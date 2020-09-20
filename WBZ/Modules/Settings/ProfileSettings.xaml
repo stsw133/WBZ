@@ -1,0 +1,122 @@
+﻿<Window x:Class="WBZ.Modules.Settings.ProfileSettings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:c="clr-namespace:WBZ.Controls"
+        xmlns:h="clr-namespace:WBZ.Helpers"
+        xmlns:p="clr-namespace:WBZ.Properties"
+        xmlns:local="clr-namespace:WBZ.Modules.Settings"
+        mc:Ignorable="d"
+        Title="Ustawienia profilu" MinHeight="140" MinWidth="140" Height="350" Width="350"
+            BorderThickness="3" BorderBrush="#333" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" WindowStyle="None"
+            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}}"
+            Icon="pack://siteoforigin:,,,/Resources/icon32_profile.ico">
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
+    </WindowChrome.WindowChrome>
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="conv_VisibleIfTrue"/>
+        <h:conv_Size x:Key="conv_Size"/>
+    </Window.Resources>
+    <DockPanel>
+        <!-- titleBar -->
+        <c:TitleBar DockPanel.Dock="Top" AdditionalIcon="pack://siteoforigin:,,,/Resources/_null.ico"/>
+        <!-- buttonsPanel -->
+        <Border DockPanel.Dock="Bottom" Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="0,1,0,0">
+            <c:SimpleButton Margin="5" IsEnabled="True" TextVisibility="True" HorizontalAlignment="Center"
+                            TextContent="Zapisz i zamknij" IconSource="pack://siteoforigin:,,,/Resources/icon32_save.ico" PreviewMouseLeftButtonUp="btnSave_Click"/>
+        </Border>
+        <!-- tabs -->
+        <TabControl DockPanel.Dock="Top">
+            <!-- tabMain -->
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" Margin="2">
+                        <Image Margin="2" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_profile.ico"/>
+                        <TextBlock Text="Ogólne" Margin="2" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <DockPanel>
+                        <GroupBox DockPanel.Dock="Top" Header="Dane osobowe" Margin="5,5,5,0" VerticalAlignment="Top">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Content="Imię:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding User.Forename}" Margin="5" VerticalContentAlignment="Center"/>
+                                <Label Grid.Row="1" Grid.Column="0" Content="Nazwisko:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding User.Lastname}" Margin="5" VerticalContentAlignment="Center"/>
+                                <Label Content="Data urodz.:" Grid.Row="2" Grid.Column="0" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Visibility="Collapsed"/>
+                                <DatePicker Grid.Row="2" Grid.Column="1" Margin="5" VerticalContentAlignment="Center" Visibility="Collapsed"/>
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox DockPanel.Dock="Top" Header="Dane kontaktowe" Margin="5,5,5,0" VerticalAlignment="Top">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Content="Adres:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Visibility="Collapsed"/>
+                                <TextBox Grid.Row="0" Grid.Column="1" Margin="5" VerticalContentAlignment="Center" Visibility="Collapsed"/>
+                                <Label Grid.Row="0" Grid.Column="0" Content="E-mail:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding User.Email}" Margin="5" VerticalContentAlignment="Center"/>
+                                <Label Grid.Row="1" Grid.Column="0" Content="Telefon:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding User.Phone}" Margin="5" VerticalContentAlignment="Center"/>
+                            </Grid>
+                        </GroupBox>
+                    </DockPanel>
+                </ScrollViewer>
+            </TabItem>
+            <!-- tabSecurity -->
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" Margin="2">
+                        <Image Margin="2" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_locked.ico"/>
+                        <TextBlock Text="Bezpieczeństwo" Margin="2" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <DockPanel>
+                    <Grid DockPanel.Dock="Top" Margin="5,5,5,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="Użytkownik:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <TextBox Grid.Column="1" Text="{Binding User.Username}" Margin="5" VerticalContentAlignment="Center"/>
+                    </Grid>
+                    <GroupBox DockPanel.Dock="Top" Header="Zmiana hasła" Margin="5,5,5,0" VerticalAlignment="Top">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Content="Stare hasło:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                            <PasswordBox x:Name="tbOldPassword" Grid.Row="0" Grid.Column="1" Margin="5" VerticalContentAlignment="Center"/>
+                            <Label Grid.Row="1" Grid.Column="0" Content="Nowe hasło:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                            <PasswordBox x:Name="tbNewPassword" Grid.Row="1" Grid.Column="1" Margin="5" VerticalContentAlignment="Center"/>
+                            <Label Grid.Row="2" Grid.Column="0" Content="Powtórz:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                            <PasswordBox x:Name="tbRNewPassword" Grid.Row="2" Grid.Column="1" Margin="5" VerticalContentAlignment="Center"/>
+                        </Grid>
+                    </GroupBox>
+                </DockPanel>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>

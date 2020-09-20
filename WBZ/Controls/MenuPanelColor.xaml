@@ -1,0 +1,82 @@
+﻿<UserControl x:Class="WBZ.Controls.MenuPanelColor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WBZ.Controls"
+             mc:Ignorable="d"
+             MaxWidth="400">
+    <StackPanel Orientation="Horizontal">
+        <Label Content="Kolor paneli"/>
+        <ComboBox x:Name="cbPanelColor" SelectedValuePath="Tag" SelectedValue="{Binding Tag, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}">
+            <ComboBoxItem Tag="#EEE">
+                <StackPanel Orientation="Horizontal" Height="19">
+                    <Rectangle Fill="#EEE" Stroke="Gray" Height="15" Width="15"/>
+                    <TextBlock Text="Jasny" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                </StackPanel>
+            </ComboBoxItem>
+            <ComboBoxItem Tag="#555">
+                <StackPanel Orientation="Horizontal" Height="19">
+                    <Rectangle Fill="#555" Stroke="Gray" Height="15" Width="15"/>
+                    <TextBlock Text="Ciemny" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                </StackPanel>
+            </ComboBoxItem>
+            <Separator/>
+            <ComboBoxItem Tag="#4AE">
+                <StackPanel Orientation="Horizontal" Height="19">
+                    <Rectangle Fill="#4AE" Stroke="Gray" Height="15" Width="15"/>
+                    <TextBlock Text="Błękitny" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                </StackPanel>
+            </ComboBoxItem>
+            <ComboBoxItem Tag="#E55">
+                <StackPanel Orientation="Horizontal" Height="19">
+                    <Rectangle Fill="#E55" Stroke="Gray" Height="15" Width="15"/>
+                    <TextBlock Text="Czerwony" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                </StackPanel>
+            </ComboBoxItem>
+            <ComboBoxItem Tag="Orange">
+                <StackPanel Orientation="Horizontal" Height="19">
+                    <Rectangle Fill="Orange" Stroke="Gray" Height="15" Width="15"/>
+                    <TextBlock Text="Pomarańczowy" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                </StackPanel>
+            </ComboBoxItem>
+            <ComboBoxItem Tag="#B8D">
+                <StackPanel Orientation="Horizontal" Height="19">
+                    <Rectangle Fill="#B8D" Stroke="Gray" Height="15" Width="15"/>
+                    <TextBlock Text="Purpurowy" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                </StackPanel>
+            </ComboBoxItem>
+            <ComboBoxItem Tag="HotPink">
+                <StackPanel Orientation="Horizontal" Height="19">
+                    <Rectangle Fill="HotPink" Stroke="Gray" Height="15" Width="15"/>
+                    <TextBlock Text="Różowy" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                </StackPanel>
+            </ComboBoxItem>
+            <ComboBoxItem Tag="MediumTurquoise">
+                <StackPanel Orientation="Horizontal" Height="19">
+                    <Rectangle Fill="MediumTurquoise" Stroke="Gray" Height="15" Width="15"/>
+                    <TextBlock Text="Turkusowy" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                </StackPanel>
+            </ComboBoxItem>
+            <ComboBoxItem Tag="#5D5">
+                <StackPanel Orientation="Horizontal" Height="19">
+                    <Rectangle Fill="#5D5" Stroke="Gray" Height="15" Width="15"/>
+                    <TextBlock Text="Zielony" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                </StackPanel>
+            </ComboBoxItem>
+            <ComboBoxItem Tag="#EE5">
+                <StackPanel Orientation="Horizontal" Height="19">
+                    <Rectangle Fill="#EE5" Stroke="Gray" Height="15" Width="15"/>
+                    <TextBlock Text="Żółty" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                </StackPanel>
+            </ComboBoxItem>
+            <Separator/>
+            <ComboBoxItem Tag="{Binding Tag, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" Selected="ComboBoxItem_Selected">
+                <StackPanel Orientation="Horizontal" Height="19">
+                    <Rectangle Fill="{Binding Tag, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" Stroke="Gray" Height="15" Width="15"/>
+                    <TextBlock Text="Własny" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                </StackPanel>
+            </ComboBoxItem>
+        </ComboBox>
+    </StackPanel>
+</UserControl>

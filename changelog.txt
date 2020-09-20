@@ -1,0 +1,56 @@
+Zmiany w wersji 1.1.0 wzglêdem poprzedniej wersji 1.0.2:
+
+ 1. Dodano modu³ za³¹czników i galerii za³¹czników.
+ 2. Dodano modu³ pracowników.
+ 3. Zmiana modu³u klas atrybutów - wersja z osobnym oknem listy i oknem dodawania/edycji.
+ 4. Przemeblowano pozycje w oknie g³ównym.
+ 5. Mo¿liwoœæ definiowania w³asnych kolorów paneli.
+
+
+
+Zmiany w wersji 1.0.2 wzglêdem poprzedniej wersji 1.0.1:
+
+ 1. Naprawiony b³¹d przez który archiwalne towary i magazyny na listach nie by³y zaznaczone szarym kolorem.
+ 2. Naprawiony b³¹d przy uruchamianiu okna edycji/podgl¹du z poziomu okna logów dla obiektów, które zosta³y usuniête.
+ 3. Nazwy modu³ów w oknie logów wyœwietlaj¹ siê od teraz w jêzyku polskim.
+ 4. Usuniêto edycjê/podgl¹d przy dwukrotnym klikniêciu prawym przyciskiem myszy na rekord.
+ 5. Do filtrów wyszukiwania na listach dokumentów, dystrybucji i logów dodano zakresy dat.
+ 6. Naprawiony b³¹d przy pierwszym uruchomieniu programu, gdy nie istnia³ plik Data/Databases.bin
+ 7. Naprawiony b³¹d przez który nie odœwie¿a³a siê lista baz danych w oknie logowania po modyfikacji listy baz danych.
+ 8. Lista kontaktów w edycji firm i rodzin oraz lista jednostek miar w edycji towarów maj¹ od teraz przy kolumnach z polami wyboru domyœln¹ wartoœæ z nieokreœlonej na odznaczon¹.
+ 9. Czêœciowo dzia³aj¹ce potwierdzenie filtrów na przycisk Enter w polach tekstowych.
+ 10. Nowa ikona wersji w oknie logowania, gdy program nie wczyta³ z API aktualnoœci wersji.
+ 11. Ujednolicony styl przycisków na panelach filtrów z reszt¹ przycisków w aplikacji.
+ 12. Zmieniony komunikat przy testowaniu bazy danych w oknie konfiguracji baz gdy po³¹czenie siê nie powiod³o.
+ 13. Dodano menu kontekstowe w oknie listy u¿ytkowników i oknie logów.
+ 14. Poprawiony sposób prezentacji i przeliczania iloœci w kilogramach w oknie towarów, które posiadaj¹ dodatkowe jednostki miar.
+ 15. Zmodyfikowany wygl¹d okna generowania raportów.
+ 16. Nowa ikona dla filtrów.
+
+
+
+Zmiany w wersji 1.0.1 wzglêdem poprzedniej wersji 1.0.0:
+
+ 1. Poprawka, dziêki której nie jest wymagane w ustawieniach regionalnych wybranie kropki jak symbolu dziesiêtnego.
+ 2. Naprawiony b³¹d przez który nie by³o mo¿liwe dokonanie wydruku w oknie dystrybucji.
+ 3. Naprawiony b³¹d przez który nie by³o mo¿liwe zapisywanie nazw dystrybucji ani wyœwietlanie takich które mia³y nazwê.
+ 4. Naprawiony b³¹d przez który podczas edycji dokumentu lub dystrybucji nie mo¿na by³o zmieniæ ich dat wystawienia/realizacji.
+ 5. Naprawiony b³¹d z wy³¹czaniem programu, gdy przechodzi³o siê do zak³adki Ÿróde³ w oknie firmy.
+ 6. Naprawiony b³¹d przez których na dokumentach i dystrybucjach nie wyœwietla³y siê dane w zak³adkach: "Atrybuty", "Za³¹czniki", "Logi".
+ 7. Naprawiony b³¹d nie pozwalaj¹cy zapisaæ dokumentu gdy na towarze nie podano ¿adnej domyœlnej jednostki miary. Od teraz bez podania jednostki domyœlnej, towar bêdzie przeliczany w kg.
+ 8. Naprawiony b³¹d z wyœwietlan¹ maksymaln¹ iloœci¹ wyfiltrowanych obiektów na listach.
+ 9. Naprawiony b³¹d przy ponownym zapisie obiektu, którego nie uda³o siê wczeœniej zapisaæ z powodu walidacji danych.
+ 10. Naprawiony b³¹d z zapisem za³¹czników, który ustawia³ w logach wpis wskazuj¹cy na magazyny.
+ 11. Naprawiony b³¹d z b³êdnymi wagami towarów na wydruku dystrybucji.
+ 12. Mo¿liwoœæ w³¹czania lub wy³¹czania zapisywania logów z poziomu okna administracyjnego "Wyœwietl logi".
+ 13. Przechodzenie na zak³adki Ÿróde³, atrybutów, za³¹czników i logów w oknie edycji/podgl¹du od teraz wczytuje dane tylko raz.
+ 14. Zamykanie okna edycji/podgl¹du od teraz bêdzie czyœciæ pozosta³oœci po za³¹cznikach w folderze TEMP.
+ 15. Logi zapisywane w transakcji, ¿eby zapobiec "œmieciowym danym" przy b³êdnych zapisach obiektów.
+ 16. Nowe okno do pobierania wersji (dostêpne w oknie logowania w pozosta³ych opcjach pod nazw¹ "Baza wersji aplikacji".
+ 17. Dodano zabezpieczenie aby na pewno przy usuwaniu towarów, magazynów, dokumentów i dystrybucji usuwa³y siê powi¹zane z nimi dane tj. stany towarów oraz pozycje na dokumentach i dystrybucjach.
+ 18. Dodano opcjê automatycznej migracji bazy z wersji 1.0.0 do wersji 1.0.1 (dostêpn¹ w oknie logowania w pozosta³ych opcjach pod nazw¹ "Aktualizuj bazê danych")
+ 19. Z okna zarz¹dzania klasami atrybutów usuniêto typ atrybutu "Wartoœæ logiczna", gdy¿ jej funkcjonalnoœæ mo¿na w bardziej kontrolowany sposób osi¹gn¹æ typem "Ci¹g znaków" i podaniem mo¿liwych wartoœci "TAK;NIE".
+ 20. Poprawienie b³êdu zwi¹zanego z "brakuj¹c¹" kolumn¹ "module" w tabeli atrybutów przy usuwaniu pozosta³oœci po obiektach.
+ 21. Zmiana nazwy koloru ró¿owego dla okien i paneli.
+ 22. Zmiana koloru czcionki w wydruku raportu sumarycznego z pomarañczowego na czarny.
+ 23. Poradnik u¿ytkowania zaktualizowany o nowe okno pobierania wersji i kilka mniejszych zmian.

@@ -1,0 +1,245 @@
+﻿<Window x:Class="WBZ.Modules.Distributions.DistributionsAdd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:c="clr-namespace:WBZ.Controls"
+        xmlns:h="clr-namespace:WBZ.Helpers"
+        xmlns:p="clr-namespace:WBZ.Properties"
+        xmlns:local="clr-namespace:WBZ.Modules.Distributions"
+        mc:Ignorable="d"
+        Title="{Binding Title}" MinHeight="240" MinWidth="360" Height="{Binding Source={x:Static p:Settings.Default}, Path=config_DistributionsAdd_WindowY, Mode=TwoWay}" Width="{Binding Source={x:Static p:Settings.Default}, Path=config_DistributionsAdd_WindowX, Mode=TwoWay}"
+            BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
+            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}}"
+            Icon="pack://siteoforigin:,,,/Resources/icon32_food.ico">
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
+    </WindowChrome.WindowChrome>
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="conv_VisibleIfTrue"/>
+        <h:conv_BoolInverted x:Key="conv_BoolInverted"/>
+        <h:conv_Size x:Key="conv_Size"/>
+    </Window.Resources>
+    <DockPanel>
+        <!-- titleBar -->
+        <c:TitleBar DockPanel.Dock="Top" AdditionalIcon="{Binding EditIcon}"/>
+        <!-- buttonsPanel -->
+        <Border DockPanel.Dock="Right" Background="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="1,0,0,0">
+            <DockPanel>
+                <ToggleButton x:Name="btnToggle" BorderThickness="0" Width="5" IsChecked="True"/>
+                <CheckBox x:Name="chckToBuffer" DockPanel.Dock="Top" Content="Do bufora" Margin="5,5,5,0" IsChecked="True" VerticalContentAlignment="Center" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=2}" IsEnabled="{Binding EditMode}"/>
+                <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding EditMode}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
+                                TextContent="Zapisz" IconSource="pack://siteoforigin:,,,/Resources/icon32_save.ico" PreviewMouseLeftButtonUp="btnSave_Click"/>
+                <Separator DockPanel.Dock="Top" Margin="0,5,0,0" VerticalAlignment="Top" Height="5"/>
+                <c:SimpleButton DockPanel.Dock="Bottom" Margin="5,0,5,5" IsEnabled="True" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
+                                TextContent="Zamknij okno" IconSource="pack://siteoforigin:,,,/Resources/icon32_close.ico" PreviewMouseLeftButtonUp="btnClose_Click"/>
+                <Separator DockPanel.Dock="Bottom" Margin="0,0,0,5" VerticalAlignment="Bottom" Height="5"/>
+                <c:SimpleButton DockPanel.Dock="Bottom" Margin="5,0,5,5" IsEnabled="True" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
+                                TextContent="Odśwież" IconSource="pack://siteoforigin:,,,/Resources/icon32_refresh.ico" PreviewMouseLeftButtonUp="btnRefresh_Click" Visibility="Collapsed"/>
+                <Separator DockPanel.Dock="Bottom" Margin="0,0,0,5" VerticalAlignment="Bottom" Height="5" Visibility="Collapsed"/>
+                <c:SimpleButton DockPanel.Dock="Bottom" Margin="5,0,5,5" IsEnabled="True" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
+                                TextContent="Drukuj" IconSource="pack://siteoforigin:,,,/Resources/icon32_printer.ico" PreviewMouseLeftButtonUp="btnPrint_Click">
+                    <c:SimpleButton.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Lista darowizn" Click="btnGiveawayList_Click"/>
+                        </ContextMenu>
+                    </c:SimpleButton.ContextMenu>
+                </c:SimpleButton>
+                <Separator DockPanel.Dock="Bottom" Margin="0,0,0,5" VerticalAlignment="Bottom" Height="5"/>
+            </DockPanel>
+            <Border.ContextMenu>
+                <ContextMenu>
+                    <c:MenuPanelColor Tag="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+                </ContextMenu>
+            </Border.ContextMenu>
+        </Border>
+        <!-- tabs -->
+        <TabControl DockPanel.Dock="Top">
+            <!-- tabMain -->
+            <TabItem>
+                <TabItem.Header>
+                    <c:SimpleHeader TextContent="Ogólne" IconSource="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
+                </TabItem.Header>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <DockPanel Margin="10" IsEnabled="{Binding EditMode}">
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Nazwa:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                            <TextBox Text="{Binding InstanceInfo.Name}" Margin="5" VerticalContentAlignment="Center"/>
+                        </DockPanel>
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Data wystawienia:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                            <DatePicker SelectedDate="{Binding InstanceInfo.DateReal}" Margin="5" VerticalContentAlignment="Center"/>
+                        </DockPanel>
+                        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                            <Button ToolTip="Dodaj pozycję" HorizontalAlignment="Left" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=2}" Click="btnPositionsAdd_Click">
+                                <Image Margin="2" Source="pack://siteoforigin:,,,/Resources/icon32_add.ico"/>
+                            </Button>
+                            <Label Content="Pozycje:"/>
+                        </StackPanel>
+                        <Grid x:Name="gridGroups" DockPanel.Dock="Top">
+                            <Grid.Resources>
+                                <CollectionViewSource x:Key="groups" Source="{Binding InstanceInfo.Families}">
+                                    <CollectionViewSource.GroupDescriptions>
+                                        <PropertyGroupDescription PropertyName="Family"/>
+                                    </CollectionViewSource.GroupDescriptions>
+                                </CollectionViewSource>
+                            </Grid.Resources>
+                            <DataGrid x:Name="dgFamilies" ColumnHeaderHeight="0" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
+                                      AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding Source={StaticResource groups}}" IsReadOnly="{Binding EditMode, Converter={StaticResource conv_BoolInverted}}"
+                                      CanUserAddRows="False">
+                                <DataGrid.GroupStyle>
+                                    <GroupStyle>
+                                        <GroupStyle.ContainerStyle>
+                                            <Style TargetType="{x:Type GroupItem}">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type GroupItem}">
+                                                            <Expander Margin="5,20" Padding="5" Background="#DDD" BorderBrush="Black" BorderThickness="1" IsExpanded="True">
+                                                                <Expander.Header>
+                                                                    <DockPanel>
+                                                                        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                                                                            <Label Content="Rodzina:" VerticalAlignment="Center" FontWeight="Medium"/>
+                                                                            <Label Content="{Binding Items[0].FamilyName}"/>
+                                                                        </StackPanel>
+                                                                        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                                                                            <Label Content="Liczba osób:" VerticalAlignment="Center" FontWeight="Medium"/>
+                                                                            <Label Content="{Binding Items[0].Members}"/>
+                                                                        </StackPanel>
+                                                                        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Tag="{Binding Items[0]}">
+                                                                            <Label Content="Status:" VerticalAlignment="Center" FontWeight="Medium"/>
+                                                                            <Button Tag="{Binding Items[0].Status}" Margin="5" Padding="5, 2.5" Foreground="White" Click="btnChangeFamilyStatus_Click">
+                                                                                <Button.Style>
+                                                                                    <Style TargetType="Button">
+                                                                                        <Style.Triggers>
+                                                                                            <DataTrigger Binding="{Binding Items[0].Status}" Value="0">
+                                                                                                <Setter Property="Background" Value="Gray"/>
+                                                                                                <Setter Property="Content" Value="Brak"/>
+                                                                                            </DataTrigger>
+                                                                                            <DataTrigger Binding="{Binding Items[0].Status}" Value="1">
+                                                                                                <Setter Property="Background" Value="Blue"/>
+                                                                                                <Setter Property="Content" Value="Poinformowano"/>
+                                                                                            </DataTrigger>
+                                                                                            <DataTrigger Binding="{Binding Items[0].Status}" Value="2">
+                                                                                                <Setter Property="Background" Value="OrangeRed"/>
+                                                                                                <Setter Property="Content" Value="Odebrano"/>
+                                                                                            </DataTrigger>
+                                                                                        </Style.Triggers>
+                                                                                    </Style>
+                                                                                </Button.Style>
+                                                                            </Button>
+                                                                        </StackPanel>
+                                                                    </DockPanel>
+                                                                </Expander.Header>
+                                                                <Expander.Content>
+                                                                    <Border Padding="10" Background="White" BorderBrush="Black" BorderThickness="1">
+                                                                        <DockPanel>
+                                                                            <DataGrid x:Name="dgPositions" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
+                                                                                      AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding Path=Items[0].Positions.DefaultView}" IsReadOnly="{Binding EditMode, Converter={StaticResource conv_BoolInverted}}"
+                                                                                      CanUserAddRows="False">
+                                                                                <DataGrid.Columns>
+                                                                                    <DataGridTextColumn Binding="{Binding id}" Header="ID" IsReadOnly="True" Visibility="Hidden"/>
+                                                                                    <DataGridTextColumn Binding="{Binding position}" Header="Lp"/>
+                                                                                    <DataGridTextColumn Binding="{Binding storename}" Header="Nazwa magazynu" IsReadOnly="True"/>
+                                                                                    <DataGridTextColumn Binding="{Binding articlename}" Header="Nazwa towaru" IsReadOnly="True" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=25}"/>
+                                                                                    <DataGridTextColumn Binding="{Binding measure}" Header="Jm" IsReadOnly="True"/>
+                                                                                    <DataGridTextColumn Binding="{Binding amount}" Header="Ilość"/>
+                                                                                </DataGrid.Columns>
+                                                                                <DataGrid.RowStyle>
+                                                                                    <Style TargetType="DataGridRow">
+                                                                                        <Style.Triggers>
+                                                                                            <DataTrigger Binding="{Binding Row.RowState}" Value="Added">
+                                                                                                <Setter Property="Background" Value="LightGreen"/>
+                                                                                            </DataTrigger>
+                                                                                            <DataTrigger Binding="{Binding Row.RowState}" Value="Modified">
+                                                                                                <Setter Property="Background" Value="LightYellow"/>
+                                                                                            </DataTrigger>
+                                                                                            <DataTrigger Binding="{Binding Row.RowState}" Value="Deleted">
+                                                                                                <Setter Property="Background" Value="LightPink"/>
+                                                                                            </DataTrigger>
+                                                                                        </Style.Triggers>
+                                                                                    </Style>
+                                                                                </DataGrid.RowStyle>
+                                                                            </DataGrid>
+                                                                        </DockPanel>
+                                                                    </Border>
+                                                                </Expander.Content>
+                                                            </Expander>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </GroupStyle.ContainerStyle>
+                                    </GroupStyle>
+                                </DataGrid.GroupStyle>
+                            </DataGrid>
+                        </Grid>
+                        <!--
+                        <DataGrid x:Name="dgPositions" DockPanel.Dock="Top" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
+                                  AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstanceInfo.Positions.DefaultView}" IsReadOnly="{Binding EditMode, Converter={StaticResource conv_BoolInverted}}"
+                                  CanUserAddRows="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding id}" Header="ID" IsReadOnly="True" Visibility="Hidden"/>
+                                <DataGridTextColumn Binding="{Binding position}" Header="Lp"/>
+                                <DataGridTextColumn Binding="{Binding familyname}" Header="Nazwisko rodziny" IsReadOnly="True"/>
+                                <DataGridTextColumn Binding="{Binding members}" Header="Liczba osób" IsReadOnly="True"/>
+                                <DataGridTextColumn Binding="{Binding storename}" Header="Nazwa magazynu" IsReadOnly="True"/>
+                                <DataGridTextColumn Binding="{Binding articlename}" Header="Nazwa towaru" IsReadOnly="True" Width="*"/>
+                                <DataGridTextColumn Binding="{Binding measure}" Header="Jm" IsReadOnly="True"/>
+                                <DataGridTextColumn Binding="{Binding amount}" Header="Ilość"/>
+                                <DataGridTextColumn Binding="{Binding status}" Header="Status" IsReadOnly="True"/>
+                            </DataGrid.Columns>
+                            <DataGrid.RowStyle>
+                                <Style TargetType="DataGridRow">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding RowState}" Value="DataRowState.Added">
+                                            <Setter Property="Background" Value="LightGreen"></Setter>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding RowState}" Value="DataRowState.Modified">
+                                            <Setter Property="Background" Value="LightYellow"></Setter>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding RowState}" Value="DataRowState.Deleted">
+                                            <Setter Property="Background" Value="LightPink"></Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.RowStyle>
+                        </DataGrid>
+                        -->
+                    </DockPanel>
+                </ScrollViewer>
+            </TabItem>
+            <!-- tabAdditional -->
+            <TabItem>
+                <TabItem.Header>
+                    <c:SimpleHeader TextContent="Dodatkowe" IconSource="pack://siteoforigin:,,,/Resources/icon32_tools.ico"/>
+                </TabItem.Header>
+                <DockPanel Margin="5" IsEnabled="{Binding EditMode}">
+                    <CheckBox DockPanel.Dock="Top" Content="Archiwalna" Margin="20" VerticalContentAlignment="Center" IsChecked="{Binding InstanceInfo.Archival}"/>
+                    <Label DockPanel.Dock="Top" Content="Komentarz:" Margin="5,5,5,0" VerticalContentAlignment="Center"/>
+                    <TextBox DockPanel.Dock="Top" Text="{Binding InstanceInfo.Comment}" Margin="5" TextWrapping="Wrap"/>
+                </DockPanel>
+            </TabItem>
+            <!-- tabAttributes -->
+            <TabItem IsEnabled="{Binding IsEditing}">
+                <TabItem.Header>
+                    <c:SimpleHeader TextContent="Atrybuty" IconSource="pack://siteoforigin:,,,/Resources/icon32_attributes.ico"/>
+                </TabItem.Header>
+                <c:AttributesTab/>
+            </TabItem>
+            <!-- tabAttachments -->
+            <TabItem x:Name="tabAttachments" IsEnabled="{Binding IsEditing}">
+                <TabItem.Header>
+                    <c:SimpleHeader TextContent="Załączniki" IconSource="pack://siteoforigin:,,,/Resources/icon32_photos.ico"/>
+                </TabItem.Header>
+                <c:AttachmentsTab/>
+            </TabItem>
+            <!-- tabLogs -->
+            <TabItem x:Name="tabLogs" IsEnabled="{Binding IsEditing}">
+                <TabItem.Header>
+                    <c:SimpleHeader TextContent="Historia" IconSource="pack://siteoforigin:,,,/Resources/icon32_logs.ico"/>
+                </TabItem.Header>
+                <c:LogsTab/>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>

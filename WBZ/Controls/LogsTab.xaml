@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="WBZ.Controls.LogsTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:h="clr-namespace:WBZ.Helpers"
+             xmlns:p="clr-namespace:WBZ.Properties"
+             xmlns:local="clr-namespace:WBZ.Controls"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="conv_VisibleIfTrue"/>
+        <h:conv_Size x:Key="conv_Size"/>
+    </UserControl.Resources>
+    <DataGrid Margin="5" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
+              AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstanceLogs}" IsReadOnly="True">
+        <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding UserFullname}" Header="Użytkownik"/>
+            <DataGridTextColumn Binding="{Binding Content}" Header="Treść" Width="*"/>
+            <DataGridTextColumn Binding="{Binding DateTime, StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}" Header="Data i czas"/>
+        </DataGrid.Columns>
+    </DataGrid>
+</UserControl>

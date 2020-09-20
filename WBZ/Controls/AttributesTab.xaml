@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="WBZ.Controls.AttributesTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:h="clr-namespace:WBZ.Helpers"
+             xmlns:p="clr-namespace:WBZ.Properties"
+             xmlns:local="clr-namespace:WBZ.Controls"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="conv_VisibleIfTrue"/>
+        <h:conv_Size x:Key="conv_Size"/>
+    </UserControl.Resources>
+    <DataGrid Margin="5" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
+              AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstanceAttributes}" IsReadOnly="True">
+        <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" Visibility="Hidden"/>
+            <DataGridTextColumn Binding="{Binding Class.Name}" Header="Atrybut" Width="1*"/>
+            <DataGridTemplateColumn Header="Wartość" Width="3*">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content=" . . . " Visibility="{Binding EditMode, Converter={StaticResource conv_VisibleIfTrue}}" Click="btnAttributeChange_Click"/>
+                            <TextBlock Text="{Binding Value}" Padding="2.5" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+        </DataGrid.Columns>
+        <DataGrid.RowStyle>
+            <Style TargetType="DataGridRow">
+                <Style.Triggers>
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Required}" Value="true"/>
+                            <Condition Binding="{Binding Value}" Value=""/>
+                        </MultiDataTrigger.Conditions>
+                        <Setter Property="Foreground" Value="Red"/>
+                    </MultiDataTrigger>
+                </Style.Triggers>
+            </Style>
+        </DataGrid.RowStyle>
+    </DataGrid>
+</UserControl>

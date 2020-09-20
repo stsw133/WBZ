@@ -1,0 +1,90 @@
+﻿<Window x:Class="WBZ.Modules.Login.LoginDatabases"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:c="clr-namespace:WBZ.Controls"
+        xmlns:h="clr-namespace:WBZ.Helpers"
+        xmlns:p="clr-namespace:WBZ.Properties"
+        xmlns:local="clr-namespace:WBZ.Modules.Login"
+        mc:Ignorable="d"
+        Title="Lista baz danych" SizeToContent="WidthAndHeight"
+            BorderThickness="3" BorderBrush="#333" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner" WindowStyle="None"
+            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}}"
+            Icon="pack://siteoforigin:,,,/Resources/icon32_database.ico">
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
+    </WindowChrome.WindowChrome>
+    <Window.Resources>
+        <h:conv_Size x:Key="conv_Size"/>
+    </Window.Resources>
+    <DockPanel>
+        <!-- titleBar -->
+        <c:TitleBar DockPanel.Dock="Top" AdditionalIcon="pack://siteoforigin:,,,/Resources/icon32_settings.ico"/>
+        <!-- buttonsPanel -->
+        <Border DockPanel.Dock="Bottom" Background="#EEE" BorderBrush="Gray" BorderThickness="0,1,0,0">
+            <Button Margin="10" HorizontalAlignment="Center" MinWidth="150" Click="btnSave_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Margin="4" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_accept.ico"/>
+                    <Label Content="Zapisz" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+        </Border>
+        <!-- listBox -->
+        <DockPanel>
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                <Button Margin="5,5,0,5" Click="btnAddDatabase_Click" ToolTip="Dodaj nowe połączenie z bazą danych">
+                    <Grid>
+                        <Image Margin="2" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_database.ico"/>
+                        <Image Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Source="pack://siteoforigin:,,,/Resources/icon32_add.ico"/>
+                    </Grid>
+                </Button>
+                <Button Margin="5,5,0,5" Click="btnRemoveDatabase_Click" ToolTip="Usuń zaznaczone połączenie z bazą danych">
+                    <Grid>
+                        <Image Margin="2" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_database.ico"/>
+                        <Image Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Source="pack://siteoforigin:,,,/Resources/icon32_remove.ico"/>
+                    </Grid>
+                </Button>
+            </StackPanel>
+            <ListBox x:Name="lbDatabases" Margin="5,0,5,5" Width="200" ItemsSource="{Binding Databases}" SelectedValuePath="Name" DisplayMemberPath="Name" SelectionChanged="lbDatabases_SelectionChanged"/>
+        </DockPanel>
+        <!-- main -->
+        <Grid x:Name="gridDatabaseInfo" DataContext="{Binding ElementName=lbDatabases, Path=SelectedItem}" Margin="5" VerticalAlignment="Center" IsEnabled="False" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=30}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Content="Nazwa:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="tbName" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center" Text="{Binding Name, Mode=TwoWay}"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="Serwer:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="tbServer" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center" Text="{Binding Server, Mode=TwoWay}"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="Port:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="tbPort" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center" Text="{Binding Port, Mode=TwoWay}"/>
+            <Label Grid.Row="3" Grid.Column="0" Content="Baza:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="tbDatabase" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center" Text="{Binding Database, Mode=TwoWay}"/>
+            <Label Grid.Row="4" Grid.Column="0" Content="Użytkownik:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="tbUsername" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center" Text="{Binding Username, Mode=TwoWay}"/>
+            <Label Grid.Row="5" Grid.Column="0" Content="Hasło:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <PasswordBox x:Name="pbPassword" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center" PasswordChanged="pbPassword_PasswordChanged"/>
+            <Label Grid.Row="6" Grid.Column="0" Content="Status:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <Label x:Name="lblStatus" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center"/>
+            <Button Grid.Row="7" Grid.Column="1" Margin="5" Click="btnTest_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Margin="4" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_test.ico"/>
+                    <Label Content="Testuj" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+    </DockPanel>
+</Window>

@@ -1,0 +1,130 @@
+﻿<Window x:Class="WBZ.Modules.Settings.AppSettings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:c="clr-namespace:WBZ.Controls"
+        xmlns:h="clr-namespace:WBZ.Helpers"
+        xmlns:p="clr-namespace:WBZ.Properties"
+        xmlns:local="clr-namespace:WBZ.Modules.Settings"
+        mc:Ignorable="d"
+        Title="Ustawienia" MinHeight="140" MinWidth="200" Height="350" Width="500"
+            BorderThickness="3" BorderBrush="#333" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" WindowStyle="None"
+            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}}"
+            Icon="pack://siteoforigin:,,,/Resources/icon32_settings.ico" Closed="Window_Closed">
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
+    </WindowChrome.WindowChrome>
+    <Window.Resources>
+        <h:conv_Size x:Key="conv_Size"/>
+    </Window.Resources>
+    <DockPanel>
+        <!-- titleBar -->
+        <c:TitleBar DockPanel.Dock="Top" AdditionalIcon="pack://siteoforigin:,,,/Resources/_null.ico"/>
+        <!-- tabs -->
+        <TabControl DockPanel.Dock="Top" TabStripPlacement="Left">
+            <!-- tabMain -->
+            <TabItem Header="Ogólne">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <DockPanel>
+                        <GroupBox Header="Sieć" DockPanel.Dock="Top" Margin="5,5,5,0" VerticalAlignment="Top">
+                            <DockPanel Margin="5">
+                                <DockPanel DockPanel.Dock="Top">
+                                    <Label Content="API URL:" Margin="5" VerticalContentAlignment="Center"/>
+                                    <TextBox Text="{Binding apiUrl, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Margin="5" VerticalContentAlignment="Center"/>
+                                </DockPanel>
+                            </DockPanel>
+                        </GroupBox>
+                    </DockPanel>
+                </ScrollViewer>
+            </TabItem>
+            <!-- tabStyle -->
+            <TabItem Header="Styl i czcionka">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <DockPanel>
+                        <GroupBox DockPanel.Dock="Top" Header="Pasek tytułowy okien" Margin="5,5,5,0" VerticalAlignment="Top" Visibility="Collapsed">
+                            <DockPanel>
+                                <RadioButton DockPanel.Dock="Top" Content="Domyślny" Margin="5" VerticalContentAlignment="Center" GroupName="TitleBarStyle"/>
+                                <RadioButton DockPanel.Dock="Top" Content="Alternatywny" Margin="5" VerticalContentAlignment="Center" GroupName="TitleBarStyle" IsChecked="True"/>
+                            </DockPanel>
+                        </GroupBox>
+                        <GroupBox Header="Czcionka" DockPanel.Dock="Top" Margin="5,5,5,0" VerticalAlignment="Top">
+                            <DockPanel Margin="5">
+                                <DockPanel DockPanel.Dock="Top">
+                                    <Label Content="Czcionka:" Margin="5" VerticalContentAlignment="Center"/>
+                                    <ComboBox Margin="5" VerticalContentAlignment="Center" SelectedValuePath="Tag" SelectedValue="{Binding config_FontFamily, Source={x:Static p:Settings.Default}, Mode=TwoWay}">
+                                        <ComboBoxItem Content="Arial" FontFamily="Arial" Tag="Arial"/>
+                                        <ComboBoxItem Content="Candara" FontFamily="Candara" Tag="Candara"/>
+                                        <ComboBoxItem Content="Franklin Gothic" FontFamily="Franklin Gothic" Tag="Franklin Gothic"/>
+                                        <ComboBoxItem Content="Segoe UI" FontFamily="Segoe UI" Tag="Segoe UI"/>
+                                        <ComboBoxItem Content="Tahoma" FontFamily="Tahoma" Tag="Tahoma"/>
+                                        <ComboBoxItem Content="Verdana" FontFamily="Verdana" Tag="Verdana"/>
+                                    </ComboBox>
+                                </DockPanel>
+                                <DockPanel DockPanel.Dock="Top">
+                                    <Label Content="Rozmiar czcionki:" Margin="5" VerticalContentAlignment="Center"/>
+                                    <Label Content="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalContentAlignment="Center" FontWeight="Medium"/>
+                                </DockPanel>
+                                <Slider DockPanel.Dock="Top" Value="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=TwoWay}" IsSnapToTickEnabled="True" Minimum="8" Maximum="16" TickFrequency="0.5" TickPlacement="BottomRight"/>
+                            </DockPanel>
+                        </GroupBox>
+                    </DockPanel>
+                </ScrollViewer>
+            </TabItem>
+            <!-- tabCommunication -->
+            <TabItem Header="Komunikacja">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <DockPanel>
+                        <GroupBox DockPanel.Dock="Top" Header="E-mail" Margin="5,5,5,0" VerticalAlignment="Top">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Content="Host:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                                <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding config_Email_Host, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Margin="5" VerticalContentAlignment="Center"/>
+                                <Label Grid.Row="1" Grid.Column="0" Content="Port:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                                <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding config_Email_Port, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Margin="5" VerticalContentAlignment="Center"/>
+                                <Label Grid.Row="2" Grid.Column="0" Content="E-mail:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                                <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding config_Email_Email, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Margin="5" VerticalContentAlignment="Center"/>
+                                <Label Grid.Row="3" Grid.Column="0" Content="Hasło:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                                <PasswordBox x:Name="pbEmailPassword" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center" Loaded="pbEmailPassword_Loaded" PasswordChanged="pbEmailPassword_PasswordChanged"/>
+                                <c:SimpleButton Grid.Row="4" Grid.Column="1" Margin="5" IsEnabled="True" TextVisibility="True"
+                                                TextContent="Testuj" IconSource="pack://siteoforigin:,,,/Resources/icon32_test.ico" PreviewMouseLeftButtonUp="btnEmailTest_Click"/>
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox DockPanel.Dock="Top" Header="GSM" Margin="5,5,5,0" VerticalAlignment="Top">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Content="Port:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding config_GSM_com, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Margin="5" VerticalContentAlignment="Center"/>
+                                <GroupBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Header="Treść wiadomości:" Margin="5">
+                                    <TextBox Text="{Binding config_GSM_message, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Margin="5" MinHeight="150" TextWrapping="Wrap" MaxLength="240"/>
+                                </GroupBox>
+                            </Grid>
+                        </GroupBox>
+                    </DockPanel>
+                </ScrollViewer>
+            </TabItem>
+            <!-- shortcuts -->
+            <TabItem Header="Skróty klawiszowe" Visibility="Collapsed"/>
+            <!-- offline mode -->
+            <TabItem Header="Tryb offline" Visibility="Collapsed"/>
+        </TabControl>
+    </DockPanel>
+</Window>
