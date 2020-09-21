@@ -133,8 +133,9 @@
     <Compile Include="Classes\C_Document.cs" />
     <Compile Include="Classes\C_Family.cs" />
     <Compile Include="Classes\C_Log.cs" />
+    <Compile Include="Classes\C_Employee.cs" />
     <Compile Include="Classes\C_User.cs" />
-    <Compile Include="Classes\C_Warehouse.cs" />
+    <Compile Include="Classes\C_Store.cs" />
     <Compile Include="Controls\AttachmentsTab.xaml.cs">
       <DependentUpon>AttachmentsTab.xaml</DependentUpon>
     </Compile>
@@ -636,12 +637,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\icon32_briefcase.ico">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\icon32_distributions.ico">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\icon32_orders.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <Content Include="SQL\database.sql" />

@@ -184,7 +184,7 @@ namespace WBZ
 		}
 		private void btnEmployeesList_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new UsersList();
+			var window = new EmployeesList();
 			window.Show();
 		}
 		#endregion

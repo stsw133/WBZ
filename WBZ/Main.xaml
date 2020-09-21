@@ -115,7 +115,7 @@
                                         <Label Content="Zarządzaj użytkownikami" VerticalContentAlignment="Center"/>
                                     </DockPanel>
                                 </Button>
-                                <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=20}" FontWeight="Normal" IsEnabled="{Binding User.Perms, Converter={StaticResource conv_ListContains}, ConverterParameter=employees_preview}" Click="btnEmployeesList_Click" Visibility="Collapsed">
+                                <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=20}" FontWeight="Normal" IsEnabled="{Binding User.Perms, Converter={StaticResource conv_ListContains}, ConverterParameter=employees_preview}" Click="btnEmployeesList_Click">
                                     <DockPanel>
                                         <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_briefcase.ico"/>
                                         <Label Content="Zarządzaj pracownikami" VerticalContentAlignment="Center"/>

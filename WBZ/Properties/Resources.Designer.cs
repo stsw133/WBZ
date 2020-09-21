@@ -243,16 +243,6 @@ namespace WBZ.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        internal static System.Drawing.Icon icon32_distributions {
-            get {
-                object obj = ResourceManager.GetObject("icon32_distributions", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
         internal static System.Drawing.Icon icon32_download {
             get {
                 object obj = ResourceManager.GetObject("icon32_download", resourceCulture);
@@ -436,16 +426,6 @@ namespace WBZ.Properties {
         internal static System.Drawing.Icon icon32_notifications {
             get {
                 object obj = ResourceManager.GetObject("icon32_notifications", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon icon32_orders {
-            get {
-                object obj = ResourceManager.GetObject("icon32_orders", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }

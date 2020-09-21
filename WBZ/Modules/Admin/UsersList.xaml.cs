@@ -41,7 +41,7 @@ namespace WBZ.Modules.Admin
 						+ $"LOWER(COALESCE(u.lastname,'')) like '%{M.Filters.Lastname.ToLower()}%' and "
 						+ $"LOWER(COALESCE(u.email,'')) like '%{M.Filters.Email.ToLower()}%' and "
 						+ $"LOWER(COALESCE(u.phone,'')) like '%{M.Filters.Phone.ToLower()}%' and "
-						+ (M.Filters.Blocked ? $"u.active=true and " : "");
+						+ (M.Filters.Archival ? $"u.archival=false and " : "");
 
 			M.FilterSQL = M.FilterSQL.TrimEnd(" and ".ToCharArray());
 		}

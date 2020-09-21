@@ -1454,438 +1454,6 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public string config_ArticlesList_dgListShow_ID {
-            get {
-                return ((string)(this["config_ArticlesList_dgListShow_ID"]));
-            }
-            set {
-                this["config_ArticlesList_dgListShow_ID"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public string config_ArticlesList_dgListShow_Code {
-            get {
-                return ((string)(this["config_ArticlesList_dgListShow_Code"]));
-            }
-            set {
-                this["config_ArticlesList_dgListShow_Code"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public string config_ArticlesList_dgListShow_Name {
-            get {
-                return ((string)(this["config_ArticlesList_dgListShow_Name"]));
-            }
-            set {
-                this["config_ArticlesList_dgListShow_Name"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public string config_ArticlesList_dgListShow_EAN {
-            get {
-                return ((string)(this["config_ArticlesList_dgListShow_EAN"]));
-            }
-            set {
-                this["config_ArticlesList_dgListShow_EAN"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public string config_ArticlesList_dgListShow_Measure {
-            get {
-                return ((string)(this["config_ArticlesList_dgListShow_Measure"]));
-            }
-            set {
-                this["config_ArticlesList_dgListShow_Measure"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public string config_ArticlesList_dgListShow_Amount {
-            get {
-                return ((string)(this["config_ArticlesList_dgListShow_Amount"]));
-            }
-            set {
-                this["config_ArticlesList_dgListShow_Amount"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public string config_ArticlesList_dgListShow_Reserved {
-            get {
-                return ((string)(this["config_ArticlesList_dgListShow_Reserved"]));
-            }
-            set {
-                this["config_ArticlesList_dgListShow_Reserved"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public string config_ArticlesList_dgListShow_Created {
-            get {
-                return ((string)(this["config_ArticlesList_dgListShow_Created"]));
-            }
-            set {
-                this["config_ArticlesList_dgListShow_Created"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public string config_ArticlesList_dgListShow_Modified {
-            get {
-                return ((string)(this["config_ArticlesList_dgListShow_Modified"]));
-            }
-            set {
-                this["config_ArticlesList_dgListShow_Modified"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public string config_CompaniesList_dgListShow_id {
-            get {
-                return ((string)(this["config_CompaniesList_dgListShow_id"]));
-            }
-            set {
-                this["config_CompaniesList_dgListShow_id"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public string config_CompaniesList_dgListShow_name {
-            get {
-                return ((string)(this["config_CompaniesList_dgListShow_name"]));
-            }
-            set {
-                this["config_CompaniesList_dgListShow_name"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public string config_CompaniesList_dgListShow_branch {
-            get {
-                return ((string)(this["config_CompaniesList_dgListShow_branch"]));
-            }
-            set {
-                this["config_CompaniesList_dgListShow_branch"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public string config_CompaniesList_dgListShow_nip {
-            get {
-                return ((string)(this["config_CompaniesList_dgListShow_nip"]));
-            }
-            set {
-                this["config_CompaniesList_dgListShow_nip"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public string config_CompaniesList_dgListShow_regon {
-            get {
-                return ((string)(this["config_CompaniesList_dgListShow_regon"]));
-            }
-            set {
-                this["config_CompaniesList_dgListShow_regon"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public string config_CompaniesList_dgListShow_city {
-            get {
-                return ((string)(this["config_CompaniesList_dgListShow_city"]));
-            }
-            set {
-                this["config_CompaniesList_dgListShow_city"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public string config_CompaniesList_dgListShow_address {
-            get {
-                return ((string)(this["config_CompaniesList_dgListShow_address"]));
-            }
-            set {
-                this["config_CompaniesList_dgListShow_address"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public string config_CompaniesList_dgListShow_post_code {
-            get {
-                return ((string)(this["config_CompaniesList_dgListShow_post_code"]));
-            }
-            set {
-                this["config_CompaniesList_dgListShow_post_code"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public string config_CompaniesList_dgListShow_invoices_count {
-            get {
-                return ((string)(this["config_CompaniesList_dgListShow_invoices_count"]));
-            }
-            set {
-                this["config_CompaniesList_dgListShow_invoices_count"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public string config_CompaniesList_dgListShow_modified {
-            get {
-                return ((string)(this["config_CompaniesList_dgListShow_modified"]));
-            }
-            set {
-                this["config_CompaniesList_dgListShow_modified"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public string config_CompaniesList_dgListShow_modifier {
-            get {
-                return ((string)(this["config_CompaniesList_dgListShow_modifier"]));
-            }
-            set {
-                this["config_CompaniesList_dgListShow_modifier"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public string config_CompaniesList_dgListShow_created {
-            get {
-                return ((string)(this["config_CompaniesList_dgListShow_created"]));
-            }
-            set {
-                this["config_CompaniesList_dgListShow_created"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public string config_CompaniesList_dgListShow_creator {
-            get {
-                return ((string)(this["config_CompaniesList_dgListShow_creator"]));
-            }
-            set {
-                this["config_CompaniesList_dgListShow_creator"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public string config_FamiliesList_dgListShow_id {
-            get {
-                return ((string)(this["config_FamiliesList_dgListShow_id"]));
-            }
-            set {
-                this["config_FamiliesList_dgListShow_id"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public string config_FamiliesList_dgListShow_name {
-            get {
-                return ((string)(this["config_FamiliesList_dgListShow_name"]));
-            }
-            set {
-                this["config_FamiliesList_dgListShow_name"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public string config_FamiliesList_dgListShow_lastname {
-            get {
-                return ((string)(this["config_FamiliesList_dgListShow_lastname"]));
-            }
-            set {
-                this["config_FamiliesList_dgListShow_lastname"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public string config_FamiliesList_dgListShow_members {
-            get {
-                return ((string)(this["config_FamiliesList_dgListShow_members"]));
-            }
-            set {
-                this["config_FamiliesList_dgListShow_members"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public string config_FamiliesList_dgListShow_city {
-            get {
-                return ((string)(this["config_FamiliesList_dgListShow_city"]));
-            }
-            set {
-                this["config_FamiliesList_dgListShow_city"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public string config_FamiliesList_dgListShow_address {
-            get {
-                return ((string)(this["config_FamiliesList_dgListShow_address"]));
-            }
-            set {
-                this["config_FamiliesList_dgListShow_address"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public string config_FamiliesList_dgListShow_post_code {
-            get {
-                return ((string)(this["config_FamiliesList_dgListShow_post_code"]));
-            }
-            set {
-                this["config_FamiliesList_dgListShow_post_code"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public string config_FamiliesList_dgListShow_count_donation {
-            get {
-                return ((string)(this["config_FamiliesList_dgListShow_count_donation"]));
-            }
-            set {
-                this["config_FamiliesList_dgListShow_count_donation"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public string config_FamiliesList_dgListShow_status {
-            get {
-                return ((string)(this["config_FamiliesList_dgListShow_status"]));
-            }
-            set {
-                this["config_FamiliesList_dgListShow_status"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public string config_FamiliesList_dgListShow_last_donation {
-            get {
-                return ((string)(this["config_FamiliesList_dgListShow_last_donation"]));
-            }
-            set {
-                this["config_FamiliesList_dgListShow_last_donation"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public string config_FamiliesList_dgListShow_modifier {
-            get {
-                return ((string)(this["config_FamiliesList_dgListShow_modifier"]));
-            }
-            set {
-                this["config_FamiliesList_dgListShow_modifier"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public string config_FamiliesList_dgListShow_modified {
-            get {
-                return ((string)(this["config_FamiliesList_dgListShow_modified"]));
-            }
-            set {
-                this["config_FamiliesList_dgListShow_modified"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public string config_FamiliesList_dgListShow_creator {
-            get {
-                return ((string)(this["config_FamiliesList_dgListShow_creator"]));
-            }
-            set {
-                this["config_FamiliesList_dgListShow_creator"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public string config_FamiliesList_dgListShow_created {
-            get {
-                return ((string)(this["config_FamiliesList_dgListShow_created"]));
-            }
-            set {
-                this["config_FamiliesList_dgListShow_created"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool columns_UsersList_ID {
             get {
                 return ((bool)(this["columns_UsersList_ID"]));
@@ -2096,6 +1664,174 @@ namespace WBZ.Properties {
             }
             set {
                 this["config_EmployeesList_WindowY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int config_EmployeesList_LimitPerPage {
+            get {
+                return ((int)(this["config_EmployeesList_LimitPerPage"]));
+            }
+            set {
+                this["config_EmployeesList_LimitPerPage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("e.lastname")]
+        public string config_EmployeesList_Sort1By {
+            get {
+                return ((string)(this["config_EmployeesList_Sort1By"]));
+            }
+            set {
+                this["config_EmployeesList_Sort1By"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool config_EmployeesList_Sort1Order {
+            get {
+                return ((bool)(this["config_EmployeesList_Sort1Order"]));
+            }
+            set {
+                this["config_EmployeesList_Sort1Order"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string config_EmployeesList_Sort2By {
+            get {
+                return ((string)(this["config_EmployeesList_Sort2By"]));
+            }
+            set {
+                this["config_EmployeesList_Sort2By"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool config_EmployeesList_Sort2Order {
+            get {
+                return ((bool)(this["config_EmployeesList_Sort2Order"]));
+            }
+            set {
+                this["config_EmployeesList_Sort2Order"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool columns_EmployeesList_ID {
+            get {
+                return ((bool)(this["columns_EmployeesList_ID"]));
+            }
+            set {
+                this["columns_EmployeesList_ID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool columns_EmployeesList_Fullname {
+            get {
+                return ((bool)(this["columns_EmployeesList_Fullname"]));
+            }
+            set {
+                this["columns_EmployeesList_Fullname"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool columns_EmployeesList_Department {
+            get {
+                return ((bool)(this["columns_EmployeesList_Department"]));
+            }
+            set {
+                this["columns_EmployeesList_Department"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool columns_EmployeesList_Position {
+            get {
+                return ((bool)(this["columns_EmployeesList_Position"]));
+            }
+            set {
+                this["columns_EmployeesList_Position"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool columns_EmployeesList_Email {
+            get {
+                return ((bool)(this["columns_EmployeesList_Email"]));
+            }
+            set {
+                this["columns_EmployeesList_Email"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool columns_EmployeesList_Phone {
+            get {
+                return ((bool)(this["columns_EmployeesList_Phone"]));
+            }
+            set {
+                this["columns_EmployeesList_Phone"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool columns_EmployeesList_Postcode {
+            get {
+                return ((bool)(this["columns_EmployeesList_Postcode"]));
+            }
+            set {
+                this["columns_EmployeesList_Postcode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool columns_EmployeesList_City {
+            get {
+                return ((bool)(this["columns_EmployeesList_City"]));
+            }
+            set {
+                this["columns_EmployeesList_City"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool columns_EmployeesList_Address {
+            get {
+                return ((bool)(this["columns_EmployeesList_Address"]));
+            }
+            set {
+                this["columns_EmployeesList_Address"] = value;
             }
         }
     }

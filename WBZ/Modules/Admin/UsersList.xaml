@@ -61,26 +61,26 @@
                             <c:SimpleHeader TextContent="Ogólne" IconSource="pack://siteoforigin:,,,/Resources/icon32_filter.ico"/>
                         </TabItem.Header>
                         <ScrollViewer>
-                            <DockPanel Margin="0,0,0,5">
-                                <DockPanel DockPanel.Dock="Top" Margin="5,5,5,0">
-                                    <Label Content="Imię:" Margin="0,0,5,0" HorizontalContentAlignment="Right" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=15}"/>
-                                    <TextBox Text="{Binding Filters.Forename}" VerticalContentAlignment="Center" KeyUp="dpFilter_KeyUp"/>
+                            <DockPanel Margin="5">
+                                <DockPanel DockPanel.Dock="Top">
+                                    <Label Content="Imię:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                                    <TextBox Text="{Binding Filters.Forename}" Margin="2.5" VerticalContentAlignment="Center" KeyUp="dpFilter_KeyUp"/>
                                 </DockPanel>
-                                <DockPanel DockPanel.Dock="Top" Margin="5,5,5,0">
-                                    <Label Content="Nazwisko:" Margin="0,0,5,0" HorizontalContentAlignment="Right" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=15}"/>
-                                    <TextBox Text="{Binding Filters.Lastname}" VerticalContentAlignment="Center" KeyUp="dpFilter_KeyUp"/>
+                                <DockPanel DockPanel.Dock="Top">
+                                    <Label Content="Nazwisko:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                                    <TextBox Text="{Binding Filters.Lastname}" Margin="2.5" VerticalContentAlignment="Center" KeyUp="dpFilter_KeyUp"/>
                                 </DockPanel>
-                                <DockPanel DockPanel.Dock="Top" Margin="5,5,5,0">
-                                    <Label Content="E-mail:" Margin="0,0,5,0" HorizontalContentAlignment="Right" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=15}"/>
-                                    <TextBox Text="{Binding Filters.Email}" VerticalContentAlignment="Center" KeyUp="dpFilter_KeyUp"/>
+                                <DockPanel DockPanel.Dock="Top">
+                                    <Label Content="E-mail:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                                    <TextBox Text="{Binding Filters.Email}" Margin="2.5" VerticalContentAlignment="Center" KeyUp="dpFilter_KeyUp"/>
                                 </DockPanel>
-                                <DockPanel DockPanel.Dock="Top" Margin="5,5,5,0">
-                                    <Label Content="Nr telefonu:" Margin="0,0,5,0" HorizontalContentAlignment="Right" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=15}"/>
-                                    <TextBox Text="{Binding Filters.Phone}" VerticalContentAlignment="Center" KeyUp="dpFilter_KeyUp"/>
+                                <DockPanel DockPanel.Dock="Top">
+                                    <Label Content="Nr telefonu:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                                    <TextBox Text="{Binding Filters.Phone}" Margin="2.5" VerticalContentAlignment="Center" KeyUp="dpFilter_KeyUp"/>
                                 </DockPanel>
-                                <DockPanel DockPanel.Dock="Top" Margin="5,5,5,0">
-                                    <Label Content="Tylko aktywni:" Margin="0,0,5,0" HorizontalContentAlignment="Right" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=15}"/>
-                                    <CheckBox IsChecked="{Binding Filters.Active}" VerticalContentAlignment="Center"/>
+                                <DockPanel DockPanel.Dock="Top">
+                                    <Label Content="Tylko aktywni:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                                    <CheckBox IsChecked="{Binding Filters.Active}" Margin="2.5" VerticalContentAlignment="Center"/>
                                 </DockPanel>
                                 <!--
                                 <CheckBox DockPanel.Dock="Top" x:Name="chckFilterGroup" Content="Wg grupy:" Margin="5" VerticalContentAlignment="Center"/>
@@ -146,21 +146,21 @@
                             <c:SimpleHeader TextContent="Ustawienia" IconSource="pack://siteoforigin:,,,/Resources/icon32_settings.ico"/>
                         </TabItem.Header>
                         <ScrollViewer>
-                            <DockPanel Margin="0,0,0,5">
-                                <DockPanel DockPanel.Dock="Top" Margin="5,5,5,0">
-                                    <Label Content="Sortuj najpierw po:" Margin="0,0,5,0" HorizontalContentAlignment="Right" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=15}"/>
-                                    <Button Content="{Binding config_UsersList_Sort1Order, Source={x:Static p:Settings.Default}, Mode=TwoWay, Converter={StaticResource conv_BoolToString}, ConverterParameter='  ↑  ~  ↓  '}"/>
-                                    <ComboBox SelectedValue="{Binding config_UsersList_Sort1By, Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
+                            <DockPanel Margin="5">
+                                <DockPanel DockPanel.Dock="Top">
+                                    <Label Content="Sortuj najpierw po:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                                    <Button Margin="2.5" Content="{Binding config_UsersList_Sort1Order, Source={x:Static p:Settings.Default}, Mode=TwoWay, Converter={StaticResource conv_BoolToString}, ConverterParameter='  ↑  ~  ↓  '}" />
+                                    <ComboBox Margin="2.5" SelectedValue="{Binding config_UsersList_Sort1By, Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
                                         <ComboBoxItem Content="Imię" Tag="u.forename"/>
                                         <ComboBoxItem Content="Nazwisko" Tag="u.lastname"/>
                                         <ComboBoxItem Content="E-mail" Tag="u.email"/>
                                         <ComboBoxItem Content="Telefon" Tag="u.phone"/>
                                     </ComboBox>
                                 </DockPanel>
-                                <DockPanel DockPanel.Dock="Top" Margin="5,5,5,0">
-                                    <Label Content="Sortuj następnie po:" Margin="0,0,5,0" HorizontalContentAlignment="Right" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=15}"/>
-                                    <Button Content="{Binding config_UsersList_Sort2Order, Source={x:Static p:Settings.Default}, Mode=TwoWay, Converter={StaticResource conv_BoolToString}, ConverterParameter='  ↑  ~  ↓  '}"/>
-                                    <ComboBox SelectedValue="{Binding config_UsersList_Sort2By, Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
+                                <DockPanel DockPanel.Dock="Top">
+                                    <Label Content="Sortuj następnie po:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                                    <Button Margin="2.5" Content="{Binding config_UsersList_Sort2Order, Source={x:Static p:Settings.Default}, Mode=TwoWay, Converter={StaticResource conv_BoolToString}, ConverterParameter='  ↑  ~  ↓  '}"/>
+                                    <ComboBox Margin="2.5" SelectedValue="{Binding config_UsersList_Sort2By, Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
                                         <ComboBoxItem Content="" Tag=""/>
                                         <ComboBoxItem Content="Imię" Tag="u.forename"/>
                                         <ComboBoxItem Content="Nazwisko" Tag="u.lastname"/>
@@ -168,9 +168,9 @@
                                         <ComboBoxItem Content="Telefon" Tag="u.phone"/>
                                     </ComboBox>
                                 </DockPanel>
-                                <DockPanel DockPanel.Dock="Top" Margin="5,5,5,0">
-                                    <Label Content="Limit wczytywania:" Margin="0,0,5,0" HorizontalContentAlignment="Right" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=15}"/>
-                                    <TextBox Text="{Binding config_UsersList_LimitPerPage, Source={x:Static p:Settings.Default}, Mode=TwoWay}" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=5}" KeyUp="dpFilter_KeyUp"/>
+                                <DockPanel DockPanel.Dock="Top">
+                                    <Label Content="Limit wczytywania:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                                    <TextBox Text="{Binding config_UsersList_LimitPerPage, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Margin="2.5" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=5}" KeyUp="dpFilter_KeyUp"/>
                                 </DockPanel>
                             </DockPanel>
                         </ScrollViewer>

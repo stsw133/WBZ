@@ -1097,6 +1097,174 @@ namespace WBZ
 		}
 		#endregion
 
+		#region module "Admin - Employees"
+		/// <summary>
+		/// Pobiera listę pracowników
+		/// </summary>
+		/// <param name="filter">Filtr SQL</param>
+		/// <param name="limit">Limit rekordów</param>
+		/// <param name="offset">Offset</param>
+		/// <param name="order">Sortowanie po nazwie kolumny</param>
+		/// <param name="desc">Porządek sortowania malejący</param>
+		internal static List<C_Employee> ListEmployees(string filter = null, int page = 0)
+		{
+			var result = new List<C_Employee>();
+
+			try
+			{
+				int limit = Properties.Settings.Default.config_EmployeesList_LimitPerPage;
+				int offset = page * limit;
+				string order = $"{Properties.Settings.Default.config_EmployeesList_Sort1By} {(Properties.Settings.Default.config_EmployeesList_Sort1Order ? "desc" : "asc")}";
+				if (!string.IsNullOrEmpty(Properties.Settings.Default.config_EmployeesList_Sort2By))
+					order += $", {Properties.Settings.Default.config_EmployeesList_Sort2By} {(Properties.Settings.Default.config_EmployeesList_Sort2Order ? "desc" : "asc")}";
+
+				using (var sqlConn = new NpgsqlConnection(connWBZ))
+				{
+					sqlConn.Open();
+
+					var sqlCmd = new NpgsqlCommand(@"select e.id, e.""user"", e.forename, e.lastname,
+							e.department, e.position, e.email, e.phone, e.postcode, e.city, e.address, e.archival
+						from wbz.employees e
+						where @filter
+						order by @order
+						limit @limit offset @offset", sqlConn);
+					sqlCmd.CommandText = sqlCmd.CommandText.Replace("@filter", filter ?? true.ToString());
+					sqlCmd.CommandText = sqlCmd.CommandText.Replace("@order", order);
+					sqlCmd.Parameters.AddWithValue("limit", limit);
+					sqlCmd.Parameters.AddWithValue("offset", offset);
+					using (var sqlDA = new NpgsqlDataAdapter(sqlCmd))
+					{
+						var dt = new DataTable();
+						sqlDA.Fill(dt);
+						result = dt.DataTableToList<C_Employee>();
+
+						foreach (C_Employee employee in result)
+							employee.User = GetInstance("users", (int)dt.Rows.Find($"id = {employee.ID}")["user"]) as C_User;
+					}
+
+					sqlConn.Close();
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+			}
+
+			return result;
+		}
+		/// <summary>
+		/// Ustawia dane o pracowniku
+		/// </summary>
+		/// <param name="store">Klasa pracownika</param>
+		internal static bool SetEmployee(C_Employee employee)
+		{
+			bool result = false;
+			int ID = employee.ID;
+
+			try
+			{
+				using (var sqlConn = new NpgsqlConnection(connWBZ))
+				{
+					sqlConn.Open();
+
+					using (var sqlTran = sqlConn.BeginTransaction())
+					{
+						NpgsqlCommand sqlCmd;
+
+						///add
+						if (employee.ID == 0)
+							sqlCmd = new NpgsqlCommand(@"insert into wbz.employees (""user"", forename, lastname, department, position,
+									email, phone, city, address, postcode, archival, comment)
+								values (@user, @forename, @lastname, @department, @position,
+									@email, @phone, @city, @address, @postcode, @archival, @comment) returning id", sqlConn, sqlTran);
+						///edit
+						else
+							sqlCmd = new NpgsqlCommand(@"update wbz.employees
+								set ""user""=@user, forename=@forename, lastname=@lastname, department=@department, position=@position,
+									email=@email, phone=@phone, city=@city, address=@address, postcode=@postcode, archival=@archival, comment=@comment
+								where id=@id", sqlConn, sqlTran);
+
+						sqlCmd.Parameters.AddWithValue("id", ID);
+						sqlCmd.Parameters.AddWithValue("user", employee.User.ID);
+						sqlCmd.Parameters.AddWithValue("forename", employee.Forename);
+						sqlCmd.Parameters.AddWithValue("lastname", employee.Lastname);
+						sqlCmd.Parameters.AddWithValue("department", employee.Department);
+						sqlCmd.Parameters.AddWithValue("position", employee.Position);
+						sqlCmd.Parameters.AddWithValue("email", employee.Email);
+						sqlCmd.Parameters.AddWithValue("phone", employee.Phone);
+						sqlCmd.Parameters.AddWithValue("city", employee.City);
+						sqlCmd.Parameters.AddWithValue("address", employee.Address);
+						sqlCmd.Parameters.AddWithValue("postcode", employee.Postcode);
+						sqlCmd.Parameters.AddWithValue("archival", employee.Archival);
+						sqlCmd.Parameters.AddWithValue("comment", employee.Comment);
+
+						///add
+						if (employee.ID == 0)
+						{
+							ID = Convert.ToInt32(sqlCmd.ExecuteScalar());
+							SetLog(Global.User.ID, "employees", ID, $"Utworzono pracownika.", sqlTran);
+						}
+						///edit
+						else
+						{
+							sqlCmd.ExecuteNonQuery();
+							SetLog(Global.User.ID, "employees", ID, $"Edytowano pracownika.", sqlTran);
+						}
+
+						sqlTran.Commit();
+						employee.ID = ID;
+					}
+
+					sqlConn.Close();
+				}
+
+				result = true;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+			}
+
+			return result;
+		}
+		/// <summary>
+		/// Usunięcie pracownika
+		/// </summary>
+		/// <param name="id">ID instancji</param>
+		internal static bool DeleteEmployee(int id)
+		{
+			bool result = false;
+
+			try
+			{
+				using (var sqlConn = new NpgsqlConnection(connWBZ))
+				{
+					sqlConn.Open();
+
+					using (var sqlTran = sqlConn.BeginTransaction())
+					{
+						var sqlCmd = new NpgsqlCommand(@"delete from wbz.employees where id=@id", sqlConn);
+						sqlCmd.Parameters.AddWithValue("id", id);
+						sqlCmd.ExecuteNonQuery();
+
+						ClearObject("employees", id, sqlConn, sqlTran);
+						SetLog(Global.User.ID, "employees", id, $"Usunięto pracownika.");
+
+						sqlTran.Commit();
+					}
+
+					sqlConn.Close();
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+			}
+
+			return result;
+		}
+		#endregion
+
 		#region module "Documents"
 		/// <summary>
 		/// Pobiera listę dokumentów
@@ -2974,6 +3142,11 @@ namespace WBZ
 									on s.id=d.store
 								where @filter", sqlConn);
 							break;
+						case Global.ModuleTypes.EMPLOYEES:
+							sqlCmd = new NpgsqlCommand(@"select count(distinct e.id)
+								from wbz.employees e
+								where @filter", sqlConn);
+							break;
 						case Global.ModuleTypes.FAMILIES:
 							sqlCmd = new NpgsqlCommand(@"select count(distinct f.id)
 								from wbz.families f
@@ -3041,6 +3214,8 @@ namespace WBZ
 						return ListDistributions($"d.id={id}")[0];
 					case Global.ModuleTypes.DOCUMENTS:
 						return ListDocuments($"d.id={id}")[0];
+					case Global.ModuleTypes.EMPLOYEES:
+						return ListEmployees($"e.id={id}")[0];
 					case Global.ModuleTypes.FAMILIES:
 						return ListFamilies($"f.id={id}")[0];
 					case Global.ModuleTypes.LOGS:

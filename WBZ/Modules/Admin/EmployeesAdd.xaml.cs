@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WBZ.Classes;
 
 namespace WBZ.Modules.Admin
 {
@@ -19,7 +20,7 @@ namespace WBZ.Modules.Admin
     /// </summary>
     public partial class EmployeesAdd : Window
     {
-        public EmployeesAdd()
+        public EmployeesAdd(C_Employee employee, bool editMode)
         {
             InitializeComponent();
         }
