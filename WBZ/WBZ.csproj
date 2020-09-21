@@ -624,6 +624,12 @@
     <EmbeddedResource Include="Resources\icon32_briefcase.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\icon32_distributions.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\icon32_orders.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="SQL\database.sql" />
     <EmbeddedResource Include="Resources\logo128_pwsz.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

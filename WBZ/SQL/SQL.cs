@@ -908,12 +908,18 @@ namespace WBZ
 		/// <param name="offset">Offset</param>
 		/// <param name="order">Sortowanie po nazwie kolumny</param>
 		/// <param name="desc">Porządek sortowania malejący</param>
-		internal static List<C_User> ListUsers(string filter = null, int limit = int.MaxValue, int offset = 0, string order = "lastname", bool desc = false)
+		internal static List<C_User> ListUsers(string filter = null, int page = 0)
 		{
 			var result = new List<C_User>();
 
 			try
 			{
+				int limit = Properties.Settings.Default.config_UsersList_LimitPerPage;
+				int offset = page * limit;
+				string order = $"{Properties.Settings.Default.config_UsersList_Sort1By} {(Properties.Settings.Default.config_UsersList_Sort1Order ? "desc" : "asc")}";
+				if (!string.IsNullOrEmpty(Properties.Settings.Default.config_UsersList_Sort2By))
+					order += $", {Properties.Settings.Default.config_UsersList_Sort2By} {(Properties.Settings.Default.config_UsersList_Sort2Order ? "desc" : "asc")}";
+
 				using (var sqlConn = new NpgsqlConnection(connWBZ))
 				{
 					sqlConn.Open();
@@ -925,7 +931,7 @@ namespace WBZ
 						order by @order
 						limit @limit offset @offset", sqlConn);
 					sqlCmd.CommandText = sqlCmd.CommandText.Replace("@filter", filter ?? true.ToString());
-					sqlCmd.CommandText = sqlCmd.CommandText.Replace("@order", order + " " + (desc ? "desc" : "asc"));
+					sqlCmd.CommandText = sqlCmd.CommandText.Replace("@order", order);
 					sqlCmd.Parameters.AddWithValue("limit", limit);
 					sqlCmd.Parameters.AddWithValue("offset", offset);
 					using (var sqlDA = new NpgsqlDataAdapter(sqlCmd))

@@ -10,24 +10,6 @@ namespace WBZ.Helpers
 	/// Konwerter wartości bool na string, parametr musi składać się z dwóch ciągów oddzielonych znakiem ~
 	/// Jeśli wartość=true to podstawiany jest ciąg z lewej strony parametru, dla wartości false z prawej strony
 	/// </summary>
-	public class conv_BoolToString : IValueConverter
-	{
-		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-		{
-			if ((bool)value) return parameter.ToString().Split('~')[0];
-			return parameter.ToString().Split('~')[1];
-		}
-
-		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-		{
-			return parameter.ToString().Split('~')[1];
-		}
-	}
-
-	/// <summary>
-	/// Konwerter wartości bool na string, parametr musi składać się z dwóch ciągów oddzielonych znakiem ~
-	/// Jeśli wartość=true to podstawiany jest ciąg z lewej strony parametru, dla wartości false z prawej strony
-	/// </summary>
 	public class conv_BoolInverted : IValueConverter
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -44,6 +26,24 @@ namespace WBZ.Helpers
 				return !System.Convert.ToBoolean(value) ? Visibility.Collapsed : Visibility.Visible;
 			else
 				return !System.Convert.ToBoolean(value);
+		}
+	}
+
+	/// <summary>
+	/// Konwerter wartości bool na string, parametr musi składać się z dwóch ciągów oddzielonych znakiem ~
+	/// Jeśli wartość=true to podstawiany jest ciąg z lewej strony parametru, dla wartości false z prawej strony
+	/// </summary>
+	public class conv_BoolToString : IValueConverter
+	{
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			if ((bool)value) return parameter.ToString().Split('~')[0];
+			return parameter.ToString().Split('~')[1];
+		}
+
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			return parameter.ToString().Split('~')[1];
 		}
 	}
 

@@ -503,5 +503,20 @@
     <Setting Name="config_Attmisc_PanelColor" Type="System.String" Scope="User">
       <Value Profile="(Default)">#EEE</Value>
     </Setting>
+    <Setting Name="config_UsersList_LimitPerPage" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="config_UsersList_Sort1By" Type="System.String" Scope="User">
+      <Value Profile="(Default)">u.lastname</Value>
+    </Setting>
+    <Setting Name="config_UsersList_Sort1Order" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="config_UsersList_Sort2By" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="config_UsersList_Sort2Order" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

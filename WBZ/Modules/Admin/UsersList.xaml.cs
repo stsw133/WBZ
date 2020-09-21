@@ -96,7 +96,7 @@ namespace WBZ.Modules.Admin
 			await Task.Run(() => {
 				UpdateFilters();
 				M.TotalItems = SQL.CountInstances(M.INSTANCE_TYPE, M.FilterSQL);
-				M.InstancesList = SQL.ListUsers(M.FilterSQL, M.Limit, M.Page = 0 * M.Limit, "lastname", false);
+				M.InstancesList = SQL.ListUsers(M.FilterSQL, M.Page = 0);
 			});
 		}
 		private void btnClose_Click(object sender, MouseButtonEventArgs e)
@@ -133,7 +133,7 @@ namespace WBZ.Modules.Admin
 			if (e.VerticalChange > 0 && e.VerticalOffset + e.ViewportHeight == e.ExtentHeight && M.InstancesList.Count < M.TotalItems)
 			{
 				DataContext = null;
-				M.InstancesList.AddRange(SQL.ListUsers(M.FilterSQL, M.Limit, ++M.Page * M.Limit, "lastname", false));
+				M.InstancesList.AddRange(SQL.ListUsers(M.FilterSQL, ++M.Page));
 				DataContext = M;
 				Extensions.GetVisualChild<ScrollViewer>(sender as DataGrid).ScrollToVerticalOffset(e.VerticalOffset);
 			}
@@ -200,8 +200,6 @@ namespace WBZ.Modules.Admin
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
 		}
-		/// Limit instancji na stronę
-		public int Limit { get; } = 50;
 		/// Łączna liczba instancji
 		private int totalItems;
 		public int TotalItems

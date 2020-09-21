@@ -12,7 +12,7 @@ namespace WBZ.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.5.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.7.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -2024,6 +2024,66 @@ namespace WBZ.Properties {
             }
             set {
                 this["config_Attmisc_PanelColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int config_UsersList_LimitPerPage {
+            get {
+                return ((int)(this["config_UsersList_LimitPerPage"]));
+            }
+            set {
+                this["config_UsersList_LimitPerPage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("u.lastname")]
+        public string config_UsersList_Sort1By {
+            get {
+                return ((string)(this["config_UsersList_Sort1By"]));
+            }
+            set {
+                this["config_UsersList_Sort1By"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool config_UsersList_Sort1Order {
+            get {
+                return ((bool)(this["config_UsersList_Sort1Order"]));
+            }
+            set {
+                this["config_UsersList_Sort1Order"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string config_UsersList_Sort2By {
+            get {
+                return ((string)(this["config_UsersList_Sort2By"]));
+            }
+            set {
+                this["config_UsersList_Sort2By"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool config_UsersList_Sort2Order {
+            get {
+                return ((bool)(this["config_UsersList_Sort2Order"]));
+            }
+            set {
+                this["config_UsersList_Sort2Order"] = value;
             }
         }
     }

@@ -18,6 +18,7 @@
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="conv_VisibleIfTrue"/>
         <h:conv_BoolInverted x:Key="conv_BoolInverted"/>
+        <h:conv_BoolToString x:Key="conv_BoolToString"/>
         <h:conv_ListContains x:Key="conv_ListContains"/>
         <h:conv_Size x:Key="conv_Size"/>
     </Window.Resources>
@@ -54,12 +55,10 @@
         <Grid DockPanel.Dock="Top" Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}">
             <Expander x:Name="filtersExpander" Header="Filtry wyszukiwania" Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="0,0,0,1">
                 <TabControl MaxHeight="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=20}">
+                    <!-- tabMain -->
                     <TabItem>
                         <TabItem.Header>
-                            <StackPanel Orientation="Horizontal" Margin="2">
-                                <Image Margin="2" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_filter.ico"/>
-                                <TextBlock Text="Ogólne" Margin="2" VerticalAlignment="Center"/>
-                            </StackPanel>
+                            <c:SimpleHeader TextContent="Ogólne" IconSource="pack://siteoforigin:,,,/Resources/icon32_filter.ico"/>
                         </TabItem.Header>
                         <ScrollViewer>
                             <DockPanel Margin="0,0,0,5">
@@ -90,12 +89,10 @@
                             </DockPanel>
                         </ScrollViewer>
                     </TabItem>
+                    <!-- tabAttributes -->
                     <TabItem IsEnabled="False">
                         <TabItem.Header>
-                            <StackPanel Orientation="Horizontal" Margin="2">
-                                <Image Margin="2" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_attributes.ico"/>
-                                <TextBlock Text="Atrybuty" Margin="2" VerticalAlignment="Center"/>
-                            </StackPanel>
+                            <c:SimpleHeader TextContent="Atrybuty" IconSource="pack://siteoforigin:,,,/Resources/icon32_attributes.ico"/>
                         </TabItem.Header>
                         <DockPanel>
                             <DataGrid HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
@@ -107,12 +104,10 @@
                             </DataGrid>
                         </DockPanel>
                     </TabItem>
+                    <!-- tabLogs -->
                     <TabItem IsEnabled="False">
                         <TabItem.Header>
-                            <StackPanel Orientation="Horizontal" Margin="2">
-                                <Image Margin="2" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_logs.ico"/>
-                                <TextBlock Text="Historia" Margin="2" VerticalAlignment="Center"/>
-                            </StackPanel>
+                            <c:SimpleHeader TextContent="Historia" IconSource="pack://siteoforigin:,,,/Resources/icon32_logs.ico"/>
                         </TabItem.Header>
                         <Grid Margin="5">
                             <Grid.RowDefinitions>
@@ -144,6 +139,41 @@
                             <CheckBox Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="3" x:Name="chckFilterModifier" Content="Wg osoby modyfikującej:" Margin="5" VerticalContentAlignment="Center"/>
                             <ComboBox Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="3" x:Name="cbFilterModifier" Margin="5" VerticalContentAlignment="Center" ItemsSource="{Binding InstancesList.DefaultView}" DisplayMemberPath="fullname" SelectedValuePath="id" IsEnabled="{Binding IsChecked, ElementName=chckFilterModifier}"/>
                         </Grid>
+                    </TabItem>
+                    <!-- tabSettings -->
+                    <TabItem>
+                        <TabItem.Header>
+                            <c:SimpleHeader TextContent="Ustawienia" IconSource="pack://siteoforigin:,,,/Resources/icon32_settings.ico"/>
+                        </TabItem.Header>
+                        <ScrollViewer>
+                            <DockPanel Margin="0,0,0,5">
+                                <DockPanel DockPanel.Dock="Top" Margin="5,5,5,0">
+                                    <Label Content="Sortuj najpierw po:" Margin="0,0,5,0" HorizontalContentAlignment="Right" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=15}"/>
+                                    <Button Content="{Binding config_UsersList_Sort1Order, Source={x:Static p:Settings.Default}, Mode=TwoWay, Converter={StaticResource conv_BoolToString}, ConverterParameter='  ↑  ~  ↓  '}"/>
+                                    <ComboBox SelectedValue="{Binding config_UsersList_Sort1By, Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
+                                        <ComboBoxItem Content="Imię" Tag="u.forename"/>
+                                        <ComboBoxItem Content="Nazwisko" Tag="u.lastname"/>
+                                        <ComboBoxItem Content="E-mail" Tag="u.email"/>
+                                        <ComboBoxItem Content="Telefon" Tag="u.phone"/>
+                                    </ComboBox>
+                                </DockPanel>
+                                <DockPanel DockPanel.Dock="Top" Margin="5,5,5,0">
+                                    <Label Content="Sortuj następnie po:" Margin="0,0,5,0" HorizontalContentAlignment="Right" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=15}"/>
+                                    <Button Content="{Binding config_UsersList_Sort2Order, Source={x:Static p:Settings.Default}, Mode=TwoWay, Converter={StaticResource conv_BoolToString}, ConverterParameter='  ↑  ~  ↓  '}"/>
+                                    <ComboBox SelectedValue="{Binding config_UsersList_Sort2By, Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
+                                        <ComboBoxItem Content="" Tag=""/>
+                                        <ComboBoxItem Content="Imię" Tag="u.forename"/>
+                                        <ComboBoxItem Content="Nazwisko" Tag="u.lastname"/>
+                                        <ComboBoxItem Content="E-mail" Tag="u.email"/>
+                                        <ComboBoxItem Content="Telefon" Tag="u.phone"/>
+                                    </ComboBox>
+                                </DockPanel>
+                                <DockPanel DockPanel.Dock="Top" Margin="5,5,5,0">
+                                    <Label Content="Limit wczytywania:" Margin="0,0,5,0" HorizontalContentAlignment="Right" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=15}"/>
+                                    <TextBox Text="{Binding config_UsersList_LimitPerPage, Source={x:Static p:Settings.Default}, Mode=TwoWay}" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=5}" KeyUp="dpFilter_KeyUp"/>
+                                </DockPanel>
+                            </DockPanel>
+                        </ScrollViewer>
                     </TabItem>
                 </TabControl>
             </Expander>
