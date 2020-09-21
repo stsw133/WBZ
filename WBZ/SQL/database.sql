@@ -408,6 +408,8 @@ CREATE TABLE wbz.employees
     city character varying(40) COLLATE pg_catalog."default",
     address character varying(60) COLLATE pg_catalog."default",
     postcode character varying(6) COLLATE pg_catalog."default",
+    department character varying(40) COLLATE pg_catalog."default",
+    position character varying(40) COLLATE pg_catalog."default",
     archival boolean NOT NULL DEFAULT false,
     comment text COLLATE pg_catalog."default",
     CONSTRAINT employees_pkey PRIMARY KEY (id),

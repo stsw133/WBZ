@@ -167,6 +167,12 @@
     <Compile Include="Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Admin\EmployeesAdd.xaml.cs">
+      <DependentUpon>EmployeesAdd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\EmployeesList.xaml.cs">
+      <DependentUpon>EmployeesList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Attmisc\AttributesClassesAdd.xaml.cs">
       <DependentUpon>AttributesClassesAdd.xaml</DependentUpon>
     </Compile>
@@ -287,6 +293,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\TitleBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Admin\EmployeesAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Admin\EmployeesList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

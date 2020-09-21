@@ -2074,5 +2074,29 @@ namespace WBZ.Properties {
                 this["config_UsersList_Sort2Order"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("900")]
+        public int config_EmployeesList_WindowX {
+            get {
+                return ((int)(this["config_EmployeesList_WindowX"]));
+            }
+            set {
+                this["config_EmployeesList_WindowX"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("600")]
+        public int config_EmployeesList_WindowY {
+            get {
+                return ((int)(this["config_EmployeesList_WindowY"]));
+            }
+            set {
+                this["config_EmployeesList_WindowY"] = value;
+            }
+        }
     }
 }

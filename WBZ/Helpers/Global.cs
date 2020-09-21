@@ -26,6 +26,7 @@ namespace WBZ.Helpers
             public const string COMPANIES = "companies";
             public const string DISTRIBUTIONS = "distributions";
             public const string DOCUMENTS = "documents";
+            public const string EMPLOYEES = "employees";
             public const string FAMILIES = "families";
             public const string LOGS = "logs";
             public const string STATS = "stats";
@@ -59,6 +60,8 @@ namespace WBZ.Helpers
                     return "Dystrybucje";
                 case ModuleTypes.DOCUMENTS:
                     return "Dokumenty";
+                case ModuleTypes.EMPLOYEES:
+                    return "Pracownicy";
                 case ModuleTypes.FAMILIES:
                     return "Rodziny";
                 case ModuleTypes.LOGS:
