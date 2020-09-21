@@ -112,7 +112,29 @@ alter table wbz.attributes_classes add column if not exists required boolean not
 alter table wbz.attributes_classes add column if not exists archival boolean not null default false;
 alter table wbz.attributes add column if not exists archival boolean not null default false;
 
-								update wbz.config set value='1.1.0' where property='VERSION'", sqlConn, sqlTran);
+CREATE TABLE wbz.employees
+(
+    id serial NOT NULL,
+    ""user"" integer,
+	email character varying(60) COLLATE pg_catalog.""default"",
+	phone character varying(16) COLLATE pg_catalog.""default"",
+	forename character varying(50) COLLATE pg_catalog.""default"" NOT NULL,
+	lastname character varying(30) COLLATE pg_catalog.""default"" NOT NULL,
+	city character varying(40) COLLATE pg_catalog.""default"",
+	address character varying(60) COLLATE pg_catalog.""default"",
+	postcode character varying(6) COLLATE pg_catalog.""default"",
+	archival boolean NOT NULL DEFAULT false,
+	comment text COLLATE pg_catalog.""default"",
+	CONSTRAINT employees_pkey PRIMARY KEY(id),
+	CONSTRAINT employees_user_fkey FOREIGN KEY(""user"")
+		REFERENCES wbz.users(id) MATCH SIMPLE
+		ON UPDATE CASCADE
+		ON DELETE SET NULL
+		NOT VALID
+)
+TABLESPACE pg_default;
+
+							update wbz.config set value='1.1.0' where property='VERSION'", sqlConn, sqlTran);
 							sqlCmd.ExecuteNonQuery();
 						}
 

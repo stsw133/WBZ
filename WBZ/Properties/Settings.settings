@@ -101,9 +101,6 @@
     <Setting Name="columns_DocumentsList_DateIssue" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="config_Stores_PanelColor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#EEE</Value>
-    </Setting>
     <Setting Name="config_StoresList_WindowX" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">900</Value>
     </Setting>

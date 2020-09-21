@@ -25,7 +25,7 @@
         <!-- titleBar -->
         <c:TitleBar DockPanel.Dock="Top" AdditionalIcon="pack://siteoforigin:,,,/Resources/icon32_list.ico"/>
         <!-- buttonsPanel -->
-        <Border DockPanel.Dock="Right" Background="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="1,0,0,0" Visibility="{Binding SelectingMode, Converter={StaticResource conv_BoolInverted}}">
+        <Border DockPanel.Dock="Right" Background="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="1,0,0,0" Visibility="{Binding SelectingMode, Converter={StaticResource conv_BoolInverted}}">
             <DockPanel>
                 <ToggleButton x:Name="btnToggle" BorderThickness="0" Width="5" IsChecked="True"/>
                 <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding User.Perms, Converter={StaticResource conv_ListContains}, ConverterParameter=stores_preview}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
@@ -46,13 +46,13 @@
             </DockPanel>
             <Border.ContextMenu>
                 <ContextMenu>
-                    <c:MenuPanelColor Tag="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+                    <c:MenuPanelColor Tag="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                 </ContextMenu>
             </Border.ContextMenu>
         </Border>
         <!-- filtersPanel -->
-        <Grid DockPanel.Dock="Top" Background="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}">
-            <Expander x:Name="filtersExpander" Header="Filtry wyszukiwania" Background="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="0,0,0,1">
+        <Grid DockPanel.Dock="Top" Background="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}">
+            <Expander x:Name="filtersExpander" Header="Filtry wyszukiwania" Background="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="0,0,0,1">
                 <TabControl MaxHeight="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=20}">
                     <TabItem>
                         <TabItem.Header>
@@ -159,7 +159,7 @@
             </StackPanel>
         </Grid>
         <!-- statusPanel -->
-        <Border DockPanel.Dock="Bottom" Background="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="0,1,0,0">
+        <Border DockPanel.Dock="Bottom" Background="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="0,1,0,0">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
                     <Label Content="Wyświetlono:" Margin="5,0"/>

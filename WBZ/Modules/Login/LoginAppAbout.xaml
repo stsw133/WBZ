@@ -44,11 +44,11 @@
                     <StackPanel VerticalAlignment="Center">
                         <TextBlock DockPanel.Dock="Top" Text="{Binding AboutCreators}" Padding="5" TextAlignment="Center" TextWrapping="Wrap" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=25}"/>
                         <StackPanel DockPanel.Dock="Top">
-                            <Label DockPanel.Dock="Top" Content="Arkadiusz Bryska" Padding="5" HorizontalAlignment="Center" FontWeight="Medium"/>
+                            <Label Content="Karol Staszewski" Padding="5,5,5,0" HorizontalAlignment="Center" FontWeight="Medium"/>
+                            <Label Content="stsw.karolstaszewski@gmail.com" Padding="5,0,5,5" HorizontalAlignment="Center" Foreground="#239"/>
                         </StackPanel>
                         <StackPanel DockPanel.Dock="Top">
-                            <Label Content="Karol Staszewski" Padding="5,5,5,0" HorizontalAlignment="Center" FontWeight="Medium"/>
-                            <Label Content="karolstaszewski96@o2.pl" Padding="5,0,5,5" HorizontalAlignment="Center" Foreground="#239"/>
+                            <Label DockPanel.Dock="Top" Content="Arkadiusz Bryska" Padding="5" HorizontalAlignment="Center" FontWeight="Medium"/>
                         </StackPanel>
                     </StackPanel>
                 </DockPanel>

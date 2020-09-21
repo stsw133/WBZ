@@ -421,18 +421,6 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#EEE")]
-        public string config_Stores_PanelColor {
-            get {
-                return ((string)(this["config_Stores_PanelColor"]));
-            }
-            set {
-                this["config_Stores_PanelColor"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("900")]
         public int config_StoresList_WindowX {
             get {

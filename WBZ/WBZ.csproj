@@ -242,10 +242,10 @@
     <Compile Include="Modules\Stats\StatsReportsGenerator.xaml.cs">
       <DependentUpon>StatsReportsGenerator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Stores\StoresAdd.xaml.cs">
+    <Compile Include="Modules\Articles\Stores\StoresAdd.xaml.cs">
       <DependentUpon>StoresAdd.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Stores\StoresList.xaml.cs">
+    <Compile Include="Modules\Articles\Stores\StoresList.xaml.cs">
       <DependentUpon>StoresList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -406,11 +406,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Stores\StoresAdd.xaml">
+    <Page Include="Modules\Articles\Stores\StoresAdd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Stores\StoresList.xaml">
+    <Page Include="Modules\Articles\Stores\StoresList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

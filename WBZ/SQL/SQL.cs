@@ -967,25 +967,6 @@ namespace WBZ
 			return result;
 		}
 		/// <summary>
-		/// Pobiera dane o użytkowniku
-		/// </summary>
-		/// <param name="id">ID instancji</param>
-		internal static C_User GetUser(int id)
-		{
-			C_User result = null;
-
-			try
-			{
-				result = ListUsers($"u.id={id}")[0];
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message);
-			}
-
-			return result;
-		}
-		/// <summary>
 		/// Ustawia dane o użytkowniku
 		/// </summary>
 		/// <param name="store">Klasa użytkownika</param>
@@ -1162,25 +1143,6 @@ namespace WBZ
 
 					sqlConn.Close();
 				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message);
-			}
-
-			return result;
-		}
-		/// <summary>
-		/// Pobiera dane o dokumencie
-		/// </summary>
-		/// <param name="id">ID instancji</param>
-		internal static C_Document GetDocument(int id)
-		{
-			C_Document result = null;
-
-			try
-			{
-				result = ListDocuments($"d.id={id}")[0];
 			}
 			catch (Exception ex)
 			{
@@ -1407,7 +1369,7 @@ namespace WBZ
 						///update articles amounts
 						if (oldstatus > 0)
 						{
-							var document = GetDocument(id);
+							var document = GetInstance("documents", id) as C_Document;
 							var positions = GetDocumentPositions(id);
 							foreach (DataRow pos in positions.Rows)
 								ChangeArticleAmount(document.Store, (int)pos["article"], -(double)pos["amount"], (string)pos["measure"], false, sqlConn, sqlTran);
@@ -1473,25 +1435,6 @@ namespace WBZ
 					
 					sqlConn.Close();
 				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message);
-			}
-
-			return result;
-		}
-		/// <summary>
-		/// Pobiera dane o magazynie
-		/// </summary>
-		/// <param name="id">ID instancji</param>
-		internal static C_Store GetStore(int id)
-		{
-			C_Store result = null;
-
-			try
-			{
-				result = ListStores($"s.id={id}")[0];
 			}
 			catch (Exception ex)
 			{
@@ -1650,25 +1593,6 @@ namespace WBZ
 
 					sqlConn.Close();
 				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message);
-			}
-
-			return result;
-		}
-		/// <summary>
-		/// Pobiera dane o towarze
-		/// </summary>
-		/// <param name="id">ID instancji</param>
-		internal static C_Article GetArticle(int id)
-		{
-			C_Article result = null;
-
-			try
-			{
-				result = ListArticles($"a.id={id}")[0];
 			}
 			catch (Exception ex)
 			{
@@ -2006,25 +1930,6 @@ namespace WBZ
 			return result;
 		}
 		/// <summary>
-		/// Pobiera dane o firmie
-		/// </summary>
-		/// <param name="id">ID instancji</param>
-		internal static C_Company GetCompany(int id)
-		{
-			C_Company result = null;
-
-			try
-			{
-				result = ListCompanies($"c.id={id}")[0];
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message);
-			}
-
-			return result;
-		}
-		/// <summary>
 		/// Ustawia dane o firmie
 		/// </summary>
 		/// <param name="company">Klasa firmy</param>
@@ -2178,25 +2083,6 @@ namespace WBZ
 
 					sqlConn.Close();
 				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message);
-			}
-
-			return result;
-		}
-		/// <summary>
-		/// Pobiera dane o rodzinie
-		/// </summary>
-		/// <param name="id">ID instancji</param>
-		internal static C_Family GetFamily(int id)
-		{
-			C_Family result = null;
-
-			try
-			{
-				result = ListFamilies($"f.id={id}")[0];
 			}
 			catch (Exception ex)
 			{
@@ -2362,25 +2248,6 @@ namespace WBZ
 
 					sqlConn.Close();
 				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message);
-			}
-
-			return result;
-		}
-		/// <summary>
-		/// Pobiera dane o dystrybucji
-		/// </summary>
-		/// <param name="id">ID instancji</param>
-		internal static C_Distribution GetDistribution(int id)
-		{
-			C_Distribution result = null;
-
-			try
-			{
-				result = ListDistributions($"d.id={id}")[0];
 			}
 			catch (Exception ex)
 			{
@@ -2726,25 +2593,6 @@ namespace WBZ
 
 					sqlConn.Close();
 				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message);
-			}
-
-			return result;
-		}
-		/// <summary>
-		/// Pobiera dane o klasie atrybutu
-		/// </summary>
-		/// <param name="id">ID instancji</param>
-		internal static C_AttributeClass GetAttributeClass(int id)
-		{
-			C_AttributeClass result = null;
-
-			try
-			{
-				result = ListAttributesClasses($"ac.id={id}")[0];
 			}
 			catch (Exception ex)
 			{
@@ -3168,6 +3016,51 @@ namespace WBZ
 			}
 
 			return result;
+		}
+		/// <summary>
+		/// Pobiera dane o instancji
+		/// </summary>
+		/// <param name="id">ID instancji</param>
+		internal static object GetInstance(string module, int id)
+		{
+			try
+			{
+				switch (module)
+				{
+					case Global.ModuleTypes.ARTICLES:
+						return ListArticles($"a.id={id}")[0];
+					case Global.ModuleTypes.ATTACHMENTS:
+						return null;
+					case Global.ModuleTypes.ATTRIBUTES_CLASSES:
+						return ListAttributesClasses($"ac.id={id}")[0];
+					case Global.ModuleTypes.COMMUNITY:
+						return null;
+					case Global.ModuleTypes.COMPANIES:
+						return ListCompanies($"c.id={id}")[0];
+					case Global.ModuleTypes.DISTRIBUTIONS:
+						return ListDistributions($"d.id={id}")[0];
+					case Global.ModuleTypes.DOCUMENTS:
+						return ListDocuments($"d.id={id}")[0];
+					case Global.ModuleTypes.FAMILIES:
+						return ListFamilies($"f.id={id}")[0];
+					case Global.ModuleTypes.LOGS:
+						return ListLogs($"l.id={id}")[0];
+					case Global.ModuleTypes.STATS:
+						return null;
+					case Global.ModuleTypes.STORES:
+						return ListStores($"s.id={id}")[0];
+					case Global.ModuleTypes.USERS:
+						return ListUsers($"u.id={id}")[0];
+					default:
+						return null;
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+			}
+
+			return null;
 		}
 		#endregion
 	}

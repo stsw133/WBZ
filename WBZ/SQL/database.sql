@@ -129,7 +129,7 @@ CREATE TABLE wbz.groups
     id serial NOT NULL,
     module character varying(50) COLLATE pg_catalog."default" NOT NULL,
     name character varying(50) COLLATE pg_catalog."default" NOT NULL,
-    owner integer, --id grupy do, której ta grupa nale¿y
+    owner integer, --id grupy do której ta grupa nale¿y
     archival boolean NOT NULL DEFAULT false,
     comment text COLLATE pg_catalog."default",
     CONSTRAINT groups_pkey PRIMARY KEY (id)
@@ -393,6 +393,29 @@ CREATE TABLE wbz.distributions_positions
         REFERENCES wbz.articles (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE NO ACTION
+)
+TABLESPACE pg_default;
+
+-- Table: wbz.employees
+CREATE TABLE wbz.employees
+(
+    id serial NOT NULL,
+    "user" integer,
+    email character varying(60) COLLATE pg_catalog."default",
+    phone character varying(16) COLLATE pg_catalog."default",
+    forename character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    lastname character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    city character varying(40) COLLATE pg_catalog."default",
+    address character varying(60) COLLATE pg_catalog."default",
+    postcode character varying(6) COLLATE pg_catalog."default",
+    archival boolean NOT NULL DEFAULT false,
+    comment text COLLATE pg_catalog."default",
+    CONSTRAINT employees_pkey PRIMARY KEY (id),
+    CONSTRAINT employees_user_fkey FOREIGN KEY ("user")
+        REFERENCES wbz.users (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE SET NULL
+        NOT VALID
 )
 TABLESPACE pg_default;
 
