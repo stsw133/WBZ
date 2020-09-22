@@ -44,7 +44,7 @@
             </Border.ContextMenu>
         </Border>
         <!-- tabs -->
-        <TabControl DockPanel.Dock="Top" SelectionChanged="tabs_SelectionChanged">
+        <TabControl DockPanel.Dock="Top">
             <!-- tabMain -->
             <TabItem>
                 <TabItem.Header>

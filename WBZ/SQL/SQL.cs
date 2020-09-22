@@ -1123,9 +1123,12 @@ namespace WBZ
 				{
 					sqlConn.Open();
 
-					var sqlCmd = new NpgsqlCommand(@"select e.id, e.""user"", e.forename, e.lastname,
-							e.department, e.position, e.email, e.phone, e.postcode, e.city, e.address, e.archival
+					var sqlCmd = new NpgsqlCommand(@"select e.id, e.""user"", u.lastname || ' ' || u.forename as username,
+							e.forename, e.lastname, e.department, e.position,
+							e.email, e.phone, e.postcode, e.city, e.address, e.archival
 						from wbz.employees e
+						left join wbz.users u
+							on e.id=u.""user""
 						where @filter
 						order by @order
 						limit @limit offset @offset", sqlConn);
@@ -1138,9 +1141,6 @@ namespace WBZ
 						var dt = new DataTable();
 						sqlDA.Fill(dt);
 						result = dt.DataTableToList<C_Employee>();
-
-						foreach (C_Employee employee in result)
-							employee.User = GetInstance("users", (int)dt.Rows.Find($"id = {employee.ID}")["user"]) as C_User;
 					}
 
 					sqlConn.Close();
@@ -1186,7 +1186,7 @@ namespace WBZ
 								where id=@id", sqlConn, sqlTran);
 
 						sqlCmd.Parameters.AddWithValue("id", ID);
-						sqlCmd.Parameters.AddWithValue("user", employee.User.ID);
+						sqlCmd.Parameters.AddWithValue("user", employee.User);
 						sqlCmd.Parameters.AddWithValue("forename", employee.Forename);
 						sqlCmd.Parameters.AddWithValue("lastname", employee.Lastname);
 						sqlCmd.Parameters.AddWithValue("department", employee.Department);
@@ -3146,6 +3146,8 @@ namespace WBZ
 						case Global.ModuleTypes.EMPLOYEES:
 							sqlCmd = new NpgsqlCommand(@"select count(distinct e.id)
 								from wbz.employees e
+								left join wbz.users u
+									on e.id=u.""user""
 								where @filter", sqlConn);
 							break;
 						case Global.ModuleTypes.FAMILIES:
@@ -3202,31 +3204,31 @@ namespace WBZ
 				switch (module)
 				{
 					case Global.ModuleTypes.ARTICLES:
-						return ListArticles($"a.id={id}")[0];
+						return ListArticles($"a.id={id}")?[0];
 					case Global.ModuleTypes.ATTACHMENTS:
 						return null;
 					case Global.ModuleTypes.ATTRIBUTES_CLASSES:
-						return ListAttributesClasses($"ac.id={id}")[0];
+						return ListAttributesClasses($"ac.id={id}")?[0];
 					case Global.ModuleTypes.COMMUNITY:
 						return null;
 					case Global.ModuleTypes.COMPANIES:
-						return ListCompanies($"c.id={id}")[0];
+						return ListCompanies($"c.id={id}")?[0];
 					case Global.ModuleTypes.DISTRIBUTIONS:
-						return ListDistributions($"d.id={id}")[0];
+						return ListDistributions($"d.id={id}")?[0];
 					case Global.ModuleTypes.DOCUMENTS:
-						return ListDocuments($"d.id={id}")[0];
+						return ListDocuments($"d.id={id}")?[0];
 					case Global.ModuleTypes.EMPLOYEES:
-						return ListEmployees($"e.id={id}")[0];
+						return ListEmployees($"e.id={id}")?[0];
 					case Global.ModuleTypes.FAMILIES:
-						return ListFamilies($"f.id={id}")[0];
+						return ListFamilies($"f.id={id}")?[0];
 					case Global.ModuleTypes.LOGS:
-						return ListLogs($"l.id={id}")[0];
+						return ListLogs($"l.id={id}")?[0];
 					case Global.ModuleTypes.STATS:
 						return null;
 					case Global.ModuleTypes.STORES:
-						return ListStores($"s.id={id}")[0];
+						return ListStores($"s.id={id}")?[0];
 					case Global.ModuleTypes.USERS:
-						return ListUsers($"u.id={id}")[0];
+						return ListUsers($"u.id={id}")?[0];
 					default:
 						return null;
 				}
