@@ -136,6 +136,9 @@
     <Compile Include="Classes\C_Employee.cs" />
     <Compile Include="Classes\C_User.cs" />
     <Compile Include="Classes\C_Store.cs" />
+    <Compile Include="Controls\AttachmentsAdd.xaml.cs">
+      <DependentUpon>AttachmentsAdd.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\AttachmentsTab.xaml.cs">
       <DependentUpon>AttachmentsTab.xaml</DependentUpon>
     </Compile>
@@ -265,6 +268,10 @@
     <Compile Include="Controls\MenuPanelColor.xaml.cs">
       <DependentUpon>MenuPanelColor.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\AttachmentsAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\AttachmentsTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -715,7 +722,7 @@
     <EmbeddedResource Include="Resources\icon32_database.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\icon32_www.ico">
+    <EmbeddedResource Include="Resources\icon32_web.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\logo32.ico">

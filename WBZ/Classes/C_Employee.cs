@@ -3,7 +3,7 @@
 	public class C_Employee
 	{
 		public int ID { get; set; }
-		public C_User User { get; set; }
+		public int User { get; set; }
 		public string Email { get; set; }
 		public string Phone { get; set; }
 		public string Forename { get; set; }
@@ -15,11 +15,12 @@
 		public string Address { get; set; }
 		public bool Archival { get; set; }
 		public string Comment { get; set; }
+		public string UserName { get; set; }
 
 		public C_Employee()
 		{
 			ID = 0;
-			User = new C_User();
+			User = 0;
 			Email = "";
 			Phone = "";
 			Forename = "";
@@ -31,6 +32,7 @@
 			Address = "";
 			Archival = false;
 			Comment = "";
+			UserName = "";
 		}
 
 		public string Fullname

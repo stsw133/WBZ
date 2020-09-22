@@ -301,7 +301,7 @@
   <data name="icon32_warning" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_warning.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon32_www" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="icon32_web" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_www.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="logo" type="System.Resources.ResXFileRef, System.Windows.Forms">

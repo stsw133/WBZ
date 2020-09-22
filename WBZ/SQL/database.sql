@@ -115,6 +115,7 @@ CREATE TABLE wbz.attachments
     instance integer NOT NULL,
     name character varying(50) COLLATE pg_catalog."default" NOT NULL,
     file bytea NOT NULL,
+    comment text COLLATE pg_catalog."default",
     CONSTRAINT attachments_pkey PRIMARY KEY (id),
     CONSTRAINT attachments_perms_user_fkey FOREIGN KEY ("user")
         REFERENCES wbz.users (id) MATCH SIMPLE

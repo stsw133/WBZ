@@ -16,12 +16,12 @@ namespace WBZ.Modules.Admin
 	{
 		M_UsersAdd M = new M_UsersAdd();
 
-		public UsersAdd(C_User user, bool editMode)
+		public UsersAdd(C_User instance, bool editMode)
 		{
 			InitializeComponent();
 			DataContext = M;
 
-			M.InstanceInfo = user;
+			M.InstanceInfo = instance;
 			M.EditMode = editMode;
 		}
 		private bool CheckDataValidation()

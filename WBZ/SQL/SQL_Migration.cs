@@ -111,6 +111,7 @@ alter table wbz.attributes_classes add column if not exists defvalue character v
 alter table wbz.attributes_classes add column if not exists required boolean not null default false;
 alter table wbz.attributes_classes add column if not exists archival boolean not null default false;
 alter table wbz.attributes add column if not exists archival boolean not null default false;
+alter table wbz.attachments add column if not exists comment text;
 
 CREATE TABLE wbz.employees
 (

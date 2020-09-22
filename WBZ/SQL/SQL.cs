@@ -446,7 +446,7 @@ namespace WBZ
 		/// <param name="instance">Numer ID obiektu</param>
 		/// <param name="name">Nazwa załącznika</param>
 		/// <param name="file">Plik</param>
-		internal static int SetAttachment(string module, int instance, string name, byte[] file)
+		internal static int SetAttachment(string module, int instance, string name, byte[] file, string comment)
 		{
 			int result = 0;
 
@@ -456,13 +456,14 @@ namespace WBZ
 				{
 					sqlConn.Open();
 
-					var sqlCmd = new NpgsqlCommand(@"insert into wbz.attachments (""user"", module, instance, name, file)
-						values (@user, @module, @instance, @name, @file) returning id", sqlConn);
+					var sqlCmd = new NpgsqlCommand(@"insert into wbz.attachments (""user"", module, instance, name, file, comment)
+						values (@user, @module, @instance, @name, @file, @comment) returning id", sqlConn);
 					sqlCmd.Parameters.AddWithValue("user", Global.User.ID);
 					sqlCmd.Parameters.AddWithValue("module", module);
 					sqlCmd.Parameters.AddWithValue("instance", instance);
 					sqlCmd.Parameters.AddWithValue("name", name);
 					sqlCmd.Parameters.AddWithValue("file", file);
+					sqlCmd.Parameters.AddWithValue("comment", comment);
 					result = Convert.ToInt32(sqlCmd.ExecuteScalar());
 
 					SetLog(Global.User.ID, module, instance, $"Dodano załącznik {name}.");

@@ -683,9 +683,9 @@ namespace WBZ.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        internal static System.Drawing.Icon icon32_www {
+        internal static System.Drawing.Icon icon32_web {
             get {
-                object obj = ResourceManager.GetObject("icon32_www", resourceCulture);
+                object obj = ResourceManager.GetObject("icon32_web", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }

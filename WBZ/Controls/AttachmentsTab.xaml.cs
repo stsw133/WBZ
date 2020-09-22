@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
@@ -52,13 +54,28 @@ namespace WBZ.Controls
 
         private void btnAttachmentAdd_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new OpenFileDialog()
+            var window = new AttachmentsAdd();
+            window.Owner = Window.GetWindow(this);
+            if (window.ShowDialog() == true)
             {
-                Filter = "Wszystkie pliki|*.*"
-            };
-            if (dialog.ShowDialog() == true)
-            {
-                SQL.SetAttachment(InstanceType, ID, Path.GetFileName(dialog.FileName), File.ReadAllBytes(dialog.FileName));
+                string filePath, fileName;
+                byte[] file;
+                if (string.IsNullOrEmpty(window.GetDrive))
+                {
+                    filePath = window.GetLink;
+                    fileName = filePath.Split('/').Last();
+                    using (WebClient client = new WebClient())
+                    {
+                        file = client.DownloadData(filePath);
+                    }
+                }
+                else
+                {
+                    filePath = window.GetDrive;
+                    fileName = Path.GetFileName(filePath);
+                    file = File.ReadAllBytes(filePath);
+                }
+                SQL.SetAttachment(InstanceType, ID, fileName, file, filePath);
                 M.InstanceAttachments = SQL.ListAttachments(InstanceType, ID);
             }
         }
