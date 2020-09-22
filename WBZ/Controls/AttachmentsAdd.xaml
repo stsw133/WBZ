@@ -23,12 +23,12 @@
         <!-- main -->
         <DockPanel DockPanel.Dock="Top">
             <c:SimpleButton Margin="5,5,0,5" IsEnabled="{Binding EditMode}" TextVisibility="False"
-                            IconSource="pack://siteoforigin:,,,/Resources/icon32_web.ico" PreviewMouseLeftButtonUp="btnLink_Click"/>
+                            TextContent="Z przeglądarki" IconSource="pack://siteoforigin:,,,/Resources/icon32_web.ico" PreviewMouseLeftButtonUp="btnLink_Click"/>
             <TextBox x:Name="tbLink" Margin="5" VerticalContentAlignment="Center"/>
         </DockPanel>
         <DockPanel DockPanel.Dock="Top">
             <c:SimpleButton Margin="5,5,0,5" IsEnabled="{Binding EditMode}" TextVisibility="False"
-                            IconSource="pack://siteoforigin:,,,/Resources/icon32_photos.ico" PreviewMouseLeftButtonUp="btnDrive_Click"/>
+                            TextContent="Z dysku" IconSource="pack://siteoforigin:,,,/Resources/icon32_folder.ico" PreviewMouseLeftButtonUp="btnDrive_Click"/>
             <TextBox x:Name="tbDrive" Margin="5" VerticalContentAlignment="Center"/>
         </DockPanel>
         <Grid MinWidth="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=30}">

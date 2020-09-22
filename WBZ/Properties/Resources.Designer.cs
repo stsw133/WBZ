@@ -303,6 +303,16 @@ namespace WBZ.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
+        internal static System.Drawing.Icon icon32_folder {
+            get {
+                object obj = ResourceManager.GetObject("icon32_folder", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
         internal static System.Drawing.Icon icon32_food {
             get {
                 object obj = ResourceManager.GetObject("icon32_food", resourceCulture);
@@ -336,6 +346,16 @@ namespace WBZ.Properties {
         internal static System.Drawing.Icon icon32_greetings {
             get {
                 object obj = ResourceManager.GetObject("icon32_greetings", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon icon32_group {
+            get {
+                object obj = ResourceManager.GetObject("icon32_group", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }
@@ -536,6 +556,16 @@ namespace WBZ.Properties {
         internal static System.Drawing.Icon icon32_search {
             get {
                 object obj = ResourceManager.GetObject("icon32_search", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon icon32_select {
+            get {
+                object obj = ResourceManager.GetObject("icon32_select", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }

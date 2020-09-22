@@ -1128,7 +1128,7 @@ namespace WBZ
 							e.email, e.phone, e.postcode, e.city, e.address, e.archival
 						from wbz.employees e
 						left join wbz.users u
-							on e.id=u.""user""
+							on u.id=e.""user""
 						where @filter
 						order by @order
 						limit @limit offset @offset", sqlConn);

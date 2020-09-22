@@ -187,6 +187,9 @@
   <data name="icon32_fine" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_fine.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icon32_folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon32_folder.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon32_food" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_food.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -198,6 +201,9 @@
   </data>
   <data name="icon32_greetings" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_greetings.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon32_group" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon32_group.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon32_invoices" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_documents.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -258,6 +264,9 @@
   </data>
   <data name="icon32_search" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_search.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon32_select" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon32_select.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon32_settings" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_settings.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

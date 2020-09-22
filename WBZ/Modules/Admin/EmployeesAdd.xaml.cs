@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Input;
 using WBZ.Classes;
 using WBZ.Helpers;
+using INSTANCE_CLASS = WBZ.Classes.C_Employee;
 
 namespace WBZ.Modules.Admin
 {
@@ -14,7 +15,7 @@ namespace WBZ.Modules.Admin
     {
         M_EmployeesAdd M = new M_EmployeesAdd();
 
-        public EmployeesAdd(C_Employee instance, bool editMode)
+        public EmployeesAdd(INSTANCE_CLASS instance, bool editMode)
         {
             InitializeComponent();
             DataContext = M;
@@ -74,8 +75,8 @@ namespace WBZ.Modules.Admin
 		/// Dane o zalogowanym użytkowniku
 		public C_User User { get; } = Global.User;
 		/// Instancja
-		private C_Employee instanceInfo;
-		public C_Employee InstanceInfo
+		private INSTANCE_CLASS instanceInfo;
+		public INSTANCE_CLASS InstanceInfo
 		{
 			get
 			{

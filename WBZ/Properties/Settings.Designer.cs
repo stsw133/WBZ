@@ -1834,5 +1834,53 @@ namespace WBZ.Properties {
                 this["columns_EmployeesList_Address"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("900")]
+        public int config_EmployeesAdd_WindowX {
+            get {
+                return ((int)(this["config_EmployeesAdd_WindowX"]));
+            }
+            set {
+                this["config_EmployeesAdd_WindowX"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("600")]
+        public int config_EmployeesAdd_WindowY {
+            get {
+                return ((int)(this["config_EmployeesAdd_WindowY"]));
+            }
+            set {
+                this["config_EmployeesAdd_WindowY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("900")]
+        public int config_GroupsList_WindowX {
+            get {
+                return ((int)(this["config_GroupsList_WindowX"]));
+            }
+            set {
+                this["config_GroupsList_WindowX"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("600")]
+        public int config_GroupsList_WindowY {
+            get {
+                return ((int)(this["config_GroupsList_WindowY"]));
+            }
+            set {
+                this["config_GroupsList_WindowY"] = value;
+            }
+        }
     }
 }

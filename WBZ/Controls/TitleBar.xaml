@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:h="clr-namespace:WBZ.Helpers"
              xmlns:p="clr-namespace:WBZ.Properties"
-             xmlns:local="clr-namespace:WBZ.Controls"
              mc:Ignorable="d"
              Loaded="UserControl_Loaded">
     <UserControl.Resources>

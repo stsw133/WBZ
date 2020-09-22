@@ -455,5 +455,17 @@
     <Setting Name="columns_EmployeesList_Address" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="config_EmployeesAdd_WindowX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">900</Value>
+    </Setting>
+    <Setting Name="config_EmployeesAdd_WindowY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">600</Value>
+    </Setting>
+    <Setting Name="config_GroupsList_WindowX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">900</Value>
+    </Setting>
+    <Setting Name="config_GroupsList_WindowY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">600</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

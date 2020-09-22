@@ -6,7 +6,6 @@
         xmlns:c="clr-namespace:WBZ.Controls"
         xmlns:h="clr-namespace:WBZ.Helpers"
         xmlns:p="clr-namespace:WBZ.Properties"
-        xmlns:local="clr-namespace:WBZ.Modules.Admin"
         mc:Ignorable="d"
         Title="{Binding Title}" MinHeight="240" MinWidth="360" Height="{Binding Source={x:Static p:Settings.Default}, Path=config_UsersAdd_WindowY, Mode=TwoWay}" Width="{Binding Source={x:Static p:Settings.Default}, Path=config_UsersAdd_WindowX, Mode=TwoWay}"
             BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"

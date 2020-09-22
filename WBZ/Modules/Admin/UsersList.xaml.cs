@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using WBZ.Classes;
 using WBZ.Helpers;
+using INSTANCE_CLASS = WBZ.Classes.C_User;
 
 namespace WBZ.Modules.Admin
 {
@@ -52,7 +53,7 @@ namespace WBZ.Modules.Admin
 		}
 		private void btnFiltersClear_Click(object sender, MouseButtonEventArgs e)
 		{
-			M.Filters = new C_User();
+			M.Filters = new INSTANCE_CLASS();
 			btnRefresh_Click(null, null);
 		}
 		#endregion
@@ -60,7 +61,7 @@ namespace WBZ.Modules.Admin
 		#region buttons
 		private void btnPreview_Click(object sender, MouseButtonEventArgs e)
 		{
-			var indexes = dgList.SelectedItems.Cast<C_User>().Select(x => M.InstancesList.IndexOf(x));
+			var indexes = dgList.SelectedItems.Cast<INSTANCE_CLASS>().Select(x => M.InstancesList.IndexOf(x));
 			foreach (int index in indexes)
 			{
 				var window = new UsersAdd(M.InstancesList[index], false);
@@ -69,12 +70,12 @@ namespace WBZ.Modules.Admin
 		}
 		private void btnAdd_Click(object sender, MouseButtonEventArgs e)
 		{
-			var window = new UsersAdd(new C_User(), true);
+			var window = new UsersAdd(new INSTANCE_CLASS(), true);
 			window.Show();
 		}
 		private void btnEdit_Click(object sender, MouseButtonEventArgs e)
 		{
-			var indexes = dgList.SelectedItems.Cast<C_User>().Select(x => M.InstancesList.IndexOf(x));
+			var indexes = dgList.SelectedItems.Cast<INSTANCE_CLASS>().Select(x => M.InstancesList.IndexOf(x));
 			foreach (int index in indexes)
 			{
 				var window = new UsersAdd(M.InstancesList[index], true);
@@ -83,7 +84,7 @@ namespace WBZ.Modules.Admin
 		}
 		private void btnDelete_Click(object sender, MouseButtonEventArgs e)
 		{
-			var indexes = dgList.SelectedItems.Cast<C_User>().Select(x => M.InstancesList.IndexOf(x));
+			var indexes = dgList.SelectedItems.Cast<INSTANCE_CLASS>().Select(x => M.InstancesList.IndexOf(x));
 			if (indexes.Count<int>() > 0 && MessageBox.Show("Czy na pewno usunąć zaznaczone rekordy?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
 			{
 				foreach (int index in indexes)
@@ -105,7 +106,7 @@ namespace WBZ.Modules.Admin
 		}
 		#endregion
 
-		public C_User Selected;
+		public INSTANCE_CLASS Selected;
 		private void dgList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			if (e.LeftButton == MouseButtonState.Pressed)
@@ -119,7 +120,7 @@ namespace WBZ.Modules.Admin
 				}
 				else
 				{
-					var indexes = dgList.SelectedItems.Cast<C_User>().Select(x => M.InstancesList.IndexOf(x));
+					var indexes = dgList.SelectedItems.Cast<INSTANCE_CLASS>().Select(x => M.InstancesList.IndexOf(x));
 					foreach (int index in indexes)
 						Selected = M.InstancesList[index];
 
@@ -155,8 +156,8 @@ namespace WBZ.Modules.Admin
 		/// Dane o zalogowanym użytkowniku
 		public C_User User { get; } = Global.User;
 		/// Lista instancji
-		private List<C_User> instancesList;
-		public List<C_User> InstancesList
+		private List<INSTANCE_CLASS> instancesList;
+		public List<INSTANCE_CLASS> InstancesList
 		{
 			get
 			{
@@ -173,8 +174,8 @@ namespace WBZ.Modules.Admin
 		/// Filtr SQL
 		public string FilterSQL { get; set; }
 		/// Instancja filtra
-		private C_User filters = new C_User();
-		public C_User Filters
+		private INSTANCE_CLASS filters = new INSTANCE_CLASS();
+		public INSTANCE_CLASS Filters
 		{
 			get
 			{

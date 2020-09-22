@@ -6,12 +6,11 @@
         xmlns:c="clr-namespace:WBZ.Controls"
         xmlns:h="clr-namespace:WBZ.Helpers"
         xmlns:p="clr-namespace:WBZ.Properties"
-        xmlns:local="clr-namespace:WBZ.Modules.Admin"
         mc:Ignorable="d"
         Title="{Binding Title}" MinHeight="240" MinWidth="360" Height="{Binding Source={x:Static p:Settings.Default}, Path=config_EmployeesAdd_WindowY, Mode=TwoWay}" Width="{Binding Source={x:Static p:Settings.Default}, Path=config_EmployeesAdd_WindowX, Mode=TwoWay}"
             BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}}"
-            Icon="pack://siteoforigin:,,,/Resources/icon32_stores.ico">
+            Icon="pack://siteoforigin:,,,/Resources/icon32_briefcase.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -57,7 +56,7 @@
                             <Button Margin="5,5,0,5" VerticalContentAlignment="Center" Click="btnUserChoose_Click">
                                 <Image Margin="2" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=1.5}" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_user.ico"/>
                             </Button>
-                            <TextBox Text="{Binding InstanceInfo.StoreName}" Tag="{Binding InstanceInfo.Store}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True"/>
+                            <TextBox Text="{Binding InstanceInfo.UserName}" Tag="{Binding InstanceInfo.User}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Imię:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
@@ -108,6 +107,13 @@
                     <Label DockPanel.Dock="Top" Content="Komentarz:" Margin="5,5,5,0" VerticalContentAlignment="Center"/>
                     <TextBox DockPanel.Dock="Top" Text="{Binding InstanceInfo.Comment}" Margin="5" TextWrapping="Wrap"/>
                 </DockPanel>
+            </TabItem>
+            <!-- tabGroups -->
+            <TabItem IsEnabled="{Binding IsEditing}">
+                <TabItem.Header>
+                    <c:SimpleHeader TextContent="Grupy" IconSource="pack://siteoforigin:,,,/Resources/icon32_group.ico"/>
+                </TabItem.Header>
+                <c:GroupsTab/>
             </TabItem>
             <!-- tabAttributes -->
             <TabItem IsEnabled="{Binding IsEditing}">

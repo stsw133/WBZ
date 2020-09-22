@@ -142,6 +142,9 @@
     <Compile Include="Controls\AttachmentsTab.xaml.cs">
       <DependentUpon>AttachmentsTab.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\GroupsTab.xaml.cs">
+      <DependentUpon>GroupsTab.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LogsTab.xaml.cs">
       <DependentUpon>LogsTab.xaml</DependentUpon>
     </Compile>
@@ -182,6 +185,9 @@
     </Compile>
     <Compile Include="Modules\Attmisc\AttributesClassesList.xaml.cs">
       <DependentUpon>AttributesClassesList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Attmisc\GroupsList.xaml.cs">
+      <DependentUpon>GroupsList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Attmisc\LogsList.xaml.cs">
       <DependentUpon>LogsList.xaml</DependentUpon>
@@ -276,6 +282,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\GroupsTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\LogsTab.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -309,6 +319,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Modules\Admin\EmployeesList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Attmisc\GroupsList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -644,6 +658,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\icon32_briefcase.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\icon32_folder.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\icon32_group.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\icon32_select.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <Content Include="SQL\database.sql" />

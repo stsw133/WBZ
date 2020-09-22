@@ -1,5 +1,4 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -8,6 +7,7 @@ using System.Net;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using WBZ.Classes;
 using WBZ.Helpers;
 
@@ -52,7 +52,7 @@ namespace WBZ.Controls
             catch { }
         }
 
-        private void btnAttachmentAdd_Click(object sender, RoutedEventArgs e)
+        private void btnAttachmentAdd_Click(object sender, MouseButtonEventArgs e)
         {
             var window = new AttachmentsAdd();
             window.Owner = Window.GetWindow(this);
@@ -79,7 +79,7 @@ namespace WBZ.Controls
                 M.InstanceAttachments = SQL.ListAttachments(InstanceType, ID);
             }
         }
-        private void btnAttachmentRemove_Click(object sender, RoutedEventArgs e)
+        private void btnAttachmentRemove_Click(object sender, MouseButtonEventArgs e)
         {
             if (lbAttachments.SelectedIndex < 0)
                 return;
