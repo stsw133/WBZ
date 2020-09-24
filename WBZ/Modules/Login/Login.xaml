@@ -6,7 +6,6 @@
         xmlns:c="clr-namespace:WBZ.Controls"
         xmlns:h="clr-namespace:WBZ.Helpers"
         xmlns:p="clr-namespace:WBZ.Properties"
-        xmlns:local="clr-namespace:WBZ.Modules.Login"
         mc:Ignorable="d"
         Title="Logowanie" SizeToContent="WidthAndHeight"
             BorderThickness="3" BorderBrush="#333" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" WindowStyle="None"

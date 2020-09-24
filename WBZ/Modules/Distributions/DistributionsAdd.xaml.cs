@@ -281,7 +281,7 @@ namespace WBZ.Modules.Distributions
 	/// </summary>
 	internal class M_DistributionsAdd : INotifyPropertyChanged
 	{
-		public readonly string INSTANCE_TYPE = Global.ModuleTypes.DISTRIBUTIONS;
+		public readonly string INSTANCE_TYPE = Global.Module.DISTRIBUTIONS;
 
 		/// Dane o zalogowanym użytkowniku
 		public C_User User { get; } = Global.User;

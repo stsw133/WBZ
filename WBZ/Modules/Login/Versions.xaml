@@ -6,7 +6,6 @@
         xmlns:c="clr-namespace:WBZ.Controls"
         xmlns:h="clr-namespace:WBZ.Helpers"
         xmlns:p="clr-namespace:WBZ.Properties"
-        xmlns:local="clr-namespace:WBZ.Modules.Login"
         mc:Ignorable="d"
         Title="Baza wersji aplikacji" MinHeight="200" MinWidth="300" Height="500" Width="750"
             BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"

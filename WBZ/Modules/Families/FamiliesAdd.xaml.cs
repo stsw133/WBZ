@@ -230,7 +230,7 @@ namespace WBZ.Modules.Families
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                if (Global.User.Perms.Contains($"{Global.ModuleTypes.DISTRIBUTIONS}_{Global.UserPermTypes.SAVE}"))
+                if (Global.User.Perms.Contains($"{Global.Module.DISTRIBUTIONS}_{Global.UserPermType.SAVE}"))
                 {
                     var indexes = (sender as DataGrid).SelectedItems.Cast<C_Distribution>().Select(x => M.InstanceSources_Distributions.IndexOf(x));
                     foreach (int index in indexes)
@@ -239,7 +239,7 @@ namespace WBZ.Modules.Families
                         window.Show();
                     }
                 }
-                else if (Global.User.Perms.Contains($"{Global.ModuleTypes.DISTRIBUTIONS}_{Global.UserPermTypes.PREVIEW}"))
+                else if (Global.User.Perms.Contains($"{Global.Module.DISTRIBUTIONS}_{Global.UserPermType.PREVIEW}"))
                 {
                     var indexes = (sender as DataGrid).SelectedItems.Cast<C_Distribution>().Select(x => M.InstanceSources_Distributions.IndexOf(x));
                     foreach (int index in indexes)
@@ -257,7 +257,7 @@ namespace WBZ.Modules.Families
 	/// </summary>
 	internal class M_FamiliesAdd : INotifyPropertyChanged
     {
-        public readonly string INSTANCE_TYPE = Global.ModuleTypes.FAMILIES;
+        public readonly string INSTANCE_TYPE = Global.Module.FAMILIES;
 
         /// Dane o zalogowanym użytkowniku
         public C_User User { get; } = Global.User;

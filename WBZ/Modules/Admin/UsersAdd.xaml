@@ -10,7 +10,7 @@
         Title="{Binding Title}" MinHeight="240" MinWidth="360" Height="{Binding Source={x:Static p:Settings.Default}, Path=config_UsersAdd_WindowY, Mode=TwoWay}" Width="{Binding Source={x:Static p:Settings.Default}, Path=config_UsersAdd_WindowX, Mode=TwoWay}"
             BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}}"
-            Icon="pack://siteoforigin:,,,/Resources/icon32_users.ico" Closed="Window_Closed">
+            Icon="pack://siteoforigin:,,,/Resources/icon32_users.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -34,7 +34,7 @@
                 <Separator DockPanel.Dock="Bottom" Margin="0,0,0,5" VerticalAlignment="Bottom" Height="5"/>
                 <c:SimpleButton DockPanel.Dock="Bottom" Margin="5,0,5,5" IsEnabled="True" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
                                 TextContent="Odśwież" IconSource="pack://siteoforigin:,,,/Resources/icon32_refresh.ico" PreviewMouseLeftButtonUp="btnRefresh_Click"/>
-                <Separator DockPanel.Dock="Bottom" Margin="0,0,0,5" VerticalAlignment="Bottom" Height="5" Visibility="Collapsed"/>
+                <Separator DockPanel.Dock="Bottom" Margin="0,0,0,5" VerticalAlignment="Bottom" Height="5"/>
             </DockPanel>
             <Border.ContextMenu>
                 <ContextMenu>
@@ -150,6 +150,42 @@
                                       Tag="employees_save" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
                             <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={StaticResource conv_ListContains}, ConverterParameter=employees_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                       Tag="employees_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                        </Grid>
+                        <Grid DockPanel.Dock="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                <Image Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_community.ico"/>
+                                <Label Content="Społeczność:" VerticalContentAlignment="Center"/>
+                            </StackPanel>
+                            <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={StaticResource conv_ListContains}, ConverterParameter=community_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="community_preview" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="2" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={StaticResource conv_ListContains}, ConverterParameter=community_save}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="community_save" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked" Visibility="Collapsed"/>
+                            <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={StaticResource conv_ListContains}, ConverterParameter=community_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="community_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked" Visibility="Collapsed"/>
+                        </Grid>
+                        <Grid DockPanel.Dock="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                <Image Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_groups.ico"/>
+                                <Label Content="Grupy:" VerticalContentAlignment="Center"/>
+                            </StackPanel>
+                            <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={StaticResource conv_ListContains}, ConverterParameter=groups_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="groups_preview" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="2" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={StaticResource conv_ListContains}, ConverterParameter=groups_save}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="groups_save" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={StaticResource conv_ListContains}, ConverterParameter=groups_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="groups_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
                         </Grid>
                         <Grid DockPanel.Dock="Top">
                             <Grid.ColumnDefinitions>
@@ -310,24 +346,6 @@
                                       Tag="stats_save" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
                             <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={StaticResource conv_ListContains}, ConverterParameter=stats_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                       Tag="stats_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked" Visibility="Collapsed"/>
-                        </Grid>
-                        <Grid DockPanel.Dock="Top">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                <Image Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_community.ico"/>
-                                <Label Content="Społeczność:" VerticalContentAlignment="Center"/>
-                            </StackPanel>
-                            <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={StaticResource conv_ListContains}, ConverterParameter=community_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="community_preview" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox Grid.Column="2" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={StaticResource conv_ListContains}, ConverterParameter=community_save}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="community_save" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={StaticResource conv_ListContains}, ConverterParameter=community_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="community_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked" Visibility="Collapsed"/>
                         </Grid>
                     </DockPanel>
                 </ScrollViewer>

@@ -1,4 +1,4 @@
-﻿<Window x:Class="WBZ.Helpers.AttributeValueChange"
+﻿<Window x:Class="WBZ.Controls.AttributeChange"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,6 @@
         xmlns:c="clr-namespace:WBZ.Controls"
         xmlns:h="clr-namespace:WBZ.Helpers"
         xmlns:p="clr-namespace:WBZ.Properties"
-        xmlns:local="clr-namespace:WBZ.Helpers"
         mc:Ignorable="d"
         Title="{Binding Title}" SizeToContent="WidthAndHeight"
             BorderThickness="3" BorderBrush="#333" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" WindowStyle="None"

@@ -10,7 +10,7 @@
         Title="Zarządzanie grupami" MinHeight="240" MinWidth="240" Height="{Binding Source={x:Static p:Settings.Default}, Path=config_GroupsList_WindowY, Mode=TwoWay}" Width="{Binding Source={x:Static p:Settings.Default}, Path=config_GroupsList_WindowX, Mode=TwoWay}"
             BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}}"
-            Icon="pack://siteoforigin:,,,/Resources/icon32_group.ico" Loaded="Window_Loaded" Closed="Window_Closed">
+            Icon="pack://siteoforigin:,,,/Resources/icon32_groups.ico" Loaded="Window_Loaded" Closed="Window_Closed">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -48,16 +48,27 @@
             </Border.ContextMenu>
         </Border>
         <!-- other -->
-        <DockPanel DockPanel.Dock="Top">
-            <Label DockPanel.Dock="Top" Content="Moduł:"/>
-            <ComboBox/>
-            <Label DockPanel.Dock="Top" Content="Archiwalne:"/>
-            <CheckBox/>
-            <TreeView DockPanel.Dock="Top"/>
-            <DockPanel Margin="5">
-                <Label DockPanel.Dock="Top" Content="Komentarz:" Margin="5,5,5,0" VerticalContentAlignment="Center"/>
-                <TextBox DockPanel.Dock="Top" Text="{Binding InstanceInfo.Comment}" Margin="5" TextWrapping="Wrap" IsReadOnly="True"/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <DockPanel Margin="10" IsEnabled="{Binding EditMode}">
+                <DockPanel DockPanel.Dock="Top">
+                    <Label Content="Moduł:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                    <ComboBox SelectedValue="{Binding InstanceInfo.Module}" SelectedValuePath="Tag" Margin="5" VerticalContentAlignment="Center">
+                        <ComboBoxItem Content="Dokumenty" Tag="documents"/>
+                        <ComboBoxItem Content="Dystrybucje" Tag="distributions"/>
+                        <ComboBoxItem Content="Firmy" Tag="companies"/>
+                        <ComboBoxItem Content="Magazyny" Tag="stores"/>
+                        <ComboBoxItem Content="Pracownicy" Tag="employees"/>
+                        <ComboBoxItem Content="Rodziny" Tag="families"/>
+                        <ComboBoxItem Content="Towary" Tag="articles"/>
+                    </ComboBox>
+                </DockPanel>
+                <CheckBox DockPanel.Dock="Top" Content="Pokaż archiwalne" Margin="20" VerticalContentAlignment="Center" IsChecked="{Binding InstanceInfo.Archival}"/>
+                <DockPanel DockPanel.Dock="Bottom">
+                    <Label DockPanel.Dock="Top" Content="Komentarz:" Margin="5,5,5,0" VerticalContentAlignment="Center"/>
+                    <TextBox DockPanel.Dock="Top" Text="{Binding InstanceInfo.Comment}" Margin="5" TextWrapping="Wrap" MinHeight="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Converter={StaticResource conv_Size}, ConverterParameter=0.2}" IsReadOnly="True"/>
+                </DockPanel>
+                <TreeView DockPanel.Dock="Top"/>
             </DockPanel>
-        </DockPanel>
+        </ScrollViewer>
     </DockPanel>
 </Window>

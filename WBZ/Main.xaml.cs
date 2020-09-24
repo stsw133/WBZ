@@ -33,31 +33,28 @@ namespace WBZ
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			if (!Global.User.Perms.Contains($"{Global.ModuleTypes.COMMUNITY}_{Global.UserPermTypes.PREVIEW}"))
-				gridModules.Children.RemoveAt(8);
-
-			if (!Global.User.Perms.Contains($"{Global.ModuleTypes.STATS}_{Global.UserPermTypes.PREVIEW}"))
+			if (!Global.User.Perms.Contains($"{Global.Module.STATS}_{Global.UserPermType.PREVIEW}"))
 				gridModules.Children.RemoveAt(7);
 
-			if ((!Global.User.Perms.Contains($"{Global.ModuleTypes.ATTRIBUTES_CLASSES}_{Global.UserPermTypes.PREVIEW}"))
-			 && (!Global.User.Perms.Contains($"{Global.ModuleTypes.ATTACHMENTS}_{Global.UserPermTypes.PREVIEW}"))
-			 && (!Global.User.Perms.Contains($"{Global.ModuleTypes.LOGS}_{Global.UserPermTypes.PREVIEW}")))
+			if ((!Global.User.Perms.Contains($"{Global.Module.ATTRIBUTES_CLASSES}_{Global.UserPermType.PREVIEW}"))
+			 && (!Global.User.Perms.Contains($"{Global.Module.ATTACHMENTS}_{Global.UserPermType.PREVIEW}"))
+			 && (!Global.User.Perms.Contains($"{Global.Module.LOGS}_{Global.UserPermType.PREVIEW}")))
 				gridModules.Children.RemoveAt(6);
 
-			if (!Global.User.Perms.Contains($"{Global.ModuleTypes.DISTRIBUTIONS}_{Global.UserPermTypes.PREVIEW}"))
+			if (!Global.User.Perms.Contains($"{Global.Module.DISTRIBUTIONS}_{Global.UserPermType.PREVIEW}"))
 				gridModules.Children.RemoveAt(5);
 
-			if (!Global.User.Perms.Contains($"{Global.ModuleTypes.FAMILIES}_{Global.UserPermTypes.PREVIEW}"))
+			if (!Global.User.Perms.Contains($"{Global.Module.FAMILIES}_{Global.UserPermType.PREVIEW}"))
 				gridModules.Children.RemoveAt(4);
 
-			if (!Global.User.Perms.Contains($"{Global.ModuleTypes.COMPANIES}_{Global.UserPermTypes.PREVIEW}"))
+			if (!Global.User.Perms.Contains($"{Global.Module.COMPANIES}_{Global.UserPermType.PREVIEW}"))
 				gridModules.Children.RemoveAt(3);
 
-			if ((!Global.User.Perms.Contains($"{Global.ModuleTypes.ARTICLES}_{Global.UserPermTypes.PREVIEW}"))
-			 && (!Global.User.Perms.Contains($"{Global.ModuleTypes.STORES}_{Global.UserPermTypes.PREVIEW}")))
+			if ((!Global.User.Perms.Contains($"{Global.Module.ARTICLES}_{Global.UserPermType.PREVIEW}"))
+			 && (!Global.User.Perms.Contains($"{Global.Module.STORES}_{Global.UserPermType.PREVIEW}")))
 				gridModules.Children.RemoveAt(2);
 
-			if (!Global.User.Perms.Contains($"{Global.ModuleTypes.DOCUMENTS}_{Global.UserPermTypes.PREVIEW}"))
+			if (!Global.User.Perms.Contains($"{Global.Module.DOCUMENTS}_{Global.UserPermType.PREVIEW}"))
 				gridModules.Children.RemoveAt(1);
 
 			if (!Global.User.Perms.Contains($"admin"))
@@ -172,8 +169,6 @@ namespace WBZ
 				expAttmisc.IsExpanded = false;
 			if (!sender.Equals(expStats))
 				expStats.IsExpanded = false;
-			if (!sender.Equals(expCommunity))
-				expCommunity.IsExpanded = false;
 		}
 
 		#region module "Admin"
@@ -186,6 +181,11 @@ namespace WBZ
 		{
 			var window = new EmployeesList();
 			window.Show();
+		}
+		private void btnCommunity_Click(object sender, RoutedEventArgs e)
+		{
+			//var window = new Forum();
+			//window.Show();
 		}
 		#endregion
 
@@ -260,6 +260,11 @@ namespace WBZ
 		#endregion
 
 		#region module "Attmisc"
+		private void btnGroupsList_Click(object sender, RoutedEventArgs e)
+		{
+			var window = new GroupsList();
+			window.Show();
+		}
 		private void btnAttributesClassesList_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new AttributesClassesList();
@@ -287,14 +292,6 @@ namespace WBZ
 		{
 			var window = new Stats();
 			window.Show();
-		}
-		#endregion
-
-		#region module "Community"
-		private void btnForum_Click(object sender, RoutedEventArgs e)
-		{
-			//var window = new Forum();
-			//window.Show();
 		}
 		#endregion
 

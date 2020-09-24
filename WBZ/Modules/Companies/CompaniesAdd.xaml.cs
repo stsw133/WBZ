@@ -71,7 +71,7 @@ namespace WBZ.Modules.Companies
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                if (Global.User.Perms.Contains($"{Global.ModuleTypes.DOCUMENTS}_{Global.UserPermTypes.SAVE}"))
+                if (Global.User.Perms.Contains($"{Global.Module.DOCUMENTS}_{Global.UserPermType.SAVE}"))
                 {
                     var indexes = (sender as DataGrid).SelectedItems.Cast<C_Document>().Select(x => M.InstanceSources_Documents.IndexOf(x));
                     foreach (int index in indexes)
@@ -80,7 +80,7 @@ namespace WBZ.Modules.Companies
                         window.Show();
                     }
                 }
-                else if (Global.User.Perms.Contains($"{Global.ModuleTypes.DOCUMENTS}_{Global.UserPermTypes.PREVIEW}"))
+                else if (Global.User.Perms.Contains($"{Global.Module.DOCUMENTS}_{Global.UserPermType.PREVIEW}"))
                 {
                     var indexes = (sender as DataGrid).SelectedItems.Cast<C_Document>().Select(x => M.InstanceSources_Documents.IndexOf(x));
                     foreach (int index in indexes)
@@ -98,7 +98,7 @@ namespace WBZ.Modules.Companies
 	/// </summary>
 	internal class M_CompaniesAdd : INotifyPropertyChanged
     {
-        public readonly string INSTANCE_TYPE = Global.ModuleTypes.COMPANIES;
+        public readonly string INSTANCE_TYPE = Global.Module.COMPANIES;
 
         /// Dane o zalogowanym użytkowniku
         public C_User User { get; } = Global.User;

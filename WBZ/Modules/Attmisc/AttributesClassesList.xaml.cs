@@ -112,7 +112,7 @@ namespace WBZ.Modules.Attmisc
 			{
 				if (!M.SelectingMode)
 				{
-					if (Global.User.Perms.Contains($"{M.INSTANCE_TYPE}_{Global.UserPermTypes.SAVE}"))
+					if (Global.User.Perms.Contains($"{M.INSTANCE_TYPE}_{Global.UserPermType.SAVE}"))
 						btnEdit_Click(null, null);
 					else
 						btnPreview_Click(null, null);
@@ -150,7 +150,7 @@ namespace WBZ.Modules.Attmisc
 	/// </summary>
 	internal class M_AttributesClassesList : INotifyPropertyChanged
 	{
-		public readonly string INSTANCE_TYPE = Global.ModuleTypes.ATTRIBUTES_CLASSES;
+		public readonly string INSTANCE_TYPE = Global.Module.ATTRIBUTES_CLASSES;
 
 		/// Dane o zalogowanym użytkowniku
 		public C_User User { get; } = Global.User;

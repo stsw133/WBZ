@@ -75,7 +75,7 @@ namespace WBZ.Modules.Stores
 		{
 			if (e.LeftButton == MouseButtonState.Pressed)
 			{
-				if (Global.User.Perms.Contains($"{Global.ModuleTypes.ARTICLES}_{Global.UserPermTypes.SAVE}"))
+				if (Global.User.Perms.Contains($"{Global.Module.ARTICLES}_{Global.UserPermType.SAVE}"))
 				{
 					var indexes = (sender as DataGrid).SelectedItems.Cast<C_Article>().Select(x => M.InstanceSources_Articles.IndexOf(x));
 					foreach (int index in indexes)
@@ -84,7 +84,7 @@ namespace WBZ.Modules.Stores
 						window.Show();
 					}
 				}
-				else if (Global.User.Perms.Contains($"{Global.ModuleTypes.ARTICLES}_{Global.UserPermTypes.PREVIEW}"))
+				else if (Global.User.Perms.Contains($"{Global.Module.ARTICLES}_{Global.UserPermType.PREVIEW}"))
 				{
 					var indexes = (sender as DataGrid).SelectedItems.Cast<C_Article>().Select(x => M.InstanceSources_Articles.IndexOf(x));
 					foreach (int index in indexes)
@@ -100,7 +100,7 @@ namespace WBZ.Modules.Stores
 		{
 			if (e.LeftButton == MouseButtonState.Pressed)
 			{
-				if (Global.User.Perms.Contains($"{Global.ModuleTypes.DOCUMENTS}_{Global.UserPermTypes.SAVE}"))
+				if (Global.User.Perms.Contains($"{Global.Module.DOCUMENTS}_{Global.UserPermType.SAVE}"))
 				{
 					var indexes = (sender as DataGrid).SelectedItems.Cast<C_Document>().Select(x => M.InstanceSources_Documents.IndexOf(x));
 					foreach (int index in indexes)
@@ -109,7 +109,7 @@ namespace WBZ.Modules.Stores
 						window.Show();
 					}
 				}
-				else if (Global.User.Perms.Contains($"{Global.ModuleTypes.DOCUMENTS}_{Global.UserPermTypes.PREVIEW}"))
+				else if (Global.User.Perms.Contains($"{Global.Module.DOCUMENTS}_{Global.UserPermType.PREVIEW}"))
 				{
 					var indexes = (sender as DataGrid).SelectedItems.Cast<C_Document>().Select(x => M.InstanceSources_Documents.IndexOf(x));
 					foreach (int index in indexes)
@@ -127,7 +127,7 @@ namespace WBZ.Modules.Stores
 	/// </summary>
 	internal class M_StoresAdd : INotifyPropertyChanged
 	{
-		public readonly string INSTANCE_TYPE = Global.ModuleTypes.STORES;
+		public readonly string INSTANCE_TYPE = Global.Module.STORES;
 
 		/// Dane o zalogowanym użytkowniku
 		public C_User User { get; } = Global.User;

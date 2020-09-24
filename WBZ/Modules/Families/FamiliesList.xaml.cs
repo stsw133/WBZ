@@ -114,7 +114,7 @@ namespace WBZ.Modules.Families
             {
                 if (!M.SelectingMode)
                 {
-                    if (Global.User.Perms.Contains($"{M.INSTANCE_TYPE}_{Global.UserPermTypes.SAVE}"))
+                    if (Global.User.Perms.Contains($"{M.INSTANCE_TYPE}_{Global.UserPermType.SAVE}"))
                         btnEdit_Click(null, null);
                     else
                         btnPreview_Click(null, null);
@@ -152,7 +152,7 @@ namespace WBZ.Modules.Families
 	/// </summary>
 	internal class M_FamiliesList : INotifyPropertyChanged
     {
-        public readonly string INSTANCE_TYPE = Global.ModuleTypes.FAMILIES;
+        public readonly string INSTANCE_TYPE = Global.Module.FAMILIES;
 
         /// Dane o zalogowanym użytkowniku
         public C_User User { get; } = Global.User;

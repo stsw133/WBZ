@@ -111,7 +111,7 @@ namespace WBZ.Modules.Distributions
 			{
 				if (!M.SelectingMode)
 				{
-					if (Global.User.Perms.Contains($"{M.INSTANCE_TYPE}_{Global.UserPermTypes.SAVE}"))
+					if (Global.User.Perms.Contains($"{M.INSTANCE_TYPE}_{Global.UserPermType.SAVE}"))
 						btnEdit_Click(null, null);
 					else
 						btnPreview_Click(null, null);
@@ -149,7 +149,7 @@ namespace WBZ.Modules.Distributions
 	/// </summary>
 	internal class M_DistributionsList : INotifyPropertyChanged
 	{
-		public readonly string INSTANCE_TYPE = Global.ModuleTypes.DISTRIBUTIONS;
+		public readonly string INSTANCE_TYPE = Global.Module.DISTRIBUTIONS;
 
 		/// Dane o zalogowanym użytkowniku
 		public C_User User { get; } = Global.User;

@@ -9,7 +9,7 @@ using System.Reflection;
 
 namespace WBZ.Helpers
 {
-    internal static class Global
+    public static class Global
     {
         internal static string Version => $"{Assembly.GetEntryAssembly().GetName().Version.Major}.{Assembly.GetEntryAssembly().GetName().Version.Minor}.{Assembly.GetEntryAssembly().GetName().Version.Build}";
         internal static string VersionNewest { get; set; } = null;
@@ -17,7 +17,7 @@ namespace WBZ.Helpers
         internal static C_User User { get; set; } = new C_User();
 
         #region GlobalStructure
-        internal static class ModuleTypes
+        internal static class Module
         {
             public const string ARTICLES = "articles";
             public const string ATTACHMENTS = "attachments";
@@ -33,56 +33,70 @@ namespace WBZ.Helpers
             public const string STORES = "stores";
             public const string USERS = "users";
         }
-        internal static class UserPermTypes
-        {
-            public const string PREVIEW = "preview";
-            public const string SAVE = "save";
-            public const string DELETE = "delete";
-        }
-        #endregion
-
-        #region Translations
         internal static string TranslateModules(string module)
         {
-            switch(module)
+            switch (module)
             {
-                case ModuleTypes.ARTICLES:
+                case Module.ARTICLES:
                     return "Towary";
-                case ModuleTypes.ATTACHMENTS:
+                case Module.ATTACHMENTS:
                     return "Załączniki";
-                case ModuleTypes.ATTRIBUTES_CLASSES:
+                case Module.ATTRIBUTES_CLASSES:
                     return "Klasy atrybutów";
-                case ModuleTypes.COMMUNITY:
+                case Module.COMMUNITY:
                     return "Społeczność";
-                case ModuleTypes.COMPANIES:
+                case Module.COMPANIES:
                     return "Firmy";
-                case ModuleTypes.DISTRIBUTIONS:
+                case Module.DISTRIBUTIONS:
                     return "Dystrybucje";
-                case ModuleTypes.DOCUMENTS:
+                case Module.DOCUMENTS:
                     return "Dokumenty";
-                case ModuleTypes.EMPLOYEES:
+                case Module.EMPLOYEES:
                     return "Pracownicy";
-                case ModuleTypes.FAMILIES:
+                case Module.FAMILIES:
                     return "Rodziny";
-                case ModuleTypes.LOGS:
+                case Module.LOGS:
                     return "Logi";
-                case ModuleTypes.STATS:
+                case Module.STATS:
                     return "Statystyki";
-                case ModuleTypes.STORES:
+                case Module.STORES:
                     return "Magazyny";
-                case ModuleTypes.USERS:
+                case Module.USERS:
                     return "Użytkownicy";
                 default:
                     return "(nieznany)";
             }
         }
-		#endregion
+        internal static class UserPermType
+        {
+            public const string PREVIEW = "preview";
+            public const string SAVE = "save";
+            public const string DELETE = "delete";
+        }
+        public enum ActionType
+        {
+            NONE,
+            NEW,
+            DUPLICATE,
+            PREVIEW,
+            EDIT,
+            ARCHIVE,
+            DELETE,
+            SAVE,
+            REFRESH,
+            CLOSE,
+            LIST,
+            PRINT,
+            ADD,
+            REMOVE
+        }
+        #endregion
 
 		#region Crypto
 		private const int DerivationIterations = 1000;
         private const string password = "ejdndbfewbasjhdggjhbasbvdgewvbjdbsavdqgwjbdjsvdyugwqyubashjdbjfgdtyuqw";
 
-        public static string Encrypt(string plainText)
+        internal static string Encrypt(string plainText)
         {
             if (plainText.Length == 0) {
                 MessageBox.Show("Tekst do zaszyfrowania jest pusty", "Błąd walidacji!", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -122,7 +136,7 @@ namespace WBZ.Helpers
             }
         }
 
-        public static string Decrypt(string cipherText)
+        internal static string Decrypt(string cipherText)
         {
             if (cipherText.Length == 0)
             {

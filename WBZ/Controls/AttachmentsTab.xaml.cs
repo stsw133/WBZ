@@ -105,8 +105,6 @@ namespace WBZ.Controls
 
         private void UserControl_Closed(object sender, EventArgs e)
         {
-            Properties.Settings.Default.Save();
-
             try
             {
                 if (M.InstanceAttachments != null)

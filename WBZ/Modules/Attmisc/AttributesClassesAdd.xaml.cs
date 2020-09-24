@@ -60,7 +60,7 @@ namespace WBZ.Modules.Attmisc
 	/// </summary>
 	internal class M_AttributesClassesAdd : INotifyPropertyChanged
     {
-        public readonly string INSTANCE_TYPE = Global.ModuleTypes.ATTRIBUTES_CLASSES;
+        public readonly string INSTANCE_TYPE = Global.Module.ATTRIBUTES_CLASSES;
 
         /// Dane o zalogowanym użytkowniku
         public C_User User { get; } = Global.User;

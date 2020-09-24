@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using WBZ.Classes;
+using WBZ.Controls;
 using WBZ.Helpers;
 
 namespace WBZ.Modules.Attmisc
@@ -27,7 +29,7 @@ namespace WBZ.Modules.Attmisc
 			var window = new MsgWin(MsgWin.Type.InputBox, "Nowa grupa", "Podaj pełną ścieżkę grupy (oddzielaj znakiem /)", "");
 			if (window.ShowDialog() == true)
 			{
-
+				
 			}
 		}
 		private void btnEdit_Click(object sender, MouseButtonEventArgs e)

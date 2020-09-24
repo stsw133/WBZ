@@ -87,98 +87,98 @@ namespace WBZ.Modules.Attmisc
 			if (log.Instance == 0)
 				return;
 
-			if (log.Module == Global.ModuleTypes.DOCUMENTS)
+			if (log.Module == Global.Module.DOCUMENTS)
 			{
 				if (SQL.CountInstances(log.Module, $"d.id={log.Instance}") == 0)
 					return;
 
-				if (!(editMode && Global.User.Perms.Contains($"{Global.ModuleTypes.DOCUMENTS}_{Global.UserPermTypes.SAVE}")))
+				if (!(editMode && Global.User.Perms.Contains($"{Global.Module.DOCUMENTS}_{Global.UserPermType.SAVE}")))
 					editMode = false;
-				if (!Global.User.Perms.Contains($"{Global.ModuleTypes.DOCUMENTS}_{Global.UserPermTypes.PREVIEW}") && !Global.User.Perms.Contains($"{Global.ModuleTypes.DOCUMENTS}_{Global.UserPermTypes.SAVE}"))
+				if (!Global.User.Perms.Contains($"{Global.Module.DOCUMENTS}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{Global.Module.DOCUMENTS}_{Global.UserPermType.SAVE}"))
 					return;
 				var window = new DocumentsAdd(SQL.GetInstance(log.Module, log.Instance) as C_Document, editMode);
 				window.Show();
 			}
-			else if (log.Module == Global.ModuleTypes.STORES)
+			else if (log.Module == Global.Module.STORES)
 			{
 				if (SQL.CountInstances(log.Module, $"s.id={log.Instance}") == 0)
 					return;
 
-				if (!(editMode && Global.User.Perms.Contains($"{Global.ModuleTypes.STORES}_{Global.UserPermTypes.SAVE}")))
+				if (!(editMode && Global.User.Perms.Contains($"{Global.Module.STORES}_{Global.UserPermType.SAVE}")))
 					editMode = false;
-				if (!Global.User.Perms.Contains($"{Global.ModuleTypes.STORES}_{Global.UserPermTypes.PREVIEW}") && !Global.User.Perms.Contains($"{Global.ModuleTypes.STORES}_{Global.UserPermTypes.SAVE}"))
+				if (!Global.User.Perms.Contains($"{Global.Module.STORES}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{Global.Module.STORES}_{Global.UserPermType.SAVE}"))
 					return;
 				var window = new StoresAdd(SQL.GetInstance(log.Module, log.Instance) as C_Store, editMode);
 				window.Show();
 			}
-			else if (log.Module == Global.ModuleTypes.ARTICLES)
+			else if (log.Module == Global.Module.ARTICLES)
 			{
 				if (SQL.CountInstances(log.Module, $"a.id={log.Instance}") == 0)
 					return;
 
-				if (!(editMode && Global.User.Perms.Contains($"{Global.ModuleTypes.ARTICLES}_{Global.UserPermTypes.SAVE}")))
+				if (!(editMode && Global.User.Perms.Contains($"{Global.Module.ARTICLES}_{Global.UserPermType.SAVE}")))
 					editMode = false;
-				if (!Global.User.Perms.Contains($"{Global.ModuleTypes.ARTICLES}_{Global.UserPermTypes.PREVIEW}") && !Global.User.Perms.Contains($"{Global.ModuleTypes.ARTICLES}_{Global.UserPermTypes.SAVE}"))
+				if (!Global.User.Perms.Contains($"{Global.Module.ARTICLES}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{Global.Module.ARTICLES}_{Global.UserPermType.SAVE}"))
 					return;
 				var window = new ArticlesAdd(SQL.GetInstance(log.Module, log.Instance) as C_Article, editMode);
 				window.Show();
 			}
-			else if (log.Module == Global.ModuleTypes.COMPANIES)
+			else if (log.Module == Global.Module.COMPANIES)
 			{
 				if (SQL.CountInstances(log.Module, $"c.id={log.Instance}") == 0)
 					return;
 
-				if (!(editMode && Global.User.Perms.Contains($"{Global.ModuleTypes.COMPANIES}_{Global.UserPermTypes.SAVE}")))
+				if (!(editMode && Global.User.Perms.Contains($"{Global.Module.COMPANIES}_{Global.UserPermType.SAVE}")))
 					editMode = false;
-				if (!Global.User.Perms.Contains($"{Global.ModuleTypes.COMPANIES}_{Global.UserPermTypes.PREVIEW}") && !Global.User.Perms.Contains($"{Global.ModuleTypes.COMPANIES}_{Global.UserPermTypes.SAVE}"))
+				if (!Global.User.Perms.Contains($"{Global.Module.COMPANIES}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{Global.Module.COMPANIES}_{Global.UserPermType.SAVE}"))
 					return;
 				var window = new CompaniesAdd(SQL.GetInstance(log.Module, log.Instance) as C_Company, editMode);
 				window.Show();
 			}
-			else if (log.Module == Global.ModuleTypes.FAMILIES)
+			else if (log.Module == Global.Module.FAMILIES)
 			{
 				if (SQL.CountInstances(log.Module, $"f.id={log.Instance}") == 0)
 					return;
 
-				if (!(editMode && Global.User.Perms.Contains($"{Global.ModuleTypes.FAMILIES}_{Global.UserPermTypes.SAVE}")))
+				if (!(editMode && Global.User.Perms.Contains($"{Global.Module.FAMILIES}_{Global.UserPermType.SAVE}")))
 					editMode = false;
-				if (!Global.User.Perms.Contains($"{Global.ModuleTypes.FAMILIES}_{Global.UserPermTypes.PREVIEW}") && !Global.User.Perms.Contains($"{Global.ModuleTypes.FAMILIES}_{Global.UserPermTypes.SAVE}"))
+				if (!Global.User.Perms.Contains($"{Global.Module.FAMILIES}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{Global.Module.FAMILIES}_{Global.UserPermType.SAVE}"))
 					return;
 				var window = new FamiliesAdd(SQL.GetInstance(log.Module, log.Instance) as C_Family, editMode);
 				window.Show();
 			}
-			else if (log.Module == Global.ModuleTypes.DISTRIBUTIONS)
+			else if (log.Module == Global.Module.DISTRIBUTIONS)
 			{
 				if (SQL.CountInstances(log.Module, $"d.id={log.Instance}") == 0)
 					return;
 
-				if (!(editMode && Global.User.Perms.Contains($"{Global.ModuleTypes.DISTRIBUTIONS}_{Global.UserPermTypes.SAVE}")))
+				if (!(editMode && Global.User.Perms.Contains($"{Global.Module.DISTRIBUTIONS}_{Global.UserPermType.SAVE}")))
 					editMode = false;
-				if (!Global.User.Perms.Contains($"{Global.ModuleTypes.DISTRIBUTIONS}_{Global.UserPermTypes.PREVIEW}") && !Global.User.Perms.Contains($"{Global.ModuleTypes.DISTRIBUTIONS}_{Global.UserPermTypes.SAVE}"))
+				if (!Global.User.Perms.Contains($"{Global.Module.DISTRIBUTIONS}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{Global.Module.DISTRIBUTIONS}_{Global.UserPermType.SAVE}"))
 					return;
 				var window = new DistributionsAdd(SQL.GetInstance(log.Module, log.Instance) as C_Distribution, editMode);
 				window.Show();
 			}
-			else if (log.Module == Global.ModuleTypes.USERS)
+			else if (log.Module == Global.Module.USERS)
 			{
 				if (SQL.CountInstances(log.Module, $"u.id={log.Instance}") == 0)
 					return;
 
-				if (!(editMode && Global.User.Perms.Contains($"{Global.ModuleTypes.USERS}_{Global.UserPermTypes.SAVE}")))
+				if (!(editMode && Global.User.Perms.Contains($"{Global.Module.USERS}_{Global.UserPermType.SAVE}")))
 					editMode = false;
-				if (!Global.User.Perms.Contains($"{Global.ModuleTypes.USERS}_{Global.UserPermTypes.PREVIEW}") && !Global.User.Perms.Contains($"{Global.ModuleTypes.USERS}_{Global.UserPermTypes.SAVE}"))
+				if (!Global.User.Perms.Contains($"{Global.Module.USERS}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{Global.Module.USERS}_{Global.UserPermType.SAVE}"))
 					return;
 				var window = new UsersAdd(SQL.GetInstance(log.Module, log.Instance) as C_User, editMode);
 				window.Show();
 			}
-			else if (log.Module == Global.ModuleTypes.ATTRIBUTES_CLASSES)
+			else if (log.Module == Global.Module.ATTRIBUTES_CLASSES)
 			{
 				if (SQL.CountInstances(log.Module, $"ac.id={log.Instance}") == 0)
 					return;
 
-				if (!(editMode && Global.User.Perms.Contains($"{Global.ModuleTypes.ATTRIBUTES_CLASSES}_{Global.UserPermTypes.SAVE}")))
+				if (!(editMode && Global.User.Perms.Contains($"{Global.Module.ATTRIBUTES_CLASSES}_{Global.UserPermType.SAVE}")))
 					editMode = false;
-				if (!Global.User.Perms.Contains($"{Global.ModuleTypes.ATTRIBUTES_CLASSES}_{Global.UserPermTypes.PREVIEW}") && !Global.User.Perms.Contains($"{Global.ModuleTypes.ATTRIBUTES_CLASSES}_{Global.UserPermTypes.SAVE}"))
+				if (!Global.User.Perms.Contains($"{Global.Module.ATTRIBUTES_CLASSES}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{Global.Module.ATTRIBUTES_CLASSES}_{Global.UserPermType.SAVE}"))
 					return;
 				var window = new AttributesClassesAdd(SQL.GetInstance(log.Module, log.Instance) as C_AttributeClass, editMode);
 				window.Show();
@@ -198,7 +198,7 @@ namespace WBZ.Modules.Attmisc
 		{
 			await Task.Run(() => {
 				UpdateFilters();
-				M.TotalItems = SQL.CountInstances(Global.ModuleTypes.LOGS, M.FilterSQL);
+				M.TotalItems = SQL.CountInstances(Global.Module.LOGS, M.FilterSQL);
 				M.InstancesList = SQL.ListLogs(M.FilterSQL, M.Limit, M.Page = 0 * M.Limit, "datetime", true);
 				foreach (var instance in M.InstancesList)
 					instance.TranslatedModule = Global.TranslateModules(instance.Module);

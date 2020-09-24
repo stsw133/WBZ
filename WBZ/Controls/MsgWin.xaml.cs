@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace WBZ.Helpers
+namespace WBZ.Controls
 {
 	/// <summary>
 	/// Interaction logic for MsgWin.xaml

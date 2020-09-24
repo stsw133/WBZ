@@ -121,7 +121,7 @@ namespace WBZ.Modules.Documents
 	/// </summary>
 	internal class M_DocumentsAdd : INotifyPropertyChanged
 	{
-		public readonly string INSTANCE_TYPE = Global.ModuleTypes.DOCUMENTS;
+		public readonly string INSTANCE_TYPE = Global.Module.DOCUMENTS;
 
 		/// Dane o zalogowanym użytkowniku
 		public C_User User { get; } = Global.User;

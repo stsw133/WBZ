@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
@@ -32,9 +31,8 @@ namespace WBZ.Modules.Admin
         }
 
 		/// <summary>
-		/// Aktualizacja filtrów wyszukiwania
+		/// Update filters
 		/// </summary>
-		#region filters
 		private void UpdateFilters()
 		{
 			M.FilterSQL = $"LOWER(COALESCE(e.forename,'')) like '%{M.Filters.Forename.ToLower()}%' and "
@@ -50,66 +48,110 @@ namespace WBZ.Modules.Admin
 
 			M.FilterSQL = M.FilterSQL.TrimEnd(" and ".ToCharArray());
 		}
+
+		/// <summary>
+		/// Apply filters
+		/// </summary>
 		private void dpFilter_KeyUp(object sender, KeyEventArgs e)
 		{
 			if (e.Key == Key.Enter)
 				btnRefresh_Click(null, null);
 		}
+
+		/// <summary>
+		/// Clear filters
+		/// </summary>
 		private void btnFiltersClear_Click(object sender, MouseButtonEventArgs e)
 		{
 			M.Filters = new INSTANCE_CLASS();
 			btnRefresh_Click(null, null);
 		}
-		#endregion
 
-		#region buttons
+		/// <summary>
+		/// Preview
+		/// </summary>
 		private void btnPreview_Click(object sender, MouseButtonEventArgs e)
 		{
-			var indexes = dgList.SelectedItems.Cast<INSTANCE_CLASS>().Select(x => M.InstancesList.IndexOf(x));
-			foreach (int index in indexes)
+			var selectedInstances = dgList.SelectedItems.Cast<INSTANCE_CLASS>();
+			foreach (INSTANCE_CLASS instance in selectedInstances)
 			{
-				var window = new EmployeesAdd(M.InstancesList[index], false);
+				var window = new EmployeesAdd(instance, Global.ActionType.PREVIEW);
 				window.Show();
 			}
 		}
+
+		/// <summary>
+		/// Add
+		/// </summary>
 		private void btnAdd_Click(object sender, MouseButtonEventArgs e)
 		{
-			var window = new EmployeesAdd(new INSTANCE_CLASS(), true);
+			var window = new EmployeesAdd(new INSTANCE_CLASS(), Global.ActionType.NEW);
 			window.Show();
 		}
-		private void btnEdit_Click(object sender, MouseButtonEventArgs e)
+
+		/// <summary>
+		/// Duplicate
+		/// </summary>
+		private void btnDuplicate_Click(object sender, MouseButtonEventArgs e)
 		{
-			var indexes = dgList.SelectedItems.Cast<INSTANCE_CLASS>().Select(x => M.InstancesList.IndexOf(x));
-			foreach (int index in indexes)
+			var selectedInstances = dgList.SelectedItems.Cast<INSTANCE_CLASS>();
+			foreach (INSTANCE_CLASS instance in selectedInstances)
 			{
-				var window = new EmployeesAdd(M.InstancesList[index], true);
+				var window = new EmployeesAdd(instance, Global.ActionType.NEW);
 				window.Show();
 			}
 		}
+
+		/// <summary>
+		/// Edit
+		/// </summary>
+		private void btnEdit_Click(object sender, MouseButtonEventArgs e)
+		{
+			var selectedInstances = dgList.SelectedItems.Cast<INSTANCE_CLASS>();
+			foreach (INSTANCE_CLASS instance in selectedInstances)
+			{
+				var window = new EmployeesAdd(instance, Global.ActionType.EDIT);
+				window.Show();
+			}
+		}
+
+		/// <summary>
+		/// Delete
+		/// </summary>
 		private void btnDelete_Click(object sender, MouseButtonEventArgs e)
 		{
-			var indexes = dgList.SelectedItems.Cast<INSTANCE_CLASS>().Select(x => M.InstancesList.IndexOf(x));
-			if (indexes.Count<int>() > 0 && MessageBox.Show("Czy na pewno usunąć zaznaczone rekordy?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+			var selectedInstances = dgList.SelectedItems.Cast<INSTANCE_CLASS>();
+			if (selectedInstances.Count() > 0 && MessageBox.Show("Czy na pewno usunąć zaznaczone rekordy?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
 			{
-				foreach (int index in indexes)
-					SQL.DeleteEmployee(M.InstancesList[index].ID);
+				foreach (INSTANCE_CLASS instance in selectedInstances)
+					SQL.DeleteInstance(M.INSTANCE_TYPE, instance.ID);
 				btnRefresh_Click(null, null);
 			}
 		}
+
+		/// <summary>
+		/// Refresh
+		/// </summary>
 		private async void btnRefresh_Click(object sender, MouseButtonEventArgs e)
 		{
 			await Task.Run(() => {
 				UpdateFilters();
 				M.TotalItems = SQL.CountInstances(M.INSTANCE_TYPE, M.FilterSQL);
-				M.InstancesList = SQL.ListEmployees(M.FilterSQL, M.Page = 0);
+				M.InstancesList = SQL.ListInstances(M.INSTANCE_TYPE, M.FilterSQL, M.Page = 0) as List<INSTANCE_CLASS>;
 			});
 		}
+
+		/// <summary>
+		/// Close
+		/// </summary>
 		private void btnClose_Click(object sender, MouseButtonEventArgs e)
 		{
 			Close();
 		}
-		#endregion
 
+		/// <summary>
+		/// Select
+		/// </summary>
 		public INSTANCE_CLASS Selected;
 		private void dgList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
@@ -117,36 +159,31 @@ namespace WBZ.Modules.Admin
 			{
 				if (!M.SelectingMode)
 				{
-					if (Global.User.Perms.Contains($"{M.INSTANCE_TYPE}_{Global.UserPermTypes.SAVE}"))
+					if (Global.User.Perms.Contains($"{M.INSTANCE_TYPE}_{Global.UserPermType.SAVE}"))
 						btnEdit_Click(null, null);
 					else
 						btnPreview_Click(null, null);
 				}
 				else
 				{
-					var indexes = dgList.SelectedItems.Cast<INSTANCE_CLASS>().Select(x => M.InstancesList.IndexOf(x));
-					foreach (int index in indexes)
-						Selected = M.InstancesList[index];
-
+					Selected = dgList.SelectedItems.Cast<INSTANCE_CLASS>().FirstOrDefault();
 					DialogResult = true;
 				}
 			}
 		}
 
+		/// <summary>
+		/// Load more
+		/// </summary>
 		private void dgList_ScrollChanged(object sender, ScrollChangedEventArgs e)
 		{
 			if (e.VerticalChange > 0 && e.VerticalOffset + e.ViewportHeight == e.ExtentHeight && M.InstancesList.Count < M.TotalItems)
 			{
 				DataContext = null;
-				M.InstancesList.AddRange(SQL.ListEmployees(M.FilterSQL, ++M.Page));
+				M.InstancesList.AddRange(SQL.ListInstances(M.INSTANCE_TYPE, M.FilterSQL, ++M.Page) as List<INSTANCE_CLASS>);
 				DataContext = M;
 				Extensions.GetVisualChild<ScrollViewer>(sender as DataGrid).ScrollToVerticalOffset(e.VerticalOffset);
 			}
-		}
-
-		private void Window_Closed(object sender, EventArgs e)
-		{
-			Properties.Settings.Default.Save();
 		}
 	}
 
@@ -155,7 +192,7 @@ namespace WBZ.Modules.Admin
 	/// </summary>
 	internal class M_EmployeesList : INotifyPropertyChanged
 	{
-		public readonly string INSTANCE_TYPE = Global.ModuleTypes.EMPLOYEES;
+		public readonly string INSTANCE_TYPE = Global.Module.EMPLOYEES;
 
 		/// Dane o zalogowanym użytkowniku
 		public C_User User { get; } = Global.User;

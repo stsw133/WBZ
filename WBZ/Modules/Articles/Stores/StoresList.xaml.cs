@@ -113,7 +113,7 @@ namespace WBZ.Modules.Stores
 			{
 				if (!M.SelectingMode)
 				{
-					if (Global.User.Perms.Contains($"{M.INSTANCE_TYPE}_{Global.UserPermTypes.SAVE}"))
+					if (Global.User.Perms.Contains($"{M.INSTANCE_TYPE}_{Global.UserPermType.SAVE}"))
 						btnEdit_Click(null, null);
 					else
 						btnPreview_Click(null, null);
@@ -151,7 +151,7 @@ namespace WBZ.Modules.Stores
 	/// </summary>
 	internal class M_StoresList : INotifyPropertyChanged
 	{
-		public readonly string INSTANCE_TYPE = Global.ModuleTypes.STORES;
+		public readonly string INSTANCE_TYPE = Global.Module.STORES;
 
 		/// Dane o zalogowanym użytkowniku
 		public C_User User { get; } = Global.User;

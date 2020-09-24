@@ -253,6 +253,16 @@ namespace WBZ.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
+        internal static System.Drawing.Icon icon32_duplicate {
+            get {
+                object obj = ResourceManager.GetObject("icon32_duplicate", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
         internal static System.Drawing.Icon icon32_edit {
             get {
                 object obj = ResourceManager.GetObject("icon32_edit", resourceCulture);
@@ -353,9 +363,9 @@ namespace WBZ.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        internal static System.Drawing.Icon icon32_group {
+        internal static System.Drawing.Icon icon32_groups {
             get {
-                object obj = ResourceManager.GetObject("icon32_group", resourceCulture);
+                object obj = ResourceManager.GetObject("icon32_groups", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }

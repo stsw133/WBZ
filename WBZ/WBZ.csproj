@@ -151,21 +151,21 @@
     <Compile Include="Controls\AttributesTab.xaml.cs">
       <DependentUpon>AttributesTab.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MsgWin.xaml.cs">
+      <DependentUpon>MsgWin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SimpleHeader.xaml.cs">
       <DependentUpon>SimpleHeader.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\SimpleButton.xaml.cs">
       <DependentUpon>SimpleButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\AttributeValueChange.xaml.cs">
-      <DependentUpon>AttributeValueChange.xaml</DependentUpon>
+    <Compile Include="Controls\AttributeChange.xaml.cs">
+      <DependentUpon>AttributeChange.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Converters.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\Global.cs" />
-    <Compile Include="Helpers\MsgWin.xaml.cs">
-      <DependentUpon>MsgWin.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Helpers\GSM.cs" />
     <Compile Include="Helpers\Mail.cs" />
     <Compile Include="Controls\TitleBar.xaml.cs">
@@ -294,6 +294,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\MsgWin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\SimpleHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -302,11 +306,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Helpers\AttributeValueChange.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Helpers\MsgWin.xaml">
+    <Page Include="Controls\AttributeChange.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -641,9 +641,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Modules\Community\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Resources\icon32_unknown.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -663,10 +661,13 @@
     <EmbeddedResource Include="Resources\icon32_folder.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\icon32_group.ico">
+    <EmbeddedResource Include="Resources\icon32_groups.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\icon32_select.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\icon32_duplicate.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <Content Include="SQL\database.sql" />

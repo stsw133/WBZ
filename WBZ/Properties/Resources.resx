@@ -172,6 +172,9 @@
   <data name="icon32_download" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_download.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icon32_duplicate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon32_duplicate.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon32_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_edit.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -202,8 +205,8 @@
   <data name="icon32_greetings" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_greetings.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon32_group" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon32_group.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon32_groups" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon32_groups.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon32_invoices" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_documents.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

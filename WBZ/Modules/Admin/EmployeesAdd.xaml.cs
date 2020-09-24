@@ -15,15 +15,21 @@ namespace WBZ.Modules.Admin
     {
         M_EmployeesAdd M = new M_EmployeesAdd();
 
-        public EmployeesAdd(INSTANCE_CLASS instance, bool editMode)
+        public EmployeesAdd(INSTANCE_CLASS instance, Global.ActionType mode)
         {
             InitializeComponent();
             DataContext = M;
 
             M.InstanceInfo = instance;
-			M.EditMode = editMode;
+			M.Mode = mode;
+
+			if (M.Mode == Global.ActionType.NEW)
+				M.InstanceInfo.ID = SQL.NewInstance(M.INSTANCE_TYPE);
 		}
 
+		/// <summary>
+		/// Validation
+		/// </summary>
 		private bool CheckDataValidation()
 		{
 			bool result = true;
@@ -31,28 +37,40 @@ namespace WBZ.Modules.Admin
 			return result;
 		}
 
-		#region buttons
+		/// <summary>
+		/// Save
+		/// </summary>
 		private void btnSave_Click(object sender, MouseButtonEventArgs e)
 		{
 			if (!CheckDataValidation())
 				return;
 
-			if (SQL.SetEmployee(M.InstanceInfo))
+			if (SQL.SetInstance(M.INSTANCE_TYPE, M.InstanceInfo))
 				Close();
 		}
+
+		/// <summary>
+		/// Refresh
+		/// </summary>
 		private void btnRefresh_Click(object sender, MouseButtonEventArgs e)
 		{
 			if (M.InstanceInfo.ID == 0)
 				return;
 			//TODO - dorobić odświeżanie zmienionych danych
 		}
+
+		/// <summary>
+		/// Close
+		/// </summary>
 		private void btnClose_Click(object sender, MouseButtonEventArgs e)
 		{
 			Close();
 		}
-		#endregion
 
-		private void btnUserChoose_Click(object sender, RoutedEventArgs e)
+		/// <summary>
+		/// Select: User
+		/// </summary>
+		private void btnSelectUser_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new UsersList(true);
 			if (window.ShowDialog() == true)
@@ -70,7 +88,7 @@ namespace WBZ.Modules.Admin
 	/// </summary>
 	internal class M_EmployeesAdd : INotifyPropertyChanged
 	{
-		public readonly string INSTANCE_TYPE = Global.ModuleTypes.EMPLOYEES;
+		public readonly string INSTANCE_TYPE = Global.Module.EMPLOYEES;
 
 		/// Dane o zalogowanym użytkowniku
 		public C_User User { get; } = Global.User;
@@ -89,17 +107,19 @@ namespace WBZ.Modules.Admin
 			}
 		}
 		/// Czy okno jest w trybie edycji (zamiast w trybie dodawania)
-		public bool IsEditing { get { return InstanceInfo.ID > 0; } }
-		/// Tryb edycji dla okna
-		public bool EditMode { get; set; }
-		/// Ikona okna
-		public string EditIcon
+		public bool IsEditing { get { return Mode != Global.ActionType.NEW; } }
+		/// Tryb okna
+		public Global.ActionType Mode { get; set; }
+		/// Dodatkowa ikona okna
+		public string ModeIcon
 		{
 			get
 			{
-				if (InstanceInfo.ID == 0)
+				if (Mode == Global.ActionType.ADD)
 					return "pack://siteoforigin:,,,/Resources/icon32_add.ico";
-				else if (EditMode)
+				else if (Mode == Global.ActionType.DUPLICATE)
+					return "pack://siteoforigin:,,,/Resources/icon32_duplicate.ico";
+				else if (Mode == Global.ActionType.EDIT)
 					return "pack://siteoforigin:,,,/Resources/icon32_edit.ico";
 				else
 					return "pack://siteoforigin:,,,/Resources/icon32_search.ico";
@@ -110,9 +130,11 @@ namespace WBZ.Modules.Admin
 		{
 			get
 			{
-				if (InstanceInfo.ID == 0)
+				if (Mode == Global.ActionType.ADD)
 					return "Nowy pracownik";
-				else if (EditMode)
+				else if (Mode == Global.ActionType.DUPLICATE)
+					return $"Duplikowanie pracownika: {InstanceInfo.Fullname}";
+				else if (Mode == Global.ActionType.EDIT)
 					return $"Edycja pracownika: {InstanceInfo.Fullname}";
 				else
 					return $"Podgląd pracownika: {InstanceInfo.Fullname}";

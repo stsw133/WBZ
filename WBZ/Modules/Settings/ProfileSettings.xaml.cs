@@ -51,8 +51,6 @@ namespace WBZ.Modules.Settings
     /// </summary>
     internal class M_ProfileSettings : INotifyPropertyChanged
     {
-        public readonly string INSTANCE_TYPE = Global.ModuleTypes.USERS;
-
         /// Dane o zalogowanym użytkowniku
         private C_User user = Global.User;
         public C_User User

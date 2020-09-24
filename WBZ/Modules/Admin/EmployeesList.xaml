@@ -10,7 +10,7 @@
         Title="Zarządzanie pracownikami" MinHeight="240" MinWidth="360" Height="{Binding Source={x:Static p:Settings.Default}, Path=config_EmployeesList_WindowY, Mode=TwoWay}" Width="{Binding Source={x:Static p:Settings.Default}, Path=config_EmployeesList_WindowX, Mode=TwoWay}"
             BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}}"
-            Icon="pack://siteoforigin:,,,/Resources/icon32_briefcase.ico" Closed="Window_Closed">
+            Icon="pack://siteoforigin:,,,/Resources/icon32_briefcase.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -32,6 +32,8 @@
                                 TextContent="Podgląd" IconSource="pack://siteoforigin:,,,/Resources/icon32_search.ico" PreviewMouseLeftButtonUp="btnPreview_Click"/>
                 <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding User.Perms, Converter={StaticResource conv_ListContains}, ConverterParameter=employees_save}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
                                 TextContent="Dodaj" IconSource="pack://siteoforigin:,,,/Resources/icon32_add.ico" PreviewMouseLeftButtonUp="btnAdd_Click"/>
+                <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding User.Perms, Converter={StaticResource conv_ListContains}, ConverterParameter=users_save}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
+                                TextContent="Duplikuj" IconSource="pack://siteoforigin:,,,/Resources/icon32_duplicate.ico" PreviewMouseLeftButtonUp="btnDuplicate_Click"/>
                 <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding User.Perms, Converter={StaticResource conv_ListContains}, ConverterParameter=employees_save}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
                                 TextContent="Edytuj" IconSource="pack://siteoforigin:,,,/Resources/icon32_edit.ico" PreviewMouseLeftButtonUp="btnEdit_Click"/>
                 <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding User.Perms, Converter={StaticResource conv_ListContains}, ConverterParameter=employees_delete}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"

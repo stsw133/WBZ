@@ -153,7 +153,7 @@ namespace WBZ.Modules.Login
 		private void btnOther_Click(object sender, RoutedEventArgs e)
 		{
 			/// warunki pojawienia się przycisku "Dodaj administratora"
-			if (SQL.CountInstances(Global.ModuleTypes.USERS, @"blocked=false and archival=false and exists(select from wbz.users_permissions where ""user""=u.id and perm='admin')") == 0)
+			if (SQL.CountInstances(Global.Module.USERS, @"blocked=false and archival=false and exists(select from wbz.users_permissions where ""user""=u.id and perm='admin')") == 0)
 			{
 				btnCreateAdmin.Visibility = Visibility.Visible;
 				btnCreateAdmin.IsEnabled = true;

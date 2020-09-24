@@ -4,16 +4,16 @@ using System.Reflection;
 using System.Windows;
 using WBZ.Classes;
 
-namespace WBZ.Helpers
+namespace WBZ.Controls
 {
 	/// <summary>
-	/// Interaction logic for AttributeValueChange.xaml
+	/// Interaction logic for AttributeChange.xaml
 	/// </summary>
-	public partial class AttributeValueChange : Window
+	public partial class AttributeChange : Window
 	{
 		M_AttributeValueChange M = new M_AttributeValueChange();
 
-		public AttributeValueChange(C_Attribute attribute, bool editMode)
+		public AttributeChange(C_Attribute attribute, bool editMode)
 		{
 			InitializeComponent();
 			DataContext = M;
