@@ -109,49 +109,29 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("900")]
-        public int config_UsersList_WindowX {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>900</string>\r\n  <string>600</string>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection config_UsersList_WindowSize {
             get {
-                return ((int)(this["config_UsersList_WindowX"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["config_UsersList_WindowSize"]));
             }
             set {
-                this["config_UsersList_WindowX"] = value;
+                this["config_UsersList_WindowSize"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("600")]
-        public int config_UsersList_WindowY {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>900</string>\r\n  <string>600</string>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection config_UsersNew_WindowSize {
             get {
-                return ((int)(this["config_UsersList_WindowY"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["config_UsersNew_WindowSize"]));
             }
             set {
-                this["config_UsersList_WindowY"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("900")]
-        public int config_UsersAdd_WindowX {
-            get {
-                return ((int)(this["config_UsersAdd_WindowX"]));
-            }
-            set {
-                this["config_UsersAdd_WindowX"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("600")]
-        public int config_UsersAdd_WindowY {
-            get {
-                return ((int)(this["config_UsersAdd_WindowY"]));
-            }
-            set {
-                this["config_UsersAdd_WindowY"] = value;
+                this["config_UsersNew_WindowSize"] = value;
             }
         }
         
@@ -1585,145 +1565,15 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("50")]
-        public int config_UsersList_LimitPerPage {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>900</string>\r\n  <string>600</string>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection config_EmployeesList_WindowSize {
             get {
-                return ((int)(this["config_UsersList_LimitPerPage"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["config_EmployeesList_WindowSize"]));
             }
             set {
-                this["config_UsersList_LimitPerPage"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("u.lastname")]
-        public string config_UsersList_Sort1By {
-            get {
-                return ((string)(this["config_UsersList_Sort1By"]));
-            }
-            set {
-                this["config_UsersList_Sort1By"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool config_UsersList_Sort1Order {
-            get {
-                return ((bool)(this["config_UsersList_Sort1Order"]));
-            }
-            set {
-                this["config_UsersList_Sort1Order"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string config_UsersList_Sort2By {
-            get {
-                return ((string)(this["config_UsersList_Sort2By"]));
-            }
-            set {
-                this["config_UsersList_Sort2By"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool config_UsersList_Sort2Order {
-            get {
-                return ((bool)(this["config_UsersList_Sort2Order"]));
-            }
-            set {
-                this["config_UsersList_Sort2Order"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("900")]
-        public int config_EmployeesList_WindowX {
-            get {
-                return ((int)(this["config_EmployeesList_WindowX"]));
-            }
-            set {
-                this["config_EmployeesList_WindowX"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("600")]
-        public int config_EmployeesList_WindowY {
-            get {
-                return ((int)(this["config_EmployeesList_WindowY"]));
-            }
-            set {
-                this["config_EmployeesList_WindowY"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("50")]
-        public int config_EmployeesList_LimitPerPage {
-            get {
-                return ((int)(this["config_EmployeesList_LimitPerPage"]));
-            }
-            set {
-                this["config_EmployeesList_LimitPerPage"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("e.lastname")]
-        public string config_EmployeesList_Sort1By {
-            get {
-                return ((string)(this["config_EmployeesList_Sort1By"]));
-            }
-            set {
-                this["config_EmployeesList_Sort1By"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool config_EmployeesList_Sort1Order {
-            get {
-                return ((bool)(this["config_EmployeesList_Sort1Order"]));
-            }
-            set {
-                this["config_EmployeesList_Sort1Order"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string config_EmployeesList_Sort2By {
-            get {
-                return ((string)(this["config_EmployeesList_Sort2By"]));
-            }
-            set {
-                this["config_EmployeesList_Sort2By"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool config_EmployeesList_Sort2Order {
-            get {
-                return ((bool)(this["config_EmployeesList_Sort2Order"]));
-            }
-            set {
-                this["config_EmployeesList_Sort2Order"] = value;
+                this["config_EmployeesList_WindowSize"] = value;
             }
         }
         
@@ -1837,25 +1687,15 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("900")]
-        public int config_EmployeesAdd_WindowX {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>900</string>\r\n  <string>600</string>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection config_EmployeesNew_WindowSize {
             get {
-                return ((int)(this["config_EmployeesAdd_WindowX"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["config_EmployeesNew_WindowSize"]));
             }
             set {
-                this["config_EmployeesAdd_WindowX"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("600")]
-        public int config_EmployeesAdd_WindowY {
-            get {
-                return ((int)(this["config_EmployeesAdd_WindowY"]));
-            }
-            set {
-                this["config_EmployeesAdd_WindowY"] = value;
+                this["config_EmployeesNew_WindowSize"] = value;
             }
         }
         
@@ -1880,6 +1720,44 @@ namespace WBZ.Properties {
             }
             set {
                 this["config_GroupsList_WindowY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>e.lastname</string>
+  <string>False</string>
+  <string>e.forename</string>
+  <string>False</string>
+  <string>50</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection sorting_EmployeesList {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_EmployeesList"]));
+            }
+            set {
+                this["sorting_EmployeesList"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>u.lastname</string>
+  <string>False</string>
+  <string>u.forename</string>
+  <string>False</string>
+  <string>50</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection sorting_UsersList {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_UsersList"]));
+            }
+            set {
+                this["sorting_UsersList"] = value;
             }
         }
     }

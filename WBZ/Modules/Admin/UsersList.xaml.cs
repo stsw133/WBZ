@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
@@ -71,17 +72,17 @@ namespace WBZ.Modules.Admin
 			var selectedInstances = dgList.SelectedItems.Cast<INSTANCE_CLASS>();
 			foreach (INSTANCE_CLASS instance in selectedInstances)
 			{
-				var window = new UsersAdd(instance, Global.ActionType.PREVIEW);
+				var window = new UsersNew(instance, Global.ActionType.PREVIEW);
 				window.Show();
 			}
 		}
 
 		/// <summary>
-		/// Add
+		/// New
 		/// </summary>
-		private void btnAdd_Click(object sender, MouseButtonEventArgs e)
+		private void btnNew_Click(object sender, MouseButtonEventArgs e)
 		{
-			var window = new UsersAdd(new INSTANCE_CLASS(), Global.ActionType.NEW);
+			var window = new UsersNew(new INSTANCE_CLASS(), Global.ActionType.NEW);
 			window.Show();
 		}
 
@@ -93,7 +94,7 @@ namespace WBZ.Modules.Admin
 			var selectedInstances = dgList.SelectedItems.Cast<INSTANCE_CLASS>();
 			foreach (INSTANCE_CLASS instance in selectedInstances)
 			{
-				var window = new UsersAdd(instance, Global.ActionType.NEW);
+				var window = new UsersNew(instance, Global.ActionType.DUPLICATE);
 				window.Show();
 			}
 		}
@@ -106,7 +107,7 @@ namespace WBZ.Modules.Admin
 			var selectedInstances = dgList.SelectedItems.Cast<INSTANCE_CLASS>();
 			foreach (INSTANCE_CLASS instance in selectedInstances)
 			{
-				var window = new UsersAdd(instance, Global.ActionType.EDIT);
+				var window = new UsersNew(instance, Global.ActionType.EDIT);
 				window.Show();
 			}
 		}
@@ -133,7 +134,7 @@ namespace WBZ.Modules.Admin
 			await Task.Run(() => {
 				UpdateFilters();
 				M.TotalItems = SQL.CountInstances(M.INSTANCE_TYPE, M.FilterSQL);
-				M.InstancesList = SQL.ListInstances(M.INSTANCE_TYPE, M.FilterSQL, M.Page = 0) as List<INSTANCE_CLASS>;
+				M.InstancesList = SQL.ListInstances(M.INSTANCE_TYPE, M.FilterSQL, M.SORTING, M.Page = 0).DataTableToList<INSTANCE_CLASS>();
 			});
 		}
 
@@ -176,7 +177,7 @@ namespace WBZ.Modules.Admin
 			if (e.VerticalChange > 0 && e.VerticalOffset + e.ViewportHeight == e.ExtentHeight && M.InstancesList.Count < M.TotalItems)
 			{
 				DataContext = null;
-				M.InstancesList.AddRange(SQL.ListInstances(M.INSTANCE_TYPE, M.FilterSQL, ++M.Page) as List<INSTANCE_CLASS>);
+				M.InstancesList.AddRange(SQL.ListInstances(M.INSTANCE_TYPE, M.FilterSQL, M.SORTING, ++M.Page).DataTableToList<INSTANCE_CLASS>());
 				DataContext = M;
 				Extensions.GetVisualChild<ScrollViewer>(sender as DataGrid).ScrollToVerticalOffset(e.VerticalOffset);
 			}
@@ -189,6 +190,7 @@ namespace WBZ.Modules.Admin
 	internal class M_UsersList : INotifyPropertyChanged
 	{
 		public readonly string INSTANCE_TYPE = Global.Module.USERS;
+		public StringCollection SORTING = Properties.Settings.Default.sorting_UsersList;
 
 		/// Dane o zalogowanym użytkowniku
 		public C_User User { get; } = Global.User;

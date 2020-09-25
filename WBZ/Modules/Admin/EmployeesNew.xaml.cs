@@ -11,11 +11,11 @@ namespace WBZ.Modules.Admin
     /// <summary>
     /// Interaction logic for EmployeesAdd.xaml
     /// </summary>
-    public partial class EmployeesAdd : Window
+    public partial class EmployeesNew : Window
     {
-        M_EmployeesAdd M = new M_EmployeesAdd();
+        M_EmployeesNew M = new M_EmployeesNew();
 
-        public EmployeesAdd(INSTANCE_CLASS instance, Global.ActionType mode)
+        public EmployeesNew(INSTANCE_CLASS instance, Global.ActionType mode)
         {
             InitializeComponent();
             DataContext = M;
@@ -23,8 +23,8 @@ namespace WBZ.Modules.Admin
             M.InstanceInfo = instance;
 			M.Mode = mode;
 
-			if (M.Mode == Global.ActionType.NEW)
-				M.InstanceInfo.ID = SQL.NewInstance(M.INSTANCE_TYPE);
+			if (M.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
+				M.InstanceInfo.ID = SQL.NewInstanceID(M.INSTANCE_TYPE);
 		}
 
 		/// <summary>
@@ -40,12 +40,13 @@ namespace WBZ.Modules.Admin
 		/// <summary>
 		/// Save
 		/// </summary>
+		private bool saved = false;
 		private void btnSave_Click(object sender, MouseButtonEventArgs e)
 		{
 			if (!CheckDataValidation())
 				return;
 
-			if (SQL.SetInstance(M.INSTANCE_TYPE, M.InstanceInfo))
+			if (saved = SQL.SetInstance(M.INSTANCE_TYPE, M.InstanceInfo, M.Mode))
 				Close();
 		}
 
@@ -81,12 +82,18 @@ namespace WBZ.Modules.Admin
 					M.InstanceInfo = M.InstanceInfo;
 				}
 		}
+
+		private void Window_Closed(object sender, System.EventArgs e)
+		{
+			if (M.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE) && !saved)
+				SQL.ClearObject(M.INSTANCE_TYPE, M.InstanceInfo.ID);
+		}
 	}
 
 	/// <summary>
 	/// Model
 	/// </summary>
-	internal class M_EmployeesAdd : INotifyPropertyChanged
+	internal class M_EmployeesNew : INotifyPropertyChanged
 	{
 		public readonly string INSTANCE_TYPE = Global.Module.EMPLOYEES;
 
@@ -106,8 +113,8 @@ namespace WBZ.Modules.Admin
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
 		}
-		/// Czy okno jest w trybie edycji (zamiast w trybie dodawania)
-		public bool IsEditing { get { return Mode != Global.ActionType.NEW; } }
+		/// Czy okno jest w trybie edycji
+		public bool EditMode { get { return Mode != Global.ActionType.PREVIEW; } }
 		/// Tryb okna
 		public Global.ActionType Mode { get; set; }
 		/// Dodatkowa ikona okna
@@ -115,7 +122,7 @@ namespace WBZ.Modules.Admin
 		{
 			get
 			{
-				if (Mode == Global.ActionType.ADD)
+				if (Mode == Global.ActionType.NEW)
 					return "pack://siteoforigin:,,,/Resources/icon32_add.ico";
 				else if (Mode == Global.ActionType.DUPLICATE)
 					return "pack://siteoforigin:,,,/Resources/icon32_duplicate.ico";
@@ -130,7 +137,7 @@ namespace WBZ.Modules.Admin
 		{
 			get
 			{
-				if (Mode == Global.ActionType.ADD)
+				if (Mode == Global.ActionType.NEW)
 					return "Nowy pracownik";
 				else if (Mode == Global.ActionType.DUPLICATE)
 					return $"Duplikowanie pracownika: {InstanceInfo.Fullname}";

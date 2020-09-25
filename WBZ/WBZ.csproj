@@ -174,8 +174,8 @@
     <Compile Include="Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Admin\EmployeesAdd.xaml.cs">
-      <DependentUpon>EmployeesAdd.xaml</DependentUpon>
+    <Compile Include="Modules\Admin\EmployeesNew.xaml.cs">
+      <DependentUpon>EmployeesNew.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Admin\EmployeesList.xaml.cs">
       <DependentUpon>EmployeesList.xaml</DependentUpon>
@@ -195,8 +195,8 @@
     <Compile Include="Modules\Admin\UsersList.xaml.cs">
       <DependentUpon>UsersList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Admin\UsersAdd.xaml.cs">
-      <DependentUpon>UsersAdd.xaml</DependentUpon>
+    <Compile Include="Modules\Admin\UsersNew.xaml.cs">
+      <DependentUpon>UsersNew.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Companies\CompaniesAdd.xaml.cs">
       <DependentUpon>CompaniesAdd.xaml</DependentUpon>
@@ -314,7 +314,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Admin\EmployeesAdd.xaml">
+    <Page Include="Modules\Admin\EmployeesNew.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -330,7 +330,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Admin\UsersAdd.xaml">
+    <Page Include="Modules\Admin\UsersNew.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -668,6 +668,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\icon32_duplicate.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\icon32_descending.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <Content Include="SQL\database.sql" />

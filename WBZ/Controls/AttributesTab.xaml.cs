@@ -52,7 +52,7 @@ namespace WBZ.Controls
             var indexes = dataGrid.SelectedItems.Cast<C_Attribute>().Select(x => M.InstanceAttributes.IndexOf(x));
             foreach (int index in indexes)
             {
-                var window = new AttributeValueChange(M.InstanceAttributes[index], EditMode);
+                var window = new AttributeChange(M.InstanceAttributes[index], EditMode);
                 window.Owner = (((Parent as TabItem)?.Parent as TabControl)?.Parent as DockPanel)?.Parent as Window;
                 if (window.ShowDialog() == true)
                     SQL.UpdateAttribute(M.InstanceAttributes[index]);

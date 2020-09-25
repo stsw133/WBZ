@@ -1,4 +1,4 @@
-﻿<Window x:Class="WBZ.Modules.Admin.EmployeesAdd"
+﻿<Window x:Class="WBZ.Modules.Admin.EmployeesNew"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,10 +7,10 @@
         xmlns:h="clr-namespace:WBZ.Helpers"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
-        Title="{Binding Title}" MinHeight="240" MinWidth="360" Height="{Binding Source={x:Static p:Settings.Default}, Path=config_EmployeesAdd_WindowY, Mode=TwoWay}" Width="{Binding Source={x:Static p:Settings.Default}, Path=config_EmployeesAdd_WindowX, Mode=TwoWay}"
+        Title="{Binding Title}" MinHeight="240" MinWidth="360" Height="{Binding Source={x:Static p:Settings.Default}, Path=config_EmployeesNew_WindowSize[1], Mode=TwoWay}" Width="{Binding Source={x:Static p:Settings.Default}, Path=config_EmployeesNew_WindowSize[0], Mode=TwoWay}"
             BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}}"
-            Icon="pack://siteoforigin:,,,/Resources/icon32_briefcase.ico">
+            Icon="pack://siteoforigin:,,,/Resources/icon32_briefcase.ico" Closed="Window_Closed">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -109,28 +109,28 @@
                 </DockPanel>
             </TabItem>
             <!-- tabGroups -->
-            <TabItem IsEnabled="{Binding IsEditing}">
+            <TabItem>
                 <TabItem.Header>
                     <c:SimpleHeader TextContent="Grupy" IconSource="pack://siteoforigin:,,,/Resources/icon32_groups.ico"/>
                 </TabItem.Header>
                 <c:GroupsTab/>
             </TabItem>
             <!-- tabAttributes -->
-            <TabItem IsEnabled="{Binding IsEditing}">
+            <TabItem>
                 <TabItem.Header>
                     <c:SimpleHeader TextContent="Atrybuty" IconSource="pack://siteoforigin:,,,/Resources/icon32_attributes.ico"/>
                 </TabItem.Header>
                 <c:AttributesTab/>
             </TabItem>
             <!-- tabAttachments -->
-            <TabItem x:Name="tabAttachments" IsEnabled="{Binding IsEditing}">
+            <TabItem>
                 <TabItem.Header>
                     <c:SimpleHeader TextContent="Załączniki" IconSource="pack://siteoforigin:,,,/Resources/icon32_photos.ico"/>
                 </TabItem.Header>
                 <c:AttachmentsTab/>
             </TabItem>
             <!-- tabLogs -->
-            <TabItem x:Name="tabLogs" IsEnabled="{Binding IsEditing}">
+            <TabItem>
                 <TabItem.Header>
                     <c:SimpleHeader TextContent="Historia" IconSource="pack://siteoforigin:,,,/Resources/icon32_logs.ico"/>
                 </TabItem.Header>

@@ -107,7 +107,7 @@ namespace WBZ.Modules.Articles
 
 		private void cbStore_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			SelectedStore = SQL.GetInstance("stores", cbStore.SelectedValue != null ? (int)cbStore.SelectedValue : 0) as C_Store;
+			SelectedStore = SQL.GetInstance("stores", cbStore.SelectedValue != null ? (int)cbStore.SelectedValue : 0).DataTableToList<C_Store>()?[0];
 			btnRefresh_Click(null, null);
 		}
 

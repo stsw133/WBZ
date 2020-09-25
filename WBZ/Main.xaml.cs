@@ -171,23 +171,32 @@ namespace WBZ
 				expStats.IsExpanded = false;
 		}
 
-		#region module "Admin"
+		/// <summary>
+		/// Admin - UsersList
+		/// </summary>
 		private void btnUsersList_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new UsersList();
 			window.Show();
 		}
+
+		/// <summary>
+		/// Admin - EmployeesList
+		/// </summary>
 		private void btnEmployeesList_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new EmployeesList();
 			window.Show();
 		}
+
+		/// <summary>
+		/// Admin - Community
+		/// </summary>
 		private void btnCommunity_Click(object sender, RoutedEventArgs e)
 		{
 			//var window = new Forum();
 			//window.Show();
 		}
-		#endregion
 
 		#region module "Documents"
 		private void btnDocumentsList_Click(object sender, RoutedEventArgs e)

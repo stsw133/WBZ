@@ -7,7 +7,7 @@
         xmlns:h="clr-namespace:WBZ.Helpers"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
-        Title="Zarządzanie pracownikami" MinHeight="240" MinWidth="360" Height="{Binding Source={x:Static p:Settings.Default}, Path=config_EmployeesList_WindowY, Mode=TwoWay}" Width="{Binding Source={x:Static p:Settings.Default}, Path=config_EmployeesList_WindowX, Mode=TwoWay}"
+        Title="Zarządzanie pracownikami" MinHeight="240" MinWidth="360" Height="{Binding Source={x:Static p:Settings.Default}, Path=config_EmployeesList_WindowSize[1], Mode=TwoWay}" Width="{Binding Source={x:Static p:Settings.Default}, Path=config_EmployeesList_WindowSize[0], Mode=TwoWay}"
             BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}}"
             Icon="pack://siteoforigin:,,,/Resources/icon32_briefcase.ico">
@@ -31,7 +31,7 @@
                 <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding User.Perms, Converter={StaticResource conv_ListContains}, ConverterParameter=employees_preview}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
                                 TextContent="Podgląd" IconSource="pack://siteoforigin:,,,/Resources/icon32_search.ico" PreviewMouseLeftButtonUp="btnPreview_Click"/>
                 <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding User.Perms, Converter={StaticResource conv_ListContains}, ConverterParameter=employees_save}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
-                                TextContent="Dodaj" IconSource="pack://siteoforigin:,,,/Resources/icon32_add.ico" PreviewMouseLeftButtonUp="btnAdd_Click"/>
+                                TextContent="Dodaj" IconSource="pack://siteoforigin:,,,/Resources/icon32_add.ico" PreviewMouseLeftButtonUp="btnNew_Click"/>
                 <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding User.Perms, Converter={StaticResource conv_ListContains}, ConverterParameter=users_save}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
                                 TextContent="Duplikuj" IconSource="pack://siteoforigin:,,,/Resources/icon32_duplicate.ico" PreviewMouseLeftButtonUp="btnDuplicate_Click"/>
                 <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding User.Perms, Converter={StaticResource conv_ListContains}, ConverterParameter=employees_save}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
@@ -170,28 +170,31 @@
                             <DockPanel Margin="5">
                                 <DockPanel DockPanel.Dock="Top">
                                     <Label Content="Sortuj najpierw po:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
-                                    <Button Margin="2.5" Content="{Binding config_EmployeesList_Sort1Order, Source={x:Static p:Settings.Default}, Mode=TwoWay, Converter={StaticResource conv_BoolToString}, ConverterParameter='  ↑  ~  ↓  '}" />
-                                    <ComboBox Margin="2.5" SelectedValue="{Binding config_EmployeesList_Sort1By, Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
-                                        <ComboBoxItem Content="Imię" Tag="u.forename"/>
-                                        <ComboBoxItem Content="Nazwisko" Tag="u.lastname"/>
-                                        <ComboBoxItem Content="E-mail" Tag="u.email"/>
-                                        <ComboBoxItem Content="Telefon" Tag="u.phone"/>
+                                    <ToggleButton Margin="2.5" IsChecked="{Binding sorting_EmployeesList[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=2}">
+                                        <Image Source="pack://siteoforigin:,,,/Resources/icon32_descending.ico"/>
+                                    </ToggleButton>
+                                    <ComboBox Margin="2.5" SelectedValue="{Binding sorting_EmployeesList[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
+                                        <ComboBoxItem Content="Imię" Tag="e.forename"/>
+                                        <ComboBoxItem Content="Nazwisko" Tag="e.lastname"/>
+                                        <ComboBoxItem Content="E-mail" Tag="e.email"/>
+                                        <ComboBoxItem Content="Telefon" Tag="e.phone"/>
                                     </ComboBox>
                                 </DockPanel>
                                 <DockPanel DockPanel.Dock="Top">
                                     <Label Content="Sortuj następnie po:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
-                                    <Button Margin="2.5" Content="{Binding config_EmployeesList_Sort2Order, Source={x:Static p:Settings.Default}, Mode=TwoWay, Converter={StaticResource conv_BoolToString}, ConverterParameter='  ↑  ~  ↓  '}"/>
-                                    <ComboBox Margin="2.5" SelectedValue="{Binding config_EmployeesList_Sort2By, Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
-                                        <ComboBoxItem Content="" Tag=""/>
-                                        <ComboBoxItem Content="Imię" Tag="u.forename"/>
-                                        <ComboBoxItem Content="Nazwisko" Tag="u.lastname"/>
-                                        <ComboBoxItem Content="E-mail" Tag="u.email"/>
-                                        <ComboBoxItem Content="Telefon" Tag="u.phone"/>
+                                    <ToggleButton Margin="2.5" IsChecked="{Binding sorting_EmployeesList[3], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=2}">
+                                        <Image Source="pack://siteoforigin:,,,/Resources/icon32_descending.ico"/>
+                                    </ToggleButton>
+                                    <ComboBox Margin="2.5" SelectedValue="{Binding sorting_EmployeesList[2], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
+                                        <ComboBoxItem Content="Imię" Tag="e.forename"/>
+                                        <ComboBoxItem Content="Nazwisko" Tag="e.lastname"/>
+                                        <ComboBoxItem Content="E-mail" Tag="e.email"/>
+                                        <ComboBoxItem Content="Telefon" Tag="e.phone"/>
                                     </ComboBox>
                                 </DockPanel>
                                 <DockPanel DockPanel.Dock="Top">
                                     <Label Content="Limit wczytywania:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
-                                    <TextBox Text="{Binding config_EmployeesList_LimitPerPage, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Margin="2.5" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=5}" KeyUp="dpFilter_KeyUp"/>
+                                    <TextBox Text="{Binding sorting_EmployeesList[4], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Margin="2.5" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=5}"/>
                                 </DockPanel>
                             </DockPanel>
                         </ScrollViewer>

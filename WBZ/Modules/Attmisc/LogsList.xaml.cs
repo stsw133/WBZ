@@ -96,7 +96,7 @@ namespace WBZ.Modules.Attmisc
 					editMode = false;
 				if (!Global.User.Perms.Contains($"{Global.Module.DOCUMENTS}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{Global.Module.DOCUMENTS}_{Global.UserPermType.SAVE}"))
 					return;
-				var window = new DocumentsAdd(SQL.GetInstance(log.Module, log.Instance) as C_Document, editMode);
+				var window = new DocumentsAdd(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Document>()?[0], editMode);
 				window.Show();
 			}
 			else if (log.Module == Global.Module.STORES)
@@ -108,7 +108,7 @@ namespace WBZ.Modules.Attmisc
 					editMode = false;
 				if (!Global.User.Perms.Contains($"{Global.Module.STORES}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{Global.Module.STORES}_{Global.UserPermType.SAVE}"))
 					return;
-				var window = new StoresAdd(SQL.GetInstance(log.Module, log.Instance) as C_Store, editMode);
+				var window = new StoresAdd(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Store>()?[0], editMode);
 				window.Show();
 			}
 			else if (log.Module == Global.Module.ARTICLES)
@@ -120,7 +120,7 @@ namespace WBZ.Modules.Attmisc
 					editMode = false;
 				if (!Global.User.Perms.Contains($"{Global.Module.ARTICLES}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{Global.Module.ARTICLES}_{Global.UserPermType.SAVE}"))
 					return;
-				var window = new ArticlesAdd(SQL.GetInstance(log.Module, log.Instance) as C_Article, editMode);
+				var window = new ArticlesAdd(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Article>()?[0], editMode);
 				window.Show();
 			}
 			else if (log.Module == Global.Module.COMPANIES)
@@ -132,7 +132,7 @@ namespace WBZ.Modules.Attmisc
 					editMode = false;
 				if (!Global.User.Perms.Contains($"{Global.Module.COMPANIES}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{Global.Module.COMPANIES}_{Global.UserPermType.SAVE}"))
 					return;
-				var window = new CompaniesAdd(SQL.GetInstance(log.Module, log.Instance) as C_Company, editMode);
+				var window = new CompaniesAdd(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Company>()?[0], editMode);
 				window.Show();
 			}
 			else if (log.Module == Global.Module.FAMILIES)
@@ -144,7 +144,7 @@ namespace WBZ.Modules.Attmisc
 					editMode = false;
 				if (!Global.User.Perms.Contains($"{Global.Module.FAMILIES}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{Global.Module.FAMILIES}_{Global.UserPermType.SAVE}"))
 					return;
-				var window = new FamiliesAdd(SQL.GetInstance(log.Module, log.Instance) as C_Family, editMode);
+				var window = new FamiliesAdd(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Family>()?[0], editMode);
 				window.Show();
 			}
 			else if (log.Module == Global.Module.DISTRIBUTIONS)
@@ -156,7 +156,7 @@ namespace WBZ.Modules.Attmisc
 					editMode = false;
 				if (!Global.User.Perms.Contains($"{Global.Module.DISTRIBUTIONS}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{Global.Module.DISTRIBUTIONS}_{Global.UserPermType.SAVE}"))
 					return;
-				var window = new DistributionsAdd(SQL.GetInstance(log.Module, log.Instance) as C_Distribution, editMode);
+				var window = new DistributionsAdd(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Distribution>()?[0], editMode);
 				window.Show();
 			}
 			else if (log.Module == Global.Module.USERS)
@@ -168,7 +168,7 @@ namespace WBZ.Modules.Attmisc
 					editMode = false;
 				if (!Global.User.Perms.Contains($"{Global.Module.USERS}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{Global.Module.USERS}_{Global.UserPermType.SAVE}"))
 					return;
-				var window = new UsersAdd(SQL.GetInstance(log.Module, log.Instance) as C_User, editMode);
+				var window = new UsersNew(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_User>()?[0], Global.ActionType.PREVIEW);
 				window.Show();
 			}
 			else if (log.Module == Global.Module.ATTRIBUTES_CLASSES)
@@ -180,7 +180,7 @@ namespace WBZ.Modules.Attmisc
 					editMode = false;
 				if (!Global.User.Perms.Contains($"{Global.Module.ATTRIBUTES_CLASSES}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{Global.Module.ATTRIBUTES_CLASSES}_{Global.UserPermType.SAVE}"))
 					return;
-				var window = new AttributesClassesAdd(SQL.GetInstance(log.Module, log.Instance) as C_AttributeClass, editMode);
+				var window = new AttributesClassesAdd(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_AttributeClass>()?[0], editMode);
 				window.Show();
 			}
 		}

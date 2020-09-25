@@ -21,7 +21,6 @@ namespace WBZ.Controls
         M_AttachmentsTab M = new M_AttachmentsTab();
         private string InstanceType;
         private int ID;
-        private bool EditMode;
 
         public AttachmentsTab()
         {
@@ -46,7 +45,7 @@ namespace WBZ.Controls
                 {
                     InstanceType = (string)d.INSTANCE_TYPE;
                     ID = (int)d.InstanceInfo.ID;
-                    EditMode = (bool)d.EditMode;
+                    M.EditMode = (bool)d.EditMode;
                 }
             }
             catch { }
@@ -135,6 +134,8 @@ namespace WBZ.Controls
                 NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
             }
         }
+        /// Czy okno jest w trybie edycji
+		public bool EditMode { get; set; }
 
         /// <summary>
 		/// PropertyChangedEventHandler
