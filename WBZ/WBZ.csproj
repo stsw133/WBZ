@@ -136,22 +136,25 @@
     <Compile Include="Classes\C_Employee.cs" />
     <Compile Include="Classes\C_User.cs" />
     <Compile Include="Classes\C_Store.cs" />
-    <Compile Include="Controls\AttachmentsAdd.xaml.cs">
+    <Compile Include="Controls\StatusPanel.xaml.cs">
+      <DependentUpon>StatusPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Windows\AttachmentsAdd.xaml.cs">
       <DependentUpon>AttachmentsAdd.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AttachmentsTab.xaml.cs">
+    <Compile Include="Controls\Tabs\AttachmentsTab.xaml.cs">
       <DependentUpon>AttachmentsTab.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\GroupsTab.xaml.cs">
+    <Compile Include="Controls\Tabs\GroupsTab.xaml.cs">
       <DependentUpon>GroupsTab.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LogsTab.xaml.cs">
+    <Compile Include="Controls\Tabs\LogsTab.xaml.cs">
       <DependentUpon>LogsTab.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AttributesTab.xaml.cs">
+    <Compile Include="Controls\Tabs\AttributesTab.xaml.cs">
       <DependentUpon>AttributesTab.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MsgWin.xaml.cs">
+    <Compile Include="Controls\Windows\MsgWin.xaml.cs">
       <DependentUpon>MsgWin.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\SimpleHeader.xaml.cs">
@@ -160,7 +163,7 @@
     <Compile Include="Controls\SimpleButton.xaml.cs">
       <DependentUpon>SimpleButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AttributeChange.xaml.cs">
+    <Compile Include="Controls\Windows\AttributeChange.xaml.cs">
       <DependentUpon>AttributeChange.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Converters.cs" />
@@ -173,6 +176,9 @@
     </Compile>
     <Compile Include="Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Admin\ConsoleSQL.xaml.cs">
+      <DependentUpon>ConsoleSQL.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Admin\EmployeesNew.xaml.cs">
       <DependentUpon>EmployeesNew.xaml</DependentUpon>
@@ -237,7 +243,7 @@
     <Compile Include="Modules\Login\LoginDatabases.xaml.cs">
       <DependentUpon>LoginDatabases.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Confirmation.xaml.cs">
+    <Compile Include="Controls\Windows\Confirmation.xaml.cs">
       <DependentUpon>Confirmation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Login\LoginRegister.xaml.cs">
@@ -274,27 +280,31 @@
     <Compile Include="Controls\MenuPanelColor.xaml.cs">
       <DependentUpon>MenuPanelColor.xaml</DependentUpon>
     </Compile>
-    <Page Include="Controls\AttachmentsAdd.xaml">
+    <Page Include="Controls\StatusPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\AttachmentsTab.xaml">
+    <Page Include="Controls\Windows\AttachmentsAdd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\GroupsTab.xaml">
+    <Page Include="Controls\Tabs\AttachmentsTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\LogsTab.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\AttributesTab.xaml">
+    <Page Include="Controls\Tabs\GroupsTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\MsgWin.xaml">
+    <Page Include="Controls\Tabs\LogsTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Tabs\AttributesTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Windows\MsgWin.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -306,11 +316,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\AttributeChange.xaml">
+    <Page Include="Controls\Windows\AttributeChange.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\TitleBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Admin\ConsoleSQL.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -414,7 +428,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Confirmation.xaml">
+    <Page Include="Controls\Windows\Confirmation.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

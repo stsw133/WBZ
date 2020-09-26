@@ -5,7 +5,6 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using WBZ.Classes;
-using WBZ.Helpers;
 
 namespace WBZ.Controls
 {
@@ -15,9 +14,9 @@ namespace WBZ.Controls
     public partial class AttributesTab : UserControl
     {
         M_AttributesTab M = new M_AttributesTab();
-        private string InstanceType;
+        private string Module;
         private int ID;
-        private bool EditMode;
+        private bool EditingMode;
 
         public AttributesTab()
         {
@@ -32,33 +31,40 @@ namespace WBZ.Controls
                 Window win = Window.GetWindow(this);
 
                 if (ID != 0 && M.InstanceAttributes == null)
-                    M.InstanceAttributes = SQL.ListAttributes(InstanceType, ID);
+                    M.InstanceAttributes = SQL.ListAttributes(Module, ID);
 
                 dynamic d = win?.DataContext;
                 if (d != null)
                 {
-                    InstanceType = (string)d.INSTANCE_TYPE;
+                    Module = (string)d.MODULE_NAME;
                     ID = (int)d.InstanceInfo.ID;
-                    EditMode = (bool)d.EditMode;
                 }
             }
             catch { }
         }
 
+        /// <summary>
+        /// Change
+        /// </summary>
         private void btnAttributeChange_Click(object sender, RoutedEventArgs e)
         {
             var dataGrid = Content as DataGrid;
+            Window win = Window.GetWindow(this);
+
+            dynamic d = win?.DataContext;
+            if (d != null)
+                EditingMode = (bool)d.EditingMode;
 
             var indexes = dataGrid.SelectedItems.Cast<C_Attribute>().Select(x => M.InstanceAttributes.IndexOf(x));
             foreach (int index in indexes)
             {
-                var window = new AttributeChange(M.InstanceAttributes[index], EditMode);
-                window.Owner = (((Parent as TabItem)?.Parent as TabControl)?.Parent as DockPanel)?.Parent as Window;
+                var window = new AttributeChange(M.InstanceAttributes[index], EditingMode);
+                window.Owner = win;
                 if (window.ShowDialog() == true)
                     SQL.UpdateAttribute(M.InstanceAttributes[index]);
             }
 
-            M.InstanceAttributes = SQL.ListAttributes(InstanceType, ID);
+            M.InstanceAttributes = SQL.ListAttributes(Module, ID);
         }
 	}
 
@@ -67,7 +73,7 @@ namespace WBZ.Controls
 	/// </summary>
 	internal class M_AttributesTab : INotifyPropertyChanged
     {
-        /// Atrybuty
+        /// Attributes
         private List<C_Attribute> instanceAttributes;
         public List<C_Attribute> InstanceAttributes
         {

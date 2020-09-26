@@ -7,6 +7,9 @@ namespace WBZ.Helpers
 {
     class GSM
     {
+        /// <summary>
+        /// Send
+        /// </summary>
         internal static bool SendSMS(string[] numbers)
         {
             bool result = true;
@@ -18,7 +21,7 @@ namespace WBZ.Helpers
                     using (SerialPort sp = new SerialPort(Properties.Settings.Default.config_GSM_com))
                     {
                         sp.Open();
-                        //Using AT command to send sms
+                        ///Using AT command to send sms
                         sp.WriteLine("AT" + Environment.NewLine);
                         Thread.Sleep(100);
                         sp.WriteLine("AT+CMGF=1" + Environment.NewLine);

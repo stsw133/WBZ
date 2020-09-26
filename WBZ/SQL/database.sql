@@ -130,7 +130,8 @@ CREATE TABLE wbz.groups
     id serial NOT NULL,
     module character varying(50) COLLATE pg_catalog."default" NOT NULL,
     name character varying(50) COLLATE pg_catalog."default" NOT NULL,
-    owner integer, --id grupy do której ta grupa nale¿y
+    instance integer, --id instancji, która nale¿y do grupy w polu owner
+    owner integer, --id grupy do której ta grupa/instancja nale¿y
     archival boolean NOT NULL DEFAULT false,
     comment text COLLATE pg_catalog."default",
     CONSTRAINT groups_pkey PRIMARY KEY (id)

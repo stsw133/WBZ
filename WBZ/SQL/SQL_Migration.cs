@@ -112,6 +112,7 @@ alter table wbz.attributes_classes add column if not exists required boolean not
 alter table wbz.attributes_classes add column if not exists archival boolean not null default false;
 alter table wbz.attributes add column if not exists archival boolean not null default false;
 alter table wbz.attachments add column if not exists comment text;
+alter table wbz.groups add column if not exists instance integer;
 
 CREATE TABLE wbz.employees
 (

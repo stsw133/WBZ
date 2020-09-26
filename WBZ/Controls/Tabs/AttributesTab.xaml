@@ -19,7 +19,7 @@
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <Button Content=" . . . " Visibility="{Binding EditMode, Converter={StaticResource conv_VisibleIfTrue}}" Click="btnAttributeChange_Click"/>
+                            <Button Content=" . . . " Visibility="{Binding EditingMode, Converter={StaticResource conv_VisibleIfTrue}}" Click="btnAttributeChange_Click"/>
                             <TextBlock Text="{Binding Value}" Padding="2.5" VerticalAlignment="Center"/>
                         </StackPanel>
                     </DataTemplate>

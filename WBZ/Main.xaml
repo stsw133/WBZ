@@ -126,6 +126,12 @@
                                         <Label Content="Społeczność" VerticalContentAlignment="Center"/>
                                     </DockPanel>
                                 </Button>
+                                <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=20}" FontWeight="Normal" Click="btnConsoleSQL_Click">
+                                    <DockPanel>
+                                        <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_source.ico"/>
+                                        <Label Content="Konsola SQL" VerticalContentAlignment="Center"/>
+                                    </DockPanel>
+                                </Button>
                             </DockPanel>
                         </Border>
                         <Expander.ContextMenu>

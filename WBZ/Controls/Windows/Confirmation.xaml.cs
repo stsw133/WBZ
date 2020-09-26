@@ -29,7 +29,7 @@ namespace WBZ.Controls
 		}
 
 		/// <summary>
-		/// Przycisk akceptacji
+		/// Accept
 		/// </summary>
 		private void btnAccept_Click(object sender, MouseButtonEventArgs e)
 		{

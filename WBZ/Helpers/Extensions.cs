@@ -11,16 +11,15 @@ namespace WBZ.Helpers
     internal static class Extensions
     {
         /// <summary>
-        /// Sprawdza czy wartość zmiennej zawiera się w liście wartości
+        /// Is value in list of values
         /// </summary>
         public static bool In<T>(this T value, params T[] input)
 		{
             return input.Any(n => Equals(n, value));
         }
 
-
         /// <summary>
-        /// Konwertuje dane z tabeli danych SQL na listę klas lub listę danych podanego typu
+        /// Convert DataTable to list of any model class
         /// </summary>
         public static List<T> DataTableToList<T>(this DataTable table) where T : class, new()
         {
@@ -56,6 +55,9 @@ namespace WBZ.Helpers
             }
         }
         
+        /// <summary>
+        /// Get visual child of control
+        /// </summary>
         public static T GetVisualChild<T>(DependencyObject parent) where T : Visual
         {
             T child = default;
@@ -65,14 +67,12 @@ namespace WBZ.Helpers
             {
                 Visual v = (Visual)VisualTreeHelper.GetChild(parent, i);
                 child = v as T;
+
                 if (child == null)
-                {
                     child = GetVisualChild<T>(v);
-                }
+                
                 if (child != null)
-                {
                     break;
-                }
             }
             return child;
         }

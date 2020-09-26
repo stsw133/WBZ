@@ -48,7 +48,7 @@ namespace WBZ.Controls
 	/// </summary>
 	public class M_AttributeValueChange : INotifyPropertyChanged
 	{
-		/// Atrybut
+		/// Attribute
 		private C_Attribute attributeInfo;
 		public C_Attribute AttributeInfo
 		{
@@ -62,13 +62,13 @@ namespace WBZ.Controls
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
 		}
-		/// Wartości atrybutu
+		/// Attribute values
 		public string[] AttributeValues { get { return AttributeInfo.Class.Values.Split(';'); } }
-		/// Tryb wyboru wartości
+		/// Can attribute have any value
 		public bool FreeValues { get { return string.IsNullOrEmpty(AttributeInfo.Class.Values); } }
-		/// Tryb edycji dla okna
+		/// Edit mode
 		public bool EditMode { get; set; }
-		/// Tytuł okna
+		/// Window title
 		public string Title
 		{
 			get

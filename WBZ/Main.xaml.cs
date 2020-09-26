@@ -198,6 +198,17 @@ namespace WBZ
 			//window.Show();
 		}
 
+		/// <summary>
+		/// Admin - Console SQL
+		/// </summary>
+		private void btnConsoleSQL_Click(object sender, RoutedEventArgs e)
+		{
+#if DEBUG
+			var window = new ConsoleSQL();
+			window.Show();
+#endif
+		}
+
 		#region module "Documents"
 		private void btnDocumentsList_Click(object sender, RoutedEventArgs e)
 		{

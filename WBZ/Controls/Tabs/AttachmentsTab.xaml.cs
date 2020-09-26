@@ -19,13 +19,13 @@ namespace WBZ.Controls
     public partial class AttachmentsTab : UserControl
     {
         M_AttachmentsTab M = new M_AttachmentsTab();
-        private string InstanceType;
+        private string Module;
         private int ID;
 
         public AttachmentsTab()
         {
             InitializeComponent();
-            DataContext = M;
+            lbAttachments.DataContext = M;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -36,21 +36,23 @@ namespace WBZ.Controls
 
                 if (ID != 0 && M.InstanceAttachments == null)
                 {
-                    M.InstanceAttachments = SQL.ListAttachments(InstanceType, ID);
+                    M.InstanceAttachments = SQL.ListAttachments(Module, ID);
                     win.Closed += UserControl_Closed;
                 }
 
                 dynamic d = win?.DataContext;
                 if (d != null)
                 {
-                    InstanceType = (string)d.INSTANCE_TYPE;
+                    Module = (string)d.MODULE_NAME;
                     ID = (int)d.InstanceInfo.ID;
-                    M.EditMode = (bool)d.EditMode;
                 }
             }
             catch { }
         }
 
+        /// <summary>
+        /// Add
+        /// </summary>
         private void btnAttachmentAdd_Click(object sender, MouseButtonEventArgs e)
         {
             var window = new AttachmentsAdd();
@@ -74,20 +76,25 @@ namespace WBZ.Controls
                     fileName = Path.GetFileName(filePath);
                     file = File.ReadAllBytes(filePath);
                 }
-                SQL.SetAttachment(InstanceType, ID, fileName, file, filePath);
-                M.InstanceAttachments = SQL.ListAttachments(InstanceType, ID);
+                SQL.SetAttachment(Module, ID, fileName, file, filePath);
+                M.InstanceAttachments = SQL.ListAttachments(Module, ID);
             }
         }
+
+        /// <summary>
+        /// Remove
+        /// </summary>
         private void btnAttachmentRemove_Click(object sender, MouseButtonEventArgs e)
         {
             if (lbAttachments.SelectedIndex < 0)
                 return;
 
             SQL.DeleteAttachment(M.InstanceAttachments[lbAttachments.SelectedIndex].ID);
-            SQL.SetLog(Global.User.ID, InstanceType, ID, $"Usunięto załącznik: {M.InstanceAttachments[lbAttachments.SelectedIndex].Name}");
+            SQL.SetLog(Global.User.ID, Module, ID, $"Usunięto załącznik: {M.InstanceAttachments[lbAttachments.SelectedIndex].Name}");
 
-            M.InstanceAttachments = SQL.ListAttachments(InstanceType, ID);
+            M.InstanceAttachments = SQL.ListAttachments(Module, ID);
         }
+
         private void lbAttachments_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lbAttachments.SelectedIndex < 0)
@@ -120,7 +127,7 @@ namespace WBZ.Controls
     /// </summary>
     internal class M_AttachmentsTab : INotifyPropertyChanged
     {
-        /// Załączniki
+        /// Attachments
         private List<C_Attachment> instanceAttachments;
         public List<C_Attachment> InstanceAttachments
         {
@@ -134,8 +141,6 @@ namespace WBZ.Controls
                 NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
             }
         }
-        /// Czy okno jest w trybie edycji
-		public bool EditMode { get; set; }
 
         /// <summary>
 		/// PropertyChangedEventHandler

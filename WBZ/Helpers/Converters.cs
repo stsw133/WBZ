@@ -7,8 +7,7 @@ using System.Windows.Data;
 namespace WBZ.Helpers
 {
 	/// <summary>
-	/// Konwerter wartości bool na string, parametr musi składać się z dwóch ciągów oddzielonych znakiem ~
-	/// Jeśli wartość=true to podstawiany jest ciąg z lewej strony parametru, dla wartości false z prawej strony
+	/// Convert bool -> !bool , bool -> !Visibility : parameter must be bool
 	/// </summary>
 	public class conv_BoolInverted : IValueConverter
 	{
@@ -30,8 +29,8 @@ namespace WBZ.Helpers
 	}
 
 	/// <summary>
-	/// Konwerter wartości bool na string, parametr musi składać się z dwóch ciągów oddzielonych znakiem ~
-	/// Jeśli wartość=true to podstawiany jest ciąg z lewej strony parametru, dla wartości false z prawej strony
+	/// Convert bool -> string : parameter must be like 'string~string'
+	/// If true then string is on left side of ~ else on right side
 	/// </summary>
 	public class conv_BoolToString : IValueConverter
 	{
@@ -48,8 +47,8 @@ namespace WBZ.Helpers
 	}
 
 	/// <summary>
-	/// Jeśli wartość parametru jest zawarta w liście wartości źródła to konwerter zwraca: true lub Visibility.Visible
-	/// W przeciwnym wypadku zwraca: false lub Visibility.Collapsed
+	/// Convert list.contains(string) : parameter must be string
+	/// If true then returns true or Visibility.Visible else returns false or Visibility.Collapsed
 	/// </summary>
 	public class conv_ListContains : IValueConverter
 	{
@@ -81,7 +80,7 @@ namespace WBZ.Helpers
 	}
 
 	/// <summary>
-	/// Konwerter wartości int, parametr jest mnożnikiem np. jeśli wartość=3 a parametr=5 to w wyniku wartość wyniesie 15
+	/// Convert double -> double * double : parameter must be number
 	/// </summary>
 	public class conv_Size : IValueConverter
 	{
@@ -97,7 +96,7 @@ namespace WBZ.Helpers
 	}
 
 	/// <summary>
-	/// Konwerter wartości string na Visibility
+	/// Convert string -> Visibility : parameter must be string
 	/// </summary>
 	public class conv_StringToVisibility : IValueConverter
 	{

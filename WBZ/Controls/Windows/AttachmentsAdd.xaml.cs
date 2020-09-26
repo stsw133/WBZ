@@ -1,18 +1,7 @@
 ﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace WBZ.Controls
 {
@@ -51,11 +40,17 @@ namespace WBZ.Controls
             }
         }
 
+        /// <summary>
+        /// Open internet browser
+        /// </summary>
         private void btnLink_Click(object sender, MouseButtonEventArgs e)
         {
             Process.Start("");
         }
 
+        /// <summary>
+        /// Open file dialog
+        /// </summary>
         private void btnDrive_Click(object sender, MouseButtonEventArgs e)
         {
             var dialog = new OpenFileDialog()
@@ -66,6 +61,9 @@ namespace WBZ.Controls
                 tbDrive.Text = dialog.FileName;
         }
 
+        /// <summary>
+        /// Accept
+        /// </summary>
         private void btnAccept_Click(object sender, MouseButtonEventArgs e)
         {
             DialogResult = true;

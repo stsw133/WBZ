@@ -9,7 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using WBZ.Classes;
 using WBZ.Helpers;
-using INSTANCE_CLASS = WBZ.Classes.C_Employee;
+using MODULE_CLASS = WBZ.Classes.C_Employee;
 
 namespace WBZ.Modules.Admin
 {
@@ -64,7 +64,7 @@ namespace WBZ.Modules.Admin
 		/// </summary>
 		private void btnFiltersClear_Click(object sender, MouseButtonEventArgs e)
 		{
-			M.Filters = new INSTANCE_CLASS();
+			M.Filters = new MODULE_CLASS();
 			btnRefresh_Click(null, null);
 		}
 
@@ -73,8 +73,8 @@ namespace WBZ.Modules.Admin
 		/// </summary>
 		private void btnPreview_Click(object sender, MouseButtonEventArgs e)
 		{
-			var selectedInstances = dgList.SelectedItems.Cast<INSTANCE_CLASS>();
-			foreach (INSTANCE_CLASS instance in selectedInstances)
+			var selectedInstances = dgList.SelectedItems.Cast<MODULE_CLASS>();
+			foreach (MODULE_CLASS instance in selectedInstances)
 			{
 				var window = new EmployeesNew(instance, Global.ActionType.PREVIEW);
 				window.Show();
@@ -86,7 +86,7 @@ namespace WBZ.Modules.Admin
 		/// </summary>
 		private void btnNew_Click(object sender, MouseButtonEventArgs e)
 		{
-			var window = new EmployeesNew(new INSTANCE_CLASS(), Global.ActionType.NEW);
+			var window = new EmployeesNew(new MODULE_CLASS(), Global.ActionType.NEW);
 			window.Show();
 		}
 
@@ -95,8 +95,8 @@ namespace WBZ.Modules.Admin
 		/// </summary>
 		private void btnDuplicate_Click(object sender, MouseButtonEventArgs e)
 		{
-			var selectedInstances = dgList.SelectedItems.Cast<INSTANCE_CLASS>();
-			foreach (INSTANCE_CLASS instance in selectedInstances)
+			var selectedInstances = dgList.SelectedItems.Cast<MODULE_CLASS>();
+			foreach (MODULE_CLASS instance in selectedInstances)
 			{
 				var window = new EmployeesNew(instance, Global.ActionType.DUPLICATE);
 				window.Show();
@@ -108,8 +108,8 @@ namespace WBZ.Modules.Admin
 		/// </summary>
 		private void btnEdit_Click(object sender, MouseButtonEventArgs e)
 		{
-			var selectedInstances = dgList.SelectedItems.Cast<INSTANCE_CLASS>();
-			foreach (INSTANCE_CLASS instance in selectedInstances)
+			var selectedInstances = dgList.SelectedItems.Cast<MODULE_CLASS>();
+			foreach (MODULE_CLASS instance in selectedInstances)
 			{
 				var window = new EmployeesNew(instance, Global.ActionType.EDIT);
 				window.Show();
@@ -121,11 +121,11 @@ namespace WBZ.Modules.Admin
 		/// </summary>
 		private void btnDelete_Click(object sender, MouseButtonEventArgs e)
 		{
-			var selectedInstances = dgList.SelectedItems.Cast<INSTANCE_CLASS>();
+			var selectedInstances = dgList.SelectedItems.Cast<MODULE_CLASS>();
 			if (selectedInstances.Count() > 0 && MessageBox.Show("Czy na pewno usunąć zaznaczone rekordy?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
 			{
-				foreach (INSTANCE_CLASS instance in selectedInstances)
-					SQL.DeleteInstance(M.INSTANCE_TYPE, instance.ID);
+				foreach (MODULE_CLASS instance in selectedInstances)
+					SQL.DeleteInstance(M.MODULE_NAME, instance.ID);
 				btnRefresh_Click(null, null);
 			}
 		}
@@ -137,8 +137,8 @@ namespace WBZ.Modules.Admin
 		{
 			await Task.Run(() => {
 				UpdateFilters();
-				M.TotalItems = SQL.CountInstances(M.INSTANCE_TYPE, M.FilterSQL);
-				M.InstancesList = SQL.ListInstances(M.INSTANCE_TYPE, M.FilterSQL, M.SORTING, M.Page = 0).DataTableToList<INSTANCE_CLASS>();
+				M.TotalItems = SQL.CountInstances(M.MODULE_NAME, M.FilterSQL);
+				M.InstancesList = SQL.ListInstances(M.MODULE_NAME, M.FilterSQL, M.SORTING, M.Page = 0).DataTableToList<MODULE_CLASS>();
 			});
 		}
 
@@ -153,21 +153,21 @@ namespace WBZ.Modules.Admin
 		/// <summary>
 		/// Select
 		/// </summary>
-		public INSTANCE_CLASS Selected;
+		public MODULE_CLASS Selected;
 		private void dgList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			if (e.LeftButton == MouseButtonState.Pressed)
 			{
 				if (!M.SelectingMode)
 				{
-					if (Global.User.Perms.Contains($"{M.INSTANCE_TYPE}_{Global.UserPermType.SAVE}"))
+					if (Global.User.Perms.Contains($"{M.MODULE_NAME}_{Global.UserPermType.SAVE}"))
 						btnEdit_Click(null, null);
 					else
 						btnPreview_Click(null, null);
 				}
 				else
 				{
-					Selected = dgList.SelectedItems.Cast<INSTANCE_CLASS>().FirstOrDefault();
+					Selected = dgList.SelectedItems.Cast<MODULE_CLASS>().FirstOrDefault();
 					DialogResult = true;
 				}
 			}
@@ -181,7 +181,7 @@ namespace WBZ.Modules.Admin
 			if (e.VerticalChange > 0 && e.VerticalOffset + e.ViewportHeight == e.ExtentHeight && M.InstancesList.Count < M.TotalItems)
 			{
 				DataContext = null;
-				M.InstancesList.AddRange(SQL.ListInstances(M.INSTANCE_TYPE, M.FilterSQL, M.SORTING, ++M.Page).DataTableToList<INSTANCE_CLASS>());
+				M.InstancesList.AddRange(SQL.ListInstances(M.MODULE_NAME, M.FilterSQL, M.SORTING, ++M.Page).DataTableToList<MODULE_CLASS>());
 				DataContext = M;
 				Extensions.GetVisualChild<ScrollViewer>(sender as DataGrid).ScrollToVerticalOffset(e.VerticalOffset);
 			}
@@ -193,14 +193,14 @@ namespace WBZ.Modules.Admin
 	/// </summary>
 	internal class M_EmployeesList : INotifyPropertyChanged
 	{
-		public readonly string INSTANCE_TYPE = Global.Module.EMPLOYEES;
+		public readonly string MODULE_NAME = Global.Module.EMPLOYEES;
 		public StringCollection SORTING = Properties.Settings.Default.sorting_EmployeesList;
 
-		/// Dane o zalogowanym użytkowniku
+		/// Logged user
 		public C_User User { get; } = Global.User;
-		/// Lista instancji
-		private List<INSTANCE_CLASS> instancesList;
-		public List<INSTANCE_CLASS> InstancesList
+		/// Instance list
+		private List<MODULE_CLASS> instancesList;
+		public List<MODULE_CLASS> InstancesList
 		{
 			get
 			{
@@ -212,13 +212,13 @@ namespace WBZ.Modules.Admin
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
 		}
-		/// Tryb wyboru dla okna
+		/// Selecting mode
 		public bool SelectingMode { get; set; }
-		/// Filtr SQL
+		/// SQL filter
 		public string FilterSQL { get; set; }
-		/// Instancja filtra
-		private INSTANCE_CLASS filters = new INSTANCE_CLASS();
-		public INSTANCE_CLASS Filters
+		/// Filter instance
+		private MODULE_CLASS filters = new MODULE_CLASS();
+		public MODULE_CLASS Filters
 		{
 			get
 			{
@@ -230,7 +230,7 @@ namespace WBZ.Modules.Admin
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
 		}
-		/// Numer strony
+		/// Page number
 		private int page;
 		public int Page
 		{
@@ -244,7 +244,7 @@ namespace WBZ.Modules.Admin
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
 		}
-		/// Łączna liczba instancji
+		/// Total instances number
 		private int totalItems;
 		public int TotalItems
 		{

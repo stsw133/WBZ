@@ -41,7 +41,7 @@ namespace WBZ.Modules.Settings
                 }
             }
 
-            if (SQL.SetUser(M.User))
+            if (SQL.SetInstance(Global.Module.USERS, M.User, Global.ActionType.EDIT))
 			    Close();
 		}
 	}

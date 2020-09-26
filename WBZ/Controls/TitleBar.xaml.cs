@@ -23,14 +23,8 @@ namespace WBZ.Controls
 		{
 			try
 			{
-				var parent = Parent;
-				while (parent != null && !(parent is Window))
-				{
-					parent = (parent as FrameworkElement).Parent;
-				}
-				win = parent as Window;
-
-				win.StateChanged += new EventHandler(this.Window_StateChanged);
+				win = Window.GetWindow(this);
+				win.StateChanged += new EventHandler(Window_StateChanged);
 
 				if ((win.ResizeMode == ResizeMode.NoResize)
 				|| (win.ResizeMode == ResizeMode.CanMinimize))
@@ -81,12 +75,18 @@ namespace WBZ.Controls
 			}
 		}
 
+		/// <summary>
+		/// Default size
+		/// </summary>
 		private void titleBar_DefaultSize_Click(object sender, RoutedEventArgs e)
 		{
 			win.Height = win.MinHeight * 2.5;
 			win.Width = win.MinWidth * 2.5;
 		}
 
+		/// <summary>
+		/// Set center
+		/// </summary>
 		public void titleBar_SetCenter_Click(object sender, RoutedEventArgs e)
 		{
 			Rect workArea = SystemParameters.WorkArea;
@@ -94,11 +94,17 @@ namespace WBZ.Controls
 			win.Top = (workArea.Height - win.Height) / 2 + workArea.Top;
 		}
 
+		/// <summary>
+		/// Minimize
+		/// </summary>
 		private void titleBar_Minimize_Click(object sender, RoutedEventArgs e)
 		{
 			win.WindowState = WindowState.Minimized;
 		}
 
+		/// <summary>
+		/// Resize
+		/// </summary>
 		private void titleBar_Resize_Click(object sender, RoutedEventArgs e)
 		{
 			if (win.WindowState == WindowState.Normal)
@@ -110,6 +116,9 @@ namespace WBZ.Controls
 			titleBar_Menu_Maximize.IsEnabled = !titleBar_Menu_Maximize.IsEnabled;
 		}
 
+		/// <summary>
+		/// Close
+		/// </summary>
 		private void titleBar_Close_Click(object sender, RoutedEventArgs e)
 		{
 			win.Close();

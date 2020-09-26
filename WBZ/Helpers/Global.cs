@@ -15,8 +15,6 @@ namespace WBZ.Helpers
         internal static string VersionNewest { get; set; } = null;
         internal static C_Database Database { get; set; } = new C_Database();
         internal static C_User User { get; set; } = new C_User();
-
-        #region GlobalStructure
         internal static class Module
         {
             public const string ARTICLES = "articles";
@@ -33,7 +31,7 @@ namespace WBZ.Helpers
             public const string STORES = "stores";
             public const string USERS = "users";
         }
-        internal static string TranslateModules(string module)
+        internal static string TranslateModule(string module)
         {
             switch (module)
             {
@@ -90,7 +88,6 @@ namespace WBZ.Helpers
             ADD,
             REMOVE
         }
-        #endregion
 
 		#region Crypto
 		private const int DerivationIterations = 1000;
@@ -144,14 +141,14 @@ namespace WBZ.Helpers
                 return "";
             }
 
-            // Get the complete stream of bytes that represent:
-            // [16 bytes of Salt] + [16 bytes of IV] + [n bytes of CipherText]
+            /// Get the complete stream of bytes that represent:
+            /// [16 bytes of Salt] + [16 bytes of IV] + [n bytes of CipherText]
             var cipherTextBytesWithSaltAndIv = Convert.FromBase64String(cipherText);
-            // Get the saltbytes by extracting the first 16 bytes from the supplied cipherText bytes.
+            /// Get the saltbytes by extracting the first 16 bytes from the supplied cipherText bytes.
             var saltStringBytes = cipherTextBytesWithSaltAndIv.Take(16).ToArray();
-            // Get the IV bytes by extracting the next 16 bytes from the supplied cipherText bytes.
+            /// Get the IV bytes by extracting the next 16 bytes from the supplied cipherText bytes.
             var ivStringBytes = cipherTextBytesWithSaltAndIv.Skip(16).Take(16).ToArray();
-            // Get the actual cipher text bytes by removing the first 64 bytes from the cipherText string.
+            /// Get the actual cipher text bytes by removing the first 64 bytes from the cipherText string.
             var cipherTextBytes = cipherTextBytesWithSaltAndIv.Skip(16 * 2).Take(cipherTextBytesWithSaltAndIv.Length - (16 * 2)).ToArray();
             string passPhrase = password;
             using (var password = new Rfc2898DeriveBytes(passPhrase, saltStringBytes, DerivationIterations))
@@ -182,10 +179,10 @@ namespace WBZ.Helpers
 
         private static byte[] Generate256BitsOfRandomEntropy()
         {
-            var randomBytes = new byte[16]; // 16 Bytes will give us 128 bits.
+            var randomBytes = new byte[16]; /// 16 Bytes will give us 128 bits.
             using (var rngCsp = new RNGCryptoServiceProvider())
             {
-                // Fill the array with cryptographically secure random bytes.
+                /// Fill the array with cryptographically secure random bytes.
                 rngCsp.GetBytes(randomBytes);
             }
             return randomBytes;

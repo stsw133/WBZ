@@ -15,7 +15,7 @@
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
     <Window.Resources>
-        <h:conv_Size x:Key="Conv_Size"/>
+        <h:conv_Size x:Key="conv_Size"/>
     </Window.Resources>
     <DockPanel>
         <!-- titleBar -->
@@ -25,8 +25,8 @@
         <TextBox DockPanel.Dock="Top" x:Name="tbInput" Margin="5" Padding="5" VerticalContentAlignment="Center" Visibility="Collapsed"/>
         <Rectangle DockPanel.Dock="Top" Margin="5" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
         <DockPanel DockPanel.Dock="Bottom" HorizontalAlignment="Center">
-            <Button Content="OK" Margin="5" HorizontalAlignment="Right" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource Conv_Size}, ConverterParameter=2.5}" Width="100" Click="btnOk_Click"/>
-            <Button Content="Anuluj" Margin="5" HorizontalAlignment="Left" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource Conv_Size}, ConverterParameter=2.5}" Width="100" Click="btnCancel_Click"/>
+            <Button Content="OK" Margin="5" HorizontalAlignment="Right" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=2.5}" Width="100" Click="btnOk_Click"/>
+            <Button Content="Anuluj" Margin="5" HorizontalAlignment="Left" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=2.5}" Width="100" Click="btnCancel_Click"/>
         </DockPanel>
     </DockPanel>
 </Window>

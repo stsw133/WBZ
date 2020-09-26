@@ -14,12 +14,12 @@
     <DockPanel Margin="5">
         <DockPanel>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                <c:SimpleButton Margin="0,0,5,0" IsEnabled="{Binding EditMode}" TextVisibility="False"
+                <c:SimpleButton Margin="0,0,5,0" IsEnabled="{Binding EditingMode}" TextVisibility="False"
                                 TextContent="Dodaj grupę" IconSource="pack://siteoforigin:,,,/Resources/icon32_add.ico" PreviewMouseLeftButtonUp="btnGroupAdd_Click"/>
-                <c:SimpleButton Margin="0,0,5,0" IsEnabled="{Binding EditMode}" TextVisibility="False"
+                <c:SimpleButton Margin="0,0,5,0" IsEnabled="{Binding EditingMode}" TextVisibility="False"
                                 TextContent="Usuń grupę" IconSource="pack://siteoforigin:,,,/Resources/icon32_remove.ico" PreviewMouseLeftButtonUp="btnGroupRemove_Click"/>
                 <GridSplitter DockPanel.Dock="Top" Margin="0,0,5,0" BorderBrush="DarkGray" BorderThickness="1" IsEnabled="False"/>
-                <c:SimpleButton Margin="0,0,5,0" IsEnabled="{Binding EditMode}" TextVisibility="False"
+                <c:SimpleButton Margin="0,0,5,0" IsEnabled="{Binding EditingMode}" TextVisibility="False"
                                 TextContent="Ustaw jako główną" IconSource="pack://siteoforigin:,,,/Resources/icon32_select.ico" PreviewMouseLeftButtonUp="btnGroupSelectAsMain_Click"/>
             </StackPanel>
             <DataGrid Margin="0,5,0,0" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"

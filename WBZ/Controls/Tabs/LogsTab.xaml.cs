@@ -13,9 +13,8 @@ namespace WBZ.Controls
     public partial class LogsTab : UserControl
     {
         M_LogsTab M = new M_LogsTab();
-        private string InstanceType;
+        private string Module;
         private int ID;
-        private bool EditMode;
 
         public LogsTab()
         {
@@ -30,14 +29,13 @@ namespace WBZ.Controls
                 Window win = Window.GetWindow(this);
 
                 if (ID != 0 && M.InstanceLogs == null)
-                    M.InstanceLogs = SQL.ListLogs(InstanceType, ID, null);
+                    M.InstanceLogs = SQL.ListLogs(Module, ID, null);
 
                 dynamic d = win?.DataContext;
                 if (d != null)
                 {
-                    InstanceType = (string)d.INSTANCE_TYPE;
+                    Module = (string)d.MODULE_NAME;
                     ID = (int)d.InstanceInfo.ID;
-                    EditMode = (bool)d.EditMode;
                 }
             }
             catch { }
@@ -49,7 +47,7 @@ namespace WBZ.Controls
 	/// </summary>
 	internal class M_LogsTab : INotifyPropertyChanged
     {
-        /// Logi
+        /// Logs
         private List<C_Log> instanceLogs;
         public List<C_Log> InstanceLogs
         {

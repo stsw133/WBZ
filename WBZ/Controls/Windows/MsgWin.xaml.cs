@@ -15,7 +15,7 @@ namespace WBZ.Controls
 
 		public string[] values = new string[1];
 
-		public MsgWin(Type type = 0, string title = "", string message = "", string value = "")
+		public MsgWin(Type type, string title = "", string message = "", string value = "")
 		{
 			InitializeComponent();
 
@@ -28,13 +28,18 @@ namespace WBZ.Controls
 				tbInput.Visibility = Visibility.Visible;
 		}
 
+		/// <summary>
+		/// OK
+		/// </summary>
 		private void btnOk_Click(object sender, RoutedEventArgs e)
 		{
 			values[0] = tbInput.Text;
-
 			DialogResult = true;
 		}
 
+		/// <summary>
+		/// Cancel
+		/// </summary>
 		private void btnCancel_Click(object sender, RoutedEventArgs e)
 		{
 			DialogResult = false;

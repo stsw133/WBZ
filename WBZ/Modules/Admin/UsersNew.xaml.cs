@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using WBZ.Classes;
 using WBZ.Helpers;
-using INSTANCE_CLASS = WBZ.Classes.C_User;
+using MODULE_CLASS = WBZ.Classes.C_User;
 
 namespace WBZ.Modules.Admin
 {
@@ -16,7 +16,7 @@ namespace WBZ.Modules.Admin
 	{
 		M_UsersNew M = new M_UsersNew();
 
-		public UsersNew(INSTANCE_CLASS instance, Global.ActionType mode)
+		public UsersNew(MODULE_CLASS instance, Global.ActionType mode)
 		{
 			InitializeComponent();
 			DataContext = M;
@@ -25,7 +25,8 @@ namespace WBZ.Modules.Admin
 			M.Mode = mode;
 
 			if (M.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
-				M.InstanceInfo.ID = SQL.NewInstanceID(M.INSTANCE_TYPE);
+				M.InstanceInfo.ID = SQL.NewInstanceID(M.MODULE_NAME);
+			M.InstanceInfo.Perms = SQL.GetUserPerms(M.InstanceInfo.ID);
 		}
 
 		/// <summary>
@@ -47,7 +48,7 @@ namespace WBZ.Modules.Admin
 			if (!CheckDataValidation())
 				return;
 
-			if (saved = SQL.SetInstance(M.INSTANCE_TYPE, M.InstanceInfo, M.Mode))
+			if (saved = SQL.SetInstance(M.MODULE_NAME, M.InstanceInfo, M.Mode))
 				Close();
 		}
 
@@ -92,7 +93,7 @@ namespace WBZ.Modules.Admin
 		private void Window_Closed(object sender, System.EventArgs e)
 		{
 			if (M.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE) && !saved)
-				SQL.ClearObject(M.INSTANCE_TYPE, M.InstanceInfo.ID);
+				SQL.ClearObject(M.MODULE_NAME, M.InstanceInfo.ID);
 		}
 	}
 
@@ -101,13 +102,13 @@ namespace WBZ.Modules.Admin
 	/// </summary>
 	internal class M_UsersNew : INotifyPropertyChanged
 	{
-		public readonly string INSTANCE_TYPE = Global.Module.USERS;
+		public readonly string MODULE_NAME = Global.Module.USERS;
 
-		/// Dane o zalogowanym użytkowniku
+		/// Logged user
 		public C_User User { get; } = Global.User;
-		/// Instancja
-		private INSTANCE_CLASS instanceInfo;
-		public INSTANCE_CLASS InstanceInfo
+		/// Instance
+		private MODULE_CLASS instanceInfo;
+		public MODULE_CLASS InstanceInfo
 		{
 			get
 			{
@@ -119,8 +120,8 @@ namespace WBZ.Modules.Admin
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
 		}
-		/// Czy okno jest w trybie edycji
-		public bool EditMode { get { return Mode != Global.ActionType.PREVIEW; } }
+		/// Editing mode
+		public bool EditingMode { get { return Mode != Global.ActionType.PREVIEW; } }
 		/// Tryb okna
 		public Global.ActionType Mode { get; set; }
 		/// Dodatkowa ikona okna

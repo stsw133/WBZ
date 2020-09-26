@@ -201,7 +201,7 @@ namespace WBZ.Modules.Attmisc
 				M.TotalItems = SQL.CountInstances(Global.Module.LOGS, M.FilterSQL);
 				M.InstancesList = SQL.ListLogs(M.FilterSQL, M.Limit, M.Page = 0 * M.Limit, "datetime", true);
 				foreach (var instance in M.InstancesList)
-					instance.TranslatedModule = Global.TranslateModules(instance.Module);
+					instance.TranslatedModule = Global.TranslateModule(instance.Module);
 			});
 		}
 		private void btnClose_Click(object sender, MouseButtonEventArgs e)
@@ -223,7 +223,7 @@ namespace WBZ.Modules.Attmisc
 				DataContext = null;
 				M.InstancesList.AddRange(SQL.ListLogs(M.FilterSQL, M.Limit, ++M.Page * M.Limit, "datetime", true));
 				for (int i = M.InstancesList.Count - 1; i >= Math.Max(M.InstancesList.Count - M.Limit, 0); i--)
-					M.InstancesList[i].TranslatedModule = Global.TranslateModules(M.InstancesList[i].Module);
+					M.InstancesList[i].TranslatedModule = Global.TranslateModule(M.InstancesList[i].Module);
 				DataContext = M;
 				Extensions.GetVisualChild<ScrollViewer>(sender as DataGrid).ScrollToVerticalOffset(e.VerticalOffset);
 			}

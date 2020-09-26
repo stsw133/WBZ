@@ -201,8 +201,8 @@ namespace WBZ.Modules.Login
 			conf.Owner = this;
 			if (conf.ShowDialog() == true)
 			{
-				var users = SQL.ListUsers($"(lower(username)='{conf.GetLogin.ToLower()}' or lower(email)='{conf.GetLogin.ToLower()}') and password='{Global.sha256(conf.GetPassword)}'");
-				if (users.Count == 0 || users[0].Perms.Contains("admin") != true)
+				var users = SQL.ListInstances(Global.Module.USERS, $"(lower(username)='{conf.GetLogin.ToLower()}' or lower(email)='{conf.GetLogin.ToLower()}') and password='{Global.sha256(conf.GetPassword)}'").DataTableToList<C_User>();
+				if (users.Count == 0 || !SQL.GetUserPerms(users[0].ID).Contains("admin"))
 				{
 					MessageBox.Show("Brak uprawnień administracyjnych lub błędne dane użytkownika!");
 					return;

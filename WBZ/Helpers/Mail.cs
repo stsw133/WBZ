@@ -7,6 +7,9 @@ namespace WBZ.Helpers
 {
 	internal class Mail
 	{
+		/// <summary>
+		/// Send
+		/// </summary>
 		internal static bool SendMail(string from, string[] to, string subject, string body)
 		{
 			try
@@ -37,6 +40,9 @@ namespace WBZ.Helpers
 			return true;
 		}
 
+		/// <summary>
+		/// Test
+		/// </summary>
 		internal static bool TestMail()
 		{
 			//TODO - testowanie poprawności konfiguracji maili

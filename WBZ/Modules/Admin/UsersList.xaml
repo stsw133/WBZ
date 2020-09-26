@@ -189,16 +189,7 @@
             </StackPanel>
         </Grid>
         <!-- statusPanel -->
-        <Border DockPanel.Dock="Bottom" Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="0,1,0,0">
-            <DockPanel>
-                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
-                    <Label Content="Wyświetlono:" Margin="5,0"/>
-                    <Label Content="{Binding InstancesList.Count}" FontWeight="Medium"/>
-                    <Label Content=" / "/>
-                    <Label Content="{Binding TotalItems}" FontWeight="Medium"/>
-                </StackPanel>
-            </DockPanel>
-        </Border>
+        <c:StatusPanel DockPanel.Dock="Bottom" Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
         <!-- dataGrid -->
         <DataGrid x:Name="dgList" DockPanel.Dock="Top" Margin="5" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
                   AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstancesList}" IsReadOnly="True"

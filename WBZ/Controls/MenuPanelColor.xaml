@@ -7,7 +7,7 @@
              MaxWidth="400">
     <StackPanel Orientation="Horizontal">
         <Label Content="Kolor paneli"/>
-        <ComboBox x:Name="cbPanelColor" SelectedValuePath="Tag" SelectedValue="{Binding Tag, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}">
+        <ComboBox SelectedValuePath="Tag" SelectedValue="{Binding Tag, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}">
             <ComboBoxItem Tag="#EEE">
                 <StackPanel Orientation="Horizontal" Height="19">
                     <Rectangle Fill="#EEE" Stroke="Gray" Height="15" Width="15"/>

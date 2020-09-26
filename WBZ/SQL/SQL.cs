@@ -646,22 +646,7 @@ namespace WBZ
 
 					using (var sqlTran = sqlConn.BeginTransaction())
 					{
-						var sqlCmd = new NpgsqlCommand(@"delete from wbz.contacts where module=@module and instance=@instance", sqlConn, sqlTran);
-						sqlCmd.Parameters.AddWithValue("module", module);
-						sqlCmd.Parameters.AddWithValue("instance", instance);
-						sqlCmd.ExecuteNonQuery();
-
-						sqlCmd = new NpgsqlCommand(@"delete from wbz.attributes
-							where class in (select id from wbz.attributes_classes where module=@module)
-								and instance=@instance", sqlConn, sqlTran);
-						sqlCmd.Parameters.AddWithValue("module", module);
-						sqlCmd.Parameters.AddWithValue("instance", instance);
-						sqlCmd.ExecuteNonQuery();
-
-						sqlCmd = new NpgsqlCommand(@"delete from wbz.attachments where module=@module and instance=@instance", sqlConn, sqlTran);
-						sqlCmd.Parameters.AddWithValue("module", module);
-						sqlCmd.Parameters.AddWithValue("instance", instance);
-						sqlCmd.ExecuteNonQuery();
+						ClearObject(module, instance, sqlConn, sqlTran);
 
 						sqlTran.Commit();
 					}
@@ -689,7 +674,12 @@ namespace WBZ
 
 			try
 			{
-				var sqlCmd = new NpgsqlCommand(@"delete from wbz.contacts where module=@module and instance=@instance", sqlConn, sqlTran);
+				var sqlCmd = new NpgsqlCommand(@"delete from wbz.groups where module=@module and instance=@instance", sqlConn, sqlTran);
+				sqlCmd.Parameters.AddWithValue("module", module);
+				sqlCmd.Parameters.AddWithValue("instance", instance);
+				sqlCmd.ExecuteNonQuery();
+
+				sqlCmd = new NpgsqlCommand(@"delete from wbz.contacts where module=@module and instance=@instance", sqlConn, sqlTran);
 				sqlCmd.Parameters.AddWithValue("module", module);
 				sqlCmd.Parameters.AddWithValue("instance", instance);
 				sqlCmd.ExecuteNonQuery();
@@ -950,67 +940,34 @@ namespace WBZ
 			return result;
 		}
 
-		#region module "Admin - Users"
 		/// <summary>
-		/// Pobiera listę użytkowników
+		/// Pobiera uprawnienia użytkownika
 		/// </summary>
-		/// <param name="filter">Filtr SQL</param>
-		/// <param name="limit">Limit rekordów</param>
-		/// <param name="offset">Offset</param>
-		/// <param name="order">Sortowanie po nazwie kolumny</param>
-		/// <param name="desc">Porządek sortowania malejący</param>
-		internal static List<C_User> ListUsers(string filter = null, int page = 0)
+		/// <param name="id">ID użytkownika</param>
+		internal static List<string> GetUserPerms(int id)
 		{
-			var result = new List<C_User>();
+			var result = new List<string>();
 
 			try
 			{
-				/*
-				int limit = Properties.Settings.Default.config_UsersList_LimitPerPage;
-				int offset = page * limit;
-				string order = $"{Properties.Settings.Default.config_UsersList_Sort1By} {(Properties.Settings.Default.config_UsersList_Sort1Order ? "desc" : "asc")}";
-				if (!string.IsNullOrEmpty(Properties.Settings.Default.config_UsersList_Sort2By))
-					order += $", {Properties.Settings.Default.config_UsersList_Sort2By} {(Properties.Settings.Default.config_UsersList_Sort2Order ? "desc" : "asc")}";
-
 				using (var sqlConn = new NpgsqlConnection(connWBZ))
 				{
 					sqlConn.Open();
 
-					var sqlCmd = new NpgsqlCommand(@"select u.id, u.username, '' as newpass, u.forename, u.lastname,
-							u.email, u.phone, u.blocked, u.archival
-						from wbz.users u
-						where @filter
-						order by @order
-						limit @limit offset @offset", sqlConn);
-					sqlCmd.CommandText = sqlCmd.CommandText.Replace("@filter", filter ?? true.ToString());
-					sqlCmd.CommandText = sqlCmd.CommandText.Replace("@order", order);
-					sqlCmd.Parameters.AddWithValue("limit", limit);
-					sqlCmd.Parameters.AddWithValue("offset", offset);
+					var sqlCmd = new NpgsqlCommand(@"select up.perm
+						from wbz.users_permissions up
+						where ""user""=@id", sqlConn);
+					sqlCmd.Parameters.AddWithValue("id", id);
 					using (var sqlDA = new NpgsqlDataAdapter(sqlCmd))
 					{
 						var dt = new DataTable();
 						sqlDA.Fill(dt);
-						result = dt.DataTableToList<C_User>();
+						foreach (DataRow row in dt.Rows)
+							result.Add(row["perm"].ToString());
 					}
 
-					foreach (C_User user in result)
-					{
-						sqlCmd = new NpgsqlCommand(@"select up.perm
-							from wbz.users_permissions up
-							where ""user""=@id", sqlConn);
-						sqlCmd.Parameters.AddWithValue("id", user.ID);
-						using (var sqlDA = new NpgsqlDataAdapter(sqlCmd))
-						{
-							var dt = new DataTable();
-							sqlDA.Fill(dt);
-							foreach (DataRow row in dt.Rows)
-								user.Perms.Add(row["perm"].ToString());
-						}
-					}
-					
 					sqlConn.Close();
 				}
-				*/
 			}
 			catch (Exception ex)
 			{
@@ -1019,100 +976,6 @@ namespace WBZ
 
 			return result;
 		}
-		/// <summary>
-		/// Ustawia dane o użytkowniku
-		/// </summary>
-		/// <param name="store">Klasa użytkownika</param>
-		internal static bool SetUser(C_User user)
-		{
-			bool result = false;
-			int ID = user.ID;
-
-			try
-			{
-				using (var sqlConn = new NpgsqlConnection(connWBZ))
-				{
-					sqlConn.Open();
-
-					using (var sqlTran = sqlConn.BeginTransaction())
-					{
-						NpgsqlCommand sqlCmd;
-
-						///add
-						if (ID == 0)
-							sqlCmd = new NpgsqlCommand(@"insert into wbz.users wbz.users (username, password, forename, lastname, email, phone, blocked, archival)
-								values (@username, @password, @forename, @lastname, @email, @phone, @blocked, @archival) returning id", sqlConn, sqlTran);
-						///edit
-						else
-							sqlCmd = new NpgsqlCommand(@"update wbz.users
-								set username=@username, forename=@forename, lastname=@lastname, email=@email, phone=@phone, blocked=@blocked, archival=@archival
-								where id=@id", sqlConn, sqlTran);
-
-						sqlCmd.Parameters.AddWithValue("id", ID);
-						sqlCmd.Parameters.AddWithValue("username", user.Username);
-						sqlCmd.Parameters.AddWithValue("password", Global.sha256(user.Newpass));
-						sqlCmd.Parameters.AddWithValue("forename", user.Forename);
-						sqlCmd.Parameters.AddWithValue("lastname", user.Lastname);
-						sqlCmd.Parameters.AddWithValue("email", user.Email);
-						sqlCmd.Parameters.AddWithValue("phone", user.Phone);
-						sqlCmd.Parameters.AddWithValue("blocked", user.Blocked);
-						sqlCmd.Parameters.AddWithValue("archival", user.Archival);
-
-						///add
-						if (ID == 0)
-						{
-							ID = Convert.ToInt32(sqlCmd.ExecuteScalar());
-							SetLog(Global.User.ID, "users", ID, $"Utworzono użytkownika {user.Forename} {user.Lastname}", sqlTran);
-						}
-						///edit
-						else
-						{
-							sqlCmd.ExecuteNonQuery();
-							///set password if given
-							if (!string.IsNullOrEmpty(user.Newpass))
-							{
-								sqlCmd = new NpgsqlCommand(@"update wbz.users
-									set password=@newpass
-									where id=@id", sqlConn, sqlTran);
-								sqlCmd.Parameters.AddWithValue("id", ID);
-								sqlCmd.Parameters.AddWithValue("newpass", Global.sha256(user.Newpass));
-								sqlCmd.ExecuteNonQuery();
-							}
-
-							SetLog(Global.User.ID, "users", ID, $"Edytowano użytkownika {user.Forename} {user.Lastname}", sqlTran);
-						}
-
-						///permissions
-						sqlCmd = new NpgsqlCommand(@"delete from wbz.users_permissions where ""user""=@user", sqlConn, sqlTran);
-						sqlCmd.Parameters.AddWithValue("user", ID);
-						sqlCmd.ExecuteNonQuery();
-
-						foreach (string perm in user.Perms)
-						{
-							sqlCmd = new NpgsqlCommand(@"insert into wbz.users_permissions (""user"", perm)
-								values (@user, @perm)", sqlConn, sqlTran);
-							sqlCmd.Parameters.AddWithValue("user", ID);
-							sqlCmd.Parameters.AddWithValue("perm", perm);
-							sqlCmd.ExecuteNonQuery();
-						}
-
-						sqlTran.Commit();
-						user.ID = ID;
-					}
-
-					sqlConn.Close();
-				}
-
-				result = true;
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message);
-			}
-
-			return result;
-		}
-		#endregion
 
 		#region module "Documents"
 		/// <summary>
@@ -2930,9 +2793,6 @@ namespace WBZ
 		}
 		#endregion
 
-		#region module "Community"
-		#endregion
-
 		#region modules
 		/// <summary>
 		/// Liczy ilość instancji
@@ -3031,15 +2891,18 @@ namespace WBZ
 		/// </summary>
 		/// <param name="module">Nazwa modułu</param>
 		/// <param name="filter">Filtr SQL</param>
-		/// <param name="sort">Klasa sortowania</param>
+		/// <param name="sort">Kolekcja sortowania</param>
 		/// <param name="page">Strona listy rekordów</param>
-		internal static DataTable ListInstances(string module, string filter, StringCollection sort, int page)
+		internal static DataTable ListInstances(string module, string filter, StringCollection sort = null, int page = 0)
 		{
 			DataTable result = new DataTable();
 			string query;
 
 			try
 			{
+				if (sort == null)
+					sort = new StringCollection() { "1", "false", "2", "false", "50" };
+
 				using (var sqlConn = new NpgsqlConnection(connWBZ))
 				{
 					sqlConn.Open();
@@ -3064,6 +2927,7 @@ namespace WBZ
 						case Global.Module.DOCUMENTS:
 							query = @"";
 							break;
+						/// employees
 						case Global.Module.EMPLOYEES:
 							query = @"select e.id, e.""user"", u.lastname || ' ' || u.forename as username,
 									e.forename, e.lastname, e.department, e.position,
@@ -3081,8 +2945,11 @@ namespace WBZ
 						case Global.Module.STORES:
 							query = @"";
 							break;
+						/// users
 						case Global.Module.USERS:
-							query = @"";
+							query = @"select u.id, u.username, '' as newpass, u.forename, u.lastname,
+									u.email, u.phone, u.blocked, u.archival
+								from wbz.users u";
 							break;
 						default:
 							return result;
@@ -3143,7 +3010,7 @@ namespace WBZ
 		{
 			try
 			{
-				return ListInstances(module, $"{module[0]}.id={id}", new StringCollection() { "1", "false", "2", "false", "50" }, 0);
+				return ListInstances(module, $"{module[0]}.id={id}");
 			}
 			catch (Exception ex)
 			{
@@ -3170,6 +3037,8 @@ namespace WBZ
 
 					using (var sqlTran = sqlConn.BeginTransaction())
 					{
+						NpgsqlCommand sqlCmd;
+
 						switch (module)
 						{
 							case Global.Module.ARTICLES:
@@ -3190,9 +3059,10 @@ namespace WBZ
 							case Global.Module.DOCUMENTS:
 								query = @"";
 								break;
+							/// employees
 							case Global.Module.EMPLOYEES:
 								var employee = instance as C_Employee;
-								if (mode == Global.ActionType.NEW)
+								if (mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
 								{
 									query = @"insert into wbz.employees (""user"", forename, lastname, department, position,
 											email, phone, city, address, postcode, archival, comment)
@@ -3204,11 +3074,12 @@ namespace WBZ
 								{
 									query = @"update wbz.employees
 										set ""user""=@user, forename=@forename, lastname=@lastname, department=@department, position=@position,
-											email=@email, phone=@phone, city=@city, address=@address, postcode=@postcode, archival=@archival, comment=@comment
+											email=@email, phone=@phone, city=@city, address=@address, postcode=@postcode,
+											archival=@archival, comment=@comment
 										where id=@id";
 									SetLog(Global.User.ID, module, employee.ID, $"Edytowano pracownika.", sqlTran);
 								}
-								var sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran);
+								sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran);
 								sqlCmd.Parameters.AddWithValue("id", employee.ID);
 								sqlCmd.Parameters.AddWithValue("user", employee.User);
 								sqlCmd.Parameters.AddWithValue("forename", employee.Forename);
@@ -3233,8 +3104,47 @@ namespace WBZ
 							case Global.Module.STORES:
 								query = @"";
 								break;
+							/// users
 							case Global.Module.USERS:
-								query = @"";
+								var user = instance as C_User;
+								if (mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
+								{
+									query = @"insert into wbz.users wbz.users (username, password, forename, lastname, email, phone, blocked, archival)
+										values (@username, @password, @forename, @lastname, @email, @phone, @blocked, @archival)";
+									SetLog(Global.User.ID, module, user.ID, $"Utworzono użytkownika.", sqlTran);
+								}
+								else
+								{
+									query = $@"update wbz.users
+										set username=@username, {(!string.IsNullOrEmpty(user.Newpass) ? "password=@newpass," : "")}
+											forename=@forename, lastname=@lastname, email=@email, phone=@phone, blocked=@blocked, archival=@archival
+										where id=@id";
+									SetLog(Global.User.ID, module, user.ID, $"Edytowano użytkownika.", sqlTran);
+								}
+								sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran);
+								sqlCmd.Parameters.AddWithValue("id", user.ID);
+								sqlCmd.Parameters.AddWithValue("username", user.Username);
+								sqlCmd.Parameters.AddWithValue("password", Global.sha256(user.Newpass));
+								sqlCmd.Parameters.AddWithValue("forename", user.Forename);
+								sqlCmd.Parameters.AddWithValue("lastname", user.Lastname);
+								sqlCmd.Parameters.AddWithValue("email", user.Email);
+								sqlCmd.Parameters.AddWithValue("phone", user.Phone);
+								sqlCmd.Parameters.AddWithValue("blocked", user.Blocked);
+								sqlCmd.Parameters.AddWithValue("archival", user.Archival);
+
+								/// permissions
+								sqlCmd = new NpgsqlCommand(@"delete from wbz.users_permissions where ""user""=@user", sqlConn, sqlTran);
+								sqlCmd.Parameters.AddWithValue("user", user.ID);
+								sqlCmd.ExecuteNonQuery();
+
+								foreach (string perm in user.Perms)
+								{
+									sqlCmd = new NpgsqlCommand(@"insert into wbz.users_permissions (""user"", perm)
+										values (@user, @perm)", sqlConn, sqlTran);
+									sqlCmd.Parameters.AddWithValue("user", user.ID);
+									sqlCmd.Parameters.AddWithValue("perm", perm);
+									sqlCmd.ExecuteNonQuery();
+								}
 								break;
 							default:
 								return result;
@@ -3293,6 +3203,7 @@ namespace WBZ
 							case Global.Module.DOCUMENTS:
 								query = @"";
 								break;
+							/// employees
 							case Global.Module.EMPLOYEES:
 								query = @"delete from wbz.employees where id=@id";
 								SetLog(Global.User.ID, module, id, $"Usunięto pracownika.", sqlTran);
@@ -3306,6 +3217,7 @@ namespace WBZ
 							case Global.Module.STORES:
 								query = @"";
 								break;
+							/// users
 							case Global.Module.USERS:
 								query = @"delete from wbz.users where id=@id";
 								SetLog(Global.User.ID, module, id, $"Usunięto użytkownika.", sqlTran);

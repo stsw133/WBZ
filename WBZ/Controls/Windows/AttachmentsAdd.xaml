@@ -1,4 +1,4 @@
-﻿<Window x:Class="WBZ.Controls.Confirmation"
+﻿<Window x:Class="WBZ.Controls.AttachmentsAdd"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,10 +7,10 @@
         xmlns:h="clr-namespace:WBZ.Helpers"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
-        Title="Potwierdzenie" SizeToContent="WidthAndHeight"
+        Title="Nowy załącznik" SizeToContent="WidthAndHeight"
             BorderThickness="3" BorderBrush="#333" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner" WindowStyle="None"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}}"
-            Icon="pack://siteoforigin:,,,/Resources/_null.ico">
+            Icon="pack://siteoforigin:,,,/Resources/icon32_photos.ico" Loaded="Window_Loaded">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -21,22 +21,23 @@
         <!-- titleBar -->
         <c:TitleBar DockPanel.Dock="Top" AdditionalIcon="pack://siteoforigin:,,,/Resources/_null.ico"/>
         <!-- main -->
-        <Grid MinWidth="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=30}">
+        <DockPanel DockPanel.Dock="Top">
+            <c:SimpleButton Margin="5,5,0,5" IsEnabled="{Binding EditMode}" TextVisibility="False"
+                            TextContent="Z przeglądarki" IconSource="pack://siteoforigin:,,,/Resources/icon32_web.ico" PreviewMouseLeftButtonUp="btnLink_Click"/>
+            <TextBox x:Name="tbLink" Margin="5" VerticalContentAlignment="Center"/>
+        </DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+            <c:SimpleButton Margin="5,5,0,5" IsEnabled="{Binding EditMode}" TextVisibility="False"
+                            TextContent="Z dysku" IconSource="pack://siteoforigin:,,,/Resources/icon32_folder.ico" PreviewMouseLeftButtonUp="btnDrive_Click"/>
+            <TextBox x:Name="tbDrive" Margin="5" VerticalContentAlignment="Center"/>
+        </DockPanel>
+        <Grid Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=30}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Content="Login:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <TextBox x:Name="tbLogin" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center"/>
-            <Label Grid.Row="1" Grid.Column="0" Content="Hasło:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <PasswordBox x:Name="pbPassword" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center"/>
-            <c:SimpleButton Grid.Row="2" Grid.Column="1" Margin="5" IsEnabled="True" TextVisibility="True"
+            <c:SimpleButton Grid.Column="1" Margin="5" IsEnabled="True" TextVisibility="True"
                             TextContent="Akceptuj" IconSource="pack://siteoforigin:,,,/Resources/icon32_accept.ico" PreviewMouseLeftButtonUp="btnAccept_Click"/>
         </Grid>
     </DockPanel>
