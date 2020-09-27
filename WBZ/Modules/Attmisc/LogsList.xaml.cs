@@ -15,7 +15,6 @@ using WBZ.Modules.Companies;
 using WBZ.Modules.Distributions;
 using WBZ.Modules.Documents;
 using WBZ.Modules.Families;
-using WBZ.Modules.Stores;
 
 namespace WBZ.Modules.Attmisc
 {
@@ -108,7 +107,7 @@ namespace WBZ.Modules.Attmisc
 					editMode = false;
 				if (!Global.User.Perms.Contains($"{Global.Module.STORES}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{Global.Module.STORES}_{Global.UserPermType.SAVE}"))
 					return;
-				var window = new StoresAdd(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Store>()?[0], editMode);
+				var window = new StoresNew(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Store>()?[0], Global.ActionType.PREVIEW);
 				window.Show();
 			}
 			else if (log.Module == Global.Module.ARTICLES)
@@ -120,7 +119,7 @@ namespace WBZ.Modules.Attmisc
 					editMode = false;
 				if (!Global.User.Perms.Contains($"{Global.Module.ARTICLES}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{Global.Module.ARTICLES}_{Global.UserPermType.SAVE}"))
 					return;
-				var window = new ArticlesAdd(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Article>()?[0], editMode);
+				var window = new ArticlesNew(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Article>()?[0], Global.ActionType.PREVIEW);
 				window.Show();
 			}
 			else if (log.Module == Global.Module.COMPANIES)

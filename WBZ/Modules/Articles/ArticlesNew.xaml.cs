@@ -12,27 +12,33 @@ using WBZ.Classes;
 using WBZ.Helpers;
 using WBZ.Modules.Distributions;
 using WBZ.Modules.Documents;
-using WBZ.Modules.Stores;
+using MODULE_CLASS = WBZ.Classes.C_Article;
 
 namespace WBZ.Modules.Articles
 {
 	/// <summary>
-	/// Interaction logic for ArticlesAdd.xaml
+	/// Interaction logic for ArticlesNew.xaml
 	/// </summary>
-	public partial class ArticlesAdd : Window
+	public partial class ArticlesNew : Window
 	{
-		M_ArticlesAdd M = new M_ArticlesAdd();
+		M_ArticlesNew M = new M_ArticlesNew();
 
-		public ArticlesAdd(C_Article instance, bool editMode)
+		public ArticlesNew(MODULE_CLASS instance, Global.ActionType mode)
 		{
 			InitializeComponent();
 			DataContext = M;
 
 			M.InstanceInfo = instance;
+			M.Mode = mode;
+
+			if (M.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
+				M.InstanceInfo.ID = SQL.NewInstanceID(M.MODULE_NAME);
 			M.InstanceInfo.Measures = SQL.GetArticleMeasures(M.InstanceInfo.ID);
-			M.EditMode = editMode;
 		}
 
+		/// <summary>
+		/// Validation
+		/// </summary>
 		private bool CheckDataValidation()
 		{
 			bool result = true;
@@ -40,26 +46,36 @@ namespace WBZ.Modules.Articles
 			return result;
 		}
 
-		#region buttons
+		/// <summary>
+		/// Save
+		/// </summary>
+		private bool saved = false;
 		private void btnSave_Click(object sender, MouseButtonEventArgs e)
 		{
 			if (!CheckDataValidation())
 				return;
 
-			if (SQL.SetArticle(M.InstanceInfo))
+			if (saved = SQL.SetInstance(M.MODULE_NAME, M.InstanceInfo, M.Mode))
 				Close();
 		}
+
+		/// <summary>
+		/// Refresh
+		/// </summary>
 		private void btnRefresh_Click(object sender, MouseButtonEventArgs e)
 		{
 			if (M.InstanceInfo.ID == 0)
 				return;
 			//TODO - dorobić odświeżanie zmienionych danych
 		}
+
+		/// <summary>
+		/// Close
+		/// </summary>
 		private void btnClose_Click(object sender, MouseButtonEventArgs e)
 		{
 			Close();
 		}
-		#endregion
 
 		private void dgMeasures_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
 		{
@@ -81,114 +97,105 @@ namespace WBZ.Modules.Articles
 			});
 		}
 
+		/// <summary>
+		/// Tab changed
+		/// </summary>
 		private void tabs_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			var tab = (e.AddedItems.Count > 0 ? e.AddedItems[0] : null) as TabItem;
 			if (tab?.Name == "tabSources_Stores")
 			{
 				if (M.InstanceInfo.ID != 0 && M.InstanceSources_Stores == null)
-					M.InstanceSources_Stores = SQL.ListStores($"sa.article={M.InstanceInfo.ID}");
+					M.InstanceSources_Stores = SQL.ListInstances(Global.Module.STORES, $"sa.article={M.InstanceInfo.ID}").DataTableToList<C_Store>();
 			}
 			else if (tab?.Name == "tabSources_Documents")
 			{
 				if (M.InstanceInfo.ID != 0 && M.InstanceSources_Documents == null)
-					M.InstanceSources_Documents = SQL.ListDocuments($"dp.article={M.InstanceInfo.ID}");
+					M.InstanceSources_Documents = SQL.ListInstances(Global.Module.STORES, $"dp.article={M.InstanceInfo.ID}").DataTableToList<C_Document>();
 			}
 			else if (tab?.Name == "tabSources_Distributions")
 			{
 				if (M.InstanceInfo.ID != 0 && M.InstanceSources_Distributions == null)
-					M.InstanceSources_Distributions = SQL.ListDistributions($"dp.article={M.InstanceInfo.ID}");
+					M.InstanceSources_Distributions = SQL.ListInstances(Global.Module.STORES, $"dp.article={M.InstanceInfo.ID}").DataTableToList<C_Distribution>();
 			}
 		}
 
+		/// <summary>
+		/// Open: Store
+		/// </summary>
 		private void dgList_Stores_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			if (e.LeftButton == MouseButtonState.Pressed)
 			{
-				if (Global.User.Perms.Contains($"{Global.Module.STORES}_{Global.UserPermType.SAVE}"))
+				Global.ActionType perm = Global.User.Perms.Contains($"{Global.Module.STORES}_{Global.UserPermType.SAVE}")
+					? Global.ActionType.EDIT : Global.ActionType.PREVIEW;
+
+				var selectedInstances = (sender as DataGrid).SelectedItems.Cast<C_Store>();
+				foreach (C_Store instance in selectedInstances)
 				{
-					var indexes = (sender as DataGrid).SelectedItems.Cast<C_Store>().Select(x => M.InstanceSources_Stores.IndexOf(x));
-					foreach (int index in indexes)
-					{
-						var window = new StoresAdd(M.InstanceSources_Stores[index], true);
-						window.Show();
-					}
-				}
-				else if (Global.User.Perms.Contains($"{Global.Module.STORES}_{Global.UserPermType.PREVIEW}"))
-				{
-					var indexes = (sender as DataGrid).SelectedItems.Cast<C_Store>().Select(x => M.InstanceSources_Stores.IndexOf(x));
-					foreach (int index in indexes)
-					{
-						var window = new StoresAdd(M.InstanceSources_Stores[index], false);
-						window.Show();
-					}
+					var window = new StoresNew(instance, perm);
+					window.Show();
 				}
 			}
 		}
 
+		/// <summary>
+		/// Open: Document
+		/// </summary>
 		private void dgList_Documents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			if (e.LeftButton == MouseButtonState.Pressed)
 			{
-				if (Global.User.Perms.Contains($"{Global.Module.DOCUMENTS}_{Global.UserPermType.SAVE}"))
+				Global.ActionType perm = Global.User.Perms.Contains($"{Global.Module.DOCUMENTS}_{Global.UserPermType.SAVE}")
+					? Global.ActionType.EDIT : Global.ActionType.PREVIEW;
+
+				var selectedInstances = (sender as DataGrid).SelectedItems.Cast<C_Document>();
+				foreach (C_Document instance in selectedInstances)
 				{
-					var indexes = (sender as DataGrid).SelectedItems.Cast<C_Document>().Select(x => M.InstanceSources_Documents.IndexOf(x));
-					foreach (int index in indexes)
-					{
-						var window = new DocumentsAdd(M.InstanceSources_Documents[index], true);
-						window.Show();
-					}
-				}
-				else if (Global.User.Perms.Contains($"{Global.Module.DOCUMENTS}_{Global.UserPermType.PREVIEW}"))
-				{
-					var indexes = (sender as DataGrid).SelectedItems.Cast<C_Document>().Select(x => M.InstanceSources_Documents.IndexOf(x));
-					foreach (int index in indexes)
-					{
-						var window = new DocumentsAdd(M.InstanceSources_Documents[index], false);
-						window.Show();
-					}
+					var window = new DocumentsAdd(instance, false/*perm*/);
+					window.Show();
 				}
 			}
 		}
 
+		/// <summary>
+		/// Open: Distribution
+		/// </summary>
 		private void dgList_Distributions_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			if (e.LeftButton == MouseButtonState.Pressed)
 			{
-				if (Global.User.Perms.Contains($"{Global.Module.DISTRIBUTIONS}_{Global.UserPermType.SAVE}"))
+				Global.ActionType perm = Global.User.Perms.Contains($"{Global.Module.DISTRIBUTIONS}_{Global.UserPermType.SAVE}")
+					? Global.ActionType.EDIT : Global.ActionType.PREVIEW;
+
+				var selectedInstances = (sender as DataGrid).SelectedItems.Cast<C_Distribution>();
+				foreach (C_Distribution instance in selectedInstances)
 				{
-					var indexes = (sender as DataGrid).SelectedItems.Cast<C_Distribution>().Select(x => M.InstanceSources_Distributions.IndexOf(x));
-					foreach (int index in indexes)
-					{
-						var window = new DistributionsAdd(M.InstanceSources_Distributions[index], true);
-						window.Show();
-					}
-				}
-				else if (Global.User.Perms.Contains($"{Global.Module.DISTRIBUTIONS}_{Global.UserPermType.PREVIEW}"))
-				{
-					var indexes = (sender as DataGrid).SelectedItems.Cast<C_Distribution>().Select(x => M.InstanceSources_Distributions.IndexOf(x));
-					foreach (int index in indexes)
-					{
-						var window = new DistributionsAdd(M.InstanceSources_Distributions[index], false);
-						window.Show();
-					}
+					var window = new DistributionsAdd(instance, false/*perm*/);
+					window.Show();
 				}
 			}
+		}
+
+		private void Window_Closed(object sender, System.EventArgs e)
+		{
+			if (M.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE) && !saved)
+				SQL.ClearObject(M.MODULE_NAME, M.InstanceInfo.ID);
 		}
 	}
 
 	/// <summary>
 	/// Model
 	/// </summary>
-	internal class M_ArticlesAdd : INotifyPropertyChanged
+	internal class M_ArticlesNew : INotifyPropertyChanged
 	{
-		public readonly string INSTANCE_TYPE = Global.Module.ARTICLES;
+		public readonly string MODULE_NAME = Global.Module.ARTICLES;
 
-		/// Dane o zalogowanym użytkowniku
+		/// Logged user
 		public C_User User { get; } = Global.User;
-		/// Instancja
-		private C_Article instanceInfo;
-		public C_Article InstanceInfo
+		/// Instance
+		private MODULE_CLASS instanceInfo;
+		public MODULE_CLASS InstanceInfo
 		{
 			get
 			{
@@ -200,7 +207,7 @@ namespace WBZ.Modules.Articles
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
 		}
-		/// Źródło instancji - magazyny
+		/// Instance source - stores
 		private List<C_Store> instanceSources_Stores;
 		public List<C_Store> InstanceSources_Stores
 		{
@@ -214,7 +221,7 @@ namespace WBZ.Modules.Articles
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
 		}
-		/// Źródło instancji - dokumenty
+		/// Instance source - documents
 		private List<C_Document> instanceSources_Documents;
 		public List<C_Document> InstanceSources_Documents
 		{
@@ -228,7 +235,7 @@ namespace WBZ.Modules.Articles
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
 		}
-		/// Źródło instancji - dystrybucje
+		/// Instance source - distributions
 		private List<C_Distribution> instanceSources_Distributions;
 		public List<C_Distribution> InstanceSources_Distributions
 		{
@@ -242,18 +249,20 @@ namespace WBZ.Modules.Articles
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
 		}
-		/// Czy okno jest w trybie edycji (zamiast w trybie dodawania)
-		public bool IsEditing { get { return InstanceInfo.ID > 0; } }
-		/// Tryb edycji dla okna
-		public bool EditMode { get; set; }
-		/// Ikona okna
-		public string EditIcon
+		/// Editing mode
+		public bool EditingMode { get { return Mode != Global.ActionType.PREVIEW; } }
+		/// Tryb okna
+		public Global.ActionType Mode { get; set; }
+		/// Dodatkowa ikona okna
+		public string ModeIcon
 		{
 			get
 			{
-				if (InstanceInfo.ID == 0)
+				if (Mode == Global.ActionType.NEW)
 					return "pack://siteoforigin:,,,/Resources/icon32_add.ico";
-				else if (EditMode)
+				else if (Mode == Global.ActionType.DUPLICATE)
+					return "pack://siteoforigin:,,,/Resources/icon32_duplicate.ico";
+				else if (Mode == Global.ActionType.EDIT)
 					return "pack://siteoforigin:,,,/Resources/icon32_edit.ico";
 				else
 					return "pack://siteoforigin:,,,/Resources/icon32_search.ico";
@@ -264,9 +273,11 @@ namespace WBZ.Modules.Articles
 		{
 			get
 			{
-				if (InstanceInfo.ID == 0)
+				if (Mode == Global.ActionType.NEW)
 					return "Nowy towar";
-				else if (EditMode)
+				else if (Mode == Global.ActionType.DUPLICATE)
+					return $"Duplikowanie towaru: {InstanceInfo.Name}";
+				else if (Mode == Global.ActionType.EDIT)
 					return $"Edycja towaru: {InstanceInfo.Name}";
 				else
 					return $"Podgląd towaru: {InstanceInfo.Name}";

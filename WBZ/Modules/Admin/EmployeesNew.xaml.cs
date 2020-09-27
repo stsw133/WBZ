@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
@@ -83,7 +84,7 @@ namespace WBZ.Modules.Admin
 				}
 		}
 
-		private void Window_Closed(object sender, System.EventArgs e)
+		private void Window_Closed(object sender, EventArgs e)
 		{
 			if (M.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE) && !saved)
 				SQL.ClearObject(M.MODULE_NAME, M.InstanceInfo.ID);

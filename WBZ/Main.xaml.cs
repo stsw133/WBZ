@@ -13,7 +13,6 @@ using WBZ.Modules.Documents;
 using WBZ.Modules.Login;
 using WBZ.Modules.Settings;
 using WBZ.Modules.Stats;
-using WBZ.Modules.Stores;
 using WBZ.Modules.Attmisc;
 
 namespace WBZ
@@ -222,23 +221,32 @@ namespace WBZ
 		}
 		#endregion
 
-		#region module "Articles"
+		/// <summary>
+		/// Articles - ArticlesList
+		/// </summary>
 		private void btnArticlesList_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new ArticlesList();
 			window.Show();
 		}
-		private void btnArticlesAdd_Click(object sender, RoutedEventArgs e)
+
+		/// <summary>
+		/// Articles - ArticlesNew
+		/// </summary>
+		private void btnArticlesNew_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new ArticlesAdd(new C_Article(), true);
+			var window = new ArticlesNew(new C_Article(), Global.ActionType.NEW);
 			window.Show();
 		}
+
+		/// <summary>
+		/// Articles - StoresList
+		/// </summary>
 		private void btnStoresList_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new StoresList();
 			window.Show();
 		}
-		#endregion
 
 		#region module "Companies"
 		private void btnCompaniesList_Click(object sender, RoutedEventArgs e)

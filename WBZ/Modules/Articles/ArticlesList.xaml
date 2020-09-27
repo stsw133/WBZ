@@ -6,12 +6,11 @@
         xmlns:c="clr-namespace:WBZ.Controls"
         xmlns:h="clr-namespace:WBZ.Helpers"
         xmlns:p="clr-namespace:WBZ.Properties"
-        xmlns:local="clr-namespace:WBZ.Modules.Articles"
         mc:Ignorable="d"
-        Title="Lista towarów" MinHeight="240" MinWidth="360" Height="{Binding config_ArticlesList_WindowY, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_ArticlesList_WindowX, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+        Title="Lista towarów" MinHeight="240" MinWidth="360" Height="{Binding config_ArticlesList_WindowSize[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_ArticlesList_WindowSize[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
             BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}}"
-            Icon="pack://siteoforigin:,,,/Resources/icon32_articles.ico" Closed="Window_Closed">
+            Icon="pack://siteoforigin:,,,/Resources/icon32_articles.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -31,7 +30,9 @@
                 <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding User.Perms, Converter={StaticResource conv_ListContains}, ConverterParameter=articles_preview}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
                                 TextContent="Podgląd" IconSource="pack://siteoforigin:,,,/Resources/icon32_search.ico" PreviewMouseLeftButtonUp="btnPreview_Click"/>
                 <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding User.Perms, Converter={StaticResource conv_ListContains}, ConverterParameter=articles_save}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
-                                TextContent="Dodaj" IconSource="pack://siteoforigin:,,,/Resources/icon32_add.ico" PreviewMouseLeftButtonUp="btnAdd_Click"/>
+                                TextContent="Dodaj" IconSource="pack://siteoforigin:,,,/Resources/icon32_add.ico" PreviewMouseLeftButtonUp="btnNew_Click"/>
+                <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding User.Perms, Converter={StaticResource conv_ListContains}, ConverterParameter=articles_save}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
+                                TextContent="Duplikuj" IconSource="pack://siteoforigin:,,,/Resources/icon32_duplicate.ico" PreviewMouseLeftButtonUp="btnDuplicate_Click"/>
                 <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding User.Perms, Converter={StaticResource conv_ListContains}, ConverterParameter=articles_save}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
                                 TextContent="Edytuj" IconSource="pack://siteoforigin:,,,/Resources/icon32_edit.ico" PreviewMouseLeftButtonUp="btnEdit_Click"/>
                 <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding User.Perms, Converter={StaticResource conv_ListContains}, ConverterParameter=articles_delete}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
@@ -54,12 +55,10 @@
         <Grid DockPanel.Dock="Top" Background="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}">
             <Expander x:Name="filtersExpander" Header="Filtry wyszukiwania" Background="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="0,0,0,1">
                 <TabControl MaxHeight="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=20}">
+                    <!-- tabMain -->
                     <TabItem>
                         <TabItem.Header>
-                            <StackPanel Orientation="Horizontal" Margin="2">
-                                <Image Margin="2" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_filter.ico"/>
-                                <TextBlock Text="Ogólne" Margin="2" VerticalAlignment="Center"/>
-                            </StackPanel>
+                            <c:SimpleHeader TextContent="Ogólne" IconSource="pack://siteoforigin:,,,/Resources/icon32_filter.ico"/>
                         </TabItem.Header>
                         <ScrollViewer>
                             <DockPanel Margin="5">
@@ -86,12 +85,10 @@
                             </DockPanel>
                         </ScrollViewer>
                     </TabItem>
+                    <!-- tabAttributes -->
                     <TabItem IsEnabled="False">
                         <TabItem.Header>
-                            <StackPanel Orientation="Horizontal" Margin="2">
-                                <Image Margin="2" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_attributes.ico"/>
-                                <TextBlock Text="Atrybuty" Margin="2" VerticalAlignment="Center"/>
-                            </StackPanel>
+                            <c:SimpleHeader TextContent="Atrybuty" IconSource="pack://siteoforigin:,,,/Resources/icon32_attributes.ico"/>
                         </TabItem.Header>
                         <DockPanel>
                             <DataGrid HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
@@ -103,12 +100,10 @@
                             </DataGrid>
                         </DockPanel>
                     </TabItem>
+                    <!-- tabLogs -->
                     <TabItem IsEnabled="False">
                         <TabItem.Header>
-                            <StackPanel Orientation="Horizontal" Margin="2">
-                                <Image Margin="2" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_logs.ico"/>
-                                <TextBlock Text="Historia" Margin="2" VerticalAlignment="Center"/>
-                            </StackPanel>
+                            <c:SimpleHeader TextContent="Historia" IconSource="pack://siteoforigin:,,,/Resources/icon32_logs.ico"/>
                         </TabItem.Header>
                         <Grid Margin="5">
                             <Grid.RowDefinitions>
@@ -141,6 +136,42 @@
                             <ComboBox Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="3" x:Name="cbFilterModifier" Margin="5" VerticalContentAlignment="Center" ItemsSource="{Binding UsersList.DefaultView}" DisplayMemberPath="fullname" SelectedValuePath="id" IsEnabled="{Binding IsChecked, ElementName=chckFilterModifier}"/>
                         </Grid>
                     </TabItem>
+                    <!-- tabSettings -->
+                    <TabItem>
+                        <TabItem.Header>
+                            <c:SimpleHeader TextContent="Ustawienia" IconSource="pack://siteoforigin:,,,/Resources/icon32_settings.ico"/>
+                        </TabItem.Header>
+                        <ScrollViewer>
+                            <DockPanel Margin="5">
+                                <DockPanel DockPanel.Dock="Top">
+                                    <Label Content="Sortuj najpierw po:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                                    <ToggleButton Margin="2.5" IsChecked="{Binding sorting_ArticlesList[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=2}">
+                                        <Image Source="pack://siteoforigin:,,,/Resources/icon32_descending.ico"/>
+                                    </ToggleButton>
+                                    <ComboBox Margin="2.5" SelectedValue="{Binding sorting_ArticlesList[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
+                                        <ComboBoxItem Content="Kod" Tag="a.codename"/>
+                                        <ComboBoxItem Content="Nazwa" Tag="a.name"/>
+                                        <ComboBoxItem Content="EAN" Tag="a.ean"/>
+                                    </ComboBox>
+                                </DockPanel>
+                                <DockPanel DockPanel.Dock="Top">
+                                    <Label Content="Sortuj następnie po:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                                    <ToggleButton Margin="2.5" IsChecked="{Binding sorting_ArticlesList[3], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=2}">
+                                        <Image Source="pack://siteoforigin:,,,/Resources/icon32_descending.ico"/>
+                                    </ToggleButton>
+                                    <ComboBox Margin="2.5" SelectedValue="{Binding sorting_ArticlesList[2], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
+                                        <ComboBoxItem Content="Kod" Tag="a.codename"/>
+                                        <ComboBoxItem Content="Nazwa" Tag="a.name"/>
+                                        <ComboBoxItem Content="EAN" Tag="a.ean"/>
+                                    </ComboBox>
+                                </DockPanel>
+                                <DockPanel DockPanel.Dock="Top">
+                                    <Label Content="Limit wczytywania:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                                    <TextBox Text="{Binding sorting_ArticlesList[4], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Margin="2.5" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=5}"/>
+                                </DockPanel>
+                            </DockPanel>
+                        </ScrollViewer>
+                    </TabItem>
                 </TabControl>
             </Expander>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
@@ -151,16 +182,7 @@
             </StackPanel>
         </Grid>
         <!-- statusPanel -->
-        <Border DockPanel.Dock="Bottom" Background="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="0,1,0,0">
-            <DockPanel>
-                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
-                    <Label Content="Wyświetlono:" Margin="5,0"/>
-                    <Label Content="{Binding InstancesList.Count}" FontWeight="Medium"/>
-                    <Label Content=" / "/>
-                    <Label Content="{Binding TotalItems}" FontWeight="Medium"/>
-                </StackPanel>
-            </DockPanel>
-        </Border>
+        <c:StatusPanel DockPanel.Dock="Bottom" Background="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
         <!-- dataGrid -->
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
             <Label Content="Magazyn:" Margin="5,0,0,5"/>
