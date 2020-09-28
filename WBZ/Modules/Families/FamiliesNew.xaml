@@ -1,4 +1,4 @@
-﻿<Window x:Class="WBZ.Modules.Families.FamiliesAdd"
+﻿<Window x:Class="WBZ.Modules.Families.FamiliesNew"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,9 +6,8 @@
         xmlns:c="clr-namespace:WBZ.Controls"
         xmlns:h="clr-namespace:WBZ.Helpers"
         xmlns:p="clr-namespace:WBZ.Properties"
-        xmlns:local="clr-namespace:WBZ.Modules.Families"
         mc:Ignorable="d"
-        Title="{Binding Title}" MinHeight="240" MinWidth="360" Height="{Binding config_FamiliesAdd_WindowY, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_FamiliesAdd_WindowX, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+        Title="{Binding Title}" MinHeight="240" MinWidth="360" Height="{Binding config_FamiliesNew_WindowSize[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_FamiliesNew_WindowSize[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
             BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}}"
             Icon="pack://siteoforigin:,,,/Resources/icon32_families.ico">
@@ -25,7 +24,7 @@
         <!-- titleBar -->
         <c:TitleBar DockPanel.Dock="Top" AdditionalIcon="pack://siteoforigin:,,,/Resources/icon32_add.ico"/>
         <!-- buttonsPanel -->
-        <Border x:Name="buttonsPanel" DockPanel.Dock="Right" Background="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="1,0,0,0">
+        <Border DockPanel.Dock="Right" Background="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="1,0,0,0">
             <DockPanel>
                 <ToggleButton x:Name="btnToggle" BorderThickness="0" Width="5" IsChecked="True"/>
                 <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding EditMode}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
@@ -35,8 +34,8 @@
                                 TextContent="Zamknij okno" IconSource="pack://siteoforigin:,,,/Resources/icon32_close.ico" PreviewMouseLeftButtonUp="btnClose_Click"/>
                 <Separator DockPanel.Dock="Bottom" Margin="0,0,0,5" VerticalAlignment="Bottom" Height="5"/>
                 <c:SimpleButton DockPanel.Dock="Bottom" Margin="5,0,5,5" IsEnabled="True" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
-                                TextContent="Odśwież" IconSource="pack://siteoforigin:,,,/Resources/icon32_refresh.ico" PreviewMouseLeftButtonUp="btnRefresh_Click" Visibility="Collapsed"/>
-                <Separator DockPanel.Dock="Bottom" Margin="0,0,0,5" VerticalAlignment="Bottom" Height="5" Visibility="Collapsed"/>
+                                TextContent="Odśwież" IconSource="pack://siteoforigin:,,,/Resources/icon32_refresh.ico" PreviewMouseLeftButtonUp="btnRefresh_Click"/>
+                <Separator DockPanel.Dock="Bottom" Margin="0,0,0,5" VerticalAlignment="Bottom" Height="5"/>
                 <c:SimpleButton DockPanel.Dock="Bottom" Margin="5,0,5,5" IsEnabled="True" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
                                 TextContent="Drukuj" IconSource="pack://siteoforigin:,,,/Resources/icon32_printer.ico" PreviewMouseLeftButtonUp="btnPrint_Click">
                     <c:SimpleButton.ContextMenu>
@@ -61,7 +60,7 @@
                     <c:SimpleHeader TextContent="Ogólne" IconSource="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
                 </TabItem.Header>
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <DockPanel Margin="10" IsEnabled="{Binding EditMode}" VerticalAlignment="Top">
+                    <DockPanel Margin="10" IsEnabled="{Binding EditingMode}" VerticalAlignment="Top">
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Zgłaszający:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
                             <TextBox Text="{Binding InstanceInfo.Declarant}" Margin="5" VerticalContentAlignment="Center"/>
@@ -102,32 +101,14 @@
                 <TabItem.Header>
                     <c:SimpleHeader TextContent="Dodatkowe" IconSource="pack://siteoforigin:,,,/Resources/icon32_tools.ico"/>
                 </TabItem.Header>
-                <DockPanel Margin="5" IsEnabled="{Binding EditMode}">
+                <DockPanel Margin="5" IsEnabled="{Binding EditingMode}">
                     <CheckBox DockPanel.Dock="Top" Content="Archiwalna" Margin="20" VerticalContentAlignment="Center" IsChecked="{Binding InstanceInfo.Archival}"/>
                     <Label DockPanel.Dock="Top" Content="Komentarz:" Margin="5,5,5,0" VerticalContentAlignment="Center"/>
                     <TextBox DockPanel.Dock="Top" Text="{Binding InstanceInfo.Comment}" Margin="5" TextWrapping="Wrap"/>
                 </DockPanel>
             </TabItem>
-            <!-- tabContacts -->
-            <TabItem>
-                <TabItem.Header>
-                    <c:SimpleHeader TextContent="Kontakty" IconSource="pack://siteoforigin:,,,/Resources/icon32_mail.ico"/>
-                </TabItem.Header>
-                <DataGrid Margin="5" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
-                          AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstanceInfo.Contacts.DefaultView}" IsReadOnly="{Binding User.Perms, Converter={StaticResource conv_ListContains}, ConverterParameter=!families_save}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding id}" Header="ID" IsReadOnly="True" Visibility="Hidden"/>
-                        <DataGridTextColumn Binding="{Binding forename}" Header="Imię" Width="1*"/>
-                        <DataGridTextColumn Binding="{Binding lastname}" Header="Nazwisko" Width="1*"/>
-                        <DataGridTextColumn Binding="{Binding email}" Header="E-mail" Width="3*"/>
-                        <DataGridTextColumn Binding="{Binding phone}" Header="Nr telefonu" Width="1*"/>
-                        <DataGridCheckBoxColumn Binding="{Binding default}" Header="Domyślny"/>
-                        <DataGridCheckBoxColumn Binding="{Binding archival}" Header="Archiwalny"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </TabItem>
             <!-- tabSources -->
-            <TabItem IsEnabled="{Binding IsEditing}">
+            <TabItem>
                 <TabItem.Header>
                     <c:SimpleHeader TextContent="Źródła" IconSource="pack://siteoforigin:,,,/Resources/icon32_source.ico"/>
                 </TabItem.Header>
@@ -153,22 +134,36 @@
                     </TabItem>
                 </TabControl>
             </TabItem>
+            <!-- tabContacts -->
+            <TabItem>
+                <TabItem.Header>
+                    <c:SimpleHeader TextContent="Kontakty" IconSource="pack://siteoforigin:,,,/Resources/icon32_mail.ico"/>
+                </TabItem.Header>
+                <c:ContactsTab/>
+            </TabItem>
+            <!-- tabGroups -->
+            <TabItem>
+                <TabItem.Header>
+                    <c:SimpleHeader TextContent="Grupy" IconSource="pack://siteoforigin:,,,/Resources/icon32_groups.ico"/>
+                </TabItem.Header>
+                <c:GroupsTab/>
+            </TabItem>
             <!-- tabAttributes -->
-            <TabItem IsEnabled="{Binding IsEditing}">
+            <TabItem>
                 <TabItem.Header>
                     <c:SimpleHeader TextContent="Atrybuty" IconSource="pack://siteoforigin:,,,/Resources/icon32_attributes.ico"/>
                 </TabItem.Header>
                 <c:AttributesTab/>
             </TabItem>
             <!-- tabAttachments -->
-            <TabItem x:Name="tabAttachments" IsEnabled="{Binding IsEditing}">
+            <TabItem>
                 <TabItem.Header>
                     <c:SimpleHeader TextContent="Załączniki" IconSource="pack://siteoforigin:,,,/Resources/icon32_photos.ico"/>
                 </TabItem.Header>
                 <c:AttachmentsTab/>
             </TabItem>
             <!-- tabLogs -->
-            <TabItem x:Name="tabLogs" IsEnabled="{Binding IsEditing}">
+            <TabItem>
                 <TabItem.Header>
                     <c:SimpleHeader TextContent="Historia" IconSource="pack://siteoforigin:,,,/Resources/icon32_logs.ico"/>
                 </TabItem.Header>

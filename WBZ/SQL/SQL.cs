@@ -59,7 +59,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -87,7 +87,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -128,7 +128,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -171,7 +171,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -207,7 +207,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -233,7 +233,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -291,7 +291,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -347,7 +347,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -380,7 +380,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -406,7 +406,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -442,7 +442,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -468,7 +468,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -503,7 +503,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -578,7 +578,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -605,7 +605,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -646,7 +646,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -709,7 +709,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -754,7 +754,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -799,7 +799,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -828,7 +828,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -856,7 +856,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -889,7 +889,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -944,7 +944,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -988,7 +988,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -1123,7 +1123,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -1180,7 +1180,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -1229,7 +1229,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -1255,7 +1255,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -1315,177 +1315,11 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
 		}
-
-		#region module "Families"
-		/// <summary>
-		/// Pobiera listę rodzin
-		/// </summary>
-		/// <param name="filter">Filtr SQL</param>
-		/// <param name="limit">Limit rekordów</param>
-		/// <param name="offset">Offset</param>
-		/// <param name="order">Sortowanie po nazwie kolumny</param>
-		/// <param name="desc">Porządek sortowania malejący</param>
-		internal static List<C_Family> ListFamilies(string filter = null, int limit = int.MaxValue, int offset = 0, string order = "lastname", bool desc = false)
-		{
-			var result = new List<C_Family>();
-
-			try
-			{
-				using (var sqlConn = new NpgsqlConnection(connWBZ))
-				{
-					sqlConn.Open();
-
-					var sqlCmd = new NpgsqlCommand(@"select f.id, f.declarant, f.lastname, f.members, f.postcode, f.city, f.address,
-							f.status, f.c_sms, f.c_call, f.c_email, max(d.datereal) as donationlast, sum(dp.amount) as donationweight,
-							f.archival, f.comment
-						from wbz.families f
-						left join wbz.distributions_positions dp
-							on f.id=dp.family
-						left join wbz.distributions d
-							on dp.distribution=d.id
-						where @filter
-						group by f.id
-						order by @order
-						limit @limit offset @offset", sqlConn);
-					sqlCmd.CommandText = sqlCmd.CommandText.Replace("@filter", filter ?? true.ToString());
-					sqlCmd.CommandText = sqlCmd.CommandText.Replace("@order", order + " " + (desc ? "desc" : "asc"));
-					sqlCmd.Parameters.AddWithValue("limit", limit);
-					sqlCmd.Parameters.AddWithValue("offset", offset);
-					using (var sqlDA = new NpgsqlDataAdapter(sqlCmd))
-					{
-						var dt = new DataTable();
-						sqlDA.Fill(dt);
-						result = dt.DataTableToList<C_Family>();
-					}
-
-					sqlConn.Close();
-				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message);
-			}
-
-			return result;
-		}
-		/// <summary>
-		/// Ustawia dane o rodzinie
-		/// </summary>
-		/// <param name="family">Klasa rodziny</param>
-		internal static bool SetFamily(C_Family family)
-		{
-			bool result = false;
-			int ID = family.ID;
-
-			try
-			{
-				using (var sqlConn = new NpgsqlConnection(connWBZ))
-				{
-					sqlConn.Open();
-
-					using (var sqlTran = sqlConn.BeginTransaction())
-					{
-						NpgsqlCommand sqlCmd;
-
-						///add
-						if (ID == 0)
-							sqlCmd = new NpgsqlCommand(@"insert into wbz.families (declarant, lastname, members, postcode, city, address,
-									status, c_sms, c_call, c_email, archival, comment)
-								values (@declarant, @lastname, @members, @postcode, @city, @address,
-									@status, @c_sms, @c_call, @c_email, @archival, @comment) returning id", sqlConn, sqlTran);
-						///edit
-						else
-							sqlCmd = new NpgsqlCommand(@"update wbz.families
-								set declarant=@declarant, lastname=@lastname, members=@members, postcode=@postcode, city=@city, address=@address,
-									status=@status, c_sms=@c_sms, c_call=@c_call, c_email=@c_email, archival=@archival, comment=@comment
-								where id=@id", sqlConn, sqlTran);
-
-						sqlCmd.Parameters.AddWithValue("id", ID);
-						sqlCmd.Parameters.AddWithValue("declarant", family.Declarant);
-						sqlCmd.Parameters.AddWithValue("lastname", family.Lastname);
-						sqlCmd.Parameters.AddWithValue("members", family.Members);
-						sqlCmd.Parameters.AddWithValue("postcode", family.Postcode);
-						sqlCmd.Parameters.AddWithValue("city", family.City);
-						sqlCmd.Parameters.AddWithValue("address", family.Address);
-						sqlCmd.Parameters.AddWithValue("status", family.Status);
-						sqlCmd.Parameters.AddWithValue("c_sms", family.C_SMS);
-						sqlCmd.Parameters.AddWithValue("c_call", family.C_Call);
-						sqlCmd.Parameters.AddWithValue("c_email", family.C_Email);
-						sqlCmd.Parameters.AddWithValue("archival", family.Archival);
-						sqlCmd.Parameters.AddWithValue("comment", family.Comment);
-
-						///add
-						if (ID == 0)
-						{
-							ID = Convert.ToInt32(sqlCmd.ExecuteScalar());
-							SetLog(Global.User.ID, "families", ID, $"Utworzono rodzinę.", sqlTran);
-						}
-						///edit
-						else
-						{
-							sqlCmd.ExecuteNonQuery();
-							SetLog(Global.User.ID, "families", ID, $"Edytowano rodzinę.", sqlTran);
-						}
-
-						sqlTran.Commit();
-						family.ID = ID;
-					}
-
-					sqlConn.Close();
-				}
-
-				if (UpdateContacts("families", family.ID, family.Contacts))
-					result = true;
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message);
-			}
-
-			return result;
-		}
-		/// <summary>
-		/// Usunięcie rodziny
-		/// </summary>
-		/// <param name="id">ID instancji</param>
-		internal static bool DeleteFamily(int id)
-		{
-			bool result = false;
-
-			try
-			{
-				using (var sqlConn = new NpgsqlConnection(connWBZ))
-				{
-					sqlConn.Open();
-
-					using (var sqlTran = sqlConn.BeginTransaction())
-					{
-						var sqlCmd = new NpgsqlCommand(@"delete from wbz.families where id=@id", sqlConn);
-						sqlCmd.Parameters.AddWithValue("id", id);
-						sqlCmd.ExecuteNonQuery();
-
-						ClearObject("families", id, sqlConn, sqlTran);
-						SetLog(Global.User.ID, "families", id, $"Usunięto rodzinę.");
-
-						sqlTran.Commit();
-					}
-
-					sqlConn.Close();
-				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message);
-			}
-
-			return result;
-		}
-		#endregion
 
 		#region module "Distributions"
 		/// <summary>
@@ -1533,7 +1367,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -1560,7 +1394,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -1634,7 +1468,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -1770,7 +1604,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -1827,7 +1661,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -1870,7 +1704,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -1936,7 +1770,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -1973,7 +1807,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -2035,7 +1869,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -2062,7 +1896,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -2093,7 +1927,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -2128,7 +1962,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -2160,7 +1994,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -2187,26 +2021,32 @@ namespace WBZ
 				{
 					switch (module)
 					{
+						/// articles
 						case Global.Module.ARTICLES:
 							query = @"select count(distinct a.id)
 								from wbz.articles a";
 							break;
+						/// attachments
 						case Global.Module.ATTACHMENTS:
 							query = @"select count(distinct a.id)
 								from wbz.attachments a";
 							break;
+						/// attributes_classes
 						case Global.Module.ATTRIBUTES_CLASSES:
 							query = @"select count(distinct ac.id)
 								from wbz.attributes_classes ac";
 							break;
+						/// companies
 						case Global.Module.COMPANIES:
 							query = @"select count(distinct c.id)
 								from wbz.companies c";
 							break;
+						/// distributions
 						case Global.Module.DISTRIBUTIONS:
 							query = @"select count(distinct d.id)
 								from wbz.distributions d";
 							break;
+						/// documents
 						case Global.Module.DOCUMENTS:
 							query = @"select count(distinct d.id)
 								from wbz.documents d
@@ -2217,28 +2057,33 @@ namespace WBZ
 								left join wbz.stores s
 									on s.id=d.store";
 							break;
+						/// employees
 						case Global.Module.EMPLOYEES:
 							query = @"select count(distinct e.id)
 								from wbz.employees e
 								left join wbz.users u
 									on u.id=e.""user""";
 							break;
+						/// families
 						case Global.Module.FAMILIES:
 							query = @"select count(distinct f.id)
 								from wbz.families f";
 							break;
+						/// logs
 						case Global.Module.LOGS:
 							query = @"select count(distinct l.id)
 								from wbz.logs l
 								left join wbz.users u
 									on l.""user"" = u.id";
 							break;
+						/// stores
 						case Global.Module.STORES:
 							query = @"select count(distinct s.id)
 								from wbz.stores s
 								left join wbz.stores_articles sa
 									on s.id = sa.store";
 							break;
+						/// users
 						case Global.Module.USERS:
 							query = @"select count(distinct u.id)
 								from wbz.users u";
@@ -2256,7 +2101,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -2319,8 +2164,16 @@ namespace WBZ
 								left join wbz.users u
 									on u.id=e.""user""";
 							break;
+						/// families
 						case Global.Module.FAMILIES:
-							query = @"";
+							query = @"select f.id, f.declarant, f.lastname, f.members, f.postcode, f.city, f.address,
+									f.status, f.c_sms, f.c_call, f.c_email, max(d.datereal) as donationlast, sum(dp.amount) as donationweight,
+									f.archival, f.comment
+								from wbz.families f
+								left join wbz.distributions_positions dp
+									on f.id=dp.family
+								left join wbz.distributions d
+									on dp.distribution=d.id";
 							break;
 						case Global.Module.LOGS:
 							query = @"";
@@ -2347,6 +2200,7 @@ namespace WBZ
 					using (var sqlCmd = new NpgsqlCommand(query, sqlConn))
 					{
 						sqlCmd.CommandText += $" where {filter}";
+						if (module.In(Global.Module.ARTICLES, Global.Module.FAMILIES, Global.Module.STORES)) sqlCmd.CommandText += $" group by {module[0]}.id";
 						sqlCmd.CommandText += $" order by {sort[0]} {(Convert.ToBoolean(sort[1]) ? "desc" : "asc")}, {sort[2]} {(Convert.ToBoolean(sort[3]) ? "desc" : "asc")}";
 						sqlCmd.CommandText += $" limit {sort[4]} offset {Convert.ToInt32(sort[4]) * page}";
 						using (var sqlDA = new NpgsqlDataAdapter(sqlCmd))
@@ -2358,7 +2212,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 			
 			return result;
@@ -2381,7 +2235,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return result;
@@ -2399,7 +2253,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 
 			return null;
@@ -2578,8 +2432,42 @@ namespace WBZ
 								sqlCmd.ExecuteNonQuery();
 							}
 							break;
+						/// families
 						case Global.Module.FAMILIES:
-							query = @"";
+							var family = instance as C_Family;
+							if (mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
+							{
+								query = @"insert into wbz.families (declarant, lastname, members, postcode, city, address,
+										status, c_sms, c_call, c_email, archival, comment)
+									values (@declarant, @lastname, @members, @postcode, @city, @address,
+										@status, @c_sms, @c_call, @c_email, @archival, @comment)";
+								SetLog(Global.User.ID, module, family.ID, $"Utworzono rodzinę.", sqlTran);
+							}
+							else
+							{
+								query = $@"update wbz.families
+									set declarant=@declarant, lastname=@lastname, members=@members, postcode=@postcode, city=@city, address=@address,
+										status=@status, c_sms=@c_sms, c_call=@c_call, c_email=@c_email, archival=@archival, comment=@comment
+									where id=@id";
+								SetLog(Global.User.ID, module, family.ID, $"Edytowano rodzinę.", sqlTran);
+							}
+							using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
+							{
+								sqlCmd.Parameters.AddWithValue("id", family.ID);
+								sqlCmd.Parameters.AddWithValue("declarant", family.Declarant);
+								sqlCmd.Parameters.AddWithValue("lastname", family.Lastname);
+								sqlCmd.Parameters.AddWithValue("members", family.Members);
+								sqlCmd.Parameters.AddWithValue("postcode", family.Postcode);
+								sqlCmd.Parameters.AddWithValue("city", family.City);
+								sqlCmd.Parameters.AddWithValue("address", family.Address);
+								sqlCmd.Parameters.AddWithValue("status", family.Status);
+								sqlCmd.Parameters.AddWithValue("c_sms", family.C_SMS);
+								sqlCmd.Parameters.AddWithValue("c_call", family.C_Call);
+								sqlCmd.Parameters.AddWithValue("c_email", family.C_Email);
+								sqlCmd.Parameters.AddWithValue("archival", family.Archival);
+								sqlCmd.Parameters.AddWithValue("comment", family.Comment);
+								sqlCmd.ExecuteNonQuery();
+							}
 							break;
 						case Global.Module.LOGS:
 							query = @"";
@@ -2673,7 +2561,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 			
 			return result;
@@ -2723,8 +2611,10 @@ namespace WBZ
 							query = @"delete from wbz.employees where id=@id";
 							SetLog(Global.User.ID, module, id, $"Usunięto pracownika.", sqlTran);
 							break;
+						/// families
 						case Global.Module.FAMILIES:
-							query = @"";
+							query = @"delete from wbz.families where id=@id";
+							SetLog(Global.User.ID, module, id, $"Usunięto rodzinę.", sqlTran);
 							break;
 						case Global.Module.LOGS:
 							query = @"";
@@ -2755,7 +2645,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.ToString());
 			}
 			
 			return result;

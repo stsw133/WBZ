@@ -223,8 +223,8 @@
     <Compile Include="Modules\Distributions\DistributionsStatus.xaml.cs">
       <DependentUpon>DistributionsStatus.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Families\FamiliesAdd.xaml.cs">
-      <DependentUpon>FamiliesAdd.xaml</DependentUpon>
+    <Compile Include="Modules\Families\FamiliesNew.xaml.cs">
+      <DependentUpon>FamiliesNew.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Families\FamiliesList.xaml.cs">
       <DependentUpon>FamiliesList.xaml</DependentUpon>
@@ -274,6 +274,7 @@
     <Compile Include="Modules\Articles\StoresList.xaml.cs">
       <DependentUpon>StoresList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Other\Prints.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -404,7 +405,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Families\FamiliesAdd.xaml">
+    <Page Include="Modules\Families\FamiliesNew.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

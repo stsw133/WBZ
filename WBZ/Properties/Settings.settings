@@ -223,23 +223,22 @@
     <Setting Name="columns_CompaniesList_Address" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="config_FamiliesList_WindowX" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">900</Value>
-    </Setting>
-    <Setting Name="config_FamiliesList_WindowY" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">600</Value>
+    <Setting Name="config_FamiliesList_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;900&lt;/string&gt;
+  &lt;string&gt;600&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="config_Families_PanelColor" Type="System.String" Scope="User">
       <Value Profile="(Default)">#EEE</Value>
     </Setting>
-    <Setting Name="config_FamiliesAdd_WindowX" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">900</Value>
-    </Setting>
-    <Setting Name="config_FamiliesAdd_WindowY" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">600</Value>
-    </Setting>
-    <Setting Name="config_FamiliesList_RowsLimitPerPage" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">50</Value>
+    <Setting Name="config_FamiliesNew_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;900&lt;/string&gt;
+  &lt;string&gt;600&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="config_DistributionsAdd_WindowX" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">900</Value>
@@ -487,6 +486,16 @@
   &lt;string&gt;c.codename&lt;/string&gt;
   &lt;string&gt;False&lt;/string&gt;
   &lt;string&gt;c.name&lt;/string&gt;
+  &lt;string&gt;False&lt;/string&gt;
+  &lt;string&gt;50&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="sorting_FamiliesList" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;f.lastname&lt;/string&gt;
+  &lt;string&gt;False&lt;/string&gt;
+  &lt;string&gt;f.city&lt;/string&gt;
   &lt;string&gt;False&lt;/string&gt;
   &lt;string&gt;50&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>

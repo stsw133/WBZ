@@ -143,7 +143,7 @@ namespace WBZ.Modules.Attmisc
 					editMode = false;
 				if (!Global.User.Perms.Contains($"{Global.Module.FAMILIES}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{Global.Module.FAMILIES}_{Global.UserPermType.SAVE}"))
 					return;
-				var window = new FamiliesAdd(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Family>()?[0], editMode);
+				var window = new FamiliesNew(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Family>()?[0], Global.ActionType.PREVIEW);
 				window.Show();
 			}
 			else if (log.Module == Global.Module.DISTRIBUTIONS)

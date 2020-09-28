@@ -99,7 +99,7 @@
                 </DockPanel>
             </TabItem>
             <!-- tabSources -->
-            <TabItem IsEnabled="{Binding IsEditing}">
+            <TabItem>
                 <TabItem.Header>
                     <c:SimpleHeader TextContent="Źródła" IconSource="pack://siteoforigin:,,,/Resources/icon32_source.ico"/>
                 </TabItem.Header>

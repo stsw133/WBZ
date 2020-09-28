@@ -266,18 +266,23 @@ namespace WBZ
 			window.Show();
 		}
 
-		#region module "Families"
+		/// <summary>
+		/// Families - FamiliesList
+		/// </summary>
 		private void btnFamiliesList_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new FamiliesList();
 			window.Show();
 		}
+
+		/// <summary>
+		/// Families - FamiliesNew
+		/// </summary>
 		private void btnFamiliesAdd_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new FamiliesAdd(new C_Family(), true);
+			var window = new FamiliesNew(new C_Family(), Global.ActionType.NEW);
 			window.Show();
 		}
-		#endregion
 
 		#region module "Distributions"
 		private void btnDistributionsList_Click(object sender, RoutedEventArgs e)
