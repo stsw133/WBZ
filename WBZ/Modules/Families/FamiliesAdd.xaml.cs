@@ -31,7 +31,6 @@ namespace WBZ.Modules.Families
             DataContext = M;
 
             M.InstanceInfo = instance;
-            M.InstanceInfo.Contacts = SQL.ListContacts(M.INSTANCE_TYPE, M.InstanceInfo.ID);
             M.EditMode = editMode;
         }
 

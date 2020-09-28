@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using WBZ.Helpers;
 
 namespace WBZ.Classes
 {
@@ -81,15 +82,15 @@ namespace WBZ.Classes
 
 		public C_DistributionPosition()
 		{
-			var store = SQL.ListStores(limit: 1);
+			var stores = SQL.ListInstances(Global.Module.STORES, "true").DataTableToList<C_Store>();
 
 			ID = 0;
 			Distribution = 0;
 			Position = 0;
-			Store = store.Count == 1 ? store[0].ID : 0;
+			Store = stores.Count == 1 ? stores[0].ID : 0;
 			Article = 0;
 			Amount = 0;
-			StoreName = store.Count == 1 ? store[0].Name : "";
+			StoreName = stores.Count == 1 ? stores[0].Name : "";
 			ArticleName = "";
 		}
 	}

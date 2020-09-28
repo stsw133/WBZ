@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
+using WBZ.Helpers;
 
 namespace WBZ.Classes
 {
@@ -32,12 +32,12 @@ namespace WBZ.Classes
 
 		public C_Document()
 		{
-			var store = SQL.ListStores(limit: 1);
+			var stores = SQL.ListInstances(Global.Module.STORES, "true").DataTableToList<C_Store>();
 
 			ID = 0;
 			Type = "FS";
 			Name = "";
-			Store = store.Count == 1 ? store[0].ID : 0;
+			Store = stores.Count == 1 ? stores[0].ID : 0;
 			Company = 0;
 			fDateIssue = new DateTime(DateTime.Now.Year, 1, 1);
 			DateIssue = DateTime.Now;
@@ -45,7 +45,7 @@ namespace WBZ.Classes
 			Archival = false;
 			Comment = "";
 			Positions = new DataTable();
-			StoreName = store.Count == 1 ? store[0].Name : "";
+			StoreName = stores.Count == 1 ? stores[0].Name : "";
 			CompanyName = "";
 			PositionsCount = 0;
 			Weight = 0;

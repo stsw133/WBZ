@@ -248,18 +248,23 @@ namespace WBZ
 			window.Show();
 		}
 
-		#region module "Companies"
+		/// <summary>
+		/// Companies - CompaniesList
+		/// </summary>
 		private void btnCompaniesList_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new CompaniesList();
 			window.Show();
 		}
-		private void btnCompaniesAdd_Click(object sender, RoutedEventArgs e)
+
+		/// <summary>
+		/// Companies - CompaniesNew
+		/// </summary>
+		private void btnCompaniesNew_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new CompaniesAdd(new C_Company(), true);
+			var window = new CompaniesNew(new C_Company(), Global.ActionType.NEW);
 			window.Show();
 		}
-		#endregion
 
 		#region module "Families"
 		private void btnFamiliesList_Click(object sender, RoutedEventArgs e)

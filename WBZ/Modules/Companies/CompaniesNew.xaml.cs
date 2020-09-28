@@ -9,26 +9,32 @@ using System.Windows.Input;
 using WBZ.Classes;
 using WBZ.Helpers;
 using WBZ.Modules.Documents;
+using MODULE_CLASS = WBZ.Classes.C_Company;
 
 namespace WBZ.Modules.Companies
 {
     /// <summary>
-    /// Logika interakcji dla klasy CompaniesAdd.xaml
+    /// Logika interakcji dla klasy CompaniesNew.xaml
     /// </summary>
-    public partial class CompaniesAdd : Window
+    public partial class CompaniesNew : Window
     {
-        M_CompaniesAdd M = new M_CompaniesAdd();
+        M_CompaniesNew M = new M_CompaniesNew();
 
-        public CompaniesAdd(C_Company instance, bool editMode)
+        public CompaniesNew(MODULE_CLASS instance, Global.ActionType mode)
         {
             InitializeComponent();
             DataContext = M;
 
             M.InstanceInfo = instance;
-            M.InstanceInfo.Contacts = SQL.ListContacts(M.INSTANCE_TYPE, M.InstanceInfo.ID);
-            M.EditMode = editMode;
+            M.Mode = mode;
+
+            if (M.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
+                M.InstanceInfo.ID = SQL.NewInstanceID(M.MODULE_NAME);
         }
 
+        /// <summary>
+		/// Validation
+		/// </summary>
         private bool CheckDataValidation()
         {
             bool result = true;
@@ -36,75 +42,88 @@ namespace WBZ.Modules.Companies
             return result;
         }
 
-        #region buttons
+        /// <summary>
+		/// Save
+		/// </summary>
+        private bool saved = false;
         private void btnSave_Click(object sender, MouseButtonEventArgs e)
         {
             if (!CheckDataValidation())
                 return;
 
-            if (SQL.SetCompany(M.InstanceInfo))
+            if (saved = SQL.SetInstance(M.MODULE_NAME, M.InstanceInfo, M.Mode))
                 Close();
         }
+
+        /// <summary>
+		/// Refresh
+		/// </summary>
         private void btnRefresh_Click(object sender, MouseButtonEventArgs e)
         {
             if (M.InstanceInfo.ID == 0)
                 return;
             //TODO - dorobić odświeżanie zmienionych danych
         }
+
+        /// <summary>
+		/// Close
+		/// </summary>
         private void btnClose_Click(object sender, MouseButtonEventArgs e)
         {
             Close();
         }
-        #endregion
 
+        /// <summary>
+		/// Tab changed
+		/// </summary>
         private void tabs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var tab = (e.AddedItems.Count > 0 ? e.AddedItems[0] : null) as TabItem;
             if (tab?.Name == "tabSources_Documents")
             {
 				if (M.InstanceInfo.ID != 0 && M.InstanceSources_Documents == null)
-					M.InstanceSources_Documents = SQL.ListDocuments($"c.id={M.InstanceInfo.ID}");
+                    M.InstanceSources_Documents = SQL.ListInstances(Global.Module.DOCUMENTS, $"c.id={M.InstanceInfo.ID}").DataTableToList<C_Document>();
             }
         }
 
+        /// <summary>
+		/// Open: Document
+		/// </summary>
         private void dgList_Documents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                if (Global.User.Perms.Contains($"{Global.Module.DOCUMENTS}_{Global.UserPermType.SAVE}"))
+                Global.ActionType perm = Global.User.Perms.Contains($"{Global.Module.DOCUMENTS}_{Global.UserPermType.SAVE}")
+                    ? Global.ActionType.EDIT : Global.ActionType.PREVIEW;
+
+                var selectedInstances = (sender as DataGrid).SelectedItems.Cast<C_Document>();
+                foreach (C_Document instance in selectedInstances)
                 {
-                    var indexes = (sender as DataGrid).SelectedItems.Cast<C_Document>().Select(x => M.InstanceSources_Documents.IndexOf(x));
-                    foreach (int index in indexes)
-                    {
-                        var window = new DocumentsAdd(M.InstanceSources_Documents[index], true);
-                        window.Show();
-                    }
-                }
-                else if (Global.User.Perms.Contains($"{Global.Module.DOCUMENTS}_{Global.UserPermType.PREVIEW}"))
-                {
-                    var indexes = (sender as DataGrid).SelectedItems.Cast<C_Document>().Select(x => M.InstanceSources_Documents.IndexOf(x));
-                    foreach (int index in indexes)
-                    {
-                        var window = new DocumentsAdd(M.InstanceSources_Documents[index], false);
-                        window.Show();
-                    }
+                    var window = new DocumentsAdd(instance, false/*perm*/);
+                    window.Show();
                 }
             }
+        }
+
+        private void Window_Closed(object sender, System.EventArgs e)
+        {
+            if (M.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE) && !saved)
+                SQL.ClearObject(M.MODULE_NAME, M.InstanceInfo.ID);
         }
     }
 
     /// <summary>
 	/// Model
 	/// </summary>
-	internal class M_CompaniesAdd : INotifyPropertyChanged
+	internal class M_CompaniesNew : INotifyPropertyChanged
     {
-        public readonly string INSTANCE_TYPE = Global.Module.COMPANIES;
+        public readonly string MODULE_NAME = Global.Module.COMPANIES;
 
-        /// Dane o zalogowanym użytkowniku
+        /// Logged user
         public C_User User { get; } = Global.User;
-        /// Instancja
-        private C_Company instanceInfo;
-        public C_Company InstanceInfo
+        /// Instance
+		private MODULE_CLASS instanceInfo;
+        public MODULE_CLASS InstanceInfo
         {
             get
             {
@@ -116,8 +135,8 @@ namespace WBZ.Modules.Companies
                 NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
             }
         }
-        /// Źródło instancji - dokumenty
-        private List<C_Document> instanceSources_Documents;
+        /// Instance source - documents
+		private List<C_Document> instanceSources_Documents;
         public List<C_Document> InstanceSources_Documents
         {
             get
@@ -130,18 +149,20 @@ namespace WBZ.Modules.Companies
                 NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
             }
         }
-        /// Czy okno jest w trybie edycji (zamiast w trybie dodawania)
-        public bool IsEditing { get { return InstanceInfo.ID > 0; } }
-        /// Tryb edycji dla okna
-        public bool EditMode { get; set; }
-        /// Ikona okna
-        public string EditIcon
+        /// Editing mode
+		public bool EditingMode { get { return Mode != Global.ActionType.PREVIEW; } }
+        /// Tryb okna
+        public Global.ActionType Mode { get; set; }
+        /// Dodatkowa ikona okna
+        public string ModeIcon
         {
             get
             {
-                if (InstanceInfo.ID == 0)
+                if (Mode == Global.ActionType.NEW)
                     return "pack://siteoforigin:,,,/Resources/icon32_add.ico";
-                else if (EditMode)
+                else if (Mode == Global.ActionType.DUPLICATE)
+                    return "pack://siteoforigin:,,,/Resources/icon32_duplicate.ico";
+                else if (Mode == Global.ActionType.EDIT)
                     return "pack://siteoforigin:,,,/Resources/icon32_edit.ico";
                 else
                     return "pack://siteoforigin:,,,/Resources/icon32_search.ico";
@@ -152,9 +173,11 @@ namespace WBZ.Modules.Companies
         {
             get
             {
-                if (InstanceInfo.ID == 0)
+                if (Mode == Global.ActionType.NEW)
                     return "Nowa firma";
-                else if (EditMode)
+                else if (Mode == Global.ActionType.DUPLICATE)
+                    return $"Duplikowanie firmy: {InstanceInfo.Name}";
+                else if (Mode == Global.ActionType.EDIT)
                     return $"Edycja firmy: {InstanceInfo.Name}";
                 else
                     return $"Podgląd firmy: {InstanceInfo.Name}";

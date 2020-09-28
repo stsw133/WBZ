@@ -25,9 +25,9 @@ namespace WBZ.Modules.Admin
 			M.InstanceInfo = instance;
 			M.Mode = mode;
 
+			M.InstanceInfo.Perms = SQL.GetUserPerms(M.InstanceInfo.ID);
 			if (M.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
 				M.InstanceInfo.ID = SQL.NewInstanceID(M.MODULE_NAME);
-			M.InstanceInfo.Perms = SQL.GetUserPerms(M.InstanceInfo.ID);
 		}
 
 		/// <summary>

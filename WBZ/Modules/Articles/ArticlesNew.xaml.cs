@@ -31,9 +31,15 @@ namespace WBZ.Modules.Articles
 			M.InstanceInfo = instance;
 			M.Mode = mode;
 
-			if (M.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
-				M.InstanceInfo.ID = SQL.NewInstanceID(M.MODULE_NAME);
 			M.InstanceInfo.Measures = SQL.GetArticleMeasures(M.InstanceInfo.ID);
+			if (M.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
+			{
+				M.InstanceInfo.ID = SQL.NewInstanceID(M.MODULE_NAME);
+				foreach (DataRow row in M.InstanceInfo.Measures.Rows)
+				{
+					row.SetAdded();
+				}
+			}
 		}
 
 		/// <summary>
@@ -111,12 +117,12 @@ namespace WBZ.Modules.Articles
 			else if (tab?.Name == "tabSources_Documents")
 			{
 				if (M.InstanceInfo.ID != 0 && M.InstanceSources_Documents == null)
-					M.InstanceSources_Documents = SQL.ListInstances(Global.Module.STORES, $"dp.article={M.InstanceInfo.ID}").DataTableToList<C_Document>();
+					M.InstanceSources_Documents = SQL.ListInstances(Global.Module.DOCUMENTS, $"dp.article={M.InstanceInfo.ID}").DataTableToList<C_Document>();
 			}
 			else if (tab?.Name == "tabSources_Distributions")
 			{
 				if (M.InstanceInfo.ID != 0 && M.InstanceSources_Distributions == null)
-					M.InstanceSources_Distributions = SQL.ListInstances(Global.Module.STORES, $"dp.article={M.InstanceInfo.ID}").DataTableToList<C_Distribution>();
+					M.InstanceSources_Distributions = SQL.ListInstances(Global.Module.DISTRIBUTIONS, $"dp.article={M.InstanceInfo.ID}").DataTableToList<C_Distribution>();
 			}
 		}
 

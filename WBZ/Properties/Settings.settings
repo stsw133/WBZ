@@ -179,23 +179,22 @@
     <Setting Name="columns_ArticlesList_Reserved" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="config_CompaniesAdd_WindowX" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">900</Value>
-    </Setting>
-    <Setting Name="config_CompaniesAdd_WindowY" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">600</Value>
+    <Setting Name="config_CompaniesNew_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;900&lt;/string&gt;
+  &lt;string&gt;600&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="config_Companies_PanelColor" Type="System.String" Scope="User">
       <Value Profile="(Default)">#EEE</Value>
     </Setting>
-    <Setting Name="config_CompaniesList_WindowX" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">900</Value>
-    </Setting>
-    <Setting Name="config_CompaniesList_WindowY" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">600</Value>
-    </Setting>
-    <Setting Name="config_CompaniesList_RowsLimitPerPage" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">50</Value>
+    <Setting Name="config_CompaniesList_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;900&lt;/string&gt;
+  &lt;string&gt;600&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="columns_CompaniesList_ID" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -478,6 +477,16 @@
   &lt;string&gt;s.codename&lt;/string&gt;
   &lt;string&gt;False&lt;/string&gt;
   &lt;string&gt;s.name&lt;/string&gt;
+  &lt;string&gt;False&lt;/string&gt;
+  &lt;string&gt;50&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="sorting_CompaniesList" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;c.codename&lt;/string&gt;
+  &lt;string&gt;False&lt;/string&gt;
+  &lt;string&gt;c.name&lt;/string&gt;
   &lt;string&gt;False&lt;/string&gt;
   &lt;string&gt;50&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>

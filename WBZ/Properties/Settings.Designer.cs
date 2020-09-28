@@ -649,25 +649,15 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("900")]
-        public int config_CompaniesAdd_WindowX {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>900</string>\r\n  <string>600</string>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection config_CompaniesNew_WindowSize {
             get {
-                return ((int)(this["config_CompaniesAdd_WindowX"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["config_CompaniesNew_WindowSize"]));
             }
             set {
-                this["config_CompaniesAdd_WindowX"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("600")]
-        public int config_CompaniesAdd_WindowY {
-            get {
-                return ((int)(this["config_CompaniesAdd_WindowY"]));
-            }
-            set {
-                this["config_CompaniesAdd_WindowY"] = value;
+                this["config_CompaniesNew_WindowSize"] = value;
             }
         }
         
@@ -685,37 +675,15 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("900")]
-        public int config_CompaniesList_WindowX {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>900</string>\r\n  <string>600</string>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection config_CompaniesList_WindowSize {
             get {
-                return ((int)(this["config_CompaniesList_WindowX"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["config_CompaniesList_WindowSize"]));
             }
             set {
-                this["config_CompaniesList_WindowX"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("600")]
-        public int config_CompaniesList_WindowY {
-            get {
-                return ((int)(this["config_CompaniesList_WindowY"]));
-            }
-            set {
-                this["config_CompaniesList_WindowY"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("50")]
-        public int config_CompaniesList_RowsLimitPerPage {
-            get {
-                return ((int)(this["config_CompaniesList_RowsLimitPerPage"]));
-            }
-            set {
-                this["config_CompaniesList_RowsLimitPerPage"] = value;
+                this["config_CompaniesList_WindowSize"] = value;
             }
         }
         
@@ -1744,6 +1712,25 @@ namespace WBZ.Properties {
             }
             set {
                 this["sorting_StoresList"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>c.codename</string>
+  <string>False</string>
+  <string>c.name</string>
+  <string>False</string>
+  <string>50</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection sorting_CompaniesList {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_CompaniesList"]));
+            }
+            set {
+                this["sorting_CompaniesList"] = value;
             }
         }
     }

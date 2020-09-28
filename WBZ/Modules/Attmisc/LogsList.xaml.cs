@@ -131,7 +131,7 @@ namespace WBZ.Modules.Attmisc
 					editMode = false;
 				if (!Global.User.Perms.Contains($"{Global.Module.COMPANIES}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{Global.Module.COMPANIES}_{Global.UserPermType.SAVE}"))
 					return;
-				var window = new CompaniesAdd(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Company>()?[0], editMode);
+				var window = new CompaniesNew(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Company>()?[0], Global.ActionType.PREVIEW);
 				window.Show();
 			}
 			else if (log.Module == Global.Module.FAMILIES)
