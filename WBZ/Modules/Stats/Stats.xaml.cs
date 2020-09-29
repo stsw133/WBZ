@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Data;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -23,13 +22,19 @@ namespace WBZ.Modules.Stats
 			DataContext = M;
 		}
 
-		#region buttons
+		/// <summary>
+		/// Report
+		/// </summary>
 		private void btnReportGenerate_Click(object sender, MouseButtonEventArgs e)
 		{
 			var window = new StatsReportsGenerator(StatsReports.DonationsSum);
 			window.Owner = this;
 			window.ShowDialog();
 		}
+
+		/// <summary>
+		/// Refresh
+		/// </summary>
 		private async void btnRefresh_Click(object sender, MouseButtonEventArgs e)
 		{
 			await Task.Run(() => {
@@ -37,15 +42,13 @@ namespace WBZ.Modules.Stats
 				M.StatsArticlesTotal = SQL.GetStatsArticlesTotal();
 			});
 		}
+
+		/// <summary>
+		/// Close
+		/// </summary>
 		private void btnClose_Click(object sender, MouseButtonEventArgs e)
 		{
 			Close();
-		}
-		#endregion
-
-		private void Window_Closed(object sender, EventArgs e)
-		{
-			Properties.Settings.Default.Save();
 		}
 	}
 
@@ -54,9 +57,9 @@ namespace WBZ.Modules.Stats
 	/// </summary>
 	internal class M_Stats : INotifyPropertyChanged
 	{
-		/// Dane o zalogowanym użytkowniku
+		/// Logged user
 		public C_User User { get; } = Global.User;
-		/// Statystyki towarów
+		/// Article stats
 		private DataTable statsArticles = SQL.GetStatsArticles();
 		public DataTable StatsArticles
 		{
@@ -70,7 +73,7 @@ namespace WBZ.Modules.Stats
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
 		}
-		/// Statystyki towarów - łącznie
+		/// Article stats - total
 		private double statsArticlesTotal = SQL.GetStatsArticlesTotal();
 		public double StatsArticlesTotal
 		{

@@ -621,26 +621,31 @@ namespace WBZ
 
 			try
 			{
-				var sqlCmd = new NpgsqlCommand(@"delete from wbz.groups where module=@module and instance=@instance", sqlConn, sqlTran);
-				sqlCmd.Parameters.AddWithValue("module", module);
-				sqlCmd.Parameters.AddWithValue("instance", instance);
-				sqlCmd.ExecuteNonQuery();
-
-				sqlCmd = new NpgsqlCommand(@"delete from wbz.contacts where module=@module and instance=@instance", sqlConn, sqlTran);
-				sqlCmd.Parameters.AddWithValue("module", module);
-				sqlCmd.Parameters.AddWithValue("instance", instance);
-				sqlCmd.ExecuteNonQuery();
-
-				sqlCmd = new NpgsqlCommand(@"delete from wbz.attributes
-					where class in (select id from wbz.attributes_classes where module=@module) and instance=@instance", sqlConn, sqlTran);
-				sqlCmd.Parameters.AddWithValue("module", module);
-				sqlCmd.Parameters.AddWithValue("instance", instance);
-				sqlCmd.ExecuteNonQuery();
-
-				sqlCmd = new NpgsqlCommand(@"delete from wbz.attachments where module=@module and instance=@instance", sqlConn, sqlTran);
-				sqlCmd.Parameters.AddWithValue("module", module);
-				sqlCmd.Parameters.AddWithValue("instance", instance);
-				sqlCmd.ExecuteNonQuery();
+				using (var sqlCmd = new NpgsqlCommand(@"delete from wbz.contacts where module=@module and instance=@instance", sqlConn, sqlTran))
+				{
+					sqlCmd.Parameters.AddWithValue("module", module);
+					sqlCmd.Parameters.AddWithValue("instance", instance);
+					sqlCmd.ExecuteNonQuery();
+				}
+				using (var sqlCmd = new NpgsqlCommand(@"delete from wbz.groups where module=@module and instance=@instance", sqlConn, sqlTran))
+				{
+					sqlCmd.Parameters.AddWithValue("module", module);
+					sqlCmd.Parameters.AddWithValue("instance", instance);
+					sqlCmd.ExecuteNonQuery();
+				}
+				using (var sqlCmd = new NpgsqlCommand(@"delete from wbz.attributes
+					where class in (select id from wbz.attributes_classes where module=@module) and instance=@instance", sqlConn, sqlTran))
+				{
+					sqlCmd.Parameters.AddWithValue("module", module);
+					sqlCmd.Parameters.AddWithValue("instance", instance);
+					sqlCmd.ExecuteNonQuery();
+				}
+				using (var sqlCmd = new NpgsqlCommand(@"delete from wbz.attachments where module=@module and instance=@instance", sqlConn, sqlTran))
+				{
+					sqlCmd.Parameters.AddWithValue("module", module);
+					sqlCmd.Parameters.AddWithValue("instance", instance);
+					sqlCmd.ExecuteNonQuery();
+				}
 
 				result = true;
 			}

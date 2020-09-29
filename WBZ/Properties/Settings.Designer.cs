@@ -873,25 +873,15 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("900")]
-        public int config_Stats_WindowX {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>900</string>\r\n  <string>600</string>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection config_Stats_WindowSize {
             get {
-                return ((int)(this["config_Stats_WindowX"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["config_Stats_WindowSize"]));
             }
             set {
-                this["config_Stats_WindowX"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("600")]
-        public int config_Stats_WindowY {
-            get {
-                return ((int)(this["config_Stats_WindowY"]));
-            }
-            set {
-                this["config_Stats_WindowY"] = value;
+                this["config_Stats_WindowSize"] = value;
             }
         }
         

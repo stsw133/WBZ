@@ -6,12 +6,11 @@
         xmlns:c="clr-namespace:WBZ.Controls"
         xmlns:h="clr-namespace:WBZ.Helpers"
         xmlns:p="clr-namespace:WBZ.Properties"
-        xmlns:local="clr-namespace:WBZ.Modules.Stats"
         mc:Ignorable="d"
-        Title="Statystyki" MinHeight="240" MinWidth="360" Height="{Binding config_Stats_WindowY, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_Stats_WindowX, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+        Title="Statystyki" MinHeight="240" MinWidth="360" Height="{Binding config_Stats_WindowSize[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_Stats_WindowSize[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
             BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}}"
-            Icon="pack://siteoforigin:,,,/Resources/icon32_stats.ico" Closed="Window_Closed">
+            Icon="pack://siteoforigin:,,,/Resources/icon32_stats.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
