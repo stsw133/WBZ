@@ -216,7 +216,7 @@ namespace WBZ
 		}
 		private void btnDocumentsAdd_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new DocumentsAdd(new C_Document(), true);
+			var window = new DocumentsNew(new C_Document(), true);
 			window.Show();
 		}
 		#endregion

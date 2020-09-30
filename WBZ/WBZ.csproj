@@ -229,8 +229,8 @@
     <Compile Include="Modules\Families\FamiliesList.xaml.cs">
       <DependentUpon>FamiliesList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Documents\DocumentsAdd.xaml.cs">
-      <DependentUpon>DocumentsAdd.xaml</DependentUpon>
+    <Compile Include="Modules\Documents\DocumentsNew.xaml.cs">
+      <DependentUpon>DocumentsNew.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Documents\DocumentsList.xaml.cs">
       <DependentUpon>DocumentsList.xaml</DependentUpon>
@@ -413,7 +413,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Documents\DocumentsAdd.xaml">
+    <Page Include="Modules\Documents\DocumentsNew.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

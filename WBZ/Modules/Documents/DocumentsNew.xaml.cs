@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Data;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
@@ -7,27 +8,40 @@ using WBZ.Classes;
 using WBZ.Helpers;
 using WBZ.Modules.Articles;
 using WBZ.Modules.Companies;
+using MODULE_CLASS = WBZ.Classes.C_Document;
 
 namespace WBZ.Modules.Documents
 {
 	/// <summary>
-	/// Interaction logic for DocumentsAdd.xaml
+	/// Interaction logic for DocumentsNew.xaml
 	/// </summary>
-	public partial class DocumentsAdd : Window
+	public partial class DocumentsNew : Window
 	{
-		M_DocumentsAdd M = new M_DocumentsAdd();
+		M_DocumentsNew M = new M_DocumentsNew();
 
-		public DocumentsAdd(C_Document instance, bool editMode)
+		public DocumentsNew(MODULE_CLASS instance, Global.ActionType mode)
 		{
 			InitializeComponent();
 			DataContext = M;
 
 			M.InstanceInfo = instance;
-			chckToBuffer.IsChecked = instance.Status == (short)C_Document.DocumentStatus.Buffer;
+			M.Mode = mode;
+			if (mode == Global.ActionType.EDIT && instance.Status == (short)MODULE_CLASS.DocumentStatus.Buffer)
+				M.Mode = Global.ActionType.PREVIEW;
+
+			chckToBuffer.IsChecked = instance.Status == (short)MODULE_CLASS.DocumentStatus.Buffer;
 			M.InstanceInfo.Positions = SQL.GetDocumentPositions(M.InstanceInfo.ID);
-			M.EditMode = editMode && M.InstanceInfo.Status == (short)C_Document.DocumentStatus.Buffer;
+			if (M.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
+			{
+				M.InstanceInfo.ID = SQL.NewInstanceID(M.MODULE_NAME);
+				foreach (DataRow row in M.InstanceInfo.Positions.Rows)
+					row.SetAdded();
+			}
 		}
 
+		/// <summary>
+		/// Validation
+		/// </summary>
 		private bool CheckDataValidation()
 		{
 			bool result = true;
@@ -35,7 +49,10 @@ namespace WBZ.Modules.Documents
 			return result;
 		}
 
-		#region buttons
+		/// <summary>
+		/// Save
+		/// </summary>
+		private bool saved = false;
 		private void btnSave_Click(object sender, MouseButtonEventArgs e)
 		{
 			if (!CheckDataValidation())
@@ -47,31 +64,49 @@ namespace WBZ.Modules.Documents
 				return;
 			}
 
-			M.InstanceInfo.Status = (short)(chckToBuffer.IsChecked==true ? C_Document.DocumentStatus.Buffer : C_Document.DocumentStatus.Approved);
-			if (SQL.SetDocument(M.InstanceInfo))
+			M.InstanceInfo.Status = (short)(chckToBuffer.IsChecked==true ? MODULE_CLASS.DocumentStatus.Buffer : MODULE_CLASS.DocumentStatus.Approved);
+			if (saved = SQL.SetInstance(M.MODULE_NAME, M.InstanceInfo, M.Mode))
 				Close();
 		}
+
+		/// <summary>
+		/// GetFromFile
+		/// </summary>
 		private void btnGetFromFile_Click(object sender, MouseButtonEventArgs e)
 		{
 			
 		}
+
+		/// <summary>
+		/// GetByScaner
+		/// </summary>
 		private void btnGetByScaner_Click(object sender, MouseButtonEventArgs e)
 		{
 			
 		}
+
+		/// <summary>
+		/// Refresh
+		/// </summary>
 		private void btnRefresh_Click(object sender, MouseButtonEventArgs e)
 		{
 			if (M.InstanceInfo.ID == 0)
 				return;
 			//TODO - dorobić odświeżanie zmienionych danych
 		}
+
+		/// <summary>
+		/// Close
+		/// </summary>
 		private void btnClose_Click(object sender, MouseButtonEventArgs e)
 		{
 			Close();
 		}
-		#endregion
 
-		private void btnCompanyChoose_Click(object sender, RoutedEventArgs e)
+		/// <summary>
+		/// Select: Company
+		/// </summary>
+		private void btnSelectCompany_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new CompaniesList(true);
 			if (window.ShowDialog() == true)
@@ -83,7 +118,10 @@ namespace WBZ.Modules.Documents
 				}
 		}
 
-		private void btnStoreChoose_Click(object sender, RoutedEventArgs e)
+		/// <summary>
+		/// Select: Store
+		/// </summary>
+		private void btnSelectStore_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new StoresList(true);
 			if (window.ShowDialog() == true)
@@ -95,6 +133,9 @@ namespace WBZ.Modules.Documents
 				}
 		}
 
+		/// <summary>
+		/// Add position
+		/// </summary>
 		private void btnPositionsAdd_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new ArticlesList(true);
@@ -118,15 +159,15 @@ namespace WBZ.Modules.Documents
 	/// <summary>
 	/// Model
 	/// </summary>
-	internal class M_DocumentsAdd : INotifyPropertyChanged
+	internal class M_DocumentsNew : INotifyPropertyChanged
 	{
-		public readonly string INSTANCE_TYPE = Global.Module.DOCUMENTS;
+		public readonly string MODULE_NAME = Global.Module.DOCUMENTS;
 
-		/// Dane o zalogowanym użytkowniku
+		/// Logged user
 		public C_User User { get; } = Global.User;
-		/// Instancja
-		private C_Document instanceInfo;
-		public C_Document InstanceInfo
+		/// Instance
+		private MODULE_CLASS instanceInfo;
+		public MODULE_CLASS InstanceInfo
 		{
 			get
 			{
@@ -138,18 +179,20 @@ namespace WBZ.Modules.Documents
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
 		}
-		/// Czy okno jest w trybie edycji (zamiast w trybie dodawania)
-		public bool IsEditing { get { return InstanceInfo.ID > 0; } }
-		/// Tryb edycji dla okna
-		public bool EditMode { get; set; }
-		/// Ikona okna
-		public string EditIcon
+		/// Editing mode
+		public bool EditingMode { get { return Mode != Global.ActionType.PREVIEW; } }
+		/// Tryb okna
+		public Global.ActionType Mode { get; set; }
+		/// Dodatkowa ikona okna
+		public string ModeIcon
 		{
 			get
 			{
-				if (InstanceInfo.ID == 0)
+				if (Mode == Global.ActionType.NEW)
 					return "pack://siteoforigin:,,,/Resources/icon32_add.ico";
-				else if (EditMode)
+				else if (Mode == Global.ActionType.DUPLICATE)
+					return "pack://siteoforigin:,,,/Resources/icon32_duplicate.ico";
+				else if (Mode == Global.ActionType.EDIT)
 					return "pack://siteoforigin:,,,/Resources/icon32_edit.ico";
 				else
 					return "pack://siteoforigin:,,,/Resources/icon32_search.ico";
@@ -160,9 +203,11 @@ namespace WBZ.Modules.Documents
 		{
 			get
 			{
-				if (InstanceInfo.ID == 0)
+				if (Mode == Global.ActionType.NEW)
 					return "Nowy dokument";
-				else if (EditMode)
+				else if (Mode == Global.ActionType.DUPLICATE)
+					return $"Duplikowanie dokumentu: {InstanceInfo.Name}";
+				else if (Mode == Global.ActionType.EDIT)
 					return $"Edycja dokumentu: {InstanceInfo.Name}";
 				else
 					return $"Podgląd dokumentu: {InstanceInfo.Name}";

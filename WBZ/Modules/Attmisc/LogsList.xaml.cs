@@ -95,7 +95,7 @@ namespace WBZ.Modules.Attmisc
 					editMode = false;
 				if (!Global.User.Perms.Contains($"{Global.Module.DOCUMENTS}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{Global.Module.DOCUMENTS}_{Global.UserPermType.SAVE}"))
 					return;
-				var window = new DocumentsAdd(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Document>()?[0], editMode);
+				var window = new DocumentsNew(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Document>()?[0], editMode);
 				window.Show();
 			}
 			else if (log.Module == Global.Module.STORES)

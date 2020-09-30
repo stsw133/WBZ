@@ -221,25 +221,15 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("900")]
-        public int config_DocumentsAdd_WindowX {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>900</string>\r\n  <string>600</string>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection config_DocumentsNew_WindowSize {
             get {
-                return ((int)(this["config_DocumentsAdd_WindowX"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["config_DocumentsNew_WindowSize"]));
             }
             set {
-                this["config_DocumentsAdd_WindowX"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("600")]
-        public int config_DocumentsAdd_WindowY {
-            get {
-                return ((int)(this["config_DocumentsAdd_WindowY"]));
-            }
-            set {
-                this["config_DocumentsAdd_WindowY"] = value;
+                this["config_DocumentsNew_WindowSize"] = value;
             }
         }
         
@@ -257,37 +247,15 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("900")]
-        public int config_DocumentsList_WindowX {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>900</string>\r\n  <string>600</string>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection config_DocumentsList_WindowSize {
             get {
-                return ((int)(this["config_DocumentsList_WindowX"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["config_DocumentsList_WindowSize"]));
             }
             set {
-                this["config_DocumentsList_WindowX"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("600")]
-        public int config_DocumentsList_WindowY {
-            get {
-                return ((int)(this["config_DocumentsList_WindowY"]));
-            }
-            set {
-                this["config_DocumentsList_WindowY"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("50")]
-        public int config_DocumentsList_RowsLimitPerPage {
-            get {
-                return ((int)(this["config_DocumentsList_RowsLimitPerPage"]));
-            }
-            set {
-                this["config_DocumentsList_RowsLimitPerPage"] = value;
+                this["config_DocumentsList_WindowSize"] = value;
             }
         }
         
@@ -1708,6 +1676,25 @@ namespace WBZ.Properties {
             }
             set {
                 this["sorting_FamiliesList"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>d.dateissue</string>
+  <string>False</string>
+  <string>d.name</string>
+  <string>False</string>
+  <string>50</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection sorting_DocumentsList {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_DocumentsList"]));
+            }
+            set {
+                this["sorting_DocumentsList"] = value;
             }
         }
     }
