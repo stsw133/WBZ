@@ -41,58 +41,6 @@ namespace WBZ
 
 		#region mainDB
 		/// <summary>
-		/// Pobiera wartość podanej właściwości z bazy danych
-		/// </summary>
-		/// <param name="property">Nazwa właściwości z tabeli wbz.config</param>
-		internal static string GetPropertyValue(string property)
-		{
-			string result = null;
-
-			try
-			{
-				using (var sqlConn = connOpenedWBZ)
-				using (var sqlCmd = new NpgsqlCommand(@"select coalesce((select value from wbz.config where property=@property),'')", sqlConn))
-				{
-					sqlCmd.Parameters.AddWithValue("property", property);
-					result = sqlCmd.ExecuteScalar().ToString();
-				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.ToString());
-			}
-
-			return result;
-		}
-		/// <summary>
-		/// Ustawia wartość podanej właściwości z bazy danych
-		/// </summary>
-		/// <param name="property">Nazwa właściwości z tabeli wbz.config</param>
-		/// <param name="value">Wartość właściwości z tabeli wbz.config</param>
-		internal static bool SetPropertyValue(string property, string value)
-		{
-			bool result = false;
-
-			try
-			{
-				using (var sqlConn = connOpenedWBZ)
-				using (var sqlCmd = new NpgsqlCommand(@"update wbz.config set value=@value where property=@property", sqlConn))
-				{
-					sqlCmd.Parameters.AddWithValue("property", property);
-					sqlCmd.Parameters.AddWithValue("value", value);
-					sqlCmd.ExecuteNonQuery();
-				}
-
-				result = true;
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.ToString());
-			}
-
-			return result;
-		}
-		/// <summary>
 		/// Pobiera logi dla podanego modułu, obiektu i użytkownika
 		/// </summary>
 		/// <param name="module">Nazwa modułu</param>
@@ -200,32 +148,6 @@ namespace WBZ
 					sqlCmd.Parameters.AddWithValue("module", module);
 					sqlCmd.Parameters.AddWithValue("instance", instance);
 					sqlCmd.Parameters.AddWithValue("content", content);
-					sqlCmd.ExecuteNonQuery();
-				}
-
-				result = true;
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.ToString());
-			}
-
-			return result;
-		}
-		/// <summary>
-		/// Usuwa log o podanych parametrach
-		/// </summary>
-		/// <param name="id">ID instancji</param>
-		internal static bool DeleteLog(int id)
-		{
-			bool result = false;
-
-			try
-			{
-				using (var sqlConn = connOpenedWBZ)
-				{
-					var sqlCmd = new NpgsqlCommand(@"delete from wbz.logs where id=@id", sqlConn);
-					sqlCmd.Parameters.AddWithValue("id", id);
 					sqlCmd.ExecuteNonQuery();
 				}
 
@@ -439,32 +361,6 @@ namespace WBZ
 
 					SetLog(Global.User.ID, module, instance, $"Dodano załącznik {name}.");
 				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.ToString());
-			}
-
-			return result;
-		}
-		/// <summary>
-		/// Usuwa załącznik o podanych parametrach
-		/// </summary>
-		/// <param name="id">ID instancji</param>
-		internal static bool DeleteAttachment(int id)
-		{
-			bool result = false;
-
-			try
-			{
-				using (var sqlConn = connOpenedWBZ)
-				{
-					var sqlCmd = new NpgsqlCommand(@"delete from wbz.attachments where id=@id", sqlConn);
-					sqlCmd.Parameters.AddWithValue("id", id);
-					sqlCmd.ExecuteNonQuery();
-				}
-
-				result = true;
 			}
 			catch (Exception ex)
 			{
@@ -2108,19 +2004,10 @@ namespace WBZ
 						/// articles
 						case Global.Module.ARTICLES:
 							var article = instance as C_Article;
-							if (mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
-							{
-								query = @"insert into wbz.articles (id, codename, name, ean, archival, comment)
-									values (@id, @codename, @name, @ean, @archival, @comment)";
-								SetLog(Global.User.ID, module, article.ID, $"Utworzono towar.", sqlTran);
-							}
-							else
-							{
-								query = @"update wbz.articles
-									set codename=@codename, name=@name, ean=@ean, archival=@archival, comment=@comment
-									where id=@id";
-								SetLog(Global.User.ID, module, article.ID, $"Edytowano towar.", sqlTran);
-							}
+							query = @"insert into wbz.articles (id, codename, name, ean, archival, comment)
+								values (@id, @codename, @name, @ean, @archival, @comment)
+								on conflict(id) do
+								update set codename=@codename, name=@name, ean=@ean, archival=@archival, comment=@comment";
 							using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 							{
 								sqlCmd.Parameters.AddWithValue("id", article.ID);
@@ -2131,6 +2018,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("comment", article.Comment);
 								sqlCmd.ExecuteNonQuery();
 							}
+							SetLog(Global.User.ID, module, article.ID, $"{(mode==Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} towar: {article.Name}.", sqlTran);
 
 							///measures
 							foreach (DataRow measure in article.Measures.Rows)
@@ -2186,20 +2074,11 @@ namespace WBZ
 						/// companies
 						case Global.Module.COMPANIES:
 							var company = instance as C_Company;
-							if (mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
-							{
-								query = @"insert into wbz.companies (id, codename, name, branch, nip, regon, postcode, city, address, archival, comment)
-									values (@id, @codename, @name, @branch, @nip, @regon, @postcode, @city, @address, @archival, @comment)";
-								SetLog(Global.User.ID, module, company.ID, $"Utworzono firmę.", sqlTran);
-							}
-							else
-							{
-								query = @"update wbz.companies
-									set codename=@codename, name=@name, branch=@branch, nip=@nip, regon=@regon,
-										postcode=@postcode, city=@city, address=@address, archival=@archival, comment=@comment
-									where id=@id";
-								SetLog(Global.User.ID, module, company.ID, $"Edytowano firmę.", sqlTran);
-							}
+							query = @"insert into wbz.companies (id, codename, name, branch, nip, regon, postcode, city, address, archival, comment)
+								values (@id, @codename, @name, @branch, @nip, @regon, @postcode, @city, @address, @archival, @comment)
+								on conflict(id) do
+								update set codename=@codename, name=@name, branch=@branch, nip=@nip, regon=@regon,
+									postcode=@postcode, city=@city, address=@address, archival=@archival, comment=@comment";
 							using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 							{
 								sqlCmd.Parameters.AddWithValue("id", company.ID);
@@ -2215,6 +2094,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("comment", company.Comment);
 								sqlCmd.ExecuteNonQuery();
 							}
+							SetLog(Global.User.ID, module, company.ID, $"{(mode == Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} firmę: {company.Name}.", sqlTran);
 							break;
 						case Global.Module.DISTRIBUTIONS:
 							query = @"";
@@ -2227,20 +2107,11 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("id", document.ID);
 								oldstatus = Convert.ToInt32(sqlCmd.ExecuteScalar());
 							}
-							if (mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
-							{
-								query = @"insert into wbz.documents (id, name, type, store, company, dateissue, status, archival, comment)
-									values (@id, @name, @type, @store, @company, @dateissue, @status, @archival, @comment)";
-								SetLog(Global.User.ID, module, document.ID, $"Utworzono dokument.", sqlTran);
-							}
-							else
-							{
-								query = @"update wbz.documents
-									set name=@name, type=@type, store=@store, company=@company,
-										dateissue=@dateissue, status=@status, archival=@archival, comment=@comment
-									where id=@id";
-								SetLog(Global.User.ID, module, document.ID, $"Edytowano dokument.", sqlTran);
-							}
+							query = @"insert into wbz.documents (id, name, type, store, company, dateissue, status, archival, comment)
+								values (@id, @name, @type, @store, @company, @dateissue, @status, @archival, @comment)
+								on conflict(id) do
+								update set name=@name, type=@type, store=@store, company=@company,
+									dateissue=@dateissue, status=@status, archival=@archival, comment=@comment";
 							using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 							{
 								sqlCmd.Parameters.AddWithValue("id", document.ID);
@@ -2254,6 +2125,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("comment", document.Comment);
 								sqlCmd.ExecuteNonQuery();
 							}
+							SetLog(Global.User.ID, module, document.ID, $"{(mode == Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} dokument: {document.Name}.", sqlTran);
 
 							///positions
 							foreach (DataRow position in document.Positions.Rows)
@@ -2261,44 +2133,50 @@ namespace WBZ
 								///add
 								if (position.RowState == DataRowState.Added)
 								{
-									sqlCmd = new NpgsqlCommand(@"insert into wbz.documents_positions (document, position, article, amount, cost)
-									values (@document, @position, @article, (@amount * wbz.ArtDefMeaCon(@article)),
-										@cost)", sqlConn, sqlTran);
-									sqlCmd.Parameters.Clear();
-									sqlCmd.Parameters.AddWithValue("document", document.ID);
-									sqlCmd.Parameters.AddWithValue("position", position["position"]);
-									sqlCmd.Parameters.AddWithValue("article", position["article"]);
-									sqlCmd.Parameters.AddWithValue("amount", position["amount"]);
-									sqlCmd.Parameters.AddWithValue("measure", position["measure"]);
-									sqlCmd.Parameters.AddWithValue("cost", position["cost"]);
-									sqlCmd.ExecuteNonQuery();
+									using (sqlCmd = new NpgsqlCommand(@"insert into wbz.documents_positions (document, position, article, amount, cost)
+										values (@document, @position, @article, (@amount * wbz.ArtDefMeaCon(@article)),
+											@cost)", sqlConn, sqlTran))
+									{
+										sqlCmd.Parameters.Clear();
+										sqlCmd.Parameters.AddWithValue("document", document.ID);
+										sqlCmd.Parameters.AddWithValue("position", position["position"]);
+										sqlCmd.Parameters.AddWithValue("article", position["article"]);
+										sqlCmd.Parameters.AddWithValue("amount", position["amount"]);
+										sqlCmd.Parameters.AddWithValue("measure", position["measure"]);
+										sqlCmd.Parameters.AddWithValue("cost", position["cost"]);
+										sqlCmd.ExecuteNonQuery();
+									}
 									SetLog(Global.User.ID, "documents", document.ID, $"Dodano pozycję {position["position"]}.", sqlTran);
 								}
 								///edit
 								else if (position.RowState == DataRowState.Modified)
 								{
-									sqlCmd = new NpgsqlCommand(@"update wbz.documents_positions
-									set position=@position, article=@article, amount=(@amount * wbz.ArtDefMeaCon(@article)),
-										cost=@cost
-									where id=@id", sqlConn, sqlTran);
-									sqlCmd.Parameters.Clear();
-									sqlCmd.Parameters.AddWithValue("id", position["id", DataRowVersion.Original]);
-									sqlCmd.Parameters.AddWithValue("position", position["position"]);
-									sqlCmd.Parameters.AddWithValue("article", position["article"]);
-									sqlCmd.Parameters.AddWithValue("amount", position["amount"]);
-									sqlCmd.Parameters.AddWithValue("measure", position["measure"]);
-									sqlCmd.Parameters.AddWithValue("cost", position["cost"]);
-									sqlCmd.ExecuteNonQuery();
+									using (sqlCmd = new NpgsqlCommand(@"update wbz.documents_positions
+										set position=@position, article=@article, amount=(@amount * wbz.ArtDefMeaCon(@article)),
+											cost=@cost
+										where id=@id", sqlConn, sqlTran))
+									{
+										sqlCmd.Parameters.Clear();
+										sqlCmd.Parameters.AddWithValue("id", position["id", DataRowVersion.Original]);
+										sqlCmd.Parameters.AddWithValue("position", position["position"]);
+										sqlCmd.Parameters.AddWithValue("article", position["article"]);
+										sqlCmd.Parameters.AddWithValue("amount", position["amount"]);
+										sqlCmd.Parameters.AddWithValue("measure", position["measure"]);
+										sqlCmd.Parameters.AddWithValue("cost", position["cost"]);
+										sqlCmd.ExecuteNonQuery();
+									}
 									SetLog(Global.User.ID, "documents", document.ID, $"Edytowano pozycję {position["position", DataRowVersion.Original]}.", sqlTran);
 								}
 								///delete
 								else if (position.RowState == DataRowState.Deleted)
 								{
-									sqlCmd = new NpgsqlCommand(@"delete from wbz.documents_positions
-									where id=@id", sqlConn, sqlTran);
-									sqlCmd.Parameters.Clear();
-									sqlCmd.Parameters.AddWithValue("id", position["id", DataRowVersion.Original]);
-									sqlCmd.ExecuteNonQuery();
+									using (sqlCmd = new NpgsqlCommand(@"delete from wbz.documents_positions
+										where id=@id", sqlConn, sqlTran))
+									{
+										sqlCmd.Parameters.Clear();
+										sqlCmd.Parameters.AddWithValue("id", position["id", DataRowVersion.Original]);
+										sqlCmd.ExecuteNonQuery();
+									}
 									SetLog(Global.User.ID, "documents", document.ID, $"Usunięto pozycję {position["position", DataRowVersion.Original]}.", sqlTran);
 								}
 
@@ -2315,23 +2193,14 @@ namespace WBZ
 						/// employees
 						case Global.Module.EMPLOYEES:
 							var employee = instance as C_Employee;
-							if (mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
-							{
-								query = @"insert into wbz.employees (id, ""user"", forename, lastname, department, position,
-										email, phone, city, address, postcode, archival, comment)
-									values (@id, @user, @forename, @lastname, @department, @position,
-										@email, @phone, @city, @address, @postcode, @archival, @comment)";
-								SetLog(Global.User.ID, module, employee.ID, $"Utworzono pracownika.", sqlTran);
-							}
-							else
-							{
-								query = @"update wbz.employees
-									set ""user""=@user, forename=@forename, lastname=@lastname, department=@department, position=@position,
-										email=@email, phone=@phone, city=@city, address=@address, postcode=@postcode,
-										archival=@archival, comment=@comment
-									where id=@id";
-								SetLog(Global.User.ID, module, employee.ID, $"Edytowano pracownika.", sqlTran);
-							}
+							query = @"insert into wbz.employees (id, ""user"", forename, lastname, department, position,
+									email, phone, city, address, postcode, archival, comment)
+								values (@id, @user, @forename, @lastname, @department, @position,
+									@email, @phone, @city, @address, @postcode, @archival, @comment)
+								on conflict(id) do
+								update set ""user""=@user, forename=@forename, lastname=@lastname, department=@department, position=@position,
+									email=@email, phone=@phone, city=@city, address=@address, postcode=@postcode,
+									archival=@archival, comment=@comment";
 							using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 							{
 								sqlCmd.Parameters.AddWithValue("id", employee.ID);
@@ -2349,26 +2218,18 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("comment", employee.Comment);
 								sqlCmd.ExecuteNonQuery();
 							}
+							SetLog(Global.User.ID, module, employee.ID, $"{(mode == Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} pracownika: {employee.Fullname}.", sqlTran);
 							break;
 						/// families
 						case Global.Module.FAMILIES:
 							var family = instance as C_Family;
-							if (mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
-							{
-								query = @"insert into wbz.families (id, declarant, lastname, members, postcode, city, address,
-										status, c_sms, c_call, c_email, archival, comment)
-									values (@id, @declarant, @lastname, @members, @postcode, @city, @address,
-										@status, @c_sms, @c_call, @c_email, @archival, @comment)";
-								SetLog(Global.User.ID, module, family.ID, $"Utworzono rodzinę.", sqlTran);
-							}
-							else
-							{
-								query = $@"update wbz.families
-									set declarant=@declarant, lastname=@lastname, members=@members, postcode=@postcode, city=@city, address=@address,
-										status=@status, c_sms=@c_sms, c_call=@c_call, c_email=@c_email, archival=@archival, comment=@comment
-									where id=@id";
-								SetLog(Global.User.ID, module, family.ID, $"Edytowano rodzinę.", sqlTran);
-							}
+							query = @"insert into wbz.families (id, declarant, lastname, members, postcode, city, address,
+									status, c_sms, c_call, c_email, archival, comment)
+								values (@id, @declarant, @lastname, @members, @postcode, @city, @address,
+									@status, @c_sms, @c_call, @c_email, @archival, @comment)
+								on conflict(id) do
+								update set declarant=@declarant, lastname=@lastname, members=@members, postcode=@postcode, city=@city, address=@address,
+									status=@status, c_sms=@c_sms, c_call=@c_call, c_email=@c_email, archival=@archival, comment=@comment";
 							using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 							{
 								sqlCmd.Parameters.AddWithValue("id", family.ID);
@@ -2386,6 +2247,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("comment", family.Comment);
 								sqlCmd.ExecuteNonQuery();
 							}
+							SetLog(Global.User.ID, module, family.ID, $"{(mode == Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} rodzinę: {family.Lastname}.", sqlTran);
 							break;
 						case Global.Module.LOGS:
 							query = @"";
@@ -2393,19 +2255,10 @@ namespace WBZ
 						/// stores
 						case Global.Module.STORES:
 							var store = instance as C_Store;
-							if (mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
-							{
-								query = @"insert into wbz.stores (id, codename, name, city, address, postcode, archival, comment)
-									values (@id, @codename, @name, @city, @address, @postcode, @archival, @comment)";
-								SetLog(Global.User.ID, module, store.ID, $"Utworzono magazyn.", sqlTran);
-							}
-							else
-							{
-								query = $@"update wbz.stores
-									set codename=@codename, name=@name, city=@city, address=@address, postcode=@postcode, archival=@archival, comment=@comment
-									where id=@id";
-								SetLog(Global.User.ID, module, store.ID, $"Edytowano magazyn.", sqlTran);
-							}
+							query = @"insert into wbz.stores (id, codename, name, city, address, postcode, archival, comment)
+								values (@id, @codename, @name, @city, @address, @postcode, @archival, @comment)
+								on conflict(id) do
+								update set codename=@codename, name=@name, city=@city, address=@address, postcode=@postcode, archival=@archival, comment=@comment";
 							using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 							{
 								sqlCmd.Parameters.AddWithValue("id", store.ID);
@@ -2418,24 +2271,16 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("comment", store.Comment);
 								sqlCmd.ExecuteNonQuery();
 							}
+							SetLog(Global.User.ID, module, store.ID, $"{(mode == Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} magazyn: {store.Name}.", sqlTran);
 							break;
 						/// users
 						case Global.Module.USERS:
 							var user = instance as C_User;
-							if (mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
-							{
-								query = @"insert into wbz.users wbz.users (id, username, password, forename, lastname, email, phone, blocked, archival)
-									values (@id, @username, @password, @forename, @lastname, @email, @phone, @blocked, @archival)";
-								SetLog(Global.User.ID, module, user.ID, $"Utworzono użytkownika.", sqlTran);
-							}
-							else
-							{
-								query = $@"update wbz.users
-									set username=@username, {(!string.IsNullOrEmpty(user.Newpass) ? "password=@newpass," : "")}
-										forename=@forename, lastname=@lastname, email=@email, phone=@phone, blocked=@blocked, archival=@archival
-									where id=@id";
-								SetLog(Global.User.ID, module, user.ID, $"Edytowano użytkownika.", sqlTran);
-							}
+							query = @"insert into wbz.users wbz.users (id, username, password, forename, lastname, email, phone, blocked, archival)
+								values (@id, @username, @password, @forename, @lastname, @email, @phone, @blocked, @archival)
+								on conflict(id) do
+								update set username=@username, " + (!string.IsNullOrEmpty(user.Newpass) ? "password = @newpass," : "") + @"
+									forename = @forename, lastname = @lastname, email = @email, phone = @phone, blocked = @blocked, archival = @archival";
 							using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 							{
 								sqlCmd.Parameters.AddWithValue("id", user.ID);
@@ -2449,6 +2294,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("archival", user.Archival);
 								sqlCmd.ExecuteNonQuery();
 							}
+							SetLog(Global.User.ID, module, user.ID, $"{(mode == Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} użytkownika: {user.Fullname}.", sqlTran);
 
 							/// permissions
 							using (sqlCmd = new NpgsqlCommand(@"delete from wbz.users_permissions where ""user""=@user", sqlConn, sqlTran))
@@ -2456,7 +2302,6 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("user", user.ID);
 								sqlCmd.ExecuteNonQuery();
 							}
-
 							foreach (string perm in user.Perms)
 							{
 								using (sqlCmd = new NpgsqlCommand(@"insert into wbz.users_permissions (""user"", perm)
@@ -2489,7 +2334,7 @@ namespace WBZ
 		/// </summary>
 		/// <param name="module">Nazwa modułu</param>
 		/// <param name="id">ID instancji</param>
-		internal static bool DeleteInstance(string module, int id)
+		internal static bool DeleteInstance(string module, int id, string name)
 		{
 			bool result = false;
 			string query;
@@ -2505,10 +2350,12 @@ namespace WBZ
 						case Global.Module.ARTICLES:
 							query = @"delete from wbz.stores_articles where article=@id;
 								delete from wbz.articles where id=@id";
-							SetLog(Global.User.ID, module, id, $"Usunięto towar.", sqlTran);
+							SetLog(Global.User.ID, module, id, $"Usunięto towar: {name}", sqlTran);
 							break;
+						/// attachments
 						case Global.Module.ATTACHMENTS:
-							query = @"";
+							query = @"delete from wbz.attachments where id=@id";
+							SetLog(Global.User.ID, module, id, $"Usunięto załącznik: {name}");
 							break;
 						case Global.Module.ATTRIBUTES_CLASSES:
 							query = @"";
@@ -2516,7 +2363,7 @@ namespace WBZ
 						/// companies
 						case Global.Module.COMPANIES:
 							query = @"delete from wbz.companies where id=@id";
-							SetLog(Global.User.ID, module, id, $"Usunięto firmę.", sqlTran);
+							SetLog(Global.User.ID, module, id, $"Usunięto firmę: {name}", sqlTran);
 							break;
 						case Global.Module.DISTRIBUTIONS:
 							query = @"";
@@ -2527,25 +2374,26 @@ namespace WBZ
 						/// employees
 						case Global.Module.EMPLOYEES:
 							query = @"delete from wbz.employees where id=@id";
-							SetLog(Global.User.ID, module, id, $"Usunięto pracownika.", sqlTran);
+							SetLog(Global.User.ID, module, id, $"Usunięto pracownika: {name}", sqlTran);
 							break;
 						/// families
 						case Global.Module.FAMILIES:
 							query = @"delete from wbz.families where id=@id";
-							SetLog(Global.User.ID, module, id, $"Usunięto rodzinę.", sqlTran);
+							SetLog(Global.User.ID, module, id, $"Usunięto rodzinę: {name}", sqlTran);
 							break;
+						/// logs
 						case Global.Module.LOGS:
-							query = @"";
+							query = @"delete from wbz.logs where id=@id";
 							break;
 						case Global.Module.STORES:
 							query = @"delete from wbz.stores_articles where store=@id;
 								delete from wbz.stores where id=@id";
-							SetLog(Global.User.ID, module, id, $"Usunięto magazyn.", sqlTran);
+							SetLog(Global.User.ID, module, id, $"Usunięto magazyn: {name}", sqlTran);
 							break;
 						/// users
 						case Global.Module.USERS:
 							query = @"delete from wbz.users where id=@id";
-							SetLog(Global.User.ID, module, id, $"Usunięto użytkownika.", sqlTran);
+							SetLog(Global.User.ID, module, id, $"Usunięto użytkownika: {name}", sqlTran);
 							break;
 						default:
 							return result;
@@ -2568,9 +2416,61 @@ namespace WBZ
 			
 			return result;
 		}
-        #endregion
+		#endregion
 
-        #region additional
-        #endregion
-    }
+		#region additional
+		/// <summary>
+		/// Pobiera wartość podanej właściwości z bazy danych
+		/// </summary>
+		/// <param name="property">Nazwa właściwości z tabeli wbz.config</param>
+		internal static string GetPropertyValue(string property)
+		{
+			string result = null;
+
+			try
+			{
+				using (var sqlConn = connOpenedWBZ)
+				using (var sqlCmd = new NpgsqlCommand(@"select coalesce((select value from wbz.config where property=@property),'')", sqlConn))
+				{
+					sqlCmd.Parameters.AddWithValue("property", property);
+					result = sqlCmd.ExecuteScalar().ToString();
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.ToString());
+			}
+
+			return result;
+		}
+		/// <summary>
+		/// Ustawia wartość podanej właściwości z bazy danych
+		/// </summary>
+		/// <param name="property">Nazwa właściwości z tabeli wbz.config</param>
+		/// <param name="value">Wartość właściwości z tabeli wbz.config</param>
+		internal static bool SetPropertyValue(string property, string value)
+		{
+			bool result = false;
+
+			try
+			{
+				using (var sqlConn = connOpenedWBZ)
+				using (var sqlCmd = new NpgsqlCommand(@"update wbz.config set value=@value where property=@property", sqlConn))
+				{
+					sqlCmd.Parameters.AddWithValue("property", property);
+					sqlCmd.Parameters.AddWithValue("value", value);
+					sqlCmd.ExecuteNonQuery();
+				}
+
+				result = true;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.ToString());
+			}
+
+			return result;
+		}
+		#endregion
+	}
 }

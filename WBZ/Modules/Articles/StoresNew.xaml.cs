@@ -122,7 +122,7 @@ namespace WBZ.Modules.Articles
 				var selectedInstances = (sender as DataGrid).SelectedItems.Cast<C_Document>();
 				foreach (C_Document instance in selectedInstances)
 				{
-					var window = new DocumentsNew(instance, false/*perm*/);
+					var window = new DocumentsNew(instance, perm);
 					window.Show();
 				}
 			}

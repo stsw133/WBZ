@@ -154,6 +154,12 @@ namespace WBZ.Modules.Documents
 					M.InstanceInfo.Positions.Rows.Add(row);
 				}
 		}
+
+		private void Window_Closed(object sender, System.EventArgs e)
+		{
+			if (M.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE) && !saved)
+				SQL.ClearObject(M.MODULE_NAME, M.InstanceInfo.ID);
+		}
 	}
 
 	/// <summary>

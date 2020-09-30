@@ -121,7 +121,7 @@ namespace WBZ.Modules.Admin
 			if (selectedInstances.Count() > 0 && MessageBox.Show("Czy na pewno usunąć zaznaczone rekordy?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
 			{
 				foreach (MODULE_CLASS instance in selectedInstances)
-					SQL.DeleteInstance(M.MODULE_NAME, instance.ID);
+					SQL.DeleteInstance(M.MODULE_NAME, instance.ID, instance.Fullname);
 				btnRefresh_Click(null, null);
 			}
 		}

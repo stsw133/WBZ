@@ -89,9 +89,7 @@ namespace WBZ.Controls
             if (lbAttachments.SelectedIndex < 0)
                 return;
 
-            SQL.DeleteAttachment(M.InstanceAttachments[lbAttachments.SelectedIndex].ID);
-            SQL.SetLog(Global.User.ID, Module, ID, $"Usunięto załącznik: {M.InstanceAttachments[lbAttachments.SelectedIndex].Name}");
-
+            SQL.DeleteInstance(Global.Module.ATTACHMENTS, M.InstanceAttachments[lbAttachments.SelectedIndex].ID, M.InstanceAttachments[lbAttachments.SelectedIndex].Name);
             M.InstanceAttachments = SQL.ListAttachments(Module, ID);
         }
 

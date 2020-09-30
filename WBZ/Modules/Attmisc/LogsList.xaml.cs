@@ -69,7 +69,7 @@ namespace WBZ.Modules.Attmisc
 			foreach (int index in indexes)
 			{
 				var log = M.InstancesList[index];
-				openObj(log, false);
+				openObj(log, Global.ActionType.PREVIEW);
 			}
 		}
 		private void btnEdit_Click(object sender, MouseButtonEventArgs e)
@@ -78,110 +78,60 @@ namespace WBZ.Modules.Attmisc
 			foreach (int index in indexes)
 			{
 				var log = M.InstancesList[index];
-				openObj(log, true);
+				openObj(log, Global.ActionType.EDIT);
 			}
 		}
-		private void openObj(C_Log log, bool editMode)
+		private void openObj(C_Log log, Global.ActionType mode)
 		{
 			if (log.Instance == 0)
 				return;
+			if (SQL.CountInstances(log.Module, $"{string.Join("", log.Module.Split('_').AsQueryable().Cast<string>().Select(str => str.Substring(0, 1)))}.id={log.Instance}") == 0)
+				return;
 
-			if (log.Module == Global.Module.DOCUMENTS)
-			{
-				if (SQL.CountInstances(log.Module, $"d.id={log.Instance}") == 0)
-					return;
+			if (!(mode == Global.ActionType.EDIT && Global.User.Perms.Contains($"{log.Module}_{Global.UserPermType.SAVE}")))
+				mode = Global.ActionType.PREVIEW;
+			if (!Global.User.Perms.Contains($"{log.Module}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{log.Module}_{Global.UserPermType.SAVE}"))
+				return;
+			Window window;
 
-				if (!(editMode && Global.User.Perms.Contains($"{Global.Module.DOCUMENTS}_{Global.UserPermType.SAVE}")))
-					editMode = false;
-				if (!Global.User.Perms.Contains($"{Global.Module.DOCUMENTS}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{Global.Module.DOCUMENTS}_{Global.UserPermType.SAVE}"))
+			switch (log.Module)
+            {
+				/// articles
+				case Global.Module.ARTICLES:
+					window = new ArticlesNew(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Article>()?[0], mode);
+					break;
+				/// attributes_classes
+				case Global.Module.ATTRIBUTES_CLASSES:
+					window = new AttributesClassesAdd(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_AttributeClass>()?[0], false/*mode*/);
+					break;
+				/// companies
+				case Global.Module.COMPANIES:
+					window = new CompaniesNew(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Company>()?[0], mode);
+					break;
+				/// distributions
+				case Global.Module.DISTRIBUTIONS:
+					window = new DistributionsAdd(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Distribution>()?[0], false/*mode*/);
+					break;
+				/// documents
+				case Global.Module.DOCUMENTS:
+					window = new DocumentsNew(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Document>()?[0], mode);
+					break;
+				/// families
+				case Global.Module.FAMILIES:
+					window = new FamiliesNew(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Family>()?[0], mode);
+					break;
+				/// stores
+				case Global.Module.STORES:
+					window = new StoresNew(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Store>()?[0], mode);
+					break;
+				/// users
+				case Global.Module.USERS:
+					window = new UsersNew(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_User>()?[0], mode);
+					break;
+				default:
 					return;
-				var window = new DocumentsNew(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Document>()?[0], editMode);
-				window.Show();
 			}
-			else if (log.Module == Global.Module.STORES)
-			{
-				if (SQL.CountInstances(log.Module, $"s.id={log.Instance}") == 0)
-					return;
-
-				if (!(editMode && Global.User.Perms.Contains($"{Global.Module.STORES}_{Global.UserPermType.SAVE}")))
-					editMode = false;
-				if (!Global.User.Perms.Contains($"{Global.Module.STORES}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{Global.Module.STORES}_{Global.UserPermType.SAVE}"))
-					return;
-				var window = new StoresNew(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Store>()?[0], Global.ActionType.PREVIEW);
-				window.Show();
-			}
-			else if (log.Module == Global.Module.ARTICLES)
-			{
-				if (SQL.CountInstances(log.Module, $"a.id={log.Instance}") == 0)
-					return;
-
-				if (!(editMode && Global.User.Perms.Contains($"{Global.Module.ARTICLES}_{Global.UserPermType.SAVE}")))
-					editMode = false;
-				if (!Global.User.Perms.Contains($"{Global.Module.ARTICLES}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{Global.Module.ARTICLES}_{Global.UserPermType.SAVE}"))
-					return;
-				var window = new ArticlesNew(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Article>()?[0], Global.ActionType.PREVIEW);
-				window.Show();
-			}
-			else if (log.Module == Global.Module.COMPANIES)
-			{
-				if (SQL.CountInstances(log.Module, $"c.id={log.Instance}") == 0)
-					return;
-
-				if (!(editMode && Global.User.Perms.Contains($"{Global.Module.COMPANIES}_{Global.UserPermType.SAVE}")))
-					editMode = false;
-				if (!Global.User.Perms.Contains($"{Global.Module.COMPANIES}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{Global.Module.COMPANIES}_{Global.UserPermType.SAVE}"))
-					return;
-				var window = new CompaniesNew(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Company>()?[0], Global.ActionType.PREVIEW);
-				window.Show();
-			}
-			else if (log.Module == Global.Module.FAMILIES)
-			{
-				if (SQL.CountInstances(log.Module, $"f.id={log.Instance}") == 0)
-					return;
-
-				if (!(editMode && Global.User.Perms.Contains($"{Global.Module.FAMILIES}_{Global.UserPermType.SAVE}")))
-					editMode = false;
-				if (!Global.User.Perms.Contains($"{Global.Module.FAMILIES}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{Global.Module.FAMILIES}_{Global.UserPermType.SAVE}"))
-					return;
-				var window = new FamiliesNew(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Family>()?[0], Global.ActionType.PREVIEW);
-				window.Show();
-			}
-			else if (log.Module == Global.Module.DISTRIBUTIONS)
-			{
-				if (SQL.CountInstances(log.Module, $"d.id={log.Instance}") == 0)
-					return;
-
-				if (!(editMode && Global.User.Perms.Contains($"{Global.Module.DISTRIBUTIONS}_{Global.UserPermType.SAVE}")))
-					editMode = false;
-				if (!Global.User.Perms.Contains($"{Global.Module.DISTRIBUTIONS}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{Global.Module.DISTRIBUTIONS}_{Global.UserPermType.SAVE}"))
-					return;
-				var window = new DistributionsAdd(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Distribution>()?[0], editMode);
-				window.Show();
-			}
-			else if (log.Module == Global.Module.USERS)
-			{
-				if (SQL.CountInstances(log.Module, $"u.id={log.Instance}") == 0)
-					return;
-
-				if (!(editMode && Global.User.Perms.Contains($"{Global.Module.USERS}_{Global.UserPermType.SAVE}")))
-					editMode = false;
-				if (!Global.User.Perms.Contains($"{Global.Module.USERS}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{Global.Module.USERS}_{Global.UserPermType.SAVE}"))
-					return;
-				var window = new UsersNew(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_User>()?[0], Global.ActionType.PREVIEW);
-				window.Show();
-			}
-			else if (log.Module == Global.Module.ATTRIBUTES_CLASSES)
-			{
-				if (SQL.CountInstances(log.Module, $"ac.id={log.Instance}") == 0)
-					return;
-
-				if (!(editMode && Global.User.Perms.Contains($"{Global.Module.ATTRIBUTES_CLASSES}_{Global.UserPermType.SAVE}")))
-					editMode = false;
-				if (!Global.User.Perms.Contains($"{Global.Module.ATTRIBUTES_CLASSES}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{Global.Module.ATTRIBUTES_CLASSES}_{Global.UserPermType.SAVE}"))
-					return;
-				var window = new AttributesClassesAdd(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_AttributeClass>()?[0], editMode);
-				window.Show();
-			}
+			window.Show();
 		}
 		private void btnDelete_Click(object sender, MouseButtonEventArgs e)
 		{
@@ -189,7 +139,7 @@ namespace WBZ.Modules.Attmisc
 			if (indexes.Count<int>() > 0 && MessageBox.Show("Czy na pewno usunąć zaznaczone rekordy?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
 			{
 				foreach (int index in indexes)
-					SQL.DeleteLog(M.InstancesList[index].ID);
+					SQL.DeleteInstance(Global.Module.LOGS, M.InstancesList[index].ID, null);
 				btnRefresh_Click(null, null);
 			}
 		}

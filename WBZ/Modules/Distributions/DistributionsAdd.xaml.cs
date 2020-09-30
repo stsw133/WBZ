@@ -173,7 +173,7 @@ namespace WBZ.Modules.Distributions
 			}
 
 			///Render
-			PdfDocumentRenderer renderer = new PdfDocumentRenderer(true, PdfSharp.Pdf.PdfFontEmbedding.Always);
+			PdfDocumentRenderer renderer = new PdfDocumentRenderer(true);
 			renderer.Document = document;
 			renderer.RenderDocument();
 

@@ -208,18 +208,23 @@ namespace WBZ
 #endif
 		}
 
-		#region module "Documents"
+		/// <summary>
+		/// Documents - DocumentsNew
+		/// </summary>
 		private void btnDocumentsList_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new DocumentsList();
 			window.Show();
 		}
-		private void btnDocumentsAdd_Click(object sender, RoutedEventArgs e)
+
+		/// <summary>
+		/// Documents - DocumentsNew
+		/// </summary>
+		private void btnDocumentsNew_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new DocumentsNew(new C_Document(), true);
+			var window = new DocumentsNew(new C_Document(), Global.ActionType.NEW);
 			window.Show();
 		}
-		#endregion
 
 		/// <summary>
 		/// Articles - ArticlesList
