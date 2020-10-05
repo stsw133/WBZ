@@ -21,7 +21,7 @@
     </Window.Resources>
     <DockPanel>
         <!-- titleBar -->
-        <c:TitleBar DockPanel.Dock="Top" AdditionalIcon="pack://siteoforigin:,,,/Resources/_null.ico"/>
+        <c:TitleBar DockPanel.Dock="Top"/>
         <!-- main -->
         <TextBox DockPanel.Dock="Top" Margin="5" Padding="2.5" Text="{Binding AttributeInfo.Value}" Visibility="{Binding FreeValues, Converter={StaticResource conv_VisibleIfTrue}}"/>
         <ComboBox DockPanel.Dock="Top" Margin="5" Padding="2.5" ItemsSource="{Binding AttributeValues}" SelectedValue="{Binding AttributeInfo.Value}" Visibility="{Binding FreeValues, Converter={StaticResource conv_BoolInverted}}"/>

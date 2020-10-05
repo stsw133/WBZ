@@ -214,8 +214,8 @@
     <Compile Include="Modules\Companies\CompaniesList.xaml.cs">
       <DependentUpon>CompaniesList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Distributions\DistributionsAdd.xaml.cs">
-      <DependentUpon>DistributionsAdd.xaml</DependentUpon>
+    <Compile Include="Modules\Distributions\DistributionsNew.xaml.cs">
+      <DependentUpon>DistributionsNew.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Distributions\DistributionsList.xaml.cs">
       <DependentUpon>DistributionsList.xaml</DependentUpon>
@@ -365,7 +365,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Distributions\DistributionsAdd.xaml">
+    <Page Include="Modules\Distributions\DistributionsNew.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

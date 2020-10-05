@@ -1,4 +1,4 @@
-﻿using Props = WBZ.Properties.Settings;
+﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -6,12 +6,12 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using WBZ.Classes;
-using WBZ.Helpers;
 using System.Net.Http;
-using Newtonsoft.Json.Linq;
-using WBZ.Controls;
 using System.Reflection;
+using WBZ.Classes;
+using WBZ.Controls;
+using WBZ.Helpers;
+using Props = WBZ.Properties.Settings;
 
 namespace WBZ.Modules.Login
 {
@@ -221,16 +221,13 @@ namespace WBZ.Modules.Login
 		private void btnGenerateNewpass_Click(object sender, RoutedEventArgs e)
 		{
 			//TODO - nowy sposób generowania hasła z wysłaniem kodu na maila
-			var window = new MsgWin(MsgWin.Type.InputBox, "Generowanie nowego hasła",
-				$"Podaj e-mail konta, którego hasło chcesz odzyskać:");
+			var window = new MsgWin(MsgWin.Type.InputBox, "Generowanie nowego hasła", $"Podaj e-mail konta, którego hasło chcesz odzyskać:");
 			window.Owner = this;
 			if (window.ShowDialog() == true)
 			{
 				var loginData = SQL.GenerateNewPasswordForAccount(window.values[0]);
-				if (Mail.SendMail(Props.Default.config_Email_Email,
-						new string[] { window.values[0] },
-						"WBZ - generowanie nowego hasła",
-						$"Nazwa użytkownika: {loginData[0]}{Environment.NewLine}Hasło: {loginData[1]}"))
+				if (Mail.SendMail(Props.Default.config_Email_Email, new string[] { window.values[0] },
+						"WBZ - generowanie nowego hasła", $"Nazwa użytkownika: {loginData[0]}{Environment.NewLine}Hasło: {loginData[1]}"))
 					MessageBox.Show("Wiadomość z nazwą użytkownika i hasłem wysłano na podany e-mail.");
 			}
 		}

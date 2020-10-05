@@ -123,9 +123,9 @@ namespace WBZ.Modules.Admin
 		}
 		/// Editing mode
 		public bool EditingMode { get { return Mode != Global.ActionType.PREVIEW; } }
-		/// Tryb okna
+		/// Window mode
 		public Global.ActionType Mode { get; set; }
-		/// Dodatkowa ikona okna
+		/// Additional window icon
 		public string ModeIcon
 		{
 			get
@@ -140,7 +140,7 @@ namespace WBZ.Modules.Admin
 					return "pack://siteoforigin:,,,/Resources/icon32_search.ico";
 			}
 		}
-		/// Tytuł okna
+		/// Window title
 		public string Title
 		{
 			get

@@ -22,7 +22,7 @@
     </Window.Resources>
     <DockPanel>
         <!-- titleBar -->
-        <c:TitleBar DockPanel.Dock="Top" AdditionalIcon="pack://siteoforigin:,,,/Resources/_null.ico"/>
+        <c:TitleBar DockPanel.Dock="Top"/>
         <!-- menu -->
         <Border DockPanel.Dock="Top" BorderBrush="Gray" BorderThickness="1">
             <DockPanel>
@@ -267,7 +267,7 @@
                                         <Label Content="Wyświetl listę" VerticalContentAlignment="Center"/>
                                     </DockPanel>
                                 </Button>
-                                <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=20}" FontWeight="Normal" IsEnabled="{Binding User.Perms, Converter={StaticResource conv_ListContains}, ConverterParameter=distributions_save}" Click="btnDistributionsAdd_Click">
+                                <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=20}" FontWeight="Normal" IsEnabled="{Binding User.Perms, Converter={StaticResource conv_ListContains}, ConverterParameter=distributions_save}" Click="btnDistributionsNew_Click">
                                     <DockPanel>
                                         <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_add.ico"/>
                                         <Label Content="Dodaj nową" VerticalContentAlignment="Center"/>

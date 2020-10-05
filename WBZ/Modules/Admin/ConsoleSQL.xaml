@@ -19,7 +19,7 @@
     </Window.Resources>
     <DockPanel>
         <!-- titleBar -->
-        <c:TitleBar DockPanel.Dock="Top" AdditionalIcon="pack://siteoforigin:,,,/Resources/_null.ico"/>
+        <c:TitleBar DockPanel.Dock="Top"/>
         <!-- main -->
         <DockPanel DockPanel.Dock="Bottom">
             <c:SimpleButton Margin="5,5,0,5" IsEnabled="True" TextVisibility="False" HorizontalAlignment="Left"

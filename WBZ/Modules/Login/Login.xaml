@@ -20,7 +20,7 @@
     </Window.Resources>
     <DockPanel>
         <!-- titleBar -->
-        <c:TitleBar DockPanel.Dock="Top" AdditionalIcon="pack://siteoforigin:,,,/Resources/_null.ico"/>
+        <c:TitleBar DockPanel.Dock="Top"/>
         <!-- main -->
         <DockPanel DockPanel.Dock="Top">
             <Border DockPanel.Dock="Top" Background="White" BorderBrush="Gray" BorderThickness="1">

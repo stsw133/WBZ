@@ -6,7 +6,6 @@
         xmlns:c="clr-namespace:WBZ.Controls"
         xmlns:h="clr-namespace:WBZ.Helpers"
         xmlns:p="clr-namespace:WBZ.Properties"
-        xmlns:local="clr-namespace:WBZ.Modules.Distributions"
         mc:Ignorable="d"
         Title="{Binding Title}" SizeToContent="WidthAndHeight"
             BorderThickness="3" BorderBrush="#333" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" WindowStyle="None"
@@ -22,7 +21,7 @@
     </Window.Resources>
     <DockPanel>
         <!-- titleBar -->
-        <c:TitleBar DockPanel.Dock="Top" AdditionalIcon="pack://siteoforigin:,,,/Resources/_null.ico"/>
+        <c:TitleBar DockPanel.Dock="Top"/>
         <!-- main -->
         <GroupBox DockPanel.Dock="Top" Margin="10,10,10,0" Padding="5" Header="Uzgodniony sposób kontaktu" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=25}">
             <StackPanel>

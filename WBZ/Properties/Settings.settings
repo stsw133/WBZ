@@ -239,14 +239,12 @@
   &lt;string&gt;600&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
-    <Setting Name="config_DistributionsAdd_WindowX" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">900</Value>
-    </Setting>
-    <Setting Name="config_DistributionsAdd_WindowY" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">600</Value>
-    </Setting>
-    <Setting Name="config_DistributionsList_RowsLimitPerPage" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">50</Value>
+    <Setting Name="config_DistributionsNew_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;900&lt;/string&gt;
+  &lt;string&gt;600&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="config_Stats_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
@@ -324,11 +322,12 @@
     <Setting Name="conn_password" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="config_DistributionsList_WindowY" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">600</Value>
-    </Setting>
-    <Setting Name="config_DistributionsList_WindowX" Type="System.String" Scope="User">
-      <Value Profile="(Default)">900</Value>
+    <Setting Name="config_DistributionsList_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;900&lt;/string&gt;
+  &lt;string&gt;600&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="config_Distributions_PanelColor" Type="System.String" Scope="User">
       <Value Profile="(Default)">#EEE</Value>
@@ -504,7 +503,17 @@
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
   &lt;string&gt;d.dateissue&lt;/string&gt;
+  &lt;string&gt;True&lt;/string&gt;
+  &lt;string&gt;d.name&lt;/string&gt;
   &lt;string&gt;False&lt;/string&gt;
+  &lt;string&gt;50&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="sorting_DistributionsList" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;d.datereal&lt;/string&gt;
+  &lt;string&gt;True&lt;/string&gt;
   &lt;string&gt;d.name&lt;/string&gt;
   &lt;string&gt;False&lt;/string&gt;
   &lt;string&gt;50&lt;/string&gt;

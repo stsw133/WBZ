@@ -19,7 +19,7 @@
     </Window.Resources>
     <DockPanel>
         <!-- titleBar -->
-        <c:TitleBar DockPanel.Dock="Top" AdditionalIcon="pack://siteoforigin:,,,/Resources/_null.ico"/>
+        <c:TitleBar DockPanel.Dock="Top"/>
         <!-- main -->
         <Label DockPanel.Dock="Top" x:Name="txtMessage" Margin="5" VerticalContentAlignment="Center"/>
         <TextBox DockPanel.Dock="Top" x:Name="tbInput" Margin="5" Padding="5" VerticalContentAlignment="Center" Visibility="Collapsed"/>

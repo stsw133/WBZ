@@ -115,7 +115,7 @@ namespace WBZ.Modules.Families
                 var selectedInstances = (sender as DataGrid).SelectedItems.Cast<C_Distribution>();
                 foreach (C_Distribution instance in selectedInstances)
                 {
-                    var window = new DistributionsAdd(instance, false/*perm*/);
+                    var window = new DistributionsNew(instance, perm);
                     window.Show();
                 }
             }
@@ -167,9 +167,9 @@ namespace WBZ.Modules.Families
         }
         /// Editing mode
         public bool EditingMode { get { return Mode != Global.ActionType.PREVIEW; } }
-        /// Tryb okna
-        public Global.ActionType Mode { get; set; }
-        /// Dodatkowa ikona okna
+        /// Window mode
+		public Global.ActionType Mode { get; set; }
+        /// Additional window icon
         public string ModeIcon
         {
             get
@@ -184,7 +184,7 @@ namespace WBZ.Modules.Families
                     return "pack://siteoforigin:,,,/Resources/icon32_search.ico";
             }
         }
-        /// Tytuł okna
+        /// Window title
         public string Title
         {
             get

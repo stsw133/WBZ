@@ -289,18 +289,23 @@ namespace WBZ
 			window.Show();
 		}
 
-		#region module "Distributions"
+		/// <summary>
+		/// Distributions - DistributionsList
+		/// </summary>
 		private void btnDistributionsList_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new DistributionsList();
 			window.Show();
 		}
-		private void btnDistributionsAdd_Click(object sender, RoutedEventArgs e)
+
+		/// <summary>
+		/// Distributions - DistributionsNew
+		/// </summary>
+		private void btnDistributionsNew_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new DistributionsAdd(new C_Distribution(), true);
+			var window = new DistributionsNew(new C_Distribution(), Global.ActionType.NEW);
 			window.Show();
 		}
-		#endregion
 
 		#region module "Attmisc"
 		private void btnGroupsList_Click(object sender, RoutedEventArgs e)
@@ -330,13 +335,14 @@ namespace WBZ
 		}
 		#endregion
 
-		#region module "Stats"
+		/// <summary>
+		/// Stats
+		/// </summary>
 		private void btnStats_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new Stats();
 			window.Show();
 		}
-		#endregion
 
 		private void Window_Closing(object sender, CancelEventArgs e)
         {

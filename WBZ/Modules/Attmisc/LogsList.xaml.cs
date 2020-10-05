@@ -110,7 +110,7 @@ namespace WBZ.Modules.Attmisc
 					break;
 				/// distributions
 				case Global.Module.DISTRIBUTIONS:
-					window = new DistributionsAdd(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Distribution>()?[0], false/*mode*/);
+					window = new DistributionsNew(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Distribution>()?[0], mode);
 					break;
 				/// documents
 				case Global.Module.DOCUMENTS:

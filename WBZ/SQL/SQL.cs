@@ -479,79 +479,6 @@ namespace WBZ
 
 			return result;
 		}
-		/// <summary>
-		/// Usuwa wszystkie kontakty, atrybuty i załączniki przypisane do obiektu
-		/// </summary>
-		/// <param name="module">Nazwa modułu</param>
-		/// <param name="instance">Numer ID obiektu</param>
-		internal static bool ClearObject(string module, int instance)
-		{
-			bool result = false;
-
-			try
-			{
-				using (var sqlConn = connOpenedWBZ)
-				using (var sqlTran = sqlConn.BeginTransaction())
-				{
-					ClearObject(module, instance, sqlConn, sqlTran);
-					sqlTran.Commit();
-				}
-
-				result = true;
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.ToString());
-			}
-
-			return result;
-		}
-		/// <summary>
-		/// Usuwa wszystkie kontakty, atrybuty i załączniki przypisane do obiektu
-		/// </summary>
-		/// <param name="module">Nazwa modułu</param>
-		/// <param name="instance">Numer ID obiektu</param>
-		internal static bool ClearObject(string module, int instance, NpgsqlConnection sqlConn, NpgsqlTransaction sqlTran)
-		{
-			bool result = false;
-
-			try
-			{
-				using (var sqlCmd = new NpgsqlCommand(@"delete from wbz.contacts where module=@module and instance=@instance", sqlConn, sqlTran))
-				{
-					sqlCmd.Parameters.AddWithValue("module", module);
-					sqlCmd.Parameters.AddWithValue("instance", instance);
-					sqlCmd.ExecuteNonQuery();
-				}
-				using (var sqlCmd = new NpgsqlCommand(@"delete from wbz.groups where module=@module and instance=@instance", sqlConn, sqlTran))
-				{
-					sqlCmd.Parameters.AddWithValue("module", module);
-					sqlCmd.Parameters.AddWithValue("instance", instance);
-					sqlCmd.ExecuteNonQuery();
-				}
-				using (var sqlCmd = new NpgsqlCommand(@"delete from wbz.attributes
-					where class in (select id from wbz.attributes_classes where module=@module) and instance=@instance", sqlConn, sqlTran))
-				{
-					sqlCmd.Parameters.AddWithValue("module", module);
-					sqlCmd.Parameters.AddWithValue("instance", instance);
-					sqlCmd.ExecuteNonQuery();
-				}
-				using (var sqlCmd = new NpgsqlCommand(@"delete from wbz.attachments where module=@module and instance=@instance", sqlConn, sqlTran))
-				{
-					sqlCmd.Parameters.AddWithValue("module", module);
-					sqlCmd.Parameters.AddWithValue("instance", instance);
-					sqlCmd.ExecuteNonQuery();
-				}
-
-				result = true;
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.ToString());
-			}
-
-			return result;
-		}
 		#endregion
 
 		#region Login
@@ -1033,57 +960,6 @@ namespace WBZ
 			return result;
 		}
 
-		#region module "Distributions"
-		/// <summary>
-		/// Pobiera listę dystrybucji
-		/// </summary>
-		/// <param name="filter">Filtr SQL</param>
-		/// <param name="limit">Limit rekordów</param>
-		/// <param name="offset">Offset</param>
-		/// <param name="order">Sortowanie po nazwie kolumny</param>
-		/// <param name="desc">Porządek sortowania malejący</param>
-		internal static List<C_Distribution> ListDistributions(string filter = null, int limit = int.MaxValue, int offset = 0, string order = "datereal", bool desc = true)
-		{
-			var result = new List<C_Distribution>();
-
-			try
-			{
-				using (var sqlConn = new NpgsqlConnection(connWBZ))
-				{
-					sqlConn.Open();
-
-					var sqlCmd = new NpgsqlCommand(@"select d.id, d.name, d.datereal, d.status,
-							count(distinct dp.family) as familiescount, sum(members) as memberscount,
-							count(dp.*) as positionscount, sum(dp.amount) as weight,
-							d.archival, d.comment
-						from wbz.distributions d
-						left join wbz.distributions_positions dp
-							on dp.distribution=d.id
-						where @filter
-						group by d.id
-						order by @order
-						limit @limit offset @offset", sqlConn);
-					sqlCmd.CommandText = sqlCmd.CommandText.Replace("@filter", filter ?? true.ToString());
-					sqlCmd.CommandText = sqlCmd.CommandText.Replace("@order", order + " " + (desc ? "desc" : "asc"));
-					sqlCmd.Parameters.AddWithValue("limit", limit);
-					sqlCmd.Parameters.AddWithValue("offset", offset);
-					using (var sqlDA = new NpgsqlDataAdapter(sqlCmd))
-					{
-						var dt = new DataTable();
-						sqlDA.Fill(dt);
-						result = dt.DataTableToList<C_Distribution>();
-					}
-
-					sqlConn.Close();
-				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.ToString());
-			}
-
-			return result;
-		}
 		/// <summary>
 		/// Pobiera sformatowaną tabelę dla pozycji dystrybucji
 		/// </summary>
@@ -1111,6 +987,7 @@ namespace WBZ
 
 			return result;
 		}
+
 		/// <summary>
 		/// Pobiera dane o pozycjach dystrybucji
 		/// </summary>
@@ -1185,6 +1062,7 @@ namespace WBZ
 
 			return result;
 		}
+
 		/// <summary>
 		/// Ustawia dane o dystrybucji
 		/// </summary>
@@ -1321,6 +1199,7 @@ namespace WBZ
 
 			return result;
 		}
+
 		/// <summary>
 		/// Usunięcie dystrybucji
 		/// </summary>
@@ -1378,7 +1257,6 @@ namespace WBZ
 
 			return result;
 		}
-		#endregion
 
 		#region module "Attmisc - Attributes"
 		/// <summary>
@@ -1714,6 +1592,7 @@ namespace WBZ
         #endregion
 
         #region basic
+
         #endregion
 
         #region modules
@@ -1861,8 +1740,15 @@ namespace WBZ
 									c.archival, c.comment
 								from wbz.companies c";
 							break;
+						/// distributions
 						case Global.Module.DISTRIBUTIONS:
-							query = @"";
+							query = @"select d.id, d.name, d.datereal, d.status,
+									count(distinct dp.family) as familiescount, sum(members) as memberscount,
+									count(dp.*) as positionscount, sum(dp.amount) as weight,
+									d.archival, d.comment
+								from wbz.distributions d
+								left join wbz.distributions_positions dp
+									on dp.distribution=d.id";
 							break;
 						/// documents
 						case Global.Module.DOCUMENTS:
@@ -1922,7 +1808,7 @@ namespace WBZ
 					using (var sqlCmd = new NpgsqlCommand(query, sqlConn))
 					{
 						sqlCmd.CommandText += $" where {filter}";
-						if (module.In(Global.Module.ARTICLES, Global.Module.FAMILIES, Global.Module.STORES)) sqlCmd.CommandText += $" group by {module[0]}.id";
+						if (module.In(Global.Module.ARTICLES, Global.Module.DISTRIBUTIONS, Global.Module.FAMILIES, Global.Module.STORES)) sqlCmd.CommandText += $" group by {module[0]}.id";
 						if (module.In(Global.Module.DOCUMENTS)) sqlCmd.CommandText += $" group by d.id, c.id, s.id";
 						sqlCmd.CommandText += $" order by {sort[0]} {(Convert.ToBoolean(sort[1]) ? "desc" : "asc")}, {sort[2]} {(Convert.ToBoolean(sort[3]) ? "desc" : "asc")}";
 						sqlCmd.CommandText += $" limit {sort[4]} offset {Convert.ToInt32(sort[4]) * page}";
@@ -2459,6 +2345,79 @@ namespace WBZ
 				{
 					sqlCmd.Parameters.AddWithValue("property", property);
 					sqlCmd.Parameters.AddWithValue("value", value);
+					sqlCmd.ExecuteNonQuery();
+				}
+
+				result = true;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.ToString());
+			}
+
+			return result;
+		}
+		/// <summary>
+		/// Usuwa wszystkie kontakty, atrybuty i załączniki przypisane do obiektu
+		/// </summary>
+		/// <param name="module">Nazwa modułu</param>
+		/// <param name="instance">Numer ID obiektu</param>
+		internal static bool ClearObject(string module, int instance)
+		{
+			bool result = false;
+
+			try
+			{
+				using (var sqlConn = connOpenedWBZ)
+				using (var sqlTran = sqlConn.BeginTransaction())
+				{
+					ClearObject(module, instance, sqlConn, sqlTran);
+					sqlTran.Commit();
+				}
+
+				result = true;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.ToString());
+			}
+
+			return result;
+		}
+		/// <summary>
+		/// Usuwa wszystkie kontakty, atrybuty i załączniki przypisane do obiektu
+		/// </summary>
+		/// <param name="module">Nazwa modułu</param>
+		/// <param name="instance">Numer ID obiektu</param>
+		internal static bool ClearObject(string module, int instance, NpgsqlConnection sqlConn, NpgsqlTransaction sqlTran)
+		{
+			bool result = false;
+
+			try
+			{
+				using (var sqlCmd = new NpgsqlCommand(@"delete from wbz.contacts where module=@module and instance=@instance", sqlConn, sqlTran))
+				{
+					sqlCmd.Parameters.AddWithValue("module", module);
+					sqlCmd.Parameters.AddWithValue("instance", instance);
+					sqlCmd.ExecuteNonQuery();
+				}
+				using (var sqlCmd = new NpgsqlCommand(@"delete from wbz.groups where module=@module and instance=@instance", sqlConn, sqlTran))
+				{
+					sqlCmd.Parameters.AddWithValue("module", module);
+					sqlCmd.Parameters.AddWithValue("instance", instance);
+					sqlCmd.ExecuteNonQuery();
+				}
+				using (var sqlCmd = new NpgsqlCommand(@"delete from wbz.attributes
+					where class in (select id from wbz.attributes_classes where module=@module) and instance=@instance", sqlConn, sqlTran))
+				{
+					sqlCmd.Parameters.AddWithValue("module", module);
+					sqlCmd.Parameters.AddWithValue("instance", instance);
+					sqlCmd.ExecuteNonQuery();
+				}
+				using (var sqlCmd = new NpgsqlCommand(@"delete from wbz.attachments where module=@module and instance=@instance", sqlConn, sqlTran))
+				{
+					sqlCmd.Parameters.AddWithValue("module", module);
+					sqlCmd.Parameters.AddWithValue("instance", instance);
 					sqlCmd.ExecuteNonQuery();
 				}
 

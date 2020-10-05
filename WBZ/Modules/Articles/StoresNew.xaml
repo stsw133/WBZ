@@ -21,7 +21,7 @@
     </Window.Resources>
     <DockPanel>
         <!-- titleBar -->
-        <c:TitleBar DockPanel.Dock="Top" AdditionalIcon="{Binding EditIcon}"/>
+        <c:TitleBar DockPanel.Dock="Top" AdditionalIcon="{Binding ModeIcon}"/>
         <!-- buttonsPanel -->
         <Border DockPanel.Dock="Right" Background="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="1,0,0,0">
             <DockPanel>

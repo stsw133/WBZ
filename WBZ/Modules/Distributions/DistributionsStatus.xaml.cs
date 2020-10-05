@@ -29,12 +29,18 @@ namespace WBZ.Modules.Distributions
 			if (family.Status == 2) rbStatus2.IsChecked = true;
 		}
 
+		/// <summary>
+		/// Send SMS
+		/// </summary>
 		private void btnSendSMS_Click(object sender, MouseButtonEventArgs e)
 		{
 			if (GSM.SendSMS(new string[] { M.FamilyContactsInfo.Rows[0]["phone"].ToString() }))
 				(sender as Button).IsEnabled = false;
 		}
 
+		/// <summary>
+		/// Send Email
+		/// </summary>
 		private void btnSendEmail_Click(object sender, MouseButtonEventArgs e)
 		{
 			if (Mail.SendMail(Properties.Settings.Default.config_Email_Email, new string[] { M.FamilyContactsInfo.Rows[0]["email"].ToString() }, "Darowizna do odebrania",
@@ -42,10 +48,17 @@ namespace WBZ.Modules.Distributions
 				(sender as Button).IsEnabled = false;
 		}
 
+		/// <summary>
+		/// OK
+		/// </summary>
 		private void btnOk_Click(object sender, RoutedEventArgs e)
 		{
 			DialogResult = true;
 		}
+
+		/// <summary>
+		/// Cancel
+		/// </summary>
 		private void btnCancel_Click(object sender, RoutedEventArgs e)
 		{
 			DialogResult = false;
@@ -57,7 +70,7 @@ namespace WBZ.Modules.Distributions
 	/// </summary>
 	public class M_DistributionsStatus : INotifyPropertyChanged
 	{
-		/// Rodzina
+		/// Family
 		private C_Family familyInfo;
 		public C_Family FamilyInfo
 		{
@@ -71,7 +84,7 @@ namespace WBZ.Modules.Distributions
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
 		}
-		/// Główny kontakt rodziny
+		/// Main family contact
 		private DataTable familyContactsInfo;
 		public DataTable FamilyContactsInfo
 		{
@@ -85,7 +98,7 @@ namespace WBZ.Modules.Distributions
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
 		}
-		/// Tytuł okna
+		/// Window title
 		public string Title
 		{
 			get

@@ -164,7 +164,7 @@ z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danyc
         }
 
         /// <summary>
-        /// RODO
+        /// ReportGenerateDonationsSum
         /// </summary>
 		internal static void Print_ReportGenerateDonationsSum(DateTime dFrom, DateTime dTo)
         {
@@ -392,6 +392,123 @@ z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danyc
             renderer.RenderDocument();
 
             ///Save
+            renderer.PdfDocument.Save(filename);
+
+            try
+            {
+                ///Open document.pdf
+                Process.Start(filename);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// DistributionList
+        /// </summary>
+		internal static void Print_DistributionList(C_Distribution distribution)
+        {
+            Color color = Color.FromRgb(0, 0, 0);
+            Color lColor = Color.FromRgb(192, 192, 192);
+
+            ///Create document.pdf
+            Document document = new Document();
+            document.Info.Title = $"Realizacja darowizn";
+            document.Info.Subject = $"Realizacja darowizn: {distribution.ID} - {distribution.DateReal}";
+            document.Info.Author = $"{Global.Database.Name}";
+
+            ///Title
+            Section section = document.AddSection();
+            section.PageSetup.TopMargin = "4cm";
+
+            Image img = section.Headers.Primary.AddImage("Resources/logo.png");
+            img.ScaleHeight = 0.200;
+            img.ScaleWidth = 0.200;
+            img.Top = ShapePosition.Top;
+            img.Left = ShapePosition.Right;
+            img.RelativeHorizontal = RelativeHorizontal.Page;
+            img.RelativeVertical = RelativeVertical.Page;
+
+            ///Subject
+            Paragraph pSubject = section.Headers.Primary.AddParagraph("Wielkopolski Bank Żywności");
+            pSubject.AddLineBreak();
+            pSubject.AddText($"{Global.Database.Name}");
+            pSubject.AddLineBreak();
+            pSubject.AddLineBreak();
+            pSubject.AddText("Realizacja darowizn");
+            pSubject.AddLineBreak();
+            pSubject.AddText($"ID: {distribution.ID}, Data: {distribution.DateReal:dd.MM.yyyy}");
+            pSubject.Format.Alignment = ParagraphAlignment.Left;
+            pSubject.Format.Font.Size = 12;
+            pSubject.Format.Font.Color = color;
+            pSubject.Format.Font.Bold = true;
+
+            ///Content
+            Table tContent = section.AddTable();
+            tContent.Borders.Width = 0.75;
+            Column column = tContent.AddColumn("2cm");
+            column.Format.Alignment = ParagraphAlignment.Center;
+
+            column = tContent.AddColumn("3.5cm");
+            column.Format.Alignment = ParagraphAlignment.Right;
+
+            column = tContent.AddColumn("3.5cm");
+            column.Format.Alignment = ParagraphAlignment.Right;
+
+            column = tContent.AddColumn("3.5cm");
+            column.Format.Alignment = ParagraphAlignment.Right;
+
+            column = tContent.AddColumn("3.5cm");
+            column.Format.Alignment = ParagraphAlignment.Right;
+
+            ///Table header
+            Row row = tContent.AddRow();
+            row.HeadingFormat = true;
+            row.Format.Alignment = ParagraphAlignment.Center;
+            row.Shading.Color = lColor;
+            row.Format.Font.Bold = true;
+            row.Format.Font.Size = 11;
+
+            row.Cells[0].AddParagraph("Nr:");
+            row.Cells[1].AddParagraph("Rodzina:");
+            row.Cells[2].AddParagraph("Waga\ndarowizny (kg):");
+            row.Cells[3].AddParagraph("Data\nodebrania:");
+            row.Cells[4].AddParagraph("Podpis\nodbierającego:");
+
+            ///Table content
+            Row row1 = null;
+            int index = 0;
+            foreach (var family in distribution.Families)
+            {
+                var amount = 0d;
+                foreach (DataRow rValue in family.Positions.Rows)
+                    if (rValue.RowState != DataRowState.Deleted)
+                        amount += Convert.ToDouble(rValue["amount"]) * SQL.GetArtDefMeaCon((int)rValue["article"]);
+
+                index++;
+                row1 = tContent.AddRow();
+                row1.Format.Alignment = ParagraphAlignment.Center;
+                row1.Shading.Color = Color.Empty;
+                row1.Format.Font.Bold = false;
+                row1.TopPadding = 10;
+                row1.BottomPadding = 10;
+                row1.Format.Font.Size = 11;
+                row1.Cells[0].AddParagraph(index.ToString());
+                row1.Cells[1].AddParagraph($"{family.FamilyName}");
+                row1.Cells[2].AddParagraph($"{amount}");
+                if (family.Status == (short)C_DistributionFamily.DistributionFamilyStatus.Taken)
+                    row1.Cells[4].AddParagraph("Odebrano");
+            }
+
+            ///Render
+            PdfDocumentRenderer renderer = new PdfDocumentRenderer(true);
+            renderer.Document = document;
+            renderer.RenderDocument();
+
+            ///Save
+            string filename = "ListaRealizacji.pdf";
             renderer.PdfDocument.Save(filename);
 
             try
