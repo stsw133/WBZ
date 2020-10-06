@@ -133,6 +133,7 @@
     <Compile Include="Classes\C_Distribution.cs" />
     <Compile Include="Classes\C_Document.cs" />
     <Compile Include="Classes\C_Family.cs" />
+    <Compile Include="Classes\C_Group.cs" />
     <Compile Include="Classes\C_Log.cs" />
     <Compile Include="Classes\C_Employee.cs" />
     <Compile Include="Classes\C_User.cs" />

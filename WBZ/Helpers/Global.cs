@@ -19,13 +19,16 @@ namespace WBZ.Helpers
         {
             public const string ARTICLES = "articles";
             public const string ATTACHMENTS = "attachments";
+            public const string ATTRIBUTES = "attributes";
             public const string ATTRIBUTES_CLASSES = "attributes_classes";
             public const string COMMUNITY = "community";
             public const string COMPANIES = "companies";
+            public const string CONTACTS = "contacts";
             public const string DISTRIBUTIONS = "distributions";
             public const string DOCUMENTS = "documents";
             public const string EMPLOYEES = "employees";
             public const string FAMILIES = "families";
+            public const string GROUPS = "groups";
             public const string LOGS = "logs";
             public const string STATS = "stats";
             public const string STORES = "stores";

@@ -10,7 +10,7 @@
         Title="Zarządzanie grupami" MinHeight="240" MinWidth="240" Height="{Binding Source={x:Static p:Settings.Default}, Path=config_GroupsList_WindowSize[1], Mode=TwoWay}" Width="{Binding Source={x:Static p:Settings.Default}, Path=config_GroupsList_WindowSize[0], Mode=TwoWay}"
             BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}}"
-            Icon="pack://siteoforigin:,,,/Resources/icon32_groups.ico" Loaded="Window_Loaded">
+            Icon="pack://siteoforigin:,,,/Resources/icon32_groups.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -49,28 +49,87 @@
                 </ContextMenu>
             </Border.ContextMenu>
         </Border>
-        <!-- other -->
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <DockPanel Margin="10" IsEnabled="{Binding EditMode}">
-                <DockPanel DockPanel.Dock="Top">
-                    <Label Content="Moduł:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
-                    <ComboBox SelectedValue="{Binding InstanceInfo.Module}" SelectedValuePath="Tag" Margin="5" VerticalContentAlignment="Center">
-                        <ComboBoxItem Content="Dokumenty" Tag="documents"/>
-                        <ComboBoxItem Content="Dystrybucje" Tag="distributions"/>
-                        <ComboBoxItem Content="Firmy" Tag="companies"/>
-                        <ComboBoxItem Content="Magazyny" Tag="stores"/>
-                        <ComboBoxItem Content="Pracownicy" Tag="employees"/>
-                        <ComboBoxItem Content="Rodziny" Tag="families"/>
-                        <ComboBoxItem Content="Towary" Tag="articles"/>
-                    </ComboBox>
-                </DockPanel>
-                <CheckBox DockPanel.Dock="Top" Content="Pokaż archiwalne" Margin="20" VerticalContentAlignment="Center" IsChecked="{Binding InstanceInfo.Archival}"/>
-                <DockPanel DockPanel.Dock="Bottom">
-                    <Label DockPanel.Dock="Top" Content="Komentarz:" Margin="5,5,5,0" VerticalContentAlignment="Center"/>
-                    <TextBox DockPanel.Dock="Top" Text="{Binding InstanceInfo.Comment}" Margin="5" TextWrapping="Wrap" MinHeight="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Converter={StaticResource conv_Size}, ConverterParameter=0.2}" IsReadOnly="True"/>
-                </DockPanel>
-                <TreeView DockPanel.Dock="Top"/>
-            </DockPanel>
-        </ScrollViewer>
+        <!-- filtersPanel -->
+        <Grid DockPanel.Dock="Top" Background="{Binding config_Attmisc_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}">
+            <Expander x:Name="filtersExpander" Header="Filtry wyszukiwania" Background="{Binding config_Attmisc_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="0,0,0,1">
+                <TabControl MaxHeight="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=20}">
+                    <!-- tabMain -->
+                    <TabItem>
+                        <TabItem.Header>
+                            <c:SimpleHeader TextContent="Ogólne" IconSource="pack://siteoforigin:,,,/Resources/icon32_filter.ico"/>
+                        </TabItem.Header>
+                        <ScrollViewer>
+                            <DockPanel Margin="5">
+                                <DockPanel DockPanel.Dock="Top">
+                                    <Label Content="Moduł:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                                    <ComboBox SelectedValue="{Binding Filters.Module}" SelectedValuePath="Tag" Margin="2.5" VerticalContentAlignment="Center">
+                                        <ComboBoxItem Content="Dokumenty" Tag="documents"/>
+                                        <ComboBoxItem Content="Dystrybucje" Tag="distributions"/>
+                                        <ComboBoxItem Content="Firmy" Tag="companies"/>
+                                        <ComboBoxItem Content="Magazyny" Tag="stores"/>
+                                        <ComboBoxItem Content="Pracownicy" Tag="employees"/>
+                                        <ComboBoxItem Content="Rodziny" Tag="families"/>
+                                        <ComboBoxItem Content="Towary" Tag="articles"/>
+                                    </ComboBox>
+                                </DockPanel>
+                                <DockPanel DockPanel.Dock="Top">
+                                    <Label Content="Nazwa:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                                    <TextBox Text="{Binding Filters.Name}" Margin="2.5" VerticalContentAlignment="Center" KeyUp="dpFilter_KeyUp"/>
+                                </DockPanel>
+                                <DockPanel DockPanel.Dock="Top">
+                                    <Label Content="Pokaż archiwalne:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                                    <CheckBox IsChecked="{Binding Filters.Archival}" Margin="2.5" VerticalContentAlignment="Center"/>
+                                </DockPanel>
+                            </DockPanel>
+                        </ScrollViewer>
+                    </TabItem>
+                    <!-- tabSettings -->
+                    <TabItem>
+                        <TabItem.Header>
+                            <c:SimpleHeader TextContent="Ustawienia" IconSource="pack://siteoforigin:,,,/Resources/icon32_settings.ico"/>
+                        </TabItem.Header>
+                        <ScrollViewer>
+                            <DockPanel Margin="5">
+                                <DockPanel DockPanel.Dock="Top">
+                                    <Label Content="Sortuj najpierw po:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                                    <ToggleButton Margin="2.5" IsChecked="{Binding sorting_GroupsList[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=2}">
+                                        <Image Source="pack://siteoforigin:,,,/Resources/icon32_descending.ico"/>
+                                    </ToggleButton>
+                                    <ComboBox Margin="2.5" SelectedValue="{Binding sorting_GroupsList[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
+                                        <ComboBoxItem Content="Moduł" Tag="g.module"/>
+                                        <ComboBoxItem Content="Nazwa" Tag="g.name"/>
+                                    </ComboBox>
+                                </DockPanel>
+                                <DockPanel DockPanel.Dock="Top">
+                                    <Label Content="Sortuj następnie po:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                                    <ToggleButton Margin="2.5" IsChecked="{Binding sorting_GroupsList[3], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=2}">
+                                        <Image Source="pack://siteoforigin:,,,/Resources/icon32_descending.ico"/>
+                                    </ToggleButton>
+                                    <ComboBox Margin="2.5" SelectedValue="{Binding sorting_GroupsList[2], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
+                                        <ComboBoxItem Content="Moduł" Tag="g.module"/>
+                                        <ComboBoxItem Content="Nazwa" Tag="g.name"/>
+                                    </ComboBox>
+                                </DockPanel>
+                                <DockPanel DockPanel.Dock="Top">
+                                    <Label Content="Limit wczytywania:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                                    <TextBox Text="{Binding sorting_GroupsList[4], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Margin="2.5" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=5}"/>
+                                </DockPanel>
+                            </DockPanel>
+                        </ScrollViewer>
+                    </TabItem>
+                </TabControl>
+            </Expander>
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <c:SimpleButton Margin="0,4,4,4" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Visibility="{Binding IsExpanded, ElementName=filtersExpander, Converter={StaticResource conv_VisibleIfTrue}}"
+                                TextContent="Akceptuj" IconSource="pack://siteoforigin:,,,/Resources/icon32_accept.ico" PreviewMouseLeftButtonUp="btnRefresh_Click"/>
+                <c:SimpleButton Margin="0,4,4,4" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Visibility="{Binding IsExpanded, ElementName=filtersExpander, Converter={StaticResource conv_VisibleIfTrue}}"
+                                TextContent="Czyść" IconSource="pack://siteoforigin:,,,/Resources/icon32_clear.ico" PreviewMouseLeftButtonUp="btnFiltersClear_Click"/>
+            </StackPanel>
+        </Grid>
+        <!-- statusPanel -->
+        <c:StatusPanel DockPanel.Dock="Bottom" Background="{Binding config_Attmisc_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+        <!-- treeView -->
+        <TreeView x:Name="tvGroups" DockPanel.Dock="Top" Margin="5" Padding="5" BorderThickness="1" ItemsSource="{Binding InstancesList}"
+                  MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged"/>
     </DockPanel>
 </Window>

@@ -1321,6 +1321,11 @@ namespace WBZ
 								left join wbz.users u
 									on u.id=e.""user""";
 							break;
+						/// groups
+						case Global.Module.GROUPS:
+							query = @"select count(distinct g.id)
+								from wbz.groups g";
+							break;
 						/// families
 						case Global.Module.FAMILIES:
 							query = @"select count(distinct f.id)
@@ -1346,7 +1351,7 @@ namespace WBZ
 								from wbz.users u";
 							break;
 						default:
-							return result;
+							throw new NotImplementedException();
 					}
 
 					using (var sqlCmd = new NpgsqlCommand(query, sqlConn))
@@ -1442,6 +1447,12 @@ namespace WBZ
 								left join wbz.users u
 									on u.id=e.""user""";
 							break;
+						/// groups
+						case Global.Module.GROUPS:
+							query = @"select g.id, g.module, g.name, g.instance, g.owner,
+									g.archival, g.comment
+								from wbz.groups g";
+							break;
 						/// families
 						case Global.Module.FAMILIES:
 							query = @"select f.id, f.declarant, f.lastname, f.members, f.postcode, f.city, f.address,
@@ -1477,7 +1488,7 @@ namespace WBZ
 								from wbz.users u";
 							break;
 						default:
-							return result;
+							throw new NotImplementedException();
 					}
 					using (var sqlDA = new NpgsqlDataAdapter(query, sqlConn))
 					{
@@ -1566,7 +1577,7 @@ namespace WBZ
 								where document=@id";
 							break;
 						default:
-							return result;
+							throw new NotImplementedException();
 					}
 					using (var sqlDA = new NpgsqlDataAdapter(query, sqlConn))
 					{
@@ -1936,7 +1947,7 @@ namespace WBZ
 							}
 							break;
 						default:
-							return result;
+							throw new NotImplementedException();
 					}
 
 					sqlTran.Commit();
@@ -2024,7 +2035,7 @@ namespace WBZ
 							SetLog(Global.User.ID, module, id, $"Usunięto użytkownika: {name}", sqlTran);
 							break;
 						default:
-							return result;
+							throw new NotImplementedException();
 					}
 
 					using (var sqlCmd = new NpgsqlCommand(query, sqlConn))
