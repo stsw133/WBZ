@@ -76,16 +76,16 @@
                     <Image Source="{Binding File}"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-            <ListBox.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Widok 1 do 1" Click="btnStretchNone"/>
-                    <MenuItem Header="Widok skalowany" Click="btnStretchUniform"/>
-                </ContextMenu>
-            </ListBox.ContextMenu>
         </ListBox>
         <!-- gallery -->
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
             <Image x:Name="imgContent" Stretch="None"/>
+            <ScrollViewer.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Widok 1 do 1" Click="btnStretchNone"/>
+                    <MenuItem Header="Widok skalowany" Click="btnStretchUniform"/>
+                </ContextMenu>
+            </ScrollViewer.ContextMenu>
         </ScrollViewer>
     </DockPanel>
 </Window>
