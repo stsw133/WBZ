@@ -197,7 +197,7 @@ namespace WBZ.Modules.Attmisc
 			if (e.VerticalChange > 0 && e.VerticalOffset + e.ViewportHeight == e.ExtentHeight && M.InstancesList.Count < M.TotalItems)
 			{
 				DataContext = null;
-				M.InstancesList.AddRange(SQL.ListInstances(Global.Module.LOGS, M.FilterSQL, Properties.Settings.Default.sorting_LogsList, ++M.Page).DataTableToList<MODULE_CLASS>());
+				M.InstancesList.AddRange(SQL.ListInstances(Global.Module.LOGS, M.FilterSQL, M.SORTING, ++M.Page).DataTableToList<MODULE_CLASS>());
 				for (int i = M.InstancesList.Count - 1; i >= Math.Max(M.InstancesList.Count - Convert.ToInt32(M.SORTING[4]), 0); i--)
 					M.InstancesList[i].TranslatedModule = Global.TranslateModule(M.InstancesList[i].Module);
 				DataContext = M;

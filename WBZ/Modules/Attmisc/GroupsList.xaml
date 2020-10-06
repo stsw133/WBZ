@@ -7,7 +7,7 @@
         xmlns:h="clr-namespace:WBZ.Helpers"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
-        Title="Zarządzanie grupami" MinHeight="240" MinWidth="240" Height="{Binding Source={x:Static p:Settings.Default}, Path=config_GroupsList_WindowSize[1], Mode=TwoWay}" Width="{Binding Source={x:Static p:Settings.Default}, Path=config_GroupsList_WindowSize[0], Mode=TwoWay}"
+        Title="Zarządzanie grupami" MinHeight="240" MinWidth="360" Height="{Binding Source={x:Static p:Settings.Default}, Path=config_GroupsList_WindowSize[1], Mode=TwoWay}" Width="{Binding Source={x:Static p:Settings.Default}, Path=config_GroupsList_WindowSize[0], Mode=TwoWay}"
             BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}}"
             Icon="pack://siteoforigin:,,,/Resources/icon32_groups.ico">
@@ -129,7 +129,6 @@
         <!-- statusPanel -->
         <c:StatusPanel DockPanel.Dock="Bottom" Background="{Binding config_Attmisc_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
         <!-- treeView -->
-        <TreeView x:Name="tvGroups" DockPanel.Dock="Top" Margin="5" Padding="5" BorderThickness="1" ItemsSource="{Binding InstancesList}"
-                  MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged"/>
+        <TreeView x:Name="tvGroups" DockPanel.Dock="Top" Margin="5" Padding="5" BorderThickness="1" ItemsSource="{Binding InstancesList}"/>
     </DockPanel>
 </Window>

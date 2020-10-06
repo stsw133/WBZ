@@ -305,33 +305,50 @@ namespace WBZ
 			window.Show();
 		}
 
-		#region module "Attmisc"
+		/// <summary>
+		/// Groups - list
+		/// </summary>
 		private void btnGroupsList_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new GroupsList();
 			window.Show();
 		}
+
+		/// <summary>
+		/// AttributesClasses - list
+		/// </summary>
 		private void btnAttributesClassesList_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new AttributesClassesList();
 			window.Show();
 		}
+
+		/// <summary>
+		/// Attachments - list
+		/// </summary>
 		private void btnAttachmentsList_Click(object sender, RoutedEventArgs e)
 		{
 			//var window = new AttachmentsList();
 			//window.Show();
 		}
+
+		/// <summary>
+		/// Attachments - gallery
+		/// </summary>
 		private void btnAttachmentsGallery_Click(object sender, RoutedEventArgs e)
 		{
-			//var window = new AttachmentsGallery();
-			//window.Show();
+			var window = new AttachmentsGallery();
+			window.Show();
 		}
+
+		/// <summary>
+		/// Logs - list
+		/// </summary>
 		private void btnLogsList_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new LogsList();
 			window.Show();
 		}
-		#endregion
 
 		/// <summary>
 		/// Stats

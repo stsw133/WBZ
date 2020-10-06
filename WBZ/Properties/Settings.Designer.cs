@@ -1701,5 +1701,38 @@ namespace WBZ.Properties {
                 this["sorting_GroupsList"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>1050</string>\r\n  <string>700</string>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection config_AttachmentsGallery_WindowSize {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["config_AttachmentsGallery_WindowSize"]));
+            }
+            set {
+                this["config_AttachmentsGallery_WindowSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>a.module</string>
+  <string>False</string>
+  <string>a.name</string>
+  <string>False</string>
+  <string>20</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection sorting_AttachmentsGallery {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_AttachmentsGallery"]));
+            }
+            set {
+                this["sorting_AttachmentsGallery"] = value;
+            }
+        }
     }
 }

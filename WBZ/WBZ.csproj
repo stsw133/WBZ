@@ -197,6 +197,9 @@
     <Compile Include="Modules\Attmisc\AttributesClassesList.xaml.cs">
       <DependentUpon>AttributesClassesList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Attmisc\AttachmentsGallery.xaml.cs">
+      <DependentUpon>AttachmentsGallery.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Attmisc\GroupsList.xaml.cs">
       <DependentUpon>GroupsList.xaml</DependentUpon>
     </Compile>
@@ -343,6 +346,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Modules\Admin\EmployeesList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Attmisc\AttachmentsGallery.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
