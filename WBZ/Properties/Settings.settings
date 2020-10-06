@@ -37,23 +37,26 @@
   &lt;string&gt;600&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
-    <Setting Name="config_AttributesClassesList_WindowX" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">900</Value>
+    <Setting Name="config_AttributesClassesList_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;900&lt;/string&gt;
+  &lt;string&gt;600&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
     </Setting>
-    <Setting Name="config_AttributesClassesList_WindowY" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">600</Value>
+    <Setting Name="config_AttributesClassesNew_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;900&lt;/string&gt;
+  &lt;string&gt;600&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
     </Setting>
-    <Setting Name="config_AttributesClassesAdd_WindowX" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">900</Value>
-    </Setting>
-    <Setting Name="config_AttributesClassesAdd_WindowY" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">600</Value>
-    </Setting>
-    <Setting Name="config_LogsList_WindowX" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">900</Value>
-    </Setting>
-    <Setting Name="config_LogsList_WindowY" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">600</Value>
+    <Setting Name="config_LogsList_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;900&lt;/string&gt;
+  &lt;string&gt;600&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="config_Admin_PanelColor" Type="System.String" Scope="User">
       <Value Profile="(Default)">#EEE</Value>
@@ -433,11 +436,12 @@
   &lt;string&gt;600&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
-    <Setting Name="config_GroupsList_WindowX" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">900</Value>
-    </Setting>
-    <Setting Name="config_GroupsList_WindowY" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">600</Value>
+    <Setting Name="config_GroupsList_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;900&lt;/string&gt;
+  &lt;string&gt;600&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="sorting_EmployeesList" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
@@ -515,6 +519,26 @@
   &lt;string&gt;d.datereal&lt;/string&gt;
   &lt;string&gt;True&lt;/string&gt;
   &lt;string&gt;d.name&lt;/string&gt;
+  &lt;string&gt;False&lt;/string&gt;
+  &lt;string&gt;50&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="sorting_LogsList" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;l.datetime&lt;/string&gt;
+  &lt;string&gt;True&lt;/string&gt;
+  &lt;string&gt;l.id&lt;/string&gt;
+  &lt;string&gt;True&lt;/string&gt;
+  &lt;string&gt;50&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="sorting_AttributesClassesList" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;ac.module&lt;/string&gt;
+  &lt;string&gt;False&lt;/string&gt;
+  &lt;string&gt;ac.name&lt;/string&gt;
   &lt;string&gt;False&lt;/string&gt;
   &lt;string&gt;50&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>

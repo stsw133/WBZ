@@ -30,7 +30,7 @@ namespace WBZ.Modules.Documents
 				M.Mode = Global.ActionType.PREVIEW;
 
 			chckToBuffer.IsChecked = instance.Status == (short)MODULE_CLASS.DocumentStatus.Buffer;
-			M.InstanceInfo.Positions = SQL.GetDocumentPositions(M.InstanceInfo.ID);
+			M.InstanceInfo.Positions = SQL.GetInstancePositions(M.MODULE_NAME, M.InstanceInfo.ID);
 			if (M.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
 			{
 				M.InstanceInfo.ID = SQL.NewInstanceID(M.MODULE_NAME);

@@ -23,8 +23,10 @@ namespace WBZ.Modules.Attmisc
 
 		}
 
-		#region buttons
-		private void btnAdd_Click(object sender, MouseButtonEventArgs e)
+		/// <summary>
+		/// New
+		/// </summary>
+		private void btnNew_Click(object sender, MouseButtonEventArgs e)
 		{
 			var window = new MsgWin(MsgWin.Type.InputBox, "Nowa grupa", "Podaj pełną ścieżkę grupy (oddzielaj znakiem /)", "");
 			if (window.ShowDialog() == true)
@@ -32,6 +34,30 @@ namespace WBZ.Modules.Attmisc
 				
 			}
 		}
+
+		/// <summary>
+		/// Duplicate
+		/// </summary>
+		private void btnDuplicate_Click(object sender, MouseButtonEventArgs e)
+		{
+			/*
+			var indexes = dgList.SelectedItems.Cast<C_AttributeClass>().Select(x => M.InstancesList.IndexOf(x));
+			foreach (int index in indexes)
+			{
+				var window = new AttributesClassesAdd(M.InstancesList[index], true);
+				window.Show();
+
+				var window = new MsgWin(MsgWin.Type.InputBox, $"Duplikowanie grupy: {M.InstancesList[index].Fullpath}", "Podaj pełną ścieżkę grupy (oddzielaj znakiem /)", M.InstancesList[index].Fullpath);
+				if (window.ShowDialog() == true)
+				{
+
+				}
+			}*/
+		}
+
+		/// <summary>
+		/// Edit
+		/// </summary>
 		private void btnEdit_Click(object sender, MouseButtonEventArgs e)
 		{
 			/*
@@ -41,13 +67,17 @@ namespace WBZ.Modules.Attmisc
 				var window = new AttributesClassesAdd(M.InstancesList[index], true);
 				window.Show();
 
-				var window = new MsgWin(MsgWin.Type.InputBox, $"Edycja grupy: {M.InstancesList[index].Fullpath}", "Podaj pełną ścieżkę grupy (oddzielaj znakiem /)", "");
+				var window = new MsgWin(MsgWin.Type.InputBox, $"Edycja grupy: {M.InstancesList[index].Fullpath}", "Podaj pełną ścieżkę grupy (oddzielaj znakiem /)", M.InstancesList[index].Fullpath);
 				if (window.ShowDialog() == true)
 				{
 
 				}
 			}*/
 		}
+
+		/// <summary>
+		/// Delete
+		/// </summary>
 		private void btnDelete_Click(object sender, MouseButtonEventArgs e)
 		{
 			/*
@@ -60,6 +90,10 @@ namespace WBZ.Modules.Attmisc
 			}
 			*/
 		}
+
+		/// <summary>
+		/// Refresh
+		/// </summary>
 		private async void btnRefresh_Click(object sender, MouseButtonEventArgs e)
 		{
 			await Task.Run(() => {
@@ -68,15 +102,13 @@ namespace WBZ.Modules.Attmisc
 				//M.InstancesList = SQL.ListAttributesClasses(M.FilterSQL, M.Limit, M.Page = 0 * M.Limit, "name", false);
 			});
 		}
+
+		/// <summary>
+		/// Close
+		/// </summary>
 		private void btnClose_Click(object sender, MouseButtonEventArgs e)
 		{
 			Close();
-		}
-		#endregion
-
-		private void Window_Closed(object sender, EventArgs e)
-		{
-
 		}
 	}
 }

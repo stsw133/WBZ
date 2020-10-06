@@ -137,73 +137,43 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("900")]
-        public int config_AttributesClassesList_WindowX {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>900</string>\r\n  <string>600</string>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection config_AttributesClassesList_WindowSize {
             get {
-                return ((int)(this["config_AttributesClassesList_WindowX"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["config_AttributesClassesList_WindowSize"]));
             }
             set {
-                this["config_AttributesClassesList_WindowX"] = value;
+                this["config_AttributesClassesList_WindowSize"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("600")]
-        public int config_AttributesClassesList_WindowY {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>900</string>\r\n  <string>600</string>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection config_AttributesClassesNew_WindowSize {
             get {
-                return ((int)(this["config_AttributesClassesList_WindowY"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["config_AttributesClassesNew_WindowSize"]));
             }
             set {
-                this["config_AttributesClassesList_WindowY"] = value;
+                this["config_AttributesClassesNew_WindowSize"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("900")]
-        public int config_AttributesClassesAdd_WindowX {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>900</string>\r\n  <string>600</string>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection config_LogsList_WindowSize {
             get {
-                return ((int)(this["config_AttributesClassesAdd_WindowX"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["config_LogsList_WindowSize"]));
             }
             set {
-                this["config_AttributesClassesAdd_WindowX"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("600")]
-        public int config_AttributesClassesAdd_WindowY {
-            get {
-                return ((int)(this["config_AttributesClassesAdd_WindowY"]));
-            }
-            set {
-                this["config_AttributesClassesAdd_WindowY"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("900")]
-        public int config_LogsList_WindowX {
-            get {
-                return ((int)(this["config_LogsList_WindowX"]));
-            }
-            set {
-                this["config_LogsList_WindowX"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("600")]
-        public int config_LogsList_WindowY {
-            get {
-                return ((int)(this["config_LogsList_WindowY"]));
-            }
-            set {
-                this["config_LogsList_WindowY"] = value;
+                this["config_LogsList_WindowSize"] = value;
             }
         }
         
@@ -1511,25 +1481,15 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("900")]
-        public int config_GroupsList_WindowX {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>900</string>\r\n  <string>600</string>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection config_GroupsList_WindowSize {
             get {
-                return ((int)(this["config_GroupsList_WindowX"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["config_GroupsList_WindowSize"]));
             }
             set {
-                this["config_GroupsList_WindowX"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("600")]
-        public int config_GroupsList_WindowY {
-            get {
-                return ((int)(this["config_GroupsList_WindowY"]));
-            }
-            set {
-                this["config_GroupsList_WindowY"] = value;
+                this["config_GroupsList_WindowSize"] = value;
             }
         }
         
@@ -1682,6 +1642,44 @@ namespace WBZ.Properties {
             }
             set {
                 this["sorting_DistributionsList"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>l.datetime</string>
+  <string>True</string>
+  <string>l.id</string>
+  <string>True</string>
+  <string>50</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection sorting_LogsList {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_LogsList"]));
+            }
+            set {
+                this["sorting_LogsList"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>ac.module</string>
+  <string>False</string>
+  <string>ac.name</string>
+  <string>False</string>
+  <string>50</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection sorting_AttributesClassesList {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_AttributesClassesList"]));
+            }
+            set {
+                this["sorting_AttributesClassesList"] = value;
             }
         }
     }

@@ -171,7 +171,7 @@ namespace WBZ
 		}
 
 		/// <summary>
-		/// Admin - UsersList
+		/// Admin - Users - list
 		/// </summary>
 		private void btnUsersList_Click(object sender, RoutedEventArgs e)
 		{
@@ -180,7 +180,7 @@ namespace WBZ
 		}
 
 		/// <summary>
-		/// Admin - EmployeesList
+		/// Admin - Employees - list
 		/// </summary>
 		private void btnEmployeesList_Click(object sender, RoutedEventArgs e)
 		{
@@ -202,14 +202,12 @@ namespace WBZ
 		/// </summary>
 		private void btnConsoleSQL_Click(object sender, RoutedEventArgs e)
 		{
-#if DEBUG
 			var window = new ConsoleSQL();
 			window.Show();
-#endif
 		}
 
 		/// <summary>
-		/// Documents - DocumentsNew
+		/// Documents - list
 		/// </summary>
 		private void btnDocumentsList_Click(object sender, RoutedEventArgs e)
 		{
@@ -218,7 +216,7 @@ namespace WBZ
 		}
 
 		/// <summary>
-		/// Documents - DocumentsNew
+		/// Documents - new
 		/// </summary>
 		private void btnDocumentsNew_Click(object sender, RoutedEventArgs e)
 		{
@@ -227,7 +225,7 @@ namespace WBZ
 		}
 
 		/// <summary>
-		/// Articles - ArticlesList
+		/// Articles - list
 		/// </summary>
 		private void btnArticlesList_Click(object sender, RoutedEventArgs e)
 		{
@@ -236,7 +234,7 @@ namespace WBZ
 		}
 
 		/// <summary>
-		/// Articles - ArticlesNew
+		/// Articles - new
 		/// </summary>
 		private void btnArticlesNew_Click(object sender, RoutedEventArgs e)
 		{
@@ -245,7 +243,7 @@ namespace WBZ
 		}
 
 		/// <summary>
-		/// Articles - StoresList
+		/// Articles - Stores - list
 		/// </summary>
 		private void btnStoresList_Click(object sender, RoutedEventArgs e)
 		{
@@ -254,7 +252,7 @@ namespace WBZ
 		}
 
 		/// <summary>
-		/// Companies - CompaniesList
+		/// Companies - list
 		/// </summary>
 		private void btnCompaniesList_Click(object sender, RoutedEventArgs e)
 		{
@@ -263,7 +261,7 @@ namespace WBZ
 		}
 
 		/// <summary>
-		/// Companies - CompaniesNew
+		/// Companies - new
 		/// </summary>
 		private void btnCompaniesNew_Click(object sender, RoutedEventArgs e)
 		{
@@ -272,7 +270,7 @@ namespace WBZ
 		}
 
 		/// <summary>
-		/// Families - FamiliesList
+		/// Families - list
 		/// </summary>
 		private void btnFamiliesList_Click(object sender, RoutedEventArgs e)
 		{
@@ -281,7 +279,7 @@ namespace WBZ
 		}
 
 		/// <summary>
-		/// Families - FamiliesNew
+		/// Families - new
 		/// </summary>
 		private void btnFamiliesAdd_Click(object sender, RoutedEventArgs e)
 		{
@@ -290,7 +288,7 @@ namespace WBZ
 		}
 
 		/// <summary>
-		/// Distributions - DistributionsList
+		/// Distributions - list
 		/// </summary>
 		private void btnDistributionsList_Click(object sender, RoutedEventArgs e)
 		{
@@ -299,7 +297,7 @@ namespace WBZ
 		}
 
 		/// <summary>
-		/// Distributions - DistributionsNew
+		/// Distributions - new
 		/// </summary>
 		private void btnDistributionsNew_Click(object sender, RoutedEventArgs e)
 		{

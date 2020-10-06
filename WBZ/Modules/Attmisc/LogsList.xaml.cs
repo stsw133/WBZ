@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
@@ -15,6 +16,7 @@ using WBZ.Modules.Companies;
 using WBZ.Modules.Distributions;
 using WBZ.Modules.Documents;
 using WBZ.Modules.Families;
+using MODULE_CLASS = WBZ.Classes.C_Log;
 
 namespace WBZ.Modules.Attmisc
 {
@@ -38,9 +40,8 @@ namespace WBZ.Modules.Attmisc
 		}
 
 		/// <summary>
-		/// Aktualizacja filtrów wyszukiwania
+		/// Update filters
 		/// </summary>
-		#region filters
 		private void UpdateFilters()
 		{
 			M.FilterSQL = $"LOWER(COALESCE(u.lastname,'') || ' ' || COALESCE(u.forename,'')) like '%{M.Filters.UserFullname.ToLower()}%' and "
@@ -50,38 +51,46 @@ namespace WBZ.Modules.Attmisc
 
 			M.FilterSQL = M.FilterSQL.TrimEnd(" and ".ToCharArray());
 		}
+
+		/// <summary>
+		/// Apply filters
+		/// </summary>
 		private void dpFilter_KeyUp(object sender, KeyEventArgs e)
 		{
 			if (e.Key == Key.Enter)
 				btnRefresh_Click(null, null);
 		}
+
+		/// <summary>
+		/// Clear filters
+		/// </summary>
 		private void btnFiltersClear_Click(object sender, MouseButtonEventArgs e)
 		{
-			M.Filters = new C_Log();
+			M.Filters = new MODULE_CLASS();
 			btnRefresh_Click(null, null);
 		}
-		#endregion
 
-		#region buttons
+		/// <summary>
+		/// Preview
+		/// </summary>
 		private void btnPreview_Click(object sender, MouseButtonEventArgs e)
 		{
-			var indexes = dgList.SelectedItems.Cast<C_Log>().Select(x => M.InstancesList.IndexOf(x));
-			foreach (int index in indexes)
-			{
-				var log = M.InstancesList[index];
-				openObj(log, Global.ActionType.PREVIEW);
-			}
+			var selectedInstances = dgList.SelectedItems.Cast<MODULE_CLASS>();
+			foreach (MODULE_CLASS instance in selectedInstances)
+				openObj(instance, Global.ActionType.PREVIEW);
 		}
+
+		/// <summary>
+		/// Edit
+		/// </summary>
 		private void btnEdit_Click(object sender, MouseButtonEventArgs e)
 		{
-			var indexes = dgList.SelectedItems.Cast<C_Log>().Select(x => M.InstancesList.IndexOf(x));
-			foreach (int index in indexes)
-			{
-				var log = M.InstancesList[index];
-				openObj(log, Global.ActionType.EDIT);
-			}
+			var selectedInstances = dgList.SelectedItems.Cast<MODULE_CLASS>();
+			foreach (MODULE_CLASS instance in selectedInstances)
+				openObj(instance, Global.ActionType.EDIT);
 		}
-		private void openObj(C_Log log, Global.ActionType mode)
+
+		private void openObj(MODULE_CLASS log, Global.ActionType mode)
 		{
 			if (log.Instance == 0)
 				return;
@@ -102,7 +111,7 @@ namespace WBZ.Modules.Attmisc
 					break;
 				/// attributes_classes
 				case Global.Module.ATTRIBUTES_CLASSES:
-					window = new AttributesClassesAdd(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_AttributeClass>()?[0], false/*mode*/);
+					window = new AttributesClassesNew(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_AttributeClass>()?[0], mode);
 					break;
 				/// companies
 				case Global.Module.COMPANIES:
@@ -133,45 +142,63 @@ namespace WBZ.Modules.Attmisc
 			}
 			window.Show();
 		}
+
+		/// <summary>
+		/// Delete
+		/// </summary>
 		private void btnDelete_Click(object sender, MouseButtonEventArgs e)
 		{
-			var indexes = dgList.SelectedItems.Cast<C_Log>().Select(x => M.InstancesList.IndexOf(x));
-			if (indexes.Count<int>() > 0 && MessageBox.Show("Czy na pewno usunąć zaznaczone rekordy?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+			var selectedInstances = dgList.SelectedItems.Cast<MODULE_CLASS>();
+			if (selectedInstances.Count() > 0 && MessageBox.Show("Czy na pewno usunąć zaznaczone rekordy?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
 			{
-				foreach (int index in indexes)
-					SQL.DeleteInstance(Global.Module.LOGS, M.InstancesList[index].ID, null);
+				foreach (MODULE_CLASS instance in selectedInstances)
+					SQL.DeleteInstance(M.MODULE_NAME, instance.ID, null);
 				btnRefresh_Click(null, null);
 			}
 		}
+
+		/// <summary>
+		/// Refresh
+		/// </summary>
 		private async void btnRefresh_Click(object sender, MouseButtonEventArgs e)
 		{
 			await Task.Run(() => {
 				UpdateFilters();
-				M.TotalItems = SQL.CountInstances(Global.Module.LOGS, M.FilterSQL);
-				M.InstancesList = SQL.ListLogs(M.FilterSQL, M.Limit, M.Page = 0 * M.Limit, "datetime", true);
+				M.TotalItems = SQL.CountInstances(M.MODULE_NAME, M.FilterSQL);
+				M.InstancesList = SQL.ListInstances(M.MODULE_NAME, M.FilterSQL, M.SORTING, M.Page = 0).DataTableToList<MODULE_CLASS>();
+
 				foreach (var instance in M.InstancesList)
 					instance.TranslatedModule = Global.TranslateModule(instance.Module);
 			});
 		}
+
+		/// <summary>
+		/// Close
+		/// </summary>
 		private void btnClose_Click(object sender, MouseButtonEventArgs e)
 		{
 			Close();
 		}
-		#endregion
 
+		/// <summary>
+		/// Select
+		/// </summary>
 		private void dgList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			if (e.LeftButton == MouseButtonState.Pressed)
 				btnEdit_Click(null, null);
 		}
 
+		/// <summary>
+		/// Load more
+		/// </summary>
 		private void dgList_ScrollChanged(object sender, ScrollChangedEventArgs e)
 		{
 			if (e.VerticalChange > 0 && e.VerticalOffset + e.ViewportHeight == e.ExtentHeight && M.InstancesList.Count < M.TotalItems)
 			{
 				DataContext = null;
-				M.InstancesList.AddRange(SQL.ListLogs(M.FilterSQL, M.Limit, ++M.Page * M.Limit, "datetime", true));
-				for (int i = M.InstancesList.Count - 1; i >= Math.Max(M.InstancesList.Count - M.Limit, 0); i--)
+				M.InstancesList.AddRange(SQL.ListInstances(Global.Module.LOGS, M.FilterSQL, Properties.Settings.Default.sorting_LogsList, ++M.Page).DataTableToList<MODULE_CLASS>());
+				for (int i = M.InstancesList.Count - 1; i >= Math.Max(M.InstancesList.Count - Convert.ToInt32(M.SORTING[4]), 0); i--)
 					M.InstancesList[i].TranslatedModule = Global.TranslateModule(M.InstancesList[i].Module);
 				DataContext = M;
 				Extensions.GetVisualChild<ScrollViewer>(sender as DataGrid).ScrollToVerticalOffset(e.VerticalOffset);
@@ -185,11 +212,6 @@ namespace WBZ.Modules.Attmisc
 			else
 				SQL.SetPropertyValue("LOGS_ENABLED", "0");
 		}
-
-		private void Window_Closed(object sender, EventArgs e)
-		{
-			Properties.Settings.Default.Save();
-		}
 	}
 
 	/// <summary>
@@ -197,11 +219,14 @@ namespace WBZ.Modules.Attmisc
 	/// </summary>
 	internal class M_LogsList : INotifyPropertyChanged
 	{
-		/// Dane o zalogowanym użytkowniku
+		public readonly string MODULE_NAME = Global.Module.LOGS;
+		public StringCollection SORTING = Properties.Settings.Default.sorting_LogsList;
+
+		/// Logged user
 		public C_User User { get; } = Global.User;
-		/// Lista instancji
-		private List<C_Log> instancesList;
-		public List<C_Log> InstancesList
+		/// Instance list
+		private List<MODULE_CLASS> instancesList;
+		public List<MODULE_CLASS> InstancesList
 		{
 			get
 			{
@@ -213,11 +238,13 @@ namespace WBZ.Modules.Attmisc
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
 		}
-		/// Filtr SQL
+		/// Selecting mode
+		public bool SelectingMode { get; set; }
+		/// SQL filter
 		public string FilterSQL { get; set; }
-		/// Instancja filtra
-		private C_Log filters = new C_Log();
-		public C_Log Filters
+		/// Filter instance
+		private MODULE_CLASS filters = new MODULE_CLASS();
+		public MODULE_CLASS Filters
 		{
 			get
 			{
@@ -229,7 +256,7 @@ namespace WBZ.Modules.Attmisc
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
 		}
-		/// Numer strony
+		/// Page number
 		private int page;
 		public int Page
 		{
@@ -243,9 +270,7 @@ namespace WBZ.Modules.Attmisc
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
 		}
-		/// Limit instancji na stronę
-		public int Limit { get; } = 50;
-		/// Łączna liczba instancji
+		/// Total instances number
 		private int totalItems;
 		public int TotalItems
 		{

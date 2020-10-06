@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using WBZ.Classes;
+using WBZ.Helpers;
 
 namespace WBZ.Controls
 {
@@ -29,7 +30,7 @@ namespace WBZ.Controls
                 Window win = Window.GetWindow(this);
 
                 if (ID != 0 && M.InstanceLogs == null)
-                    M.InstanceLogs = SQL.ListLogs(Module, ID, null);
+                    M.InstanceLogs = SQL.ListInstances(Global.Module.LOGS, $"l.module='{Module}' and l.instance={ID}").DataTableToList<C_Log>();
 
                 dynamic d = win?.DataContext;
                 if (d != null)

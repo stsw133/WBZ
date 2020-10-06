@@ -190,8 +190,8 @@
     <Compile Include="Modules\Admin\EmployeesList.xaml.cs">
       <DependentUpon>EmployeesList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Attmisc\AttributesClassesAdd.xaml.cs">
-      <DependentUpon>AttributesClassesAdd.xaml</DependentUpon>
+    <Compile Include="Modules\Attmisc\AttributesClassesNew.xaml.cs">
+      <DependentUpon>AttributesClassesNew.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Attmisc\AttributesClassesList.xaml.cs">
       <DependentUpon>AttributesClassesList.xaml</DependentUpon>
@@ -357,7 +357,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Attmisc\AttributesClassesAdd.xaml">
+    <Page Include="Modules\Attmisc\AttributesClassesNew.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

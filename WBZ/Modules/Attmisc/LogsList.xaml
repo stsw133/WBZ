@@ -6,12 +6,11 @@
         xmlns:c="clr-namespace:WBZ.Controls"
         xmlns:h="clr-namespace:WBZ.Helpers"
         xmlns:p="clr-namespace:WBZ.Properties"
-        xmlns:local="clr-namespace:WBZ.Modules.Attmisc"
         mc:Ignorable="d"
-        Title="Lista logów" MinHeight="240" MinWidth="360" Height="{Binding Source={x:Static p:Settings.Default}, Path=config_LogsList_WindowY, Mode=TwoWay}" Width="{Binding Source={x:Static p:Settings.Default}, Path=config_LogsList_WindowX, Mode=TwoWay}"
+        Title="Lista logów" MinHeight="240" MinWidth="360" Height="{Binding Source={x:Static p:Settings.Default}, Path=config_LogsList_WindowSize[1], Mode=TwoWay}" Width="{Binding Source={x:Static p:Settings.Default}, Path=config_LogsList_WindowSize[0], Mode=TwoWay}"
             BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}}"
-            Icon="pack://siteoforigin:,,,/Resources/icon32_logs.ico" Closed="Window_Closed">
+            Icon="pack://siteoforigin:,,,/Resources/icon32_logs.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -23,7 +22,7 @@
     </Window.Resources>
     <DockPanel>
         <!-- titleBar -->
-        <c:TitleBar DockPanel.Dock="Top"/>
+        <c:TitleBar DockPanel.Dock="Top" AdditionalIcon="pack://siteoforigin:,,,/Resources/icon32_list.ico"/>
         <!-- buttonsPanel -->
         <Border DockPanel.Dock="Right" Background="{Binding config_Attmisc_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="1,0,0,0" Visibility="{Binding SelectingMode, Converter={StaticResource conv_BoolInverted}}">
             <DockPanel>
@@ -55,12 +54,10 @@
         <Grid DockPanel.Dock="Top" Background="{Binding config_Attmisc_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}">
             <Expander x:Name="filtersExpander" Header="Filtry wyszukiwania" Background="{Binding config_Attmisc_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="0,0,0,1">
                 <TabControl MaxHeight="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=20}">
+                    <!-- tabMain -->
                     <TabItem>
                         <TabItem.Header>
-                            <StackPanel Orientation="Horizontal" Margin="2">
-                                <Image Margin="2" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_filter.ico"/>
-                                <TextBlock Text="Ogólne" Margin="2" VerticalAlignment="Center"/>
-                            </StackPanel>
+                            <c:SimpleHeader TextContent="Ogólne" IconSource="pack://siteoforigin:,,,/Resources/icon32_filter.ico"/>
                         </TabItem.Header>
                         <ScrollViewer>
                             <DockPanel Margin="0,0,0,5">
@@ -87,6 +84,44 @@
                             </DockPanel>
                         </ScrollViewer>
                     </TabItem>
+                    <!-- tabSettings -->
+                    <TabItem>
+                        <TabItem.Header>
+                            <c:SimpleHeader TextContent="Ustawienia" IconSource="pack://siteoforigin:,,,/Resources/icon32_settings.ico"/>
+                        </TabItem.Header>
+                        <ScrollViewer>
+                            <DockPanel Margin="5">
+                                <DockPanel DockPanel.Dock="Top">
+                                    <Label Content="Sortuj najpierw po:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                                    <ToggleButton Margin="2.5" IsChecked="{Binding sorting_LogsList[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=2}">
+                                        <Image Source="pack://siteoforigin:,,,/Resources/icon32_descending.ico"/>
+                                    </ToggleButton>
+                                    <ComboBox Margin="2.5" SelectedValue="{Binding sorting_LogsList[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
+                                        <ComboBoxItem Content="Nazwisko i imię" Tag="l.userfullname"/>
+                                        <ComboBoxItem Content="Moduł" Tag="l.module"/>
+                                        <ComboBoxItem Content="Treść" Tag="l.content"/>
+                                        <ComboBoxItem Content="Data" Tag="l.datetime"/>
+                                    </ComboBox>
+                                </DockPanel>
+                                <DockPanel DockPanel.Dock="Top">
+                                    <Label Content="Sortuj następnie po:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                                    <ToggleButton Margin="2.5" IsChecked="{Binding sorting_LogsList[3], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=2}">
+                                        <Image Source="pack://siteoforigin:,,,/Resources/icon32_descending.ico"/>
+                                    </ToggleButton>
+                                    <ComboBox Margin="2.5" SelectedValue="{Binding sorting_LogsList[2], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
+                                        <ComboBoxItem Content="Nazwisko i imię" Tag="l.userfullname"/>
+                                        <ComboBoxItem Content="Moduł" Tag="l.module"/>
+                                        <ComboBoxItem Content="Treść" Tag="l.content"/>
+                                        <ComboBoxItem Content="Data" Tag="l.datetime"/>
+                                    </ComboBox>
+                                </DockPanel>
+                                <DockPanel DockPanel.Dock="Top">
+                                    <Label Content="Limit wczytywania:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                                    <TextBox Text="{Binding sorting_LogsList[4], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Margin="2.5" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=5}"/>
+                                </DockPanel>
+                            </DockPanel>
+                        </ScrollViewer>
+                    </TabItem>
                 </TabControl>
             </Expander>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
@@ -97,16 +132,7 @@
             </StackPanel>
         </Grid>
         <!-- statusPanel -->
-        <Border DockPanel.Dock="Bottom" Background="{Binding config_Attmisc_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="0,1,0,0">
-            <DockPanel>
-                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
-                    <Label Content="Wyświetlono:" Margin="5,0"/>
-                    <Label Content="{Binding InstancesList.Count}" FontWeight="Medium"/>
-                    <Label Content=" / "/>
-                    <Label Content="{Binding TotalItems}" FontWeight="Medium"/>
-                </StackPanel>
-            </DockPanel>
-        </Border>
+        <c:StatusPanel DockPanel.Dock="Bottom" Background="{Binding config_Attmisc_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
         <!-- dataGrid -->
         <DataGrid x:Name="dgList" DockPanel.Dock="Top" Margin="5" Padding="5" GridLinesVisibility="Vertical" VerticalGridLinesBrush="Gray" BorderThickness="1"
                   AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstancesList}" IsReadOnly="True"
@@ -132,29 +158,32 @@
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Module}" Value="documents">
-                            <Setter Property="Background" Value="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Module}" Value="stores">
-                            <Setter Property="Background" Value="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
-                        </DataTrigger>
                         <DataTrigger Binding="{Binding Module}" Value="articles">
                             <Setter Property="Background" Value="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Module}" Value="attributes_classes">
+                            <Setter Property="Background" Value="{Binding config_Attmisc_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Module}" Value="companies">
                             <Setter Property="Background" Value="{Binding config_Companies_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding Module}" Value="families">
-                            <Setter Property="Background" Value="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
-                        </DataTrigger>
                         <DataTrigger Binding="{Binding Module}" Value="distributions">
                             <Setter Property="Background" Value="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding Module}" Value="users">
+                        <DataTrigger Binding="{Binding Module}" Value="documents">
+                            <Setter Property="Background" Value="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Module}" Value="employees">
                             <Setter Property="Background" Value="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding Module}" Value="attributes_classes">
-                            <Setter Property="Background" Value="{Binding config_Attmisc_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                        <DataTrigger Binding="{Binding Module}" Value="families">
+                            <Setter Property="Background" Value="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Module}" Value="stores">
+                            <Setter Property="Background" Value="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Module}" Value="users">
+                            <Setter Property="Background" Value="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>

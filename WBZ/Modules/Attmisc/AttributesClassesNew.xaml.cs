@@ -1,31 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using WBZ.Classes;
 using WBZ.Helpers;
+using MODULE_CLASS = WBZ.Classes.C_AttributeClass;
 
 namespace WBZ.Modules.Attmisc
 {
 	/// <summary>
-	/// Interaction logic for AttributesClassesAdd.xaml
+	/// Interaction logic for AttributesClassesNew.xaml
 	/// </summary>
-	public partial class AttributesClassesAdd : Window
+	public partial class AttributesClassesNew : Window
 	{
-        M_AttributesClassesAdd M = new M_AttributesClassesAdd();
+        M_AttributesClassesNew M = new M_AttributesClassesNew();
 
-        public AttributesClassesAdd(C_AttributeClass instance, bool editMode)
+        public AttributesClassesNew(MODULE_CLASS instance, Global.ActionType mode)
         {
             InitializeComponent();
             DataContext = M;
 
             M.InstanceInfo = instance;
-            M.EditMode = editMode;
+            M.Mode = mode;
+
+            if (M.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
+                M.InstanceInfo.ID = SQL.NewInstanceID(M.MODULE_NAME);
         }
 
+        /// <summary>
+		/// Validation
+		/// </summary>
         private bool CheckDataValidation()
         {
             bool result = true;
@@ -33,40 +38,56 @@ namespace WBZ.Modules.Attmisc
             return result;
         }
 
-        #region buttons
+        /// <summary>
+		/// Save
+		/// </summary>
+		private bool saved = false;
         private void btnSave_Click(object sender, MouseButtonEventArgs e)
         {
             if (!CheckDataValidation())
                 return;
 
-            if (SQL.SetAttributeClass(M.InstanceInfo))
+            if (saved = SQL.SetInstance(M.MODULE_NAME, M.InstanceInfo, M.Mode))
                 Close();
         }
+
+        /// <summary>
+		/// Refresh
+		/// </summary>
         private void btnRefresh_Click(object sender, MouseButtonEventArgs e)
         {
             if (M.InstanceInfo.ID == 0)
                 return;
             //TODO - dorobić odświeżanie zmienionych danych
         }
+
+        /// <summary>
+		/// Close
+		/// </summary>
         private void btnClose_Click(object sender, MouseButtonEventArgs e)
         {
             Close();
         }
-        #endregion
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            if (M.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE) && !saved)
+                SQL.ClearObject(M.MODULE_NAME, M.InstanceInfo.ID);
+        }
     }
 
     /// <summary>
 	/// Model
 	/// </summary>
-	internal class M_AttributesClassesAdd : INotifyPropertyChanged
+	internal class M_AttributesClassesNew : INotifyPropertyChanged
     {
-        public readonly string INSTANCE_TYPE = Global.Module.ATTRIBUTES_CLASSES;
+        public readonly string MODULE_NAME = Global.Module.ATTRIBUTES_CLASSES;
 
-        /// Dane o zalogowanym użytkowniku
+        /// Logged user
         public C_User User { get; } = Global.User;
-        /// Instancja
-        private C_AttributeClass instanceInfo;
-        public C_AttributeClass InstanceInfo
+        /// Instance
+		private MODULE_CLASS instanceInfo;
+        public MODULE_CLASS InstanceInfo
         {
             get
             {
@@ -78,31 +99,35 @@ namespace WBZ.Modules.Attmisc
                 NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
             }
         }
-        /// Czy okno jest w trybie edycji (zamiast w trybie dodawania)
-        public bool IsEditing { get { return InstanceInfo.ID > 0; } }
-        /// Tryb edycji dla okna
-        public bool EditMode { get; set; }
-        /// Ikona okna
-        public string EditIcon
+        /// Editing mode
+		public bool EditingMode { get { return Mode != Global.ActionType.PREVIEW; } }
+        /// Window mode
+        public Global.ActionType Mode { get; set; }
+        /// Additional window icon
+        public string ModeIcon
         {
             get
             {
-                if (InstanceInfo.ID == 0)
+                if (Mode == Global.ActionType.NEW)
                     return "pack://siteoforigin:,,,/Resources/icon32_add.ico";
-                else if (EditMode)
+                else if (Mode == Global.ActionType.DUPLICATE)
+                    return "pack://siteoforigin:,,,/Resources/icon32_duplicate.ico";
+                else if (Mode == Global.ActionType.EDIT)
                     return "pack://siteoforigin:,,,/Resources/icon32_edit.ico";
                 else
                     return "pack://siteoforigin:,,,/Resources/icon32_search.ico";
             }
         }
-        /// Tytuł okna
+        /// Window title
         public string Title
         {
             get
             {
-                if (InstanceInfo.ID == 0)
+                if (Mode == Global.ActionType.NEW)
                     return "Nowa klasa atrybutu";
-                else if (EditMode)
+                else if (Mode == Global.ActionType.DUPLICATE)
+                    return $"Duplikowanie klasy atrybutu: {InstanceInfo.Name}";
+                else if (Mode == Global.ActionType.EDIT)
                     return $"Edycja klasy atrybutu: {InstanceInfo.Name}";
                 else
                     return $"Podgląd klasy atrybutu: {InstanceInfo.Name}";
