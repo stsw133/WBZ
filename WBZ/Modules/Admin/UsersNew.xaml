@@ -213,6 +213,24 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                <Image Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_photos.ico"/>
+                                <Label Content="Załączniki:" VerticalContentAlignment="Center"/>
+                            </StackPanel>
+                            <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={StaticResource conv_ListContains}, ConverterParameter=attachments_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="attachments_preview" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="2" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={StaticResource conv_ListContains}, ConverterParameter=attachments_save}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="attachments_save" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={StaticResource conv_ListContains}, ConverterParameter=attachments_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="attachments_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                        </Grid>
+                        <Grid DockPanel.Dock="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Orientation="Horizontal">
                                 <Image Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_logs.ico"/>
                                 <Label Content="Logi:" VerticalContentAlignment="Center"/>
                             </StackPanel>

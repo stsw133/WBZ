@@ -426,9 +426,9 @@ namespace WBZ
 					///permissions
 					sqlCmd = new NpgsqlCommand(@"insert into wbz.users_permissions (""user"", perm)
 							values (@id, 'admin'),
-								(@id, 'admin_users_preview'),
-								(@id, 'admin_users_save'),
-								(@id, 'admin_users_delete')", sqlConn, sqlTran);
+								(@id, 'users_preview'),
+								(@id, 'users_save'),
+								(@id, 'users_delete')", sqlConn, sqlTran);
 					sqlCmd.Parameters.AddWithValue("id", id);
 					sqlCmd.ExecuteNonQuery();
 
@@ -1909,7 +1909,7 @@ namespace WBZ
 						/// users
 						case Global.Module.USERS:
 							var user = instance as C_User;
-							query = @"insert into wbz.users wbz.users (id, username, password, forename, lastname, email, phone, blocked, archival)
+							query = @"insert into wbz.users (id, username, password, forename, lastname, email, phone, blocked, archival)
 								values (@id, @username, @password, @forename, @lastname, @email, @phone, @blocked, @archival)
 								on conflict(id) do
 								update set username=@username, " + (!string.IsNullOrEmpty(user.Newpass) ? "password = @newpass," : "") + @"

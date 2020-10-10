@@ -98,11 +98,11 @@ namespace WBZ.Modules.Login
 		{
 			var cbDatabase = (sender as ComboBox);
 
+			if (cbDatabase.SelectedIndex < 0)
+				return;
+
 			try
 			{
-				if (cbDatabase.SelectedIndex < 0)
-					cbDatabase.SelectedIndex = 0;
-
 				Global.Database = cbDatabase.SelectedItem as C_Database;
 				SQL.connWBZ = SQL.MakeConnString(Global.Database.Server, Global.Database.Port, Global.Database.Database, Global.Database.Username, Global.Database.Password);
 				Global.Database.Version = SQL.GetPropertyValue("VERSION");
