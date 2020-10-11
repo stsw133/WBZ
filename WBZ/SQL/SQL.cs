@@ -919,7 +919,7 @@ namespace WBZ
 						sqlCmd.Parameters.AddWithValue("status", distribution.Status);
 						sqlCmd.Parameters.AddWithValue("archival", distribution.Archival);
 						sqlCmd.Parameters.AddWithValue("comment", distribution.Comment);
-						sqlCmd.Parameters.AddWithValue("icon", distribution.Icon);
+						sqlCmd.Parameters.AddWithValue("icon", (object)distribution.Icon ?? DBNull.Value);
 
 						///add
 						if (ID == 0)
@@ -1632,7 +1632,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("ean", article.EAN);
 								sqlCmd.Parameters.AddWithValue("archival", article.Archival);
 								sqlCmd.Parameters.AddWithValue("comment", article.Comment);
-								sqlCmd.Parameters.AddWithValue("icon", article.Icon);
+								sqlCmd.Parameters.AddWithValue("icon", (object)article.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
 							SetLog(Global.User.ID, module, article.ID, $"{(mode==Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} towar: {article.Name}.", sqlTran);
@@ -1704,7 +1704,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("required", attributeClass.Required);
 								sqlCmd.Parameters.AddWithValue("archival", attributeClass.Archival);
 								sqlCmd.Parameters.AddWithValue("comment", attributeClass.Comment);
-								sqlCmd.Parameters.AddWithValue("icon", attributeClass.Icon);
+								sqlCmd.Parameters.AddWithValue("icon", (object)attributeClass.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
 							SetLog(Global.User.ID, module, attributeClass.ID, $"{(mode == Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} klasę atrybutu: {attributeClass.Name}.", sqlTran);
@@ -1731,7 +1731,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("address", company.Address);
 								sqlCmd.Parameters.AddWithValue("archival", company.Archival);
 								sqlCmd.Parameters.AddWithValue("comment", company.Comment);
-								sqlCmd.Parameters.AddWithValue("icon", company.Icon);
+								sqlCmd.Parameters.AddWithValue("icon", (object)company.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
 							SetLog(Global.User.ID, module, company.ID, $"{(mode == Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} firmę: {company.Name}.", sqlTran);
@@ -1764,7 +1764,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("status", document.Status);
 								sqlCmd.Parameters.AddWithValue("archival", document.Archival);
 								sqlCmd.Parameters.AddWithValue("comment", document.Comment);
-								sqlCmd.Parameters.AddWithValue("icon", document.Icon);
+								sqlCmd.Parameters.AddWithValue("icon", (object)document.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
 							SetLog(Global.User.ID, module, document.ID, $"{(mode == Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} dokument: {document.Name}.", sqlTran);
@@ -1858,7 +1858,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("postcode", employee.Postcode);
 								sqlCmd.Parameters.AddWithValue("archival", employee.Archival);
 								sqlCmd.Parameters.AddWithValue("comment", employee.Comment);
-								sqlCmd.Parameters.AddWithValue("icon", employee.Icon);
+								sqlCmd.Parameters.AddWithValue("icon", (object)employee.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
 							SetLog(Global.User.ID, module, employee.ID, $"{(mode == Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} pracownika: {employee.Fullname}.", sqlTran);
@@ -1889,7 +1889,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("c_email", family.C_Email);
 								sqlCmd.Parameters.AddWithValue("archival", family.Archival);
 								sqlCmd.Parameters.AddWithValue("comment", family.Comment);
-								sqlCmd.Parameters.AddWithValue("icon", family.Icon);
+								sqlCmd.Parameters.AddWithValue("icon", (object)family.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
 							SetLog(Global.User.ID, module, family.ID, $"{(mode == Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} rodzinę: {family.Lastname}.", sqlTran);
@@ -1916,7 +1916,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("postcode", store.Postcode);
 								sqlCmd.Parameters.AddWithValue("archival", store.Archival);
 								sqlCmd.Parameters.AddWithValue("comment", store.Comment);
-								sqlCmd.Parameters.AddWithValue("icon", store.Icon);
+								sqlCmd.Parameters.AddWithValue("icon", (object)store.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
 							SetLog(Global.User.ID, module, store.ID, $"{(mode == Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} magazyn: {store.Name}.", sqlTran);
