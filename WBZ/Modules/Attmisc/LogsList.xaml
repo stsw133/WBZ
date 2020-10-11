@@ -134,7 +134,7 @@
         <!-- statusPanel -->
         <c:StatusPanel DockPanel.Dock="Bottom" Background="{Binding config_Attmisc_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
         <!-- dataGrid -->
-        <DataGrid x:Name="dgList" DockPanel.Dock="Top" Margin="5" Padding="5" GridLinesVisibility="Vertical" VerticalGridLinesBrush="Gray" BorderThickness="1"
+        <DataGrid x:Name="dgList" DockPanel.Dock="Top" Margin="5" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
                   AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstancesList}" IsReadOnly="True"
                   MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged">
             <DataGrid.Columns>

@@ -10,7 +10,7 @@
         Title="Lista klas atrybutów" MinHeight="240" MinWidth="360" Height="{Binding config_AttributesClassesList_WindowSize[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_AttributesClassesList_WindowSize[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
             BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}}"
-            Icon="pack://siteoforigin:,,,/Resources/icon32_articles.ico">
+            Icon="pack://siteoforigin:,,,/Resources/icon32_attributes.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -195,7 +195,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Binding="{Binding Module}" Header="Moduł" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Code, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}" Width="1*"/>
+                <DataGridTextColumn Binding="{Binding Module}" Header="Moduł" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Module, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}" Width="1*"/>
                 <DataGridTextColumn Binding="{Binding Name}" Header="Nazwa" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Name, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}" Width="2*"/>
                 <DataGridTextColumn Binding="{Binding Type}" Header="Typ" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Type, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}" Width="1*"/>
                 <DataGridTextColumn Binding="{Binding Values}" Header="Wartości" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Values, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}" Width="3*"/>
@@ -217,6 +217,33 @@
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Archival}" Value="true">
                             <Setter Property="Foreground" Value="Gray"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Module}" Value="articles">
+                            <Setter Property="Background" Value="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Module}" Value="attributes_classes">
+                            <Setter Property="Background" Value="{Binding config_Attmisc_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Module}" Value="companies">
+                            <Setter Property="Background" Value="{Binding config_Companies_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Module}" Value="distributions">
+                            <Setter Property="Background" Value="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Module}" Value="documents">
+                            <Setter Property="Background" Value="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Module}" Value="employees">
+                            <Setter Property="Background" Value="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Module}" Value="families">
+                            <Setter Property="Background" Value="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Module}" Value="stores">
+                            <Setter Property="Background" Value="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Module}" Value="users">
+                            <Setter Property="Background" Value="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>

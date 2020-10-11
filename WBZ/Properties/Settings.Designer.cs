@@ -1830,5 +1830,77 @@ namespace WBZ.Properties {
                 this["columns_FamiliesList_Icon"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool columns_AttributesClassesList_ID {
+            get {
+                return ((bool)(this["columns_AttributesClassesList_ID"]));
+            }
+            set {
+                this["columns_AttributesClassesList_ID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool columns_AttributesClassesList_Module {
+            get {
+                return ((bool)(this["columns_AttributesClassesList_Module"]));
+            }
+            set {
+                this["columns_AttributesClassesList_Module"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool columns_AttributesClassesList_Name {
+            get {
+                return ((bool)(this["columns_AttributesClassesList_Name"]));
+            }
+            set {
+                this["columns_AttributesClassesList_Name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool columns_AttributesClassesList_Type {
+            get {
+                return ((bool)(this["columns_AttributesClassesList_Type"]));
+            }
+            set {
+                this["columns_AttributesClassesList_Type"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool columns_AttributesClassesList_Values {
+            get {
+                return ((bool)(this["columns_AttributesClassesList_Values"]));
+            }
+            set {
+                this["columns_AttributesClassesList_Values"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool columns_AttributesClassesList_Required {
+            get {
+                return ((bool)(this["columns_AttributesClassesList_Required"]));
+            }
+            set {
+                this["columns_AttributesClassesList_Required"] = value;
+            }
+        }
     }
 }
