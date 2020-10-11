@@ -21,6 +21,7 @@ namespace WBZ.Classes
 		public short Status { get; set; }
 		public bool Archival { get; set; }
 		public string Comment { get; set; }
+		public byte[] Icon { get; set; }
 		public List<C_DistributionFamily> Families { get; set; }
 		public int FamiliesCount { get; set; }
 		public int MembersCount { get; set; }
@@ -36,6 +37,7 @@ namespace WBZ.Classes
 			Status = (short)DistributionStatus.Buffer;
 			Archival = false;
 			Comment = "";
+			Icon = null;
 			Families = new List<C_DistributionFamily>();
 			FamiliesCount = 0;
 			MembersCount = 0;

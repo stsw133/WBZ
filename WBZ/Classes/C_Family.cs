@@ -18,6 +18,7 @@ namespace WBZ.Classes
 		public bool C_Email { get; set; }
 		public bool Archival { get; set; }
 		public string Comment { get; set; }
+		public byte[] Icon { get; set; }
 		public DateTime DonationLast { get; set; }
 		public decimal DonationWeight { get; set; }
 
@@ -36,6 +37,7 @@ namespace WBZ.Classes
 			C_Email = false;
 			Archival = false;
 			Comment = "";
+			Icon = null;
 			DonationLast = DateTime.MinValue;
 			DonationWeight = 0;
 		}

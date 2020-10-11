@@ -188,6 +188,13 @@
                   MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_ID, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
+                <DataGridTemplateColumn MaxWidth="50" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Icon, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Icon}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Binding="{Binding Module}" Header="Moduł" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Code, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}" Width="1*"/>
                 <DataGridTextColumn Binding="{Binding Name}" Header="Nazwa" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Name, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}" Width="2*"/>
                 <DataGridTextColumn Binding="{Binding Type}" Header="Typ" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Type, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}" Width="1*"/>
@@ -197,6 +204,7 @@
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_ID, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="Ikona" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Icon, Mode=TwoWay}"/>
                     <MenuItem IsCheckable="True" Header="Moduł" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Module, Mode=TwoWay}"/>
                     <MenuItem IsCheckable="True" Header="Nazwa" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Name, Mode=TwoWay}"/>
                     <MenuItem IsCheckable="True" Header="Typ" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Type, Mode=TwoWay}"/>

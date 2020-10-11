@@ -208,6 +208,13 @@
                   MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_ID, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
+                <DataGridTemplateColumn MaxWidth="50" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Icon, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Icon}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Binding="{Binding Declarant}" Header="Zgłaszający" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Declarant, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
                 <DataGridTextColumn Binding="{Binding Lastname}" Header="Rodzina" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Lastname, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
                 <DataGridTextColumn Binding="{Binding Members}" Header="Ilość osób" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Members, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
@@ -241,6 +248,7 @@
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_ID, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="Ikona" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Icon, Mode=TwoWay}"/>
                     <MenuItem IsCheckable="True" Header="Zgłaszający" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Declarant, Mode=TwoWay}"/>
                     <MenuItem IsCheckable="True" Header="Rodzina" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Lastname, Mode=TwoWay}"/>
                     <MenuItem IsCheckable="True" Header="Ilość osób" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Members, Mode=TwoWay}"/>

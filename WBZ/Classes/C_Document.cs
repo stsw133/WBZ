@@ -23,6 +23,7 @@ namespace WBZ.Classes
 		public short Status { get; set; }
 		public bool Archival { get; set; }
 		public string Comment { get; set; }
+		public byte[] Icon { get; set; }
 		public DataTable Positions { get; set; }
 		public string StoreName { get; set; }
 		public string CompanyName { get; set; }
@@ -44,6 +45,7 @@ namespace WBZ.Classes
 			Status = (short)DocumentStatus.Buffer;
 			Archival = false;
 			Comment = "";
+			Icon = null;
 			Positions = new DataTable();
 			StoreName = stores.Count == 1 ? stores[0].Name : "";
 			CompanyName = "";

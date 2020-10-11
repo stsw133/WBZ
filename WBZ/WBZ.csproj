@@ -141,6 +141,9 @@
     <Compile Include="Controls\StatusPanel.xaml.cs">
       <DependentUpon>StatusPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Tabs\AdditionalsTab.xaml.cs">
+      <DependentUpon>AdditionalsTab.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Tabs\ContactsTab.xaml.cs">
       <DependentUpon>ContactsTab.xaml</DependentUpon>
     </Compile>
@@ -284,6 +287,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="SQL\SQL.cs" />
     <Compile Include="SQL\SQL_Migration.cs" />
     <Compile Include="Controls\MenuPanelColor.xaml.cs">
@@ -292,6 +296,10 @@
     <Page Include="Controls\StatusPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Tabs\AdditionalsTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\Tabs\ContactsTab.xaml">
       <Generator>MSBuild:Compile</Generator>

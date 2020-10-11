@@ -113,6 +113,17 @@ alter table wbz.attributes_classes add column if not exists archival boolean not
 alter table wbz.attributes add column if not exists archival boolean not null default false;
 alter table wbz.attachments add column if not exists comment text;
 alter table wbz.groups add column if not exists instance integer;
+alter table wbz.groups add column if not exists icon bytea;
+alter table wbz.attributes_classes add column if not exists icon bytea;
+alter table wbz.articles add column if not exists icon bytea;
+alter table wbz.stores add column if not exists icon bytea;
+alter table wbz.companies add column if not exists icon bytea;
+alter table wbz.families add column if not exists icon bytea;
+alter table wbz.documents add column if not exists icon bytea;
+alter table wbz.distributions add column if not exists icon bytea;
+
+alter table wbz.users_permissions drop column if exists id;
+drop sequence if exists wbz.users_permissions_id_seq;
 
 CREATE TABLE wbz.employees
 (
@@ -129,6 +140,7 @@ CREATE TABLE wbz.employees
 	position character varying(40) COLLATE pg_catalog.""default"",
 	archival boolean NOT NULL DEFAULT false,
 	comment text COLLATE pg_catalog.""default"",
+	icon bytea,
 	CONSTRAINT employees_pkey PRIMARY KEY(id),
 	CONSTRAINT employees_user_fkey FOREIGN KEY(""user"")
 		REFERENCES wbz.users(id) MATCH SIMPLE

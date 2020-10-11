@@ -102,11 +102,7 @@
                 <TabItem.Header>
                     <c:SimpleHeader TextContent="Dodatkowe" IconSource="pack://siteoforigin:,,,/Resources/icon32_tools.ico"/>
                 </TabItem.Header>
-                <DockPanel Margin="5" IsEnabled="{Binding EditingMode}">
-                    <CheckBox DockPanel.Dock="Top" Content="Archiwalny" Margin="20" VerticalContentAlignment="Center" IsChecked="{Binding InstanceInfo.Archival}"/>
-                    <Label DockPanel.Dock="Top" Content="Komentarz:" Margin="5,5,5,0" VerticalContentAlignment="Center"/>
-                    <TextBox DockPanel.Dock="Top" Text="{Binding InstanceInfo.Comment}" Margin="5" TextWrapping="Wrap"/>
-                </DockPanel>
+                <c:AdditionalsTab/>
             </TabItem>
             <!-- tabGroups -->
             <TabItem>

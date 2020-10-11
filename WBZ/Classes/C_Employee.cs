@@ -15,6 +15,7 @@
 		public string Address { get; set; }
 		public bool Archival { get; set; }
 		public string Comment { get; set; }
+		public byte[] Icon { get; set; }
 		public string UserName { get; set; }
 
 		public C_Employee()
@@ -32,6 +33,7 @@
 			Address = "";
 			Archival = false;
 			Comment = "";
+			Icon = null;
 			UserName = "";
 		}
 

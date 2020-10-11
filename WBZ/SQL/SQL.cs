@@ -373,7 +373,7 @@ namespace WBZ
 							MessageBox.Show("Użytkownik o podanym loginie jest zablokowany.");
 						else
 						{
-							sqlCmd = new NpgsqlCommand(@"select id, user, perm
+							sqlCmd = new NpgsqlCommand(@"select user, perm
 								from wbz.users_permissions
 								where ""user""=@id", sqlConn);
 							sqlCmd.Parameters.AddWithValue("id", Global.User.ID);
@@ -905,12 +905,12 @@ namespace WBZ
 
 						///add
 						if (ID == 0)
-							sqlCmd = new NpgsqlCommand(@"insert into wbz.distributions (name, datereal, status, archival, comment)
-								values (@name, @datereal, @status, @archival, @comment) returning id", sqlConn, sqlTran);
+							sqlCmd = new NpgsqlCommand(@"insert into wbz.distributions (name, datereal, status, archival, comment, icon)
+								values (@name, @datereal, @status, @archival, @comment, @icon) returning id", sqlConn, sqlTran);
 						///edit
 						else
 							sqlCmd = new NpgsqlCommand(@"update wbz.distributions
-								set name=@name, datereal=@datereal, status=@status, archival=@archival, comment=@comment
+								set name=@name, datereal=@datereal, status=@status, archival=@archival, comment=@comment, icon=@icon
 								where id=@id", sqlConn, sqlTran);
 
 						sqlCmd.Parameters.AddWithValue("id", ID);
@@ -919,6 +919,7 @@ namespace WBZ
 						sqlCmd.Parameters.AddWithValue("status", distribution.Status);
 						sqlCmd.Parameters.AddWithValue("archival", distribution.Archival);
 						sqlCmd.Parameters.AddWithValue("comment", distribution.Comment);
+						sqlCmd.Parameters.AddWithValue("icon", distribution.Icon);
 
 						///add
 						if (ID == 0)
@@ -1394,7 +1395,7 @@ namespace WBZ
 							query = @"select a.id, a.codename, a.name, a.ean, coalesce(nullif(wbz.ArtDefMeaNam(a.id),''), 'kg') as measure,
 									coalesce(sum(sa.amount), 0) as amountraw, coalesce(sum(sa.amount) / wbz.ArtDefMeaCon(a.id), 0) as amount,
 									coalesce(sum(sa.reserved), 0) as reservedraw, coalesce(sum(sa.reserved) / wbz.ArtDefMeaCon(a.id), 0) as reserved,
-									a.archival, a.comment
+									a.archival, a.comment, a.icon
 								from wbz.articles a
 								left join wbz.stores_articles sa
 									on a.id = sa.article";
@@ -1406,13 +1407,14 @@ namespace WBZ
 							break;
 						/// attributes_classes
 						case Global.Module.ATTRIBUTES_CLASSES:
-							query = @"select ac.id as ""ID"", ac.module as ""Module"", ac.name as ""Name"", ac.type as ""Type"", ac.""values"" as ""Values""
+							query = @"select ac.id as ""ID"", ac.module as ""Module"", ac.name as ""Name"", ac.type as ""Type"", ac.""values"" as ""Values"",
+									ac.archival, ac.comment, ac.icon
 								from wbz.attributes_classes ac";
 							break;
 						/// companies
 						case Global.Module.COMPANIES:
 							query = @"select c.id, c.codename, c.name, c.branch, c.nip, c.regon, c.postcode, c.city, c.address,
-									c.archival, c.comment
+									c.archival, c.comment, c.icon
 								from wbz.companies c";
 							break;
 						/// distributions
@@ -1420,7 +1422,7 @@ namespace WBZ
 							query = @"select d.id, d.name, d.datereal, d.status,
 									count(distinct dp.family) as familiescount, sum(members) as memberscount,
 									count(dp.*) as positionscount, sum(dp.amount) as weight,
-									d.archival, d.comment
+									d.archival, d.comment, d.icon
 								from wbz.distributions d
 								left join wbz.distributions_positions dp
 									on dp.distribution=d.id";
@@ -1429,7 +1431,7 @@ namespace WBZ
 						case Global.Module.DOCUMENTS:
 							query = @"select d.id, d.name, d.store, s.name as storename, d.company, c.name as companyname,
 									d.type, d.dateissue, d.status, count(dp.*) as positionscount, sum(dp.amount) as weight, sum(dp.cost) as cost,
-									d.archival, d.comment
+									d.archival, d.comment, d.icon
 								from wbz.documents d
 								left join wbz.documents_positions dp
 									on dp.document=d.id
@@ -1442,7 +1444,8 @@ namespace WBZ
 						case Global.Module.EMPLOYEES:
 							query = @"select e.id, e.""user"", u.lastname || ' ' || u.forename as username,
 									e.forename, e.lastname, e.department, e.position,
-									e.email, e.phone, e.postcode, e.city, e.address, e.archival
+									e.email, e.phone, e.postcode, e.city, e.address,
+									e.archival, e.comment, e.icon
 								from wbz.employees e
 								left join wbz.users u
 									on u.id=e.""user""";
@@ -1450,14 +1453,14 @@ namespace WBZ
 						/// groups
 						case Global.Module.GROUPS:
 							query = @"select g.id, g.module, g.name, g.instance, g.owner,
-									g.archival, g.comment
+									g.archival, g.comment, g.icon
 								from wbz.groups g";
 							break;
 						/// families
 						case Global.Module.FAMILIES:
 							query = @"select f.id, f.declarant, f.lastname, f.members, f.postcode, f.city, f.address,
 									f.status, f.c_sms, f.c_call, f.c_email, max(d.datereal) as donationlast, sum(dp.amount) as donationweight,
-									f.archival, f.comment
+									f.archival, f.comment, f.icon
 								from wbz.families f
 								left join wbz.distributions_positions dp
 									on f.id=dp.family
@@ -1476,7 +1479,7 @@ namespace WBZ
 						case Global.Module.STORES:
 							query = @"select s.id, s.codename, s.name, s.postcode, s.city, s.address,
 									coalesce(sum(amount),0) as amount, coalesce(sum(reserved),0) as reserved,
-									s.archival, s.comment
+									s.archival, s.comment, s.icon
 								from wbz.stores s
 								left join wbz.stores_articles sa
 									on s.id = sa.store";
@@ -1616,10 +1619,11 @@ namespace WBZ
 						/// articles
 						case Global.Module.ARTICLES:
 							var article = instance as C_Article;
-							query = @"insert into wbz.articles (id, codename, name, ean, archival, comment)
-								values (@id, @codename, @name, @ean, @archival, @comment)
+							query = @"insert into wbz.articles (id, codename, name, ean, archival, comment, icon)
+								values (@id, @codename, @name, @ean, @archival, @comment, @icon)
 								on conflict(id) do
-								update set codename=@codename, name=@name, ean=@ean, archival=@archival, comment=@comment";
+								update set codename=@codename, name=@name, ean=@ean,
+									archival=@archival, comment=@comment, icon=@icon";
 							using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 							{
 								sqlCmd.Parameters.AddWithValue("id", article.ID);
@@ -1628,6 +1632,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("ean", article.EAN);
 								sqlCmd.Parameters.AddWithValue("archival", article.Archival);
 								sqlCmd.Parameters.AddWithValue("comment", article.Comment);
+								sqlCmd.Parameters.AddWithValue("icon", article.Icon);
 								sqlCmd.ExecuteNonQuery();
 							}
 							SetLog(Global.User.ID, module, article.ID, $"{(mode==Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} towar: {article.Name}.", sqlTran);
@@ -1684,11 +1689,11 @@ namespace WBZ
 						/// attributes_classes
 						case Global.Module.ATTRIBUTES_CLASSES:
 							var attributeClass = instance as C_AttributeClass;
-							query = @"insert into wbz.attributes_classes (module, name, type, ""values"", required, archival)
-								values (@module, @name, @type, @values, @required, @archival)
+							query = @"insert into wbz.attributes_classes (module, name, type, ""values"", required, archival, comment, icon)
+								values (@module, @name, @type, @values, @required, @archival, @comment, @icon)
 								on conflict(id) do
-								update set module=@module, name=@name, type=@type, ""values""=@values,
-									required=@required, archival=@archival";
+								update set module=@module, name=@name, type=@type, ""values""=@values, required=@required,
+									archival=@archival, comment=@comment, icon=@icon";
 							using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 							{
 								sqlCmd.Parameters.AddWithValue("id", attributeClass.ID);
@@ -1698,6 +1703,8 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("values", attributeClass.Values);
 								sqlCmd.Parameters.AddWithValue("required", attributeClass.Required);
 								sqlCmd.Parameters.AddWithValue("archival", attributeClass.Archival);
+								sqlCmd.Parameters.AddWithValue("comment", attributeClass.Comment);
+								sqlCmd.Parameters.AddWithValue("icon", attributeClass.Icon);
 								sqlCmd.ExecuteNonQuery();
 							}
 							SetLog(Global.User.ID, module, attributeClass.ID, $"{(mode == Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} klasę atrybutu: {attributeClass.Name}.", sqlTran);
@@ -1705,11 +1712,12 @@ namespace WBZ
 						/// companies
 						case Global.Module.COMPANIES:
 							var company = instance as C_Company;
-							query = @"insert into wbz.companies (id, codename, name, branch, nip, regon, postcode, city, address, archival, comment)
-								values (@id, @codename, @name, @branch, @nip, @regon, @postcode, @city, @address, @archival, @comment)
+							query = @"insert into wbz.companies (id, codename, name, branch, nip, regon, postcode, city, address, archival, comment, icon)
+								values (@id, @codename, @name, @branch, @nip, @regon, @postcode, @city, @address, @archival, @comment, @icon)
 								on conflict(id) do
 								update set codename=@codename, name=@name, branch=@branch, nip=@nip, regon=@regon,
-									postcode=@postcode, city=@city, address=@address, archival=@archival, comment=@comment";
+									postcode=@postcode, city=@city, address=@address,
+									archival=@archival, comment=@comment, icon=@icon";
 							using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 							{
 								sqlCmd.Parameters.AddWithValue("id", company.ID);
@@ -1723,6 +1731,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("address", company.Address);
 								sqlCmd.Parameters.AddWithValue("archival", company.Archival);
 								sqlCmd.Parameters.AddWithValue("comment", company.Comment);
+								sqlCmd.Parameters.AddWithValue("icon", company.Icon);
 								sqlCmd.ExecuteNonQuery();
 							}
 							SetLog(Global.User.ID, module, company.ID, $"{(mode == Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} firmę: {company.Name}.", sqlTran);
@@ -1739,11 +1748,11 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("id", document.ID);
 								oldstatus = Convert.ToInt32(sqlCmd.ExecuteScalar());
 							}
-							query = @"insert into wbz.documents (id, name, type, store, company, dateissue, status, archival, comment)
-								values (@id, @name, @type, @store, @company, @dateissue, @status, @archival, @comment)
+							query = @"insert into wbz.documents (id, name, type, store, company, dateissue, status, archival, comment, icon)
+								values (@id, @name, @type, @store, @company, @dateissue, @status, @archival, @comment, @icon)
 								on conflict(id) do
-								update set name=@name, type=@type, store=@store, company=@company,
-									dateissue=@dateissue, status=@status, archival=@archival, comment=@comment";
+								update set name=@name, type=@type, store=@store, company=@company, dateissue=@dateissue, status=@status,
+									archival=@archival, comment=@comment, icon=@icon";
 							using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 							{
 								sqlCmd.Parameters.AddWithValue("id", document.ID);
@@ -1755,6 +1764,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("status", document.Status);
 								sqlCmd.Parameters.AddWithValue("archival", document.Archival);
 								sqlCmd.Parameters.AddWithValue("comment", document.Comment);
+								sqlCmd.Parameters.AddWithValue("icon", document.Icon);
 								sqlCmd.ExecuteNonQuery();
 							}
 							SetLog(Global.User.ID, module, document.ID, $"{(mode == Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} dokument: {document.Name}.", sqlTran);
@@ -1826,13 +1836,13 @@ namespace WBZ
 						case Global.Module.EMPLOYEES:
 							var employee = instance as C_Employee;
 							query = @"insert into wbz.employees (id, ""user"", forename, lastname, department, position,
-									email, phone, city, address, postcode, archival, comment)
+									email, phone, city, address, postcode, archival, comment, icon)
 								values (@id, @user, @forename, @lastname, @department, @position,
-									@email, @phone, @city, @address, @postcode, @archival, @comment)
+									@email, @phone, @city, @address, @postcode, @archival, @comment, @icon)
 								on conflict(id) do
 								update set ""user""=@user, forename=@forename, lastname=@lastname, department=@department, position=@position,
 									email=@email, phone=@phone, city=@city, address=@address, postcode=@postcode,
-									archival=@archival, comment=@comment";
+									archival=@archival, comment=@comment, icon=@icon";
 							using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 							{
 								sqlCmd.Parameters.AddWithValue("id", employee.ID);
@@ -1848,6 +1858,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("postcode", employee.Postcode);
 								sqlCmd.Parameters.AddWithValue("archival", employee.Archival);
 								sqlCmd.Parameters.AddWithValue("comment", employee.Comment);
+								sqlCmd.Parameters.AddWithValue("icon", employee.Icon);
 								sqlCmd.ExecuteNonQuery();
 							}
 							SetLog(Global.User.ID, module, employee.ID, $"{(mode == Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} pracownika: {employee.Fullname}.", sqlTran);
@@ -1856,12 +1867,13 @@ namespace WBZ
 						case Global.Module.FAMILIES:
 							var family = instance as C_Family;
 							query = @"insert into wbz.families (id, declarant, lastname, members, postcode, city, address,
-									status, c_sms, c_call, c_email, archival, comment)
+									status, c_sms, c_call, c_email, archival, comment, icon)
 								values (@id, @declarant, @lastname, @members, @postcode, @city, @address,
-									@status, @c_sms, @c_call, @c_email, @archival, @comment)
+									@status, @c_sms, @c_call, @c_email, @archival, @comment, @icon)
 								on conflict(id) do
 								update set declarant=@declarant, lastname=@lastname, members=@members, postcode=@postcode, city=@city, address=@address,
-									status=@status, c_sms=@c_sms, c_call=@c_call, c_email=@c_email, archival=@archival, comment=@comment";
+									status=@status, c_sms=@c_sms, c_call=@c_call, c_email=@c_email,
+									archival=@archival, comment=@comment, icon=@icon";
 							using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 							{
 								sqlCmd.Parameters.AddWithValue("id", family.ID);
@@ -1877,6 +1889,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("c_email", family.C_Email);
 								sqlCmd.Parameters.AddWithValue("archival", family.Archival);
 								sqlCmd.Parameters.AddWithValue("comment", family.Comment);
+								sqlCmd.Parameters.AddWithValue("icon", family.Icon);
 								sqlCmd.ExecuteNonQuery();
 							}
 							SetLog(Global.User.ID, module, family.ID, $"{(mode == Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} rodzinę: {family.Lastname}.", sqlTran);
@@ -1888,10 +1901,11 @@ namespace WBZ
 						/// stores
 						case Global.Module.STORES:
 							var store = instance as C_Store;
-							query = @"insert into wbz.stores (id, codename, name, city, address, postcode, archival, comment)
-								values (@id, @codename, @name, @city, @address, @postcode, @archival, @comment)
+							query = @"insert into wbz.stores (id, codename, name, city, address, postcode, archival, comment, icon)
+								values (@id, @codename, @name, @city, @address, @postcode, @archival, @comment, @icon)
 								on conflict(id) do
-								update set codename=@codename, name=@name, city=@city, address=@address, postcode=@postcode, archival=@archival, comment=@comment";
+								update set codename=@codename, name=@name, city=@city, address=@address, postcode=@postcode,
+									archival=@archival, comment=@comment, icon=@icon";
 							using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 							{
 								sqlCmd.Parameters.AddWithValue("id", store.ID);
@@ -1902,6 +1916,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("postcode", store.Postcode);
 								sqlCmd.Parameters.AddWithValue("archival", store.Archival);
 								sqlCmd.Parameters.AddWithValue("comment", store.Comment);
+								sqlCmd.Parameters.AddWithValue("icon", store.Icon);
 								sqlCmd.ExecuteNonQuery();
 							}
 							SetLog(Global.User.ID, module, store.ID, $"{(mode == Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} magazyn: {store.Name}.", sqlTran);

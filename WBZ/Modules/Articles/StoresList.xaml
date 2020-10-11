@@ -201,6 +201,13 @@
                   MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_StoresList_ID, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
+                <DataGridTemplateColumn MaxWidth="50" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_StoresList_Icon, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Icon}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Binding="{Binding Codename}" Header="Kod" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_StoresList_Codename, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
                 <DataGridTextColumn Binding="{Binding Name}" Header="Nazwa" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_StoresList_Name, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}" Width="*"/>
                 <DataGridTextColumn Binding="{Binding Postcode}" Header="Kod pocztowy" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_StoresList_Postcode, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
@@ -212,6 +219,7 @@
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_StoresList_ID, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="Ikona" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_StoresList_Icon, Mode=TwoWay}"/>
                     <MenuItem IsCheckable="True" Header="Kod" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_StoresList_Codename, Mode=TwoWay}"/>
                     <MenuItem IsCheckable="True" Header="Nazwa" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_StoresList_Name, Mode=TwoWay}"/>
                     <MenuItem IsCheckable="True" Header="Kod pocztowy" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_StoresList_Postcode, Mode=TwoWay}"/>

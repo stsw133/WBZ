@@ -8,8 +8,10 @@ namespace WBZ.Classes
 		public string Codename { get; set; }
 		public string Name { get; set; }
 		public string EAN { get; set; }
+		public decimal Price { get; set; }
 		public bool Archival { get; set; }
 		public string Comment { get; set; }
+		public byte[] Icon { get; set; }
 		public DataTable Measures { get; set; }
 		public string Measure { get; set; }
 		public decimal AmountRaw { get; set; }
@@ -23,8 +25,10 @@ namespace WBZ.Classes
 			Codename = "";
 			Name = "";
 			EAN = "";
+			Price = 0;
 			Archival = false;
 			Comment = "";
+			Icon = null;
 			Measures = new DataTable();
 			Measure = "";
 			AmountRaw = 0;
@@ -41,6 +45,7 @@ namespace WBZ.Classes
 		public string Name { get; set; }
 		public double Converter { get; set; }
 		public bool Default { get; set; }
+		public decimal Price { get; set; }
 		public decimal Amount { get; set; }
 		public decimal Reserved { get; set; }
 
@@ -51,6 +56,7 @@ namespace WBZ.Classes
 			Name = "";
 			Converter = 1;
 			Default = false;
+			Price = 0;
 			Amount = 0;
 			Reserved = 0;
 		}

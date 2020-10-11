@@ -193,6 +193,13 @@
                   MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_ID, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
+                <DataGridTemplateColumn MaxWidth="50" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Icon, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Icon}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Binding="{Binding Codename}" Header="Kod" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Code, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
                 <DataGridTextColumn Binding="{Binding Name}" Header="Nazwa" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Name, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}" Width="*"/>
                 <DataGridTextColumn Binding="{Binding EAN}" Header="EAN" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_EAN, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
@@ -203,6 +210,7 @@
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_ID, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="Ikona" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Icon, Mode=TwoWay}"/>
                     <MenuItem IsCheckable="True" Header="Kod" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Code, Mode=TwoWay}"/>
                     <MenuItem IsCheckable="True" Header="Nazwa" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Name, Mode=TwoWay}"/>
                     <MenuItem IsCheckable="True" Header="EAN" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_EAN, Mode=TwoWay}"/>

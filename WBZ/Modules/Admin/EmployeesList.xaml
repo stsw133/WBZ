@@ -216,6 +216,13 @@
                   MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_ID, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
+                <DataGridTemplateColumn MaxWidth="50" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Icon, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Icon}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Binding="{Binding Fullname}" Header="Nazwisko" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Fullname, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
                 <DataGridTextColumn Binding="{Binding Department}" Header="Dział" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Department, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
                 <DataGridTextColumn Binding="{Binding Position}" Header="Stanowisko" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Position, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
@@ -228,6 +235,7 @@
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_ID, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="Ikona" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Icon, Mode=TwoWay}"/>
                     <MenuItem IsCheckable="True" Header="Nazwisko" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Fullname, Mode=TwoWay}"/>
                     <MenuItem IsCheckable="True" Header="Dział" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Department, Mode=TwoWay}"/>
                     <MenuItem IsCheckable="True" Header="Stanowisko" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Position, Mode=TwoWay}"/>

@@ -33,7 +33,7 @@ CREATE TABLE wbz.config
 TABLESPACE pg_default;
 
 INSERT INTO wbz.config (property, value) VALUES
-    ('VERSION', '1.1.0'), --wersja bazy danych
+    ('VERSION', '1.1.0'),
     ('LOGS_ENABLED', '0'),
     ('EMAIL_HOST', 'smtp.gmail.com'),
 	('EMAIL_PORT', '587'),
@@ -61,10 +61,8 @@ TABLESPACE pg_default;
 -- Table: wbz.users_permissions
 CREATE TABLE wbz.users_permissions
 (
-    id serial NOT NULL,
     "user" integer NOT NULL,
     perm character varying(50) COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT users_permissions_pkey PRIMARY KEY ("id"),
     CONSTRAINT users_permissions_user_fkey FOREIGN KEY ("user")
         REFERENCES wbz.users (id) MATCH SIMPLE
         ON UPDATE CASCADE
@@ -130,10 +128,11 @@ CREATE TABLE wbz.groups
     id serial NOT NULL,
     module character varying(50) COLLATE pg_catalog."default" NOT NULL,
     name character varying(50) COLLATE pg_catalog."default" NOT NULL,
-    instance integer, --id instancji, która nale¿y do grupy w polu owner
-    owner integer, --id grupy do której ta grupa/instancja nale¿y
+    instance integer,
+    owner integer,
     archival boolean NOT NULL DEFAULT false,
     comment text COLLATE pg_catalog."default",
+    icon bytea,
     CONSTRAINT groups_pkey PRIMARY KEY (id)
 )
 TABLESPACE pg_default;
@@ -144,12 +143,13 @@ CREATE TABLE wbz.attributes_classes
     id serial NOT NULL,
     module character varying(50) COLLATE pg_catalog."default" NOT NULL,
     name character varying(50) COLLATE pg_catalog."default" NOT NULL,
-    type character varying(20) COLLATE pg_catalog."default" NOT NULL, --typ zmiennej np. int / bool etc.
-    "values" character varying(100) COLLATE pg_catalog."default", --wartoœci jakie mo¿e przyj¹æ atrybut (null jeœli dowolne)
+    type character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    "values" character varying(100) COLLATE pg_catalog."default",
     defvalue character varying(50) COLLATE pg_catalog."default",
     required boolean NOT NULL DEFAULT false,
     archival boolean NOT NULL DEFAULT false,
     comment text COLLATE pg_catalog."default",
+    icon bytea,
     CONSTRAINT attributes_classes_pkey PRIMARY KEY (id)
 )
 TABLESPACE pg_default;
@@ -192,9 +192,9 @@ CREATE TABLE wbz.notifications
     id serial NOT NULL,
     "user" integer NOT NULL,
     content character varying(100) COLLATE pg_catalog."default" NOT NULL,
-    read boolean NOT NULL DEFAULT false, --okreœla czy notyfikacja zosta³a przeczytana
-    datetime timestamp(6) with time zone NOT NULL DEFAULT now(), --data wystawienia notyfikacji
-    action character varying(20) COLLATE pg_catalog."default", --akcja odpalaj¹ca siê po klikniêciu
+    read boolean NOT NULL DEFAULT false,
+    datetime timestamp(6) with time zone NOT NULL DEFAULT now(),
+    action character varying(20) COLLATE pg_catalog."default",
     CONSTRAINT notifications_pkey PRIMARY KEY (id),
     CONSTRAINT notifications_user_fkey FOREIGN KEY ("user")
         REFERENCES wbz.users (id) MATCH SIMPLE
@@ -210,8 +210,10 @@ CREATE TABLE wbz.articles
     codename character varying(20) COLLATE pg_catalog."default",
     name character varying(100) COLLATE pg_catalog."default" NOT NULL,
     ean character varying(20) COLLATE pg_catalog."default",
+    price numeric(16,2),
     archival boolean NOT NULL DEFAULT false,
     comment text COLLATE pg_catalog."default",
+    icon bytea,
     CONSTRAINT articles_pkey PRIMARY KEY (id),
     CONSTRAINT articles_codename_key UNIQUE (codename)
 )
@@ -244,6 +246,7 @@ CREATE TABLE wbz.stores
     postcode character varying(6) COLLATE pg_catalog."default" NOT NULL,
     archival boolean NOT NULL DEFAULT false,
     comment text COLLATE pg_catalog."default",
+    icon bytea,
     CONSTRAINT stores_pkey PRIMARY KEY (id),
     CONSTRAINT stores_codename_key UNIQUE (codename)
 )
@@ -255,8 +258,8 @@ CREATE TABLE wbz.stores_articles
     id serial NOT NULL,
     store integer NOT NULL,
     article integer NOT NULL,
-    amount numeric(15,3) NOT NULL DEFAULT 0, --iloœæ w kilogramach
-    reserved numeric(15,3) NOT NULL DEFAULT 0, --iloœæ w kilogramach
+    amount numeric(15,3) NOT NULL DEFAULT 0,
+    reserved numeric(15,3) NOT NULL DEFAULT 0,
     CONSTRAINT stores_articles_pkey PRIMARY KEY (id),
     CONSTRAINT stores_articles_store_fkey FOREIGN KEY (store)
         REFERENCES wbz.stores (id) MATCH SIMPLE
@@ -276,13 +279,14 @@ CREATE TABLE wbz.companies
     codename character varying(20) COLLATE pg_catalog."default",
     name character varying(100) COLLATE pg_catalog."default" NOT NULL,
     branch character varying(40) COLLATE pg_catalog."default",
-    nip character varying(10) COLLATE pg_catalog."default" NOT NULL,
-    regon character varying(9) COLLATE pg_catalog."default" NOT NULL,
+    nip character varying(10) COLLATE pg_catalog."default",
+    regon character varying(9) COLLATE pg_catalog."default",
     city character varying(40) COLLATE pg_catalog."default" NOT NULL,
     address character varying(60) COLLATE pg_catalog."default" NOT NULL,
     postcode character varying(6) COLLATE pg_catalog."default" NOT NULL,
     archival boolean NOT NULL DEFAULT false,
     comment text COLLATE pg_catalog."default",
+    icon bytea,
     CONSTRAINT companies_pkey PRIMARY KEY (id)
 )
 TABLESPACE pg_default;
@@ -298,11 +302,12 @@ CREATE TABLE wbz.families
     address character varying(60) COLLATE pg_catalog."default" NOT NULL,
     postcode character varying(6) COLLATE pg_catalog."default" NOT NULL,
     status boolean NOT NULL DEFAULT true,
-    c_sms boolean NOT NULL DEFAULT false, --czy rodzina ma byæ powiadamiana wiadomoœciami sms
-    c_call boolean NOT NULL DEFAULT false, --czy rodzina ma byæ powiadamiana przez rozmowê telefoniczn¹
-    c_email boolean NOT NULL DEFAULT false, --czy rodzina ma byæ powiadamiana drog¹ poczty elektronicznej
+    c_sms boolean NOT NULL DEFAULT false,
+    c_call boolean NOT NULL DEFAULT false,
+    c_email boolean NOT NULL DEFAULT false,
     archival boolean NOT NULL DEFAULT false,
     comment text COLLATE pg_catalog."default",
+    icon bytea,
     CONSTRAINT families_pkey PRIMARY KEY (id)
 )
 TABLESPACE pg_default;
@@ -311,14 +316,15 @@ TABLESPACE pg_default;
 CREATE TABLE wbz.documents
 (
     id serial NOT NULL,
-    type character varying(50) COLLATE pg_catalog."default" NOT NULL, --np. 'invoice'
+    type character varying(50) COLLATE pg_catalog."default" NOT NULL,
     name character varying(50) COLLATE pg_catalog."default" NOT NULL,
     store integer NOT NULL,
     company integer NOT NULL,
-    dateissue date NOT NULL DEFAULT now(), --data wystawienia dokumentu
-    status smallint NOT NULL DEFAULT 0, --0 = w buforze, 1 = zatwierdzona, -1 = wycofana
+    dateissue date NOT NULL DEFAULT now(),
+    status smallint NOT NULL DEFAULT 0,
     archival boolean NOT NULL DEFAULT false,
     comment text COLLATE pg_catalog."default",
+    icon bytea,
     CONSTRAINT documents_headers_pkey PRIMARY KEY (id),
     CONSTRAINT documents_headers_store_fkey FOREIGN KEY (store)
         REFERENCES wbz.stores (id) MATCH SIMPLE
@@ -338,9 +344,9 @@ CREATE TABLE wbz.documents_positions
     document integer NOT NULL,
     "position" smallint NOT NULL,
     article integer NOT NULL,
-    amount numeric(15,3) NOT NULL DEFAULT 0, --iloœæ w kilogramach
-    cost numeric(16,2) NOT NULL DEFAULT 0, --koszt netto w z³
-    tax numeric(16,2) NOT NULL DEFAULT 0, --koszt podatku w z³
+    amount numeric(15,3) NOT NULL DEFAULT 0,
+    cost numeric(16,2) NOT NULL DEFAULT 0,
+    tax numeric(16,2) NOT NULL DEFAULT 0,
     CONSTRAINT documents_positions_pkey PRIMARY KEY (id),
     CONSTRAINT documents_positions_document_fkey FOREIGN KEY (document)
         REFERENCES wbz.documents (id) MATCH SIMPLE
@@ -358,10 +364,11 @@ CREATE TABLE wbz.distributions
 (
     id serial NOT NULL,
     name character varying(50) COLLATE pg_catalog."default",
-    datereal date, --data realizacji dystrybucji
-    status smallint NOT NULL DEFAULT 0, --0 = w buforze, 1 = zatwierdzona, -1 = wycofana
+    datereal date,
+    status smallint NOT NULL DEFAULT 0,
     archival boolean NOT NULL,
     comment text COLLATE pg_catalog."default",
+    icon bytea,
     CONSTRAINT distribution_pkey PRIMARY KEY (id)
 )
 TABLESPACE pg_default;
@@ -376,8 +383,8 @@ CREATE TABLE wbz.distributions_positions
     members smallint NOT NULL,
     store integer NOT NULL,
     article integer NOT NULL,
-    amount numeric(15,3) NOT NULL DEFAULT 0, --iloœæ w kilogramach
-    status smallint NOT NULL, --0 = nic / 1 = poinformowano / 2 = odebrano
+    amount numeric(15,3) NOT NULL DEFAULT 0,
+    status smallint NOT NULL,
     CONSTRAINT distributions_positions_pkey PRIMARY KEY (id),
     CONSTRAINT distributions_positions_distribution_fkey FOREIGN KEY (distribution)
         REFERENCES wbz.distributions (id) MATCH SIMPLE
@@ -414,6 +421,7 @@ CREATE TABLE wbz.employees
     position character varying(40) COLLATE pg_catalog."default",
     archival boolean NOT NULL DEFAULT false,
     comment text COLLATE pg_catalog."default",
+    icon bytea,
     CONSTRAINT employees_pkey PRIMARY KEY (id),
     CONSTRAINT employees_user_fkey FOREIGN KEY ("user")
         REFERENCES wbz.users (id) MATCH SIMPLE

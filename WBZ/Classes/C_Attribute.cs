@@ -10,6 +10,8 @@
 		public string DefValue { get; set; }
 		public bool Required { get; set; }
 		public bool Archival { get; set; }
+		public string Comment { get; set; }
+		public byte[] Icon { get; set; }
 
 		public C_AttributeClass()
 		{
@@ -21,6 +23,8 @@
 			DefValue = "";
 			Required = false;
 			Archival = false;
+			Comment = "";
+			Icon = null;
 		}
 	}
 

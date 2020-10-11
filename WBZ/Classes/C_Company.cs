@@ -15,6 +15,7 @@ namespace WBZ.Classes
 		public string Address { get; set; }
 		public bool Archival { get; set; }
 		public string Comment { get; set; }
+		public byte[] Icon { get; set; }
 
 		public C_Company()
 		{
@@ -29,6 +30,7 @@ namespace WBZ.Classes
 			Address = "";
 			Archival = false;
 			Comment = "";
+			Icon = null;
 		}
 	}
 }

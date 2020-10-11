@@ -203,6 +203,13 @@
                   MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_ID, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
+                <DataGridTemplateColumn MaxWidth="50" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_Icon, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Icon}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Binding="{Binding Name}" Header="Nazwa" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_Name, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}" Width="*"/>
                 <DataGridTextColumn Binding="{Binding FamiliesCount}" Header="Rodziny" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_FamiliesCount, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
                 <DataGridTextColumn Binding="{Binding MembersCount}" Header="Osoby" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_MembersCount, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
@@ -213,6 +220,7 @@
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_ID, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="Ikona" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_Icon, Mode=TwoWay}"/>
                     <MenuItem IsCheckable="True" Header="Nazwa" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_Name, Mode=TwoWay}"/>
                     <MenuItem IsCheckable="True" Header="Liczba rodzin" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_FamiliesCount, Mode=TwoWay}"/>
                     <MenuItem IsCheckable="True" Header="Liczba osób" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_MembersCount, Mode=TwoWay}"/>
