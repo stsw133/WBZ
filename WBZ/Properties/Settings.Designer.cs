@@ -1902,5 +1902,98 @@ namespace WBZ.Properties {
                 this["columns_AttributesClassesList_Required"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>900</string>\r\n  <string>600</string>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection config_AttachmentsList_WindowSize {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["config_AttachmentsList_WindowSize"]));
+            }
+            set {
+                this["config_AttachmentsList_WindowSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>a.module</string>
+  <string>False</string>
+  <string>a.name</string>
+  <string>False</string>
+  <string>50</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection sorting_AttachmentsList {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_AttachmentsList"]));
+            }
+            set {
+                this["sorting_AttachmentsList"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool columns_AttachmentsList_ID {
+            get {
+                return ((bool)(this["columns_AttachmentsList_ID"]));
+            }
+            set {
+                this["columns_AttachmentsList_ID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool columns_AttachmentsList_Module {
+            get {
+                return ((bool)(this["columns_AttachmentsList_Module"]));
+            }
+            set {
+                this["columns_AttachmentsList_Module"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool columns_AttachmentsList_Name {
+            get {
+                return ((bool)(this["columns_AttachmentsList_Name"]));
+            }
+            set {
+                this["columns_AttachmentsList_Name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool columns_AttachmentsList_UserFullname {
+            get {
+                return ((bool)(this["columns_AttachmentsList_UserFullname"]));
+            }
+            set {
+                this["columns_AttachmentsList_UserFullname"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool columns_AttachmentsList_Obj {
+            get {
+                return ((bool)(this["columns_AttachmentsList_Obj"]));
+            }
+            set {
+                this["columns_AttachmentsList_Obj"] = value;
+            }
+        }
     }
 }

@@ -16,28 +16,23 @@ using WBZ.Modules.Companies;
 using WBZ.Modules.Distributions;
 using WBZ.Modules.Documents;
 using WBZ.Modules.Families;
-using MODULE_CLASS = WBZ.Classes.C_Log;
+using MODULE_CLASS = WBZ.Classes.C_Attachment;
 
 namespace WBZ.Modules.Attmisc
 {
-	/// <summary>
-	/// Interaction logic for LogsList.xaml
-	/// </summary>
-	public partial class LogsList : Window
-	{
-		M_LogsList M = new M_LogsList();
+    /// <summary>
+    /// Interaction logic for AttachmentsList.xaml
+    /// </summary>
+    public partial class AttachmentsList : Window
+    {
+        M_AttachmentsList M = new M_AttachmentsList();
 
-		public LogsList()
-		{
-			InitializeComponent();
-			DataContext = M;
-			btnRefresh_Click(null, null);
-
-			if (C_Config.Logs_Enabled == "1")
-				chckEnabled.IsChecked = true;
-			else
-				chckEnabled.IsChecked = false;
-		}
+        public AttachmentsList()
+        {
+            InitializeComponent();
+            DataContext = M;
+            btnRefresh_Click(null, null);
+        }
 
 		/// <summary>
 		/// Update filters
@@ -45,9 +40,8 @@ namespace WBZ.Modules.Attmisc
 		private void UpdateFilters()
 		{
 			M.FilterSQL = $"LOWER(COALESCE(u.lastname,'') || ' ' || COALESCE(u.forename,'')) like '%{M.Filters.UserFullname.ToLower()}%' and "
-						+ $"LOWER(COALESCE(l.module,'')) like '%{M.Filters.Module.ToLower()}%' and "
-						+ $"LOWER(COALESCE(l.content,'')) like '%{M.Filters.Content.ToLower()}%' and "
-						+ $"l.datetime between '{M.Filters.fDateTime:yyyy-MM-dd}' and '{M.Filters.DateTime:yyyy-MM-dd} 23:59:59' and ";
+						+ $"LOWER(COALESCE(a.module,'')) like '%{M.Filters.Module.ToLower()}%' and "
+						+ $"LOWER(COALESCE(a.name,'')) like '%{M.Filters.Name.ToLower()}%' and ";
 
 			M.FilterSQL = M.FilterSQL.TrimEnd(" and ".ToCharArray());
 		}
@@ -104,7 +98,7 @@ namespace WBZ.Modules.Attmisc
 			Window window;
 
 			switch (log.Module)
-            {
+			{
 				/// articles
 				case Global.Module.ARTICLES:
 					window = new ArticlesNew(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Article>()?[0], mode);
@@ -199,23 +193,15 @@ namespace WBZ.Modules.Attmisc
 				Extensions.GetVisualChild<ScrollViewer>(sender as DataGrid).ScrollToVerticalOffset(e.VerticalOffset);
 			}
 		}
-
-		private void chckEnabled_Checked(object sender, RoutedEventArgs e)
-		{
-			if ((sender as CheckBox).IsChecked == true)
-				SQL.SetPropertyValue("LOGS_ENABLED", "1");
-			else
-				SQL.SetPropertyValue("LOGS_ENABLED", "0");
-		}
 	}
 
 	/// <summary>
 	/// Model
 	/// </summary>
-	internal class M_LogsList : INotifyPropertyChanged
+	internal class M_AttachmentsList : INotifyPropertyChanged
 	{
-		public readonly string MODULE_NAME = Global.Module.LOGS;
-		public StringCollection SORTING = Properties.Settings.Default.sorting_LogsList;
+		public readonly string MODULE_NAME = Global.Module.ATTACHMENTS;
+		public StringCollection SORTING = Properties.Settings.Default.sorting_AttachmentsList;
 
 		/// Logged user
 		public C_User User { get; } = Global.User;

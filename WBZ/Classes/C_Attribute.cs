@@ -1,4 +1,6 @@
-﻿namespace WBZ.Classes
+﻿using WBZ.Helpers;
+
+namespace WBZ.Classes
 {
 	public class C_AttributeClass
 	{
@@ -25,6 +27,14 @@
 			Archival = false;
 			Comment = "";
 			Icon = null;
+		}
+
+		public string TranslatedModule
+		{
+			get
+			{
+				return Global.TranslateModule(Module);
+			}
 		}
 	}
 

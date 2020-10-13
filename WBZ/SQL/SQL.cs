@@ -1370,6 +1370,33 @@ namespace WBZ
 			return result;
 		}
 		/// <summary>
+		/// Pobiera listę instancji do ComboBoxów (zazwyczaj ID i Name)
+		/// </summary>
+		/// <param name="module">Nazwa modułu</param>
+		/// <param name="column">Kolumna z której będą wyświetlane nazwy</param>
+		/// <param name="filter">Filtr SQL</param>
+		internal static DataTable ComboInstances(string module, string column, string filter)
+		{
+			DataTable result = new DataTable();
+
+			try
+			{
+				using (var sqlConn = connOpenedWBZ)
+				{
+					using (var sqlDA = new NpgsqlDataAdapter($@"select id, {column} as name from wbz.{module} where {filter}", sqlConn))
+					{
+						sqlDA.Fill(result);
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.ToString());
+			}
+
+			return result;
+		}
+		/// <summary>
 		/// Pobiera listę instancji
 		/// </summary>
 		/// <param name="module">Nazwa modułu</param>

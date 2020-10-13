@@ -1,9 +1,12 @@
-﻿namespace WBZ.Classes
+﻿using WBZ.Helpers;
+
+namespace WBZ.Classes
 {
 	public class C_Attachment
 	{
 		public int ID { get; set; }
 		public int User { get; set; }
+		public string UserFullname { get; set; }
 		public string Module { get; set; }
 		public int Instance { get; set; }
 		public string Name { get; set; }
@@ -17,6 +20,14 @@
 			Instance = 0;
 			Name = "";
 			File = null;
+		}
+
+		public string TranslatedModule
+		{
+			get
+			{
+				return Global.TranslateModule(Module);
+			}
 		}
 	}
 }

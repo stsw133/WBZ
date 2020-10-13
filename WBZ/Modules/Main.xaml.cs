@@ -6,16 +6,15 @@ using WBZ.Classes;
 using WBZ.Helpers;
 using WBZ.Modules.Admin;
 using WBZ.Modules.Articles;
+using WBZ.Modules.Attmisc;
 using WBZ.Modules.Companies;
-using WBZ.Modules.Families;
 using WBZ.Modules.Distributions;
 using WBZ.Modules.Documents;
+using WBZ.Modules.Families;
 using WBZ.Modules.Login;
 using WBZ.Modules.Settings;
-using WBZ.Modules.Stats;
-using WBZ.Modules.Attmisc;
 
-namespace WBZ
+namespace WBZ.Modules
 {
 	/// <summary>
 	/// Interaction logic for Main.xaml
@@ -32,40 +31,55 @@ namespace WBZ
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
+			///STATS
 			if (!Global.User.Perms.Contains($"{Global.Module.STATS}_{Global.UserPermType.PREVIEW}"))
 				gridModules.Children.RemoveAt(7);
 
-			if ((!Global.User.Perms.Contains($"{Global.Module.ATTRIBUTES_CLASSES}_{Global.UserPermType.PREVIEW}"))
+			///ATTMISC
+			if ((!Global.User.Perms.Contains($"{Global.Module.GROUPS}_{Global.UserPermType.PREVIEW}"))
+			 && (!Global.User.Perms.Contains($"{Global.Module.ATTRIBUTES_CLASSES}_{Global.UserPermType.PREVIEW}"))
 			 && (!Global.User.Perms.Contains($"{Global.Module.ATTACHMENTS}_{Global.UserPermType.PREVIEW}"))
 			 && (!Global.User.Perms.Contains($"{Global.Module.LOGS}_{Global.UserPermType.PREVIEW}")))
 				gridModules.Children.RemoveAt(6);
 
+			///DISTRIBUTIONS
 			if (!Global.User.Perms.Contains($"{Global.Module.DISTRIBUTIONS}_{Global.UserPermType.PREVIEW}"))
 				gridModules.Children.RemoveAt(5);
 
+			///FAMILIES
 			if (!Global.User.Perms.Contains($"{Global.Module.FAMILIES}_{Global.UserPermType.PREVIEW}"))
 				gridModules.Children.RemoveAt(4);
 
+			///COMPANIES
 			if (!Global.User.Perms.Contains($"{Global.Module.COMPANIES}_{Global.UserPermType.PREVIEW}"))
 				gridModules.Children.RemoveAt(3);
 
+			///ARTICLES
 			if ((!Global.User.Perms.Contains($"{Global.Module.ARTICLES}_{Global.UserPermType.PREVIEW}"))
 			 && (!Global.User.Perms.Contains($"{Global.Module.STORES}_{Global.UserPermType.PREVIEW}")))
 				gridModules.Children.RemoveAt(2);
 
+			///DOCUMENTS
 			if (!Global.User.Perms.Contains($"{Global.Module.DOCUMENTS}_{Global.UserPermType.PREVIEW}"))
 				gridModules.Children.RemoveAt(1);
 
+			///ADMIN
 			if (!Global.User.Perms.Contains($"admin"))
 				gridModules.Children.RemoveAt(0);
 		}
 
-		#region menu
+		/// <summary>
+		/// Menu - Settings
+		/// </summary>
 		private void menuSettings_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new AppSettings();
 			window.ShowDialog();
 		}
+
+		/// <summary>
+		/// Menu - Logout
+		/// </summary>
 		private void menuLogout_Click(object sender, RoutedEventArgs e)
 		{
 			if (MessageBox.Show("Czy na pewno się wylogować?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
@@ -76,17 +90,25 @@ namespace WBZ
 					if (x != this)
 						x.Close();
 
-				var window = new Login();
+				var window = new Login.Login();
 				window.Show();
 
 				M.WantToLogout = true;
 				Close();
 			}
 		}
+
+		/// <summary>
+		/// Menu - Close
+		/// </summary>
 		private void menuClose_Click(object sender, RoutedEventArgs e)
 		{
 			Close();
 		}
+
+		/// <summary>
+		/// Menu - Manual
+		/// </summary>
 		private void menuManual_Click(object sender, RoutedEventArgs e)
 		{
 			try
@@ -101,40 +123,61 @@ namespace WBZ
 				MessageBox.Show(ex.Message);
 			}
 		}
+
+		/// <summary>
+		/// Menu - AboutApp
+		/// </summary>
 		private void menuAboutApp_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new LoginAppAbout();
 			window.Owner = this;
 			window.ShowDialog();
 		}
-		#endregion
 
-		#region profile
+		/// <summary>
+		/// Other - open context menu
+		/// </summary>
 		private void btnOther_Click(object sender, RoutedEventArgs e)
 		{
 			var btn = sender as FrameworkElement;
 			if (btn != null)
 				btn.ContextMenu.IsOpen = true;
 		}
+
+		/// <summary>
+		/// Profile
+		/// </summary>
 		private void btnProfile_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new ProfileSettings();
 			window.ShowDialog();
 		}
+
+		/// <summary>
+		/// Calendar
+		/// </summary>
 		private void btnCalendar_Click(object sender, RoutedEventArgs e)
 		{
 			//var window = new Calendar();
 			//window.Owner = this;
 			//window.Show();
 		}
+
+		/// <summary>
+		/// Mail
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void btnMail_Click(object sender, RoutedEventArgs e)
 		{
 			//var window = new Mail();
 			//window.Owner = this;
 			//window.Show();
 		}
-		#endregion
 
+		/// <summary>
+		/// Search - TextChanged
+		/// </summary>
 		private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)
 		{
 			var searchText = (sender as TextBox).Text.ToLower();
@@ -150,6 +193,9 @@ namespace WBZ
 			}
 		}
 		
+		/// <summary>
+		/// Module - Expanded
+		/// </summary>
 		private void expModule_Expanded(object sender, RoutedEventArgs e)
 		{
 			if (!sender.Equals(expAdmin))
@@ -328,8 +374,8 @@ namespace WBZ
 		/// </summary>
 		private void btnAttachmentsList_Click(object sender, RoutedEventArgs e)
 		{
-			//var window = new AttachmentsList();
-			//window.Show();
+			var window = new AttachmentsList();
+			window.Show();
 		}
 
 		/// <summary>
@@ -355,7 +401,7 @@ namespace WBZ
 		/// </summary>
 		private void btnStats_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new Stats();
+			var window = new Stats.Stats();
 			window.Show();
 		}
 

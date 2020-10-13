@@ -1,4 +1,6 @@
-﻿namespace WBZ.Classes
+﻿using WBZ.Helpers;
+
+namespace WBZ.Classes
 {
     public class C_Contact
     {
@@ -24,5 +26,13 @@
             Default = false;
 			Archival = false;
 		}
-	}
+
+        public string TranslatedModule
+        {
+            get
+            {
+                return Global.TranslateModule(Module);
+            }
+        }
+    }
 }

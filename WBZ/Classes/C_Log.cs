@@ -1,4 +1,5 @@
 ﻿using System;
+using WBZ.Helpers;
 
 namespace WBZ.Classes
 {
@@ -8,7 +9,6 @@ namespace WBZ.Classes
 		public int User { get; set; }
 		public string UserFullname { get; set; }
 		public string Module { get; set; }
-		public string TranslatedModule { get; set; }
 		public int Instance { get; set; }
 		public string Content { get; set; }
 		public DateTime fDateTime { get; set; }
@@ -18,12 +18,19 @@ namespace WBZ.Classes
 		{
 			ID = 0;
 			User = 0;
-			UserFullname = "";
 			Module = "";
 			Instance = 0;
 			Content = "";
 			fDateTime = new DateTime(DateTime.Now.Year, 1, 1);
 			DateTime = DateTime.Now;
+		}
+
+		public string TranslatedModule
+		{
+			get
+			{
+				return Global.TranslateModule(Module);
+			}
 		}
 	}
 }
