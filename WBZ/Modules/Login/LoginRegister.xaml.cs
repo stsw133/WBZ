@@ -14,7 +14,7 @@ namespace WBZ.Modules.Login
 		}
 
 		/// <summary>
-		/// Przycisk akceptacji
+		/// Accept
 		/// </summary>
 		private void btnAccept_Click(object sender, MouseButtonEventArgs e)
 		{

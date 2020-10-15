@@ -19,16 +19,25 @@ namespace WBZ.Controls
             
         }
 
+		/// <summary>
+		/// Add
+		/// </summary>
 		private void btnGroupAdd_Click(object sender, MouseButtonEventArgs e)
 		{
 
 		}
 
+		/// <summary>
+		/// Remove
+		/// </summary>
 		private void btnGroupRemove_Click(object sender, MouseButtonEventArgs e)
 		{
 
 		}
 
+		/// <summary>
+		/// Select as main
+		/// </summary>
 		private void btnGroupSelectAsMain_Click(object sender, MouseButtonEventArgs e)
 		{
 

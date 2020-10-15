@@ -123,6 +123,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\C_Additional.cs" />
+    <Compile Include="Classes\C_Address.cs" />
     <Compile Include="Classes\C_ComboValue.cs" />
     <Compile Include="Classes\C_Article.cs" />
     <Compile Include="Classes\C_Attachment.cs" />
@@ -267,11 +269,11 @@
     <Compile Include="Modules\Login\Versions.xaml.cs">
       <DependentUpon>Versions.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Settings\AppSettings.xaml.cs">
-      <DependentUpon>AppSettings.xaml</DependentUpon>
+    <Compile Include="Modules\Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Settings\ProfileSettings.xaml.cs">
-      <DependentUpon>ProfileSettings.xaml</DependentUpon>
+    <Compile Include="Modules\Personal\Profile.xaml.cs">
+      <DependentUpon>Profile.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Stats\Stats.xaml.cs">
       <DependentUpon>Stats.xaml</DependentUpon>
@@ -473,11 +475,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Settings\AppSettings.xaml">
+    <Page Include="Modules\Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Settings\ProfileSettings.xaml">
+    <Page Include="Modules\Personal\Profile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -718,6 +720,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\icon32_descending.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\icon32_language_pl.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <Content Include="SQL\database.sql" />

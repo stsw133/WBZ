@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using WBZ.Classes;
+using WBZ.Controls;
 using WBZ.Helpers;
 
 namespace WBZ.Modules.Login
@@ -28,7 +29,7 @@ namespace WBZ.Modules.Login
 		}
 
 		/// <summary>
-		/// Przycisk dodania nowej bazy danych
+		/// Add database
 		/// </summary>
 		private void btnAddDatabase_Click(object sender, RoutedEventArgs e)
 		{
@@ -41,7 +42,7 @@ namespace WBZ.Modules.Login
 		}
 
 		/// <summary>
-		/// Przycisk usunięcia zaznaczonej bazy danych
+		/// Remove database
 		/// </summary>
 		private void btnRemoveDatabase_Click(object sender, RoutedEventArgs e)
 		{
@@ -53,7 +54,7 @@ namespace WBZ.Modules.Login
 		}
 
 		/// <summary>
-		/// Zmiana zaznaczenia pozycji na liście baz danych
+		/// Databases - SelectionChanged
 		/// </summary>
 		private void lbDatabases_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
@@ -70,7 +71,7 @@ namespace WBZ.Modules.Login
 		}
 
 		/// <summary>
-		/// Zapisywanie hasła w klasie połączenia z bazą danych
+		/// Password - PasswordChanged
 		/// </summary>
 		private void pbPassword_PasswordChanged(object sender, RoutedEventArgs e)
 		{
@@ -81,7 +82,7 @@ namespace WBZ.Modules.Login
 		}
 
 		/// <summary>
-		/// Testowanie połączenia z bazą i pobranie wersji
+		/// Test
 		/// </summary>
 		private void btnTest_Click(object sender, RoutedEventArgs e)
 		{
@@ -106,7 +107,7 @@ namespace WBZ.Modules.Login
 		}
 
 		/// <summary>
-		/// Przycisk zapisania zmian w bazach danych
+		/// Save
 		/// </summary>
 		private void btnSave_Click(object sender, RoutedEventArgs e)
 		{
@@ -126,7 +127,7 @@ namespace WBZ.Modules.Login
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Błąd zapisywania zmian: " + ex.Message) { Owner = this }.ShowDialog();
 			}
 		}
 	}
@@ -136,7 +137,7 @@ namespace WBZ.Modules.Login
 	/// </summary>
 	internal class M_LoginDatabases : INotifyPropertyChanged
 	{
-		/// PropertyList
+		/// Databases list
 		private ObservableCollection<C_Database> databases = new ObservableCollection<C_Database>(C_Database.LoadAllDatabases());
 		public ObservableCollection<C_Database> Databases
 		{
@@ -151,6 +152,7 @@ namespace WBZ.Modules.Login
 			}
 		}
 
+		/// PropertyChanged
 		public event PropertyChangedEventHandler PropertyChanged;
 		public void NotifyPropertyChanged(string name)
 		{

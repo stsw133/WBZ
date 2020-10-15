@@ -193,7 +193,6 @@ namespace WBZ
 		/// <summary>
 		/// Zapisuje załącznik o podanych parametrach
 		/// </summary>
-		/// <param name="user">Numer ID użytkownika</param>
 		/// <param name="module">Nazwa modułu</param>
 		/// <param name="instance">Numer ID obiektu</param>
 		/// <param name="name">Nazwa załącznika</param>

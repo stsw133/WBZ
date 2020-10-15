@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using WBZ.Classes;
+using WBZ.Controls;
 using WBZ.Helpers;
 using WBZ.Modules.Admin;
 using WBZ.Modules.Articles;
@@ -12,7 +13,7 @@ using WBZ.Modules.Distributions;
 using WBZ.Modules.Documents;
 using WBZ.Modules.Families;
 using WBZ.Modules.Login;
-using WBZ.Modules.Settings;
+using WBZ.Modules.Personal;
 
 namespace WBZ.Modules
 {
@@ -69,11 +70,25 @@ namespace WBZ.Modules
 		}
 
 		/// <summary>
+		/// Menu - Refresh
+		/// </summary>
+		private void menuRefresh_Click(object sender, RoutedEventArgs e)
+		{
+			Global.User = SQL.GetInstance(Global.Module.USERS, Global.User.ID).DataTableToList<C_User>()?[0];
+
+			var window = new Main();
+			window.Show();
+
+			M.WantToLogout = true;
+			Close();
+		}
+
+		/// <summary>
 		/// Menu - Settings
 		/// </summary>
 		private void menuSettings_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new AppSettings();
+			var window = new Settings();
 			window.ShowDialog();
 		}
 
@@ -82,7 +97,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void menuLogout_Click(object sender, RoutedEventArgs e)
 		{
-			if (MessageBox.Show("Czy na pewno się wylogować?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+			if (new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.CONFIRMATION, "Na pewno dokonać wylogowania?") { Owner = this }.ShowDialog() == true)
 			{
 				Global.User = new C_User();
 
@@ -120,7 +135,7 @@ namespace WBZ.Modules
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Błąd otwierania poradnika: " + ex.Message) { Owner = this }.ShowDialog();
 			}
 		}
 
@@ -149,7 +164,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnProfile_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new ProfileSettings();
+			var window = new Profile();
 			window.ShowDialog();
 		}
 

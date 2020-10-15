@@ -12,8 +12,13 @@ namespace WBZ.Controls
 			MsgOnly = 0,
 			InputBox = 1
 		}
-
-		public string[] values = new string[1];
+		public static class MsgTitle
+		{
+			public const string CONFIRMATION = "Potwierdzenie";
+			public const string ERROR = "Błąd";
+			public const string INFO = "Informacja";
+			public const string WARNING = "Ostrzeżenie";
+		}
 
 		public MsgWin(Type type, string title = "", string message = "", string value = "")
 		{
@@ -28,12 +33,13 @@ namespace WBZ.Controls
 				tbInput.Visibility = Visibility.Visible;
 		}
 
+		public string Value { get { return tbInput.Text; } }
+
 		/// <summary>
 		/// OK
 		/// </summary>
 		private void btnOk_Click(object sender, RoutedEventArgs e)
 		{
-			values[0] = tbInput.Text;
 			DialogResult = true;
 		}
 

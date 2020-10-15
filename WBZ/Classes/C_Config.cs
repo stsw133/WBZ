@@ -2,9 +2,12 @@
 {
 	public static class C_Config
 	{
-		public static string Version;
-		public static string Logs_Enabled;
-		public static string Email_Host, Email_Port, Email_Address, Email_Password;
+		public static string Version { get; set; }
+		public static string Logs_Enabled { get; set; }
+		public static string Email_Host { get; set; }
+		public static string Email_Port { get; set; }
+		public static string Email_Address { get; set; }
+		public static string Email_Password { get; set; }
 
 		public static void LoadConfig()
 		{

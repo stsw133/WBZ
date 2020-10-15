@@ -1,4 +1,4 @@
-﻿<Window x:Class="WBZ.Modules.Settings.ProfileSettings"
+﻿<Window x:Class="WBZ.Modules.Personal.Profile"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,6 @@
         xmlns:c="clr-namespace:WBZ.Controls"
         xmlns:h="clr-namespace:WBZ.Helpers"
         xmlns:p="clr-namespace:WBZ.Properties"
-        xmlns:local="clr-namespace:WBZ.Modules.Settings"
         mc:Ignorable="d"
         Title="Ustawienia profilu" MinHeight="140" MinWidth="140" Height="350" Width="350"
             BorderThickness="3" BorderBrush="#333" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" WindowStyle="None"
@@ -70,7 +69,7 @@
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Row="0" Grid.Column="0" Content="Adres:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Visibility="Collapsed"/>
                                 <TextBox Grid.Row="0" Grid.Column="1" Margin="5" VerticalContentAlignment="Center" Visibility="Collapsed"/>
-                                <Label Grid.Row="0" Grid.Column="0" Content="E-mail:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                                <Label Grid.Row="0" Grid.Column="0" Content="E-mail:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" FontWeight="Medium"/>
                                 <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding User.Email}" Margin="5" VerticalContentAlignment="Center"/>
                                 <Label Grid.Row="1" Grid.Column="0" Content="Telefon:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                                 <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding User.Phone}" Margin="5" VerticalContentAlignment="Center"/>
@@ -93,7 +92,7 @@
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Content="Użytkownik:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <Label Grid.Column="0" Content="Użytkownik:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" FontWeight="Medium"/>
                         <TextBox Grid.Column="1" Text="{Binding User.Username}" Margin="5" VerticalContentAlignment="Center"/>
                     </Grid>
                     <GroupBox DockPanel.Dock="Top" Header="Zmiana hasła" Margin="5,5,5,0" VerticalAlignment="Top">

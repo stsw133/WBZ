@@ -214,6 +214,9 @@
   <data name="icon32_invoices" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_documents.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icon32_language_pl" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon32_language_pl.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon32_list" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_list.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
+using WBZ.Controls;
 using WBZ.Helpers;
 
-namespace WBZ.Modules.Settings
+namespace WBZ.Modules
 {
 	/// <summary>
-	/// Interaction logic for AppSettings.xaml
+	/// Interaction logic for Settings.xaml
 	/// </summary>
-	public partial class AppSettings : Window
+	public partial class Settings : Window
 	{
-		public AppSettings()
+		public Settings()
 		{
 			InitializeComponent();
 		}
@@ -26,12 +27,15 @@ namespace WBZ.Modules.Settings
 				Properties.Settings.Default.config_Email_Password = Global.Encrypt(pbEmailPassword.Password);
 		}
 
+		/// <summary>
+		/// Test
+		/// </summary>
 		private void btnEmailTest_Click(object sender, MouseButtonEventArgs e)
 		{
 			if (Mail.TestMail())
-				MessageBox.Show("Test poczty e-mail powiódł się.", "Informacja", MessageBoxButton.OK, MessageBoxImage.Information);
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.INFO, "Test poczty e-mail powiódł się.") { Owner = this }.ShowDialog();
 			else
-				MessageBox.Show("Test poczty e-mail nie powiódł się!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Test poczty e-mail nie powiódł się!") { Owner = this }.ShowDialog();
 		}
 
 		private void Window_Closed(object sender, EventArgs e)

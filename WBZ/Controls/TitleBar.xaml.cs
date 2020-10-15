@@ -53,7 +53,7 @@ namespace WBZ.Controls
 				  nameof(AdditionalIcon),
 				  typeof(ImageSource),
 				  typeof(TitleBar),
-				  new PropertyMetadata(new BitmapImage(new Uri("pack://siteoforigin:,,,/Resources/_null.ico")))
+				  new PropertyMetadata(null)
 			  );
 
 		private void Window_StateChanged(object sender, EventArgs e)

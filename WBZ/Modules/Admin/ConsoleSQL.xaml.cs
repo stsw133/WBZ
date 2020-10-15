@@ -3,6 +3,7 @@ using System;
 using System.Data;
 using System.Windows;
 using System.Windows.Input;
+using WBZ.Controls;
 
 namespace WBZ.Modules.Admin
 {
@@ -40,7 +41,7 @@ namespace WBZ.Modules.Admin
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Błąd zapytania SQL: " + ex.Message) { Owner = this }.ShowDialog();
 			}
 
 			dgConsole.ItemsSource = dt.DefaultView;

@@ -3,30 +3,34 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 using WBZ.Classes;
+using WBZ.Controls;
 using WBZ.Helpers;
 
-namespace WBZ.Modules.Settings
+namespace WBZ.Modules.Personal
 {
 	/// <summary>
-	/// Interaction logic for ProfileSettings.xaml
+	/// Interaction logic for Profile.xaml
 	/// </summary>
-	public partial class ProfileSettings : Window
+	public partial class Profile : Window
 	{
-        M_ProfileSettings M = new M_ProfileSettings();
+        M_Profile M = new M_Profile();
 
-        public ProfileSettings()
+        public Profile()
 		{
 			InitializeComponent();
             DataContext = M;
         }
 
+        /// <summary>
+        /// Save
+        /// </summary>
 		private void btnSave_Click(object sender, MouseButtonEventArgs e)
         {
             if (!string.IsNullOrEmpty(tbOldPassword.Password) && !string.IsNullOrEmpty(tbNewPassword.Password) && !string.IsNullOrEmpty(tbRNewPassword.Password))
             {
                 if (tbNewPassword.Password != tbRNewPassword.Password)
                 {
-                    MessageBox.Show("Nowe hasło nie zgadza się z powtórzeniem!");
+                    new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Nowe hasło nie zgadza się z powtórzeniem!") { Owner = this }.ShowDialog();
                     return;
                 }
                 else
@@ -35,7 +39,7 @@ namespace WBZ.Modules.Settings
                         M.User.Newpass = tbNewPassword.Password;
                     else
                     {
-                        MessageBox.Show("Podano złe dotychczasowe hasło!");
+                        new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Podano złe dotychczasowe hasło!") { Owner = this }.ShowDialog();
                         return;
                     }
                 }
@@ -49,9 +53,9 @@ namespace WBZ.Modules.Settings
     /// <summary>
     /// Model
     /// </summary>
-    internal class M_ProfileSettings : INotifyPropertyChanged
+    internal class M_Profile : INotifyPropertyChanged
     {
-        /// Dane o zalogowanym użytkowniku
+        /// Logged user
         private C_User user = Global.User;
         public C_User User
         {

@@ -17,7 +17,7 @@ namespace WBZ.Controls
 		{
 			var window = new MsgWin(MsgWin.Type.InputBox, "Własny kolor", "Podaj kod szesnastkowy swojego koloru:", Tag.ToString());
 			if (window.ShowDialog() == true)
-				Tag = window.values[0];
+				Tag = window.Value;
 		}
 	}
 }

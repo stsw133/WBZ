@@ -195,7 +195,7 @@ namespace WBZ.Modules.Articles
 
 		/// Logged user
 		public C_User User { get; } = Global.User;
-		/// Instance list
+		/// Instances list
 		private List<MODULE_CLASS> instancesList;
 		public List<MODULE_CLASS> InstancesList
 		{

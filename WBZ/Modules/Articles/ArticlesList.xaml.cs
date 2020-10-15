@@ -204,7 +204,7 @@ namespace WBZ.Modules.Articles
 		public C_User User { get; } = Global.User;
 		/// Stores list
 		public DataTable StoresList { get; } = SQL.GetStoresNames();
-		/// Instance list
+		/// Instances list
 		private List<MODULE_CLASS> instancesList;
 		public List<MODULE_CLASS> InstancesList
 		{

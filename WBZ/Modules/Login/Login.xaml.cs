@@ -37,20 +37,17 @@ namespace WBZ.Modules.Login
 		
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			///sprawdzanie najnowszej wersji
 			CheckNewestVersion();
 			txtVersion.Content = Global.Version;
 
-			///wczytanie listy baz danych
 			M.Databases = new ObservableCollection<C_Database>(C_Database.LoadAllDatabases());
 
-			///wpisanie hasła jeśli ustawiona opcja "Zapamiętaj dane logowania"
 			if (!string.IsNullOrEmpty(Props.Default.userPass))
                 tbPassword.Password = Props.Default.userPass;
 		}
 
 		/// <summary>
-		/// Funkcja pobierająca numer najnowszej wersji przez API URL
+		/// Get newest version from API URL
 		/// </summary>
 		private async void CheckNewestVersion()
 		{
@@ -65,7 +62,7 @@ namespace WBZ.Modules.Login
 					Global.VersionNewest = (string)data.versions[0];
 				}
 
-				///sprawdzenie wersji programu
+				///check app version
 				if (Global.Version == Global.VersionNewest)
 				{
 					imgVersion.Source = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resources/icon32_fine.ico"));
@@ -81,7 +78,7 @@ namespace WBZ.Modules.Login
 		}
 
 		/// <summary>
-		/// Przycisk zmiany połączenia z główną bazą
+		/// Databases
 		/// </summary>
 		private void btnDatabases_Click(object sender, RoutedEventArgs e)
 		{
@@ -92,7 +89,7 @@ namespace WBZ.Modules.Login
 		}
 
 		/// <summary>
-		/// Moment zmiany bazy oddziału
+		/// Database - SelectionChanged
 		/// </summary>
 		private void cbDatabase_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
@@ -112,19 +109,19 @@ namespace WBZ.Modules.Login
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Błąd zmiany bazy: " + ex.Message) { Owner = this }.ShowDialog();
 			}
 		}
 
 		/// <summary>
-		/// Przycisk logowania do systemu
+		/// Login
 		/// </summary>
 		private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
 			if (Global.Database.Version != Global.Version)
 			{
-				MessageBox.Show($"Wersja aplikacji {Global.Version} nie zgadza się z wersją bazy danych {Global.Database.Version}!" +
-					Environment.NewLine + "Zaktualizuj bazę z menu dodatkowych opcji lub skontaktuj się z administratorem.");
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.INFO, $"Wersja aplikacji {Global.Version} nie zgadza się z wersją bazy danych {Global.Database.Version}!" +
+					Environment.NewLine + "Zaktualizuj bazę z menu dodatkowych opcji lub skontaktuj się z administratorem.") { Owner = this }.ShowDialog();
 				return;
 			}
 
@@ -148,11 +145,11 @@ namespace WBZ.Modules.Login
 		}
 
 		/// <summary>
-		/// Przycisk pozostałych opcji
+		/// Other
 		/// </summary>
 		private void btnOther_Click(object sender, RoutedEventArgs e)
 		{
-			/// warunki pojawienia się przycisku "Dodaj administratora"
+			///conditions of button "Dodaj administratora"
 			if (SQL.CountInstances(Global.Module.USERS, @"blocked=false and archival=false and exists(select from wbz.users_permissions where ""user""=u.id and perm='admin')") == 0)
 			{
 				btnCreateAdmin.Visibility = Visibility.Visible;
@@ -164,7 +161,7 @@ namespace WBZ.Modules.Login
 				btnCreateAdmin.IsEnabled = false;
 			}
 
-			/// warunki pojawienia się przycisku "Aktualizuj bazę danych"
+			///conditions of button "Aktualizuj bazę danych"
 			if (Global.Database.Version != Global.Version)
 			{
 				btnUpdateDatabase.Visibility = Visibility.Visible;
@@ -177,13 +174,14 @@ namespace WBZ.Modules.Login
 				btnUpdateDatabase.IsEnabled = false;
 			}
 
+			///open context menu
 			var btn = sender as FrameworkElement;
 			if (btn != null)
 				btn.ContextMenu.IsOpen = true;
 		}
 
 		/// <summary>
-		/// Przycisk rejestracji konta administracyjnego w systemie
+		/// CreateAdmin
 		/// </summary>
 		private void btnCreateAdmin_Click(object sender, RoutedEventArgs e)
 		{
@@ -193,7 +191,7 @@ namespace WBZ.Modules.Login
 		}
 
 		/// <summary>
-		/// Przycisk aktualizacji bazy danych do najnowszej wersji
+		/// UpdateDatabase
 		/// </summary>
 		private void btnUpdateDatabase_Click(object sender, RoutedEventArgs e)
 		{
@@ -204,36 +202,36 @@ namespace WBZ.Modules.Login
 				var users = SQL.ListInstances(Global.Module.USERS, $"(lower(username)='{conf.GetLogin.ToLower()}' or lower(email)='{conf.GetLogin.ToLower()}') and password='{Global.sha256(conf.GetPassword)}'").DataTableToList<C_User>();
 				if (users.Count == 0 || !SQL.GetUserPerms(users[0].ID).Contains("admin"))
 				{
-					MessageBox.Show("Brak uprawnień administracyjnych lub błędne dane użytkownika!");
+					new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Brak uprawnień administracyjnych lub błędne dane użytkownika!") { Owner = this }.ShowDialog();
 					return;
 				}
 
 				if (SQL_Migration.DoWork())
-					MessageBox.Show("Migracja przeprowadzona pomyślnie.", "Informacja", MessageBoxButton.OK, MessageBoxImage.Information);
+					new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.INFO, "Migracja przeprowadzona pomyślnie.") { Owner = this }.ShowDialog();
 				else
-					MessageBox.Show("Nie udało się przeprowadzić migracji!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+					new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Nie udało się przeprowadzić migracji!") { Owner = this }.ShowDialog();
 			}
 		}
 
 		/// <summary>
-		/// Przycisk generowania nowego hasła
+		/// GenerateNewpass
 		/// </summary>
 		private void btnGenerateNewpass_Click(object sender, RoutedEventArgs e)
 		{
 			//TODO - nowy sposób generowania hasła z wysłaniem kodu na maila
-			var window = new MsgWin(MsgWin.Type.InputBox, "Generowanie nowego hasła", $"Podaj e-mail konta, którego hasło chcesz odzyskać:");
+			var window = new MsgWin(MsgWin.Type.InputBox, "Generowanie nowego hasła", "Podaj e-mail konta, którego hasło chcesz odzyskać:");
 			window.Owner = this;
 			if (window.ShowDialog() == true)
 			{
-				var loginData = SQL.GenerateNewPasswordForAccount(window.values[0]);
-				if (Mail.SendMail(Props.Default.config_Email_Email, new string[] { window.values[0] },
+				var loginData = SQL.GenerateNewPasswordForAccount(window.Value);
+				if (Mail.SendMail(Props.Default.config_Email_Email, new string[] { window.Value },
 						"WBZ - generowanie nowego hasła", $"Nazwa użytkownika: {loginData[0]}{Environment.NewLine}Hasło: {loginData[1]}"))
-					MessageBox.Show("Wiadomość z nazwą użytkownika i hasłem wysłano na podany e-mail.");
+					new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.INFO, "Wiadomość z nazwą użytkownika i hasłem wysłano na podany e-mail.") { Owner = this }.ShowDialog();
 			}
 		}
 
 		/// <summary>
-		/// Przycisk otworzenia poradnika użytkowania
+		/// Manual
 		/// </summary>
 		private void btnManual_Click(object sender, RoutedEventArgs e)
 		{
@@ -246,12 +244,12 @@ namespace WBZ.Modules.Login
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Błąd otwierania poradnika: " + ex.Message) { Owner = this }.ShowDialog();
 			}
 		}
 
 		/// <summary>
-		/// Przycisk otworzenia okna z wersjami aplikacji
+		/// Versions
 		/// </summary>
 		private void btnVersions_Click(object sender, RoutedEventArgs e)
 		{
@@ -261,7 +259,7 @@ namespace WBZ.Modules.Login
 		}
 
 		/// <summary>
-		/// Przycisk otworzenia okna z informacjami o programie
+		/// AboutApp
 		/// </summary>
 		private void btnAboutApp_Click(object sender, RoutedEventArgs e)
 		{
@@ -276,7 +274,7 @@ namespace WBZ.Modules.Login
 	/// </summary>
 	internal class M_Login : INotifyPropertyChanged
 	{
-		/// Lista baz danych
+		/// Databases list
 		private ObservableCollection<C_Database> databases;
 		public ObservableCollection<C_Database> Databases
 		{

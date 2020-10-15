@@ -7,8 +7,8 @@ using System.IO;
 using System.Net.Http;
 using System.Reflection;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
+using WBZ.Controls;
 
 namespace WBZ.Modules.Login
 {
@@ -26,7 +26,9 @@ namespace WBZ.Modules.Login
 			btnRefresh_Click(null, null);
 		}
 
-		#region buttons
+		/// <summary>
+		/// Download
+		/// </summary>
 		private async void btnDownload_Click(object sender, MouseButtonEventArgs e)
 		{
 			string version = ((dynamic)lbList.SelectedValue).ToString();
@@ -52,7 +54,7 @@ namespace WBZ.Modules.Login
 						if (file != null)
 						{
 							File.WriteAllBytes(dialog.FileName, file);
-							if (MessageBox.Show("Czy uruchomić plik instalacyjny? W przypadku akceptacji program zostanie wyłączony.", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+							if (new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.CONFIRMATION, "Czy uruchomić plik instalacyjny? W przypadku akceptacji program zostanie wyłączony.") { Owner = this }.ShowDialog() == true)
 							{
 								Process.Start(dialog.FileName);
 								App.Current.Shutdown();
@@ -65,9 +67,13 @@ namespace WBZ.Modules.Login
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Błąd pobierania wersji: " + ex.Message) { Owner = this }.ShowDialog();
 			}
 		}
+
+		/// <summary>
+		/// Refresh
+		/// </summary>
 		private async void btnRefresh_Click(object sender, MouseButtonEventArgs e)
 		{
 			try
@@ -83,15 +89,21 @@ namespace WBZ.Modules.Login
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Błąd odświeżania listy: " + ex.Message) { Owner = this }.ShowDialog();
 			}
 		}
+
+		/// <summary>
+		/// Close
+		/// </summary>
 		private void btnClose_Click(object sender, MouseButtonEventArgs e)
 		{
 			Close();
 		}
-		#endregion
 
+		/// <summary>
+		/// VersionList - MouseDoubleClick
+		/// </summary>
 		private void lbList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			if (e.LeftButton == MouseButtonState.Pressed)
@@ -104,7 +116,7 @@ namespace WBZ.Modules.Login
 	/// </summary>
 	internal class M_Versions : INotifyPropertyChanged
 	{
-		/// Lista instancji
+		/// Instances list
 		private dynamic instancesList;
 		public dynamic InstancesList
 		{

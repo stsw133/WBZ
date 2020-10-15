@@ -23,11 +23,11 @@ namespace WBZ.Modules.Login
 	/// </summary>
 	internal class M_LoginAppAbout : INotifyPropertyChanged
 	{
-		/// Dane o wersji systemu
+		/// System version
 		public string Version => Global.Version;
-		/// O programie
+		/// About app
 		public string AboutApp => $@"To w pełni darmowy program wspomagający pracę banków żywności. Oferuje modułowy sposób zarządzania zasobami i dystrybucją.";
-		/// O twórcach
+		/// About creators
 		public string AboutCreators => $@"Twórcami aplikacji jest dwójka studentów z Państwowej Wyższej Szkoły Zawodowej im. Hipolita Cegielskiego w Gnieźnie.";
 
 		/// <summary>

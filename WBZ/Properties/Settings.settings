@@ -644,5 +644,8 @@
     <Setting Name="columns_AttachmentsList_Obj" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="language" Type="System.String" Scope="User">
+      <Value Profile="(Default)">PL</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

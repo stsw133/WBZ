@@ -27,7 +27,12 @@
         <Border DockPanel.Dock="Top" BorderBrush="Gray" BorderThickness="1">
             <DockPanel>
                 <Menu BorderBrush="Gray" BorderThickness="0,0,1,0">
-                    <MenuItem Header="System" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=2.25}">
+                    <MenuItem Header="System" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=2}">
+                        <MenuItem Header="Odśwież uprawnienia" Click="menuRefresh_Click">
+                            <MenuItem.Icon>
+                                <Image Source="pack://siteoforigin:,,,/Resources/icon32_refresh.ico"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                         <MenuItem Header="Ustawienia" Click="menuSettings_Click">
                             <MenuItem.Icon>
                                 <Image Source="pack://siteoforigin:,,,/Resources/icon32_settings.ico"/>
@@ -45,7 +50,7 @@
                             </MenuItem.Icon>
                         </MenuItem>
                     </MenuItem>
-                    <MenuItem Header="Pomoc" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=2.25}">
+                    <MenuItem Header="Pomoc" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=2}">
                         <MenuItem Header="Poradnik użytkownika" Click="menuManual_Click">
                             <MenuItem.Icon>
                                 <Image Source="pack://siteoforigin:,,,/Resources/icon32_books.ico"/>
