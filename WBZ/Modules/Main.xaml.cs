@@ -14,6 +14,7 @@ using WBZ.Modules.Documents;
 using WBZ.Modules.Families;
 using WBZ.Modules.Login;
 using WBZ.Modules.Personal;
+using WBZ.Modules.Stores;
 
 namespace WBZ.Modules
 {
@@ -197,40 +198,21 @@ namespace WBZ.Modules
 		{
 			var searchText = (sender as TextBox).Text.ToLower();
 
-			foreach (DockPanel module in gridModules.Children)
+			foreach (Border module in gridModules.Children)
 			{
-				var expHeader = (module.Children[1] as Expander).Header.ToString().ToLower();
+				var dp = (module.Child as DockPanel);
+				var bord = (dp.Children[0] as Border);
+				var sp = (bord.Child as StackPanel);
+				var lab = (sp.Children[1] as Label);
+				var moduleName = lab.Content.ToString().ToLower();
 
-				if (expHeader.Contains(searchText))
+				if (moduleName.Contains(searchText.ToLower()))
 					module.Visibility = Visibility.Visible;
 				else
 					module.Visibility = Visibility.Collapsed;
 			}
 		}
 		
-		/// <summary>
-		/// Module - Expanded
-		/// </summary>
-		private void expModule_Expanded(object sender, RoutedEventArgs e)
-		{
-			if (!sender.Equals(expAdmin))
-				expAdmin.IsExpanded = false;
-			if (!sender.Equals(expDocuments))
-				expDocuments.IsExpanded = false;
-			if (!sender.Equals(expArticles))
-				expArticles.IsExpanded = false;
-			if (!sender.Equals(expCompanies))
-				expCompanies.IsExpanded = false;
-			if (!sender.Equals(expFamilies))
-				expFamilies.IsExpanded = false;
-			if (!sender.Equals(expDistributions))
-				expDistributions.IsExpanded = false;
-			if (!sender.Equals(expAttmisc))
-				expAttmisc.IsExpanded = false;
-			if (!sender.Equals(expStats))
-				expStats.IsExpanded = false;
-		}
-
 		/// <summary>
 		/// Admin - Users - list
 		/// </summary>
@@ -304,9 +286,18 @@ namespace WBZ.Modules
 		}
 
 		/// <summary>
-		/// Articles - Stores - list
+		/// Stores - list
 		/// </summary>
 		private void btnStoresList_Click(object sender, RoutedEventArgs e)
+		{
+			var window = new StoresList();
+			window.Show();
+		}
+
+		/// <summary>
+		/// Stores - new
+		/// </summary>
+		private void btnStoresNew_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new StoresList();
 			window.Show();
@@ -342,7 +333,7 @@ namespace WBZ.Modules
 		/// <summary>
 		/// Families - new
 		/// </summary>
-		private void btnFamiliesAdd_Click(object sender, RoutedEventArgs e)
+		private void btnFamiliesNew_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new FamiliesNew(new C_Family(), Global.ActionType.NEW);
 			window.Show();

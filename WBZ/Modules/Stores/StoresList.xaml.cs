@@ -12,7 +12,7 @@ using WBZ.Classes;
 using WBZ.Helpers;
 using MODULE_CLASS = WBZ.Classes.C_Store;
 
-namespace WBZ.Modules.Articles
+namespace WBZ.Modules.Stores
 {
 	/// <summary>
 	/// Interaction logic for StoresList.xaml

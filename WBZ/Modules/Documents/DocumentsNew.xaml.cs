@@ -8,6 +8,7 @@ using WBZ.Classes;
 using WBZ.Helpers;
 using WBZ.Modules.Articles;
 using WBZ.Modules.Companies;
+using WBZ.Modules.Stores;
 using MODULE_CLASS = WBZ.Classes.C_Document;
 
 namespace WBZ.Modules.Documents

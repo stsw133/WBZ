@@ -12,6 +12,7 @@ using WBZ.Classes;
 using WBZ.Helpers;
 using WBZ.Modules.Distributions;
 using WBZ.Modules.Documents;
+using WBZ.Modules.Stores;
 using MODULE_CLASS = WBZ.Classes.C_Article;
 
 namespace WBZ.Modules.Articles

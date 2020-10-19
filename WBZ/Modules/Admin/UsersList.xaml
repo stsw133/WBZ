@@ -154,10 +154,10 @@
                                         <Image Source="pack://siteoforigin:,,,/Resources/icon32_descending.ico"/>
                                     </ToggleButton>
                                     <ComboBox Margin="2.5" SelectedValue="{Binding sorting_UsersList[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
-                                        <ComboBoxItem Content="Imię" Tag="e.forename"/>
-                                        <ComboBoxItem Content="Nazwisko" Tag="e.lastname"/>
-                                        <ComboBoxItem Content="E-mail" Tag="e.email"/>
-                                        <ComboBoxItem Content="Telefon" Tag="e.phone"/>
+                                        <ComboBoxItem Content="Imię" Tag="u.forename"/>
+                                        <ComboBoxItem Content="Nazwisko" Tag="u.lastname"/>
+                                        <ComboBoxItem Content="E-mail" Tag="u.email"/>
+                                        <ComboBoxItem Content="Telefon" Tag="u.phone"/>
                                     </ComboBox>
                                 </DockPanel>
                                 <DockPanel DockPanel.Dock="Top">
@@ -166,10 +166,10 @@
                                         <Image Source="pack://siteoforigin:,,,/Resources/icon32_descending.ico"/>
                                     </ToggleButton>
                                     <ComboBox Margin="2.5" SelectedValue="{Binding sorting_UsersList[2], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
-                                        <ComboBoxItem Content="Imię" Tag="e.forename"/>
-                                        <ComboBoxItem Content="Nazwisko" Tag="e.lastname"/>
-                                        <ComboBoxItem Content="E-mail" Tag="e.email"/>
-                                        <ComboBoxItem Content="Telefon" Tag="e.phone"/>
+                                        <ComboBoxItem Content="Imię" Tag="u.forename"/>
+                                        <ComboBoxItem Content="Nazwisko" Tag="u.lastname"/>
+                                        <ComboBoxItem Content="E-mail" Tag="u.email"/>
+                                        <ComboBoxItem Content="Telefon" Tag="u.phone"/>
                                     </ComboBox>
                                 </DockPanel>
                                 <DockPanel DockPanel.Dock="Top">

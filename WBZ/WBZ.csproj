@@ -281,10 +281,10 @@
     <Compile Include="Modules\Stats\StatsReportsGenerator.xaml.cs">
       <DependentUpon>StatsReportsGenerator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Articles\StoresNew.xaml.cs">
+    <Compile Include="Modules\Stores\StoresNew.xaml.cs">
       <DependentUpon>StoresNew.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Articles\StoresList.xaml.cs">
+    <Compile Include="Modules\Stores\StoresList.xaml.cs">
       <DependentUpon>StoresList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Other\Prints.cs" />
@@ -491,11 +491,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Articles\StoresNew.xaml">
+    <Page Include="Modules\Stores\StoresNew.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Articles\StoresList.xaml">
+    <Page Include="Modules\Stores\StoresList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -16,6 +16,7 @@ using WBZ.Modules.Companies;
 using WBZ.Modules.Distributions;
 using WBZ.Modules.Documents;
 using WBZ.Modules.Families;
+using WBZ.Modules.Stores;
 using MODULE_CLASS = WBZ.Classes.C_Attachment;
 
 namespace WBZ.Modules.Attmisc

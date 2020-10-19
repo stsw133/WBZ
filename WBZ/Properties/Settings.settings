@@ -647,5 +647,8 @@
     <Setting Name="language" Type="System.String" Scope="User">
       <Value Profile="(Default)">PL</Value>
     </Setting>
+    <Setting Name="config_Stores_PanelColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#EEE</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
