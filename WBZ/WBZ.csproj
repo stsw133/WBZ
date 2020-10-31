@@ -191,10 +191,10 @@
     <Compile Include="Modules\Admin\ConsoleSQL.xaml.cs">
       <DependentUpon>ConsoleSQL.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Admin\EmployeesNew.xaml.cs">
+    <Compile Include="Modules\Employees\EmployeesNew.xaml.cs">
       <DependentUpon>EmployeesNew.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Admin\EmployeesList.xaml.cs">
+    <Compile Include="Modules\Employees\EmployeesList.xaml.cs">
       <DependentUpon>EmployeesList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Attmisc\AttachmentsList.xaml.cs">
@@ -215,10 +215,10 @@
     <Compile Include="Modules\Attmisc\LogsList.xaml.cs">
       <DependentUpon>LogsList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Admin\UsersList.xaml.cs">
+    <Compile Include="Modules\Users\UsersList.xaml.cs">
       <DependentUpon>UsersList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Admin\UsersNew.xaml.cs">
+    <Compile Include="Modules\Users\UsersNew.xaml.cs">
       <DependentUpon>UsersNew.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Companies\CompaniesNew.xaml.cs">
@@ -355,11 +355,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Admin\EmployeesNew.xaml">
+    <Page Include="Modules\Employees\EmployeesNew.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Admin\EmployeesList.xaml">
+    <Page Include="Modules\Employees\EmployeesList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -379,7 +379,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Admin\UsersNew.xaml">
+    <Page Include="Modules\Users\UsersNew.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -419,7 +419,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Admin\UsersList.xaml">
+    <Page Include="Modules\Users\UsersList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

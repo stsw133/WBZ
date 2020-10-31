@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -9,43 +10,38 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using WBZ.Classes;
 using WBZ.Helpers;
-using MODULE_CLASS = WBZ.Classes.C_Employee;
+using MODULE_CLASS = WBZ.Classes.C_User;
 
-namespace WBZ.Modules.Admin
+namespace WBZ.Modules.Users
 {
-    /// <summary>
-    /// Interaction logic for EmployeesList.xaml
-    /// </summary>
-    public partial class EmployeesList : Window
-    {
-        M_EmployeesList M = new M_EmployeesList();
+	/// <summary>
+	/// Interaction logic for UsersList.xaml
+	/// </summary>
+	public partial class UsersList : Window
+	{
+		M_UsersList M = new M_UsersList();
 
-        public EmployeesList(bool selectingMode = false)
-        {
-            InitializeComponent();
-            DataContext = M;
-            btnRefresh_Click(null, null);
+		public UsersList(bool selectingMode = false)
+		{
+			InitializeComponent();
+			DataContext = M;
+			btnRefresh_Click(null, null);
 
-            M.SelectingMode = selectingMode;
-            if (M.SelectingMode)
-                dgList.SelectionMode = DataGridSelectionMode.Single;
-        }
+			M.SelectingMode = selectingMode;
+			if (M.SelectingMode)
+				dgList.SelectionMode = DataGridSelectionMode.Single;
+		}
 
 		/// <summary>
 		/// Update filters
 		/// </summary>
 		private void UpdateFilters()
 		{
-			M.FilterSQL = $"LOWER(COALESCE(e.forename,'')) like '%{M.Filters.Forename.ToLower()}%' and "
-						+ $"LOWER(COALESCE(e.lastname,'')) like '%{M.Filters.Lastname.ToLower()}%' and "
-						+ $"LOWER(COALESCE(e.department,'')) like '%{M.Filters.Department.ToLower()}%' and "
-						+ $"LOWER(COALESCE(e.position,'')) like '%{M.Filters.Position.ToLower()}%' and "
-						+ $"LOWER(COALESCE(e.email,'')) like '%{M.Filters.Email.ToLower()}%' and "
-						+ $"LOWER(COALESCE(e.phone,'')) like '%{M.Filters.Phone.ToLower()}%' and "
-						+ $"LOWER(COALESCE(e.postcode,'')) like '%{M.Filters.Postcode.ToLower()}%' and "
-						+ $"LOWER(COALESCE(e.city,'')) like '%{M.Filters.City.ToLower()}%' and "
-						+ $"LOWER(COALESCE(e.address,'')) like '%{M.Filters.Address.ToLower()}%' and "
-						+ (M.Filters.Archival ? $"e.archival=false and " : "");
+			M.FilterSQL = $"LOWER(COALESCE(u.forename,'')) like '%{M.Filters.Forename.ToLower()}%' and "
+						+ $"LOWER(COALESCE(u.lastname,'')) like '%{M.Filters.Lastname.ToLower()}%' and "
+						+ $"LOWER(COALESCE(u.email,'')) like '%{M.Filters.Email.ToLower()}%' and "
+						+ $"LOWER(COALESCE(u.phone,'')) like '%{M.Filters.Phone.ToLower()}%' and "
+						+ (M.Filters.Archival ? $"u.archival=false and " : "");
 
 			M.FilterSQL = M.FilterSQL.TrimEnd(" and ".ToCharArray());
 		}
@@ -76,7 +72,7 @@ namespace WBZ.Modules.Admin
 			var selectedInstances = dgList.SelectedItems.Cast<MODULE_CLASS>();
 			foreach (MODULE_CLASS instance in selectedInstances)
 			{
-				var window = new EmployeesNew(instance, Global.ActionType.PREVIEW);
+				var window = new UsersNew(instance, Global.ActionType.PREVIEW);
 				window.Show();
 			}
 		}
@@ -86,7 +82,7 @@ namespace WBZ.Modules.Admin
 		/// </summary>
 		private void btnNew_Click(object sender, MouseButtonEventArgs e)
 		{
-			var window = new EmployeesNew(new MODULE_CLASS(), Global.ActionType.NEW);
+			var window = new UsersNew(new MODULE_CLASS(), Global.ActionType.NEW);
 			window.Show();
 		}
 
@@ -98,7 +94,7 @@ namespace WBZ.Modules.Admin
 			var selectedInstances = dgList.SelectedItems.Cast<MODULE_CLASS>();
 			foreach (MODULE_CLASS instance in selectedInstances)
 			{
-				var window = new EmployeesNew(instance, Global.ActionType.DUPLICATE);
+				var window = new UsersNew(instance, Global.ActionType.DUPLICATE);
 				window.Show();
 			}
 		}
@@ -111,7 +107,7 @@ namespace WBZ.Modules.Admin
 			var selectedInstances = dgList.SelectedItems.Cast<MODULE_CLASS>();
 			foreach (MODULE_CLASS instance in selectedInstances)
 			{
-				var window = new EmployeesNew(instance, Global.ActionType.EDIT);
+				var window = new UsersNew(instance, Global.ActionType.EDIT);
 				window.Show();
 			}
 		}
@@ -191,10 +187,10 @@ namespace WBZ.Modules.Admin
 	/// <summary>
 	/// Model
 	/// </summary>
-	internal class M_EmployeesList : INotifyPropertyChanged
+	internal class M_UsersList : INotifyPropertyChanged
 	{
-		public readonly string MODULE_NAME = Global.Module.EMPLOYEES;
-		public StringCollection SORTING = Properties.Settings.Default.sorting_EmployeesList;
+		public readonly string MODULE_NAME = Global.Module.USERS;
+		public StringCollection SORTING = Properties.Settings.Default.sorting_UsersList;
 
 		/// Logged user
 		public C_User User { get; } = Global.User;

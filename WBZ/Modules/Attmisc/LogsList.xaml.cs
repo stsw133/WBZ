@@ -17,6 +17,7 @@ using WBZ.Modules.Distributions;
 using WBZ.Modules.Documents;
 using WBZ.Modules.Families;
 using WBZ.Modules.Stores;
+using WBZ.Modules.Users;
 using MODULE_CLASS = WBZ.Classes.C_Log;
 
 namespace WBZ.Modules.Attmisc

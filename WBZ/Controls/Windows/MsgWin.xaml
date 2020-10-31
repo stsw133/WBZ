@@ -7,7 +7,7 @@
         xmlns:h="clr-namespace:WBZ.Helpers"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
-        Title="Wiadomość" SizeToContent="Height" MinWidth="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=10}" MaxWidth="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=30}"
+        Title="Wiadomość" SizeToContent="WidthAndHeight"
             BorderThickness="3" BorderBrush="#333" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" WindowStyle="None"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}, Mode=OneWay}" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay}"
             Icon="pack://siteoforigin:,,,/Resources/_null.ico">
@@ -17,7 +17,7 @@
     <Window.Resources>
         <h:conv_Size x:Key="conv_Size"/>
     </Window.Resources>
-    <DockPanel>
+    <DockPanel Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=30}">
         <!-- titleBar -->
         <c:TitleBar DockPanel.Dock="Top"/>
         <!-- main -->

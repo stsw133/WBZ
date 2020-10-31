@@ -2019,5 +2019,29 @@ namespace WBZ.Properties {
                 this["config_Stores_PanelColor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#EEE")]
+        public string config_Users_PanelColor {
+            get {
+                return ((string)(this["config_Users_PanelColor"]));
+            }
+            set {
+                this["config_Users_PanelColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#EEE")]
+        public string config_Employees_PanelColor {
+            get {
+                return ((string)(this["config_Employees_PanelColor"]));
+            }
+            set {
+                this["config_Employees_PanelColor"] = value;
+            }
+        }
     }
 }

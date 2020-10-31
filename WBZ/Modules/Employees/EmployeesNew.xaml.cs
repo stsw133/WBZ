@@ -2,30 +2,29 @@
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using WBZ.Classes;
 using WBZ.Helpers;
-using MODULE_CLASS = WBZ.Classes.C_User;
+using WBZ.Modules.Users;
+using MODULE_CLASS = WBZ.Classes.C_Employee;
 
-namespace WBZ.Modules.Admin
+namespace WBZ.Modules.Employees
 {
-	/// <summary>
-	/// Interaction logic for AdminUsersAdd.xaml
-	/// </summary>
-	public partial class UsersNew : Window
-	{
-		M_UsersNew M = new M_UsersNew();
+    /// <summary>
+    /// Interaction logic for EmployeesNew.xaml
+    /// </summary>
+    public partial class EmployeesNew : Window
+    {
+        M_EmployeesNew M = new M_EmployeesNew();
 
-		public UsersNew(MODULE_CLASS instance, Global.ActionType mode)
-		{
-			InitializeComponent();
-			DataContext = M;
+        public EmployeesNew(MODULE_CLASS instance, Global.ActionType mode)
+        {
+            InitializeComponent();
+            DataContext = M;
 
-			M.InstanceInfo = instance;
+            M.InstanceInfo = instance;
 			M.Mode = mode;
 
-			M.InstanceInfo.Perms = SQL.GetUserPerms(M.InstanceInfo.ID);
 			if (M.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
 				M.InstanceInfo.ID = SQL.NewInstanceID(M.MODULE_NAME);
 		}
@@ -36,7 +35,7 @@ namespace WBZ.Modules.Admin
 		private bool CheckDataValidation()
 		{
 			bool result = true;
-			
+
 			return result;
 		}
 
@@ -72,23 +71,18 @@ namespace WBZ.Modules.Admin
 		}
 
 		/// <summary>
-		/// Add perm
+		/// Select: User
 		/// </summary>
-		private void chckPerms_Checked(object sender, RoutedEventArgs e)
+		private void btnSelectUser_Click(object sender, RoutedEventArgs e)
 		{
-			var perm = (sender as CheckBox).Tag.ToString();
-			if (!M.InstanceInfo.Perms.Contains(perm))
-				M.InstanceInfo.Perms.Add(perm);
-		}
-
-		/// <summary>
-		/// Remove perm
-		/// </summary>
-		private void chckPerms_Unchecked(object sender, RoutedEventArgs e)
-		{
-			var perm = (sender as CheckBox).Tag.ToString();
-			if (M.InstanceInfo.Perms.Contains(perm))
-				M.InstanceInfo.Perms.Remove(perm);
+			var window = new UsersList(true);
+			if (window.ShowDialog() == true)
+				if (window.Selected != null)
+				{
+					M.InstanceInfo.User = window.Selected.ID;
+					M.InstanceInfo.UserName = window.Selected.Fullname;
+					M.InstanceInfo = M.InstanceInfo;
+				}
 		}
 
 		private void Window_Closed(object sender, EventArgs e)
@@ -101,9 +95,9 @@ namespace WBZ.Modules.Admin
 	/// <summary>
 	/// Model
 	/// </summary>
-	internal class M_UsersNew : INotifyPropertyChanged
+	internal class M_EmployeesNew : INotifyPropertyChanged
 	{
-		public readonly string MODULE_NAME = Global.Module.USERS;
+		public readonly string MODULE_NAME = Global.Module.EMPLOYEES;
 
 		/// Logged user
 		public C_User User { get; } = Global.User;
@@ -146,13 +140,13 @@ namespace WBZ.Modules.Admin
 			get
 			{
 				if (Mode == Global.ActionType.NEW)
-					return "Nowy użytkownik";
+					return "Nowy pracownik";
 				else if (Mode == Global.ActionType.DUPLICATE)
-					return $"Duplikowanie użytkownika: {InstanceInfo.Fullname}";
+					return $"Duplikowanie pracownika: {InstanceInfo.Fullname}";
 				else if (Mode == Global.ActionType.EDIT)
-					return $"Edycja użytkownika: {InstanceInfo.Fullname}";
+					return $"Edycja pracownika: {InstanceInfo.Fullname}";
 				else
-					return $"Podgląd użytkownika: {InstanceInfo.Fullname}";
+					return $"Podgląd pracownika: {InstanceInfo.Fullname}";
 			}
 		}
 

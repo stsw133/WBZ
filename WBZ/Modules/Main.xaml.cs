@@ -11,10 +11,12 @@ using WBZ.Modules.Attmisc;
 using WBZ.Modules.Companies;
 using WBZ.Modules.Distributions;
 using WBZ.Modules.Documents;
+using WBZ.Modules.Employees;
 using WBZ.Modules.Families;
 using WBZ.Modules.Login;
 using WBZ.Modules.Personal;
 using WBZ.Modules.Stores;
+using WBZ.Modules.Users;
 
 namespace WBZ.Modules
 {
@@ -33,41 +35,42 @@ namespace WBZ.Modules
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			///STATS
-			if (!Global.User.Perms.Contains($"{Global.Module.STATS}_{Global.UserPermType.PREVIEW}"))
-				gridModules.Children.RemoveAt(7);
-
 			///ATTMISC
 			if ((!Global.User.Perms.Contains($"{Global.Module.GROUPS}_{Global.UserPermType.PREVIEW}"))
 			 && (!Global.User.Perms.Contains($"{Global.Module.ATTRIBUTES_CLASSES}_{Global.UserPermType.PREVIEW}"))
 			 && (!Global.User.Perms.Contains($"{Global.Module.ATTACHMENTS}_{Global.UserPermType.PREVIEW}"))
 			 && (!Global.User.Perms.Contains($"{Global.Module.LOGS}_{Global.UserPermType.PREVIEW}")))
-				gridModules.Children.RemoveAt(6);
-
+				gridModules.Children.Remove(modAttmisc);
+			///USERS
+			if (!Global.User.Perms.Contains($"{Global.Module.USERS}_{Global.UserPermType.PREVIEW}"))
+				gridModules.Children.Remove(modUsers);
+			///EMPLOYEES
+			if (!Global.User.Perms.Contains($"{Global.Module.EMPLOYEES}_{Global.UserPermType.PREVIEW}"))
+				gridModules.Children.Remove(modEmployees);
+			///STATS
+			if (!Global.User.Perms.Contains($"{Global.Module.STATS}_{Global.UserPermType.PREVIEW}"))
+				gridModules.Children.Remove(modStats);
 			///DISTRIBUTIONS
 			if (!Global.User.Perms.Contains($"{Global.Module.DISTRIBUTIONS}_{Global.UserPermType.PREVIEW}"))
-				gridModules.Children.RemoveAt(5);
-
+				gridModules.Children.Remove(modDistributions);
 			///FAMILIES
 			if (!Global.User.Perms.Contains($"{Global.Module.FAMILIES}_{Global.UserPermType.PREVIEW}"))
-				gridModules.Children.RemoveAt(4);
-
+				gridModules.Children.Remove(modFamilies);
 			///COMPANIES
 			if (!Global.User.Perms.Contains($"{Global.Module.COMPANIES}_{Global.UserPermType.PREVIEW}"))
-				gridModules.Children.RemoveAt(3);
-
+				gridModules.Children.Remove(modCompanies);
+			///STORES
+			if (!Global.User.Perms.Contains($"{Global.Module.STORES}_{Global.UserPermType.PREVIEW}"))
+				gridModules.Children.Remove(modStores);
 			///ARTICLES
-			if ((!Global.User.Perms.Contains($"{Global.Module.ARTICLES}_{Global.UserPermType.PREVIEW}"))
-			 && (!Global.User.Perms.Contains($"{Global.Module.STORES}_{Global.UserPermType.PREVIEW}")))
-				gridModules.Children.RemoveAt(2);
-
+			if (!Global.User.Perms.Contains($"{Global.Module.ARTICLES}_{Global.UserPermType.PREVIEW}"))
+				gridModules.Children.Remove(modArticles);
 			///DOCUMENTS
 			if (!Global.User.Perms.Contains($"{Global.Module.DOCUMENTS}_{Global.UserPermType.PREVIEW}"))
-				gridModules.Children.RemoveAt(1);
-
+				gridModules.Children.Remove(modDocuments);
 			///ADMIN
 			if (!Global.User.Perms.Contains($"admin"))
-				gridModules.Children.RemoveAt(0);
+				gridModules.Children.Remove(modAdmin);
 		}
 
 		/// <summary>
@@ -76,6 +79,7 @@ namespace WBZ.Modules
 		private void menuRefresh_Click(object sender, RoutedEventArgs e)
 		{
 			Global.User = SQL.GetInstance(Global.Module.USERS, Global.User.ID).DataTableToList<C_User>()?[0];
+			Global.User.Perms = SQL.GetUserPerms(Global.User.ID);
 
 			var window = new Main();
 			window.Show();
@@ -213,24 +217,6 @@ namespace WBZ.Modules
 			}
 		}
 		
-		/// <summary>
-		/// Admin - Users - list
-		/// </summary>
-		private void btnUsersList_Click(object sender, RoutedEventArgs e)
-		{
-			var window = new UsersList();
-			window.Show();
-		}
-
-		/// <summary>
-		/// Admin - Employees - list
-		/// </summary>
-		private void btnEmployeesList_Click(object sender, RoutedEventArgs e)
-		{
-			var window = new EmployeesList();
-			window.Show();
-		}
-
 		/// <summary>
 		/// Admin - Community
 		/// </summary>
@@ -408,6 +394,42 @@ namespace WBZ.Modules
 		private void btnStats_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new Stats.Stats();
+			window.Show();
+		}
+
+		/// <summary>
+		/// Employees - list
+		/// </summary>
+		private void btnEmployeesList_Click(object sender, RoutedEventArgs e)
+		{
+			var window = new EmployeesList();
+			window.Show();
+		}
+
+		/// <summary>
+		/// Employees - new
+		/// </summary>
+		private void btnEmployeesNew_Click(object sender, RoutedEventArgs e)
+		{
+			var window = new EmployeesNew(new C_Employee(), Global.ActionType.NEW);
+			window.Show();
+		}
+
+		/// <summary>
+		/// Users - list
+		/// </summary>
+		private void btnUsersList_Click(object sender, RoutedEventArgs e)
+		{
+			var window = new UsersList();
+			window.Show();
+		}
+
+		/// <summary>
+		/// Users - new
+		/// </summary>
+		private void btnUsersNew_Click(object sender, RoutedEventArgs e)
+		{
+			var window = new UsersNew(new C_User(), Global.ActionType.NEW);
 			window.Show();
 		}
 
