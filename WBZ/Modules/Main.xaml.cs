@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using WBZ.Classes;
+using WBZ.Models;
 using WBZ.Controls;
 using WBZ.Helpers;
 using WBZ.Modules.Admin;

@@ -105,7 +105,7 @@
             </DockPanel>
         </Border>
         <!-- main -->
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Background="#999">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Background="#AAA">
             <WrapPanel x:Name="gridModules" Margin="5" HorizontalAlignment="Center">
                 <!-- admin -->
                 <Border x:Name="modAdmin" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=30}"

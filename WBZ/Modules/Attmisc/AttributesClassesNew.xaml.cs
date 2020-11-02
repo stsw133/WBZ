@@ -3,9 +3,9 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
-using WBZ.Classes;
+using WBZ.Models;
 using WBZ.Helpers;
-using MODULE_CLASS = WBZ.Classes.C_AttributeClass;
+using MODULE_CLASS = WBZ.Models.C_AttributeClass;
 
 namespace WBZ.Modules.Attmisc
 {

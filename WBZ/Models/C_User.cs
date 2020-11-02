@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WBZ.Classes
+namespace WBZ.Models
 {
 	public class C_User
 	{

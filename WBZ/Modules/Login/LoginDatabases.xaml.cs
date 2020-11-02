@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using WBZ.Classes;
+using WBZ.Models;
 using WBZ.Controls;
 using WBZ.Helpers;
 

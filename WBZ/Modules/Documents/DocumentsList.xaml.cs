@@ -1,16 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Data;
+﻿using System.Data;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using WBZ.Classes;
 using WBZ.Helpers;
-using MODULE_CLASS = WBZ.Classes.C_Document;
+using MODULE_CLASS = WBZ.Models.C_Document;
 
 namespace WBZ.Modules.Documents
 {
@@ -19,16 +14,16 @@ namespace WBZ.Modules.Documents
 	/// </summary>
 	public partial class DocumentsList : Window
 	{
-		M_DocumentsList M = new M_DocumentsList();
+		D_DocumentsList D = new D_DocumentsList();
 
 		public DocumentsList(bool selectingMode = false)
 		{
 			InitializeComponent();
-			DataContext = M;
+			DataContext = D;
 			btnRefresh_Click(null, null);
 
-			M.SelectingMode = selectingMode;
-			if (M.SelectingMode)
+			D.SelectingMode = selectingMode;
+			if (D.SelectingMode)
 				dgList.SelectionMode = DataGridSelectionMode.Single;
 		}
 
@@ -37,14 +32,14 @@ namespace WBZ.Modules.Documents
 		/// </summary>
 		private void UpdateFilters()
 		{
-			M.FilterSQL = $"LOWER(COALESCE(d.type,'')) like '%{M.Filters.Type.ToLower()}%' and "
-						+ $"LOWER(COALESCE(d.name,'')) like '%{M.Filters.Name.ToLower()}%' and "
-						+ $"LOWER(COALESCE(s.name,'')) like '%{M.Filters.StoreName.ToLower()}%' and "
-						+ $"LOWER(COALESCE(c.name,'')) like '%{M.Filters.CompanyName.ToLower()}%' and "
-						+ $"d.dateissue between '{M.Filters.fDateIssue:yyyy-MM-dd}' and '{M.Filters.DateIssue:yyyy-MM-dd} 23:59:59' and "
-						+ (!M.Filters.Archival ? $"d.archival=false and " : "");
+			D.FilterSQL = $"LOWER(COALESCE(d.type,'')) like '%{D.Filters.Type.ToLower()}%' and "
+						+ $"LOWER(COALESCE(d.name,'')) like '%{D.Filters.Name.ToLower()}%' and "
+						+ $"LOWER(COALESCE(s.name,'')) like '%{D.Filters.StoreName.ToLower()}%' and "
+						+ $"LOWER(COALESCE(c.name,'')) like '%{D.Filters.CompanyName.ToLower()}%' and "
+						+ $"d.dateissue between '{D.Filters.fDateIssue:yyyy-MM-dd}' and '{D.Filters.DateIssue:yyyy-MM-dd} 23:59:59' and "
+						+ (!D.Filters.Archival ? $"d.archival=false and " : "");
 
-			M.FilterSQL = M.FilterSQL.TrimEnd(" and ".ToCharArray());
+			D.FilterSQL = D.FilterSQL.TrimEnd(" and ".ToCharArray());
 		}
 
 		/// <summary>
@@ -61,7 +56,7 @@ namespace WBZ.Modules.Documents
 		/// </summary>
 		private void btnFiltersClear_Click(object sender, MouseButtonEventArgs e)
 		{
-			M.Filters = new MODULE_CLASS();
+			D.Filters = new MODULE_CLASS();
 			btnRefresh_Click(null, null);
 		}
 
@@ -122,7 +117,7 @@ namespace WBZ.Modules.Documents
 			if (selectedInstances.Count() > 0 && MessageBox.Show("Czy na pewno usunąć zaznaczone rekordy?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
 			{
 				foreach (MODULE_CLASS instance in selectedInstances)
-					SQL.DeleteInstance(M.MODULE_NAME, instance.ID, instance.Name);
+					SQL.DeleteInstance(D.MODULE_NAME, instance.ID, instance.Name);
 				btnRefresh_Click(null, null);
 			}
 		}
@@ -134,8 +129,8 @@ namespace WBZ.Modules.Documents
 		{
 			await Task.Run(() => {
 				UpdateFilters();
-				M.TotalItems = SQL.CountInstances(M.MODULE_NAME, M.FilterSQL);
-				M.InstancesList = SQL.ListInstances(M.MODULE_NAME, M.FilterSQL, M.SORTING, M.Page = 0).DataTableToList<MODULE_CLASS>();
+				D.TotalItems = SQL.CountInstances(D.MODULE_NAME, D.FilterSQL);
+				D.InstancesList = SQL.ListInstances(D.MODULE_NAME, D.FilterSQL, D.SORTING, D.Page = 0).DataTableToList<MODULE_CLASS>();
 			});
 		}
 
@@ -155,9 +150,9 @@ namespace WBZ.Modules.Documents
 		{
 			if (e.LeftButton == MouseButtonState.Pressed)
 			{
-				if (!M.SelectingMode)
+				if (!D.SelectingMode)
 				{
-					if (Global.User.Perms.Contains($"{M.MODULE_NAME}_{Global.UserPermType.SAVE}"))
+					if (Global.User.Perms.Contains($"{D.MODULE_NAME}_{Global.UserPermType.SAVE}"))
 						btnEdit_Click(null, null);
 					else
 						btnPreview_Click(null, null);
@@ -175,94 +170,13 @@ namespace WBZ.Modules.Documents
 		/// </summary>
 		private void dgList_ScrollChanged(object sender, ScrollChangedEventArgs e)
 		{
-			if (e.VerticalChange > 0 && e.VerticalOffset + e.ViewportHeight == e.ExtentHeight && M.InstancesList.Count < M.TotalItems)
+			if (e.VerticalChange > 0 && e.VerticalOffset + e.ViewportHeight == e.ExtentHeight && D.InstancesList.Count < D.TotalItems)
 			{
 				DataContext = null;
-				M.InstancesList.AddRange(SQL.ListInstances(M.MODULE_NAME, M.FilterSQL, M.SORTING, ++M.Page).DataTableToList<MODULE_CLASS>());
-				DataContext = M;
+				D.InstancesList.AddRange(SQL.ListInstances(D.MODULE_NAME, D.FilterSQL, D.SORTING, ++D.Page).DataTableToList<MODULE_CLASS>());
+				DataContext = D;
 				Extensions.GetVisualChild<ScrollViewer>(sender as DataGrid).ScrollToVerticalOffset(e.VerticalOffset);
 			}
-		}
-	}
-
-	/// <summary>
-	/// Model
-	/// </summary>
-	internal class M_DocumentsList : INotifyPropertyChanged
-	{
-		public readonly string MODULE_NAME = Global.Module.DOCUMENTS;
-		public StringCollection SORTING = Properties.Settings.Default.sorting_DocumentsList;
-
-		/// Logged user
-		public C_User User { get; } = Global.User;
-		/// Instances list
-		private List<MODULE_CLASS> instancesList;
-		public List<MODULE_CLASS> InstancesList
-		{
-			get
-			{
-				return instancesList;
-			}
-			set
-			{
-				instancesList = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
-			}
-		}
-		/// Selecting mode
-		public bool SelectingMode { get; set; }
-		/// SQL filter
-		public string FilterSQL { get; set; }
-		/// Filter instance
-		private MODULE_CLASS filters = new MODULE_CLASS();
-		public MODULE_CLASS Filters
-		{
-			get
-			{
-				return filters;
-			}
-			set
-			{
-				filters = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
-			}
-		}
-		/// Page number
-		private int page;
-		public int Page
-		{
-			get
-			{
-				return page;
-			}
-			set
-			{
-				page = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
-			}
-		}
-		/// Total instances number
-		private int totalItems;
-		public int TotalItems
-		{
-			get
-			{
-				return totalItems;
-			}
-			set
-			{
-				totalItems = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
-			}
-		}
-
-		/// <summary>
-		/// PropertyChangedEventHandler
-		/// </summary>
-		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged(string name)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
 	}
 }

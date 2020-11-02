@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO.Ports;
 using System.Threading;
-using System.Windows;
+using WBZ.Controls;
 
 namespace WBZ.Helpers
 {
@@ -38,14 +38,14 @@ namespace WBZ.Helpers
                         if (response.Contains("ERROR"))
                         {
                             result = false;
-                            MessageBox.Show(number + ": Nie udało się wysłać sms");
+                            new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"Nie udało się wysłać SMS na numer {number}").ShowDialog();
                         }
                     }
                 }
                 catch (Exception ex)
                 {
+                    new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, ex.Message).ShowDialog();
                     result = false;
-                    MessageBox.Show(number + ": " + ex);
                 }
             }
             return result;

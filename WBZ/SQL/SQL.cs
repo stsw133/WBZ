@@ -5,7 +5,7 @@ using System.Collections.Specialized;
 using System.Data;
 using System.Linq;
 using System.Windows;
-using WBZ.Classes;
+using WBZ.Models;
 using WBZ.Helpers;
 
 namespace WBZ

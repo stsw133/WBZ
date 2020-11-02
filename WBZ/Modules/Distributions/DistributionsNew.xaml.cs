@@ -1,24 +1,16 @@
-﻿using MigraDoc.DocumentObjectModel;
-using MigraDoc.DocumentObjectModel.Shapes;
-using MigraDoc.DocumentObjectModel.Tables;
-using MigraDoc.Rendering;
-using System;
-using System.ComponentModel;
+﻿using System;
 using System.Data;
-using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using WBZ.Classes;
+using WBZ.Models;
 using WBZ.Helpers;
 using WBZ.Modules.Articles;
 using WBZ.Modules.Families;
 using WBZ.Other;
-using Image = MigraDoc.DocumentObjectModel.Shapes.Image;
-using MODULE_CLASS = WBZ.Classes.C_Distribution;
+using MODULE_CLASS = WBZ.Models.C_Distribution;
 
 namespace WBZ.Modules.Distributions
 {
@@ -27,24 +19,24 @@ namespace WBZ.Modules.Distributions
 	/// </summary>
 	public partial class DistributionsNew : Window
 	{
-		M_DistributionsNew M = new M_DistributionsNew();
+		D_DistributionsNew D = new D_DistributionsNew();
 
 		public DistributionsNew(MODULE_CLASS instance, Global.ActionType mode)
 		{
 			InitializeComponent();
-			DataContext = M;
+			DataContext = D;
 
-			M.InstanceInfo = instance;
-			M.Mode = mode;
+			D.InstanceInfo = instance;
+			D.Mode = mode;
 			if (mode == Global.ActionType.EDIT && instance.Status == (short)MODULE_CLASS.DistributionStatus.Buffer)
-				M.Mode = Global.ActionType.PREVIEW;
+				D.Mode = Global.ActionType.PREVIEW;
 
 			chckToBuffer.IsChecked = instance.Status == (short)MODULE_CLASS.DistributionStatus.Buffer;
-			M.InstanceInfo.Families = SQL.GetDistributionPositions(M.InstanceInfo.ID);
-			if (M.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
+			D.InstanceInfo.Families = SQL.GetDistributionPositions(D.InstanceInfo.ID);
+			if (D.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
 			{
-				M.InstanceInfo.ID = SQL.NewInstanceID(M.MODULE_NAME);
-				foreach (var family in M.InstanceInfo.Families)
+				D.InstanceInfo.ID = SQL.NewInstanceID(D.MODULE_NAME);
+				foreach (var family in D.InstanceInfo.Families)
 					foreach (DataRow row in family.Positions.Rows)
 						row.SetAdded();
 			}
@@ -70,7 +62,7 @@ namespace WBZ.Modules.Distributions
 				return;
 
 			int counter = 0;
-			foreach (var family in M.InstanceInfo.Families)
+			foreach (var family in D.InstanceInfo.Families)
 			{
 				counter += family.Positions.Rows.Count;
 				if (chckToBuffer.IsChecked == false && family.Status != (short)C_DistributionFamily.DistributionFamilyStatus.Taken)
@@ -86,8 +78,8 @@ namespace WBZ.Modules.Distributions
 				return;
 			}
 
-			M.InstanceInfo.Status = (short)(chckToBuffer.IsChecked == true ? MODULE_CLASS.DistributionStatus.Buffer : MODULE_CLASS.DistributionStatus.Approved);
-			if (saved = SQL.SetInstance(M.MODULE_NAME, M.InstanceInfo, M.Mode))
+			D.InstanceInfo.Status = (short)(chckToBuffer.IsChecked == true ? MODULE_CLASS.DistributionStatus.Buffer : MODULE_CLASS.DistributionStatus.Approved);
+			if (saved = SQL.SetInstance(D.MODULE_NAME, D.InstanceInfo, D.Mode))
 				Close();
 		}
 
@@ -103,7 +95,7 @@ namespace WBZ.Modules.Distributions
 
 		private void btnDistributionList_Click(object sender, RoutedEventArgs e)
 		{
-			Prints.Print_DistributionList(M.InstanceInfo);
+			Prints.Print_DistributionList(D.InstanceInfo);
 		}
 
 		/// <summary>
@@ -111,7 +103,7 @@ namespace WBZ.Modules.Distributions
 		/// </summary>
 		private void btnRefresh_Click(object sender, MouseButtonEventArgs e)
 		{
-			if (M.InstanceInfo.ID == 0)
+			if (D.InstanceInfo.ID == 0)
 				return;
 			//TODO - dorobić odświeżanie zmienionych danych
 		}
@@ -134,7 +126,7 @@ namespace WBZ.Modules.Distributions
 			var window = new FamiliesList(true);
 			if (window.ShowDialog() == true)
 			{
-				family = M.InstanceInfo.Families.FirstOrDefault(x => x.Family == window.Selected.ID);
+				family = D.InstanceInfo.Families.FirstOrDefault(x => x.Family == window.Selected.ID);
 				if (family == null)
 				{
 					family = new C_DistributionFamily()
@@ -143,7 +135,7 @@ namespace WBZ.Modules.Distributions
 						FamilyName = window.Selected.Lastname,
 						Members = window.Selected.Members
 					};
-					M.InstanceInfo.Families.Add(family);
+					D.InstanceInfo.Families.Add(family);
 					((CollectionViewSource)gridGroups.Resources["groups"]).View.Refresh();
 				}
 			}
@@ -161,7 +153,7 @@ namespace WBZ.Modules.Distributions
 						var row = family.Positions.NewRow();
 
 						int counter = 0;
-						foreach (var f in M.InstanceInfo.Families)
+						foreach (var f in D.InstanceInfo.Families)
 							counter += f.Positions.Rows.Count;
 
 						row["position"] = counter + 1;
@@ -201,76 +193,8 @@ namespace WBZ.Modules.Distributions
 
 		private void Window_Closed(object sender, System.EventArgs e)
 		{
-			if (M.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE) && !saved)
-				SQL.ClearObject(M.MODULE_NAME, M.InstanceInfo.ID);
-		}
-	}
-
-	/// <summary>
-	/// Model
-	/// </summary>
-	internal class M_DistributionsNew : INotifyPropertyChanged
-	{
-		public readonly string MODULE_NAME = Global.Module.DISTRIBUTIONS;
-
-		/// Logged user
-		public C_User User { get; } = Global.User;
-		/// Instance
-		private MODULE_CLASS instanceInfo;
-		public MODULE_CLASS InstanceInfo
-		{
-			get
-			{
-				return instanceInfo;
-			}
-			set
-			{
-				instanceInfo = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
-			}
-		}
-		/// Editing mode
-		public bool EditingMode { get { return Mode != Global.ActionType.PREVIEW; } }
-		/// Window mode
-		public Global.ActionType Mode { get; set; }
-		/// Additional window icon
-		public string ModeIcon
-		{
-			get
-			{
-				if (Mode == Global.ActionType.NEW)
-					return "pack://siteoforigin:,,,/Resources/icon32_add.ico";
-				else if (Mode == Global.ActionType.DUPLICATE)
-					return "pack://siteoforigin:,,,/Resources/icon32_duplicate.ico";
-				else if (Mode == Global.ActionType.EDIT)
-					return "pack://siteoforigin:,,,/Resources/icon32_edit.ico";
-				else
-					return "pack://siteoforigin:,,,/Resources/icon32_search.ico";
-			}
-		}
-		/// Window title
-		public string Title
-		{
-			get
-			{
-				if (Mode == Global.ActionType.NEW)
-					return "Nowa dystrybucja";
-				else if (Mode == Global.ActionType.DUPLICATE)
-					return $"Duplikowanie dystrybucji: {InstanceInfo.Name}";
-				else if (Mode == Global.ActionType.EDIT)
-					return $"Edycja dystrybucji: {InstanceInfo.Name}";
-				else
-					return $"Podgląd dystrybucji: {InstanceInfo.Name}";
-			}
-		}
-
-		/// <summary>
-		/// PropertyChangedEventHandler
-		/// </summary>
-		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged(string name)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+			if (D.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE) && !saved)
+				SQL.ClearObject(D.MODULE_NAME, D.InstanceInfo.ID);
 		}
 	}
 }

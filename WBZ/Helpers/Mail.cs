@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Net.Mail;
-using System.Windows;
+using WBZ.Controls;
 using Props = WBZ.Properties.Settings;
 
 namespace WBZ.Helpers
@@ -33,7 +33,7 @@ namespace WBZ.Helpers
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, ex.Message).ShowDialog();
 				return false;
 			}
 

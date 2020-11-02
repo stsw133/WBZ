@@ -8,7 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Net.Http;
 using System.Reflection;
-using WBZ.Classes;
+using WBZ.Models;
 using WBZ.Controls;
 using WBZ.Helpers;
 using Props = WBZ.Properties.Settings;

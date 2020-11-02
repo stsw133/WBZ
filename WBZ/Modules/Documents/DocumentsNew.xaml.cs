@@ -1,15 +1,12 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Data;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
-using WBZ.Classes;
 using WBZ.Helpers;
 using WBZ.Modules.Articles;
 using WBZ.Modules.Companies;
 using WBZ.Modules.Stores;
-using MODULE_CLASS = WBZ.Classes.C_Document;
+using MODULE_CLASS = WBZ.Models.C_Document;
 
 namespace WBZ.Modules.Documents
 {
@@ -18,24 +15,24 @@ namespace WBZ.Modules.Documents
 	/// </summary>
 	public partial class DocumentsNew : Window
 	{
-		M_DocumentsNew M = new M_DocumentsNew();
+		D_DocumentsNew D = new D_DocumentsNew();
 
 		public DocumentsNew(MODULE_CLASS instance, Global.ActionType mode)
 		{
 			InitializeComponent();
-			DataContext = M;
+			DataContext = D;
 
-			M.InstanceInfo = instance;
-			M.Mode = mode;
+			D.InstanceInfo = instance;
+			D.Mode = mode;
 			if (mode == Global.ActionType.EDIT && instance.Status == (short)MODULE_CLASS.DocumentStatus.Buffer)
-				M.Mode = Global.ActionType.PREVIEW;
+				D.Mode = Global.ActionType.PREVIEW;
 
 			chckToBuffer.IsChecked = instance.Status == (short)MODULE_CLASS.DocumentStatus.Buffer;
-			M.InstanceInfo.Positions = SQL.GetInstancePositions(M.MODULE_NAME, M.InstanceInfo.ID);
-			if (M.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
+			D.InstanceInfo.Positions = SQL.GetInstancePositions(D.MODULE_NAME, D.InstanceInfo.ID);
+			if (D.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
 			{
-				M.InstanceInfo.ID = SQL.NewInstanceID(M.MODULE_NAME);
-				foreach (DataRow row in M.InstanceInfo.Positions.Rows)
+				D.InstanceInfo.ID = SQL.NewInstanceID(D.MODULE_NAME);
+				foreach (DataRow row in D.InstanceInfo.Positions.Rows)
 					row.SetAdded();
 			}
 		}
@@ -59,14 +56,14 @@ namespace WBZ.Modules.Documents
 			if (!CheckDataValidation())
 				return;
 
-			if (M.InstanceInfo.Positions.Rows.Count == 0)
+			if (D.InstanceInfo.Positions.Rows.Count == 0)
 			{
 				MessageBox.Show("Należy dodać co najmniej jedną pozycję do faktury!");
 				return;
 			}
 
-			M.InstanceInfo.Status = (short)(chckToBuffer.IsChecked==true ? MODULE_CLASS.DocumentStatus.Buffer : MODULE_CLASS.DocumentStatus.Approved);
-			if (saved = SQL.SetInstance(M.MODULE_NAME, M.InstanceInfo, M.Mode))
+			D.InstanceInfo.Status = (short)(chckToBuffer.IsChecked==true ? MODULE_CLASS.DocumentStatus.Buffer : MODULE_CLASS.DocumentStatus.Approved);
+			if (saved = SQL.SetInstance(D.MODULE_NAME, D.InstanceInfo, D.Mode))
 				Close();
 		}
 
@@ -91,7 +88,7 @@ namespace WBZ.Modules.Documents
 		/// </summary>
 		private void btnRefresh_Click(object sender, MouseButtonEventArgs e)
 		{
-			if (M.InstanceInfo.ID == 0)
+			if (D.InstanceInfo.ID == 0)
 				return;
 			//TODO - dorobić odświeżanie zmienionych danych
 		}
@@ -113,9 +110,9 @@ namespace WBZ.Modules.Documents
 			if (window.ShowDialog() == true)
 				if (window.Selected != null)
 				{
-					M.InstanceInfo.Company = window.Selected.ID;
-					M.InstanceInfo.CompanyName = window.Selected.Name;
-					M.InstanceInfo = M.InstanceInfo;
+					D.InstanceInfo.Company = window.Selected.ID;
+					D.InstanceInfo.CompanyName = window.Selected.Name;
+					D.InstanceInfo = D.InstanceInfo;
 				}
 		}
 
@@ -128,9 +125,9 @@ namespace WBZ.Modules.Documents
 			if (window.ShowDialog() == true)
 				if (window.Selected != null)
 				{
-					M.InstanceInfo.Store = window.Selected.ID;
-					M.InstanceInfo.StoreName = window.Selected.Name;
-					M.InstanceInfo = M.InstanceInfo;
+					D.InstanceInfo.Store = window.Selected.ID;
+					D.InstanceInfo.StoreName = window.Selected.Name;
+					D.InstanceInfo = D.InstanceInfo;
 				}
 		}
 
@@ -143,91 +140,23 @@ namespace WBZ.Modules.Documents
 			if (window.ShowDialog() == true)
 				if (window.Selected != null)
 				{
-					var row = M.InstanceInfo.Positions.NewRow();
+					var row = D.InstanceInfo.Positions.NewRow();
 
-					row["position"] = M.InstanceInfo.Positions.Rows.Count + 1;
+					row["position"] = D.InstanceInfo.Positions.Rows.Count + 1;
 					row["article"] = window.Selected.ID;
 					row["articlename"] = window.Selected.Name;
 					row["amount"] = DBNull.Value;
 					row["measure"] = window.Selected.Measure;
 					row["cost"] = DBNull.Value;
 
-					M.InstanceInfo.Positions.Rows.Add(row);
+					D.InstanceInfo.Positions.Rows.Add(row);
 				}
 		}
 
 		private void Window_Closed(object sender, System.EventArgs e)
 		{
-			if (M.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE) && !saved)
-				SQL.ClearObject(M.MODULE_NAME, M.InstanceInfo.ID);
-		}
-	}
-
-	/// <summary>
-	/// Model
-	/// </summary>
-	internal class M_DocumentsNew : INotifyPropertyChanged
-	{
-		public readonly string MODULE_NAME = Global.Module.DOCUMENTS;
-
-		/// Logged user
-		public C_User User { get; } = Global.User;
-		/// Instance
-		private MODULE_CLASS instanceInfo;
-		public MODULE_CLASS InstanceInfo
-		{
-			get
-			{
-				return instanceInfo;
-			}
-			set
-			{
-				instanceInfo = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
-			}
-		}
-		/// Editing mode
-		public bool EditingMode { get { return Mode != Global.ActionType.PREVIEW; } }
-		/// Window mode
-		public Global.ActionType Mode { get; set; }
-		/// Additional window icon
-		public string ModeIcon
-		{
-			get
-			{
-				if (Mode == Global.ActionType.NEW)
-					return "pack://siteoforigin:,,,/Resources/icon32_add.ico";
-				else if (Mode == Global.ActionType.DUPLICATE)
-					return "pack://siteoforigin:,,,/Resources/icon32_duplicate.ico";
-				else if (Mode == Global.ActionType.EDIT)
-					return "pack://siteoforigin:,,,/Resources/icon32_edit.ico";
-				else
-					return "pack://siteoforigin:,,,/Resources/icon32_search.ico";
-			}
-		}
-		/// Window title
-		public string Title
-		{
-			get
-			{
-				if (Mode == Global.ActionType.NEW)
-					return "Nowy dokument";
-				else if (Mode == Global.ActionType.DUPLICATE)
-					return $"Duplikowanie dokumentu: {InstanceInfo.Name}";
-				else if (Mode == Global.ActionType.EDIT)
-					return $"Edycja dokumentu: {InstanceInfo.Name}";
-				else
-					return $"Podgląd dokumentu: {InstanceInfo.Name}";
-			}
-		}
-
-		/// <summary>
-		/// PropertyChangedEventHandler
-		/// </summary>
-		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged(string name)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+			if (D.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE) && !saved)
+				SQL.ClearObject(D.MODULE_NAME, D.InstanceInfo.ID);
 		}
 	}
 }

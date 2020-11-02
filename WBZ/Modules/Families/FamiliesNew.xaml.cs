@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Linq;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using WBZ.Classes;
 using WBZ.Helpers;
+using WBZ.Models;
 using WBZ.Modules.Distributions;
-using MODULE_CLASS = WBZ.Classes.C_Family;
 using WBZ.Other;
+using MODULE_CLASS = WBZ.Models.C_Family;
 
 namespace WBZ.Modules.Families
 {
@@ -20,18 +17,18 @@ namespace WBZ.Modules.Families
     /// </summary>
     public partial class FamiliesNew : Window
     {
-        M_FamiliesNew M = new M_FamiliesNew();
+        D_FamiliesNew D = new D_FamiliesNew();
 
         public FamiliesNew(MODULE_CLASS instance, Global.ActionType mode)
         {
             InitializeComponent();
-            DataContext = M;
+            DataContext = D;
 
-            M.InstanceInfo = instance;
-            M.Mode = mode;
+            D.InstanceInfo = instance;
+            D.Mode = mode;
 
-            if (M.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
-                M.InstanceInfo.ID = SQL.NewInstanceID(M.MODULE_NAME);
+            if (D.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
+                D.InstanceInfo.ID = SQL.NewInstanceID(D.MODULE_NAME);
         }
 
         /// <summary>
@@ -53,7 +50,7 @@ namespace WBZ.Modules.Families
             if (!CheckDataValidation())
                 return;
 
-            if (saved = SQL.SetInstance(M.MODULE_NAME, M.InstanceInfo, M.Mode))
+            if (saved = SQL.SetInstance(D.MODULE_NAME, D.InstanceInfo, D.Mode))
                 Close();
         }
 
@@ -68,7 +65,7 @@ namespace WBZ.Modules.Families
         }
         private void btnRodo_Click(object sender, RoutedEventArgs e)
         {
-            Prints.Print_RODO(M.InstanceInfo, SQL.ListContacts(M.MODULE_NAME, M.InstanceInfo.ID, "default = true").DataTableToList<C_Contact>()?[0]);
+            Prints.Print_RODO(D.InstanceInfo, SQL.ListContacts(D.MODULE_NAME, D.InstanceInfo.ID, "default = true").DataTableToList<C_Contact>()?[0]);
         }
 
         /// <summary>
@@ -76,7 +73,7 @@ namespace WBZ.Modules.Families
 		/// </summary>
         private void btnRefresh_Click(object sender, MouseButtonEventArgs e)
         {
-            if (M.InstanceInfo.ID == 0)
+            if (D.InstanceInfo.ID == 0)
                 return;
             //TODO - dorobić odświeżanie zmienionych danych
         }
@@ -97,8 +94,8 @@ namespace WBZ.Modules.Families
             var tab = (e.AddedItems.Count > 0 ? e.AddedItems[0] : null) as TabItem;
             if (tab?.Name == "tabSources_Distributions")
             {
-				if (M.InstanceInfo.ID != 0 && M.InstanceSources_Distributions == null)
-                    M.InstanceSources_Distributions = SQL.ListInstances(Global.Module.DISTRIBUTIONS, $"dp.family={M.InstanceInfo.ID}").DataTableToList<C_Distribution>();
+				if (D.InstanceInfo.ID != 0 && D.InstanceSources_Distributions == null)
+                    D.InstanceSources_Distributions = SQL.ListInstances(Global.Module.DISTRIBUTIONS, $"dp.family={D.InstanceInfo.ID}").DataTableToList<C_Distribution>();
             }
         }
 
@@ -123,90 +120,8 @@ namespace WBZ.Modules.Families
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            if (M.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE) && !saved)
-                SQL.ClearObject(M.MODULE_NAME, M.InstanceInfo.ID);
-        }
-    }
-
-    /// <summary>
-	/// Model
-	/// </summary>
-	internal class M_FamiliesNew : INotifyPropertyChanged
-    {
-        public readonly string MODULE_NAME = Global.Module.FAMILIES;
-
-        /// Logged user
-        public C_User User { get; } = Global.User;
-        /// Instance
-		private MODULE_CLASS instanceInfo;
-        public MODULE_CLASS InstanceInfo
-        {
-            get
-            {
-                return instanceInfo;
-            }
-            set
-            {
-                instanceInfo = value;
-                NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
-            }
-        }
-        /// Instance source - distributions
-        private List<C_Distribution> instanceSources_Distributions;
-        public List<C_Distribution> InstanceSources_Distributions
-        {
-            get
-            {
-                return instanceSources_Distributions;
-            }
-            set
-            {
-                instanceSources_Distributions = value;
-                NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
-            }
-        }
-        /// Editing mode
-        public bool EditingMode { get { return Mode != Global.ActionType.PREVIEW; } }
-        /// Window mode
-		public Global.ActionType Mode { get; set; }
-        /// Additional window icon
-        public string ModeIcon
-        {
-            get
-            {
-                if (Mode == Global.ActionType.NEW)
-                    return "pack://siteoforigin:,,,/Resources/icon32_add.ico";
-                else if (Mode == Global.ActionType.DUPLICATE)
-                    return "pack://siteoforigin:,,,/Resources/icon32_duplicate.ico";
-                else if (Mode == Global.ActionType.EDIT)
-                    return "pack://siteoforigin:,,,/Resources/icon32_edit.ico";
-                else
-                    return "pack://siteoforigin:,,,/Resources/icon32_search.ico";
-            }
-        }
-        /// Window title
-        public string Title
-        {
-            get
-            {
-                if (Mode == Global.ActionType.NEW)
-                    return "Nowa rodzina";
-                else if (Mode == Global.ActionType.DUPLICATE)
-                    return $"Duplikowanie rodziny: {InstanceInfo.Lastname}";
-                else if (Mode == Global.ActionType.EDIT)
-                    return $"Edycja rodziny: {InstanceInfo.Lastname}";
-                else
-                    return $"Podgląd rodziny: {InstanceInfo.Lastname}";
-            }
-        }
-
-        /// <summary>
-		/// PropertyChangedEventHandler
-		/// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void NotifyPropertyChanged(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            if (D.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE) && !saved)
+                SQL.ClearObject(D.MODULE_NAME, D.InstanceInfo.ID);
         }
     }
 }

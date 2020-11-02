@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 
-namespace WBZ.Classes
+namespace WBZ.Models
 {
 	public class C_Family
 	{

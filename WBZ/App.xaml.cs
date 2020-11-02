@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using WBZ.Classes;
+using WBZ.Models;
 using WBZ.Modules.Login;
 
 namespace WBZ

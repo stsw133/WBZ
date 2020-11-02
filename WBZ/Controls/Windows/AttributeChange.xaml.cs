@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
-using WBZ.Classes;
+using WBZ.Models;
 
 namespace WBZ.Controls
 {
@@ -35,7 +35,7 @@ namespace WBZ.Controls
 			||  (M.AttributeInfo.Class.Type == "string"))
 				DialogResult = true;
 			else
-				MessageBox.Show($"Wartość niezgodna z typem ({M.AttributeInfo.Class.Type}) danych klasy atrybutu!");
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"Wartość niezgodna z typem ({M.AttributeInfo.Class.Type}) danych klasy atrybutu!") { Owner = this }.ShowDialog();
 		}
 		private void btnCancel_Click(object sender, RoutedEventArgs e)
 		{

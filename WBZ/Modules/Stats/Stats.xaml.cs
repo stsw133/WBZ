@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using WBZ.Classes;
+using WBZ.Models;
 using WBZ.Helpers;
 
 namespace WBZ.Modules.Stats

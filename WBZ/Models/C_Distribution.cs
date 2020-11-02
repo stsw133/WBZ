@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using WBZ.Helpers;
 
-namespace WBZ.Classes
+namespace WBZ.Models
 {
 	public class C_Distribution
 	{

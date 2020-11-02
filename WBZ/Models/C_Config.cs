@@ -1,4 +1,4 @@
-﻿namespace WBZ.Classes
+﻿namespace WBZ.Models
 {
 	public static class C_Config
 	{

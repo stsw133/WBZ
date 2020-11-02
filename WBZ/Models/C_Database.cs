@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Windows;
+using WBZ.Controls;
 using WBZ.Helpers;
 
-namespace WBZ.Classes
+namespace WBZ.Models
 {
 	public class C_Database
 	{
@@ -73,7 +73,7 @@ namespace WBZ.Classes
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show("Błąd wczytywania listy baz danych: " + ex.Message);
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"Błąd wczytywania listy baz danych: {ex.Message}").ShowDialog();
 			}
 
 			return result;
@@ -102,7 +102,7 @@ namespace WBZ.Classes
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show("Błąd zapisywania listy baz danych: " + ex.Message);
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"Błąd zapisywania listy baz danych: {ex.Message}").ShowDialog();
 			}
 		}
 	}

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using WBZ.Classes;
+using WBZ.Models;
 using WBZ.Controls;
 using WBZ.Helpers;
-using MODULE_CLASS = WBZ.Classes.C_Group;
+using MODULE_CLASS = WBZ.Models.C_Group;
 
 namespace WBZ.Modules.Attmisc
 {

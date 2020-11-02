@@ -1,10 +1,7 @@
-﻿using System.ComponentModel;
-using System.Data;
-using System.Reflection;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using WBZ.Classes;
+using WBZ.Models;
 using WBZ.Helpers;
 
 namespace WBZ.Modules.Distributions
@@ -14,15 +11,15 @@ namespace WBZ.Modules.Distributions
 	/// </summary>
 	public partial class DistributionsStatus : Window
 	{
-		M_DistributionsStatus M = new M_DistributionsStatus();
+		D_DistributionsStatus D = new D_DistributionsStatus();
 
 		public DistributionsStatus(C_DistributionFamily family)
 		{
 			InitializeComponent();
-			DataContext = M;
+			DataContext = D;
 
-			M.FamilyInfo = SQL.GetInstance("family", family.Family).DataTableToList<C_Family>()?[0];
-			M.FamilyContactsInfo = SQL.ListContacts("families", family.Family, @"""default""=true");
+			D.FamilyInfo = SQL.GetInstance("family", family.Family).DataTableToList<C_Family>()?[0];
+			D.FamilyContactsInfo = SQL.ListContacts("families", family.Family, @"""default""=true");
 
 			if (family.Status == 0) rbStatus0.IsChecked = true;
 			if (family.Status == 1) rbStatus1.IsChecked = true;
@@ -34,7 +31,7 @@ namespace WBZ.Modules.Distributions
 		/// </summary>
 		private void btnSendSMS_Click(object sender, MouseButtonEventArgs e)
 		{
-			if (GSM.SendSMS(new string[] { M.FamilyContactsInfo.Rows[0]["phone"].ToString() }))
+			if (GSM.SendSMS(new string[] { D.FamilyContactsInfo.Rows[0]["phone"].ToString() }))
 				(sender as Button).IsEnabled = false;
 		}
 
@@ -43,7 +40,7 @@ namespace WBZ.Modules.Distributions
 		/// </summary>
 		private void btnSendEmail_Click(object sender, MouseButtonEventArgs e)
 		{
-			if (Mail.SendMail(Properties.Settings.Default.config_Email_Email, new string[] { M.FamilyContactsInfo.Rows[0]["email"].ToString() }, "Darowizna do odebrania",
+			if (Mail.SendMail(Properties.Settings.Default.config_Email_Email, new string[] { D.FamilyContactsInfo.Rows[0]["email"].ToString() }, "Darowizna do odebrania",
 					Properties.Settings.Default.config_GSM_message + $"\n\n\nWiadomosc generowana automatycznie. Proszę nie odpisywać."))
 				(sender as Button).IsEnabled = false;
 		}
@@ -62,56 +59,6 @@ namespace WBZ.Modules.Distributions
 		private void btnCancel_Click(object sender, RoutedEventArgs e)
 		{
 			DialogResult = false;
-		}
-	}
-
-	/// <summary>
-	/// Model
-	/// </summary>
-	public class M_DistributionsStatus : INotifyPropertyChanged
-	{
-		/// Family
-		private C_Family familyInfo;
-		public C_Family FamilyInfo
-		{
-			get
-			{
-				return familyInfo;
-			}
-			set
-			{
-				familyInfo = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
-			}
-		}
-		/// Main family contact
-		private DataTable familyContactsInfo;
-		public DataTable FamilyContactsInfo
-		{
-			get
-			{
-				return familyContactsInfo;
-			}
-			set
-			{
-				familyContactsInfo = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
-			}
-		}
-		/// Window title
-		public string Title
-		{
-			get
-			{
-				return $"Zmiana statusu rodziny: {FamilyInfo.Lastname}";
-			}
-		}
-
-		/// PropertyChanged
-		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged(string name)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
 	}
 }

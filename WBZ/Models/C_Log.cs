@@ -1,7 +1,7 @@
 ﻿using System;
 using WBZ.Helpers;
 
-namespace WBZ.Classes
+namespace WBZ.Models
 {
 	public class C_Log
 	{

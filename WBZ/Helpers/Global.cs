@@ -1,11 +1,11 @@
-﻿﻿using System.Text;
-using System.Security.Cryptography;
-using System;
+﻿using System;
 using System.Linq;
 using System.IO;
-using System.Windows;
-using WBZ.Classes;
 using System.Reflection;
+using System.Security.Cryptography;
+﻿using System.Text;
+using WBZ.Models;
+using WBZ.Controls;
 
 namespace WBZ.Helpers
 {
@@ -98,8 +98,9 @@ namespace WBZ.Helpers
 
         internal static string Encrypt(string plainText)
         {
-            if (plainText.Length == 0) {
-                MessageBox.Show("Tekst do zaszyfrowania jest pusty", "Błąd walidacji!", MessageBoxButton.OK, MessageBoxImage.Error);
+            if (plainText.Length == 0)
+            {
+                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Tekst do zaszyfrowania jest pusty").ShowDialog();
                 return "";
             }
 
@@ -140,7 +141,7 @@ namespace WBZ.Helpers
         {
             if (cipherText.Length == 0)
             {
-                MessageBox.Show("Tekst do odszyfrowania jest pusty", "Błąd walidacji!", MessageBoxButton.OK, MessageBoxImage.Error);
+                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Tekst do odszyfrowania jest pusty").ShowDialog();
                 return "";
             }
 

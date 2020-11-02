@@ -6,7 +6,7 @@ using System;
 using System.Data;
 using System.Diagnostics;
 using System.Windows;
-using WBZ.Classes;
+using WBZ.Models;
 using WBZ.Helpers;
 
 namespace WBZ.Other

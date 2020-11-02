@@ -10,9 +10,9 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using WBZ.Classes;
+using WBZ.Models;
 using WBZ.Helpers;
-using MODULE_CLASS = WBZ.Classes.C_Attachment;
+using MODULE_CLASS = WBZ.Models.C_Attachment;
 
 namespace WBZ.Modules.Attmisc
 {

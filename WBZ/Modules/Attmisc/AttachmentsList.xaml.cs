@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using WBZ.Classes;
+using WBZ.Models;
 using WBZ.Helpers;
 using WBZ.Modules.Admin;
 using WBZ.Modules.Articles;
@@ -18,7 +18,7 @@ using WBZ.Modules.Documents;
 using WBZ.Modules.Families;
 using WBZ.Modules.Stores;
 using WBZ.Modules.Users;
-using MODULE_CLASS = WBZ.Classes.C_Attachment;
+using MODULE_CLASS = WBZ.Models.C_Attachment;
 
 namespace WBZ.Modules.Attmisc
 {

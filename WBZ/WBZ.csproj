@@ -123,24 +123,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Classes\C_Additional.cs" />
-    <Compile Include="Classes\C_Address.cs" />
-    <Compile Include="Classes\C_ComboValue.cs" />
-    <Compile Include="Classes\C_Article.cs" />
-    <Compile Include="Classes\C_Attachment.cs" />
-    <Compile Include="Classes\C_Attribute.cs" />
-    <Compile Include="Classes\C_Company.cs" />
-    <Compile Include="Classes\C_Config.cs" />
-    <Compile Include="Classes\C_Contact.cs" />
-    <Compile Include="Classes\C_Database.cs" />
-    <Compile Include="Classes\C_Distribution.cs" />
-    <Compile Include="Classes\C_Document.cs" />
-    <Compile Include="Classes\C_Family.cs" />
-    <Compile Include="Classes\C_Group.cs" />
-    <Compile Include="Classes\C_Log.cs" />
-    <Compile Include="Classes\C_Employee.cs" />
-    <Compile Include="Classes\C_User.cs" />
-    <Compile Include="Classes\C_Store.cs" />
+    <Compile Include="Models\C_Additional.cs" />
+    <Compile Include="Models\C_Address.cs" />
+    <Compile Include="Models\C_ComboValue.cs" />
+    <Compile Include="Models\C_Article.cs" />
+    <Compile Include="Models\C_Attachment.cs" />
+    <Compile Include="Models\C_Attribute.cs" />
+    <Compile Include="Models\C_Company.cs" />
+    <Compile Include="Models\C_Config.cs" />
+    <Compile Include="Models\C_Contact.cs" />
+    <Compile Include="Models\C_Database.cs" />
+    <Compile Include="Models\C_Distribution.cs" />
+    <Compile Include="Models\C_Document.cs" />
+    <Compile Include="Models\C_Family.cs" />
+    <Compile Include="Models\C_Group.cs" />
+    <Compile Include="Models\C_Log.cs" />
+    <Compile Include="Models\C_Employee.cs" />
+    <Compile Include="Models\C_User.cs" />
+    <Compile Include="Models\C_Store.cs" />
     <Compile Include="Controls\StatusPanel.xaml.cs">
       <DependentUpon>StatusPanel.xaml</DependentUpon>
     </Compile>
@@ -185,6 +185,19 @@
     <Compile Include="Controls\TitleBar.xaml.cs">
       <DependentUpon>TitleBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Articles\D_ArticlesList.cs" />
+    <Compile Include="Modules\Articles\D_ArticlesNew.cs" />
+    <Compile Include="Modules\Companies\D_CompaniesList.cs" />
+    <Compile Include="Modules\Companies\D_CompaniesNew.cs" />
+    <Compile Include="Modules\Distributions\D_DistributionsList.cs" />
+    <Compile Include="Modules\Distributions\D_DistributionsNew.cs" />
+    <Compile Include="Modules\Distributions\D_DistributionsStatus.cs" />
+    <Compile Include="Modules\Documents\D_DocumentsList.cs" />
+    <Compile Include="Modules\Documents\D_DocumentsNew.cs" />
+    <Compile Include="Modules\Employees\D_EmployeesList.cs" />
+    <Compile Include="Modules\Employees\D_EmployeesNew.cs" />
+    <Compile Include="Modules\Families\D_FamiliesList.cs" />
+    <Compile Include="Modules\Families\D_FamiliesNew.cs" />
     <Compile Include="Modules\Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
     </Compile>
@@ -215,6 +228,10 @@
     <Compile Include="Modules\Attmisc\LogsList.xaml.cs">
       <DependentUpon>LogsList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Stores\D_StoresList.cs" />
+    <Compile Include="Modules\Stores\D_StoresNew.cs" />
+    <Compile Include="Modules\Users\D_UsersList.cs" />
+    <Compile Include="Modules\Users\D_UsersNew.cs" />
     <Compile Include="Modules\Users\UsersList.xaml.cs">
       <DependentUpon>UsersList.xaml</DependentUpon>
     </Compile>
