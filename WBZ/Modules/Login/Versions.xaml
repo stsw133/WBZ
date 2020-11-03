@@ -14,12 +14,6 @@
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
-    <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="conv_VisibleIfTrue"/>
-        <h:conv_BoolInverted x:Key="conv_BoolInverted"/>
-        <h:conv_ListContains x:Key="conv_ListContains"/>
-        <h:conv_Size x:Key="conv_Size"/>
-    </Window.Resources>
     <DockPanel>
         <!-- titleBar -->
         <c:TitleBar DockPanel.Dock="Top"/>

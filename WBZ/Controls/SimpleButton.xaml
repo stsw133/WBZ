@@ -6,15 +6,11 @@
              xmlns:h="clr-namespace:WBZ.Helpers"
              xmlns:p="clr-namespace:WBZ.Properties"
              mc:Ignorable="d">
-    <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="conv_VisibleIfTrue"/>
-        <h:conv_Size x:Key="conv_Size"/>
-    </UserControl.Resources>
     <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5">
         <Button BorderThickness="0" HorizontalContentAlignment="Left">
             <StackPanel Orientation="Horizontal">
-                <Image Margin="4" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=2}" Source="{Binding IconSource, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
-                <Label Content="{Binding TextContent, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" VerticalAlignment="Center" Visibility="{Binding TextVisibility, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Converter={StaticResource conv_VisibleIfTrue}}"/>
+                <Image Margin="4" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="{Binding IconSource, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
+                <Label Content="{Binding TextContent, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" VerticalAlignment="Center" Visibility="{Binding TextVisibility, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Converter={h:conv_BoolToVisibility}}"/>
             </StackPanel>
         </Button>
     </Border>

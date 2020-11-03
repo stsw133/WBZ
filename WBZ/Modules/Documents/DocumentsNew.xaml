@@ -14,11 +14,6 @@
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
-    <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="conv_VisibleIfTrue"/>
-        <h:conv_BoolInverted x:Key="conv_BoolInverted"/>
-        <h:conv_Size x:Key="conv_Size"/>
-    </Window.Resources>
     <DockPanel>
         <!-- titleBar -->
         <c:TitleBar DockPanel.Dock="Top" AdditionalIcon="{Binding ModeIcon}"/>
@@ -59,41 +54,41 @@
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <DockPanel Margin="10" IsEnabled="{Binding EditingMode}">
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Firma:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="Firma:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
                             <Button Margin="5,5,0,5" VerticalContentAlignment="Center" Click="btnSelectCompany_Click">
-                                <Image Margin="2" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=1.5}" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_companies.ico"/>
+                                <Image Margin="2" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_companies.ico"/>
                             </Button>
                             <TextBox Text="{Binding InstanceInfo.CompanyName}" Tag="{Binding InstanceInfo.Company}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Magazyn:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="Magazyn:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
                             <Button Margin="5,5,0,5" VerticalContentAlignment="Center" Click="btnSelectStore_Click">
-                                <Image Margin="2" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=1.5}" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_stores.ico"/>
+                                <Image Margin="2" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_stores.ico"/>
                             </Button>
                             <TextBox Text="{Binding InstanceInfo.StoreName}" Tag="{Binding InstanceInfo.Store}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Typ:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="Typ:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
                             <ComboBox SelectedValue="{Binding InstanceInfo.Type}" SelectedValuePath="Tag" Margin="5" VerticalContentAlignment="Center">
                                 <ComboBoxItem Content="Faktura" Tag="FS"/>
                             </ComboBox>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Nazwa:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="Nazwa:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
                             <TextBox Text="{Binding InstanceInfo.Name}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Data wystawienia:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="Data wystawienia:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
                             <DatePicker SelectedDate="{Binding InstanceInfo.DateIssue}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-                            <Button ToolTip="Dodaj pozycję" HorizontalAlignment="Left" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=2}" Click="btnPositionsAdd_Click">
+                            <Button ToolTip="Dodaj pozycję" HorizontalAlignment="Left" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Click="btnPositionsAdd_Click">
                                 <Image Margin="2" Source="pack://siteoforigin:,,,/Resources/icon32_add.ico"/>
                             </Button>
                             <Label Content="Pozycje:"/>
                         </StackPanel>
                         <DataGrid x:Name="dgPositions" DockPanel.Dock="Top" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
-                                  AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstanceInfo.Positions.DefaultView}" IsReadOnly="{Binding EditMode, Converter={StaticResource conv_BoolInverted}}"
+                                  AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstanceInfo.Positions.DefaultView}" IsReadOnly="{Binding EditMode, Converter={h:conv_BoolInverted}}"
                                   CanUserAddRows="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding id}" Header="ID" IsReadOnly="True" Visibility="Hidden"/>

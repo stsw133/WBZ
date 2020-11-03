@@ -14,11 +14,6 @@
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
-    <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="conv_VisibleIfTrue"/>
-        <h:conv_BoolInverted x:Key="conv_BoolInverted"/>
-        <h:conv_Size x:Key="conv_Size"/>
-    </Window.Resources>
     <DockPanel>
         <!-- titleBar -->
         <c:TitleBar DockPanel.Dock="Top" AdditionalIcon="{Binding ModeIcon}"/>
@@ -52,23 +47,23 @@
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <DockPanel Margin="10" IsEnabled="{Binding EditingMode}" VerticalAlignment="Top">
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Kod:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="Kod:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
                             <TextBox Text="{Binding InstanceInfo.Codename}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Nazwa:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="Nazwa:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
                             <TextBox Text="{Binding InstanceInfo.Name}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Kod pocztowy:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="Kod pocztowy:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
                             <TextBox Text="{Binding InstanceInfo.Postcode}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Miasto:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="Miasto:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
                             <TextBox Text="{Binding InstanceInfo.City}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Adres:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="Adres:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
                             <TextBox Text="{Binding InstanceInfo.Address}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                     </DockPanel>
@@ -96,13 +91,13 @@
                                   AutoGenerateColumns="False" ItemsSource="{Binding InstanceSources_Articles}" IsReadOnly="True"
                                   MouseDoubleClick="dgList_Articles_MouseDoubleClick">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_ID, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
-                                <DataGridTextColumn Binding="{Binding Codename}" Header="Kod" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Code, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
-                                <DataGridTextColumn Binding="{Binding Name}" Header="Nazwa" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Name, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}" Width="*"/>
-                                <DataGridTextColumn Binding="{Binding EAN}" Header="EAN" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_EAN, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
-                                <DataGridTextColumn Binding="{Binding Measure}" Header="Jm" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Measure, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
-                                <DataGridTextColumn Binding="{Binding Amount}" Header="Ilość" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Amount, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
-                                <DataGridTextColumn Binding="{Binding Reserved}" Header="Zarezerwowano" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Reserved, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
+                                <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_ID, Mode=OneWay, Converter={h:conv_BoolToVisibility}}"/>
+                                <DataGridTextColumn Binding="{Binding Codename}" Header="Kod" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Code, Mode=OneWay, Converter={h:conv_BoolToVisibility}}"/>
+                                <DataGridTextColumn Binding="{Binding Name}" Header="Nazwa" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Name, Mode=OneWay, Converter={h:conv_BoolToVisibility}}" Width="*"/>
+                                <DataGridTextColumn Binding="{Binding EAN}" Header="EAN" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_EAN, Mode=OneWay, Converter={h:conv_BoolToVisibility}}"/>
+                                <DataGridTextColumn Binding="{Binding Measure}" Header="Jm" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Measure, Mode=OneWay, Converter={h:conv_BoolToVisibility}}"/>
+                                <DataGridTextColumn Binding="{Binding Amount}" Header="Ilość" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Amount, Mode=OneWay, Converter={h:conv_BoolToVisibility}}"/>
+                                <DataGridTextColumn Binding="{Binding Reserved}" Header="Zarezerwowano" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Reserved, Mode=OneWay, Converter={h:conv_BoolToVisibility}}"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </TabItem>
@@ -115,15 +110,15 @@
                                   AutoGenerateColumns="False" ItemsSource="{Binding InstanceSources_Documents}" IsReadOnly="True"
                                   MouseDoubleClick="dgList_Documents_MouseDoubleClick">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_ID, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
-                                <DataGridTextColumn Binding="{Binding Type}" Header="Typ" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Type, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
-                                <DataGridTextColumn Binding="{Binding Name}" Header="Nazwa" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Name, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}" Width="*"/>
-                                <DataGridTextColumn Binding="{Binding StoreName}" Header="Magazyn" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_StoreName, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
-                                <DataGridTextColumn Binding="{Binding CompanyName}" Header="Firma" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_CompanyName, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
-                                <DataGridTextColumn Binding="{Binding PositionsCount}" Header="Pozycje" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_PositionsCount, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
-                                <DataGridTextColumn Binding="{Binding Weight}" Header="Waga (kg)" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Weight, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
-                                <DataGridTextColumn Binding="{Binding Cost}" Header="Kwota netto" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Cost, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
-                                <DataGridTextColumn Binding="{Binding DateIssue, StringFormat={}{0:yyyy-MM-dd}}" Header="Data wystawienia" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_DateIssue, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
+                                <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_ID, Mode=OneWay, Converter={h:conv_BoolToVisibility}}"/>
+                                <DataGridTextColumn Binding="{Binding Type}" Header="Typ" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Type, Mode=OneWay, Converter={h:conv_BoolToVisibility}}"/>
+                                <DataGridTextColumn Binding="{Binding Name}" Header="Nazwa" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Name, Mode=OneWay, Converter={h:conv_BoolToVisibility}}" Width="*"/>
+                                <DataGridTextColumn Binding="{Binding StoreName}" Header="Magazyn" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_StoreName, Mode=OneWay, Converter={h:conv_BoolToVisibility}}"/>
+                                <DataGridTextColumn Binding="{Binding CompanyName}" Header="Firma" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_CompanyName, Mode=OneWay, Converter={h:conv_BoolToVisibility}}"/>
+                                <DataGridTextColumn Binding="{Binding PositionsCount}" Header="Pozycje" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_PositionsCount, Mode=OneWay, Converter={h:conv_BoolToVisibility}}"/>
+                                <DataGridTextColumn Binding="{Binding Weight}" Header="Waga (kg)" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Weight, Mode=OneWay, Converter={h:conv_BoolToVisibility}}"/>
+                                <DataGridTextColumn Binding="{Binding Cost}" Header="Kwota netto" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Cost, Mode=OneWay, Converter={h:conv_BoolToVisibility}}"/>
+                                <DataGridTextColumn Binding="{Binding DateIssue, StringFormat={}{0:yyyy-MM-dd}}" Header="Data wystawienia" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_DateIssue, Mode=OneWay, Converter={h:conv_BoolToVisibility}}"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </TabItem>

@@ -14,28 +14,22 @@
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
-    <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="conv_VisibleIfTrue"/>
-        <h:conv_BoolInverted x:Key="conv_BoolInverted"/>
-        <h:conv_ListContains x:Key="conv_ListContains"/>
-        <h:conv_Size x:Key="conv_Size"/>
-    </Window.Resources>
     <DockPanel>
         <!-- titleBar -->
         <c:TitleBar DockPanel.Dock="Top" AdditionalIcon="pack://siteoforigin:,,,/Resources/icon32_list.ico"/>
         <!-- buttonsPanel -->
-        <Border DockPanel.Dock="Right" Background="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="1,0,0,0" Visibility="{Binding SelectingMode, Converter={StaticResource conv_BoolInverted}}">
+        <Border DockPanel.Dock="Right" Background="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="1,0,0,0" Visibility="{Binding SelectingMode, Converter={h:conv_BoolInverted}}">
             <DockPanel>
                 <ToggleButton x:Name="btnToggle" BorderThickness="0" Width="5" IsChecked="True"/>
-                <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding User.Perms, Converter={StaticResource conv_ListContains}, ConverterParameter=articles_preview}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
+                <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding User.Perms, Converter={h:conv_ListContains}, ConverterParameter=articles_preview}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
                                 TextContent="Podgląd" IconSource="pack://siteoforigin:,,,/Resources/icon32_search.ico" PreviewMouseLeftButtonUp="btnPreview_Click"/>
-                <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding User.Perms, Converter={StaticResource conv_ListContains}, ConverterParameter=articles_save}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
+                <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding User.Perms, Converter={h:conv_ListContains}, ConverterParameter=articles_save}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
                                 TextContent="Dodaj" IconSource="pack://siteoforigin:,,,/Resources/icon32_add.ico" PreviewMouseLeftButtonUp="btnNew_Click"/>
-                <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding User.Perms, Converter={StaticResource conv_ListContains}, ConverterParameter=articles_save}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
+                <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding User.Perms, Converter={h:conv_ListContains}, ConverterParameter=articles_save}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
                                 TextContent="Duplikuj" IconSource="pack://siteoforigin:,,,/Resources/icon32_duplicate.ico" PreviewMouseLeftButtonUp="btnDuplicate_Click"/>
-                <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding User.Perms, Converter={StaticResource conv_ListContains}, ConverterParameter=articles_save}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
+                <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding User.Perms, Converter={h:conv_ListContains}, ConverterParameter=articles_save}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
                                 TextContent="Edytuj" IconSource="pack://siteoforigin:,,,/Resources/icon32_edit.ico" PreviewMouseLeftButtonUp="btnEdit_Click"/>
-                <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding User.Perms, Converter={StaticResource conv_ListContains}, ConverterParameter=articles_delete}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
+                <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding User.Perms, Converter={h:conv_ListContains}, ConverterParameter=articles_delete}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
                                 TextContent="Usuń" IconSource="pack://siteoforigin:,,,/Resources/icon32_delete.ico" PreviewMouseLeftButtonUp="btnDelete_Click"/>
                 <Separator DockPanel.Dock="Top" Margin="0,5,0,0" VerticalAlignment="Top" Height="5"/>
                 <c:SimpleButton DockPanel.Dock="Bottom" Margin="5,0,5,5" IsEnabled="True" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
@@ -54,7 +48,7 @@
         <!-- filtersPanel -->
         <Grid DockPanel.Dock="Top" Background="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}">
             <Expander x:Name="filtersExpander" Header="Filtry wyszukiwania" Background="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="0,0,0,1">
-                <TabControl MaxHeight="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=20}">
+                <TabControl MaxHeight="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=20}">
                     <!-- tabMain -->
                     <TabItem>
                         <TabItem.Header>
@@ -63,19 +57,19 @@
                         <ScrollViewer>
                             <DockPanel Margin="5">
                                 <DockPanel DockPanel.Dock="Top">
-                                    <Label Content="Kod:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                                    <Label Content="Kod:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
                                     <TextBox Text="{Binding Filters.Codename}" Margin="2.5" VerticalContentAlignment="Center" KeyUp="dpFilter_KeyUp"/>
                                 </DockPanel>
                                 <DockPanel DockPanel.Dock="Top">
-                                    <Label Content="Nazwa:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                                    <Label Content="Nazwa:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
                                     <TextBox Text="{Binding Filters.Name}" Margin="2.5" VerticalContentAlignment="Center" KeyUp="dpFilter_KeyUp"/>
                                 </DockPanel>
                                 <DockPanel DockPanel.Dock="Top">
-                                    <Label Content="EAN:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                                    <Label Content="EAN:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
                                     <TextBox Text="{Binding Filters.EAN}" Margin="2.5" VerticalContentAlignment="Center" KeyUp="dpFilter_KeyUp"/>
                                 </DockPanel>
                                 <DockPanel DockPanel.Dock="Top">
-                                    <Label Content="Pokaż archiwalne:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                                    <Label Content="Pokaż archiwalne:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
                                     <CheckBox IsChecked="{Binding Filters.Archival}" Margin="2.5" VerticalContentAlignment="Center"/>
                                 </DockPanel>
                                 <!--
@@ -144,8 +138,8 @@
                         <ScrollViewer>
                             <DockPanel Margin="5">
                                 <DockPanel DockPanel.Dock="Top">
-                                    <Label Content="Sortuj najpierw po:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
-                                    <ToggleButton Margin="2.5" IsChecked="{Binding sorting_ArticlesList[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=2}">
+                                    <Label Content="Sortuj najpierw po:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
+                                    <ToggleButton Margin="2.5" IsChecked="{Binding sorting_ArticlesList[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}">
                                         <Image Source="pack://siteoforigin:,,,/Resources/icon32_descending.ico"/>
                                     </ToggleButton>
                                     <ComboBox Margin="2.5" SelectedValue="{Binding sorting_ArticlesList[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
@@ -155,8 +149,8 @@
                                     </ComboBox>
                                 </DockPanel>
                                 <DockPanel DockPanel.Dock="Top">
-                                    <Label Content="Sortuj następnie po:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
-                                    <ToggleButton Margin="2.5" IsChecked="{Binding sorting_ArticlesList[3], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=2}">
+                                    <Label Content="Sortuj następnie po:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
+                                    <ToggleButton Margin="2.5" IsChecked="{Binding sorting_ArticlesList[3], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}">
                                         <Image Source="pack://siteoforigin:,,,/Resources/icon32_descending.ico"/>
                                     </ToggleButton>
                                     <ComboBox Margin="2.5" SelectedValue="{Binding sorting_ArticlesList[2], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
@@ -166,8 +160,8 @@
                                     </ComboBox>
                                 </DockPanel>
                                 <DockPanel DockPanel.Dock="Top">
-                                    <Label Content="Limit wczytywania:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
-                                    <TextBox Text="{Binding sorting_ArticlesList[4], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Margin="2.5" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=5}"/>
+                                    <Label Content="Limit wczytywania:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
+                                    <TextBox Text="{Binding sorting_ArticlesList[4], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Margin="2.5" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=5}"/>
                                 </DockPanel>
                             </DockPanel>
                         </ScrollViewer>
@@ -175,9 +169,9 @@
                 </TabControl>
             </Expander>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
-                <c:SimpleButton Margin="0,4,4,4" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Visibility="{Binding IsExpanded, ElementName=filtersExpander, Converter={StaticResource conv_VisibleIfTrue}}"
+                <c:SimpleButton Margin="0,4,4,4" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Visibility="{Binding IsExpanded, ElementName=filtersExpander, Converter={h:conv_BoolToVisibility}}"
                                 TextContent="Akceptuj" IconSource="pack://siteoforigin:,,,/Resources/icon32_accept.ico" PreviewMouseLeftButtonUp="btnRefresh_Click"/>
-                <c:SimpleButton Margin="0,4,4,4" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Visibility="{Binding IsExpanded, ElementName=filtersExpander, Converter={StaticResource conv_VisibleIfTrue}}"
+                <c:SimpleButton Margin="0,4,4,4" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Visibility="{Binding IsExpanded, ElementName=filtersExpander, Converter={h:conv_BoolToVisibility}}"
                                 TextContent="Czyść" IconSource="pack://siteoforigin:,,,/Resources/icon32_clear.ico" PreviewMouseLeftButtonUp="btnFiltersClear_Click"/>
             </StackPanel>
         </Grid>
@@ -192,20 +186,20 @@
                   AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstancesList}" IsReadOnly="True"
                   MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_ID, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
-                <DataGridTemplateColumn MaxWidth="50" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Icon, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}">
+                <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_ID, Mode=OneWay, Converter={h:conv_BoolToVisibility}}"/>
+                <DataGridTemplateColumn MaxWidth="50" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Icon, Mode=OneWay, Converter={h:conv_BoolToVisibility}}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Image Source="{Binding Icon}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Binding="{Binding Codename}" Header="Kod" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Code, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
-                <DataGridTextColumn Binding="{Binding Name}" Header="Nazwa" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Name, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}" Width="*"/>
-                <DataGridTextColumn Binding="{Binding EAN}" Header="EAN" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_EAN, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
-                <DataGridTextColumn Binding="{Binding Measure}" Header="Jm" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Measure, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
-                <DataGridTextColumn Binding="{Binding Amount}" Header="Ilość" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Amount, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
-                <DataGridTextColumn Binding="{Binding Reserved}" Header="Zarezerwowano" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Reserved, Mode=OneWay, Converter={StaticResource conv_VisibleIfTrue}}"/>
+                <DataGridTextColumn Binding="{Binding Codename}" Header="Kod" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Code, Mode=OneWay, Converter={h:conv_BoolToVisibility}}"/>
+                <DataGridTextColumn Binding="{Binding Name}" Header="Nazwa" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Name, Mode=OneWay, Converter={h:conv_BoolToVisibility}}" Width="*"/>
+                <DataGridTextColumn Binding="{Binding EAN}" Header="EAN" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_EAN, Mode=OneWay, Converter={h:conv_BoolToVisibility}}"/>
+                <DataGridTextColumn Binding="{Binding Measure}" Header="Jm" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Measure, Mode=OneWay, Converter={h:conv_BoolToVisibility}}"/>
+                <DataGridTextColumn Binding="{Binding Amount}" Header="Ilość" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Amount, Mode=OneWay, Converter={h:conv_BoolToVisibility}}"/>
+                <DataGridTextColumn Binding="{Binding Reserved}" Header="Zarezerwowano" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Reserved, Mode=OneWay, Converter={h:conv_BoolToVisibility}}"/>
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu>

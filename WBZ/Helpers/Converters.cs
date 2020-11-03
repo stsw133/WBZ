@@ -3,14 +3,23 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Markup;
 
 namespace WBZ.Helpers
 {
 	/// <summary>
 	/// Convert bool -> !bool , bool -> !Visibility : parameter must be bool
 	/// </summary>
-	public class conv_BoolInverted : IValueConverter
+	public class conv_BoolInverted : MarkupExtension, IValueConverter
 	{
+		private static conv_BoolInverted _conv = null;
+		public override object ProvideValue(IServiceProvider serviceProvider)
+		{
+			if (_conv == null)
+				_conv = new conv_BoolInverted();
+			return _conv;
+		}
+
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			if (targetType.Name == "Visibility")
@@ -32,8 +41,16 @@ namespace WBZ.Helpers
 	/// Convert bool -> string : parameter must be like 'string~string'
 	/// If true then string is on left side of ~ else on right side
 	/// </summary>
-	public class conv_BoolToString : IValueConverter
+	public class conv_BoolToString : MarkupExtension, IValueConverter
 	{
+		private static conv_BoolToString _conv = null;
+		public override object ProvideValue(IServiceProvider serviceProvider)
+		{
+			if (_conv == null)
+				_conv = new conv_BoolToString();
+			return _conv;
+		}
+
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			if ((bool)value) return parameter.ToString().Split('~')[0];
@@ -47,11 +64,43 @@ namespace WBZ.Helpers
 	}
 
 	/// <summary>
+	/// Convert bool -> Visibility : parameter must be bool
+	/// </summary>
+	public class conv_BoolToVisibility : MarkupExtension, IValueConverter
+	{
+		private static conv_BoolToVisibility _conv = null;
+		public override object ProvideValue(IServiceProvider serviceProvider)
+		{
+			if (_conv == null)
+				_conv = new conv_BoolToVisibility();
+			return _conv;
+		}
+
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			return System.Convert.ToBoolean(value) ? Visibility.Visible : Visibility.Collapsed;
+		}
+
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			return System.Convert.ToBoolean(value) ? Visibility.Collapsed : Visibility.Visible;
+		}
+	}
+
+	/// <summary>
 	/// Convert list.contains(string) : parameter must be string
 	/// If true then returns true or Visibility.Visible else returns false or Visibility.Collapsed
 	/// </summary>
-	public class conv_ListContains : IValueConverter
+	public class conv_ListContains : MarkupExtension, IValueConverter
 	{
+		private static conv_ListContains _conv = null;
+		public override object ProvideValue(IServiceProvider serviceProvider)
+		{
+			if (_conv == null)
+				_conv = new conv_ListContains();
+			return _conv;
+		}
+
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			if ((value as List<string>).Contains(parameter.ToString().TrimStart('!')))
@@ -82,8 +131,16 @@ namespace WBZ.Helpers
 	/// <summary>
 	/// Convert double -> double * double : parameter must be number
 	/// </summary>
-	public class conv_Size : IValueConverter
+	public class conv_Size : MarkupExtension, IValueConverter
 	{
+		private static conv_Size _conv = null;
+		public override object ProvideValue(IServiceProvider serviceProvider)
+		{
+			if (_conv == null)
+				_conv = new conv_Size();
+			return _conv;
+		}
+
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			return System.Convert.ToDouble(value, CultureInfo.InvariantCulture) * System.Convert.ToDouble(parameter, CultureInfo.InvariantCulture);
@@ -98,8 +155,16 @@ namespace WBZ.Helpers
 	/// <summary>
 	/// Convert string -> Visibility : parameter must be string
 	/// </summary>
-	public class conv_StringToVisibility : IValueConverter
+	public class conv_StringToVisibility : MarkupExtension, IValueConverter
 	{
+		private static conv_StringToVisibility _conv = null;
+		public override object ProvideValue(IServiceProvider serviceProvider)
+		{
+			if (_conv == null)
+				_conv = new conv_StringToVisibility();
+			return _conv;
+		}
+
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			if (value.ToString() == "True")

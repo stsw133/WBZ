@@ -11,7 +11,7 @@ namespace WBZ.Helpers
 {
     public static class Global
     {
-        internal static string Version => $"{Assembly.GetEntryAssembly().GetName().Version.Major}.{Assembly.GetEntryAssembly().GetName().Version.Minor}.{Assembly.GetEntryAssembly().GetName().Version.Build}";
+        internal static string Version => string.Concat(Assembly.GetEntryAssembly().GetName().Version.ToString().Reverse().Skip(2).Reverse());
         internal static string VersionNewest { get; set; } = null;
         internal static C_Database Database { get; set; } = new C_Database();
         internal static C_User User { get; set; } = new C_User();

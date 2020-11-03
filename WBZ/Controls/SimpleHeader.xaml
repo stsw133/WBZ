@@ -6,11 +6,8 @@
              xmlns:h="clr-namespace:WBZ.Helpers"
              xmlns:p="clr-namespace:WBZ.Properties"
              mc:Ignorable="d">
-    <UserControl.Resources>
-        <h:conv_Size x:Key="conv_Size"/>
-    </UserControl.Resources>
     <StackPanel Orientation="Horizontal" Margin="2">
-        <Image Margin="2" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=1.5}" Source="{Binding IconSource, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
+        <Image Margin="2" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="{Binding IconSource, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
         <TextBlock Text="{Binding TextContent, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" Margin="2" VerticalAlignment="Center"/>
     </StackPanel>
 </UserControl>

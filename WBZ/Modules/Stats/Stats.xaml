@@ -14,11 +14,6 @@
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
-    <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="conv_VisibleIfTrue"/>
-        <h:conv_ListContains x:Key="conv_ListContains"/>
-        <h:conv_Size x:Key="conv_Size"/>
-    </Window.Resources>
     <DockPanel>
         <!-- titleBar -->
         <c:TitleBar DockPanel.Dock="Top"/>
@@ -26,7 +21,7 @@
         <Border DockPanel.Dock="Right" Background="{Binding config_Stats_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="1,0,0,0">
             <DockPanel>
                 <ToggleButton x:Name="btnToggle" BorderThickness="0" Width="5" IsChecked="True"/>
-                <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding User.Perms, Converter={StaticResource conv_ListContains}, ConverterParameter=stats_save}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
+                <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding User.Perms, Converter={h:conv_ListContains}, ConverterParameter=stats_save}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
                                 TextContent="Generuj raport" IconSource="pack://siteoforigin:,,,/Resources/icon32_list.ico" PreviewMouseLeftButtonUp="btnReportGenerate_Click"/>
                 <Separator DockPanel.Dock="Top" Margin="0,5,0,0" VerticalAlignment="Top" Height="5"/>
                 <c:SimpleButton DockPanel.Dock="Bottom" Margin="5,0,5,5" IsEnabled="True" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
@@ -52,7 +47,7 @@
                             <ScrollViewer Padding="10">
                                 <DockPanel>
                                     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                                        <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=1.75}" Source="pack://siteoforigin:,,,/Resources/icon32_articles.ico"/>
+                                        <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.75}" Source="pack://siteoforigin:,,,/Resources/icon32_articles.ico"/>
                                         <Label Content="Towary" VerticalAlignment="Center"/>
                                     </StackPanel>
                                     <Label DockPanel.Dock="Top" Content="Towary otrzymane wg lat i miesięcy (kg):" VerticalAlignment="Center" FontWeight="Normal"/>

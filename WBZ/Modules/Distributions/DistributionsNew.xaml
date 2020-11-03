@@ -14,11 +14,6 @@
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
-    <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="conv_VisibleIfTrue"/>
-        <h:conv_BoolInverted x:Key="conv_BoolInverted"/>
-        <h:conv_Size x:Key="conv_Size"/>
-    </Window.Resources>
     <DockPanel>
         <!-- titleBar -->
         <c:TitleBar DockPanel.Dock="Top" AdditionalIcon="{Binding ModeIcon}"/>
@@ -63,15 +58,15 @@
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <DockPanel Margin="10" IsEnabled="{Binding EditingMode}">
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Nazwa:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="Nazwa:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
                             <TextBox Text="{Binding InstanceInfo.Name}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Data wystawienia:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="Data wystawienia:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
                             <DatePicker SelectedDate="{Binding InstanceInfo.DateReal}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-                            <Button ToolTip="Dodaj pozycję" HorizontalAlignment="Left" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=2}" Click="btnPositionsAdd_Click">
+                            <Button ToolTip="Dodaj pozycję" HorizontalAlignment="Left" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Click="btnPositionsAdd_Click">
                                 <Image Margin="2" Source="pack://siteoforigin:,,,/Resources/icon32_add.ico"/>
                             </Button>
                             <Label Content="Pozycje:"/>
@@ -85,7 +80,7 @@
                                 </CollectionViewSource>
                             </Grid.Resources>
                             <DataGrid x:Name="dgFamilies" ColumnHeaderHeight="0" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
-                                      AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding Source={StaticResource groups}}" IsReadOnly="{Binding EditMode, Converter={StaticResource conv_BoolInverted}}"
+                                      AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding Source={StaticResource groups}}" IsReadOnly="{Binding EditMode, Converter={h:conv_BoolInverted}}"
                                       CanUserAddRows="False">
                                 <DataGrid.GroupStyle>
                                     <GroupStyle>
@@ -134,13 +129,13 @@
                                                                     <Border Padding="10" Background="White" BorderBrush="Black" BorderThickness="1">
                                                                         <DockPanel>
                                                                             <DataGrid x:Name="dgPositions" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
-                                                                                      AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding Path=Items[0].Positions.DefaultView}" IsReadOnly="{Binding EditMode, Converter={StaticResource conv_BoolInverted}}"
+                                                                                      AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding Path=Items[0].Positions.DefaultView}" IsReadOnly="{Binding EditMode, Converter={h:conv_BoolInverted}}"
                                                                                       CanUserAddRows="False">
                                                                                 <DataGrid.Columns>
                                                                                     <DataGridTextColumn Binding="{Binding id}" Header="ID" IsReadOnly="True" Visibility="Hidden"/>
                                                                                     <DataGridTextColumn Binding="{Binding position}" Header="Lp"/>
                                                                                     <DataGridTextColumn Binding="{Binding storename}" Header="Nazwa magazynu" IsReadOnly="True"/>
-                                                                                    <DataGridTextColumn Binding="{Binding articlename}" Header="Nazwa towaru" IsReadOnly="True" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=25}"/>
+                                                                                    <DataGridTextColumn Binding="{Binding articlename}" Header="Nazwa towaru" IsReadOnly="True" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=25}"/>
                                                                                     <DataGridTextColumn Binding="{Binding measure}" Header="Jm" IsReadOnly="True"/>
                                                                                     <DataGridTextColumn Binding="{Binding amount}" Header="Ilość"/>
                                                                                 </DataGrid.Columns>
@@ -175,7 +170,7 @@
                         </Grid>
                         <!--
                         <DataGrid x:Name="dgPositions" DockPanel.Dock="Top" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
-                                  AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstanceInfo.Positions.DefaultView}" IsReadOnly="{Binding EditMode, Converter={StaticResource conv_BoolInverted}}"
+                                  AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstanceInfo.Positions.DefaultView}" IsReadOnly="{Binding EditMode, Converter={h:conv_BoolInverted}}"
                                   CanUserAddRows="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding id}" Header="ID" IsReadOnly="True" Visibility="Hidden"/>

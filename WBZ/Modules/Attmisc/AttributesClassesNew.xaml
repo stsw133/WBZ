@@ -14,11 +14,6 @@
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
-    <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="conv_VisibleIfTrue"/>
-        <h:conv_BoolInverted x:Key="conv_BoolInverted"/>
-        <h:conv_Size x:Key="conv_Size"/>
-    </Window.Resources>
     <DockPanel>
         <!-- titleBar -->
         <c:TitleBar DockPanel.Dock="Top" AdditionalIcon="{Binding ModeIcon}"/>
@@ -52,7 +47,7 @@
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <DockPanel Margin="10" IsEnabled="{Binding EditingMode}">
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Moduł:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="Moduł:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
                             <ComboBox SelectedValue="{Binding InstanceInfo.Module}" SelectedValuePath="Tag" Margin="5" VerticalContentAlignment="Center">
                                 <ComboBoxItem Content="Dokumenty" Tag="documents"/>
                                 <ComboBoxItem Content="Dystrybucje" Tag="distributions"/>
@@ -64,11 +59,11 @@
                             </ComboBox>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Nazwa:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="Nazwa:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
                             <TextBox Text="{Binding InstanceInfo.Name}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Typ:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={StaticResource conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="Typ:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
                             <ComboBox SelectedValue="{Binding InstanceInfo.Type}" SelectedValuePath="Tag" Margin="5" VerticalContentAlignment="Center">
                                 <ComboBoxItem Content="Ciąg znaków" Tag="string"/>
                                 <ComboBoxItem Content="Data" Tag="date"/>
@@ -80,7 +75,7 @@
                         <CheckBox DockPanel.Dock="Top" Content="Wymagana" Margin="20" HorizontalAlignment="Center" VerticalContentAlignment="Center" IsChecked="{Binding InstanceInfo.Required}"/>
                         <Label DockPanel.Dock="Top" Content="Lista możliwych wartości:" Margin="5,5,5,0" HorizontalAlignment="Center"/>
                         <DataGrid x:Name="dgValues" DockPanel.Dock="Top" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
-                                  AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstanceInfo.Values}" IsReadOnly="{Binding EditMode, Converter={StaticResource conv_BoolInverted}}">
+                                  AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstanceInfo.Values}" IsReadOnly="{Binding EditMode, Converter={h:conv_BoolInverted}}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding}" Header="Wartość" Width="*"/>
                             </DataGrid.Columns>

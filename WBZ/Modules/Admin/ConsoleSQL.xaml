@@ -14,9 +14,6 @@
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
-    <Window.Resources>
-        <h:conv_Size x:Key="conv_Size"/>
-    </Window.Resources>
     <DockPanel>
         <!-- titleBar -->
         <c:TitleBar DockPanel.Dock="Top"/>
@@ -27,7 +24,7 @@
             <Label Margin="5,5,0,5" Content="Mode:" VerticalAlignment="Center"/>
             <Label Margin="0,5" Content="only selecting data allowed" VerticalAlignment="Center" FontWeight="Medium"/>
         </DockPanel>
-        <TextBox x:Name="tbConsole" DockPanel.Dock="Top" Margin="5" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True"  Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Converter={StaticResource conv_Size}, ConverterParameter=0.4}"/>
+        <TextBox x:Name="tbConsole" DockPanel.Dock="Top" Margin="5" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True"  Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Converter={h:conv_Size}, ConverterParameter=0.4}"/>
         <DataGrid x:Name="dgConsole" DockPanel.Dock="Top" Margin="5" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
                   AutoGenerateColumns="True" RowHeaderWidth="0" IsReadOnly="True"/>
     </DockPanel>

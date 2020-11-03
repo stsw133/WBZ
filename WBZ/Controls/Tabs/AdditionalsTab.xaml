@@ -8,11 +8,6 @@
              xmlns:p="clr-namespace:WBZ.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="conv_VisibleIfTrue"/>
-        <h:conv_BoolInverted x:Key="conv_BoolInverted"/>
-        <h:conv_Size x:Key="conv_Size"/>
-    </UserControl.Resources>
     <DockPanel Margin="5" IsEnabled="{Binding EditingMode}">
         <DockPanel DockPanel.Dock="Right">
             <Border DockPanel.Dock="Top" Margin="5" BorderBrush="Gray" BorderThickness="1">

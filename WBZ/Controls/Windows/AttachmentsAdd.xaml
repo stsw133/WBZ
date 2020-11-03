@@ -14,9 +14,6 @@
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
-    <Window.Resources>
-        <h:conv_Size x:Key="conv_Size"/>
-    </Window.Resources>
     <DockPanel>
         <!-- titleBar -->
         <c:TitleBar DockPanel.Dock="Top"/>
@@ -31,7 +28,7 @@
                             TextContent="Z dysku" IconSource="pack://siteoforigin:,,,/Resources/icon32_folder.ico" PreviewMouseLeftButtonUp="btnDrive_Click"/>
             <TextBox x:Name="tbDrive" Margin="5" VerticalContentAlignment="Center"/>
         </DockPanel>
-        <Grid Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={StaticResource conv_Size}, ConverterParameter=30}">
+        <Grid Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=30}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
