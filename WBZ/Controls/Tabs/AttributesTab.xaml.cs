@@ -13,7 +13,7 @@ namespace WBZ.Controls
     /// </summary>
     public partial class AttributesTab : UserControl
     {
-        M_AttributesTab M = new M_AttributesTab();
+        D_AttributesTab D = new D_AttributesTab();
         private string Module;
         private int ID;
         private bool EditingMode;
@@ -21,7 +21,7 @@ namespace WBZ.Controls
         public AttributesTab()
         {
             InitializeComponent();
-            DataContext = M;
+            DataContext = D;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -30,8 +30,8 @@ namespace WBZ.Controls
             {
                 Window win = Window.GetWindow(this);
 
-                if (ID != 0 && M.InstanceAttributes == null)
-                    M.InstanceAttributes = SQL.ListAttributes(Module, ID);
+                if (ID != 0 && D.InstanceAttributes == null)
+                    D.InstanceAttributes = SQL.ListAttributes(Module, ID);
 
                 dynamic d = win?.DataContext;
                 if (d != null)
@@ -55,23 +55,23 @@ namespace WBZ.Controls
             if (d != null)
                 EditingMode = (bool)d.EditingMode;
 
-            var indexes = dataGrid.SelectedItems.Cast<C_Attribute>().Select(x => M.InstanceAttributes.IndexOf(x));
+            var indexes = dataGrid.SelectedItems.Cast<C_Attribute>().Select(x => D.InstanceAttributes.IndexOf(x));
             foreach (int index in indexes)
             {
-                var window = new AttributeChange(M.InstanceAttributes[index], EditingMode);
+                var window = new AttributeChange(D.InstanceAttributes[index], EditingMode);
                 window.Owner = win;
                 if (window.ShowDialog() == true)
-                    SQL.UpdateAttribute(M.InstanceAttributes[index]);
+                    SQL.UpdateAttribute(D.InstanceAttributes[index]);
             }
 
-            M.InstanceAttributes = SQL.ListAttributes(Module, ID);
+            D.InstanceAttributes = SQL.ListAttributes(Module, ID);
         }
 	}
 
 	/// <summary>
 	/// Model
 	/// </summary>
-	internal class M_AttributesTab : INotifyPropertyChanged
+	internal class D_AttributesTab : INotifyPropertyChanged
     {
         /// Attributes
         private List<C_Attribute> instanceAttributes;

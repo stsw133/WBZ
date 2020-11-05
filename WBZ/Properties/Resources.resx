@@ -157,6 +157,9 @@
   <data name="icon32_close" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_close.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icon32_color" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon32_color.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon32_community" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_community.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

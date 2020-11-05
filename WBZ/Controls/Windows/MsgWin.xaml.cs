@@ -33,7 +33,13 @@ namespace WBZ.Controls
 				tbInput.Visibility = Visibility.Visible;
 		}
 
-		public string Value { get { return tbInput.Text; } }
+		public string Value
+		{
+			get
+			{
+				return tbInput.Text;
+			}
+		}
 
 		/// <summary>
 		/// OK

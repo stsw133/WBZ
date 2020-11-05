@@ -12,7 +12,7 @@ namespace WBZ.Controls
     /// </summary>
     public partial class ContactsTab : UserControl
     {
-        M_ContactsTab M = new M_ContactsTab();
+        D_ContactsTab D = new D_ContactsTab();
         private string Module;
         private int ID;
         private bool EditingMode;
@@ -20,7 +20,7 @@ namespace WBZ.Controls
         public ContactsTab()
         {
             InitializeComponent();
-            DataContext = M;
+            DataContext = D;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -29,9 +29,9 @@ namespace WBZ.Controls
             {
                 Window win = Window.GetWindow(this);
 
-                if (ID != 0 && M.InstanceContacts == null)
+                if (ID != 0 && D.InstanceContacts == null)
                 {
-                    M.InstanceContacts = SQL.ListContacts(Module, ID);
+                    D.InstanceContacts = SQL.ListContacts(Module, ID);
                     win.Closed += UserControl_Closed;
                 }
 
@@ -50,7 +50,7 @@ namespace WBZ.Controls
         {
             try
             {
-                SQL.UpdateContacts(Module, ID, M.InstanceContacts);
+                SQL.UpdateContacts(Module, ID, D.InstanceContacts);
             }
             catch { }
         }
@@ -59,9 +59,9 @@ namespace WBZ.Controls
     /// <summary>
     /// Model
     /// </summary>
-    internal class M_ContactsTab : INotifyPropertyChanged
+    internal class D_ContactsTab : INotifyPropertyChanged
     {
-        /// Attachments
+        /// Contacts
         private DataTable instanceContacts;
         public DataTable InstanceContacts
         {

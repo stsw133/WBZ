@@ -742,6 +742,9 @@
     <EmbeddedResource Include="Resources\icon32_language_pl.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\icon32_color.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="SQL\database.sql" />
     <EmbeddedResource Include="Resources\logo128_pwsz.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

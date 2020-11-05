@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Input;
 
@@ -22,6 +23,7 @@ namespace WBZ.Controls
                 tbLink.Text = clipboardText;
             else if (clipboardText.StartsWith("C:"))
                 tbDrive.Text = clipboardText;
+            tbName.Text = Path.GetFileName(clipboardText);
         }
 
         public string GetLink
@@ -37,6 +39,14 @@ namespace WBZ.Controls
             get
             {
                 return tbDrive.Text;
+            }
+        }
+
+        public string GetName
+        {
+            get
+            {
+                return tbName.Text;
             }
         }
 

@@ -28,6 +28,10 @@
                             TextContent="Z dysku" IconSource="pack://siteoforigin:,,,/Resources/icon32_folder.ico" PreviewMouseLeftButtonUp="btnDrive_Click"/>
             <TextBox x:Name="tbDrive" Margin="5" VerticalContentAlignment="Center"/>
         </DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+            <Label Margin="5,5,0,5" Content="Nazwa:" VerticalAlignment="Center"/>
+            <TextBox x:Name="tbName" Margin="5" VerticalContentAlignment="Center"/>
+        </DockPanel>
         <Grid Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=30}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>

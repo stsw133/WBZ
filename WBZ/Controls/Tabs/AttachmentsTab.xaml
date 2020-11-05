@@ -14,6 +14,8 @@
                 <c:SimpleButton Margin="0,0,5,0" IsEnabled="{Binding EditingMode}" TextVisibility="False"
                                 TextContent="Dodaj załącznik" IconSource="pack://siteoforigin:,,,/Resources/icon32_add.ico" PreviewMouseLeftButtonUp="btnAttachmentAdd_Click"/>
                 <c:SimpleButton Margin="0,0,5,0" IsEnabled="{Binding EditingMode}" TextVisibility="False"
+                                TextContent="Edytuj załącznik" IconSource="pack://siteoforigin:,,,/Resources/icon32_edit.ico" PreviewMouseLeftButtonUp="btnAttachmentEdit_Click"/>
+                <c:SimpleButton Margin="0,0,5,0" IsEnabled="{Binding EditingMode}" TextVisibility="False"
                                 TextContent="Usuń załącznik" IconSource="pack://siteoforigin:,,,/Resources/icon32_remove.ico" PreviewMouseLeftButtonUp="btnAttachmentRemove_Click"/>
             </StackPanel>
             <ListBox x:Name="lbAttachments" DockPanel.Dock="Top" Margin="0,5,5,0" ItemsSource="{Binding InstanceAttachments}" DisplayMemberPath="Name" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}" SelectionChanged="lbAttachments_SelectionChanged"/>

@@ -11,31 +11,31 @@ namespace WBZ.Controls
 	/// </summary>
 	public partial class AttributeChange : Window
 	{
-		M_AttributeValueChange M = new M_AttributeValueChange();
+		D_AttributeValueChange D = new D_AttributeValueChange();
 
 		public AttributeChange(C_Attribute attribute, bool editMode)
 		{
 			InitializeComponent();
-			DataContext = M;
+			DataContext = D;
 
-			M.AttributeInfo = attribute;
-			M.EditMode = editMode;
+			D.AttributeInfo = attribute;
+			D.EditMode = editMode;
 		}
 
 		private void btnOk_Click(object sender, RoutedEventArgs e)
 		{
-			if (M.AttributeInfo.Value == null)
-				M.AttributeInfo.Value = "";
+			if (D.AttributeInfo.Value == null)
+				D.AttributeInfo.Value = "";
 
-			if ((string.IsNullOrEmpty(M.AttributeInfo.Value))
-			||  (M.AttributeInfo.Class.Type == "char" && char.TryParse(M.AttributeInfo.Value, out _))
-			||  (M.AttributeInfo.Class.Type == "date" && DateTime.TryParse(M.AttributeInfo.Value, out _))
-			||  (M.AttributeInfo.Class.Type == "double" && double.TryParse(M.AttributeInfo.Value, out _))
-			||  (M.AttributeInfo.Class.Type == "int" && int.TryParse(M.AttributeInfo.Value, out _))
-			||  (M.AttributeInfo.Class.Type == "string"))
+			if ((string.IsNullOrEmpty(D.AttributeInfo.Value))
+			||  (D.AttributeInfo.Class.Type == "char" && char.TryParse(D.AttributeInfo.Value, out _))
+			||  (D.AttributeInfo.Class.Type == "date" && DateTime.TryParse(D.AttributeInfo.Value, out _))
+			||  (D.AttributeInfo.Class.Type == "double" && double.TryParse(D.AttributeInfo.Value, out _))
+			||  (D.AttributeInfo.Class.Type == "int" && int.TryParse(D.AttributeInfo.Value, out _))
+			||  (D.AttributeInfo.Class.Type == "string"))
 				DialogResult = true;
 			else
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"Wartość niezgodna z typem ({M.AttributeInfo.Class.Type}) danych klasy atrybutu!") { Owner = this }.ShowDialog();
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"Wartość niezgodna z typem ({D.AttributeInfo.Class.Type}) danych klasy atrybutu!") { Owner = this }.ShowDialog();
 		}
 		private void btnCancel_Click(object sender, RoutedEventArgs e)
 		{
@@ -46,7 +46,7 @@ namespace WBZ.Controls
 	/// <summary>
 	/// Model
 	/// </summary>
-	public class M_AttributeValueChange : INotifyPropertyChanged
+	public class D_AttributeValueChange : INotifyPropertyChanged
 	{
 		/// Attribute
 		private C_Attribute attributeInfo;

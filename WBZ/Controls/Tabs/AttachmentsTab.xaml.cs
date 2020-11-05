@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Windows;
@@ -18,14 +17,14 @@ namespace WBZ.Controls
     /// </summary>
     public partial class AttachmentsTab : UserControl
     {
-        M_AttachmentsTab M = new M_AttachmentsTab();
+        D_AttachmentsTab D = new D_AttachmentsTab();
         private string Module;
         private int ID;
 
         public AttachmentsTab()
         {
             InitializeComponent();
-            lbAttachments.DataContext = M;
+            lbAttachments.DataContext = D;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -34,9 +33,9 @@ namespace WBZ.Controls
             {
                 Window win = Window.GetWindow(this);
 
-                if (ID != 0 && M.InstanceAttachments == null)
+                if (ID != 0 && D.InstanceAttachments == null)
                 {
-                    M.InstanceAttachments = SQL.ListInstances(Global.Module.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}").DataTableToList<C_Attachment>();
+                    D.InstanceAttachments = SQL.ListInstances(Global.Module.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}").DataTableToList<C_Attachment>();
                     win.Closed += UserControl_Closed;
                 }
 
@@ -59,12 +58,11 @@ namespace WBZ.Controls
             window.Owner = Window.GetWindow(this);
             if (window.ShowDialog() == true)
             {
-                string filePath, fileName;
+                string filePath;
                 byte[] file;
                 if (string.IsNullOrEmpty(window.GetDrive))
                 {
                     filePath = window.GetLink;
-                    fileName = filePath.Split('/').Last();
                     using (WebClient client = new WebClient())
                     {
                         file = client.DownloadData(filePath);
@@ -73,11 +71,28 @@ namespace WBZ.Controls
                 else
                 {
                     filePath = window.GetDrive;
-                    fileName = Path.GetFileName(filePath);
                     file = File.ReadAllBytes(filePath);
                 }
-                SQL.SetAttachment(Module, ID, fileName, file, filePath);
-                M.InstanceAttachments = SQL.ListInstances(Global.Module.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}").DataTableToList<C_Attachment>();
+                SQL.SetAttachment(Module, ID, window.GetName, file, filePath);
+                D.InstanceAttachments = SQL.ListInstances(Global.Module.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}").DataTableToList<C_Attachment>();
+            }
+        }
+
+        /// <summary>
+        /// Edit
+        /// </summary>
+        private void btnAttachmentEdit_Click(object sender, MouseButtonEventArgs e)
+        {
+            if (lbAttachments.SelectedIndex < 0)
+                return;
+            var item = lbAttachments.SelectedItem as C_Attachment;
+
+            var window = new MsgWin(MsgWin.Type.InputBox, "Edycja załącznika", "Nowa nazwa załącznika:", item.Name);
+            window.Owner = Window.GetWindow(this);
+            if (window.ShowDialog() == true)
+            {
+                item.Name = window.Value;
+                lbAttachments.ItemsSource = D.InstanceAttachments;
             }
         }
 
@@ -88,11 +103,15 @@ namespace WBZ.Controls
         {
             if (lbAttachments.SelectedIndex < 0)
                 return;
+            var item = lbAttachments.SelectedItem as C_Attachment;
 
-            SQL.DeleteInstance(Global.Module.ATTACHMENTS, M.InstanceAttachments[lbAttachments.SelectedIndex].ID, M.InstanceAttachments[lbAttachments.SelectedIndex].Name);
-            M.InstanceAttachments = SQL.ListInstances(Global.Module.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}").DataTableToList<C_Attachment>();
+            SQL.DeleteInstance(Global.Module.ATTACHMENTS, item.ID, item.Name);
+            D.InstanceAttachments = SQL.ListInstances(Global.Module.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}").DataTableToList<C_Attachment>();
         }
 
+        /// <summary>
+        /// SelectionChanged
+        /// </summary>
         private void lbAttachments_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lbAttachments.SelectedIndex < 0)
@@ -107,12 +126,15 @@ namespace WBZ.Controls
             wbFile.Source = new Uri(@"file:///" + Path.Combine(Path.GetTempPath(), selection.Name));
         }
 
+        /// <summary>
+        /// Closed
+        /// </summary>
         private void UserControl_Closed(object sender, EventArgs e)
         {
             try
             {
-                if (M.InstanceAttachments != null)
-                    foreach (var attachment in M.InstanceAttachments)
+                if (D.InstanceAttachments != null)
+                    foreach (var attachment in D.InstanceAttachments)
                         if (attachment.File != null)
                             File.Delete(Path.Combine(Path.GetTempPath(), attachment.Name));
             }
@@ -123,7 +145,7 @@ namespace WBZ.Controls
     /// <summary>
     /// Model
     /// </summary>
-    internal class M_AttachmentsTab : INotifyPropertyChanged
+    internal class D_AttachmentsTab : INotifyPropertyChanged
     {
         /// Attachments
         private List<C_Attachment> instanceAttachments;

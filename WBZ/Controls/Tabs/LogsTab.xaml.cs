@@ -13,14 +13,14 @@ namespace WBZ.Controls
     /// </summary>
     public partial class LogsTab : UserControl
     {
-        M_LogsTab M = new M_LogsTab();
+        D_LogsTab D = new D_LogsTab();
         private string Module;
         private int ID;
 
         public LogsTab()
         {
             InitializeComponent();
-            DataContext = M;
+            DataContext = D;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -29,8 +29,8 @@ namespace WBZ.Controls
             {
                 Window win = Window.GetWindow(this);
 
-                if (ID != 0 && M.InstanceLogs == null)
-                    M.InstanceLogs = SQL.ListInstances(Global.Module.LOGS, $"l.module='{Module}' and l.instance={ID}").DataTableToList<C_Log>();
+                if (ID != 0 && D.InstanceLogs == null)
+                    D.InstanceLogs = SQL.ListInstances(Global.Module.LOGS, $"l.module='{Module}' and l.instance={ID}").DataTableToList<C_Log>();
 
                 dynamic d = win?.DataContext;
                 if (d != null)
@@ -46,7 +46,7 @@ namespace WBZ.Controls
 	/// <summary>
 	/// Model
 	/// </summary>
-	internal class M_LogsTab : INotifyPropertyChanged
+	internal class D_LogsTab : INotifyPropertyChanged
     {
         /// Logs
         private List<C_Log> instanceLogs;
