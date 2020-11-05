@@ -17,6 +17,8 @@ using WBZ.Modules.Login;
 using WBZ.Modules.Personal;
 using WBZ.Modules.Stores;
 using WBZ.Modules.Users;
+using WBZ.Modules.Groups;
+using WBZ.Modules.AttributesClasses;
 
 namespace WBZ.Modules
 {
@@ -344,47 +346,11 @@ namespace WBZ.Modules
 		}
 
 		/// <summary>
-		/// Groups - list
+		/// Groups
 		/// </summary>
 		private void btnGroupsList_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new GroupsList();
-			window.Show();
-		}
-
-		/// <summary>
-		/// AttributesClasses - list
-		/// </summary>
-		private void btnAttributesClassesList_Click(object sender, RoutedEventArgs e)
-		{
-			var window = new AttributesClassesList();
-			window.Show();
-		}
-
-		/// <summary>
-		/// Attachments - list
-		/// </summary>
-		private void btnAttachmentsList_Click(object sender, RoutedEventArgs e)
-		{
-			var window = new AttachmentsList();
-			window.Show();
-		}
-
-		/// <summary>
-		/// Attachments - gallery
-		/// </summary>
-		private void btnAttachmentsGallery_Click(object sender, RoutedEventArgs e)
-		{
-			var window = new AttachmentsGallery();
-			window.Show();
-		}
-
-		/// <summary>
-		/// Logs - list
-		/// </summary>
-		private void btnLogsList_Click(object sender, RoutedEventArgs e)
-		{
-			var window = new LogsList();
 			window.Show();
 		}
 
@@ -430,6 +396,51 @@ namespace WBZ.Modules
 		private void btnUsersNew_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new UsersNew(new C_User(), Global.ActionType.NEW);
+			window.Show();
+		}
+
+		/// <summary>
+		/// AttributesClasses - list
+		/// </summary>
+		private void btnAttributesClassesList_Click(object sender, RoutedEventArgs e)
+		{
+			var window = new AttributesClassesList();
+			window.Show();
+		}
+
+		/// <summary>
+		/// AttributesClasses - new
+		/// </summary>
+		private void btnAttributesClassesNew_Click(object sender, RoutedEventArgs e)
+		{
+			var window = new AttributesClassesNew(new C_AttributeClass(), Global.ActionType.NEW);
+			window.Show();
+		}
+
+		/// <summary>
+		/// Attachments - list
+		/// </summary>
+		private void btnAttachmentsList_Click(object sender, RoutedEventArgs e)
+		{
+			var window = new AttachmentsList();
+			window.Show();
+		}
+
+		/// <summary>
+		/// Attachments - gallery
+		/// </summary>
+		private void btnAttachmentsGallery_Click(object sender, RoutedEventArgs e)
+		{
+			var window = new AttachmentsGallery();
+			window.Show();
+		}
+
+		/// <summary>
+		/// Logs - list
+		/// </summary>
+		private void btnLogsList_Click(object sender, RoutedEventArgs e)
+		{
+			var window = new LogsList();
 			window.Show();
 		}
 

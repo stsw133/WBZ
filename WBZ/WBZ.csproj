@@ -187,6 +187,8 @@
     </Compile>
     <Compile Include="Modules\Articles\D_ArticlesList.cs" />
     <Compile Include="Modules\Articles\D_ArticlesNew.cs" />
+    <Compile Include="Modules\AttributesClasses\D_AttributesClassesList.cs" />
+    <Compile Include="Modules\AttributesClasses\D_AttributesClassesNew.cs" />
     <Compile Include="Modules\Companies\D_CompaniesList.cs" />
     <Compile Include="Modules\Companies\D_CompaniesNew.cs" />
     <Compile Include="Modules\Distributions\D_DistributionsList.cs" />
@@ -213,16 +215,16 @@
     <Compile Include="Modules\Attmisc\AttachmentsList.xaml.cs">
       <DependentUpon>AttachmentsList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Attmisc\AttributesClassesNew.xaml.cs">
+    <Compile Include="Modules\AttributesClasses\AttributesClassesNew.xaml.cs">
       <DependentUpon>AttributesClassesNew.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Attmisc\AttributesClassesList.xaml.cs">
+    <Compile Include="Modules\AttributesClasses\AttributesClassesList.xaml.cs">
       <DependentUpon>AttributesClassesList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Attmisc\AttachmentsGallery.xaml.cs">
       <DependentUpon>AttachmentsGallery.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Attmisc\GroupsList.xaml.cs">
+    <Compile Include="Modules\Groups\GroupsList.xaml.cs">
       <DependentUpon>GroupsList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Attmisc\LogsList.xaml.cs">
@@ -388,7 +390,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Attmisc\GroupsList.xaml">
+    <Page Include="Modules\Groups\GroupsList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -400,11 +402,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Attmisc\AttributesClassesNew.xaml">
+    <Page Include="Modules\AttributesClasses\AttributesClassesNew.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Attmisc\AttributesClassesList.xaml">
+    <Page Include="Modules\AttributesClasses\AttributesClassesList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

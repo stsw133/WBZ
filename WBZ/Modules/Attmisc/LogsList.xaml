@@ -156,7 +156,7 @@
                             <Setter Property="Background" Value="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Module}" Value="attributes_classes">
-                            <Setter Property="Background" Value="{Binding config_Attmisc_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                            <Setter Property="Background" Value="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Module}" Value="companies">
                             <Setter Property="Background" Value="{Binding config_Companies_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>

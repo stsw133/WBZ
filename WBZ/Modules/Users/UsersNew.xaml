@@ -110,6 +110,7 @@
                                 <Label Content="Usuwanie:" VerticalContentAlignment="Center"/>
                             </StackPanel>
                         </Grid>
+                        <!-- users -->
                         <Grid DockPanel.Dock="Top">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -128,6 +129,7 @@
                             <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={h:conv_ListContains}, ConverterParameter=users_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                       Tag="users_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
                         </Grid>
+                        <!-- employees -->
                         <Grid DockPanel.Dock="Top">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -146,6 +148,7 @@
                             <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={h:conv_ListContains}, ConverterParameter=employees_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                       Tag="employees_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
                         </Grid>
+                        <!-- community -->
                         <Grid DockPanel.Dock="Top">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -164,6 +167,7 @@
                             <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={h:conv_ListContains}, ConverterParameter=community_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                       Tag="community_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked" Visibility="Collapsed"/>
                         </Grid>
+                        <!-- groups -->
                         <Grid DockPanel.Dock="Top">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -182,6 +186,7 @@
                             <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={h:conv_ListContains}, ConverterParameter=groups_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                       Tag="groups_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
                         </Grid>
+                        <!-- attributes_classes -->
                         <Grid DockPanel.Dock="Top">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -200,6 +205,7 @@
                             <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={h:conv_ListContains}, ConverterParameter=attributes_classes_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                       Tag="attributes_classes_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
                         </Grid>
+                        <!-- attachments -->
                         <Grid DockPanel.Dock="Top">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -218,6 +224,7 @@
                             <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={h:conv_ListContains}, ConverterParameter=attachments_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                       Tag="attachments_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
                         </Grid>
+                        <!-- logs -->
                         <Grid DockPanel.Dock="Top">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -234,6 +241,7 @@
                             <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={h:conv_ListContains}, ConverterParameter=logs_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                       Tag="logs_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
                         </Grid>
+                        <!-- documents -->
                         <Grid DockPanel.Dock="Top">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -252,6 +260,7 @@
                             <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={h:conv_ListContains}, ConverterParameter=documents_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                       Tag="documents_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
                         </Grid>
+                        <!-- stores -->
                         <Grid DockPanel.Dock="Top">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -270,6 +279,7 @@
                             <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={h:conv_ListContains}, ConverterParameter=stores_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                       Tag="stores_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
                         </Grid>
+                        <!-- articles -->
                         <Grid DockPanel.Dock="Top">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -288,6 +298,7 @@
                             <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={h:conv_ListContains}, ConverterParameter=articles_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                       Tag="articles_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
                         </Grid>
+                        <!-- companies -->
                         <Grid DockPanel.Dock="Top">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -306,6 +317,7 @@
                             <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={h:conv_ListContains}, ConverterParameter=companies_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                       Tag="companies_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
                         </Grid>
+                        <!-- families -->
                         <Grid DockPanel.Dock="Top">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -324,6 +336,7 @@
                             <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={h:conv_ListContains}, ConverterParameter=families_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                       Tag="families_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
                         </Grid>
+                        <!-- distributions -->
                         <Grid DockPanel.Dock="Top">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -342,6 +355,7 @@
                             <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={h:conv_ListContains}, ConverterParameter=distributions_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                       Tag="distributions_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
                         </Grid>
+                        <!-- stats -->
                         <Grid DockPanel.Dock="Top">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>

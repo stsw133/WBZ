@@ -1478,7 +1478,7 @@ namespace WBZ
 							break;
 						/// groups
 						case Global.Module.GROUPS:
-							query = @"select g.id, g.module, g.name, g.instance, g.owner,
+							query = @"select g.id, g.module, g.name, '' as fullpath, g.instance, g.owner,
 									g.archival, g.comment, g.icon
 								from wbz.groups g";
 							break;
@@ -1920,6 +1920,27 @@ namespace WBZ
 							}
 							SetLog(Global.User.ID, module, family.ID, $"{(mode == Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} rodzinę: {family.Lastname}.", sqlTran);
 							break;
+						/// groups
+						case Global.Module.GROUPS:
+							var group = instance as C_Group;
+							query = @"insert into wbz.groups (id, module, name, instance, owner, archival, comment, icon)
+								values (@id, @module, @name, @instance, @owner, @archival, @comment, @icon)
+								on conflict(id) do
+								update set module=@module, name=@name, instance=@instance, owner=@owner, archival=@archival, comment=@comment, icon=@icon";
+							using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
+							{
+								sqlCmd.Parameters.AddWithValue("id", group.ID);
+								sqlCmd.Parameters.AddWithValue("module", group.Module);
+								sqlCmd.Parameters.AddWithValue("name", group.Name);
+								sqlCmd.Parameters.AddWithValue("instance", group.Instance > 0 ? (object)group.Instance : DBNull.Value);
+								sqlCmd.Parameters.AddWithValue("owner", group.Owner);
+								sqlCmd.Parameters.AddWithValue("archival", group.Archival);
+								sqlCmd.Parameters.AddWithValue("comment", group.Comment);
+								sqlCmd.Parameters.AddWithValue("icon", (object)group.Icon ?? DBNull.Value);
+								sqlCmd.ExecuteNonQuery();
+							}
+							SetLog(Global.User.ID, module, group.ID, $"{(mode == Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} grupę: {group.Name}.", sqlTran);
+							break;
 						/// logs
 						case Global.Module.LOGS:
 							query = @"";
@@ -2059,6 +2080,11 @@ namespace WBZ
 						case Global.Module.FAMILIES:
 							query = @"delete from wbz.families where id=@id";
 							SetLog(Global.User.ID, module, id, $"Usunięto rodzinę: {name}", sqlTran);
+							break;
+						/// groups
+						case Global.Module.GROUPS:
+							query = @"delete from wbz.groups where id=@id";
+							SetLog(Global.User.ID, module, id, $"Usunięto grupę: {name}", sqlTran);
 							break;
 						/// logs
 						case Global.Module.LOGS:

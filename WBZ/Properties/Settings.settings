@@ -656,5 +656,8 @@
     <Setting Name="config_Employees_PanelColor" Type="System.String" Scope="User">
       <Value Profile="(Default)">#EEE</Value>
     </Setting>
+    <Setting Name="config_AttributesClasses_PanelColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#EEE</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -1,85 +1,12 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Reflection;
-using System.Windows;
-using System.Windows.Input;
-using WBZ.Models;
 using WBZ.Helpers;
+using WBZ.Models;
 using MODULE_CLASS = WBZ.Models.C_AttributeClass;
 
-namespace WBZ.Modules.Attmisc
+namespace WBZ.Modules.AttributesClasses
 {
-	/// <summary>
-	/// Interaction logic for AttributesClassesNew.xaml
-	/// </summary>
-	public partial class AttributesClassesNew : Window
-	{
-        M_AttributesClassesNew M = new M_AttributesClassesNew();
-
-        public AttributesClassesNew(MODULE_CLASS instance, Global.ActionType mode)
-        {
-            InitializeComponent();
-            DataContext = M;
-
-            M.InstanceInfo = instance;
-            M.Mode = mode;
-
-            if (M.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
-                M.InstanceInfo.ID = SQL.NewInstanceID(M.MODULE_NAME);
-        }
-
-        /// <summary>
-		/// Validation
-		/// </summary>
-        private bool CheckDataValidation()
-        {
-            bool result = true;
-
-            return result;
-        }
-
-        /// <summary>
-		/// Save
-		/// </summary>
-		private bool saved = false;
-        private void btnSave_Click(object sender, MouseButtonEventArgs e)
-        {
-            if (!CheckDataValidation())
-                return;
-
-            if (saved = SQL.SetInstance(M.MODULE_NAME, M.InstanceInfo, M.Mode))
-                Close();
-        }
-
-        /// <summary>
-		/// Refresh
-		/// </summary>
-        private void btnRefresh_Click(object sender, MouseButtonEventArgs e)
-        {
-            if (M.InstanceInfo.ID == 0)
-                return;
-            //TODO - dorobić odświeżanie zmienionych danych
-        }
-
-        /// <summary>
-		/// Close
-		/// </summary>
-        private void btnClose_Click(object sender, MouseButtonEventArgs e)
-        {
-            Close();
-        }
-
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            if (M.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE) && !saved)
-                SQL.ClearObject(M.MODULE_NAME, M.InstanceInfo.ID);
-        }
-    }
-
-    /// <summary>
-	/// Model
-	/// </summary>
-	internal class M_AttributesClassesNew : INotifyPropertyChanged
+    class D_AttributesClassesNew : INotifyPropertyChanged
     {
         public readonly string MODULE_NAME = Global.Module.ATTRIBUTES_CLASSES;
 

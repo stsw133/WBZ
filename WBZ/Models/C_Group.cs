@@ -12,6 +12,7 @@ namespace WBZ.Models
 		public bool Archival { get; set; }
 		public string Comment { get; set; }
 		public byte[] Icon { get; set; }
+		public string Fullpath { get; set; }
 
 		public C_Group()
 		{
@@ -23,6 +24,7 @@ namespace WBZ.Models
 			Archival = false;
 			Comment = "";
 			Icon = null;
+			Fullpath = "";
 		}
 
 		public string TranslatedModule

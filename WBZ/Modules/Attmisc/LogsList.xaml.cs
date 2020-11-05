@@ -19,6 +19,7 @@ using WBZ.Modules.Families;
 using WBZ.Modules.Stores;
 using WBZ.Modules.Users;
 using MODULE_CLASS = WBZ.Models.C_Log;
+using WBZ.Modules.AttributesClasses;
 
 namespace WBZ.Modules.Attmisc
 {

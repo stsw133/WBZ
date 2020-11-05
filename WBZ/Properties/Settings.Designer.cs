@@ -2043,5 +2043,17 @@ namespace WBZ.Properties {
                 this["config_Employees_PanelColor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#EEE")]
+        public string config_AttributesClasses_PanelColor {
+            get {
+                return ((string)(this["config_AttributesClasses_PanelColor"]));
+            }
+            set {
+                this["config_AttributesClasses_PanelColor"] = value;
+            }
+        }
     }
 }
