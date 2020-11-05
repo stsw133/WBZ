@@ -11,11 +11,11 @@ namespace WBZ.Helpers
 {
     public static class Global
     {
-        internal static string Version => string.Concat(Assembly.GetEntryAssembly().GetName().Version.ToString().Reverse().Skip(2).Reverse());
-        internal static string VersionNewest { get; set; } = null;
-        internal static C_Database Database { get; set; } = new C_Database();
-        internal static C_User User { get; set; } = new C_User();
-        internal static class Module
+        public static string Version => string.Concat(Assembly.GetEntryAssembly().GetName().Version.ToString().Reverse().Skip(2).Reverse());
+        public static string VersionNewest { get; set; } = null;
+        public static C_Database Database { get; set; } = new C_Database();
+        public static C_User User { get; set; } = new C_User();
+        public static class Module
         {
             public const string ARTICLES = "articles";
             public const string ATTACHMENTS = "attachments";
@@ -34,7 +34,7 @@ namespace WBZ.Helpers
             public const string STORES = "stores";
             public const string USERS = "users";
         }
-        internal static string TranslateModule(string module)
+        public static string TranslateModule(string module)
         {
             switch (module)
             {
@@ -68,7 +68,7 @@ namespace WBZ.Helpers
                     return "(nieznany)";
             }
         }
-        internal static class UserPermType
+        public static class UserPermType
         {
             public const string PREVIEW = "preview";
             public const string SAVE = "save";

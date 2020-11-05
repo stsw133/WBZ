@@ -27,12 +27,12 @@ namespace WBZ.Modules
 	/// </summary>
 	public partial class Main : Window
 	{
-		readonly M_Main M = new M_Main();
+		readonly D_Main D = new D_Main();
 
 		public Main()
 		{
 			InitializeComponent();
-			DataContext = M;
+			DataContext = D;
 		}
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -86,7 +86,7 @@ namespace WBZ.Modules
 			var window = new Main();
 			window.Show();
 
-			M.WantToLogout = true;
+			D.WantToLogout = true;
 			Close();
 		}
 
@@ -115,7 +115,7 @@ namespace WBZ.Modules
 				var window = new Login.Login();
 				window.Show();
 
-				M.WantToLogout = true;
+				D.WantToLogout = true;
 				Close();
 			}
 		}
@@ -447,7 +447,7 @@ namespace WBZ.Modules
 		private void Window_Closing(object sender, CancelEventArgs e)
         {
 			Properties.Settings.Default.Save();
-            if (!M.WantToLogout)
+            if (!D.WantToLogout)
                 foreach (Window x in App.Current.Windows)
                     if (x != this)
                         x.Close();
@@ -455,12 +455,11 @@ namespace WBZ.Modules
 	}
 
 	/// <summary>
-	/// Model
+	/// Data
 	/// </summary>
-	internal class M_Main : INotifyPropertyChanged
+	internal class D_Main : INotifyPropertyChanged
 	{
 		/// PropertyList
-		public C_User User { get; } = Global.User;
 		public string Title { get; } = Global.Database.Name + " - okno główne";
 		public bool WantToLogout { get; set; } = false;
 		
