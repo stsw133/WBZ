@@ -124,6 +124,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Helpers\Commands.cs" />
+    <Compile Include="Helpers\Functions.cs" />
     <Compile Include="Models\C_Additional.cs" />
     <Compile Include="Models\C_Address.cs" />
     <Compile Include="Models\C_ComboValue.cs" />

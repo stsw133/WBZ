@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -13,10 +12,8 @@ using WBZ.Modules.Distributions;
 using WBZ.Modules.Documents;
 using WBZ.Modules.Employees;
 using WBZ.Modules.Families;
-using WBZ.Modules.Login;
 using WBZ.Modules.Personal;
 using WBZ.Modules.Stores;
-using WBZ.Modules.Users;
 using WBZ.Modules.Groups;
 using WBZ.Modules.AttributesClasses;
 using WBZ.Modules.Attachments;
@@ -91,17 +88,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void menuHelp_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
-			try
-			{
-				System.Diagnostics.Process process = new System.Diagnostics.Process();
-				string path = AppDomain.CurrentDomain.BaseDirectory + @"/Resources/pl_manual.pdf";
-				process.StartInfo.FileName = new Uri(path, UriKind.RelativeOrAbsolute).LocalPath;
-				process.Start();
-			}
-			catch (Exception ex)
-			{
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Błąd otwierania poradnika: " + ex.Message) { Owner = this }.ShowDialog();
-			}
+			Functions.OpenWindow_Help(this);
 		}
 
 		/// <summary>
@@ -109,8 +96,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void menuSettings_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new Settings();
-			window.ShowDialog();
+			Functions.OpenWindow_Settings(this);
 		}
 
 		/// <summary>
@@ -441,8 +427,9 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnUsersList_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new UsersList();
-			window.Show();
+			//var window = new UsersList();
+			//window.Show();
+			Functions.OpenWindow_Module(this, Global.Module.USERS, Commands.Type.LIST);
 		}
 
 		/// <summary>
@@ -450,8 +437,9 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnUsersNew_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new UsersNew(new C_User(), Commands.Type.NEW);
-			window.Show();
+			//var window = new UsersNew(new C_User(), Commands.Type.NEW);
+			//window.Show();
+			Functions.OpenWindow_Module(this, Global.Module.USERS, Commands.Type.NEW);
 		}
 
 		/// <summary>

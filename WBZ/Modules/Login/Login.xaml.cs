@@ -235,17 +235,7 @@ namespace WBZ.Modules.Login
 		/// </summary>
 		private void btnManual_Click(object sender, RoutedEventArgs e)
 		{
-			try
-			{
-				Process process = new Process();
-				string path = AppDomain.CurrentDomain.BaseDirectory + @"/Resources/pl_manual.pdf";
-				process.StartInfo.FileName = new Uri(path, UriKind.RelativeOrAbsolute).LocalPath;
-				process.Start();
-			}
-			catch (Exception ex)
-			{
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Błąd otwierania poradnika: " + ex.Message) { Owner = this }.ShowDialog();
-			}
+			Functions.OpenWindow_Help(this);
 		}
 
 		/// <summary>

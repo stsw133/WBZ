@@ -10,10 +10,12 @@ namespace WBZ.Helpers
 			NONE,
 			ADD,
 			ARCHIVE,
+			CLEAN,
 			CLOSE,
 			DELETE,
 			DUPLICATE,
 			EDIT,
+			FIND,
 			HELP,
 			LIST,
 			NEW,
@@ -21,7 +23,8 @@ namespace WBZ.Helpers
 			PRINT,
 			REFRESH,
 			REMOVE,
-			SAVE
+			SAVE,
+			SELECTING
 		}
 
 		/// <summary>
@@ -51,7 +54,20 @@ namespace WBZ.Helpers
 			}
 		);
 		/// <summary>
-		/// Archive
+		/// Clean
+		/// </summary>
+		public static readonly RoutedUICommand Clean = new RoutedUICommand
+		(
+			Enum.GetName(typeof(Type), Type.CLEAN),
+			Enum.GetName(typeof(Type), Type.CLEAN),
+			typeof(Commands),
+			new InputGestureCollection()
+			{
+				new KeyGesture(Key.F4)
+			}
+		);
+		/// <summary>
+		/// Close
 		/// </summary>
 		public static readonly RoutedUICommand Close = new RoutedUICommand
 		(
@@ -100,6 +116,19 @@ namespace WBZ.Helpers
 			new InputGestureCollection()
 			{
 				new KeyGesture(Key.E, ModifierKeys.Control)
+			}
+		);
+		/// <summary>
+		/// Find
+		/// </summary>
+		public static readonly RoutedUICommand Find = new RoutedUICommand
+		(
+			Enum.GetName(typeof(Type), Type.FIND),
+			Enum.GetName(typeof(Type), Type.FIND),
+			typeof(Commands),
+			new InputGestureCollection()
+			{
+				new KeyGesture(Key.F, ModifierKeys.Control)
 			}
 		);
 		/// <summary>
@@ -154,7 +183,6 @@ namespace WBZ.Helpers
 				new KeyGesture(Key.P, ModifierKeys.Control)
 			}
 		);
-		/*
 		/// <summary>
 		/// Print
 		/// </summary>
@@ -165,10 +193,9 @@ namespace WBZ.Helpers
 			typeof(Commands),
 			new InputGestureCollection()
 			{
-				new KeyGesture(Key.P, ModifierKeys.Shift)
+				new KeyGesture(Key.P, ModifierKeys.Alt)
 			}
 		);
-		*/
 		/// <summary>
 		/// Refresh
 		/// </summary>
@@ -206,6 +233,19 @@ namespace WBZ.Helpers
 			new InputGestureCollection()
 			{
 				new KeyGesture(Key.S, ModifierKeys.Control)
+			}
+		);
+		/// <summary>
+		/// Selecting
+		/// </summary>
+		public static readonly RoutedUICommand Selecting = new RoutedUICommand
+		(
+			Enum.GetName(typeof(Type), Type.SELECTING),
+			Enum.GetName(typeof(Type), Type.SELECTING),
+			typeof(Commands),
+			new InputGestureCollection()
+			{
+				new KeyGesture(Key.L, ModifierKeys.Control)
 			}
 		);
 	}
