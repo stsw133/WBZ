@@ -21,19 +21,19 @@ namespace WBZ.Modules.Distributions
 	{
 		D_DistributionsNew D = new D_DistributionsNew();
 
-		public DistributionsNew(MODULE_CLASS instance, Global.ActionType mode)
+		public DistributionsNew(MODULE_CLASS instance, Commands.Type mode)
 		{
 			InitializeComponent();
 			DataContext = D;
 
 			D.InstanceInfo = instance;
 			D.Mode = mode;
-			if (mode == Global.ActionType.EDIT && instance.Status == (short)MODULE_CLASS.DistributionStatus.Buffer)
-				D.Mode = Global.ActionType.PREVIEW;
+			if (mode == Commands.Type.EDIT && instance.Status == (short)MODULE_CLASS.DistributionStatus.Buffer)
+				D.Mode = Commands.Type.PREVIEW;
 
 			chckToBuffer.IsChecked = instance.Status == (short)MODULE_CLASS.DistributionStatus.Buffer;
 			D.InstanceInfo.Families = SQL.GetDistributionPositions(D.InstanceInfo.ID);
-			if (D.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
+			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE))
 			{
 				D.InstanceInfo.ID = SQL.NewInstanceID(D.MODULE_NAME);
 				foreach (var family in D.InstanceInfo.Families)
@@ -193,7 +193,7 @@ namespace WBZ.Modules.Distributions
 
 		private void Window_Closed(object sender, System.EventArgs e)
 		{
-			if (D.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE) && !saved)
+			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE) && !saved)
 				SQL.ClearObject(D.MODULE_NAME, D.InstanceInfo.ID);
 		}
 	}

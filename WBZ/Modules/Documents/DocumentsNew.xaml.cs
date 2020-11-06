@@ -17,19 +17,19 @@ namespace WBZ.Modules.Documents
 	{
 		D_DocumentsNew D = new D_DocumentsNew();
 
-		public DocumentsNew(MODULE_CLASS instance, Global.ActionType mode)
+		public DocumentsNew(MODULE_CLASS instance, Commands.Type mode)
 		{
 			InitializeComponent();
 			DataContext = D;
 
 			D.InstanceInfo = instance;
 			D.Mode = mode;
-			if (mode == Global.ActionType.EDIT && instance.Status == (short)MODULE_CLASS.DocumentStatus.Buffer)
-				D.Mode = Global.ActionType.PREVIEW;
+			if (mode == Commands.Type.EDIT && instance.Status == (short)MODULE_CLASS.DocumentStatus.Buffer)
+				D.Mode = Commands.Type.PREVIEW;
 
 			chckToBuffer.IsChecked = instance.Status == (short)MODULE_CLASS.DocumentStatus.Buffer;
 			D.InstanceInfo.Positions = SQL.GetInstancePositions(D.MODULE_NAME, D.InstanceInfo.ID);
-			if (D.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
+			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE))
 			{
 				D.InstanceInfo.ID = SQL.NewInstanceID(D.MODULE_NAME);
 				foreach (DataRow row in D.InstanceInfo.Positions.Rows)
@@ -155,7 +155,7 @@ namespace WBZ.Modules.Documents
 
 		private void Window_Closed(object sender, System.EventArgs e)
 		{
-			if (D.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE) && !saved)
+			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE) && !saved)
 				SQL.ClearObject(D.MODULE_NAME, D.InstanceInfo.ID);
 		}
 	}

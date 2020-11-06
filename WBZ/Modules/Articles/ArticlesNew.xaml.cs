@@ -21,7 +21,7 @@ namespace WBZ.Modules.Articles
 	{
 		D_ArticlesNew D = new D_ArticlesNew();
 
-		public ArticlesNew(MODULE_CLASS instance, Global.ActionType mode)
+		public ArticlesNew(MODULE_CLASS instance, Commands.Type mode)
 		{
 			InitializeComponent();
 			DataContext = D;
@@ -30,7 +30,7 @@ namespace WBZ.Modules.Articles
 			D.Mode = mode;
 
 			D.InstanceInfo.Measures = SQL.GetArticleMeasures(D.InstanceInfo.ID);
-			if (D.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
+			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE))
 			{
 				D.InstanceInfo.ID = SQL.NewInstanceID(D.MODULE_NAME);
 				foreach (DataRow row in D.InstanceInfo.Measures.Rows)
@@ -129,8 +129,8 @@ namespace WBZ.Modules.Articles
 		{
 			if (e.LeftButton == MouseButtonState.Pressed)
 			{
-				Global.ActionType perm = Global.User.Perms.Contains($"{Global.Module.STORES}_{Global.UserPermType.SAVE}")
-					? Global.ActionType.EDIT : Global.ActionType.PREVIEW;
+				Commands.Type perm = Global.User.Perms.Contains($"{Global.Module.STORES}_{Global.UserPermType.SAVE}")
+					? Commands.Type.EDIT : Commands.Type.PREVIEW;
 
 				var selectedInstances = (sender as DataGrid).SelectedItems.Cast<C_Store>();
 				foreach (C_Store instance in selectedInstances)
@@ -148,8 +148,8 @@ namespace WBZ.Modules.Articles
 		{
 			if (e.LeftButton == MouseButtonState.Pressed)
 			{
-				Global.ActionType perm = Global.User.Perms.Contains($"{Global.Module.DOCUMENTS}_{Global.UserPermType.SAVE}")
-					? Global.ActionType.EDIT : Global.ActionType.PREVIEW;
+				Commands.Type perm = Global.User.Perms.Contains($"{Global.Module.DOCUMENTS}_{Global.UserPermType.SAVE}")
+					? Commands.Type.EDIT : Commands.Type.PREVIEW;
 
 				var selectedInstances = (sender as DataGrid).SelectedItems.Cast<C_Document>();
 				foreach (C_Document instance in selectedInstances)
@@ -167,8 +167,8 @@ namespace WBZ.Modules.Articles
 		{
 			if (e.LeftButton == MouseButtonState.Pressed)
 			{
-				Global.ActionType perm = Global.User.Perms.Contains($"{Global.Module.DISTRIBUTIONS}_{Global.UserPermType.SAVE}")
-					? Global.ActionType.EDIT : Global.ActionType.PREVIEW;
+				Commands.Type perm = Global.User.Perms.Contains($"{Global.Module.DISTRIBUTIONS}_{Global.UserPermType.SAVE}")
+					? Commands.Type.EDIT : Commands.Type.PREVIEW;
 
 				var selectedInstances = (sender as DataGrid).SelectedItems.Cast<C_Distribution>();
 				foreach (C_Distribution instance in selectedInstances)
@@ -181,7 +181,7 @@ namespace WBZ.Modules.Articles
 
 		private void Window_Closed(object sender, System.EventArgs e)
 		{
-			if (D.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE) && !saved)
+			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE) && !saved)
 				SQL.ClearObject(D.MODULE_NAME, D.InstanceInfo.ID);
 		}
 	}

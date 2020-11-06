@@ -71,7 +71,7 @@ namespace WBZ.Modules.Employees
 			var selectedInstances = dgList.SelectedItems.Cast<MODULE_CLASS>();
 			foreach (MODULE_CLASS instance in selectedInstances)
 			{
-				var window = new EmployeesNew(instance, Global.ActionType.PREVIEW);
+				var window = new EmployeesNew(instance, Commands.Type.PREVIEW);
 				window.Show();
 			}
 		}
@@ -81,7 +81,7 @@ namespace WBZ.Modules.Employees
 		/// </summary>
 		private void btnNew_Click(object sender, MouseButtonEventArgs e)
 		{
-			var window = new EmployeesNew(new MODULE_CLASS(), Global.ActionType.NEW);
+			var window = new EmployeesNew(new MODULE_CLASS(), Commands.Type.NEW);
 			window.Show();
 		}
 
@@ -93,7 +93,7 @@ namespace WBZ.Modules.Employees
 			var selectedInstances = dgList.SelectedItems.Cast<MODULE_CLASS>();
 			foreach (MODULE_CLASS instance in selectedInstances)
 			{
-				var window = new EmployeesNew(instance, Global.ActionType.DUPLICATE);
+				var window = new EmployeesNew(instance, Commands.Type.DUPLICATE);
 				window.Show();
 			}
 		}
@@ -106,7 +106,7 @@ namespace WBZ.Modules.Employees
 			var selectedInstances = dgList.SelectedItems.Cast<MODULE_CLASS>();
 			foreach (MODULE_CLASS instance in selectedInstances)
 			{
-				var window = new EmployeesNew(instance, Global.ActionType.EDIT);
+				var window = new EmployeesNew(instance, Commands.Type.EDIT);
 				window.Show();
 			}
 		}

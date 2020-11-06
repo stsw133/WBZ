@@ -24,19 +24,19 @@ namespace WBZ.Modules.AttributesClasses
             }
         }
         /// Editing mode
-		public bool EditingMode { get { return Mode != Global.ActionType.PREVIEW; } }
+		public bool EditingMode { get { return Mode != Commands.Type.PREVIEW; } }
         /// Window mode
-        public Global.ActionType Mode { get; set; }
+        public Commands.Type Mode { get; set; }
         /// Additional window icon
         public string ModeIcon
         {
             get
             {
-                if (Mode == Global.ActionType.NEW)
+                if (Mode == Commands.Type.NEW)
                     return "pack://siteoforigin:,,,/Resources/icon32_add.ico";
-                else if (Mode == Global.ActionType.DUPLICATE)
+                else if (Mode == Commands.Type.DUPLICATE)
                     return "pack://siteoforigin:,,,/Resources/icon32_duplicate.ico";
-                else if (Mode == Global.ActionType.EDIT)
+                else if (Mode == Commands.Type.EDIT)
                     return "pack://siteoforigin:,,,/Resources/icon32_edit.ico";
                 else
                     return "pack://siteoforigin:,,,/Resources/icon32_search.ico";
@@ -47,11 +47,11 @@ namespace WBZ.Modules.AttributesClasses
         {
             get
             {
-                if (Mode == Global.ActionType.NEW)
+                if (Mode == Commands.Type.NEW)
                     return "Nowa klasa atrybutu";
-                else if (Mode == Global.ActionType.DUPLICATE)
+                else if (Mode == Commands.Type.DUPLICATE)
                     return $"Duplikowanie klasy atrybutu: {InstanceInfo.Name}";
-                else if (Mode == Global.ActionType.EDIT)
+                else if (Mode == Commands.Type.EDIT)
                     return $"Edycja klasy atrybutu: {InstanceInfo.Name}";
                 else
                     return $"Podgląd klasy atrybutu: {InstanceInfo.Name}";

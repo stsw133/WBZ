@@ -40,19 +40,19 @@ namespace WBZ.Modules.Families
             }
         }
         /// Editing mode
-        public bool EditingMode { get { return Mode != Global.ActionType.PREVIEW; } }
+        public bool EditingMode { get { return Mode != Commands.Type.PREVIEW; } }
         /// Window mode
-		public Global.ActionType Mode { get; set; }
+		public Commands.Type Mode { get; set; }
         /// Additional window icon
         public string ModeIcon
         {
             get
             {
-                if (Mode == Global.ActionType.NEW)
+                if (Mode == Commands.Type.NEW)
                     return "pack://siteoforigin:,,,/Resources/icon32_add.ico";
-                else if (Mode == Global.ActionType.DUPLICATE)
+                else if (Mode == Commands.Type.DUPLICATE)
                     return "pack://siteoforigin:,,,/Resources/icon32_duplicate.ico";
-                else if (Mode == Global.ActionType.EDIT)
+                else if (Mode == Commands.Type.EDIT)
                     return "pack://siteoforigin:,,,/Resources/icon32_edit.ico";
                 else
                     return "pack://siteoforigin:,,,/Resources/icon32_search.ico";
@@ -63,11 +63,11 @@ namespace WBZ.Modules.Families
         {
             get
             {
-                if (Mode == Global.ActionType.NEW)
+                if (Mode == Commands.Type.NEW)
                     return "Nowa rodzina";
-                else if (Mode == Global.ActionType.DUPLICATE)
+                else if (Mode == Commands.Type.DUPLICATE)
                     return $"Duplikowanie rodziny: {InstanceInfo.Lastname}";
-                else if (Mode == Global.ActionType.EDIT)
+                else if (Mode == Commands.Type.EDIT)
                     return $"Edycja rodziny: {InstanceInfo.Lastname}";
                 else
                     return $"Podgląd rodziny: {InstanceInfo.Lastname}";

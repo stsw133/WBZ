@@ -79,24 +79,7 @@ namespace WBZ.Helpers
             public const string SAVE = "save";
             public const string DELETE = "delete";
         }
-        public enum ActionType
-        {
-            NONE,
-            NEW,
-            DUPLICATE,
-            PREVIEW,
-            EDIT,
-            ARCHIVE,
-            DELETE,
-            SAVE,
-            REFRESH,
-            CLOSE,
-            LIST,
-            PRINT,
-            ADD,
-            REMOVE
-        }
-
+        
 		#region Crypto
 		private const int DerivationIterations = 1000;
         private const string password = "ejdndbfewbasjhdggjhbasbvdgewvbjdbsavdqgwjbdjsvdyugwqyubashjdbjfgdtyuqw";

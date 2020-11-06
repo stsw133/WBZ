@@ -14,7 +14,7 @@ namespace WBZ.Modules.Users
 	{
 		D_UsersNew D = new D_UsersNew();
 
-		public UsersNew(MODULE_CLASS instance, Global.ActionType mode)
+		public UsersNew(MODULE_CLASS instance, Commands.Type mode)
 		{
 			InitializeComponent();
 			DataContext = D;
@@ -23,7 +23,7 @@ namespace WBZ.Modules.Users
 			D.Mode = mode;
 
 			D.InstanceInfo.Perms = SQL.GetUserPerms(D.InstanceInfo.ID);
-			if (D.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
+			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE))
 				D.InstanceInfo.ID = SQL.NewInstanceID(D.MODULE_NAME);
 		}
 
@@ -90,7 +90,7 @@ namespace WBZ.Modules.Users
 
 		private void Window_Closed(object sender, EventArgs e)
 		{
-			if (D.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE) && !saved)
+			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE) && !saved)
 				SQL.ClearObject(D.MODULE_NAME, D.InstanceInfo.ID);
 		}
 	}

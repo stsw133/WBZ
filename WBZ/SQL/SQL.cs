@@ -1627,7 +1627,7 @@ namespace WBZ
 		/// </summary>
 		/// <param name="module">Nazwa modułu</param>
 		/// <param name="instance">Instancja</param>
-		internal static bool SetInstance(string module, object instance, Global.ActionType mode)
+		internal static bool SetInstance(string module, object instance, Commands.Type mode)
 		{
 			bool result = false;
 			string query;
@@ -1661,7 +1661,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)article.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Global.User.ID, module, article.ID, $"{(mode==Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} towar: {article.Name}.", sqlTran);
+							SetLog(Global.User.ID, module, article.ID, $"{(mode==Commands.Type.EDIT ? "Edytowano" : "Utworzono")} towar: {article.Name}.", sqlTran);
 
 							///measures
 							foreach (DataRow measure in article.Measures.Rows)
@@ -1733,7 +1733,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)attributeClass.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Global.User.ID, module, attributeClass.ID, $"{(mode == Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} klasę atrybutu: {attributeClass.Name}.", sqlTran);
+							SetLog(Global.User.ID, module, attributeClass.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} klasę atrybutu: {attributeClass.Name}.", sqlTran);
 							break;
 						/// companies
 						case Global.Module.COMPANIES:
@@ -1760,7 +1760,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)company.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Global.User.ID, module, company.ID, $"{(mode == Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} firmę: {company.Name}.", sqlTran);
+							SetLog(Global.User.ID, module, company.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} firmę: {company.Name}.", sqlTran);
 							break;
 						/// distributions
 						case Global.Module.DISTRIBUTIONS:
@@ -1793,7 +1793,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)document.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Global.User.ID, module, document.ID, $"{(mode == Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} dokument: {document.Name}.", sqlTran);
+							SetLog(Global.User.ID, module, document.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} dokument: {document.Name}.", sqlTran);
 
 							///positions
 							foreach (DataRow position in document.Positions.Rows)
@@ -1887,7 +1887,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)employee.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Global.User.ID, module, employee.ID, $"{(mode == Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} pracownika: {employee.Fullname}.", sqlTran);
+							SetLog(Global.User.ID, module, employee.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} pracownika: {employee.Fullname}.", sqlTran);
 							break;
 						/// families
 						case Global.Module.FAMILIES:
@@ -1918,7 +1918,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)family.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Global.User.ID, module, family.ID, $"{(mode == Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} rodzinę: {family.Lastname}.", sqlTran);
+							SetLog(Global.User.ID, module, family.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} rodzinę: {family.Lastname}.", sqlTran);
 							break;
 						/// groups
 						case Global.Module.GROUPS:
@@ -1939,7 +1939,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)group.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Global.User.ID, module, group.ID, $"{(mode == Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} grupę: {group.Name}.", sqlTran);
+							SetLog(Global.User.ID, module, group.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} grupę: {group.Name}.", sqlTran);
 							break;
 						/// logs
 						case Global.Module.LOGS:
@@ -1966,7 +1966,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)store.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Global.User.ID, module, store.ID, $"{(mode == Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} magazyn: {store.Name}.", sqlTran);
+							SetLog(Global.User.ID, module, store.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} magazyn: {store.Name}.", sqlTran);
 							break;
 						/// users
 						case Global.Module.USERS:
@@ -1989,7 +1989,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("archival", user.Archival);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Global.User.ID, module, user.ID, $"{(mode == Global.ActionType.EDIT ? "Edytowano" : "Utworzono")} użytkownika: {user.Fullname}.", sqlTran);
+							SetLog(Global.User.ID, module, user.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} użytkownika: {user.Fullname}.", sqlTran);
 
 							/// permissions
 							using (sqlCmd = new NpgsqlCommand(@"delete from wbz.users_permissions where ""user""=@user", sqlConn, sqlTran))

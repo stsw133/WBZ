@@ -69,7 +69,7 @@ namespace WBZ.Modules.Articles
 			var selectedInstances = dgList.SelectedItems.Cast<MODULE_CLASS>();
 			foreach (MODULE_CLASS instance in selectedInstances)
 			{
-				var window = new ArticlesNew(instance, Global.ActionType.PREVIEW);
+				var window = new ArticlesNew(instance, Commands.Type.PREVIEW);
 				window.Show();
 			}
 		}
@@ -79,7 +79,7 @@ namespace WBZ.Modules.Articles
 		/// </summary>
 		private void btnNew_Click(object sender, MouseButtonEventArgs e)
 		{
-			var window = new ArticlesNew(new MODULE_CLASS(), Global.ActionType.NEW);
+			var window = new ArticlesNew(new MODULE_CLASS(), Commands.Type.NEW);
 			window.Show();
 		}
 
@@ -91,7 +91,7 @@ namespace WBZ.Modules.Articles
 			var selectedInstances = dgList.SelectedItems.Cast<MODULE_CLASS>();
 			foreach (MODULE_CLASS instance in selectedInstances)
 			{
-				var window = new ArticlesNew(instance, Global.ActionType.DUPLICATE);
+				var window = new ArticlesNew(instance, Commands.Type.DUPLICATE);
 				window.Show();
 			}
 		}
@@ -104,7 +104,7 @@ namespace WBZ.Modules.Articles
 			var selectedInstances = dgList.SelectedItems.Cast<MODULE_CLASS>();
 			foreach (MODULE_CLASS instance in selectedInstances)
 			{
-				var window = new ArticlesNew(instance, Global.ActionType.EDIT);
+				var window = new ArticlesNew(instance, Commands.Type.EDIT);
 				window.Show();
 			}
 		}

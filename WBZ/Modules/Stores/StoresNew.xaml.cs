@@ -17,7 +17,7 @@ namespace WBZ.Modules.Stores
 	{
 		D_StoresNew D = new D_StoresNew();
 
-		public StoresNew(MODULE_CLASS instance, Global.ActionType mode)
+		public StoresNew(MODULE_CLASS instance, Commands.Type mode)
 		{
 			InitializeComponent();
 			DataContext = D;
@@ -25,7 +25,7 @@ namespace WBZ.Modules.Stores
 			D.InstanceInfo = instance;
 			D.Mode = mode;
 
-			if (D.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
+			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE))
 				D.InstanceInfo.ID = SQL.NewInstanceID(D.MODULE_NAME);
 		}
 
@@ -95,8 +95,8 @@ namespace WBZ.Modules.Stores
 		{
 			if (e.LeftButton == MouseButtonState.Pressed)
 			{
-				Global.ActionType perm = Global.User.Perms.Contains($"{Global.Module.ARTICLES}_{Global.UserPermType.SAVE}")
-					? Global.ActionType.EDIT : Global.ActionType.PREVIEW;
+				Commands.Type perm = Global.User.Perms.Contains($"{Global.Module.ARTICLES}_{Global.UserPermType.SAVE}")
+					? Commands.Type.EDIT : Commands.Type.PREVIEW;
 
 				var selectedInstances = (sender as DataGrid).SelectedItems.Cast<C_Article>();
 				foreach (C_Article instance in selectedInstances)
@@ -114,8 +114,8 @@ namespace WBZ.Modules.Stores
 		{
 			if (e.LeftButton == MouseButtonState.Pressed)
 			{
-				Global.ActionType perm = Global.User.Perms.Contains($"{Global.Module.DOCUMENTS}_{Global.UserPermType.SAVE}")
-					? Global.ActionType.EDIT : Global.ActionType.PREVIEW;
+				Commands.Type perm = Global.User.Perms.Contains($"{Global.Module.DOCUMENTS}_{Global.UserPermType.SAVE}")
+					? Commands.Type.EDIT : Commands.Type.PREVIEW;
 
 				var selectedInstances = (sender as DataGrid).SelectedItems.Cast<C_Document>();
 				foreach (C_Document instance in selectedInstances)
@@ -128,7 +128,7 @@ namespace WBZ.Modules.Stores
 
 		private void Window_Closed(object sender, System.EventArgs e)
 		{
-			if (D.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE) && !saved)
+			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE) && !saved)
 				SQL.ClearObject(D.MODULE_NAME, D.InstanceInfo.ID);
 		}
 	}

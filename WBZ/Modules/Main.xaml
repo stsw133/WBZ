@@ -15,6 +15,11 @@
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
+    <Window.CommandBindings>
+        <CommandBinding Command="h:Commands.Close" Executed="menuClose_Executed"/>
+        <CommandBinding Command="h:Commands.Help" Executed="menuHelp_Executed"/>
+        <CommandBinding Command="h:Commands.Refresh" Executed="menuRefresh_Executed"/>
+    </Window.CommandBindings>
     <DockPanel>
         <!-- titleBar -->
         <c:TitleBar DockPanel.Dock="Top"/>
@@ -22,8 +27,9 @@
         <Border DockPanel.Dock="Top" BorderBrush="Gray" BorderThickness="1">
             <DockPanel>
                 <Menu BorderBrush="Gray" BorderThickness="0,0,1,0">
+                    <!-- system -->
                     <MenuItem Header="System" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2.25}">
-                        <MenuItem Header="Odśwież uprawnienia" Click="menuRefresh_Click">
+                        <MenuItem Header="Odśwież" Command="h:Commands.Refresh">
                             <MenuItem.Icon>
                                 <Image Source="pack://siteoforigin:,,,/Resources/icon32_refresh.ico"/>
                             </MenuItem.Icon>
@@ -39,14 +45,15 @@
                                 <Image Source="pack://siteoforigin:,,,/Resources/icon32_return.ico"/>
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="Zamknij system" Click="menuClose_Click">
+                        <MenuItem Header="Zamknij system" Command="h:Commands.Close">
                             <MenuItem.Icon>
                                 <Image Source="pack://siteoforigin:,,,/Resources/icon32_close.ico"/>
                             </MenuItem.Icon>
                         </MenuItem>
                     </MenuItem>
+                    <!-- help -->
                     <MenuItem Header="Pomoc" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2.25}">
-                        <MenuItem Header="Poradnik użytkownika" Click="menuManual_Click">
+                        <MenuItem Header="Poradnik użytkownika" Command="h:Commands.Help">
                             <MenuItem.Icon>
                                 <Image Source="pack://siteoforigin:,,,/Resources/icon32_books.ico"/>
                             </MenuItem.Icon>
@@ -59,6 +66,7 @@
                         </MenuItem>
                     </MenuItem>
                 </Menu>
+                <!-- personal -->
                 <Label DockPanel.Dock="Right" Content="{Binding Source={x:Static h:Global.User}, Path=Fullname}" Margin="5,0" Padding="1" VerticalContentAlignment="Center" FontWeight="Medium"/>
                 <Button DockPanel.Dock="Right" HorizontalAlignment="Right" BorderThickness="1,0" ToolTip="Pozostałe" Click="btnOther_Click">
                     <Image Margin="2" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.75}" Source="pack://siteoforigin:,,,/Resources/icon32_tools.ico"/>

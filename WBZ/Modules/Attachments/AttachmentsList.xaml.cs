@@ -68,7 +68,7 @@ namespace WBZ.Modules.Attachments
 		{
 			var selectedInstances = dgList.SelectedItems.Cast<MODULE_CLASS>();
 			foreach (MODULE_CLASS instance in selectedInstances)
-				openObj(instance, Global.ActionType.PREVIEW);
+				openObj(instance, Commands.Type.PREVIEW);
 		}
 
 		/// <summary>
@@ -78,18 +78,18 @@ namespace WBZ.Modules.Attachments
 		{
 			var selectedInstances = dgList.SelectedItems.Cast<MODULE_CLASS>();
 			foreach (MODULE_CLASS instance in selectedInstances)
-				openObj(instance, Global.ActionType.EDIT);
+				openObj(instance, Commands.Type.EDIT);
 		}
 
-		private void openObj(MODULE_CLASS log, Global.ActionType mode)
+		private void openObj(MODULE_CLASS log, Commands.Type mode)
 		{
 			if (log.Instance == 0)
 				return;
 			if (SQL.CountInstances(log.Module, $"{string.Join("", log.Module.Split('_').AsQueryable().Cast<string>().Select(str => str.Substring(0, 1)))}.id={log.Instance}") == 0)
 				return;
 
-			if (!(mode == Global.ActionType.EDIT && Global.User.Perms.Contains($"{log.Module}_{Global.UserPermType.SAVE}")))
-				mode = Global.ActionType.PREVIEW;
+			if (!(mode == Commands.Type.EDIT && Global.User.Perms.Contains($"{log.Module}_{Global.UserPermType.SAVE}")))
+				mode = Commands.Type.PREVIEW;
 			if (!Global.User.Perms.Contains($"{log.Module}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{log.Module}_{Global.UserPermType.SAVE}"))
 				return;
 			Window window;

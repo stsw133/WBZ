@@ -20,6 +20,7 @@ using WBZ.Modules.Groups;
 using WBZ.Modules.AttributesClasses;
 using WBZ.Modules.Attachments;
 using WBZ.Modules.Logs;
+using System.Windows.Input;
 
 namespace WBZ.Modules
 {
@@ -88,7 +89,7 @@ namespace WBZ.Modules
 		/// <summary>
 		/// Menu - Refresh
 		/// </summary>
-		private void menuRefresh_Click(object sender, RoutedEventArgs e)
+		private void menuRefresh_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			Global.User = SQL.GetInstance(Global.Module.USERS, Global.User.ID).DataTableToList<C_User>()?[0];
 			Global.User.Perms = SQL.GetUserPerms(Global.User.ID);
@@ -133,15 +134,15 @@ namespace WBZ.Modules
 		/// <summary>
 		/// Menu - Close
 		/// </summary>
-		private void menuClose_Click(object sender, RoutedEventArgs e)
+		private void menuClose_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			Close();
 		}
 
 		/// <summary>
-		/// Menu - Manual
+		/// Menu - Help
 		/// </summary>
-		private void menuManual_Click(object sender, RoutedEventArgs e)
+		private void menuHelp_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			try
 			{
@@ -261,7 +262,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnArticlesNew_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new ArticlesNew(new C_Article(), Global.ActionType.NEW);
+			var window = new ArticlesNew(new C_Article(), Commands.Type.NEW);
 			window.Show();
 		}
 
@@ -297,7 +298,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnAttributesClassesNew_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new AttributesClassesNew(new C_AttributeClass(), Global.ActionType.NEW);
+			var window = new AttributesClassesNew(new C_AttributeClass(), Commands.Type.NEW);
 			window.Show();
 		}
 
@@ -315,7 +316,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnCompaniesNew_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new CompaniesNew(new C_Company(), Global.ActionType.NEW);
+			var window = new CompaniesNew(new C_Company(), Commands.Type.NEW);
 			window.Show();
 		}
 
@@ -333,7 +334,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnDistributionsNew_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new DistributionsNew(new C_Distribution(), Global.ActionType.NEW);
+			var window = new DistributionsNew(new C_Distribution(), Commands.Type.NEW);
 			window.Show();
 		}
 
@@ -351,7 +352,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnDocumentsNew_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new DocumentsNew(new C_Document(), Global.ActionType.NEW);
+			var window = new DocumentsNew(new C_Document(), Commands.Type.NEW);
 			window.Show();
 		}
 
@@ -369,7 +370,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnEmployeesNew_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new EmployeesNew(new C_Employee(), Global.ActionType.NEW);
+			var window = new EmployeesNew(new C_Employee(), Commands.Type.NEW);
 			window.Show();
 		}
 
@@ -387,7 +388,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnFamiliesNew_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new FamiliesNew(new C_Family(), Global.ActionType.NEW);
+			var window = new FamiliesNew(new C_Family(), Commands.Type.NEW);
 			window.Show();
 		}
 
@@ -459,7 +460,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnUsersNew_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new UsersNew(new C_User(), Global.ActionType.NEW);
+			var window = new UsersNew(new C_User(), Commands.Type.NEW);
 			window.Show();
 		}
 

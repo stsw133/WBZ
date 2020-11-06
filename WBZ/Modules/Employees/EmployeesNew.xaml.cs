@@ -14,7 +14,7 @@ namespace WBZ.Modules.Employees
     {
         D_EmployeesNew D = new D_EmployeesNew();
 
-        public EmployeesNew(MODULE_CLASS instance, Global.ActionType mode)
+        public EmployeesNew(MODULE_CLASS instance, Commands.Type mode)
         {
             InitializeComponent();
             DataContext = D;
@@ -22,7 +22,7 @@ namespace WBZ.Modules.Employees
             D.InstanceInfo = instance;
 			D.Mode = mode;
 
-			if (D.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE))
+			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE))
 				D.InstanceInfo.ID = SQL.NewInstanceID(D.MODULE_NAME);
 		}
 
@@ -84,7 +84,7 @@ namespace WBZ.Modules.Employees
 
 		private void Window_Closed(object sender, EventArgs e)
 		{
-			if (D.Mode.In(Global.ActionType.NEW, Global.ActionType.DUPLICATE) && !saved)
+			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE) && !saved)
 				SQL.ClearObject(D.MODULE_NAME, D.InstanceInfo.ID);
 		}
 	}

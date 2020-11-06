@@ -80,7 +80,7 @@ namespace WBZ.Modules.Groups
 							Name = groupName,
 							Owner = owner
 						};
-						SQL.SetInstance(D.MODULE_NAME, group, Global.ActionType.NEW);
+						SQL.SetInstance(D.MODULE_NAME, group, Commands.Type.NEW);
 						owner = group.ID;
 					}
 				}
@@ -115,7 +115,7 @@ namespace WBZ.Modules.Groups
 							Name = groupName,
 							Owner = owner
 						};
-						SQL.SetInstance(D.MODULE_NAME, group, Global.ActionType.DUPLICATE);
+						SQL.SetInstance(D.MODULE_NAME, group, Commands.Type.DUPLICATE);
 						owner = group.ID;
 					}
 				}
@@ -150,7 +150,7 @@ namespace WBZ.Modules.Groups
 							Name = groupName,
 							Owner = owner
 						};
-						SQL.SetInstance(D.MODULE_NAME, group, Global.ActionType.EDIT);
+						SQL.SetInstance(D.MODULE_NAME, group, Commands.Type.EDIT);
 						owner = group.ID;
 					}
 				}
