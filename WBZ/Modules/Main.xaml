@@ -26,20 +26,26 @@
         <!-- menu -->
         <Border DockPanel.Dock="Top" BorderBrush="Gray" BorderThickness="1">
             <DockPanel>
+                <!-- menu -->
                 <Menu BorderBrush="Gray" BorderThickness="0,0,1,0">
-                    <!-- system -->
                     <MenuItem Header="System" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2.25}">
-                        <MenuItem Header="Odśwież" Command="h:Commands.Refresh">
+                        <MenuItem Header="Poradnik użytkownika" Command="h:Commands.Help">
                             <MenuItem.Icon>
-                                <Image Source="pack://siteoforigin:,,,/Resources/icon32_refresh.ico"/>
+                                <Image Source="pack://siteoforigin:,,,/Resources/icon32_books.ico"/>
                             </MenuItem.Icon>
                         </MenuItem>
+                        <Separator/>
                         <MenuItem Header="Ustawienia" Click="menuSettings_Click">
                             <MenuItem.Icon>
                                 <Image Source="pack://siteoforigin:,,,/Resources/icon32_settings.ico"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <Separator/>
+                        <MenuItem Header="Odśwież" Command="h:Commands.Refresh">
+                            <MenuItem.Icon>
+                                <Image Source="pack://siteoforigin:,,,/Resources/icon32_refresh.ico"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                         <MenuItem Header="Wyloguj" Click="menuLogout_Click">
                             <MenuItem.Icon>
                                 <Image Source="pack://siteoforigin:,,,/Resources/icon32_return.ico"/>
@@ -48,20 +54,6 @@
                         <MenuItem Header="Zamknij system" Command="h:Commands.Close">
                             <MenuItem.Icon>
                                 <Image Source="pack://siteoforigin:,,,/Resources/icon32_close.ico"/>
-                            </MenuItem.Icon>
-                        </MenuItem>
-                    </MenuItem>
-                    <!-- help -->
-                    <MenuItem Header="Pomoc" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2.25}">
-                        <MenuItem Header="Poradnik użytkownika" Command="h:Commands.Help">
-                            <MenuItem.Icon>
-                                <Image Source="pack://siteoforigin:,,,/Resources/icon32_books.ico"/>
-                            </MenuItem.Icon>
-                        </MenuItem>
-                        <Separator/>
-                        <MenuItem Header="O programie" Click="menuAboutApp_Click">
-                            <MenuItem.Icon>
-                                <Image Source="pack://siteoforigin:,,,/Resources/logo32.ico"/>
                             </MenuItem.Icon>
                         </MenuItem>
                     </MenuItem>
@@ -108,7 +100,10 @@
             </DockPanel>
         </Border>
         <!-- main -->
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Background="#AAA">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ScrollViewer.Background>
+                <SolidColorBrush Color="#AAA"/>
+            </ScrollViewer.Background>
             <WrapPanel x:Name="gridModules" Margin="5" HorizontalAlignment="Center">
                 <!-- admin -->
                 <Border x:Name="modAdmin" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=30}"

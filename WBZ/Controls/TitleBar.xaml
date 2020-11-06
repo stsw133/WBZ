@@ -10,15 +10,15 @@
     <!-- titleBar -->
     <DockPanel x:Name="titleBar" Background="#444" MouseDown="titleBar_MouseDown" WindowChrome.IsHitTestVisibleInChrome="True">
         <Button x:Name="titleBar_Close" DockPanel.Dock="Right" Background="#333" BorderThickness="0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=3.5}" Click="titleBar_Close_Click">
-            <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.75}" Source="pack://siteoforigin:,,,/Resources/icon32_close.ico"/>
+            <Image Margin="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=0.25}" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.75}" Source="pack://siteoforigin:,,,/Resources/icon32_close.ico"/>
         </Button>
         <Button x:Name="titleBar_Resize" DockPanel.Dock="Right" Background="#333" BorderThickness="0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=3.5}" Click="titleBar_Resize_Click">
-            <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.75}" Source="pack://siteoforigin:,,,/Resources/icon32_maximize.ico"/>
+            <Image Margin="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=0.25}" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.75}" Source="pack://siteoforigin:,,,/Resources/icon32_maximize.ico"/>
         </Button>
         <Button x:Name="titleBar_Minimize" DockPanel.Dock="Right" Background="#333" BorderThickness="0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=3.5}" Click="titleBar_Minimize_Click">
-            <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.75}" Source="pack://siteoforigin:,,,/Resources/icon32_minimize.ico"/>
+            <Image Margin="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=0.25}" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.75}" Source="pack://siteoforigin:,,,/Resources/icon32_minimize.ico"/>
         </Button>
-        <Grid Margin="3">
+        <Grid Margin="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=0.25}">
             <Image Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.75}" Source="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
             <Image Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=0.85}" Source="{Binding AdditionalIcon, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
         </Grid>

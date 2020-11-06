@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using WBZ.Models;
 using WBZ.Controls;
 using WBZ.Helpers;
@@ -20,7 +21,6 @@ using WBZ.Modules.Groups;
 using WBZ.Modules.AttributesClasses;
 using WBZ.Modules.Attachments;
 using WBZ.Modules.Logs;
-using System.Windows.Input;
 
 namespace WBZ.Modules
 {
@@ -87,6 +87,33 @@ namespace WBZ.Modules
 		}
 
 		/// <summary>
+		/// Menu - Help
+		/// </summary>
+		private void menuHelp_Executed(object sender, ExecutedRoutedEventArgs e)
+		{
+			try
+			{
+				System.Diagnostics.Process process = new System.Diagnostics.Process();
+				string path = AppDomain.CurrentDomain.BaseDirectory + @"/Resources/pl_manual.pdf";
+				process.StartInfo.FileName = new Uri(path, UriKind.RelativeOrAbsolute).LocalPath;
+				process.Start();
+			}
+			catch (Exception ex)
+			{
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Błąd otwierania poradnika: " + ex.Message) { Owner = this }.ShowDialog();
+			}
+		}
+
+		/// <summary>
+		/// Menu - Settings
+		/// </summary>
+		private void menuSettings_Click(object sender, RoutedEventArgs e)
+		{
+			var window = new Settings();
+			window.ShowDialog();
+		}
+
+		/// <summary>
 		/// Menu - Refresh
 		/// </summary>
 		private void menuRefresh_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -102,20 +129,11 @@ namespace WBZ.Modules
 		}
 
 		/// <summary>
-		/// Menu - Settings
-		/// </summary>
-		private void menuSettings_Click(object sender, RoutedEventArgs e)
-		{
-			var window = new Settings();
-			window.ShowDialog();
-		}
-
-		/// <summary>
 		/// Menu - Logout
 		/// </summary>
 		private void menuLogout_Click(object sender, RoutedEventArgs e)
 		{
-			if (new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.CONFIRMATION, "Na pewno dokonać wylogowania?") { Owner = this }.ShowDialog() == true)
+			if (new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.CONFIRMATION, "Na pewno wylogować?") { Owner = this }.ShowDialog() == true)
 			{
 				Global.User = new C_User();
 
@@ -137,34 +155,6 @@ namespace WBZ.Modules
 		private void menuClose_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			Close();
-		}
-
-		/// <summary>
-		/// Menu - Help
-		/// </summary>
-		private void menuHelp_Executed(object sender, ExecutedRoutedEventArgs e)
-		{
-			try
-			{
-				System.Diagnostics.Process process = new System.Diagnostics.Process();
-				string path = AppDomain.CurrentDomain.BaseDirectory + @"/Resources/pl_manual.pdf";
-				process.StartInfo.FileName = new Uri(path, UriKind.RelativeOrAbsolute).LocalPath;
-				process.Start();
-			}
-			catch (Exception ex)
-			{
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Błąd otwierania poradnika: " + ex.Message) { Owner = this }.ShowDialog();
-			}
-		}
-
-		/// <summary>
-		/// Menu - AboutApp
-		/// </summary>
-		private void menuAboutApp_Click(object sender, RoutedEventArgs e)
-		{
-			var window = new LoginAppAbout();
-			window.Owner = this;
-			window.ShowDialog();
 		}
 
 		/// <summary>

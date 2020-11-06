@@ -112,7 +112,7 @@ namespace WBZ.Helpers
 			typeof(Commands),
 			new InputGestureCollection()
 			{
-				new KeyGesture(Key.F1, ModifierKeys.Control)
+				new KeyGesture(Key.F1)
 			}
 		);
 		/// <summary>
