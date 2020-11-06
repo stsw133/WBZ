@@ -179,7 +179,7 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#EEE")]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF444444")]
         public string config_Admin_PanelColor {
             get {
                 return ((string)(this["config_Admin_PanelColor"]));
@@ -205,7 +205,7 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#EEE")]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF33AAEE")]
         public string config_Documents_PanelColor {
             get {
                 return ((string)(this["config_Documents_PanelColor"]));
@@ -477,7 +477,7 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#EEE")]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF55DD55")]
         public string config_Articles_PanelColor {
             get {
                 return ((string)(this["config_Articles_PanelColor"]));
@@ -601,7 +601,7 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#EEE")]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFEEEE55")]
         public string config_Companies_PanelColor {
             get {
                 return ((string)(this["config_Companies_PanelColor"]));
@@ -749,7 +749,7 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#EEE")]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFEEAA33")]
         public string config_Families_PanelColor {
             get {
                 return ((string)(this["config_Families_PanelColor"]));
@@ -803,25 +803,13 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#EEE")]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFBB88DD")]
         public string config_Stats_PanelColor {
             get {
                 return ((string)(this["config_Stats_PanelColor"]));
             }
             set {
                 this["config_Stats_PanelColor"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#EEE")]
-        public string config_Community_PanelColor {
-            get {
-                return ((string)(this["config_Community_PanelColor"]));
-            }
-            set {
-                this["config_Community_PanelColor"] = value;
             }
         }
         
@@ -1093,7 +1081,7 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#EEE")]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFEE5555")]
         public string config_Distributions_PanelColor {
             get {
                 return ((string)(this["config_Distributions_PanelColor"]));
@@ -1333,7 +1321,7 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#EEE")]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFF69B4")]
         public string config_Attmisc_PanelColor {
             get {
                 return ((string)(this["config_Attmisc_PanelColor"]));
@@ -2010,7 +1998,7 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#EEE")]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF44CCCC")]
         public string config_Stores_PanelColor {
             get {
                 return ((string)(this["config_Stores_PanelColor"]));
@@ -2022,7 +2010,7 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#EEE")]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF7799BB")]
         public string config_Users_PanelColor {
             get {
                 return ((string)(this["config_Users_PanelColor"]));
@@ -2034,7 +2022,7 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#EEE")]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF775522")]
         public string config_Employees_PanelColor {
             get {
                 return ((string)(this["config_Employees_PanelColor"]));
@@ -2046,13 +2034,61 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#EEE")]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFEEAA33")]
         public string config_AttributesClasses_PanelColor {
             get {
                 return ((string)(this["config_AttributesClasses_PanelColor"]));
             }
             set {
                 this["config_AttributesClasses_PanelColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFEEEE55")]
+        public string config_Attachments_PanelColor {
+            get {
+                return ((string)(this["config_Attachments_PanelColor"]));
+            }
+            set {
+                this["config_Attachments_PanelColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF44CCCC")]
+        public string config_Logs_PanelColor {
+            get {
+                return ((string)(this["config_Logs_PanelColor"]));
+            }
+            set {
+                this["config_Logs_PanelColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF33AAEE")]
+        public string config_Groups_PanelColor {
+            get {
+                return ((string)(this["config_Groups_PanelColor"]));
+            }
+            set {
+                this["config_Groups_PanelColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFFF69B4")]
+        public string config_Community_PanelColor {
+            get {
+                return ((string)(this["config_Community_PanelColor"]));
+            }
+            set {
+                this["config_Community_PanelColor"] = value;
             }
         }
     }

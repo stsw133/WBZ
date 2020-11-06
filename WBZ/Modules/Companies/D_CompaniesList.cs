@@ -3,7 +3,6 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Reflection;
 using WBZ.Helpers;
-using WBZ.Models;
 using MODULE_CLASS = WBZ.Models.C_Company;
 
 namespace WBZ.Modules.Companies
@@ -13,8 +12,6 @@ namespace WBZ.Modules.Companies
         public readonly string MODULE_NAME = Global.Module.COMPANIES;
         public StringCollection SORTING = Properties.Settings.Default.sorting_CompaniesList;
 
-        /// Logged user
-        public C_User User { get; } = Global.User;
         /// Instances list
 		private List<MODULE_CLASS> instancesList;
         public List<MODULE_CLASS> InstancesList

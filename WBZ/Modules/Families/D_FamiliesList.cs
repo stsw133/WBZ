@@ -3,7 +3,6 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Reflection;
 using WBZ.Helpers;
-using WBZ.Models;
 using MODULE_CLASS = WBZ.Models.C_Family;
 
 namespace WBZ.Modules.Families
@@ -13,8 +12,6 @@ namespace WBZ.Modules.Families
         public readonly string MODULE_NAME = Global.Module.FAMILIES;
         public StringCollection SORTING = Properties.Settings.Default.sorting_FamiliesList;
 
-        /// Logged user
-        public C_User User { get; } = Global.User;
         /// Instances list
 		private List<MODULE_CLASS> instancesList;
         public List<MODULE_CLASS> InstancesList

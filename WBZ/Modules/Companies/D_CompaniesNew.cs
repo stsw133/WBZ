@@ -11,8 +11,6 @@ namespace WBZ.Modules.Companies
     {
         public readonly string MODULE_NAME = Global.Module.COMPANIES;
 
-        /// Logged user
-        public C_User User { get; } = Global.User;
         /// Instance
 		private MODULE_CLASS instanceInfo;
         public MODULE_CLASS InstanceInfo

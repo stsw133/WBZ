@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Reflection;
 using WBZ.Helpers;
-using WBZ.Models;
 using MODULE_CLASS = WBZ.Models.C_AttributeClass;
 
 namespace WBZ.Modules.AttributesClasses
@@ -10,8 +9,6 @@ namespace WBZ.Modules.AttributesClasses
     {
         public readonly string MODULE_NAME = Global.Module.ATTRIBUTES_CLASSES;
 
-        /// Logged user
-        public C_User User { get; } = Global.User;
         /// Instance
 		private MODULE_CLASS instanceInfo;
         public MODULE_CLASS InstanceInfo

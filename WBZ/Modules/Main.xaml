@@ -131,64 +131,6 @@
                         </ContextMenu>
                     </Border.ContextMenu>
                 </Border>
-                <!-- documents -->
-                <Border x:Name="modDocuments" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
-                    <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">
-                        <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
-                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Image Margin="10" Source="pack://siteoforigin:,,,/Resources/icon32_documents.ico" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="Dokumenty" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}"/>
-                            </StackPanel>
-                        </Border>
-                        <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}" FontWeight="Normal" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=documents_preview}" Click="btnDocumentsList_Click">
-                            <DockPanel>
-                                <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_list.ico"/>
-                                <Label Content="Wyświetl listę" VerticalContentAlignment="Center"/>
-                            </DockPanel>
-                        </Button>
-                        <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}" FontWeight="Normal" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=documents_save}" Click="btnDocumentsNew_Click">
-                            <DockPanel>
-                                <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_add.ico"/>
-                                <Label Content="Dodaj nowy" VerticalContentAlignment="Center"/>
-                            </DockPanel>
-                        </Button>
-                    </DockPanel>
-                    <Border.ContextMenu>
-                        <ContextMenu>
-                            <c:MenuPanelColor Tag="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
-                        </ContextMenu>
-                    </Border.ContextMenu>
-                </Border>
-                <!-- stores -->
-                <Border x:Name="modStores" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
-                    <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">
-                        <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
-                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Image Margin="10" Source="pack://siteoforigin:,,,/Resources/icon32_stores.ico" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="Magazyny" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}"/>
-                            </StackPanel>
-                        </Border>
-                        <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}" FontWeight="Normal" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=stores_preview}" Click="btnStoresList_Click">
-                            <DockPanel>
-                                <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_list.ico"/>
-                                <Label Content="Wyświetl listę" VerticalContentAlignment="Center"/>
-                            </DockPanel>
-                        </Button>
-                        <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}" FontWeight="Normal" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=stores_save}" Click="btnStoresNew_Click">
-                            <DockPanel>
-                                <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_add.ico"/>
-                                <Label Content="Dodaj nowy" VerticalContentAlignment="Center"/>
-                            </DockPanel>
-                        </Button>
-                    </DockPanel>
-                    <Border.ContextMenu>
-                        <ContextMenu>
-                            <c:MenuPanelColor Tag="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
-                        </ContextMenu>
-                    </Border.ContextMenu>
-                </Border>
                 <!-- articles -->
                 <Border x:Name="modArticles" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=30}"
                         Background="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
@@ -215,6 +157,64 @@
                     <Border.ContextMenu>
                         <ContextMenu>
                             <c:MenuPanelColor Tag="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+                        </ContextMenu>
+                    </Border.ContextMenu>
+                </Border>
+                <!-- attachments -->
+                <Border x:Name="modAttachments" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=30}"
+                        Background="{Binding config_Attachments_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
+                    <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">
+                        <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image Margin="10" Source="pack://siteoforigin:,,,/Resources/icon32_photos.ico" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=3}"/>
+                                <Label Margin="5" Content="Załączniki" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}"/>
+                            </StackPanel>
+                        </Border>
+                        <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}" FontWeight="Normal" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=attachments_preview}" Click="btnAttachmentsList_Click">
+                            <DockPanel>
+                                <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_photos.ico"/>
+                                <Label Content="Zarządzaj załącznikami" VerticalContentAlignment="Center"/>
+                            </DockPanel>
+                        </Button>
+                        <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}" FontWeight="Normal" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=attachments_preview}" Click="btnAttachmentsGallery_Click">
+                            <DockPanel>
+                                <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_gallery.ico"/>
+                                <Label Content="Galeria załączników" VerticalContentAlignment="Center"/>
+                            </DockPanel>
+                        </Button>
+                    </DockPanel>
+                    <Border.ContextMenu>
+                        <ContextMenu>
+                            <c:MenuPanelColor Tag="{Binding config_Attachments_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+                        </ContextMenu>
+                    </Border.ContextMenu>
+                </Border>
+                <!-- attributesClasses -->
+                <Border x:Name="modAttributesClasses" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=30}"
+                        Background="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
+                    <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">
+                        <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image Margin="10" Source="pack://siteoforigin:,,,/Resources/icon32_attributes.ico" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=3}"/>
+                                <Label Margin="5" Content="Klasy atrybutów" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}"/>
+                            </StackPanel>
+                        </Border>
+                        <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}" FontWeight="Normal" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=attributes_classes_preview}" Click="btnAttributesClassesList_Click">
+                            <DockPanel>
+                                <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_list.ico"/>
+                                <Label Content="Wyświetl listę" VerticalContentAlignment="Center"/>
+                            </DockPanel>
+                        </Button>
+                        <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}" FontWeight="Normal" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=attributes_classes_save}" Click="btnAttributesClassesNew_Click">
+                            <DockPanel>
+                                <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_add.ico"/>
+                                <Label Content="Dodaj nową" VerticalContentAlignment="Center"/>
+                            </DockPanel>
+                        </Button>
+                    </DockPanel>
+                    <Border.ContextMenu>
+                        <ContextMenu>
+                            <c:MenuPanelColor Tag="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                         </ContextMenu>
                     </Border.ContextMenu>
                 </Border>
@@ -247,35 +247,6 @@
                         </ContextMenu>
                     </Border.ContextMenu>
                 </Border>
-                <!-- families -->
-                <Border x:Name="modFamilies" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
-                    <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">
-                        <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
-                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Image Margin="10" Source="pack://siteoforigin:,,,/Resources/icon32_families.ico" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="Rodziny" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}"/>
-                            </StackPanel>
-                        </Border>
-                        <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}" FontWeight="Normal" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=families_preview}" Click="btnFamiliesList_Click">
-                            <DockPanel>
-                                <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_list.ico"/>
-                                <Label Content="Wyświetl listę" VerticalContentAlignment="Center"/>
-                            </DockPanel>
-                        </Button>
-                        <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}" FontWeight="Normal" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=families_save}" Click="btnFamiliesNew_Click">
-                            <DockPanel>
-                                <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_add.ico"/>
-                                <Label Content="Dodaj nową" VerticalContentAlignment="Center"/>
-                            </DockPanel>
-                        </Button>
-                    </DockPanel>
-                    <Border.ContextMenu>
-                        <ContextMenu>
-                            <c:MenuPanelColor Tag="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
-                        </ContextMenu>
-                    </Border.ContextMenu>
-                </Border>
                 <!-- distributions -->
                 <Border x:Name="modDistributions" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=30}"
                         Background="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
@@ -305,26 +276,32 @@
                         </ContextMenu>
                     </Border.ContextMenu>
                 </Border>
-                <!-- stats -->
-                <Border x:Name="modStats" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Stats_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
+                <!-- documents -->
+                <Border x:Name="modDocuments" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=30}"
+                        Background="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
                     <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Image Margin="10" Source="pack://siteoforigin:,,,/Resources/icon32_stats.ico" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="Statystyki" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}"/>
+                                <Image Margin="10" Source="pack://siteoforigin:,,,/Resources/icon32_documents.ico" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=3}"/>
+                                <Label Margin="5" Content="Dokumenty" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}"/>
                             </StackPanel>
                         </Border>
-                        <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}" FontWeight="Normal" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=stats_preview}" Click="btnStats_Click">
+                        <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}" FontWeight="Normal" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=documents_preview}" Click="btnDocumentsList_Click">
                             <DockPanel>
-                                <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_stats.ico"/>
-                                <Label Content="Wyświetl statystyki" VerticalContentAlignment="Center"/>
+                                <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_list.ico"/>
+                                <Label Content="Wyświetl listę" VerticalContentAlignment="Center"/>
+                            </DockPanel>
+                        </Button>
+                        <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}" FontWeight="Normal" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=documents_save}" Click="btnDocumentsNew_Click">
+                            <DockPanel>
+                                <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_add.ico"/>
+                                <Label Content="Dodaj nowy" VerticalContentAlignment="Center"/>
                             </DockPanel>
                         </Button>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
-                            <c:MenuPanelColor Tag="{Binding config_Stats_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+                            <c:MenuPanelColor Tag="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                         </ContextMenu>
                     </Border.ContextMenu>
                 </Border>
@@ -357,6 +334,139 @@
                         </ContextMenu>
                     </Border.ContextMenu>
                 </Border>
+                <!-- families -->
+                <Border x:Name="modFamilies" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=30}"
+                        Background="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
+                    <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">
+                        <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image Margin="10" Source="pack://siteoforigin:,,,/Resources/icon32_families.ico" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=3}"/>
+                                <Label Margin="5" Content="Rodziny" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}"/>
+                            </StackPanel>
+                        </Border>
+                        <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}" FontWeight="Normal" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=families_preview}" Click="btnFamiliesList_Click">
+                            <DockPanel>
+                                <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_list.ico"/>
+                                <Label Content="Wyświetl listę" VerticalContentAlignment="Center"/>
+                            </DockPanel>
+                        </Button>
+                        <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}" FontWeight="Normal" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=families_save}" Click="btnFamiliesNew_Click">
+                            <DockPanel>
+                                <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_add.ico"/>
+                                <Label Content="Dodaj nową" VerticalContentAlignment="Center"/>
+                            </DockPanel>
+                        </Button>
+                    </DockPanel>
+                    <Border.ContextMenu>
+                        <ContextMenu>
+                            <c:MenuPanelColor Tag="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+                        </ContextMenu>
+                    </Border.ContextMenu>
+                </Border>
+                <!-- groups -->
+                <Border x:Name="modGroups" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=30}"
+                        Background="{Binding config_Groups_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
+                    <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">
+                        <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image Margin="10" Source="pack://siteoforigin:,,,/Resources/icon32_groups.ico" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=3}"/>
+                                <Label Margin="5" Content="Grupy" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}"/>
+                            </StackPanel>
+                        </Border>
+                        <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}" FontWeight="Normal" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=groups_preview}" Click="btnGroupsList_Click">
+                            <DockPanel>
+                                <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_groups.ico"/>
+                                <Label Content="Zarządzaj grupami" VerticalContentAlignment="Center"/>
+                            </DockPanel>
+                        </Button>
+                    </DockPanel>
+                    <Border.ContextMenu>
+                        <ContextMenu>
+                            <c:MenuPanelColor Tag="{Binding config_Groups_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+                        </ContextMenu>
+                    </Border.ContextMenu>
+                </Border>
+                <!-- logs -->
+                <Border x:Name="modLogs" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=30}"
+                        Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
+                    <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">
+                        <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image Margin="10" Source="pack://siteoforigin:,,,/Resources/icon32_logs.ico" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=3}"/>
+                                <Label Margin="5" Content="Logi" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}"/>
+                            </StackPanel>
+                        </Border>
+                        <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}" FontWeight="Normal" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=logs_preview}" Click="btnLogsList_Click">
+                            <DockPanel>
+                                <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_logs.ico"/>
+                                <Label Content="Wyświetl logi" VerticalContentAlignment="Center"/>
+                            </DockPanel>
+                        </Button>
+                        <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}" FontWeight="Normal" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=logs_preview}" Click="btnLogsErrorsList_Click">
+                            <DockPanel>
+                                <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_errors.ico"/>
+                                <Label Content="Wyświetl błędy" VerticalContentAlignment="Center"/>
+                            </DockPanel>
+                        </Button>
+                    </DockPanel>
+                    <Border.ContextMenu>
+                        <ContextMenu>
+                            <c:MenuPanelColor Tag="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+                        </ContextMenu>
+                    </Border.ContextMenu>
+                </Border>
+                <!-- stats -->
+                <Border x:Name="modStats" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=30}"
+                        Background="{Binding config_Stats_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
+                    <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">
+                        <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image Margin="10" Source="pack://siteoforigin:,,,/Resources/icon32_stats.ico" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=3}"/>
+                                <Label Margin="5" Content="Statystyki" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}"/>
+                            </StackPanel>
+                        </Border>
+                        <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}" FontWeight="Normal" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=stats_preview}" Click="btnStats_Click">
+                            <DockPanel>
+                                <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_stats.ico"/>
+                                <Label Content="Wyświetl statystyki" VerticalContentAlignment="Center"/>
+                            </DockPanel>
+                        </Button>
+                    </DockPanel>
+                    <Border.ContextMenu>
+                        <ContextMenu>
+                            <c:MenuPanelColor Tag="{Binding config_Stats_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+                        </ContextMenu>
+                    </Border.ContextMenu>
+                </Border>
+                <!-- stores -->
+                <Border x:Name="modStores" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=30}"
+                        Background="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
+                    <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">
+                        <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image Margin="10" Source="pack://siteoforigin:,,,/Resources/icon32_stores.ico" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=3}"/>
+                                <Label Margin="5" Content="Magazyny" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}"/>
+                            </StackPanel>
+                        </Border>
+                        <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}" FontWeight="Normal" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=stores_preview}" Click="btnStoresList_Click">
+                            <DockPanel>
+                                <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_list.ico"/>
+                                <Label Content="Wyświetl listę" VerticalContentAlignment="Center"/>
+                            </DockPanel>
+                        </Button>
+                        <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}" FontWeight="Normal" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=stores_save}" Click="btnStoresNew_Click">
+                            <DockPanel>
+                                <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_add.ico"/>
+                                <Label Content="Dodaj nowy" VerticalContentAlignment="Center"/>
+                            </DockPanel>
+                        </Button>
+                    </DockPanel>
+                    <Border.ContextMenu>
+                        <ContextMenu>
+                            <c:MenuPanelColor Tag="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+                        </ContextMenu>
+                    </Border.ContextMenu>
+                </Border>
                 <!-- users -->
                 <Border x:Name="modUsers" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=30}"
                         Background="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
@@ -383,76 +493,6 @@
                     <Border.ContextMenu>
                         <ContextMenu>
                             <c:MenuPanelColor Tag="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
-                        </ContextMenu>
-                    </Border.ContextMenu>
-                </Border>
-                <!-- AttributesClasses -->
-                <Border x:Name="modAttributesClasses" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
-                    <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">
-                        <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
-                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Image Margin="10" Source="pack://siteoforigin:,,,/Resources/icon32_attributes.ico" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="Klasy atrybutów" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}"/>
-                            </StackPanel>
-                        </Border>
-                        <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}" FontWeight="Normal" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=attributes_classes_preview}" Click="btnAttributesClassesList_Click">
-                            <DockPanel>
-                                <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_list.ico"/>
-                                <Label Content="Wyświetl listę" VerticalContentAlignment="Center"/>
-                            </DockPanel>
-                        </Button>
-                        <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}" FontWeight="Normal" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=attributes_classes_save}" Click="btnAttributesClassesNew_Click">
-                            <DockPanel>
-                                <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_add.ico"/>
-                                <Label Content="Dodaj nową" VerticalContentAlignment="Center"/>
-                            </DockPanel>
-                        </Button>
-                    </DockPanel>
-                    <Border.ContextMenu>
-                        <ContextMenu>
-                            <c:MenuPanelColor Tag="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
-                        </ContextMenu>
-                    </Border.ContextMenu>
-                </Border>
-                <!-- attmisc -->
-                <Border x:Name="modAttmisc" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Attmisc_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
-                    <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">
-                        <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
-                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Image Margin="10" Source="pack://siteoforigin:,,,/Resources/icon32_attmisc.ico" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="Pozostałe" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}"/>
-                            </StackPanel>
-                        </Border>
-                        <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}" FontWeight="Normal" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=groups_preview}" Click="btnGroupsList_Click">
-                            <DockPanel>
-                                <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_groups.ico"/>
-                                <Label Content="Zarządzaj grupami" VerticalContentAlignment="Center"/>
-                            </DockPanel>
-                        </Button>
-                        <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}" FontWeight="Normal" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=attachments_preview}" Click="btnAttachmentsList_Click">
-                            <DockPanel>
-                                <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_photos.ico"/>
-                                <Label Content="Zarządzaj załącznikami" VerticalContentAlignment="Center"/>
-                            </DockPanel>
-                        </Button>
-                        <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}" FontWeight="Normal" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=attachments_preview}" Click="btnAttachmentsGallery_Click">
-                            <DockPanel>
-                                <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_gallery.ico"/>
-                                <Label Content="Galeria załączników" VerticalContentAlignment="Center"/>
-                            </DockPanel>
-                        </Button>
-                        <Button DockPanel.Dock="Top" Margin="10,10,10,0" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}" FontWeight="Normal" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=logs_preview}" Click="btnLogsList_Click">
-                            <DockPanel>
-                                <Image Margin="3" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_logs.ico"/>
-                                <Label Content="Wyświetl logi" VerticalContentAlignment="Center"/>
-                            </DockPanel>
-                        </Button>
-                    </DockPanel>
-                    <Border.ContextMenu>
-                        <ContextMenu>
-                            <c:MenuPanelColor Tag="{Binding config_Attmisc_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                         </ContextMenu>
                     </Border.ContextMenu>
                 </Border>

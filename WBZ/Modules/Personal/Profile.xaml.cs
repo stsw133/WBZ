@@ -1,8 +1,5 @@
-﻿using System.ComponentModel;
-using System.Reflection;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
-using WBZ.Models;
 using WBZ.Controls;
 using WBZ.Helpers;
 
@@ -13,12 +10,12 @@ namespace WBZ.Modules.Personal
 	/// </summary>
 	public partial class Profile : Window
 	{
-        M_Profile M = new M_Profile();
+        D_Profile D = new D_Profile();
 
         public Profile()
 		{
 			InitializeComponent();
-            DataContext = M;
+            DataContext = D;
         }
 
         /// <summary>
@@ -36,7 +33,7 @@ namespace WBZ.Modules.Personal
                 else
                 {
                     if (SQL.Login(Global.User.Username, tbOldPassword.Password))
-                        M.User.Newpass = tbNewPassword.Password;
+                        D.User.Newpass = tbNewPassword.Password;
                     else
                     {
                         new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Podano złe dotychczasowe hasło!") { Owner = this }.ShowDialog();
@@ -45,38 +42,8 @@ namespace WBZ.Modules.Personal
                 }
             }
 
-            if (SQL.SetInstance(Global.Module.USERS, M.User, Global.ActionType.EDIT))
+            if (SQL.SetInstance(Global.Module.USERS, D.User, Global.ActionType.EDIT))
 			    Close();
 		}
 	}
-
-    /// <summary>
-    /// Model
-    /// </summary>
-    internal class M_Profile : INotifyPropertyChanged
-    {
-        /// Logged user
-        private C_User user = Global.User;
-        public C_User User
-        {
-            get
-            {
-                return user;
-            }
-            set
-            {
-                user = value;
-                NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
-            }
-        }
-        
-        /// <summary>
-		/// PropertyChangedEventHandler
-		/// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void NotifyPropertyChanged(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
-    }
 }

@@ -21,7 +21,7 @@
         <Border DockPanel.Dock="Right" Background="{Binding config_Stats_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="1,0,0,0">
             <DockPanel>
                 <ToggleButton x:Name="btnToggle" BorderThickness="0" Width="5" IsChecked="True"/>
-                <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding User.Perms, Converter={h:conv_ListContains}, ConverterParameter=stats_save}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
+                <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=stats_save}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
                                 TextContent="Generuj raport" IconSource="pack://siteoforigin:,,,/Resources/icon32_list.ico" PreviewMouseLeftButtonUp="btnReportGenerate_Click"/>
                 <Separator DockPanel.Dock="Top" Margin="0,5,0,0" VerticalAlignment="Top" Height="5"/>
                 <c:SimpleButton DockPanel.Dock="Bottom" Margin="5,0,5,5" IsEnabled="True" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"

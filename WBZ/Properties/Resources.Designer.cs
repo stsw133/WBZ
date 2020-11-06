@@ -303,6 +303,16 @@ namespace WBZ.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
+        internal static System.Drawing.Icon icon32_errors {
+            get {
+                object obj = ResourceManager.GetObject("icon32_errors", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
         internal static System.Drawing.Icon icon32_families {
             get {
                 object obj = ResourceManager.GetObject("icon32_families", resourceCulture);

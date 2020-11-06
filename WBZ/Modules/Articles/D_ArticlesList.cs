@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Data;
 using System.Reflection;
 using WBZ.Helpers;
-using WBZ.Models;
 using MODULE_CLASS = WBZ.Models.C_Article;
 
 namespace WBZ.Modules.Articles
@@ -14,8 +13,6 @@ namespace WBZ.Modules.Articles
 		public readonly string MODULE_NAME = Global.Module.ARTICLES;
 		public StringCollection SORTING = Properties.Settings.Default.sorting_ArticlesList;
 
-		/// Logged user
-		public C_User User { get; } = Global.User;
 		/// Stores list
 		public DataTable StoresList { get; } = SQL.GetStoresNames();
 		/// Instances list

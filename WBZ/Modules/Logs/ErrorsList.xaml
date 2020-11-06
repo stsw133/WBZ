@@ -1,4 +1,4 @@
-﻿<Window x:Class="WBZ.Modules.Attmisc.LogsList"
+﻿<Window x:Class="WBZ.Modules.Logs.ErrorsList"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,10 +7,10 @@
         xmlns:h="clr-namespace:WBZ.Helpers"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
-        Title="Lista logów" MinHeight="240" MinWidth="360" Height="{Binding Source={x:Static p:Settings.Default}, Path=config_LogsList_WindowSize[1], Mode=TwoWay}" Width="{Binding Source={x:Static p:Settings.Default}, Path=config_LogsList_WindowSize[0], Mode=TwoWay}"
+        Title="Lista błędów" MinHeight="240" MinWidth="360" Height="{Binding Source={x:Static p:Settings.Default}, Path=config_ErrorsList_WindowSize[1], Mode=TwoWay}" Width="{Binding Source={x:Static p:Settings.Default}, Path=config_ErrorsList_WindowSize[0], Mode=TwoWay}"
             BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}}"
-            Icon="pack://siteoforigin:,,,/Resources/icon32_logs.ico">
+            Icon="pack://siteoforigin:,,,/Resources/icon32_errors.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -18,17 +18,17 @@
         <!-- titleBar -->
         <c:TitleBar DockPanel.Dock="Top" AdditionalIcon="pack://siteoforigin:,,,/Resources/icon32_list.ico"/>
         <!-- buttonsPanel -->
-        <Border DockPanel.Dock="Right" Background="{Binding config_Attmisc_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="1,0,0,0" Visibility="{Binding SelectingMode, Converter={h:conv_BoolInverted}}">
+        <Border DockPanel.Dock="Right" Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="1,0,0,0" Visibility="{Binding SelectingMode, Converter={h:conv_BoolInverted}}">
             <DockPanel>
                 <ToggleButton x:Name="btnToggle" BorderThickness="0" Width="5" IsChecked="True"/>
-                <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding User.Perms, Converter={h:conv_ListContains}, ConverterParameter=logs_preview}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
+                <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=logs_preview}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
                                 TextContent="Podgląd&#10;obiektu" IconSource="pack://siteoforigin:,,,/Resources/icon32_search.ico" PreviewMouseLeftButtonUp="btnPreview_Click"/>
-                <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding User.Perms, Converter={h:conv_ListContains}, ConverterParameter=logs_save}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
+                <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=logs_save}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
                                 TextContent="Edycja&#10;obiektu" IconSource="pack://siteoforigin:,,,/Resources/icon32_edit.ico" PreviewMouseLeftButtonUp="btnEdit_Click"/>
                 <Separator DockPanel.Dock="Top" Margin="0,5,0,0" VerticalAlignment="Top" Height="5" Visibility="{Binding IsChecked, ElementName=btnToggle, Converter={h:conv_BoolToVisibility}}"/>
-                <CheckBox x:Name="chckEnabled" DockPanel.Dock="Top" Content="Logi włączone" Margin="5,5,5,0" Visibility="{Binding IsChecked, ElementName=btnToggle, Converter={h:conv_BoolToVisibility}}" Checked="chckEnabled_Checked" Unchecked="chckEnabled_Checked"/>
+                <CheckBox x:Name="chckEnabled" DockPanel.Dock="Top" Content="Logi bł. włączone" Margin="5,5,5,0" Visibility="{Binding IsChecked, ElementName=btnToggle, Converter={h:conv_BoolToVisibility}}" Checked="chckEnabled_Checked" Unchecked="chckEnabled_Checked"/>
                 <Separator DockPanel.Dock="Top" Margin="0,5,0,0" VerticalAlignment="Top" Height="5"/>
-                <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding User.Perms, Converter={h:conv_ListContains}, ConverterParameter=logs_delete}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
+                <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=logs_delete}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
                                 TextContent="Usuń" IconSource="pack://siteoforigin:,,,/Resources/icon32_delete.ico" PreviewMouseLeftButtonUp="btnDelete_Click"/>
                 <Separator DockPanel.Dock="Top" Margin="0,5,0,0" VerticalAlignment="Top" Height="5" Visibility="{Binding IsChecked, ElementName=btnToggle, Converter={h:conv_BoolToVisibility}}"/>
                 <c:SimpleButton DockPanel.Dock="Bottom" Margin="5,0,5,5" IsEnabled="True" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
@@ -40,13 +40,13 @@
             </DockPanel>
             <Border.ContextMenu>
                 <ContextMenu>
-                    <c:MenuPanelColor Tag="{Binding config_Attmisc_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+                    <c:MenuPanelColor Tag="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                 </ContextMenu>
             </Border.ContextMenu>
         </Border>
         <!-- filtersPanel -->
-        <Grid DockPanel.Dock="Top" Background="{Binding config_Attmisc_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}">
-            <Expander x:Name="filtersExpander" Header="Filtry wyszukiwania" Background="{Binding config_Attmisc_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="0,0,0,1">
+        <Grid DockPanel.Dock="Top" Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}">
+            <Expander x:Name="filtersExpander" Header="Filtry wyszukiwania" Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="0,0,0,1">
                 <TabControl MaxHeight="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=20}">
                     <!-- tabMain -->
                     <TabItem>
@@ -126,7 +126,7 @@
             </StackPanel>
         </Grid>
         <!-- statusPanel -->
-        <c:StatusPanel DockPanel.Dock="Bottom" Background="{Binding config_Attmisc_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+        <c:StatusPanel DockPanel.Dock="Bottom" Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
         <!-- dataGrid -->
         <DataGrid x:Name="dgList" DockPanel.Dock="Top" Margin="5" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
                   AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstancesList}" IsReadOnly="True"

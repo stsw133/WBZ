@@ -1,58 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using WBZ.Models;
 using WBZ.Helpers;
-using WBZ.Modules.Admin;
 using WBZ.Modules.Articles;
+using WBZ.Modules.AttributesClasses;
 using WBZ.Modules.Companies;
 using WBZ.Modules.Distributions;
 using WBZ.Modules.Documents;
 using WBZ.Modules.Families;
 using WBZ.Modules.Stores;
 using WBZ.Modules.Users;
-using MODULE_CLASS = WBZ.Models.C_Log;
-using WBZ.Modules.AttributesClasses;
+using MODULE_CLASS = WBZ.Models.C_Attachment;
 
-namespace WBZ.Modules.Attmisc
+namespace WBZ.Modules.Attachments
 {
-	/// <summary>
-	/// Interaction logic for LogsList.xaml
-	/// </summary>
-	public partial class LogsList : Window
-	{
-		M_LogsList M = new M_LogsList();
+    /// <summary>
+    /// Interaction logic for AttachmentsList.xaml
+    /// </summary>
+    public partial class AttachmentsList : Window
+    {
+        D_AttachmentsList D = new D_AttachmentsList();
 
-		public LogsList()
-		{
-			InitializeComponent();
-			DataContext = M;
-			btnRefresh_Click(null, null);
-
-			if (C_Config.Logs_Enabled == "1")
-				chckEnabled.IsChecked = true;
-			else
-				chckEnabled.IsChecked = false;
-		}
+        public AttachmentsList()
+        {
+            InitializeComponent();
+            DataContext = D;
+            btnRefresh_Click(null, null);
+        }
 
 		/// <summary>
 		/// Update filters
 		/// </summary>
 		private void UpdateFilters()
 		{
-			M.FilterSQL = $"LOWER(COALESCE(u.lastname,'') || ' ' || COALESCE(u.forename,'')) like '%{M.Filters.UserFullname.ToLower()}%' and "
-						+ $"LOWER(COALESCE(l.module,'')) like '%{M.Filters.Module.ToLower()}%' and "
-						+ $"LOWER(COALESCE(l.content,'')) like '%{M.Filters.Content.ToLower()}%' and "
-						+ $"l.datetime between '{M.Filters.fDateTime:yyyy-MM-dd}' and '{M.Filters.DateTime:yyyy-MM-dd} 23:59:59' and ";
+			D.FilterSQL = $"LOWER(COALESCE(u.lastname,'') || ' ' || COALESCE(u.forename,'')) like '%{D.Filters.UserFullname.ToLower()}%' and "
+						+ $"LOWER(COALESCE(a.module,'')) like '%{D.Filters.Module.ToLower()}%' and "
+						+ $"LOWER(COALESCE(a.name,'')) like '%{D.Filters.Name.ToLower()}%' and ";
 
-			M.FilterSQL = M.FilterSQL.TrimEnd(" and ".ToCharArray());
+			D.FilterSQL = D.FilterSQL.TrimEnd(" and ".ToCharArray());
 		}
 
 		/// <summary>
@@ -69,7 +57,7 @@ namespace WBZ.Modules.Attmisc
 		/// </summary>
 		private void btnFiltersClear_Click(object sender, MouseButtonEventArgs e)
 		{
-			M.Filters = new MODULE_CLASS();
+			D.Filters = new MODULE_CLASS();
 			btnRefresh_Click(null, null);
 		}
 
@@ -107,7 +95,7 @@ namespace WBZ.Modules.Attmisc
 			Window window;
 
 			switch (log.Module)
-            {
+			{
 				/// articles
 				case Global.Module.ARTICLES:
 					window = new ArticlesNew(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Article>()?[0], mode);
@@ -155,7 +143,7 @@ namespace WBZ.Modules.Attmisc
 			if (selectedInstances.Count() > 0 && MessageBox.Show("Czy na pewno usunąć zaznaczone rekordy?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
 			{
 				foreach (MODULE_CLASS instance in selectedInstances)
-					SQL.DeleteInstance(M.MODULE_NAME, instance.ID, null);
+					SQL.DeleteInstance(D.MODULE_NAME, instance.ID, null);
 				btnRefresh_Click(null, null);
 			}
 		}
@@ -167,8 +155,8 @@ namespace WBZ.Modules.Attmisc
 		{
 			await Task.Run(() => {
 				UpdateFilters();
-				M.TotalItems = SQL.CountInstances(M.MODULE_NAME, M.FilterSQL);
-				M.InstancesList = SQL.ListInstances(M.MODULE_NAME, M.FilterSQL, M.SORTING, M.Page = 0).DataTableToList<MODULE_CLASS>();
+				D.TotalItems = SQL.CountInstances(D.MODULE_NAME, D.FilterSQL);
+				D.InstancesList = SQL.ListInstances(D.MODULE_NAME, D.FilterSQL, D.SORTING, D.Page = 0).DataTableToList<MODULE_CLASS>();
 			});
 		}
 
@@ -194,102 +182,13 @@ namespace WBZ.Modules.Attmisc
 		/// </summary>
 		private void dgList_ScrollChanged(object sender, ScrollChangedEventArgs e)
 		{
-			if (e.VerticalChange > 0 && e.VerticalOffset + e.ViewportHeight == e.ExtentHeight && M.InstancesList.Count < M.TotalItems)
+			if (e.VerticalChange > 0 && e.VerticalOffset + e.ViewportHeight == e.ExtentHeight && D.InstancesList.Count < D.TotalItems)
 			{
 				DataContext = null;
-				M.InstancesList.AddRange(SQL.ListInstances(Global.Module.LOGS, M.FilterSQL, M.SORTING, ++M.Page).DataTableToList<MODULE_CLASS>());
-				DataContext = M;
+				D.InstancesList.AddRange(SQL.ListInstances(Global.Module.LOGS, D.FilterSQL, D.SORTING, ++D.Page).DataTableToList<MODULE_CLASS>());
+				DataContext = D;
 				Extensions.GetVisualChild<ScrollViewer>(sender as DataGrid).ScrollToVerticalOffset(e.VerticalOffset);
 			}
-		}
-
-		private void chckEnabled_Checked(object sender, RoutedEventArgs e)
-		{
-			if ((sender as CheckBox).IsChecked == true)
-				SQL.SetPropertyValue("LOGS_ENABLED", "1");
-			else
-				SQL.SetPropertyValue("LOGS_ENABLED", "0");
-		}
-	}
-
-	/// <summary>
-	/// Model
-	/// </summary>
-	internal class M_LogsList : INotifyPropertyChanged
-	{
-		public readonly string MODULE_NAME = Global.Module.LOGS;
-		public StringCollection SORTING = Properties.Settings.Default.sorting_LogsList;
-
-		/// Logged user
-		public C_User User { get; } = Global.User;
-		/// Instances list
-		private List<MODULE_CLASS> instancesList;
-		public List<MODULE_CLASS> InstancesList
-		{
-			get
-			{
-				return instancesList;
-			}
-			set
-			{
-				instancesList = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
-			}
-		}
-		/// Selecting mode
-		public bool SelectingMode { get; set; }
-		/// SQL filter
-		public string FilterSQL { get; set; }
-		/// Filter instance
-		private MODULE_CLASS filters = new MODULE_CLASS();
-		public MODULE_CLASS Filters
-		{
-			get
-			{
-				return filters;
-			}
-			set
-			{
-				filters = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
-			}
-		}
-		/// Page number
-		private int page;
-		public int Page
-		{
-			get
-			{
-				return page;
-			}
-			set
-			{
-				page = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
-			}
-		}
-		/// Total instances number
-		private int totalItems;
-		public int TotalItems
-		{
-			get
-			{
-				return totalItems;
-			}
-			set
-			{
-				totalItems = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
-			}
-		}
-
-		/// <summary>
-		/// PropertyChangedEventHandler
-		/// </summary>
-		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged(string name)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
 	}
 }

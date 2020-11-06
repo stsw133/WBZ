@@ -59,7 +59,7 @@
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="config_Admin_PanelColor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#EEE</Value>
+      <Value Profile="(Default)">#FF444444</Value>
     </Setting>
     <Setting Name="config_DocumentsNew_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
@@ -69,7 +69,7 @@
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="config_Documents_PanelColor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#EEE</Value>
+      <Value Profile="(Default)">#FF33AAEE</Value>
     </Setting>
     <Setting Name="config_DocumentsList_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
@@ -151,7 +151,7 @@
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="config_Articles_PanelColor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#EEE</Value>
+      <Value Profile="(Default)">#FF55DD55</Value>
     </Setting>
     <Setting Name="config_ArticlesList_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
@@ -189,7 +189,7 @@
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="config_Companies_PanelColor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#EEE</Value>
+      <Value Profile="(Default)">#FFEEEE55</Value>
     </Setting>
     <Setting Name="config_CompaniesList_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
@@ -233,7 +233,7 @@
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="config_Families_PanelColor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#EEE</Value>
+      <Value Profile="(Default)">#FFEEAA33</Value>
     </Setting>
     <Setting Name="config_FamiliesNew_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
@@ -257,10 +257,7 @@
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="config_Stats_PanelColor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#EEE</Value>
-    </Setting>
-    <Setting Name="config_Community_PanelColor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#EEE</Value>
+      <Value Profile="(Default)">#FFBB88DD</Value>
     </Setting>
     <Setting Name="columns_FamiliesList_ID" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -333,7 +330,7 @@
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="config_Distributions_PanelColor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#EEE</Value>
+      <Value Profile="(Default)">#FFEE5555</Value>
     </Setting>
     <Setting Name="columns_DistributionsList_ID" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -393,7 +390,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="config_Attmisc_PanelColor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#EEE</Value>
+      <Value Profile="(Default)">#FFFF69B4</Value>
     </Setting>
     <Setting Name="config_EmployeesList_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
@@ -648,16 +645,28 @@
       <Value Profile="(Default)">PL</Value>
     </Setting>
     <Setting Name="config_Stores_PanelColor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#EEE</Value>
+      <Value Profile="(Default)">#FF44CCCC</Value>
     </Setting>
     <Setting Name="config_Users_PanelColor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#EEE</Value>
+      <Value Profile="(Default)">#FF7799BB</Value>
     </Setting>
     <Setting Name="config_Employees_PanelColor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#EEE</Value>
+      <Value Profile="(Default)">#FF775522</Value>
     </Setting>
     <Setting Name="config_AttributesClasses_PanelColor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#EEE</Value>
+      <Value Profile="(Default)">#FFEEAA33</Value>
+    </Setting>
+    <Setting Name="config_Attachments_PanelColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FFEEEE55</Value>
+    </Setting>
+    <Setting Name="config_Logs_PanelColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FF44CCCC</Value>
+    </Setting>
+    <Setting Name="config_Groups_PanelColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FF33AAEE</Value>
+    </Setting>
+    <Setting Name="config_Community_PanelColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FFFF69B4</Value>
     </Setting>
   </Settings>
 </SettingsFile>

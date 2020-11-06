@@ -3,14 +3,14 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Reflection;
 using WBZ.Helpers;
-using MODULE_CLASS = WBZ.Models.C_Employee;
+using MODULE_CLASS = WBZ.Models.C_Group;
 
-namespace WBZ.Modules.Employees
+namespace WBZ.Modules.Groups
 {
-    class D_EmployeesList : INotifyPropertyChanged
+    class D_GroupsList : INotifyPropertyChanged
     {
-		public readonly string MODULE_NAME = Global.Module.EMPLOYEES;
-		public StringCollection SORTING = Properties.Settings.Default.sorting_EmployeesList;
+		public readonly string MODULE_NAME = Global.Module.GROUPS;
+		public StringCollection SORTING = Properties.Settings.Default.sorting_GroupsList;
 
 		/// Instances list
 		private List<MODULE_CLASS> instancesList;
@@ -41,20 +41,6 @@ namespace WBZ.Modules.Employees
 			set
 			{
 				filters = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
-			}
-		}
-		/// Page number
-		private int page;
-		public int Page
-		{
-			get
-			{
-				return page;
-			}
-			set
-			{
-				page = value;
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
 		}

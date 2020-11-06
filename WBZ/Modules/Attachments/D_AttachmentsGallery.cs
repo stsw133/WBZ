@@ -3,14 +3,14 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Reflection;
 using WBZ.Helpers;
-using MODULE_CLASS = WBZ.Models.C_Employee;
+using MODULE_CLASS = WBZ.Models.C_Attachment;
 
-namespace WBZ.Modules.Employees
+namespace WBZ.Modules.Attachments
 {
-    class D_EmployeesList : INotifyPropertyChanged
+    class D_AttachmentsGallery : INotifyPropertyChanged
     {
-		public readonly string MODULE_NAME = Global.Module.EMPLOYEES;
-		public StringCollection SORTING = Properties.Settings.Default.sorting_EmployeesList;
+		public readonly string MODULE_NAME = Global.Module.ATTACHMENTS;
+		public StringCollection SORTING = Properties.Settings.Default.sorting_AttachmentsGallery;
 
 		/// Instances list
 		private List<MODULE_CLASS> instancesList;

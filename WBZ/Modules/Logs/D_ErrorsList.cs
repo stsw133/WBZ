@@ -3,14 +3,14 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Reflection;
 using WBZ.Helpers;
-using MODULE_CLASS = WBZ.Models.C_Employee;
+using MODULE_CLASS = WBZ.Models.C_Log;
 
-namespace WBZ.Modules.Employees
+namespace WBZ.Modules.Logs
 {
-    class D_EmployeesList : INotifyPropertyChanged
+    class D_ErrorsList : INotifyPropertyChanged
     {
-		public readonly string MODULE_NAME = Global.Module.EMPLOYEES;
-		public StringCollection SORTING = Properties.Settings.Default.sorting_EmployeesList;
+		public readonly string MODULE_NAME = Global.Module.LOGS;
+		public StringCollection SORTING = Properties.Settings.Default.sorting_LogsList;
 
 		/// Instances list
 		private List<MODULE_CLASS> instancesList;

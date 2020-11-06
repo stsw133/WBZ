@@ -11,10 +11,15 @@ namespace WBZ.Helpers
 {
     public static class Global
     {
+        /// App version
         public static string Version => string.Concat(Assembly.GetEntryAssembly().GetName().Version.ToString().Reverse().Skip(2).Reverse());
+        /// Newest version to download
         public static string VersionNewest { get; set; } = null;
+        /// Chosen database
         public static C_Database Database { get; set; } = new C_Database();
+        /// Logged user
         public static C_User User { get; set; } = new C_User();
+        /// Module list
         public static class Module
         {
             public const string ARTICLES = "articles";

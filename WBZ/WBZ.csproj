@@ -187,6 +187,8 @@
     </Compile>
     <Compile Include="Modules\Articles\D_ArticlesList.cs" />
     <Compile Include="Modules\Articles\D_ArticlesNew.cs" />
+    <Compile Include="Modules\Attachments\D_AttachmentsGallery.cs" />
+    <Compile Include="Modules\Attachments\D_AttachmentsList.cs" />
     <Compile Include="Modules\AttributesClasses\D_AttributesClassesList.cs" />
     <Compile Include="Modules\AttributesClasses\D_AttributesClassesNew.cs" />
     <Compile Include="Modules\Companies\D_CompaniesList.cs" />
@@ -196,10 +198,17 @@
     <Compile Include="Modules\Distributions\D_DistributionsStatus.cs" />
     <Compile Include="Modules\Documents\D_DocumentsList.cs" />
     <Compile Include="Modules\Documents\D_DocumentsNew.cs" />
+    <Compile Include="Modules\D_Main.cs" />
     <Compile Include="Modules\Employees\D_EmployeesList.cs" />
     <Compile Include="Modules\Employees\D_EmployeesNew.cs" />
     <Compile Include="Modules\Families\D_FamiliesList.cs" />
     <Compile Include="Modules\Families\D_FamiliesNew.cs" />
+    <Compile Include="Modules\Groups\D_GroupsList.cs" />
+    <Compile Include="Modules\Logs\D_ErrorsList.cs" />
+    <Compile Include="Modules\Logs\D_LogsList.cs" />
+    <Compile Include="Modules\Logs\ErrorsList.xaml.cs">
+      <DependentUpon>ErrorsList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
     </Compile>
@@ -212,7 +221,7 @@
     <Compile Include="Modules\Employees\EmployeesList.xaml.cs">
       <DependentUpon>EmployeesList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Attmisc\AttachmentsList.xaml.cs">
+    <Compile Include="Modules\Attachments\AttachmentsList.xaml.cs">
       <DependentUpon>AttachmentsList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\AttributesClasses\AttributesClassesNew.xaml.cs">
@@ -221,15 +230,17 @@
     <Compile Include="Modules\AttributesClasses\AttributesClassesList.xaml.cs">
       <DependentUpon>AttributesClassesList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Attmisc\AttachmentsGallery.xaml.cs">
+    <Compile Include="Modules\Attachments\AttachmentsGallery.xaml.cs">
       <DependentUpon>AttachmentsGallery.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Groups\GroupsList.xaml.cs">
       <DependentUpon>GroupsList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Attmisc\LogsList.xaml.cs">
+    <Compile Include="Modules\Logs\LogsList.xaml.cs">
       <DependentUpon>LogsList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Personal\D_Profile.cs" />
+    <Compile Include="Modules\Stats\D_Stats.cs" />
     <Compile Include="Modules\Stores\D_StoresList.cs" />
     <Compile Include="Modules\Stores\D_StoresNew.cs" />
     <Compile Include="Modules\Users\D_UsersList.cs" />
@@ -382,11 +393,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Attmisc\AttachmentsGallery.xaml">
+    <Page Include="Modules\Attachments\AttachmentsGallery.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Attmisc\AttachmentsList.xaml">
+    <Page Include="Modules\Attachments\AttachmentsList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -394,7 +405,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Attmisc\LogsList.xaml">
+    <Page Include="Modules\Logs\ErrorsList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Logs\LogsList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -745,6 +760,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\icon32_color.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\icon32_errors.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <Content Include="SQL\database.sql" />

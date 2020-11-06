@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Reflection;
 using WBZ.Helpers;
-using WBZ.Models;
 using MODULE_CLASS = WBZ.Models.C_User;
 
 namespace WBZ.Modules.Users
@@ -10,8 +9,6 @@ namespace WBZ.Modules.Users
     {
 		public readonly string MODULE_NAME = Global.Module.USERS;
 
-		/// Logged user
-		public C_User User { get; } = Global.User;
 		/// Instance
 		private MODULE_CLASS instanceInfo;
 		public MODULE_CLASS InstanceInfo
