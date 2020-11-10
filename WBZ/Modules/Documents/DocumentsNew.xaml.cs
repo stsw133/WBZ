@@ -153,7 +153,10 @@ namespace WBZ.Modules.Documents
 				}
 		}
 
-		private void Window_Closed(object sender, System.EventArgs e)
+		/// <summary>
+		/// Closed
+		/// </summary>
+		private void Window_Closed(object sender, EventArgs e)
 		{
 			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE) && !saved)
 				SQL.ClearObject(D.MODULE_NAME, D.InstanceInfo.ID);

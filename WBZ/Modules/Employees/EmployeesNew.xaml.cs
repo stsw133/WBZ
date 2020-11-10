@@ -82,6 +82,9 @@ namespace WBZ.Modules.Employees
 				}
 		}
 
+		/// <summary>
+		/// Closed
+		/// </summary>
 		private void Window_Closed(object sender, EventArgs e)
 		{
 			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE) && !saved)

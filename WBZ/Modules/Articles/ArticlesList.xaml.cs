@@ -143,6 +143,9 @@ namespace WBZ.Modules.Articles
 			Close();
 		}
 
+		/// <summary>
+		/// Store - SelectionChanged
+		/// </summary>
 		public C_Store SelectedStore;
 		private void cbStore_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{

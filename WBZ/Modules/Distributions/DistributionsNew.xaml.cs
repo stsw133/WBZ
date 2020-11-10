@@ -92,7 +92,6 @@ namespace WBZ.Modules.Distributions
 			if (btn != null)
 				btn.ContextMenu.IsOpen = true;
 		}
-
 		private void btnDistributionList_Click(object sender, RoutedEventArgs e)
 		{
 			Prints.Print_DistributionList(D.InstanceInfo);
@@ -172,6 +171,11 @@ namespace WBZ.Modules.Distributions
 			} while (!br);
 		}
 
+		/// <summary>
+		/// ChangeFamilyStatus
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void btnChangeFamilyStatus_Click(object sender, RoutedEventArgs e)
 		{
 			var family = (((sender as Button).Parent as StackPanel).Tag) as C_DistributionFamily;
@@ -191,7 +195,10 @@ namespace WBZ.Modules.Distributions
 			}
 		}
 
-		private void Window_Closed(object sender, System.EventArgs e)
+		/// <summary>
+		/// Closed
+		/// </summary>
+		private void Window_Closed(object sender, EventArgs e)
 		{
 			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE) && !saved)
 				SQL.ClearObject(D.MODULE_NAME, D.InstanceInfo.ID);

@@ -197,6 +197,9 @@ namespace WBZ.Modules.Logs
 			}
 		}
 
+		/// <summary>
+		/// Logs enable/disable
+		/// </summary>
 		private void chckEnabled_Checked(object sender, RoutedEventArgs e)
 		{
 			if ((sender as CheckBox).IsChecked == true)

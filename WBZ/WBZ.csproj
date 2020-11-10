@@ -206,6 +206,10 @@
     <Compile Include="Modules\Families\D_FamiliesList.cs" />
     <Compile Include="Modules\Families\D_FamiliesNew.cs" />
     <Compile Include="Modules\Groups\D_GroupsList.cs" />
+    <Compile Include="Modules\Login\D_Login.cs" />
+    <Compile Include="Modules\Login\D_LoginAppAbout.cs" />
+    <Compile Include="Modules\Login\D_LoginDatabases.cs" />
+    <Compile Include="Modules\Login\D_Versions.cs" />
     <Compile Include="Modules\Logs\D_ErrorsList.cs" />
     <Compile Include="Modules\Logs\D_LogsList.cs" />
     <Compile Include="Modules\Logs\ErrorsList.xaml.cs">

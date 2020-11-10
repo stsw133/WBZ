@@ -1,13 +1,10 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Net.Http;
-using System.Reflection;
 using WBZ.Models;
 using WBZ.Controls;
 using WBZ.Helpers;
@@ -20,12 +17,12 @@ namespace WBZ.Modules.Login
 	/// </summary>
 	public partial class Login : Window
 	{
-		readonly M_Login M = new M_Login();
+		readonly D_Login D = new D_Login();
 
 		public Login()
 		{
 			InitializeComponent();
-			DataContext = M;
+			DataContext = D;
 
 			if (Props.Default.UpgradeRequired)
 			{
@@ -35,12 +32,15 @@ namespace WBZ.Modules.Login
 			}
 		}
 		
+		/// <summary>
+		/// Loaded
+		/// </summary>
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			CheckNewestVersion();
 			txtVersion.Content = Global.Version;
 
-			M.Databases = new ObservableCollection<C_Database>(C_Database.LoadAllDatabases());
+			D.Databases = new ObservableCollection<C_Database>(C_Database.LoadAllDatabases());
 
 			if (!string.IsNullOrEmpty(Props.Default.userPass))
                 tbPassword.Password = Props.Default.userPass;
@@ -256,36 +256,6 @@ namespace WBZ.Modules.Login
 			var window = new LoginAppAbout();
 			window.Owner = this;
 			window.ShowDialog();
-		}
-	}
-
-	/// <summary>
-	/// Model
-	/// </summary>
-	internal class M_Login : INotifyPropertyChanged
-	{
-		/// Databases list
-		private ObservableCollection<C_Database> databases;
-		public ObservableCollection<C_Database> Databases
-		{
-			get
-			{
-				return databases;
-			}
-			set
-			{
-				databases = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
-			}
-		}
-
-		/// <summary>
-		/// PropertyChangedEventHandler
-		/// </summary>
-		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged(string name)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
 	}
 }

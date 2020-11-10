@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -17,12 +14,12 @@ namespace WBZ.Modules.Login
 	/// </summary>
 	public partial class LoginDatabases : Window
 	{
-		readonly M_LoginDatabases M = new M_LoginDatabases();
+		readonly D_LoginDatabases D = new D_LoginDatabases();
 
 		public LoginDatabases()
 		{
 			InitializeComponent();
-			DataContext = M;
+			DataContext = D;
 
 			if (Owner == null)
 				WindowStartupLocation = WindowStartupLocation.CenterScreen;
@@ -35,10 +32,10 @@ namespace WBZ.Modules.Login
 		{
 			var db = new C_Database()
 			{
-				Name = $"db_{M.Databases.Count + 1}"
+				Name = $"db_{D.Databases.Count + 1}"
 			};
-			M.Databases.Add(db);
-			lbDatabases.SelectedIndex = M.Databases.Count - 1;
+			D.Databases.Add(db);
+			lbDatabases.SelectedIndex = D.Databases.Count - 1;
 		}
 
 		/// <summary>
@@ -49,7 +46,7 @@ namespace WBZ.Modules.Login
 			if (lbDatabases.SelectedIndex == -1)
 				return;
 
-			M.Databases.RemoveAt(lbDatabases.SelectedIndex);
+			D.Databases.RemoveAt(lbDatabases.SelectedIndex);
 			lbDatabases.SelectedIndex = -1;
 		}
 
@@ -113,8 +110,8 @@ namespace WBZ.Modules.Login
 		{
 			try
 			{
-				C_Database.SaveAllDatabases(new List<C_Database>(M.Databases));
-				if (Owner == null && M.Databases.Count > 0)
+				C_Database.SaveAllDatabases(new List<C_Database>(D.Databases));
+				if (Owner == null && D.Databases.Count > 0)
 				{
 					var window = new Login();
 					window.Show();
@@ -129,34 +126,6 @@ namespace WBZ.Modules.Login
 			{
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Błąd zapisywania zmian: " + ex.Message) { Owner = this }.ShowDialog();
 			}
-		}
-	}
-
-	/// <summary>
-	/// Model
-	/// </summary>
-	internal class M_LoginDatabases : INotifyPropertyChanged
-	{
-		/// Databases list
-		private ObservableCollection<C_Database> databases = new ObservableCollection<C_Database>(C_Database.LoadAllDatabases());
-		public ObservableCollection<C_Database> Databases
-		{
-			get
-			{
-				return databases;
-			}
-			set
-			{
-				databases = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
-			}
-		}
-
-		/// PropertyChanged
-		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged(string name)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
 	}
 }

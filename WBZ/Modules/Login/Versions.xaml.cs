@@ -1,11 +1,9 @@
 ﻿using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
 using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 using WBZ.Controls;
@@ -17,12 +15,12 @@ namespace WBZ.Modules.Login
 	/// </summary>
 	public partial class Versions : Window
 	{
-		M_Versions M = new M_Versions();
+		D_Versions D = new D_Versions();
 
 		public Versions()
 		{
 			InitializeComponent();
-			DataContext = M;
+			DataContext = D;
 			btnRefresh_Click(null, null);
 		}
 
@@ -84,7 +82,7 @@ namespace WBZ.Modules.Login
 				{
 					string result = await content.ReadAsStringAsync();
 					dynamic data = JObject.Parse(result);
-					M.InstancesList = data;
+					D.InstancesList = data;
 				}
 			}
 			catch (Exception ex)
@@ -108,36 +106,6 @@ namespace WBZ.Modules.Login
 		{
 			if (e.LeftButton == MouseButtonState.Pressed)
 				btnDownload_Click(null, null);
-		}
-	}
-
-	/// <summary>
-	/// Model
-	/// </summary>
-	internal class M_Versions : INotifyPropertyChanged
-	{
-		/// Instances list
-		private dynamic instancesList;
-		public dynamic InstancesList
-		{
-			get
-			{
-				return instancesList;
-			}
-			set
-			{
-				instancesList = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
-			}
-		}
-		
-		/// <summary>
-		/// PropertyChangedEventHandler
-		/// </summary>
-		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged(string name)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
 	}
 }

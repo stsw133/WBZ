@@ -80,6 +80,9 @@ namespace WBZ.Modules.Attachments
 			imgContent.Stretch = Stretch.Uniform;
 		}
 
+		/// <summary>
+		/// Images - SelectionChanged
+		/// </summary>
 		private void lbImages_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			var lbImages = (sender as ListBox);
@@ -113,6 +116,9 @@ namespace WBZ.Modules.Attachments
 			}
 		}
 
+		/// <summary>
+		/// Closed
+		/// </summary>
 		private void Window_Closed(object sender, EventArgs e)
 		{
 			try

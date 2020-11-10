@@ -17,7 +17,7 @@
     </WindowChrome.WindowChrome>
     <Window.CommandBindings>
         <CommandBinding Command="h:Commands.Close" Executed="menuClose_Executed"/>
-        <CommandBinding Command="h:Commands.Help" Executed="menuHelp_Executed"/>
+        <!-- <CommandBinding Command="h:Commands.Help" Executed="menuHelp_Executed"/> -->
         <CommandBinding Command="h:Commands.Refresh" Executed="menuRefresh_Executed"/>
     </Window.CommandBindings>
     <DockPanel>

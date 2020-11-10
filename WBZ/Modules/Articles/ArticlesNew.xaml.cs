@@ -79,6 +79,11 @@ namespace WBZ.Modules.Articles
 			Close();
 		}
 
+		/// <summary>
+		/// Measures - CellEditEnding
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void dgMeasures_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
 		{
 			int index = e.Row.GetIndex();
@@ -179,7 +184,10 @@ namespace WBZ.Modules.Articles
 			}
 		}
 
-		private void Window_Closed(object sender, System.EventArgs e)
+		/// <summary>
+		/// Closed
+		/// </summary>
+		private void Window_Closed(object sender, EventArgs e)
 		{
 			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE) && !saved)
 				SQL.ClearObject(D.MODULE_NAME, D.InstanceInfo.ID);

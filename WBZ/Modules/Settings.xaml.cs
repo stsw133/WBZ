@@ -16,11 +16,18 @@ namespace WBZ.Modules
 			InitializeComponent();
 		}
 
+		/// <summary>
+		/// EmailPassword - Loaded
+		/// </summary>
 		private void pbEmailPassword_Loaded(object sender, RoutedEventArgs e)
 		{
 			if (Properties.Settings.Default.config_Email_Password.Length > 0)
 				pbEmailPassword.Password = Global.Decrypt(Properties.Settings.Default.config_Email_Password);
 		}
+
+		/// <summary>
+		/// EmailPassword - PasswordChanged
+		/// </summary>
 		private void pbEmailPassword_PasswordChanged(object sender, RoutedEventArgs e)
 		{
 			if (pbEmailPassword.Password.Length > 0)
@@ -28,7 +35,7 @@ namespace WBZ.Modules
 		}
 
 		/// <summary>
-		/// Test
+		/// EmailTest
 		/// </summary>
 		private void btnEmailTest_Click(object sender, MouseButtonEventArgs e)
 		{
@@ -38,6 +45,9 @@ namespace WBZ.Modules
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Test poczty e-mail nie powiódł się!") { Owner = this }.ShowDialog();
 		}
 
+		/// <summary>
+		/// Closed
+		/// </summary>
 		private void Window_Closed(object sender, EventArgs e)
 		{
 			Properties.Settings.Default.Save();
