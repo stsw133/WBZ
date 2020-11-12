@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using WBZ.Controls;
 using WBZ.Models;
@@ -13,9 +12,9 @@ namespace WBZ.Helpers
         /// <summary>
         /// Open window
         /// </summary>
-        internal static void OpenWindow(string fullname, Window owner = null, bool dialog = false)
+        internal static void OpenWindow(Window owner, string fullname, bool dialog, params object[] args)
         {
-            var window = Activator.CreateInstance(Type.GetType(fullname)) as Window;
+            var window = Activator.CreateInstance(Type.GetType(fullname), args) as Window;
 
             if (owner != null)
                 window.Owner = owner;
@@ -49,7 +48,7 @@ namespace WBZ.Helpers
         /// </summary>
         internal static void OpenWindow_Settings(Window owner)
         {
-            OpenWindow(typeof(Modules.Settings).FullName, owner, true);
+            OpenWindow(owner, typeof(Modules.Settings).FullName, true);
         }
 
         /// <summary>

@@ -329,6 +329,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Prototypes\P_ModuleList.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="SQL\SQL.cs" />
     <Compile Include="SQL\SQL_Migration.cs" />
