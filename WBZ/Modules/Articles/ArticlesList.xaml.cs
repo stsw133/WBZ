@@ -15,12 +15,14 @@ namespace WBZ.Modules.Articles
 	public partial class ArticlesList : Window
 	{
 		D_ArticlesList D = new D_ArticlesList();
+		P_ModuleList<MODULE_CLASS> P;
 
 		public ArticlesList(bool selectingMode = false)
 		{
 			InitializeComponent();
 			DataContext = D;
 			D.SelectingMode = selectingMode;
+			P = new P_ModuleList(this);
 		}
 
 		/// <summary>
@@ -36,7 +38,7 @@ namespace WBZ.Modules.Articles
 			if (D.StoresList.Rows.Count > 0)
 				cbStore.SelectedIndex = 0;
 			*/
-			P_ModuleList.Window_Loaded(this);
+			P.Window_Loaded(sender, e);
 		}
 
 		/// <summary>
@@ -53,7 +55,7 @@ namespace WBZ.Modules.Articles
 
 			D.FilterSQL = D.FilterSQL.TrimEnd(" and ".ToCharArray());
 			*/
-			P_ModuleList.UpdateFilters(this);
+			P.UpdateFilters();
 		}
 
 		/// <summary>
@@ -65,7 +67,7 @@ namespace WBZ.Modules.Articles
 			if (e.Key == Key.Enter)
 				btnRefresh_Click(null, null);
 			*/
-			P_ModuleList.dpFilter_KeyUp(this, e);
+			P.dpFilter_KeyUp(sender, e);
 		}
 
 		/// <summary>
@@ -77,7 +79,7 @@ namespace WBZ.Modules.Articles
 			D.Filters = new MODULE_CLASS();
 			btnRefresh_Click(null, null);
 			*/
-			P_ModuleList.btnFiltersClear_Click(this);
+			P.btnFiltersClear_Click(sender, e);
 		}
 
 		/// <summary>
@@ -93,7 +95,7 @@ namespace WBZ.Modules.Articles
 				window.Show();
 			}
 			*/
-			P_ModuleList.btnPreview_Click(this, GetType().FullName);
+			P.btnPreview_Click(sender, e);
 		}
 
 		/// <summary>
@@ -105,7 +107,7 @@ namespace WBZ.Modules.Articles
 			var window = new ArticlesNew(new MODULE_CLASS(), Commands.Type.NEW);
 			window.Show();
 			*/
-			P_ModuleList.btnNew_Click(this, GetType().FullName);
+			P.btnNew_Click(sender, e);
 		}
 
 		/// <summary>
@@ -121,7 +123,7 @@ namespace WBZ.Modules.Articles
 				window.Show();
 			}
 			*/
-			P_ModuleList.btnDuplicate_Click(this, GetType().FullName);
+			P.btnDuplicate_Click(sender, e);
 		}
 
 		/// <summary>
@@ -137,7 +139,7 @@ namespace WBZ.Modules.Articles
 				window.Show();
 			}
 			*/
-			P_ModuleList.btnEdit_Click(this, GetType().FullName);
+			P.btnEdit_Click(sender, e);
 		}
 
 		/// <summary>
@@ -154,7 +156,7 @@ namespace WBZ.Modules.Articles
 				btnRefresh_Click(null, null);
 			}
 			*/
-			P_ModuleList.btnDelete_Click(this);
+			P.btnDelete_Click(sender, e);
 		}
 
 		/// <summary>
@@ -169,7 +171,7 @@ namespace WBZ.Modules.Articles
 				D.InstancesList = SQL.ListInstances(D.MODULE_NAME, D.FilterSQL, D.SORTING, D.Page = 0).DataTableToList<MODULE_CLASS>();
 			});
 			*/
-			P_ModuleList.btnRefresh_Click(this);
+			P.btnRefresh_Click(sender, e);
 		}
 
 		/// <summary>
@@ -178,7 +180,7 @@ namespace WBZ.Modules.Articles
 		private void btnClose_Click(object sender, MouseButtonEventArgs e)
 		{
 			//Close();
-			P_ModuleList.btnClose_Click(this);
+			P.btnClose_Click(sender, e);
 		}
 
 		/// <summary>
@@ -214,7 +216,7 @@ namespace WBZ.Modules.Articles
 				}
 			}
 			*/
-			P_ModuleList.dgList_MouseDoubleClick(this, e);
+			P.dgList_MouseDoubleClick(sender, e);
 		}
 
 		/// <summary>
@@ -231,7 +233,7 @@ namespace WBZ.Modules.Articles
 				Extensions.GetVisualChild<ScrollViewer>(sender as DataGrid).ScrollToVerticalOffset(e.VerticalOffset);
 			}
 			*/
-			P_ModuleList.dgList_ScrollChanged(this, sender, e);
+			P.dgList_ScrollChanged(sender, e);
 		}
 
 		/// <summary>
@@ -239,7 +241,7 @@ namespace WBZ.Modules.Articles
 		/// </summary>
         private void Window_Closed(object sender, EventArgs e)
         {
-			P_ModuleList.Window_Closed(this);
+			P.Window_Closed(sender, e);
 		}
     }
 }

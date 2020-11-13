@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,26 +7,35 @@ using WBZ.Helpers;
 
 namespace WBZ.Prototypes
 {
-    internal static class P_ModuleList
+    internal class P_ModuleList<MODULE_MODEL>
     {
+        dynamic W, D;
+        string Fullname;
+        string MODULE_NAME;
+
+        internal P_ModuleList(object owner)
+        {
+            W = owner;
+            D = W.DataContext;
+            Fullname = owner.GetType().FullName;
+            MODULE_NAME = D.MODULE_NAME;
+        }
+
         /// <summary>
         /// Loaded
         /// </summary>
-        internal static void Window_Loaded(dynamic owner)
+        internal void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var D = owner.DataContext;
-
             if (D.SelectingMode)
-                owner.dgList.SelectionMode = DataGridSelectionMode.Single;
+                W.dgList.SelectionMode = DataGridSelectionMode.Single;
 
-            string moduleName = D.MODULE_NAME;
-            switch (moduleName)
+            switch (MODULE_NAME)
             {
                 ///ARTICLES
                 case Global.Module.ARTICLES:
                     /// auto-select first store
                     if (D.StoresList.Rows.Count > 0)
-                        owner.cbStore.SelectedIndex = 0;
+                        W.cbStore.SelectedIndex = 0;
                     break;
             }
         }
@@ -35,12 +43,9 @@ namespace WBZ.Prototypes
         /// <summary>
 		/// Update filters
 		/// </summary>
-		internal static void UpdateFilters(dynamic owner)
+		internal void UpdateFilters()
         {
-            var D = owner.DataContext;
-
-            string moduleName = D.MODULE_NAME;
-            switch (moduleName)
+            switch (MODULE_NAME)
             {
                 ///ARTICLES
                 case Global.Module.ARTICLES:
@@ -48,7 +53,7 @@ namespace WBZ.Prototypes
                         + $"LOWER(COALESCE(a.name,'')) like '%{D.Filters.Name.ToLower()}%' and "
                         + $"LOWER(COALESCE(a.ean,'')) like '%{D.Filters.EAN.ToLower()}%' and "
                         + (!D.Filters.Archival ? $"a.archival=false and " : "")
-                        + (owner.SelectedStore?.ID > 0 ? $"sa.store={owner.SelectedStore.ID} and " : "");
+                        + (W.SelectedStore?.ID > 0 ? $"sa.store={W.SelectedStore.ID} and " : "");
                     break;
             }
 
@@ -58,32 +63,30 @@ namespace WBZ.Prototypes
         /// <summary>
 		/// Apply filters
 		/// </summary>
-		internal static void dpFilter_KeyUp(dynamic owner, KeyEventArgs e)
+		internal void dpFilter_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
-                btnRefresh_Click(owner);
+                btnRefresh_Click(null, null);
         }
 
         /// <summary>
 		/// Clear filters
 		/// </summary>
-		internal static void btnFiltersClear_Click(dynamic owner)
+		internal void btnFiltersClear_Click(object sender, MouseButtonEventArgs e)
         {
-            var D = owner.DataContext;
-
-            D.Filters = new MODULE_CLASS();
-            btnRefresh_Click(owner);
+            D.Filters = new MODULE_MODEL();
+            btnRefresh_Click(null, null);
         }
 
         /// <summary>
         /// Preview
         /// </summary>
-        internal static void btnPreview_Click(dynamic owner, string fullname)
+        internal void btnPreview_Click(object sender, MouseButtonEventArgs e)
         {
-            var selectedInstances = owner.dgList.SelectedItems.Cast<MODULE_CLASS>();
-            foreach (MODULE_CLASS instance in selectedInstances)
+            var selectedInstances = W.dgList.SelectedItems.Cast<MODULE_MODEL>();
+            foreach (MODULE_MODEL instance in selectedInstances)
             {
-                var window = Activator.CreateInstance(Type.GetType(fullname), instance, Commands.Type.PREVIEW) as Window;
+                var window = Activator.CreateInstance(Type.GetType(Fullname), instance, Commands.Type.PREVIEW) as Window;
                 window.Show();
             }
         }
@@ -91,21 +94,21 @@ namespace WBZ.Prototypes
         /// <summary>
 		/// New
 		/// </summary>
-		internal static void btnNew_Click(dynamic owner, string fullname)
+		internal void btnNew_Click(object sender, MouseButtonEventArgs e)
         {
-            var window = Activator.CreateInstance(Type.GetType(fullname), new MODULE_CLASS(), Commands.Type.NEW) as Window;
+            var window = Activator.CreateInstance(Type.GetType(Fullname), null, Commands.Type.NEW) as Window;
             window.Show();
         }
 
         /// <summary>
         /// Duplicate
         /// </summary>
-        internal static void btnDuplicate_Click(dynamic owner, string fullname)
+        internal void btnDuplicate_Click(object sender, MouseButtonEventArgs e)
         {
-            var selectedInstances = owner.dgList.SelectedItems.Cast<MODULE_CLASS>();
-            foreach (MODULE_CLASS instance in selectedInstances)
+            var selectedInstances = W.dgList.SelectedItems.Cast<MODULE_MODEL>();
+            foreach (MODULE_MODEL instance in selectedInstances)
             {
-                var window = Activator.CreateInstance(Type.GetType(fullname), new MODULE_CLASS(), Commands.Type.DUPLICATE) as Window;
+                var window = Activator.CreateInstance(Type.GetType(Fullname), instance, Commands.Type.DUPLICATE) as Window;
                 window.Show();
             }
         }
@@ -113,12 +116,12 @@ namespace WBZ.Prototypes
         /// <summary>
         /// Edit
         /// </summary>
-        internal static void btnEdit_Click(dynamic owner, string fullname)
+        internal void btnEdit_Click(object sender, MouseButtonEventArgs e)
         {
-            var selectedInstances = owner.dgList.SelectedItems.Cast<MODULE_CLASS>();
-            foreach (MODULE_CLASS instance in selectedInstances)
+            var selectedInstances = W.dgList.SelectedItems.Cast<MODULE_MODEL>();
+            foreach (MODULE_MODEL instance in selectedInstances)
             {
-                var window = Activator.CreateInstance(Type.GetType(fullname), instance, Commands.Type.EDIT) as Window;
+                var window = Activator.CreateInstance(Type.GetType(Fullname), instance, Commands.Type.EDIT) as Window;
                 window.Show();
             }
         }
@@ -126,48 +129,42 @@ namespace WBZ.Prototypes
         /// <summary>
         /// Delete
         /// </summary>
-        internal static void btnDelete_Click(dynamic owner)
+        internal void btnDelete_Click(object sender, MouseButtonEventArgs e)
         {
-            var D = owner.DataContext;
-
-            var selectedInstances = owner.dgList.SelectedItems.Cast<MODULE_CLASS>();
+            var selectedInstances = W.dgList.SelectedItems.Cast<MODULE_MODEL>();
             if (selectedInstances.Count() > 0 && MessageBox.Show("Czy na pewno usunąć zaznaczone rekordy?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                foreach (MODULE_CLASS instance in selectedInstances)
+                foreach (dynamic instance in selectedInstances)
                     SQL.DeleteInstance(D.MODULE_NAME, instance.ID, instance.Name);
-                btnRefresh_Click(owner);
+                btnRefresh_Click(null, null);
             }
         }
 
         /// <summary>
         /// Refresh
         /// </summary>
-        internal static async void btnRefresh_Click(dynamic owner)
+        internal async void btnRefresh_Click(object sender, MouseButtonEventArgs e)
         {
-            var D = owner.DataContext;
-
             await Task.Run(() => {
-                UpdateFilters(owner);
+                UpdateFilters();
                 D.TotalItems = SQL.CountInstances(D.MODULE_NAME, D.FilterSQL);
-                D.InstancesList = SQL.ListInstances(D.MODULE_NAME, D.FilterSQL, D.SORTING, D.Page = 0).DataTableToList<MODULE_CLASS>();
+                D.InstancesList = SQL.ListInstances(D.MODULE_NAME, D.FilterSQL, D.SORTING, D.Page = 0).DataTableToList<MODULE_MODEL>();
             });
         }
 
         /// <summary>
         /// Close
         /// </summary>
-        internal static void btnClose_Click(dynamic owner)
+        internal void btnClose_Click(object sender, MouseButtonEventArgs e)
         {
-            owner.Close();
+            W.Close();
         }
 
         /// <summary>
         /// Select
         /// </summary>
-        internal static void dgList_MouseDoubleClick(dynamic owner, MouseButtonEventArgs e)
+        internal void dgList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var D = owner.DataContext;
-
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 if (!D.SelectingMode)
@@ -179,8 +176,8 @@ namespace WBZ.Prototypes
                 }
                 else
                 {
-                    owner.Selected = owner.dgList.SelectedItems.Cast<MODULE_CLASS>().FirstOrDefault();
-                    owner.DialogResult = true;
+                    W.Selected = W.dgList.SelectedItems.Cast<MODULE_MODEL>().FirstOrDefault();
+                    W.DialogResult = true;
                 }
             }
         }
@@ -188,15 +185,13 @@ namespace WBZ.Prototypes
         /// <summary>
         /// Load more
         /// </summary>
-        internal static void dgList_ScrollChanged(dynamic owner, object sender, ScrollChangedEventArgs e)
+        internal void dgList_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            var D = owner.DataContext;
-
             if (e.VerticalChange > 0 && e.VerticalOffset + e.ViewportHeight == e.ExtentHeight && D.InstancesList.Count < D.TotalItems)
             {
-                DataContext = null;
-                D.InstancesList.AddRange(SQL.ListInstances(D.MODULE_NAME, D.FilterSQL, D.SORTING, ++D.Page).DataTableToList<MODULE_CLASS>());
-                DataContext = D;
+                W.DataContext = null;
+                D.InstancesList.AddRange(SQL.ListInstances(D.MODULE_NAME, D.FilterSQL, D.SORTING, ++D.Page).DataTableToList<MODULE_MODEL>());
+                W.DataContext = D;
                 Extensions.GetVisualChild<ScrollViewer>(sender as DataGrid).ScrollToVerticalOffset(e.VerticalOffset);
             }
         }
@@ -204,7 +199,7 @@ namespace WBZ.Prototypes
         /// <summary>
         /// Closed
         /// </summary>
-        internal static void Window_Closed(dynamic owner)
+        internal void Window_Closed(object sender, EventArgs e)
         {
         }
     }
