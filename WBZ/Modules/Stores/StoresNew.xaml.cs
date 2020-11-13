@@ -80,12 +80,12 @@ namespace WBZ.Modules.Stores
 			if (tab?.Name == "tabSources_Articles")
 			{
 				if (D.InstanceInfo.ID != 0 && D.InstanceSources_Articles == null)
-					D.InstanceSources_Articles = SQL.ListInstances(Global.Module.ARTICLES, $"sa.store={D.InstanceInfo.ID}").DataTableToList<C_Article>();
+					D.InstanceSources_Articles = SQL.ListInstances<C_Article>(Global.Module.ARTICLES, $"sa.store={D.InstanceInfo.ID}");
 			}
 			else if (tab?.Name == "tabSources_Documents")
 			{
 				if (D.InstanceInfo.ID != 0 && D.InstanceSources_Documents == null)
-					D.InstanceSources_Documents = SQL.ListInstances(Global.Module.DOCUMENTS, $"d.store={D.InstanceInfo.ID}").DataTableToList<C_Document>();
+					D.InstanceSources_Documents = SQL.ListInstances<C_Document>(Global.Module.DOCUMENTS, $"d.store={D.InstanceInfo.ID}");
 			}
 		}
 

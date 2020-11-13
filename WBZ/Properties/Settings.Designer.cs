@@ -1523,10 +1523,10 @@ namespace WBZ.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>1</string>
   <string>a.codename</string>
-  <string>2</string>
+  <string>False</string>
   <string>a.name</string>
+  <string>False</string>
   <string>50</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection sorting_ArticlesList {

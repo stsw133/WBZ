@@ -1,35 +1,61 @@
 ﻿using System;
+using System.Data;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using WBZ.Helpers;
 
-namespace WBZ.Prototypes
+namespace WBZ.Interfaces
 {
-    internal class P_ModuleList<MODULE_MODEL>
+    interface IModuleList
+	{
+        void Window_Loaded(object sender, RoutedEventArgs e);
+        void UpdateFilters();
+        void dpFilter_KeyUp(object sender, KeyEventArgs e);
+        void btnFiltersClear_Click(object sender, MouseButtonEventArgs e);
+        void btnPreview_Click(object sender, MouseButtonEventArgs e);
+        void btnNew_Click(object sender, MouseButtonEventArgs e);
+        void btnDuplicate_Click(object sender, MouseButtonEventArgs e);
+        void btnEdit_Click(object sender, MouseButtonEventArgs e);
+        void btnDelete_Click(object sender, MouseButtonEventArgs e);
+        void btnRefresh_Click(object sender, MouseButtonEventArgs e);
+        void btnClose_Click(object sender, MouseButtonEventArgs e);
+        void dgList_MouseDoubleClick(object sender, MouseButtonEventArgs e);
+        void dgList_ScrollChanged(object sender, ScrollChangedEventArgs e);
+        void Window_Closed(object sender, EventArgs e);
+    }
+
+    public class ModuleList<MODULE_MODEL> : Window, IModuleList where MODULE_MODEL : class, new()
     {
         dynamic W, D;
-        string Fullname;
-        string MODULE_NAME;
+        string FullName, HalfName;
+        string MODULE_TYPE;
+        //Type MODULE_MODEL;
 
-        internal P_ModuleList(object owner)
+        public ModuleList()
         {
-            W = owner;
-            D = W.DataContext;
-            Fullname = owner.GetType().FullName;
-            MODULE_NAME = D.MODULE_NAME;
+            
         }
 
         /// <summary>
         /// Loaded
         /// </summary>
-        internal void Window_Loaded(object sender, RoutedEventArgs e)
+        public void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            W = GetWindow(this);
+            D = W.DataContext;
+
+            FullName = W.GetType().FullName;
+            HalfName = FullName.Substring(0, FullName.Length - 4);
+
+            MODULE_TYPE = D.MODULE_TYPE;
+            //MODULE_MODEL = Global.ModuleModel(MODULE_TYPE);
+
             if (D.SelectingMode)
                 W.dgList.SelectionMode = DataGridSelectionMode.Single;
 
-            switch (MODULE_NAME)
+            switch (MODULE_TYPE)
             {
                 ///ARTICLES
                 case Global.Module.ARTICLES:
@@ -43,9 +69,9 @@ namespace WBZ.Prototypes
         /// <summary>
 		/// Update filters
 		/// </summary>
-		internal void UpdateFilters()
+		public void UpdateFilters()
         {
-            switch (MODULE_NAME)
+            switch (MODULE_TYPE)
             {
                 ///ARTICLES
                 case Global.Module.ARTICLES:
@@ -63,7 +89,7 @@ namespace WBZ.Prototypes
         /// <summary>
 		/// Apply filters
 		/// </summary>
-		internal void dpFilter_KeyUp(object sender, KeyEventArgs e)
+		public void dpFilter_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
                 btnRefresh_Click(null, null);
@@ -72,21 +98,21 @@ namespace WBZ.Prototypes
         /// <summary>
 		/// Clear filters
 		/// </summary>
-		internal void btnFiltersClear_Click(object sender, MouseButtonEventArgs e)
+		public void btnFiltersClear_Click(object sender, MouseButtonEventArgs e)
         {
-            D.Filters = new MODULE_MODEL();
+            //D.Filters = new MODULE_MODEL();
             btnRefresh_Click(null, null);
         }
 
         /// <summary>
         /// Preview
         /// </summary>
-        internal void btnPreview_Click(object sender, MouseButtonEventArgs e)
+        public void btnPreview_Click(object sender, MouseButtonEventArgs e)
         {
             var selectedInstances = W.dgList.SelectedItems.Cast<MODULE_MODEL>();
             foreach (MODULE_MODEL instance in selectedInstances)
             {
-                var window = Activator.CreateInstance(Type.GetType(Fullname), instance, Commands.Type.PREVIEW) as Window;
+                var window = Activator.CreateInstance(Type.GetType(HalfName + "New"), instance, Commands.Type.PREVIEW) as Window;
                 window.Show();
             }
         }
@@ -94,21 +120,21 @@ namespace WBZ.Prototypes
         /// <summary>
 		/// New
 		/// </summary>
-		internal void btnNew_Click(object sender, MouseButtonEventArgs e)
+		public void btnNew_Click(object sender, MouseButtonEventArgs e)
         {
-            var window = Activator.CreateInstance(Type.GetType(Fullname), null, Commands.Type.NEW) as Window;
+            var window = Activator.CreateInstance(Type.GetType(HalfName + "New"), null, Commands.Type.NEW) as Window;
             window.Show();
         }
 
         /// <summary>
         /// Duplicate
         /// </summary>
-        internal void btnDuplicate_Click(object sender, MouseButtonEventArgs e)
+        public void btnDuplicate_Click(object sender, MouseButtonEventArgs e)
         {
             var selectedInstances = W.dgList.SelectedItems.Cast<MODULE_MODEL>();
             foreach (MODULE_MODEL instance in selectedInstances)
             {
-                var window = Activator.CreateInstance(Type.GetType(Fullname), instance, Commands.Type.DUPLICATE) as Window;
+                var window = Activator.CreateInstance(Type.GetType(HalfName + "New"), instance, Commands.Type.DUPLICATE) as Window;
                 window.Show();
             }
         }
@@ -116,12 +142,12 @@ namespace WBZ.Prototypes
         /// <summary>
         /// Edit
         /// </summary>
-        internal void btnEdit_Click(object sender, MouseButtonEventArgs e)
+        public void btnEdit_Click(object sender, MouseButtonEventArgs e)
         {
             var selectedInstances = W.dgList.SelectedItems.Cast<MODULE_MODEL>();
             foreach (MODULE_MODEL instance in selectedInstances)
             {
-                var window = Activator.CreateInstance(Type.GetType(Fullname), instance, Commands.Type.EDIT) as Window;
+                var window = Activator.CreateInstance(Type.GetType(HalfName + "New"), instance, Commands.Type.EDIT) as Window;
                 window.Show();
             }
         }
@@ -129,13 +155,13 @@ namespace WBZ.Prototypes
         /// <summary>
         /// Delete
         /// </summary>
-        internal void btnDelete_Click(object sender, MouseButtonEventArgs e)
+        public void btnDelete_Click(object sender, MouseButtonEventArgs e)
         {
             var selectedInstances = W.dgList.SelectedItems.Cast<MODULE_MODEL>();
             if (selectedInstances.Count() > 0 && MessageBox.Show("Czy na pewno usunąć zaznaczone rekordy?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
                 foreach (dynamic instance in selectedInstances)
-                    SQL.DeleteInstance(D.MODULE_NAME, instance.ID, instance.Name);
+                    SQL.DeleteInstance(D.MODULE_TYPE, instance.ID, instance.Name);
                 btnRefresh_Click(null, null);
             }
         }
@@ -143,19 +169,19 @@ namespace WBZ.Prototypes
         /// <summary>
         /// Refresh
         /// </summary>
-        internal async void btnRefresh_Click(object sender, MouseButtonEventArgs e)
+        public async void btnRefresh_Click(object sender, MouseButtonEventArgs e)
         {
             await Task.Run(() => {
                 UpdateFilters();
-                D.TotalItems = SQL.CountInstances(D.MODULE_NAME, D.FilterSQL);
-                D.InstancesList = SQL.ListInstances(D.MODULE_NAME, D.FilterSQL, D.SORTING, D.Page = 0).DataTableToList<MODULE_MODEL>();
+                D.TotalItems = SQL.CountInstances(D.MODULE_TYPE, D.FilterSQL);
+                D.InstancesList = SQL.ListInstances<MODULE_MODEL>(D.MODULE_TYPE, D.FilterSQL, D.SORTING, D.Page = 0);
             });
         }
 
         /// <summary>
         /// Close
         /// </summary>
-        internal void btnClose_Click(object sender, MouseButtonEventArgs e)
+        public void btnClose_Click(object sender, MouseButtonEventArgs e)
         {
             W.Close();
         }
@@ -163,13 +189,13 @@ namespace WBZ.Prototypes
         /// <summary>
         /// Select
         /// </summary>
-        internal void dgList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        public void dgList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 if (!D.SelectingMode)
                 {
-                    if (Global.User.Perms.Contains($"{D.MODULE_NAME}_{Global.UserPermType.SAVE}"))
+                    if (Global.User.Perms.Contains($"{D.MODULE_TYPE}_{Global.UserPermType.SAVE}"))
                         btnEdit_Click(null, null);
                     else
                         btnPreview_Click(null, null);
@@ -185,12 +211,12 @@ namespace WBZ.Prototypes
         /// <summary>
         /// Load more
         /// </summary>
-        internal void dgList_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        public void dgList_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             if (e.VerticalChange > 0 && e.VerticalOffset + e.ViewportHeight == e.ExtentHeight && D.InstancesList.Count < D.TotalItems)
             {
                 W.DataContext = null;
-                D.InstancesList.AddRange(SQL.ListInstances(D.MODULE_NAME, D.FilterSQL, D.SORTING, ++D.Page).DataTableToList<MODULE_MODEL>());
+                D.InstancesList.AddRange(SQL.ListInstances(D.MODULE_TYPE, D.FilterSQL, D.SORTING, ++D.Page).DataTableToList<MODULE_MODEL>());
                 W.DataContext = D;
                 Extensions.GetVisualChild<ScrollViewer>(sender as DataGrid).ScrollToVerticalOffset(e.VerticalOffset);
             }
@@ -199,7 +225,7 @@ namespace WBZ.Prototypes
         /// <summary>
         /// Closed
         /// </summary>
-        internal void Window_Closed(object sender, EventArgs e)
+        public void Window_Closed(object sender, EventArgs e)
         {
         }
     }

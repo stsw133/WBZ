@@ -18,7 +18,7 @@ namespace WBZ.Modules.Distributions
 			InitializeComponent();
 			DataContext = D;
 
-			D.FamilyInfo = SQL.GetInstance("family", family.Family).DataTableToList<C_Family>()?[0];
+			D.FamilyInfo = SQL.GetInstance<C_Family>("family", family.Family);
 			D.FamilyContactsInfo = SQL.ListContacts("families", family.Family, @"""default""=true");
 
 			if (family.Status == 0) rbStatus0.IsChecked = true;

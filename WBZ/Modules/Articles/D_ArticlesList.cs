@@ -4,20 +4,26 @@ using System.ComponentModel;
 using System.Data;
 using System.Reflection;
 using WBZ.Helpers;
-using MODULE_CLASS = WBZ.Models.C_Article;
+using MODULE_MODEL = WBZ.Models.C_Article;
 
 namespace WBZ.Modules.Articles
 {
     class D_ArticlesList : INotifyPropertyChanged
 	{
-		public readonly string MODULE_NAME = Global.Module.ARTICLES;
-		public StringCollection SORTING = Properties.Settings.Default.sorting_ArticlesList;
+		public event PropertyChangedEventHandler PropertyChanged;
+		public void NotifyPropertyChanged(string name)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+		}
 
+		/// Module
+		public readonly string MODULE_TYPE = Global.Module.ARTICLES;
+		public StringCollection SORTING = Properties.Settings.Default.sorting_ArticlesList;
 		/// Stores list
 		public DataTable StoresList { get; } = SQL.GetStoresNames();
 		/// Instances list
-		private List<MODULE_CLASS> instancesList;
-		public List<MODULE_CLASS> InstancesList
+		private List<MODULE_MODEL> instancesList;
+		public List<MODULE_MODEL> InstancesList
 		{
 			get
 			{
@@ -34,8 +40,8 @@ namespace WBZ.Modules.Articles
 		/// SQL filter
 		public string FilterSQL { get; set; }
 		/// Filter instance
-		private MODULE_CLASS filters = new MODULE_CLASS();
-		public MODULE_CLASS Filters
+		private MODULE_MODEL filters = new MODULE_MODEL();
+		public MODULE_MODEL Filters
 		{
 			get
 			{
@@ -74,15 +80,6 @@ namespace WBZ.Modules.Articles
 				totalItems = value;
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
-		}
-
-		/// <summary>
-		/// PropertyChangedEventHandler
-		/// </summary>
-		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged(string name)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
 	}
 }

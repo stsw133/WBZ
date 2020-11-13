@@ -104,35 +104,35 @@ namespace WBZ.Modules.Logs
             {
 				/// articles
 				case Global.Module.ARTICLES:
-					window = new ArticlesNew(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Article>()?[0], mode);
+					window = new ArticlesNew(SQL.GetInstance<C_Article>(log.Module, log.Instance), mode);
 					break;
 				/// attributes_classes
 				case Global.Module.ATTRIBUTES_CLASSES:
-					window = new AttributesClassesNew(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_AttributeClass>()?[0], mode);
+					window = new AttributesClassesNew(SQL.GetInstance<C_AttributeClass>(log.Module, log.Instance), mode);
 					break;
 				/// companies
 				case Global.Module.COMPANIES:
-					window = new CompaniesNew(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Company>()?[0], mode);
+					window = new CompaniesNew(SQL.GetInstance<C_Company>(log.Module, log.Instance), mode);
 					break;
 				/// distributions
 				case Global.Module.DISTRIBUTIONS:
-					window = new DistributionsNew(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Distribution>()?[0], mode);
+					window = new DistributionsNew(SQL.GetInstance<C_Distribution>(log.Module, log.Instance), mode);
 					break;
 				/// documents
 				case Global.Module.DOCUMENTS:
-					window = new DocumentsNew(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Document>()?[0], mode);
+					window = new DocumentsNew(SQL.GetInstance<C_Document>(log.Module, log.Instance), mode);
 					break;
 				/// families
 				case Global.Module.FAMILIES:
-					window = new FamiliesNew(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Family>()?[0], mode);
+					window = new FamiliesNew(SQL.GetInstance<C_Family>(log.Module, log.Instance), mode);
 					break;
 				/// stores
 				case Global.Module.STORES:
-					window = new StoresNew(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_Store>()?[0], mode);
+					window = new StoresNew(SQL.GetInstance<C_Store>(log.Module, log.Instance), mode);
 					break;
 				/// users
 				case Global.Module.USERS:
-					window = new UsersNew(SQL.GetInstance(log.Module, log.Instance).DataTableToList<C_User>()?[0], mode);
+					window = new UsersNew(SQL.GetInstance<C_User>(log.Module, log.Instance), mode);
 					break;
 				default:
 					return;
@@ -162,7 +162,7 @@ namespace WBZ.Modules.Logs
 			await Task.Run(() => {
 				UpdateFilters();
 				D.TotalItems = SQL.CountInstances(D.MODULE_NAME, D.FilterSQL);
-				D.InstancesList = SQL.ListInstances(D.MODULE_NAME, D.FilterSQL, D.SORTING, D.Page = 0).DataTableToList<MODULE_CLASS>();
+				D.InstancesList = SQL.ListInstances<MODULE_CLASS>(D.MODULE_NAME, D.FilterSQL, D.SORTING, D.Page = 0);
 			});
 		}
 
@@ -191,7 +191,7 @@ namespace WBZ.Modules.Logs
 			if (e.VerticalChange > 0 && e.VerticalOffset + e.ViewportHeight == e.ExtentHeight && D.InstancesList.Count < D.TotalItems)
 			{
 				DataContext = null;
-				D.InstancesList.AddRange(SQL.ListInstances(Global.Module.LOGS, D.FilterSQL, D.SORTING, ++D.Page).DataTableToList<MODULE_CLASS>());
+				D.InstancesList.AddRange(SQL.ListInstances<MODULE_CLASS>(Global.Module.LOGS, D.FilterSQL, D.SORTING, ++D.Page));
 				DataContext = D;
 				Extensions.GetVisualChild<ScrollViewer>(sender as DataGrid).ScrollToVerticalOffset(e.VerticalOffset);
 			}

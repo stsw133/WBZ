@@ -30,7 +30,7 @@ namespace WBZ.Controls
                 Window win = Window.GetWindow(this);
 
                 if (ID != 0 && D.InstanceLogs == null)
-                    D.InstanceLogs = SQL.ListInstances(Global.Module.LOGS, $"l.module='{Module}' and l.instance={ID}").DataTableToList<C_Log>();
+                    D.InstanceLogs = SQL.ListInstances<C_Log>(Global.Module.LOGS, $"l.module='{Module}' and l.instance={ID}");
 
                 dynamic d = win?.DataContext;
                 if (d != null)

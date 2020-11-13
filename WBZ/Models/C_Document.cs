@@ -33,7 +33,7 @@ namespace WBZ.Models
 
 		public C_Document()
 		{
-			var stores = SQL.ListInstances(Global.Module.STORES, "true").DataTableToList<C_Store>();
+			var stores = SQL.ListInstances<C_Store>(Global.Module.STORES, "true");
 
 			ID = 0;
 			Type = "FS";

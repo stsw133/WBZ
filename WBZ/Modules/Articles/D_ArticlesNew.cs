@@ -9,10 +9,16 @@ namespace WBZ.Modules.Articles
 {
     internal class D_ArticlesNew : INotifyPropertyChanged
 	{
-		public readonly string MODULE_NAME = Global.Module.ARTICLES;
+		public event PropertyChangedEventHandler PropertyChanged;
+		public void NotifyPropertyChanged(string name)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+		}
 
+		/// Module
+		public readonly string MODULE_TYPE = Global.Module.ARTICLES;
 		/// Instance
-		private MODULE_CLASS instanceInfo;
+		private MODULE_CLASS instanceInfo = new MODULE_CLASS();
 		public MODULE_CLASS InstanceInfo
 		{
 			get
@@ -26,7 +32,7 @@ namespace WBZ.Modules.Articles
 			}
 		}
 		/// Instance source - stores
-		private List<C_Store> instanceSources_Stores;
+		private List<C_Store> instanceSources_Stores = new List<C_Store>();
 		public List<C_Store> InstanceSources_Stores
 		{
 			get
@@ -40,7 +46,7 @@ namespace WBZ.Modules.Articles
 			}
 		}
 		/// Instance source - documents
-		private List<C_Document> instanceSources_Documents;
+		private List<C_Document> instanceSources_Documents = new List<C_Document>();
 		public List<C_Document> InstanceSources_Documents
 		{
 			get
@@ -54,7 +60,7 @@ namespace WBZ.Modules.Articles
 			}
 		}
 		/// Instance source - distributions
-		private List<C_Distribution> instanceSources_Distributions;
+		private List<C_Distribution> instanceSources_Distributions = new List<C_Distribution>();
 		public List<C_Distribution> InstanceSources_Distributions
 		{
 			get
@@ -100,15 +106,6 @@ namespace WBZ.Modules.Articles
 				else
 					return $"Podgląd towaru: {InstanceInfo.Name}";
 			}
-		}
-
-		/// <summary>
-		/// PropertyChangedEventHandler
-		/// </summary>
-		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged(string name)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
 	}
 }

@@ -26,13 +26,20 @@ namespace WBZ.Modules.Articles
 			InitializeComponent();
 			DataContext = D;
 
-			D.InstanceInfo = instance;
+			if (instance != null)
+				D.InstanceInfo = instance;
 			D.Mode = mode;
+		}
 
+		/// <summary>
+		/// Loaded
+		/// </summary>
+		private void Window_Loaded(object sender, RoutedEventArgs e)
+		{
 			D.InstanceInfo.Measures = SQL.GetArticleMeasures(D.InstanceInfo.ID);
 			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE))
 			{
-				D.InstanceInfo.ID = SQL.NewInstanceID(D.MODULE_NAME);
+				D.InstanceInfo.ID = SQL.NewInstanceID(D.MODULE_TYPE);
 				foreach (DataRow row in D.InstanceInfo.Measures.Rows)
 					row.SetAdded();
 			}
@@ -57,7 +64,7 @@ namespace WBZ.Modules.Articles
 			if (!CheckDataValidation())
 				return;
 
-			if (saved = SQL.SetInstance(D.MODULE_NAME, D.InstanceInfo, D.Mode))
+			if (saved = SQL.SetInstance(D.MODULE_TYPE, D.InstanceInfo, D.Mode))
 				Close();
 		}
 
@@ -113,17 +120,17 @@ namespace WBZ.Modules.Articles
 			if (tab?.Name == "tabSources_Stores")
 			{
 				if (D.InstanceInfo.ID != 0 && D.InstanceSources_Stores == null)
-					D.InstanceSources_Stores = SQL.ListInstances(Global.Module.STORES, $"sa.article={D.InstanceInfo.ID}").DataTableToList<C_Store>();
+					D.InstanceSources_Stores = SQL.ListInstances<C_Store>(Global.Module.STORES, $"sa.article={D.InstanceInfo.ID}");
 			}
 			else if (tab?.Name == "tabSources_Documents")
 			{
 				if (D.InstanceInfo.ID != 0 && D.InstanceSources_Documents == null)
-					D.InstanceSources_Documents = SQL.ListInstances(Global.Module.DOCUMENTS, $"dp.article={D.InstanceInfo.ID}").DataTableToList<C_Document>();
+					D.InstanceSources_Documents = SQL.ListInstances<C_Document>(Global.Module.DOCUMENTS, $"dp.article={D.InstanceInfo.ID}");
 			}
 			else if (tab?.Name == "tabSources_Distributions")
 			{
 				if (D.InstanceInfo.ID != 0 && D.InstanceSources_Distributions == null)
-					D.InstanceSources_Distributions = SQL.ListInstances(Global.Module.DISTRIBUTIONS, $"dp.article={D.InstanceInfo.ID}").DataTableToList<C_Distribution>();
+					D.InstanceSources_Distributions = SQL.ListInstances<C_Distribution>(Global.Module.DISTRIBUTIONS, $"dp.article={D.InstanceInfo.ID}");
 			}
 		}
 
@@ -190,7 +197,7 @@ namespace WBZ.Modules.Articles
 		private void Window_Closed(object sender, EventArgs e)
 		{
 			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE) && !saved)
-				SQL.ClearObject(D.MODULE_NAME, D.InstanceInfo.ID);
+				SQL.ClearObject(D.MODULE_TYPE, D.InstanceInfo.ID);
 		}
 	}
 }

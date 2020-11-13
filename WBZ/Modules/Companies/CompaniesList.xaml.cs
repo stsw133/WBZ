@@ -133,7 +133,7 @@ namespace WBZ.Modules.Companies
             await Task.Run(() => {
                 UpdateFilters();
                 D.TotalItems = SQL.CountInstances(D.MODULE_NAME, D.FilterSQL);
-                D.InstancesList = SQL.ListInstances(D.MODULE_NAME, D.FilterSQL, D.SORTING, D.Page = 0).DataTableToList<MODULE_CLASS>();
+                D.InstancesList = SQL.ListInstances<MODULE_CLASS>(D.MODULE_NAME, D.FilterSQL, D.SORTING, D.Page = 0);
             });
         }
 
@@ -176,7 +176,7 @@ namespace WBZ.Modules.Companies
             if (e.VerticalChange > 0 && e.VerticalOffset + e.ViewportHeight == e.ExtentHeight && D.InstancesList.Count < D.TotalItems)
             {
                 DataContext = null;
-                D.InstancesList.AddRange(SQL.ListInstances(D.MODULE_NAME, D.FilterSQL, D.SORTING, ++D.Page).DataTableToList<MODULE_CLASS>());
+                D.InstancesList.AddRange(SQL.ListInstances<MODULE_CLASS>(D.MODULE_NAME, D.FilterSQL, D.SORTING, ++D.Page));
                 DataContext = D;
                 Extensions.GetVisualChild<ScrollViewer>(sender as DataGrid).ScrollToVerticalOffset(e.VerticalOffset);
             }

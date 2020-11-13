@@ -39,6 +39,36 @@ namespace WBZ.Helpers
             public const string STORES = "stores";
             public const string USERS = "users";
         }
+        public static Type ModuleModel(string module)
+        {
+            switch (module)
+            {
+                case Module.ARTICLES:
+                    return typeof(C_Article);
+                case Module.ATTACHMENTS:
+                    return typeof(C_Attachment);
+                case Module.ATTRIBUTES_CLASSES:
+                    return typeof(C_AttributeClass);
+                case Module.COMPANIES:
+                    return typeof(C_Company);
+                case Module.DISTRIBUTIONS:
+                    return typeof(C_Distribution);
+                case Module.DOCUMENTS:
+                    return typeof(C_Document);
+                case Module.EMPLOYEES:
+                    return typeof(C_Employee);
+                case Module.FAMILIES:
+                    return typeof(C_Family);
+                case Module.LOGS:
+                    return typeof(C_Log);
+                case Module.STORES:
+                    return typeof(C_Store);
+                case Module.USERS:
+                    return typeof(C_User);
+                default:
+                    return null;
+            }
+        }
         public static string TranslateModule(string module)
         {
             switch (module)

@@ -614,7 +614,7 @@ namespace WBZ
 						///update articles amounts
 						if (oldstatus > 0)
 						{
-							var document = GetInstance("documents", id).DataTableToList<C_Document>()?[0];
+							var document = GetInstance<C_Document>("documents", id);
 							var positions = GetInstancePositions("documents", id);
 							foreach (DataRow pos in positions.Rows)
 								ChangeArticleAmount(document.Store, (int)pos["article"], -(double)pos["amount"], (string)pos["measure"], false, sqlConn, sqlTran);
@@ -1402,9 +1402,9 @@ namespace WBZ
 		/// <param name="filter">Filtr SQL</param>
 		/// <param name="sort">Kolekcja sortowania</param>
 		/// <param name="page">Strona listy rekordów</param>
-		internal static DataTable ListInstances(string module, string filter, StringCollection sort = null, int page = 0)
+		internal static List<T> ListInstances<T>(string module, string filter, StringCollection sort = null, int page = 0) where T : class, new()
 		{
-			DataTable result = new DataTable();
+			List<T> result = new List<T>();
 			string query;
 
 			try
@@ -1526,7 +1526,10 @@ namespace WBZ
 						if (module.In(Global.Module.DOCUMENTS)) sqlDA.SelectCommand.CommandText += $" group by d.id, c.id, s.id";
 						sqlDA.SelectCommand.CommandText += $" order by {sort[0]} {(Convert.ToBoolean(sort[1]) ? "desc" : "asc")}, {sort[2]} {(Convert.ToBoolean(sort[3]) ? "desc" : "asc")}";
 						sqlDA.SelectCommand.CommandText += $" limit {sort[4]} offset {Convert.ToInt32(sort[4]) * page}";
-						sqlDA.Fill(result);
+
+						var dt = new DataTable();
+						sqlDA.Fill(dt);
+						result = dt.DataTableToList<T>();
 					}
 				}
 			}
@@ -1565,18 +1568,17 @@ namespace WBZ
 		/// </summary>
 		/// <param name="module">Nazwa modułu</param>
 		/// <param name="id">ID instancji</param>
-		internal static DataTable GetInstance(string module, int id)
+		internal static T GetInstance<T>(string module, int id) where T : class, new()
 		{
 			try
 			{
-				return ListInstances(module, $"{module[0]}.id={id}");
+				return ListInstances<T>(module, $"{module[0]}.id={id}")[0];
 			}
 			catch (Exception ex)
 			{
 				MessageBox.Show(ex.ToString());
 			}
-
-			return null;
+			return default(T);
 		}
 		/// <summary>
 		/// Pobiera listę pozycji instancji

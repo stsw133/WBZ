@@ -95,7 +95,7 @@ namespace WBZ.Modules.Families
             if (tab?.Name == "tabSources_Distributions")
             {
 				if (D.InstanceInfo.ID != 0 && D.InstanceSources_Distributions == null)
-                    D.InstanceSources_Distributions = SQL.ListInstances(Global.Module.DISTRIBUTIONS, $"dp.family={D.InstanceInfo.ID}").DataTableToList<C_Distribution>();
+                    D.InstanceSources_Distributions = SQL.ListInstances<C_Distribution>(Global.Module.DISTRIBUTIONS, $"dp.family={D.InstanceInfo.ID}");
             }
         }
 

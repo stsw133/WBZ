@@ -68,7 +68,7 @@ namespace WBZ.Modules.Groups
 				int owner = 0;
 				foreach (var groupName in window.Value.Split('/'))
 				{
-					var groups = SQL.ListInstances(D.MODULE_NAME, $"g.name='{groupName}'").DataTableToList<MODULE_CLASS>();
+					var groups = SQL.ListInstances<MODULE_CLASS>(D.MODULE_NAME, $"g.name='{groupName}'");
 					if (groups.Count > 0)
 						owner = groups[0].ID;
 					else
@@ -103,7 +103,7 @@ namespace WBZ.Modules.Groups
 				int owner = 0;
 				foreach (var groupName in window.Value.Split('/'))
 				{
-					var groups = SQL.ListInstances(D.MODULE_NAME, $"g.name='{groupName}'").DataTableToList<MODULE_CLASS>();
+					var groups = SQL.ListInstances<MODULE_CLASS>(D.MODULE_NAME, $"g.name='{groupName}'");
 					if (groups.Count > 0)
 						owner = groups[0].ID;
 					else
@@ -138,7 +138,7 @@ namespace WBZ.Modules.Groups
 				int owner = 0;
 				foreach (var groupName in window.Value.Split('/'))
 				{
-					var groups = SQL.ListInstances(D.MODULE_NAME, $"g.name='{groupName}'").DataTableToList<MODULE_CLASS>();
+					var groups = SQL.ListInstances<MODULE_CLASS>(D.MODULE_NAME, $"g.name='{groupName}'");
 					if (groups.Count > 0)
 						owner = groups[0].ID;
 					else
@@ -181,7 +181,7 @@ namespace WBZ.Modules.Groups
 			await Task.Run(() => {
 				UpdateFilters();
 				D.TotalItems = SQL.CountInstances(D.MODULE_NAME, D.FilterSQL);
-				D.InstancesList = SQL.ListInstances(D.MODULE_NAME, D.FilterSQL, D.SORTING).DataTableToList<MODULE_CLASS>();
+				D.InstancesList = SQL.ListInstances<MODULE_CLASS>(D.MODULE_NAME, D.FilterSQL, D.SORTING);
 			});
 		}
 

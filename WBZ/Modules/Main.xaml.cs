@@ -104,7 +104,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void menuRefresh_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
-			Global.User = SQL.GetInstance(Global.Module.USERS, Global.User.ID).DataTableToList<C_User>()?[0];
+			Global.User = SQL.GetInstance<C_User>(Global.Module.USERS, Global.User.ID);
 			Global.User.Perms = SQL.GetUserPerms(Global.User.ID);
 
 			var window = new Main();

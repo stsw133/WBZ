@@ -80,7 +80,7 @@ namespace WBZ.Modules.Companies
             if (tab?.Name == "tabSources_Documents")
             {
 				if (D.InstanceInfo.ID != 0 && D.InstanceSources_Documents == null)
-                    D.InstanceSources_Documents = SQL.ListInstances(Global.Module.DOCUMENTS, $"c.id={D.InstanceInfo.ID}").DataTableToList<C_Document>();
+                    D.InstanceSources_Documents = SQL.ListInstances<C_Document>(Global.Module.DOCUMENTS, $"c.id={D.InstanceInfo.ID}");
             }
         }
 

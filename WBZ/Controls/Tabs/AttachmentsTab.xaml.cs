@@ -35,7 +35,7 @@ namespace WBZ.Controls
 
                 if (ID != 0 && D.InstanceAttachments == null)
                 {
-                    D.InstanceAttachments = SQL.ListInstances(Global.Module.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}").DataTableToList<C_Attachment>();
+                    D.InstanceAttachments = SQL.ListInstances<C_Attachment>(Global.Module.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}");
                     win.Closed += UserControl_Closed;
                 }
 
@@ -74,7 +74,7 @@ namespace WBZ.Controls
                     file = File.ReadAllBytes(filePath);
                 }
                 SQL.SetAttachment(Module, ID, window.GetName, file, filePath);
-                D.InstanceAttachments = SQL.ListInstances(Global.Module.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}").DataTableToList<C_Attachment>();
+                D.InstanceAttachments = SQL.ListInstances<C_Attachment>(Global.Module.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}");
             }
         }
 
@@ -106,7 +106,7 @@ namespace WBZ.Controls
             var item = lbAttachments.SelectedItem as C_Attachment;
 
             SQL.DeleteInstance(Global.Module.ATTACHMENTS, item.ID, item.Name);
-            D.InstanceAttachments = SQL.ListInstances(Global.Module.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}").DataTableToList<C_Attachment>();
+            D.InstanceAttachments = SQL.ListInstances<C_Attachment>(Global.Module.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}");
         }
 
         /// <summary>
