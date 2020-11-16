@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="Ustawienia" MinHeight="140" MinWidth="200" Height="350" Width="500"
             BorderThickness="3" BorderBrush="#333" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" WindowStyle="None"
-            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}}"
+            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
             Icon="pack://siteoforigin:,,,/Resources/icon32_settings.ico" Closed="Window_Closed">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
@@ -45,7 +45,7 @@
                                 <RadioButton DockPanel.Dock="Top" Content="Alternatywny" Margin="5" VerticalContentAlignment="Center" GroupName="TitleBarStyle" IsChecked="True"/>
                             </DockPanel>
                         </GroupBox>
-                        <GroupBox Header="Czcionka" DockPanel.Dock="Top" Margin="5,5,5,0" VerticalAlignment="Top">
+                        <GroupBox Header="Interfejs" DockPanel.Dock="Top" Margin="5,5,5,0" VerticalAlignment="Top">
                             <DockPanel Margin="5">
                                 <DockPanel DockPanel.Dock="Top">
                                     <Label Content="Czcionka:" Margin="5" VerticalContentAlignment="Center"/>
@@ -59,10 +59,10 @@
                                     </ComboBox>
                                 </DockPanel>
                                 <DockPanel DockPanel.Dock="Top">
-                                    <Label Content="Rozmiar czcionki:" Margin="5" VerticalContentAlignment="Center"/>
-                                    <Label Content="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalContentAlignment="Center" FontWeight="Medium"/>
+                                    <Label Content="Rozmiar interfejsu:" Margin="5" VerticalContentAlignment="Center"/>
+                                    <Label Content="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalContentAlignment="Center" FontWeight="Medium"/>
                                 </DockPanel>
-                                <Slider DockPanel.Dock="Top" Value="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=TwoWay}" IsSnapToTickEnabled="True" Minimum="8" Maximum="16" TickFrequency="0.5" TickPlacement="BottomRight"/>
+                                <Slider DockPanel.Dock="Top" Value="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=TwoWay}" IsSnapToTickEnabled="True" Minimum="8" Maximum="16" TickFrequency="0.5" TickPlacement="BottomRight"/>
                             </DockPanel>
                         </GroupBox>
                     </DockPanel>

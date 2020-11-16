@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Data;
+using WBZ.Helpers;
 
 namespace WBZ.Models
 {
 	public class C_Family
 	{
+		public static readonly string MODULE = Global.Module.FAMILIES;
+
 		public int ID { get; set; }
 		public string Declarant { get; set; }
 		public string Lastname { get; set; }

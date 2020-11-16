@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -31,12 +30,6 @@ namespace WBZ.Interfaces
         dynamic W, D;
         string FullName, HalfName;
         string MODULE_TYPE;
-        //Type MODULE_MODEL;
-
-        public ModuleList()
-        {
-            
-        }
 
         /// <summary>
         /// Loaded
@@ -50,7 +43,6 @@ namespace WBZ.Interfaces
             HalfName = FullName.Substring(0, FullName.Length - 4);
 
             MODULE_TYPE = D.MODULE_TYPE;
-            //MODULE_MODEL = Global.ModuleModel(MODULE_TYPE);
 
             if (D.SelectingMode)
                 W.dgList.SelectionMode = DataGridSelectionMode.Single;

@@ -7,6 +7,8 @@ namespace WBZ.Models
 {
 	public class C_Distribution
 	{
+		public static readonly string MODULE = Global.Module.DISTRIBUTIONS;
+
 		public enum DistributionStatus
 		{
 			Withdrawn = -1,

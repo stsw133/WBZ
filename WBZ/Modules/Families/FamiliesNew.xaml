@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="{Binding Title}" MinHeight="240" MinWidth="360" Height="{Binding config_FamiliesNew_WindowSize[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_FamiliesNew_WindowSize[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
             BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
-            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}}"
+            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
             Icon="pack://siteoforigin:,,,/Resources/icon32_families.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
@@ -80,7 +80,7 @@
                             <TextBox Text="{Binding InstanceInfo.Address}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <CheckBox DockPanel.Dock="Top" Content="Status - aktywna" Margin="20" HorizontalAlignment="Center" VerticalContentAlignment="Center" IsChecked="{Binding InstanceInfo.Status}"/>
-                        <GroupBox DockPanel.Dock="Top" Header="Uzgodniony sposób kontaktu" Padding="0,0,0,10" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=25}">
+                        <GroupBox DockPanel.Dock="Top" Header="Uzgodniony sposób kontaktu" Padding="0,0,0,10" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=25}">
                             <StackPanel>
                                 <CheckBox Content="Wyślij wiadomość SMS" Margin="10,10,10,0" VerticalContentAlignment="Center" IsChecked="{Binding InstanceInfo.C_SMS}"/>
                                 <CheckBox Content="Rozmowa telefoniczna" Margin="10,10,10,0" VerticalContentAlignment="Center" IsChecked="{Binding InstanceInfo.C_Call}"/>

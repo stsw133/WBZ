@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="Nowy załącznik" SizeToContent="WidthAndHeight"
             BorderThickness="3" BorderBrush="#333" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner" WindowStyle="None"
-            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}}"
+            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
             Icon="pack://siteoforigin:,,,/Resources/icon32_photos.ico" Loaded="Window_Loaded">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
@@ -32,7 +32,7 @@
             <Label Margin="5,5,0,5" Content="Nazwa:" VerticalAlignment="Center"/>
             <TextBox x:Name="tbName" Margin="5" VerticalContentAlignment="Center"/>
         </DockPanel>
-        <Grid Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=30}">
+        <Grid Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=30}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>

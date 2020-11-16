@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="Ustawienia profilu" MinHeight="140" MinWidth="140" Height="350" Width="350"
             BorderThickness="3" BorderBrush="#333" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" WindowStyle="None"
-            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}}"
+            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
             Icon="pack://siteoforigin:,,,/Resources/icon32_profile.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
@@ -28,7 +28,7 @@
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal" Margin="2">
-                        <Image Margin="2" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_profile.ico"/>
+                        <Image Margin="2" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_profile.ico"/>
                         <TextBlock Text="Ogólne" Margin="2" VerticalAlignment="Center"/>
                     </StackPanel>
                 </TabItem.Header>
@@ -78,7 +78,7 @@
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal" Margin="2">
-                        <Image Margin="2" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_locked.ico"/>
+                        <Image Margin="2" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_locked.ico"/>
                         <TextBlock Text="Bezpieczeństwo" Margin="2" VerticalAlignment="Center"/>
                     </StackPanel>
                 </TabItem.Header>

@@ -126,6 +126,7 @@
     </ApplicationDefinition>
     <Compile Include="Helpers\Commands.cs" />
     <Compile Include="Helpers\Functions.cs" />
+    <Compile Include="Interfaces\IModuleNew.cs" />
     <Compile Include="Models\C_Additional.cs" />
     <Compile Include="Models\C_Address.cs" />
     <Compile Include="Models\C_ComboValue.cs" />
@@ -732,9 +733,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Prototypes\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Resources\icon32_unknown.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

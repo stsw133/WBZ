@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="Lista baz danych" SizeToContent="WidthAndHeight"
             BorderThickness="3" BorderBrush="#333" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner" WindowStyle="None"
-            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}}"
+            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
             Icon="pack://siteoforigin:,,,/Resources/icon32_database.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
@@ -21,7 +21,7 @@
         <Border DockPanel.Dock="Bottom" Background="#EEE" BorderBrush="Gray" BorderThickness="0,1,0,0">
             <Button Margin="10" HorizontalAlignment="Center" MinWidth="150" Click="btnSave_Click">
                 <StackPanel Orientation="Horizontal">
-                    <Image Margin="4" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_accept.ico"/>
+                    <Image Margin="4" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_accept.ico"/>
                     <Label Content="Zapisz" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
@@ -31,21 +31,21 @@
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
                 <Button Margin="5,5,0,5" Click="btnAddDatabase_Click" ToolTip="Dodaj nowe połączenie z bazą danych">
                     <Grid>
-                        <Image Margin="2" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_database.ico"/>
-                        <Image Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Source="pack://siteoforigin:,,,/Resources/icon32_add.ico"/>
+                        <Image Margin="2" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_database.ico"/>
+                        <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Source="pack://siteoforigin:,,,/Resources/icon32_add.ico"/>
                     </Grid>
                 </Button>
                 <Button Margin="5,5,0,5" Click="btnRemoveDatabase_Click" ToolTip="Usuń zaznaczone połączenie z bazą danych">
                     <Grid>
-                        <Image Margin="2" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_database.ico"/>
-                        <Image Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Source="pack://siteoforigin:,,,/Resources/icon32_remove.ico"/>
+                        <Image Margin="2" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_database.ico"/>
+                        <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Source="pack://siteoforigin:,,,/Resources/icon32_remove.ico"/>
                     </Grid>
                 </Button>
             </StackPanel>
             <ListBox x:Name="lbDatabases" Margin="5,0,5,5" Width="200" ItemsSource="{Binding Databases}" SelectedValuePath="Name" DisplayMemberPath="Name" SelectionChanged="lbDatabases_SelectionChanged"/>
         </DockPanel>
         <!-- main -->
-        <Grid x:Name="gridDatabaseInfo" DataContext="{Binding ElementName=lbDatabases, Path=SelectedItem}" Margin="5" VerticalAlignment="Center" IsEnabled="False" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=30}">
+        <Grid x:Name="gridDatabaseInfo" DataContext="{Binding ElementName=lbDatabases, Path=SelectedItem}" Margin="5" VerticalAlignment="Center" IsEnabled="False" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=30}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -77,7 +77,7 @@
             <Label x:Name="lblStatus" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center"/>
             <Button Grid.Row="7" Grid.Column="1" Margin="5" Click="btnTest_Click">
                 <StackPanel Orientation="Horizontal">
-                    <Image Margin="4" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_test.ico"/>
+                    <Image Margin="4" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_test.ico"/>
                     <Label Content="Testuj" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>

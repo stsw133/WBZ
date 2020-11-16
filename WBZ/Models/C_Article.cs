@@ -1,9 +1,12 @@
 ﻿using System.Data;
+using WBZ.Helpers;
 
 namespace WBZ.Models
 {
 	public class C_Article
 	{
+		public static readonly string MODULE = Global.Module.ARTICLES;
+
 		public int ID { get; set; }
 		public string Codename { get; set; }
 		public string Name { get; set; }

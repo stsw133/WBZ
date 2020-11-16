@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="Lista logów" MinHeight="240" MinWidth="360" Height="{Binding Source={x:Static p:Settings.Default}, Path=config_LogsList_WindowSize[1], Mode=TwoWay}" Width="{Binding Source={x:Static p:Settings.Default}, Path=config_LogsList_WindowSize[0], Mode=TwoWay}"
             BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
-            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}}"
+            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
             Icon="pack://siteoforigin:,,,/Resources/icon32_logs.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
@@ -47,7 +47,7 @@
         <!-- filtersPanel -->
         <Grid DockPanel.Dock="Top" Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}">
             <Expander x:Name="filtersExpander" Header="Filtry wyszukiwania" Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="0,0,0,1">
-                <TabControl MaxHeight="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=20}">
+                <TabControl MaxHeight="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=20}">
                     <!-- tabMain -->
                     <TabItem>
                         <TabItem.Header>
@@ -56,19 +56,19 @@
                         <ScrollViewer>
                             <DockPanel Margin="0,0,0,5">
                                 <DockPanel DockPanel.Dock="Top" Margin="5,5,5,0">
-                                    <Label Content="Nazwisko i imię:" Margin="0,0,5,0" HorizontalContentAlignment="Right" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}"/>
+                                    <Label Content="Nazwisko i imię:" Margin="0,0,5,0" HorizontalContentAlignment="Right" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}"/>
                                     <TextBox Text="{Binding Filters.UserFullname}" VerticalContentAlignment="Center" KeyUp="dpFilter_KeyUp"/>
                                 </DockPanel>
                                 <DockPanel DockPanel.Dock="Top" Margin="5,5,5,0">
-                                    <Label Content="Moduł:" Margin="0,0,5,0" HorizontalContentAlignment="Right" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}"/>
+                                    <Label Content="Moduł:" Margin="0,0,5,0" HorizontalContentAlignment="Right" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}"/>
                                     <TextBox Text="{Binding Filters.Module}" VerticalContentAlignment="Center" KeyUp="dpFilter_KeyUp"/>
                                 </DockPanel>
                                 <DockPanel DockPanel.Dock="Top" Margin="5,5,5,0">
-                                    <Label Content="Treść:" Margin="0,0,5,0" HorizontalContentAlignment="Right" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}"/>
+                                    <Label Content="Treść:" Margin="0,0,5,0" HorizontalContentAlignment="Right" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}"/>
                                     <TextBox Text="{Binding Filters.Content}" VerticalContentAlignment="Center" KeyUp="dpFilter_KeyUp"/>
                                 </DockPanel>
                                 <DockPanel DockPanel.Dock="Top" Margin="5,5,5,0">
-                                    <Label Content="Data:" Margin="0,0,5,0" HorizontalContentAlignment="Right" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}"/>
+                                    <Label Content="Data:" Margin="0,0,5,0" HorizontalContentAlignment="Right" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=15}"/>
                                     <StackPanel Orientation="Horizontal">
                                         <DatePicker SelectedDate="{Binding Filters.fDateTime}" Margin="2.5" VerticalContentAlignment="Center"/>
                                         <Label Content="/" Margin="2.5"/>
@@ -87,7 +87,7 @@
                             <DockPanel Margin="5">
                                 <DockPanel DockPanel.Dock="Top">
                                     <Label Content="Sortuj najpierw po:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
-                                    <ToggleButton Margin="2.5" IsChecked="{Binding sorting_LogsList[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}">
+                                    <ToggleButton Margin="2.5" IsChecked="{Binding sorting_LogsList[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}">
                                         <Image Source="pack://siteoforigin:,,,/Resources/icon32_descending.ico"/>
                                     </ToggleButton>
                                     <ComboBox Margin="2.5" SelectedValue="{Binding sorting_LogsList[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
@@ -99,7 +99,7 @@
                                 </DockPanel>
                                 <DockPanel DockPanel.Dock="Top">
                                     <Label Content="Sortuj następnie po:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
-                                    <ToggleButton Margin="2.5" IsChecked="{Binding sorting_LogsList[3], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}">
+                                    <ToggleButton Margin="2.5" IsChecked="{Binding sorting_LogsList[3], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}">
                                         <Image Source="pack://siteoforigin:,,,/Resources/icon32_descending.ico"/>
                                     </ToggleButton>
                                     <ComboBox Margin="2.5" SelectedValue="{Binding sorting_LogsList[2], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
@@ -111,7 +111,7 @@
                                 </DockPanel>
                                 <DockPanel DockPanel.Dock="Top">
                                     <Label Content="Limit wczytywania:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
-                                    <TextBox Text="{Binding sorting_LogsList[4], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Margin="2.5" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=5}"/>
+                                    <TextBox Text="{Binding sorting_LogsList[4], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Margin="2.5" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=5}"/>
                                 </DockPanel>
                             </DockPanel>
                         </ScrollViewer>

@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="{Binding Title}" MinHeight="240" MinWidth="360" Height="{Binding Source={x:Static p:Settings.Default}, Path=config_DistributionsNew_WindowSize[1], Mode=TwoWay}" Width="{Binding Source={x:Static p:Settings.Default}, Path=config_DistributionsNew_WindowSize[0], Mode=TwoWay}"
             BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
-            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}}"
+            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
             Icon="pack://siteoforigin:,,,/Resources/icon32_food.ico" Closed="Window_Closed">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
@@ -66,7 +66,7 @@
                             <DatePicker SelectedDate="{Binding InstanceInfo.DateReal}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-                            <Button ToolTip="Dodaj pozycję" HorizontalAlignment="Left" Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Click="btnPositionsAdd_Click">
+                            <Button ToolTip="Dodaj pozycję" HorizontalAlignment="Left" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Click="btnPositionsAdd_Click">
                                 <Image Margin="2" Source="pack://siteoforigin:,,,/Resources/icon32_add.ico"/>
                             </Button>
                             <Label Content="Pozycje:"/>
@@ -135,7 +135,7 @@
                                                                                     <DataGridTextColumn Binding="{Binding id}" Header="ID" IsReadOnly="True" Visibility="Hidden"/>
                                                                                     <DataGridTextColumn Binding="{Binding position}" Header="Lp"/>
                                                                                     <DataGridTextColumn Binding="{Binding storename}" Header="Nazwa magazynu" IsReadOnly="True"/>
-                                                                                    <DataGridTextColumn Binding="{Binding articlename}" Header="Nazwa towaru" IsReadOnly="True" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=25}"/>
+                                                                                    <DataGridTextColumn Binding="{Binding articlename}" Header="Nazwa towaru" IsReadOnly="True" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=25}"/>
                                                                                     <DataGridTextColumn Binding="{Binding measure}" Header="Jm" IsReadOnly="True"/>
                                                                                     <DataGridTextColumn Binding="{Binding amount}" Header="Ilość"/>
                                                                                 </DataGrid.Columns>

@@ -4,6 +4,8 @@ namespace WBZ.Models
 {
 	public class C_AttributeClass
 	{
+		public static readonly string MODULE = Global.Module.ATTRIBUTES_CLASSES;
+
 		public int ID { get; set; }
 		public string Module { get; set; }
 		public string Name { get; set; }

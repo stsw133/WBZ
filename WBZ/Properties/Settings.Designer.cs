@@ -98,12 +98,12 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("12")]
-        public double config_FontSize {
+        public double config_iSize {
             get {
-                return ((double)(this["config_FontSize"]));
+                return ((double)(this["config_iSize"]));
             }
             set {
-                this["config_FontSize"] = value;
+                this["config_iSize"] = value;
             }
         }
         

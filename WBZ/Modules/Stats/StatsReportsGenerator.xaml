@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="Generator raportów" SizeToContent="WidthAndHeight"
             BorderThickness="3" BorderBrush="#333" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner" WindowStyle="None"
-            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}}"
+            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
             Icon="pack://siteoforigin:,,,/Resources/_null.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
@@ -27,7 +27,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
-                <RowDefinition Height="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                <RowDefinition Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Grid.ColumnSpan="3" Content="Podaj przedział czasowy raportu:" Margin="5" VerticalContentAlignment="Center"/>

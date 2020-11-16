@@ -17,6 +17,7 @@ namespace WBZ.Modules.Articles
 		{
 			InitializeComponent();
 			DataContext = D;
+
 			D.SelectingMode = selectingMode;
 		}
 

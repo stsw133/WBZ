@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="O programie" SizeToContent="WidthAndHeight"
             BorderThickness="3" BorderBrush="#333" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner" WindowStyle="None"
-            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}}"
+            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
             Icon="pack://siteoforigin:,,,/Resources/logo32.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
@@ -26,10 +26,10 @@
                     </Border>
                     <StackPanel VerticalAlignment="Center">
                         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Label Content="WBZ" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" FontWeight="Heavy"/>
-                            <Label Content="{Binding Version}" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" FontWeight="Heavy"/>
+                            <Label Content="WBZ" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" FontWeight="Heavy"/>
+                            <Label Content="{Binding Version}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" FontWeight="Heavy"/>
                         </StackPanel>
-                        <TextBlock DockPanel.Dock="Top" Text="{Binding AboutApp}" Padding="5" TextAlignment="Center" TextWrapping="Wrap" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=25}"/>
+                        <TextBlock DockPanel.Dock="Top" Text="{Binding AboutApp}" Padding="5" TextAlignment="Center" TextWrapping="Wrap" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=25}"/>
                     </StackPanel>
                 </DockPanel>
             </Border>
@@ -39,7 +39,7 @@
                         <Image Margin="10" Source="pack://siteoforigin:,,,/Resources/logo128_pwsz.ico" Height="128"/>
                     </Border>
                     <StackPanel VerticalAlignment="Center">
-                        <TextBlock DockPanel.Dock="Top" Text="{Binding AboutCreators}" Padding="5" TextAlignment="Center" TextWrapping="Wrap" Width="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=25}"/>
+                        <TextBlock DockPanel.Dock="Top" Text="{Binding AboutCreators}" Padding="5" TextAlignment="Center" TextWrapping="Wrap" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=25}"/>
                         <StackPanel DockPanel.Dock="Top">
                             <Label Content="Karol Staszewski" Padding="5,5,5,0" HorizontalAlignment="Center" FontWeight="Medium"/>
                             <Label Content="stsw.karolstaszewski@gmail.com" Padding="5,0,5,5" HorizontalAlignment="Center" Foreground="#239"/>

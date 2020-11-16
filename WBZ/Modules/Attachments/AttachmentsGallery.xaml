@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="Galeria załączników" MinHeight="280" MinWidth="420" Height="{Binding Source={x:Static p:Settings.Default}, Path=config_AttachmentsGallery_WindowSize[1], Mode=TwoWay}" Width="{Binding Source={x:Static p:Settings.Default}, Path=config_AttachmentsGallery_WindowSize[0], Mode=TwoWay}"
             BorderThickness="6" BorderBrush="Black" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
-            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_FontSize, Source={x:Static p:Settings.Default}}"
+            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
             Icon="pack://siteoforigin:,,,/Resources/icon32_gallery.ico" Closed="Window_Closed">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
@@ -20,7 +20,7 @@
         <!-- filtersPanel -->
         <Grid DockPanel.Dock="Top" Background="Black">
             <Expander x:Name="filtersExpander" Header="Filtry wyszukiwania" Background="Black" Foreground="White" BorderThickness="0">
-                <TabControl MaxHeight="{Binding config_FontSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=20}">
+                <TabControl MaxHeight="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=20}">
                     <!-- tabMain -->
                     <TabItem>
                         <TabItem.Header>
