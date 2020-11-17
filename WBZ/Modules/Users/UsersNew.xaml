@@ -1,8 +1,9 @@
-﻿<Window x:Class="WBZ.Modules.Users.UsersNew"
+﻿<local:New x:Class="WBZ.Modules.Users.UsersNew"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WBZ.Modules.Users"
         xmlns:c="clr-namespace:WBZ.Controls"
         xmlns:h="clr-namespace:WBZ.Helpers"
         xmlns:p="clr-namespace:WBZ.Properties"
@@ -10,7 +11,8 @@
         Title="{Binding Title}" MinHeight="240" MinWidth="360" Height="{Binding Source={x:Static p:Settings.Default}, Path=config_UsersNew_WindowSize[1], Mode=TwoWay}" Width="{Binding Source={x:Static p:Settings.Default}, Path=config_UsersNew_WindowSize[0], Mode=TwoWay}"
             BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
-            Icon="pack://siteoforigin:,,,/Resources/icon32_users.ico" Closed="Window_Closed">
+            Icon="pack://siteoforigin:,,,/Resources/icon32_users.ico"
+            Loaded="Window_Loaded" Closed="Window_Closed">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -98,15 +100,15 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_search.ico"/>
+                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_search.ico"/>
                                 <Label Content="Podgląd:" VerticalContentAlignment="Center"/>
                             </StackPanel>
                             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_edit.ico"/>
+                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_edit.ico"/>
                                 <Label Content="Edycja:" VerticalContentAlignment="Center"/>
                             </StackPanel>
                             <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_delete.ico"/>
+                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_delete.ico"/>
                                 <Label Content="Usuwanie:" VerticalContentAlignment="Center"/>
                             </StackPanel>
                         </Grid>
@@ -119,7 +121,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_users.ico"/>
+                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_users.ico"/>
                                 <Label Content="Użytkownicy:" VerticalContentAlignment="Center"/>
                             </StackPanel>
                             <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={h:conv_ListContains}, ConverterParameter=users_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
@@ -138,7 +140,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_briefcase.ico"/>
+                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_briefcase.ico"/>
                                 <Label Content="Pracownicy:" VerticalContentAlignment="Center"/>
                             </StackPanel>
                             <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={h:conv_ListContains}, ConverterParameter=employees_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
@@ -157,7 +159,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_community.ico"/>
+                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_community.ico"/>
                                 <Label Content="Społeczność:" VerticalContentAlignment="Center"/>
                             </StackPanel>
                             <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={h:conv_ListContains}, ConverterParameter=community_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
@@ -176,7 +178,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_groups.ico"/>
+                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_groups.ico"/>
                                 <Label Content="Grupy:" VerticalContentAlignment="Center"/>
                             </StackPanel>
                             <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={h:conv_ListContains}, ConverterParameter=groups_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
@@ -195,7 +197,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_attributes.ico"/>
+                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_attributes.ico"/>
                                 <Label Content="Klasy atrybutów:" VerticalContentAlignment="Center"/>
                             </StackPanel>
                             <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={h:conv_ListContains}, ConverterParameter=attributes_classes_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
@@ -214,7 +216,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_photos.ico"/>
+                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_photos.ico"/>
                                 <Label Content="Załączniki:" VerticalContentAlignment="Center"/>
                             </StackPanel>
                             <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={h:conv_ListContains}, ConverterParameter=attachments_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
@@ -233,7 +235,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_logs.ico"/>
+                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_logs.ico"/>
                                 <Label Content="Logi:" VerticalContentAlignment="Center"/>
                             </StackPanel>
                             <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={h:conv_ListContains}, ConverterParameter=logs_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
@@ -250,7 +252,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_documents.ico"/>
+                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_documents.ico"/>
                                 <Label Content="Dokumenty:" VerticalContentAlignment="Center"/>
                             </StackPanel>
                             <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={h:conv_ListContains}, ConverterParameter=documents_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
@@ -269,7 +271,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_stores.ico"/>
+                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_stores.ico"/>
                                 <Label Content="Magazyny:" VerticalContentAlignment="Center"/>
                             </StackPanel>
                             <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={h:conv_ListContains}, ConverterParameter=stores_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
@@ -288,7 +290,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_articles.ico"/>
+                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_articles.ico"/>
                                 <Label Content="Towary:" VerticalContentAlignment="Center"/>
                             </StackPanel>
                             <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={h:conv_ListContains}, ConverterParameter=articles_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
@@ -307,7 +309,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_companies.ico"/>
+                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_companies.ico"/>
                                 <Label Content="Firmy:" VerticalContentAlignment="Center"/>
                             </StackPanel>
                             <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={h:conv_ListContains}, ConverterParameter=companies_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
@@ -326,7 +328,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_families.ico"/>
+                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_families.ico"/>
                                 <Label Content="Rodziny:" VerticalContentAlignment="Center"/>
                             </StackPanel>
                             <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={h:conv_ListContains}, ConverterParameter=families_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
@@ -345,7 +347,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_food.ico"/>
+                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_food.ico"/>
                                 <Label Content="Dystrybucja:" VerticalContentAlignment="Center"/>
                             </StackPanel>
                             <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={h:conv_ListContains}, ConverterParameter=distributions_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
@@ -364,7 +366,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_stats.ico"/>
+                                <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_stats.ico"/>
                                 <Label Content="Statystyki:" VerticalContentAlignment="Center"/>
                             </StackPanel>
                             <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={h:conv_ListContains}, ConverterParameter=stats_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
@@ -386,4 +388,4 @@
             </TabItem>
         </TabControl>
     </DockPanel>
-</Window>
+</local:New>

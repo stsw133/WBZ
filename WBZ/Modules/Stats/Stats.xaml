@@ -47,7 +47,7 @@
                             <ScrollViewer Padding="10">
                                 <DockPanel>
                                     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                                        <Image Margin="3" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.75}" Source="pack://siteoforigin:,,,/Resources/icon32_articles.ico"/>
+                                        <Image Margin="3" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=1.75}" Source="pack://siteoforigin:,,,/Resources/icon32_articles.ico"/>
                                         <Label Content="Towary" VerticalAlignment="Center"/>
                                     </StackPanel>
                                     <Label DockPanel.Dock="Top" Content="Towary otrzymane wg lat i miesięcy (kg):" VerticalAlignment="Center" FontWeight="Normal"/>

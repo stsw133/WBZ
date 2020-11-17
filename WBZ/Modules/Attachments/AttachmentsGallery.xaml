@@ -20,7 +20,7 @@
         <!-- filtersPanel -->
         <Grid DockPanel.Dock="Top" Background="Black">
             <Expander x:Name="filtersExpander" Header="Filtry wyszukiwania" Background="Black" Foreground="White" BorderThickness="0">
-                <TabControl MaxHeight="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=20}">
+                <TabControl MaxHeight="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=20}">
                     <!-- tabMain -->
                     <TabItem>
                         <TabItem.Header>

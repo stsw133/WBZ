@@ -235,7 +235,7 @@ namespace WBZ.Modules.Login
 		/// </summary>
 		private void btnManual_Click(object sender, RoutedEventArgs e)
 		{
-			Functions.OpenWindow_Help(this);
+			Functions.OpenHelp(this);
 		}
 
 		/// <summary>

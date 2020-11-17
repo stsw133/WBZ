@@ -7,8 +7,14 @@ namespace WBZ.Modules.Users
 {
     class D_UsersNew : INotifyPropertyChanged
     {
-		public readonly string MODULE_NAME = Global.Module.USERS;
+		public event PropertyChangedEventHandler PropertyChanged;
+		public void NotifyPropertyChanged(string name)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+		}
 
+		/// Module
+		public readonly string MODULE_TYPE = Global.Module.USERS;
 		/// Instance
 		private MODULE_CLASS instanceInfo;
 		public MODULE_CLASS InstanceInfo
@@ -23,10 +29,10 @@ namespace WBZ.Modules.Users
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
 		}
+		/// Mode
+		public Commands.Type Mode { get; set; }
 		/// Editing mode
 		public bool EditingMode { get { return Mode != Commands.Type.PREVIEW; } }
-		/// Window mode
-		public Commands.Type Mode { get; set; }
 		/// Additional window icon
 		public string ModeIcon
 		{
@@ -56,15 +62,6 @@ namespace WBZ.Modules.Users
 				else
 					return $"Podgląd użytkownika: {InstanceInfo.Fullname}";
 			}
-		}
-
-		/// <summary>
-		/// PropertyChangedEventHandler
-		/// </summary>
-		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged(string name)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
 	}
 }

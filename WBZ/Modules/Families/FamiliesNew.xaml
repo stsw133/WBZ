@@ -80,7 +80,7 @@
                             <TextBox Text="{Binding InstanceInfo.Address}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <CheckBox DockPanel.Dock="Top" Content="Status - aktywna" Margin="20" HorizontalAlignment="Center" VerticalContentAlignment="Center" IsChecked="{Binding InstanceInfo.Status}"/>
-                        <GroupBox DockPanel.Dock="Top" Header="Uzgodniony sposób kontaktu" Padding="0,0,0,10" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=25}">
+                        <GroupBox DockPanel.Dock="Top" Header="Uzgodniony sposób kontaktu" Padding="0,0,0,10" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=25}">
                             <StackPanel>
                                 <CheckBox Content="Wyślij wiadomość SMS" Margin="10,10,10,0" VerticalContentAlignment="Center" IsChecked="{Binding InstanceInfo.C_SMS}"/>
                                 <CheckBox Content="Rozmowa telefoniczna" Margin="10,10,10,0" VerticalContentAlignment="Center" IsChecked="{Binding InstanceInfo.C_Call}"/>

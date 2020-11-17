@@ -38,10 +38,8 @@ namespace WBZ.Interfaces
         {
             W = GetWindow(this);
             D = W.DataContext;
-
             FullName = W.GetType().FullName;
             HalfName = FullName.Substring(0, FullName.Length - 4);
-
             MODULE_TYPE = D.MODULE_TYPE;
 
             if (D.SelectingMode)
@@ -73,6 +71,14 @@ namespace WBZ.Interfaces
                         + (!D.Filters.Archival ? $"a.archival=false and " : "")
                         + (W.SelectedStore?.ID > 0 ? $"sa.store={W.SelectedStore.ID} and " : "");
                     break;
+                ///USERS
+                case Global.Module.USERS:
+                    D.FilterSQL = $"LOWER(COALESCE(u.forename,'')) like '%{D.Filters.Forename.ToLower()}%' and "
+                        + $"LOWER(COALESCE(u.lastname,'')) like '%{D.Filters.Lastname.ToLower()}%' and "
+                        + $"LOWER(COALESCE(u.email,'')) like '%{D.Filters.Email.ToLower()}%' and "
+                        + $"LOWER(COALESCE(u.phone,'')) like '%{D.Filters.Phone.ToLower()}%' and "
+                        + (D.Filters.Archival ? $"u.archival=false and " : "");
+                    break;
             }
 
             D.FilterSQL = D.FilterSQL.TrimEnd(" and ".ToCharArray());
@@ -92,7 +98,7 @@ namespace WBZ.Interfaces
 		/// </summary>
 		public void btnFiltersClear_Click(object sender, MouseButtonEventArgs e)
         {
-            //D.Filters = new MODULE_MODEL();
+            D.Filters = new MODULE_MODEL();
             btnRefresh_Click(null, null);
         }
 

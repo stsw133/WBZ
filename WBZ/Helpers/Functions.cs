@@ -2,8 +2,6 @@
 using System.Diagnostics;
 using System.Windows;
 using WBZ.Controls;
-using WBZ.Models;
-using WBZ.Modules.Users;
 
 namespace WBZ.Helpers
 {
@@ -28,7 +26,7 @@ namespace WBZ.Helpers
         /// <summary>
         /// Open window - Help
         /// </summary>
-        internal static void OpenWindow_Help(Window owner)
+        internal static void OpenHelp(Window owner)
         {
             try
             {
@@ -41,46 +39,6 @@ namespace WBZ.Helpers
             {
                 new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Błąd otwierania poradnika: " + ex.Message) { Owner = owner }.ShowDialog();
             }
-        }
-
-        /// <summary>
-        /// Open window - Settings
-        /// </summary>
-        internal static void OpenWindow_Settings(Window owner)
-        {
-            OpenWindow(owner, typeof(Modules.Settings).FullName, true);
-        }
-
-        /// <summary>
-        /// Open window - Module
-        /// </summary>
-        internal static bool? OpenWindow_Module(Window owner, string module, Commands.Type type, object model = null)
-        {
-            Window window;
-            bool selectingMode = type == Commands.Type.SELECTING;
-
-            switch (module)
-            {
-                ///USERS
-                case Global.Module.USERS:
-                    ///LIST
-                    if (type.In(Commands.Type.LIST, Commands.Type.SELECTING))
-                        window = new UsersList(selectingMode);
-                    ///NEW
-                    else if (type.In(Commands.Type.DUPLICATE, Commands.Type.EDIT, Commands.Type.NEW, Commands.Type.PREVIEW))
-                        window = new UsersNew(model != null ? (C_User)model : new C_User(), type);
-                    else return null;
-                    break;
-                default:
-                    return null;
-            }
-            window.Owner = owner;
-            if (selectingMode)
-                return window.ShowDialog();
-            else
-                window.Show();
-
-            return null;
         }
     }
 }

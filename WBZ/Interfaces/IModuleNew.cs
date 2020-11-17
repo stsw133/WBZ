@@ -24,30 +24,20 @@ namespace WBZ.Interfaces
         string FullName, HalfName;
         string MODULE_TYPE;
 
-        public void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            W = GetWindow(this);
-            D = W.DataContext;
+		/// <summary>
+		/// Loaded
+		/// </summary>
+		public void Window_Loaded(object sender, RoutedEventArgs e)
+		{
+			W = GetWindow(this);
+			D = W.DataContext;
+			FullName = W.GetType().FullName;
+			HalfName = FullName.Substring(0, FullName.Length - 3);
+			MODULE_TYPE = D.MODULE_TYPE;
 
-            FullName = W.GetType().FullName;
-            HalfName = FullName.Substring(0, FullName.Length - 4);
-
-            MODULE_TYPE = D.MODULE_TYPE;
-
-            switch (MODULE_TYPE)
-            {
-                ///ARTICLES
-                case Global.Module.ARTICLES:
-                    D.InstanceInfo.Measures = SQL.GetArticleMeasures(D.InstanceInfo.ID);
-                    if (((Commands.Type)D.Mode).In(Commands.Type.NEW, Commands.Type.DUPLICATE))
-                    {
-                        D.InstanceInfo.ID = SQL.NewInstanceID(D.MODULE_TYPE);
-                        foreach (DataRow row in D.InstanceInfo.Measures.Rows)
-                            row.SetAdded();
-                    }
-                    break;
-            }
-        }
+			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE))
+				D.InstanceInfo.ID = SQL.NewInstanceID(D.MODULE_TYPE);
+		}
 
         /// <summary>
 		/// Validation

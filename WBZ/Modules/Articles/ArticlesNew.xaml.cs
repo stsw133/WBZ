@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -12,7 +13,7 @@ namespace WBZ.Modules.Articles
 	/// <summary>
 	/// Interaction logic for ArticlesNew.xaml
 	/// </summary>
-	public partial class ArticlesNew : _ArticlesNew
+	public partial class ArticlesNew : New
 	{
 		D_ArticlesNew D = new D_ArticlesNew();
 
@@ -24,6 +25,11 @@ namespace WBZ.Modules.Articles
 			if (instance != null)
 				D.InstanceInfo = instance;
 			D.Mode = mode;
+
+			D.InstanceInfo.Measures = SQL.GetArticleMeasures(D.InstanceInfo.ID);
+			if (D.Mode == Commands.Type.DUPLICATE)
+				foreach (DataRow row in D.InstanceInfo.Measures.Rows)
+					row.SetAdded();
 		}
 
 		/// <summary>
@@ -98,5 +104,5 @@ namespace WBZ.Modules.Articles
 		}
 	}
 
-	public class _ArticlesNew : ModuleNew<MODULE_MODEL> { }
+	public class New : ModuleNew<MODULE_MODEL> { }
 }

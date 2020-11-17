@@ -14,16 +14,16 @@
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
-    <DockPanel Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=30}">
+    <DockPanel Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=30}">
         <!-- titleBar -->
         <c:TitleBar DockPanel.Dock="Top"/>
         <!-- main -->
         <Label DockPanel.Dock="Top" x:Name="txtMessage" Margin="5" VerticalContentAlignment="Center"/>
         <TextBox DockPanel.Dock="Top" x:Name="tbInput" Margin="5" Padding="5" VerticalContentAlignment="Center" Visibility="Collapsed"/>
-        <Rectangle DockPanel.Dock="Top" Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
+        <Rectangle DockPanel.Dock="Top" Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
         <DockPanel DockPanel.Dock="Bottom" HorizontalAlignment="Center">
-            <Button Content="OK" Margin="5" HorizontalAlignment="Right" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2.5}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=10}" Click="btnOk_Click"/>
-            <Button Content="Anuluj" Margin="5" HorizontalAlignment="Left" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2.5}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=10}" Click="btnCancel_Click"/>
+            <Button Content="OK" Margin="5" HorizontalAlignment="Right" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=2.5}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=10}" Click="btnOk_Click"/>
+            <Button Content="Anuluj" Margin="5" HorizontalAlignment="Left" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=2.5}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=10}" Click="btnCancel_Click"/>
         </DockPanel>
     </DockPanel>
 </Window>

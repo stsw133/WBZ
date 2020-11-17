@@ -9,13 +9,6 @@ namespace WBZ
 	/// </summary>
 	public partial class App : Application
 	{
-		public App()
-        {
-			///HELP
-			//var help = new CommandBinding(Commands.Help, Commands.Help_Executed, Commands.Help_CanExecute);
-			//CommandManager.RegisterClassCommandBinding(typeof(Window), help);
-		}
-
 		/// <summary>
 		/// Startup
 		/// </summary>

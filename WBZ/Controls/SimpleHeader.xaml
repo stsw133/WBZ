@@ -6,8 +6,8 @@
              xmlns:h="clr-namespace:WBZ.Helpers"
              xmlns:p="clr-namespace:WBZ.Properties"
              mc:Ignorable="d">
-    <StackPanel Orientation="Horizontal" Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=0.15}">
-        <Image Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=0.15}" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="{Binding IconSource, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
-        <TextBlock Text="{Binding TextContent, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=0.15}" VerticalAlignment="Center"/>
+    <StackPanel Orientation="Horizontal" Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=0.15}">
+        <Image Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=0.15}" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="{Binding IconSource, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
+        <TextBlock Text="{Binding TextContent, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=0.15}" VerticalAlignment="Center"/>
     </StackPanel>
 </UserControl>

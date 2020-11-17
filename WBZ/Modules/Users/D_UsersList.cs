@@ -9,9 +9,15 @@ namespace WBZ.Modules.Users
 {
     class D_UsersList : INotifyPropertyChanged
     {
-		public readonly string MODULE_NAME = Global.Module.USERS;
-		public StringCollection SORTING = Properties.Settings.Default.sorting_UsersList;
+		public event PropertyChangedEventHandler PropertyChanged;
+		public void NotifyPropertyChanged(string name)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+		}
 
+		/// Module
+		public readonly string MODULE_TYPE = Global.Module.USERS;
+		public StringCollection SORTING = Properties.Settings.Default.sorting_UsersList;
 		/// Instances list
 		private List<MODULE_CLASS> instancesList;
 		public List<MODULE_CLASS> InstancesList
@@ -26,8 +32,10 @@ namespace WBZ.Modules.Users
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
 		}
+		/// Mode
+		public Commands.Type Mode { get; set; }
 		/// Selecting mode
-		public bool SelectingMode { get; set; }
+		public bool SelectingMode { get { return Mode == Commands.Type.SELECTING; } }
 		/// SQL filter
 		public string FilterSQL { get; set; }
 		/// Filter instance
@@ -71,15 +79,6 @@ namespace WBZ.Modules.Users
 				totalItems = value;
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
-		}
-
-		/// <summary>
-		/// PropertyChangedEventHandler
-		/// </summary>
-		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged(string name)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
 	}
 }

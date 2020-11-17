@@ -72,7 +72,7 @@ namespace WBZ.Modules.Employees
 		/// </summary>
 		private void btnSelectUser_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new UsersList(true);
+			var window = new UsersList(Commands.Type.SELECTING);
 			if (window.ShowDialog() == true)
 				if (window.Selected != null)
 				{

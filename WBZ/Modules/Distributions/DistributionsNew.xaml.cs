@@ -144,7 +144,7 @@ namespace WBZ.Modules.Distributions
 			bool br = false;
 			do
 			{
-				var window2 = new ArticlesList(true);
+				var window2 = new ArticlesList(Commands.Type.SELECTING);
 				if (window2.ShowDialog() == true)
 				{
 					if (window2.Selected != null)

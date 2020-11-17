@@ -19,8 +19,6 @@ namespace WBZ.Modules.Articles
 		/// Module
 		public readonly string MODULE_TYPE = Global.Module.ARTICLES;
 		public StringCollection SORTING = Properties.Settings.Default.sorting_ArticlesList;
-		/// Stores list
-		public DataTable StoresList { get; } = SQL.GetStoresNames();
 		/// Instances list
 		private List<MODULE_MODEL> instancesList;
 		public List<MODULE_MODEL> InstancesList
@@ -35,8 +33,12 @@ namespace WBZ.Modules.Articles
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
 		}
+		/// Stores list
+		public DataTable StoresList { get; } = SQL.GetStoresNames();
+		/// Mode
+		public Commands.Type Mode { get; set; }
 		/// Selecting mode
-		public bool SelectingMode { get; set; }
+		public bool SelectingMode { get { return Mode == Commands.Type.SELECTING; } }
 		/// SQL filter
 		public string FilterSQL { get; set; }
 		/// Filter instance

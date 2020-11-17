@@ -73,10 +73,10 @@ namespace WBZ.Modules.Articles
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
 		}
-		/// Editing mode
-		public bool EditingMode { get { return Mode != Commands.Type.PREVIEW; } }
 		/// Window mode
 		public Commands.Type Mode { get; set; }
+		/// Editing mode
+		public bool EditingMode { get { return Mode != Commands.Type.PREVIEW; } }
 		/// Additional window icon
 		public string ModeIcon
 		{

@@ -32,7 +32,7 @@
             <Label Margin="5,5,0,5" Content="Nazwa:" VerticalAlignment="Center"/>
             <TextBox x:Name="tbName" Margin="5" VerticalContentAlignment="Center"/>
         </DockPanel>
-        <Grid Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=30}">
+        <Grid Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=30}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>

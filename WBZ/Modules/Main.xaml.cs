@@ -7,17 +7,18 @@ using WBZ.Controls;
 using WBZ.Helpers;
 using WBZ.Modules.Admin;
 using WBZ.Modules.Articles;
+using WBZ.Modules.Attachments;
+using WBZ.Modules.AttributesClasses;
 using WBZ.Modules.Companies;
 using WBZ.Modules.Distributions;
 using WBZ.Modules.Documents;
 using WBZ.Modules.Employees;
 using WBZ.Modules.Families;
+using WBZ.Modules.Groups;
+using WBZ.Modules.Logs;
 using WBZ.Modules.Personal;
 using WBZ.Modules.Stores;
-using WBZ.Modules.Groups;
-using WBZ.Modules.AttributesClasses;
-using WBZ.Modules.Attachments;
-using WBZ.Modules.Logs;
+using WBZ.Modules.Users;
 
 namespace WBZ.Modules
 {
@@ -88,7 +89,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void menuHelp_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
-			Functions.OpenWindow_Help(this);
+			Functions.OpenHelp(this);
 		}
 
 		/// <summary>
@@ -96,7 +97,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void menuSettings_Click(object sender, RoutedEventArgs e)
 		{
-			Functions.OpenWindow_Settings(this);
+			new Settings() { Owner = this }.ShowDialog();
 		}
 
 		/// <summary>
@@ -158,8 +159,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnProfile_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new Profile();
-			window.ShowDialog();
+			new Profile() { Owner = this }.ShowDialog();
 		}
 
 		/// <summary>
@@ -167,9 +167,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnCalendar_Click(object sender, RoutedEventArgs e)
 		{
-			//var window = new Calendar();
-			//window.Owner = this;
-			//window.Show();
+			//new Calendar() { Owner = this }.ShowDialog();
 		}
 
 		/// <summary>
@@ -179,9 +177,7 @@ namespace WBZ.Modules
 		/// <param name="e"></param>
 		private void btnMail_Click(object sender, RoutedEventArgs e)
 		{
-			//var window = new Mail();
-			//window.Owner = this;
-			//window.Show();
+			//new Mail() { Owner = this }.ShowDialog();
 		}
 
 		/// <summary>
@@ -211,8 +207,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnCommunity_Click(object sender, RoutedEventArgs e)
 		{
-			//var window = new Forum();
-			//window.Show();
+			//new Forum() { Owner = this }.ShowDialog();
 		}
 
 		/// <summary>
@@ -220,8 +215,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnConsoleSQL_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new ConsoleSQL();
-			window.Show();
+			new ConsoleSQL() { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -229,8 +223,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnArticlesList_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new ArticlesList();
-			window.Show();
+			new ArticlesList(Commands.Type.LIST) { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -238,8 +231,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnArticlesNew_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new ArticlesNew(new C_Article(), Commands.Type.NEW);
-			window.Show();
+			new ArticlesNew(null, Commands.Type.NEW) { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -247,8 +239,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnAttachmentsList_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new AttachmentsList();
-			window.Show();
+			new AttachmentsList() { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -256,8 +247,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnAttachmentsGallery_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new AttachmentsGallery();
-			window.Show();
+			new AttachmentsGallery() { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -265,8 +255,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnAttributesClassesList_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new AttributesClassesList();
-			window.Show();
+			new AttributesClassesList() { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -274,8 +263,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnAttributesClassesNew_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new AttributesClassesNew(new C_AttributeClass(), Commands.Type.NEW);
-			window.Show();
+			new AttributesClassesNew(null, Commands.Type.NEW) { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -283,8 +271,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnCompaniesList_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new CompaniesList();
-			window.Show();
+			new CompaniesList() { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -292,8 +279,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnCompaniesNew_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new CompaniesNew(new C_Company(), Commands.Type.NEW);
-			window.Show();
+			new CompaniesNew(null, Commands.Type.NEW) { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -301,8 +287,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnDistributionsList_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new DistributionsList();
-			window.Show();
+			new DistributionsList() { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -310,8 +295,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnDistributionsNew_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new DistributionsNew(new C_Distribution(), Commands.Type.NEW);
-			window.Show();
+			new DistributionsNew(null, Commands.Type.NEW) { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -319,8 +303,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnDocumentsList_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new DocumentsList();
-			window.Show();
+			new DocumentsList() { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -328,8 +311,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnDocumentsNew_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new DocumentsNew(new C_Document(), Commands.Type.NEW);
-			window.Show();
+			new DocumentsNew(null, Commands.Type.NEW) { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -337,8 +319,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnEmployeesList_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new EmployeesList();
-			window.Show();
+			new EmployeesList() { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -346,8 +327,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnEmployeesNew_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new EmployeesNew(new C_Employee(), Commands.Type.NEW);
-			window.Show();
+			new EmployeesNew(null, Commands.Type.NEW) { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -355,8 +335,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnFamiliesList_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new FamiliesList();
-			window.Show();
+			new FamiliesList() { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -364,8 +343,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnFamiliesNew_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new FamiliesNew(new C_Family(), Commands.Type.NEW);
-			window.Show();
+			new FamiliesNew(null, Commands.Type.NEW) { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -373,8 +351,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnGroupsList_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new GroupsList();
-			window.Show();
+			new GroupsList() { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -382,8 +359,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnLogsList_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new LogsList();
-			window.Show();
+			new LogsList() { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -391,8 +367,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnLogsErrorsList_Click(object sender, RoutedEventArgs e)
 		{
-			//var window = new ErrorsList();
-			//window.Show();
+			//new ErrorsList() { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -400,8 +375,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnStats_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new Stats.Stats();
-			window.Show();
+			new Stats.Stats() { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -409,8 +383,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnStoresList_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new StoresList();
-			window.Show();
+			new StoresList() { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -418,8 +391,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnStoresNew_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new StoresList();
-			window.Show();
+			new StoresNew(null, Commands.Type.NEW) { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -427,9 +399,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnUsersList_Click(object sender, RoutedEventArgs e)
 		{
-			//var window = new UsersList();
-			//window.Show();
-			Functions.OpenWindow_Module(this, Global.Module.USERS, Commands.Type.LIST);
+			new UsersList(Commands.Type.LIST) { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -437,9 +407,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnUsersNew_Click(object sender, RoutedEventArgs e)
 		{
-			//var window = new UsersNew(new C_User(), Commands.Type.NEW);
-			//window.Show();
-			Functions.OpenWindow_Module(this, Global.Module.USERS, Commands.Type.NEW);
+			new UsersNew(null, Commands.Type.NEW) { Owner = this }.Show();
 		}
 
 		/// <summary>

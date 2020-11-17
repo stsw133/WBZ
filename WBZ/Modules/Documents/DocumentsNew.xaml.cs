@@ -136,7 +136,7 @@ namespace WBZ.Modules.Documents
 		/// </summary>
 		private void btnPositionsAdd_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new ArticlesList(true);
+			var window = new ArticlesList(Commands.Type.SELECTING);
 			if (window.ShowDialog() == true)
 				if (window.Selected != null)
 				{

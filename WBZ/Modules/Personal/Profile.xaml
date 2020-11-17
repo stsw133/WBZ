@@ -28,7 +28,7 @@
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal" Margin="2">
-                        <Image Margin="2" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_profile.ico"/>
+                        <Image Margin="2" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_profile.ico"/>
                         <TextBlock Text="Ogólne" Margin="2" VerticalAlignment="Center"/>
                     </StackPanel>
                 </TabItem.Header>
@@ -78,7 +78,7 @@
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal" Margin="2">
-                        <Image Margin="2" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_locked.ico"/>
+                        <Image Margin="2" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_locked.ico"/>
                         <TextBlock Text="Bezpieczeństwo" Margin="2" VerticalAlignment="Center"/>
                     </StackPanel>
                 </TabItem.Header>

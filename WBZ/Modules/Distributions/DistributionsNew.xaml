@@ -66,7 +66,7 @@
                             <DatePicker SelectedDate="{Binding InstanceInfo.DateReal}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-                            <Button ToolTip="Dodaj pozycję" HorizontalAlignment="Left" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=2}" Click="btnPositionsAdd_Click">
+                            <Button ToolTip="Dodaj pozycję" HorizontalAlignment="Left" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=2}" Click="btnPositionsAdd_Click">
                                 <Image Margin="2" Source="pack://siteoforigin:,,,/Resources/icon32_add.ico"/>
                             </Button>
                             <Label Content="Pozycje:"/>
@@ -135,7 +135,7 @@
                                                                                     <DataGridTextColumn Binding="{Binding id}" Header="ID" IsReadOnly="True" Visibility="Hidden"/>
                                                                                     <DataGridTextColumn Binding="{Binding position}" Header="Lp"/>
                                                                                     <DataGridTextColumn Binding="{Binding storename}" Header="Nazwa magazynu" IsReadOnly="True"/>
-                                                                                    <DataGridTextColumn Binding="{Binding articlename}" Header="Nazwa towaru" IsReadOnly="True" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={h:conv_Size}, ConverterParameter=25}"/>
+                                                                                    <DataGridTextColumn Binding="{Binding articlename}" Header="Nazwa towaru" IsReadOnly="True" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=25}"/>
                                                                                     <DataGridTextColumn Binding="{Binding measure}" Header="Jm" IsReadOnly="True"/>
                                                                                     <DataGridTextColumn Binding="{Binding amount}" Header="Ilość"/>
                                                                                 </DataGrid.Columns>
