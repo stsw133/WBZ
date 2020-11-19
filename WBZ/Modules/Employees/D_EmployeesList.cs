@@ -3,18 +3,24 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Reflection;
 using WBZ.Helpers;
-using MODULE_CLASS = WBZ.Models.C_Employee;
+using MODULE_MODEL = WBZ.Models.C_Employee;
 
 namespace WBZ.Modules.Employees
 {
     class D_EmployeesList : INotifyPropertyChanged
     {
-		public readonly string MODULE_NAME = Global.Module.EMPLOYEES;
-		public StringCollection SORTING = Properties.Settings.Default.sorting_EmployeesList;
+		public event PropertyChangedEventHandler PropertyChanged;
+		public void NotifyPropertyChanged(string name)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+		}
 
+		/// Module
+		public readonly string MODULE_TYPE = Global.Module.EMPLOYEES;
+		public StringCollection SORTING = Properties.Settings.Default.sorting_EmployeesList;
 		/// Instances list
-		private List<MODULE_CLASS> instancesList;
-		public List<MODULE_CLASS> InstancesList
+		private List<MODULE_MODEL> instancesList;
+		public List<MODULE_MODEL> InstancesList
 		{
 			get
 			{
@@ -26,13 +32,15 @@ namespace WBZ.Modules.Employees
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
 		}
+		/// Mode
+		public Commands.Type Mode { get; set; }
 		/// Selecting mode
-		public bool SelectingMode { get; set; }
+		public bool SelectingMode { get { return Mode == Commands.Type.SELECTING; } }
 		/// SQL filter
 		public string FilterSQL { get; set; }
 		/// Filter instance
-		private MODULE_CLASS filters = new MODULE_CLASS();
-		public MODULE_CLASS Filters
+		private MODULE_MODEL filters = new MODULE_MODEL();
+		public MODULE_MODEL Filters
 		{
 			get
 			{
@@ -71,15 +79,6 @@ namespace WBZ.Modules.Employees
 				totalItems = value;
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
-		}
-
-		/// <summary>
-		/// PropertyChangedEventHandler
-		/// </summary>
-		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged(string name)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
 	}
 }

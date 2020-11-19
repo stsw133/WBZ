@@ -44,16 +44,6 @@ namespace WBZ.Interfaces
 
             if (D.SelectingMode)
                 W.dgList.SelectionMode = DataGridSelectionMode.Single;
-
-            switch (MODULE_TYPE)
-            {
-                ///ARTICLES
-                case Global.Module.ARTICLES:
-                    /// auto-select first store
-                    if (D.StoresList.Rows.Count > 0)
-                        W.cbStore.SelectedIndex = 0;
-                    break;
-            }
         }
 
         /// <summary>
@@ -63,7 +53,7 @@ namespace WBZ.Interfaces
         {
             switch (MODULE_TYPE)
             {
-                ///ARTICLES
+                /// ARTICLES
                 case Global.Module.ARTICLES:
                     D.FilterSQL = $"LOWER(COALESCE(a.codename,'')) like '%{D.Filters.Codename.ToLower()}%' and "
                         + $"LOWER(COALESCE(a.name,'')) like '%{D.Filters.Name.ToLower()}%' and "
@@ -71,7 +61,49 @@ namespace WBZ.Interfaces
                         + (!D.Filters.Archival ? $"a.archival=false and " : "")
                         + (W.SelectedStore?.ID > 0 ? $"sa.store={W.SelectedStore.ID} and " : "");
                     break;
-                ///USERS
+                /// ATTRIBUTES_CLASSES
+                case Global.Module.ATTRIBUTES_CLASSES:
+                    D.FilterSQL = $"LOWER(COALESCE(ac.module,'')) like '%{D.Filters.Module.ToLower()}%' and "
+                        + $"LOWER(COALESCE(ac.name,'')) like '%{D.Filters.Name.ToLower()}%' and "
+                        + $"LOWER(COALESCE(ac.type,'')) like '%{D.Filters.Type.ToLower()}%' and "
+                        + $"LOWER(COALESCE(ac.values,'')) like '%{D.Filters.Values.ToLower()}%' and "
+                        + (!D.Filters.Archival ? $"ac.archival=false and " : "");
+                    break;
+                /// COMPANIES
+                case Global.Module.COMPANIES:
+                    D.FilterSQL = $"LOWER(COALESCE(c.codename,'')) like '%{D.Filters.Codename.ToLower()}%' and "
+                        + $"LOWER(COALESCE(c.name,'')) like '%{D.Filters.Name.ToLower()}%' and "
+                        + $"LOWER(COALESCE(c.branch,'')) like '%{D.Filters.Branch.ToLower()}%' and "
+                        + $"LOWER(COALESCE(c.nip,'')) like '%{D.Filters.NIP.ToLower()}%' and "
+                        + $"LOWER(COALESCE(c.regon,'')) like '%{D.Filters.REGON.ToLower()}%' and "
+                        + $"LOWER(COALESCE(c.postcode,'')) like '%{D.Filters.Postcode.ToLower()}%' and "
+                        + $"LOWER(COALESCE(c.city,'')) like '%{D.Filters.City.ToLower()}%' and "
+                        + $"LOWER(COALESCE(c.address,'')) like '%{D.Filters.Address.ToLower()}%' and "
+                        + (!D.Filters.Archival ? $"c.archival=false and " : "");
+                    break;
+                /// EMPLOYEES
+                case Global.Module.EMPLOYEES:
+                    D.FilterSQL = $"LOWER(COALESCE(e.forename,'')) like '%{D.Filters.Forename.ToLower()}%' and "
+                        + $"LOWER(COALESCE(e.lastname,'')) like '%{D.Filters.Lastname.ToLower()}%' and "
+                        + $"LOWER(COALESCE(e.department,'')) like '%{D.Filters.Department.ToLower()}%' and "
+                        + $"LOWER(COALESCE(e.position,'')) like '%{D.Filters.Position.ToLower()}%' and "
+                        + $"LOWER(COALESCE(e.email,'')) like '%{D.Filters.Email.ToLower()}%' and "
+                        + $"LOWER(COALESCE(e.phone,'')) like '%{D.Filters.Phone.ToLower()}%' and "
+                        + $"LOWER(COALESCE(e.postcode,'')) like '%{D.Filters.Postcode.ToLower()}%' and "
+                        + $"LOWER(COALESCE(e.city,'')) like '%{D.Filters.City.ToLower()}%' and "
+                        + $"LOWER(COALESCE(e.address,'')) like '%{D.Filters.Address.ToLower()}%' and "
+                        + (D.Filters.Archival ? $"e.archival=false and " : "");
+                    break;
+                /// STORES
+                case Global.Module.STORES:
+                    D.FilterSQL = $"LOWER(COALESCE(s.codename,'')) like '%{D.Filters.Codename.ToLower()}%' and "
+                        + $"LOWER(COALESCE(s.name,'')) like '%{D.Filters.Name.ToLower()}%' and "
+                        + $"LOWER(COALESCE(s.postcode,'')) like '%{D.Filters.Postcode.ToLower()}%' and "
+                        + $"LOWER(COALESCE(s.city,'')) like '%{D.Filters.City.ToLower()}%' and "
+                        + $"LOWER(COALESCE(s.address,'')) like '%{D.Filters.Address.ToLower()}%' and "
+                        + (!D.Filters.Archival ? $"s.archival=false and " : "");
+                    break;
+                /// USERS
                 case Global.Module.USERS:
                     D.FilterSQL = $"LOWER(COALESCE(u.forename,'')) like '%{D.Filters.Forename.ToLower()}%' and "
                         + $"LOWER(COALESCE(u.lastname,'')) like '%{D.Filters.Lastname.ToLower()}%' and "

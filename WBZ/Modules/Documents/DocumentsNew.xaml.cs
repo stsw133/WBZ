@@ -106,7 +106,7 @@ namespace WBZ.Modules.Documents
 		/// </summary>
 		private void btnSelectCompany_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new CompaniesList(true);
+			var window = new CompaniesList(Commands.Type.SELECTING);
 			if (window.ShowDialog() == true)
 				if (window.Selected != null)
 				{
@@ -121,7 +121,7 @@ namespace WBZ.Modules.Documents
 		/// </summary>
 		private void btnSelectStore_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new StoresList(true);
+			var window = new StoresList(Commands.Type.SELECTING);
 			if (window.ShowDialog() == true)
 				if (window.Selected != null)
 				{

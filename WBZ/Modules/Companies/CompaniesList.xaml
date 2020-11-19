@@ -1,8 +1,9 @@
-﻿<Window x:Class="WBZ.Modules.Companies.CompaniesList"
+﻿<local:List x:Class="WBZ.Modules.Companies.CompaniesList"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WBZ.Modules.Companies"
         xmlns:c="clr-namespace:WBZ.Controls"
         xmlns:h="clr-namespace:WBZ.Helpers"
         xmlns:p="clr-namespace:WBZ.Properties"
@@ -254,5 +255,5 @@
             </DataGrid.RowStyle>
         </DataGrid>
     </DockPanel>
-</Window>
+</local:List>
 

@@ -98,64 +98,7 @@ namespace WBZ.Interfaces
 				}
 			}
 		}
-		/*
-		/// <summary>
-		/// Open: Store
-		/// </summary>
-		private void dgList_Stores_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-		{
-			if (e.LeftButton == MouseButtonState.Pressed)
-			{
-				Commands.Type perm = Global.User.Perms.Contains($"{Global.Module.STORES}_{Global.UserPermType.SAVE}")
-					? Commands.Type.EDIT : Commands.Type.PREVIEW;
-
-				var selectedInstances = (sender as DataGrid).SelectedItems.Cast<C_Store>();
-				foreach (C_Store instance in selectedInstances)
-				{
-					var window = new StoresNew(instance, perm);
-					window.Show();
-				}
-			}
-		}
-
-		/// <summary>
-		/// Open: Document
-		/// </summary>
-		private void dgList_Documents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-		{
-			if (e.LeftButton == MouseButtonState.Pressed)
-			{
-				Commands.Type perm = Global.User.Perms.Contains($"{Global.Module.DOCUMENTS}_{Global.UserPermType.SAVE}")
-					? Commands.Type.EDIT : Commands.Type.PREVIEW;
-
-				var selectedInstances = (sender as DataGrid).SelectedItems.Cast<C_Document>();
-				foreach (C_Document instance in selectedInstances)
-				{
-					var window = new DocumentsNew(instance, perm);
-					window.Show();
-				}
-			}
-		}
-
-		/// <summary>
-		/// Open: Distribution
-		/// </summary>
-		private void dgList_Distributions_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-		{
-			if (e.LeftButton == MouseButtonState.Pressed)
-			{
-				Commands.Type perm = Global.User.Perms.Contains($"{Global.Module.DISTRIBUTIONS}_{Global.UserPermType.SAVE}")
-					? Commands.Type.EDIT : Commands.Type.PREVIEW;
-
-				var selectedInstances = (sender as DataGrid).SelectedItems.Cast<C_Distribution>();
-				foreach (C_Distribution instance in selectedInstances)
-				{
-					var window = new DistributionsNew(instance, perm);
-					window.Show();
-				}
-			}
-		}
-		*/
+		
 		/// <summary>
 		/// Closed
 		/// </summary>

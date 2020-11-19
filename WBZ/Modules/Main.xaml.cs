@@ -255,7 +255,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnAttributesClassesList_Click(object sender, RoutedEventArgs e)
 		{
-			new AttributesClassesList() { Owner = this }.Show();
+			new AttributesClassesList(Commands.Type.LIST) { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -271,7 +271,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnCompaniesList_Click(object sender, RoutedEventArgs e)
 		{
-			new CompaniesList() { Owner = this }.Show();
+			new CompaniesList(Commands.Type.LIST) { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -319,7 +319,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnEmployeesList_Click(object sender, RoutedEventArgs e)
 		{
-			new EmployeesList() { Owner = this }.Show();
+			new EmployeesList(Commands.Type.LIST) { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -383,7 +383,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnStoresList_Click(object sender, RoutedEventArgs e)
 		{
-			new StoresList() { Owner = this }.Show();
+			new StoresList(Commands.Type.LIST) { Owner = this }.Show();
 		}
 
 		/// <summary>

@@ -3,17 +3,23 @@ using System.ComponentModel;
 using System.Reflection;
 using WBZ.Helpers;
 using WBZ.Models;
-using MODULE_CLASS = WBZ.Models.C_Store;
+using MODULE_MODEL = WBZ.Models.C_Store;
 
 namespace WBZ.Modules.Stores
 {
     class D_StoresNew : INotifyPropertyChanged
     {
-		public readonly string MODULE_NAME = Global.Module.STORES;
+		public event PropertyChangedEventHandler PropertyChanged;
+		public void NotifyPropertyChanged(string name)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+		}
 
+		/// Module
+		public readonly string MODULE_TYPE = Global.Module.STORES;
 		/// Instance
-		private MODULE_CLASS instanceInfo;
-		public MODULE_CLASS InstanceInfo
+		private MODULE_MODEL instanceInfo = new MODULE_MODEL();
+		public MODULE_MODEL InstanceInfo
 		{
 			get
 			{
@@ -53,10 +59,10 @@ namespace WBZ.Modules.Stores
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
 		}
-		/// Editing mode
-		public bool EditingMode { get { return Mode != Commands.Type.PREVIEW; } }
 		/// Window mode
 		public Commands.Type Mode { get; set; }
+		/// Editing mode
+		public bool EditingMode { get { return Mode != Commands.Type.PREVIEW; } }
 		/// Additional window icon
 		public string ModeIcon
 		{
@@ -86,15 +92,6 @@ namespace WBZ.Modules.Stores
 				else
 					return $"Podgląd magazynu: {InstanceInfo.Name}";
 			}
-		}
-
-		/// <summary>
-		/// PropertyChangedEventHandler
-		/// </summary>
-		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged(string name)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
 	}
 }

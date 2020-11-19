@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Reflection;
 using WBZ.Helpers;
 using WBZ.Models;
-using MODULE_CLASS = WBZ.Models.C_Article;
+using MODULE_MODEL = WBZ.Models.C_Article;
 
 namespace WBZ.Modules.Articles
 {
@@ -18,8 +18,8 @@ namespace WBZ.Modules.Articles
 		/// Module
 		public readonly string MODULE_TYPE = Global.Module.ARTICLES;
 		/// Instance
-		private MODULE_CLASS instanceInfo = new MODULE_CLASS();
-		public MODULE_CLASS InstanceInfo
+		private MODULE_MODEL instanceInfo = new MODULE_MODEL();
+		public MODULE_MODEL InstanceInfo
 		{
 			get
 			{

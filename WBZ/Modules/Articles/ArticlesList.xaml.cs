@@ -19,6 +19,8 @@ namespace WBZ.Modules.Articles
 			DataContext = D;
 
 			D.Mode = mode;
+			if (D.StoresList.Rows.Count > 0)
+				cbStore.SelectedIndex = 0;
 		}
 
 		/// Selected

@@ -1,17 +1,23 @@
 ﻿using System.ComponentModel;
 using System.Reflection;
 using WBZ.Helpers;
-using MODULE_CLASS = WBZ.Models.C_Employee;
+using MODULE_MODEL = WBZ.Models.C_Employee;
 
 namespace WBZ.Modules.Employees
 {
     class D_EmployeesNew : INotifyPropertyChanged
     {
-		public readonly string MODULE_NAME = Global.Module.EMPLOYEES;
+		public event PropertyChangedEventHandler PropertyChanged;
+		public void NotifyPropertyChanged(string name)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+		}
 
+		/// Module
+		public readonly string MODULE_TYPE = Global.Module.EMPLOYEES;
 		/// Instance
-		private MODULE_CLASS instanceInfo;
-		public MODULE_CLASS InstanceInfo
+		private MODULE_MODEL instanceInfo = new MODULE_MODEL();
+		public MODULE_MODEL InstanceInfo
 		{
 			get
 			{
@@ -23,10 +29,10 @@ namespace WBZ.Modules.Employees
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
 		}
-		/// Editing mode
-		public bool EditingMode { get { return Mode != Commands.Type.PREVIEW; } }
 		/// Window mode
 		public Commands.Type Mode { get; set; }
+		/// Editing mode
+		public bool EditingMode { get { return Mode != Commands.Type.PREVIEW; } }
 		/// Additional window icon
 		public string ModeIcon
 		{
@@ -56,15 +62,6 @@ namespace WBZ.Modules.Employees
 				else
 					return $"Podgląd pracownika: {InstanceInfo.Fullname}";
 			}
-		}
-
-		/// <summary>
-		/// PropertyChangedEventHandler
-		/// </summary>
-		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged(string name)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
 	}
 }

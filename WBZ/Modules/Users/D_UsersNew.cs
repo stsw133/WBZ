@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Reflection;
 using WBZ.Helpers;
-using MODULE_CLASS = WBZ.Models.C_User;
+using MODULE_MODEL = WBZ.Models.C_User;
 
 namespace WBZ.Modules.Users
 {
@@ -16,8 +16,8 @@ namespace WBZ.Modules.Users
 		/// Module
 		public readonly string MODULE_TYPE = Global.Module.USERS;
 		/// Instance
-		private MODULE_CLASS instanceInfo;
-		public MODULE_CLASS InstanceInfo
+		private MODULE_MODEL instanceInfo = new MODULE_MODEL();
+		public MODULE_MODEL InstanceInfo
 		{
 			get
 			{
