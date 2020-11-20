@@ -4,13 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:c="clr-namespace:WBZ.Controls"
-        xmlns:h="clr-namespace:WBZ.Helpers"
+        xmlns:g="clr-namespace:WBZ.Globals"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
         Title="Nowy załącznik" SizeToContent="WidthAndHeight"
             BorderThickness="3" BorderBrush="#333" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner" WindowStyle="None"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
-            Icon="pack://siteoforigin:,,,/Resources/icon32_photos.ico" Loaded="Window_Loaded">
+            Icon="/Resources/icon32_photos.ico" Loaded="Window_Loaded">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -19,27 +19,27 @@
         <c:TitleBar DockPanel.Dock="Top"/>
         <!-- main -->
         <DockPanel DockPanel.Dock="Top">
-            <c:SimpleButton Margin="5,5,0,5" IsEnabled="{Binding EditMode}" TextVisibility="False"
-                            TextContent="Z przeglądarki" IconSource="pack://siteoforigin:,,,/Resources/icon32_web.ico" PreviewMouseLeftButtonUp="btnLink_Click"/>
+            <c:Button Margin="5,5,0,5" IsEnabled="{Binding EditMode}" TextVisibility="False"
+                            Text="Z przeglądarki" Icon="/Resources/icon32_web.ico" PreviewMouseLeftButtonUp="btnLink_Click"/>
             <TextBox x:Name="tbLink" Margin="5" VerticalContentAlignment="Center"/>
         </DockPanel>
         <DockPanel DockPanel.Dock="Top">
-            <c:SimpleButton Margin="5,5,0,5" IsEnabled="{Binding EditMode}" TextVisibility="False"
-                            TextContent="Z dysku" IconSource="pack://siteoforigin:,,,/Resources/icon32_folder.ico" PreviewMouseLeftButtonUp="btnDrive_Click"/>
+            <c:Button Margin="5,5,0,5" IsEnabled="{Binding EditMode}" TextVisibility="False"
+                            Text="Z dysku" Icon="/Resources/icon32_folder.ico" PreviewMouseLeftButtonUp="btnDrive_Click"/>
             <TextBox x:Name="tbDrive" Margin="5" VerticalContentAlignment="Center"/>
         </DockPanel>
         <DockPanel DockPanel.Dock="Top">
             <Label Margin="5,5,0,5" Content="Nazwa:" VerticalAlignment="Center"/>
             <TextBox x:Name="tbName" Margin="5" VerticalContentAlignment="Center"/>
         </DockPanel>
-        <Grid Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=30}">
+        <Grid Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=30}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <c:SimpleButton Grid.Column="1" Margin="5" IsEnabled="True" TextVisibility="True"
-                            TextContent="Akceptuj" IconSource="pack://siteoforigin:,,,/Resources/icon32_accept.ico" PreviewMouseLeftButtonUp="btnAccept_Click"/>
+            <c:Button Grid.Column="1" Margin="5" IsEnabled="True" TextVisibility="True"
+                            Text="Akceptuj" Icon="/Resources/icon32_accept.ico" PreviewMouseLeftButtonUp="btnAccept_Click"/>
         </Grid>
     </DockPanel>
 </Window>

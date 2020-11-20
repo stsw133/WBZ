@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows;
 using System.Windows.Input;
-using WBZ.Helpers;
+using WBZ.Globals;
 using WBZ.Modules.Articles;
 using WBZ.Modules.Companies;
 using WBZ.Modules.Stores;

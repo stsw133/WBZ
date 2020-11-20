@@ -4,13 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:c="clr-namespace:WBZ.Controls"
-        xmlns:h="clr-namespace:WBZ.Helpers"
+        xmlns:g="clr-namespace:WBZ.Globals"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
         Title="Generator raportów" SizeToContent="WidthAndHeight"
             BorderThickness="3" BorderBrush="#333" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner" WindowStyle="None"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
-            Icon="pack://siteoforigin:,,,/Resources/_null.ico">
+            Icon="/Resources/_null.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -34,8 +34,8 @@
             <DatePicker Grid.Row="1" Grid.Column="0" x:Name="dpFrom" Margin="20,5,5,5" VerticalContentAlignment="Center"/>
             <Label Grid.Row="1" Grid.Column="1" Content="/" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <DatePicker Grid.Row="1" Grid.Column="2" x:Name="dpTo" Margin="5,5,20,5" VerticalContentAlignment="Center"/>
-            <c:SimpleButton Grid.Row="3" Grid.ColumnSpan="3" Margin="5" IsEnabled="True" TextVisibility="True" HorizontalAlignment="Center"
-                            TextContent="Akceptuj" IconSource="pack://siteoforigin:,,,/Resources/icon32_accept.ico" PreviewMouseLeftButtonUp="btnAccept_Click"/>
+            <c:Button Grid.Row="3" Grid.ColumnSpan="3" Margin="5" IsEnabled="True" TextVisibility="True" HorizontalAlignment="Center"
+                            Text="Akceptuj" Icon="/Resources/icon32_accept.ico" PreviewMouseLeftButtonUp="btnAccept_Click"/>
         </Grid>
     </DockPanel>
 </Window>

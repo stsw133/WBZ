@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-using WBZ.Helpers;
+using WBZ.Globals;
 
 namespace WBZ.Modules.Login
 {

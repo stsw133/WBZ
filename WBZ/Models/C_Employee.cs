@@ -1,11 +1,7 @@
-﻿using WBZ.Helpers;
-
-namespace WBZ.Models
+﻿namespace WBZ.Models
 {
 	public class C_Employee
 	{
-		public static readonly string MODULE = Global.Module.EMPLOYEES;
-
 		public int ID { get; set; }
 		public int User { get; set; }
 		public string Email { get; set; }

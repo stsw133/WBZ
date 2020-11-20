@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace WBZ.Helpers
+namespace WBZ.Globals
 {
 	/// <summary>
 	/// Convert bool -> !bool , bool -> !Visibility : parameter must be bool

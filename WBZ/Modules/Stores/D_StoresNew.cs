@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
-using WBZ.Helpers;
+using WBZ.Globals;
 using WBZ.Models;
 using MODULE_MODEL = WBZ.Models.C_Store;
 
@@ -69,13 +69,13 @@ namespace WBZ.Modules.Stores
 			get
 			{
 				if (Mode == Commands.Type.NEW)
-					return "pack://siteoforigin:,,,/Resources/icon32_add.ico";
+					return "/Resources/icon32_add.ico";
 				else if (Mode == Commands.Type.DUPLICATE)
-					return "pack://siteoforigin:,,,/Resources/icon32_duplicate.ico";
+					return "/Resources/icon32_duplicate.ico";
 				else if (Mode == Commands.Type.EDIT)
-					return "pack://siteoforigin:,,,/Resources/icon32_edit.ico";
+					return "/Resources/icon32_edit.ico";
 				else
-					return "pack://siteoforigin:,,,/Resources/icon32_search.ico";
+					return "/Resources/icon32_search.ico";
 			}
 		}
 		/// Window title

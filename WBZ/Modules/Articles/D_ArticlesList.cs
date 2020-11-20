@@ -3,7 +3,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Reflection;
-using WBZ.Helpers;
+using WBZ.Globals;
 using MODULE_MODEL = WBZ.Models.C_Article;
 
 namespace WBZ.Modules.Articles

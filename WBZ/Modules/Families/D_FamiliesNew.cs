@@ -1,19 +1,25 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
-using WBZ.Helpers;
+using WBZ.Globals;
 using WBZ.Models;
-using MODULE_CLASS = WBZ.Models.C_Family;
+using MODULE_MODEL = WBZ.Models.C_Family;
 
 namespace WBZ.Modules.Families
 {
     class D_FamiliesNew : INotifyPropertyChanged
     {
-        public readonly string MODULE_NAME = Global.Module.FAMILIES;
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void NotifyPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
 
+        /// Module
+        public readonly string MODULE_TYPE = Global.Module.FAMILIES;
         /// Instance
-		private MODULE_CLASS instanceInfo;
-        public MODULE_CLASS InstanceInfo
+		private MODULE_MODEL instanceInfo = new MODULE_MODEL();
+        public MODULE_MODEL InstanceInfo
         {
             get
             {
@@ -39,23 +45,23 @@ namespace WBZ.Modules.Families
                 NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
             }
         }
-        /// Editing mode
-        public bool EditingMode { get { return Mode != Commands.Type.PREVIEW; } }
         /// Window mode
 		public Commands.Type Mode { get; set; }
+        /// Editing mode
+        public bool EditingMode { get { return Mode != Commands.Type.PREVIEW; } }
         /// Additional window icon
         public string ModeIcon
         {
             get
             {
                 if (Mode == Commands.Type.NEW)
-                    return "pack://siteoforigin:,,,/Resources/icon32_add.ico";
+                    return "/Resources/icon32_add.ico";
                 else if (Mode == Commands.Type.DUPLICATE)
-                    return "pack://siteoforigin:,,,/Resources/icon32_duplicate.ico";
+                    return "/Resources/icon32_duplicate.ico";
                 else if (Mode == Commands.Type.EDIT)
-                    return "pack://siteoforigin:,,,/Resources/icon32_edit.ico";
+                    return "/Resources/icon32_edit.ico";
                 else
-                    return "pack://siteoforigin:,,,/Resources/icon32_search.ico";
+                    return "/Resources/icon32_search.ico";
             }
         }
         /// Window title
@@ -72,15 +78,6 @@ namespace WBZ.Modules.Families
                 else
                     return $"Podgląd rodziny: {InstanceInfo.Lastname}";
             }
-        }
-
-        /// <summary>
-		/// PropertyChangedEventHandler
-		/// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void NotifyPropertyChanged(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

@@ -4,13 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:c="clr-namespace:WBZ.Controls"
-        xmlns:h="clr-namespace:WBZ.Helpers"
+        xmlns:g="clr-namespace:WBZ.Globals"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
-        Title="Ustawienia" MinHeight="140" MinWidth="200" Height="350" Width="500"
+        Title="Ustawienia" MinHeight="160" MinWidth="240" Height="400" Width="600"
             BorderThickness="3" BorderBrush="#333" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" WindowStyle="None"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
-            Icon="pack://siteoforigin:,,,/Resources/icon32_settings.ico" Closed="Window_Closed">
+            Icon="/Resources/icon32_settings.ico" Closed="Window_Closed">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -20,7 +20,10 @@
         <!-- tabs -->
         <TabControl DockPanel.Dock="Top" TabStripPlacement="Left">
             <!-- tabMain -->
-            <TabItem Header="Ogólne">
+            <TabItem>
+                <TabItem.Header>
+                    <c:Header Text="Ogólne" Icon="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
+                </TabItem.Header>
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <DockPanel>
                         <GroupBox Header="Sieć" DockPanel.Dock="Top" Margin="5,5,5,0" VerticalAlignment="Top">
@@ -35,7 +38,10 @@
                 </ScrollViewer>
             </TabItem>
             <!-- tabStyle -->
-            <TabItem Header="Styl i czcionka">
+            <TabItem>
+                <TabItem.Header>
+                    <c:Header Text="Styl i czcionka" Icon="/Resources/icon32_font.ico"/>
+                </TabItem.Header>
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <DockPanel>
                         <CheckBox DockPanel.Dock="Top" Content="Tryb ciemny" Margin="10,10,10,5" Visibility="Collapsed"/>
@@ -69,7 +75,10 @@
                 </ScrollViewer>
             </TabItem>
             <!-- tabCommunication -->
-            <TabItem Header="Komunikacja">
+            <TabItem>
+                <TabItem.Header>
+                    <c:Header Text="Komunikacja" Icon="/Resources/icon32_mail.ico"/>
+                </TabItem.Header>
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <DockPanel>
                         <GroupBox DockPanel.Dock="Top" Header="E-mail" Margin="5,5,5,0" VerticalAlignment="Top">
@@ -94,8 +103,8 @@
                                 <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding config_Email_Email, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Margin="5" VerticalContentAlignment="Center"/>
                                 <Label Grid.Row="3" Grid.Column="0" Content="Hasło:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                                 <PasswordBox x:Name="pbEmailPassword" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center" Loaded="pbEmailPassword_Loaded" PasswordChanged="pbEmailPassword_PasswordChanged"/>
-                                <c:SimpleButton Grid.Row="4" Grid.Column="1" Margin="5" IsEnabled="True" TextVisibility="True"
-                                                TextContent="Testuj" IconSource="pack://siteoforigin:,,,/Resources/icon32_test.ico" PreviewMouseLeftButtonUp="btnEmailTest_Click"/>
+                                <c:Button Grid.Row="4" Grid.Column="1" Margin="5" IsEnabled="True" TextVisibility="True" HorizontalAlignment="Center"
+                                          Text="Testuj" Icon="/Resources/icon32_test.ico" PreviewMouseLeftButtonUp="btnEmailTest_Click"/>
                             </Grid>
                         </GroupBox>
                         <GroupBox DockPanel.Dock="Top" Header="GSM" Margin="5,5,5,0" VerticalAlignment="Top">

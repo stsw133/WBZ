@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using WBZ.Models;
 using WBZ.Controls;
-using WBZ.Helpers;
+using WBZ.Globals;
 using WBZ.Modules.Admin;
 using WBZ.Modules.Articles;
 using WBZ.Modules.Attachments;
@@ -205,7 +205,7 @@ namespace WBZ.Modules
 		/// <summary>
 		/// Admin - Community
 		/// </summary>
-		private void btnCommunity_Click(object sender, RoutedEventArgs e)
+		private void btnCommunity_Click(object sender, MouseButtonEventArgs e)
 		{
 			//new Forum() { Owner = this }.ShowDialog();
 		}
@@ -213,7 +213,7 @@ namespace WBZ.Modules
 		/// <summary>
 		/// Admin - Console SQL
 		/// </summary>
-		private void btnConsoleSQL_Click(object sender, RoutedEventArgs e)
+		private void btnConsoleSQL_Click(object sender, MouseButtonEventArgs e)
 		{
 			new ConsoleSQL() { Owner = this }.Show();
 		}
@@ -221,7 +221,7 @@ namespace WBZ.Modules
 		/// <summary>
 		/// Articles - list
 		/// </summary>
-		private void btnArticlesList_Click(object sender, RoutedEventArgs e)
+		private void btnArticlesList_Click(object sender, MouseButtonEventArgs e)
 		{
 			new ArticlesList(Commands.Type.LIST) { Owner = this }.Show();
 		}
@@ -229,7 +229,7 @@ namespace WBZ.Modules
 		/// <summary>
 		/// Articles - new
 		/// </summary>
-		private void btnArticlesNew_Click(object sender, RoutedEventArgs e)
+		private void btnArticlesNew_Click(object sender, MouseButtonEventArgs e)
 		{
 			new ArticlesNew(null, Commands.Type.NEW) { Owner = this }.Show();
 		}
@@ -237,7 +237,7 @@ namespace WBZ.Modules
 		/// <summary>
 		/// Attachments - list
 		/// </summary>
-		private void btnAttachmentsList_Click(object sender, RoutedEventArgs e)
+		private void btnAttachmentsList_Click(object sender, MouseButtonEventArgs e)
 		{
 			new AttachmentsList() { Owner = this }.Show();
 		}
@@ -245,7 +245,7 @@ namespace WBZ.Modules
 		/// <summary>
 		/// Attachments - gallery
 		/// </summary>
-		private void btnAttachmentsGallery_Click(object sender, RoutedEventArgs e)
+		private void btnAttachmentsGallery_Click(object sender, MouseButtonEventArgs e)
 		{
 			new AttachmentsGallery() { Owner = this }.Show();
 		}
@@ -253,7 +253,7 @@ namespace WBZ.Modules
 		/// <summary>
 		/// AttributesClasses - list
 		/// </summary>
-		private void btnAttributesClassesList_Click(object sender, RoutedEventArgs e)
+		private void btnAttributesClassesList_Click(object sender, MouseButtonEventArgs e)
 		{
 			new AttributesClassesList(Commands.Type.LIST) { Owner = this }.Show();
 		}
@@ -261,7 +261,7 @@ namespace WBZ.Modules
 		/// <summary>
 		/// AttributesClasses - new
 		/// </summary>
-		private void btnAttributesClassesNew_Click(object sender, RoutedEventArgs e)
+		private void btnAttributesClassesNew_Click(object sender, MouseButtonEventArgs e)
 		{
 			new AttributesClassesNew(null, Commands.Type.NEW) { Owner = this }.Show();
 		}
@@ -269,7 +269,7 @@ namespace WBZ.Modules
 		/// <summary>
 		/// Companies - list
 		/// </summary>
-		private void btnCompaniesList_Click(object sender, RoutedEventArgs e)
+		private void btnCompaniesList_Click(object sender, MouseButtonEventArgs e)
 		{
 			new CompaniesList(Commands.Type.LIST) { Owner = this }.Show();
 		}
@@ -277,7 +277,7 @@ namespace WBZ.Modules
 		/// <summary>
 		/// Companies - new
 		/// </summary>
-		private void btnCompaniesNew_Click(object sender, RoutedEventArgs e)
+		private void btnCompaniesNew_Click(object sender, MouseButtonEventArgs e)
 		{
 			new CompaniesNew(null, Commands.Type.NEW) { Owner = this }.Show();
 		}
@@ -285,7 +285,7 @@ namespace WBZ.Modules
 		/// <summary>
 		/// Distributions - list
 		/// </summary>
-		private void btnDistributionsList_Click(object sender, RoutedEventArgs e)
+		private void btnDistributionsList_Click(object sender, MouseButtonEventArgs e)
 		{
 			new DistributionsList() { Owner = this }.Show();
 		}
@@ -293,7 +293,7 @@ namespace WBZ.Modules
 		/// <summary>
 		/// Distributions - new
 		/// </summary>
-		private void btnDistributionsNew_Click(object sender, RoutedEventArgs e)
+		private void btnDistributionsNew_Click(object sender, MouseButtonEventArgs e)
 		{
 			new DistributionsNew(null, Commands.Type.NEW) { Owner = this }.Show();
 		}
@@ -301,7 +301,7 @@ namespace WBZ.Modules
 		/// <summary>
 		/// Documents - list
 		/// </summary>
-		private void btnDocumentsList_Click(object sender, RoutedEventArgs e)
+		private void btnDocumentsList_Click(object sender, MouseButtonEventArgs e)
 		{
 			new DocumentsList() { Owner = this }.Show();
 		}
@@ -309,7 +309,7 @@ namespace WBZ.Modules
 		/// <summary>
 		/// Documents - new
 		/// </summary>
-		private void btnDocumentsNew_Click(object sender, RoutedEventArgs e)
+		private void btnDocumentsNew_Click(object sender, MouseButtonEventArgs e)
 		{
 			new DocumentsNew(null, Commands.Type.NEW) { Owner = this }.Show();
 		}
@@ -317,7 +317,7 @@ namespace WBZ.Modules
 		/// <summary>
 		/// Employees - list
 		/// </summary>
-		private void btnEmployeesList_Click(object sender, RoutedEventArgs e)
+		private void btnEmployeesList_Click(object sender, MouseButtonEventArgs e)
 		{
 			new EmployeesList(Commands.Type.LIST) { Owner = this }.Show();
 		}
@@ -325,7 +325,7 @@ namespace WBZ.Modules
 		/// <summary>
 		/// Employees - new
 		/// </summary>
-		private void btnEmployeesNew_Click(object sender, RoutedEventArgs e)
+		private void btnEmployeesNew_Click(object sender, MouseButtonEventArgs e)
 		{
 			new EmployeesNew(null, Commands.Type.NEW) { Owner = this }.Show();
 		}
@@ -333,15 +333,15 @@ namespace WBZ.Modules
 		/// <summary>
 		/// Families - list
 		/// </summary>
-		private void btnFamiliesList_Click(object sender, RoutedEventArgs e)
+		private void btnFamiliesList_Click(object sender, MouseButtonEventArgs e)
 		{
-			new FamiliesList() { Owner = this }.Show();
+			new FamiliesList(Commands.Type.LIST) { Owner = this }.Show();
 		}
 
 		/// <summary>
 		/// Families - new
 		/// </summary>
-		private void btnFamiliesNew_Click(object sender, RoutedEventArgs e)
+		private void btnFamiliesNew_Click(object sender, MouseButtonEventArgs e)
 		{
 			new FamiliesNew(null, Commands.Type.NEW) { Owner = this }.Show();
 		}
@@ -349,7 +349,7 @@ namespace WBZ.Modules
 		/// <summary>
 		/// Groups
 		/// </summary>
-		private void btnGroupsList_Click(object sender, RoutedEventArgs e)
+		private void btnGroupsList_Click(object sender, MouseButtonEventArgs e)
 		{
 			new GroupsList() { Owner = this }.Show();
 		}
@@ -357,23 +357,15 @@ namespace WBZ.Modules
 		/// <summary>
 		/// Logs - list
 		/// </summary>
-		private void btnLogsList_Click(object sender, RoutedEventArgs e)
+		private void btnLogsList_Click(object sender, MouseButtonEventArgs e)
 		{
 			new LogsList() { Owner = this }.Show();
 		}
 
 		/// <summary>
-		/// Logs - error list
-		/// </summary>
-		private void btnLogsErrorsList_Click(object sender, RoutedEventArgs e)
-		{
-			//new ErrorsList() { Owner = this }.Show();
-		}
-
-		/// <summary>
 		/// Stats
 		/// </summary>
-		private void btnStats_Click(object sender, RoutedEventArgs e)
+		private void btnStats_Click(object sender, MouseButtonEventArgs e)
 		{
 			new Stats.Stats() { Owner = this }.Show();
 		}
@@ -381,7 +373,7 @@ namespace WBZ.Modules
 		/// <summary>
 		/// Stores - list
 		/// </summary>
-		private void btnStoresList_Click(object sender, RoutedEventArgs e)
+		private void btnStoresList_Click(object sender, MouseButtonEventArgs e)
 		{
 			new StoresList(Commands.Type.LIST) { Owner = this }.Show();
 		}
@@ -389,7 +381,7 @@ namespace WBZ.Modules
 		/// <summary>
 		/// Stores - new
 		/// </summary>
-		private void btnStoresNew_Click(object sender, RoutedEventArgs e)
+		private void btnStoresNew_Click(object sender, MouseButtonEventArgs e)
 		{
 			new StoresNew(null, Commands.Type.NEW) { Owner = this }.Show();
 		}
@@ -397,7 +389,7 @@ namespace WBZ.Modules
 		/// <summary>
 		/// Users - list
 		/// </summary>
-		private void btnUsersList_Click(object sender, RoutedEventArgs e)
+		private void btnUsersList_Click(object sender, MouseButtonEventArgs e)
 		{
 			new UsersList(Commands.Type.LIST) { Owner = this }.Show();
 		}
@@ -405,7 +397,7 @@ namespace WBZ.Modules
 		/// <summary>
 		/// Users - new
 		/// </summary>
-		private void btnUsersNew_Click(object sender, RoutedEventArgs e)
+		private void btnUsersNew_Click(object sender, MouseButtonEventArgs e)
 		{
 			new UsersNew(null, Commands.Type.NEW) { Owner = this }.Show();
 		}

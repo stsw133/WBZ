@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using WBZ.Models;
 using WBZ.Controls;
-using WBZ.Helpers;
+using WBZ.Globals;
 
 namespace WBZ.Modules.Login
 {

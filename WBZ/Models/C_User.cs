@@ -1,12 +1,9 @@
 ﻿using System.Collections.Generic;
-using WBZ.Helpers;
 
 namespace WBZ.Models
 {
 	public class C_User
 	{
-		public static readonly string MODULE = Global.Module.USERS;
-
 		public int ID { get; set; }
 		public string Username { get; set; }
 		public string Newpass { get; set; }

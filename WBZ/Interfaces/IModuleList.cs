@@ -3,12 +3,13 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using WBZ.Helpers;
+using WBZ.Globals;
 
 namespace WBZ.Interfaces
 {
     interface IModuleList
 	{
+        void Init();
         void Window_Loaded(object sender, RoutedEventArgs e);
         void UpdateFilters();
         void dpFilter_KeyUp(object sender, KeyEventArgs e);
@@ -32,16 +33,22 @@ namespace WBZ.Interfaces
         string MODULE_TYPE;
 
         /// <summary>
-        /// Loaded
+        /// Init
         /// </summary>
-        public void Window_Loaded(object sender, RoutedEventArgs e)
+        public void Init()
         {
             W = GetWindow(this);
             D = W.DataContext;
             FullName = W.GetType().FullName;
             HalfName = FullName.Substring(0, FullName.Length - 4);
             MODULE_TYPE = D.MODULE_TYPE;
+        }
 
+        /// <summary>
+        /// Loaded
+        /// </summary>
+        public void Window_Loaded(object sender, RoutedEventArgs e)
+        {
             if (D.SelectingMode)
                 W.dgList.SelectionMode = DataGridSelectionMode.Single;
         }
@@ -93,6 +100,16 @@ namespace WBZ.Interfaces
                         + $"LOWER(COALESCE(e.city,'')) like '%{D.Filters.City.ToLower()}%' and "
                         + $"LOWER(COALESCE(e.address,'')) like '%{D.Filters.Address.ToLower()}%' and "
                         + (D.Filters.Archival ? $"e.archival=false and " : "");
+                    break;
+                /// FAMILIES
+                case Global.Module.FAMILIES:
+                    D.FilterSQL = $"LOWER(COALESCE(f.declarant,'')) like '%{D.Filters.Declarant.ToLower()}%' and "
+                        + $"LOWER(COALESCE(f.lastname,'')) like '%{D.Filters.Lastname.ToLower()}%' and "
+                        + (D.Filters.Members > 0 ? $"COALESCE(f.members,0) = {D.Filters.Members} and " : "")
+                        + $"LOWER(COALESCE(f.postcode,'')) like '%{D.Filters.Postcode.ToLower()}%' and "
+                        + $"LOWER(COALESCE(f.city,'')) like '%{D.Filters.City.ToLower()}%' and "
+                        + $"LOWER(COALESCE(f.address,'')) like '%{D.Filters.Address.ToLower()}%' and "
+                        + (!D.Filters.Archival ? $"f.archival=false and " : "");
                     break;
                 /// STORES
                 case Global.Module.STORES:

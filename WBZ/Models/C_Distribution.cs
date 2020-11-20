@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using WBZ.Helpers;
+using WBZ.Globals;
 
 namespace WBZ.Models
 {
 	public class C_Distribution
 	{
-		public static readonly string MODULE = Global.Module.DISTRIBUTIONS;
-
 		public enum DistributionStatus
 		{
 			Withdrawn = -1,

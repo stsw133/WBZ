@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
 using WBZ.Models;
-using WBZ.Helpers;
+using WBZ.Globals;
 using MODULE_MODEL = WBZ.Models.C_Company;
 using WBZ.Interfaces;
 
@@ -18,6 +18,7 @@ namespace WBZ.Modules.Companies
         {
             InitializeComponent();
             DataContext = D;
+            Init();
 
             if (instance != null)
                 D.InstanceInfo = instance;

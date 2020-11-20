@@ -3,7 +3,7 @@ using System.IO.Ports;
 using System.Threading;
 using WBZ.Controls;
 
-namespace WBZ.Helpers
+namespace WBZ.Globals
 {
     class GSM
     {

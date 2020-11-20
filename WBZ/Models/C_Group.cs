@@ -1,11 +1,9 @@
-﻿using WBZ.Helpers;
+﻿using WBZ.Globals;
 
 namespace WBZ.Models
 {
 	public class C_Group
 	{
-		public static readonly string MODULE = Global.Module.GROUPS;
-
 		public int ID { get; set; }
 		public string Module { get; set; }
 		public string Name { get; set; }

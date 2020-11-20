@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Data;
-using WBZ.Helpers;
+using WBZ.Globals;
 
 namespace WBZ.Models
 {
 	public class C_Document
 	{
-		public static readonly string MODULE = Global.Module.DOCUMENTS;
-
 		public enum DocumentStatus
 		{
 			Withdrawn = -1,

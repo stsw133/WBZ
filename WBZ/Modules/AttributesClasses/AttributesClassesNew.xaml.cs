@@ -1,4 +1,4 @@
-﻿using WBZ.Helpers;
+﻿using WBZ.Globals;
 using WBZ.Interfaces;
 using MODULE_MODEL = WBZ.Models.C_AttributeClass;
 
@@ -15,6 +15,7 @@ namespace WBZ.Modules.AttributesClasses
         {
             InitializeComponent();
             DataContext = D;
+            Init();
 
             if (instance != null)
                 D.InstanceInfo = instance;

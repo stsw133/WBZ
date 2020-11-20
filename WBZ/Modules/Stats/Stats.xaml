@@ -4,13 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:c="clr-namespace:WBZ.Controls"
-        xmlns:h="clr-namespace:WBZ.Helpers"
+        xmlns:g="clr-namespace:WBZ.Globals"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
         Title="Statystyki" MinHeight="240" MinWidth="360" Height="{Binding config_Stats_WindowSize[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_Stats_WindowSize[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
             BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
-            Icon="pack://siteoforigin:,,,/Resources/icon32_stats.ico">
+            Icon="/Resources/icon32_stats.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -21,14 +21,14 @@
         <Border DockPanel.Dock="Right" Background="{Binding config_Stats_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="1,0,0,0">
             <DockPanel>
                 <ToggleButton x:Name="btnToggle" BorderThickness="0" Width="5" IsChecked="True"/>
-                <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding Source={x:Static h:Global.User}, Path=Perms, Converter={h:conv_ListContains}, ConverterParameter=stats_save}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
-                                TextContent="Generuj raport" IconSource="pack://siteoforigin:,,,/Resources/icon32_list.ico" PreviewMouseLeftButtonUp="btnReportGenerate_Click"/>
+                <c:Button DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=stats_save}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
+                                Text="Generuj raport" Icon="/Resources/icon32_list.ico" PreviewMouseLeftButtonUp="btnReportGenerate_Click"/>
                 <Separator DockPanel.Dock="Top" Margin="0,5,0,0" VerticalAlignment="Top" Height="5"/>
-                <c:SimpleButton DockPanel.Dock="Bottom" Margin="5,0,5,5" IsEnabled="True" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
-                                TextContent="Zamknij okno" IconSource="pack://siteoforigin:,,,/Resources/icon32_close.ico" PreviewMouseLeftButtonUp="btnClose_Click"/>
+                <c:Button DockPanel.Dock="Bottom" Margin="5,0,5,5" IsEnabled="True" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
+                                Text="Zamknij okno" Icon="/Resources/icon32_close.ico" PreviewMouseLeftButtonUp="btnClose_Click"/>
                 <Separator DockPanel.Dock="Bottom" Margin="0,0,0,5" VerticalAlignment="Bottom" Height="5"/>
-                <c:SimpleButton DockPanel.Dock="Bottom" Margin="5,0,5,5" IsEnabled="True" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
-                                TextContent="Odśwież" IconSource="pack://siteoforigin:,,,/Resources/icon32_refresh.ico" PreviewMouseLeftButtonUp="btnRefresh_Click"/>
+                <c:Button DockPanel.Dock="Bottom" Margin="5,0,5,5" IsEnabled="True" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
+                                Text="Odśwież" Icon="/Resources/icon32_refresh.ico" PreviewMouseLeftButtonUp="btnRefresh_Click"/>
                 <Separator DockPanel.Dock="Bottom" Margin="0,0,0,5" VerticalAlignment="Bottom" Height="5"/>
             </DockPanel>
             <Border.ContextMenu>
@@ -47,7 +47,7 @@
                             <ScrollViewer Padding="10">
                                 <DockPanel>
                                     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                                        <Image Margin="3" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=1.75}" Source="pack://siteoforigin:,,,/Resources/icon32_articles.ico"/>
+                                        <Image Margin="3" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.75}" Source="/Resources/icon32_articles.ico"/>
                                         <Label Content="Towary" VerticalAlignment="Center"/>
                                     </StackPanel>
                                     <Label DockPanel.Dock="Top" Content="Towary otrzymane wg lat i miesięcy (kg):" VerticalAlignment="Center" FontWeight="Normal"/>

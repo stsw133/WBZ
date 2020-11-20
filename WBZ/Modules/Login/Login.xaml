@@ -4,13 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:c="clr-namespace:WBZ.Controls"
-        xmlns:h="clr-namespace:WBZ.Helpers"
+        xmlns:g="clr-namespace:WBZ.Globals"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
         Title="Logowanie" SizeToContent="WidthAndHeight"
             BorderThickness="3" BorderBrush="#333" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" WindowStyle="None"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
-            Icon="pack://siteoforigin:,,,/Resources/icon32_login.ico"
+            Icon="/Resources/icon32_login.ico"
             Loaded="Window_Loaded">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
@@ -21,7 +21,7 @@
         <!-- main -->
         <DockPanel DockPanel.Dock="Top">
             <Border DockPanel.Dock="Top" Background="White" BorderBrush="Gray" BorderThickness="1">
-                <Image Source="pack://siteoforigin:,,,/Resources/logo.png" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=30}"/>
+                <Image Source="/Resources/logo.png" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=30}"/>
             </Border>
             <Grid DockPanel.Dock="Top" Margin="5">
                 <Grid.RowDefinitions>
@@ -37,7 +37,7 @@
                 <Label Content="Baza danych:" Grid.Row="0" Grid.Column="0" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                 <DockPanel Grid.Row="0" Grid.Column="1" Margin="5">
                     <Button ToolTip="Zmień połączenie z główną bazą" Click="btnDatabases_Click">
-                        <Image Margin="2" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=1.5}" Source="pack://siteoforigin:,,,/Resources/icon32_database.ico"/>
+                        <Image Margin="2" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_database.ico"/>
                     </Button>
                     <ComboBox VerticalContentAlignment="Center" BorderThickness="0,1,1,1" DisplayMemberPath="Name" SelectedValuePath="Name" ItemsSource="{Binding Databases, Mode=OneWay}" SelectedValue="{Binding dbName, Source={x:Static p:Settings.Default}, Mode=TwoWay}" ToolTip="Identyfikator bazy danych" SelectionChanged="cbDatabase_SelectionChanged"/>
                 </DockPanel>
@@ -55,7 +55,7 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <DockPanel Grid.Column="0">
-                    <Image x:Name="imgVersion" Margin="5" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_unknown.ico"/>
+                    <Image x:Name="imgVersion" Margin="5" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=2}" Source="/Resources/icon32_unknown.ico"/>
                     <StackPanel VerticalAlignment="Center" Margin="5">
                         <Label Content="Wersja:" Padding="1"/>
                         <Label x:Name="txtVersion" Padding="1" FontWeight="Medium"/>
@@ -63,48 +63,48 @@
                 </DockPanel>
                 <Button x:Name="btnLogin" Content="Zaloguj" Grid.Column="1" Margin="5" IsEnabled="False" Click="btnLogin_Click"/>
                 <Button x:Name="btnOther" ToolTip="Pozostałe" Grid.Column="2" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsEnabled="False" Click="btnOther_Click">
-                    <Image Margin="2" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=2}" Source="pack://siteoforigin:,,,/Resources/icon32_tools.ico"/>
+                    <Image Margin="2" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=2}" Source="/Resources/icon32_tools.ico"/>
                     <Button.ContextMenu>
                         <ContextMenu>
                             <MenuItem x:Name="btnCreateAdmin" Header="Utwórz administratora" IsEnabled="False" Visibility="Collapsed" Click="btnCreateAdmin_Click">
                                 <MenuItem.Icon>
-                                    <Image Source="pack://siteoforigin:,,,/Resources/icon32_admin.ico"/>
+                                    <Image Source="/Resources/icon32_admin.ico"/>
                                 </MenuItem.Icon>
                             </MenuItem>
                             <MenuItem x:Name="btnUpdateDatabase" Header="Aktualizuj bazę danych" IsEnabled="False" Visibility="Collapsed" Click="btnUpdateDatabase_Click">
                                 <MenuItem.Icon>
-                                    <Image Source="pack://siteoforigin:,,,/Resources/icon32_database.ico"/>
+                                    <Image Source="/Resources/icon32_database.ico"/>
                                 </MenuItem.Icon>
                             </MenuItem>
                             <MenuItem Header="Generuj nowe hasło" Click="btnGenerateNewpass_Click">
                                 <MenuItem.Icon>
-                                    <Image Source="pack://siteoforigin:,,,/Resources/icon32_random.ico"/>
+                                    <Image Source="/Resources/icon32_random.ico"/>
                                 </MenuItem.Icon>
                             </MenuItem>
                             <MenuItem Header="Poradnik użytkownika" Click="btnManual_Click">
                                 <MenuItem.Icon>
-                                    <Image Source="pack://siteoforigin:,,,/Resources/icon32_books.ico"/>
+                                    <Image Source="/Resources/icon32_books.ico"/>
                                 </MenuItem.Icon>
                             </MenuItem>
                             <MenuItem Header="Język">
                                 <MenuItem.Icon>
-                                    <Image Source="pack://siteoforigin:,,,/Resources/_null.ico"/>
+                                    <Image Source="/Resources/_null.ico"/>
                                 </MenuItem.Icon>
                                 <MenuItem Header="PL" IsCheckable="True">
                                     <MenuItem.Icon>
-                                        <Image Source="pack://siteoforigin:,,,/Resources/icon32_language_pl.ico"/>
+                                        <Image Source="/Resources/icon32_language_pl.ico"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
                             </MenuItem>
                             <Separator/>
                             <MenuItem Header="Baza wersji aplikacji" Click="btnVersions_Click">
                                 <MenuItem.Icon>
-                                    <Image Source="pack://siteoforigin:,,,/Resources/icon32_versions.ico"/>
+                                    <Image Source="/Resources/icon32_versions.ico"/>
                                 </MenuItem.Icon>
                             </MenuItem>
                             <MenuItem Header="O programie" Click="btnAboutApp_Click">
                                 <MenuItem.Icon>
-                                    <Image Source="pack://siteoforigin:,,,/Resources/logo32.ico"/>
+                                    <Image Source="/Resources/logo32.ico"/>
                                 </MenuItem.Icon>
                             </MenuItem>
                         </ContextMenu>

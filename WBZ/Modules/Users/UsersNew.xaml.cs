@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using WBZ.Helpers;
+using WBZ.Globals;
 using WBZ.Interfaces;
 using MODULE_MODEL = WBZ.Models.C_User;
 
@@ -17,6 +17,7 @@ namespace WBZ.Modules.Users
 		{
 			InitializeComponent();
 			DataContext = D;
+			Init();
 
 			if (instance != null)
 				D.InstanceInfo = instance;

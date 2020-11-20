@@ -1,12 +1,7 @@
-﻿using System.Data;
-using WBZ.Helpers;
-
-namespace WBZ.Models
+﻿namespace WBZ.Models
 {
 	public class C_Company
 	{
-		public static readonly string MODULE = Global.Module.COMPANIES;
-
 		public int ID { get; set; }
 		public string Codename { get; set; }
 		public string Name { get; set; }

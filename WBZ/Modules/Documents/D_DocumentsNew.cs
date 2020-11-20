@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Reflection;
-using WBZ.Helpers;
+using WBZ.Globals;
 using MODULE_CLASS = WBZ.Models.C_Document;
 
 namespace WBZ.Modules.Documents
@@ -33,13 +33,13 @@ namespace WBZ.Modules.Documents
 			get
 			{
 				if (Mode == Commands.Type.NEW)
-					return "pack://siteoforigin:,,,/Resources/icon32_add.ico";
+					return "/Resources/icon32_add.ico";
 				else if (Mode == Commands.Type.DUPLICATE)
-					return "pack://siteoforigin:,,,/Resources/icon32_duplicate.ico";
+					return "/Resources/icon32_duplicate.ico";
 				else if (Mode == Commands.Type.EDIT)
-					return "pack://siteoforigin:,,,/Resources/icon32_edit.ico";
+					return "/Resources/icon32_edit.ico";
 				else
-					return "pack://siteoforigin:,,,/Resources/icon32_search.ico";
+					return "/Resources/icon32_search.ico";
 			}
 		}
 		/// Window title

@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Windows;
 using WBZ.Controls;
 
-namespace WBZ.Helpers
+namespace WBZ.Globals
 {
     internal static class Functions
     {

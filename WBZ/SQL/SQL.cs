@@ -6,7 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Windows;
 using WBZ.Models;
-using WBZ.Helpers;
+using WBZ.Globals;
 
 namespace WBZ
 {

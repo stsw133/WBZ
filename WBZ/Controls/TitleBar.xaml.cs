@@ -42,15 +42,15 @@ namespace WBZ.Controls
 			catch { }
 		}
 
-		public ImageSource AdditionalIcon
+		public ImageSource SubIcon
 		{
-			get { return (ImageSource)GetValue(pAdditionalIcon); }
-			set { SetValue(pAdditionalIcon, value); }
+			get { return (ImageSource)GetValue(pSubIcon); }
+			set { SetValue(pSubIcon, value); }
 		}
 
-		public static readonly DependencyProperty pAdditionalIcon
+		public static readonly DependencyProperty pSubIcon
 			= DependencyProperty.Register(
-				  nameof(AdditionalIcon),
+				  nameof(SubIcon),
 				  typeof(ImageSource),
 				  typeof(TitleBar),
 				  new PropertyMetadata(null)

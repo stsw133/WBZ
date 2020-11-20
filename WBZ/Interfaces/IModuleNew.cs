@@ -4,12 +4,13 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using WBZ.Helpers;
+using WBZ.Globals;
 
 namespace WBZ.Interfaces
 {
 	interface IModuleNew
 	{
+		void Init();
 		void Window_Loaded(object sender, RoutedEventArgs e);
 		bool CheckDataValidation();
 		void btnSave_Click(object sender, MouseButtonEventArgs e);
@@ -25,16 +26,22 @@ namespace WBZ.Interfaces
         string MODULE_TYPE;
 
 		/// <summary>
-		/// Loaded
+		/// Init
 		/// </summary>
-		public void Window_Loaded(object sender, RoutedEventArgs e)
+		public void Init()
 		{
 			W = GetWindow(this);
 			D = W.DataContext;
 			FullName = W.GetType().FullName;
-			HalfName = FullName.Substring(0, FullName.Length - 3);
+			HalfName = FullName.Substring(0, FullName.Length - 4);
 			MODULE_TYPE = D.MODULE_TYPE;
+		}
 
+		/// <summary>
+		/// Loaded
+		/// </summary>
+		public void Window_Loaded(object sender, RoutedEventArgs e)
+		{
 			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE))
 				D.InstanceInfo.ID = SQL.NewInstanceID(D.MODULE_TYPE);
 		}

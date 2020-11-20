@@ -7,7 +7,7 @@ using System.Windows.Media.Imaging;
 using System.Net.Http;
 using WBZ.Models;
 using WBZ.Controls;
-using WBZ.Helpers;
+using WBZ.Globals;
 using Props = WBZ.Properties.Settings;
 
 namespace WBZ.Modules.Login

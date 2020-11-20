@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:h="clr-namespace:WBZ.Helpers"
+             xmlns:g="clr-namespace:WBZ.Globals"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded">
     <DataGrid Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
-              AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstanceContacts}" IsReadOnly="{Binding EditingMode, Converter={h:conv_BoolInverted}}">
+              AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstanceContacts}" IsReadOnly="{Binding EditingMode, Converter={g:conv_BoolInverted}}">
         <DataGrid.Columns>
             <DataGridTextColumn Binding="{Binding id}" Header="ID" IsReadOnly="True" Visibility="Hidden"/>
             <DataGridTextColumn Binding="{Binding forename}" Header="Imię" Width="1*"/>

@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 using WBZ.Models;
 using WBZ.Controls;
 
-namespace WBZ.Helpers
+namespace WBZ.Globals
 {
     public static class Global
     {

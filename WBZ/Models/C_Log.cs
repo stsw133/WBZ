@@ -1,12 +1,10 @@
 ﻿using System;
-using WBZ.Helpers;
+using WBZ.Globals;
 
 namespace WBZ.Models
 {
 	public class C_Log
 	{
-		public static readonly string MODULE = Global.Module.LOGS;
-
 		public int ID { get; set; }
 		public int User { get; set; }
 		public string UserFullname { get; set; }

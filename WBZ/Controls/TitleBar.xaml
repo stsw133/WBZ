@@ -3,24 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:h="clr-namespace:WBZ.Helpers"
+             xmlns:g="clr-namespace:WBZ.Globals"
              xmlns:p="clr-namespace:WBZ.Properties"
              mc:Ignorable="d"
              Loaded="UserControl_Loaded">
     <!-- titleBar -->
     <DockPanel x:Name="titleBar" Background="#444" MouseDown="titleBar_MouseDown" WindowChrome.IsHitTestVisibleInChrome="True">
-        <Button x:Name="titleBar_Close" DockPanel.Dock="Right" Background="#333" BorderThickness="0" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=3.5}" Click="titleBar_Close_Click">
-            <Image Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=0.25}" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=1.75}" Source="pack://siteoforigin:,,,/Resources/icon32_close.ico"/>
+        <Button x:Name="titleBar_Close" DockPanel.Dock="Right" Background="#333" BorderThickness="0" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3.5}" Click="titleBar_Close_Click">
+            <Image Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.25}" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.75}" Source="/Resources/icon32_close.ico"/>
         </Button>
-        <Button x:Name="titleBar_Resize" DockPanel.Dock="Right" Background="#333" BorderThickness="0" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=3.5}" Click="titleBar_Resize_Click">
-            <Image Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=0.25}" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=1.75}" Source="pack://siteoforigin:,,,/Resources/icon32_maximize.ico"/>
+        <Button x:Name="titleBar_Resize" DockPanel.Dock="Right" Background="#333" BorderThickness="0" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3.5}" Click="titleBar_Resize_Click">
+            <Image Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.25}" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.75}" Source="/Resources/icon32_maximize.ico"/>
         </Button>
-        <Button x:Name="titleBar_Minimize" DockPanel.Dock="Right" Background="#333" BorderThickness="0" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=3.5}" Click="titleBar_Minimize_Click">
-            <Image Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=0.25}" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=1.75}" Source="pack://siteoforigin:,,,/Resources/icon32_minimize.ico"/>
+        <Button x:Name="titleBar_Minimize" DockPanel.Dock="Right" Background="#333" BorderThickness="0" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3.5}" Click="titleBar_Minimize_Click">
+            <Image Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.25}" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.75}" Source="/Resources/icon32_minimize.ico"/>
         </Button>
-        <Grid Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=0.25}">
-            <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=1.75}" Source="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
-            <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=0.85}" Source="{Binding AdditionalIcon, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+        <Grid Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.25}">
+            <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.75}" Source="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
+            <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.85}" Source="{Binding SubIcon, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
         </Grid>
         <Label x:Name="titleBar_Title" Content="{Binding Title, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" VerticalContentAlignment="Center" Foreground="White"/>
         <DockPanel.ContextMenu>

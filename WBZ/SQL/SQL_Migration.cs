@@ -1,7 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Windows;
-using WBZ.Helpers;
+using WBZ.Globals;
 
 namespace WBZ
 {

@@ -1,4 +1,4 @@
-﻿using WBZ.Helpers;
+﻿using WBZ.Globals;
 using WBZ.Interfaces;
 using MODULE_MODEL = WBZ.Models.C_Employee;
 
@@ -15,6 +15,7 @@ namespace WBZ.Modules.Employees
         {
             InitializeComponent();
             DataContext = D;
+            Init();
             btnRefresh_Click(null, null);
 
 			D.Mode = mode;

@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using WBZ.Helpers;
+using WBZ.Globals;
 using WBZ.Interfaces;
 using WBZ.Modules.Users;
 using MODULE_MODEL = WBZ.Models.C_Employee;
@@ -17,6 +17,7 @@ namespace WBZ.Modules.Employees
         {
             InitializeComponent();
             DataContext = D;
+			Init();
 
 			if (instance != null)
 				D.InstanceInfo = instance;

@@ -1,5 +1,5 @@
 ﻿using System.Windows.Controls;
-using WBZ.Helpers;
+using WBZ.Globals;
 using WBZ.Interfaces;
 using WBZ.Models;
 using MODULE_MODEL = WBZ.Models.C_Article;
@@ -17,6 +17,7 @@ namespace WBZ.Modules.Articles
 		{
 			InitializeComponent();
 			DataContext = D;
+			Init();
 
 			D.Mode = mode;
 			if (D.StoresList.Rows.Count > 0)

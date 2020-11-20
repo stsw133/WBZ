@@ -202,6 +202,9 @@
   <data name="icon32_folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_folder.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icon32_font" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon32_font.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon32_food" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_food.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

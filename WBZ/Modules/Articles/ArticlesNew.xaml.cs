@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 using WBZ.Models;
-using WBZ.Helpers;
+using WBZ.Globals;
 using WBZ.Interfaces;
 using MODULE_MODEL = WBZ.Models.C_Article;
 
@@ -21,6 +21,7 @@ namespace WBZ.Modules.Articles
 		{
 			InitializeComponent();
 			DataContext = D;
+			Init();
 
 			if (instance != null)
 				D.InstanceInfo = instance;

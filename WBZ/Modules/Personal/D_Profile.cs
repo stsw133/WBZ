@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Reflection;
-using WBZ.Helpers;
+using WBZ.Globals;
 using WBZ.Models;
 
 namespace WBZ.Modules.Personal

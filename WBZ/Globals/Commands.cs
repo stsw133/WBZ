@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace WBZ.Helpers
+namespace WBZ.Globals
 {
     public static class Commands
     {

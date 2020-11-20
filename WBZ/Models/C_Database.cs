@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using WBZ.Controls;
-using WBZ.Helpers;
+using WBZ.Globals;
 
 namespace WBZ.Models
 {

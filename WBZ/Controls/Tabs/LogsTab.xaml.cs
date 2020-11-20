@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using WBZ.Models;
-using WBZ.Helpers;
+using WBZ.Globals;
 
 namespace WBZ.Controls
 {

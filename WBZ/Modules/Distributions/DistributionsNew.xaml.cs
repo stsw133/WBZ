@@ -6,7 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using WBZ.Models;
-using WBZ.Helpers;
+using WBZ.Globals;
 using WBZ.Modules.Articles;
 using WBZ.Modules.Families;
 using WBZ.Other;
@@ -122,7 +122,7 @@ namespace WBZ.Modules.Distributions
 		{
 			C_DistributionFamily family;
 
-			var window = new FamiliesList(true);
+			var window = new FamiliesList(Commands.Type.SELECTING);
 			if (window.ShowDialog() == true)
 			{
 				family = D.InstanceInfo.Families.FirstOrDefault(x => x.Family == window.Selected.ID);

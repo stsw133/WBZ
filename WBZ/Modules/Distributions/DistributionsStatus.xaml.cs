@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using WBZ.Models;
-using WBZ.Helpers;
+using WBZ.Globals;
 
 namespace WBZ.Modules.Distributions
 {

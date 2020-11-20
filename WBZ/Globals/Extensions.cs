@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Media;
 
-namespace WBZ.Helpers
+namespace WBZ.Globals
 {
     internal static class Extensions
     {

@@ -4,13 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:c="clr-namespace:WBZ.Controls"
-        xmlns:h="clr-namespace:WBZ.Helpers"
+        xmlns:g="clr-namespace:WBZ.Globals"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
         Title="Rejestracja" SizeToContent="WidthAndHeight"
             BorderThickness="3" BorderBrush="#333" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner" WindowStyle="None"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
-            Icon="pack://siteoforigin:,,,/Resources/_null.ico">
+            Icon="/Resources/_null.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -18,7 +18,7 @@
         <!-- titleBar -->
         <c:TitleBar DockPanel.Dock="Top"/>
         <!-- main -->
-        <Grid MinWidth="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={h:conv_Size}, ConverterParameter=30}">
+        <Grid MinWidth="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=30}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -36,8 +36,8 @@
             <TextBox x:Name="tbUsername" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center"/>
             <Label Grid.Row="2" Grid.Column="0" Content="Hasło:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
             <PasswordBox x:Name="pbPassword" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center"/>
-            <c:SimpleButton Grid.Row="3" Grid.Column="1" Margin="5" IsEnabled="True" TextVisibility="True"
-                            TextContent="Akceptuj" IconSource="pack://siteoforigin:,,,/Resources/icon32_accept.ico" PreviewMouseLeftButtonUp="btnAccept_Click"/>
+            <c:Button Grid.Row="3" Grid.Column="1" Margin="5" IsEnabled="True" TextVisibility="True"
+                            Text="Akceptuj" Icon="/Resources/icon32_accept.ico" PreviewMouseLeftButtonUp="btnAccept_Click"/>
         </Grid>
     </DockPanel>
 </Window>

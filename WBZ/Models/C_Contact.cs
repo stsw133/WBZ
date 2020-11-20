@@ -1,4 +1,4 @@
-﻿using WBZ.Helpers;
+﻿using WBZ.Globals;
 
 namespace WBZ.Models
 {

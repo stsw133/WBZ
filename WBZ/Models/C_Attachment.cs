@@ -1,11 +1,9 @@
-﻿using WBZ.Helpers;
+﻿using WBZ.Globals;
 
 namespace WBZ.Models
 {
 	public class C_Attachment
 	{
-		public static readonly string MODULE = Global.Module.ATTACHMENTS;
-
 		public int ID { get; set; }
 		public int User { get; set; }
 		public string UserFullname { get; set; }

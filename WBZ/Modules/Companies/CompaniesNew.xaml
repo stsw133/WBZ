@@ -5,31 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WBZ.Modules.Companies"
         xmlns:c="clr-namespace:WBZ.Controls"
-        xmlns:h="clr-namespace:WBZ.Helpers"
+        xmlns:g="clr-namespace:WBZ.Globals"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
         Title="{Binding Title}" MinHeight="240" MinWidth="360" Height="{Binding Source={x:Static p:Settings.Default}, Path=config_CompaniesNew_WindowSize[1], Mode=TwoWay}" Width="{Binding Source={x:Static p:Settings.Default}, Path=config_CompaniesNew_WindowSize[0], Mode=TwoWay}"
             BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
-            Icon="pack://siteoforigin:,,,/Resources/icon32_companies.ico" Closed="Window_Closed">
+            Icon="/Resources/icon32_companies.ico" Closed="Window_Closed">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
     <DockPanel>
         <!-- titleBar -->
-        <c:TitleBar DockPanel.Dock="Top" AdditionalIcon="{Binding ModeIcon}"/>
+        <c:TitleBar DockPanel.Dock="Top" SubIcon="{Binding ModeIcon}"/>
         <!-- buttonsPanel -->
         <Border DockPanel.Dock="Right" Background="{Binding config_Companies_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="1,0,0,0">
             <DockPanel>
                 <ToggleButton x:Name="btnToggle" BorderThickness="0" Width="5" IsChecked="True"/>
-                <c:SimpleButton DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding EditMode}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
-                                TextContent="Zapisz" IconSource="pack://siteoforigin:,,,/Resources/icon32_save.ico" PreviewMouseLeftButtonUp="btnSave_Click"/>
+                <c:Button DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding EditMode}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
+                                Text="Zapisz" Icon="/Resources/icon32_save.ico" PreviewMouseLeftButtonUp="btnSave_Click"/>
                 <Separator DockPanel.Dock="Top" Margin="0,5,0,0" VerticalAlignment="Top" Height="5"/>
-                <c:SimpleButton DockPanel.Dock="Bottom" Margin="5,0,5,5" IsEnabled="True" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
-                                TextContent="Zamknij okno" IconSource="pack://siteoforigin:,,,/Resources/icon32_close.ico" PreviewMouseLeftButtonUp="btnClose_Click"/>
+                <c:Button DockPanel.Dock="Bottom" Margin="5,0,5,5" IsEnabled="True" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
+                                Text="Zamknij okno" Icon="/Resources/icon32_close.ico" PreviewMouseLeftButtonUp="btnClose_Click"/>
                 <Separator DockPanel.Dock="Bottom" Margin="0,0,0,5" VerticalAlignment="Bottom" Height="5"/>
-                <c:SimpleButton DockPanel.Dock="Bottom" Margin="5,0,5,5" IsEnabled="True" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
-                                TextContent="Odśwież" IconSource="pack://siteoforigin:,,,/Resources/icon32_refresh.ico" PreviewMouseLeftButtonUp="btnRefresh_Click"/>
+                <c:Button DockPanel.Dock="Bottom" Margin="5,0,5,5" IsEnabled="True" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
+                                Text="Odśwież" Icon="/Resources/icon32_refresh.ico" PreviewMouseLeftButtonUp="btnRefresh_Click"/>
                 <Separator DockPanel.Dock="Bottom" Margin="0,0,0,5" VerticalAlignment="Bottom" Height="5"/>
             </DockPanel>
             <Border.ContextMenu>
@@ -43,40 +43,40 @@
             <!-- tabMain -->
             <TabItem>
                 <TabItem.Header>
-                    <c:SimpleHeader TextContent="Ogólne" IconSource="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
+                    <c:Header Text="Ogólne" Icon="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
                 </TabItem.Header>
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <DockPanel Margin="10" IsEnabled="{Binding EditingMode}" VerticalAlignment="Top">
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Kod:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="Kod:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
                             <TextBox Text="{Binding InstanceInfo.Codename}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Nazwa:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="Nazwa:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
                             <TextBox Text="{Binding InstanceInfo.Name}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Oddział:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="Oddział:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
                             <TextBox Text="{Binding InstanceInfo.Branch}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="NIP:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="NIP:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
                             <TextBox Text="{Binding InstanceInfo.NIP}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="REGON:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="REGON:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
                             <TextBox Text="{Binding InstanceInfo.REGON}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Kod pocztowy:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="Kod pocztowy:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
                             <TextBox Text="{Binding InstanceInfo.Postcode}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Miasto:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="Miasto:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
                             <TextBox Text="{Binding InstanceInfo.City}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Adres:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={h:conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="Adres:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
                             <TextBox Text="{Binding InstanceInfo.Address}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                     </DockPanel>
@@ -85,34 +85,34 @@
             <!-- tabAdditional -->
             <TabItem>
                 <TabItem.Header>
-                    <c:SimpleHeader TextContent="Dodatkowe" IconSource="pack://siteoforigin:,,,/Resources/icon32_tools.ico"/>
+                    <c:Header Text="Dodatkowe" Icon="/Resources/icon32_tools.ico"/>
                 </TabItem.Header>
                 <c:AdditionalsTab/>
             </TabItem>
             <!-- tabSources -->
             <TabItem>
                 <TabItem.Header>
-                    <c:SimpleHeader TextContent="Źródła" IconSource="pack://siteoforigin:,,,/Resources/icon32_source.ico"/>
+                    <c:Header Text="Źródła" Icon="/Resources/icon32_source.ico"/>
                 </TabItem.Header>
                 <TabControl SelectionChanged="tabs_SelectionChanged">
                     <!-- tabDocuments -->
                     <TabItem x:Name="tabSources_Documents">
                         <TabItem.Header>
-                            <c:SimpleHeader TextContent="Dokumenty" IconSource="pack://siteoforigin:,,,/Resources/icon32_documents.ico"/>
+                            <c:Header Text="Dokumenty" Icon="/Resources/icon32_documents.ico"/>
                         </TabItem.Header>
                         <DataGrid Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
                                   AutoGenerateColumns="False" ItemsSource="{Binding InstanceSources_Documents}" IsReadOnly="True"
                                   MouseDoubleClick="dgList_Documents_MouseDoubleClick">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_ID, Mode=OneWay, Converter={h:conv_BoolToVisibility}}"/>
-                                <DataGridTextColumn Binding="{Binding Type}" Header="Typ" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Type, Mode=OneWay, Converter={h:conv_BoolToVisibility}}"/>
-                                <DataGridTextColumn Binding="{Binding Name}" Header="Nazwa" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Name, Mode=OneWay, Converter={h:conv_BoolToVisibility}}" Width="*"/>
-                                <DataGridTextColumn Binding="{Binding StoreName}" Header="Magazyn" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_StoreName, Mode=OneWay, Converter={h:conv_BoolToVisibility}}"/>
-                                <DataGridTextColumn Binding="{Binding CompanyName}" Header="Firma" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_CompanyName, Mode=OneWay, Converter={h:conv_BoolToVisibility}}"/>
-                                <DataGridTextColumn Binding="{Binding PositionsCount}" Header="Pozycje" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_PositionsCount, Mode=OneWay, Converter={h:conv_BoolToVisibility}}"/>
-                                <DataGridTextColumn Binding="{Binding Weight}" Header="Waga (kg)" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Weight, Mode=OneWay, Converter={h:conv_BoolToVisibility}}"/>
-                                <DataGridTextColumn Binding="{Binding Cost}" Header="Kwota netto" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Cost, Mode=OneWay, Converter={h:conv_BoolToVisibility}}"/>
-                                <DataGridTextColumn Binding="{Binding DateIssue, StringFormat={}{0:yyyy-MM-dd}}" Header="Data wystawienia" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_DateIssue, Mode=OneWay, Converter={h:conv_BoolToVisibility}}"/>
+                                <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_ID, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                                <DataGridTextColumn Binding="{Binding Type}" Header="Typ" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Type, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                                <DataGridTextColumn Binding="{Binding Name}" Header="Nazwa" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Name, Mode=OneWay, Converter={g:conv_BoolToVisibility}}" Width="*"/>
+                                <DataGridTextColumn Binding="{Binding StoreName}" Header="Magazyn" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_StoreName, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                                <DataGridTextColumn Binding="{Binding CompanyName}" Header="Firma" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_CompanyName, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                                <DataGridTextColumn Binding="{Binding PositionsCount}" Header="Pozycje" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_PositionsCount, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                                <DataGridTextColumn Binding="{Binding Weight}" Header="Waga (kg)" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Weight, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                                <DataGridTextColumn Binding="{Binding Cost}" Header="Kwota netto" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Cost, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                                <DataGridTextColumn Binding="{Binding DateIssue, StringFormat={}{0:yyyy-MM-dd}}" Header="Data wystawienia" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_DateIssue, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </TabItem>
@@ -121,35 +121,35 @@
             <!-- tabContacts -->
             <TabItem>
                 <TabItem.Header>
-                    <c:SimpleHeader TextContent="Kontakty" IconSource="pack://siteoforigin:,,,/Resources/icon32_mail.ico"/>
+                    <c:Header Text="Kontakty" Icon="/Resources/icon32_mail.ico"/>
                 </TabItem.Header>
                 <c:ContactsTab/>
             </TabItem>
             <!-- tabGroups -->
             <TabItem>
                 <TabItem.Header>
-                    <c:SimpleHeader TextContent="Grupy" IconSource="pack://siteoforigin:,,,/Resources/icon32_groups.ico"/>
+                    <c:Header Text="Grupy" Icon="/Resources/icon32_groups.ico"/>
                 </TabItem.Header>
                 <c:GroupsTab/>
             </TabItem>
             <!-- tabAttributes -->
             <TabItem>
                 <TabItem.Header>
-                    <c:SimpleHeader TextContent="Atrybuty" IconSource="pack://siteoforigin:,,,/Resources/icon32_attributes.ico"/>
+                    <c:Header Text="Atrybuty" Icon="/Resources/icon32_attributes.ico"/>
                 </TabItem.Header>
                 <c:AttributesTab/>
             </TabItem>
             <!-- tabAttachments -->
             <TabItem>
                 <TabItem.Header>
-                    <c:SimpleHeader TextContent="Załączniki" IconSource="pack://siteoforigin:,,,/Resources/icon32_photos.ico"/>
+                    <c:Header Text="Załączniki" Icon="/Resources/icon32_photos.ico"/>
                 </TabItem.Header>
                 <c:AttachmentsTab/>
             </TabItem>
             <!-- tabLogs -->
             <TabItem>
                 <TabItem.Header>
-                    <c:SimpleHeader TextContent="Historia" IconSource="pack://siteoforigin:,,,/Resources/icon32_logs.ico"/>
+                    <c:Header Text="Historia" Icon="/Resources/icon32_logs.ico"/>
                 </TabItem.Header>
                 <c:LogsTab/>
             </TabItem>

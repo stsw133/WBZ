@@ -7,7 +7,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Windows;
 using WBZ.Models;
-using WBZ.Helpers;
+using WBZ.Globals;
 
 namespace WBZ.Other
 {

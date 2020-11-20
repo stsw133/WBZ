@@ -3,7 +3,7 @@ using System.Net.Mail;
 using WBZ.Controls;
 using Props = WBZ.Properties.Settings;
 
-namespace WBZ.Helpers
+namespace WBZ.Globals
 {
 	internal class Mail
 	{

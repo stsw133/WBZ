@@ -353,6 +353,16 @@ namespace WBZ.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
+        internal static System.Drawing.Icon icon32_font {
+            get {
+                object obj = ResourceManager.GetObject("icon32_font", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
         internal static System.Drawing.Icon icon32_food {
             get {
                 object obj = ResourceManager.GetObject("icon32_food", resourceCulture);
