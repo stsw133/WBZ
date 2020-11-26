@@ -287,7 +287,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnDistributionsList_Click(object sender, MouseButtonEventArgs e)
 		{
-			new DistributionsList() { Owner = this }.Show();
+			new DistributionsList(Commands.Type.LIST) { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -303,7 +303,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnDocumentsList_Click(object sender, MouseButtonEventArgs e)
 		{
-			new DocumentsList() { Owner = this }.Show();
+			new DocumentsList(Commands.Type.LIST) { Owner = this }.Show();
 		}
 
 		/// <summary>

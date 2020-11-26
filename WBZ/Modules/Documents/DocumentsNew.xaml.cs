@@ -3,68 +3,39 @@ using System.Data;
 using System.Windows;
 using System.Windows.Input;
 using WBZ.Globals;
+using WBZ.Interfaces;
 using WBZ.Modules.Articles;
 using WBZ.Modules.Companies;
 using WBZ.Modules.Stores;
-using MODULE_CLASS = WBZ.Models.C_Document;
+using MODULE_MODEL = WBZ.Models.C_Document;
 
 namespace WBZ.Modules.Documents
 {
 	/// <summary>
 	/// Interaction logic for DocumentsNew.xaml
 	/// </summary>
-	public partial class DocumentsNew : Window
+	public partial class DocumentsNew : New
 	{
 		D_DocumentsNew D = new D_DocumentsNew();
 
-		public DocumentsNew(MODULE_CLASS instance, Commands.Type mode)
+		public DocumentsNew(MODULE_MODEL instance, Commands.Type mode)
 		{
 			InitializeComponent();
 			DataContext = D;
+			Init();
 
-			D.InstanceInfo = instance;
+			if (instance != null)
+				D.InstanceInfo = instance;
 			D.Mode = mode;
-			if (mode == Commands.Type.EDIT && instance.Status == (short)MODULE_CLASS.DocumentStatus.Buffer)
+
+			if (mode == Commands.Type.EDIT && instance.Status == (short)MODULE_MODEL.DocumentStatus.Buffer)
 				D.Mode = Commands.Type.PREVIEW;
 
-			chckToBuffer.IsChecked = instance.Status == (short)MODULE_CLASS.DocumentStatus.Buffer;
-			D.InstanceInfo.Positions = SQL.GetInstancePositions(D.MODULE_NAME, D.InstanceInfo.ID);
-			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE))
-			{
-				D.InstanceInfo.ID = SQL.NewInstanceID(D.MODULE_NAME);
+			chckToBuffer.IsChecked = instance.Status == (short)MODULE_MODEL.DocumentStatus.Buffer;
+			D.InstanceInfo.Positions = SQL.GetInstancePositions(D.MODULE_TYPE, D.InstanceInfo.ID);
+			if (D.Mode.In(Commands.Type.DUPLICATE))
 				foreach (DataRow row in D.InstanceInfo.Positions.Rows)
 					row.SetAdded();
-			}
-		}
-
-		/// <summary>
-		/// Validation
-		/// </summary>
-		private bool CheckDataValidation()
-		{
-			bool result = true;
-			
-			return result;
-		}
-
-		/// <summary>
-		/// Save
-		/// </summary>
-		private bool saved = false;
-		private void btnSave_Click(object sender, MouseButtonEventArgs e)
-		{
-			if (!CheckDataValidation())
-				return;
-
-			if (D.InstanceInfo.Positions.Rows.Count == 0)
-			{
-				MessageBox.Show("Należy dodać co najmniej jedną pozycję do faktury!");
-				return;
-			}
-
-			D.InstanceInfo.Status = (short)(chckToBuffer.IsChecked==true ? MODULE_CLASS.DocumentStatus.Buffer : MODULE_CLASS.DocumentStatus.Approved);
-			if (saved = SQL.SetInstance(D.MODULE_NAME, D.InstanceInfo, D.Mode))
-				Close();
 		}
 
 		/// <summary>
@@ -81,24 +52,6 @@ namespace WBZ.Modules.Documents
 		private void btnGetByScaner_Click(object sender, MouseButtonEventArgs e)
 		{
 			
-		}
-
-		/// <summary>
-		/// Refresh
-		/// </summary>
-		private void btnRefresh_Click(object sender, MouseButtonEventArgs e)
-		{
-			if (D.InstanceInfo.ID == 0)
-				return;
-			//TODO - dorobić odświeżanie zmienionych danych
-		}
-
-		/// <summary>
-		/// Close
-		/// </summary>
-		private void btnClose_Click(object sender, MouseButtonEventArgs e)
-		{
-			Close();
 		}
 
 		/// <summary>
@@ -152,14 +105,7 @@ namespace WBZ.Modules.Documents
 					D.InstanceInfo.Positions.Rows.Add(row);
 				}
 		}
-
-		/// <summary>
-		/// Closed
-		/// </summary>
-		private void Window_Closed(object sender, EventArgs e)
-		{
-			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE) && !saved)
-				SQL.ClearObject(D.MODULE_NAME, D.InstanceInfo.ID);
-		}
 	}
+
+	public class New : ModuleNew<MODULE_MODEL> { }
 }

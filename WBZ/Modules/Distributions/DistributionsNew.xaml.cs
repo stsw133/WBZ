@@ -10,52 +10,42 @@ using WBZ.Globals;
 using WBZ.Modules.Articles;
 using WBZ.Modules.Families;
 using WBZ.Other;
-using MODULE_CLASS = WBZ.Models.C_Distribution;
+using MODULE_MODEL = WBZ.Models.C_Distribution;
+using WBZ.Interfaces;
 
 namespace WBZ.Modules.Distributions
 {
 	/// <summary>
 	/// Interaction logic for DistributionsNew.xaml
 	/// </summary>
-	public partial class DistributionsNew : Window
+	public partial class DistributionsNew : New
 	{
 		D_DistributionsNew D = new D_DistributionsNew();
 
-		public DistributionsNew(MODULE_CLASS instance, Commands.Type mode)
+		public DistributionsNew(MODULE_MODEL instance, Commands.Type mode)
 		{
 			InitializeComponent();
 			DataContext = D;
+			Init();
 
-			D.InstanceInfo = instance;
+			if (instance != null)
+				D.InstanceInfo = instance;
 			D.Mode = mode;
-			if (mode == Commands.Type.EDIT && instance.Status == (short)MODULE_CLASS.DistributionStatus.Buffer)
+
+			if (mode == Commands.Type.EDIT && instance.Status == (short)MODULE_MODEL.DistributionStatus.Buffer)
 				D.Mode = Commands.Type.PREVIEW;
 
-			chckToBuffer.IsChecked = instance.Status == (short)MODULE_CLASS.DistributionStatus.Buffer;
+			chckToBuffer.IsChecked = instance.Status == (short)MODULE_MODEL.DistributionStatus.Buffer;
 			D.InstanceInfo.Families = SQL.GetDistributionPositions(D.InstanceInfo.ID);
-			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE))
-			{
-				D.InstanceInfo.ID = SQL.NewInstanceID(D.MODULE_NAME);
+			if (D.Mode.In(Commands.Type.DUPLICATE))
 				foreach (var family in D.InstanceInfo.Families)
 					foreach (DataRow row in family.Positions.Rows)
 						row.SetAdded();
-			}
 		}
-
-		/// <summary>
-		/// Validation
-		/// </summary>
-		private bool CheckDataValidation()
-		{
-			bool result = true;
-
-			return result;
-		}
-
+		/*
 		/// <summary>
 		/// Save
 		/// </summary>
-		private bool saved = false;
 		private void btnSave_Click(object sender, MouseButtonEventArgs e)
 		{
 			if (!CheckDataValidation())
@@ -78,11 +68,11 @@ namespace WBZ.Modules.Distributions
 				return;
 			}
 
-			D.InstanceInfo.Status = (short)(chckToBuffer.IsChecked == true ? MODULE_CLASS.DistributionStatus.Buffer : MODULE_CLASS.DistributionStatus.Approved);
-			if (saved = SQL.SetInstance(D.MODULE_NAME, D.InstanceInfo, D.Mode))
+			D.InstanceInfo.Status = (short)(chckToBuffer.IsChecked == true ? MODULE_MODEL.DistributionStatus.Buffer : MODULE_MODEL.DistributionStatus.Approved);
+			if (saved = SQL.SetInstance(D.MODULE_TYPE, D.InstanceInfo, D.Mode))
 				Close();
 		}
-
+		*/
 		/// <summary>
 		/// Print
 		/// </summary>
@@ -95,24 +85,6 @@ namespace WBZ.Modules.Distributions
 		private void btnDistributionList_Click(object sender, RoutedEventArgs e)
 		{
 			Prints.Print_DistributionList(D.InstanceInfo);
-		}
-
-		/// <summary>
-		/// Refresh
-		/// </summary>
-		private void btnRefresh_Click(object sender, MouseButtonEventArgs e)
-		{
-			if (D.InstanceInfo.ID == 0)
-				return;
-			//TODO - dorobić odświeżanie zmienionych danych
-		}
-
-		/// <summary>
-		/// Close
-		/// </summary>
-		private void btnClose_Click(object sender, MouseButtonEventArgs e)
-		{
-			Close();
 		}
 
 		/// <summary>
@@ -194,14 +166,7 @@ namespace WBZ.Modules.Distributions
 				((CollectionViewSource)gridGroups.Resources["groups"]).View.Refresh();
 			}
 		}
-
-		/// <summary>
-		/// Closed
-		/// </summary>
-		private void Window_Closed(object sender, EventArgs e)
-		{
-			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE) && !saved)
-				SQL.ClearObject(D.MODULE_NAME, D.InstanceInfo.ID);
-		}
 	}
+
+	public class New : ModuleNew<MODULE_MODEL> { }
 }

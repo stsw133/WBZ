@@ -126,6 +126,8 @@
     </ApplicationDefinition>
     <Compile Include="Globals\Commands.cs" />
     <Compile Include="Globals\Functions.cs" />
+    <Compile Include="Interfaces\D_ModuleList.cs" />
+    <Compile Include="Interfaces\D_ModuleNew.cs" />
     <Compile Include="Interfaces\IModuleNew.cs" />
     <Compile Include="Models\C_Additional.cs" />
     <Compile Include="Models\C_Address.cs" />

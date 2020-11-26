@@ -1,85 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Reflection;
+﻿using System.Collections.Specialized;
 using WBZ.Globals;
-using MODULE_CLASS = WBZ.Models.C_Document;
+using WBZ.Interfaces;
+using MODULE_MODEL = WBZ.Models.C_Document;
 
 namespace WBZ.Modules.Documents
 {
-    class D_DocumentsList : INotifyPropertyChanged
-    {
-		public readonly string MODULE_NAME = Global.Module.DOCUMENTS;
+    class D_DocumentsList : D_ModuleList<MODULE_MODEL>
+	{
+		/// Module
+		public readonly string MODULE_TYPE = Global.Module.DOCUMENTS;
 		public StringCollection SORTING = Properties.Settings.Default.sorting_DocumentsList;
-
-		/// Instances list
-		private List<MODULE_CLASS> instancesList;
-		public List<MODULE_CLASS> InstancesList
-		{
-			get
-			{
-				return instancesList;
-			}
-			set
-			{
-				instancesList = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
-			}
-		}
-		/// Selecting mode
-		public bool SelectingMode { get; set; }
-		/// SQL filter
-		public string FilterSQL { get; set; }
-		/// Filter instance
-		private MODULE_CLASS filters = new MODULE_CLASS();
-		public MODULE_CLASS Filters
-		{
-			get
-			{
-				return filters;
-			}
-			set
-			{
-				filters = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
-			}
-		}
-		/// Page number
-		private int page;
-		public int Page
-		{
-			get
-			{
-				return page;
-			}
-			set
-			{
-				page = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
-			}
-		}
-		/// Total instances number
-		private int totalItems;
-		public int TotalItems
-		{
-			get
-			{
-				return totalItems;
-			}
-			set
-			{
-				totalItems = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
-			}
-		}
-
-		/// <summary>
-		/// PropertyChangedEventHandler
-		/// </summary>
-		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged(string name)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
 	}
 }

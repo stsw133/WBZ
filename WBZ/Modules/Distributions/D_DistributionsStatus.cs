@@ -7,6 +7,20 @@ namespace WBZ.Modules.Distributions
 {
     class D_DistributionsStatus : INotifyPropertyChanged
     {
+		public event PropertyChangedEventHandler PropertyChanged;
+		public void NotifyPropertyChanged(string name)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+		}
+
+		/// Window title
+		public string Title
+		{
+			get
+			{
+				return $"Zmiana statusu rodziny: {FamilyInfo.Lastname}";
+			}
+		}
 		/// Family
 		private C_Family familyInfo;
 		public C_Family FamilyInfo
@@ -34,21 +48,6 @@ namespace WBZ.Modules.Distributions
 				familyContactsInfo = value;
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
-		}
-		/// Window title
-		public string Title
-		{
-			get
-			{
-				return $"Zmiana statusu rodziny: {FamilyInfo.Lastname}";
-			}
-		}
-
-		/// PropertyChanged
-		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged(string name)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
 	}
 }

@@ -21,9 +21,8 @@ namespace WBZ.Interfaces
 
     public class ModuleNew<MODULE_MODEL> : Window, IModuleNew where MODULE_MODEL : class, new()
     {
-        dynamic W, D;
+		dynamic W,  D;
         string FullName, HalfName;
-        string MODULE_TYPE;
 
 		/// <summary>
 		/// Init
@@ -34,7 +33,6 @@ namespace WBZ.Interfaces
 			D = W.DataContext;
 			FullName = W.GetType().FullName;
 			HalfName = FullName.Substring(0, FullName.Length - 4);
-			MODULE_TYPE = D.MODULE_TYPE;
 		}
 
 		/// <summary>
@@ -42,8 +40,8 @@ namespace WBZ.Interfaces
 		/// </summary>
 		public void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE))
-				D.InstanceInfo.ID = SQL.NewInstanceID(D.MODULE_TYPE);
+			if (((Commands.Type)D.Mode).In(Commands.Type.NEW, Commands.Type.DUPLICATE))
+				(D.InstanceInfo as dynamic).ID = SQL.NewInstanceID(D.MODULE_TYPE);
 		}
 
         /// <summary>
@@ -74,7 +72,7 @@ namespace WBZ.Interfaces
 		/// </summary>
 		public void btnRefresh_Click(object sender, MouseButtonEventArgs e)
 		{
-			if (D.InstanceInfo.ID == 0)
+			if ((D.InstanceInfo as dynamic).ID == 0)
 				return;
 			//TODO - dorobić odświeżanie zmienionych danych
 		}
@@ -112,7 +110,7 @@ namespace WBZ.Interfaces
 		public void Window_Closed(object sender, EventArgs e)
 		{
 			if (((Commands.Type)D.Mode).In(Commands.Type.NEW, Commands.Type.DUPLICATE) && !saved)
-				SQL.ClearObject(D.MODULE_TYPE, D.InstanceInfo.ID);
+				SQL.ClearObject(D.MODULE_TYPE, (D.InstanceInfo as dynamic).ID);
 		}
 	}
 }
