@@ -1478,9 +1478,15 @@ namespace WBZ
 							break;
 						/// groups
 						case Global.Module.GROUPS:
-							query = @"select g.id, g.module, g.name, 'a\a' as fullpath, g.instance, g.owner,
+							query = @"select g.id, g.module, g.name, g.instance, g.owner,
+									case when trim(concat(g1.name, '\', g2.name, '\', g3.name, '\', g4.name), '\') = '' then ''
+										else concat(trim(concat(g1.name, '\', g2.name, '\', g3.name, '\', g4.name), '\'), '\') end as fullpath,
 									g.archival, g.comment, g.icon
-								from wbz.groups g";
+								from wbz.groups g
+								left join wbz.groups g4 on g4.id=g.owner
+								left join wbz.groups g3 on g3.id=g4.owner
+								left join wbz.groups g2 on g2.id=g3.owner
+								left join wbz.groups g1 on g1.id=g2.owner";
 							break;
 						/// families
 						case Global.Module.FAMILIES:

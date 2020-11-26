@@ -14,6 +14,11 @@ namespace WBZ.Controls
 			InitializeComponent();
 		}
 
+		/// <summary>
+		/// Loaded
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             

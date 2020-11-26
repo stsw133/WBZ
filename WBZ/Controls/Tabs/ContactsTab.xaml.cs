@@ -23,6 +23,9 @@ namespace WBZ.Controls
             DataContext = D;
         }
 
+        /// <summary>
+        /// Loaded
+        /// </summary>
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             try
@@ -46,6 +49,9 @@ namespace WBZ.Controls
             catch { }
         }
 
+        /// <summary>
+        /// Closed
+        /// </summary>
         private void UserControl_Closed(object sender, EventArgs e)
         {
             try

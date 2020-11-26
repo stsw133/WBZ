@@ -1,19 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WBZ.Globals;
 using WBZ.Models;
+using WBZ.Modules.Groups;
 
 namespace WBZ.Controls
 {
@@ -43,7 +36,96 @@ namespace WBZ.Controls
                   new PropertyMetadata(false)
               );
 
+        /// <summary>
+        /// Loaded
+        /// </summary>
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            btnGroupRefresh_Click(null, null);
+        }
+
+        /// <summary>
+        /// GetParentItem
+        /// </summary>
+        TreeViewItem GetParentItem(TreeViewItem item)
+        {
+            for (var i = VisualTreeHelper.GetParent(item); i != null; i = VisualTreeHelper.GetParent(i))
+                if (i is TreeViewItem)
+                    return (TreeViewItem)i;
+            return null;
+        }
+
+        /// <summary>
+		/// New
+		/// </summary>
+		private void btnGroupNew_Click(object sender, MouseButtonEventArgs e)
+        {
+            var instance = new M_Group();
+            if (tvGroups.SelectedItem == null)
+            {
+                instance.Module = Module;
+                instance.Owner = 0;
+            }
+            else
+            {
+                var fullpath = (tvGroups.SelectedItem as TreeViewItem).Header.ToString() + "\\";
+                for (var i = GetParentItem((tvGroups.SelectedItem as TreeViewItem)); i != null; i = GetParentItem(i))
+                    fullpath = i.Header + "\\" + fullpath;
+
+                if (fullpath.Split('\\').Length > 5)
+                    return;
+
+                instance.Module = Module;
+                instance.Owner = (int)(tvGroups.SelectedItem as TreeViewItem).Tag;
+                instance.Fullpath = fullpath;
+            }
+            new GroupsNew(instance, Commands.Type.NEW) { Owner = Window.GetWindow(this) }.Show();
+        }
+
+        /// <summary>
+		/// Duplicate
+		/// </summary>
+		private void btnGroupDuplicate_Click(object sender, MouseButtonEventArgs e)
+        {
+            if (tvGroups.SelectedItem == null)
+                return;
+
+            int id = (int)(tvGroups.SelectedItem as TreeViewItem).Tag;
+            new GroupsNew(SQL.GetInstance<M_Group>(Global.Module.GROUPS, id), Commands.Type.DUPLICATE) { Owner = Window.GetWindow(this) }.Show();
+        }
+
+        /// <summary>
+		/// Edit
+		/// </summary>
+		private void btnGroupEdit_Click(object sender, MouseButtonEventArgs e)
+        {
+            if (tvGroups.SelectedItem == null)
+                return;
+
+            int id = (int)(tvGroups.SelectedItem as TreeViewItem).Tag;
+            new GroupsNew(SQL.GetInstance<M_Group>(Global.Module.GROUPS, id), Commands.Type.EDIT) { Owner = Window.GetWindow(this) }.Show();
+        }
+
+        /// <summary>
+        /// Delete
+        /// </summary>
+        private void btnGroupDelete_Click(object sender, MouseButtonEventArgs e)
+        {
+            if (tvGroups.SelectedItem == null)
+                return;
+
+            if (MessageBox.Show("Czy na pewno usunąć zaznaczoną grupę?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                var group = tvGroups.SelectedItem as TreeViewItem;
+                SQL.DeleteInstance(Global.Module.GROUPS, (int)group.Tag, (string)group.Header);
+                btnGroupRefresh_Click(null, null);
+            }
+        }
+
+        /// <summary>
+		/// Refresh
+		/// </summary>
+		private void btnGroupRefresh_Click(object sender, MouseButtonEventArgs e)
         {
             ItemCollection recurseItemCollection(ItemCollection items, int id)
             {
@@ -70,67 +152,58 @@ namespace WBZ.Controls
                 }
 
                 /// Add groups to TreeView
-                var items = tvGroups.Items;
-                foreach (var group in InstancesList)
+                tvGroups.Items.Clear();
+                foreach (var group1 in InstancesList.FindAll(x => x.Owner == 0))
                 {
-                    foreach (var _ in (group.Fullpath + '\\').Split('\\'))
+                    var tvi1 = new TreeViewItem()
                     {
-                        var owner = group;
-                        TreeViewItem tvi;
+                        Tag = group1.ID,
+                        Header = group1.Name
+                    };
+                    tvGroups.Items.Add(tvi1);
 
-                        do
+                    foreach (var group2 in InstancesList.FindAll(x => x.Owner == group1.ID))
+                    {
+                        var tvi2 = new TreeViewItem()
                         {
-                            var currents = recurseItemCollection(items, owner.ID);
-                            if (currents == null && owner.Owner != 0)
-                                owner = SQL.GetInstance<M_Group>(Global.Module.GROUPS, owner.Owner);
-                            else if (currents != null)
-                            {
-                                tvi = new TreeViewItem()
-                                {
-                                    Tag = owner.ID,
-                                    Header = owner.Name
-                                };
-                                currents.Add(tvi);
-                            }
-                        } while (owner.Owner != 0);
+                            Tag = group2.ID,
+                            Header = group2.Name
+                        };
+                        tvi1.Items.Add(tvi2);
 
-                        if (recurseItemCollection(items, owner.ID) == null)
+                        foreach (var group3 in InstancesList.FindAll(x => x.Owner == group2.ID))
                         {
-                            tvi = new TreeViewItem()
+                            var tvi3 = new TreeViewItem()
                             {
-                                Tag = owner.ID,
-                                Header = owner.Name
+                                Tag = group3.ID,
+                                Header = group3.Name
                             };
-                            items.Add(tvi);
+                            tvi2.Items.Add(tvi3);
+
+                            foreach (var group4 in InstancesList.FindAll(x => x.Owner == group3.ID))
+                            {
+                                var tvi4 = new TreeViewItem()
+                                {
+                                    Tag = group4.ID,
+                                    Header = group4.Name
+                                };
+                                tvi3.Items.Add(tvi4);
+
+                                foreach (var group5 in InstancesList.FindAll(x => x.Owner == group4.ID))
+                                {
+                                    var tvi5 = new TreeViewItem()
+                                    {
+                                        Tag = group5.ID,
+                                        Header = group5.Name
+                                    };
+                                    tvi4.Items.Add(tvi5);
+                                }
+                            }
                         }
                     }
                 }
             }
             catch { }
-        }
-
-        /// <summary>
-		/// Add
-		/// </summary>
-		private void btnGroupAdd_Click(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        /// <summary>
-		/// Edit
-		/// </summary>
-		private void btnGroupEdit_Click(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        /// <summary>
-        /// Remove
-        /// </summary>
-        private void btnGroupRemove_Click(object sender, MouseButtonEventArgs e)
-        {
-            
         }
     }
 }

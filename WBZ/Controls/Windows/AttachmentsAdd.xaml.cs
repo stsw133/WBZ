@@ -16,16 +16,6 @@ namespace WBZ.Controls
             InitializeComponent();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            var clipboardText = Clipboard.GetText();
-            if (clipboardText.StartsWith("http"))
-                tbLink.Text = clipboardText;
-            else if (clipboardText.StartsWith("C:"))
-                tbDrive.Text = clipboardText;
-            tbName.Text = Path.GetFileName(clipboardText);
-        }
-
         public string GetLink
         {
             get
@@ -48,6 +38,21 @@ namespace WBZ.Controls
             {
                 return tbName.Text;
             }
+        }
+
+        /// <summary>
+        /// Loaded
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            var clipboardText = Clipboard.GetText();
+            if (clipboardText.StartsWith("http"))
+                tbLink.Text = clipboardText;
+            else if (clipboardText.StartsWith("C:"))
+                tbDrive.Text = clipboardText;
+            tbName.Text = Path.GetFileName(clipboardText);
         }
 
         /// <summary>

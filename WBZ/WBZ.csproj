@@ -124,6 +124,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Modules\Groups\GroupsNew.xaml.cs">
+      <DependentUpon>GroupsNew.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Groups\D_GroupsNew.cs" />
     <Compile Include="Modules\Groups\GroupsView.xaml.cs">
       <DependentUpon>GroupsView.xaml</DependentUpon>
     </Compile>
@@ -343,6 +347,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\Tabs\ContactsTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Groups\GroupsNew.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

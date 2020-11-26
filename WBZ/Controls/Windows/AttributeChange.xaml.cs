@@ -22,6 +22,9 @@ namespace WBZ.Controls
 			D.EditMode = editMode;
 		}
 
+		/// <summary>
+		/// OK
+		/// </summary>
 		private void btnOk_Click(object sender, RoutedEventArgs e)
 		{
 			if (D.AttributeInfo.Value == null)
@@ -37,6 +40,10 @@ namespace WBZ.Controls
 			else
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"Wartość niezgodna z typem ({D.AttributeInfo.Class.Type}) danych klasy atrybutu!") { Owner = this }.ShowDialog();
 		}
+
+		/// <summary>
+		/// Cancel
+		/// </summary>
 		private void btnCancel_Click(object sender, RoutedEventArgs e)
 		{
 			DialogResult = false;

@@ -23,6 +23,9 @@ namespace WBZ.Controls
             DataContext = D;
         }
 
+        /// <summary>
+        /// Loaded
+        /// </summary>
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             try
