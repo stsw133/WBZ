@@ -7,7 +7,7 @@ using WBZ.Interfaces;
 using WBZ.Modules.Articles;
 using WBZ.Modules.Companies;
 using WBZ.Modules.Stores;
-using MODULE_MODEL = WBZ.Models.C_Document;
+using MODULE_MODEL = WBZ.Models.M_Document;
 
 namespace WBZ.Modules.Documents
 {

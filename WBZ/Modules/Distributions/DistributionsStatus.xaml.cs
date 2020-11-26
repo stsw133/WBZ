@@ -13,12 +13,12 @@ namespace WBZ.Modules.Distributions
 	{
 		D_DistributionsStatus D = new D_DistributionsStatus();
 
-		public DistributionsStatus(C_DistributionFamily family)
+		public DistributionsStatus(M_DistributionFamily family)
 		{
 			InitializeComponent();
 			DataContext = D;
 
-			D.FamilyInfo = SQL.GetInstance<C_Family>("family", family.Family);
+			D.FamilyInfo = SQL.GetInstance<M_Family>("family", family.Family);
 			D.FamilyContactsInfo = SQL.ListContacts("families", family.Family, @"""default""=true");
 
 			if (family.Status == 0) rbStatus0.IsChecked = true;

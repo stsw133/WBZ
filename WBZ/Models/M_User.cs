@@ -2,7 +2,7 @@
 
 namespace WBZ.Models
 {
-	public class C_User
+	public class M_User
 	{
 		public int ID { get; set; }
 		public string Username { get; set; }
@@ -15,17 +15,14 @@ namespace WBZ.Models
 		public bool Archival { get; set; }
 		public List<string> Perms { get; set; }
 
-		public C_User()
+		public M_User()
 		{
-			ID = 0;
-			Username = "";
-			Newpass = "";
-			Email = "";
-			Phone = "";
-			Forename = "";
-			Lastname = "";
-			Blocked = false;
-			Archival = false;
+			Username = string.Empty;
+			Newpass = string.Empty;
+			Email = string.Empty;
+			Phone = string.Empty;
+			Forename = string.Empty;
+			Lastname = string.Empty;
 			Perms = new List<string>();
 		}
 

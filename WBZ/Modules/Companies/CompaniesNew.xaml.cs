@@ -2,7 +2,7 @@
 using System.Windows.Input;
 using WBZ.Models;
 using WBZ.Globals;
-using MODULE_MODEL = WBZ.Models.C_Company;
+using MODULE_MODEL = WBZ.Models.M_Company;
 using WBZ.Interfaces;
 
 namespace WBZ.Modules.Companies
@@ -34,7 +34,7 @@ namespace WBZ.Modules.Companies
             if (tab?.Name == "tabSources_Documents")
             {
 				if (D.InstanceInfo.ID != 0 && D.InstanceSources_Documents == null)
-                    D.InstanceSources_Documents = SQL.ListInstances<C_Document>(Global.Module.DOCUMENTS, $"c.id={D.InstanceInfo.ID}");
+                    D.InstanceSources_Documents = SQL.ListInstances<M_Document>(Global.Module.DOCUMENTS, $"c.id={D.InstanceInfo.ID}");
             }
         }
 
@@ -43,7 +43,7 @@ namespace WBZ.Modules.Companies
 		/// </summary>
         private void dgList_Documents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            dgList_Module_MouseDoubleClick<C_Document>(sender, e, Global.Module.DOCUMENTS);
+            dgList_Module_MouseDoubleClick<M_Document>(sender, e, Global.Module.DOCUMENTS);
         }
     }
 

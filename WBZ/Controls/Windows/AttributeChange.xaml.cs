@@ -13,7 +13,7 @@ namespace WBZ.Controls
 	{
 		D_AttributeValueChange D = new D_AttributeValueChange();
 
-		public AttributeChange(C_Attribute attribute, bool editMode)
+		public AttributeChange(M_Attribute attribute, bool editMode)
 		{
 			InitializeComponent();
 			DataContext = D;
@@ -49,8 +49,8 @@ namespace WBZ.Controls
 	public class D_AttributeValueChange : INotifyPropertyChanged
 	{
 		/// Attribute
-		private C_Attribute attributeInfo;
-		public C_Attribute AttributeInfo
+		private M_Attribute attributeInfo;
+		public M_Attribute AttributeInfo
 		{
 			get
 			{

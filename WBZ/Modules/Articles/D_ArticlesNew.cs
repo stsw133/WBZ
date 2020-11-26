@@ -3,7 +3,7 @@ using System.Reflection;
 using WBZ.Globals;
 using WBZ.Interfaces;
 using WBZ.Models;
-using MODULE_MODEL = WBZ.Models.C_Article;
+using MODULE_MODEL = WBZ.Models.M_Article;
 
 namespace WBZ.Modules.Articles
 {
@@ -28,8 +28,8 @@ namespace WBZ.Modules.Articles
 			}
 		}
 		/// Instance source - stores
-		private List<C_Store> instanceSources_Stores = new List<C_Store>();
-		public List<C_Store> InstanceSources_Stores
+		private List<M_Store> instanceSources_Stores = new List<M_Store>();
+		public List<M_Store> InstanceSources_Stores
 		{
 			get
 			{
@@ -42,8 +42,8 @@ namespace WBZ.Modules.Articles
 			}
 		}
 		/// Instance source - documents
-		private List<C_Document> instanceSources_Documents = new List<C_Document>();
-		public List<C_Document> InstanceSources_Documents
+		private List<M_Document> instanceSources_Documents = new List<M_Document>();
+		public List<M_Document> InstanceSources_Documents
 		{
 			get
 			{
@@ -56,8 +56,8 @@ namespace WBZ.Modules.Articles
 			}
 		}
 		/// Instance source - distributions
-		private List<C_Distribution> instanceSources_Distributions = new List<C_Distribution>();
-		public List<C_Distribution> InstanceSources_Distributions
+		private List<M_Distribution> instanceSources_Distributions = new List<M_Distribution>();
+		public List<M_Distribution> InstanceSources_Distributions
 		{
 			get
 			{

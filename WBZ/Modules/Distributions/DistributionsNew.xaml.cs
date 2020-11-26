@@ -10,7 +10,7 @@ using WBZ.Globals;
 using WBZ.Modules.Articles;
 using WBZ.Modules.Families;
 using WBZ.Other;
-using MODULE_MODEL = WBZ.Models.C_Distribution;
+using MODULE_MODEL = WBZ.Models.M_Distribution;
 using WBZ.Interfaces;
 
 namespace WBZ.Modules.Distributions
@@ -92,7 +92,7 @@ namespace WBZ.Modules.Distributions
 		/// </summary>
 		private void btnPositionsAdd_Click(object sender, RoutedEventArgs e)
 		{
-			C_DistributionFamily family;
+			M_DistributionFamily family;
 
 			var window = new FamiliesList(Commands.Type.SELECTING);
 			if (window.ShowDialog() == true)
@@ -100,7 +100,7 @@ namespace WBZ.Modules.Distributions
 				family = D.InstanceInfo.Families.FirstOrDefault(x => x.Family == window.Selected.ID);
 				if (family == null)
 				{
-					family = new C_DistributionFamily()
+					family = new M_DistributionFamily()
 					{
 						Family = window.Selected.ID,
 						FamilyName = window.Selected.Lastname,
@@ -150,7 +150,7 @@ namespace WBZ.Modules.Distributions
 		/// <param name="e"></param>
 		private void btnChangeFamilyStatus_Click(object sender, RoutedEventArgs e)
 		{
-			var family = (((sender as Button).Parent as StackPanel).Tag) as C_DistributionFamily;
+			var family = (((sender as Button).Parent as StackPanel).Tag) as M_DistributionFamily;
 
 			var window = new DistributionsStatus(family);
 			window.Owner = this;

@@ -3,7 +3,7 @@ using WBZ.Globals;
 
 namespace WBZ.Models
 {
-	public class C_Log
+	public class M_Log
 	{
 		public int ID { get; set; }
 		public int User { get; set; }
@@ -14,13 +14,11 @@ namespace WBZ.Models
 		public DateTime fDateTime { get; set; }
 		public DateTime DateTime { get; set; }
 
-		public C_Log()
+		public M_Log()
 		{
-			ID = 0;
-			User = 0;
-			Module = "";
-			Instance = 0;
-			Content = "";
+			UserFullname = string.Empty;
+			Module = string.Empty;
+			Content = string.Empty;
 			fDateTime = new DateTime(DateTime.Now.Year, 1, 1);
 			DateTime = DateTime.Now;
 		}

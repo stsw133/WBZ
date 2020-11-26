@@ -1,6 +1,6 @@
 ﻿using WBZ.Globals;
 using WBZ.Interfaces;
-using MODULE_MODEL = WBZ.Models.C_Company;
+using MODULE_MODEL = WBZ.Models.M_Company;
 
 namespace WBZ.Modules.Companies
 {

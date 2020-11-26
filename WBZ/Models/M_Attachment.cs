@@ -2,7 +2,7 @@
 
 namespace WBZ.Models
 {
-	public class C_Attachment
+	public class M_Attachment
 	{
 		public int ID { get; set; }
 		public int User { get; set; }
@@ -12,15 +12,12 @@ namespace WBZ.Models
 		public string Name { get; set; }
 		public byte[] File { get; set; }
 
-		public C_Attachment()
-		{
-			ID = 0;
-			User = 0;
-			Module = "";
-			Instance = 0;
-			Name = "";
-			File = null;
-		}
+		public M_Attachment()
+        {
+			UserFullname = string.Empty;
+			Module = string.Empty;
+			Name = string.Empty;
+        }
 
 		public string TranslatedModule
 		{

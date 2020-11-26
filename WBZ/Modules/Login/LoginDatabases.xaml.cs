@@ -30,7 +30,7 @@ namespace WBZ.Modules.Login
 		/// </summary>
 		private void btnAddDatabase_Click(object sender, RoutedEventArgs e)
 		{
-			var db = new C_Database()
+			var db = new M_Database()
 			{
 				Name = $"db_{D.Databases.Count + 1}"
 			};
@@ -61,7 +61,7 @@ namespace WBZ.Modules.Login
 				return;
 			}
 
-			pbPassword.Password = (lbDatabases.SelectedItem as C_Database).Password;
+			pbPassword.Password = (lbDatabases.SelectedItem as M_Database).Password;
 			lblStatus.Content = "";
 
 			gridDatabaseInfo.IsEnabled = true;
@@ -75,7 +75,7 @@ namespace WBZ.Modules.Login
 			if (lbDatabases.SelectedIndex == -1)
 				return;
 
-			(lbDatabases.SelectedItem as C_Database).Password = (sender as PasswordBox).Password;
+			(lbDatabases.SelectedItem as M_Database).Password = (sender as PasswordBox).Password;
 		}
 
 		/// <summary>
@@ -110,7 +110,7 @@ namespace WBZ.Modules.Login
 		{
 			try
 			{
-				C_Database.SaveAllDatabases(new List<C_Database>(D.Databases));
+				M_Database.SaveAllDatabases(new List<M_Database>(D.Databases));
 				if (Owner == null && D.Databases.Count > 0)
 				{
 					var window = new Login();

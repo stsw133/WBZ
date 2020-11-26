@@ -8,8 +8,8 @@ namespace WBZ.Modules.Login
     class D_LoginDatabases : INotifyPropertyChanged
     {
 		/// Databases list
-		private ObservableCollection<C_Database> databases = new ObservableCollection<C_Database>(C_Database.LoadAllDatabases());
-		public ObservableCollection<C_Database> Databases
+		private ObservableCollection<M_Database> databases = new ObservableCollection<M_Database>(M_Database.LoadAllDatabases());
+		public ObservableCollection<M_Database> Databases
 		{
 			get
 			{

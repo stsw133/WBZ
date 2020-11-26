@@ -51,7 +51,7 @@ namespace WBZ
 		{
 			bool result = false;
 
-			if (C_Config.Logs_Enabled != "1")
+			if (M_Config.Logs_Enabled != "1")
 				return true;
 
 			try
@@ -82,9 +82,9 @@ namespace WBZ
 		/// <param name="module">Nazwa modułu</param>
 		/// <param name="instance">Numer ID obiektu</param>
 		/// <param name="filter">Filtr SQL</param>
-		internal static List<C_Attribute> ListAttributes(string module, int instance, string filter = null)
+		internal static List<M_Attribute> ListAttributes(string module, int instance, string filter = null)
 		{
-			var result = new List<C_Attribute>();
+			var result = new List<M_Attribute>();
 
 			try
 			{
@@ -107,10 +107,10 @@ namespace WBZ
 
 						foreach (DataRow row in dt.Rows)
 						{
-							C_Attribute c = new C_Attribute()
+							M_Attribute c = new M_Attribute()
 							{
 								ID = !Convert.IsDBNull(row["id"]) ? (long)row["id"] : 0,
-								Class = new C_AttributeClass()
+								Class = new M_AttributeClass()
 								{
 									ID = !Convert.IsDBNull(row["class"]) ? (int)row["class"] : 0,
 									Module = !Convert.IsDBNull(row["module"]) ? (string)row["module"] : "",
@@ -138,7 +138,7 @@ namespace WBZ
 		/// Ustawia dane o atrybucie
 		/// </summary>
 		/// <param name="attribute">Klasa atrybutu</param>
-		internal static bool UpdateAttribute(C_Attribute attribute)
+		internal static bool UpdateAttribute(M_Attribute attribute)
 		{
 			bool result = false;
 
@@ -367,7 +367,7 @@ namespace WBZ
 
 					if (user.Rows.Count > 0)
 					{
-						Global.User = user.DataTableToList<C_User>()[0];
+						Global.User = user.DataTableToList<M_User>()[0];
 						if (Global.User.Blocked)
 							MessageBox.Show("Użytkownik o podanym loginie jest zablokowany.");
 						else
@@ -614,7 +614,7 @@ namespace WBZ
 						///update articles amounts
 						if (oldstatus > 0)
 						{
-							var document = GetInstance<C_Document>("documents", id);
+							var document = GetInstance<M_Document>("documents", id);
 							var positions = GetInstancePositions("documents", id);
 							foreach (DataRow pos in positions.Rows)
 								ChangeArticleAmount(document.Store, (int)pos["article"], -(double)pos["amount"], (string)pos["measure"], false, sqlConn, sqlTran);
@@ -803,9 +803,9 @@ namespace WBZ
 		/// Pobiera dane o pozycjach dystrybucji
 		/// </summary>
 		/// <param name="id">ID instancji</param>
-		internal static List<C_DistributionFamily> GetDistributionPositions(int id)
+		internal static List<M_DistributionFamily> GetDistributionPositions(int id)
 		{
-			var result = new List<C_DistributionFamily>();
+			var result = new List<M_DistributionFamily>();
 			var dt = new DataTable();
 
 			try
@@ -840,7 +840,7 @@ namespace WBZ
 					var family = result.FirstOrDefault(x => x.Family == (int)row["family"]);
 					if (family == null)
 					{
-						family = new C_DistributionFamily()
+						family = new M_DistributionFamily()
 						{
 							Family = (int)row["family"],
 							FamilyName = (string)row["familyname"],
@@ -878,7 +878,7 @@ namespace WBZ
 		/// Ustawia dane o dystrybucji
 		/// </summary>
 		/// <param name="distribution">Klasa dystrybucji</param>
-		internal static bool SetDistribution(C_Distribution distribution)
+		internal static bool SetDistribution(M_Distribution distribution)
 		{
 			bool result = false;
 			int ID = distribution.ID;
@@ -1478,7 +1478,7 @@ namespace WBZ
 							break;
 						/// groups
 						case Global.Module.GROUPS:
-							query = @"select g.id, g.module, g.name, '' as fullpath, g.instance, g.owner,
+							query = @"select g.id, g.module, g.name, 'a\a' as fullpath, g.instance, g.owner,
 									g.archival, g.comment, g.icon
 								from wbz.groups g";
 							break;
@@ -1646,7 +1646,7 @@ namespace WBZ
 					{
 						/// articles
 						case Global.Module.ARTICLES:
-							var article = instance as C_Article;
+							var article = instance as M_Article;
 							query = @"insert into wbz.articles (id, codename, name, ean, archival, comment, icon)
 								values (@id, @codename, @name, @ean, @archival, @comment, @icon)
 								on conflict(id) do
@@ -1716,7 +1716,7 @@ namespace WBZ
 							break;
 						/// attributes_classes
 						case Global.Module.ATTRIBUTES_CLASSES:
-							var attributeClass = instance as C_AttributeClass;
+							var attributeClass = instance as M_AttributeClass;
 							query = @"insert into wbz.attributes_classes (module, name, type, ""values"", required, archival, comment, icon)
 								values (@module, @name, @type, @values, @required, @archival, @comment, @icon)
 								on conflict(id) do
@@ -1739,7 +1739,7 @@ namespace WBZ
 							break;
 						/// companies
 						case Global.Module.COMPANIES:
-							var company = instance as C_Company;
+							var company = instance as M_Company;
 							query = @"insert into wbz.companies (id, codename, name, branch, nip, regon, postcode, city, address, archival, comment, icon)
 								values (@id, @codename, @name, @branch, @nip, @regon, @postcode, @city, @address, @archival, @comment, @icon)
 								on conflict(id) do
@@ -1770,7 +1770,7 @@ namespace WBZ
 							break;
 						/// documents
 						case Global.Module.DOCUMENTS:
-							var document = instance as C_Document;
+							var document = instance as M_Document;
 							using (sqlCmd = new NpgsqlCommand(@"select status from wbz.documents where id=@id", sqlConn, sqlTran))
 							{
 								sqlCmd.Parameters.AddWithValue("id", document.ID);
@@ -1862,7 +1862,7 @@ namespace WBZ
 							break;
 						/// employees
 						case Global.Module.EMPLOYEES:
-							var employee = instance as C_Employee;
+							var employee = instance as M_Employee;
 							query = @"insert into wbz.employees (id, ""user"", forename, lastname, department, position,
 									email, phone, city, address, postcode, archival, comment, icon)
 								values (@id, @user, @forename, @lastname, @department, @position,
@@ -1893,7 +1893,7 @@ namespace WBZ
 							break;
 						/// families
 						case Global.Module.FAMILIES:
-							var family = instance as C_Family;
+							var family = instance as M_Family;
 							query = @"insert into wbz.families (id, declarant, lastname, members, postcode, city, address,
 									status, c_sms, c_call, c_email, archival, comment, icon)
 								values (@id, @declarant, @lastname, @members, @postcode, @city, @address,
@@ -1924,7 +1924,7 @@ namespace WBZ
 							break;
 						/// groups
 						case Global.Module.GROUPS:
-							var group = instance as C_Group;
+							var group = instance as M_Group;
 							query = @"insert into wbz.groups (id, module, name, instance, owner, archival, comment, icon)
 								values (@id, @module, @name, @instance, @owner, @archival, @comment, @icon)
 								on conflict(id) do
@@ -1949,7 +1949,7 @@ namespace WBZ
 							break;
 						/// stores
 						case Global.Module.STORES:
-							var store = instance as C_Store;
+							var store = instance as M_Store;
 							query = @"insert into wbz.stores (id, codename, name, city, address, postcode, archival, comment, icon)
 								values (@id, @codename, @name, @city, @address, @postcode, @archival, @comment, @icon)
 								on conflict(id) do
@@ -1972,7 +1972,7 @@ namespace WBZ
 							break;
 						/// users
 						case Global.Module.USERS:
-							var user = instance as C_User;
+							var user = instance as M_User;
 							query = @"insert into wbz.users (id, username, password, forename, lastname, email, phone, blocked, archival)
 								values (@id, @username, @password, @forename, @lastname, @email, @phone, @blocked, @archival)
 								on conflict(id) do

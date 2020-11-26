@@ -2,7 +2,7 @@
 
 namespace WBZ.Models
 {
-    public class C_Contact
+    public class M_Contact
     {
         public int ID { get; set; }
         public string Module { get; set; }
@@ -14,18 +14,14 @@ namespace WBZ.Models
         public bool Default { get; set; }
         public bool Archival { get; set; }
 
-		public C_Contact()
-		{
-			ID = 0;
-			Module = "";
-            Instance = 0;
-            Email = "";
-            Phone = "";
-            Forename = "";
-            Lastname = "";
-            Default = false;
-			Archival = false;
-		}
+        public M_Contact()
+        {
+            Module = string.Empty;
+            Email = string.Empty;
+            Phone = string.Empty;
+            Forename = string.Empty;
+            Lastname = string.Empty;
+        }
 
         public string TranslatedModule
         {

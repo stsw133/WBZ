@@ -35,14 +35,14 @@ namespace WBZ.Controls
 
                 if (ID != 0 && D.InstanceAttachments == null)
                 {
-                    D.InstanceAttachments = SQL.ListInstances<C_Attachment>(Global.Module.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}");
+                    D.InstanceAttachments = SQL.ListInstances<M_Attachment>(Global.Module.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}");
                     win.Closed += UserControl_Closed;
                 }
 
                 dynamic d = win?.DataContext;
                 if (d != null)
                 {
-                    Module = (string)d.MODULE_NAME;
+                    Module = (string)d.MODULE_TYPE;
                     ID = (int)d.InstanceInfo.ID;
                 }
             }
@@ -74,7 +74,7 @@ namespace WBZ.Controls
                     file = File.ReadAllBytes(filePath);
                 }
                 SQL.SetAttachment(Module, ID, window.GetName, file, filePath);
-                D.InstanceAttachments = SQL.ListInstances<C_Attachment>(Global.Module.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}");
+                D.InstanceAttachments = SQL.ListInstances<M_Attachment>(Global.Module.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}");
             }
         }
 
@@ -85,7 +85,7 @@ namespace WBZ.Controls
         {
             if (lbAttachments.SelectedIndex < 0)
                 return;
-            var item = lbAttachments.SelectedItem as C_Attachment;
+            var item = lbAttachments.SelectedItem as M_Attachment;
 
             var window = new MsgWin(MsgWin.Type.InputBox, "Edycja załącznika", "Nowa nazwa załącznika:", item.Name);
             window.Owner = Window.GetWindow(this);
@@ -103,10 +103,10 @@ namespace WBZ.Controls
         {
             if (lbAttachments.SelectedIndex < 0)
                 return;
-            var item = lbAttachments.SelectedItem as C_Attachment;
+            var item = lbAttachments.SelectedItem as M_Attachment;
 
             SQL.DeleteInstance(Global.Module.ATTACHMENTS, item.ID, item.Name);
-            D.InstanceAttachments = SQL.ListInstances<C_Attachment>(Global.Module.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}");
+            D.InstanceAttachments = SQL.ListInstances<M_Attachment>(Global.Module.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}");
         }
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace WBZ.Controls
             if (lbAttachments.SelectedIndex < 0)
                 return;
 
-            var selection = (sender as ListBox).SelectedItem as C_Attachment;
+            var selection = (sender as ListBox).SelectedItem as M_Attachment;
             if (selection.File == null)
                 selection.File = SQL.GetAttachmentFile(selection.ID);
 
@@ -148,8 +148,8 @@ namespace WBZ.Controls
     internal class D_AttachmentsTab : INotifyPropertyChanged
     {
         /// Attachments
-        private List<C_Attachment> instanceAttachments;
-        public List<C_Attachment> InstanceAttachments
+        private List<M_Attachment> instanceAttachments;
+        public List<M_Attachment> InstanceAttachments
         {
             get
             {

@@ -3,7 +3,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Reflection;
 using WBZ.Globals;
-using MODULE_CLASS = WBZ.Models.C_User;
+using MODULE_CLASS = WBZ.Models.M_User;
 
 namespace WBZ.Modules.Users
 {

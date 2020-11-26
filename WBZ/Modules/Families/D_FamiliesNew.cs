@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Reflection;
 using WBZ.Globals;
 using WBZ.Models;
-using MODULE_MODEL = WBZ.Models.C_Family;
+using MODULE_MODEL = WBZ.Models.M_Family;
 
 namespace WBZ.Modules.Families
 {
@@ -32,8 +32,8 @@ namespace WBZ.Modules.Families
             }
         }
         /// Instance source - distributions
-        private List<C_Distribution> instanceSources_Distributions;
-        public List<C_Distribution> InstanceSources_Distributions
+        private List<M_Distribution> instanceSources_Distributions;
+        public List<M_Distribution> InstanceSources_Distributions
         {
             get
             {

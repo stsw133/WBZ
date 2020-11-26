@@ -312,26 +312,6 @@
                         </ContextMenu>
                     </Border.ContextMenu>
                 </Border>
-                <!-- groups -->
-                <Border x:Name="modGroups" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Groups_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
-                    <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">
-                        <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
-                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Image Margin="10" Source="/Resources/icon32_groups.ico" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="Grupy" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}"/>
-                            </StackPanel>
-                        </Border>
-                        <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" Alignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
-                                  Text="Zarządzaj grupami" Icon="/Resources/icon32_groups.ico" PreviewMouseLeftButtonUp="btnGroupsList_Click"
-                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=groups_preview}"/>
-                    </DockPanel>
-                    <Border.ContextMenu>
-                        <ContextMenu>
-                            <c:MenuPanelColor Tag="{Binding config_Groups_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
-                        </ContextMenu>
-                    </Border.ContextMenu>
-                </Border>
                 <!-- logs -->
                 <Border x:Name="modLogs" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=30}"
                         Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">

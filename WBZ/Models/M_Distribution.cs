@@ -5,7 +5,7 @@ using WBZ.Globals;
 
 namespace WBZ.Models
 {
-	public class C_Distribution
+	public class M_Distribution : M
 	{
 		public enum DistributionStatus
 		{
@@ -14,39 +14,27 @@ namespace WBZ.Models
 			Approved = 1
 		}
 
-		public int ID { get; set; }
 		public string Name { get; set; }
 		public DateTime fDateReal { get; set; }
 		public DateTime DateReal { get; set; }
 		public short Status { get; set; }
-		public bool Archival { get; set; }
-		public string Comment { get; set; }
-		public byte[] Icon { get; set; }
-		public List<C_DistributionFamily> Families { get; set; }
+		public List<M_DistributionFamily> Families { get; set; }
 		public int FamiliesCount { get; set; }
 		public int MembersCount { get; set; }
 		public int PositionsCount { get; set; }
 		public decimal Weight { get; set; }
 
-		public C_Distribution()
+		public M_Distribution()
 		{
-			ID = 0;
-			Name = "";
+			Name = string.Empty;
 			fDateReal = new DateTime(DateTime.Now.Year, 1, 1);
 			DateReal = DateTime.Now;
 			Status = (short)DistributionStatus.Buffer;
-			Archival = false;
-			Comment = "";
-			Icon = null;
-			Families = new List<C_DistributionFamily>();
-			FamiliesCount = 0;
-			MembersCount = 0;
-			PositionsCount = 0;
-			Weight = 0;
+			Families = new List<M_DistributionFamily>();
 		}
 	}
 
-	public class C_DistributionFamily
+	public class M_DistributionFamily
 	{
 		public enum DistributionFamilyStatus
 		{
@@ -61,17 +49,15 @@ namespace WBZ.Models
 		public short Status { get; set; }
 		public DataTable Positions { get; set; }
 
-		public C_DistributionFamily()
+		public M_DistributionFamily()
 		{
-			Family = 0;
-			FamilyName = "";
-			Members = 0;
+			FamilyName = string.Empty;
 			Status = (short)DistributionFamilyStatus.None;
 			Positions = SQL.GetDistributionPositionsFormatting();
 		}
 	}
 
-	public class C_DistributionPosition
+	public class M_DistributionPosition
 	{
 		public int ID { get; set; }
 		public int Distribution { get; set; }
@@ -82,18 +68,13 @@ namespace WBZ.Models
 		public string StoreName { get; set; }
 		public string ArticleName { get; set; }
 
-		public C_DistributionPosition()
+		public M_DistributionPosition()
 		{
-			var stores = SQL.ListInstances<C_Store>(Global.Module.STORES, "true");
+			var stores = SQL.ListInstances<M_Store>(Global.Module.STORES, "true");
 
-			ID = 0;
-			Distribution = 0;
-			Position = 0;
 			Store = stores.Count == 1 ? stores[0].ID : 0;
-			Article = 0;
-			Amount = 0;
-			StoreName = stores.Count == 1 ? stores[0].Name : "";
-			ArticleName = "";
+			StoreName = stores.Count == 1 ? stores[0].Name : string.Empty;
+			ArticleName = string.Empty;
 		}
 	}
 }

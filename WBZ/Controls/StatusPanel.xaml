@@ -3,15 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:g="clr-namespace:WBZ.Globals"
+             xmlns:p="clr-namespace:WBZ.Properties"
              mc:Ignorable="d">
     <Border BorderBrush="Gray" BorderThickness="0,1,0,0">
-        <DockPanel>
-            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
-                <Label Content="Wyświetlono:" Margin="5,0"/>
-                <Label Content="{Binding InstancesList.Count}" FontWeight="Medium"/>
-                <Label Content=" / "/>
-                <Label Content="{Binding TotalItems}" FontWeight="Medium"/>
-            </StackPanel>
-        </DockPanel>
+        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
+            <ToggleButton Margin="5" IsChecked="{Binding EnableGroups, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" VerticalAlignment="Center" Visibility="{Binding HasGroups, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Converter={g:conv_BoolToVisibility}}" Unchecked="ToggleButton_Unchecked">
+                <Image Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.2}" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_groups.ico"/>
+            </ToggleButton>
+            <Label Content="Wyświetlono:" Margin="0,0,5,0" VerticalAlignment="Center"/>
+            <Label Content="{Binding InstancesList.Count}" FontWeight="Medium" VerticalAlignment="Center"/>
+            <Label Content=" / " VerticalAlignment="Center"/>
+            <Label Content="{Binding TotalItems}" FontWeight="Medium" VerticalAlignment="Center"/>
+        </StackPanel>
     </Border>
 </UserControl>

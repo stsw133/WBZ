@@ -3,7 +3,7 @@ using System.Windows.Input;
 using WBZ.Models;
 using WBZ.Globals;
 using WBZ.Interfaces;
-using MODULE_MODEL = WBZ.Models.C_Store;
+using MODULE_MODEL = WBZ.Models.M_Store;
 
 namespace WBZ.Modules.Stores
 {
@@ -34,12 +34,12 @@ namespace WBZ.Modules.Stores
 			if (tab?.Name == "tabSources_Articles")
 			{
 				if (D.InstanceInfo.ID != 0 && D.InstanceSources_Articles == null)
-					D.InstanceSources_Articles = SQL.ListInstances<C_Article>(Global.Module.ARTICLES, $"sa.store={D.InstanceInfo.ID}");
+					D.InstanceSources_Articles = SQL.ListInstances<M_Article>(Global.Module.ARTICLES, $"sa.store={D.InstanceInfo.ID}");
 			}
 			else if (tab?.Name == "tabSources_Documents")
 			{
 				if (D.InstanceInfo.ID != 0 && D.InstanceSources_Documents == null)
-					D.InstanceSources_Documents = SQL.ListInstances<C_Document>(Global.Module.DOCUMENTS, $"d.store={D.InstanceInfo.ID}");
+					D.InstanceSources_Documents = SQL.ListInstances<M_Document>(Global.Module.DOCUMENTS, $"d.store={D.InstanceInfo.ID}");
 			}
 		}
 
@@ -48,7 +48,7 @@ namespace WBZ.Modules.Stores
 		/// </summary>
 		private void dgList_Articles_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
-			dgList_Module_MouseDoubleClick<C_Article>(sender, e, Global.Module.ARTICLES);
+			dgList_Module_MouseDoubleClick<M_Article>(sender, e, Global.Module.ARTICLES);
 		}
 
 		/// <summary>
@@ -56,7 +56,7 @@ namespace WBZ.Modules.Stores
 		/// </summary>
 		private void dgList_Documents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
-			dgList_Module_MouseDoubleClick<C_Document>(sender, e, Global.Module.DOCUMENTS);
+			dgList_Module_MouseDoubleClick<M_Document>(sender, e, Global.Module.DOCUMENTS);
 		}
 	}
 

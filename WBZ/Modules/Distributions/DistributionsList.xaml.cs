@@ -1,6 +1,6 @@
 ﻿using WBZ.Globals;
 using WBZ.Interfaces;
-using MODULE_MODEL = WBZ.Models.C_Distribution;
+using MODULE_MODEL = WBZ.Models.M_Distribution;
 
 namespace WBZ.Modules.Distributions
 {

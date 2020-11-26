@@ -4,7 +4,7 @@ using System.Reflection;
 using WBZ.Globals;
 using WBZ.Interfaces;
 using WBZ.Models;
-using MODULE_MODEL = WBZ.Models.C_Company;
+using MODULE_MODEL = WBZ.Models.M_Company;
 
 namespace WBZ.Modules.Companies
 {
@@ -29,8 +29,8 @@ namespace WBZ.Modules.Companies
             }
         }
         /// Instance source - documents
-		private List<C_Document> instanceSources_Documents;
-        public List<C_Document> InstanceSources_Documents
+		private List<M_Document> instanceSources_Documents;
+        public List<M_Document> InstanceSources_Documents
         {
             get
             {

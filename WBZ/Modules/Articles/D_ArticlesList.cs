@@ -2,7 +2,7 @@
 using System.Data;
 using WBZ.Globals;
 using WBZ.Interfaces;
-using MODULE_MODEL = WBZ.Models.C_Article;
+using MODULE_MODEL = WBZ.Models.M_Article;
 
 namespace WBZ.Modules.Articles
 {

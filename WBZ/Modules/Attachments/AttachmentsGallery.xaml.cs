@@ -7,7 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using WBZ.Globals;
-using MODULE_CLASS = WBZ.Models.C_Attachment;
+using MODULE_CLASS = WBZ.Models.M_Attachment;
 
 namespace WBZ.Modules.Attachments
 {

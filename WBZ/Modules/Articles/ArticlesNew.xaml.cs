@@ -6,7 +6,7 @@ using System.Windows.Input;
 using WBZ.Models;
 using WBZ.Globals;
 using WBZ.Interfaces;
-using MODULE_MODEL = WBZ.Models.C_Article;
+using MODULE_MODEL = WBZ.Models.M_Article;
 
 namespace WBZ.Modules.Articles
 {
@@ -66,17 +66,17 @@ namespace WBZ.Modules.Articles
 			if (tab?.Name?.EndsWith("_Stores") == true)
 			{
 				if (D.InstanceInfo.ID != 0 && D.InstanceSources_Stores == null)
-					D.InstanceSources_Stores = SQL.ListInstances<C_Store>(Global.Module.STORES, $"sa.article={D.InstanceInfo.ID}");
+					D.InstanceSources_Stores = SQL.ListInstances<M_Store>(Global.Module.STORES, $"sa.article={D.InstanceInfo.ID}");
 			}
 			else if (tab?.Name?.EndsWith("_Documents") == true)
 			{
 				if (D.InstanceInfo.ID != 0 && D.InstanceSources_Documents == null)
-					D.InstanceSources_Documents = SQL.ListInstances<C_Document>(Global.Module.DOCUMENTS, $"dp.article={D.InstanceInfo.ID}");
+					D.InstanceSources_Documents = SQL.ListInstances<M_Document>(Global.Module.DOCUMENTS, $"dp.article={D.InstanceInfo.ID}");
 			}
 			else if (tab?.Name?.EndsWith("_Distributions") == true)
 			{
 				if (D.InstanceInfo.ID != 0 && D.InstanceSources_Distributions == null)
-					D.InstanceSources_Distributions = SQL.ListInstances<C_Distribution>(Global.Module.DISTRIBUTIONS, $"dp.article={D.InstanceInfo.ID}");
+					D.InstanceSources_Distributions = SQL.ListInstances<M_Distribution>(Global.Module.DISTRIBUTIONS, $"dp.article={D.InstanceInfo.ID}");
 			}
 		}
 
@@ -85,7 +85,7 @@ namespace WBZ.Modules.Articles
 		/// </summary>
 		private void dgList_Stores_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
-			dgList_Module_MouseDoubleClick<C_Store>(sender, e, Global.Module.STORES);
+			dgList_Module_MouseDoubleClick<M_Store>(sender, e, Global.Module.STORES);
 		}
 
 		/// <summary>
@@ -93,7 +93,7 @@ namespace WBZ.Modules.Articles
 		/// </summary>
 		private void dgList_Documents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
-			dgList_Module_MouseDoubleClick<C_Document>(sender, e, Global.Module.DOCUMENTS);
+			dgList_Module_MouseDoubleClick<M_Document>(sender, e, Global.Module.DOCUMENTS);
 		}
 
 		/// <summary>
@@ -101,7 +101,7 @@ namespace WBZ.Modules.Articles
 		/// </summary>
 		private void dgList_Distributions_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
-			dgList_Module_MouseDoubleClick<C_Distribution>(sender, e, Global.Module.ARTICLES);
+			dgList_Module_MouseDoubleClick<M_Distribution>(sender, e, Global.Module.ARTICLES);
 		}
 	}
 

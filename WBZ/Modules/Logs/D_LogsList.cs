@@ -3,7 +3,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Reflection;
 using WBZ.Globals;
-using MODULE_CLASS = WBZ.Models.C_Log;
+using MODULE_CLASS = WBZ.Models.M_Log;
 
 namespace WBZ.Modules.Logs
 {

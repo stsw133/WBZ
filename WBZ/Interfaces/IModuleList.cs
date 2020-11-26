@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -172,7 +173,7 @@ namespace WBZ.Interfaces
         /// </summary>
         public void btnPreview_Click(object sender, MouseButtonEventArgs e)
         {
-            var selectedInstances = W.dgList.SelectedItems.Cast<MODULE_MODEL>();
+            var selectedInstances = (W.dgList as DataGrid).SelectedItems.Cast<MODULE_MODEL>();
             foreach (MODULE_MODEL instance in selectedInstances)
             {
                 var window = Activator.CreateInstance(Type.GetType(HalfName + "New"), instance, Commands.Type.PREVIEW) as Window;
@@ -194,7 +195,7 @@ namespace WBZ.Interfaces
         /// </summary>
         public void btnDuplicate_Click(object sender, MouseButtonEventArgs e)
         {
-            var selectedInstances = W.dgList.SelectedItems.Cast<MODULE_MODEL>();
+            var selectedInstances = (W.dgList as DataGrid).SelectedItems.Cast<MODULE_MODEL>();
             foreach (MODULE_MODEL instance in selectedInstances)
             {
                 var window = Activator.CreateInstance(Type.GetType(HalfName + "New"), instance, Commands.Type.DUPLICATE) as Window;
@@ -207,7 +208,7 @@ namespace WBZ.Interfaces
         /// </summary>
         public void btnEdit_Click(object sender, MouseButtonEventArgs e)
         {
-            var selectedInstances = W.dgList.SelectedItems.Cast<MODULE_MODEL>();
+            var selectedInstances = (W.dgList as DataGrid).SelectedItems.Cast<MODULE_MODEL>();
             foreach (MODULE_MODEL instance in selectedInstances)
             {
                 var window = Activator.CreateInstance(Type.GetType(HalfName + "New"), instance, Commands.Type.EDIT) as Window;
@@ -220,7 +221,7 @@ namespace WBZ.Interfaces
         /// </summary>
         public void btnDelete_Click(object sender, MouseButtonEventArgs e)
         {
-            var selectedInstances = W.dgList.SelectedItems.Cast<MODULE_MODEL>();
+            var selectedInstances = (W.dgList as DataGrid).SelectedItems.Cast<MODULE_MODEL>();
             if (selectedInstances.Count() > 0 && MessageBox.Show("Czy na pewno usunąć zaznaczone rekordy?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
                 foreach (dynamic instance in selectedInstances)

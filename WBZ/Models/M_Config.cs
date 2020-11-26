@@ -1,6 +1,6 @@
 ﻿namespace WBZ.Models
 {
-	public static class C_Config
+	public static class M_Config
 	{
 		public static string Version { get; set; }
 		public static string Logs_Enabled { get; set; }

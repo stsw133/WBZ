@@ -8,8 +8,8 @@ namespace WBZ.Modules.Personal
     class D_Profile : INotifyPropertyChanged
     {
         /// Logged user
-        private C_User user = Global.User;
-        public C_User User
+        private M_User user = Global.User;
+        public M_User User
         {
             get
             {

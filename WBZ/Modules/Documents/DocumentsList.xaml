@@ -209,58 +209,68 @@
             </StackPanel>
         </Grid>
         <!-- statusPanel -->
-        <c:StatusPanel DockPanel.Dock="Bottom" Background="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
-        <!-- dataGrid -->
-        <DataGrid x:Name="dgList" DockPanel.Dock="Top" Margin="5" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
+        <c:StatusPanel x:Name="StatusPanel" DockPanel.Dock="Bottom" Background="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" HasGroups="True"/>
+        <!-- grid -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <!-- groupsView -->
+            <c:GroupsView Grid.Column="0" EditingMode="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=documents_save}" Visibility="{Binding EnableGroups, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
+            <GridSplitter BorderThickness="2" Visibility="{Binding EnableGroups, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
+            <!-- dataGrid -->
+            <DataGrid x:Name="dgList" Grid.Column="1" Margin="5" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
                   AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstancesList}" IsReadOnly="True"
                   MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_ID, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                <DataGridTemplateColumn MaxWidth="50" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Icon, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding Icon}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Binding="{Binding Type}" Header="Typ" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Type, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                <DataGridTextColumn Binding="{Binding Name}" Header="Nazwa" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Name, Mode=OneWay, Converter={g:conv_BoolToVisibility}}" Width="*"/>
-                <DataGridTextColumn Binding="{Binding StoreName}" Header="Magazyn" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_StoreName, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                <DataGridTextColumn Binding="{Binding CompanyName}" Header="Firma" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_CompanyName, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                <DataGridTextColumn Binding="{Binding PositionsCount}" Header="Pozycje" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_PositionsCount, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                <DataGridTextColumn Binding="{Binding Weight}" Header="Waga (kg)" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Weight, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                <DataGridTextColumn Binding="{Binding Cost}" Header="Kwota netto" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Cost, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                <DataGridTextColumn Binding="{Binding DateIssue, StringFormat={}{0:yyyy-MM-dd}}" Header="Data wystawienia" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_DateIssue, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-            </DataGrid.Columns>
-            <DataGrid.ContextMenu>
-                <ContextMenu>
-                    <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_ID, Mode=TwoWay}"/>
-                    <MenuItem IsCheckable="True" Header="Ikona" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Icon, Mode=TwoWay}"/>
-                    <MenuItem IsCheckable="True" Header="Typ" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Type, Mode=TwoWay}"/>
-                    <MenuItem IsCheckable="True" Header="Nazwa" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Name, Mode=TwoWay}"/>
-                    <MenuItem IsCheckable="True" Header="Magazyn" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_StoreName, Mode=TwoWay}"/>
-                    <MenuItem IsCheckable="True" Header="Firma" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_CompanyName, Mode=TwoWay}"/>
-                    <MenuItem IsCheckable="True" Header="Liczba pozycji" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_PositionsCount, Mode=TwoWay}"/>
-                    <MenuItem IsCheckable="True" Header="Łączna waga (kg)" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Weight, Mode=TwoWay}"/>
-                    <MenuItem IsCheckable="True" Header="Łączny koszt netto" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Cost, Mode=TwoWay}"/>
-                    <MenuItem IsCheckable="True" Header="Data wystawienia" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_DateIssue, Mode=TwoWay}"/>
-                </ContextMenu>
-            </DataGrid.ContextMenu>
-            <DataGrid.RowStyle>
-                <Style TargetType="DataGridRow">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Status}" Value="0">
-                            <Setter Property="Foreground" Value="Green"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Status}" Value="-1">
-                            <Setter Property="Foreground" Value="DarkGoldenrod"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Archival}" Value="true">
-                            <Setter Property="Foreground" Value="Gray"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </DataGrid.RowStyle>
-        </DataGrid>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_ID, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                    <DataGridTemplateColumn MaxWidth="50" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Icon, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Icon}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Binding="{Binding Type}" Header="Typ" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Type, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Nazwa" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Name, Mode=OneWay, Converter={g:conv_BoolToVisibility}}" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding StoreName}" Header="Magazyn" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_StoreName, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                    <DataGridTextColumn Binding="{Binding CompanyName}" Header="Firma" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_CompanyName, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                    <DataGridTextColumn Binding="{Binding PositionsCount}" Header="Pozycje" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_PositionsCount, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                    <DataGridTextColumn Binding="{Binding Weight}" Header="Waga (kg)" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Weight, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                    <DataGridTextColumn Binding="{Binding Cost}" Header="Kwota netto" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Cost, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                    <DataGridTextColumn Binding="{Binding DateIssue, StringFormat={}{0:yyyy-MM-dd}}" Header="Data wystawienia" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_DateIssue, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                </DataGrid.Columns>
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_ID, Mode=TwoWay}"/>
+                        <MenuItem IsCheckable="True" Header="Ikona" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Icon, Mode=TwoWay}"/>
+                        <MenuItem IsCheckable="True" Header="Typ" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Type, Mode=TwoWay}"/>
+                        <MenuItem IsCheckable="True" Header="Nazwa" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Name, Mode=TwoWay}"/>
+                        <MenuItem IsCheckable="True" Header="Magazyn" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_StoreName, Mode=TwoWay}"/>
+                        <MenuItem IsCheckable="True" Header="Firma" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_CompanyName, Mode=TwoWay}"/>
+                        <MenuItem IsCheckable="True" Header="Liczba pozycji" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_PositionsCount, Mode=TwoWay}"/>
+                        <MenuItem IsCheckable="True" Header="Łączna waga (kg)" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Weight, Mode=TwoWay}"/>
+                        <MenuItem IsCheckable="True" Header="Łączny koszt netto" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Cost, Mode=TwoWay}"/>
+                        <MenuItem IsCheckable="True" Header="Data wystawienia" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_DateIssue, Mode=TwoWay}"/>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Status}" Value="0">
+                                <Setter Property="Foreground" Value="Green"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Status}" Value="-1">
+                                <Setter Property="Foreground" Value="DarkGoldenrod"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Archival}" Value="true">
+                                <Setter Property="Foreground" Value="Gray"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+            </DataGrid>
+        </Grid>
     </DockPanel>
 </local:List>

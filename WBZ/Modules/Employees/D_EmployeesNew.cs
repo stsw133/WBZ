@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Reflection;
 using WBZ.Globals;
-using MODULE_MODEL = WBZ.Models.C_Employee;
+using MODULE_MODEL = WBZ.Models.M_Employee;
 
 namespace WBZ.Modules.Employees
 {

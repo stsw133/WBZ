@@ -4,39 +4,33 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:c="clr-namespace:WBZ.Controls"
-             xmlns:g="clr-namespace:WBZ.Globals"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded">
     <DockPanel Margin="5">
-        <DockPanel>
-            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                <c:Button Margin="0,0,5,0" IsEnabled="{Binding EditingMode}" TextVisibility="False"
-                                Text="Dodaj grupę" Icon="/Resources/icon32_add.ico" PreviewMouseLeftButtonUp="btnGroupAdd_Click"/>
-                <c:Button Margin="0,0,5,0" IsEnabled="{Binding EditingMode}" TextVisibility="False"
-                                Text="Usuń grupę" Icon="/Resources/icon32_remove.ico" PreviewMouseLeftButtonUp="btnGroupRemove_Click"/>
-                <GridSplitter DockPanel.Dock="Top" Margin="0,0,5,0" BorderBrush="DarkGray" BorderThickness="1" IsEnabled="False"/>
-                <c:Button Margin="0,0,5,0" IsEnabled="{Binding EditingMode}" TextVisibility="False"
-                                Text="Ustaw jako główną" Icon="/Resources/icon32_select.ico" PreviewMouseLeftButtonUp="btnGroupSelectAsMain_Click"/>
-            </StackPanel>
-            <DataGrid Margin="0,5,0,0" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <c:Button Margin="0,0,5,0" IsEnabled="{Binding EditingMode}" TextVisibility="False" ToolTip="Dodaj grupę" Icon="/Resources/icon32_add.ico" PreviewMouseLeftButtonUp="btnGroupAdd_Click"/>
+            <c:Button Margin="0,0,5,0" IsEnabled="{Binding EditingMode}" TextVisibility="False" ToolTip="Usuń grupę" Icon="/Resources/icon32_remove.ico" PreviewMouseLeftButtonUp="btnGroupRemove_Click"/>
+            <GridSplitter DockPanel.Dock="Top" Margin="0,0,5,0" BorderBrush="DarkGray" BorderThickness="1" IsEnabled="False"/>
+            <c:Button Margin="0,0,5,0" IsEnabled="{Binding EditingMode}" TextVisibility="False" ToolTip="Ustaw jako główną" Icon="/Resources/icon32_select.ico" PreviewMouseLeftButtonUp="btnGroupSelectAsMain_Click"/>
+        </StackPanel>
+        <DataGrid Margin="0,5,0,0" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
                       AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstanceGroups}" IsReadOnly="True">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" Visibility="Hidden"/>
-                    <DataGridTextColumn Binding="{Binding Fullpath}" Header="Grupa" Width="*"/>
-                </DataGrid.Columns>
-                <DataGrid.RowStyle>
-                    <Style TargetType="DataGridRow">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Main}" Value="true">
-                                <Setter Property="Foreground" Value="Green"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding Archival}" Value="true">
-                                <Setter Property="Foreground" Value="Gray"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </DataGrid.RowStyle>
-            </DataGrid>
-        </DockPanel>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" Visibility="Hidden"/>
+                <DataGridTextColumn Binding="{Binding Fullpath}" Header="Grupa" Width="*"/>
+            </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Main}" Value="true">
+                            <Setter Property="Foreground" Value="Green"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Archival}" Value="true">
+                            <Setter Property="Foreground" Value="Gray"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
     </DockPanel>
 </UserControl>

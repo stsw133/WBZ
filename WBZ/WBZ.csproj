@@ -124,29 +124,30 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Modules\Groups\GroupsView.xaml.cs">
+      <DependentUpon>GroupsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Globals\Commands.cs" />
     <Compile Include="Globals\Functions.cs" />
     <Compile Include="Interfaces\D_ModuleList.cs" />
     <Compile Include="Interfaces\D_ModuleNew.cs" />
     <Compile Include="Interfaces\IModuleNew.cs" />
-    <Compile Include="Models\C_Additional.cs" />
-    <Compile Include="Models\C_Address.cs" />
-    <Compile Include="Models\C_ComboValue.cs" />
-    <Compile Include="Models\C_Article.cs" />
-    <Compile Include="Models\C_Attachment.cs" />
-    <Compile Include="Models\C_Attribute.cs" />
-    <Compile Include="Models\C_Company.cs" />
-    <Compile Include="Models\C_Config.cs" />
-    <Compile Include="Models\C_Contact.cs" />
-    <Compile Include="Models\C_Database.cs" />
-    <Compile Include="Models\C_Distribution.cs" />
-    <Compile Include="Models\C_Document.cs" />
-    <Compile Include="Models\C_Family.cs" />
-    <Compile Include="Models\C_Group.cs" />
-    <Compile Include="Models\C_Log.cs" />
-    <Compile Include="Models\C_Employee.cs" />
-    <Compile Include="Models\C_User.cs" />
-    <Compile Include="Models\C_Store.cs" />
+    <Compile Include="Models\M_ComboValue.cs" />
+    <Compile Include="Models\M_Article.cs" />
+    <Compile Include="Models\M_Attachment.cs" />
+    <Compile Include="Models\M_Attribute.cs" />
+    <Compile Include="Models\M_Company.cs" />
+    <Compile Include="Models\M_Config.cs" />
+    <Compile Include="Models\M_Contact.cs" />
+    <Compile Include="Models\M_Database.cs" />
+    <Compile Include="Models\M_Distribution.cs" />
+    <Compile Include="Models\M_Document.cs" />
+    <Compile Include="Models\M_Family.cs" />
+    <Compile Include="Models\M_Group.cs" />
+    <Compile Include="Models\M_Log.cs" />
+    <Compile Include="Models\M_Employee.cs" />
+    <Compile Include="Models\M_User.cs" />
+    <Compile Include="Models\M_Store.cs" />
     <Compile Include="Controls\StatusPanel.xaml.cs">
       <DependentUpon>StatusPanel.xaml</DependentUpon>
     </Compile>
@@ -191,6 +192,7 @@
     <Compile Include="Controls\TitleBar.xaml.cs">
       <DependentUpon>TitleBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\M.cs" />
     <Compile Include="Modules\Articles\D_ArticlesList.cs" />
     <Compile Include="Modules\Articles\D_ArticlesNew.cs" />
     <Compile Include="Modules\Attachments\D_AttachmentsGallery.cs" />
@@ -209,16 +211,11 @@
     <Compile Include="Modules\Employees\D_EmployeesNew.cs" />
     <Compile Include="Modules\Families\D_FamiliesList.cs" />
     <Compile Include="Modules\Families\D_FamiliesNew.cs" />
-    <Compile Include="Modules\Groups\D_GroupsList.cs" />
     <Compile Include="Modules\Login\D_Login.cs" />
     <Compile Include="Modules\Login\D_LoginAppAbout.cs" />
     <Compile Include="Modules\Login\D_LoginDatabases.cs" />
     <Compile Include="Modules\Login\D_Versions.cs" />
-    <Compile Include="Modules\Logs\D_ErrorsList.cs" />
     <Compile Include="Modules\Logs\D_LogsList.cs" />
-    <Compile Include="Modules\Logs\ErrorsList.xaml.cs">
-      <DependentUpon>ErrorsList.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Modules\Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
     </Compile>
@@ -242,9 +239,6 @@
     </Compile>
     <Compile Include="Modules\Attachments\AttachmentsGallery.xaml.cs">
       <DependentUpon>AttachmentsGallery.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Groups\GroupsList.xaml.cs">
-      <DependentUpon>GroupsList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Logs\LogsList.xaml.cs">
       <DependentUpon>LogsList.xaml</DependentUpon>
@@ -352,6 +346,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Modules\Groups\GroupsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Windows\AttachmentsAdd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -409,14 +407,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Modules\Attachments\AttachmentsList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Groups\GroupsList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Logs\ErrorsList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

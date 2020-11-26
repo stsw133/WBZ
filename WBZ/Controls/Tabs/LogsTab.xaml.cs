@@ -30,12 +30,12 @@ namespace WBZ.Controls
                 Window win = Window.GetWindow(this);
 
                 if (ID != 0 && D.InstanceLogs == null)
-                    D.InstanceLogs = SQL.ListInstances<C_Log>(Global.Module.LOGS, $"l.module='{Module}' and l.instance={ID}");
+                    D.InstanceLogs = SQL.ListInstances<M_Log>(Global.Module.LOGS, $"l.module='{Module}' and l.instance={ID}");
 
                 dynamic d = win?.DataContext;
                 if (d != null)
                 {
-                    Module = (string)d.MODULE_NAME;
+                    Module = (string)d.MODULE_TYPE;
                     ID = (int)d.InstanceInfo.ID;
                 }
             }
@@ -49,8 +49,8 @@ namespace WBZ.Controls
 	internal class D_LogsTab : INotifyPropertyChanged
     {
         /// Logs
-        private List<C_Log> instanceLogs;
-        public List<C_Log> InstanceLogs
+        private List<M_Log> instanceLogs;
+        public List<M_Log> InstanceLogs
         {
             get
             {

@@ -1,6 +1,6 @@
 ﻿using WBZ.Globals;
 using WBZ.Interfaces;
-using MODULE_MODEL = WBZ.Models.C_AttributeClass;
+using MODULE_MODEL = WBZ.Models.M_AttributeClass;
 
 namespace WBZ.Modules.AttributesClasses
 {

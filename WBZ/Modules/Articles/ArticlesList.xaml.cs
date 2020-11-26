@@ -2,7 +2,7 @@
 using WBZ.Globals;
 using WBZ.Interfaces;
 using WBZ.Models;
-using MODULE_MODEL = WBZ.Models.C_Article;
+using MODULE_MODEL = WBZ.Models.M_Article;
 
 namespace WBZ.Modules.Articles
 {
@@ -30,10 +30,10 @@ namespace WBZ.Modules.Articles
 		/// <summary>
 		/// Store - SelectionChanged
 		/// </summary>
-		public C_Store SelectedStore;
+		public M_Store SelectedStore;
 		private void cbStore_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			SelectedStore = SQL.GetInstance<C_Store>(Global.Module.STORES, cbStore.SelectedValue != null ? (int)cbStore.SelectedValue : 0);
+			SelectedStore = SQL.GetInstance<M_Store>(Global.Module.STORES, cbStore.SelectedValue != null ? (int)cbStore.SelectedValue : 0);
 			btnRefresh_Click(null, null);
 		}
 	}

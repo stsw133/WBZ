@@ -2,16 +2,13 @@
 
 namespace WBZ.Models
 {
-	public class C_Article
+	public class M_Article : M
 	{
-		public int ID { get; set; }
 		public string Codename { get; set; }
 		public string Name { get; set; }
 		public string EAN { get; set; }
 		public decimal Price { get; set; }
-		public bool Archival { get; set; }
-		public string Comment { get; set; }
-		public byte[] Icon { get; set; }
+
 		public DataTable Measures { get; set; }
 		public string Measure { get; set; }
 		public decimal AmountRaw { get; set; }
@@ -19,26 +16,18 @@ namespace WBZ.Models
 		public decimal ReservedRaw { get; set; }
 		public decimal Reserved { get; set; }
 
-		public C_Article()
+		public M_Article()
 		{
-			ID = 0;
-			Codename = "";
-			Name = "";
-			EAN = "";
-			Price = 0;
-			Archival = false;
-			Comment = "";
-			Icon = null;
+			Codename = string.Empty;
+			Name = string.Empty;
+			EAN = string.Empty;
+
 			Measures = new DataTable();
-			Measure = "";
-			AmountRaw = 0;
-			Amount = 0;
-			ReservedRaw = 0;
-			Reserved = 0;
+			Measure = string.Empty;
 		}
 	}
-
-	public class C_ArticleMeasure
+	/*
+	public class M_ArticleMeasure
 	{
 		public int ID { get; set; }
 		public int Article { get; set; }
@@ -49,16 +38,11 @@ namespace WBZ.Models
 		public decimal Amount { get; set; }
 		public decimal Reserved { get; set; }
 
-		public C_ArticleMeasure()
+		public M_ArticleMeasure()
 		{
-			ID = 0;
-			Article = 0;
-			Name = "";
+			Name = string.Empty;
 			Converter = 1;
-			Default = false;
-			Price = 0;
-			Amount = 0;
-			Reserved = 0;
 		}
 	}
+	*/
 }

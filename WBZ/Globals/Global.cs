@@ -16,9 +16,9 @@ namespace WBZ.Globals
         /// Newest version to download
         public static string VersionNewest { get; set; } = null;
         /// Chosen database
-        public static C_Database Database { get; set; } = new C_Database();
+        public static M_Database Database { get; set; } = new M_Database();
         /// Logged user
-        public static C_User User { get; set; } = new C_User();
+        public static M_User User { get; set; } = new M_User();
         /// Module list
         public static class Module
         {
@@ -38,36 +38,6 @@ namespace WBZ.Globals
             public const string STATS = "stats";
             public const string STORES = "stores";
             public const string USERS = "users";
-        }
-        public static Type ModuleModel(string module)
-        {
-            switch (module)
-            {
-                case Module.ARTICLES:
-                    return typeof(C_Article);
-                case Module.ATTACHMENTS:
-                    return typeof(C_Attachment);
-                case Module.ATTRIBUTES_CLASSES:
-                    return typeof(C_AttributeClass);
-                case Module.COMPANIES:
-                    return typeof(C_Company);
-                case Module.DISTRIBUTIONS:
-                    return typeof(C_Distribution);
-                case Module.DOCUMENTS:
-                    return typeof(C_Document);
-                case Module.EMPLOYEES:
-                    return typeof(C_Employee);
-                case Module.FAMILIES:
-                    return typeof(C_Family);
-                case Module.LOGS:
-                    return typeof(C_Log);
-                case Module.STORES:
-                    return typeof(C_Store);
-                case Module.USERS:
-                    return typeof(C_User);
-                default:
-                    return null;
-            }
         }
         public static string TranslateModule(string module)
         {

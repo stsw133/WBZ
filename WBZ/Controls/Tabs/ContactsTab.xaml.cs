@@ -38,7 +38,7 @@ namespace WBZ.Controls
                 dynamic d = win?.DataContext;
                 if (d != null)
                 {
-                    Module = (string)d.MODULE_NAME;
+                    Module = (string)d.MODULE_TYPE;
                     ID = (int)d.InstanceInfo.ID;
                     EditingMode = (bool)d.InstanceInfo.EditingMode;
                 }

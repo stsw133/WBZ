@@ -13,7 +13,7 @@ using WBZ.Modules.Documents;
 using WBZ.Modules.Families;
 using WBZ.Modules.Stores;
 using WBZ.Modules.Users;
-using MODULE_CLASS = WBZ.Models.C_Attachment;
+using MODULE_CLASS = WBZ.Models.M_Attachment;
 
 namespace WBZ.Modules.Attachments
 {
@@ -98,35 +98,35 @@ namespace WBZ.Modules.Attachments
 			{
 				/// articles
 				case Global.Module.ARTICLES:
-					window = new ArticlesNew(SQL.GetInstance<C_Article>(log.Module, log.Instance), mode);
+					window = new ArticlesNew(SQL.GetInstance<M_Article>(log.Module, log.Instance), mode);
 					break;
 				/// attributes_classes
 				case Global.Module.ATTRIBUTES_CLASSES:
-					window = new AttributesClassesNew(SQL.GetInstance<C_AttributeClass>(log.Module, log.Instance), mode);
+					window = new AttributesClassesNew(SQL.GetInstance<M_AttributeClass>(log.Module, log.Instance), mode);
 					break;
 				/// companies
 				case Global.Module.COMPANIES:
-					window = new CompaniesNew(SQL.GetInstance<C_Company>(log.Module, log.Instance), mode);
+					window = new CompaniesNew(SQL.GetInstance<M_Company>(log.Module, log.Instance), mode);
 					break;
 				/// distributions
 				case Global.Module.DISTRIBUTIONS:
-					window = new DistributionsNew(SQL.GetInstance<C_Distribution>(log.Module, log.Instance), mode);
+					window = new DistributionsNew(SQL.GetInstance<M_Distribution>(log.Module, log.Instance), mode);
 					break;
 				/// documents
 				case Global.Module.DOCUMENTS:
-					window = new DocumentsNew(SQL.GetInstance<C_Document>(log.Module, log.Instance), mode);
+					window = new DocumentsNew(SQL.GetInstance<M_Document>(log.Module, log.Instance), mode);
 					break;
 				/// families
 				case Global.Module.FAMILIES:
-					window = new FamiliesNew(SQL.GetInstance<C_Family>(log.Module, log.Instance), mode);
+					window = new FamiliesNew(SQL.GetInstance<M_Family>(log.Module, log.Instance), mode);
 					break;
 				/// stores
 				case Global.Module.STORES:
-					window = new StoresNew(SQL.GetInstance<C_Store>(log.Module, log.Instance), mode);
+					window = new StoresNew(SQL.GetInstance<M_Store>(log.Module, log.Instance), mode);
 					break;
 				/// users
 				case Global.Module.USERS:
-					window = new UsersNew(SQL.GetInstance<C_User>(log.Module, log.Instance), mode);
+					window = new UsersNew(SQL.GetInstance<M_User>(log.Module, log.Instance), mode);
 					break;
 				default:
 					return;

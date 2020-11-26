@@ -6,7 +6,7 @@ using WBZ.Globals;
 
 namespace WBZ.Models
 {
-	public class C_Database
+	public class M_Database
 	{
 		public string Name { get; set; }
 		public string Server { get; set; }
@@ -16,24 +16,23 @@ namespace WBZ.Models
 		public string Password { get; set; }
 		public string Version { get; set; }
 
-		public C_Database()
-		{
-			Name = "";
-			Server = "";
-			Port = 0;
-			Database = "";
-			Username = "";
-			Password = "";
-			Version = "";
-		}
+		public M_Database()
+        {
+			Name = string.Empty;
+			Server = string.Empty;
+			Database = string.Empty;
+			Username = string.Empty;
+			Password = string.Empty;
+			Version = string.Empty;
+        }
 
 		/// <summary>
 		/// Wczytanie listy baz danych z pliku
 		/// </summary>
-		public static List<C_Database> LoadAllDatabases()
+		public static List<M_Database> LoadAllDatabases()
 		{
-			var result = new List<C_Database>();
-			var db = new C_Database();
+			var result = new List<M_Database>();
+			var db = new M_Database();
 
 			try
 			{
@@ -52,7 +51,7 @@ namespace WBZ.Models
 
 						if (property == "Name")
 						{
-							db = new C_Database();
+							db = new M_Database();
 							db.Name = Global.Decrypt(line.Substring(property.Length + 1));
 						}
 						else if (property == "Server")
@@ -82,13 +81,13 @@ namespace WBZ.Models
 		/// <summary>
 		/// Zapisanie listy baz danych do pliku
 		/// </summary>
-		public static void SaveAllDatabases(List<C_Database> databases)
+		public static void SaveAllDatabases(List<M_Database> databases)
 		{
 			try
 			{
 				using (var stream = new StreamWriter(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Data\Databases.bin")))
 				{
-					foreach (C_Database db in databases)
+					foreach (M_Database db in databases)
 					{
 						stream.WriteLine($"Name={Global.Encrypt(db.Name)}");
 						stream.WriteLine($"Server={Global.Encrypt(db.Server)}");

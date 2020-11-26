@@ -40,7 +40,7 @@ namespace WBZ.Modules.Login
 			CheckNewestVersion();
 			txtVersion.Content = Global.Version;
 
-			D.Databases = new ObservableCollection<C_Database>(C_Database.LoadAllDatabases());
+			D.Databases = new ObservableCollection<M_Database>(M_Database.LoadAllDatabases());
 
 			if (!string.IsNullOrEmpty(Props.Default.userPass))
                 tbPassword.Password = Props.Default.userPass;
@@ -100,7 +100,7 @@ namespace WBZ.Modules.Login
 
 			try
 			{
-				Global.Database = cbDatabase.SelectedItem as C_Database;
+				Global.Database = cbDatabase.SelectedItem as M_Database;
 				SQL.connWBZ = SQL.MakeConnString(Global.Database.Server, Global.Database.Port, Global.Database.Database, Global.Database.Username, Global.Database.Password);
 				Global.Database.Version = SQL.GetPropertyValue("VERSION");
 
@@ -127,7 +127,7 @@ namespace WBZ.Modules.Login
 
 			if (SQL.Login(tbLogin.Text, Global.sha256(tbPassword.Password)))
 			{
-				C_Config.LoadConfig();
+				M_Config.LoadConfig();
 				var window = new Main();
 				window.Show();
 				Close();
@@ -199,7 +199,7 @@ namespace WBZ.Modules.Login
 			conf.Owner = this;
 			if (conf.ShowDialog() == true)
 			{
-				var users = SQL.ListInstances<C_User>(Global.Module.USERS, $"(lower(username)='{conf.GetLogin.ToLower()}' or lower(email)='{conf.GetLogin.ToLower()}') and password='{Global.sha256(conf.GetPassword)}'");
+				var users = SQL.ListInstances<M_User>(Global.Module.USERS, $"(lower(username)='{conf.GetLogin.ToLower()}' or lower(email)='{conf.GetLogin.ToLower()}') and password='{Global.sha256(conf.GetPassword)}'");
 				if (users.Count == 0 || !SQL.GetUserPerms(users[0].ID).Contains("admin"))
 				{
 					new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Brak uprawnień administracyjnych lub błędne dane użytkownika!") { Owner = this }.ShowDialog();

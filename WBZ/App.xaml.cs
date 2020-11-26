@@ -14,7 +14,7 @@ namespace WBZ
 		/// </summary>
 		private void App_Startup(object sender, StartupEventArgs e)
 		{
-			if (C_Database.LoadAllDatabases().Count == 0)
+			if (M_Database.LoadAllDatabases().Count == 0)
 				new LoginDatabases().Show();
 			else
 				new Login().Show();

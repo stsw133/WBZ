@@ -3,7 +3,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Reflection;
 using WBZ.Globals;
-using MODULE_CLASS = WBZ.Models.C_Attachment;
+using MODULE_CLASS = WBZ.Models.M_Attachment;
 
 namespace WBZ.Modules.Attachments
 {

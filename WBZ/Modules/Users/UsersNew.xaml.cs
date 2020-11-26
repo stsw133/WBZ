@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using WBZ.Globals;
 using WBZ.Interfaces;
-using MODULE_MODEL = WBZ.Models.C_User;
+using MODULE_MODEL = WBZ.Models.M_User;
 
 namespace WBZ.Modules.Users
 {

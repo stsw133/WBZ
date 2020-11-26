@@ -2,7 +2,7 @@
 using WBZ.Globals;
 using WBZ.Interfaces;
 using WBZ.Modules.Users;
-using MODULE_MODEL = WBZ.Models.C_Employee;
+using MODULE_MODEL = WBZ.Models.M_Employee;
 
 namespace WBZ.Modules.Employees
 {

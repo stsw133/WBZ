@@ -36,7 +36,7 @@ namespace WBZ.Controls
                 dynamic d = win?.DataContext;
                 if (d != null)
                 {
-                    Module = (string)d.MODULE_NAME;
+                    Module = (string)d.MODULE_TYPE;
                     ID = (int)d.InstanceInfo.ID;
                 }
             }
@@ -55,7 +55,7 @@ namespace WBZ.Controls
             if (d != null)
                 EditingMode = (bool)d.EditingMode;
 
-            var indexes = dataGrid.SelectedItems.Cast<C_Attribute>().Select(x => D.InstanceAttributes.IndexOf(x));
+            var indexes = dataGrid.SelectedItems.Cast<M_Attribute>().Select(x => D.InstanceAttributes.IndexOf(x));
             foreach (int index in indexes)
             {
                 var window = new AttributeChange(D.InstanceAttributes[index], EditingMode);
@@ -74,8 +74,8 @@ namespace WBZ.Controls
 	internal class D_AttributesTab : INotifyPropertyChanged
     {
         /// Attributes
-        private List<C_Attribute> instanceAttributes;
-        public List<C_Attribute> InstanceAttributes
+        private List<M_Attribute> instanceAttributes;
+        public List<M_Attribute> InstanceAttributes
         {
             get
             {

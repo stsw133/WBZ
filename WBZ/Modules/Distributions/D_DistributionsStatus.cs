@@ -22,8 +22,8 @@ namespace WBZ.Modules.Distributions
 			}
 		}
 		/// Family
-		private C_Family familyInfo;
-		public C_Family FamilyInfo
+		private M_Family familyInfo;
+		public M_Family FamilyInfo
 		{
 			get
 			{

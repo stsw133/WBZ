@@ -16,7 +16,7 @@ namespace WBZ.Other
         /// <summary>
         /// RODO
         /// </summary>
-		internal static void Print_RODO(C_Family family, C_Contact contact)
+		internal static void Print_RODO(M_Family family, M_Contact contact)
         {
             try
             {
@@ -408,7 +408,7 @@ z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danyc
         /// <summary>
         /// DistributionList
         /// </summary>
-		internal static void Print_DistributionList(C_Distribution distribution)
+		internal static void Print_DistributionList(M_Distribution distribution)
         {
             Color color = Color.FromRgb(0, 0, 0);
             Color lColor = Color.FromRgb(192, 192, 192);
@@ -498,7 +498,7 @@ z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danyc
                 row1.Cells[0].AddParagraph(index.ToString());
                 row1.Cells[1].AddParagraph($"{family.FamilyName}");
                 row1.Cells[2].AddParagraph($"{amount}");
-                if (family.Status == (short)C_DistributionFamily.DistributionFamilyStatus.Taken)
+                if (family.Status == (short)M_DistributionFamily.DistributionFamilyStatus.Taken)
                     row1.Cells[4].AddParagraph("Odebrano");
             }
 
