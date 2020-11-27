@@ -70,7 +70,7 @@ namespace WBZ.Controls
             {
                 var path = (((tvGroups.SelectedItem as TreeViewItem).Header as StackPanel).Children[1] as TextBlock).Text + "\\";
                 for (var i = GetParentItem((tvGroups.SelectedItem as TreeViewItem)); i != null; i = GetParentItem(i))
-                    path = i.Header + "\\" + path;
+                    path = ((i.Header as StackPanel).Children[1] as TextBlock).Text + "\\" + path;
 
                 if (path.Split('\\').Length > 5)
                     return;
