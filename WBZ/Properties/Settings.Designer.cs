@@ -2010,7 +2010,7 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FF7799BB")]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF99AABB")]
         public string config_Users_PanelColor {
             get {
                 return ((string)(this["config_Users_PanelColor"]));
@@ -2022,7 +2022,7 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FF775522")]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFBB9966")]
         public string config_Employees_PanelColor {
             get {
                 return ((string)(this["config_Employees_PanelColor"]));

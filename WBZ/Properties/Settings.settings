@@ -648,10 +648,10 @@
       <Value Profile="(Default)">#FF44CCCC</Value>
     </Setting>
     <Setting Name="config_Users_PanelColor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#FF7799BB</Value>
+      <Value Profile="(Default)">#FF99AABB</Value>
     </Setting>
     <Setting Name="config_Employees_PanelColor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#FF775522</Value>
+      <Value Profile="(Default)">#FFBB9966</Value>
     </Setting>
     <Setting Name="config_AttributesClasses_PanelColor" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FFEEAA33</Value>

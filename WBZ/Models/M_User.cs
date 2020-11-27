@@ -2,9 +2,8 @@
 
 namespace WBZ.Models
 {
-	public class M_User
+	public class M_User : M
 	{
-		public int ID { get; set; }
 		public string Username { get; set; }
 		public string Newpass { get; set; }
 		public string Email { get; set; }
@@ -12,7 +11,6 @@ namespace WBZ.Models
 		public string Forename { get; set; }
 		public string Lastname { get; set; }
 		public bool Blocked { get; set; }
-		public bool Archival { get; set; }
 		public List<string> Perms { get; set; }
 
 		public M_User()

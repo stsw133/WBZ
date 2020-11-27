@@ -33,9 +33,9 @@
                         <TextBlock Text="Błękitny" Margin="5,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
                 </ComboBoxItem>
-                <ComboBoxItem Tag="#FF775522">
+                <ComboBoxItem Tag="#FFBB9966">
                     <StackPanel Orientation="Horizontal" MinHeight="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}">
-                        <Rectangle Fill="#FF775522" Stroke="Gray" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}"/>
+                        <Rectangle Fill="#FFBB9966" Stroke="Gray" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}"/>
                         <TextBlock Text="Brązowy" Margin="5,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
                 </ComboBoxItem>
@@ -63,9 +63,9 @@
                         <TextBlock Text="Różowy" Margin="5,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
                 </ComboBoxItem>
-                <ComboBoxItem Tag="#FF7799BB">
+                <ComboBoxItem Tag="#FF99AABB">
                     <StackPanel Orientation="Horizontal" MinHeight="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}">
-                        <Rectangle Fill="#FF7799BB" Stroke="Gray" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}"/>
+                        <Rectangle Fill="#FF99AABB" Stroke="Gray" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}"/>
                         <TextBlock Text="Szaroniebieski" Margin="5,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
                 </ComboBoxItem>
