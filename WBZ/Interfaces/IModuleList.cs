@@ -67,6 +67,7 @@ namespace WBZ.Interfaces
                         + $"LOWER(COALESCE(a.name,'')) like '%{Filters.Name.ToLower()}%' and "
                         + $"LOWER(COALESCE(a.ean,'')) like '%{Filters.EAN.ToLower()}%' and "
                         + (!Filters.Archival ? $"a.archival=false and " : "")
+                        + (Filters.Group > 0 ? $"g.owner={Filters.Group} and " : "")
                         + (W.SelectedStore?.ID > 0 ? $"sa.store={W.SelectedStore.ID} and " : "");
                     break;
                 /// ATTACHMENTS
@@ -81,7 +82,8 @@ namespace WBZ.Interfaces
                         + $"LOWER(COALESCE(ac.name,'')) like '%{Filters.Name.ToLower()}%' and "
                         + $"LOWER(COALESCE(ac.type,'')) like '%{Filters.Type.ToLower()}%' and "
                         + $"LOWER(COALESCE(ac.values,'')) like '%{Filters.Values.ToLower()}%' and "
-                        + (!Filters.Archival ? $"ac.archival=false and " : "");
+                        + (!Filters.Archival ? $"ac.archival=false and " : "")
+                        + (Filters.Group > 0 ? $"g.owner={Filters.Group} and " : "");
                     break;
                 /// COMPANIES
                 case Global.Module.COMPANIES:
@@ -93,14 +95,16 @@ namespace WBZ.Interfaces
                         + $"LOWER(COALESCE(c.postcode,'')) like '%{Filters.Postcode.ToLower()}%' and "
                         + $"LOWER(COALESCE(c.city,'')) like '%{Filters.City.ToLower()}%' and "
                         + $"LOWER(COALESCE(c.address,'')) like '%{Filters.Address.ToLower()}%' and "
-                        + (!Filters.Archival ? $"c.archival=false and " : "");
+                        + (!Filters.Archival ? $"c.archival=false and " : "")
+                        + (!Filters.Group > 0 ? $"g.owner={Filters.Group} and " : "");
                     break;
                 /// DISTRIBUTIONS
                 case Global.Module.DISTRIBUTIONS:
                     D.FilterSQL = $"LOWER(COALESCE(d.name,'')) like '%{Filters.Name}%' and "
                         + $"d.datereal between '{Filters.fDateReal:yyyy-MM-dd}' and '{Filters.DateReal:yyyy-MM-dd} 23:59:59' and "
                         //+ (M.Filters.FamiliesCount > 0 ? $"COALESCE(count(family),0) = {M.Filters.FamiliesCount} and " : "")
-                        + (!Filters.Archival ? $"d.archival=false and " : "");
+                        + (!Filters.Archival ? $"d.archival=false and " : "")
+                        + (Filters.Group > 0 ? $"g.owner={Filters.Group} and " : "");
                     break;
                 /// DOCUMENTS
                 case Global.Module.DOCUMENTS:
@@ -109,7 +113,8 @@ namespace WBZ.Interfaces
                         + $"LOWER(COALESCE(s.name,'')) like '%{Filters.StoreName.ToLower()}%' and "
                         + $"LOWER(COALESCE(c.name,'')) like '%{Filters.CompanyName.ToLower()}%' and "
                         + $"d.dateissue between '{Filters.fDateIssue:yyyy-MM-dd}' and '{Filters.DateIssue:yyyy-MM-dd} 23:59:59' and "
-                        + (!Filters.Archival ? $"d.archival=false and " : "");
+                        + (!Filters.Archival ? $"d.archival=false and " : "")
+                        + (Filters.Group > 0 ? $"g.owner={Filters.Group} and " : "");
                     break;
                 /// EMPLOYEES
                 case Global.Module.EMPLOYEES:
@@ -122,7 +127,8 @@ namespace WBZ.Interfaces
                         + $"LOWER(COALESCE(e.postcode,'')) like '%{Filters.Postcode.ToLower()}%' and "
                         + $"LOWER(COALESCE(e.city,'')) like '%{Filters.City.ToLower()}%' and "
                         + $"LOWER(COALESCE(e.address,'')) like '%{Filters.Address.ToLower()}%' and "
-                        + (Filters.Archival ? $"e.archival=false and " : "");
+                        + (!Filters.Archival ? $"e.archival=false and " : "")
+                        + (Filters.Group > 0 ? $"g.owner={Filters.Group} and " : "");
                     break;
                 /// FAMILIES
                 case Global.Module.FAMILIES:
@@ -132,14 +138,16 @@ namespace WBZ.Interfaces
                         + $"LOWER(COALESCE(f.postcode,'')) like '%{Filters.Postcode.ToLower()}%' and "
                         + $"LOWER(COALESCE(f.city,'')) like '%{Filters.City.ToLower()}%' and "
                         + $"LOWER(COALESCE(f.address,'')) like '%{Filters.Address.ToLower()}%' and "
-                        + (!Filters.Archival ? $"f.archival=false and " : "");
+                        + (!Filters.Archival ? $"f.archival=false and " : "")
+                        + (Filters.Group > 0 ? $"g.owner={Filters.Group} and " : "");
                     break;
                 /// LOGS
                 case Global.Module.LOGS:
                     D.FilterSQL = $"LOWER(COALESCE(u.lastname,'') || ' ' || COALESCE(u.forename,'')) like '%{Filters.UserFullname.ToLower()}%' and "
                         + $"LOWER(COALESCE(l.module,'')) like '%{Filters.Module.ToLower()}%' and "
                         + $"LOWER(COALESCE(l.content,'')) like '%{Filters.Content.ToLower()}%' and "
-                        + $"l.datetime between '{Filters.fDateTime:yyyy-MM-dd}' and '{Filters.DateTime:yyyy-MM-dd} 23:59:59' and ";
+                        + $"l.datetime between '{Filters.fDateTime:yyyy-MM-dd}' and '{Filters.DateTime:yyyy-MM-dd} 23:59:59' and "
+                        + $"l.type={Filters.Group} and ";
                     break;
                 /// STORES
                 case Global.Module.STORES:
@@ -148,7 +156,8 @@ namespace WBZ.Interfaces
                         + $"LOWER(COALESCE(s.postcode,'')) like '%{Filters.Postcode.ToLower()}%' and "
                         + $"LOWER(COALESCE(s.city,'')) like '%{Filters.City.ToLower()}%' and "
                         + $"LOWER(COALESCE(s.address,'')) like '%{Filters.Address.ToLower()}%' and "
-                        + (!Filters.Archival ? $"s.archival=false and " : "");
+                        + (!Filters.Archival ? $"s.archival=false and " : "")
+                        + (Filters.Group > 0 ? $"g.owner={Filters.Group} and " : "");
                     break;
                 /// USERS
                 case Global.Module.USERS:
@@ -156,7 +165,8 @@ namespace WBZ.Interfaces
                         + $"LOWER(COALESCE(u.lastname,'')) like '%{Filters.Lastname.ToLower()}%' and "
                         + $"LOWER(COALESCE(u.email,'')) like '%{Filters.Email.ToLower()}%' and "
                         + $"LOWER(COALESCE(u.phone,'')) like '%{Filters.Phone.ToLower()}%' and "
-                        + (Filters.Archival ? $"u.archival=false and " : "");
+                        + (!Filters.Archival ? $"u.archival=false and " : "")
+                        + (Filters.Group > 0 ? $"g.owner={Filters.Group} and " : "");
                     break;
             }
 

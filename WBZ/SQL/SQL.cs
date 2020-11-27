@@ -1234,7 +1234,9 @@ namespace WBZ
 							query = @"select count(distinct a.id)
 								from wbz.articles a
 								left join wbz.stores_articles sa
-									on a.id=sa.article";
+									on a.id=sa.article
+								left join wbz.groups g
+									on g.instance=a.id";
 							break;
 						/// attachments
 						case Global.Module.ATTACHMENTS:
@@ -1244,17 +1246,23 @@ namespace WBZ
 						/// attributes_classes
 						case Global.Module.ATTRIBUTES_CLASSES:
 							query = @"select count(distinct ac.id)
-								from wbz.attributes_classes ac";
+								from wbz.attributes_classes ac
+								left join wbz.groups g
+									on g.instance=ac.id";
 							break;
 						/// companies
 						case Global.Module.COMPANIES:
 							query = @"select count(distinct c.id)
-								from wbz.companies c";
+								from wbz.companies c
+								left join wbz.groups g
+									on g.instance=c.id";
 							break;
 						/// distributions
 						case Global.Module.DISTRIBUTIONS:
 							query = @"select count(distinct d.id)
-								from wbz.distributions d";
+								from wbz.distributions d
+								left join wbz.groups g
+									on g.instance=d.id";
 							break;
 						/// documents
 						case Global.Module.DOCUMENTS:
@@ -1265,14 +1273,18 @@ namespace WBZ
 								left join wbz.companies c
 									on c.id=d.company
 								left join wbz.stores s
-									on s.id=d.store";
+									on s.id=d.store
+								left join wbz.groups g
+									on g.instance=d.id";
 							break;
 						/// employees
 						case Global.Module.EMPLOYEES:
 							query = @"select count(distinct e.id)
 								from wbz.employees e
 								left join wbz.users u
-									on u.id=e.""user""";
+									on u.id=e.""user""
+								left join wbz.groups g
+									on g.instance=e.id";
 							break;
 						/// groups
 						case Global.Module.GROUPS:
@@ -1282,7 +1294,9 @@ namespace WBZ
 						/// families
 						case Global.Module.FAMILIES:
 							query = @"select count(distinct f.id)
-								from wbz.families f";
+								from wbz.families f
+								left join wbz.groups g
+									on g.instance=f.id";
 							break;
 						/// logs
 						case Global.Module.LOGS:
@@ -1296,12 +1310,16 @@ namespace WBZ
 							query = @"select count(distinct s.id)
 								from wbz.stores s
 								left join wbz.stores_articles sa
-									on s.id = sa.store";
+									on s.id = sa.store
+								left join wbz.groups g
+									on g.instance=s.id";
 							break;
 						/// users
 						case Global.Module.USERS:
 							query = @"select count(distinct u.id)
-								from wbz.users u";
+								from wbz.users u
+								left join wbz.groups g
+									on g.instance=u.id";
 							break;
 						default:
 							throw new NotImplementedException();
@@ -1377,7 +1395,9 @@ namespace WBZ
 									a.archival, a.comment, a.icon
 								from wbz.articles a
 								left join wbz.stores_articles sa
-									on a.id = sa.article";
+									on a.id=sa.article
+								left join wbz.groups g
+									on g.instance=a.id";
 							break;
 						/// attachments
 						case Global.Module.ATTACHMENTS:
@@ -1388,13 +1408,17 @@ namespace WBZ
 						case Global.Module.ATTRIBUTES_CLASSES:
 							query = @"select ac.id as ""ID"", ac.module as ""Module"", ac.name as ""Name"", ac.type as ""Type"", ac.""values"" as ""Values"",
 									ac.archival, ac.comment, ac.icon
-								from wbz.attributes_classes ac";
+								from wbz.attributes_classes ac
+								left join wbz.groups g
+									on g.instance=ac.id";
 							break;
 						/// companies
 						case Global.Module.COMPANIES:
 							query = @"select c.id, c.codename, c.name, c.branch, c.nip, c.regon, c.postcode, c.city, c.address,
 									c.archival, c.comment, c.icon
-								from wbz.companies c";
+								from wbz.companies c
+								left join wbz.groups g
+									on g.instance=c.id";
 							break;
 						/// distributions
 						case Global.Module.DISTRIBUTIONS:
@@ -1404,7 +1428,9 @@ namespace WBZ
 									d.archival, d.comment, d.icon
 								from wbz.distributions d
 								left join wbz.distributions_positions dp
-									on dp.distribution=d.id";
+									on dp.distribution=d.id
+								left join wbz.groups g
+									on g.instance=d.id";
 							break;
 						/// documents
 						case Global.Module.DOCUMENTS:
@@ -1417,7 +1443,9 @@ namespace WBZ
 								left join wbz.companies c
 									on c.id=d.company
 								left join wbz.stores s
-									on s.id=d.store";
+									on s.id=d.store
+								left join wbz.groups g
+									on g.instance=d.id";
 							break;
 						/// employees
 						case Global.Module.EMPLOYEES:
@@ -1427,7 +1455,9 @@ namespace WBZ
 									e.archival, e.comment, e.icon
 								from wbz.employees e
 								left join wbz.users u
-									on u.id=e.""user""";
+									on u.id=e.""user""
+								left join wbz.groups g
+									on g.instance=e.id";
 							break;
 						/// groups
 						case Global.Module.GROUPS:
@@ -1450,7 +1480,9 @@ namespace WBZ
 								left join wbz.distributions_positions dp
 									on f.id=dp.family
 								left join wbz.distributions d
-									on dp.distribution=d.id";
+									on dp.distribution=d.id
+								left join wbz.groups g
+									on g.instance=f.id";
 							break;
 						/// logs
 						case Global.Module.LOGS:
@@ -1467,13 +1499,17 @@ namespace WBZ
 									s.archival, s.comment, s.icon
 								from wbz.stores s
 								left join wbz.stores_articles sa
-									on s.id = sa.store";
+									on s.id = sa.store
+								left join wbz.groups g
+									on g.instance=s.id";
 							break;
 						/// users
 						case Global.Module.USERS:
 							query = @"select u.id, u.username, '' as newpass, u.forename, u.lastname,
 									u.email, u.phone, u.blocked, u.archival
-								from wbz.users u";
+								from wbz.users u
+								left join wbz.groups g
+									on g.instance=u.id";
 							break;
 						default:
 							throw new NotImplementedException();

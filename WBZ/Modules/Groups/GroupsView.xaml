@@ -19,8 +19,8 @@
                       ToolTip="Usuń grupę" Icon="/Resources/icon32_delete.ico" PreviewMouseLeftButtonUp="btnGroupsDelete_Click"/>
             <Rectangle Margin="0,5,5,0" Width="1" Fill="Gray"/>
             <c:Button Margin="0,5,5,0" TextVisibility="False"
-                      ToolTip="Odśwież grupy" Icon="/Resources/icon32_refresh.ico" PreviewMouseLeftButtonUp="btnGroupsRefresh_Click"/>
+                      ToolTip="Odśwież listę grup" Icon="/Resources/icon32_refresh.ico" PreviewMouseLeftButtonUp="btnGroupsRefresh_Click"/>
         </StackPanel>
-        <TreeView x:Name="tvGroups" Padding="0,0,5,0"/>
+        <TreeView x:Name="tvGroups" Padding="0,0,5,0" MouseDown="tvGroups_MouseDown" SelectedItemChanged="tvGroups_SelectedItemChanged"/>
     </DockPanel>
 </UserControl>

@@ -68,7 +68,7 @@ namespace WBZ.Controls
             }
             else
             {
-                var path = (tvGroups.SelectedItem as TreeViewItem).Header.ToString() + "\\";
+                var path = (((tvGroups.SelectedItem as TreeViewItem).Header as StackPanel).Children[1] as TextBlock).Text + "\\";
                 for (var i = GetParentItem((tvGroups.SelectedItem as TreeViewItem)); i != null; i = GetParentItem(i))
                     path = i.Header + "\\" + path;
 
@@ -166,18 +166,18 @@ namespace WBZ.Controls
                     var image = new Image()
                     {
                         Source = Functions.LoadImage(group.Icon),
-                        Width = 16,
-                        Height = 16
+                        Margin = new Thickness(0, 0, 5, 0),
+                        Width = Properties.Settings.Default.config_iSize * 1.5,
+                        Height = Properties.Settings.Default.config_iSize * 1.5
                     };
+                    image.Visibility = image.Source != null ? Visibility.Visible : Visibility.Collapsed;
                     var tb = new TextBlock()
                     {
-                        Margin = new Thickness(5,0,0,0),
                         Text = group.Name
                     };
                     if (group.Archival)
                         tb.Foreground = (Brush)new BrushConverter().ConvertFrom("#777");
-                    if (image.Source != null)
-                        stack.Children.Add(image);
+                    stack.Children.Add(image);
                     stack.Children.Add(tb);
                     var tvi = new TreeViewItem()
                     {
@@ -216,6 +216,44 @@ namespace WBZ.Controls
                             }
                         }
                     }
+                }
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// MouseDown
+        /// </summary>
+        private void tvGroups_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Right)
+            {
+                var item = tvGroups.SelectedItem as TreeViewItem;
+                if (item != null)
+                {
+                    tvGroups.Focus();
+                    item.IsSelected = false;
+                }
+            }
+        }
+
+        /// <summary>
+        /// SelectedItemChanged
+        /// </summary>
+        private void tvGroups_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            try
+            {
+                Window win = Window.GetWindow(this);
+
+                dynamic d = win?.DataContext;
+                if (d != null)
+                {
+                    if (e.NewValue != null)
+                        d.Filters.Group = (int)(e.NewValue as TreeViewItem).Tag;
+                    else
+                        d.Filters.Group = 0;
+                    (win as dynamic).btnRefresh_Click(null, null);
                 }
             }
             catch { }
