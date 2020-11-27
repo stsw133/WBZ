@@ -113,7 +113,7 @@ namespace WBZ.Globals
 			else
 			{
 				if (targetType.Name == "Visibility")
-					return parameter.ToString()[0] != '!' ? Visibility.Collapsed : Visibility.Collapsed;
+					return parameter.ToString()[0] != '!' ? Visibility.Collapsed : Visibility.Visible;
 				else
 					return parameter.ToString()[0] != '!' ? false : true;
 			}

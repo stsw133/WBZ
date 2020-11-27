@@ -13,6 +13,6 @@ namespace WBZ.Modules.Articles
 		public StringCollection SORTING = Properties.Settings.Default.sorting_ArticlesList;
 		
 		/// Stores list
-		public DataTable StoresList { get; } = SQL.GetStoresNames();
+		public DataTable StoresList { get; } = SQL.ComboInstances(Global.Module.STORES, "codename", "archival=false");
 	}
 }

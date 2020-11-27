@@ -491,62 +491,6 @@ namespace WBZ
 		#endregion
 
 		/// <summary>
-		/// Pobiera nazwiska i imiona użytkowników (przydatne do bindowania comboboxów gdy szukamy twórców lub modyfikatorów)
-		/// </summary>
-		internal static DataTable GetUsersFullnames()
-		{
-			var result = new DataTable();
-
-			try
-			{
-				using (var sqlConn = connOpenedWBZ)
-				{
-					var sqlCmd = new NpgsqlCommand(@"select id, lastname || ' ' || forename as fullname
-						from wbz.users
-						order by lastname asc, forename asc", sqlConn);
-					using (var sqlDA = new NpgsqlDataAdapter(sqlCmd))
-					{
-						sqlDA.Fill(result);
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.ToString());
-			}
-
-			return result;
-		}
-
-		/// <summary>
-		/// Pobiera nazwy magazynów (przydatne do bindowania comboboxów)
-		/// </summary>
-		internal static DataTable GetStoresNames()
-		{
-			var result = new DataTable();
-
-			try
-			{
-				using (var sqlConn = connOpenedWBZ)
-				{
-					var sqlCmd = new NpgsqlCommand(@"select id, coalesce(nullif(codename,''), name) as name
-						from wbz.stores
-						order by codename asc, name asc", sqlConn);
-					using (var sqlDA = new NpgsqlDataAdapter(sqlCmd))
-					{
-						sqlDA.Fill(result);
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.ToString());
-			}
-
-			return result;
-		}
-
-		/// <summary>
 		/// Pobiera uprawnienia użytkownika
 		/// </summary>
 		/// <param name="id">ID użytkownika</param>
@@ -1258,10 +1202,17 @@ namespace WBZ
         #endregion
 
         #region basic
+		private static string ShowError(Exception ex)
+        {
+#if DEBUG
+			return ex.ToString();
+#else
+			return ex.Message;
+#endif
+		}
+#endregion
 
-        #endregion
-
-        #region modules
+		#region modules
         /// <summary>
         /// Liczy ilość instancji
         /// </summary>
@@ -1281,7 +1232,9 @@ namespace WBZ
 						/// articles
 						case Global.Module.ARTICLES:
 							query = @"select count(distinct a.id)
-								from wbz.articles a";
+								from wbz.articles a
+								left join wbz.stores_articles sa
+									on a.id=sa.article";
 							break;
 						/// attachments
 						case Global.Module.ATTACHMENTS:
@@ -1382,7 +1335,7 @@ namespace WBZ
 			{
 				using (var sqlConn = connOpenedWBZ)
 				{
-					using (var sqlDA = new NpgsqlDataAdapter($@"select id, {column} as name from wbz.{module} where {filter}", sqlConn))
+					using (var sqlDA = new NpgsqlDataAdapter($@"select id, {column} as name from wbz.{module} where {filter} order by {column} asc", sqlConn))
 					{
 						sqlDA.Fill(result);
 					}
@@ -1480,7 +1433,7 @@ namespace WBZ
 						case Global.Module.GROUPS:
 							query = @"select g.id, g.module, g.name, g.instance, g.owner,
 									case when trim(concat(g1.name, '\', g2.name, '\', g3.name, '\', g4.name), '\') = '' then ''
-										else concat(trim(concat(g1.name, '\', g2.name, '\', g3.name, '\', g4.name), '\'), '\') end as fullpath,
+										else concat(trim(concat(g1.name, '\', g2.name, '\', g3.name, '\', g4.name), '\'), '\') end as path,
 									g.archival, g.comment, g.icon
 								from wbz.groups g
 								left join wbz.groups g4 on g4.id=g.owner
@@ -2130,7 +2083,7 @@ namespace WBZ
 			
 			return result;
 		}
-		#endregion
+#endregion
 
 		#region additional
 		/// <summary>
@@ -2284,6 +2237,6 @@ namespace WBZ
 
 			return result;
 		}
-		#endregion
+#endregion
 	}
 }

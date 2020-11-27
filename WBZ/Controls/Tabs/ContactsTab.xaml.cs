@@ -63,10 +63,16 @@ namespace WBZ.Controls
     }
 
     /// <summary>
-    /// Model
+    /// DataContext
     /// </summary>
     internal class D_ContactsTab : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void NotifyPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
         /// Contacts
         private DataTable instanceContacts;
         public DataTable InstanceContacts
@@ -80,15 +86,6 @@ namespace WBZ.Controls
                 instanceContacts = value;
                 NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
             }
-        }
-
-        /// <summary>
-		/// PropertyChangedEventHandler
-		/// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void NotifyPropertyChanged(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

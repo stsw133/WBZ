@@ -208,62 +208,54 @@
         </Grid>
         <!-- statusPanel -->
         <c:StatusPanel x:Name="StatusPanel" DockPanel.Dock="Bottom" Background="{Binding config_Companies_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" HasGroups="True"/>
-        <!-- grid -->
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <!-- groupsView -->
-            <c:GroupsView Grid.Column="0" EditingMode="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=companies_save}" Visibility="{Binding EnableGroups, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
-            <GridSplitter BorderThickness="2" Visibility="{Binding EnableGroups, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
-            <!-- dataGrid -->
-            <DataGrid x:Name="dgList" Grid.Column="1" Margin="5" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
+        <!-- groupsView -->
+        <c:GroupsView EditingMode="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=companies_save}" Visibility="{Binding EnableGroups, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
+        <!-- dataGrid -->
+        <DataGrid x:Name="dgList" Margin="5" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
                   AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstancesList}" IsReadOnly="True"
                   MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_ID, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                    <DataGridTemplateColumn MaxWidth="50" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_Icon, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Image Source="{Binding Icon}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTextColumn Binding="{Binding Codename}" Header="Kod" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_Codename, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                    <DataGridTextColumn Binding="{Binding Name}" Header="Nazwa" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_Name, Mode=OneWay, Converter={g:conv_BoolToVisibility}}" Width="*"/>
-                    <DataGridTextColumn Binding="{Binding Branch}" Header="Oddział" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_Branch, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                    <DataGridTextColumn Binding="{Binding NIP}" Header="NIP" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_NIP, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                    <DataGridTextColumn Binding="{Binding REGON}" Header="REGON" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_REGON, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                    <DataGridTextColumn Binding="{Binding Postcode}" Header="Kod pocztowy" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_Postcode, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                    <DataGridTextColumn Binding="{Binding City}" Header="Miasto" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_City, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                    <DataGridTextColumn Binding="{Binding Address}" Header="Adres" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_Address, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                </DataGrid.Columns>
-                <DataGrid.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_ID, Mode=TwoWay}"/>
-                        <MenuItem IsCheckable="True" Header="Ikona" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_Icon, Mode=TwoWay}"/>
-                        <MenuItem IsCheckable="True" Header="Kod" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_Codename, Mode=TwoWay}"/>
-                        <MenuItem IsCheckable="True" Header="Nazwa" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_Name, Mode=TwoWay}"/>
-                        <MenuItem IsCheckable="True" Header="Oddział" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_Branch, Mode=TwoWay}"/>
-                        <MenuItem IsCheckable="True" Header="NIP" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_NIP, Mode=TwoWay}"/>
-                        <MenuItem IsCheckable="True" Header="REGON" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_REGON, Mode=TwoWay}"/>
-                        <MenuItem IsCheckable="True" Header="Kod pocztowy" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_Postcode, Mode=TwoWay}"/>
-                        <MenuItem IsCheckable="True" Header="Miasto" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_City, Mode=TwoWay}"/>
-                        <MenuItem IsCheckable="True" Header="Adres" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_Address, Mode=TwoWay}"/>
-                    </ContextMenu>
-                </DataGrid.ContextMenu>
-                <DataGrid.RowStyle>
-                    <Style TargetType="DataGridRow">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Archival}" Value="true">
-                                <Setter Property="Foreground" Value="Gray"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </DataGrid.RowStyle>
-            </DataGrid>
-        </Grid>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_ID, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                <DataGridTemplateColumn MaxWidth="50" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_Icon, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Icon}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding Codename}" Header="Kod" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_Codename, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                <DataGridTextColumn Binding="{Binding Name}" Header="Nazwa" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_Name, Mode=OneWay, Converter={g:conv_BoolToVisibility}}" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Branch}" Header="Oddział" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_Branch, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                <DataGridTextColumn Binding="{Binding NIP}" Header="NIP" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_NIP, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                <DataGridTextColumn Binding="{Binding REGON}" Header="REGON" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_REGON, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                <DataGridTextColumn Binding="{Binding Postcode}" Header="Kod pocztowy" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_Postcode, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                <DataGridTextColumn Binding="{Binding City}" Header="Miasto" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_City, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                <DataGridTextColumn Binding="{Binding Address}" Header="Adres" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_Address, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_ID, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="Ikona" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_Icon, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="Kod" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_Codename, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="Nazwa" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_Name, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="Oddział" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_Branch, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="NIP" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_NIP, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="REGON" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_REGON, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="Kod pocztowy" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_Postcode, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="Miasto" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_City, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="Adres" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_CompaniesList_Address, Mode=TwoWay}"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Archival}" Value="true">
+                            <Setter Property="Foreground" Value="Gray"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
     </DockPanel>
 </local:List>
 

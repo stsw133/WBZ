@@ -47,10 +47,16 @@ namespace WBZ.Controls
 	}
 
 	/// <summary>
-	/// Model
+	/// DataContext
 	/// </summary>
 	internal class D_LogsTab : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void NotifyPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
         /// Logs
         private List<M_Log> instanceLogs;
         public List<M_Log> InstanceLogs
@@ -64,15 +70,6 @@ namespace WBZ.Controls
                 instanceLogs = value;
                 NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
             }
-        }
-
-        /// <summary>
-		/// PropertyChangedEventHandler
-		/// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void NotifyPropertyChanged(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

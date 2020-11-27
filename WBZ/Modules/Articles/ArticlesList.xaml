@@ -178,64 +178,56 @@
         </Grid>
         <!-- statusPanel -->
         <c:StatusPanel x:Name="StatusPanel" DockPanel.Dock="Bottom" Background="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" HasGroups="True"/>
-        <!-- grid -->
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <!-- groupsView -->
-            <c:GroupsView Grid.Column="0" EditingMode="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=articles_save}" Visibility="{Binding EnableGroups, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
-            <GridSplitter BorderThickness="2" Visibility="{Binding EnableGroups, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
-            <DockPanel Grid.Column="1">
-                <!-- storesList -->
-                <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
-                    <Label Content="Magazyn:" Margin="5,0,0,5"/>
-                    <ComboBox x:Name="cbStore" Margin="5,0,5,5" ItemsSource="{Binding StoresList.DefaultView}" DisplayMemberPath="name" SelectedValuePath="id" VerticalContentAlignment="Center" SelectionChanged="cbStore_SelectionChanged"/>
-                </StackPanel>
-                <!-- dataGrid -->
-                <DataGrid x:Name="dgList" Margin="5" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
-                          AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstancesList}" IsReadOnly="True"
-                          MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_ID, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                        <DataGridTemplateColumn MaxWidth="50" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Icon, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Image Source="{Binding Icon}"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTextColumn Binding="{Binding Codename}" Header="Kod" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Code, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                        <DataGridTextColumn Binding="{Binding Name}" Header="Nazwa" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Name, Mode=OneWay, Converter={g:conv_BoolToVisibility}}" Width="*"/>
-                        <DataGridTextColumn Binding="{Binding EAN}" Header="EAN" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_EAN, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                        <DataGridTextColumn Binding="{Binding Measure}" Header="Jm" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Measure, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                        <DataGridTextColumn Binding="{Binding Amount}" Header="Ilość" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Amount, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                        <DataGridTextColumn Binding="{Binding Reserved}" Header="Zarezerwowano" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Reserved, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                    </DataGrid.Columns>
-                    <DataGrid.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_ID, Mode=TwoWay}"/>
-                            <MenuItem IsCheckable="True" Header="Ikona" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Icon, Mode=TwoWay}"/>
-                            <MenuItem IsCheckable="True" Header="Kod" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Code, Mode=TwoWay}"/>
-                            <MenuItem IsCheckable="True" Header="Nazwa" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Name, Mode=TwoWay}"/>
-                            <MenuItem IsCheckable="True" Header="EAN" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_EAN, Mode=TwoWay}"/>
-                            <MenuItem IsCheckable="True" Header="Jm" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Measure, Mode=TwoWay}"/>
-                            <MenuItem IsCheckable="True" Header="Ilość" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Amount, Mode=TwoWay}"/>
-                            <MenuItem IsCheckable="True" Header="Zarezerwowano" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Reserved, Mode=TwoWay}"/>
-                        </ContextMenu>
-                    </DataGrid.ContextMenu>
-                    <DataGrid.RowStyle>
-                        <Style TargetType="DataGridRow">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Archival}" Value="true">
-                                    <Setter Property="Foreground" Value="Gray"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </DataGrid.RowStyle>
-                </DataGrid>
-            </DockPanel>
-        </Grid>
+        <!-- groupsView -->
+        <c:GroupsView EditingMode="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=articles_save}" Visibility="{Binding EnableGroups, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
+        <DockPanel>
+            <!-- storesList -->
+            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
+                <Label Content="Magazyn:" Margin="5,0,0,5"/>
+                <ComboBox x:Name="cbStore" Margin="5,0,5,5" ItemsSource="{Binding StoresList.DefaultView}" DisplayMemberPath="name" SelectedValuePath="id" VerticalContentAlignment="Center" SelectionChanged="cbStore_SelectionChanged"/>
+            </StackPanel>
+            <!-- dataGrid -->
+            <DataGrid x:Name="dgList" Margin="5" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
+                      AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstancesList}" IsReadOnly="True"
+                      MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_ID, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                    <DataGridTemplateColumn MaxWidth="50" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Icon, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Icon}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Binding="{Binding Codename}" Header="Kod" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Code, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Nazwa" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Name, Mode=OneWay, Converter={g:conv_BoolToVisibility}}" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding EAN}" Header="EAN" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_EAN, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                    <DataGridTextColumn Binding="{Binding Measure}" Header="Jm" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Measure, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                    <DataGridTextColumn Binding="{Binding Amount}" Header="Ilość" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Amount, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                    <DataGridTextColumn Binding="{Binding Reserved}" Header="Zarezerwowano" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Reserved, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                </DataGrid.Columns>
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_ID, Mode=TwoWay}"/>
+                        <MenuItem IsCheckable="True" Header="Ikona" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Icon, Mode=TwoWay}"/>
+                        <MenuItem IsCheckable="True" Header="Kod" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Code, Mode=TwoWay}"/>
+                        <MenuItem IsCheckable="True" Header="Nazwa" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Name, Mode=TwoWay}"/>
+                        <MenuItem IsCheckable="True" Header="EAN" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_EAN, Mode=TwoWay}"/>
+                        <MenuItem IsCheckable="True" Header="Jm" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Measure, Mode=TwoWay}"/>
+                        <MenuItem IsCheckable="True" Header="Ilość" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Amount, Mode=TwoWay}"/>
+                        <MenuItem IsCheckable="True" Header="Zarezerwowano" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Reserved, Mode=TwoWay}"/>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Archival}" Value="true">
+                                <Setter Property="Foreground" Value="Gray"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+            </DataGrid>
+        </DockPanel>
     </DockPanel>
 </local:List>

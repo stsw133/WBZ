@@ -18,7 +18,7 @@
         <!-- titleBar -->
         <c:TitleBar DockPanel.Dock="Top"/>
         <!-- main -->
-        <Label DockPanel.Dock="Top" x:Name="txtMessage" Margin="5" VerticalContentAlignment="Center"/>
+        <TextBlock DockPanel.Dock="Top" x:Name="txtMessage" Margin="5" TextAlignment="Center" TextWrapping="Wrap"/>
         <TextBox DockPanel.Dock="Top" x:Name="tbInput" Margin="5" Padding="5" VerticalContentAlignment="Center" Visibility="Collapsed"/>
         <Rectangle DockPanel.Dock="Top" Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
         <DockPanel DockPanel.Dock="Bottom" HorizontalAlignment="Center">

@@ -146,10 +146,16 @@ namespace WBZ.Controls
     }
 
     /// <summary>
-    /// Model
+    /// DataContext
     /// </summary>
     internal class D_AttachmentsTab : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void NotifyPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
         /// Attachments
         private List<M_Attachment> instanceAttachments;
         public List<M_Attachment> InstanceAttachments
@@ -163,15 +169,6 @@ namespace WBZ.Controls
                 instanceAttachments = value;
                 NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
             }
-        }
-
-        /// <summary>
-		/// PropertyChangedEventHandler
-		/// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void NotifyPropertyChanged(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

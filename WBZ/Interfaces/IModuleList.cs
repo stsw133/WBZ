@@ -69,6 +69,12 @@ namespace WBZ.Interfaces
                         + (!Filters.Archival ? $"a.archival=false and " : "")
                         + (W.SelectedStore?.ID > 0 ? $"sa.store={W.SelectedStore.ID} and " : "");
                     break;
+                /// ATTACHMENTS
+                case Global.Module.ATTACHMENTS:
+                    D.FilterSQL = $"LOWER(COALESCE(u.lastname,'') || ' ' || COALESCE(u.forename,'')) like '%{Filters.UserFullname.ToLower()}%' and "
+                        + $"LOWER(COALESCE(a.module,'')) like '%{Filters.Module.ToLower()}%' and "
+                        + $"LOWER(COALESCE(a.name,'')) like '%{Filters.Name.ToLower()}%' and ";
+                    break;
                 /// ATTRIBUTES_CLASSES
                 case Global.Module.ATTRIBUTES_CLASSES:
                     D.FilterSQL = $"LOWER(COALESCE(ac.module,'')) like '%{Filters.Module.ToLower()}%' and "
@@ -127,6 +133,13 @@ namespace WBZ.Interfaces
                         + $"LOWER(COALESCE(f.city,'')) like '%{Filters.City.ToLower()}%' and "
                         + $"LOWER(COALESCE(f.address,'')) like '%{Filters.Address.ToLower()}%' and "
                         + (!Filters.Archival ? $"f.archival=false and " : "");
+                    break;
+                /// LOGS
+                case Global.Module.LOGS:
+                    D.FilterSQL = $"LOWER(COALESCE(u.lastname,'') || ' ' || COALESCE(u.forename,'')) like '%{Filters.UserFullname.ToLower()}%' and "
+                        + $"LOWER(COALESCE(l.module,'')) like '%{Filters.Module.ToLower()}%' and "
+                        + $"LOWER(COALESCE(l.content,'')) like '%{Filters.Content.ToLower()}%' and "
+                        + $"l.datetime between '{Filters.fDateTime:yyyy-MM-dd}' and '{Filters.DateTime:yyyy-MM-dd} 23:59:59' and ";
                     break;
                 /// STORES
                 case Global.Module.STORES:

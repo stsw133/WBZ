@@ -52,7 +52,11 @@ namespace WBZ.Controls
                 tbLink.Text = clipboardText;
             else if (clipboardText.StartsWith("C:"))
                 tbDrive.Text = clipboardText;
-            tbName.Text = Path.GetFileName(clipboardText);
+            try
+            {
+                tbName.Text = Path.GetFileName(clipboardText);
+            }
+            catch { }
         }
 
         /// <summary>

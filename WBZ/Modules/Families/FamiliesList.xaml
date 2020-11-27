@@ -196,83 +196,75 @@
         </Grid>
         <!-- statusPanel -->
         <c:StatusPanel x:Name="StatusPanel" DockPanel.Dock="Bottom" Background="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" HasGroups="True"/>
-        <!-- grid -->
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <!-- groupsView -->
-            <c:GroupsView Grid.Column="0" EditingMode="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=families_save}" Visibility="{Binding EnableGroups, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
-            <GridSplitter BorderThickness="2" Visibility="{Binding EnableGroups, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
-            <!-- dataGrid -->
-            <DataGrid x:Name="dgList" Grid.Column="1" Margin="5" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
+        <!-- groupsView -->
+        <c:GroupsView EditingMode="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=families_save}" Visibility="{Binding EnableGroups, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
+        <!-- dataGrid -->
+        <DataGrid x:Name="dgList" Margin="5" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
                   AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstancesList}" IsReadOnly="True"
                   MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_ID, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                    <DataGridTemplateColumn MaxWidth="50" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Icon, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Image Source="{Binding Icon}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTextColumn Binding="{Binding Declarant}" Header="Zgłaszający" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Declarant, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                    <DataGridTextColumn Binding="{Binding Lastname}" Header="Rodzina" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Lastname, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                    <DataGridTextColumn Binding="{Binding Members}" Header="Ilość osób" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Members, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                    <DataGridTextColumn Binding="{Binding Postcode}" Header="Kod pocztowy" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Postcode, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                    <DataGridTextColumn Binding="{Binding City}" Header="Miejscowość" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_City, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                    <DataGridTextColumn Binding="{Binding Address}" Header="Adres" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Address, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                    <DataGridTextColumn Binding="{Binding DonationWeight}" Header="Przekazano (kg)" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_DonationWeight, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                    <DataGridTextColumn Binding="{Binding Status, Converter={g:conv_BoolToString}, ConverterParameter='Aktywna~Nieaktywna'}" Header="Status" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Status, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
-                        <DataGridTextColumn.CellStyle>
-                            <Style TargetType="DataGridCell">
-                                <Style.Triggers >
-                                    <DataTrigger Binding="{Binding Status}" Value="true">
-                                        <Setter Property="Background" Value="LightGreen"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding Status}" Value="false">
-                                        <Setter Property="Background" Value="IndianRed"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </DataGridTextColumn.CellStyle>
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="TextBlock">
-                                <Setter Property="TextAlignment" Value="Center"/>
-                                <Setter Property="Margin" Value="2,0,2,0"/>
-                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Binding="{Binding DonationLast, StringFormat={}{0:yyyy-MM-dd}}" Header="Ostatnia darowizna" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_DonationLast, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                </DataGrid.Columns>
-                <DataGrid.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_ID, Mode=TwoWay}"/>
-                        <MenuItem IsCheckable="True" Header="Ikona" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Icon, Mode=TwoWay}"/>
-                        <MenuItem IsCheckable="True" Header="Zgłaszający" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Declarant, Mode=TwoWay}"/>
-                        <MenuItem IsCheckable="True" Header="Rodzina" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Lastname, Mode=TwoWay}"/>
-                        <MenuItem IsCheckable="True" Header="Ilość osób" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Members, Mode=TwoWay}"/>
-                        <MenuItem IsCheckable="True" Header="Kod pocztowy" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Postcode, Mode=TwoWay}"/>
-                        <MenuItem IsCheckable="True" Header="Miejscowość" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_City, Mode=TwoWay}"/>
-                        <MenuItem IsCheckable="True" Header="Adres" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Address, Mode=TwoWay}"/>
-                        <MenuItem IsCheckable="True" Header="Przekazano (kg)" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_DonationWeight, Mode=TwoWay}"/>
-                        <MenuItem IsCheckable="True" Header="Status" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Status, Mode=TwoWay}"/>
-                        <MenuItem IsCheckable="True" Header="Ostatnia darowizna" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_DonationLast, Mode=TwoWay}"/>
-                    </ContextMenu>
-                </DataGrid.ContextMenu>
-                <DataGrid.RowStyle>
-                    <Style TargetType="DataGridRow">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Archival}" Value="true">
-                                <Setter Property="Foreground" Value="Gray"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </DataGrid.RowStyle>
-            </DataGrid>
-        </Grid>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_ID, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                <DataGridTemplateColumn MaxWidth="50" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Icon, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Icon}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding Declarant}" Header="Zgłaszający" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Declarant, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                <DataGridTextColumn Binding="{Binding Lastname}" Header="Rodzina" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Lastname, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                <DataGridTextColumn Binding="{Binding Members}" Header="Ilość osób" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Members, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                <DataGridTextColumn Binding="{Binding Postcode}" Header="Kod pocztowy" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Postcode, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                <DataGridTextColumn Binding="{Binding City}" Header="Miejscowość" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_City, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                <DataGridTextColumn Binding="{Binding Address}" Header="Adres" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Address, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                <DataGridTextColumn Binding="{Binding DonationWeight}" Header="Przekazano (kg)" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_DonationWeight, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                <DataGridTextColumn Binding="{Binding Status, Converter={g:conv_BoolToString}, ConverterParameter='Aktywna~Nieaktywna'}" Header="Status" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Status, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Style.Triggers >
+                                <DataTrigger Binding="{Binding Status}" Value="true">
+                                    <Setter Property="Background" Value="LightGreen"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Status}" Value="false">
+                                    <Setter Property="Background" Value="IndianRed"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextAlignment" Value="Center"/>
+                            <Setter Property="Margin" Value="2,0,2,0"/>
+                            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding DonationLast, StringFormat={}{0:yyyy-MM-dd}}" Header="Ostatnia darowizna" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_DonationLast, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_ID, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="Ikona" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Icon, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="Zgłaszający" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Declarant, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="Rodzina" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Lastname, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="Ilość osób" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Members, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="Kod pocztowy" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Postcode, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="Miejscowość" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_City, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="Adres" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Address, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="Przekazano (kg)" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_DonationWeight, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="Status" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Status, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="Ostatnia darowizna" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_DonationLast, Mode=TwoWay}"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Archival}" Value="true">
+                            <Setter Property="Foreground" Value="Gray"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
     </DockPanel>
 </local:List>

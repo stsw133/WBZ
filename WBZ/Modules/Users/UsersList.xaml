@@ -184,46 +184,38 @@
         </Grid>
         <!-- statusPanel -->
         <c:StatusPanel x:Name="StatusPanel" DockPanel.Dock="Bottom" Background="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" HasGroups="True"/>
-        <!-- grid -->
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <!-- groupsView -->
-            <c:GroupsView Grid.Column="0" EditingMode="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=users_save}" Visibility="{Binding EnableGroups, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
-            <GridSplitter BorderThickness="2" Visibility="{Binding EnableGroups, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
-            <!-- dataGrid -->
-            <DataGrid x:Name="dgList" Grid.Column="1" Margin="5" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
+        <!-- groupsView -->
+        <c:GroupsView EditingMode="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=users_save}" Visibility="{Binding EnableGroups, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
+        <!-- dataGrid -->
+        <DataGrid x:Name="dgList" Margin="5" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
                   AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstancesList}" IsReadOnly="True"
                   MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_ID, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                    <DataGridTextColumn Binding="{Binding Fullname}" Header="Nazwisko" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Fullname, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                    <DataGridTextColumn Binding="{Binding Email}" Header="E-mail" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Email, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                    <DataGridTextColumn Binding="{Binding Phone}" Header="Telefon" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Phone, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                </DataGrid.Columns>
-                <DataGrid.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_ID, Mode=TwoWay}"/>
-                        <MenuItem IsCheckable="True" Header="Nazwisko" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Fullname, Mode=TwoWay}"/>
-                        <MenuItem IsCheckable="True" Header="E-mail" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Email, Mode=TwoWay}"/>
-                        <MenuItem IsCheckable="True" Header="Telefon" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Phone, Mode=TwoWay}"/>
-                    </ContextMenu>
-                </DataGrid.ContextMenu>
-                <DataGrid.RowStyle>
-                    <Style TargetType="DataGridRow">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Blocked}" Value="true">
-                                <Setter Property="Foreground" Value="Red"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding Archival}" Value="true">
-                                <Setter Property="Foreground" Value="Gray"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </DataGrid.RowStyle>
-            </DataGrid>
-        </Grid>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_ID, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                <DataGridTextColumn Binding="{Binding Fullname}" Header="Nazwisko" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Fullname, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                <DataGridTextColumn Binding="{Binding Email}" Header="E-mail" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Email, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                <DataGridTextColumn Binding="{Binding Phone}" Header="Telefon" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Phone, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_ID, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="Nazwisko" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Fullname, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="E-mail" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Email, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="Telefon" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Phone, Mode=TwoWay}"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Blocked}" Value="true">
+                            <Setter Property="Foreground" Value="Red"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Archival}" Value="true">
+                            <Setter Property="Foreground" Value="Gray"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
     </DockPanel>
 </local:List>

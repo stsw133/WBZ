@@ -8,7 +8,7 @@
              mc:Ignorable="d">
     <Border BorderBrush="Gray" BorderThickness="0,1,0,0">
         <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
-            <ToggleButton Margin="5" IsChecked="{Binding EnableGroups, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" VerticalAlignment="Center" Visibility="{Binding HasGroups, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Converter={g:conv_BoolToVisibility}}" Unchecked="ToggleButton_Unchecked">
+            <ToggleButton Margin="5" IsChecked="{Binding EnableGroups, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" VerticalAlignment="Center" Visibility="{Binding HasGroups, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Converter={g:conv_BoolToVisibility}}">
                 <Image Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.2}" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_groups.ico"/>
             </ToggleButton>
             <Label Content="Wyświetlono:" Margin="0,0,5,0" VerticalAlignment="Center"/>

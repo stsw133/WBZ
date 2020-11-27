@@ -51,10 +51,16 @@ namespace WBZ.Controls
     }
 
     /// <summary>
-    /// Model
+    /// DataContext
     /// </summary>
     internal class D_MenuPanelColor : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void NotifyPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
         /// R
         private byte r;
         public byte R
@@ -113,15 +119,6 @@ namespace WBZ.Controls
                 rgb = $"#FF{r:X2}{g:X2}{b:X2}";
                 NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
             }
-        }
-
-        /// <summary>
-		/// PropertyChangedEventHandler
-		/// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void NotifyPropertyChanged(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

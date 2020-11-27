@@ -60,12 +60,12 @@
                             <TextBox Text="{Binding InstanceInfo.EAN}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Ilość (kg):" Margin="5" HorizontalContentAlignment="Right" FontWeight="Light" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
-                            <TextBox Text="{Binding InstanceInfo.AmountRaw}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True"/>
+                            <Label Content="Ilość (kg):" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
+                            <TextBox Text="{Binding InstanceInfo.AmountRaw}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True" Background="#EEE"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Zarezerwowano (kg):" Margin="5" HorizontalContentAlignment="Right" FontWeight="Light" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
-                            <TextBox Text="{Binding InstanceInfo.ReservedRaw}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True"/>
+                            <Label Content="Zarezerwowano (kg):" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
+                            <TextBox Text="{Binding InstanceInfo.ReservedRaw}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True" Background="#EEE"/>
                         </DockPanel>
                         <Label DockPanel.Dock="Top" Content="Dodatkowe wagi i zasoby:" Margin="5,5,5,0" HorizontalAlignment="Center"/>
                         <DataGrid x:Name="dgMeasures" DockPanel.Dock="Top" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"

@@ -6,12 +6,15 @@
              xmlns:g="clr-namespace:WBZ.Globals"
              xmlns:p="clr-namespace:WBZ.Properties"
              mc:Ignorable="d">
-    <Border Background="#DDD" BorderBrush="Gray" BorderThickness="1" CornerRadius="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.5}">
-        <Button Background="Transparent" BorderThickness="0" HorizontalContentAlignment="{Binding Alignment, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}">
-            <StackPanel Orientation="Horizontal">
-                <Image Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.3}" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=2}" Source="{Binding Icon, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
-                <Label Content="{Binding Text, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" VerticalAlignment="Center" Visibility="{Binding TextVisibility, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Converter={g:conv_BoolToVisibility}}"/>
-            </StackPanel>
-        </Button>
-    </Border>
+    <Button HorizontalContentAlignment="{Binding Alignment, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}">
+        <Button.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.5}"/>
+            </Style>
+        </Button.Resources>
+        <StackPanel Orientation="Horizontal">
+            <Image Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.3}" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=2}" Source="{Binding Icon, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
+            <Label Content="{Binding Text, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" VerticalAlignment="Center" Visibility="{Binding TextVisibility, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Converter={g:conv_BoolToVisibility}}"/>
+        </StackPanel>
+    </Button>
 </UserControl>

@@ -38,10 +38,5 @@ namespace WBZ.Controls
                   typeof(StatusPanel),
                   new PropertyMetadata(false)
               );
-
-        private void ToggleButton_Unchecked(object sender, RoutedEventArgs e)
-        {
-            ((Parent as DockPanel).Children[4] as Grid).ColumnDefinitions[0].Width = GridLength.Auto;
-        }
     }
 }

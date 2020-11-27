@@ -48,12 +48,12 @@
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <DockPanel Margin="10" IsEnabled="{Binding EditingMode}">
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Moduł:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Light" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="Moduł:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
                             <TextBox Text="{Binding InstanceInfo.TranslatedModule, Mode=OneWay}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True" Background="#EEE"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Nazwa:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
-                            <TextBox Text="{Binding InstanceInfo.Fullpath}" Margin="5,5,0,5" VerticalContentAlignment="Center" IsReadOnly="True" Background="#EEE"/>
+                            <TextBox Text="{Binding InstanceInfo.Path}" Margin="5,5,0,5" VerticalContentAlignment="Center" IsReadOnly="True" Background="#EEE"/>
                             <TextBox Text="{Binding InstanceInfo.Name}" Margin="0,5,5,5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <c:AdditionalsTab/>

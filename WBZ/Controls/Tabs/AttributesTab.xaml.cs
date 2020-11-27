@@ -72,10 +72,16 @@ namespace WBZ.Controls
 	}
 
 	/// <summary>
-	/// Model
+	/// DataContext
 	/// </summary>
 	internal class D_AttributesTab : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void NotifyPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
         /// Attributes
         private List<M_Attribute> instanceAttributes;
         public List<M_Attribute> InstanceAttributes
@@ -89,15 +95,6 @@ namespace WBZ.Controls
                 instanceAttributes = value;
                 NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
             }
-        }
-
-        /// <summary>
-		/// PropertyChangedEventHandler
-		/// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void NotifyPropertyChanged(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

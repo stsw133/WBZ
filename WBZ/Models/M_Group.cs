@@ -8,13 +8,13 @@ namespace WBZ.Models
 		public string Name { get; set; }
 		public int Instance { get; set; }
 		public int Owner { get; set; }
-		public string Fullpath { get; set; }
+		public string Path { get; set; }
 
 		public M_Group()
         {
 			Module = string.Empty;
 			Name = string.Empty;
-			Fullpath = string.Empty;
+			Path = string.Empty;
         }
 
 		public string TranslatedModule
@@ -22,6 +22,13 @@ namespace WBZ.Models
 			get
 			{
 				return Global.TranslateModule(Module);
+			}
+		}
+		public string Fullpath
+		{
+			get
+			{
+				return Path + Name;
 			}
 		}
 	}

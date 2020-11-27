@@ -1,8 +1,9 @@
-﻿<Window x:Class="WBZ.Modules.Logs.LogsList"
+﻿<local:List x:Class="WBZ.Modules.Logs.LogsList"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WBZ.Modules.Logs"
         xmlns:c="clr-namespace:WBZ.Controls"
         xmlns:g="clr-namespace:WBZ.Globals"
         xmlns:p="clr-namespace:WBZ.Properties"
@@ -127,71 +128,63 @@
         </Grid>
         <!-- statusPanel -->
         <c:StatusPanel x:Name="StatusPanel" DockPanel.Dock="Bottom" Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" HasGroups="True"/>
-        <!-- grid -->
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <!-- groupsView -->
-            <c:GroupsView Grid.Column="0" EditingMode="False" Visibility="{Binding EnableGroups, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
-            <GridSplitter BorderThickness="2" Visibility="{Binding EnableGroups, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
-            <!-- dataGrid -->
-            <DataGrid x:Name="dgList" Grid.Column="1" Margin="5" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
+        <!-- groupsView -->
+        <c:GroupsView EditingMode="False" Visibility="{Binding EnableGroups, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
+        <!-- dataGrid -->
+        <DataGrid x:Name="dgList" Margin="5" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
                   AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstancesList}" IsReadOnly="True"
                   MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_ID, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                    <DataGridTextColumn Binding="{Binding UserFullname}" Header="Użytkownik" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_UserFullname, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                    <DataGridTextColumn Binding="{Binding TranslatedModule}" Header="Nazwa modułu" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Module, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                    <DataGridTextColumn Binding="{Binding Obj}" Header="ID obiektu" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Obj, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                    <DataGridTextColumn Binding="{Binding Content}" Header="Treść" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Content, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                    <DataGridTextColumn Binding="{Binding DateTime, StringFormat={}{0:yyyy-MM-dd}}" Header="Data i czas" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_DateTime, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                </DataGrid.Columns>
-                <DataGrid.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_ID, Mode=TwoWay}"/>
-                        <MenuItem IsCheckable="True" Header="Użytkownik" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_UserFullname, Mode=TwoWay}"/>
-                        <MenuItem IsCheckable="True" Header="Nazwa modułu" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Module, Mode=TwoWay}"/>
-                        <MenuItem IsCheckable="True" Header="ID obiektu" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Obj, Mode=TwoWay}"/>
-                        <MenuItem IsCheckable="True" Header="Treść" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Content, Mode=TwoWay}"/>
-                        <MenuItem IsCheckable="True" Header="Data i czas" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_DateTime, Mode=TwoWay}"/>
-                    </ContextMenu>
-                </DataGrid.ContextMenu>
-                <DataGrid.RowStyle>
-                    <Style TargetType="DataGridRow">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Module}" Value="articles">
-                                <Setter Property="Background" Value="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding Module}" Value="attributes_classes">
-                                <Setter Property="Background" Value="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding Module}" Value="companies">
-                                <Setter Property="Background" Value="{Binding config_Companies_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding Module}" Value="distributions">
-                                <Setter Property="Background" Value="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding Module}" Value="documents">
-                                <Setter Property="Background" Value="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding Module}" Value="employees">
-                                <Setter Property="Background" Value="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding Module}" Value="families">
-                                <Setter Property="Background" Value="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding Module}" Value="stores">
-                                <Setter Property="Background" Value="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding Module}" Value="users">
-                                <Setter Property="Background" Value="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </DataGrid.RowStyle>
-            </DataGrid>
-        </Grid>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_ID, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                <DataGridTextColumn Binding="{Binding UserFullname}" Header="Użytkownik" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_UserFullname, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                <DataGridTextColumn Binding="{Binding TranslatedModule}" Header="Nazwa modułu" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Module, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                <DataGridTextColumn Binding="{Binding Obj}" Header="ID obiektu" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Obj, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                <DataGridTextColumn Binding="{Binding Content}" Header="Treść" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Content, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                <DataGridTextColumn Binding="{Binding DateTime, StringFormat={}{0:yyyy-MM-dd}}" Header="Data i czas" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_DateTime, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_ID, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="Użytkownik" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_UserFullname, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="Nazwa modułu" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Module, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="ID obiektu" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Obj, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="Treść" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Content, Mode=TwoWay}"/>
+                    <MenuItem IsCheckable="True" Header="Data i czas" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_DateTime, Mode=TwoWay}"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Module}" Value="articles">
+                            <Setter Property="Background" Value="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Module}" Value="attributes_classes">
+                            <Setter Property="Background" Value="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Module}" Value="companies">
+                            <Setter Property="Background" Value="{Binding config_Companies_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Module}" Value="distributions">
+                            <Setter Property="Background" Value="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Module}" Value="documents">
+                            <Setter Property="Background" Value="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Module}" Value="employees">
+                            <Setter Property="Background" Value="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Module}" Value="families">
+                            <Setter Property="Background" Value="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Module}" Value="stores">
+                            <Setter Property="Background" Value="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Module}" Value="users">
+                            <Setter Property="Background" Value="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
     </DockPanel>
-</Window>
+</local:List>

@@ -51,10 +51,16 @@ namespace WBZ.Controls
 	}
 
 	/// <summary>
-	/// Model
+	/// DataContext
 	/// </summary>
 	public class D_AttributeValueChange : INotifyPropertyChanged
 	{
+		public event PropertyChangedEventHandler PropertyChanged;
+		public void NotifyPropertyChanged(string name)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+		}
+
 		/// Attribute
 		private M_Attribute attributeInfo;
 		public M_Attribute AttributeInfo
@@ -87,13 +93,6 @@ namespace WBZ.Controls
 				else
 					return $"Podgląd wartości atrybutu: {AttributeInfo.Class.Name}";
 			}
-		}
-
-		/// PropertyChanged
-		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged(string name)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
 	}
 }

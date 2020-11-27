@@ -25,7 +25,7 @@ namespace WBZ.Controls
 			InitializeComponent();
 
 			Title = title;
-			txtMessage.Content = message;
+			txtMessage.Text = message;
 			tbInput.Text = value;
 
 			///InputBox

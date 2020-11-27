@@ -9,10 +9,17 @@
              Loaded="UserControl_Loaded">
     <DockPanel Margin="5,5,0,5">
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Visibility="{Binding EditingMode, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Converter={g:conv_BoolToVisibility}}">
-            <c:Button Margin="0,5,5,0" TextVisibility="False" ToolTip="Dodaj grupę" Icon="/Resources/icon32_add.ico" PreviewMouseLeftButtonUp="btnGroupNew_Click"/>
-            <c:Button Margin="0,5,5,0" TextVisibility="False" ToolTip="Duplikuj grupę" Icon="/Resources/icon32_duplicate.ico" PreviewMouseLeftButtonUp="btnGroupDuplicate_Click"/>
-            <c:Button Margin="0,5,5,0" TextVisibility="False" ToolTip="Edytuj grupę" Icon="/Resources/icon32_edit.ico" PreviewMouseLeftButtonUp="btnGroupEdit_Click"/>
-            <c:Button Margin="0,5,5,0" TextVisibility="False" ToolTip="Usuń grupę" Icon="/Resources/icon32_delete.ico" PreviewMouseLeftButtonUp="btnGroupDelete_Click"/>
+            <c:Button Margin="0,5,5,0" TextVisibility="False" IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=groups_save}"
+                      ToolTip="Dodaj grupę" Icon="/Resources/icon32_add.ico" PreviewMouseLeftButtonUp="btnGroupsNew_Click"/>
+            <c:Button Margin="0,5,5,0" TextVisibility="False" IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=groups_preview}" Visibility="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=!groups_save}"
+                      ToolTip="Podgląd grupy" Icon="/Resources/icon32_search.ico" PreviewMouseLeftButtonUp="btnGroupsPreview_Click"/>
+            <c:Button Margin="0,5,5,0" TextVisibility="False" IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=groups_save}" Visibility="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=groups_save}"
+                      ToolTip="Edytuj grupę" Icon="/Resources/icon32_edit.ico" PreviewMouseLeftButtonUp="btnGroupsEdit_Click"/>
+            <c:Button Margin="0,5,5,0" TextVisibility="False" IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=groups_delete}"
+                      ToolTip="Usuń grupę" Icon="/Resources/icon32_delete.ico" PreviewMouseLeftButtonUp="btnGroupsDelete_Click"/>
+            <Rectangle Margin="0,5,5,0" Width="1" Fill="Gray"/>
+            <c:Button Margin="0,5,5,0" TextVisibility="False"
+                      ToolTip="Odśwież grupy" Icon="/Resources/icon32_refresh.ico" PreviewMouseLeftButtonUp="btnGroupsRefresh_Click"/>
         </StackPanel>
         <TreeView x:Name="tvGroups" Padding="0,0,5,0"/>
     </DockPanel>

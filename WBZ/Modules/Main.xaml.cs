@@ -201,7 +201,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnAttachmentsList_Click(object sender, MouseButtonEventArgs e)
 		{
-			new AttachmentsList() { Owner = this }.Show();
+			new AttachmentsList(Commands.Type.LIST) { Owner = this }.Show();
 		}
 		private void btnAttachmentsGallery_Click(object sender, MouseButtonEventArgs e)
 		{
