@@ -86,7 +86,7 @@
                                     <Image Source="/Resources/icon32_books.ico"/>
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem Header="Język">
+                            <MenuItem Header="Język" Visibility="Collapsed">
                                 <MenuItem.Icon>
                                     <Image Source="/Resources/_null.ico"/>
                                 </MenuItem.Icon>

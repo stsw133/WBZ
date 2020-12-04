@@ -7,6 +7,7 @@ using System.Linq;
 using System.Windows;
 using WBZ.Models;
 using WBZ.Globals;
+using WBZ.Controls;
 
 namespace WBZ
 {
@@ -71,7 +72,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.ToString());
+				Error("Błąd podczas zapisywania logu", ex, Global.Module.LOGS, 0, true, false);
 			}
 
 			return result;
@@ -129,7 +130,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.ToString());
+				Error("Błąd podczas pobierania listy atrybutów", ex, Global.Module.ATTRIBUTES, 0);
 			}
 
 			return result;
@@ -1202,25 +1203,41 @@ namespace WBZ
         #endregion
 
         #region basic
-		private static string ShowError(Exception ex)
+		private static void Error(string msg, Exception ex, string module, int instance, bool show = true, bool save = true)
         {
+			var error = new M_Log()
+			{
+				ID = NewInstanceID(Global.Module.LOGS),
+				Instance = instance,
+				Module = module,
+				Type = M_Log.LogType.ERROR,
+				User = Global.User.ID
+			};
 #if DEBUG
-			return ex.ToString();
+			error.Content = ex.ToString();
+			if (show)
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"{msg}:{Environment.NewLine}{ex}").ShowDialog();
+			if (save)
+				SetInstance(Global.Module.LOGS, error, Commands.Type.NEW);
 #else
-			return ex.Message;
+			error.Content = ex.Message;
+			if (show)
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"{msg}:{Environment.NewLine}{ex.Message}").ShowDialog();
+			if (save)
+				SetInstance(Global.Module.LOGS, error, Commands.Type.NEW);
 #endif
 		}
-#endregion
+		#endregion
 
 		#region modules
-        /// <summary>
-        /// Liczy ilość instancji
-        /// </summary>
-        /// <param name="module">Nazwa modułu</param>
-        /// <param name="filter">Filtr SQL</param>
-        internal static int CountInstances(string module, string filter = "true")
+		/// <summary>
+		/// Liczy ilość instancji
+		/// </summary>
+		/// <param name="module">Nazwa modułu</param>
+		/// <param name="filter">Filtr SQL</param>
+		internal static int CountInstances(string module, string filter = "true")
 		{
-			int result = 0;
+			var result = 0;
 			string query;
 
 			try
@@ -1229,7 +1246,7 @@ namespace WBZ
 				{
 					switch (module)
 					{
-						/// articles
+						/// ARTICLES
 						case Global.Module.ARTICLES:
 							query = @"select count(distinct a.id)
 								from wbz.articles a
@@ -1238,33 +1255,33 @@ namespace WBZ
 								left join wbz.groups g
 									on g.instance=a.id";
 							break;
-						/// attachments
+						/// ATTACHMENTS
 						case Global.Module.ATTACHMENTS:
 							query = @"select count(distinct a.id)
 								from wbz.attachments a";
 							break;
-						/// attributes_classes
+						/// ATTRIBUTES_CLASSES
 						case Global.Module.ATTRIBUTES_CLASSES:
 							query = @"select count(distinct ac.id)
 								from wbz.attributes_classes ac
 								left join wbz.groups g
 									on g.instance=ac.id";
 							break;
-						/// companies
+						/// COMPANIES
 						case Global.Module.COMPANIES:
 							query = @"select count(distinct c.id)
 								from wbz.companies c
 								left join wbz.groups g
 									on g.instance=c.id";
 							break;
-						/// distributions
+						/// DISTRIBUTIONS
 						case Global.Module.DISTRIBUTIONS:
 							query = @"select count(distinct d.id)
 								from wbz.distributions d
 								left join wbz.groups g
 									on g.instance=d.id";
 							break;
-						/// documents
+						/// DOCUMENTS
 						case Global.Module.DOCUMENTS:
 							query = @"select count(distinct d.id)
 								from wbz.documents d
@@ -1277,7 +1294,7 @@ namespace WBZ
 								left join wbz.groups g
 									on g.instance=d.id";
 							break;
-						/// employees
+						/// EMPLOYEES
 						case Global.Module.EMPLOYEES:
 							query = @"select count(distinct e.id)
 								from wbz.employees e
@@ -1286,26 +1303,26 @@ namespace WBZ
 								left join wbz.groups g
 									on g.instance=e.id";
 							break;
-						/// groups
+						/// GROUPS
 						case Global.Module.GROUPS:
 							query = @"select count(distinct g.id)
 								from wbz.groups g";
 							break;
-						/// families
+						/// FAMILIES
 						case Global.Module.FAMILIES:
 							query = @"select count(distinct f.id)
 								from wbz.families f
 								left join wbz.groups g
 									on g.instance=f.id";
 							break;
-						/// logs
+						/// LOGS
 						case Global.Module.LOGS:
 							query = @"select count(distinct l.id)
 								from wbz.logs l
 								left join wbz.users u
 									on l.""user"" = u.id";
 							break;
-						/// stores
+						/// STORES
 						case Global.Module.STORES:
 							query = @"select count(distinct s.id)
 								from wbz.stores s
@@ -1314,7 +1331,7 @@ namespace WBZ
 								left join wbz.groups g
 									on g.instance=s.id";
 							break;
-						/// users
+						/// USERS
 						case Global.Module.USERS:
 							query = @"select count(distinct u.id)
 								from wbz.users u
@@ -1334,7 +1351,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.ToString());
+				Error("Błąd podczas pobierania liczby instancji", ex, module, 0);
 			}
 
 			return result;
@@ -1345,23 +1362,28 @@ namespace WBZ
 		/// <param name="module">Nazwa modułu</param>
 		/// <param name="column">Kolumna z której będą wyświetlane nazwy</param>
 		/// <param name="filter">Filtr SQL</param>
-		internal static DataTable ComboInstances(string module, string column, string filter)
+		internal static List<M_ComboValue> ComboInstances(string module, string column, string filter)
 		{
-			DataTable result = new DataTable();
+			var result = new List<M_ComboValue>();
 
 			try
 			{
 				using (var sqlConn = connOpenedWBZ)
 				{
-					using (var sqlDA = new NpgsqlDataAdapter($@"select id, {column} as name from wbz.{module} where {filter} order by {column} asc", sqlConn))
+					using (var sqlDA = new NpgsqlDataAdapter($@"select id, {column} as name
+						from wbz.{module}
+						where {filter}
+						order by {column} asc", sqlConn))
 					{
-						sqlDA.Fill(result);
+						var dt = new DataTable();
+						sqlDA.Fill(dt);
+						result = dt.DataTableToList<M_ComboValue>();
 					}
 				}
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.ToString());
+				Error("Błąd podczas pobierania wartości listy rozwijanej", ex, module, 0);
 			}
 
 			return result;
@@ -1375,7 +1397,7 @@ namespace WBZ
 		/// <param name="page">Strona listy rekordów</param>
 		internal static List<T> ListInstances<T>(string module, string filter, StringCollection sort = null, int page = 0) where T : class, new()
 		{
-			List<T> result = new List<T>();
+			var result = new List<T>();
 			string query;
 
 			try
@@ -1387,7 +1409,7 @@ namespace WBZ
 				{
 					switch (module)
 					{
-						/// articles
+						/// ARTICLES
 						case Global.Module.ARTICLES:
 							query = @"select a.id, a.codename, a.name, a.ean, coalesce(nullif(wbz.ArtDefMeaNam(a.id),''), 'kg') as measure,
 									coalesce(sum(sa.amount), 0) as amountraw, coalesce(sum(sa.amount) / wbz.ArtDefMeaCon(a.id), 0) as amount,
@@ -1399,12 +1421,12 @@ namespace WBZ
 								left join wbz.groups g
 									on g.instance=a.id";
 							break;
-						/// attachments
+						/// ATTACHMENTS
 						case Global.Module.ATTACHMENTS:
 							query = @"select a.id, a.""user"", a.module, a.instance, a.name, null as file
 								from wbz.attachments a";
 							break;
-						/// attributes_classes
+						/// ATTRIBUTES_CLASSES
 						case Global.Module.ATTRIBUTES_CLASSES:
 							query = @"select ac.id as ""ID"", ac.module as ""Module"", ac.name as ""Name"", ac.type as ""Type"", ac.""values"" as ""Values"",
 									ac.archival, ac.comment, ac.icon
@@ -1412,7 +1434,7 @@ namespace WBZ
 								left join wbz.groups g
 									on g.instance=ac.id";
 							break;
-						/// companies
+						/// COMPANIES
 						case Global.Module.COMPANIES:
 							query = @"select c.id, c.codename, c.name, c.branch, c.nip, c.regon, c.postcode, c.city, c.address,
 									c.archival, c.comment, c.icon
@@ -1420,7 +1442,7 @@ namespace WBZ
 								left join wbz.groups g
 									on g.instance=c.id";
 							break;
-						/// distributions
+						/// DISTRIBUTIONS
 						case Global.Module.DISTRIBUTIONS:
 							query = @"select d.id, d.name, d.datereal, d.status,
 									count(distinct dp.family) as familiescount, sum(members) as memberscount,
@@ -1432,7 +1454,7 @@ namespace WBZ
 								left join wbz.groups g
 									on g.instance=d.id";
 							break;
-						/// documents
+						/// DOCUMENTS
 						case Global.Module.DOCUMENTS:
 							query = @"select d.id, d.name, d.store, s.name as storename, d.company, c.name as companyname,
 									d.type, d.dateissue, d.status, count(dp.*) as positionscount, sum(dp.amount) as weight, sum(dp.cost) as cost,
@@ -1447,7 +1469,7 @@ namespace WBZ
 								left join wbz.groups g
 									on g.instance=d.id";
 							break;
-						/// employees
+						/// EMPLOYEES
 						case Global.Module.EMPLOYEES:
 							query = @"select e.id, e.""user"", u.lastname || ' ' || u.forename as username,
 									e.forename, e.lastname, e.department, e.position,
@@ -1459,7 +1481,7 @@ namespace WBZ
 								left join wbz.groups g
 									on g.instance=e.id";
 							break;
-						/// groups
+						/// GROUPS
 						case Global.Module.GROUPS:
 							query = @"select g.id, g.module, g.name, g.instance, g.owner,
 									case when trim(concat(g1.name, '\', g2.name, '\', g3.name, '\', g4.name), '\') = '' then ''
@@ -1471,7 +1493,7 @@ namespace WBZ
 								left join wbz.groups g2 on g2.id=g3.owner
 								left join wbz.groups g1 on g1.id=g2.owner";
 							break;
-						/// families
+						/// FAMILIES
 						case Global.Module.FAMILIES:
 							query = @"select f.id, f.declarant, f.lastname, f.members, f.postcode, f.city, f.address,
 									f.status, f.c_sms, f.c_call, f.c_email, max(d.datereal) as donationlast, sum(dp.amount) as donationweight,
@@ -1484,15 +1506,15 @@ namespace WBZ
 								left join wbz.groups g
 									on g.instance=f.id";
 							break;
-						/// logs
+						/// LOGS
 						case Global.Module.LOGS:
 							query = @"select l.id, l.""user"", u.lastname || ' ' || u.forename as userfullname,
-									l.module, l.instance, l.content, l.datetime
+									l.module, l.instance, l.type, l.content, l.datetime
 								from wbz.logs l
 								left join wbz.users u
 									on l.""user"" = u.id";
 							break;
-						/// stores
+						/// STORES
 						case Global.Module.STORES:
 							query = @"select s.id, s.codename, s.name, s.postcode, s.city, s.address,
 									coalesce(sum(amount),0) as amount, coalesce(sum(reserved),0) as reserved,
@@ -1503,7 +1525,7 @@ namespace WBZ
 								left join wbz.groups g
 									on g.instance=s.id";
 							break;
-						/// users
+						/// USERS
 						case Global.Module.USERS:
 							query = @"select u.id, u.username, '' as newpass, u.forename, u.lastname,
 									u.email, u.phone, u.blocked, u.archival
@@ -1530,7 +1552,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.ToString());
+				Error("Błąd podczas pobierania listy", ex, module, 0);
 			}
 			
 			return result;
@@ -1553,7 +1575,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.ToString());
+				Error("Błąd podczas pobierania nowego identyfikatora", ex, module, 0);
 			}
 
 			return result;
@@ -1571,7 +1593,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.ToString());
+				Error("Błąd podczas pobierania instancji", ex, module, id);
 			}
 			return default(T);
 		}
@@ -1591,11 +1613,11 @@ namespace WBZ
 				{
 					switch (module)
 					{
-						/// distributions
+						/// DISTRIBUTIONS
 						case Global.Module.DISTRIBUTIONS:
 							query = @"";
 							break;
-						/// documents
+						/// DOCUMENTS
 						case Global.Module.DOCUMENTS:
 							query = @"select id, position, article, (select name from wbz.articles where id=dp.article) as articlename,
 									amount / wbz.ArtDefMeaCon(dp.article) as amount, coalesce(nullif(wbz.ArtDefMeaNam(dp.article),''), 'kg') as measure, cost
@@ -1614,7 +1636,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.ToString());
+				Error("Błąd podczas pobierania pozycji instancji", ex, module, id);
 			}
 
 			return result;
@@ -1624,7 +1646,8 @@ namespace WBZ
 		/// </summary>
 		/// <param name="module">Nazwa modułu</param>
 		/// <param name="instance">Instancja</param>
-		internal static bool SetInstance(string module, object instance, Commands.Type mode)
+		/// <param name="mode">Tryb</param>
+		internal static bool SetInstance<T>(string module, T instance, Commands.Type mode)
 		{
 			bool result = false;
 			string query;
@@ -1639,7 +1662,7 @@ namespace WBZ
 
 					switch (module)
 					{
-						/// articles
+						/// ARTICLES
 						case Global.Module.ARTICLES:
 							var article = instance as M_Article;
 							query = @"insert into wbz.articles (id, codename, name, ean, archival, comment, icon)
@@ -1705,11 +1728,11 @@ namespace WBZ
 								}
 							}
 							break;
-						/// attachments
+						/// ATTACHMENTS
 						case Global.Module.ATTACHMENTS:
 							query = @"";
 							break;
-						/// attributes_classes
+						/// ATTRIBUTES_CLASSES
 						case Global.Module.ATTRIBUTES_CLASSES:
 							var attributeClass = instance as M_AttributeClass;
 							query = @"insert into wbz.attributes_classes (module, name, type, ""values"", required, archival, comment, icon)
@@ -1732,7 +1755,7 @@ namespace WBZ
 							}
 							SetLog(Global.User.ID, module, attributeClass.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} klasę atrybutu: {attributeClass.Name}.", sqlTran);
 							break;
-						/// companies
+						/// COMPANIES
 						case Global.Module.COMPANIES:
 							var company = instance as M_Company;
 							query = @"insert into wbz.companies (id, codename, name, branch, nip, regon, postcode, city, address, archival, comment, icon)
@@ -1759,11 +1782,11 @@ namespace WBZ
 							}
 							SetLog(Global.User.ID, module, company.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} firmę: {company.Name}.", sqlTran);
 							break;
-						/// distributions
+						/// DISTRIBUTIONS
 						case Global.Module.DISTRIBUTIONS:
 							query = @"";
 							break;
-						/// documents
+						/// DOCUMENTS
 						case Global.Module.DOCUMENTS:
 							var document = instance as M_Document;
 							using (sqlCmd = new NpgsqlCommand(@"select status from wbz.documents where id=@id", sqlConn, sqlTran))
@@ -1855,7 +1878,7 @@ namespace WBZ
 								}
 							}
 							break;
-						/// employees
+						/// EMPLOYEES
 						case Global.Module.EMPLOYEES:
 							var employee = instance as M_Employee;
 							query = @"insert into wbz.employees (id, ""user"", forename, lastname, department, position,
@@ -1886,7 +1909,7 @@ namespace WBZ
 							}
 							SetLog(Global.User.ID, module, employee.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} pracownika: {employee.Fullname}.", sqlTran);
 							break;
-						/// families
+						/// FAMILIES
 						case Global.Module.FAMILIES:
 							var family = instance as M_Family;
 							query = @"insert into wbz.families (id, declarant, lastname, members, postcode, city, address,
@@ -1917,7 +1940,7 @@ namespace WBZ
 							}
 							SetLog(Global.User.ID, module, family.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} rodzinę: {family.Lastname}.", sqlTran);
 							break;
-						/// groups
+						/// GROUPS
 						case Global.Module.GROUPS:
 							var group = instance as M_Group;
 							query = @"insert into wbz.groups (id, module, name, instance, owner, archival, comment, icon)
@@ -1938,11 +1961,11 @@ namespace WBZ
 							}
 							SetLog(Global.User.ID, module, group.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} grupę: {group.Name}.", sqlTran);
 							break;
-						/// logs
+						/// LOGS
 						case Global.Module.LOGS:
 							query = @"";
 							break;
-						/// stores
+						/// STORES
 						case Global.Module.STORES:
 							var store = instance as M_Store;
 							query = @"insert into wbz.stores (id, codename, name, city, address, postcode, archival, comment, icon)
@@ -1965,7 +1988,7 @@ namespace WBZ
 							}
 							SetLog(Global.User.ID, module, store.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} magazyn: {store.Name}.", sqlTran);
 							break;
-						/// users
+						/// USERS
 						case Global.Module.USERS:
 							var user = instance as M_User;
 							query = @"insert into wbz.users (id, username, password, forename, lastname, email, phone, blocked, archival)
@@ -2016,7 +2039,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.ToString());
+				Error("Błąd podczas zapisywania instancji", ex, module, (instance as M).ID);
 			}
 			
 			return result;
@@ -2038,62 +2061,62 @@ namespace WBZ
 				{
 					switch (module)
 					{
-						/// articles
+						/// ARTICLES
 						case Global.Module.ARTICLES:
 							query = @"delete from wbz.stores_articles where article=@id;
 								delete from wbz.articles where id=@id";
 							SetLog(Global.User.ID, module, id, $"Usunięto towar: {name}", sqlTran);
 							break;
-						/// attachments
+						/// ATTACHMENTS
 						case Global.Module.ATTACHMENTS:
 							query = @"delete from wbz.attachments where id=@id";
-							SetLog(Global.User.ID, module, id, $"Usunięto załącznik: {name}");
+							SetLog(Global.User.ID, module, id, $"Usunięto załącznik: {name}", sqlTran);
 							break;
-						/// attributes_classes
+						/// ATTRIBUTES_CLASSES
 						case Global.Module.ATTRIBUTES_CLASSES:
 							query = @"delete from wbz.attributes where class=@id;
 								delete from wbz.attributes_classes where id=@id";
 							SetLog(Global.User.ID, module, id, $"Usunięto klasę atrybutu: {name}", sqlTran);
 							break;
-						/// companies
+						/// COMPANIES
 						case Global.Module.COMPANIES:
 							query = @"delete from wbz.companies where id=@id";
 							SetLog(Global.User.ID, module, id, $"Usunięto firmę: {name}", sqlTran);
 							break;
-						/// distributions
+						/// DISTRIBUTIONS
 						case Global.Module.DISTRIBUTIONS:
 							query = @"";
 							break;
-						/// documents
+						/// DOCUMENTS
 						case Global.Module.DOCUMENTS:
 							query = @"";
 							break;
-						/// employees
+						/// EMPLOYEES
 						case Global.Module.EMPLOYEES:
 							query = @"delete from wbz.employees where id=@id";
 							SetLog(Global.User.ID, module, id, $"Usunięto pracownika: {name}", sqlTran);
 							break;
-						/// families
+						/// FAMILIES
 						case Global.Module.FAMILIES:
 							query = @"delete from wbz.families where id=@id";
 							SetLog(Global.User.ID, module, id, $"Usunięto rodzinę: {name}", sqlTran);
 							break;
-						/// groups
+						/// GROUPS
 						case Global.Module.GROUPS:
 							query = @"delete from wbz.groups where id=@id";
 							SetLog(Global.User.ID, module, id, $"Usunięto grupę: {name}", sqlTran);
 							break;
-						/// logs
+						/// LOGS
 						case Global.Module.LOGS:
 							query = @"delete from wbz.logs where id=@id";
 							break;
-						/// stores
+						/// STORES
 						case Global.Module.STORES:
 							query = @"delete from wbz.stores_articles where store=@id;
 								delete from wbz.stores where id=@id";
 							SetLog(Global.User.ID, module, id, $"Usunięto magazyn: {name}", sqlTran);
 							break;
-						/// users
+						/// USERS
 						case Global.Module.USERS:
 							query = @"delete from wbz.users where id=@id";
 							SetLog(Global.User.ID, module, id, $"Usunięto użytkownika: {name}", sqlTran);
@@ -2114,7 +2137,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.ToString());
+				Error("Błąd podczas usuwania instancji", ex, module, id);
 			}
 			
 			return result;

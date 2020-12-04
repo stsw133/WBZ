@@ -5,11 +5,18 @@ namespace WBZ.Models
 {
 	public class M_Log
 	{
+		public enum LogType
+        {
+			LOG,
+			ERROR
+        }
+
 		public int ID { get; set; }
 		public int User { get; set; }
 		public string UserFullname { get; set; }
 		public string Module { get; set; }
 		public int Instance { get; set; }
+		public LogType Type { get; set; }
 		public string Content { get; set; }
 		public DateTime fDateTime { get; set; }
 		public DateTime DateTime { get; set; }
