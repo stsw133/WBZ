@@ -8,6 +8,7 @@ using System.Windows;
 using WBZ.Models;
 using WBZ.Globals;
 using WBZ.Controls;
+using System.Threading.Tasks;
 
 namespace WBZ
 {
@@ -58,9 +59,9 @@ namespace WBZ
 			try
 			{
 				using (var sqlConn = connOpenedWBZ)
+				using (var sqlCmd = new NpgsqlCommand(@"insert into wbz.logs (""user"", module, instance, content)
+					values (@user, @module, @instance, @content)", sqlConn, sqlTran))
 				{
-					var sqlCmd = new NpgsqlCommand(@"insert into wbz.logs (""user"", module, instance, content)
-						values (@user, @module, @instance, @content)", sqlConn, sqlTran);
 					sqlCmd.Parameters.AddWithValue("user", user);
 					sqlCmd.Parameters.AddWithValue("module", module);
 					sqlCmd.Parameters.AddWithValue("instance", instance);
@@ -1200,9 +1201,10 @@ namespace WBZ
 
 			return result;
 		}
-        #endregion
+		#endregion
 
-        #region basic
+		#region basic
+		[STAThread]
 		private static void Error(string msg, Exception ex, string module, int instance, bool show = true, bool save = true)
         {
 			var error = new M_Log()
@@ -1210,22 +1212,24 @@ namespace WBZ
 				ID = NewInstanceID(Global.Module.LOGS),
 				Instance = instance,
 				Module = module,
-				Type = M_Log.LogType.ERROR,
+				Group = 2,
 				User = Global.User.ID
 			};
+			var d = Application.Current.Dispatcher;
+
+			d.BeginInvoke((Action)OpenErrorWindow);
+			void OpenErrorWindow()
+			{
 #if DEBUG
-			error.Content = ex.ToString();
-			if (show)
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"{msg}:{Environment.NewLine}{ex}").ShowDialog();
-			if (save)
-				SetInstance(Global.Module.LOGS, error, Commands.Type.NEW);
+				error.Content = ex.ToString();
 #else
-			error.Content = ex.Message;
-			if (show)
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"{msg}:{Environment.NewLine}{ex.Message}").ShowDialog();
-			if (save)
-				SetInstance(Global.Module.LOGS, error, Commands.Type.NEW);
+				error.Content = ex.Message;
 #endif
+				if (show)
+					new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"{msg}:{Environment.NewLine}{error.Content}").ShowDialog();
+				if (save)
+					SetInstance(Global.Module.LOGS, error, Commands.Type.NEW);
+			}
 		}
 		#endregion
 
@@ -1509,7 +1513,7 @@ namespace WBZ
 						/// LOGS
 						case Global.Module.LOGS:
 							query = @"select l.id, l.""user"", u.lastname || ' ' || u.forename as userfullname,
-									l.module, l.instance, l.type, l.content, l.datetime
+									l.module, l.instance, l.type as group, l.content, l.datetime
 								from wbz.logs l
 								left join wbz.users u
 									on l.""user"" = u.id";
@@ -1963,7 +1967,20 @@ namespace WBZ
 							break;
 						/// LOGS
 						case Global.Module.LOGS:
-							query = @"";
+							var log = instance as M_Log;
+							query = @"insert into wbz.logs (""user"", module, instance, type, content)
+								values (@user, @module, @instance, @type, @content)
+								on conflict(id) do
+								update set ""user""=@user, module=@module, instance=@instance, type=@type, content=@content";
+							using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
+							{
+								sqlCmd.Parameters.AddWithValue("user", log.User);
+								sqlCmd.Parameters.AddWithValue("module", log.Module);
+								sqlCmd.Parameters.AddWithValue("instance", log.Instance);
+								sqlCmd.Parameters.AddWithValue("type", log.Group);
+								sqlCmd.Parameters.AddWithValue("content", log.Content);
+								sqlCmd.ExecuteNonQuery();
+							}
 							break;
 						/// STORES
 						case Global.Module.STORES:

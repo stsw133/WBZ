@@ -184,7 +184,7 @@
             <!-- storesList -->
             <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
                 <Label Content="Magazyn:" Margin="5,0,0,5"/>
-                <ComboBox x:Name="cbStore" Margin="5,0,5,5" ItemsSource="{Binding StoresList.DefaultView}" DisplayMemberPath="name" SelectedValuePath="id" VerticalContentAlignment="Center" SelectionChanged="cbStore_SelectionChanged"/>
+                <ComboBox x:Name="cbStore" Margin="5,0,5,5" ItemsSource="{Binding StoresList}" DisplayMemberPath="Name" SelectedValuePath="ID" VerticalContentAlignment="Center" SelectionChanged="cbStore_SelectionChanged"/>
             </StackPanel>
             <!-- dataGrid -->
             <DataGrid x:Name="dgList" Margin="5" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"

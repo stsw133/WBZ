@@ -30,6 +30,20 @@ namespace WBZ.Modules.Logs
 		}
 
 		/// <summary>
+		/// Update filters
+		/// </summary>
+		public void UpdateFilters()
+		{
+			D.FilterSQL = $"LOWER(COALESCE(u.lastname,'') || ' ' || COALESCE(u.forename,'')) like '%{D.Filters.UserFullname.ToLower()}%' and "
+						+ $"LOWER(COALESCE(l.module,'')) like '%{D.Filters.Module.ToLower()}%' and "
+						+ $"LOWER(COALESCE(l.content,'')) like '%{D.Filters.Content.ToLower()}%' and "
+						+ $"l.datetime between '{D.Filters.fDateTime:yyyy-MM-dd}' and '{D.Filters.DateTime:yyyy-MM-dd} 23:59:59' and "
+						+ $"l.type={D.Filters.Group} and ";
+
+			D.FilterSQL = D.FilterSQL.TrimEnd(" and ".ToCharArray());
+		}
+
+		/// <summary>
 		/// Preview
 		/// </summary>
 		private void btnPreview_Click(object sender, MouseButtonEventArgs e)
