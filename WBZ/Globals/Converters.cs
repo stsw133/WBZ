@@ -88,6 +88,46 @@ namespace WBZ.Globals
 	}
 
 	/// <summary>
+	/// Compare string to string : parameter must be string
+	/// </summary>
+	public class conv_CompareStrings : MarkupExtension, IValueConverter
+	{
+		private static conv_CompareStrings _conv = null;
+		public override object ProvideValue(IServiceProvider serviceProvider)
+		{
+			if (_conv == null)
+				_conv = new conv_CompareStrings();
+			return _conv;
+		}
+
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			if (value.ToString() == parameter.ToString())
+			{
+				if (targetType.Name == "Visibility")
+					return Visibility.Visible;
+				else
+					return true;
+			}
+			else
+			{
+				if (targetType.Name == "Visibility")
+					return Visibility.Collapsed;
+				else
+					return false;
+			}
+		}
+
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			if (targetType.Name == "Visibility")
+				return Visibility.Collapsed;
+			else
+				return false;
+		}
+	}
+
+	/// <summary>
 	/// Convert list.contains(string) : parameter must be string
 	/// If true then returns true or Visibility.Visible else returns false or Visibility.Collapsed
 	/// </summary>
@@ -149,36 +189,6 @@ namespace WBZ.Globals
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			return System.Convert.ToDouble(value, CultureInfo.InvariantCulture) / System.Convert.ToDouble(parameter, CultureInfo.InvariantCulture);
-		}
-	}
-
-	/// <summary>
-	/// Convert string -> Visibility : parameter must be string
-	/// </summary>
-	public class conv_StringToVisibility : MarkupExtension, IValueConverter
-	{
-		private static conv_StringToVisibility _conv = null;
-		public override object ProvideValue(IServiceProvider serviceProvider)
-		{
-			if (_conv == null)
-				_conv = new conv_StringToVisibility();
-			return _conv;
-		}
-
-		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-		{
-			if (value.ToString() == "True")
-				return Visibility.Visible;
-			else
-				return Visibility.Collapsed;
-		}
-
-		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-		{
-			if (value.ToString() != "True")
-				return Visibility.Visible;
-			else
-				return Visibility.Collapsed;
 		}
 	}
 }
