@@ -21,8 +21,20 @@ namespace WBZ.Modules.AttributesClasses
 			D.Mode = mode;
 		}
 
-		/// Selected
-		public MODULE_MODEL Selected;
+		/// <summary>
+		/// Update filters
+		/// </summary>
+		public void UpdateFilters()
+		{
+			D.FilterSQL = $"LOWER(COALESCE(ac.module,'')) like '%{D.Filters.Module.ToLower()}%' and "
+						+ $"LOWER(COALESCE(ac.name,'')) like '%{D.Filters.Name.ToLower()}%' and "
+						+ $"LOWER(COALESCE(ac.type,'')) like '%{D.Filters.Type.ToLower()}%' and "
+						+ $"LOWER(COALESCE(ac.values,'')) like '%{D.Filters.Values.ToLower()}%' and "
+						+ (!D.Filters.Archival ? $"ac.archival=false and " : "")
+						+ (D.Filters.Group > 0 ? $"g.owner={D.Filters.Group} and " : "");
+
+			D.FilterSQL = D.FilterSQL.TrimEnd(" and ".ToCharArray());
+		}
 	}
 
 	public class List : ModuleList<MODULE_MODEL> { }

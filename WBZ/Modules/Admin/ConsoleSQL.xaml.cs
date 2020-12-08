@@ -29,13 +29,11 @@ namespace WBZ.Modules.Admin
 				using (var sqlConn = new NpgsqlConnection(SQL.connWBZ))
 				{
 					sqlConn.Open();
-					using (var sqlTran = sqlConn.BeginTransaction())
+
+					var sqlCmd = new NpgsqlCommand(tbConsole.Text, sqlConn);
+					using (var sqlDA = new NpgsqlDataAdapter(sqlCmd))
 					{
-						var sqlCmd = new NpgsqlCommand(tbConsole.Text, sqlConn);
-						using (var sqlDA = new NpgsqlDataAdapter(sqlCmd))
-						{
-							sqlDA.Fill(dt);
-						}
+						sqlDA.Fill(dt);
 					}
 				}
 			}

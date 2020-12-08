@@ -121,6 +121,7 @@ alter table wbz.companies add column if not exists icon bytea;
 alter table wbz.families add column if not exists icon bytea;
 alter table wbz.documents add column if not exists icon bytea;
 alter table wbz.distributions add column if not exists icon bytea;
+alter table wbz.logs add column if not exists type smallint not null default 1;
 
 alter table wbz.users_permissions drop column if exists id;
 drop sequence if exists wbz.users_permissions_id_seq;

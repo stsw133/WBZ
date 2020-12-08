@@ -94,6 +94,7 @@ CREATE TABLE wbz.logs
     "user" integer NOT NULL,
     module character varying(50) COLLATE pg_catalog."default" NOT NULL,
     instance integer NOT NULL,
+    type smallint NOT NULL DEFAULT 1,
     content text COLLATE pg_catalog."default" NOT NULL,
     datetime timestamp(6) with time zone NOT NULL DEFAULT now(),
     CONSTRAINT logs_pkey PRIMARY KEY (id),
@@ -136,6 +137,10 @@ CREATE TABLE wbz.groups
     CONSTRAINT groups_pkey PRIMARY KEY (id)
 )
 TABLESPACE pg_default;
+
+INSERT INTO wbz.groups (id, module, name, instance, owner, archival, comment, icon) VALUES
+    (1, 'logs', 'Logi', null, 0, false, '', null),
+    (2, 'logs', 'B³êdy', null, 0, false, '', null);
 
 -- Table: wbz.attributes_classes
 CREATE TABLE wbz.attributes_classes
