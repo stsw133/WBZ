@@ -16,7 +16,7 @@ namespace WBZ.Modules.Documents
 			InitializeComponent();
 			DataContext = D;
 			Init();
-			btnRefresh_Click(null, null);
+			cmdRefresh_Executed(null, null);
 
 			D.Mode = mode;
 		}

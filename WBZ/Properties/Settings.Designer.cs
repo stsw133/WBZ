@@ -12,7 +12,7 @@ namespace WBZ.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.7.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -111,7 +111,7 @@ namespace WBZ.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
             "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>900</string>\r\n  <string>600</string>\r\n</ArrayOfString>")]
+            "tring>975</string>\r\n  <string>650</string>\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection config_UsersList_WindowSize {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["config_UsersList_WindowSize"]));
@@ -139,7 +139,7 @@ namespace WBZ.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
             "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>900</string>\r\n  <string>600</string>\r\n</ArrayOfString>")]
+            "tring>975</string>\r\n  <string>650</string>\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection config_AttributesClassesList_WindowSize {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["config_AttributesClassesList_WindowSize"]));
@@ -167,7 +167,7 @@ namespace WBZ.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
             "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>900</string>\r\n  <string>600</string>\r\n</ArrayOfString>")]
+            "tring>975</string>\r\n  <string>650</string>\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection config_LogsList_WindowSize {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["config_LogsList_WindowSize"]));
@@ -219,7 +219,7 @@ namespace WBZ.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
             "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>900</string>\r\n  <string>600</string>\r\n</ArrayOfString>")]
+            "tring>975</string>\r\n  <string>650</string>\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection config_DocumentsList_WindowSize {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["config_DocumentsList_WindowSize"]));
@@ -341,7 +341,7 @@ namespace WBZ.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
             "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>900</string>\r\n  <string>600</string>\r\n</ArrayOfString>")]
+            "tring>975</string>\r\n  <string>650</string>\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection config_StoresList_WindowSize {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["config_StoresList_WindowSize"]));
@@ -491,7 +491,7 @@ namespace WBZ.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
             "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>900</string>\r\n  <string>600</string>\r\n</ArrayOfString>")]
+            "tring>975</string>\r\n  <string>650</string>\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection config_ArticlesList_WindowSize {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["config_ArticlesList_WindowSize"]));
@@ -615,7 +615,7 @@ namespace WBZ.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
             "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>900</string>\r\n  <string>600</string>\r\n</ArrayOfString>")]
+            "tring>975</string>\r\n  <string>650</string>\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection config_CompaniesList_WindowSize {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["config_CompaniesList_WindowSize"]));
@@ -737,7 +737,7 @@ namespace WBZ.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
             "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>900</string>\r\n  <string>600</string>\r\n</ArrayOfString>")]
+            "tring>975</string>\r\n  <string>650</string>\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection config_FamiliesList_WindowSize {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["config_FamiliesList_WindowSize"]));
@@ -1069,7 +1069,7 @@ namespace WBZ.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
             "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>900</string>\r\n  <string>600</string>\r\n</ArrayOfString>")]
+            "tring>975</string>\r\n  <string>650</string>\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection config_DistributionsList_WindowSize {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["config_DistributionsList_WindowSize"]));
@@ -1335,7 +1335,7 @@ namespace WBZ.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
             "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>900</string>\r\n  <string>600</string>\r\n</ArrayOfString>")]
+            "tring>975</string>\r\n  <string>650</string>\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection config_EmployeesList_WindowSize {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["config_EmployeesList_WindowSize"]));
@@ -1471,7 +1471,7 @@ namespace WBZ.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
             "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>900</string>\r\n  <string>600</string>\r\n</ArrayOfString>")]
+            "tring>975</string>\r\n  <string>650</string>\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection config_GroupsList_WindowSize {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["config_GroupsList_WindowSize"]));
@@ -1895,7 +1895,7 @@ namespace WBZ.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
             "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>900</string>\r\n  <string>600</string>\r\n</ArrayOfString>")]
+            "tring>975</string>\r\n  <string>650</string>\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection config_AttachmentsList_WindowSize {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["config_AttachmentsList_WindowSize"]));

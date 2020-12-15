@@ -22,7 +22,7 @@
             <Border DockPanel.Dock="Top" Margin="5,5,5,0" BorderBrush="#7E80" BorderThickness="2">
                 <DockPanel>
                     <Border BorderBrush="#7E80" BorderThickness="0,0,2,0">
-                        <Image Margin="10" Source="/Resources/logo128.ico" Height="128"/>
+                        <Image Margin="10" Source="/Resources/icon64.ico" Height="128"/>
                     </Border>
                     <StackPanel VerticalAlignment="Center">
                         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -36,7 +36,7 @@
             <Border DockPanel.Dock="Top" Margin="5,5,5,0" BorderBrush="#7047" BorderThickness="2">
                 <DockPanel>
                     <Border DockPanel.Dock="Right" BorderBrush="#7047" BorderThickness="2,0,0,0">
-                        <Image Margin="10" Source="/Resources/logo128_pwsz.ico" Height="128"/>
+                        <Image Margin="10" Source="/Resources/icon64.ico" Height="128"/>
                     </Border>
                     <StackPanel VerticalAlignment="Center">
                         <TextBlock DockPanel.Dock="Top" Text="{Binding AboutCreators}" Padding="5" TextAlignment="Center" TextWrapping="Wrap" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=25}"/>

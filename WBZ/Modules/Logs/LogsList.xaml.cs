@@ -21,7 +21,7 @@ namespace WBZ.Modules.Logs
 			InitializeComponent();
 			DataContext = D;
 			Init();
-			btnRefresh_Click(null, null);
+			cmdRefresh_Executed(null, null);
 
 			if (M_Config.Logs_Enabled == "1")
 				chckEnabled.IsChecked = true;

@@ -26,8 +26,8 @@
     <Setting Name="config_UsersList_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;900&lt;/string&gt;
-  &lt;string&gt;600&lt;/string&gt;
+  &lt;string&gt;975&lt;/string&gt;
+  &lt;string&gt;650&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="config_UsersNew_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
@@ -40,8 +40,8 @@
     <Setting Name="config_AttributesClassesList_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;900&lt;/string&gt;
-  &lt;string&gt;600&lt;/string&gt;
+  &lt;string&gt;975&lt;/string&gt;
+  &lt;string&gt;650&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="config_AttributesClassesNew_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
@@ -54,8 +54,8 @@
     <Setting Name="config_LogsList_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;900&lt;/string&gt;
-  &lt;string&gt;600&lt;/string&gt;
+  &lt;string&gt;975&lt;/string&gt;
+  &lt;string&gt;650&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="config_Admin_PanelColor" Type="System.String" Scope="User">
@@ -74,8 +74,8 @@
     <Setting Name="config_DocumentsList_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;900&lt;/string&gt;
-  &lt;string&gt;600&lt;/string&gt;
+  &lt;string&gt;975&lt;/string&gt;
+  &lt;string&gt;650&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="columns_DocumentsList_ID" Type="System.Boolean" Scope="User">
@@ -108,8 +108,8 @@
     <Setting Name="config_StoresList_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;900&lt;/string&gt;
-  &lt;string&gt;600&lt;/string&gt;
+  &lt;string&gt;975&lt;/string&gt;
+  &lt;string&gt;650&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="config_StoresNew_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
@@ -156,8 +156,8 @@
     <Setting Name="config_ArticlesList_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;900&lt;/string&gt;
-  &lt;string&gt;600&lt;/string&gt;
+  &lt;string&gt;975&lt;/string&gt;
+  &lt;string&gt;650&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="columns_ArticlesList_ID" Type="System.Boolean" Scope="User">
@@ -194,8 +194,8 @@
     <Setting Name="config_CompaniesList_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;900&lt;/string&gt;
-  &lt;string&gt;600&lt;/string&gt;
+  &lt;string&gt;975&lt;/string&gt;
+  &lt;string&gt;650&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="columns_CompaniesList_ID" Type="System.Boolean" Scope="User">
@@ -228,8 +228,8 @@
     <Setting Name="config_FamiliesList_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;900&lt;/string&gt;
-  &lt;string&gt;600&lt;/string&gt;
+  &lt;string&gt;975&lt;/string&gt;
+  &lt;string&gt;650&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="config_Families_PanelColor" Type="System.String" Scope="User">
@@ -325,8 +325,8 @@
     <Setting Name="config_DistributionsList_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;900&lt;/string&gt;
-  &lt;string&gt;600&lt;/string&gt;
+  &lt;string&gt;975&lt;/string&gt;
+  &lt;string&gt;650&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="config_Distributions_PanelColor" Type="System.String" Scope="User">
@@ -395,8 +395,8 @@
     <Setting Name="config_EmployeesList_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;900&lt;/string&gt;
-  &lt;string&gt;600&lt;/string&gt;
+  &lt;string&gt;975&lt;/string&gt;
+  &lt;string&gt;650&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="columns_EmployeesList_ID" Type="System.Boolean" Scope="User">
@@ -436,8 +436,8 @@
     <Setting Name="config_GroupsList_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;900&lt;/string&gt;
-  &lt;string&gt;600&lt;/string&gt;
+  &lt;string&gt;975&lt;/string&gt;
+  &lt;string&gt;650&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="sorting_EmployeesList" Type="System.Collections.Specialized.StringCollection" Scope="User">
@@ -612,8 +612,8 @@
     <Setting Name="config_AttachmentsList_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;900&lt;/string&gt;
-  &lt;string&gt;600&lt;/string&gt;
+  &lt;string&gt;975&lt;/string&gt;
+  &lt;string&gt;650&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="sorting_AttachmentsList" Type="System.Collections.Specialized.StringCollection" Scope="User">

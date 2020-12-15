@@ -3,18 +3,18 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Reflection;
 using WBZ.Globals;
-using MODULE_CLASS = WBZ.Models.M_Attachment;
+using MODULE_MODEL = WBZ.Models.M_Attachment;
 
 namespace WBZ.Modules.Attachments
 {
     class D_AttachmentsGallery : INotifyPropertyChanged
     {
-		public readonly string MODULE_NAME = Global.Module.ATTACHMENTS;
+		public readonly string MODULE_TYPE = Global.Module.ATTACHMENTS;
 		public StringCollection SORTING = Properties.Settings.Default.sorting_AttachmentsGallery;
 
 		/// Instances list
-		private List<MODULE_CLASS> instancesList;
-		public List<MODULE_CLASS> InstancesList
+		private List<MODULE_MODEL> instancesList;
+		public List<MODULE_MODEL> InstancesList
 		{
 			get
 			{
@@ -31,8 +31,8 @@ namespace WBZ.Modules.Attachments
 		/// SQL filter
 		public string FilterSQL { get; set; }
 		/// Filter instance
-		private MODULE_CLASS filters = new MODULE_CLASS();
-		public MODULE_CLASS Filters
+		private MODULE_MODEL filters = new MODULE_MODEL();
+		public MODULE_MODEL Filters
 		{
 			get
 			{

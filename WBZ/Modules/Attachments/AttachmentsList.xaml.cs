@@ -18,7 +18,7 @@ namespace WBZ.Modules.Attachments
             InitializeComponent();
             DataContext = D;
 			Init();
-            btnRefresh_Click(null, null);
+			cmdRefresh_Executed(null, null);
 
 			D.Mode = mode;
         }

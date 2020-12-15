@@ -8,13 +8,25 @@
         xmlns:g="clr-namespace:WBZ.Globals"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
-        Title="Lista klas atrybutów" MinHeight="240" MinWidth="360" Height="{Binding config_AttributesClassesList_WindowSize[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_AttributesClassesList_WindowSize[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+        Title="Lista klas atrybutów" MinHeight="260" MinWidth="390" Height="{Binding config_AttributesClassesList_WindowSize[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_AttributesClassesList_WindowSize[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
             BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
-            Icon="/Resources/icon32_attributes.ico" Loaded="Window_Loaded" Closed="Window_Closed">
+            Icon="/Resources/icon32_attributes.ico" Loaded="Window_Loaded" Closed="Window_Closed"
+            FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
+    <Window.CommandBindings>
+        <CommandBinding Command="g:Commands.Clear" Executed="cmdClear_Executed"/>
+        <CommandBinding Command="g:Commands.Close" Executed="cmdClose_Executed"/>
+        <CommandBinding Command="g:Commands.Delete" Executed="cmdDelete_Executed" CanExecute="cmdDelete_CanExecute"/>
+        <CommandBinding Command="g:Commands.Duplicate" Executed="cmdDuplicate_Executed" CanExecute="cmdDuplicate_CanExecute"/>
+        <CommandBinding Command="g:Commands.Edit" Executed="cmdEdit_Executed" CanExecute="cmdEdit_CanExecute"/>
+        <CommandBinding Command="g:Commands.Help" Executed="cmdHelp_Executed"/>
+        <CommandBinding Command="g:Commands.New" Executed="cmdNew_Executed" CanExecute="cmdNew_CanExecute"/>
+        <CommandBinding Command="g:Commands.Preview" Executed="cmdPreview_Executed" CanExecute="cmdPreview_CanExecute"/>
+        <CommandBinding Command="g:Commands.Refresh" Executed="cmdRefresh_Executed"/>
+    </Window.CommandBindings>
     <DockPanel>
         <!-- titleBar -->
         <c:TitleBar DockPanel.Dock="Top" SubIcon="/Resources/icon32_list.ico"/>
@@ -22,23 +34,20 @@
         <Border DockPanel.Dock="Right" Background="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="1,0,0,0" Visibility="{Binding SelectingMode, Converter={g:conv_BoolInverted}}">
             <DockPanel>
                 <ToggleButton x:Name="btnToggle" BorderThickness="0" Width="5" IsChecked="True"/>
-                <c:Button DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=attributes_classes_preview}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
-                                Text="Podgląd" Icon="/Resources/icon32_search.ico" PreviewMouseLeftButtonUp="btnPreview_Click"/>
-                <c:Button DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=attributes_classes_save}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
-                                Text="Dodaj" Icon="/Resources/icon32_add.ico" PreviewMouseLeftButtonUp="btnNew_Click"/>
-                <c:Button DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=attributes_classes_save}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
-                                Text="Duplikuj" Icon="/Resources/icon32_duplicate.ico" PreviewMouseLeftButtonUp="btnDuplicate_Click"/>
-                <c:Button DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=attributes_classes_save}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
-                                Text="Edytuj" Icon="/Resources/icon32_edit.ico" PreviewMouseLeftButtonUp="btnEdit_Click"/>
-                <c:Button DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=attributes_classes_delete}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
-                                Text="Usuń" Icon="/Resources/icon32_delete.ico" PreviewMouseLeftButtonUp="btnDelete_Click"/>
-                <Separator DockPanel.Dock="Top" Margin="0,5,0,0" VerticalAlignment="Top" Height="5"/>
-                <c:Button DockPanel.Dock="Bottom" Margin="5,0,5,5" IsEnabled="True" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
-                                Text="Zamknij okno" Icon="/Resources/icon32_close.ico" PreviewMouseLeftButtonUp="btnClose_Click"/>
-                <Separator DockPanel.Dock="Bottom" Margin="0,0,0,5" VerticalAlignment="Bottom" Height="5"/>
-                <c:Button DockPanel.Dock="Bottom" Margin="5,0,5,5" IsEnabled="True" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
-                                Text="Odśwież" Icon="/Resources/icon32_refresh.ico" PreviewMouseLeftButtonUp="btnRefresh_Click"/>
-                <Separator DockPanel.Dock="Bottom" Margin="0,0,0,5" VerticalAlignment="Bottom" Height="5"/>
+                <StackPanel DockPanel.Dock="Top">
+                    <c:Button Text="Podgląd" Margin="5,5,5,0" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_search.ico" Command="g:Commands.Preview"/>
+                    <c:Button Text="Dodaj" Margin="5,5,5,0" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_add.ico" Command="g:Commands.New"/>
+                    <c:Button Text="Duplikuj" Margin="5,5,5,0" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_duplicate.ico" Command="g:Commands.Duplicate"/>
+                    <c:Button Text="Edytuj" Margin="5,5,5,0" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_edit.ico" Command="g:Commands.Edit"/>
+                    <c:Button Text="Usuń" Margin="5,5,5,0" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_delete.ico" Command="g:Commands.Delete"/>
+                    <Separator Height="5" Margin="0,5,0,0"/>
+                </StackPanel>
+                <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
+                    <Separator Height="5" Margin="0,0,0,5"/>
+                    <c:Button Text="Odśwież" Margin="5,0,5,5" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_refresh.ico" Command="g:Commands.Refresh"/>
+                    <Separator Height="5" Margin="0,0,0,5"/>
+                    <c:Button Text="Zamknij okno" Margin="5,0,5,5" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_close.ico" Command="g:Commands.Close"/>
+                </StackPanel>
             </DockPanel>
             <Border.ContextMenu>
                 <ContextMenu>
@@ -170,9 +179,9 @@
             </Expander>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
                 <c:Button Margin="0,4,4,4" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Visibility="{Binding IsExpanded, ElementName=filtersExpander, Converter={g:conv_BoolToVisibility}}"
-                                Text="Akceptuj" Icon="/Resources/icon32_accept.ico" PreviewMouseLeftButtonUp="btnRefresh_Click"/>
+                          Text="Akceptuj" Icon="/Resources/icon32_accept.ico" Command="g:Commands.Refresh"/>
                 <c:Button Margin="0,4,4,4" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Visibility="{Binding IsExpanded, ElementName=filtersExpander, Converter={g:conv_BoolToVisibility}}"
-                                Text="Czyść" Icon="/Resources/icon32_clear.ico" PreviewMouseLeftButtonUp="btnFiltersClear_Click"/>
+                          Text="Czyść" Icon="/Resources/icon32_clear.ico" Command="g:Commands.Clear"/>
             </StackPanel>
         </Grid>
         <!-- statusPanel -->
@@ -200,13 +209,50 @@
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu>
-                    <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_ID, Mode=TwoWay}"/>
-                    <MenuItem IsCheckable="True" Header="Ikona" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Icon, Mode=TwoWay}"/>
-                    <MenuItem IsCheckable="True" Header="Moduł" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Module, Mode=TwoWay}"/>
-                    <MenuItem IsCheckable="True" Header="Nazwa" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Name, Mode=TwoWay}"/>
-                    <MenuItem IsCheckable="True" Header="Typ" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Type, Mode=TwoWay}"/>
-                    <MenuItem IsCheckable="True" Header="Wartości" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Values, Mode=TwoWay}"/>
-                    <MenuItem IsCheckable="True" Header="Wymagany" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Required, Mode=TwoWay}"/>
+                    <MenuItem Header="Widoczność kolumn">
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/icon32_show.ico"/>
+                        </MenuItem.Icon>
+                        <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_ID, Mode=TwoWay}"/>
+                        <MenuItem IsCheckable="True" Header="Ikona" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Icon, Mode=TwoWay}"/>
+                        <MenuItem IsCheckable="True" Header="Moduł" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Module, Mode=TwoWay}"/>
+                        <MenuItem IsCheckable="True" Header="Nazwa" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Name, Mode=TwoWay}"/>
+                        <MenuItem IsCheckable="True" Header="Typ" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Type, Mode=TwoWay}"/>
+                        <MenuItem IsCheckable="True" Header="Wartości" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Values, Mode=TwoWay}"/>
+                        <MenuItem IsCheckable="True" Header="Wymagany" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Required, Mode=TwoWay}"/>
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem Header="Podgląd" Command="g:Commands.Preview">
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/icon32_search.ico"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Dodaj" Command="g:Commands.New">
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/icon32_add.ico"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Duplikuj" Command="g:Commands.Duplicate">
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/icon32_duplicate.ico"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Edytuj" Command="g:Commands.Edit">
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/icon32_edit.ico"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Usuń" Command="g:Commands.Delete">
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/icon32_delete.ico"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem Header="Odśwież" Command="g:Commands.Refresh">
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/icon32_refresh.ico"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </ContextMenu>
             </DataGrid.ContextMenu>
             <DataGrid.RowStyle>

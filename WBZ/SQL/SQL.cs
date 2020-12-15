@@ -1207,29 +1207,33 @@ namespace WBZ
 		[STAThread]
 		private static void Error(string msg, Exception ex, string module, int instance, bool show = true, bool save = true)
         {
-			var error = new M_Log()
+			try
 			{
-				ID = NewInstanceID(Global.Module.LOGS),
-				Instance = instance,
-				Module = module,
-				Group = 2,
-				User = Global.User.ID
-			};
-			var d = Application.Current.Dispatcher;
+				var error = new M_Log()
+				{
+					ID = NewInstanceID(Global.Module.LOGS),
+					Instance = instance,
+					Module = module,
+					Group = 2,
+					User = Global.User.ID
+				};
+				var d = Application.Current.Dispatcher;
 
-			d.BeginInvoke((Action)OpenErrorWindow);
-			void OpenErrorWindow()
-			{
+				d.BeginInvoke((Action)OpenErrorWindow);
+				void OpenErrorWindow()
+				{
 #if DEBUG
-				error.Content = ex.ToString();
+					error.Content = ex.ToString();
 #else
 				error.Content = ex.Message;
 #endif
-				if (show)
-					new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"{msg}:{Environment.NewLine}{error.Content}").ShowDialog();
-				if (save)
-					SetInstance(Global.Module.LOGS, error, Commands.Type.NEW);
+					if (show)
+						new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"{msg}:{Environment.NewLine}{error.Content}").ShowDialog();
+					if (save)
+						SetInstance(Global.Module.LOGS, error, Commands.Type.NEW);
+				}
 			}
+			catch { }
 		}
 		#endregion
 
@@ -1262,7 +1266,9 @@ namespace WBZ
 						/// ATTACHMENTS
 						case Global.Module.ATTACHMENTS:
 							query = @"select count(distinct a.id)
-								from wbz.attachments a";
+								from wbz.attachments a
+								left join wbz.users u
+									on a.""user"" = u.id";
 							break;
 						/// ATTRIBUTES_CLASSES
 						case Global.Module.ATTRIBUTES_CLASSES:
@@ -1428,7 +1434,9 @@ namespace WBZ
 						/// ATTACHMENTS
 						case Global.Module.ATTACHMENTS:
 							query = @"select a.id, a.""user"", a.module, a.instance, a.name, null as file
-								from wbz.attachments a";
+								from wbz.attachments a
+								left join wbz.users u
+									on a.""user"" = u.id";
 							break;
 						/// ATTRIBUTES_CLASSES
 						case Global.Module.ATTRIBUTES_CLASSES:

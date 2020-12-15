@@ -104,7 +104,7 @@
                             </MenuItem>
                             <MenuItem Header="O programie" Click="btnAboutApp_Click">
                                 <MenuItem.Icon>
-                                    <Image Source="/Resources/logo32.ico"/>
+                                    <Image Source="/Resources/icon64.ico"/>
                                 </MenuItem.Icon>
                             </MenuItem>
                         </ContextMenu>

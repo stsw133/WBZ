@@ -12,15 +12,15 @@ namespace WBZ.Interfaces
 	{
         void Init();
         void Window_Loaded(object sender, RoutedEventArgs e);
-        void dpFilter_KeyUp(object sender, KeyEventArgs e);
-        void btnFiltersClear_Click(object sender, MouseButtonEventArgs e);
-        void btnPreview_Click(object sender, MouseButtonEventArgs e);
-        void btnNew_Click(object sender, MouseButtonEventArgs e);
-        void btnDuplicate_Click(object sender, MouseButtonEventArgs e);
-        void btnEdit_Click(object sender, MouseButtonEventArgs e);
-        void btnDelete_Click(object sender, MouseButtonEventArgs e);
-        void btnRefresh_Click(object sender, MouseButtonEventArgs e);
-        void btnClose_Click(object sender, MouseButtonEventArgs e);
+        void cmdPreview_Executed(object sender, ExecutedRoutedEventArgs e);
+        void cmdNew_Executed(object sender, ExecutedRoutedEventArgs e);
+        void cmdDuplicate_Executed(object sender, ExecutedRoutedEventArgs e);
+        void cmdEdit_Executed(object sender, ExecutedRoutedEventArgs e);
+        void cmdDelete_Executed(object sender, ExecutedRoutedEventArgs e);
+        void cmdClear_Executed(object sender, ExecutedRoutedEventArgs e);
+        void cmdRefresh_Executed(object sender, ExecutedRoutedEventArgs e);
+        void cmdHelp_Executed(object sender, ExecutedRoutedEventArgs e);
+        void cmdClose_Executed(object sender, ExecutedRoutedEventArgs e);
         void dgList_MouseDoubleClick(object sender, MouseButtonEventArgs e);
         void dgList_ScrollChanged(object sender, ScrollChangedEventArgs e);
         void Window_Closed(object sender, EventArgs e);
@@ -57,22 +57,24 @@ namespace WBZ.Interfaces
 		public void dpFilter_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
-                btnRefresh_Click(null, null);
-        }
-
-        /// <summary>
-		/// Clear filters
-		/// </summary>
-		public void btnFiltersClear_Click(object sender, MouseButtonEventArgs e)
-        {
-            D.Filters = new MODULE_MODEL();
-            btnRefresh_Click(null, null);
+                cmdRefresh_Executed(null, null);
         }
 
         /// <summary>
         /// Preview
         /// </summary>
-        public void btnPreview_Click(object sender, MouseButtonEventArgs e)
+        internal void cmdPreview_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            try
+            {
+                if (Global.User.Perms.Contains($"{D.MODULE_TYPE}_{Global.UserPermType.PREVIEW}"))
+                    e.CanExecute = true;
+                else
+                    e.CanExecute = false;
+            }
+            catch { }
+        }
+        public void cmdPreview_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var selectedInstances = (W.dgList as DataGrid).SelectedItems.Cast<MODULE_MODEL>();
             foreach (MODULE_MODEL instance in selectedInstances)
@@ -85,7 +87,18 @@ namespace WBZ.Interfaces
         /// <summary>
 		/// New
 		/// </summary>
-		public void btnNew_Click(object sender, MouseButtonEventArgs e)
+		internal void cmdNew_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            try
+            {
+                if (Global.User.Perms.Contains($"{D.MODULE_TYPE}_{Global.UserPermType.SAVE}"))
+                    e.CanExecute = true;
+                else
+                    e.CanExecute = false;
+            }
+            catch { }
+        }
+        public void cmdNew_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var window = Activator.CreateInstance(Type.GetType(HalfName + "New"), null, Commands.Type.NEW) as Window;
             window.Show();
@@ -94,7 +107,18 @@ namespace WBZ.Interfaces
         /// <summary>
         /// Duplicate
         /// </summary>
-        public void btnDuplicate_Click(object sender, MouseButtonEventArgs e)
+        internal void cmdDuplicate_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            try
+            {
+                if (Global.User.Perms.Contains($"{D.MODULE_TYPE}_{Global.UserPermType.SAVE}"))
+                    e.CanExecute = true;
+                else
+                    e.CanExecute = false;
+            }
+            catch { }
+        }
+        public void cmdDuplicate_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var selectedInstances = (W.dgList as DataGrid).SelectedItems.Cast<MODULE_MODEL>();
             foreach (MODULE_MODEL instance in selectedInstances)
@@ -107,7 +131,18 @@ namespace WBZ.Interfaces
         /// <summary>
         /// Edit
         /// </summary>
-        public void btnEdit_Click(object sender, MouseButtonEventArgs e)
+        internal void cmdEdit_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            try
+            {
+                if (Global.User.Perms.Contains($"{D.MODULE_TYPE}_{Global.UserPermType.SAVE}"))
+                    e.CanExecute = true;
+                else
+                    e.CanExecute = false;
+            }
+            catch { }
+        }
+        public void cmdEdit_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var selectedInstances = (W.dgList as DataGrid).SelectedItems.Cast<MODULE_MODEL>();
             foreach (MODULE_MODEL instance in selectedInstances)
@@ -120,21 +155,41 @@ namespace WBZ.Interfaces
         /// <summary>
         /// Delete
         /// </summary>
-        public void btnDelete_Click(object sender, MouseButtonEventArgs e)
+        internal void cmdDelete_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            try
+            {
+                if (Global.User.Perms.Contains($"{D.MODULE_TYPE}_{Global.UserPermType.DELETE}"))
+                    e.CanExecute = true;
+                else
+                    e.CanExecute = false;
+            }
+            catch { }
+        }
+        public void cmdDelete_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var selectedInstances = (W.dgList as DataGrid).SelectedItems.Cast<MODULE_MODEL>();
             if (selectedInstances.Count() > 0 && MessageBox.Show("Czy na pewno usunąć zaznaczone rekordy?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
                 foreach (dynamic instance in selectedInstances)
                     SQL.DeleteInstance(D.MODULE_TYPE, instance.ID, instance.Name);
-                btnRefresh_Click(null, null);
+                cmdRefresh_Executed(null, null);
             }
+        }
+
+        /// <summary>
+		/// Clear
+		/// </summary>
+		public void cmdClear_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            D.Filters = new MODULE_MODEL();
+            cmdRefresh_Executed(null, null);
         }
 
         /// <summary>
         /// Refresh
         /// </summary>
-        public async void btnRefresh_Click(object sender, MouseButtonEventArgs e)
+        public async void cmdRefresh_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             await Task.Run(() => {
                 W.UpdateFilters();
@@ -144,9 +199,17 @@ namespace WBZ.Interfaces
         }
 
         /// <summary>
+        /// Help
+        /// </summary>
+        public void cmdHelp_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Functions.OpenHelp(this);
+        }
+
+        /// <summary>
         /// Close
         /// </summary>
-        public void btnClose_Click(object sender, MouseButtonEventArgs e)
+        public void cmdClose_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             W.Close();
         }
@@ -162,9 +225,9 @@ namespace WBZ.Interfaces
                 if (!D.SelectingMode)
                 {
                     if (Global.User.Perms.Contains($"{D.MODULE_TYPE}_{Global.UserPermType.SAVE}"))
-                        btnEdit_Click(null, null);
+                        cmdEdit_Executed(null, null);
                     else
-                        btnPreview_Click(null, null);
+                        cmdPreview_Executed(null, null);
                 }
                 else
                 {
@@ -193,6 +256,7 @@ namespace WBZ.Interfaces
         /// </summary>
         public void Window_Closed(object sender, EventArgs e)
         {
+            W.Owner.Focus();
         }
     }
 }

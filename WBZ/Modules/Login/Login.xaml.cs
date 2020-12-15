@@ -150,7 +150,7 @@ namespace WBZ.Modules.Login
 		private void btnOther_Click(object sender, RoutedEventArgs e)
 		{
 			///conditions of button "Dodaj administratora"
-			if (SQL.CountInstances(Global.Module.USERS, @"blocked=false and archival=false and exists(select from wbz.users_permissions where ""user""=u.id and perm='admin')") == 0)
+			if (SQL.CountInstances(Global.Module.USERS, @"u.blocked=false and u.archival=false and exists(select from wbz.users_permissions where ""user""=u.id and perm='admin')") == 0)
 			{
 				btnCreateAdmin.Visibility = Visibility.Visible;
 				btnCreateAdmin.IsEnabled = true;

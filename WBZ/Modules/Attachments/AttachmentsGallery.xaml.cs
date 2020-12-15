@@ -62,8 +62,8 @@ namespace WBZ.Modules.Attachments
 		{
 			await Task.Run(() => {
 				UpdateFilters();
-				D.TotalItems = SQL.CountInstances(D.MODULE_NAME, D.FilterSQL);
-				D.InstancesList = SQL.ListInstances<MODULE_CLASS>(D.MODULE_NAME, D.FilterSQL, D.SORTING, D.Page = 0);
+				D.TotalItems = SQL.CountInstances(D.MODULE_TYPE, D.FilterSQL);
+				D.InstancesList = SQL.ListInstances<MODULE_CLASS>(D.MODULE_TYPE, D.FilterSQL, D.SORTING, D.Page = 0);
 
 				foreach (var img in D.InstancesList)
 					img.File = SQL.GetAttachmentFile(img.ID);
@@ -108,7 +108,7 @@ namespace WBZ.Modules.Attachments
 			if (e.HorizontalChange > 0 && e.HorizontalOffset + e.ViewportWidth == e.ExtentWidth && D.InstancesList.Count < D.TotalItems)
 			{
 				DataContext = null;
-				D.InstancesList.AddRange(SQL.ListInstances<MODULE_CLASS>(D.MODULE_NAME, D.FilterSQL, D.SORTING, ++D.Page));
+				D.InstancesList.AddRange(SQL.ListInstances<MODULE_CLASS>(D.MODULE_TYPE, D.FilterSQL, D.SORTING, ++D.Page));
 				foreach (var img in D.InstancesList)
 					img.File = SQL.GetAttachmentFile(img.ID);
 				DataContext = D;

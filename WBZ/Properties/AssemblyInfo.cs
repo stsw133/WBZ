@@ -1,18 +1,17 @@
 ﻿using System.Reflection;
 using System.Resources;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("WBZ")]
+[assembly: AssemblyTitle("WBZ XN")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Karol Staszewski & Arkadiusz Bryska")]
-[assembly: AssemblyProduct("WBZ")]
-[assembly: AssemblyCopyright("Copyright © Karol Staszewski & Arkadiusz Bryska 2020")]
+[assembly: AssemblyCompany("Karol Staszewski")]
+[assembly: AssemblyProduct("WBZ XN")]
+[assembly: AssemblyCopyright("Copyright © Karol Staszewski 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

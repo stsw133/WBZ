@@ -46,9 +46,9 @@ namespace WBZ.Modules.Articles
 		private void cbStore_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			SelectedStore = SQL.GetInstance<M_Store>(Global.Module.STORES, cbStore.SelectedValue != null ? (int)cbStore.SelectedValue : 0);
-			btnRefresh_Click(null, null);
+			cmdRefresh_Executed(null, null);
 		}
-	}
+    }
 
-	public class List : ModuleList<MODULE_MODEL> { }
+    public class List : ModuleList<MODULE_MODEL> { }
 }

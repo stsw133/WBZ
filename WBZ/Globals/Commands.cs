@@ -10,7 +10,7 @@ namespace WBZ.Globals
 			NONE,
 			ADD,
 			ARCHIVE,
-			CLEAN,
+			CLEAR,
 			CLOSE,
 			DELETE,
 			DUPLICATE,
@@ -54,12 +54,12 @@ namespace WBZ.Globals
 			}
 		);
 		/// <summary>
-		/// Clean
+		/// Clear
 		/// </summary>
-		public static readonly RoutedUICommand Clean = new RoutedUICommand
+		public static readonly RoutedUICommand Clear = new RoutedUICommand
 		(
-			Enum.GetName(typeof(Type), Type.CLEAN),
-			Enum.GetName(typeof(Type), Type.CLEAN),
+			Enum.GetName(typeof(Type), Type.CLEAR),
+			Enum.GetName(typeof(Type), Type.CLEAR),
 			typeof(Commands),
 			new InputGestureCollection()
 			{

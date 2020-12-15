@@ -43,7 +43,7 @@ namespace WBZ.Globals
 		{
 			if (obj.Instance == 0)
 				return;
-			if (SQL.CountInstances(obj.Module, $"{string.Join("", (obj.Module.Split('_').AsQueryable().Cast<string>() as IQueryable<string>).Select(str => str.Substring(0, 1)))}.id={obj.Instance}") == 0)
+			if (SQL.CountInstances(obj.Module, $"{string.Join("", ((obj.Module.Split('_') as string[]).AsQueryable().Cast<string>()).Select(str => str.Substring(0, 1)))}.id={obj.Instance}") == 0)
 				return;
 
 			if (!(mode == Commands.Type.EDIT && Global.User.Perms.Contains($"{obj.Module}_{Global.UserPermType.SAVE}")))

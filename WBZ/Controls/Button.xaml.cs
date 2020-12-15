@@ -1,5 +1,4 @@
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace WBZ.Controls
@@ -7,25 +6,12 @@ namespace WBZ.Controls
     /// <summary>
     /// Interaction logic for Button.xaml
     /// </summary>
-    public partial class Button : UserControl
+    public partial class Button : System.Windows.Controls.Button
     {
         public Button()
         {
             InitializeComponent();
         }
-
-        public string Alignment
-        {
-            get { return (string)GetValue(pAlignment); }
-            set { SetValue(pAlignment, value); }
-        }
-        public static readonly DependencyProperty pAlignment
-            = DependencyProperty.Register(
-                  nameof(Alignment),
-                  typeof(string),
-                  typeof(Button),
-                  new PropertyMetadata("Left")
-              );
 
         public ImageSource Icon
         {
