@@ -104,7 +104,7 @@ namespace WBZ.Modules
 		}
 		private void menuLogout_Click(object sender, RoutedEventArgs e)
 		{
-			if (new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.CONFIRMATION, "Na pewno wylogować?") { Owner = this }.ShowDialog() == true)
+			if (new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.QUESTION, "Na pewno wylogować?") { Owner = this }.ShowDialog() == true)
 			{
 				Global.User = new M_User();
 

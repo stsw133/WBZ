@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.ComponentModel;
+using System.Reflection;
 using System.Windows;
 
 namespace WBZ.Controls
@@ -15,17 +16,21 @@ namespace WBZ.Controls
 		}
 		public static class MsgTitle
 		{
-			public const string CONFIRMATION = "Potwierdzenie";
+			public const string BLOCKADE = "Blokada";
 			public const string ERROR = "Błąd";
 			public const string INFO = "Informacja";
+			public const string QUESTION = "Pytanie";
 			public const string WARNING = "Ostrzeżenie";
 		}
 
-		public MsgWin(Type type, string title = "", string message = "", string value = "")
+		D_MsgWin D = new D_MsgWin();
+
+		public MsgWin(Type type, string title, string message = "", string value = "")
 		{
 			InitializeComponent();
+			DataContext = D;
 
-			Title = title;
+			D.Title = title;
 			txtMessage.Text = message;
 			tbInput.Text = value;
 
@@ -56,6 +61,52 @@ namespace WBZ.Controls
 		private void btnCancel_Click(object sender, RoutedEventArgs e)
 		{
 			DialogResult = false;
+		}
+	}
+
+	/// <summary>
+	/// DataContext
+	/// </summary>
+	public class D_MsgWin : INotifyPropertyChanged
+	{
+		public event PropertyChangedEventHandler PropertyChanged;
+		public void NotifyPropertyChanged(string name)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+		}
+
+		/// Title
+		private string title;
+		public string Title
+		{
+			get
+			{
+				return title;
+			}
+			set
+			{
+				title = value;
+				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
+			}
+		}
+		/// Icon
+		public string Icon
+		{
+			get
+			{
+				if (Title == MsgWin.MsgTitle.BLOCKADE)
+					return "/Resources/icon32_circleorange.ico";
+				else if (Title == MsgWin.MsgTitle.ERROR)
+					return "/Resources/icon32_circlered.ico";
+				else if (Title == MsgWin.MsgTitle.INFO)
+					return "/Resources/icon32_circlegreen.ico";
+				else if (Title == MsgWin.MsgTitle.QUESTION)
+					return "/Resources/icon32_circleblue.ico";
+				else if (Title == MsgWin.MsgTitle.WARNING)
+					return "/Resources/icon32_circleyellow.ico";
+				else
+					return null;
+			}
 		}
 	}
 }

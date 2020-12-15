@@ -7,10 +7,10 @@
         xmlns:g="clr-namespace:WBZ.Globals"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
-        Title="Wiadomość" SizeToContent="WidthAndHeight"
+        Title="{Binding Title}" SizeToContent="WidthAndHeight"
             BorderThickness="3" BorderBrush="#333" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" WindowStyle="None"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}, Mode=OneWay}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay}"
-            Icon="/Resources/_null.ico">
+            Icon="{Binding Icon}">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>

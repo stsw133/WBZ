@@ -183,6 +183,66 @@ namespace WBZ.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
+        internal static System.Drawing.Icon icon32_circleblue {
+            get {
+                object obj = ResourceManager.GetObject("icon32_circleblue", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon icon32_circlegreen {
+            get {
+                object obj = ResourceManager.GetObject("icon32_circlegreen", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon icon32_circlegrey {
+            get {
+                object obj = ResourceManager.GetObject("icon32_circlegrey", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon icon32_circleorange {
+            get {
+                object obj = ResourceManager.GetObject("icon32_circleorange", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon icon32_circlered {
+            get {
+                object obj = ResourceManager.GetObject("icon32_circlered", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon icon32_circleyellow {
+            get {
+                object obj = ResourceManager.GetObject("icon32_circleyellow", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
         internal static System.Drawing.Icon icon32_clear {
             get {
                 object obj = ResourceManager.GetObject("icon32_clear", resourceCulture);
@@ -293,16 +353,6 @@ namespace WBZ.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        internal static System.Drawing.Icon icon32_error {
-            get {
-                object obj = ResourceManager.GetObject("icon32_error", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
         internal static System.Drawing.Icon icon32_errors {
             get {
                 object obj = ResourceManager.GetObject("icon32_errors", resourceCulture);
@@ -326,16 +376,6 @@ namespace WBZ.Properties {
         internal static System.Drawing.Icon icon32_filter {
             get {
                 object obj = ResourceManager.GetObject("icon32_filter", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon icon32_fine {
-            get {
-                object obj = ResourceManager.GetObject("icon32_fine", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }
@@ -703,26 +743,6 @@ namespace WBZ.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        internal static System.Drawing.Icon icon32_tooltip {
-            get {
-                object obj = ResourceManager.GetObject("icon32_tooltip", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon icon32_unknown {
-            get {
-                object obj = ResourceManager.GetObject("icon32_unknown", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
         internal static System.Drawing.Icon icon32_unlocked {
             get {
                 object obj = ResourceManager.GetObject("icon32_unlocked", resourceCulture);
@@ -766,16 +786,6 @@ namespace WBZ.Properties {
         internal static System.Drawing.Icon icon32_versions {
             get {
                 object obj = ResourceManager.GetObject("icon32_versions", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon icon32_warning {
-            get {
-                object obj = ResourceManager.GetObject("icon32_warning", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }

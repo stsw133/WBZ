@@ -52,7 +52,7 @@ namespace WBZ.Modules.Login
 						if (file != null)
 						{
 							File.WriteAllBytes(dialog.FileName, file);
-							if (new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.CONFIRMATION, "Czy uruchomić plik instalacyjny? W przypadku akceptacji program zostanie wyłączony.") { Owner = this }.ShowDialog() == true)
+							if (new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.INFO, "Czy uruchomić plik instalacyjny? W przypadku akceptacji program zostanie wyłączony.") { Owner = this }.ShowDialog() == true)
 							{
 								Process.Start(dialog.FileName);
 								App.Current.Shutdown();

@@ -55,7 +55,7 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <DockPanel Grid.Column="0">
-                    <Image x:Name="imgVersion" Margin="5" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=2}" Source="/Resources/icon32_unknown.ico"/>
+                    <Image x:Name="imgVersion" Margin="5" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=2}" Source="/Resources/icon32_circlegrey.ico"/>
                     <StackPanel VerticalAlignment="Center" Margin="5">
                         <Label Content="Wersja:" Padding="1"/>
                         <Label x:Name="txtVersion" Padding="1" FontWeight="Medium"/>

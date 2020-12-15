@@ -8,7 +8,6 @@ using System.Windows;
 using WBZ.Models;
 using WBZ.Globals;
 using WBZ.Controls;
-using System.Threading.Tasks;
 
 namespace WBZ
 {
@@ -1217,15 +1216,16 @@ namespace WBZ
 					Group = 2,
 					User = Global.User.ID
 				};
-				var d = Application.Current.Dispatcher;
 
+				var d = Application.Current.Dispatcher;
 				d.BeginInvoke((Action)OpenErrorWindow);
+
 				void OpenErrorWindow()
 				{
 #if DEBUG
 					error.Content = ex.ToString();
 #else
-				error.Content = ex.Message;
+					error.Content = ex.Message;
 #endif
 					if (show)
 						new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"{msg}:{Environment.NewLine}{error.Content}").ShowDialog();

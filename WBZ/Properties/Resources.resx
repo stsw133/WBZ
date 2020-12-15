@@ -151,6 +151,24 @@
   <data name="icon32_cancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_cancel.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icon32_circleblue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon32_circleblue.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon32_circlegreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon32_circlegreen.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon32_circlegrey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon32_circlegrey.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon32_circleorange" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon32_circleorange.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon32_circlered" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon32_circlered.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon32_circleyellow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon32_circleyellow.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon32_clear" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_clear.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -184,9 +202,6 @@
   <data name="icon32_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_edit.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon32_error" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon32_error.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="icon32_errors" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_errors.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -195,9 +210,6 @@
   </data>
   <data name="icon32_filter" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_filter.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon32_fine" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon32_fine.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon32_folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_folder.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -307,12 +319,6 @@
   <data name="icon32_tools" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_tools.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon32_tooltip" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon32_tooltip.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon32_unknown" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon32_unknown.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="icon32_unlocked" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_unlocked.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -327,9 +333,6 @@
   </data>
   <data name="icon32_versions" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_versions.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon32_warning" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon32_warning.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon32_web" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_web.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

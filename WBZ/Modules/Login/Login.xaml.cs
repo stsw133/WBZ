@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -62,15 +63,15 @@ namespace WBZ.Modules.Login
 					Global.VersionNewest = (string)data.versions[0];
 				}
 
-				///check app version
+				/// check app version
 				if (Global.Version == Global.VersionNewest)
 				{
-					imgVersion.Source = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resources/icon32_fine.ico"));
+					imgVersion.Source = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resources/icon32_circlegreen.ico"));
 					imgVersion.ToolTip = "Posiadasz aktualną wersję programu.";
 				}
 				else
 				{
-					imgVersion.Source = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resources/icon32_warning.ico"));
+					imgVersion.Source = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resources/icon32_circleorange.ico"));
 					imgVersion.ToolTip = "Posiadasz nieaktualną wersję programu. Najnowsza wersja to " + Global.VersionNewest;
 				}
 			}
@@ -91,25 +92,34 @@ namespace WBZ.Modules.Login
 		/// <summary>
 		/// Database - SelectionChanged
 		/// </summary>
-		private void cbDatabase_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		[STAThread]
+		private async void cbDatabase_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			var cbDatabase = (sender as ComboBox);
+			btnLogin.IsEnabled = false;
+			btnOther.IsEnabled = false;
 
+			var cbDatabase = (sender as ComboBox);
 			if (cbDatabase.SelectedIndex < 0)
 				return;
 
-			try
-			{
-				Global.Database = cbDatabase.SelectedItem as M_Database;
-				SQL.connWBZ = SQL.MakeConnString(Global.Database.Server, Global.Database.Port, Global.Database.Database, Global.Database.Username, Global.Database.Password);
-				Global.Database.Version = SQL.GetPropertyValue("VERSION");
+			var d = Application.Current.Dispatcher;
+			await d.BeginInvoke((Action)SelectionChanged);
 
-				btnLogin.IsEnabled = true;
-				btnOther.IsEnabled = true;
-			}
-			catch (Exception ex)
+			void SelectionChanged()
 			{
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Błąd zmiany bazy: " + ex.Message) { Owner = this }.ShowDialog();
+				try
+				{
+					Global.Database = cbDatabase.SelectedItem as M_Database;
+					SQL.connWBZ = SQL.MakeConnString(Global.Database.Server, Global.Database.Port, Global.Database.Database, Global.Database.Username, Global.Database.Password);
+					Global.Database.Version = SQL.GetPropertyValue("VERSION");
+
+					btnLogin.IsEnabled = true;
+					btnOther.IsEnabled = true;
+				}
+				catch (Exception ex)
+				{
+					new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Błąd zmiany bazy: " + ex.Message) { Owner = this }.ShowDialog();
+				}
 			}
 		}
 
@@ -120,7 +130,7 @@ namespace WBZ.Modules.Login
         {
 			if (Global.Database.Version != Global.Version)
 			{
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.INFO, $"Wersja aplikacji {Global.Version} nie zgadza się z wersją bazy danych {Global.Database.Version}!" +
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.WARNING, $"Wersja aplikacji {Global.Version} nie zgadza się z wersją bazy danych {Global.Database.Version}!" +
 					Environment.NewLine + "Zaktualizuj bazę z menu dodatkowych opcji lub skontaktuj się z administratorem.") { Owner = this }.ShowDialog();
 				return;
 			}
@@ -137,8 +147,8 @@ namespace WBZ.Modules.Login
 				Props.Default.userPass = tbPassword.Password;
 			else
 			{
-				Props.Default.userName = "";
-				Props.Default.userPass = "";
+				Props.Default.userName = string.Empty;
+				Props.Default.userPass = string.Empty;
 				Props.Default.rememberMe = false;
 			}
 			Props.Default.Save();
