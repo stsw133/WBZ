@@ -1,25 +1,34 @@
 ﻿<UserControl x:Class="WBZ.Controls.AttachmentsTab"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:c="clr-namespace:WBZ.Controls"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:g="clr-namespace:WBZ.Globals"
              xmlns:p="clr-namespace:WBZ.Properties"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="750"
              Loaded="UserControl_Loaded">
     <DockPanel Margin="5">
-        <DockPanel>
-            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                <c:Button Margin="0,0,5,0" IsEnabled="{Binding EditingMode}" TextVisibility="False"
-                                Text="Dodaj załącznik" Icon="/Resources/icon32_add.ico" PreviewMouseLeftButtonUp="btnAttachmentAdd_Click"/>
-                <c:Button Margin="0,0,5,0" IsEnabled="{Binding EditingMode}" TextVisibility="False"
-                                Text="Edytuj załącznik" Icon="/Resources/icon32_edit.ico" PreviewMouseLeftButtonUp="btnAttachmentEdit_Click"/>
-                <c:Button Margin="0,0,5,0" IsEnabled="{Binding EditingMode}" TextVisibility="False"
-                                Text="Usuń załącznik" Icon="/Resources/icon32_remove.ico" PreviewMouseLeftButtonUp="btnAttachmentRemove_Click"/>
-            </StackPanel>
-            <ListBox x:Name="lbAttachments" DockPanel.Dock="Top" Margin="0,5,5,0" ItemsSource="{Binding InstanceAttachments}" DisplayMemberPath="Name" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}" SelectionChanged="lbAttachments_SelectionChanged"/>
-        </DockPanel>
+        <ListBox x:Name="lbAttachments" ItemsSource="{Binding InstanceAttachments}" DisplayMemberPath="Name" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}" SelectionChanged="lbAttachments_SelectionChanged">
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Dodaj" IsEnabled="{Binding EditingMode}" Click="btnAttachmentAdd_Click">
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/icon32_add.ico"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Edytuj" IsEnabled="{Binding EditingMode}" Click="btnAttachmentEdit_Click">
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/icon32_edit.ico"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Usuń" IsEnabled="{Binding EditingMode}" Click="btnAttachmentRemove_Click">
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/icon32_delete.ico"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </ContextMenu>
+            </ListBox.ContextMenu>
+        </ListBox>
         <WebBrowser x:Name="wbFile"/>
     </DockPanel>
 </UserControl>

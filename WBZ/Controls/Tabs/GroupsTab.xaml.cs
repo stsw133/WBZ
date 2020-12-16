@@ -53,7 +53,7 @@ namespace WBZ.Controls
 		/// <summary>
 		/// Add
 		/// </summary>
-		private void btnGroupAdd_Click(object sender, MouseButtonEventArgs e)
+		private void btnGroupAdd_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new GroupsList(Module, Commands.Type.SELECTING);
 			window.Owner = Window.GetWindow(this);
@@ -71,7 +71,7 @@ namespace WBZ.Controls
 		/// <summary>
 		/// Remove
 		/// </summary>
-		private void btnGroupRemove_Click(object sender, MouseButtonEventArgs e)
+		private void btnGroupRemove_Click(object sender, RoutedEventArgs e)
 		{
 			var selectedInstances = dgList.SelectedItems.Cast<M_Group>();
 			if (selectedInstances.Count() > 0)
@@ -85,7 +85,7 @@ namespace WBZ.Controls
 		/// <summary>
 		/// Select as main
 		/// </summary>
-		private void btnGroupSelectAsMain_Click(object sender, MouseButtonEventArgs e)
+		private void btnGroupSelectAsMain_Click(object sender, RoutedEventArgs e)
 		{
 
 		}

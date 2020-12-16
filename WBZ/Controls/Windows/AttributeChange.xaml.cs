@@ -69,11 +69,11 @@ namespace WBZ.Controls
 			get
 			{
 				if (string.IsNullOrEmpty(AttributeInfo.Value))
-					return $"Wartość nowego atrybutu: {AttributeInfo.Class.Name}";
+					return $"Wartość nowego atrybutu";
 				else if (EditMode)
-					return $"Edycja wartości atrybutu: {AttributeInfo.Class.Name}";
+					return $"Edycja wartości atrybutu";
 				else
-					return $"Podgląd wartości atrybutu: {AttributeInfo.Class.Name}";
+					return $"Podgląd wartości atrybutu";
 			}
 		}
 		/// Attribute

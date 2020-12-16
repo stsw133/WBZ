@@ -3,27 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:c="clr-namespace:WBZ.Controls"
              xmlns:g="clr-namespace:WBZ.Globals"
              xmlns:p="clr-namespace:WBZ.Properties"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="750">
     <DockPanel Margin="5" IsEnabled="{Binding EditingMode}">
         <DockPanel DockPanel.Dock="Top">
             <DockPanel DockPanel.Dock="Right">
-                <c:Button DockPanel.Dock="Bottom" Margin="5" TextVisibility="False" IsEnabled="{Binding EditingMode}" HorizontalAlignment="Center"
-                          ToolTip="Zarządzaj ikoną" Icon="/Resources/icon32_photos.ico" PreviewMouseLeftButtonUp="btnManageIcon_Click">
-                    <c:Button.ContextMenu>
+                <Label DockPanel.Dock="Top" Content="Ikona:"/>
+                <Border DockPanel.Dock="Top" Margin="5" Background="LightGray" BorderBrush="Gray" BorderThickness="1" VerticalAlignment="Top" PreviewMouseLeftButtonUp="btnManageIcon_Click">
+                    <Grid Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.25}">
+                        <Image Stretch="UniformToFill" VerticalAlignment="Bottom" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=2}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=2}" Source="{Binding InstanceInfo.Icon}"/>
+                        <Image Stretch="UniformToFill" VerticalAlignment="Bottom" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=2}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=2}" Source="/Resources/icon32_photos.ico" Visibility="{Binding InstanceInfo.Icon, Converter={g:conv_CompareStrings}, ConverterParameter={x:Null}}"/>
+                    </Grid>
+                    <Border.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Wczytaj" Click="btnLoad_Click"/>
                             <MenuItem Header="Usuń" Click="btnDelete_Click"/>
                         </ContextMenu>
-                    </c:Button.ContextMenu>
-                </c:Button>
-                <Image DockPanel.Dock="Bottom" Margin="5" Stretch="UniformToFill" VerticalAlignment="Bottom" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=2}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=2}" Source="{Binding InstanceInfo.Icon}"/>
+                    </Border.ContextMenu>
+                </Border>
             </DockPanel>
             <CheckBox DockPanel.Dock="Top" Content="Archiwalny" Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}" VerticalContentAlignment="Center" IsChecked="{Binding InstanceInfo.Archival}"/>
             <Label DockPanel.Dock="Top" Content="Komentarz:" Margin="5,0" VerticalContentAlignment="Center"/>
         </DockPanel>
-        <TextBox Text="{Binding InstanceInfo.Comment}" Margin="5" TextWrapping="Wrap"/>
+        <TextBox Text="{Binding InstanceInfo.Comment}" Margin="5" TextWrapping="Wrap" AcceptsReturn="True"/>
     </DockPanel>
 </UserControl>

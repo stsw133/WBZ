@@ -17,7 +17,7 @@ namespace WBZ.Controls
         }
 
         /// <summary>
-		/// ManageIcon
+		/// ManageIcon - open context menu
 		/// </summary>
 		private void btnManageIcon_Click(object sender, MouseButtonEventArgs e)
         {

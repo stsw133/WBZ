@@ -6,31 +6,42 @@
              xmlns:c="clr-namespace:WBZ.Controls"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="750"
              Loaded="UserControl_Loaded">
-    <DockPanel Margin="5">
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-            <c:Button Margin="0,0,5,0" IsEnabled="{Binding EditingMode}" TextVisibility="False" ToolTip="Dodaj grupę" Icon="/Resources/icon32_add.ico" PreviewMouseLeftButtonUp="btnGroupAdd_Click"/>
-            <c:Button Margin="0,0,5,0" IsEnabled="{Binding EditingMode}" TextVisibility="False" ToolTip="Usuń grupę" Icon="/Resources/icon32_remove.ico" PreviewMouseLeftButtonUp="btnGroupRemove_Click"/>
-            <Rectangle Margin="0,0,5,0" Fill="Gray" Width="1"/>
-            <c:Button Margin="0,0,5,0" IsEnabled="False" TextVisibility="False" ToolTip="Ustaw jako główną" Icon="/Resources/icon32_select.ico" PreviewMouseLeftButtonUp="btnGroupSelectAsMain_Click"/>
-        </StackPanel>
-        <DataGrid x:Name="dgList" Margin="0,5,0,0" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
-                  AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstanceGroups}" IsReadOnly="True">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" Visibility="Hidden"/>
-                <DataGridTextColumn Binding="{Binding Path}" Header="Grupa" Width="*"/>
-            </DataGrid.Columns>
-            <DataGrid.RowStyle>
-                <Style TargetType="DataGridRow">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Main}" Value="true">
-                            <Setter Property="Foreground" Value="Green"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Archival}" Value="true">
-                            <Setter Property="Foreground" Value="Gray"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </DataGrid.RowStyle>
-        </DataGrid>
-    </DockPanel>
+    <c:DataGrid x:Name="dgList" ItemsSource="{Binding InstanceGroups}" IsReadOnly="True">
+        <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" Visibility="Collapsed"/>
+            <DataGridTextColumn Binding="{Binding Path}" Header="Grupa" Width="*"/>
+        </DataGrid.Columns>
+        <DataGrid.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Dodaj" IsEnabled="{Binding EditingMode}" Click="btnGroupAdd_Click">
+                    <MenuItem.Icon>
+                        <Image Source="/Resources/icon32_add.ico"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Usuń" IsEnabled="{Binding EditingMode}" Click="btnGroupRemove_Click">
+                    <MenuItem.Icon>
+                        <Image Source="/Resources/icon32_delete.ico"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Ustaw jako główną" IsEnabled="False" Click="btnGroupSelectAsMain_Click">
+                    <MenuItem.Icon>
+                        <Image Source="/Resources/icon32_select.ico"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </ContextMenu>
+        </DataGrid.ContextMenu>
+        <DataGrid.RowStyle>
+            <Style TargetType="DataGridRow">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Main}" Value="True">
+                        <Setter Property="Foreground" Value="Green"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Archival}" Value="True">
+                        <Setter Property="Foreground" Value="Gray"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </DataGrid.RowStyle>
+    </c:DataGrid>
 </UserControl>

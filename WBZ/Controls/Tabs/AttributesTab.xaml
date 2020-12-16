@@ -3,21 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:c="clr-namespace:WBZ.Controls"
              xmlns:g="clr-namespace:WBZ.Globals"
+             xmlns:p="clr-namespace:WBZ.Properties"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="750"
              Loaded="UserControl_Loaded">
-    <DataGrid Margin="5" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
-              AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstanceAttributes}" IsReadOnly="True">
+    <c:DataGrid ItemsSource="{Binding InstanceAttributes}" IsReadOnly="True">
         <DataGrid.Columns>
             <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" Visibility="Hidden"/>
             <DataGridTextColumn Binding="{Binding Class.Name}" Header="Atrybut" Width="1*"/>
             <DataGridTemplateColumn Header="Wartość" Width="3*">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <Button Content=" . . . " Visibility="{Binding EditingMode, Converter={g:conv_BoolToVisibility}}" Click="btnAttributeChange_Click"/>
-                            <TextBlock Text="{Binding Value}" Padding="2.5" VerticalAlignment="Center"/>
-                        </StackPanel>
+                        <DockPanel>
+                            <Button DockPanel.Dock="Right" Content=" • • • " FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.5}" Visibility="{Binding EditingMode, Converter={g:conv_BoolToVisibility}}" Click="btnAttributeChange_Click"/>
+                            <TextBlock Text="{Binding Value}"/>
+                        </DockPanel>
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
@@ -27,7 +28,7 @@
                 <Style.Triggers>
                     <MultiDataTrigger>
                         <MultiDataTrigger.Conditions>
-                            <Condition Binding="{Binding Required}" Value="true"/>
+                            <Condition Binding="{Binding Required}" Value="True"/>
                             <Condition Binding="{Binding Value}" Value=""/>
                         </MultiDataTrigger.Conditions>
                         <Setter Property="Foreground" Value="Red"/>
@@ -35,5 +36,5 @@
                 </Style.Triggers>
             </Style>
         </DataGrid.RowStyle>
-    </DataGrid>
+    </c:DataGrid>
 </UserControl>

@@ -34,11 +34,7 @@ namespace WBZ.Globals
 		(
 			Enum.GetName(typeof(Type), Type.ADD),
 			Enum.GetName(typeof(Type), Type.ADD),
-			typeof(Commands),
-			new InputGestureCollection()
-			{
-				new KeyGesture(Key.OemPlus, ModifierKeys.Control)
-			}
+			typeof(Commands)
 		);
 		/// <summary>
 		/// Archive
@@ -50,7 +46,7 @@ namespace WBZ.Globals
 			typeof(Commands),
 			new InputGestureCollection()
 			{
-				new KeyGesture(Key.A, ModifierKeys.Control)
+				new KeyGesture(Key.I, ModifierKeys.Control)
 			}
 		);
 		/// <summary>
@@ -89,7 +85,7 @@ namespace WBZ.Globals
 			typeof(Commands),
 			new InputGestureCollection()
 			{
-				new KeyGesture(Key.X, ModifierKeys.Control)
+				new KeyGesture(Key.Delete)
 			}
 		);
 		/// <summary>
@@ -151,11 +147,7 @@ namespace WBZ.Globals
 		(
 			Enum.GetName(typeof(Type), Type.LIST),
 			Enum.GetName(typeof(Type), Type.LIST),
-			typeof(Commands),
-			new InputGestureCollection()
-			{
-				new KeyGesture(Key.L, ModifierKeys.Control)
-			}
+			typeof(Commands)
 		);
 		/// <summary>
 		/// New
@@ -167,7 +159,7 @@ namespace WBZ.Globals
 			typeof(Commands),
 			new InputGestureCollection()
 			{
-				new KeyGesture(Key.N, ModifierKeys.Control)
+				new KeyGesture(Key.Insert)
 			}
 		);
 		/// <summary>
@@ -216,11 +208,7 @@ namespace WBZ.Globals
 		(
 			Enum.GetName(typeof(Type), Type.REMOVE),
 			Enum.GetName(typeof(Type), Type.REMOVE),
-			typeof(Commands),
-			new InputGestureCollection()
-			{
-				new KeyGesture(Key.OemMinus, ModifierKeys.Control)
-			}
+			typeof(Commands)
 		);
 		/// <summary>
 		/// Save
@@ -242,11 +230,7 @@ namespace WBZ.Globals
 		(
 			Enum.GetName(typeof(Type), Type.SELECTING),
 			Enum.GetName(typeof(Type), Type.SELECTING),
-			typeof(Commands),
-			new InputGestureCollection()
-			{
-				new KeyGesture(Key.L, ModifierKeys.Control)
-			}
+			typeof(Commands)
 		);
 	}
 }

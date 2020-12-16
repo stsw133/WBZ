@@ -3,13 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:c="clr-namespace:WBZ.Controls"
              xmlns:g="clr-namespace:WBZ.Globals"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="750"
              Loaded="UserControl_Loaded">
-    <DataGrid Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
-              AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstanceContacts}" IsReadOnly="{Binding EditingMode, Converter={g:conv_BoolInverted}}">
+    <c:DataGrid ItemsSource="{Binding InstanceContacts}" IsReadOnly="{Binding EditingMode, Converter={g:conv_BoolInverted}}">
         <DataGrid.Columns>
-            <DataGridTextColumn Binding="{Binding id}" Header="ID" IsReadOnly="True" Visibility="Hidden"/>
+            <DataGridTextColumn Binding="{Binding id}" Header="ID" IsReadOnly="True" Visibility="Collapsed"/>
             <DataGridTextColumn Binding="{Binding forename}" Header="Imię" Width="1*"/>
             <DataGridTextColumn Binding="{Binding lastname}" Header="Nazwisko" Width="1*"/>
             <DataGridTextColumn Binding="{Binding email}" Header="E-mail" Width="3*"/>
@@ -32,5 +32,5 @@
                 </Style.Triggers>
             </Style>
         </DataGrid.RowStyle>
-    </DataGrid>
+    </c:DataGrid>
 </UserControl>

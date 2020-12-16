@@ -55,7 +55,7 @@ namespace WBZ.Controls
         /// <summary>
         /// Add
         /// </summary>
-        private void btnAttachmentAdd_Click(object sender, MouseButtonEventArgs e)
+        private void btnAttachmentAdd_Click(object sender, RoutedEventArgs e)
         {
             var window = new AttachmentsAdd();
             window.Owner = Window.GetWindow(this);
@@ -84,7 +84,7 @@ namespace WBZ.Controls
         /// <summary>
         /// Edit
         /// </summary>
-        private void btnAttachmentEdit_Click(object sender, MouseButtonEventArgs e)
+        private void btnAttachmentEdit_Click(object sender, RoutedEventArgs e)
         {
             if (lbAttachments.SelectedIndex < 0)
                 return;
@@ -102,7 +102,7 @@ namespace WBZ.Controls
         /// <summary>
         /// Remove
         /// </summary>
-        private void btnAttachmentRemove_Click(object sender, MouseButtonEventArgs e)
+        private void btnAttachmentRemove_Click(object sender, RoutedEventArgs e)
         {
             if (lbAttachments.SelectedIndex < 0)
                 return;

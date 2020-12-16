@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
-using System.Windows.Input;
 
 namespace WBZ.Controls
 {
@@ -62,15 +61,15 @@ namespace WBZ.Controls
         /// <summary>
         /// Open internet browser
         /// </summary>
-        private void btnLink_Click(object sender, MouseButtonEventArgs e)
+        private void btnLink_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("");
+            Process.Start("https://www.google.com/");
         }
 
         /// <summary>
         /// Open file dialog
         /// </summary>
-        private void btnDrive_Click(object sender, MouseButtonEventArgs e)
+        private void btnDrive_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog()
             {
@@ -83,7 +82,7 @@ namespace WBZ.Controls
         /// <summary>
         /// Accept
         /// </summary>
-        private void btnAccept_Click(object sender, MouseButtonEventArgs e)
+        private void btnAccept_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
         }

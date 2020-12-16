@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Input;
 
 namespace WBZ.Controls
 {
@@ -31,7 +30,7 @@ namespace WBZ.Controls
 		/// <summary>
 		/// Accept
 		/// </summary>
-		private void btnAccept_Click(object sender, MouseButtonEventArgs e)
+		private void btnAccept_Click(object sender, RoutedEventArgs e)
 		{
 			DialogResult = true;
 		}
