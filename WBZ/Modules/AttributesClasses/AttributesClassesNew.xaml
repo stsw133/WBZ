@@ -70,15 +70,18 @@
                                 <ComboBoxItem Content="Data" Tag="date"/>
                                 <ComboBoxItem Content="Liczba całkowita" Tag="int"/>
                                 <ComboBoxItem Content="Liczba przecinkowa" Tag="double"/>
-                                <ComboBoxItem Content="Znak" Tag="char"/>
+                                <ComboBoxItem Content="Lista" Tag="list"/>
                             </ComboBox>
                         </DockPanel>
                         <CheckBox DockPanel.Dock="Top" Content="Wymagana" Margin="20" HorizontalAlignment="Center" VerticalContentAlignment="Center" IsChecked="{Binding InstanceInfo.Required}"/>
                         <Label DockPanel.Dock="Top" Content="Lista możliwych wartości:" Margin="5,5,5,0" HorizontalAlignment="Center"/>
                         <DataGrid x:Name="dgValues" DockPanel.Dock="Top" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
-                                  AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstanceInfo.Values}" IsReadOnly="{Binding EditMode, Converter={g:conv_BoolInverted}}">
+                                  AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstanceInfo.Values.DefaultView}" IsReadOnly="{Binding EditMode, Converter={g:conv_BoolInverted}}"
+                                  IsEnabled="{Binding InstanceInfo.Type, Converter={g:conv_CompareStrings}, ConverterParameter=list}">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding}" Header="Wartość" Width="*"/>
+                                <DataGridTextColumn Binding="{Binding id}" Header="ID" IsReadOnly="True" Visibility="Collapsed"/>
+                                <DataGridTextColumn Binding="{Binding value}" Header="Wartość" Width="*"/>
+                                <DataGridCheckBoxColumn Binding="{Binding archival}" Header="Archiwalna"/>
                             </DataGrid.Columns>
                             <DataGrid.RowStyle>
                                 <Style TargetType="DataGridRow">
@@ -91,6 +94,9 @@
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding Row.RowState}" Value="Deleted">
                                             <Setter Property="Background" Value="LightPink"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding archival}" Value="True">
+                                            <Setter Property="Foreground" Value="Gray"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>

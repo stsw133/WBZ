@@ -111,6 +111,9 @@ namespace WBZ.Interfaces
 		{
 			if (((Commands.Type)D.Mode).In(Commands.Type.NEW, Commands.Type.DUPLICATE) && !saved)
 				SQL.ClearObject(D.MODULE_TYPE, (D.InstanceInfo as dynamic).ID);
+
+			if (W.Owner != null)
+				W.Owner.Focus();
 		}
 	}
 }

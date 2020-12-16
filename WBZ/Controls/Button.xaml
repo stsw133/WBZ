@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:g="clr-namespace:WBZ.Globals"
              xmlns:p="clr-namespace:WBZ.Properties"
-             mc:Ignorable="d"
+             mc:Ignorable="d" d:DesignWidth="100"
         HorizontalContentAlignment="Left">
     <Button.Resources>
         <Style TargetType="Border">

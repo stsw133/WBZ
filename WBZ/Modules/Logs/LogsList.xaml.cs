@@ -46,7 +46,7 @@ namespace WBZ.Modules.Logs
 		/// <summary>
 		/// Preview
 		/// </summary>
-		private void btnPreview_Click(object sender, MouseButtonEventArgs e)
+		private void cmdPreview_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
 			foreach (MODULE_MODEL instance in selectedInstances)
@@ -56,7 +56,7 @@ namespace WBZ.Modules.Logs
 		/// <summary>
 		/// Edit
 		/// </summary>
-		private void btnEdit_Click(object sender, MouseButtonEventArgs e)
+		private void cmdEdit_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
 			foreach (MODULE_MODEL instance in selectedInstances)
@@ -69,7 +69,7 @@ namespace WBZ.Modules.Logs
 		private void dgList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			if (e.LeftButton == MouseButtonState.Pressed)
-				btnEdit_Click(null, null);
+				cmdEdit_Executed(null, null);
 		}
 
 		/// <summary>

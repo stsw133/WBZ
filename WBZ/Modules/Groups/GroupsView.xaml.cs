@@ -253,7 +253,7 @@ namespace WBZ.Controls
                         d.Filters.Group = (int)(e.NewValue as TreeViewItem).Tag;
                     else
                         d.Filters.Group = 0;
-                    (win as dynamic).btnRefresh_Click(null, null);
+                    (win as dynamic).cmdRefresh_Executed(null, null);
                 }
             }
             catch { }

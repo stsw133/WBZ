@@ -72,7 +72,7 @@
                                   AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstanceInfo.Measures.DefaultView}" IsReadOnly="{Binding EditMode, Converter={g:conv_BoolInverted}}"
                                   CellEditEnding="dgMeasures_CellEditEnding">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding id}" Header="ID" IsReadOnly="True" Visibility="Hidden"/>
+                                <DataGridTextColumn Binding="{Binding id}" Header="ID" IsReadOnly="True" Visibility="Collapsed"/>
                                 <DataGridTextColumn Binding="{Binding name}" Header="Jm" Width="*"/>
                                 <DataGridTextColumn Binding="{Binding converter}" Header="Przelicznik (na kg)"/>
                                 <DataGridCheckBoxColumn Binding="{Binding default}" Header="Domyślna"/>

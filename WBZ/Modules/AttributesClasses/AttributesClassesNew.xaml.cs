@@ -1,4 +1,5 @@
-﻿using WBZ.Globals;
+﻿using System.Data;
+using WBZ.Globals;
 using WBZ.Interfaces;
 using MODULE_MODEL = WBZ.Models.M_AttributeClass;
 
@@ -20,6 +21,11 @@ namespace WBZ.Modules.AttributesClasses
             if (instance != null)
                 D.InstanceInfo = instance;
             D.Mode = mode;
+
+            D.InstanceInfo.Values = SQL.GetInstancePositions(D.MODULE_TYPE, D.InstanceInfo.ID);
+            if (D.Mode == Commands.Type.DUPLICATE)
+                foreach (DataRow row in D.InstanceInfo.Values.Rows)
+                    row.SetAdded();
         }
     }
 

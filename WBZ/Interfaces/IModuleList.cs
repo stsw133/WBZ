@@ -256,7 +256,8 @@ namespace WBZ.Interfaces
         /// </summary>
         public void Window_Closed(object sender, EventArgs e)
         {
-            W.Owner.Focus();
+            if (W.Owner != null)
+                W.Owner.Focus();
         }
     }
 }

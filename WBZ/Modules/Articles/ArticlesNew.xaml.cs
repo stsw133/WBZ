@@ -27,7 +27,7 @@ namespace WBZ.Modules.Articles
 				D.InstanceInfo = instance;
 			D.Mode = mode;
 
-			D.InstanceInfo.Measures = SQL.GetArticleMeasures(D.InstanceInfo.ID);
+			D.InstanceInfo.Measures = SQL.GetInstancePositions(D.MODULE_TYPE, D.InstanceInfo.ID);
 			if (D.Mode == Commands.Type.DUPLICATE)
 				foreach (DataRow row in D.InstanceInfo.Measures.Rows)
 					row.SetAdded();

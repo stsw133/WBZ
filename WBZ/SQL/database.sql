@@ -175,6 +175,21 @@ CREATE TABLE wbz.attributes
 )
 TABLESPACE pg_default;
 
+-- Table: wbz.attributes
+CREATE TABLE wbz.attributes_values
+(
+    id bigserial NOT NULL,
+    class integer NOT NULL,
+    value character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    archival boolean NOT NULL DEFAULT false,
+    CONSTRAINT attributes_values_pkey PRIMARY KEY (id),
+    CONSTRAINT attributes_values_class_fkey FOREIGN KEY (class)
+        REFERENCES wbz.attributes_classes (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+)
+TABLESPACE pg_default;
+
 -- Table: wbz.contacts
 CREATE TABLE wbz.contacts
 (

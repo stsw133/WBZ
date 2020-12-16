@@ -92,8 +92,7 @@ namespace WBZ
 				using (var sqlConn = connOpenedWBZ)
 				{
 					var sqlCmd = new NpgsqlCommand(@"select a.id as id, ac.module, @instance as instance,
-							ac.id as class, ac.name, ac.type, ac.values, ac.required,
-							a.value as value
+							ac.id as class, ac.name, ac.type, ac.required, a.value as value
 						from wbz.attributes_classes ac
 						left join wbz.attributes a
 							on ac.id=a.class and a.instance=@instance
@@ -117,8 +116,8 @@ namespace WBZ
 									Module = !Convert.IsDBNull(row["module"]) ? (string)row["module"] : "",
 									Name = !Convert.IsDBNull(row["name"]) ? (string)row["name"] : "",
 									Type = !Convert.IsDBNull(row["type"]) ? (string)row["type"] : "",
-									Values = !Convert.IsDBNull(row["values"]) ? (string)row["values"] : "",
-									Required = !Convert.IsDBNull(row["required"]) ? (bool)row["required"] : false
+									Required = !Convert.IsDBNull(row["required"]) ? (bool)row["required"] : false,
+									Values = GetInstancePositions(Global.Module.ATTRIBUTES_CLASSES, !Convert.IsDBNull(row["class"]) ? (int)row["class"] : 0)
 								},
 								Instance = !Convert.IsDBNull(row["instance"]) ? (int)row["instance"] : 0,
 								Value = !Convert.IsDBNull(row["value"]) ? (string)row["value"] : ""
@@ -582,54 +581,6 @@ namespace WBZ
 			return result;
 		}
 
-		/// <summary>
-		/// Pobiera dane o jednostkach miar towaru
-		/// </summary>
-		/// <param name="id">ID instancji</param>
-		internal static DataTable GetArticleMeasures(int id)
-		{
-			var result = new DataTable();
-
-			try
-			{
-				using (var sqlConn = connOpenedWBZ)
-				{
-					NpgsqlCommand sqlCmd;
-
-					///add
-					if (id == 0)
-					{
-						sqlCmd = new NpgsqlCommand(@"select 0 as id, 'szt' as name, 1.00 as converter, false as ""default"",
-								0.0 as amount, 0.0 as reserved where false", sqlConn);
-					}
-					///edit
-					else
-					{
-						sqlCmd = new NpgsqlCommand(@"select am.id, am.name, am.converter, am.""default"",
-								sa.amount / coalesce(nullif(am.converter,0),1) as amount, sa.reserved / coalesce(nullif(am.converter,0),1) as reserved
-							from wbz.articles a
-							inner join wbz.articles_measures am
-								on a.id = am.article
-							left join wbz.stores_articles sa
-								on a.id = sa.article
-							where a.id=@id", sqlConn);
-						sqlCmd.Parameters.AddWithValue("id", id);
-					}
-					using (var sqlDA = new NpgsqlDataAdapter(sqlCmd))
-					{
-						sqlDA.Fill(result);
-						result.Columns["default"].DefaultValue = false;
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.ToString());
-			}
-
-			return result;
-		}
-		
 		/// <summary>
 		/// Pobiera przelicznik głównej jednostki miary towaru
 		/// </summary>
@@ -1625,6 +1576,23 @@ namespace WBZ
 				{
 					switch (module)
 					{
+						/// ARTICLES
+						case Global.Module.ARTICLES:
+							query = @"select am.id, am.name, am.converter, am.""default"",
+									sa.amount / coalesce(nullif(am.converter,0),1) as amount, sa.reserved / coalesce(nullif(am.converter,0),1) as reserved
+								from wbz.articles a
+								inner join wbz.articles_measures am
+									on a.id = am.article
+								left join wbz.stores_articles sa
+									on a.id = sa.article
+								where a.id=@id";
+							break;
+						/// ATTRIBUTES_CLASSES
+						case Global.Module.ATTRIBUTES_CLASSES:
+							query = @"select id, value, archival
+								from wbz.attributes_values av
+								where class=@id";
+							break;
 						/// DISTRIBUTIONS
 						case Global.Module.DISTRIBUTIONS:
 							query = @"";
@@ -1643,6 +1611,13 @@ namespace WBZ
 					{
 						sqlDA.SelectCommand.Parameters.AddWithValue("id", id);
 						sqlDA.Fill(result);
+					}
+
+					/// ARTICLES
+					if (module == Global.Module.ARTICLES)
+                    {
+						result.Columns["converter"].DefaultValue = 1.0;
+						result.Columns["default"].DefaultValue = false;
 					}
 				}
 			}
@@ -1747,10 +1722,10 @@ namespace WBZ
 						/// ATTRIBUTES_CLASSES
 						case Global.Module.ATTRIBUTES_CLASSES:
 							var attributeClass = instance as M_AttributeClass;
-							query = @"insert into wbz.attributes_classes (module, name, type, ""values"", required, archival, comment, icon)
-								values (@module, @name, @type, @values, @required, @archival, @comment, @icon)
+							query = @"insert into wbz.attributes_classes (module, name, type, required, archival, comment, icon)
+								values (@module, @name, @type, @required, @archival, @comment, @icon)
 								on conflict(id) do
-								update set module=@module, name=@name, type=@type, ""values""=@values, required=@required,
+								update set module=@module, name=@name, type=@type, required=@required,
 									archival=@archival, comment=@comment, icon=@icon";
 							using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 							{
@@ -1758,7 +1733,6 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("module", attributeClass.Module);
 								sqlCmd.Parameters.AddWithValue("name", attributeClass.Name);
 								sqlCmd.Parameters.AddWithValue("type", attributeClass.Type);
-								sqlCmd.Parameters.AddWithValue("values", attributeClass.Values);
 								sqlCmd.Parameters.AddWithValue("required", attributeClass.Required);
 								sqlCmd.Parameters.AddWithValue("archival", attributeClass.Archival);
 								sqlCmd.Parameters.AddWithValue("comment", attributeClass.Comment);
@@ -1766,6 +1740,49 @@ namespace WBZ
 								sqlCmd.ExecuteNonQuery();
 							}
 							SetLog(Global.User.ID, module, attributeClass.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} klasę atrybutu: {attributeClass.Name}.", sqlTran);
+
+							///values
+							foreach (DataRow value in attributeClass.Values.Rows)
+							{
+								///add
+								if (value.RowState == DataRowState.Added)
+								{
+									using (sqlCmd = new NpgsqlCommand(@"insert into wbz.attributes_values (class, value, archival)
+										values (@class, @value, @archival)", sqlConn, sqlTran))
+									{
+										sqlCmd.Parameters.AddWithValue("class", attributeClass.ID);
+										sqlCmd.Parameters.AddWithValue("value", value["name"]);
+										sqlCmd.Parameters.AddWithValue("archival", value["archival"]);
+										sqlCmd.ExecuteNonQuery();
+									}
+									SetLog(Global.User.ID, module, attributeClass.ID, $"Dodano wartość {value["name"]}.", sqlTran);
+								}
+								///edit
+								else if (value.RowState == DataRowState.Modified)
+								{
+									using (sqlCmd = new NpgsqlCommand(@"update wbz.attributes_values
+										set value=@value, archival=@archival
+										where id=@id", sqlConn, sqlTran))
+									{
+										sqlCmd.Parameters.AddWithValue("id", value["id", DataRowVersion.Original]);
+										sqlCmd.Parameters.AddWithValue("value", value["name"]);
+										sqlCmd.Parameters.AddWithValue("archival", value["archival"]);
+										sqlCmd.ExecuteNonQuery();
+									}
+									SetLog(Global.User.ID, module, attributeClass.ID, $"Edytowano wartość {value["name", DataRowVersion.Original]}.", sqlTran);
+								}
+								///delete
+								else if (value.RowState == DataRowState.Deleted)
+								{
+									using (sqlCmd = new NpgsqlCommand(@"delete from wbz.attributes_values
+										where id=@id", sqlConn, sqlTran))
+									{
+										sqlCmd.Parameters.AddWithValue("id", value["id", DataRowVersion.Original]);
+										sqlCmd.ExecuteNonQuery();
+									}
+									SetLog(Global.User.ID, module, attributeClass.ID, $"Usunięto wartość {value["name", DataRowVersion.Original]}.", sqlTran);
+								}
+							}
 							break;
 						/// COMPANIES
 						case Global.Module.COMPANIES:

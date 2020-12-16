@@ -1,4 +1,5 @@
-﻿using WBZ.Globals;
+﻿using System.Data;
+using WBZ.Globals;
 
 namespace WBZ.Models
 {
@@ -7,17 +8,17 @@ namespace WBZ.Models
 		public string Module { get; set; }
 		public string Name { get; set; }
 		public string Type { get; set; }
-		public string Values { get; set; }
 		public string DefValue { get; set; }
 		public bool Required { get; set; }
+		public DataTable Values { get; set; }
 
 		public M_AttributeClass()
         {
 			Module = string.Empty;
 			Name = string.Empty;
 			Type = string.Empty;
-			Values = string.Empty;
 			DefValue = string.Empty;
+			Values = new DataTable();
         }
 
 		public string TranslatedModule

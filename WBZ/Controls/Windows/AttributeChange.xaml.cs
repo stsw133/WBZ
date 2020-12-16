@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
+using WBZ.Globals;
 using WBZ.Models;
 
 namespace WBZ.Controls
@@ -19,6 +21,7 @@ namespace WBZ.Controls
 			DataContext = D;
 
 			D.AttributeInfo = attribute;
+			D.AttributeValues = SQL.ComboInstances("attributes_values", "value", $"class={attribute.Class.ID} and archival=false");
 			D.EditMode = editMode;
 		}
 
@@ -31,11 +34,10 @@ namespace WBZ.Controls
 				D.AttributeInfo.Value = "";
 
 			if ((string.IsNullOrEmpty(D.AttributeInfo.Value))
-			||  (D.AttributeInfo.Class.Type == "char" && char.TryParse(D.AttributeInfo.Value, out _))
 			||  (D.AttributeInfo.Class.Type == "date" && DateTime.TryParse(D.AttributeInfo.Value, out _))
 			||  (D.AttributeInfo.Class.Type == "double" && double.TryParse(D.AttributeInfo.Value, out _))
 			||  (D.AttributeInfo.Class.Type == "int" && int.TryParse(D.AttributeInfo.Value, out _))
-			||  (D.AttributeInfo.Class.Type == "string"))
+			||  (D.AttributeInfo.Class.Type.In("string", "list")))
 				DialogResult = true;
 			else
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"Wartość niezgodna z typem ({D.AttributeInfo.Class.Type}) danych klasy atrybutu!") { Owner = this }.ShowDialog();
@@ -61,6 +63,19 @@ namespace WBZ.Controls
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
 
+		/// Window title
+		public string Title
+		{
+			get
+			{
+				if (string.IsNullOrEmpty(AttributeInfo.Value))
+					return $"Wartość nowego atrybutu: {AttributeInfo.Class.Name}";
+				else if (EditMode)
+					return $"Edycja wartości atrybutu: {AttributeInfo.Class.Name}";
+				else
+					return $"Podgląd wartości atrybutu: {AttributeInfo.Class.Name}";
+			}
+		}
 		/// Attribute
 		private M_Attribute attributeInfo;
 		public M_Attribute AttributeInfo
@@ -76,23 +91,22 @@ namespace WBZ.Controls
 			}
 		}
 		/// Attribute values
-		public string[] AttributeValues { get { return AttributeInfo.Class.Values.Split(';'); } }
-		/// Can attribute have any value
-		public bool FreeValues { get { return string.IsNullOrEmpty(AttributeInfo.Class.Values); } }
-		/// Edit mode
-		public bool EditMode { get; set; }
-		/// Window title
-		public string Title
+		private List<M_ComboValue> attributeValues;
+		public List<M_ComboValue> AttributeValues
 		{
 			get
 			{
-				if (string.IsNullOrEmpty(AttributeInfo.Value))
-					return $"Wartość nowego atrybutu: {AttributeInfo.Class.Name}";
-				else if (EditMode)
-					return $"Edycja wartości atrybutu: {AttributeInfo.Class.Name}";
-				else
-					return $"Podgląd wartości atrybutu: {AttributeInfo.Class.Name}";
+				return attributeValues;
+			}
+			set
+			{
+				attributeValues = value;
+				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
 		}
+		/// Can attribute have any value
+		public bool FreeValues { get { return AttributeInfo.Class.Type != "list"; } }
+		/// Edit mode
+		public bool EditMode { get; set; }
 	}
 }

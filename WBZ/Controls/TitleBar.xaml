@@ -9,29 +9,31 @@
              Loaded="UserControl_Loaded">
     <!-- titleBar -->
     <DockPanel x:Name="titleBar" Background="#444" MouseDown="titleBar_MouseDown" WindowChrome.IsHitTestVisibleInChrome="True">
-        <Button x:Name="titleBar_Close" DockPanel.Dock="Right" Background="#333" BorderThickness="0" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3.5}" Click="titleBar_Close_Click">
-            <Image Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.25}" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.75}" Source="/Resources/icon32_close.ico"/>
-        </Button>
-        <Button x:Name="titleBar_Resize" DockPanel.Dock="Right" Background="#333" BorderThickness="0" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3.5}" Click="titleBar_Resize_Click">
-            <Image Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.25}" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.75}" Source="/Resources/icon32_maximize.ico"/>
-        </Button>
-        <Button x:Name="titleBar_Minimize" DockPanel.Dock="Right" Background="#333" BorderThickness="0" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3.5}" Click="titleBar_Minimize_Click">
-            <Image Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.25}" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.75}" Source="/Resources/icon32_minimize.ico"/>
-        </Button>
+        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+            <Button x:Name="btnMinimize" Background="#333" BorderThickness="0" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3.5}" Click="miMinimize_Click">
+                <Image Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.25}" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.75}" Source="/Resources/icon32_minimize.ico"/>
+            </Button>
+            <Button x:Name="btnResize" Background="#333" BorderThickness="0" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3.5}" Click="miResize_Click">
+                <Image Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.25}" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.75}" Source="/Resources/icon32_maximize.ico"/>
+            </Button>
+            <Button x:Name="btnClose" Background="#333" BorderThickness="0" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3.5}" Click="miClose_Click">
+                <Image Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.25}" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.75}" Source="/Resources/icon32_close.ico"/>
+            </Button>
+        </StackPanel>
         <Grid Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.25}">
             <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.75}" Source="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
             <Image Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.85}" Source="{Binding SubIcon, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
         </Grid>
-        <Label x:Name="titleBar_Title" Content="{Binding Title, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" VerticalContentAlignment="Center" Foreground="White"/>
+        <Label Content="{Binding Title, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" VerticalContentAlignment="Center" Foreground="White"/>
         <DockPanel.ContextMenu>
             <ContextMenu>
-                <MenuItem x:Name="titleBar_Menu_RestoreDown" Header="Przywróć" Click="titleBar_Resize_Click" IsEnabled="False"/>
-                <MenuItem x:Name="titleBar_Menu_SetCenter" Header="Wyśrodkuj na ekranie" Click="titleBar_SetCenter_Click"/>
-                <MenuItem x:Name="titleBar_Menu_DefaultSize" Header="Domyślny rozmiar" Click="titleBar_DefaultSize_Click" IsEnabled="{Binding IsEnabled, ElementName=titleBar_Resize}"/>
-                <MenuItem x:Name="titleBar_Menu_Minimize" Header="Minimalizuj" Click="titleBar_Minimize_Click" IsEnabled="{Binding IsEnabled, ElementName=titleBar_Minimize}"/>
-                <MenuItem x:Name="titleBar_Menu_Maximize" Header="Maksymalizuj" Click="titleBar_Resize_Click" IsEnabled="{Binding IsEnabled, ElementName=titleBar_Resize}"/>
+                <MenuItem x:Name="miRestoreDown" Header="Przywróć" Click="miResize_Click" IsEnabled="False"/>
+                <MenuItem x:Name="miSetCenter" Header="Wyśrodkuj na ekranie" Click="miSetCenter_Click"/>
+                <MenuItem x:Name="miDefaultSize" Header="Domyślny rozmiar" Click="miDefaultSize_Click" IsEnabled="{Binding IsEnabled, ElementName=btnResize}"/>
+                <MenuItem x:Name="miMinimize" Header="Minimalizuj" Click="miMinimize_Click" IsEnabled="{Binding IsEnabled, ElementName=btnMinimize}"/>
+                <MenuItem x:Name="miMaximize" Header="Maksymalizuj" Click="miResize_Click" IsEnabled="{Binding IsEnabled, ElementName=btnResize}"/>
                 <Separator/>
-                <MenuItem x:Name="titleBar_Menu_Close" Header="Zamknij okno" Click="titleBar_Close_Click" IsEnabled="{Binding IsEnabled, ElementName=titleBar_Close}"/>
+                <MenuItem x:Name="miClose" Header="Zamknij okno" Click="miClose_Click" IsEnabled="{Binding IsEnabled, ElementName=titleBar_Close}"/>
             </ContextMenu>
         </DockPanel.ContextMenu>
     </DockPanel>

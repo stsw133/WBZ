@@ -148,8 +148,20 @@ CREATE TABLE wbz.employees
 		ON UPDATE CASCADE
 		ON DELETE SET NULL
 		NOT VALID
-)
-TABLESPACE pg_default;
+) TABLESPACE pg_default;
+
+CREATE TABLE wbz.attributes_values
+(
+    id bigserial NOT NULL,
+    class integer NOT NULL,
+    value character varying(50) COLLATE pg_catalog.""default"" NOT NULL,
+	archival boolean NOT NULL DEFAULT false,
+	CONSTRAINT attributes_values_pkey PRIMARY KEY(id),
+	CONSTRAINT attributes_values_class_fkey FOREIGN KEY(class)
+        REFERENCES wbz.attributes_classes(id) MATCH SIMPLE
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+) TABLESPACE pg_default;
 
 							update wbz.config set value='1.1.0' where property='VERSION'", sqlConn, sqlTran);
 							sqlCmd.ExecuteNonQuery();

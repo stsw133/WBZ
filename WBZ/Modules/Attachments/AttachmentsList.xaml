@@ -37,7 +37,7 @@
                     <c:Button Text="Edycja&#10;obiektu" Margin="5,5,5,0" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_edit.ico" Command="g:Commands.Edit"/>
                     <Separator Height="5" Margin="0,5,0,0"/>
                     <CheckBox Content="Podgląd zdjęć" x:Name="chckShowPictures" Margin="5,5,5,0" Visibility="{Binding IsChecked, ElementName=btnToggle, Converter={g:conv_BoolToVisibility}}"/>
-                    <Separator Height="5" Margin="0,5,0,0"/>
+                    <Separator Height="5" Margin="0,5,0,0" Visibility="{Binding IsChecked, ElementName=btnToggle, Converter={g:conv_BoolToVisibility}}"/>
                     <c:Button Text="Usuń" Margin="5,5,5,0" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_delete.ico" Command="g:Commands.Delete"/>
                     <Separator Height="5" Margin="0,5,0,0"/>
                 </StackPanel>
@@ -205,16 +205,16 @@
                             <Setter Property="Background" Value="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Module}" Value="employees">
-                            <Setter Property="Background" Value="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                            <Setter Property="Background" Value="{Binding config_Employees_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Module}" Value="families">
                             <Setter Property="Background" Value="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Module}" Value="stores">
-                            <Setter Property="Background" Value="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                            <Setter Property="Background" Value="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Module}" Value="users">
-                            <Setter Property="Background" Value="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                            <Setter Property="Background" Value="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>

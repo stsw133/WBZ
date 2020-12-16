@@ -29,14 +29,14 @@ namespace WBZ.Controls
 				if ((win.ResizeMode == ResizeMode.NoResize)
 				|| (win.ResizeMode == ResizeMode.CanMinimize))
 				{
-					titleBar_Resize.IsEnabled = false;
-					titleBar_Resize.Visibility = Visibility.Collapsed;
+					btnResize.IsEnabled = false;
+					btnResize.Visibility = Visibility.Collapsed;
 				}
 
 				if (win.ResizeMode == ResizeMode.NoResize)
 				{
-					titleBar_Minimize.IsEnabled = false;
-					titleBar_Minimize.Visibility = Visibility.Collapsed;
+					btnMinimize.IsEnabled = false;
+					btnMinimize.Visibility = Visibility.Collapsed;
 				}
 			}
 			catch { }
@@ -59,17 +59,17 @@ namespace WBZ.Controls
 		private void Window_StateChanged(object sender, EventArgs e)
 		{
 			if (win.WindowState == WindowState.Maximized)
-				((Image)titleBar_Resize.Content).Source = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resources/icon32_restoredown.ico"));
+				(btnResize.Content as Image).Source = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resources/icon32_restoredown.ico"));
 			else
-				((Image)titleBar_Resize.Content).Source = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resources/icon32_maximize.ico"));
+				(btnResize.Content as Image).Source = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resources/icon32_maximize.ico"));
 		}
 
 		private void titleBar_MouseDown(object sender, MouseButtonEventArgs e)
 		{
 			if (e.ChangedButton == MouseButton.Left)
 			{
-				if (e.ClickCount == 2 && titleBar_Resize.IsEnabled)
-					titleBar_Resize_Click(null, null);
+				if (e.ClickCount == 2 && btnResize.IsEnabled)
+					miResize_Click(null, null);
 				else
 					win.DragMove();
 			}
@@ -78,7 +78,7 @@ namespace WBZ.Controls
 		/// <summary>
 		/// Default size
 		/// </summary>
-		private void titleBar_DefaultSize_Click(object sender, RoutedEventArgs e)
+		private void miDefaultSize_Click(object sender, RoutedEventArgs e)
 		{
 			win.Height = win.MinHeight * 2.5;
 			win.Width = win.MinWidth * 2.5;
@@ -87,7 +87,7 @@ namespace WBZ.Controls
 		/// <summary>
 		/// Set center
 		/// </summary>
-		public void titleBar_SetCenter_Click(object sender, RoutedEventArgs e)
+		public void miSetCenter_Click(object sender, RoutedEventArgs e)
 		{
 			Rect workArea = SystemParameters.WorkArea;
 			win.Left = (workArea.Width - win.Width) / 2 + workArea.Left;
@@ -97,7 +97,7 @@ namespace WBZ.Controls
 		/// <summary>
 		/// Minimize
 		/// </summary>
-		private void titleBar_Minimize_Click(object sender, RoutedEventArgs e)
+		private void miMinimize_Click(object sender, RoutedEventArgs e)
 		{
 			win.WindowState = WindowState.Minimized;
 		}
@@ -105,21 +105,21 @@ namespace WBZ.Controls
 		/// <summary>
 		/// Resize
 		/// </summary>
-		private void titleBar_Resize_Click(object sender, RoutedEventArgs e)
+		private void miResize_Click(object sender, RoutedEventArgs e)
 		{
 			if (win.WindowState == WindowState.Normal)
 				win.WindowState = WindowState.Maximized;
 			else
 				win.WindowState = WindowState.Normal;
 
-			titleBar_Menu_RestoreDown.IsEnabled = !titleBar_Menu_RestoreDown.IsEnabled;
-			titleBar_Menu_Maximize.IsEnabled = !titleBar_Menu_Maximize.IsEnabled;
+			miRestoreDown.IsEnabled = !miRestoreDown.IsEnabled;
+			miMaximize.IsEnabled = !miMaximize.IsEnabled;
 		}
 
 		/// <summary>
 		/// Close
 		/// </summary>
-		private void titleBar_Close_Click(object sender, RoutedEventArgs e)
+		private void miClose_Click(object sender, RoutedEventArgs e)
 		{
 			win.Close();
 		}

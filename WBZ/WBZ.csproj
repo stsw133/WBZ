@@ -143,7 +143,7 @@
     <Compile Include="Models\M_ComboValue.cs" />
     <Compile Include="Models\M_Article.cs" />
     <Compile Include="Models\M_Attachment.cs" />
-    <Compile Include="Models\M_Attribute.cs" />
+    <Compile Include="Models\M_AttributeClass.cs" />
     <Compile Include="Models\M_Company.cs" />
     <Compile Include="Models\M_Config.cs" />
     <Compile Include="Models\M_Contact.cs" />
