@@ -94,9 +94,8 @@
         <!-- groupsView -->
         <c:GroupsView EditingMode="False" Visibility="{Binding EnableGroups, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
         <!-- dataGrid -->
-        <DataGrid x:Name="dgList" Margin="5" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
-                  AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstancesList}" IsReadOnly="True"
-                  MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged">
+        <c:DataGrid x:Name="dgList" ItemsSource="{Binding InstancesList}" IsReadOnly="True"
+                    MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_ID, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
                 <DataGridTextColumn Binding="{Binding UserFullname}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_UserFullname, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
@@ -275,6 +274,6 @@
                     </Style.Triggers>
                 </Style>
             </DataGrid.RowStyle>
-        </DataGrid>
+        </c:DataGrid>
     </DockPanel>
 </local:List>

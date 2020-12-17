@@ -124,6 +124,7 @@ namespace WBZ.Globals
 				return Visibility.Collapsed;
 			else
 				return false;
+			//return value;
 		}
 	}
 
