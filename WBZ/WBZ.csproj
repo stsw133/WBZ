@@ -127,6 +127,15 @@
     <Compile Include="Controls\DataGrid.xaml.cs">
       <DependentUpon>DataGrid.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DataGridColumnFilter_Text.xaml.cs">
+      <DependentUpon>DataGridColumnFilter_Text.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DataGridColumnFilter_Number.xaml.cs">
+      <DependentUpon>DataGridColumnFilter_Number.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DataGridColumnFilter_Date.xaml.cs">
+      <DependentUpon>DataGridColumnFilter_Date.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Groups\D_GroupsList.cs" />
     <Compile Include="Modules\Groups\GroupsList.xaml.cs">
       <DependentUpon>GroupsList.xaml</DependentUpon>
@@ -346,6 +355,18 @@
       <DependentUpon>MenuPanelColor.xaml</DependentUpon>
     </Compile>
     <Page Include="Controls\DataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\DataGridColumnFilter_Text.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\DataGridColumnFilter_Number.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\DataGridColumnFilter_Date.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

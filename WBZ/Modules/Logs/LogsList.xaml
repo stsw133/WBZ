@@ -94,96 +94,34 @@
         <!-- groupsView -->
         <c:GroupsView EditingMode="False" Visibility="{Binding EnableGroups, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
         <!-- dataGrid -->
-        <c:DataGrid x:Name="dgList" ItemsSource="{Binding InstancesList}" IsReadOnly="True"
-                    MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged">
+        <c:DataGrid x:Name="dgList" ItemsSource="{Binding InstancesList}" IsReadOnly="True" MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged">
             <DataGrid.Columns>
+                <!-- ID -->
                 <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_ID, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                <!-- UserFullname -->
                 <DataGridTextColumn Binding="{Binding UserFullname}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_UserFullname, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
                     <DataGridTextColumn.Header>
-                        <StackPanel>
-                            <TextBlock Text="Użytkownik"/>
-                            <DockPanel>
-                                <ComboBox SelectedIndex="0">
-                                    <ComboBoxItem Content="⊃"/>
-                                    <ComboBoxItem Content="="/>
-                                </ComboBox>
-                                <TextBox Text="{Binding DataContext.Filters.UserFullname, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, UpdateSourceTrigger=PropertyChanged}" MinWidth="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=8}">
-                                    <TextBox.InputBindings>
-                                        <KeyBinding Command="g:Commands.Refresh" Key="Return"/>
-                                    </TextBox.InputBindings>
-                                </TextBox>
-                            </DockPanel>
-                        </StackPanel>
+                        <c:DataGridColumnFilter_Text Text="Użytkownik" Value="{Binding Data.Filters.UserFullname, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"/>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding TranslatedModule}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Module, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
                     <DataGridTextColumn.Header>
-                        <StackPanel>
-                            <TextBlock Text="Nazwa modułu"/>
-                            <DockPanel>
-                                <ComboBox SelectedIndex="0">
-                                    <ComboBoxItem Content="⊃"/>
-                                    <ComboBoxItem Content="="/>
-                                </ComboBox>
-                                <TextBox Text="{Binding DataContext.Filters.Module, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, UpdateSourceTrigger=PropertyChanged}" MinWidth="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=8}">
-                                    <TextBox.InputBindings>
-                                        <KeyBinding Command="g:Commands.Refresh" Key="Return"/>
-                                    </TextBox.InputBindings>
-                                </TextBox>
-                            </DockPanel>
-                        </StackPanel>
+                        <c:DataGridColumnFilter_Text Text="Nazwa modułu" Value="{Binding Data.Filters.Module, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"/>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding Instance}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Obj, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
                     <DataGridTextColumn.Header>
-                        <StackPanel>
-                            <TextBlock Text="ID instancji"/>
-                            <DockPanel>
-                                <ComboBox SelectedIndex="0">
-                                    <ComboBoxItem Content="="/>
-                                    <ComboBoxItem Content="≠"/>
-                                    <ComboBoxItem Content="&#62;"/>
-                                    <ComboBoxItem Content="&#60;"/>
-                                    <ComboBoxItem Content="≥"/>
-                                    <ComboBoxItem Content="≤"/>
-                                </ComboBox>
-                                <TextBox Text="{Binding DataContext.Filters.Instance, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, UpdateSourceTrigger=PropertyChanged}" MinWidth="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=8}">
-                                    <TextBox.InputBindings>
-                                        <KeyBinding Command="g:Commands.Refresh" Key="Return"/>
-                                    </TextBox.InputBindings>
-                                </TextBox>
-                            </DockPanel>
-                        </StackPanel>
+                        <c:DataGridColumnFilter_Number Text="ID instancji" Value="{Binding Data.Filters.Instance, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"/>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding Content}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Content, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
                     <DataGridTextColumn.Header>
-                        <StackPanel>
-                            <TextBlock Text="Treść"/>
-                            <DockPanel>
-                                <ComboBox SelectedIndex="0">
-                                    <ComboBoxItem Content="⊃"/>
-                                    <ComboBoxItem Content="="/>
-                                </ComboBox>
-                                <TextBox Text="{Binding DataContext.Filters.Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, UpdateSourceTrigger=PropertyChanged}" MinWidth="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=8}">
-                                    <TextBox.InputBindings>
-                                        <KeyBinding Command="g:Commands.Refresh" Key="Return"/>
-                                    </TextBox.InputBindings>
-                                </TextBox>
-                            </DockPanel>
-                        </StackPanel>
+                        <c:DataGridColumnFilter_Text Text="Treść" Value="{Binding Data.Filters.Content, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"/>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding DateTime, StringFormat={}{0:yyyy-MM-dd}}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_DateTime, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
                     <DataGridTextColumn.Header>
-                        <StackPanel>
-                            <TextBlock Text="Data i czas"/>
-                            <DockPanel>
-                                <DatePicker SelectedDate="{Binding DataContext.Filters.fDateTime, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" MinWidth="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=8}" KeyUp="dpFilter_KeyUp"/>
-                                <TextBlock Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.25}" Text="/" VerticalAlignment="Center"/>
-                                <DatePicker SelectedDate="{Binding DataContext.Filters.DateTime, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" MinWidth="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=8}" KeyUp="dpFilter_KeyUp"/>
-                            </DockPanel>
-                        </StackPanel>
+                        <c:DataGridColumnFilter_Date Text="Data i czas" Value1="{Binding Data.Filters.fDateTime, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" Value2="{Binding Data.Filters.DateTime, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"/>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
             </DataGrid.Columns>

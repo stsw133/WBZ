@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 ﻿using System.Text;
 using WBZ.Models;
 using WBZ.Controls;
+using System.Windows;
 
 namespace WBZ.Globals
 {
@@ -79,9 +80,9 @@ namespace WBZ.Globals
             public const string SAVE = "save";
             public const string DELETE = "delete";
         }
-        
-		#region Crypto
-		private const int DerivationIterations = 1000;
+
+        #region Crypto
+        private const int DerivationIterations = 1000;
         private const string password = "ejdndbfewbasjhdggjhbasbvdgewvbjdbsavdqgwjbdjsvdyugwqyubashjdbjfgdtyuqw";
 
         internal static string Encrypt(string plainText)
@@ -192,4 +193,22 @@ namespace WBZ.Globals
         }
         #endregion
     }
+
+    #region Proxy
+    public class BindingProxy : Freezable
+    {
+        protected override Freezable CreateInstanceCore()
+        {
+            return new BindingProxy();
+        }
+
+        public object Data
+        {
+            get { return (object)GetValue(DataProperty); }
+            set { SetValue(DataProperty, value); }
+        }
+
+        public static readonly DependencyProperty DataProperty = DependencyProperty.Register("Data", typeof(object), typeof(BindingProxy), new UIPropertyMetadata(null));
+    }
+    #endregion
 }
