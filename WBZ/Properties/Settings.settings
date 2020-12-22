@@ -163,7 +163,7 @@
     <Setting Name="columns_ArticlesList_ID" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="columns_ArticlesList_Code" Type="System.Boolean" Scope="User">
+    <Setting Name="columns_ArticlesList_Codename" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="columns_ArticlesList_Name" Type="System.Boolean" Scope="User">
@@ -638,7 +638,7 @@
     <Setting Name="columns_AttachmentsList_UserFullname" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="columns_AttachmentsList_Obj" Type="System.Boolean" Scope="User">
+    <Setting Name="columns_AttachmentsList_Instance" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="language" Type="System.String" Scope="User">

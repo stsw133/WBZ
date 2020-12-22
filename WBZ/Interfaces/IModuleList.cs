@@ -52,15 +52,6 @@ namespace WBZ.Interfaces
         }
 
         /// <summary>
-		/// Apply filters
-		/// </summary>
-		public void dpFilter_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-                cmdRefresh_Executed(null, null);
-        }
-
-        /// <summary>
         /// Preview
         /// </summary>
         internal void cmdPreview_CanExecute(object sender, CanExecuteRoutedEventArgs e)

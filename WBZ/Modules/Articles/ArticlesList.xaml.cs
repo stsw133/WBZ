@@ -20,8 +20,6 @@ namespace WBZ.Modules.Articles
 			Init();
 
 			D.Mode = mode;
-			if (D.StoresList.Count > 0)
-				cbStore.SelectedIndex = 0;
 		}
 
 		/// <summary>
@@ -45,6 +43,7 @@ namespace WBZ.Modules.Articles
         public M_Store SelectedStore;
 		private void cbStore_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
+			var cbStore = sender as ComboBox;
 			SelectedStore = SQL.GetInstance<M_Store>(Global.Module.STORES, cbStore.SelectedValue != null ? (int)cbStore.SelectedValue : 0);
 			cmdRefresh_Executed(null, null);
 		}

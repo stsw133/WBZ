@@ -3,13 +3,9 @@
           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-          xmlns:g="clr-namespace:WBZ.Globals"
           mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="750"
           Margin="5" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
           AutoGenerateColumns="False" RowHeaderWidth="0">
-    <DataGrid.Resources>
-        <g:BindingProxy x:Key="proxy" Data="{Binding}"/>
-    </DataGrid.Resources>
     <DataGrid.ColumnHeaderStyle>
         <Style TargetType="{x:Type DataGridColumnHeader}">
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>

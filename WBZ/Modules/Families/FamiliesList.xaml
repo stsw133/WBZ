@@ -1,18 +1,18 @@
 ﻿<local:List x:Class="WBZ.Modules.Families.FamiliesList"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WBZ.Modules.Families"
-        xmlns:c="clr-namespace:WBZ.Controls"
-        xmlns:g="clr-namespace:WBZ.Globals"
-        xmlns:p="clr-namespace:WBZ.Properties"
-        mc:Ignorable="d"
-        Title="Lista rodzin" MinHeight="260" MinWidth="390" Height="{Binding config_FamiliesList_WindowSize[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_FamiliesList_WindowSize[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-            BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
-            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
-            Icon="/Resources/icon32_families.ico" Loaded="Window_Loaded" Closed="Window_Closed"
-            FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}">
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            xmlns:local="clr-namespace:WBZ.Modules.Families"
+            xmlns:c="clr-namespace:WBZ.Controls"
+            xmlns:g="clr-namespace:WBZ.Globals"
+            xmlns:p="clr-namespace:WBZ.Properties"
+            mc:Ignorable="d"
+            Title="Lista rodzin" MinHeight="260" MinWidth="390" Height="{Binding config_FamiliesList_WindowSize[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_FamiliesList_WindowSize[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+                BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
+                FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
+                Icon="/Resources/icon32_families.ico" Loaded="Window_Loaded" Closed="Window_Closed"
+                FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -55,164 +55,23 @@
                 </ContextMenu>
             </Border.ContextMenu>
         </Border>
-        <!-- filtersPanel -->
-        <Grid DockPanel.Dock="Top" Background="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}">
-            <Expander x:Name="filtersExpander" Header="Filtry wyszukiwania" Background="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="0,0,0,1">
-                <TabControl MaxHeight="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=20}">
-                    <!-- tabMain -->
-                    <TabItem>
-                        <TabItem.Header>
-                            <c:Header Text="Ogólne" Icon="/Resources/icon32_filter.ico"/>
-                        </TabItem.Header>
-                        <ScrollViewer>
-                            <DockPanel Margin="5">
-                                <DockPanel DockPanel.Dock="Top">
-                                    <Label Content="Zgłaszający:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
-                                    <TextBox Text="{Binding Filters.Declarant}" Margin="2.5" VerticalContentAlignment="Center" KeyUp="dpFilter_KeyUp"/>
-                                </DockPanel>
-                                <DockPanel DockPanel.Dock="Top">
-                                    <Label Content="Rodzina:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
-                                    <TextBox Text="{Binding Filters.Lastname}" Margin="2.5" VerticalContentAlignment="Center" KeyUp="dpFilter_KeyUp"/>
-                                </DockPanel>
-                                <DockPanel DockPanel.Dock="Top">
-                                    <Label Content="Ilość osób:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
-                                    <TextBox Text="{Binding Filters.Members}" Margin="2.5" VerticalContentAlignment="Center" KeyUp="dpFilter_KeyUp"/>
-                                </DockPanel>
-                                <DockPanel DockPanel.Dock="Top">
-                                    <Label Content="Kod pocztowy:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
-                                    <TextBox Text="{Binding Filters.Postcode}" Margin="2.5" VerticalContentAlignment="Center" KeyUp="dpFilter_KeyUp"/>
-                                </DockPanel>
-                                <DockPanel DockPanel.Dock="Top">
-                                    <Label Content="Miasto:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
-                                    <TextBox Text="{Binding Filters.City}" Margin="2.5" VerticalContentAlignment="Center" KeyUp="dpFilter_KeyUp"/>
-                                </DockPanel>
-                                <DockPanel DockPanel.Dock="Top">
-                                    <Label Content="Adres:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
-                                    <TextBox Text="{Binding Filters.Address}" Margin="2.5" VerticalContentAlignment="Center" KeyUp="dpFilter_KeyUp"/>
-                                </DockPanel>
-                                <DockPanel DockPanel.Dock="Top">
-                                    <Label Content="Pokaż archiwalne:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
-                                    <CheckBox IsChecked="{Binding Filters.Archival}" Margin="2.5" VerticalContentAlignment="Center"/>
-                                </DockPanel>
-                                <!--
-                                <CheckBox DockPanel.Dock="Top" x:Name="chckFilterGroup" Content="Wg grupy:" Margin="5" VerticalContentAlignment="Center"/>
-                                <ComboBox DockPanel.Dock="Top" x:Name="cbFilterGroup" Margin="5" VerticalContentAlignment="Center" DisplayMemberPath="name" SelectedValuePath="id" IsEnabled="{Binding IsChecked, ElementName=chckFilterGroup}"/>
-                                -->
-                            </DockPanel>
-                        </ScrollViewer>
-                    </TabItem>
-                    <!-- tabAttributes -->
-                    <TabItem IsEnabled="False">
-                        <TabItem.Header>
-                            <c:Header Text="Atrybuty" Icon="/Resources/icon32_attributes.ico"/>
-                        </TabItem.Header>
-                        <DockPanel>
-                            <DataGrid HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
-                                      AutoGenerateColumns="False">
-                                <DataGrid.Columns>
-                                    <DataGridComboBoxColumn Header="Klasa atrybutu" Width="1*"/>
-                                    <DataGridTextColumn Header="Wartość" Width="3*"/>
-                                </DataGrid.Columns>
-                            </DataGrid>
-                        </DockPanel>
-                    </TabItem>
-                    <!-- tabLogs -->
-                    <TabItem IsEnabled="False">
-                        <TabItem.Header>
-                            <c:Header Text="Historia" Icon="/Resources/icon32_logs.ico"/>
-                        </TabItem.Header>
-                        <Grid Margin="5">
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="1*"/>
-                            </Grid.ColumnDefinitions>
-                            <CheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" x:Name="chckFilterCreated" Content="Wg daty utworzenia:" Margin="5" VerticalContentAlignment="Center"/>
-                            <DatePicker Grid.Row="1" Grid.Column="0" x:Name="dpFilterCreatedF" Margin="5" VerticalContentAlignment="Center" IsEnabled="{Binding IsChecked, ElementName=chckFilterCreated}"/>
-                            <Label Grid.Row="1" Grid.Column="1" Content="-" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
-                            <DatePicker Grid.Row="1" Grid.Column="2" x:Name="dpFilterCreatedT" Margin="5" VerticalContentAlignment="Center" IsEnabled="{Binding IsChecked, ElementName=chckFilterCreated}"/>
-                            <CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" x:Name="chckFilterCreator" Content="Wg osoby tworzącej:" Margin="5" VerticalContentAlignment="Center"/>
-                            <ComboBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" x:Name="cbFilterCreator" Margin="5" VerticalContentAlignment="Center" ItemsSource="{Binding UsersList.DefaultView}" DisplayMemberPath="fullname" SelectedValuePath="id" IsEnabled="{Binding IsChecked, ElementName=chckFilterCreator}"/>
-                            <GridSplitter Grid.Row="0" Grid.Column="3" Grid.RowSpan="4" Margin="5" BorderBrush="Gray" BorderThickness="1" Width="5" IsEnabled="False"/>
-                            <CheckBox Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="3" x:Name="chckFilterModified" Content="Wg daty modyfikacji:" Margin="5" VerticalContentAlignment="Center"/>
-                            <DatePicker Grid.Row="1" Grid.Column="4" x:Name="dpFilterModifiedF" Margin="5" VerticalContentAlignment="Center" IsEnabled="{Binding IsChecked, ElementName=chckFilterModified}"/>
-                            <Label Grid.Row="1" Grid.Column="5" Content="-" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
-                            <DatePicker Grid.Row="1" Grid.Column="6" x:Name="dpFilterModifiedT" Margin="5" VerticalContentAlignment="Center" IsEnabled="{Binding IsChecked, ElementName=chckFilterModified}"/>
-                            <CheckBox Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="3" x:Name="chckFilterModifier" Content="Wg osoby modyfikującej:" Margin="5" VerticalContentAlignment="Center"/>
-                            <ComboBox Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="3" x:Name="cbFilterModifier" Margin="5" VerticalContentAlignment="Center" ItemsSource="{Binding UsersList.DefaultView}" DisplayMemberPath="fullname" SelectedValuePath="id" IsEnabled="{Binding IsChecked, ElementName=chckFilterModifier}"/>
-                        </Grid>
-                    </TabItem>
-                    <!-- tabSettings -->
-                    <TabItem>
-                        <TabItem.Header>
-                            <c:Header Text="Ustawienia" Icon="/Resources/icon32_settings.ico"/>
-                        </TabItem.Header>
-                        <ScrollViewer>
-                            <DockPanel Margin="5">
-                                <DockPanel DockPanel.Dock="Top">
-                                    <Label Content="Sortuj najpierw po:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
-                                    <ToggleButton Margin="2.5" IsChecked="{Binding sorting_FamiliesList[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=2}">
-                                        <Image Source="/Resources/icon32_descending.ico"/>
-                                    </ToggleButton>
-                                    <ComboBox Margin="2.5" SelectedValue="{Binding sorting_FamiliesList[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
-                                        <ComboBoxItem Content="Zgłaszający" Tag="f.declarant"/>
-                                        <ComboBoxItem Content="Rodzina" Tag="f.lastname"/>
-                                        <ComboBoxItem Content="Liczba osób" Tag="f.members"/>
-                                        <ComboBoxItem Content="Kod pocztowy" Tag="f.postcode"/>
-                                        <ComboBoxItem Content="Miasto" Tag="f.city"/>
-                                        <ComboBoxItem Content="Adres" Tag="f.address"/>
-                                    </ComboBox>
-                                </DockPanel>
-                                <DockPanel DockPanel.Dock="Top">
-                                    <Label Content="Sortuj następnie po:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
-                                    <ToggleButton Margin="2.5" IsChecked="{Binding sorting_FamiliesList[3], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=2}">
-                                        <Image Source="/Resources/icon32_descending.ico"/>
-                                    </ToggleButton>
-                                    <ComboBox Margin="2.5" SelectedValue="{Binding sorting_FamiliesList[2], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
-                                        <ComboBoxItem Content="Zgłaszający" Tag="f.declarant"/>
-                                        <ComboBoxItem Content="Rodzina" Tag="f.lastname"/>
-                                        <ComboBoxItem Content="Liczba osób" Tag="f.members"/>
-                                        <ComboBoxItem Content="Kod pocztowy" Tag="f.postcode"/>
-                                        <ComboBoxItem Content="Miasto" Tag="f.city"/>
-                                        <ComboBoxItem Content="Adres" Tag="f.address"/>
-                                    </ComboBox>
-                                </DockPanel>
-                                <DockPanel DockPanel.Dock="Top">
-                                    <Label Content="Limit wczytywania:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
-                                    <TextBox Text="{Binding sorting_FamiliesList[4], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Margin="2.5" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=5}"/>
-                                </DockPanel>
-                            </DockPanel>
-                        </ScrollViewer>
-                    </TabItem>
-                </TabControl>
-            </Expander>
-            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
-                <c:Button Margin="0,4,4,4" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Visibility="{Binding IsExpanded, ElementName=filtersExpander, Converter={g:conv_BoolToVisibility}}"
-                          Text="Akceptuj" Icon="/Resources/icon32_accept.ico" Command="g:Commands.Refresh"/>
-                <c:Button Margin="0,4,4,4" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Visibility="{Binding IsExpanded, ElementName=filtersExpander, Converter={g:conv_BoolToVisibility}}"
-                          Text="Czyść" Icon="/Resources/icon32_clear.ico" Command="g:Commands.Clear"/>
-            </StackPanel>
-        </Grid>
         <!-- statusPanel -->
         <c:StatusPanel x:Name="StatusPanel" DockPanel.Dock="Bottom" Background="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" HasGroups="True"/>
         <!-- groupsView -->
         <c:GroupsView EditingMode="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=families_save}" Visibility="{Binding EnableGroups, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
+        <!-- otherFilters -->
+        <DockPanel DockPanel.Dock="Bottom">
+            <CheckBox Margin="5,0,5,5" Content="Pokaż archiwalne" IsChecked="{Binding Filters.Archival}" HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
+        </DockPanel>
         <!-- dataGrid -->
-        <DataGrid x:Name="dgList" Margin="5" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
-                  AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstancesList}" IsReadOnly="True"
-                  MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged">
+        <c:DataGrid x:Name="dgList" ItemsSource="{Binding InstancesList}" IsReadOnly="True" MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged">
+            <DataGrid.Resources>
+                <g:BindingProxy x:Key="proxy" Data="{Binding}"/>
+            </DataGrid.Resources>
             <DataGrid.Columns>
+                <!-- ID -->
                 <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_ID, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                <!-- Icon -->
                 <DataGridTemplateColumn MaxWidth="50" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Icon, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -220,21 +79,53 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Binding="{Binding Declarant}" Header="Zgłaszający" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Declarant, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                <DataGridTextColumn Binding="{Binding Lastname}" Header="Rodzina" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Lastname, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                <DataGridTextColumn Binding="{Binding Members}" Header="Ilość osób" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Members, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                <DataGridTextColumn Binding="{Binding Postcode}" Header="Kod pocztowy" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Postcode, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                <DataGridTextColumn Binding="{Binding City}" Header="Miejscowość" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_City, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                <DataGridTextColumn Binding="{Binding Address}" Header="Adres" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Address, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                <!-- Declarant -->
+                <DataGridTextColumn Binding="{Binding Declarant}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Declarant, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
+                    <DataGridTextColumn.Header>
+                        <c:DataGridColumnFilter_Text Text="Zgłaszający" Value="{Binding Data.Filters.Declarant, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"/>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <!-- Lastname -->
+                <DataGridTextColumn Binding="{Binding Lastname}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Lastname, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
+                    <DataGridTextColumn.Header>
+                        <c:DataGridColumnFilter_Text Text="Rodzina" Value="{Binding Data.Filters.Lastname, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"/>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <!-- Members -->
+                <DataGridTextColumn Binding="{Binding Members}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Members, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
+                    <DataGridTextColumn.Header>
+                        <c:DataGridColumnFilter_Number Text="Ilość osób" Value="{Binding Data.Filters.Members, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"/>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <!-- Postcode -->
+                <DataGridTextColumn Binding="{Binding Postcode}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Postcode, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
+                    <DataGridTextColumn.Header>
+                        <c:DataGridColumnFilter_Text Text="Kod pocztowy" Value="{Binding Data.Filters.Postcode, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"/>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <!-- City -->
+                <DataGridTextColumn Binding="{Binding City}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_City, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
+                    <DataGridTextColumn.Header>
+                        <c:DataGridColumnFilter_Text Text="Miejscowość" Value="{Binding Data.Filters.City, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"/>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <!-- Address -->
+                <DataGridTextColumn Binding="{Binding Address}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Address, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
+                    <DataGridTextColumn.Header>
+                        <c:DataGridColumnFilter_Text Text="Adres" Value="{Binding Data.Filters.Address, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"/>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <!-- DonationWeight -->
                 <DataGridTextColumn Binding="{Binding DonationWeight}" Header="Przekazano (kg)" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_DonationWeight, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+                <!-- Status -->
                 <DataGridTextColumn Binding="{Binding Status, Converter={g:conv_BoolToString}, ConverterParameter='Aktywna~Nieaktywna'}" Header="Status" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Status, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
                     <DataGridTextColumn.CellStyle>
                         <Style TargetType="DataGridCell">
                             <Style.Triggers >
-                                <DataTrigger Binding="{Binding Status}" Value="true">
+                                <DataTrigger Binding="{Binding Status}" Value="True">
                                     <Setter Property="Background" Value="LightGreen"/>
                                 </DataTrigger>
-                                <DataTrigger Binding="{Binding Status}" Value="false">
+                                <DataTrigger Binding="{Binding Status}" Value="False">
                                     <Setter Property="Background" Value="IndianRed"/>
                                 </DataTrigger>
                             </Style.Triggers>
@@ -248,10 +139,12 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
+                <!-- DonationLast -->
                 <DataGridTextColumn Binding="{Binding DonationLast, StringFormat={}{0:yyyy-MM-dd}}" Header="Ostatnia darowizna" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_DonationLast, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu>
+                    <!-- Columns -->
                     <MenuItem Header="Widoczność kolumn">
                         <MenuItem.Icon>
                             <Image Source="/Resources/icon32_show.ico"/>
@@ -268,6 +161,57 @@
                         <MenuItem IsCheckable="True" Header="Status" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Status, Mode=TwoWay}"/>
                         <MenuItem IsCheckable="True" Header="Ostatnia darowizna" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_DonationLast, Mode=TwoWay}"/>
                     </MenuItem>
+                    <!-- Sorting -->
+                    <MenuItem Header="Sortowanie danych">
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/icon32_descending.ico"/>
+                        </MenuItem.Icon>
+                        <MenuItem>
+                            <MenuItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Sortowanie 1:"/>
+                                    <ToggleButton IsChecked="{Binding sorting_FamiliesList[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=2.2}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=2.2}">
+                                        <Image Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.1}" Source="/Resources/icon32_descending.ico"/>
+                                    </ToggleButton>
+                                    <ComboBox SelectedValue="{Binding sorting_FamiliesList[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
+                                        <ComboBoxItem Content="Zgłaszający" Tag="f.declarant"/>
+                                        <ComboBoxItem Content="Rodzina" Tag="f.lastname"/>
+                                        <ComboBoxItem Content="Liczba osób" Tag="f.members"/>
+                                        <ComboBoxItem Content="Kod pocztowy" Tag="f.postcode"/>
+                                        <ComboBoxItem Content="Miasto" Tag="f.city"/>
+                                        <ComboBoxItem Content="Adres" Tag="f.address"/>
+                                    </ComboBox>
+                                </StackPanel>
+                            </MenuItem.Header>
+                        </MenuItem>
+                        <MenuItem>
+                            <MenuItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Sortowanie 2:"/>
+                                    <ToggleButton IsChecked="{Binding sorting_FamiliesList[3], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=2.2}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=2.2}">
+                                        <Image Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.1}" Source="/Resources/icon32_descending.ico"/>
+                                    </ToggleButton>
+                                    <ComboBox SelectedValue="{Binding sorting_FamiliesList[2], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
+                                        <ComboBoxItem Content="Zgłaszający" Tag="f.declarant"/>
+                                        <ComboBoxItem Content="Rodzina" Tag="f.lastname"/>
+                                        <ComboBoxItem Content="Liczba osób" Tag="f.members"/>
+                                        <ComboBoxItem Content="Kod pocztowy" Tag="f.postcode"/>
+                                        <ComboBoxItem Content="Miasto" Tag="f.city"/>
+                                        <ComboBoxItem Content="Adres" Tag="f.address"/>
+                                    </ComboBox>
+                                </StackPanel>
+                            </MenuItem.Header>
+                        </MenuItem>
+                        <MenuItem>
+                            <MenuItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Limit wczytywania:"/>
+                                    <TextBox Text="{Binding sorting_FamiliesList[4], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=5}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                                </StackPanel>
+                            </MenuItem.Header>
+                        </MenuItem>
+                    </MenuItem>
+                    <!-- Actions -->
                     <Separator/>
                     <MenuItem Header="Podgląd" Command="g:Commands.Preview">
                         <MenuItem.Icon>
@@ -305,12 +249,12 @@
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Archival}" Value="true">
+                        <DataTrigger Binding="{Binding Archival}" Value="True">
                             <Setter Property="Foreground" Value="Gray"/>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </DataGrid.RowStyle>
-        </DataGrid>
+        </c:DataGrid>
     </DockPanel>
 </local:List>

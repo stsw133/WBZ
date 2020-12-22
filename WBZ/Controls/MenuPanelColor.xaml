@@ -13,7 +13,7 @@
     <MenuItem.Header>
         <StackPanel Orientation="Horizontal">
             <Label Content="Kolor paneli"/>
-            <ComboBox SelectedValuePath="Tag" SelectedValue="{Binding Tag, RelativeSource={RelativeSource FindAncestor, AncestorType=MenuItem}}" MaxWidth="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}">
+            <ComboBox SelectedValuePath="Tag" SelectedValue="{Binding Tag, RelativeSource={RelativeSource FindAncestor, AncestorType=MenuItem}}" MaxWidth="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}" VerticalContentAlignment="Center">
                 <ComboBoxItem Tag="#FFEEEEEE">
                     <StackPanel Orientation="Horizontal" MinHeight="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}">
                         <Rectangle Fill="#FFEEEEEE" Stroke="Gray" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}"/>

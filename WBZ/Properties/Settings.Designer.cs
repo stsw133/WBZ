@@ -516,12 +516,12 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool columns_ArticlesList_Code {
+        public bool columns_ArticlesList_Codename {
             get {
-                return ((bool)(this["columns_ArticlesList_Code"]));
+                return ((bool)(this["columns_ArticlesList_Codename"]));
             }
             set {
-                this["columns_ArticlesList_Code"] = value;
+                this["columns_ArticlesList_Codename"] = value;
             }
         }
         
@@ -1975,12 +1975,12 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool columns_AttachmentsList_Obj {
+        public bool columns_AttachmentsList_Instance {
             get {
-                return ((bool)(this["columns_AttachmentsList_Obj"]));
+                return ((bool)(this["columns_AttachmentsList_Instance"]));
             }
             set {
-                this["columns_AttachmentsList_Obj"] = value;
+                this["columns_AttachmentsList_Instance"] = value;
             }
         }
         
