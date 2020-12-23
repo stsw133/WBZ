@@ -13,7 +13,7 @@ namespace WBZ.Controls
     /// <summary>
     /// Interaction logic for GroupsView.xaml
     /// </summary>
-    public partial class GroupsView : UserControl
+    public partial class GroupsView : TreeView
     {
         public List<M_Group> InstancesList = new List<M_Group>();
         private string Module;
@@ -39,7 +39,7 @@ namespace WBZ.Controls
         /// <summary>
         /// Loaded
         /// </summary>
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        private void TreeView_Loaded(object sender, RoutedEventArgs e)
         {
             btnGroupsRefresh_Click(null, null);
         }
@@ -58,27 +58,36 @@ namespace WBZ.Controls
         /// <summary>
 		/// New
 		/// </summary>
-		private void btnGroupsNew_Click(object sender, MouseButtonEventArgs e)
+		private void btnGroupsMegaNew_Click(object sender, RoutedEventArgs e)
         {
-            var instance = new M_Group();
-            if (tvGroups.SelectedItem == null)
+            var instance = new M_Group()
             {
-                instance.Module = Module;
-                instance.Owner = 0;
-            }
-            else
+                Module = Module,
+                Owner = 0
+            };
+            
+            new GroupsNew(instance, Commands.Type.NEW) { Owner = Window.GetWindow(this) }.ShowDialog();
+            btnGroupsRefresh_Click(null, null);
+        }
+
+        /// <summary>
+        /// New
+        /// </summary>
+        private void btnGroupsNew_Click(object sender, RoutedEventArgs e)
+        {
+            var path = (((SelectedItem as TreeViewItem).Header as StackPanel).Children[1] as TextBlock).Text + "\\";
+            for (var i = GetParentItem((SelectedItem as TreeViewItem)); i != null; i = GetParentItem(i))
+                path = ((i.Header as StackPanel).Children[1] as TextBlock).Text + "\\" + path;
+            if (path.Split('\\').Length > 5)
+                return;
+
+            var instance = new M_Group()
             {
-                var path = (((tvGroups.SelectedItem as TreeViewItem).Header as StackPanel).Children[1] as TextBlock).Text + "\\";
-                for (var i = GetParentItem((tvGroups.SelectedItem as TreeViewItem)); i != null; i = GetParentItem(i))
-                    path = ((i.Header as StackPanel).Children[1] as TextBlock).Text + "\\" + path;
+                Module = Module,
+                Owner = (int)(SelectedItem as TreeViewItem).Tag,
+                Path = path
+            };
 
-                if (path.Split('\\').Length > 5)
-                    return;
-
-                instance.Module = Module;
-                instance.Owner = (int)(tvGroups.SelectedItem as TreeViewItem).Tag;
-                instance.Path = path;
-            }
             new GroupsNew(instance, Commands.Type.NEW) { Owner = Window.GetWindow(this) }.ShowDialog();
             btnGroupsRefresh_Click(null, null);
         }
@@ -86,12 +95,12 @@ namespace WBZ.Controls
         /// <summary>
 		/// Preview
 		/// </summary>
-		private void btnGroupsPreview_Click(object sender, MouseButtonEventArgs e)
+		private void btnGroupsPreview_Click(object sender, RoutedEventArgs e)
         {
-            if (tvGroups.SelectedItem == null)
+            if (SelectedItem == null)
                 return;
 
-            int id = (int)(tvGroups.SelectedItem as TreeViewItem).Tag;
+            int id = (int)(SelectedItem as TreeViewItem).Tag;
             new GroupsNew(SQL.GetInstance<M_Group>(Global.Module.GROUPS, id), Commands.Type.PREVIEW) { Owner = Window.GetWindow(this) }.ShowDialog();
             btnGroupsRefresh_Click(null, null);
         }
@@ -99,12 +108,12 @@ namespace WBZ.Controls
         /// <summary>
 		/// Edit
 		/// </summary>
-		private void btnGroupsEdit_Click(object sender, MouseButtonEventArgs e)
+		private void btnGroupsEdit_Click(object sender, RoutedEventArgs e)
         {
-            if (tvGroups.SelectedItem == null)
+            if (SelectedItem == null)
                 return;
 
-            int id = (int)(tvGroups.SelectedItem as TreeViewItem).Tag;
+            int id = (int)(SelectedItem as TreeViewItem).Tag;
             new GroupsNew(SQL.GetInstance<M_Group>(Global.Module.GROUPS, id), Commands.Type.EDIT) { Owner = Window.GetWindow(this) }.ShowDialog();
             btnGroupsRefresh_Click(null, null);
         }
@@ -112,15 +121,15 @@ namespace WBZ.Controls
         /// <summary>
         /// Delete
         /// </summary>
-        private void btnGroupsDelete_Click(object sender, MouseButtonEventArgs e)
+        private void btnGroupsDelete_Click(object sender, RoutedEventArgs e)
         {
-            if (tvGroups.SelectedItem == null)
+            if (SelectedItem == null)
                 return;
 
             if (MessageBox.Show("Czy na pewno usunąć zaznaczoną grupę?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                var group = tvGroups.SelectedItem as TreeViewItem;
-                SQL.DeleteInstance(Global.Module.GROUPS, (int)group.Tag, (string)group.Header);
+                var group = SelectedItem as TreeViewItem;
+                SQL.DeleteInstance(Global.Module.GROUPS, (int)group.Tag, ((group.Header as StackPanel).Children[1] as TextBlock).Text);
                 btnGroupsRefresh_Click(null, null);
             }
         }
@@ -128,7 +137,7 @@ namespace WBZ.Controls
         /// <summary>
 		/// Refresh
 		/// </summary>
-		private void btnGroupsRefresh_Click(object sender, MouseButtonEventArgs e)
+		private void btnGroupsRefresh_Click(object sender, RoutedEventArgs e)
         {
             ItemCollection recurseItemCollection(ItemCollection items, int id)
             {
@@ -155,7 +164,7 @@ namespace WBZ.Controls
                 }
 
                 /// Clear groups
-                tvGroups.Items.Clear();
+                Items.Clear();
 
                 TreeViewItem GetTreeViewHeader(M_Group group)
                 {
@@ -191,7 +200,7 @@ namespace WBZ.Controls
                 foreach (var group1 in InstancesList.FindAll(x => x.Owner == 0))
                 {
                     var tvi1 = GetTreeViewHeader(group1);
-                    tvGroups.Items.Add(tvi1);
+                    Items.Add(tvi1);
 
                     foreach (var group2 in InstancesList.FindAll(x => x.Owner == group1.ID))
                     {
@@ -222,25 +231,9 @@ namespace WBZ.Controls
         }
 
         /// <summary>
-        /// MouseDown
-        /// </summary>
-        private void tvGroups_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Right)
-            {
-                var item = tvGroups.SelectedItem as TreeViewItem;
-                if (item != null)
-                {
-                    tvGroups.Focus();
-                    item.IsSelected = false;
-                }
-            }
-        }
-
-        /// <summary>
         /// SelectedItemChanged
         /// </summary>
-        private void tvGroups_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             try
             {

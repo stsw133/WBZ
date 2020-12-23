@@ -36,8 +36,10 @@
                     <c:Button Text="Podgląd&#10;obiektu" Margin="5,5,5,0" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_search.ico" Command="g:Commands.Preview"/>
                     <c:Button Text="Edycja&#10;obiektu" Margin="5,5,5,0" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_edit.ico" Command="g:Commands.Edit"/>
                     <Separator Height="5" Margin="0,5,0,0"/>
+                    <!--
                     <CheckBox Content="Podgląd zdjęć" x:Name="chckShowPictures" Margin="5,5,5,0" Visibility="{Binding IsChecked, ElementName=btnToggle, Converter={g:conv_BoolToVisibility}}"/>
                     <Separator Height="5" Margin="0,5,0,0" Visibility="{Binding IsChecked, ElementName=btnToggle, Converter={g:conv_BoolToVisibility}}"/>
+                    -->
                     <c:Button Text="Usuń" Margin="5,5,5,0" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_delete.ico" Command="g:Commands.Delete"/>
                     <Separator Height="5" Margin="0,5,0,0"/>
                 </StackPanel>
@@ -69,13 +71,13 @@
                 <!-- UserFullname -->
                 <DataGridTextColumn Binding="{Binding UserFullname}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_UserFullname, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
                     <DataGridTextColumn.Header>
-                        <c:DataGridColumnFilter_Text Text="Użytkownik" Value="{Binding Data.Filters.UserFullname, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"/>
+                        <c:DataGridColumnFilter_Text Text="Użytkownik" Value="{Binding Data.Filters.UserFullname, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
                 <!-- Module -->
                 <DataGridTextColumn Binding="{Binding TranslatedModule}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Module, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
                     <DataGridTextColumn.Header>
-                        <c:DataGridColumnFilter_Text Text="Nazwa modułu" Value="{Binding Data.Filters.Module, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"/>
+                        <c:DataGridColumnFilter_Text Text="Nazwa modułu" Value="{Binding Data.Filters.Module, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
                 <!-- Instance -->
@@ -83,7 +85,7 @@
                 <!-- Name -->
                 <DataGridTextColumn Binding="{Binding Name}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Name, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
                     <DataGridTextColumn.Header>
-                        <c:DataGridColumnFilter_Text Text="Nazwa" Value="{Binding Data.Filters.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"/>
+                        <c:DataGridColumnFilter_Text Text="Nazwa" Value="{Binding Data.Filters.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
             </DataGrid.Columns>

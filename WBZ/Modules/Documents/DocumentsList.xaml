@@ -60,7 +60,7 @@
         <!-- groupsView -->
         <c:GroupsView EditingMode="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=documents_save}" Visibility="{Binding EnableGroups, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
         <!-- otherFilters -->
-        <DockPanel DockPanel.Dock="Bottom">
+        <DockPanel DockPanel.Dock="Bottom" Visibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}">
             <CheckBox Margin="5,0,5,5" Content="Pokaż archiwalne" IsChecked="{Binding Filters.Archival}" HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
         </DockPanel>
         <!-- dataGrid -->
@@ -84,43 +84,43 @@
                 <!-- Name -->
                 <DataGridTextColumn Binding="{Binding Name}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Name, Mode=OneWay, Converter={g:conv_BoolToVisibility}}" Width="*">
                     <DataGridTextColumn.Header>
-                        <c:DataGridColumnFilter_Text Text="Nazwa" Value="{Binding Data.Filters.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"/>
+                        <c:DataGridColumnFilter_Text Text="Nazwa" Value="{Binding Data.Filters.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
                 <!-- StoreName -->
                 <DataGridTextColumn Binding="{Binding StoreName}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_StoreName, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
                     <DataGridTextColumn.Header>
-                        <c:DataGridColumnFilter_Text Text="Magazyn" Value="{Binding Data.Filters.StoreName, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"/>
+                        <c:DataGridColumnFilter_Text Text="Magazyn" Value="{Binding Data.Filters.StoreName, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
                 <!-- CompanyName -->
                 <DataGridTextColumn Binding="{Binding CompanyName}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_CompanyName, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
                     <DataGridTextColumn.Header>
-                        <c:DataGridColumnFilter_Text Text="Firma" Value="{Binding Data.Filters.CompanyName, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"/>
+                        <c:DataGridColumnFilter_Text Text="Firma" Value="{Binding Data.Filters.CompanyName, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
                 <!-- PositionsCount -->
                 <DataGridTextColumn Binding="{Binding PositionsCount}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_PositionsCount, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
                     <DataGridTextColumn.Header>
-                        <c:DataGridColumnFilter_Number Text="Pozycje" Value="{Binding Data.Filters.PositionsCount, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"/>
+                        <c:DataGridColumnFilter_Number Text="Pozycje" Value="{Binding Data.Filters.PositionsCount, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
                 <!-- Weight -->
                 <DataGridTextColumn Binding="{Binding Weight}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Weight, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
                     <DataGridTextColumn.Header>
-                        <c:DataGridColumnFilter_Number Text="Waga (kg)" Value="{Binding Data.Filters.Weight, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"/>
+                        <c:DataGridColumnFilter_Number Text="Waga (kg)" Value="{Binding Data.Filters.Weight, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
                 <!-- Cost -->
                 <DataGridTextColumn Binding="{Binding Cost}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Cost, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
                     <DataGridTextColumn.Header>
-                        <c:DataGridColumnFilter_Number Text="Kwota netto" Value="{Binding Data.Filters.Cost, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"/>
+                        <c:DataGridColumnFilter_Number Text="Kwota netto" Value="{Binding Data.Filters.Cost, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
                 <!-- DateIssue -->
                 <DataGridTextColumn Binding="{Binding DateIssue, StringFormat={}{0:yyyy-MM-dd}}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_DateIssue, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
                     <DataGridTextColumn.Header>
-                        <c:DataGridColumnFilter_Date Text="Data wystawienia" Value1="{Binding Data.Filters.fDateIssue, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" Value2="{Binding Data.Filters.DateIssue, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"/>
+                        <c:DataGridColumnFilter_Date Text="Data wystawienia" Value1="{Binding Data.Filters.fDateIssue, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" Value2="{Binding Data.Filters.DateIssue, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
             </DataGrid.Columns>

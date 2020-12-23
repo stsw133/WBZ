@@ -8,7 +8,7 @@
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
         Title="Galeria załączników" MinHeight="280" MinWidth="420" Height="{Binding Source={x:Static p:Settings.Default}, Path=config_AttachmentsGallery_WindowSize[1], Mode=TwoWay}" Width="{Binding Source={x:Static p:Settings.Default}, Path=config_AttachmentsGallery_WindowSize[0], Mode=TwoWay}"
-            BorderThickness="6" BorderBrush="Black" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
+            BorderThickness="6" BorderBrush="Black" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None" WindowState="Maximized"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
             Icon="/Resources/icon32_gallery.ico" Closed="Window_Closed">
     <WindowChrome.WindowChrome>

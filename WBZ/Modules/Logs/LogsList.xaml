@@ -69,31 +69,31 @@
                 <!-- UserFullname -->
                 <DataGridTextColumn Binding="{Binding UserFullname}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_UserFullname, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
                     <DataGridTextColumn.Header>
-                        <c:DataGridColumnFilter_Text Text="Użytkownik" Value="{Binding Data.Filters.UserFullname, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"/>
+                        <c:DataGridColumnFilter_Text Text="Użytkownik" Value="{Binding Data.Filters.UserFullname, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
                 <!-- Module -->
                 <DataGridTextColumn Binding="{Binding TranslatedModule}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Module, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
                     <DataGridTextColumn.Header>
-                        <c:DataGridColumnFilter_Text Text="Nazwa modułu" Value="{Binding Data.Filters.Module, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"/>
+                        <c:DataGridColumnFilter_Text Text="Nazwa modułu" Value="{Binding Data.Filters.Module, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
                 <!-- Instance -->
                 <DataGridTextColumn Binding="{Binding Instance}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Obj, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
                     <DataGridTextColumn.Header>
-                        <c:DataGridColumnFilter_Number Text="ID instancji" Value="{Binding Data.Filters.Instance, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"/>
+                        <c:DataGridColumnFilter_Number Text="ID instancji" Value="{Binding Data.Filters.Instance, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
                 <!-- Content -->
                 <DataGridTextColumn Binding="{Binding Content}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Content, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
                     <DataGridTextColumn.Header>
-                        <c:DataGridColumnFilter_Text Text="Treść" Value="{Binding Data.Filters.Content, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"/>
+                        <c:DataGridColumnFilter_Text Text="Treść" Value="{Binding Data.Filters.Content, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
                 <!-- DateTime -->
                 <DataGridTextColumn Binding="{Binding DateTime, StringFormat={}{0:yyyy-MM-dd}}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_DateTime, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
                     <DataGridTextColumn.Header>
-                        <c:DataGridColumnFilter_Date Text="Data i czas" Value1="{Binding Data.Filters.fDateTime, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" Value2="{Binding Data.Filters.DateTime, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"/>
+                        <c:DataGridColumnFilter_Date Text="Data i czas" Value1="{Binding Data.Filters.fDateTime, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" Value2="{Binding Data.Filters.DateTime, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
             </DataGrid.Columns>

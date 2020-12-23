@@ -32,7 +32,7 @@ namespace WBZ.Modules.Groups
             {
                 if (D.SelectingMode)
                 {
-                    var item = groupsView.tvGroups.SelectedItem as TreeViewItem;
+                    var item = groupsView.SelectedItem as TreeViewItem;
                     Selected = SQL.GetInstance<MODULE_MODEL>(Global.Module.GROUPS, (int)item.Tag);
                     DialogResult = true;
                 }

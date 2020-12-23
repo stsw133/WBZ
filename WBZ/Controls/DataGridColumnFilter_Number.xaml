@@ -4,13 +4,12 @@
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
             xmlns:g="clr-namespace:WBZ.Globals"
-            xmlns:p="clr-namespace:WBZ.Properties"
             mc:Ignorable="d" d:DesignWidth="100">
     <StackPanel.CommandBindings>
         <CommandBinding Command="g:Commands.Refresh" Executed="cmdRefresh_Executed"/>
     </StackPanel.CommandBindings>
     <TextBlock Text="{Binding Text, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=StackPanel}}"/>
-    <DockPanel>
+    <DockPanel Visibility="{Binding FilterVisibility, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=StackPanel}}">
         <!--
         <ComboBox SelectedValue="{Binding Filter, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=StackPanel}}" SelectedValuePath="Content" SelectedIndex="0">
             <ComboBoxItem Content="="/>

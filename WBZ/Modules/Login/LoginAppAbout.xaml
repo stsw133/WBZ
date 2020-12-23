@@ -10,7 +10,7 @@
         Title="O programie" SizeToContent="WidthAndHeight"
             BorderThickness="3" BorderBrush="#333" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner" WindowStyle="None"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
-            Icon="/Resources/logo32.ico">
+            Icon="/Resources/icon64.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -19,10 +19,10 @@
         <c:TitleBar DockPanel.Dock="Top"/>
         <!-- main -->
         <DockPanel Margin="0,0,0,5">
-            <Border DockPanel.Dock="Top" Margin="5,5,5,0" BorderBrush="#7E80" BorderThickness="2">
+            <Border DockPanel.Dock="Top" Margin="5,5,5,0" BorderBrush="#5E80" BorderThickness="2">
                 <DockPanel>
-                    <Border BorderBrush="#7E80" BorderThickness="0,0,2,0">
-                        <Image Margin="10" Source="/Resources/icon64.ico" Height="128"/>
+                    <Border BorderBrush="#5E80" BorderThickness="0,0,2,0">
+                        <Image Margin="10" Stretch="None" Source="/Resources/icon64.ico"/>
                     </Border>
                     <StackPanel VerticalAlignment="Center">
                         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -33,11 +33,8 @@
                     </StackPanel>
                 </DockPanel>
             </Border>
-            <Border DockPanel.Dock="Top" Margin="5,5,5,0" BorderBrush="#7047" BorderThickness="2">
+            <Border DockPanel.Dock="Top" Margin="5,5,5,0" BorderBrush="#5047" BorderThickness="2">
                 <DockPanel>
-                    <Border DockPanel.Dock="Right" BorderBrush="#7047" BorderThickness="2,0,0,0">
-                        <Image Margin="10" Source="/Resources/icon64.ico" Height="128"/>
-                    </Border>
                     <StackPanel VerticalAlignment="Center">
                         <TextBlock DockPanel.Dock="Top" Text="{Binding AboutCreators}" Padding="5" TextAlignment="Center" TextWrapping="Wrap" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=25}"/>
                         <StackPanel DockPanel.Dock="Top">

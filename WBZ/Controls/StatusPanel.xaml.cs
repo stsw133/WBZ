@@ -13,6 +13,32 @@ namespace WBZ.Controls
 			InitializeComponent();
 		}
 
+        public bool EnableFilters
+        {
+            get { return (bool)GetValue(pEnableFilters); }
+            set { SetValue(pEnableFilters, value); }
+        }
+        public static readonly DependencyProperty pEnableFilters
+            = DependencyProperty.Register(
+                  nameof(EnableFilters),
+                  typeof(bool),
+                  typeof(StatusPanel),
+                  new PropertyMetadata(true)
+              );
+
+        public bool HasFilters
+        {
+            get { return (bool)GetValue(pHasFilters); }
+            set { SetValue(pHasFilters, value); }
+        }
+        public static readonly DependencyProperty pHasFilters
+            = DependencyProperty.Register(
+                  nameof(HasFilters),
+                  typeof(bool),
+                  typeof(StatusPanel),
+                  new PropertyMetadata(true)
+              );
+
         public bool EnableGroups
         {
             get { return (bool)GetValue(pEnableGroups); }

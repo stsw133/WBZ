@@ -39,6 +39,19 @@ namespace WBZ.Controls
                   new PropertyMetadata(string.Empty)
               );
 
+        public bool FilterVisibility
+        {
+            get { return (bool)GetValue(pFilterVisibility); }
+            set { SetValue(pFilterVisibility, value); }
+        }
+        public static readonly DependencyProperty pFilterVisibility
+            = DependencyProperty.Register(
+                  nameof(FilterVisibility),
+                  typeof(bool),
+                  typeof(DataGridColumnFilter_Number),
+                  new PropertyMetadata(true)
+              );
+
         public string Value
         {
             get { return (string)GetValue(pValue); }

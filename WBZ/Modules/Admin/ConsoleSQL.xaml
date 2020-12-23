@@ -18,15 +18,16 @@
         <!-- titleBar -->
         <c:TitleBar DockPanel.Dock="Top"/>
         <!-- main -->
-        <c:Button DockPanel.Dock="Bottom" Margin="5,0,5,5" TextVisibility="False" HorizontalAlignment="Left" Icon="/Resources/icon32_refresh.ico" PreviewMouseLeftButtonUp="btnStart_Click"/>
+        <c:Button DockPanel.Dock="Bottom" Margin="5,0,5,5" TextVisibility="False" HorizontalAlignment="Center" Icon="/Resources/icon32_accept.ico" PreviewMouseLeftButtonUp="btnStart_Click"/>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <TextBox x:Name="tbConsole" Grid.Row="0" Margin="5" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True"/>
-            <GridSplitter Grid.RowSpan="2"/>
-            <c:DataGrid x:Name="dgConsole" Grid.Row="1" AutoGenerateColumns="True" IsReadOnly="True"/>
+            <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" ResizeDirection="Rows" Height="5"/>
+            <c:DataGrid x:Name="dgConsole" Grid.Row="2" AutoGenerateColumns="True" IsReadOnly="True"/>
         </Grid>
     </DockPanel>
 </Window>

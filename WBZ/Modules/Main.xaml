@@ -108,19 +108,24 @@
                 <!-- admin -->
                 <Border x:Name="modAdmin" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=30}"
                         Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
-                    <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">
+                    <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_admin.ico" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3}"/>
                                 <Label Margin="5" Content="Admin" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}"/>
                             </StackPanel>
                         </Border>
+                        <!--
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
-                                  Text="Społeczność" Icon="/Resources/icon32_community.ico" PreviewMouseLeftButtonUp="btnCommunity_Click"
-                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=community_preview}"/>
+                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=community_preview}"
+                                  Text="Społeczność" Icon="/Resources/icon32_community.ico" PreviewMouseLeftButtonUp="btnCommunity_Click"/>
+                        -->
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
-                                  Text="Konsola SQL" Icon="/Resources/icon32_source.ico" PreviewMouseLeftButtonUp="btnConsoleSQL_Click"
-                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=admin}"/>
+                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=admin}"
+                                  Text="Konsola SQL" Icon="/Resources/icon32_source.ico" Click="btnConsoleSQL_Click"/>
+                        <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
+                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=admin}"
+                                  Text="Wersje" Icon="/Resources/icon32_versions.ico" Click="btnVersions_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -131,7 +136,7 @@
                 <!-- articles -->
                 <Border x:Name="modArticles" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=30}"
                         Background="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
-                    <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">
+                    <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_articles.ico" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3}"/>
@@ -139,11 +144,11 @@
                             </StackPanel>
                         </Border>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
-                                  Text="Wyświetl listę" Icon="/Resources/icon32_list.ico" PreviewMouseLeftButtonUp="btnArticlesList_Click"
-                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=articles_preview}"/>
+                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=articles_preview}"
+                                  Text="Wyświetl listę" Icon="/Resources/icon32_list.ico" Click="btnArticlesList_Click"/>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
-                                  Text="Dodaj nowy" Icon="/Resources/icon32_add.ico" PreviewMouseLeftButtonUp="btnArticlesNew_Click"
-                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=articles_save}"/>
+                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=articles_save}"
+                                  Text="Dodaj nowy" Icon="/Resources/icon32_add.ico" Click="btnArticlesNew_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -154,7 +159,7 @@
                 <!-- attachments -->
                 <Border x:Name="modAttachments" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=30}"
                         Background="{Binding config_Attachments_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
-                    <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">
+                    <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_photos.ico" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3}"/>
@@ -162,11 +167,11 @@
                             </StackPanel>
                         </Border>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
-                                  Text="Zarządzaj załącznikami" Icon="/Resources/icon32_photos.ico" PreviewMouseLeftButtonUp="btnAttachmentsList_Click"
-                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=attachments_preview}"/>
+                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=attachments_preview}"
+                                  Text="Zarządzaj załącznikami" Icon="/Resources/icon32_photos.ico" Click="btnAttachmentsList_Click"/>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
-                                  Text="Galeria załączników" Icon="/Resources/icon32_gallery.ico" PreviewMouseLeftButtonUp="btnAttachmentsGallery_Click"
-                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=attachments_preview}"/>
+                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=attachments_preview}"
+                                  Text="Galeria załączników" Icon="/Resources/icon32_gallery.ico" Click="btnAttachmentsGallery_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -177,7 +182,7 @@
                 <!-- attributesClasses -->
                 <Border x:Name="modAttributesClasses" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=30}"
                         Background="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
-                    <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">
+                    <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_attributes.ico" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3}"/>
@@ -185,11 +190,11 @@
                             </StackPanel>
                         </Border>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
-                                  Text="Wyświetl listę" Icon="/Resources/icon32_list.ico" PreviewMouseLeftButtonUp="btnAttributesClassesList_Click"
-                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=attributes_classes_preview}"/>
+                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=attributes_classes_preview}"
+                                  Text="Wyświetl listę" Icon="/Resources/icon32_list.ico" Click="btnAttributesClassesList_Click"/>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
-                                  Text="Dodaj nową" Icon="/Resources/icon32_add.ico" PreviewMouseLeftButtonUp="btnAttributesClassesNew_Click"
-                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=attributes_classes_save}"/>
+                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=attributes_classes_save}"
+                                  Text="Dodaj nową" Icon="/Resources/icon32_add.ico" Click="btnAttributesClassesNew_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -200,7 +205,7 @@
                 <!-- companies -->
                 <Border x:Name="modCompanies" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=30}"
                         Background="{Binding config_Companies_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
-                    <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">
+                    <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_companies.ico" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3}"/>
@@ -208,11 +213,11 @@
                             </StackPanel>
                         </Border>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
-                                  Text="Wyświetl listę" Icon="/Resources/icon32_list.ico" PreviewMouseLeftButtonUp="btnCompaniesList_Click"
-                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=companies_preview}"/>
+                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=companies_preview}"
+                                  Text="Wyświetl listę" Icon="/Resources/icon32_list.ico" Click="btnCompaniesList_Click"/>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
-                                  Text="Dodaj nową" Icon="/Resources/icon32_add.ico" PreviewMouseLeftButtonUp="btnCompaniesNew_Click"
-                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=companies_save}"/>
+                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=companies_save}"
+                                  Text="Dodaj nową" Icon="/Resources/icon32_add.ico" Click="btnCompaniesNew_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -223,7 +228,7 @@
                 <!-- distributions -->
                 <Border x:Name="modDistributions" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=30}"
                         Background="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
-                    <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">
+                    <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_food.ico" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3}"/>
@@ -231,11 +236,11 @@
                             </StackPanel>
                         </Border>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
-                                  Text="Wyświetl listę" Icon="/Resources/icon32_list.ico" PreviewMouseLeftButtonUp="btnDistributionsList_Click"
-                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=distributions_preview}"/>
+                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=distributions_preview}"
+                                  Text="Wyświetl listę" Icon="/Resources/icon32_list.ico" Click="btnDistributionsList_Click"/>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
-                                  Text="Dodaj nową" Icon="/Resources/icon32_add.ico" PreviewMouseLeftButtonUp="btnDistributionsNew_Click"
-                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=distributions_save}"/>
+                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=distributions_save}"
+                                  Text="Dodaj nową" Icon="/Resources/icon32_add.ico" Click="btnDistributionsNew_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -246,7 +251,7 @@
                 <!-- documents -->
                 <Border x:Name="modDocuments" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=30}"
                         Background="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
-                    <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">
+                    <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_documents.ico" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3}"/>
@@ -254,11 +259,11 @@
                             </StackPanel>
                         </Border>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
-                                  Text="Wyświetl listę" Icon="/Resources/icon32_list.ico" PreviewMouseLeftButtonUp="btnDocumentsList_Click"
-                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=documents_preview}"/>
+                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=documents_preview}"
+                                  Text="Wyświetl listę" Icon="/Resources/icon32_list.ico" Click="btnDocumentsList_Click"/>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
-                                  Text="Dodaj nowy" Icon="/Resources/icon32_add.ico" PreviewMouseLeftButtonUp="btnDocumentsNew_Click"
-                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=documents_save}"/>
+                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=documents_save}"
+                                  Text="Dodaj nowy" Icon="/Resources/icon32_add.ico" Click="btnDocumentsNew_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -269,7 +274,7 @@
                 <!-- employees -->
                 <Border x:Name="modEmployees" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=30}"
                         Background="{Binding config_Employees_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
-                    <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">
+                    <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_briefcase.ico" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3}"/>
@@ -277,11 +282,11 @@
                             </StackPanel>
                         </Border>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
-                                  Text="Wyświetl listę" Icon="/Resources/icon32_list.ico" PreviewMouseLeftButtonUp="btnEmployeesList_Click"
-                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=employees_preview}"/>
+                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=employees_preview}"
+                                  Text="Wyświetl listę" Icon="/Resources/icon32_list.ico" Click="btnEmployeesList_Click"/>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
-                                  Text="Dodaj nowego" Icon="/Resources/icon32_add.ico" PreviewMouseLeftButtonUp="btnEmployeesNew_Click"
-                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=employees_save}"/>
+                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=employees_save}"
+                                  Text="Dodaj nowego" Icon="/Resources/icon32_add.ico" Click="btnEmployeesNew_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -292,7 +297,7 @@
                 <!-- families -->
                 <Border x:Name="modFamilies" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=30}"
                         Background="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
-                    <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">
+                    <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_families.ico" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3}"/>
@@ -300,11 +305,11 @@
                             </StackPanel>
                         </Border>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
-                                  Text="Wyświetl listę" Icon="/Resources/icon32_list.ico" PreviewMouseLeftButtonUp="btnFamiliesList_Click"
-                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=families_preview}"/>
+                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=families_preview}"
+                                  Text="Wyświetl listę" Icon="/Resources/icon32_list.ico" Click="btnFamiliesList_Click"/>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
-                                  Text="Dodaj nową" Icon="/Resources/icon32_add.ico" PreviewMouseLeftButtonUp="btnFamiliesNew_Click"
-                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=families_save}"/>
+                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=families_save}"
+                                  Text="Dodaj nową" Icon="/Resources/icon32_add.ico" Click="btnFamiliesNew_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -315,7 +320,7 @@
                 <!-- logs -->
                 <Border x:Name="modLogs" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=30}"
                         Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
-                    <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">
+                    <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_logs.ico" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3}"/>
@@ -323,8 +328,8 @@
                             </StackPanel>
                         </Border>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
-                                  Text="Wyświetl logi" Icon="/Resources/icon32_logs.ico" PreviewMouseLeftButtonUp="btnLogsList_Click"
-                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=logs_preview}"/>
+                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=logs_preview}"
+                                  Text="Wyświetl logi" Icon="/Resources/icon32_logs.ico" Click="btnLogsList_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -335,7 +340,7 @@
                 <!-- stats -->
                 <Border x:Name="modStats" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=30}"
                         Background="{Binding config_Stats_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
-                    <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">
+                    <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_stats.ico" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3}"/>
@@ -343,8 +348,8 @@
                             </StackPanel>
                         </Border>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
-                                  Text="Wyświetl statystyki" Icon="/Resources/icon32_stats.ico" PreviewMouseLeftButtonUp="btnStats_Click"
-                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=stats_preview}"/>
+                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=stats_preview}"
+                                  Text="Wyświetl statystyki" Icon="/Resources/icon32_stats.ico" Click="btnStats_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -355,7 +360,7 @@
                 <!-- stores -->
                 <Border x:Name="modStores" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=30}"
                         Background="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
-                    <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">
+                    <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_stores.ico" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3}"/>
@@ -363,11 +368,11 @@
                             </StackPanel>
                         </Border>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
-                                  Text="Wyświetl listę" Icon="/Resources/icon32_list.ico" PreviewMouseLeftButtonUp="btnStoresList_Click"
-                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=stores_preview}"/>
+                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=stores_preview}"
+                                  Text="Wyświetl listę" Icon="/Resources/icon32_list.ico" Click="btnStoresList_Click"/>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
-                                  Text="Dodaj nowy" Icon="/Resources/icon32_add.ico" PreviewMouseLeftButtonUp="btnStoresNew_Click"
-                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=stores_save}"/>
+                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=stores_save}"
+                                  Text="Dodaj nowy" Icon="/Resources/icon32_add.ico" Click="btnStoresNew_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -378,7 +383,7 @@
                 <!-- users -->
                 <Border x:Name="modUsers" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=30}"
                         Background="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
-                    <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">
+                    <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_users.ico" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3}"/>
@@ -386,11 +391,11 @@
                             </StackPanel>
                         </Border>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
-                                  Text="Wyświetl listę" Icon="/Resources/icon32_list.ico" PreviewMouseLeftButtonUp="btnUsersList_Click"
-                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=users_preview}"/>
+                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=users_preview}"
+                                  Text="Wyświetl listę" Icon="/Resources/icon32_list.ico" Click="btnUsersList_Click"/>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
-                                  Text="Dodaj nowego" Icon="/Resources/icon32_add.ico" PreviewMouseLeftButtonUp="btnUsersNew_Click"
-                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=users_save}"/>
+                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=users_save}"
+                                  Text="Dodaj nowego" Icon="/Resources/icon32_add.ico" Click="btnUsersNew_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
