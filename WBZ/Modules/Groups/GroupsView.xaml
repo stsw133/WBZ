@@ -5,7 +5,7 @@
           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
           xmlns:g="clr-namespace:WBZ.Globals"
           mc:Ignorable="d" d:DesignHeight="300"
-          Margin="5,5,0,5" Padding="0,0,5,0" Width="200"
+          Margin="5,5,0,5" Padding="0,0,5,0" MinWidth="150"
                 Loaded="TreeView_Loaded" SelectedItemChanged="TreeView_SelectedItemChanged">
     <TreeView.ContextMenu>
         <ContextMenu>
@@ -43,4 +43,9 @@
             </MenuItem>
         </ContextMenu>
     </TreeView.ContextMenu>
+    <TreeView.ItemContainerStyle>
+        <Style TargetType="{x:Type TreeViewItem}">
+            <Setter Property="IsExpanded" Value="True"/>
+        </Style>
+    </TreeView.ItemContainerStyle>
 </TreeView>

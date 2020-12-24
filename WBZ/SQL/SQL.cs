@@ -96,7 +96,8 @@ namespace WBZ
 						from wbz.attributes_classes ac
 						left join wbz.attributes a
 							on ac.id=a.class and a.instance=@instance
-						where ac.module=@module and @filter", sqlConn);
+						where ac.module=@module and @filter
+						order by ac.name", sqlConn);
 					sqlCmd.Parameters.AddWithValue("module", module);
 					sqlCmd.Parameters.AddWithValue("instance", instance);
 					sqlCmd.CommandText = sqlCmd.CommandText.Replace("@filter", filter ?? true.ToString());
@@ -1722,8 +1723,8 @@ namespace WBZ
 						/// ATTRIBUTES_CLASSES
 						case Global.Module.ATTRIBUTES_CLASSES:
 							var attributeClass = instance as M_AttributeClass;
-							query = @"insert into wbz.attributes_classes (module, name, type, required, archival, comment, icon)
-								values (@module, @name, @type, @required, @archival, @comment, @icon)
+							query = @"insert into wbz.attributes_classes (id, module, name, type, required, archival, comment, icon)
+								values (@id, @module, @name, @type, @required, @archival, @comment, @icon)
 								on conflict(id) do
 								update set module=@module, name=@name, type=@type, required=@required,
 									archival=@archival, comment=@comment, icon=@icon";

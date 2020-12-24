@@ -112,6 +112,13 @@
                 </TabItem.Header>
                 <c:AdditionalsTab/>
             </TabItem>
+            <!-- tabGroups -->
+            <TabItem>
+                <TabItem.Header>
+                    <c:Header Text="Grupy" Icon="/Resources/icon32_groups.ico"/>
+                </TabItem.Header>
+                <c:GroupsTab/>
+            </TabItem>
             <!-- tabLogs -->
             <TabItem>
                 <TabItem.Header>
