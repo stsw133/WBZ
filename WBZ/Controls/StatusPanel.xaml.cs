@@ -23,7 +23,7 @@ namespace WBZ.Controls
                   nameof(EnableFilters),
                   typeof(bool),
                   typeof(StatusPanel),
-                  new PropertyMetadata(true)
+                  new PropertyMetadata(false)
               );
 
         public bool HasFilters
@@ -36,7 +36,7 @@ namespace WBZ.Controls
                   nameof(HasFilters),
                   typeof(bool),
                   typeof(StatusPanel),
-                  new PropertyMetadata(true)
+                  new PropertyMetadata(false)
               );
 
         public bool EnableGroups

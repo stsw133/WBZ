@@ -49,6 +49,7 @@ namespace WBZ.Interfaces
         {
             if (D.SelectingMode)
                 W.dgList.SelectionMode = DataGridSelectionMode.Single;
+            cmdRefresh_Executed(null, null);
         }
 
         /// <summary>

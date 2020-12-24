@@ -17,6 +17,26 @@ namespace WBZ.Controls
         }
 
         /// <summary>
+        /// ManageIcon - drop image
+        /// </summary>
+        private void btnManageIcon_Drop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                byte[] file = File.ReadAllBytes(files[0]);
+
+                Window win = Window.GetWindow(this);
+                dynamic d = win?.DataContext;
+                if (d != null)
+                {
+                    d.InstanceInfo.Icon = file;
+                    d.InstanceInfo = d.InstanceInfo;
+                }
+            }
+        }
+
+        /// <summary>
 		/// ManageIcon - open context menu
 		/// </summary>
 		private void btnManageIcon_Click(object sender, MouseButtonEventArgs e)

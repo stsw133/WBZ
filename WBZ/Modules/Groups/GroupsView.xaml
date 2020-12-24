@@ -6,7 +6,7 @@
           xmlns:g="clr-namespace:WBZ.Globals"
           mc:Ignorable="d" d:DesignHeight="300"
           Margin="5,5,0,5" Padding="0,0,5,0" MinWidth="150"
-                Loaded="TreeView_Loaded" SelectedItemChanged="TreeView_SelectedItemChanged">
+                Loaded="TreeView_Loaded" PreviewMouseRightButtonDown="TreeView_PreviewMouseRightButtonDown" SelectedItemChanged="TreeView_SelectedItemChanged">
     <TreeView.ContextMenu>
         <ContextMenu>
             <MenuItem Header="Podgląd" IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=groups_preview}" Click="btnGroupsPreview_Click">
@@ -27,12 +27,6 @@
             <MenuItem Header="Usuń" IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=groups_delete}" Click="btnGroupsDelete_Click">
                 <MenuItem.Icon>
                     <Image Source="/Resources/icon32_delete.ico"/>
-                </MenuItem.Icon>
-            </MenuItem>
-            <Separator/>
-            <MenuItem Header="Nowa nadgrupa" IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=groups_save}" Click="btnGroupsMegaNew_Click">
-                <MenuItem.Icon>
-                    <Image Source="/Resources/icon32_add.ico"/>
                 </MenuItem.Icon>
             </MenuItem>
             <Separator/>

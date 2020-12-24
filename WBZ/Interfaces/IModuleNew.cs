@@ -42,6 +42,7 @@ namespace WBZ.Interfaces
 		{
 			if (((Commands.Type)D.Mode).In(Commands.Type.NEW, Commands.Type.DUPLICATE))
 				(D.InstanceInfo as dynamic).ID = SQL.NewInstanceID(D.MODULE_TYPE);
+			//TODO - zaczytywanie instancji dopiero po otwarciu okna (?)
 		}
 
         /// <summary>

@@ -40,304 +40,6 @@ namespace WBZ
 			return sqlConn;
 		}
 
-		#region mainDB
-		/// <summary>
-		/// Zapisuje log o podanych parametrach
-		/// </summary>
-		/// <param name="user">Numer ID użytkownika</param>
-		/// <param name="module">Nazwa modułu</param>
-		/// <param name="instance">Numer ID obiektu</param>
-		/// <param name="content">Treść logu</param>
-		internal static bool SetLog(int user, string module, int instance, string content, NpgsqlTransaction sqlTran = null)
-		{
-			bool result = false;
-
-			if (M_Config.Logs_Enabled != "1")
-				return true;
-
-			try
-			{
-				using (var sqlConn = connOpenedWBZ)
-				using (var sqlCmd = new NpgsqlCommand(@"insert into wbz.logs (""user"", module, instance, content)
-					values (@user, @module, @instance, @content)", sqlConn, sqlTran))
-				{
-					sqlCmd.Parameters.AddWithValue("user", user);
-					sqlCmd.Parameters.AddWithValue("module", module);
-					sqlCmd.Parameters.AddWithValue("instance", instance);
-					sqlCmd.Parameters.AddWithValue("content", content);
-					sqlCmd.ExecuteNonQuery();
-				}
-
-				result = true;
-			}
-			catch (Exception ex)
-			{
-				Error("Błąd podczas zapisywania logu", ex, Global.Module.LOGS, 0, true, false);
-			}
-
-			return result;
-		}
-		/// <summary>
-		/// Pobiera atrybuty dla podanego modułu i obiektu
-		/// </summary>
-		/// <param name="module">Nazwa modułu</param>
-		/// <param name="instance">Numer ID obiektu</param>
-		/// <param name="filter">Filtr SQL</param>
-		internal static List<M_Attribute> ListAttributes(string module, int instance, string filter = null)
-		{
-			var result = new List<M_Attribute>();
-
-			try
-			{
-				using (var sqlConn = connOpenedWBZ)
-				{
-					var sqlCmd = new NpgsqlCommand(@"select a.id as id, ac.module, @instance as instance,
-							ac.id as class, ac.name, ac.type, ac.required, a.value as value
-						from wbz.attributes_classes ac
-						left join wbz.attributes a
-							on ac.id=a.class and a.instance=@instance
-						where ac.module=@module and @filter
-						order by ac.name", sqlConn);
-					sqlCmd.Parameters.AddWithValue("module", module);
-					sqlCmd.Parameters.AddWithValue("instance", instance);
-					sqlCmd.CommandText = sqlCmd.CommandText.Replace("@filter", filter ?? true.ToString());
-					using (var sqlDA = new NpgsqlDataAdapter(sqlCmd))
-					{
-						var dt = new DataTable();
-						sqlDA.Fill(dt);
-
-						foreach (DataRow row in dt.Rows)
-						{
-							M_Attribute c = new M_Attribute()
-							{
-								ID = !Convert.IsDBNull(row["id"]) ? (long)row["id"] : 0,
-								Class = new M_AttributeClass()
-								{
-									ID = !Convert.IsDBNull(row["class"]) ? (int)row["class"] : 0,
-									Module = !Convert.IsDBNull(row["module"]) ? (string)row["module"] : "",
-									Name = !Convert.IsDBNull(row["name"]) ? (string)row["name"] : "",
-									Type = !Convert.IsDBNull(row["type"]) ? (string)row["type"] : "",
-									Required = !Convert.IsDBNull(row["required"]) ? (bool)row["required"] : false,
-									Values = GetInstancePositions(Global.Module.ATTRIBUTES_CLASSES, !Convert.IsDBNull(row["class"]) ? (int)row["class"] : 0)
-								},
-								Instance = !Convert.IsDBNull(row["instance"]) ? (int)row["instance"] : 0,
-								Value = !Convert.IsDBNull(row["value"]) ? (string)row["value"] : ""
-							};
-							result.Add(c);
-						}
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-				Error("Błąd podczas pobierania listy atrybutów", ex, Global.Module.ATTRIBUTES, 0);
-			}
-
-			return result;
-		}
-		/// <summary>
-		/// Ustawia dane o atrybucie
-		/// </summary>
-		/// <param name="attribute">Klasa atrybutu</param>
-		internal static bool UpdateAttribute(M_Attribute attribute)
-		{
-			bool result = false;
-
-			try
-			{
-				using (var sqlConn = connOpenedWBZ)
-				{
-					///add
-					if (attribute.ID == 0)
-					{
-						var sqlCmd = new NpgsqlCommand(@"insert into wbz.attributes (instance, class, value)
-							values (@instance, @class, @value)", sqlConn);
-						sqlCmd.Parameters.AddWithValue("instance", attribute.Instance);
-						sqlCmd.Parameters.AddWithValue("class", attribute.Class.ID);
-						sqlCmd.Parameters.AddWithValue("value", attribute.Value);
-						sqlCmd.ExecuteNonQuery();
-						SetLog(Global.User.ID, attribute.Class.Module, attribute.Instance, $"Dodano atrybut {attribute.Class.Name}.");
-					}
-					///edit
-					else if (!string.IsNullOrEmpty(attribute.Value))
-					{
-						var sqlCmd = new NpgsqlCommand(@"update wbz.attributes
-							set instance=@instance, class=@class, value=@value
-							where id=@id", sqlConn);
-						sqlCmd.Parameters.AddWithValue("id", attribute.ID);
-						sqlCmd.Parameters.AddWithValue("instance", attribute.Instance);
-						sqlCmd.Parameters.AddWithValue("class", attribute.Class.ID);
-						sqlCmd.Parameters.AddWithValue("value", attribute.Value);
-						sqlCmd.ExecuteNonQuery();
-						SetLog(Global.User.ID, attribute.Class.Module, attribute.Instance, $"Edytowano atrybut {attribute.Class.Name}.");
-					}
-					///delete
-					else
-					{
-						var sqlCmd = new NpgsqlCommand(@"delete from wbz.attributes
-							where id=@id", sqlConn);
-						sqlCmd.Parameters.AddWithValue("id", attribute.ID);
-						sqlCmd.ExecuteNonQuery();
-						SetLog(Global.User.ID, attribute.Class.Module, attribute.Instance, $"Usunięto atrybut {attribute.Class.Name}.");
-					}
-				}
-
-				result = true;
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.ToString());
-			}
-
-			return result;
-		}
-		/// <summary>
-		/// Zapisuje załącznik o podanych parametrach
-		/// </summary>
-		/// <param name="module">Nazwa modułu</param>
-		/// <param name="instance">Numer ID obiektu</param>
-		/// <param name="name">Nazwa załącznika</param>
-		/// <param name="file">Plik</param>
-		internal static int SetAttachment(string module, int instance, string name, byte[] file, string comment)
-		{
-			int result = 0;
-
-			try
-			{
-				using (var sqlConn = connOpenedWBZ)
-				{
-					var sqlCmd = new NpgsqlCommand(@"insert into wbz.attachments (""user"", module, instance, name, file, comment)
-						values (@user, @module, @instance, @name, @file, @comment) returning id", sqlConn);
-					sqlCmd.Parameters.AddWithValue("user", Global.User.ID);
-					sqlCmd.Parameters.AddWithValue("module", module);
-					sqlCmd.Parameters.AddWithValue("instance", instance);
-					sqlCmd.Parameters.AddWithValue("name", name);
-					sqlCmd.Parameters.AddWithValue("file", file);
-					sqlCmd.Parameters.AddWithValue("comment", comment);
-					result = Convert.ToInt32(sqlCmd.ExecuteScalar());
-
-					SetLog(Global.User.ID, module, instance, $"Dodano załącznik {name}.");
-				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.ToString());
-			}
-
-			return result;
-		}
-		/// <summary>
-		/// Pobiera kontakty dla podanego modułu i obiektu
-		/// </summary>
-		/// <param name="module">Nazwa modułu</param>
-		/// <param name="instance">Numer ID obiektu</param>
-		/// <param name="filter">Filtr SQL</param>
-		internal static DataTable ListContacts(string module, int instance, string filter = null)
-		{
-			var result = new DataTable();
-
-			try
-			{
-				using (var sqlConn = connOpenedWBZ)
-				{
-					var sqlCmd = new NpgsqlCommand(@"select c.id, c.module, c.instance, c.email, c.phone, c.forename, c.lastname, c.""default"", c.archival
-						from wbz.contacts c
-						where c.module=@module and c.instance=@instance and @filter", sqlConn);
-					sqlCmd.Parameters.AddWithValue("module", module);
-					sqlCmd.Parameters.AddWithValue("instance", instance);
-					sqlCmd.CommandText = sqlCmd.CommandText.Replace("@filter", filter ?? true.ToString());
-					using (var sqlDA = new NpgsqlDataAdapter(sqlCmd))
-					{
-						sqlDA.Fill(result);
-						result.Columns["default"].DefaultValue = false;
-						result.Columns["archival"].DefaultValue = false;
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.ToString());
-			}
-
-			return result;
-		}
-		/// <summary>
-		/// Ustawia dane o kontaktach
-		/// </summary>
-		/// <param name="module">Nazwa modułu</param>
-		/// <param name="instance">Numer ID obiektu</param>
-		/// <param name="contacts">Tabela kontaktów</param>
-		internal static bool UpdateContacts(string module, int instance, DataTable contacts)
-		{
-			bool result = false;
-
-			try
-			{
-				using (var sqlConn = connOpenedWBZ)
-				using (var sqlTran = sqlConn.BeginTransaction())
-				{
-					NpgsqlCommand sqlCmd;
-
-					///contacts
-					foreach (DataRow contact in contacts.Rows)
-					{
-						///add
-						if (contact.RowState == DataRowState.Added)
-						{
-							sqlCmd = new NpgsqlCommand(@"insert into wbz.contacts (module, instance, email, phone, forename, lastname, ""default"", archival)
-								values (@module, @instance, @email, @phone, @forename, @lastname, @default, @archival)", sqlConn, sqlTran);
-							sqlCmd.Parameters.AddWithValue("module", module);
-							sqlCmd.Parameters.AddWithValue("instance", instance);
-							sqlCmd.Parameters.AddWithValue("email", contact["email"]);
-							sqlCmd.Parameters.AddWithValue("phone", contact["phone"]);
-							sqlCmd.Parameters.AddWithValue("forename", contact["forename"]);
-							sqlCmd.Parameters.AddWithValue("lastname", contact["lastname"]);
-							sqlCmd.Parameters.AddWithValue("default", contact["default"]);
-							sqlCmd.Parameters.AddWithValue("archival", contact["archival"]);
-							sqlCmd.ExecuteNonQuery();
-							SetLog(Global.User.ID, module, instance, $"Dodano kontakt {contact["forename"]} {contact["lastname"]}.", sqlTran);
-						}
-						///edit
-						else if (contact.RowState == DataRowState.Modified)
-						{
-							sqlCmd = new NpgsqlCommand(@"update wbz.contacts
-								set email=@email, phone=@phone, forename=@forename, lastname=@lastname, ""default""=@default, archival=@archival
-								where id=@id", sqlConn, sqlTran);
-							sqlCmd.Parameters.AddWithValue("id", contact["id", DataRowVersion.Original]);
-							sqlCmd.Parameters.AddWithValue("email", contact["email"]);
-							sqlCmd.Parameters.AddWithValue("phone", contact["phone"]);
-							sqlCmd.Parameters.AddWithValue("forename", contact["forename"]);
-							sqlCmd.Parameters.AddWithValue("lastname", contact["lastname"]);
-							sqlCmd.Parameters.AddWithValue("default", contact["default"]);
-							sqlCmd.Parameters.AddWithValue("archival", contact["archival"]);
-							sqlCmd.ExecuteNonQuery();
-							SetLog(Global.User.ID, module, instance, $"Edytowano kontakt {contact["forename", DataRowVersion.Original]} {contact["lastname", DataRowVersion.Original]}.", sqlTran);
-						}
-						///delete
-						else if (contact.RowState == DataRowState.Deleted)
-						{
-							sqlCmd = new NpgsqlCommand(@"delete from wbz.contacts
-								where id=@id", sqlConn, sqlTran);
-							sqlCmd.Parameters.AddWithValue("id", contact["id", DataRowVersion.Original]);
-							sqlCmd.ExecuteNonQuery();
-							SetLog(Global.User.ID, module, instance, $"Usunięto kontakt {contact["forename", DataRowVersion.Original]} {contact["lastname", DataRowVersion.Original]}.", sqlTran);
-						}
-					}
-
-					sqlTran.Commit();
-				}
-
-				result = true;
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.ToString());
-			}
-
-			return result;
-		}
-		#endregion
-
 		#region Login
 		/// <summary>
 		/// Loguje użytkownika do systemu
@@ -2241,32 +1943,6 @@ namespace WBZ
 			return result;
 		}
 		/// <summary>
-		/// Pobiera zawartość załącznika o podanych parametrach
-		/// </summary>
-		/// <param name="id">ID załącznika</param>
-		internal static byte[] GetAttachmentFile(int id)
-		{
-			byte[] result = null;
-
-			try
-			{
-				using (var sqlConn = connOpenedWBZ)
-				{
-					var sqlCmd = new NpgsqlCommand(@"select file
-						from wbz.attachments
-						where id=@id", sqlConn);
-					sqlCmd.Parameters.AddWithValue("id", id);
-					result = (byte[])sqlCmd.ExecuteScalar();
-				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.ToString());
-			}
-
-			return result;
-		}
-		/// <summary>
 		/// Usuwa wszystkie kontakty, atrybuty i załączniki przypisane do obiektu
 		/// </summary>
 		/// <param name="module">Nazwa modułu</param>
@@ -2304,13 +1980,7 @@ namespace WBZ
 
 			try
 			{
-				using (var sqlCmd = new NpgsqlCommand(@"delete from wbz.contacts where module=@module and instance=@instance", sqlConn, sqlTran))
-				{
-					sqlCmd.Parameters.AddWithValue("module", module);
-					sqlCmd.Parameters.AddWithValue("instance", id);
-					sqlCmd.ExecuteNonQuery();
-				}
-				using (var sqlCmd = new NpgsqlCommand(@"delete from wbz.groups where module=@module and instance=@instance", sqlConn, sqlTran))
+				using (var sqlCmd = new NpgsqlCommand(@"delete from wbz.attachments where module=@module and instance=@instance", sqlConn, sqlTran))
 				{
 					sqlCmd.Parameters.AddWithValue("module", module);
 					sqlCmd.Parameters.AddWithValue("instance", id);
@@ -2323,7 +1993,13 @@ namespace WBZ
 					sqlCmd.Parameters.AddWithValue("instance", id);
 					sqlCmd.ExecuteNonQuery();
 				}
-				using (var sqlCmd = new NpgsqlCommand(@"delete from wbz.attachments where module=@module and instance=@instance", sqlConn, sqlTran))
+				using (var sqlCmd = new NpgsqlCommand(@"delete from wbz.contacts where module=@module and instance=@instance", sqlConn, sqlTran))
+				{
+					sqlCmd.Parameters.AddWithValue("module", module);
+					sqlCmd.Parameters.AddWithValue("instance", id);
+					sqlCmd.ExecuteNonQuery();
+				}
+				using (var sqlCmd = new NpgsqlCommand(@"delete from wbz.groups where module=@module and instance=@instance", sqlConn, sqlTran))
 				{
 					sqlCmd.Parameters.AddWithValue("module", module);
 					sqlCmd.Parameters.AddWithValue("instance", id);
@@ -2339,6 +2015,328 @@ namespace WBZ
 
 			return result;
 		}
-#endregion
+		/// <summary>
+		/// Pobiera zawartość załącznika o podanych parametrach
+		/// </summary>
+		/// <param name="id">ID załącznika</param>
+		internal static byte[] GetAttachmentFile(int id)
+		{
+			byte[] result = null;
+
+			try
+			{
+				using (var sqlConn = connOpenedWBZ)
+				{
+					var sqlCmd = new NpgsqlCommand(@"select file
+						from wbz.attachments
+						where id=@id", sqlConn);
+					sqlCmd.Parameters.AddWithValue("id", id);
+					result = (byte[])sqlCmd.ExecuteScalar();
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.ToString());
+			}
+
+			return result;
+		}
+		/// <summary>
+		/// Zapisuje załącznik o podanych parametrach
+		/// </summary>
+		/// <param name="module">Nazwa modułu</param>
+		/// <param name="instance">Numer ID obiektu</param>
+		/// <param name="name">Nazwa załącznika</param>
+		/// <param name="file">Plik</param>
+		internal static int SetAttachment(string module, int instance, string name, byte[] file, string comment)
+		{
+			int result = 0;
+
+			try
+			{
+				using (var sqlConn = connOpenedWBZ)
+				{
+					var sqlCmd = new NpgsqlCommand(@"insert into wbz.attachments (""user"", module, instance, name, file, comment)
+						values (@user, @module, @instance, @name, @file, @comment) returning id", sqlConn);
+					sqlCmd.Parameters.AddWithValue("user", Global.User.ID);
+					sqlCmd.Parameters.AddWithValue("module", module);
+					sqlCmd.Parameters.AddWithValue("instance", instance);
+					sqlCmd.Parameters.AddWithValue("name", name);
+					sqlCmd.Parameters.AddWithValue("file", file);
+					sqlCmd.Parameters.AddWithValue("comment", comment);
+					result = Convert.ToInt32(sqlCmd.ExecuteScalar());
+
+					SetLog(Global.User.ID, module, instance, $"Dodano załącznik {name}.");
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.ToString());
+			}
+
+			return result;
+		}
+		/// <summary>
+		/// Pobiera atrybuty dla podanego modułu i obiektu
+		/// </summary>
+		/// <param name="module">Nazwa modułu</param>
+		/// <param name="instance">Numer ID obiektu</param>
+		/// <param name="filter">Filtr SQL</param>
+		internal static List<M_Attribute> ListAttributes(string module, int instance, string filter = null)
+		{
+			var result = new List<M_Attribute>();
+
+			try
+			{
+				using (var sqlConn = connOpenedWBZ)
+				{
+					var sqlCmd = new NpgsqlCommand(@"select a.id as id, ac.module, @instance as instance,
+							ac.id as class, ac.name, ac.type, ac.required, ac.icon, a.value as value
+						from wbz.attributes_classes ac
+						left join wbz.attributes a
+							on ac.id=a.class and a.instance=@instance
+						where ac.module=@module and @filter
+						order by ac.name", sqlConn);
+					sqlCmd.Parameters.AddWithValue("module", module);
+					sqlCmd.Parameters.AddWithValue("instance", instance);
+					sqlCmd.CommandText = sqlCmd.CommandText.Replace("@filter", filter ?? true.ToString());
+					using (var sqlDA = new NpgsqlDataAdapter(sqlCmd))
+					{
+						var dt = new DataTable();
+						sqlDA.Fill(dt);
+
+						foreach (DataRow row in dt.Rows)
+						{
+							M_Attribute c = new M_Attribute()
+							{
+								ID = !Convert.IsDBNull(row["id"]) ? (long)row["id"] : 0,
+								Class = new M_AttributeClass()
+								{
+									ID = !Convert.IsDBNull(row["class"]) ? (int)row["class"] : 0,
+									Module = !Convert.IsDBNull(row["module"]) ? (string)row["module"] : string.Empty,
+									Name = !Convert.IsDBNull(row["name"]) ? (string)row["name"] : string.Empty,
+									Type = !Convert.IsDBNull(row["type"]) ? (string)row["type"] : string.Empty,
+									Required = !Convert.IsDBNull(row["required"]) ? (bool)row["required"] : false,
+									Icon = !Convert.IsDBNull(row["icon"]) ? (byte[])row["icon"] : null,
+									Values = GetInstancePositions(Global.Module.ATTRIBUTES_CLASSES, !Convert.IsDBNull(row["class"]) ? (int)row["class"] : 0)
+								},
+								Instance = !Convert.IsDBNull(row["instance"]) ? (int)row["instance"] : 0,
+								Value = !Convert.IsDBNull(row["value"]) ? (string)row["value"] : string.Empty
+							};
+							result.Add(c);
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				Error("Błąd podczas pobierania listy atrybutów", ex, Global.Module.ATTRIBUTES, 0);
+			}
+
+			return result;
+		}
+		/// <summary>
+		/// Ustawia dane o atrybucie
+		/// </summary>
+		/// <param name="attribute">Klasa atrybutu</param>
+		internal static bool UpdateAttribute(M_Attribute attribute)
+		{
+			bool result = false;
+
+			try
+			{
+				using (var sqlConn = connOpenedWBZ)
+				{
+					///add
+					if (attribute.ID == 0)
+					{
+						var sqlCmd = new NpgsqlCommand(@"insert into wbz.attributes (instance, class, value)
+							values (@instance, @class, @value)", sqlConn);
+						sqlCmd.Parameters.AddWithValue("instance", attribute.Instance);
+						sqlCmd.Parameters.AddWithValue("class", attribute.Class.ID);
+						sqlCmd.Parameters.AddWithValue("value", attribute.Value);
+						sqlCmd.ExecuteNonQuery();
+						SetLog(Global.User.ID, attribute.Class.Module, attribute.Instance, $"Dodano atrybut {attribute.Class.Name}.");
+					}
+					///edit
+					else if (!string.IsNullOrEmpty(attribute.Value))
+					{
+						var sqlCmd = new NpgsqlCommand(@"update wbz.attributes
+							set instance=@instance, class=@class, value=@value
+							where id=@id", sqlConn);
+						sqlCmd.Parameters.AddWithValue("id", attribute.ID);
+						sqlCmd.Parameters.AddWithValue("instance", attribute.Instance);
+						sqlCmd.Parameters.AddWithValue("class", attribute.Class.ID);
+						sqlCmd.Parameters.AddWithValue("value", attribute.Value);
+						sqlCmd.ExecuteNonQuery();
+						SetLog(Global.User.ID, attribute.Class.Module, attribute.Instance, $"Edytowano atrybut {attribute.Class.Name}.");
+					}
+					///delete
+					else
+					{
+						var sqlCmd = new NpgsqlCommand(@"delete from wbz.attributes
+							where id=@id", sqlConn);
+						sqlCmd.Parameters.AddWithValue("id", attribute.ID);
+						sqlCmd.ExecuteNonQuery();
+						SetLog(Global.User.ID, attribute.Class.Module, attribute.Instance, $"Usunięto atrybut {attribute.Class.Name}.");
+					}
+				}
+
+				result = true;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.ToString());
+			}
+
+			return result;
+		}
+		/// <summary>
+		/// Pobiera kontakty dla podanego modułu i obiektu
+		/// </summary>
+		/// <param name="module">Nazwa modułu</param>
+		/// <param name="instance">Numer ID obiektu</param>
+		/// <param name="filter">Filtr SQL</param>
+		internal static DataTable ListContacts(string module, int instance, string filter = null)
+		{
+			var result = new DataTable();
+
+			try
+			{
+				using (var sqlConn = connOpenedWBZ)
+				{
+					var sqlCmd = new NpgsqlCommand(@"select c.id, c.module, c.instance, c.email, c.phone, c.forename, c.lastname, c.""default"", c.archival
+						from wbz.contacts c
+						where c.module=@module and c.instance=@instance and @filter", sqlConn);
+					sqlCmd.Parameters.AddWithValue("module", module);
+					sqlCmd.Parameters.AddWithValue("instance", instance);
+					sqlCmd.CommandText = sqlCmd.CommandText.Replace("@filter", filter ?? true.ToString());
+					using (var sqlDA = new NpgsqlDataAdapter(sqlCmd))
+					{
+						sqlDA.Fill(result);
+						result.Columns["default"].DefaultValue = false;
+						result.Columns["archival"].DefaultValue = false;
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.ToString());
+			}
+
+			return result;
+		}
+		/// <summary>
+		/// Ustawia dane o kontaktach
+		/// </summary>
+		/// <param name="module">Nazwa modułu</param>
+		/// <param name="instance">Numer ID obiektu</param>
+		/// <param name="contacts">Tabela kontaktów</param>
+		internal static bool UpdateContacts(string module, int instance, DataTable contacts)
+		{
+			bool result = false;
+
+			try
+			{
+				using (var sqlConn = connOpenedWBZ)
+				using (var sqlTran = sqlConn.BeginTransaction())
+				{
+					NpgsqlCommand sqlCmd;
+
+					///contacts
+					foreach (DataRow contact in contacts.Rows)
+					{
+						///add
+						if (contact.RowState == DataRowState.Added)
+						{
+							sqlCmd = new NpgsqlCommand(@"insert into wbz.contacts (module, instance, email, phone, forename, lastname, ""default"", archival)
+								values (@module, @instance, @email, @phone, @forename, @lastname, @default, @archival)", sqlConn, sqlTran);
+							sqlCmd.Parameters.AddWithValue("module", module);
+							sqlCmd.Parameters.AddWithValue("instance", instance);
+							sqlCmd.Parameters.AddWithValue("email", contact["email"]);
+							sqlCmd.Parameters.AddWithValue("phone", contact["phone"]);
+							sqlCmd.Parameters.AddWithValue("forename", contact["forename"]);
+							sqlCmd.Parameters.AddWithValue("lastname", contact["lastname"]);
+							sqlCmd.Parameters.AddWithValue("default", contact["default"]);
+							sqlCmd.Parameters.AddWithValue("archival", contact["archival"]);
+							sqlCmd.ExecuteNonQuery();
+							SetLog(Global.User.ID, module, instance, $"Dodano kontakt {contact["forename"]} {contact["lastname"]}.", sqlTran);
+						}
+						///edit
+						else if (contact.RowState == DataRowState.Modified)
+						{
+							sqlCmd = new NpgsqlCommand(@"update wbz.contacts
+								set email=@email, phone=@phone, forename=@forename, lastname=@lastname, ""default""=@default, archival=@archival
+								where id=@id", sqlConn, sqlTran);
+							sqlCmd.Parameters.AddWithValue("id", contact["id", DataRowVersion.Original]);
+							sqlCmd.Parameters.AddWithValue("email", contact["email"]);
+							sqlCmd.Parameters.AddWithValue("phone", contact["phone"]);
+							sqlCmd.Parameters.AddWithValue("forename", contact["forename"]);
+							sqlCmd.Parameters.AddWithValue("lastname", contact["lastname"]);
+							sqlCmd.Parameters.AddWithValue("default", contact["default"]);
+							sqlCmd.Parameters.AddWithValue("archival", contact["archival"]);
+							sqlCmd.ExecuteNonQuery();
+							SetLog(Global.User.ID, module, instance, $"Edytowano kontakt {contact["forename", DataRowVersion.Original]} {contact["lastname", DataRowVersion.Original]}.", sqlTran);
+						}
+						///delete
+						else if (contact.RowState == DataRowState.Deleted)
+						{
+							sqlCmd = new NpgsqlCommand(@"delete from wbz.contacts
+								where id=@id", sqlConn, sqlTran);
+							sqlCmd.Parameters.AddWithValue("id", contact["id", DataRowVersion.Original]);
+							sqlCmd.ExecuteNonQuery();
+							SetLog(Global.User.ID, module, instance, $"Usunięto kontakt {contact["forename", DataRowVersion.Original]} {contact["lastname", DataRowVersion.Original]}.", sqlTran);
+						}
+					}
+
+					sqlTran.Commit();
+				}
+
+				result = true;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.ToString());
+			}
+
+			return result;
+		}
+		/// <summary>
+		/// Zapisuje log o podanych parametrach
+		/// </summary>
+		/// <param name="user">Numer ID użytkownika</param>
+		/// <param name="module">Nazwa modułu</param>
+		/// <param name="instance">Numer ID obiektu</param>
+		/// <param name="content">Treść logu</param>
+		internal static bool SetLog(int user, string module, int instance, string content, NpgsqlTransaction sqlTran = null)
+		{
+			bool result = false;
+
+			if (M_Config.Logs_Enabled != "1")
+				return true;
+
+			try
+			{
+				using (var sqlConn = connOpenedWBZ)
+				using (var sqlCmd = new NpgsqlCommand(@"insert into wbz.logs (""user"", module, instance, content)
+					values (@user, @module, @instance, @content)", sqlConn, sqlTran))
+				{
+					sqlCmd.Parameters.AddWithValue("user", user);
+					sqlCmd.Parameters.AddWithValue("module", module);
+					sqlCmd.Parameters.AddWithValue("instance", instance);
+					sqlCmd.Parameters.AddWithValue("content", content);
+					sqlCmd.ExecuteNonQuery();
+				}
+
+				result = true;
+			}
+			catch (Exception ex)
+			{
+				Error("Błąd podczas zapisywania logu", ex, Global.Module.LOGS, 0, true, false);
+			}
+
+			return result;
+		}
+		#endregion
 	}
 }

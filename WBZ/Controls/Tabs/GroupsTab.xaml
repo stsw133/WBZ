@@ -4,11 +4,23 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:c="clr-namespace:WBZ.Controls"
+             xmlns:g="clr-namespace:WBZ.Globals"
+             xmlns:p="clr-namespace:WBZ.Properties"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="750"
              Loaded="UserControl_Loaded">
     <c:DataGrid x:Name="dgList" ItemsSource="{Binding InstanceGroups}" IsReadOnly="True">
         <DataGrid.Columns>
+            <!-- ID -->
             <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" Visibility="Collapsed"/>
+            <!-- Icon -->
+            <DataGridTemplateColumn MaxWidth="50">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding Icon}"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <!-- Path -->
             <DataGridTextColumn Binding="{Binding Path}" Header="Grupa" Width="*"/>
         </DataGrid.Columns>
         <DataGrid.ContextMenu>
@@ -23,8 +35,8 @@
                         <Image Source="/Resources/icon32_delete.ico"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <Separator/>
-                <MenuItem Header="Ustaw jako główną" IsEnabled="False" Click="btnGroupSelectAsMain_Click">
+                <Separator Visibility="Collapsed"/>
+                <MenuItem Header="Ustaw jako główną" IsEnabled="{Binding EditingMode}" Click="btnGroupSelectAsMain_Click" Visibility="Collapsed">
                     <MenuItem.Icon>
                         <Image Source="/Resources/icon32_select.ico"/>
                     </MenuItem.Icon>

@@ -10,8 +10,19 @@
              Loaded="UserControl_Loaded">
     <c:DataGrid ItemsSource="{Binding InstanceAttributes}" IsReadOnly="True">
         <DataGrid.Columns>
+            <!-- ID -->
             <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" Visibility="Hidden"/>
+            <!-- Icon -->
+            <DataGridTemplateColumn MaxWidth="50">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding Icon}"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <!-- Name -->
             <DataGridTextColumn Binding="{Binding Class.Name}" Header="Atrybut" Width="1*"/>
+            <!-- Value -->
             <DataGridTemplateColumn Header="Wartość" Width="3*">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>

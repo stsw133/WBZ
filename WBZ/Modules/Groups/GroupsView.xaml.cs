@@ -56,43 +56,6 @@ namespace WBZ.Controls
         }
 
         /// <summary>
-		/// New
-		/// </summary>
-		private void btnGroupsMegaNew_Click(object sender, RoutedEventArgs e)
-        {
-            var instance = new M_Group()
-            {
-                Module = Module,
-                Owner = 0
-            };
-            
-            new GroupsNew(instance, Commands.Type.NEW) { Owner = Window.GetWindow(this) }.ShowDialog();
-            btnGroupsRefresh_Click(null, null);
-        }
-
-        /// <summary>
-        /// New
-        /// </summary>
-        private void btnGroupsNew_Click(object sender, RoutedEventArgs e)
-        {
-            var path = (((SelectedItem as TreeViewItem).Header as StackPanel).Children[1] as TextBlock).Text + "\\";
-            for (var i = GetParentItem((SelectedItem as TreeViewItem)); i != null; i = GetParentItem(i))
-                path = ((i.Header as StackPanel).Children[1] as TextBlock).Text + "\\" + path;
-            if (path.Split('\\').Length > 5)
-                return;
-
-            var instance = new M_Group()
-            {
-                Module = Module,
-                Owner = (int)(SelectedItem as TreeViewItem).Tag,
-                Path = path
-            };
-
-            new GroupsNew(instance, Commands.Type.NEW) { Owner = Window.GetWindow(this) }.ShowDialog();
-            btnGroupsRefresh_Click(null, null);
-        }
-
-        /// <summary>
 		/// Preview
 		/// </summary>
 		private void btnGroupsPreview_Click(object sender, RoutedEventArgs e)
@@ -102,6 +65,34 @@ namespace WBZ.Controls
 
             int id = (int)(SelectedItem as TreeViewItem).Tag;
             new GroupsNew(SQL.GetInstance<M_Group>(Global.Module.GROUPS, id), Commands.Type.PREVIEW) { Owner = Window.GetWindow(this) }.ShowDialog();
+            btnGroupsRefresh_Click(null, null);
+        }
+
+        /// <summary>
+		/// New
+		/// </summary>
+		private void btnGroupsNew_Click(object sender, RoutedEventArgs e)
+        {
+            var instance = new M_Group();
+            if (SelectedItem == null)
+            {
+                instance.Module = Module;
+                instance.Owner = 0;
+            }
+            else
+            {
+                var path = (((SelectedItem as TreeViewItem).Header as StackPanel).Children[1] as TextBlock).Text + "\\";
+                for (var i = GetParentItem((SelectedItem as TreeViewItem)); i != null; i = GetParentItem(i))
+                    path = ((i.Header as StackPanel).Children[1] as TextBlock).Text + "\\" + path;
+
+                if (path.Split('\\').Length > 5)
+                    return;
+
+                instance.Module = Module;
+                instance.Owner = (int)(SelectedItem as TreeViewItem).Tag;
+                instance.Path = path;
+            }
+            new GroupsNew(instance, Commands.Type.NEW) { Owner = Window.GetWindow(this) }.ShowDialog();
             btnGroupsRefresh_Click(null, null);
         }
 
@@ -228,6 +219,27 @@ namespace WBZ.Controls
                 }
             }
             catch { }
+        }
+
+        /// <summary>
+        /// PreviewMouseRightButtonDown
+        /// </summary>
+        private TreeViewItem VisualUpwardSearch(DependencyObject source)
+        {
+            while (source != null && !(source is TreeViewItem))
+                source = VisualTreeHelper.GetParent(source);
+
+            return source as TreeViewItem;
+        }
+        private void TreeView_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            TreeViewItem treeViewItem = VisualUpwardSearch(e.OriginalSource as DependencyObject);
+
+            if (treeViewItem != null)
+                treeViewItem.Focus();
+            else if (SelectedItem != null)
+                (SelectedItem as TreeViewItem).IsSelected = false;
+            e.Handled = true;
         }
 
         /// <summary>

@@ -16,7 +16,6 @@ namespace WBZ.Modules.Users
 			InitializeComponent();
 			DataContext = D;
 			Init();
-			cmdRefresh_Executed(null, null);
 
 			D.Mode = mode;
 		}

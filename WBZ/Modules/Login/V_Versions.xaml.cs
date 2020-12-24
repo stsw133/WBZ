@@ -21,6 +21,13 @@ namespace WBZ.Modules.Login
 		{
 			InitializeComponent();
 			DataContext = D;
+		}
+
+		/// <summary>
+		/// Loaded
+		/// </summary>
+		private void Window_Loaded(object sender, RoutedEventArgs e)
+		{
 			btnRefresh_Click(null, null);
 		}
 
@@ -107,5 +114,5 @@ namespace WBZ.Modules.Login
 			if (e.LeftButton == MouseButtonState.Pressed)
 				btnDownload_Click(null, null);
 		}
-	}
+    }
 }

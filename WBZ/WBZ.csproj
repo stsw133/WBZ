@@ -138,11 +138,11 @@
       <DependentUpon>DataGridColumnFilter_Date.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Groups\D_GroupsList.cs" />
-    <Compile Include="Modules\Groups\GroupsList.xaml.cs">
-      <DependentUpon>GroupsList.xaml</DependentUpon>
+    <Compile Include="Modules\Groups\V_GroupsList.xaml.cs">
+      <DependentUpon>V_GroupsList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Groups\GroupsNew.xaml.cs">
-      <DependentUpon>GroupsNew.xaml</DependentUpon>
+    <Compile Include="Modules\Groups\V_GroupsNew.xaml.cs">
+      <DependentUpon>V_GroupsNew.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Groups\D_GroupsNew.cs" />
     <Compile Include="Modules\Groups\GroupsView.xaml.cs">
@@ -237,32 +237,32 @@
     <Compile Include="Modules\Login\D_LoginDatabases.cs" />
     <Compile Include="Modules\Login\D_Versions.cs" />
     <Compile Include="Modules\Logs\D_LogsList.cs" />
-    <Compile Include="Modules\Main.xaml.cs">
-      <DependentUpon>Main.xaml</DependentUpon>
+    <Compile Include="Modules\V_Main.xaml.cs">
+      <DependentUpon>V_Main.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Admin\ConsoleSQL.xaml.cs">
       <DependentUpon>ConsoleSQL.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Employees\EmployeesNew.xaml.cs">
-      <DependentUpon>EmployeesNew.xaml</DependentUpon>
+    <Compile Include="Modules\Employees\V_EmployeesNew.xaml.cs">
+      <DependentUpon>V_EmployeesNew.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Employees\EmployeesList.xaml.cs">
-      <DependentUpon>EmployeesList.xaml</DependentUpon>
+    <Compile Include="Modules\Employees\V_EmployeesList.xaml.cs">
+      <DependentUpon>V_EmployeesList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Attachments\AttachmentsList.xaml.cs">
-      <DependentUpon>AttachmentsList.xaml</DependentUpon>
+    <Compile Include="Modules\Attachments\V_AttachmentsList.xaml.cs">
+      <DependentUpon>V_AttachmentsList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\AttributesClasses\AttributesClassesNew.xaml.cs">
-      <DependentUpon>AttributesClassesNew.xaml</DependentUpon>
+    <Compile Include="Modules\AttributesClasses\V_AttributesClassesNew.xaml.cs">
+      <DependentUpon>V_AttributesClassesNew.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\AttributesClasses\AttributesClassesList.xaml.cs">
-      <DependentUpon>AttributesClassesList.xaml</DependentUpon>
+    <Compile Include="Modules\AttributesClasses\V_AttributesClassesList.xaml.cs">
+      <DependentUpon>V_AttributesClassesList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Attachments\AttachmentsGallery.xaml.cs">
-      <DependentUpon>AttachmentsGallery.xaml</DependentUpon>
+    <Compile Include="Modules\Attachments\V_AttachmentsGallery.xaml.cs">
+      <DependentUpon>V_AttachmentsGallery.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Logs\LogsList.xaml.cs">
-      <DependentUpon>LogsList.xaml</DependentUpon>
+    <Compile Include="Modules\Logs\V_LogsList.xaml.cs">
+      <DependentUpon>V_LogsList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Personal\D_Profile.cs" />
     <Compile Include="Modules\Stats\D_Stats.cs" />
@@ -270,50 +270,50 @@
     <Compile Include="Modules\Stores\D_StoresNew.cs" />
     <Compile Include="Modules\Users\D_UsersList.cs" />
     <Compile Include="Modules\Users\D_UsersNew.cs" />
-    <Compile Include="Modules\Users\UsersList.xaml.cs">
-      <DependentUpon>UsersList.xaml</DependentUpon>
+    <Compile Include="Modules\Users\V_UsersList.xaml.cs">
+      <DependentUpon>V_UsersList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Users\UsersNew.xaml.cs">
-      <DependentUpon>UsersNew.xaml</DependentUpon>
+    <Compile Include="Modules\Users\V_UsersNew.xaml.cs">
+      <DependentUpon>V_UsersNew.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Companies\CompaniesNew.xaml.cs">
-      <DependentUpon>CompaniesNew.xaml</DependentUpon>
+    <Compile Include="Modules\Companies\V_CompaniesNew.xaml.cs">
+      <DependentUpon>V_CompaniesNew.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Companies\CompaniesList.xaml.cs">
-      <DependentUpon>CompaniesList.xaml</DependentUpon>
+    <Compile Include="Modules\Companies\V_CompaniesList.xaml.cs">
+      <DependentUpon>V_CompaniesList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Distributions\DistributionsNew.xaml.cs">
-      <DependentUpon>DistributionsNew.xaml</DependentUpon>
+    <Compile Include="Modules\Distributions\V_DistributionsNew.xaml.cs">
+      <DependentUpon>V_DistributionsNew.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Distributions\DistributionsList.xaml.cs">
-      <DependentUpon>DistributionsList.xaml</DependentUpon>
+    <Compile Include="Modules\Distributions\V_DistributionsList.xaml.cs">
+      <DependentUpon>V_DistributionsList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Distributions\DistributionsStatus.xaml.cs">
-      <DependentUpon>DistributionsStatus.xaml</DependentUpon>
+    <Compile Include="Modules\Distributions\V_DistributionsStatus.xaml.cs">
+      <DependentUpon>V_DistributionsStatus.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Families\FamiliesNew.xaml.cs">
-      <DependentUpon>FamiliesNew.xaml</DependentUpon>
+    <Compile Include="Modules\Families\V_FamiliesNew.xaml.cs">
+      <DependentUpon>V_FamiliesNew.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Families\FamiliesList.xaml.cs">
-      <DependentUpon>FamiliesList.xaml</DependentUpon>
+    <Compile Include="Modules\Families\V_FamiliesList.xaml.cs">
+      <DependentUpon>V_FamiliesList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Documents\DocumentsNew.xaml.cs">
-      <DependentUpon>DocumentsNew.xaml</DependentUpon>
+    <Compile Include="Modules\Documents\V_DocumentsNew.xaml.cs">
+      <DependentUpon>V_DocumentsNew.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Documents\DocumentsList.xaml.cs">
-      <DependentUpon>DocumentsList.xaml</DependentUpon>
+    <Compile Include="Modules\Documents\V_DocumentsList.xaml.cs">
+      <DependentUpon>V_DocumentsList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Articles\ArticlesNew.xaml.cs">
-      <DependentUpon>ArticlesNew.xaml</DependentUpon>
+    <Compile Include="Modules\Articles\V_ArticlesNew.xaml.cs">
+      <DependentUpon>V_ArticlesNew.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Articles\ArticlesList.xaml.cs">
-      <DependentUpon>ArticlesList.xaml</DependentUpon>
+    <Compile Include="Modules\Articles\V_ArticlesList.xaml.cs">
+      <DependentUpon>V_ArticlesList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Login\LoginAppAbout.xaml.cs">
-      <DependentUpon>LoginAppAbout.xaml</DependentUpon>
+    <Compile Include="Modules\Login\V_LoginAppAbout.xaml.cs">
+      <DependentUpon>V_LoginAppAbout.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Login\LoginDatabases.xaml.cs">
-      <DependentUpon>LoginDatabases.xaml</DependentUpon>
+    <Compile Include="Modules\Login\V_LoginDatabases.xaml.cs">
+      <DependentUpon>V_LoginDatabases.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Windows\Confirmation.xaml.cs">
       <DependentUpon>Confirmation.xaml</DependentUpon>
@@ -321,26 +321,26 @@
     <Compile Include="Modules\Login\LoginRegister.xaml.cs">
       <DependentUpon>LoginRegister.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Login\Versions.xaml.cs">
-      <DependentUpon>Versions.xaml</DependentUpon>
+    <Compile Include="Modules\Login\V_Versions.xaml.cs">
+      <DependentUpon>V_Versions.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Settings.xaml.cs">
-      <DependentUpon>Settings.xaml</DependentUpon>
+    <Compile Include="Modules\V_Settings.xaml.cs">
+      <DependentUpon>V_Settings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Personal\Profile.xaml.cs">
-      <DependentUpon>Profile.xaml</DependentUpon>
+    <Compile Include="Modules\Personal\V_Profile.xaml.cs">
+      <DependentUpon>V_Profile.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Stats\Stats.xaml.cs">
-      <DependentUpon>Stats.xaml</DependentUpon>
+    <Compile Include="Modules\Stats\V_Stats.xaml.cs">
+      <DependentUpon>V_Stats.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Stats\StatsReportsGenerator.xaml.cs">
       <DependentUpon>StatsReportsGenerator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Stores\StoresNew.xaml.cs">
-      <DependentUpon>StoresNew.xaml</DependentUpon>
+    <Compile Include="Modules\Stores\V_StoresNew.xaml.cs">
+      <DependentUpon>V_StoresNew.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Stores\StoresList.xaml.cs">
-      <DependentUpon>StoresList.xaml</DependentUpon>
+    <Compile Include="Modules\Stores\V_StoresList.xaml.cs">
+      <DependentUpon>V_StoresList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Other\Prints.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -383,11 +383,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Modules\Groups\GroupsList.xaml">
+    <Page Include="Modules\Groups\V_GroupsList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Modules\Groups\GroupsNew.xaml">
+    <Page Include="Modules\Groups\V_GroupsNew.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -439,51 +439,51 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Employees\EmployeesNew.xaml">
+    <Page Include="Modules\Employees\V_EmployeesNew.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Employees\EmployeesList.xaml">
+    <Page Include="Modules\Employees\V_EmployeesList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Attachments\AttachmentsGallery.xaml">
+    <Page Include="Modules\Attachments\V_AttachmentsGallery.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Attachments\AttachmentsList.xaml">
+    <Page Include="Modules\Attachments\V_AttachmentsList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Logs\LogsList.xaml">
+    <Page Include="Modules\Logs\V_LogsList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Users\UsersNew.xaml">
+    <Page Include="Modules\Users\V_UsersNew.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\AttributesClasses\AttributesClassesNew.xaml">
+    <Page Include="Modules\AttributesClasses\V_AttributesClassesNew.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\AttributesClasses\AttributesClassesList.xaml">
+    <Page Include="Modules\AttributesClasses\V_AttributesClassesList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Distributions\DistributionsNew.xaml">
+    <Page Include="Modules\Distributions\V_DistributionsNew.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Distributions\DistributionsList.xaml">
+    <Page Include="Modules\Distributions\V_DistributionsList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Distributions\DistributionsStatus.xaml">
+    <Page Include="Modules\Distributions\V_DistributionsStatus.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Login\Login.xaml">
+    <Page Include="Modules\Login\V_Login.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -491,55 +491,55 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Login\Login.xaml.cs">
-      <DependentUpon>Login.xaml</DependentUpon>
+    <Compile Include="Modules\Login\V_Login.xaml.cs">
+      <DependentUpon>V_Login.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Modules\Main.xaml">
+    <Page Include="Modules\V_Main.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Users\UsersList.xaml">
+    <Page Include="Modules\Users\V_UsersList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Companies\CompaniesNew.xaml">
+    <Page Include="Modules\Companies\V_CompaniesNew.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Companies\CompaniesList.xaml">
+    <Page Include="Modules\Companies\V_CompaniesList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Families\FamiliesNew.xaml">
+    <Page Include="Modules\Families\V_FamiliesNew.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Families\FamiliesList.xaml">
+    <Page Include="Modules\Families\V_FamiliesList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Documents\DocumentsNew.xaml">
+    <Page Include="Modules\Documents\V_DocumentsNew.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Documents\DocumentsList.xaml">
+    <Page Include="Modules\Documents\V_DocumentsList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Articles\ArticlesNew.xaml">
+    <Page Include="Modules\Articles\V_ArticlesNew.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Articles\ArticlesList.xaml">
+    <Page Include="Modules\Articles\V_ArticlesList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Login\LoginAppAbout.xaml">
+    <Page Include="Modules\Login\V_LoginAppAbout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Login\LoginDatabases.xaml">
+    <Page Include="Modules\Login\V_LoginDatabases.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -551,19 +551,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Login\Versions.xaml">
+    <Page Include="Modules\Login\V_Versions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Settings.xaml">
+    <Page Include="Modules\V_Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Personal\Profile.xaml">
+    <Page Include="Modules\Personal\V_Profile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Stats\Stats.xaml">
+    <Page Include="Modules\Stats\V_Stats.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -571,11 +571,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Stores\StoresNew.xaml">
+    <Page Include="Modules\Stores\V_StoresNew.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Stores\StoresList.xaml">
+    <Page Include="Modules\Stores\V_StoresList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

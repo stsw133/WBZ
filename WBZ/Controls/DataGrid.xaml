@@ -4,8 +4,8 @@
           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
           mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="750"
-          Margin="5" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
-          AutoGenerateColumns="False" RowHeaderWidth="0">
+          Margin="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
+            AutoGenerateColumns="False" RowHeaderWidth="0">
     <DataGrid.ColumnHeaderStyle>
         <Style TargetType="{x:Type DataGridColumnHeader}">
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>

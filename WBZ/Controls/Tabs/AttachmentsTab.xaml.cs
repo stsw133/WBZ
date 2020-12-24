@@ -113,6 +113,21 @@ namespace WBZ.Controls
         }
 
         /// <summary>
+        /// Drop
+        /// </summary>
+        private void lbAttachments_Drop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                byte[] file = File.ReadAllBytes(files[0]);
+
+                SQL.SetAttachment(Module, ID, Path.GetFileName(files[0]), file, files[0]);
+                D.InstanceAttachments = SQL.ListInstances<M_Attachment>(Global.Module.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}");
+            }
+        }
+
+        /// <summary>
         /// SelectionChanged
         /// </summary>
         private void lbAttachments_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -56,7 +56,8 @@
             </Border.ContextMenu>
         </Border>
         <!-- statusPanel -->
-        <c:StatusPanel x:Name="StatusPanel" DockPanel.Dock="Bottom" Background="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" HasGroups="True"/>
+        <c:StatusPanel x:Name="StatusPanel" DockPanel.Dock="Bottom" Background="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"
+                       EnableFilters="True" HasFilters="True" EnableGroups="True" HasGroups="True"/>
         <!-- groupsView -->
         <c:GroupsView EditingMode="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=families_save}" Visibility="{Binding EnableGroups, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
         <!-- otherFilters -->
