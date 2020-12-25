@@ -1,8 +1,8 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
-using WBZ.Models;
 using WBZ.Globals;
-using WBZ.Interfaces;
+using WBZ.Models;
+using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_Store;
 
 namespace WBZ.Modules.Stores

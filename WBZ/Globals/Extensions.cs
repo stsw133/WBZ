@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Data;
 using System.Linq;
 using System.Reflection;
@@ -14,18 +16,18 @@ namespace WBZ.Globals
         /// Is value in list of values
         /// </summary>
         public static bool In<T>(this T value, params T[] input)
-		{
+        {
             return input.Any(n => Equals(n, value));
         }
 
         /// <summary>
         /// Convert DataTable to list of any model class
         /// </summary>
-        public static List<T> DataTableToList<T>(this DataTable table) where T : class, new()
+        public static ObservableCollection<T> DataTableToList<T>(this DataTable table) where T : class, new()
         {
             try
             {
-                List<T> list = new List<T>();
+                ObservableCollection<T> list = new ObservableCollection<T>();
 
                 foreach (var row in table.AsEnumerable())
                 {
@@ -54,7 +56,7 @@ namespace WBZ.Globals
                 return null;
             }
         }
-        
+
         /// <summary>
         /// Get visual child of control
         /// </summary>
@@ -70,7 +72,7 @@ namespace WBZ.Globals
 
                 if (child == null)
                     child = GetVisualChild<T>(v);
-                
+
                 if (child != null)
                     break;
             }

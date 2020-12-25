@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Reflection;
 using WBZ.Globals;
 
-namespace WBZ.Interfaces
+namespace WBZ.Modules._base
 {
 	class D_ModuleList<MODULE_MODEL> : INotifyPropertyChanged where MODULE_MODEL : class, new()
 	{
@@ -14,8 +14,8 @@ namespace WBZ.Interfaces
 		}
 
 		/// Instances list
-		private List<MODULE_MODEL> instancesList;
-		public List<MODULE_MODEL> InstancesList
+		private ObservableCollection<MODULE_MODEL> instancesList;
+		public ObservableCollection<MODULE_MODEL> InstancesList
 		{
 			get
 			{

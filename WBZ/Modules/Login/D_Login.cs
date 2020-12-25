@@ -7,6 +7,12 @@ namespace WBZ.Modules.Login
 {
     class D_Login : INotifyPropertyChanged
     {
+		public event PropertyChangedEventHandler PropertyChanged;
+		public void NotifyPropertyChanged(string name)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+		}
+
 		/// Databases list
 		private ObservableCollection<M_Database> databases;
 		public ObservableCollection<M_Database> Databases
@@ -20,15 +26,6 @@ namespace WBZ.Modules.Login
 				databases = value;
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
-		}
-
-		/// <summary>
-		/// PropertyChangedEventHandler
-		/// </summary>
-		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged(string name)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
 	}
 }

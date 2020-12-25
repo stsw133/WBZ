@@ -6,27 +6,9 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using WBZ.Globals;
 
-namespace WBZ.Interfaces
+namespace WBZ.Modules._base
 {
-    interface IModuleList
-	{
-        void Init();
-        void Window_Loaded(object sender, RoutedEventArgs e);
-        void cmdPreview_Executed(object sender, ExecutedRoutedEventArgs e);
-        void cmdNew_Executed(object sender, ExecutedRoutedEventArgs e);
-        void cmdDuplicate_Executed(object sender, ExecutedRoutedEventArgs e);
-        void cmdEdit_Executed(object sender, ExecutedRoutedEventArgs e);
-        void cmdDelete_Executed(object sender, ExecutedRoutedEventArgs e);
-        void cmdClear_Executed(object sender, ExecutedRoutedEventArgs e);
-        void cmdRefresh_Executed(object sender, ExecutedRoutedEventArgs e);
-        void cmdHelp_Executed(object sender, ExecutedRoutedEventArgs e);
-        void cmdClose_Executed(object sender, ExecutedRoutedEventArgs e);
-        void dgList_MouseDoubleClick(object sender, MouseButtonEventArgs e);
-        void dgList_ScrollChanged(object sender, ScrollChangedEventArgs e);
-        void Window_Closed(object sender, EventArgs e);
-    }
-
-    public class ModuleList<MODULE_MODEL> : Window, IModuleList where MODULE_MODEL : class, new()
+    public class ModuleList<MODULE_MODEL> : Window where MODULE_MODEL : class, new()
     {
         dynamic W, D;
         string FullName, HalfName;
@@ -34,7 +16,7 @@ namespace WBZ.Interfaces
         /// <summary>
         /// Init
         /// </summary>
-        public void Init()
+        internal void Init()
         {
             W = GetWindow(this);
             D = W.DataContext;
@@ -45,7 +27,7 @@ namespace WBZ.Interfaces
         /// <summary>
         /// Loaded
         /// </summary>
-        public void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             if (D.SelectingMode)
                 W.dgList.SelectionMode = DataGridSelectionMode.Single;
@@ -66,7 +48,7 @@ namespace WBZ.Interfaces
             }
             catch { }
         }
-        public void cmdPreview_Executed(object sender, ExecutedRoutedEventArgs e)
+        internal void cmdPreview_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var selectedInstances = (W.dgList as DataGrid).SelectedItems.Cast<MODULE_MODEL>();
             foreach (MODULE_MODEL instance in selectedInstances)
@@ -90,7 +72,7 @@ namespace WBZ.Interfaces
             }
             catch { }
         }
-        public void cmdNew_Executed(object sender, ExecutedRoutedEventArgs e)
+        internal void cmdNew_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var window = Activator.CreateInstance(Type.GetType(HalfName + "New"), null, Commands.Type.NEW) as Window;
             window.Show();
@@ -110,7 +92,7 @@ namespace WBZ.Interfaces
             }
             catch { }
         }
-        public void cmdDuplicate_Executed(object sender, ExecutedRoutedEventArgs e)
+        internal void cmdDuplicate_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var selectedInstances = (W.dgList as DataGrid).SelectedItems.Cast<MODULE_MODEL>();
             foreach (MODULE_MODEL instance in selectedInstances)
@@ -134,7 +116,7 @@ namespace WBZ.Interfaces
             }
             catch { }
         }
-        public void cmdEdit_Executed(object sender, ExecutedRoutedEventArgs e)
+        internal void cmdEdit_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var selectedInstances = (W.dgList as DataGrid).SelectedItems.Cast<MODULE_MODEL>();
             foreach (MODULE_MODEL instance in selectedInstances)
@@ -158,7 +140,7 @@ namespace WBZ.Interfaces
             }
             catch { }
         }
-        public void cmdDelete_Executed(object sender, ExecutedRoutedEventArgs e)
+        internal void cmdDelete_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var selectedInstances = (W.dgList as DataGrid).SelectedItems.Cast<MODULE_MODEL>();
             if (selectedInstances.Count() > 0 && MessageBox.Show("Czy na pewno usunąć zaznaczone rekordy?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
@@ -172,7 +154,7 @@ namespace WBZ.Interfaces
         /// <summary>
 		/// Clear
 		/// </summary>
-		public void cmdClear_Executed(object sender, ExecutedRoutedEventArgs e)
+		internal void cmdClear_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             D.Filters = new MODULE_MODEL();
             cmdRefresh_Executed(null, null);
@@ -181,7 +163,7 @@ namespace WBZ.Interfaces
         /// <summary>
         /// Refresh
         /// </summary>
-        public async void cmdRefresh_Executed(object sender, ExecutedRoutedEventArgs e)
+        internal async void cmdRefresh_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             await Task.Run(() => {
                 W.UpdateFilters();
@@ -193,7 +175,7 @@ namespace WBZ.Interfaces
         /// <summary>
         /// Help
         /// </summary>
-        public void cmdHelp_Executed(object sender, ExecutedRoutedEventArgs e)
+        internal void cmdHelp_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Functions.OpenHelp(this);
         }
@@ -201,7 +183,7 @@ namespace WBZ.Interfaces
         /// <summary>
         /// Close
         /// </summary>
-        public void cmdClose_Executed(object sender, ExecutedRoutedEventArgs e)
+        internal void cmdClose_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             W.Close();
         }
@@ -209,8 +191,8 @@ namespace WBZ.Interfaces
         /// <summary>
         /// Select
         /// </summary>
-		public MODULE_MODEL Selected;
-        public void dgList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		internal MODULE_MODEL Selected;
+        private void dgList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
@@ -232,21 +214,20 @@ namespace WBZ.Interfaces
         /// <summary>
         /// Load more
         /// </summary>
-        public void dgList_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        internal void dgList_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             if (e.VerticalChange > 0 && e.VerticalOffset + e.ViewportHeight == e.ExtentHeight && D.InstancesList.Count < D.TotalItems)
             {
-                W.DataContext = null;
-                D.InstancesList.AddRange(SQL.ListInstances<MODULE_MODEL>(D.MODULE_TYPE, D.FilterSQL, D.SORTING, ++D.Page));
-                W.DataContext = D;
-                Extensions.GetVisualChild<ScrollViewer>(sender as DataGrid).ScrollToVerticalOffset(e.VerticalOffset);
+                foreach (var i in SQL.ListInstances<MODULE_MODEL>(D.MODULE_TYPE, D.FilterSQL, D.SORTING, ++D.Page))
+                    D.InstancesList.Add(i);
+                (e.OriginalSource as ScrollViewer).ScrollToVerticalOffset(e.VerticalOffset);
             }
         }
 
         /// <summary>
         /// Closed
         /// </summary>
-        public void Window_Closed(object sender, EventArgs e)
+        private void Window_Closed(object sender, EventArgs e)
         {
             if (W.Owner != null)
                 W.Owner.Focus();

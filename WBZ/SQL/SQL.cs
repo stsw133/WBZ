@@ -8,6 +8,7 @@ using System.Windows;
 using WBZ.Models;
 using WBZ.Globals;
 using WBZ.Controls;
+using System.Collections.ObjectModel;
 
 namespace WBZ
 {
@@ -1026,9 +1027,9 @@ namespace WBZ
 		/// <param name="module">Nazwa modułu</param>
 		/// <param name="column">Kolumna z której będą wyświetlane nazwy</param>
 		/// <param name="filter">Filtr SQL</param>
-		internal static List<M_ComboValue> ComboInstances(string module, string column, string filter)
+		internal static ObservableCollection<M_ComboValue> ComboInstances(string module, string column, string filter, bool allowEmpty)
 		{
-			var result = new List<M_ComboValue>();
+			var result = new ObservableCollection<M_ComboValue>();
 
 			try
 			{
@@ -1037,8 +1038,11 @@ namespace WBZ
 					using (var sqlDA = new NpgsqlDataAdapter($@"select id, {column} as name
 						from wbz.{module}
 						where {filter}
-						order by {column} asc", sqlConn))
+						order by 2 asc", sqlConn))
 					{
+						if (allowEmpty)
+							sqlDA.SelectCommand.CommandText = "select 0 as id, '' as name union " + sqlDA.SelectCommand.CommandText;
+
 						var dt = new DataTable();
 						sqlDA.Fill(dt);
 						result = dt.DataTableToList<M_ComboValue>();
@@ -1059,9 +1063,9 @@ namespace WBZ
 		/// <param name="filter">Filtr SQL</param>
 		/// <param name="sort">Kolekcja sortowania</param>
 		/// <param name="page">Strona listy rekordów</param>
-		internal static List<T> ListInstances<T>(string module, string filter, StringCollection sort = null, int page = 0) where T : class, new()
+		internal static ObservableCollection<T> ListInstances<T>(string module, string filter, StringCollection sort = null, int page = 0) where T : class, new()
 		{
-			var result = new List<T>();
+			var result = new ObservableCollection<T>();
 			string query;
 
 			try

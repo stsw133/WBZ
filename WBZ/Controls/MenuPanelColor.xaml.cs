@@ -53,7 +53,7 @@ namespace WBZ.Controls
     /// <summary>
     /// DataContext
     /// </summary>
-    internal class D_MenuPanelColor : INotifyPropertyChanged
+    class D_MenuPanelColor : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public void NotifyPropertyChanged(string name)

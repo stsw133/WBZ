@@ -7,6 +7,12 @@ namespace WBZ.Modules.Personal
 {
     class D_Profile : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void NotifyPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
         /// Logged user
         private M_User user = Global.User;
         public M_User User
@@ -20,15 +26,6 @@ namespace WBZ.Modules.Personal
                 user = value;
                 NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
             }
-        }
-
-        /// <summary>
-        /// PropertyChangedEventHandler
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void NotifyPropertyChanged(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

@@ -8,6 +8,7 @@ namespace WBZ.Models
 		public string Name { get; set; }
 		public string EAN { get; set; }
 		public decimal Price { get; set; }
+		public M_Store MainStore { get; set; }
 
 		public DataTable Measures { get; set; }
 		public string Measure { get; set; }
@@ -21,6 +22,7 @@ namespace WBZ.Models
 			Codename = string.Empty;
 			Name = string.Empty;
 			EAN = string.Empty;
+			MainStore = new M_Store();
 
 			Measures = new DataTable();
 			Measure = string.Empty;

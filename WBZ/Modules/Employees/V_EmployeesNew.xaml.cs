@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using WBZ.Globals;
-using WBZ.Interfaces;
+using WBZ.Modules._base;
 using WBZ.Modules.Users;
 using MODULE_MODEL = WBZ.Models.M_Employee;
 

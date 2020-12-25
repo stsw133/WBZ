@@ -2,8 +2,8 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using WBZ.Globals;
-using WBZ.Interfaces;
 using WBZ.Models;
+using WBZ.Modules._base;
 using WBZ.Other;
 using MODULE_MODEL = WBZ.Models.M_Family;
 

@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using WBZ.Models;
 using WBZ.Globals;
+using System.Collections.ObjectModel;
 
 namespace WBZ.Controls
 {
@@ -49,7 +50,7 @@ namespace WBZ.Controls
 	/// <summary>
 	/// DataContext
 	/// </summary>
-	internal class D_LogsTab : INotifyPropertyChanged
+	class D_LogsTab : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public void NotifyPropertyChanged(string name)
@@ -58,8 +59,8 @@ namespace WBZ.Controls
         }
 
         /// Logs
-        private List<M_Log> instanceLogs;
-        public List<M_Log> InstanceLogs
+        private ObservableCollection<M_Log> instanceLogs;
+        public ObservableCollection<M_Log> InstanceLogs
         {
             get
             {

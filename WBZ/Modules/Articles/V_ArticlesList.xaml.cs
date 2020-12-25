@@ -1,7 +1,8 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 using WBZ.Globals;
-using WBZ.Interfaces;
 using WBZ.Models;
+using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_Article;
 
 namespace WBZ.Modules.Articles
@@ -23,6 +24,15 @@ namespace WBZ.Modules.Articles
 		}
 
 		/// <summary>
+		/// Loaded
+		/// </summary>
+		public void Window_Loaded(object sender, RoutedEventArgs e)
+		{
+			if (D.SelectingMode)
+				dgList.SelectionMode = DataGridSelectionMode.Single;
+		}
+
+		/// <summary>
 		/// Update filters
 		/// </summary>
 		public void UpdateFilters()
@@ -32,7 +42,7 @@ namespace WBZ.Modules.Articles
 						+ $"LOWER(COALESCE(a.ean,'')) like '%{D.Filters.EAN.ToLower()}%' and "
 						+ (!D.Filters.Archival ? $"a.archival=false and " : "")
 						+ (D.Filters.Group > 0 ? $"g.owner={D.Filters.Group} and " : "")
-						+ (SelectedStore?.ID > 0 ? $"sa.store={SelectedStore.ID} and " : "");
+						+ (D.Filters.MainStore.ID > 0 ? $"sa.store={D.Filters.MainStore.ID} and " : "");
 
 			D.FilterSQL = D.FilterSQL.TrimEnd(" and ".ToCharArray());
 		}
@@ -40,11 +50,13 @@ namespace WBZ.Modules.Articles
         /// <summary>
         /// Store - SelectionChanged
         /// </summary>
-        public M_Store SelectedStore;
 		private void cbStore_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			var cbStore = sender as ComboBox;
-			SelectedStore = SQL.GetInstance<M_Store>(Global.Module.STORES, cbStore.SelectedValue != null ? (int)cbStore.SelectedValue : 0);
+			if (cbStore.SelectedValue != null && (int)cbStore.SelectedValue > 0)
+				D.Filters.MainStore = SQL.GetInstance<M_Store>(Global.Module.STORES, (int)cbStore.SelectedValue);
+			else
+				D.Filters.MainStore = new M_Store();
 			cmdRefresh_Executed(null, null);
 		}
     }

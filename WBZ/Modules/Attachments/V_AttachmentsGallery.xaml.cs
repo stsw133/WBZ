@@ -6,8 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using WBZ.Globals;
-using MODULE_CLASS = WBZ.Models.M_Attachment;
+using MODULE_MODEL = WBZ.Models.M_Attachment;
 
 namespace WBZ.Modules.Attachments
 {
@@ -51,7 +50,7 @@ namespace WBZ.Modules.Attachments
 		/// </summary>
 		private void btnFiltersClear_Click(object sender, MouseButtonEventArgs e)
 		{
-			D.Filters = new MODULE_CLASS();
+			D.Filters = new MODULE_MODEL();
 			btnRefresh_Click(null, null);
 		}
 
@@ -63,7 +62,7 @@ namespace WBZ.Modules.Attachments
 			await Task.Run(() => {
 				UpdateFilters();
 				D.TotalItems = SQL.CountInstances(D.MODULE_TYPE, D.FilterSQL);
-				D.InstancesList = SQL.ListInstances<MODULE_CLASS>(D.MODULE_TYPE, D.FilterSQL, D.SORTING, D.Page = 0);
+				D.InstancesList = SQL.ListInstances<MODULE_MODEL>(D.MODULE_TYPE, D.FilterSQL, D.SORTING, D.Page = 0);
 
 				foreach (var img in D.InstancesList)
 					img.File = SQL.GetAttachmentFile(img.ID);
@@ -90,7 +89,7 @@ namespace WBZ.Modules.Attachments
 			if (lbImages.SelectedIndex < 0)
 				return;
 
-			var selection = lbImages.SelectedItem as MODULE_CLASS;
+			var selection = lbImages.SelectedItem as MODULE_MODEL;
 			if (selection.File == null)
 				selection.File = SQL.GetAttachmentFile(selection.ID);
 
@@ -107,12 +106,10 @@ namespace WBZ.Modules.Attachments
 		{
 			if (e.HorizontalChange > 0 && e.HorizontalOffset + e.ViewportWidth == e.ExtentWidth && D.InstancesList.Count < D.TotalItems)
 			{
-				DataContext = null;
-				D.InstancesList.AddRange(SQL.ListInstances<MODULE_CLASS>(D.MODULE_TYPE, D.FilterSQL, D.SORTING, ++D.Page));
+				foreach (var i in SQL.ListInstances<MODULE_MODEL>(D.MODULE_TYPE, D.FilterSQL, D.SORTING, ++D.Page)) D.InstancesList.Add(i);
 				foreach (var img in D.InstancesList)
 					img.File = SQL.GetAttachmentFile(img.ID);
-				DataContext = D;
-				Extensions.GetVisualChild<ScrollViewer>(sender as DataGrid).ScrollToHorizontalOffset(e.HorizontalOffset);
+				(e.OriginalSource as ScrollViewer).ScrollToVerticalOffset(e.HorizontalOffset);
 			}
 		}
 

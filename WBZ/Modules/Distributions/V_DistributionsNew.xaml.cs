@@ -5,13 +5,13 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using WBZ.Models;
 using WBZ.Globals;
+using WBZ.Models;
+using WBZ.Modules._base;
 using WBZ.Modules.Articles;
 using WBZ.Modules.Families;
 using WBZ.Other;
 using MODULE_MODEL = WBZ.Models.M_Distribution;
-using WBZ.Interfaces;
 
 namespace WBZ.Modules.Distributions
 {
@@ -128,8 +128,8 @@ namespace WBZ.Modules.Distributions
 							counter += f.Positions.Rows.Count;
 
 						row["position"] = counter + 1;
-						row["store"] = window2.SelectedStore.ID;
-						row["storename"] = window2.SelectedStore.Name;
+						row["store"] = (window2.DataContext as D_ArticlesList).Filters.MainStore.ID;
+						row["storename"] = (window2.DataContext as D_ArticlesList).Filters.MainStore.Name;
 						row["article"] = window2.Selected.ID;
 						row["articlename"] = window2.Selected.Name;
 						row["amount"] = DBNull.Value;

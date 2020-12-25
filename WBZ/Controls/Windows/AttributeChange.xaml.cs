@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
@@ -21,7 +22,7 @@ namespace WBZ.Controls
 			DataContext = D;
 
 			D.AttributeInfo = attribute;
-			D.AttributeValues = SQL.ComboInstances("attributes_values", "value", $"class={attribute.Class.ID} and archival=false");
+			D.AttributeValues = SQL.ComboInstances("attributes_values", "value", $"class={attribute.Class.ID} and archival=false", true);
 			D.EditMode = editMode;
 		}
 
@@ -91,8 +92,8 @@ namespace WBZ.Controls
 			}
 		}
 		/// Attribute values
-		private List<M_ComboValue> attributeValues;
-		public List<M_ComboValue> AttributeValues
+		private ObservableCollection<M_ComboValue> attributeValues;
+		public ObservableCollection<M_ComboValue> AttributeValues
 		{
 			get
 			{

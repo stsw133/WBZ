@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.Reflection;
 using WBZ.Globals;
-using WBZ.Interfaces;
 using WBZ.Models;
+using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_Article;
 
 namespace WBZ.Modules.Articles
 {
-    internal class D_ArticlesNew : D_ModuleNew<MODULE_MODEL>
+    class D_ArticlesNew : D_ModuleNew<MODULE_MODEL>
 	{
 		/// Module
 		public readonly string MODULE_TYPE = Global.Module.ARTICLES;
@@ -28,8 +28,8 @@ namespace WBZ.Modules.Articles
 			}
 		}
 		/// Instance source - stores
-		private List<M_Store> instanceSources_Stores = new List<M_Store>();
-		public List<M_Store> InstanceSources_Stores
+		private ObservableCollection<M_Store> instanceSources_Stores;
+		public ObservableCollection<M_Store> InstanceSources_Stores
 		{
 			get
 			{
@@ -42,8 +42,8 @@ namespace WBZ.Modules.Articles
 			}
 		}
 		/// Instance source - documents
-		private List<M_Document> instanceSources_Documents = new List<M_Document>();
-		public List<M_Document> InstanceSources_Documents
+		private ObservableCollection<M_Document> instanceSources_Documents;
+		public ObservableCollection<M_Document> InstanceSources_Documents
 		{
 			get
 			{
@@ -56,8 +56,8 @@ namespace WBZ.Modules.Articles
 			}
 		}
 		/// Instance source - distributions
-		private List<M_Distribution> instanceSources_Distributions = new List<M_Distribution>();
-		public List<M_Distribution> InstanceSources_Distributions
+		private ObservableCollection<M_Distribution> instanceSources_Distributions;
+		public ObservableCollection<M_Distribution> InstanceSources_Distributions
 		{
 			get
 			{

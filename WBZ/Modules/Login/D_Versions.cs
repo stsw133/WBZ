@@ -5,6 +5,12 @@ namespace WBZ.Modules.Login
 {
     class D_Versions : INotifyPropertyChanged
     {
+		public event PropertyChangedEventHandler PropertyChanged;
+		public void NotifyPropertyChanged(string name)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+		}
+
 		/// Instances list
 		private dynamic instancesList;
 		public dynamic InstancesList
@@ -18,15 +24,6 @@ namespace WBZ.Modules.Login
 				instancesList = value;
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
-		}
-
-		/// <summary>
-		/// PropertyChangedEventHandler
-		/// </summary>
-		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged(string name)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
 	}
 }

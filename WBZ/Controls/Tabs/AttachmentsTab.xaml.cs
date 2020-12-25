@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using WBZ.Models;
 using WBZ.Globals;
+using System.Collections.ObjectModel;
 
 namespace WBZ.Controls
 {
@@ -163,7 +164,7 @@ namespace WBZ.Controls
     /// <summary>
     /// DataContext
     /// </summary>
-    internal class D_AttachmentsTab : INotifyPropertyChanged
+    class D_AttachmentsTab : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public void NotifyPropertyChanged(string name)
@@ -172,8 +173,8 @@ namespace WBZ.Controls
         }
 
         /// Attachments
-        private List<M_Attachment> instanceAttachments;
-        public List<M_Attachment> InstanceAttachments
+        private ObservableCollection<M_Attachment> instanceAttachments;
+        public ObservableCollection<M_Attachment> InstanceAttachments
         {
             get
             {

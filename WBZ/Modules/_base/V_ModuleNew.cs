@@ -6,20 +6,9 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using WBZ.Globals;
 
-namespace WBZ.Interfaces
+namespace WBZ.Modules._base
 {
-	interface IModuleNew
-	{
-		void Init();
-		void Window_Loaded(object sender, RoutedEventArgs e);
-		bool CheckDataValidation();
-		void btnSave_Click(object sender, MouseButtonEventArgs e);
-		void btnRefresh_Click(object sender, MouseButtonEventArgs e);
-		void btnClose_Click(object sender, MouseButtonEventArgs e);
-		void Window_Closed(object sender, EventArgs e);
-	}
-
-    public class ModuleNew<MODULE_MODEL> : Window, IModuleNew where MODULE_MODEL : class, new()
+    public class ModuleNew<MODULE_MODEL> : Window where MODULE_MODEL : class, new()
     {
 		dynamic W,  D;
         string FullName, HalfName;
@@ -38,17 +27,17 @@ namespace WBZ.Interfaces
 		/// <summary>
 		/// Loaded
 		/// </summary>
-		public void Window_Loaded(object sender, RoutedEventArgs e)
+		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			if (((Commands.Type)D.Mode).In(Commands.Type.NEW, Commands.Type.DUPLICATE))
 				(D.InstanceInfo as dynamic).ID = SQL.NewInstanceID(D.MODULE_TYPE);
 			//TODO - zaczytywanie instancji dopiero po otwarciu okna (?)
 		}
 
-        /// <summary>
+		/// <summary>
 		/// Validation
 		/// </summary>
-		public bool CheckDataValidation()
+		private bool CheckDataValidation()
         {
             bool result = true;
 
@@ -59,7 +48,7 @@ namespace WBZ.Interfaces
 		/// Save
 		/// </summary>
 		private bool saved = false;
-		public void btnSave_Click(object sender, MouseButtonEventArgs e)
+		private void btnSave_Click(object sender, MouseButtonEventArgs e)
 		{
 			if (!CheckDataValidation())
 				return;
@@ -71,7 +60,7 @@ namespace WBZ.Interfaces
 		/// <summary>
 		/// Refresh
 		/// </summary>
-		public void btnRefresh_Click(object sender, MouseButtonEventArgs e)
+		private void btnRefresh_Click(object sender, MouseButtonEventArgs e)
 		{
 			if ((D.InstanceInfo as dynamic).ID == 0)
 				return;
@@ -81,7 +70,7 @@ namespace WBZ.Interfaces
 		/// <summary>
 		/// Close
 		/// </summary>
-		public void btnClose_Click(object sender, MouseButtonEventArgs e)
+		private void btnClose_Click(object sender, MouseButtonEventArgs e)
 		{
 			Close();
 		}
@@ -89,12 +78,11 @@ namespace WBZ.Interfaces
 		/// <summary>
 		/// Open module
 		/// </summary>
-		public void dgList_Module_MouseDoubleClick<T>(object sender, MouseButtonEventArgs e, string module)
+		internal void dgList_Module_MouseDoubleClick<T>(object sender, MouseButtonEventArgs e, string module)
 		{
 			if (e.LeftButton == MouseButtonState.Pressed)
 			{
-				Commands.Type perm = Global.User.Perms.Contains($"{module}_{Global.UserPermType.SAVE}")
-					? Commands.Type.EDIT : Commands.Type.PREVIEW;
+				Commands.Type perm = Global.User.Perms.Contains($"{module}_{Global.UserPermType.SAVE}") ? Commands.Type.EDIT : Commands.Type.PREVIEW;
 
 				var selectedInstances = (sender as DataGrid).SelectedItems.Cast<T>();
 				foreach (T instance in selectedInstances)
@@ -104,11 +92,11 @@ namespace WBZ.Interfaces
 				}
 			}
 		}
-		
+
 		/// <summary>
 		/// Closed
 		/// </summary>
-		public void Window_Closed(object sender, EventArgs e)
+		private void Window_Closed(object sender, EventArgs e)
 		{
 			if (((Commands.Type)D.Mode).In(Commands.Type.NEW, Commands.Type.DUPLICATE) && !saved)
 				SQL.ClearObject(D.MODULE_TYPE, (D.InstanceInfo as dynamic).ID);

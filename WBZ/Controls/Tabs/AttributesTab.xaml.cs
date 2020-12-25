@@ -74,7 +74,7 @@ namespace WBZ.Controls
 	/// <summary>
 	/// DataContext
 	/// </summary>
-	internal class D_AttributesTab : INotifyPropertyChanged
+	class D_AttributesTab : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public void NotifyPropertyChanged(string name)

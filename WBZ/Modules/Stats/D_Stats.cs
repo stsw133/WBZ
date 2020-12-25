@@ -6,6 +6,12 @@ namespace WBZ.Modules.Stats
 {
     class D_Stats : INotifyPropertyChanged
     {
+		public event PropertyChangedEventHandler PropertyChanged;
+		public void NotifyPropertyChanged(string name)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+		}
+
 		/// Article stats
 		private DataTable statsArticles = SQL.GetStatsArticles();
 		public DataTable StatsArticles
@@ -33,15 +39,6 @@ namespace WBZ.Modules.Stats
 				statsArticlesTotal = value;
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
 			}
-		}
-
-		/// <summary>
-		/// PropertyChangedEventHandler
-		/// </summary>
-		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged(string name)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
 	}
 }

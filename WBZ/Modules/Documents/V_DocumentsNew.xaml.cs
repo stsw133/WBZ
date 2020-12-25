@@ -3,7 +3,7 @@ using System.Data;
 using System.Windows;
 using System.Windows.Input;
 using WBZ.Globals;
-using WBZ.Interfaces;
+using WBZ.Modules._base;
 using WBZ.Modules.Articles;
 using WBZ.Modules.Companies;
 using WBZ.Modules.Stores;

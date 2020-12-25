@@ -1,14 +1,13 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Net.Http;
-using WBZ.Models;
 using WBZ.Controls;
 using WBZ.Globals;
+using WBZ.Models;
 using Props = WBZ.Properties.Settings;
 
 namespace WBZ.Modules.Login

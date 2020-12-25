@@ -2,7 +2,7 @@
 using System.Reflection;
 using WBZ.Globals;
 
-namespace WBZ.Interfaces
+namespace WBZ.Modules._base
 {
     class D_ModuleNew<MODULE_MODEL> : INotifyPropertyChanged where MODULE_MODEL : class, new()
     {

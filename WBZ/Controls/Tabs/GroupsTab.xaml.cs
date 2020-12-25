@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
@@ -94,7 +95,7 @@ namespace WBZ.Controls
 	/// <summary>
 	/// DataContext
 	/// </summary>
-	internal class D_GroupsTab : INotifyPropertyChanged
+	class D_GroupsTab : INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 		public void NotifyPropertyChanged(string name)
@@ -103,8 +104,8 @@ namespace WBZ.Controls
 		}
 
 		/// Groups
-		private List<M_Group> instanceGroups;
-		public List<M_Group> InstanceGroups
+		private ObservableCollection<M_Group> instanceGroups;
+		public ObservableCollection<M_Group> InstanceGroups
 		{
 			get
 			{

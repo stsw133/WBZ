@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.Reflection;
 using WBZ.Globals;
-using WBZ.Interfaces;
 using WBZ.Models;
+using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_Company;
 
 namespace WBZ.Modules.Companies
@@ -28,8 +28,8 @@ namespace WBZ.Modules.Companies
             }
         }
         /// Instance source - documents
-		private List<M_Document> instanceSources_Documents;
-        public List<M_Document> InstanceSources_Documents
+		private ObservableCollection<M_Document> instanceSources_Documents;
+        public ObservableCollection<M_Document> InstanceSources_Documents
         {
             get
             {
