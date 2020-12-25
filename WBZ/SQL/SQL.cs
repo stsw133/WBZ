@@ -1086,8 +1086,8 @@ namespace WBZ
 								from wbz.articles a
 								left join wbz.stores_articles sa
 									on a.id=sa.article
-								left join wbz.groups g
-									on g.instance=a.id";
+								left join lateral (select g.owner from wbz.groups g where g.instance=a.id fetch first 1 row only) as g
+									on true";
 							break;
 						/// ATTACHMENTS
 						case Global.Module.ATTACHMENTS:
@@ -1101,16 +1101,16 @@ namespace WBZ
 							query = @"select ac.id as ""ID"", ac.module as ""Module"", ac.name as ""Name"", ac.type as ""Type"", ac.""values"" as ""Values"",
 									ac.archival, ac.comment, ac.icon
 								from wbz.attributes_classes ac
-								left join wbz.groups g
-									on g.instance=ac.id";
+								left join lateral (select g.owner from wbz.groups g where g.instance=ac.id fetch first 1 row only) as g
+									on true";
 							break;
 						/// COMPANIES
 						case Global.Module.COMPANIES:
 							query = @"select c.id, c.codename, c.name, c.branch, c.nip, c.regon, c.postcode, c.city, c.address,
 									c.archival, c.comment, c.icon
 								from wbz.companies c
-								left join wbz.groups g
-									on g.instance=c.id";
+								left join lateral (select g.owner from wbz.groups g where g.instance=c.id fetch first 1 row only) as g
+									on true";
 							break;
 						/// DISTRIBUTIONS
 						case Global.Module.DISTRIBUTIONS:
@@ -1121,8 +1121,8 @@ namespace WBZ
 								from wbz.distributions d
 								left join wbz.distributions_positions dp
 									on dp.distribution=d.id
-								left join wbz.groups g
-									on g.instance=d.id";
+								left join lateral (select g.owner from wbz.groups g where g.instance=d.id fetch first 1 row only) as g
+									on true";
 							break;
 						/// DOCUMENTS
 						case Global.Module.DOCUMENTS:
@@ -1136,8 +1136,8 @@ namespace WBZ
 									on c.id=d.company
 								left join wbz.stores s
 									on s.id=d.store
-								left join wbz.groups g
-									on g.instance=d.id";
+								left join lateral (select g.owner from wbz.groups g where g.instance=d.id fetch first 1 row only) as g
+									on true";
 							break;
 						/// EMPLOYEES
 						case Global.Module.EMPLOYEES:
@@ -1148,8 +1148,8 @@ namespace WBZ
 								from wbz.employees e
 								left join wbz.users u
 									on u.id=e.""user""
-								left join wbz.groups g
-									on g.instance=e.id";
+								left join lateral (select g.owner from wbz.groups g where g.instance=e.id fetch first 1 row only) as g
+									on true";
 							break;
 						/// GROUPS
 						case Global.Module.GROUPS:
@@ -1173,8 +1173,8 @@ namespace WBZ
 									on f.id=dp.family
 								left join wbz.distributions d
 									on dp.distribution=d.id
-								left join wbz.groups g
-									on g.instance=f.id";
+								left join lateral (select g.owner from wbz.groups g where g.instance=f.id fetch first 1 row only) as g
+									on true";
 							break;
 						/// LOGS
 						case Global.Module.LOGS:
@@ -1192,16 +1192,16 @@ namespace WBZ
 								from wbz.stores s
 								left join wbz.stores_articles sa
 									on s.id = sa.store
-								left join wbz.groups g
-									on g.instance=s.id";
+								left join lateral (select g.owner from wbz.groups g where g.instance=s.id fetch first 1 row only) as g
+									on true";
 							break;
 						/// USERS
 						case Global.Module.USERS:
 							query = @"select u.id, u.username, '' as newpass, u.forename, u.lastname,
 									u.email, u.phone, u.blocked, u.archival
 								from wbz.users u
-								left join wbz.groups g
-									on g.instance=u.id";
+								left join lateral (select g.owner from wbz.groups g where g.instance=u.id fetch first 1 row only) as g
+									on true";
 							break;
 						default:
 							throw new NotImplementedException();
