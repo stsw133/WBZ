@@ -69,15 +69,15 @@
                             <TextBox Text="{Binding InstanceInfo.Members}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Kod pocztowy:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="Kod pocztowy:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
                             <TextBox Text="{Binding InstanceInfo.Postcode}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Miasto:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="Miasto:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
                             <TextBox Text="{Binding InstanceInfo.City}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Adres:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="Adres:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
                             <TextBox Text="{Binding InstanceInfo.Address}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <CheckBox DockPanel.Dock="Top" Content="Status - aktywna" Margin="20" HorizontalAlignment="Center" VerticalContentAlignment="Center" IsChecked="{Binding InstanceInfo.Status}"/>

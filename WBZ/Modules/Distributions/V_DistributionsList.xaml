@@ -222,6 +222,9 @@
                         <DataTrigger Binding="{Binding Archival}" Value="True">
                             <Setter Property="Foreground" Value="Gray"/>
                         </DataTrigger>
+                        <DataTrigger Binding="{Binding Comment, Converter={g:conv_CompareStrings}}" Value="False">
+                            <Setter Property="ToolTip" Value="{Binding Comment}"/>
+                        </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </DataGrid.RowStyle>

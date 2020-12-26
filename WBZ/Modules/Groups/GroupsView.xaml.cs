@@ -185,6 +185,8 @@ namespace WBZ.Controls
                         Tag = group.ID,
                         Header = stack
                     };
+                    if (!string.IsNullOrEmpty(group.Comment))
+                        tvi.ToolTip = group.Comment;
                     return tvi;
                 }
 

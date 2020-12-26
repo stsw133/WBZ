@@ -102,7 +102,7 @@ namespace WBZ.Globals
 
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			if (value?.ToString() == parameter?.ToString())
+			if (value?.ToString() == (parameter?.ToString() ?? string.Empty))
 			{
 				if (targetType.Name == "Visibility")
 					return Visibility.Visible;

@@ -255,6 +255,9 @@
                         <DataTrigger Binding="{Binding Module}" Value="users">
                             <Setter Property="Background" Value="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
                         </DataTrigger>
+                        <DataTrigger Binding="{Binding Comment, Converter={g:conv_CompareStrings}}" Value="False">
+                            <Setter Property="ToolTip" Value="{Binding Comment}"/>
+                        </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </DataGrid.RowStyle>

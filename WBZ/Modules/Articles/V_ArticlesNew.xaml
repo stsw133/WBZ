@@ -48,7 +48,7 @@
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <DockPanel Margin="10" IsEnabled="{Binding EditingMode}">
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Kod:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="Kod:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
                             <TextBox Text="{Binding InstanceInfo.Codename}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
