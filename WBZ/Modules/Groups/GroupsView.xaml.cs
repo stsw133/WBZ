@@ -152,7 +152,7 @@ namespace WBZ.Controls
                 if (d != null)
                 {
                     Module = (string)d.MODULE_TYPE;
-                    InstancesList = SQL.ListInstances<M_Group>(Global.Module.GROUPS, $"g.module='{Module}' and g.instance is null");
+                    InstancesList = SQL.ListInstances<M_Group>(Global.Module.GROUPS, $"g.module='{Module}' and g.instance is null", Properties.Settings.Default.sorting_GroupsList);
                 }
 
                 /// Clear groups
