@@ -35,6 +35,7 @@ namespace WBZ.Modules._base
 			{
 				newID = SQL.NewInstanceID(D.MODULE_TYPE);
 			}
+			/*
 			if ((Commands.Type)D.Mode == Commands.Type.DUPLICATE)
             {
 				/// groups
@@ -42,7 +43,10 @@ namespace WBZ.Modules._base
 				for (int i = 0; i < arr.Length; i++)
 					arr[i] = arr[i][0].ToString();
 				foreach (M_Group group in SQL.ListInstances<M_Group>(D.MODULE_TYPE, $"{string.Join("", arr)}.id={D.InstanceInfo.ID}"))
-					SQL.SetInstance<M_Group>(D.MODULE_TYPE, group, Commands.Type.NEW);
+				{
+					group.ID = newID;
+					SQL.SetInstance<M_Group>(Global.Module.GROUPS, group, Commands.Type.NEW);
+				}
 				/// contacts
 				DataTable contacts = SQL.ListContacts(D.MODULE_TYPE, D.InstanceInfo.ID);
 				foreach (DataRow contact in contacts.Rows)
@@ -55,6 +59,7 @@ namespace WBZ.Modules._base
 					SQL.UpdateAttribute(attribute);
 				}
             }
+			*/
 			(D.InstanceInfo as dynamic).ID = newID;
 		}
 
