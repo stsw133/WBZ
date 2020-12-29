@@ -51,7 +51,7 @@ namespace WBZ.Controls
 		/// </summary>
         private void btnLoad_Click(object sender, RoutedEventArgs e)
 		{
-            var window = new AttachmentsAdd();
+            var window = new AttachmentsAdd(false);
             window.Owner = Window.GetWindow(this);
             if (window.ShowDialog() == true)
             {

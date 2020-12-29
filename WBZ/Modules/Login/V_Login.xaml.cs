@@ -258,6 +258,16 @@ namespace WBZ.Modules.Login
 		}
 
 		/// <summary>
+		/// Settings
+		/// </summary>
+		private void btnSettings_Click(object sender, RoutedEventArgs e)
+		{
+			var window = new Settings();
+			window.Owner = this;
+			window.ShowDialog();
+		}
+
+		/// <summary>
 		/// AboutApp
 		/// </summary>
 		private void btnAboutApp_Click(object sender, RoutedEventArgs e)

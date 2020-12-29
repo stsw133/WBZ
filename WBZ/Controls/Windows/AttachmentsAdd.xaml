@@ -26,7 +26,7 @@
             <c:Button ToolTip="Z dysku" Margin="5,5,0,5" IsEnabled="{Binding EditMode}" TextVisibility="False" Icon="/Resources/icon32_folder.ico" Click="btnDrive_Click"/>
             <TextBox x:Name="tbDrive" Margin="5" VerticalContentAlignment="Center"/>
         </DockPanel>
-        <DockPanel DockPanel.Dock="Top">
+        <DockPanel x:Name="dpName" DockPanel.Dock="Top">
             <Label Content="Nazwa:" Margin="5,5,0,5" VerticalAlignment="Center"/>
             <TextBox x:Name="tbName" Margin="5" VerticalContentAlignment="Center"/>
         </DockPanel>

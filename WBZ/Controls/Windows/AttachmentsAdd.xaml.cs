@@ -10,9 +10,15 @@ namespace WBZ.Controls
     /// </summary>
     public partial class AttachmentsAdd : Window
     {
-        public AttachmentsAdd()
+        bool needName;
+
+        public AttachmentsAdd(bool needName = true)
         {
             InitializeComponent();
+
+            this.needName = needName;
+            if (!needName)
+                dpName.Visibility = Visibility.Collapsed;
         }
 
         public string GetLink
@@ -84,6 +90,12 @@ namespace WBZ.Controls
         /// </summary>
         private void btnAccept_Click(object sender, RoutedEventArgs e)
         {
+            if (needName && string.IsNullOrWhiteSpace(GetName))
+            {
+                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Należy uzupełnić nazwę załącznika!") { Owner = this }.ShowDialog();
+                return;
+            }
+
             DialogResult = true;
         }
     }

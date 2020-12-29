@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Data;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using WBZ.Globals;
+using WBZ.Models;
 
 namespace WBZ.Modules._base
 {
@@ -12,7 +14,7 @@ namespace WBZ.Modules._base
     {
 		dynamic W,  D;
         string FullName, HalfName;
-
+		
 		/// <summary>
 		/// Init
 		/// </summary>
@@ -29,9 +31,29 @@ namespace WBZ.Modules._base
 		/// </summary>
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
+			int newID = (D.InstanceInfo as dynamic).ID;
 			if (((Commands.Type)D.Mode).In(Commands.Type.NEW, Commands.Type.DUPLICATE))
-				(D.InstanceInfo as dynamic).ID = SQL.NewInstanceID(D.MODULE_TYPE);
-			//TODO - zaczytywanie instancji dopiero po otwarciu okna (?)
+			{
+				newID = SQL.NewInstanceID(D.MODULE_TYPE);
+			}
+			if ((Commands.Type)D.Mode == Commands.Type.DUPLICATE)
+            {
+				/// groups
+				foreach (M_Group group in SQL.ListInstances<M_Group>(D.MODULE_TYPE, $"{D.MODULE_TYPE.ToLower()}.id={D.InstanceInfo.ID}"))
+					SQL.SetInstance<M_Group>(D.MODULE_TYPE, group, Commands.Type.NEW);
+				/// contacts
+				DataTable contacts = SQL.ListContacts(D.MODULE_TYPE, D.InstanceInfo.ID);
+				foreach (DataRow contact in contacts.Rows)
+					contact.SetAdded();
+				SQL.UpdateContacts(D.MODULE_TYPE, D.InstanceInfo.ID, contacts);
+				/// attributes
+				foreach (M_Attribute attribute in SQL.ListAttributes(D.MODULE_TYPE, D.InstanceInfo.ID))
+				{
+					attribute.Instance = D.InstanceInfo.ID;
+					SQL.UpdateAttribute(attribute);
+				}
+            }
+			(D.InstanceInfo as dynamic).ID = newID;
 		}
 
 		/// <summary>

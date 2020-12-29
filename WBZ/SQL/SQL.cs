@@ -1228,29 +1228,6 @@ namespace WBZ
 			return result;
 		}
 		/// <summary>
-		/// Pobiera z sekwencji ID nowej instancji
-		/// </summary>
-		/// <param name="module">Nazwa modułu</param>
-		internal static int NewInstanceID(string module)
-		{
-			int result = 0;
-
-			try
-			{
-				using (var sqlConn = connOpenedWBZ)
-				using (var sqlCmd = new NpgsqlCommand($"select nextval('wbz.{module}_id_seq')", sqlConn))
-				{
-					result = Convert.ToInt32(sqlCmd.ExecuteScalar());
-				}
-			}
-			catch (Exception ex)
-			{
-				Error("Błąd podczas pobierania nowego identyfikatora", ex, module, 0);
-			}
-
-			return result;
-		}
-		/// <summary>
 		/// Pobiera dane o instancji
 		/// </summary>
 		/// <param name="module">Nazwa modułu</param>
@@ -1331,6 +1308,29 @@ namespace WBZ
 			catch (Exception ex)
 			{
 				Error("Błąd podczas pobierania pozycji instancji", ex, module, id);
+			}
+
+			return result;
+		}
+		/// <summary>
+		/// Pobiera z sekwencji ID nowej instancji
+		/// </summary>
+		/// <param name="module">Nazwa modułu</param>
+		internal static int NewInstanceID(string module)
+		{
+			int result = 0;
+
+			try
+			{
+				using (var sqlConn = connOpenedWBZ)
+				using (var sqlCmd = new NpgsqlCommand($"select nextval('wbz.{module}_id_seq')", sqlConn))
+				{
+					result = Convert.ToInt32(sqlCmd.ExecuteScalar());
+				}
+			}
+			catch (Exception ex)
+			{
+				Error("Błąd podczas pobierania nowego identyfikatora", ex, module, 0);
 			}
 
 			return result;

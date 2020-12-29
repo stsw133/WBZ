@@ -102,6 +102,11 @@
                                     <Image Source="/Resources/icon32_versions.ico"/>
                                 </MenuItem.Icon>
                             </MenuItem>
+                            <MenuItem Header="Ustawienia" Click="btnSettings_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="/Resources/icon32_settings.ico"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
                             <MenuItem Header="O programie" Click="btnAboutApp_Click">
                                 <MenuItem.Icon>
                                     <Image Source="/Resources/icon64.ico"/>

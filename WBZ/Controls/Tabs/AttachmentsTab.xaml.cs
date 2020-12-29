@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Net;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using WBZ.Models;
 using WBZ.Globals;
 using System.Collections.ObjectModel;
@@ -58,7 +56,7 @@ namespace WBZ.Controls
         /// </summary>
         private void btnAttachmentAdd_Click(object sender, RoutedEventArgs e)
         {
-            var window = new AttachmentsAdd();
+            var window = new AttachmentsAdd(true);
             window.Owner = Window.GetWindow(this);
             if (window.ShowDialog() == true)
             {
