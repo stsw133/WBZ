@@ -1,6 +1,6 @@
--- Database: wbz
+-- Database: wbz TEST
 CREATE DATABASE wbz
-    WITH 
+    WITH
     OWNER = wbz
     ENCODING = 'UTF8'
     LC_COLLATE = 'Polish_Poland.1250'
@@ -19,7 +19,7 @@ CREATE ROLE wbz_user WITH
 
 -- SCHEMA: wbz
 CREATE SCHEMA wbz AUTHORIZATION postgres;
-COMMENT ON SCHEMA wbz IS 'Wielkopolski Bank ¯ywnoœci';
+COMMENT ON SCHEMA wbz IS 'Wielkopolski Bank ï¿½ywnoï¿½ci';
 GRANT ALL ON SCHEMA wbz TO postgres;
 GRANT ALL ON SCHEMA wbz TO wbz_user;
 
@@ -140,7 +140,7 @@ TABLESPACE pg_default;
 
 INSERT INTO wbz.groups (id, module, name, instance, owner, archival, comment, icon) VALUES
     (1, 'logs', 'Logi', null, 0, false, '', null),
-    (2, 'logs', 'B³êdy', null, 0, false, '', null);
+    (2, 'logs', 'Bï¿½ï¿½dy', null, 0, false, '', null);
 
 -- Table: wbz.attributes_classes
 CREATE TABLE wbz.attributes_classes
@@ -459,7 +459,7 @@ CREATE OR REPLACE FUNCTION wbz.artdefmeaval(
     LANGUAGE 'plpgsql'
 
     COST 100
-    VOLATILE 
+    VOLATILE
 AS $BODY$
 BEGIN
    RETURN _amount * coalesce(nullif((select converter FROM wbz.articles_measures WHERE article = _article AND "default"=true),0),1);
@@ -473,7 +473,7 @@ CREATE OR REPLACE FUNCTION wbz.artdefmeacon(
     LANGUAGE 'plpgsql'
 
     COST 100
-    VOLATILE 
+    VOLATILE
 AS $BODY$
 BEGIN
    RETURN coalesce(nullif((select converter FROM wbz.articles_measures WHERE article = _article AND "default"=true),0),1);
@@ -487,7 +487,7 @@ CREATE OR REPLACE FUNCTION wbz.artdefmeanam(
     LANGUAGE 'plpgsql'
 
     COST 100
-    VOLATILE 
+    VOLATILE
 AS $BODY$
 BEGIN
    RETURN coalesce((SELECT name FROM wbz.articles_measures WHERE article = _article AND "default"=true), 'kg');
