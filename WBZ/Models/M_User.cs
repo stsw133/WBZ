@@ -28,7 +28,7 @@ namespace WBZ.Models
 		{
 			get
 			{
-				return $"{Forename} {Lastname}";
+				return $"{Lastname} {Forename}";
 			}
 		}
 	}

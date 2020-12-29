@@ -47,7 +47,15 @@ namespace WBZ.Modules.Users
 			if (D.InstanceInfo.Perms.Contains(perm))
 				D.InstanceInfo.Perms.Remove(perm);
 		}
-	}
 
-	public class New : ModuleNew<MODULE_MODEL> { }
+		/// <summary>
+		/// PasswordChanged
+		/// </summary>
+		private void tbNewpass_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+			D.InstanceInfo.Newpass = (sender as PasswordBox).Password;
+        }
+    }
+
+    public class New : ModuleNew<MODULE_MODEL> { }
 }

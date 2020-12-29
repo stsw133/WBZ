@@ -1743,7 +1743,7 @@ namespace WBZ
 							query = @"insert into wbz.users (id, username, password, forename, lastname, email, phone, blocked, archival)
 								values (@id, @username, @password, @forename, @lastname, @email, @phone, @blocked, @archival)
 								on conflict(id) do
-								update set username=@username, " + (!string.IsNullOrEmpty(user.Newpass) ? "password = @newpass," : "") + @"
+								update set username=@username, " + (!string.IsNullOrEmpty(user.Newpass) ? "password = @password," : "") + @"
 									forename = @forename, lastname = @lastname, email = @email, phone = @phone, blocked = @blocked, archival = @archival";
 							using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 							{

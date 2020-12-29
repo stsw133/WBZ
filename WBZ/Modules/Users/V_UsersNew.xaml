@@ -53,7 +53,7 @@
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Nowe hasło:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
-                            <TextBox Text="{Binding InstanceInfo.Newpass}" Margin="5" VerticalContentAlignment="Center"/>
+                            <PasswordBox Margin="5" VerticalContentAlignment="Center" PasswordChanged="tbNewpass_PasswordChanged"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="E-mail:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>

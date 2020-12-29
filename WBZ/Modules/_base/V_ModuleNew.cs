@@ -1,5 +1,4 @@
-﻿using Npgsql;
-using System;
+﻿using System;
 using System.Data;
 using System.Linq;
 using System.Windows;
@@ -39,7 +38,10 @@ namespace WBZ.Modules._base
 			if ((Commands.Type)D.Mode == Commands.Type.DUPLICATE)
             {
 				/// groups
-				foreach (M_Group group in SQL.ListInstances<M_Group>(D.MODULE_TYPE, $"{D.MODULE_TYPE.ToLower()}.id={D.InstanceInfo.ID}"))
+				string[] arr = D.MODULE_TYPE.ToLower().Split('_');
+				for (int i = 0; i < arr.Length; i++)
+					arr[i] = arr[i][0].ToString();
+				foreach (M_Group group in SQL.ListInstances<M_Group>(D.MODULE_TYPE, $"{string.Join("", arr)}.id={D.InstanceInfo.ID}"))
 					SQL.SetInstance<M_Group>(D.MODULE_TYPE, group, Commands.Type.NEW);
 				/// contacts
 				DataTable contacts = SQL.ListContacts(D.MODULE_TYPE, D.InstanceInfo.ID);
