@@ -2091,5 +2091,17 @@ namespace WBZ.Properties {
                 this["config_Community_PanelColor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool config_ExpandGroups {
+            get {
+                return ((bool)(this["config_ExpandGroups"]));
+            }
+            set {
+                this["config_ExpandGroups"] = value;
+            }
+        }
     }
 }

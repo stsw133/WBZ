@@ -17,7 +17,7 @@ namespace WBZ.Controls
     public partial class GroupsView : TreeView
     {
         public ObservableCollection<M_Group> InstancesList = new ObservableCollection<M_Group>();
-        private string Module;
+        string Module;
 
         public GroupsView()
         {
@@ -46,17 +46,6 @@ namespace WBZ.Controls
         }
 
         /// <summary>
-        /// GetParentItem
-        /// </summary>
-        TreeViewItem GetParentItem(TreeViewItem item)
-        {
-            for (var i = VisualTreeHelper.GetParent(item); i != null; i = VisualTreeHelper.GetParent(i))
-                if (i is TreeViewItem)
-                    return (TreeViewItem)i;
-            return null;
-        }
-
-        /// <summary>
 		/// Preview
 		/// </summary>
 		private void btnGroupsPreview_Click(object sender, RoutedEventArgs e)
@@ -74,6 +63,14 @@ namespace WBZ.Controls
 		/// </summary>
 		private void btnGroupsNew_Click(object sender, RoutedEventArgs e)
         {
+            TreeViewItem GetParentItem(TreeViewItem item)
+            {
+                for (var i = VisualTreeHelper.GetParent(item); i != null; i = VisualTreeHelper.GetParent(i))
+                    if (i is TreeViewItem)
+                        return (TreeViewItem)i;
+                return null;
+            }
+
             var instance = new M_Group();
             if (SelectedItem == null)
             {
@@ -123,6 +120,33 @@ namespace WBZ.Controls
                 var group = SelectedItem as TreeViewItem;
                 SQL.DeleteInstance(Global.Module.GROUPS, (int)group.Tag, ((group.Header as StackPanel).Children[1] as TextBlock).Text);
                 btnGroupsRefresh_Click(null, null);
+            }
+        }
+
+        /// <summary>
+        /// Expand all
+        /// </summary>
+        private void btnGroupsExpandAll_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (TreeViewItem tvi1 in Items)
+            {
+                tvi1.IsExpanded = Properties.Settings.Default.config_ExpandGroups;
+                foreach (TreeViewItem tvi2 in tvi1.Items)
+                {
+                    tvi2.IsExpanded = Properties.Settings.Default.config_ExpandGroups;
+                    foreach (TreeViewItem tvi3 in tvi2.Items)
+                    {
+                        tvi3.IsExpanded = Properties.Settings.Default.config_ExpandGroups;
+                        foreach (TreeViewItem tvi4 in tvi3.Items)
+                        {
+                            tvi4.IsExpanded = Properties.Settings.Default.config_ExpandGroups;
+                            foreach (TreeViewItem tvi5 in tvi4.Items)
+                            {
+                                tvi5.IsExpanded = Properties.Settings.Default.config_ExpandGroups;
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -183,7 +207,8 @@ namespace WBZ.Controls
                     var tvi = new TreeViewItem()
                     {
                         Tag = group.ID,
-                        Header = stack
+                        Header = stack,
+                        IsExpanded = Properties.Settings.Default.config_ExpandGroups
                     };
                     if (!string.IsNullOrEmpty(group.Comment))
                         tvi.ToolTip = group.Comment;
