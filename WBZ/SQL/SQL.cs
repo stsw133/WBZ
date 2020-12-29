@@ -914,9 +914,7 @@ namespace WBZ
 							query = @"select count(distinct a.id)
 								from wbz.articles a
 								left join wbz.stores_articles sa
-									on a.id=sa.article
-								left join wbz.groups g
-									on g.instance=a.id";
+									on a.id=sa.article";
 							break;
 						/// ATTACHMENTS
 						case Global.Module.ATTACHMENTS:
@@ -928,23 +926,17 @@ namespace WBZ
 						/// ATTRIBUTES_CLASSES
 						case Global.Module.ATTRIBUTES_CLASSES:
 							query = @"select count(distinct ac.id)
-								from wbz.attributes_classes ac
-								left join wbz.groups g
-									on g.instance=ac.id";
+								from wbz.attributes_classes ac";
 							break;
 						/// COMPANIES
 						case Global.Module.COMPANIES:
 							query = @"select count(distinct c.id)
-								from wbz.companies c
-								left join wbz.groups g
-									on g.instance=c.id";
+								from wbz.companies c";
 							break;
 						/// DISTRIBUTIONS
 						case Global.Module.DISTRIBUTIONS:
 							query = @"select count(distinct d.id)
-								from wbz.distributions d
-								left join wbz.groups g
-									on g.instance=d.id";
+								from wbz.distributions d";
 							break;
 						/// DOCUMENTS
 						case Global.Module.DOCUMENTS:
@@ -955,18 +947,14 @@ namespace WBZ
 								left join wbz.companies c
 									on c.id=d.company
 								left join wbz.stores s
-									on s.id=d.store
-								left join wbz.groups g
-									on g.instance=d.id";
+									on s.id=d.store";
 							break;
 						/// EMPLOYEES
 						case Global.Module.EMPLOYEES:
 							query = @"select count(distinct e.id)
 								from wbz.employees e
 								left join wbz.users u
-									on u.id=e.""user""
-								left join wbz.groups g
-									on g.instance=e.id";
+									on u.id=e.""user""";
 							break;
 						/// GROUPS
 						case Global.Module.GROUPS:
@@ -976,9 +964,7 @@ namespace WBZ
 						/// FAMILIES
 						case Global.Module.FAMILIES:
 							query = @"select count(distinct f.id)
-								from wbz.families f
-								left join wbz.groups g
-									on g.instance=f.id";
+								from wbz.families f";
 							break;
 						/// LOGS
 						case Global.Module.LOGS:
@@ -992,16 +978,12 @@ namespace WBZ
 							query = @"select count(distinct s.id)
 								from wbz.stores s
 								left join wbz.stores_articles sa
-									on s.id = sa.store
-								left join wbz.groups g
-									on g.instance=s.id";
+									on s.id = sa.store";
 							break;
 						/// USERS
 						case Global.Module.USERS:
 							query = @"select count(distinct u.id)
-								from wbz.users u
-								left join wbz.groups g
-									on g.instance=u.id";
+								from wbz.users u";
 							break;
 						default:
 							throw new NotImplementedException();
@@ -1085,9 +1067,7 @@ namespace WBZ
 									a.archival, a.comment, a.icon
 								from wbz.articles a
 								left join wbz.stores_articles sa
-									on a.id=sa.article
-								left join lateral (select g.owner from wbz.groups g where g.instance=a.id fetch first 1 row only) as g
-									on true";
+									on a.id=sa.article";
 							break;
 						/// ATTACHMENTS
 						case Global.Module.ATTACHMENTS:
@@ -1100,17 +1080,13 @@ namespace WBZ
 						case Global.Module.ATTRIBUTES_CLASSES:
 							query = @"select ac.id as ""ID"", ac.module as ""Module"", ac.name as ""Name"", ac.type as ""Type"", ac.""values"" as ""Values"",
 									ac.archival, ac.comment, ac.icon
-								from wbz.attributes_classes ac
-								left join lateral (select g.owner from wbz.groups g where g.instance=ac.id fetch first 1 row only) as g
-									on true";
+								from wbz.attributes_classes ac";
 							break;
 						/// COMPANIES
 						case Global.Module.COMPANIES:
 							query = @"select c.id, c.codename, c.name, c.branch, c.nip, c.regon, c.postcode, c.city, c.address,
 									c.archival, c.comment, c.icon
-								from wbz.companies c
-								left join lateral (select g.owner from wbz.groups g where g.instance=c.id fetch first 1 row only) as g
-									on true";
+								from wbz.companies c";
 							break;
 						/// DISTRIBUTIONS
 						case Global.Module.DISTRIBUTIONS:
@@ -1120,9 +1096,7 @@ namespace WBZ
 									d.archival, d.comment, d.icon
 								from wbz.distributions d
 								left join wbz.distributions_positions dp
-									on dp.distribution=d.id
-								left join lateral (select g.owner from wbz.groups g where g.instance=d.id fetch first 1 row only) as g
-									on true";
+									on dp.distribution=d.id";
 							break;
 						/// DOCUMENTS
 						case Global.Module.DOCUMENTS:
@@ -1135,9 +1109,7 @@ namespace WBZ
 								left join wbz.companies c
 									on c.id=d.company
 								left join wbz.stores s
-									on s.id=d.store
-								left join lateral (select g.owner from wbz.groups g where g.instance=d.id fetch first 1 row only) as g
-									on true";
+									on s.id=d.store";
 							break;
 						/// EMPLOYEES
 						case Global.Module.EMPLOYEES:
@@ -1147,9 +1119,7 @@ namespace WBZ
 									e.archival, e.comment, e.icon
 								from wbz.employees e
 								left join wbz.users u
-									on u.id=e.""user""
-								left join lateral (select g.owner from wbz.groups g where g.instance=e.id fetch first 1 row only) as g
-									on true";
+									on u.id=e.""user""";
 							break;
 						/// GROUPS
 						case Global.Module.GROUPS:
@@ -1172,9 +1142,7 @@ namespace WBZ
 								left join wbz.distributions_positions dp
 									on f.id=dp.family
 								left join wbz.distributions d
-									on dp.distribution=d.id
-								left join lateral (select g.owner from wbz.groups g where g.instance=f.id fetch first 1 row only) as g
-									on true";
+									on dp.distribution=d.id";
 							break;
 						/// LOGS
 						case Global.Module.LOGS:
@@ -1191,17 +1159,13 @@ namespace WBZ
 									s.archival, s.comment, s.icon
 								from wbz.stores s
 								left join wbz.stores_articles sa
-									on s.id = sa.store
-								left join lateral (select g.owner from wbz.groups g where g.instance=s.id fetch first 1 row only) as g
-									on true";
+									on s.id = sa.store";
 							break;
 						/// USERS
 						case Global.Module.USERS:
 							query = @"select u.id, u.username, '' as newpass, u.forename, u.lastname,
 									u.email, u.phone, u.blocked, u.archival
-								from wbz.users u
-								left join lateral (select g.owner from wbz.groups g where g.instance=u.id fetch first 1 row only) as g
-									on true";
+								from wbz.users u";
 							break;
 						default:
 							throw new NotImplementedException();
@@ -1852,7 +1816,8 @@ namespace WBZ
 							break;
 						/// GROUPS
 						case Global.Module.GROUPS:
-							query = @"delete from wbz.groups where id=@id";
+							query = @"delete from wbz.groups where id=@id;
+								delete from wbz.groups where owner=@id";
 							SetLog(Global.User.ID, module, id, $"Usunięto grupę: {name}", sqlTran);
 							break;
 						/// LOGS

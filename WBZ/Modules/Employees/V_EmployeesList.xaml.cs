@@ -34,8 +34,8 @@ namespace WBZ.Modules.Employees
                         + $"LOWER(COALESCE(e.postcode,'')) like '%{D.Filters.Postcode.ToLower()}%' and "
                         + $"LOWER(COALESCE(e.city,'')) like '%{D.Filters.City.ToLower()}%' and "
                         + $"LOWER(COALESCE(e.address,'')) like '%{D.Filters.Address.ToLower()}%' and "
-                        + (!D.Filters.Archival ? $"e.archival=false and " : "")
-                        + (D.Filters.Group > 0 ? $"g.owner={D.Filters.Group} and " : "");
+                        + (!D.Filters.Archival ? $"e.archival=false and " : string.Empty)
+                        + (D.Filters.Group > 0 ? $"exists (select from wbz.groups g where g.instance=e.id and g.owner={D.Filters.Group}) and " : string.Empty);
 
             D.FilterSQL = D.FilterSQL.TrimEnd(" and ".ToCharArray());
 		}
