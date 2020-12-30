@@ -1,16 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using WBZ.Globals;
 using WBZ.Models;
 using WBZ.Modules.Groups;
 
-namespace WBZ.Controls
+namespace WBZ.Modules._tabs
 {
 	/// <summary>
 	/// Interaction logic for GroupsTab.xaml

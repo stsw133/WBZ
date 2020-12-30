@@ -26,7 +26,7 @@ namespace WBZ.Modules.Distributions
 		public void UpdateFilters()
 		{
 			D.FilterSQL = $"LOWER(COALESCE(d.name,'')) like '%{D.Filters.Name}%' and "
-						+ $"d.datereal between '{D.Filters.fDateReal:yyyy-MM-dd}' and '{D.Filters.DateReal:yyyy-MM-dd} 23:59:59' and "
+						+ $"d.datereal >= '{D.Filters.fDateReal:yyyy-MM-dd}' and d.datereal <= '{D.Filters.DateReal:yyyy-MM-dd}' and "
 						//+ (D.Filters.FamiliesCount > 0 ? $"COALESCE(count(family),0) = {M.Filters.FamiliesCount} and " : "")
 						+ (!D.Filters.Archival ? $"d.archival=false and " : "")
 						+ (D.Filters.Group > 0 ? $"g.owner={D.Filters.Group} and " : "");

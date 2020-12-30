@@ -772,9 +772,9 @@ namespace WBZ
 				{
 					var sqlCmd = new NpgsqlCommand(@"SELECT DISTINCT (SELECT c.name FROM wbz.companies c WHERE c.id = i.company)
 						FROM wbz.documents i 
-						WHERE i.archival = false and (dateissue between '@from' and '@to')", sqlConn);
+						WHERE i.archival = false and (dateissue >= '@from' and dateissue <= '@to')", sqlConn);
 					sqlCmd.CommandText = sqlCmd.CommandText.Replace("@from", from.ToString("yyyy.MM.dd"));
-					sqlCmd.CommandText = sqlCmd.CommandText.Replace("@to", to.ToString("yyyy.MM.dd 23:59:59"));
+					sqlCmd.CommandText = sqlCmd.CommandText.Replace("@to", to.ToString("yyyy.MM.dd"));
 					using (var sqlDA = new NpgsqlDataAdapter(sqlCmd))
 					{
 						sqlDA.Fill(result);
@@ -838,10 +838,10 @@ namespace WBZ
 				{
 					var sqlCmd = new NpgsqlCommand(@"SELECT DISTINCT to_char(i.dateissue,'dd.MM.yyyy') as day, i.dateissue
 						FROM wbz.documents i
-						WHERE i.archival = false and (i.dateissue between '@from' and '@to')
+						WHERE i.archival = false and (i.dateissue >= '@from' and i.dateissue <= '@to')
 						ORDER BY dateissue asc", sqlConn);
 					sqlCmd.CommandText = sqlCmd.CommandText.Replace("@from", from.ToString("yyyy.MM.dd"));
-					sqlCmd.CommandText = sqlCmd.CommandText.Replace("@to", to.ToString("yyyy.MM.dd 23:59:59"));
+					sqlCmd.CommandText = sqlCmd.CommandText.Replace("@to", to.ToString("yyyy.MM.dd"));
 					using (var sqlDA = new NpgsqlDataAdapter(sqlCmd))
 					{
 						sqlDA.Fill(result);

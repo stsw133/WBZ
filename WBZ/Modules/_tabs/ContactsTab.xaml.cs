@@ -1,24 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
+using System.Data;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using WBZ.Models;
-using WBZ.Globals;
-using System.Collections.ObjectModel;
 
-namespace WBZ.Controls
+namespace WBZ.Modules._tabs
 {
     /// <summary>
-    /// Interaction logic for LogsTab.xaml
+    /// Interaction logic for ContactsTab.xaml
     /// </summary>
-    public partial class LogsTab : UserControl
+    public partial class ContactsTab : UserControl
     {
-        D_LogsTab D = new D_LogsTab();
+        D_ContactsTab D = new D_ContactsTab();
         private string Module;
         private int ID;
+        private bool EditingMode;
 
-        public LogsTab()
+        public ContactsTab()
         {
             InitializeComponent();
             DataContext = D;
@@ -33,24 +32,40 @@ namespace WBZ.Controls
             {
                 Window win = Window.GetWindow(this);
 
-                if (ID != 0 && D.InstanceLogs == null)
-                    D.InstanceLogs = SQL.ListInstances<M_Log>(Global.Module.LOGS, $"l.module='{Module}' and l.instance={ID}");
+                if (ID != 0 && D.InstanceContacts == null)
+                {
+                    D.InstanceContacts = SQL.ListContacts(Module, ID);
+                    win.Closed += UserControl_Closed;
+                }
 
                 dynamic d = win?.DataContext;
                 if (d != null)
                 {
                     Module = (string)d.MODULE_TYPE;
                     ID = (int)d.InstanceInfo.ID;
+                    EditingMode = (bool)d.InstanceInfo.EditingMode;
                 }
             }
             catch { }
         }
-	}
 
-	/// <summary>
-	/// DataContext
-	/// </summary>
-	class D_LogsTab : INotifyPropertyChanged
+        /// <summary>
+        /// Closed
+        /// </summary>
+        private void UserControl_Closed(object sender, EventArgs e)
+        {
+            try
+            {
+                SQL.UpdateContacts(Module, ID, D.InstanceContacts);
+            }
+            catch { }
+        }
+    }
+
+    /// <summary>
+    /// DataContext
+    /// </summary>
+    class D_ContactsTab : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public void NotifyPropertyChanged(string name)
@@ -58,17 +73,17 @@ namespace WBZ.Controls
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
-        /// Logs
-        private ObservableCollection<M_Log> instanceLogs;
-        public ObservableCollection<M_Log> InstanceLogs
+        /// Contacts
+        private DataTable instanceContacts;
+        public DataTable InstanceContacts
         {
             get
             {
-                return instanceLogs;
+                return instanceContacts;
             }
             set
             {
-                instanceLogs = value;
+                instanceContacts = value;
                 NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
             }
         }

@@ -3,8 +3,9 @@ using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using WBZ.Controls;
 
-namespace WBZ.Controls
+namespace WBZ.Modules._tabs
 {
     /// <summary>
     /// Interaction logic for AdditionalsTab.xaml

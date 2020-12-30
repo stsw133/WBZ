@@ -172,25 +172,25 @@
     <Compile Include="Controls\StatusPanel.xaml.cs">
       <DependentUpon>StatusPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Tabs\AdditionalsTab.xaml.cs">
+    <Compile Include="Modules\_tabs\AdditionalsTab.xaml.cs">
       <DependentUpon>AdditionalsTab.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Tabs\ContactsTab.xaml.cs">
+    <Compile Include="Modules\_tabs\ContactsTab.xaml.cs">
       <DependentUpon>ContactsTab.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Windows\AttachmentsAdd.xaml.cs">
       <DependentUpon>AttachmentsAdd.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Tabs\AttachmentsTab.xaml.cs">
+    <Compile Include="Modules\_tabs\AttachmentsTab.xaml.cs">
       <DependentUpon>AttachmentsTab.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Tabs\GroupsTab.xaml.cs">
+    <Compile Include="Modules\_tabs\GroupsTab.xaml.cs">
       <DependentUpon>GroupsTab.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Tabs\LogsTab.xaml.cs">
+    <Compile Include="Modules\_tabs\LogsTab.xaml.cs">
       <DependentUpon>LogsTab.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Tabs\AttributesTab.xaml.cs">
+    <Compile Include="Modules\_tabs\AttributesTab.xaml.cs">
       <DependentUpon>AttributesTab.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Windows\MsgWin.xaml.cs">
@@ -375,11 +375,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Tabs\AdditionalsTab.xaml">
+    <Page Include="Modules\_tabs\AdditionalsTab.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Tabs\ContactsTab.xaml">
+    <Page Include="Modules\_tabs\ContactsTab.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -399,19 +399,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Tabs\AttachmentsTab.xaml">
+    <Page Include="Modules\_tabs\AttachmentsTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Tabs\GroupsTab.xaml">
+    <Page Include="Modules\_tabs\GroupsTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Tabs\LogsTab.xaml">
+    <Page Include="Modules\_tabs\LogsTab.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Tabs\AttributesTab.xaml">
+    <Page Include="Modules\_tabs\AttributesTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

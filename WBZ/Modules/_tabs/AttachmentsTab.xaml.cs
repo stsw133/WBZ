@@ -8,8 +8,9 @@ using System.Windows.Controls;
 using WBZ.Models;
 using WBZ.Globals;
 using System.Collections.ObjectModel;
+using WBZ.Controls;
 
-namespace WBZ.Controls
+namespace WBZ.Modules._tabs
 {
     /// <summary>
     /// Interaction logic for AttachmentsTab.xaml

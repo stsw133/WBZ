@@ -1,17 +1,18 @@
-﻿<local:New x:Class="WBZ.Modules.Articles.ArticlesNew"
-           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-           xmlns:local="clr-namespace:WBZ.Modules.Articles"
-           xmlns:c="clr-namespace:WBZ.Controls"
-           xmlns:g="clr-namespace:WBZ.Globals"
-           xmlns:p="clr-namespace:WBZ.Properties"
-           mc:Ignorable="d"
-           Title="{Binding Title}" MinHeight="240" MinWidth="360" Height="{Binding config_ArticlesNew_WindowSize[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_ArticlesNew_WindowSize[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
-                FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
-                Icon="/Resources/icon32_articles.ico" Loaded="Window_Loaded" Closed="Window_Closed">
+﻿<b:New x:Class="WBZ.Modules.Articles.ArticlesNew"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+       xmlns:b="clr-namespace:WBZ.Modules.Articles"
+       xmlns:c="clr-namespace:WBZ.Controls"
+       xmlns:g="clr-namespace:WBZ.Globals"
+       xmlns:p="clr-namespace:WBZ.Properties"
+       xmlns:t="clr-namespace:WBZ.Modules._tabs"
+       mc:Ignorable="d"
+       Title="{Binding Title}" MinHeight="240" MinWidth="360" Height="{Binding config_ArticlesNew_WindowSize[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_ArticlesNew_WindowSize[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+            BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
+            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
+            Icon="/Resources/icon32_articles.ico" Loaded="Window_Loaded" Closed="Window_Closed">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -103,7 +104,7 @@
                 <TabItem.Header>
                     <c:Header Text="Dodatkowe" Icon="/Resources/icon32_tools.ico"/>
                 </TabItem.Header>
-                <c:AdditionalsTab/>
+                <t:AdditionalsTab/>
             </TabItem>
             <!-- tabSources -->
             <TabItem>
@@ -178,30 +179,30 @@
                 <TabItem.Header>
                     <c:Header Text="Grupy" Icon="/Resources/icon32_groups.ico"/>
                 </TabItem.Header>
-                <c:GroupsTab/>
+                <t:GroupsTab/>
             </TabItem>
             <!-- tabAttributes -->
             <TabItem>
                 <TabItem.Header>
                     <c:Header Text="Atrybuty" Icon="/Resources/icon32_attributes.ico"/>
                 </TabItem.Header>
-                <c:AttributesTab/>
+                <t:AttributesTab/>
             </TabItem>
             <!-- tabAttachments -->
             <TabItem>
                 <TabItem.Header>
                     <c:Header Text="Załączniki" Icon="/Resources/icon32_photos.ico"/>
                 </TabItem.Header>
-                <c:AttachmentsTab/>
+                <t:AttachmentsTab/>
             </TabItem>
             <!-- tabLogs -->
             <TabItem>
                 <TabItem.Header>
                     <c:Header Text="Historia" Icon="/Resources/icon32_logs.ico"/>
                 </TabItem.Header>
-                <c:LogsTab/>
+                <t:LogsTab/>
             </TabItem>
         </TabControl>
     </DockPanel>
-</local:New>
+</b:New>
 

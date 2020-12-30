@@ -4,9 +4,10 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using WBZ.Controls;
 using WBZ.Models;
 
-namespace WBZ.Controls
+namespace WBZ.Modules._tabs
 {
     /// <summary>
     /// Interaction logic for AttributesTab.xaml
@@ -51,7 +52,7 @@ namespace WBZ.Controls
         /// </summary>
         private void btnAttributeChange_Click(object sender, RoutedEventArgs e)
         {
-            var dataGrid = Content as DataGrid;
+            var dataGrid = Content as System.Windows.Controls.DataGrid;
             Window win = Window.GetWindow(this);
 
             dynamic d = win?.DataContext;
