@@ -5,7 +5,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using WBZ.Globals;
-using WBZ.Models;
 
 namespace WBZ.Modules._base
 {
@@ -77,7 +76,18 @@ namespace WBZ.Modules._base
 		/// Save
 		/// </summary>
 		private bool saved = false;
-		private void btnSave_Click(object sender, MouseButtonEventArgs e)
+		internal void cmdSave_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+		{
+			try
+			{
+				if (D.EditingMode)
+					e.CanExecute = true;
+				else
+					e.CanExecute = false;
+			}
+			catch { }
+		}
+		internal void cmdSave_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			if (!CheckDataValidation())
 				return;
@@ -89,7 +99,7 @@ namespace WBZ.Modules._base
 		/// <summary>
 		/// Refresh
 		/// </summary>
-		private void btnRefresh_Click(object sender, MouseButtonEventArgs e)
+		internal void cmdRefresh_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			if ((D.InstanceInfo as dynamic).ID == 0)
 				return;
@@ -97,11 +107,19 @@ namespace WBZ.Modules._base
 		}
 
 		/// <summary>
+		/// Help
+		/// </summary>
+		internal void cmdHelp_Executed(object sender, ExecutedRoutedEventArgs e)
+		{
+			Functions.OpenHelp(this);
+		}
+
+		/// <summary>
 		/// Close
 		/// </summary>
-		private void btnClose_Click(object sender, MouseButtonEventArgs e)
+		internal void cmdClose_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
-			Close();
+			W.Close();
 		}
 
 		/// <summary>

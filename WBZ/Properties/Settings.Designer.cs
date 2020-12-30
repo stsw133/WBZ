@@ -2103,5 +2103,17 @@ namespace WBZ.Properties {
                 this["config_ExpandGroups"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool config_ShowButtonTexts {
+            get {
+                return ((bool)(this["config_ShowButtonTexts"]));
+            }
+            set {
+                this["config_ShowButtonTexts"] = value;
+            }
+        }
     }
 }

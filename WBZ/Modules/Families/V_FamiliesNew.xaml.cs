@@ -30,7 +30,7 @@ namespace WBZ.Modules.Families
         /// <summary>
 		/// Print
 		/// </summary>
-        private void btnPrint_Click(object sender, MouseButtonEventArgs e)
+        private void btnPrint_Click(object sender, RoutedEventArgs e)
         {
             var btn = sender as FrameworkElement;
             if (btn != null)

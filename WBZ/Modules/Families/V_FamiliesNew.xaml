@@ -16,31 +16,37 @@
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
+    <Window.CommandBindings>
+        <CommandBinding Command="g:Commands.Close" Executed="cmdClose_Executed"/>
+        <CommandBinding Command="g:Commands.Help" Executed="cmdHelp_Executed"/>
+        <CommandBinding Command="g:Commands.Refresh" Executed="cmdRefresh_Executed"/>
+        <CommandBinding Command="g:Commands.Save" Executed="cmdSave_Executed" CanExecute="cmdSave_CanExecute"/>
+    </Window.CommandBindings>
     <DockPanel>
         <!-- titleBar -->
         <c:TitleBar DockPanel.Dock="Top" SubIcon="/Resources/icon32_add.ico"/>
         <!-- buttonsPanel -->
         <Border DockPanel.Dock="Right" Background="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="1,0,0,0">
             <DockPanel>
-                <ToggleButton x:Name="btnToggle" BorderThickness="0" Width="5" IsChecked="True"/>
-                <c:Button DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="{Binding EditMode}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
-                                Text="Zapisz" Icon="/Resources/icon32_save.ico" PreviewMouseLeftButtonUp="btnSave_Click"/>
-                <Separator DockPanel.Dock="Top" Margin="0,5,0,0" VerticalAlignment="Top" Height="5"/>
-                <c:Button DockPanel.Dock="Bottom" Margin="5,0,5,5" IsEnabled="True" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
-                                Text="Zamknij okno" Icon="/Resources/icon32_close.ico" PreviewMouseLeftButtonUp="btnClose_Click"/>
-                <Separator DockPanel.Dock="Bottom" Margin="0,0,0,5" VerticalAlignment="Bottom" Height="5"/>
-                <c:Button DockPanel.Dock="Bottom" Margin="5,0,5,5" IsEnabled="True" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
-                                Text="Odśwież" Icon="/Resources/icon32_refresh.ico" PreviewMouseLeftButtonUp="btnRefresh_Click"/>
-                <Separator DockPanel.Dock="Bottom" Margin="0,0,0,5" VerticalAlignment="Bottom" Height="5"/>
-                <c:Button DockPanel.Dock="Bottom" Margin="5,0,5,5" IsEnabled="True" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
-                                Text="Drukuj" Icon="/Resources/icon32_printer.ico" PreviewMouseLeftButtonUp="btnPrint_Click">
-                    <c:Button.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="Formularz RODO" Click="btnRodo_Click"/>
-                        </ContextMenu>
-                    </c:Button.ContextMenu>
-                </c:Button>
-                <Separator DockPanel.Dock="Bottom" Margin="0,0,0,5" VerticalAlignment="Bottom" Height="5"/>
+                <ToggleButton x:Name="btnToggle" BorderThickness="0" Width="5" IsChecked="{Binding config_ShowButtonTexts, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+                <StackPanel DockPanel.Dock="Top">
+                    <c:Button Text="Zapisz" Margin="5,5,5,0" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_save.ico" Command="g:Commands.Save"/>
+                    <Separator Height="5" Margin="0,5,0,0"/>
+                </StackPanel>
+                <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
+                    <Separator Height="5" Margin="0,0,0,5"/>
+                    <c:Button Text="Drukuj" Margin="5,0,5,5" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_printer.ico" Click="btnPrint_Click">
+                        <c:Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Formularz RODO" Click="btnRodo_Click"/>
+                            </ContextMenu>
+                        </c:Button.ContextMenu>
+                    </c:Button>
+                    <Separator Height="5" Margin="0,0,0,5"/>
+                    <c:Button Text="Odśwież" Margin="5,0,5,5" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_refresh.ico" Command="g:Commands.Refresh"/>
+                    <Separator Height="5" Margin="0,0,0,5"/>
+                    <c:Button Text="Zamknij okno" Margin="5,0,5,5" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_close.ico" Command="g:Commands.Close"/>
+                </StackPanel>
             </DockPanel>
             <Border.ContextMenu>
                 <ContextMenu>

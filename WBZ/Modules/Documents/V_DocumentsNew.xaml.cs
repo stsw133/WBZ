@@ -41,7 +41,7 @@ namespace WBZ.Modules.Documents
 		/// <summary>
 		/// GetFromFile
 		/// </summary>
-		private void btnGetFromFile_Click(object sender, MouseButtonEventArgs e)
+		private void btnGetFromFile_Click(object sender, RoutedEventArgs e)
 		{
 			
 		}
@@ -49,7 +49,7 @@ namespace WBZ.Modules.Documents
 		/// <summary>
 		/// GetByScaner
 		/// </summary>
-		private void btnGetByScaner_Click(object sender, MouseButtonEventArgs e)
+		private void btnGetByScaner_Click(object sender, RoutedEventArgs e)
 		{
 			
 		}

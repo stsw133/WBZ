@@ -33,7 +33,7 @@
         <!-- buttonsPanel -->
         <Border DockPanel.Dock="Right" Background="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="1,0,0,0" Visibility="{Binding SelectingMode, Converter={g:conv_BoolInverted}}">
             <DockPanel>
-                <ToggleButton x:Name="btnToggle" BorderThickness="0" Width="5" IsChecked="True"/>
+                <ToggleButton x:Name="btnToggle" BorderThickness="0" Width="5" IsChecked="{Binding config_ShowButtonTexts, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                 <StackPanel DockPanel.Dock="Top">
                     <c:Button Text="Podgląd" Margin="5,5,5,0" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_search.ico" Command="g:Commands.Preview"/>
                     <c:Button Text="Dodaj" Margin="5,5,5,0" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_add.ico" Command="g:Commands.New"/>
