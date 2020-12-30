@@ -627,6 +627,9 @@
     <Content Include="Resources\icon32_show.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\icon32_transport.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\icon64.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -782,7 +785,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Modules\Transport\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\icon32_filter.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

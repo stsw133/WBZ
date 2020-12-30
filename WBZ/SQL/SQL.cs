@@ -1061,46 +1061,53 @@ namespace WBZ
 					{
 						/// ARTICLES
 						case Global.Module.ARTICLES:
-							query = @"select a.id, a.codename, a.name, a.ean, coalesce(nullif(wbz.ArtDefMeaNam(a.id),''), 'kg') as measure,
+							query = $@"select a.id, a.codename, a.name, a.ean, coalesce(nullif(wbz.ArtDefMeaNam(a.id),''), 'kg') as measure,
 									coalesce(sum(sa.amount), 0) as amountraw, coalesce(sum(sa.amount) / wbz.ArtDefMeaCon(a.id), 0) as amount,
 									coalesce(sum(sa.reserved), 0) as reservedraw, coalesce(sum(sa.reserved) / wbz.ArtDefMeaCon(a.id), 0) as reserved,
 									a.archival, a.comment, a.icon
 								from wbz.articles a
 								left join wbz.stores_articles sa
-									on a.id=sa.article";
+									on a.id=sa.article
+								where {filter}
+								group by a.id";
 							break;
 						/// ATTACHMENTS
 						case Global.Module.ATTACHMENTS:
-							query = @"select a.id, a.""user"", a.module, a.instance, a.name, null as file
+							query = $@"select a.id, a.""user"", a.module, a.instance, a.name, null as file
 								from wbz.attachments a
 								left join wbz.users u
-									on a.""user"" = u.id";
+									on a.""user"" = u.id	
+								where {filter}";
 							break;
 						/// ATTRIBUTES_CLASSES
 						case Global.Module.ATTRIBUTES_CLASSES:
-							query = @"select ac.id as ""ID"", ac.module as ""Module"", ac.name as ""Name"", ac.type as ""Type"", ac.""values"" as ""Values"",
+							query = $@"select ac.id as ""ID"", ac.module as ""Module"", ac.name as ""Name"", ac.type as ""Type"", ac.""values"" as ""Values"",
 									ac.archival, ac.comment, ac.icon
-								from wbz.attributes_classes ac";
+								from wbz.attributes_classes ac
+								where {filter}";
 							break;
 						/// COMPANIES
 						case Global.Module.COMPANIES:
-							query = @"select c.id, c.codename, c.name, c.branch, c.nip, c.regon, c.postcode, c.city, c.address,
+							query = $@"select c.id, c.codename, c.name, c.branch, c.nip, c.regon, c.postcode, c.city, c.address,
 									c.archival, c.comment, c.icon
-								from wbz.companies c";
+								from wbz.companies c
+								where {filter}";
 							break;
 						/// DISTRIBUTIONS
 						case Global.Module.DISTRIBUTIONS:
-							query = @"select d.id, d.name, d.datereal, d.status,
+							query = $@"select d.id, d.name, d.datereal, d.status,
 									count(distinct dp.family) as familiescount, sum(members) as memberscount,
 									count(dp.*) as positionscount, sum(dp.amount) as weight,
 									d.archival, d.comment, d.icon
 								from wbz.distributions d
 								left join wbz.distributions_positions dp
-									on dp.distribution=d.id";
+									on dp.distribution=d.id
+								where {filter}
+								group by d.id";
 							break;
 						/// DOCUMENTS
 						case Global.Module.DOCUMENTS:
-							query = @"select d.id, d.name, d.store, s.name as storename, d.company, c.name as companyname,
+							query = $@"select d.id, d.name, d.store, s.name as storename, d.company, c.name as companyname,
 									d.type, d.dateissue, d.status, count(dp.*) as positionscount, sum(dp.amount) as weight, sum(dp.cost) as cost,
 									d.archival, d.comment, d.icon
 								from wbz.documents d
@@ -1109,21 +1116,24 @@ namespace WBZ
 								left join wbz.companies c
 									on c.id=d.company
 								left join wbz.stores s
-									on s.id=d.store";
+									on s.id=d.store
+								where {filter}
+								group by d.id, c.id, s.id";
 							break;
 						/// EMPLOYEES
 						case Global.Module.EMPLOYEES:
-							query = @"select e.id, e.""user"", u.lastname || ' ' || u.forename as username,
+							query = $@"select e.id, e.""user"", u.lastname || ' ' || u.forename as username,
 									e.forename, e.lastname, e.department, e.position,
 									e.email, e.phone, e.postcode, e.city, e.address,
 									e.archival, e.comment, e.icon
 								from wbz.employees e
 								left join wbz.users u
-									on u.id=e.""user""";
+									on u.id=e.""user""
+								where {filter}";
 							break;
 						/// GROUPS
 						case Global.Module.GROUPS:
-							query = @"select g.id, g.module, g.name, g.instance, g.owner,
+							query = $@"select g.id, g.module, g.name, g.instance, g.owner,
 									case when trim(concat(g1.name, '\', g2.name, '\', g3.name, '\', g4.name), '\') = '' then ''
 										else concat(trim(concat(g1.name, '\', g2.name, '\', g3.name, '\', g4.name), '\'), '\') end as path,
 									g.archival, g.comment, g.icon
@@ -1131,50 +1141,54 @@ namespace WBZ
 								left join wbz.groups g4 on g4.id=g.owner
 								left join wbz.groups g3 on g3.id=g4.owner
 								left join wbz.groups g2 on g2.id=g3.owner
-								left join wbz.groups g1 on g1.id=g2.owner";
+								left join wbz.groups g1 on g1.id=g2.owner
+								where {filter}";
 							break;
 						/// FAMILIES
 						case Global.Module.FAMILIES:
-							query = @"select f.id, f.declarant, f.lastname, f.members, f.postcode, f.city, f.address,
+							query = $@"select f.id, f.declarant, f.lastname, f.members, f.postcode, f.city, f.address,
 									f.status, f.c_sms, f.c_call, f.c_email, max(d.datereal) as donationlast, sum(dp.amount) as donationweight,
 									f.archival, f.comment, f.icon
 								from wbz.families f
 								left join wbz.distributions_positions dp
 									on f.id=dp.family
 								left join wbz.distributions d
-									on dp.distribution=d.id";
+									on dp.distribution=d.id
+								where {filter}
+								group by f.id";
 							break;
 						/// LOGS
 						case Global.Module.LOGS:
-							query = @"select l.id, l.""user"", u.lastname || ' ' || u.forename as userfullname,
+							query = $@"select l.id, l.""user"", u.lastname || ' ' || u.forename as userfullname,
 									l.module, l.instance, l.type as group, l.content, l.datetime
 								from wbz.logs l
 								left join wbz.users u
-									on l.""user"" = u.id";
+									on l.""user"" = u.id
+								where {filter}";
 							break;
 						/// STORES
 						case Global.Module.STORES:
-							query = @"select s.id, s.codename, s.name, s.postcode, s.city, s.address,
+							query = $@"select s.id, s.codename, s.name, s.postcode, s.city, s.address,
 									coalesce(sum(amount),0) as amount, coalesce(sum(reserved),0) as reserved,
 									s.archival, s.comment, s.icon
 								from wbz.stores s
 								left join wbz.stores_articles sa
-									on s.id = sa.store";
+									on s.id = sa.store
+								where {filter}
+								group by s.id";
 							break;
 						/// USERS
 						case Global.Module.USERS:
-							query = @"select u.id, u.username, '' as newpass, u.forename, u.lastname,
+							query = $@"select u.id, u.username, '' as newpass, u.forename, u.lastname,
 									u.email, u.phone, u.blocked, u.archival
-								from wbz.users u";
+								from wbz.users u
+								where {filter}";
 							break;
 						default:
 							throw new NotImplementedException();
 					}
 					using (var sqlDA = new NpgsqlDataAdapter(query, sqlConn))
 					{
-						sqlDA.SelectCommand.CommandText += $" where {filter}";
-						if (module.In(Global.Module.ARTICLES, Global.Module.DISTRIBUTIONS, Global.Module.FAMILIES, Global.Module.STORES)) sqlDA.SelectCommand.CommandText += $" group by {module[0]}.id";
-						if (module.In(Global.Module.DOCUMENTS)) sqlDA.SelectCommand.CommandText += $" group by d.id, c.id, s.id";
 						sqlDA.SelectCommand.CommandText += $" order by {sort[0]} {(Convert.ToBoolean(sort[1]) ? "desc" : "asc")}, {sort[2]} {(Convert.ToBoolean(sort[3]) ? "desc" : "asc")}";
 						sqlDA.SelectCommand.CommandText += $" limit {sort[4]} offset {Convert.ToInt32(sort[4]) * page}";
 
@@ -1200,7 +1214,7 @@ namespace WBZ
 		{
 			try
 			{
-				return ListInstances<T>(module, $"{module[0]}.id={id}")[0];
+				return ListInstances<T>(module, $"{Global.GetModuleAlias(module)}.id={id}")[0];
 			}
 			catch (Exception ex)
 			{

@@ -13,6 +13,7 @@ namespace WBZ.Other
 {
     internal static class Prints
     {
+        //TODO - ogarnięcie nowego sposobu na wydruki w wersji 1.4.0
         /// <summary>
         /// RODO
         /// </summary>

@@ -319,6 +319,9 @@
   <data name="icon32_tools" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_tools.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icon32_transport" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon32_transport.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon32_unlocked" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_unlocked.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

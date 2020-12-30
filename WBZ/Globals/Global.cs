@@ -21,25 +21,30 @@ namespace WBZ.Globals
         /// Logged user
         public static M_User User { get; set; } = new M_User();
         /// Module list
+        //TODO - przenieść listę modułów do tabeli SQL z kolumnami: ID, Nazwa, Nazwa ikony, Włączony w wersji 1.2.0
         public static class Module
         {
             public const string ARTICLES = "articles";
             public const string ATTACHMENTS = "attachments";
-            public const string ATTRIBUTES = "attributes";
+            public const string ATTRIBUTES = "attributes";  // w wersji 1.2.0 przerobienie na submoduł
             public const string ATTRIBUTES_CLASSES = "attributes_classes";
-            public const string COMMUNITY = "community";
+            public const string COMMUNITY = "community";  // do dodania w wersji 1.3.0
             public const string COMPANIES = "companies";
-            public const string CONTACTS = "contacts";
+            public const string CONTACTS = "contacts";  // w wersji 1.2.0 przerobienie na submoduł
             public const string DISTRIBUTIONS = "distributions";
             public const string DOCUMENTS = "documents";
             public const string EMPLOYEES = "employees";
             public const string FAMILIES = "families";
-            public const string GROUPS = "groups";
+            public const string GROUPS = "groups";  // w wersji 1.2.0 przerobienie na submoduł
             public const string LOGS = "logs";
-            public const string STATS = "stats";
+            //public const string ORDERS = "orders";  // do dodania w wersji 1.3.0
+            //public const string SHIPMENTS = "shipments";  // do dodania w wersji 1.2.0
+            public const string STATS = "stats";    // do ulepszenia w wersji 1.3.0
             public const string STORES = "stores";
+            //public const string TRANSPORT = "transport";  // do dodania w wersji 1.2.0
             public const string USERS = "users";
         }
+        //TODO - przenieść tłumaczenia na różne języki do osobnego pliku (+ zaimportować bibliotekę TranslateMe) w wersji 1.2.0
         public static string TranslateModule(string module)
         {
             switch (module)
@@ -64,21 +69,32 @@ namespace WBZ.Globals
                     return "Rodziny";
                 case Module.LOGS:
                     return "Logi";
+                //case Module.ORDERS:
+                //    return "Zamówienia";
+                //case Module.SHIPMENTS:
+                //    return "Wysyłki";
                 case Module.STATS:
                     return "Statystyki";
                 case Module.STORES:
                     return "Magazyny";
+                //case Module.TRANSPORT:
+                //    return "Transport";
                 case Module.USERS:
                     return "Użytkownicy";
                 default:
                     return "(nieznany)";
             }
         }
+        public static string GetModuleAlias(string module)
+        {
+            return string.Join(string.Empty, module.Split('_').Where(x => !string.IsNullOrEmpty(x)).Select(y => y[0]));
+        }
         public static class UserPermType
         {
             public const string PREVIEW = "preview";
             public const string SAVE = "save";
             public const string DELETE = "delete";
+            //public const string DELETE = "groups";    /// do dodania w wersji 1.2.0
         }
 
         #region Crypto

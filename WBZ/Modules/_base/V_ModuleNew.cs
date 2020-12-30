@@ -38,10 +38,7 @@ namespace WBZ.Modules._base
 			if ((Commands.Type)D.Mode == Commands.Type.DUPLICATE)
             {
 				/// groups
-				string[] arr = D.MODULE_TYPE.ToLower().Split('_');
-				for (int i = 0; i < arr.Length; i++)
-					arr[i] = arr[i][0].ToString();
-				foreach (M_Group group in SQL.ListInstances<M_Group>(D.MODULE_TYPE, $"{string.Join("", arr)}.id={D.InstanceInfo.ID}"))
+				foreach (M_Group group in SQL.ListInstances<M_Group>(D.MODULE_TYPE, $"{Global.GetModuleAlias(D.MODULE_TYPE)}.id={D.InstanceInfo.ID}"))
 				{
 					group.ID = newID;
 					SQL.SetInstance<M_Group>(Global.Module.GROUPS, group, Commands.Type.NEW);

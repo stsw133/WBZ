@@ -108,6 +108,7 @@ namespace WBZ.Globals
 		/// </summary>
 		internal static void OpenHelp(Window owner)
         {
+			//TODO - przerobienie poradnika na okno pomocy w wersji 1.2.0
             try
             {
                 var process = new Process();
