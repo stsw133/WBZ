@@ -40,9 +40,9 @@ namespace WBZ.Modules.Articles
 			D.FilterSQL = $"LOWER(COALESCE(a.codename,'')) like '%{D.Filters.Codename.ToLower()}%' and "
 						+ $"LOWER(COALESCE(a.name,'')) like '%{D.Filters.Name.ToLower()}%' and "
 						+ $"LOWER(COALESCE(a.ean,'')) like '%{D.Filters.EAN.ToLower()}%' and "
-						+ (!D.Filters.Archival ? $"a.archival=false and " : "")
-						+ (D.Filters.Group > 0 ? $"g.owner={D.Filters.Group} and " : "")
-						+ (D.Filters.MainStore.ID > 0 ? $"sa.store={D.Filters.MainStore.ID} and " : "");
+						+ (!D.Filters.Archival ? $"a.archival=false and " : string.Empty)
+						+ (D.Filters.Group > 0 ? $"exists (select from wbz.groups g where g.instance=a.id and g.owner={D.Filters.Group}) and " : string.Empty)
+						+ (D.Filters.MainStore.ID > 0 ? $"sa.store={D.Filters.MainStore.ID} and " : string.Empty);
 
 			D.FilterSQL = D.FilterSQL.TrimEnd(" and ".ToCharArray());
 		}

@@ -668,5 +668,8 @@
     <Setting Name="config_Community_PanelColor" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FFFF69B4</Value>
     </Setting>
+    <Setting Name="config_ExpandGroups" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
