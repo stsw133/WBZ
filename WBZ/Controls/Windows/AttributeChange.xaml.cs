@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Reflection;
@@ -32,7 +31,7 @@ namespace WBZ.Controls
 		private void btnOk_Click(object sender, RoutedEventArgs e)
 		{
 			if (D.AttributeInfo.Value == null)
-				D.AttributeInfo.Value = "";
+				D.AttributeInfo.Value = string.Empty;
 
 			if ((string.IsNullOrEmpty(D.AttributeInfo.Value))
 			||  (D.AttributeInfo.Class.Type == "date" && DateTime.TryParse(D.AttributeInfo.Value, out _))

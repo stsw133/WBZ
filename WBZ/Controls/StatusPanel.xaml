@@ -11,7 +11,7 @@
             <!-- Higher (filters) -->
             <DockPanel DockPanel.Dock="Top" Visibility="{Binding EnableFilters, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Converter={g:conv_BoolToVisibility}}">
                 <Button DockPanel.Dock="Right" Margin="2" VerticalAlignment="Center" ToolTip="Konfiguruj filtry">
-                    <Image Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.15}" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_settings.ico"/>
+                    <Image Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.15}" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_edit.ico"/>
                 </Button>
                 <Button DockPanel.Dock="Right" Margin="2,2,0,2" VerticalAlignment="Center" ToolTip="Czyść filtry" Command="g:Commands.Clear">
                     <Image Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.15}" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_clear.ico"/>

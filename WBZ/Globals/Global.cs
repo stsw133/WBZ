@@ -106,7 +106,7 @@ namespace WBZ.Globals
             if (plainText.Length == 0)
             {
                 new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Tekst do zaszyfrowania jest pusty").ShowDialog();
-                return "";
+                return string.Empty;
             }
 
             string passPhrase = password;
@@ -147,7 +147,7 @@ namespace WBZ.Globals
             if (cipherText.Length == 0)
             {
                 new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Tekst do odszyfrowania jest pusty").ShowDialog();
-                return "";
+                return string.Empty;
             }
 
             /// Get the complete stream of bytes that represent:
