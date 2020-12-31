@@ -62,7 +62,7 @@ namespace WBZ.Modules.Login
 			}
 
 			pbPassword.Password = (lbDatabases.SelectedItem as M_Database).Password;
-			lblStatus.Content = "";
+			lblStatus.Content = string.Empty;
 
 			gridDatabaseInfo.IsEnabled = true;
 		}

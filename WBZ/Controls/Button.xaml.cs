@@ -36,7 +36,7 @@ namespace WBZ.Controls
                   nameof(Text),
                   typeof(string),
                   typeof(Button),
-                  new PropertyMetadata("")
+                  new PropertyMetadata(string.Empty)
               );
 
         public bool TextVisibility

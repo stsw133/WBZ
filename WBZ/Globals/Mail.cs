@@ -45,7 +45,7 @@ namespace WBZ.Globals
 		/// </summary>
 		internal static bool TestMail()
 		{
-			return SendMail(Props.Default.config_Email_Email, new string[] { Props.Default.config_Email_Email }, "", "");
+			return SendMail(Props.Default.config_Email_Email, new string[] { Props.Default.config_Email_Email }, string.Empty, string.Empty);
 		}
 	}
 }
