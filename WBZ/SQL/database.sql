@@ -1,4 +1,4 @@
--- Database: wbz
+-- Database: wbz test
 CREATE DATABASE wbz
     WITH 
     OWNER = wbz
