@@ -2301,8 +2301,8 @@ namespace WBZ
 			try
 			{
 				using (var sqlConn = connOpenedWBZ)
-				using (var sqlCmd = new NpgsqlCommand(@"insert into wbz.logs (""user"", module, instance, content)
-					values (@user, @module, @instance, @content)", sqlConn, sqlTran))
+				using (var sqlCmd = new NpgsqlCommand(@"insert into wbz.logs (""user"", module, instance, type, content)
+					values (@user, @module, @instance, 1, @content)", sqlConn/*, sqlTran*/))
 				{
 					sqlCmd.Parameters.AddWithValue("user", user);
 					sqlCmd.Parameters.AddWithValue("module", module);
