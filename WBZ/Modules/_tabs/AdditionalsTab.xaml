@@ -23,7 +23,7 @@
                     </Border.ContextMenu>
                 </Border>
             </DockPanel>
-            <CheckBox DockPanel.Dock="Top" Content="Archiwalny" Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}" VerticalContentAlignment="Center" IsChecked="{Binding InstanceInfo.Archival}"/>
+            <CheckBox DockPanel.Dock="Top" Content="Archiwalny" Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}" HorizontalAlignment="Left" VerticalContentAlignment="Center" IsChecked="{Binding InstanceInfo.Archival}"/>
             <Label DockPanel.Dock="Top" Content="Komentarz:" Margin="5,0" VerticalContentAlignment="Center"/>
         </DockPanel>
         <TextBox Text="{Binding InstanceInfo.Comment}" Margin="5" TextWrapping="Wrap" AcceptsReturn="True"/>

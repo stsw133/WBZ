@@ -95,7 +95,7 @@ namespace WBZ.Models
 						stream.WriteLine($"Database={Global.Encrypt(db.Database)}");
 						stream.WriteLine($"Username={Global.Encrypt(db.Username)}");
 						stream.WriteLine($"Password={Global.Encrypt(db.Password)}");
-						stream.WriteLine("");
+						stream.WriteLine(string.Empty);
 					}
 				}
 			}

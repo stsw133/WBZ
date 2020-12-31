@@ -43,7 +43,7 @@ namespace WBZ.Globals
 		{
 			if (obj.Instance == 0)
 				return;
-			if (SQL.CountInstances(obj.Module, $"{string.Join("", ((obj.Module.Split('_') as string[]).AsQueryable().Cast<string>()).Select(str => str.Substring(0, 1)))}.id={obj.Instance}") == 0)
+			if (SQL.CountInstances(obj.Module, $"{string.Join(string.Empty, ((obj.Module.Split('_') as string[]).AsQueryable().Cast<string>()).Select(str => str.Substring(0, 1)))}.id={obj.Instance}") == 0)
 				return;
 
 			if (!(mode == Commands.Type.EDIT && Global.User.Perms.Contains($"{obj.Module}_{Global.UserPermType.SAVE}")))
@@ -55,7 +55,7 @@ namespace WBZ.Globals
 			var moduleNames = (obj.Module as string).Split('_');
 			for (int i = 0; i < moduleNames.Length; i++)
 				moduleNames[i] = char.ToUpper(moduleNames[i][0]) + moduleNames[i].Substring(1);
-			var moduleName = string.Join("", moduleNames);
+			var moduleName = string.Join(string.Empty, moduleNames);
 			OpenWindow(owner, $"WBZ.Modules.{moduleName}.{moduleName}New", false, SQL.GetInstance<MODULE_MODEL>(obj.Module, obj.Instance), mode);
 			*/
 			switch (obj.Module)
