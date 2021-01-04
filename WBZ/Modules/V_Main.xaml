@@ -122,7 +122,7 @@
                         -->
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
                                   IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=admin}"
-                                  Text="Konsola SQL" Icon="/Resources/icon32_source.ico" Click="btnConsoleSQL_Click"/>
+                                  Text="Konsola SQL" Icon="/Resources/icon32_code.ico" Click="btnConsoleSQL_Click"/>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
                                   IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=admin}"
                                   Text="Wersje" Icon="/Resources/icon32_versions.ico" Click="btnVersions_Click"/>
