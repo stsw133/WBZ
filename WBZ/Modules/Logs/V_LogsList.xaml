@@ -80,11 +80,7 @@
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
                 <!-- Instance -->
-                <DataGridTextColumn Binding="{Binding Instance}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Obj, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
-                    <DataGridTextColumn.Header>
-                        <c:DataGridColumnFilter_Number Text="ID instancji" Value="{Binding Data.Filters.Instance, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
-                    </DataGridTextColumn.Header>
-                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Instance}" Header="ID instancji" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Obj, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
                 <!-- Content -->
                 <DataGridTextColumn Binding="{Binding Content}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Content, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
                     <DataGridTextColumn.Header>

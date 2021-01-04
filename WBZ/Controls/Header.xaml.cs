@@ -7,25 +7,12 @@ namespace WBZ.Controls
     /// <summary>
     /// Interaction logic for Header.xaml
     /// </summary>
-    public partial class Header : UserControl
+    public partial class Header : StackPanel
 	{
 		public Header()
 		{
 			InitializeComponent();
 		}
-
-        public string Alignment
-        {
-            get { return (string)GetValue(pAlignment); }
-            set { SetValue(pAlignment, value); }
-        }
-        public static readonly DependencyProperty pAlignment
-            = DependencyProperty.Register(
-                  nameof(Alignment),
-                  typeof(string),
-                  typeof(Header),
-                  new PropertyMetadata("Left")
-              );
 
         public ImageSource Icon
         {
@@ -50,7 +37,7 @@ namespace WBZ.Controls
                   nameof(Text),
                   typeof(string),
                   typeof(Header),
-                  new PropertyMetadata("")
+                  new PropertyMetadata(string.Empty)
               );
     }
 }
