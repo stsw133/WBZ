@@ -34,7 +34,7 @@ namespace WBZ.Models
 			Type = "FS";
 			Name = string.Empty;
 			Store = stores.Count == 1 ? stores[0].ID : 0;
-			fDateIssue = new DateTime(DateTime.Now.Year, 1, 1);
+			fDateIssue = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
 			DateIssue = DateTime.Now;
 			Status = (short)DocumentStatus.Buffer;
 			Positions = new DataTable();

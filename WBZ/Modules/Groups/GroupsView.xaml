@@ -7,7 +7,7 @@
           xmlns:p="clr-namespace:WBZ.Properties"
           mc:Ignorable="d" d:DesignHeight="300"
           Margin="5,5,0,5" Padding="0,0,5,0" MinWidth="150"
-                Loaded="TreeView_Loaded" PreviewMouseRightButtonDown="TreeView_PreviewMouseRightButtonDown" SelectedItemChanged="TreeView_SelectedItemChanged">
+                Loaded="TreeView_Loaded" PreviewMouseDoubleClick="TreeView_PreviewMouseDoubleClick" PreviewMouseRightButtonDown="TreeView_PreviewMouseRightButtonDown" SelectedItemChanged="TreeView_SelectedItemChanged">
     <TreeView.ContextMenu>
         <ContextMenu>
             <MenuItem Header="Podgląd" IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=groups_preview}" Click="btnGroupsPreview_Click">

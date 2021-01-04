@@ -21,7 +21,7 @@ namespace WBZ.Models
 			Module = string.Empty;
 			Group = 1;
 			Content = string.Empty;
-			fDateTime = new DateTime(DateTime.Now.Year, 1, 1);
+			fDateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
 			DateTime = DateTime.Now;
 		}
 
