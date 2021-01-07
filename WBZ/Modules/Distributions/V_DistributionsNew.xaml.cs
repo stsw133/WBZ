@@ -35,7 +35,7 @@ namespace WBZ.Modules.Distributions
 			if (mode == Commands.Type.EDIT && instance.Status == (short)MODULE_MODEL.DistributionStatus.Buffer)
 				D.Mode = Commands.Type.PREVIEW;
 
-			chckToBuffer.IsChecked = instance.Status == (short)MODULE_MODEL.DistributionStatus.Buffer;
+			chckToBuffer.IsChecked = D.InstanceInfo.Status == (short)MODULE_MODEL.DistributionStatus.Buffer;
 			D.InstanceInfo.Families = SQL.GetDistributionPositions(D.InstanceInfo.ID);
 			if (D.Mode.In(Commands.Type.DUPLICATE))
 				foreach (var family in D.InstanceInfo.Families)

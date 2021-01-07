@@ -31,7 +31,7 @@ namespace WBZ.Modules.Documents
 			if (mode == Commands.Type.EDIT && instance.Status == (short)MODULE_MODEL.DocumentStatus.Buffer)
 				D.Mode = Commands.Type.PREVIEW;
 
-			chckToBuffer.IsChecked = instance.Status == (short)MODULE_MODEL.DocumentStatus.Buffer;
+			chckToBuffer.IsChecked = D.InstanceInfo.Status == (short)MODULE_MODEL.DocumentStatus.Buffer;
 			D.InstanceInfo.Positions = SQL.GetInstancePositions(D.MODULE_TYPE, D.InstanceInfo.ID);
 			if (D.Mode.In(Commands.Type.DUPLICATE))
 				foreach (DataRow row in D.InstanceInfo.Positions.Rows)

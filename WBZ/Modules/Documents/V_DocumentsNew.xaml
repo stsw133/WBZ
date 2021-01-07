@@ -38,7 +38,7 @@
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                     <Separator Height="5" Margin="0,5,0,0" Visibility="Collapsed"/>
                     <c:Button Text="Z pliku" Margin="5,5,5,0" IsEnabled="{Binding EditingMode}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_camfile.ico" Click="btnGetFromFile_Click" Visibility="Collapsed"/>
-                    <c:Button Text="Ze skanera" Margin="5,5,5,0" IsEnabled="{Binding EditingMode}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_scaner.ico" Click="btnGetByScaner_Click" Visibility="Collapsed"/>
+                    <c:Button Text="Ze skanera" Margin="5,5,5,0" IsEnabled="{Binding EditingMode}" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_scanner.ico" Click="btnGetByScaner_Click" Visibility="Collapsed"/>
                     <Separator Height="5" Margin="0,0,0,5"/>
                     <c:Button Text="Odśwież" Margin="5,0,5,5" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_refresh.ico" Command="g:Commands.Refresh"/>
                     <Separator Height="5" Margin="0,0,0,5"/>
