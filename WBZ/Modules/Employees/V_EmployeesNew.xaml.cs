@@ -23,21 +23,6 @@ namespace WBZ.Modules.Employees
 				D.InstanceInfo = instance;
 			D.Mode = mode;
 		}
-
-		/// <summary>
-		/// Select: User
-		/// </summary>
-		private void btnSelectUser_Click(object sender, RoutedEventArgs e)
-		{
-			var window = new UsersList(Commands.Type.SELECTING);
-			if (window.ShowDialog() == true)
-				if (window.Selected != null)
-				{
-					D.InstanceInfo.User = window.Selected.ID;
-					D.InstanceInfo.UserName = window.Selected.Fullname;
-					D.InstanceInfo = D.InstanceInfo;
-				}
-		}
 	}
 
 	public class New : ModuleNew<MODULE_MODEL> { }

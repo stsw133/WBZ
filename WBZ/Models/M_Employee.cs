@@ -1,6 +1,6 @@
 ﻿namespace WBZ.Models
 {
-	public class M_Employee : M_Address
+	public class M_Employee : MA
 	{
 		public string Email { get; set; }
 		public string Phone { get; set; }

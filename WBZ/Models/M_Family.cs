@@ -2,7 +2,7 @@
 
 namespace WBZ.Models
 {
-	public class M_Family : M_Address
+	public class M_Family : MA
 	{
 		public string Declarant { get; set; }
 		public string Lastname { get; set; }

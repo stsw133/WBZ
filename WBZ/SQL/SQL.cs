@@ -1595,18 +1595,17 @@ namespace WBZ
 						/// EMPLOYEES
 						case Global.Module.EMPLOYEES:
 							var employee = instance as M_Employee;
-							query = @"insert into wbz.employees (id, ""user"", forename, lastname, department, position,
+							query = @"insert into wbz.employees (id, forename, lastname, department, position,
 									email, phone, city, address, postcode, archival, comment, icon)
-								values (@id, @user, @forename, @lastname, @department, @position,
+								values (@id, @forename, @lastname, @department, @position,
 									@email, @phone, @city, @address, @postcode, @archival, @comment, @icon)
 								on conflict(id) do
-								update set ""user""=@user, forename=@forename, lastname=@lastname, department=@department, position=@position,
+								update set forename=@forename, lastname=@lastname, department=@department, position=@position,
 									email=@email, phone=@phone, city=@city, address=@address, postcode=@postcode,
 									archival=@archival, comment=@comment, icon=@icon";
 							using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 							{
 								sqlCmd.Parameters.AddWithValue("id", employee.ID);
-								sqlCmd.Parameters.AddWithValue("user", employee.User);
 								sqlCmd.Parameters.AddWithValue("forename", employee.Forename);
 								sqlCmd.Parameters.AddWithValue("lastname", employee.Lastname);
 								sqlCmd.Parameters.AddWithValue("department", employee.Department);

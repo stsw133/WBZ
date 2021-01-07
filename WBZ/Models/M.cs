@@ -14,14 +14,14 @@
         }
     }
 
-    public class M_Address : M
+    public class MA : M
     {
         public string Address { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
         public string Postcode { get; set; }
 
-        public M_Address()
+        public MA()
         {
             Address = string.Empty;
             City = string.Empty;
