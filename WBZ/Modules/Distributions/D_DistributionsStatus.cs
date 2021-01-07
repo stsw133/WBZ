@@ -18,7 +18,7 @@ namespace WBZ.Modules.Distributions
 		{
 			get
 			{
-				return $"Zmiana statusu rodziny: {FamilyInfo.Lastname}";
+				return $"Zmiana statusu rodziny: {FamilyInfo?.Lastname}";
 			}
 		}
 		/// Family

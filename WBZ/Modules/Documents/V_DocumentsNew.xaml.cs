@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data;
 using System.Windows;
-using System.Windows.Input;
 using WBZ.Globals;
 using WBZ.Modules._base;
 using WBZ.Modules.Articles;
@@ -28,10 +27,9 @@ namespace WBZ.Modules.Documents
 				D.InstanceInfo = instance;
 			D.Mode = mode;
 
-			if (mode == Commands.Type.EDIT && instance.Status == (short)MODULE_MODEL.DocumentStatus.Buffer)
+			if (mode == Commands.Type.EDIT && D.InstanceInfo.Status != (short)MODULE_MODEL.DocumentStatus.Buffer)
 				D.Mode = Commands.Type.PREVIEW;
 
-			chckToBuffer.IsChecked = D.InstanceInfo.Status == (short)MODULE_MODEL.DocumentStatus.Buffer;
 			D.InstanceInfo.Positions = SQL.GetInstancePositions(D.MODULE_TYPE, D.InstanceInfo.ID);
 			if (D.Mode.In(Commands.Type.DUPLICATE))
 				foreach (DataRow row in D.InstanceInfo.Positions.Rows)

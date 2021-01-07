@@ -228,64 +228,6 @@ namespace WBZ
 		}
 
 		/// <summary>
-		/// Usunięcie dokumentu
-		/// </summary>
-		/// <param name="id">ID instancji</param>
-		internal static bool DeleteDocument(int id)
-		{
-			bool result = false;
-			int oldstatus = 0;
-
-			try
-			{
-				using (var sqlConn = new NpgsqlConnection(connWBZ))
-				{
-					sqlConn.Open();
-
-					NpgsqlCommand sqlCmd;
-
-					using (var sqlTran = sqlConn.BeginTransaction())
-					{
-						///take oldstatus if invoice exists
-						if (id != 0)
-						{
-							sqlCmd = new NpgsqlCommand(@"select status from wbz.documents where id=@id", sqlConn, sqlTran);
-							sqlCmd.Parameters.AddWithValue("id", id);
-							oldstatus = Convert.ToInt32(sqlCmd.ExecuteScalar());
-						}
-
-						sqlCmd = new NpgsqlCommand(@"delete from wbz.documents_positions WHERE document=@id;
-							delete from wbz.documents WHERE id=@id", sqlConn, sqlTran);
-						sqlCmd.Parameters.AddWithValue("id", id);
-						sqlCmd.ExecuteNonQuery();
-
-						///update articles amounts
-						if (oldstatus > 0)
-						{
-							var document = GetInstance<M_Document>("documents", id);
-							var positions = GetInstancePositions("documents", id);
-							foreach (DataRow pos in positions.Rows)
-								ChangeArticleAmount(document.Store, (int)pos["article"], -(double)pos["amount"], (string)pos["measure"], false, sqlConn, sqlTran);
-						}
-
-						ClearObject("documents", id, sqlConn, sqlTran);
-						SetLog(Global.User.ID, "documents", id, $"Usunięto dokument.", sqlConn, sqlTran);
-
-						sqlTran.Commit();
-					}
-
-					sqlConn.Close();
-				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.ToString());
-			}
-
-			return result;
-		}
-
-		/// <summary>
 		/// Pobiera przelicznik głównej jednostki miary towaru
 		/// </summary>
 		/// <param name="article">ID towaru</param>
@@ -464,202 +406,6 @@ namespace WBZ
 
 					family.Positions.Rows.Add(position);
 					family.Positions.Rows[family.Positions.Rows.Count - 1].AcceptChanges();
-				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.ToString());
-			}
-
-			return result;
-		}
-
-		/// <summary>
-		/// Ustawia dane o dystrybucji
-		/// </summary>
-		/// <param name="distribution">Klasa dystrybucji</param>
-		internal static bool SetDistribution(M_Distribution distribution)
-		{
-			bool result = false;
-			int ID = distribution.ID;
-			int oldstatus = 0;
-
-			try
-			{
-				using (var sqlConn = new NpgsqlConnection(connWBZ))
-				{
-					sqlConn.Open();
-
-					using (var sqlTran = sqlConn.BeginTransaction())
-					{
-						NpgsqlCommand sqlCmd;
-
-						///take oldstatus if distribution exists
-						if (ID != 0)
-						{
-							sqlCmd = new NpgsqlCommand(@"select status from wbz.distributions where id=@id", sqlConn, sqlTran);
-							sqlCmd.Parameters.AddWithValue("id", ID);
-							oldstatus = Convert.ToInt32(sqlCmd.ExecuteScalar());
-						}
-
-						///add
-						if (ID == 0)
-							sqlCmd = new NpgsqlCommand(@"insert into wbz.distributions (name, datereal, status, archival, comment, icon)
-								values (@name, @datereal, @status, @archival, @comment, @icon) returning id", sqlConn, sqlTran);
-						///edit
-						else
-							sqlCmd = new NpgsqlCommand(@"update wbz.distributions
-								set name=@name, datereal=@datereal, status=@status, archival=@archival, comment=@comment, icon=@icon
-								where id=@id", sqlConn, sqlTran);
-
-						sqlCmd.Parameters.AddWithValue("id", ID);
-						sqlCmd.Parameters.AddWithValue("name", distribution.Name);
-						sqlCmd.Parameters.AddWithValue("datereal", distribution.DateReal);
-						sqlCmd.Parameters.AddWithValue("status", distribution.Status);
-						sqlCmd.Parameters.AddWithValue("archival", distribution.Archival);
-						sqlCmd.Parameters.AddWithValue("comment", distribution.Comment);
-						sqlCmd.Parameters.AddWithValue("icon", (object)distribution.Icon ?? DBNull.Value);
-
-						///add
-						if (ID == 0)
-						{
-							ID = Convert.ToInt32(sqlCmd.ExecuteScalar());
-							SetLog(Global.User.ID, "distributions", ID, $"Utworzono dystrybucję.", sqlConn, sqlTran);
-						}
-						///edit
-						else
-						{
-							sqlCmd.ExecuteNonQuery();
-							SetLog(Global.User.ID, "distributions", ID, $"Edytowano dystrybucję.", sqlConn, sqlTran);
-						}
-
-						///positions
-						foreach (var family in distribution.Families)
-						foreach (DataRow position in family.Positions.Rows)
-						{
-							///add
-							if (position.RowState == DataRowState.Added)
-							{
-								sqlCmd = new NpgsqlCommand(@"insert into wbz.distributions_positions (distribution, position, family, members, store, article, amount, status)
-									values (@distribution, @position, @family, @members, @store, @article, (@amount * wbz.ArtDefMeaCon(@article)), @status)", sqlConn, sqlTran);
-								sqlCmd.Parameters.Clear();
-								sqlCmd.Parameters.AddWithValue("distribution", ID);
-								sqlCmd.Parameters.AddWithValue("position", position["position"]);
-								sqlCmd.Parameters.AddWithValue("family", family.Family);
-								sqlCmd.Parameters.AddWithValue("members", family.Members);
-								sqlCmd.Parameters.AddWithValue("store", position["store"]);
-								sqlCmd.Parameters.AddWithValue("article", position["article"]);
-								sqlCmd.Parameters.AddWithValue("amount", position["amount"]);
-								sqlCmd.Parameters.AddWithValue("measure", position["measure"]);
-								sqlCmd.Parameters.AddWithValue("status", family.Status);
-								sqlCmd.ExecuteNonQuery();
-								SetLog(Global.User.ID, "distributions", ID, $"Dodano pozycję {position["position"]}.", sqlConn, sqlTran);
-							}
-							///edit
-							else if (position.RowState == DataRowState.Modified)
-							{
-								sqlCmd = new NpgsqlCommand(@"update wbz.distributions_positions
-									set position=@position, family=@family, members=@members, store=@store, article=@article, amount=(@amount * wbz.ArtDefMeaCon(@article)), status=@status
-									where id=@id", sqlConn, sqlTran);
-								sqlCmd.Parameters.Clear();
-								sqlCmd.Parameters.AddWithValue("id", position["id", DataRowVersion.Original]);
-								sqlCmd.Parameters.AddWithValue("position", position["position"]);
-								sqlCmd.Parameters.AddWithValue("family", family.Family);
-								sqlCmd.Parameters.AddWithValue("members", family.Members);
-								sqlCmd.Parameters.AddWithValue("store", position["store"]);
-								sqlCmd.Parameters.AddWithValue("article", position["article"]);
-								sqlCmd.Parameters.AddWithValue("amount", position["amount"]);
-								sqlCmd.Parameters.AddWithValue("measure", position["measure"]);
-								sqlCmd.Parameters.AddWithValue("status", family.Status);
-								sqlCmd.ExecuteNonQuery();
-								SetLog(Global.User.ID, "distributions", ID, $"Edytowano pozycję {position["position", DataRowVersion.Original]}.", sqlConn, sqlTran);
-							}
-							///delete
-							else if (position.RowState == DataRowState.Deleted)
-							{
-								sqlCmd = new NpgsqlCommand(@"delete from wbz.distributions_positions
-									where id=@id", sqlConn, sqlTran);
-								sqlCmd.Parameters.Clear();
-								sqlCmd.Parameters.AddWithValue("id", position["id", DataRowVersion.Original]);
-								sqlCmd.ExecuteNonQuery();
-								SetLog(Global.User.ID, "distributions", ID, $"Usunięto pozycję {position["position", DataRowVersion.Original]}.", sqlConn, sqlTran);
-							}
-
-							///update articles amounts
-							if (oldstatus != distribution.Status)
-							{
-								if (oldstatus <= 0 && distribution.Status > 0)
-									ChangeArticleAmount((int)position["store"], (int)position["article"], -(double)position["amount"], (string)position["measure"], false, sqlConn, sqlTran);
-								else if (oldstatus > 0 && distribution.Status < 0)
-									ChangeArticleAmount((int)position["store"], (int)position["article"], (double)position["amount"], (string)position["measure"], false, sqlConn, sqlTran);
-							}
-						}
-
-						sqlTran.Commit();
-						distribution.ID = ID;
-					}
-
-					sqlConn.Close();
-				}
-
-				result = true;
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.ToString());
-			}
-
-			return result;
-		}
-
-		/// <summary>
-		/// Usunięcie dystrybucji
-		/// </summary>
-		/// <param name="id">ID instancji</param>
-		internal static bool DeleteDistribution(int id)
-		{
-			bool result = false;
-			int oldstatus = 0;
-
-			try
-			{
-				using (var sqlConn = new NpgsqlConnection(connWBZ))
-				{
-					sqlConn.Open();
-
-					NpgsqlCommand sqlCmd;
-
-					using (var sqlTran = sqlConn.BeginTransaction())
-					{
-						///take oldstatus if invoice exists
-						if (id != 0)
-						{
-							sqlCmd = new NpgsqlCommand(@"select status from wbz.distributions where id=@id", sqlConn, sqlTran);
-							sqlCmd.Parameters.AddWithValue("id", id);
-							oldstatus = Convert.ToInt32(sqlCmd.ExecuteScalar());
-						}
-
-						sqlCmd = new NpgsqlCommand(@"delete from wbz.distributions_positions where distribution=@id;
-							delete from wbz.distributions where id=@id", sqlConn, sqlTran);
-						sqlCmd.Parameters.AddWithValue("id", id);
-						sqlCmd.ExecuteNonQuery();
-
-						///update articles amounts
-						if (oldstatus > 0)
-						{
-							var families = GetDistributionPositions(id);
-							foreach (var family in families)
-							foreach (DataRow pos in family.Positions.Rows)
-								ChangeArticleAmount((int)pos["store"], (int)pos["article"], (double)pos["amount"], (string)pos["measure"], false, sqlConn, sqlTran);
-						}
-
-						ClearObject("distributions", id, sqlConn, sqlTran);
-						SetLog(Global.User.ID, "distributions", id, $"Usunięto dystrybucję.", sqlConn, sqlTran);
-
-						sqlTran.Commit();
-					}
-
-					sqlConn.Close();
 				}
 			}
 			catch (Exception ex)
@@ -1257,7 +1003,12 @@ namespace WBZ
 							break;
 						/// DISTRIBUTIONS
 						case Global.Module.DISTRIBUTIONS:
-							query = @"";
+							query = @"select id, position, family, (select lastname from wbz.families where id=dp.family) as familyname, members,
+									store, (select name from wbz.stores where id=dp.store) as storename,
+									article, (select name from wbz.articles where id=dp.article) as articlename,
+									amount / wbz.ArtDefMeaCon(dp.article) as amount, coalesce(nullif(wbz.ArtDefMeaNam(dp.article),''), 'kg') as measure, status
+								from wbz.distributions_positions dp
+								where distribution=@id";
 							break;
 						/// DOCUMENTS
 						case Global.Module.DOCUMENTS:
@@ -1281,6 +1032,10 @@ namespace WBZ
 						result.Columns["converter"].DefaultValue = 1.0;
 						result.Columns["default"].DefaultValue = false;
 					}
+					else if (module == Global.Module.DISTRIBUTIONS)
+                    {
+
+                    }
 				}
 			}
 			catch (Exception ex)
@@ -1498,7 +1253,89 @@ namespace WBZ
 							break;
 						/// DISTRIBUTIONS
 						case Global.Module.DISTRIBUTIONS:
-							query = @"";
+							var distribution = instance as M_Distribution;
+							using (sqlCmd = new NpgsqlCommand(@"select status from wbz.distributions where id=@id", sqlConn, sqlTran))
+							{
+								sqlCmd.Parameters.AddWithValue("id", distribution.ID);
+								oldstatus = Convert.ToInt32(sqlCmd.ExecuteScalar());
+							}
+							query = @"insert into wbz.distributions (id, name, datereal, status, archival, comment, icon)
+								values (@id, @name, @datereal, @status, @archival, @comment, @icon)
+								on conflict(id) do
+								update set name=@name, datereal=@datereal, status=@status, archival=@archival, comment=@comment, icon=@icon";
+							using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
+							{
+								sqlCmd.Parameters.AddWithValue("id", distribution.ID);
+								sqlCmd.Parameters.AddWithValue("name", distribution.Name);
+								sqlCmd.Parameters.AddWithValue("datereal", distribution.DateReal);
+								sqlCmd.Parameters.AddWithValue("status", distribution.Status);
+								sqlCmd.Parameters.AddWithValue("archival", distribution.Archival);
+								sqlCmd.Parameters.AddWithValue("comment", distribution.Comment);
+								sqlCmd.Parameters.AddWithValue("icon", (object)distribution.Icon ?? DBNull.Value);
+							}
+							SetLog(Global.User.ID, module, distribution.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} dystrybucję: {distribution.Name}.", sqlConn, sqlTran);
+
+							///positions
+							foreach (var posfam in distribution.Families)
+								foreach (DataRow position in posfam.Positions.Rows)
+								{
+									///add
+									if (position.RowState == DataRowState.Added)
+									{
+										sqlCmd = new NpgsqlCommand(@"insert into wbz.distributions_positions (distribution, position, family, members, store, article, amount, status)
+											values (@distribution, @position, @family, @members, @store, @article, (@amount * wbz.ArtDefMeaCon(@article)), @status)", sqlConn, sqlTran);
+										sqlCmd.Parameters.Clear();
+										sqlCmd.Parameters.AddWithValue("distribution", distribution.ID);
+										sqlCmd.Parameters.AddWithValue("position", position["position"]);
+										sqlCmd.Parameters.AddWithValue("family", posfam.Family);
+										sqlCmd.Parameters.AddWithValue("members", posfam.Members);
+										sqlCmd.Parameters.AddWithValue("store", position["store"]);
+										sqlCmd.Parameters.AddWithValue("article", position["article"]);
+										sqlCmd.Parameters.AddWithValue("amount", position["amount"]);
+										sqlCmd.Parameters.AddWithValue("measure", position["measure"]);
+										sqlCmd.Parameters.AddWithValue("status", posfam.Status);
+										sqlCmd.ExecuteNonQuery();
+										SetLog(Global.User.ID, module, distribution.ID, $"Dodano pozycję {position["position"]}.", sqlConn, sqlTran);
+									}
+									///edit
+									else if (position.RowState == DataRowState.Modified)
+									{
+										sqlCmd = new NpgsqlCommand(@"update wbz.distributions_positions
+											set position=@position, family=@family, members=@members, store=@store, article=@article, amount=(@amount * wbz.ArtDefMeaCon(@article)), status=@status
+											where id=@id", sqlConn, sqlTran);
+										sqlCmd.Parameters.Clear();
+										sqlCmd.Parameters.AddWithValue("id", position["id", DataRowVersion.Original]);
+										sqlCmd.Parameters.AddWithValue("position", position["position"]);
+										sqlCmd.Parameters.AddWithValue("family", posfam.Family);
+										sqlCmd.Parameters.AddWithValue("members", posfam.Members);
+										sqlCmd.Parameters.AddWithValue("store", position["store"]);
+										sqlCmd.Parameters.AddWithValue("article", position["article"]);
+										sqlCmd.Parameters.AddWithValue("amount", position["amount"]);
+										sqlCmd.Parameters.AddWithValue("measure", position["measure"]);
+										sqlCmd.Parameters.AddWithValue("status", posfam.Status);
+										sqlCmd.ExecuteNonQuery();
+										SetLog(Global.User.ID, module, distribution.ID, $"Edytowano pozycję {position["position", DataRowVersion.Original]}.", sqlConn, sqlTran);
+									}
+									///delete
+									else if (position.RowState == DataRowState.Deleted)
+									{
+										sqlCmd = new NpgsqlCommand(@"delete from wbz.distributions_positions
+											where id=@id", sqlConn, sqlTran);
+										sqlCmd.Parameters.Clear();
+										sqlCmd.Parameters.AddWithValue("id", position["id", DataRowVersion.Original]);
+										sqlCmd.ExecuteNonQuery();
+										SetLog(Global.User.ID, module, distribution.ID, $"Usunięto pozycję {position["position", DataRowVersion.Original]}.", sqlConn, sqlTran);
+									}
+
+									///update articles amounts
+									if (oldstatus != distribution.Status)
+									{
+										if (oldstatus <= 0 && distribution.Status > 0)
+											ChangeArticleAmount((int)position["store"], (int)position["article"], -(double)position["amount"], (string)position["measure"], false, sqlConn, sqlTran);
+										else if (oldstatus > 0 && distribution.Status < 0)
+											ChangeArticleAmount((int)position["store"], (int)position["article"], (double)position["amount"], (string)position["measure"], false, sqlConn, sqlTran);
+									}
+								}
 							break;
 						/// DOCUMENTS
 						case Global.Module.DOCUMENTS:
@@ -1548,7 +1385,7 @@ namespace WBZ
 										sqlCmd.Parameters.AddWithValue("cost", position["cost"]);
 										sqlCmd.ExecuteNonQuery();
 									}
-									SetLog(Global.User.ID, "documents", document.ID, $"Dodano pozycję {position["position"]}.", sqlConn, sqlTran);
+									SetLog(Global.User.ID, module, document.ID, $"Dodano pozycję {position["position"]}.", sqlConn, sqlTran);
 								}
 								///edit
 								else if (position.RowState == DataRowState.Modified)
@@ -1567,7 +1404,7 @@ namespace WBZ
 										sqlCmd.Parameters.AddWithValue("cost", position["cost"]);
 										sqlCmd.ExecuteNonQuery();
 									}
-									SetLog(Global.User.ID, "documents", document.ID, $"Edytowano pozycję {position["position", DataRowVersion.Original]}.", sqlConn, sqlTran);
+									SetLog(Global.User.ID, module, document.ID, $"Edytowano pozycję {position["position", DataRowVersion.Original]}.", sqlConn, sqlTran);
 								}
 								///delete
 								else if (position.RowState == DataRowState.Deleted)
@@ -1579,7 +1416,7 @@ namespace WBZ
 										sqlCmd.Parameters.AddWithValue("id", position["id", DataRowVersion.Original]);
 										sqlCmd.ExecuteNonQuery();
 									}
-									SetLog(Global.User.ID, "documents", document.ID, $"Usunięto pozycję {position["position", DataRowVersion.Original]}.", sqlConn, sqlTran);
+									SetLog(Global.User.ID, module, document.ID, $"Usunięto pozycję {position["position", DataRowVersion.Original]}.", sqlConn, sqlTran);
 								}
 
 								///update articles amounts
@@ -1779,6 +1616,7 @@ namespace WBZ
 		{
 			bool result = false;
 			string query;
+			int oldstatus = 0;
 
 			try
 			{
@@ -1811,11 +1649,33 @@ namespace WBZ
 							break;
 						/// DISTRIBUTIONS
 						case Global.Module.DISTRIBUTIONS:
-							query = @"";
+							if (id != 0)
+							{
+								using (var sqlCmd = new NpgsqlCommand(@"select status from wbz.distributions where id=@id", sqlConn, sqlTran))
+								{
+									sqlCmd.Parameters.AddWithValue("id", id);
+									oldstatus = Convert.ToInt32(sqlCmd.ExecuteScalar());
+								}
+							}
+
+							query = @"delete from wbz.distributions_positions where distribution=@id;
+								delete from wbz.distributions where id=@id";
+							SetLog(Global.User.ID, module, id, $"Usunięto dystrybucję: {name}", sqlConn, sqlTran);
 							break;
 						/// DOCUMENTS
 						case Global.Module.DOCUMENTS:
-							query = @"";
+							if (id != 0)
+							{
+								using (var sqlCmd_Doc = new NpgsqlCommand(@"select status from wbz.documents where id=@id", sqlConn, sqlTran))
+								{
+									sqlCmd_Doc.Parameters.AddWithValue("id", id);
+									oldstatus = Convert.ToInt32(sqlCmd_Doc.ExecuteScalar());
+								}
+							}
+
+							query = @"delete from wbz.documents_positions WHERE document=@id;
+								delete from wbz.documents WHERE id=@id";
+							SetLog(Global.User.ID, module, id, $"Usunięto dokument: {name}", sqlConn, sqlTran);
 							break;
 						/// EMPLOYEES
 						case Global.Module.EMPLOYEES:
@@ -1858,6 +1718,27 @@ namespace WBZ
 						sqlCmd.ExecuteNonQuery();
 					}
 					ClearObject(module, id, sqlConn, sqlTran);
+
+					/// update articles amounts
+					if (oldstatus > 0)
+					{
+						/// DISTRIBUTIONS
+						if (module == Global.Module.DISTRIBUTIONS)
+						{
+							var families = GetDistributionPositions(id);
+							foreach (var family in families)
+								foreach (DataRow pos in family.Positions.Rows)
+									ChangeArticleAmount((int)pos["store"], (int)pos["article"], (double)pos["amount"], (string)pos["measure"], false, sqlConn, sqlTran);
+						}
+						/// DOCUMENTS
+						else if (module == Global.Module.DOCUMENTS)
+						{
+							var document = GetInstance<M_Document>("documents", id);
+							var positions = GetInstancePositions("documents", id);
+							foreach (DataRow pos in positions.Rows)
+								ChangeArticleAmount(document.Store, (int)pos["article"], -(double)pos["amount"], (string)pos["measure"], false, sqlConn, sqlTran);
+						}
+					}
 
 					sqlTran.Commit();
 				}
