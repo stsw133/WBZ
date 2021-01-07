@@ -429,7 +429,6 @@ TABLESPACE pg_default;
 CREATE TABLE wbz.employees
 (
     id serial NOT NULL,
-    "user" integer,
     email character varying(60) COLLATE pg_catalog."default",
     phone character varying(16) COLLATE pg_catalog."default",
     forename character varying(50) COLLATE pg_catalog."default" NOT NULL,
@@ -442,12 +441,7 @@ CREATE TABLE wbz.employees
     archival boolean NOT NULL DEFAULT false,
     comment text COLLATE pg_catalog."default",
     icon bytea,
-    CONSTRAINT employees_pkey PRIMARY KEY (id),
-    CONSTRAINT employees_user_fkey FOREIGN KEY ("user")
-        REFERENCES wbz.users (id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE SET NULL
-        NOT VALID
+    CONSTRAINT employees_pkey PRIMARY KEY (id)
 )
 TABLESPACE pg_default;
 
