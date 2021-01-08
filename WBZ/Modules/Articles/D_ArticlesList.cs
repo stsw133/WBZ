@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Reflection;
 using WBZ.Globals;
 using WBZ.Models;
 using WBZ.Modules._base;
@@ -12,8 +13,20 @@ namespace WBZ.Modules.Articles
 		/// Module
 		public readonly string MODULE_TYPE = Global.Module.ARTICLES;
 		public StringCollection SORTING = Properties.Settings.Default.sorting_ArticlesList;
-		
+
 		/// Stores list
-		public ObservableCollection<M_ComboValue> StoresList { get; } = SQL.ComboInstances(Global.Module.STORES, "codename", "archival=false", true);
+		private ObservableCollection<M_ComboValue> storesList;
+		public ObservableCollection<M_ComboValue> StoresList
+        {
+			get
+			{
+				return storesList;
+			}
+			set
+			{
+				storesList = value;
+				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
+			}
+		}
 	}
 }

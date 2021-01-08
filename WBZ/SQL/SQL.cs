@@ -960,7 +960,7 @@ namespace WBZ
 		{
 			try
 			{
-				return ListInstances<T>(module, $"{Global.GetModuleAlias(module)}.id={id}")[0];
+				return ListInstances<T>(module, $"{Global.GetModuleAlias(module)}.id={id}")?[0];
 			}
 			catch (Exception ex)
 			{
@@ -1272,6 +1272,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("archival", distribution.Archival);
 								sqlCmd.Parameters.AddWithValue("comment", distribution.Comment);
 								sqlCmd.Parameters.AddWithValue("icon", (object)distribution.Icon ?? DBNull.Value);
+								sqlCmd.ExecuteNonQuery();
 							}
 							SetLog(Global.User.ID, module, distribution.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} dystrybucję: {distribution.Name}.", sqlConn, sqlTran);
 
@@ -1331,9 +1332,9 @@ namespace WBZ
 									if (oldstatus != distribution.Status)
 									{
 										if (oldstatus <= 0 && distribution.Status > 0)
-											ChangeArticleAmount((int)position["store"], (int)position["article"], -(double)position["amount"], (string)position["measure"], false, sqlConn, sqlTran);
+											ChangeArticleAmount((int)position["store"], (int)position["article"], -Convert.ToDouble(position["amount"]), (string)position["measure"], false, sqlConn, sqlTran);
 										else if (oldstatus > 0 && distribution.Status < 0)
-											ChangeArticleAmount((int)position["store"], (int)position["article"], (double)position["amount"], (string)position["measure"], false, sqlConn, sqlTran);
+											ChangeArticleAmount((int)position["store"], (int)position["article"], Convert.ToDouble(position["amount"]), (string)position["measure"], false, sqlConn, sqlTran);
 									}
 								}
 							break;
@@ -1423,9 +1424,9 @@ namespace WBZ
 								if (oldstatus != document.Status)
 								{
 									if (oldstatus <= 0 && document.Status > 0)
-										ChangeArticleAmount(document.Store, (int)position["article"], (double)position["amount"], (string)position["measure"], false, sqlConn, sqlTran);
+										ChangeArticleAmount(document.Store, (int)position["article"], Convert.ToDouble(position["amount"]), (string)position["measure"], false, sqlConn, sqlTran);
 									else if (oldstatus > 0 && document.Status < 0)
-										ChangeArticleAmount(document.Store, (int)position["article"], -(double)position["amount"], (string)position["measure"], false, sqlConn, sqlTran);
+										ChangeArticleAmount(document.Store, (int)position["article"], -Convert.ToDouble(position["amount"]), (string)position["measure"], false, sqlConn, sqlTran);
 								}
 							}
 							break;

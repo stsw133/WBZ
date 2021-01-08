@@ -30,6 +30,7 @@ namespace WBZ.Modules.Articles
 		{
 			if (D.SelectingMode)
 				dgList.SelectionMode = DataGridSelectionMode.Single;
+			D.StoresList = SQL.ComboInstances(Global.Module.STORES, "codename", "archival=false", !D.SelectingMode);
 		}
 
 		/// <summary>
