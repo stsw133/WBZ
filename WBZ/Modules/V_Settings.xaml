@@ -26,6 +26,17 @@
                 </TabItem.Header>
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <DockPanel>
+                        <GroupBox Header="Region" DockPanel.Dock="Top" Margin="5,5,5,0" VerticalAlignment="Top">
+                            <DockPanel Margin="5">
+                                <DockPanel DockPanel.Dock="Top">
+                                    <Label Content="{Tr Language, LanguageId={x:Static g:Global.Language}, DefaultText='Język:'}" Margin="5" VerticalContentAlignment="Center"/>
+                                    <ComboBox Margin="5" VerticalContentAlignment="Center" SelectedValuePath="Tag" SelectedValue="{Binding language, Source={x:Static p:Settings.Default}, Mode=TwoWay}">
+                                        <ComboBoxItem Tag="en" Content="English"/>
+                                        <ComboBoxItem Tag="pl" Content="Polski"/>
+                                    </ComboBox>
+                                </DockPanel>
+                            </DockPanel>
+                        </GroupBox>
                         <GroupBox Header="Sieć" DockPanel.Dock="Top" Margin="5,5,5,0" VerticalAlignment="Top">
                             <DockPanel Margin="5">
                                 <DockPanel DockPanel.Dock="Top">

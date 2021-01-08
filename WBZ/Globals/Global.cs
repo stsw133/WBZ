@@ -16,6 +16,8 @@ namespace WBZ.Globals
         public static string Version => string.Concat(Assembly.GetEntryAssembly().GetName().Version.ToString().Reverse().Skip(2).Reverse());
         /// Newest version to download
         public static string VersionNewest { get; set; } = null;
+        /// Language
+        public static string Language => Properties.Settings.Default.language;
         /// Chosen database
         public static M_Database Database { get; set; } = new M_Database();
         /// Logged user

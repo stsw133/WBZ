@@ -839,5 +839,15 @@ namespace WBZ.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Translations_tm {
+            get {
+                object obj = ResourceManager.GetObject("Translations_tm", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }
