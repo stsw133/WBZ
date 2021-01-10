@@ -1,0 +1,10 @@
+{
+	"LanguageName": {
+		"en": "English",
+		"pl": "Polski",
+	},
+	"Settings.Language": {
+		"en": "Language:",
+		"pl": "Język:",
+	},
+}
