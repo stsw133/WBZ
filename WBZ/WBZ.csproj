@@ -323,8 +323,8 @@
     <Compile Include="Controls\Windows\Confirmation.xaml.cs">
       <DependentUpon>Confirmation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Login\LoginRegister.xaml.cs">
-      <DependentUpon>LoginRegister.xaml</DependentUpon>
+    <Compile Include="Modules\Login\V_LoginRegister.xaml.cs">
+      <DependentUpon>V_LoginRegister.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Login\V_Versions.xaml.cs">
       <DependentUpon>V_Versions.xaml</DependentUpon>
@@ -552,7 +552,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Modules\Login\LoginRegister.xaml">
+    <Page Include="Modules\Login\V_LoginRegister.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
