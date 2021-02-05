@@ -131,7 +131,10 @@ namespace WBZ.Modules._base
 				var selectedInstances = (sender as DataGrid).SelectedItems.Cast<T>();
 				foreach (T instance in selectedInstances)
 				{
-					var window = Activator.CreateInstance(Type.GetType($"WBZ.Modules.{module.Replace("_",string.Empty)}.{module.Replace("_", string.Empty)}New"), instance, perm) as Window;
+					var winNames = module.Split('_');
+					for (int i = 0; i < winNames.Length; i++)
+						winNames[i] = winNames[i].First().ToString().ToUpper() + string.Join("", winNames[i].Skip(1));
+					var window = Activator.CreateInstance(Type.GetType($"WBZ.Modules.{string.Join("",winNames)}.{string.Join("", winNames)}New"), instance, perm) as Window;
 					window.Show();
 				}
 			}

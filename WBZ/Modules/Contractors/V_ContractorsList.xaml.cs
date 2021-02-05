@@ -1,17 +1,17 @@
 ﻿using WBZ.Globals;
 using WBZ.Modules._base;
-using MODULE_MODEL = WBZ.Models.M_Company;
+using MODULE_MODEL = WBZ.Models.M_Contractor;
 
-namespace WBZ.Modules.Companies
+namespace WBZ.Modules.Contractors
 {
     /// <summary>
-    /// Logika interakcji dla klasy CompaniesList.xaml
+    /// Logika interakcji dla klasy ContractorsList.xaml
     /// </summary>
-    public partial class CompaniesList : List
+    public partial class ContractorsList : List
     {
-        D_CompaniesList D = new D_CompaniesList();
+        D_ContractorsList D = new D_ContractorsList();
 
-        public CompaniesList(Commands.Type mode)
+        public ContractorsList(Commands.Type mode)
         {
             InitializeComponent();
             DataContext = D;

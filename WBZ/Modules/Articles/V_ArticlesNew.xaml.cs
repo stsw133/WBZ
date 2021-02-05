@@ -101,7 +101,7 @@ namespace WBZ.Modules.Articles
 		/// </summary>
 		private void dgList_Distributions_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
-			dgList_Module_MouseDoubleClick<M_Distribution>(sender, e, Global.Module.ARTICLES);
+			dgList_Module_MouseDoubleClick<M_Distribution>(sender, e, Global.Module.DISTRIBUTIONS);
 		}
 	}
 

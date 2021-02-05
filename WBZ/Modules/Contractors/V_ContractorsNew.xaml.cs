@@ -3,18 +3,18 @@ using System.Windows.Input;
 using WBZ.Globals;
 using WBZ.Models;
 using WBZ.Modules._base;
-using MODULE_MODEL = WBZ.Models.M_Company;
+using MODULE_MODEL = WBZ.Models.M_Contractor;
 
-namespace WBZ.Modules.Companies
+namespace WBZ.Modules.Contractors
 {
     /// <summary>
-    /// Logika interakcji dla klasy CompaniesNew.xaml
+    /// Logika interakcji dla klasy ContractorsNew.xaml
     /// </summary>
-    public partial class CompaniesNew : New
+    public partial class ContractorsNew : New
     {
-        D_CompaniesNew D = new D_CompaniesNew();
+        D_ContractorsNew D = new D_ContractorsNew();
 
-        public CompaniesNew(MODULE_MODEL instance, Commands.Type mode)
+        public ContractorsNew(MODULE_MODEL instance, Commands.Type mode)
         {
             InitializeComponent();
             DataContext = D;

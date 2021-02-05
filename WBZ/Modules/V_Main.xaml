@@ -202,26 +202,26 @@
                         </ContextMenu>
                     </Border.ContextMenu>
                 </Border>
-                <!-- companies -->
-                <Border x:Name="modCompanies" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Companies_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
+                <!-- contractors -->
+                <Border x:Name="modContractors" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=30}"
+                        Background="{Binding config_Contractors_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
                     <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Image Margin="10" Source="/Resources/icon32_companies.ico" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3}"/>
+                                <Image Margin="10" Source="/Resources/icon32_contractors.ico" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3}"/>
                                 <Label Margin="5" Content="{Tr Main.Contractors, DefaultText='Kontrahenci', LanguageId={x:Static g:Global.Language}}" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}"/>
                             </StackPanel>
                         </Border>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
-                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=companies_preview}"
-                                  Text="{Tr Main.ShowList, DefaultText='Wyświetl listę', LanguageId={x:Static g:Global.Language}}" Icon="/Resources/icon32_list.ico" Click="btnCompaniesList_Click"/>
+                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=contractors_preview}"
+                                  Text="{Tr Main.ShowList, DefaultText='Wyświetl listę', LanguageId={x:Static g:Global.Language}}" Icon="/Resources/icon32_list.ico" Click="btnContractorsList_Click"/>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
-                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=companies_save}"
-                                  Text="{Tr Main.AddNew, DefaultText='Dodaj nową', LanguageId={x:Static g:Global.Language}}" Icon="/Resources/icon32_add.ico" Click="btnCompaniesNew_Click"/>
+                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=contractors_save}"
+                                  Text="{Tr Main.AddNew, DefaultText='Dodaj nowego', LanguageId={x:Static g:Global.Language}}" Icon="/Resources/icon32_add.ico" Click="btnContractorsNew_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
-                            <c:MenuPanelColor Tag="{Binding config_Companies_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+                            <c:MenuPanelColor Tag="{Binding config_Contractors_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                         </ContextMenu>
                     </Border.ContextMenu>
                 </Border>

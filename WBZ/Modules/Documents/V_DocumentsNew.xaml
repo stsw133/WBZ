@@ -62,10 +62,10 @@
                     <DockPanel Margin="10" IsEnabled="{Binding EditingMode}">
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Firma:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
-                            <Button Margin="5,5,0,5" VerticalContentAlignment="Center" Click="btnSelectCompany_Click">
-                                <Image Margin="2" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_companies.ico"/>
+                            <Button Margin="5,5,0,5" VerticalContentAlignment="Center" Click="btnSelectContractor_Click">
+                                <Image Margin="2" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_contractors.ico"/>
                             </Button>
-                            <TextBox Text="{Binding InstanceInfo.CompanyName}" Tag="{Binding InstanceInfo.Company}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True"/>
+                            <TextBox Text="{Binding InstanceInfo.ContractorName}" Tag="{Binding InstanceInfo.Contractor}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Magazyn:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>

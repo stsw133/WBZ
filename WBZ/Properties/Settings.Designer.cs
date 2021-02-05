@@ -256,18 +256,6 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool columns_DocumentsList_CompanyName {
-            get {
-                return ((bool)(this["columns_DocumentsList_CompanyName"]));
-            }
-            set {
-                this["columns_DocumentsList_CompanyName"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool columns_DocumentsList_Type {
             get {
                 return ((bool)(this["columns_DocumentsList_Type"]));
@@ -590,24 +578,24 @@ namespace WBZ.Properties {
         [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
             "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
             "tring>900</string>\r\n  <string>600</string>\r\n</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection config_CompaniesNew_WindowSize {
+        public global::System.Collections.Specialized.StringCollection config_ContractorsNew_WindowSize {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["config_CompaniesNew_WindowSize"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["config_ContractorsNew_WindowSize"]));
             }
             set {
-                this["config_CompaniesNew_WindowSize"] = value;
+                this["config_ContractorsNew_WindowSize"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("#FFEEEE55")]
-        public string config_Companies_PanelColor {
+        public string config_Contractors_PanelColor {
             get {
-                return ((string)(this["config_Companies_PanelColor"]));
+                return ((string)(this["config_Contractors_PanelColor"]));
             }
             set {
-                this["config_Companies_PanelColor"] = value;
+                this["config_Contractors_PanelColor"] = value;
             }
         }
         
@@ -616,120 +604,12 @@ namespace WBZ.Properties {
         [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
             "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
             "tring>975</string>\r\n  <string>650</string>\r\n</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection config_CompaniesList_WindowSize {
+        public global::System.Collections.Specialized.StringCollection config_ContractorsList_WindowSize {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["config_CompaniesList_WindowSize"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["config_ContractorsList_WindowSize"]));
             }
             set {
-                this["config_CompaniesList_WindowSize"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool columns_CompaniesList_ID {
-            get {
-                return ((bool)(this["columns_CompaniesList_ID"]));
-            }
-            set {
-                this["columns_CompaniesList_ID"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool columns_CompaniesList_Codename {
-            get {
-                return ((bool)(this["columns_CompaniesList_Codename"]));
-            }
-            set {
-                this["columns_CompaniesList_Codename"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool columns_CompaniesList_Name {
-            get {
-                return ((bool)(this["columns_CompaniesList_Name"]));
-            }
-            set {
-                this["columns_CompaniesList_Name"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool columns_CompaniesList_Branch {
-            get {
-                return ((bool)(this["columns_CompaniesList_Branch"]));
-            }
-            set {
-                this["columns_CompaniesList_Branch"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool columns_CompaniesList_NIP {
-            get {
-                return ((bool)(this["columns_CompaniesList_NIP"]));
-            }
-            set {
-                this["columns_CompaniesList_NIP"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool columns_CompaniesList_REGON {
-            get {
-                return ((bool)(this["columns_CompaniesList_REGON"]));
-            }
-            set {
-                this["columns_CompaniesList_REGON"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool columns_CompaniesList_Postcode {
-            get {
-                return ((bool)(this["columns_CompaniesList_Postcode"]));
-            }
-            set {
-                this["columns_CompaniesList_Postcode"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool columns_CompaniesList_City {
-            get {
-                return ((bool)(this["columns_CompaniesList_City"]));
-            }
-            set {
-                this["columns_CompaniesList_City"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool columns_CompaniesList_Address {
-            get {
-                return ((bool)(this["columns_CompaniesList_Address"]));
-            }
-            set {
-                this["columns_CompaniesList_Address"] = value;
+                this["config_ContractorsList_WindowSize"] = value;
             }
         }
         
@@ -1561,25 +1441,6 @@ namespace WBZ.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>c.codename</string>
-  <string>False</string>
-  <string>c.name</string>
-  <string>False</string>
-  <string>50</string>
-</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection sorting_CompaniesList {
-            get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_CompaniesList"]));
-            }
-            set {
-                this["sorting_CompaniesList"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
   <string>f.lastname</string>
   <string>False</string>
   <string>f.city</string>
@@ -1768,18 +1629,6 @@ namespace WBZ.Properties {
             }
             set {
                 this["columns_AttributesClassesList_Icon"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool columns_CompaniesList_Icon {
-            get {
-                return ((bool)(this["columns_CompaniesList_Icon"]));
-            }
-            set {
-                this["columns_CompaniesList_Icon"] = value;
             }
         }
         
@@ -2113,6 +1962,197 @@ namespace WBZ.Properties {
             }
             set {
                 this["config_ShowButtonTexts"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public string columns_DocumentsList_ContractorName {
+            get {
+                return ((string)(this["columns_DocumentsList_ContractorName"]));
+            }
+            set {
+                this["columns_DocumentsList_ContractorName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\r\n          <ArrayOfString xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " +
+            "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n            <string>900</string>\r" +
+            "\n            <string>600</string>\r\n          </ArrayOfString>\r\n        ")]
+        public string config_ContractorsNew_WindowSize1 {
+            get {
+                return ((string)(this["config_ContractorsNew_WindowSize1"]));
+            }
+            set {
+                this["config_ContractorsNew_WindowSize1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFEEEE55")]
+        public string config_Contractors_PanelColor1 {
+            get {
+                return ((string)(this["config_Contractors_PanelColor1"]));
+            }
+            set {
+                this["config_Contractors_PanelColor1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\r\n          <ArrayOfString xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " +
+            "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n            <string>975</string>\r" +
+            "\n            <string>650</string>\r\n          </ArrayOfString>\r\n        ")]
+        public string config_ContractorsList_WindowSize1 {
+            get {
+                return ((string)(this["config_ContractorsList_WindowSize1"]));
+            }
+            set {
+                this["config_ContractorsList_WindowSize1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public string columns_ContractorsList_ID {
+            get {
+                return ((string)(this["columns_ContractorsList_ID"]));
+            }
+            set {
+                this["columns_ContractorsList_ID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public string columns_ContractorsList_Codename {
+            get {
+                return ((string)(this["columns_ContractorsList_Codename"]));
+            }
+            set {
+                this["columns_ContractorsList_Codename"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public string columns_ContractorsList_Name {
+            get {
+                return ((string)(this["columns_ContractorsList_Name"]));
+            }
+            set {
+                this["columns_ContractorsList_Name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public string columns_ContractorsList_Branch {
+            get {
+                return ((string)(this["columns_ContractorsList_Branch"]));
+            }
+            set {
+                this["columns_ContractorsList_Branch"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public string columns_ContractorsList_NIP {
+            get {
+                return ((string)(this["columns_ContractorsList_NIP"]));
+            }
+            set {
+                this["columns_ContractorsList_NIP"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public string columns_ContractorsList_REGON {
+            get {
+                return ((string)(this["columns_ContractorsList_REGON"]));
+            }
+            set {
+                this["columns_ContractorsList_REGON"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public string columns_ContractorsList_Postcode {
+            get {
+                return ((string)(this["columns_ContractorsList_Postcode"]));
+            }
+            set {
+                this["columns_ContractorsList_Postcode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public string columns_ContractorsList_City {
+            get {
+                return ((string)(this["columns_ContractorsList_City"]));
+            }
+            set {
+                this["columns_ContractorsList_City"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public string columns_ContractorsList_Address {
+            get {
+                return ((string)(this["columns_ContractorsList_Address"]));
+            }
+            set {
+                this["columns_ContractorsList_Address"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>c.codename</string>
+  <string>False</string>
+  <string>c.name</string>
+  <string>False</string>
+  <string>50</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection sorting_ContractorsList {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_ContractorsList"]));
+            }
+            set {
+                this["sorting_ContractorsList"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public string columns_ContractorsList_Icon {
+            get {
+                return ((string)(this["columns_ContractorsList_Icon"]));
+            }
+            set {
+                this["columns_ContractorsList_Icon"] = value;
             }
         }
     }

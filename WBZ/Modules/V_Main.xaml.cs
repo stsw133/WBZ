@@ -9,7 +9,7 @@ using WBZ.Modules.Admin;
 using WBZ.Modules.Articles;
 using WBZ.Modules.Attachments;
 using WBZ.Modules.AttributesClasses;
-using WBZ.Modules.Companies;
+using WBZ.Modules.Contractors;
 using WBZ.Modules.Distributions;
 using WBZ.Modules.Documents;
 using WBZ.Modules.Employees;
@@ -64,9 +64,9 @@ namespace WBZ.Modules
 			///DISTRIBUTIONS
 			if (!Global.User.Perms.Contains($"{Global.Module.DISTRIBUTIONS}_{Global.UserPermType.PREVIEW}"))
 				gridModules.Children.Remove(modDistributions);
-			///COMPANIES
-			if (!Global.User.Perms.Contains($"{Global.Module.COMPANIES}_{Global.UserPermType.PREVIEW}"))
-				gridModules.Children.Remove(modCompanies);
+			///CONTRACTORS
+			if (!Global.User.Perms.Contains($"{Global.Module.CONTRACTORS}_{Global.UserPermType.PREVIEW}"))
+				gridModules.Children.Remove(modContractors);
 			///ATTRIBUTES_CLASSES
 			if (!Global.User.Perms.Contains($"{Global.Module.ATTRIBUTES_CLASSES}_{Global.UserPermType.PREVIEW}"))
 				gridModules.Children.Remove(modAttributesClasses);
@@ -226,15 +226,15 @@ namespace WBZ.Modules
 		}
 
 		/// <summary>
-		/// Companies
+		/// Contractors
 		/// </summary>
-		private void btnCompaniesList_Click(object sender, RoutedEventArgs e)
+		private void btnContractorsList_Click(object sender, RoutedEventArgs e)
 		{
-			new CompaniesList(Commands.Type.LIST) { Owner = this }.Show();
+			new ContractorsList(Commands.Type.LIST) { Owner = this }.Show();
 		}
-		private void btnCompaniesNew_Click(object sender, RoutedEventArgs e)
+		private void btnContractorsNew_Click(object sender, RoutedEventArgs e)
 		{
-			new CompaniesNew(null, Commands.Type.NEW) { Owner = this }.Show();
+			new ContractorsNew(null, Commands.Type.NEW) { Owner = this }.Show();
 		}
 
 		/// <summary>

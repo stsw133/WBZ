@@ -84,9 +84,6 @@
     <Setting Name="columns_DocumentsList_StoreName" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="columns_DocumentsList_CompanyName" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
     <Setting Name="columns_DocumentsList_Type" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
@@ -181,49 +178,22 @@
     <Setting Name="columns_ArticlesList_Reserved" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="config_CompaniesNew_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
+    <Setting Name="config_ContractorsNew_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
   &lt;string&gt;900&lt;/string&gt;
   &lt;string&gt;600&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
-    <Setting Name="config_Companies_PanelColor" Type="System.String" Scope="User">
+    <Setting Name="config_Contractors_PanelColor" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FFEEEE55</Value>
     </Setting>
-    <Setting Name="config_CompaniesList_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
+    <Setting Name="config_ContractorsList_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
   &lt;string&gt;975&lt;/string&gt;
   &lt;string&gt;650&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
-    </Setting>
-    <Setting Name="columns_CompaniesList_ID" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="columns_CompaniesList_Codename" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="columns_CompaniesList_Name" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="columns_CompaniesList_Branch" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="columns_CompaniesList_NIP" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="columns_CompaniesList_REGON" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="columns_CompaniesList_Postcode" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="columns_CompaniesList_City" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="columns_CompaniesList_Address" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="config_FamiliesList_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
@@ -480,16 +450,6 @@
   &lt;string&gt;50&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
-    <Setting Name="sorting_CompaniesList" Type="System.Collections.Specialized.StringCollection" Scope="User">
-      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;c.codename&lt;/string&gt;
-  &lt;string&gt;False&lt;/string&gt;
-  &lt;string&gt;c.name&lt;/string&gt;
-  &lt;string&gt;False&lt;/string&gt;
-  &lt;string&gt;50&lt;/string&gt;
-&lt;/ArrayOfString&gt;</Value>
-    </Setting>
     <Setting Name="sorting_FamiliesList" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
@@ -577,9 +537,6 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="columns_AttributesClassesList_Icon" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="columns_CompaniesList_Icon" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="columns_DistributionsList_Icon" Type="System.Boolean" Scope="User">
@@ -673,6 +630,68 @@
     </Setting>
     <Setting Name="config_ShowButtonTexts" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="columns_DocumentsList_ContractorName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="config_ContractorsNew_WindowSize" Type="System.String" Scope="User">
+      <Value Profile="(Default)">
+          &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+            &lt;string&gt;900&lt;/string&gt;
+            &lt;string&gt;600&lt;/string&gt;
+          &lt;/ArrayOfString&gt;
+        </Value>
+    </Setting>
+    <Setting Name="config_Contractors_PanelColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FFEEEE55</Value>
+    </Setting>
+    <Setting Name="config_ContractorsList_WindowSize" Type="System.String" Scope="User">
+      <Value Profile="(Default)">
+          &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+            &lt;string&gt;975&lt;/string&gt;
+            &lt;string&gt;650&lt;/string&gt;
+          &lt;/ArrayOfString&gt;
+        </Value>
+    </Setting>
+    <Setting Name="columns_ContractorsList_ID" Type="System.String" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="columns_ContractorsList_Codename" Type="System.String" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="columns_ContractorsList_Name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="columns_ContractorsList_Branch" Type="System.String" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="columns_ContractorsList_NIP" Type="System.String" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="columns_ContractorsList_REGON" Type="System.String" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="columns_ContractorsList_Postcode" Type="System.String" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="columns_ContractorsList_City" Type="System.String" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="columns_ContractorsList_Address" Type="System.String" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="sorting_ContractorsList" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;c.codename&lt;/string&gt;
+  &lt;string&gt;False&lt;/string&gt;
+  &lt;string&gt;c.name&lt;/string&gt;
+  &lt;string&gt;False&lt;/string&gt;
+  &lt;string&gt;50&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="columns_ContractorsList_Icon" Type="System.String" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

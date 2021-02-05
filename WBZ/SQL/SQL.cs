@@ -508,7 +508,7 @@ namespace WBZ
 		/// </summary>
 		/// <param name="from">???</param>
 		/// <param name="to">???</param>
-		internal static DataTable GetDonationSumCompany(DateTime from, DateTime to)
+		internal static DataTable GetDonationSumContractor(DateTime from, DateTime to)
 		{
 			var result = new DataTable();
 
@@ -516,7 +516,7 @@ namespace WBZ
 			{
 				using (var sqlConn = connOpenedWBZ)
 				{
-					var sqlCmd = new NpgsqlCommand(@"SELECT DISTINCT (SELECT c.name FROM wbz.companies c WHERE c.id = i.company)
+					var sqlCmd = new NpgsqlCommand(@"SELECT DISTINCT (SELECT c.name FROM wbz.contractors c WHERE c.id = i.contractor)
 						FROM wbz.documents i 
 						WHERE i.archival = false and (dateissue >= '@from' and dateissue <= '@to')", sqlConn);
 					sqlCmd.CommandText = sqlCmd.CommandText.Replace("@from", from.ToString("yyyy.MM.dd"));
@@ -538,8 +538,8 @@ namespace WBZ
 		/// ???
 		/// </summary>
 		/// <param name="date">???</param>
-		/// <param name="company">???</param>
-		internal static DataRow GetDonationSumCompanyValue(DateTime date, string company)
+		/// <param name="contractor">???</param>
+		internal static DataRow GetDonationSumContractorValue(DateTime date, string contractor)
 		{
 			var dt = new DataTable();
 			DataRow result = null;
@@ -551,10 +551,10 @@ namespace WBZ
 					var sqlCmd = new NpgsqlCommand(@"SELECT 
 						SUM((SELECT SUM(ip.amount) FROM wbz.documents_positions ip WHERE i.id = ip.document)) as amount,
 						SUM((SELECT SUM(ip.cost) FROM wbz.documents_positions ip WHERE i.id = ip.document)) as cost
-						FROM wbz.documents i join wbz.companies c ON (i.company = c.id)
-						WHERE i.archival = false and i.dateissue = '" + date.ToString("yyyy.MM.dd") + @"' and c.name = @company and c.archival = false", sqlConn);
+						FROM wbz.documents i join wbz.contractors c ON (i.contractor = c.id)
+						WHERE i.archival = false and i.dateissue = '" + date.ToString("yyyy.MM.dd") + @"' and c.name = @contractor and c.archival = false", sqlConn);
 					//sqlCmd.Parameters.AddWithValue("date", date);
-					sqlCmd.Parameters.AddWithValue("company", company);
+					sqlCmd.Parameters.AddWithValue("contractor", contractor);
 					using (var sqlDA = new NpgsqlDataAdapter(sqlCmd))
 					{
 						sqlDA.Fill(dt);
@@ -674,10 +674,10 @@ namespace WBZ
 							query = @"select count(distinct ac.id)
 								from wbz.attributes_classes ac";
 							break;
-						/// COMPANIES
-						case Global.Module.COMPANIES:
+						/// CONTRACTORS
+						case Global.Module.CONTRACTORS:
 							query = @"select count(distinct c.id)
-								from wbz.companies c";
+								from wbz.contractors c";
 							break;
 						/// DISTRIBUTIONS
 						case Global.Module.DISTRIBUTIONS:
@@ -690,8 +690,8 @@ namespace WBZ
 								from wbz.documents d
 								left join wbz.documents_positions dp
 									on dp.document=d.id
-								left join wbz.companies c
-									on c.id=d.company
+								left join wbz.contractors c
+									on c.id=d.contractor
 								left join wbz.stores s
 									on s.id=d.store";
 							break;
@@ -832,11 +832,11 @@ namespace WBZ
 								from wbz.attributes_classes ac
 								where {filter}";
 							break;
-						/// COMPANIES
-						case Global.Module.COMPANIES:
+						/// CONTRACTORS
+						case Global.Module.CONTRACTORS:
 							query = $@"select c.id, c.codename, c.name, c.branch, c.nip, c.regon, c.postcode, c.city, c.address,
 									c.archival, c.comment, c.icon
-								from wbz.companies c
+								from wbz.contractors c
 								where {filter}";
 							break;
 						/// DISTRIBUTIONS
@@ -853,14 +853,14 @@ namespace WBZ
 							break;
 						/// DOCUMENTS
 						case Global.Module.DOCUMENTS:
-							query = $@"select d.id, d.name, d.store, s.name as storename, d.company, c.name as companyname,
+							query = $@"select d.id, d.name, d.store, s.name as storename, d.contractor, c.name as contractorname,
 									d.type, d.dateissue, d.status, count(dp.*) as positionscount, sum(dp.amount) as weight, sum(dp.cost) as cost,
 									d.archival, d.comment, d.icon
 								from wbz.documents d
 								left join wbz.documents_positions dp
 									on dp.document=d.id
-								left join wbz.companies c
-									on c.id=d.company
+								left join wbz.contractors c
+									on c.id=d.contractor
 								left join wbz.stores s
 									on s.id=d.store
 								where {filter}
@@ -1224,10 +1224,10 @@ namespace WBZ
 								}
 							}
 							break;
-						/// COMPANIES
-						case Global.Module.COMPANIES:
-							var company = instance as M_Company;
-							query = @"insert into wbz.companies (id, codename, name, branch, nip, regon, postcode, city, address, archival, comment, icon)
+						/// CONTRACTORS
+						case Global.Module.CONTRACTORS:
+							var contractor = instance as M_Contractor;
+							query = @"insert into wbz.contractors (id, codename, name, branch, nip, regon, postcode, city, address, archival, comment, icon)
 								values (@id, @codename, @name, @branch, @nip, @regon, @postcode, @city, @address, @archival, @comment, @icon)
 								on conflict(id) do
 								update set codename=@codename, name=@name, branch=@branch, nip=@nip, regon=@regon,
@@ -1235,21 +1235,21 @@ namespace WBZ
 									archival=@archival, comment=@comment, icon=@icon";
 							using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 							{
-								sqlCmd.Parameters.AddWithValue("id", company.ID);
-								sqlCmd.Parameters.AddWithValue("codename", company.Codename);
-								sqlCmd.Parameters.AddWithValue("name", company.Name);
-								sqlCmd.Parameters.AddWithValue("branch", company.Branch);
-								sqlCmd.Parameters.AddWithValue("nip", company.NIP);
-								sqlCmd.Parameters.AddWithValue("regon", company.REGON);
-								sqlCmd.Parameters.AddWithValue("postcode", company.Postcode);
-								sqlCmd.Parameters.AddWithValue("city", company.City);
-								sqlCmd.Parameters.AddWithValue("address", company.Address);
-								sqlCmd.Parameters.AddWithValue("archival", company.Archival);
-								sqlCmd.Parameters.AddWithValue("comment", company.Comment);
-								sqlCmd.Parameters.AddWithValue("icon", (object)company.Icon ?? DBNull.Value);
+								sqlCmd.Parameters.AddWithValue("id", contractor.ID);
+								sqlCmd.Parameters.AddWithValue("codename", contractor.Codename);
+								sqlCmd.Parameters.AddWithValue("name", contractor.Name);
+								sqlCmd.Parameters.AddWithValue("branch", contractor.Branch);
+								sqlCmd.Parameters.AddWithValue("nip", contractor.NIP);
+								sqlCmd.Parameters.AddWithValue("regon", contractor.REGON);
+								sqlCmd.Parameters.AddWithValue("postcode", contractor.Postcode);
+								sqlCmd.Parameters.AddWithValue("city", contractor.City);
+								sqlCmd.Parameters.AddWithValue("address", contractor.Address);
+								sqlCmd.Parameters.AddWithValue("archival", contractor.Archival);
+								sqlCmd.Parameters.AddWithValue("comment", contractor.Comment);
+								sqlCmd.Parameters.AddWithValue("icon", (object)contractor.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Global.User.ID, module, company.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} firmę: {company.Name}.", sqlConn, sqlTran);
+							SetLog(Global.User.ID, module, contractor.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} kontrahenta: {contractor.Name}.", sqlConn, sqlTran);
 							break;
 						/// DISTRIBUTIONS
 						case Global.Module.DISTRIBUTIONS:
@@ -1346,10 +1346,10 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("id", document.ID);
 								oldstatus = Convert.ToInt32(sqlCmd.ExecuteScalar());
 							}
-							query = @"insert into wbz.documents (id, name, type, store, company, dateissue, status, archival, comment, icon)
-								values (@id, @name, @type, @store, @company, @dateissue, @status, @archival, @comment, @icon)
+							query = @"insert into wbz.documents (id, name, type, store, contractor, dateissue, status, archival, comment, icon)
+								values (@id, @name, @type, @store, @contractor, @dateissue, @status, @archival, @comment, @icon)
 								on conflict(id) do
-								update set name=@name, type=@type, store=@store, company=@company, dateissue=@dateissue, status=@status,
+								update set name=@name, type=@type, store=@store, contractor=@contractor, dateissue=@dateissue, status=@status,
 									archival=@archival, comment=@comment, icon=@icon";
 							using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 							{
@@ -1357,7 +1357,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("name", document.Name);
 								sqlCmd.Parameters.AddWithValue("type", document.Type);
 								sqlCmd.Parameters.AddWithValue("store", document.Store);
-								sqlCmd.Parameters.AddWithValue("company", document.Company);
+								sqlCmd.Parameters.AddWithValue("contractor", document.Contractor);
 								sqlCmd.Parameters.AddWithValue("dateissue", document.DateIssue);
 								sqlCmd.Parameters.AddWithValue("status", document.Status);
 								sqlCmd.Parameters.AddWithValue("archival", document.Archival);
@@ -1643,9 +1643,9 @@ namespace WBZ
 								delete from wbz.attributes_classes where id=@id";
 							SetLog(Global.User.ID, module, id, $"Usunięto klasę atrybutu: {name}", sqlConn, sqlTran);
 							break;
-						/// COMPANIES
-						case Global.Module.COMPANIES:
-							query = @"delete from wbz.companies where id=@id";
+						/// CONTRACTORS
+						case Global.Module.CONTRACTORS:
+							query = @"delete from wbz.contractors where id=@id";
 							SetLog(Global.User.ID, module, id, $"Usunięto firmę: {name}", sqlConn, sqlTran);
 							break;
 						/// DISTRIBUTIONS

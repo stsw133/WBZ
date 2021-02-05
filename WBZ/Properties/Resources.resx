@@ -184,8 +184,8 @@
   <data name="icon32_community" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_community.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon32_companies" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon32_companies.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon32_contractors" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon32_contractors.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon32_database" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_database.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

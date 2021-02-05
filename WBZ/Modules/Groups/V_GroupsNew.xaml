@@ -9,7 +9,7 @@
        xmlns:p="clr-namespace:WBZ.Properties"
        xmlns:t="clr-namespace:WBZ.Modules._tabs"
        mc:Ignorable="d"
-       Title="{Binding Title}" MinHeight="240" MinWidth="360" Height="{Binding Source={x:Static p:Settings.Default}, Path=config_CompaniesNew_WindowSize[1], Mode=TwoWay}" Width="{Binding Source={x:Static p:Settings.Default}, Path=config_CompaniesNew_WindowSize[0], Mode=TwoWay}"
+       Title="{Binding Title}" MinHeight="240" MinWidth="360" Height="{Binding Source={x:Static p:Settings.Default}, Path=config_GroupsNew_WindowSize[1], Mode=TwoWay}" Width="{Binding Source={x:Static p:Settings.Default}, Path=config_GroupsNew_WindowSize[0], Mode=TwoWay}"
             BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
             Icon="/Resources/icon32_groups.ico" Loaded="Window_Loaded" Closed="Window_Closed">

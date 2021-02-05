@@ -4,7 +4,7 @@ using System.Windows;
 using WBZ.Globals;
 using WBZ.Modules._base;
 using WBZ.Modules.Articles;
-using WBZ.Modules.Companies;
+using WBZ.Modules.Contractors;
 using WBZ.Modules.Stores;
 using MODULE_MODEL = WBZ.Models.M_Document;
 
@@ -53,16 +53,16 @@ namespace WBZ.Modules.Documents
 		}
 
 		/// <summary>
-		/// Select: Company
+		/// Select: Contractor
 		/// </summary>
-		private void btnSelectCompany_Click(object sender, RoutedEventArgs e)
+		private void btnSelectContractor_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new CompaniesList(Commands.Type.SELECTING);
+			var window = new ContractorsList(Commands.Type.SELECTING);
 			if (window.ShowDialog() == true)
 				if (window.Selected != null)
 				{
-					D.InstanceInfo.Company = window.Selected.ID;
-					D.InstanceInfo.CompanyName = window.Selected.Name;
+					D.InstanceInfo.Contractor = window.Selected.ID;
+					D.InstanceInfo.ContractorName = window.Selected.Name;
 					D.InstanceInfo = D.InstanceInfo;
 				}
 		}

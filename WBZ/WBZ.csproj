@@ -142,6 +142,27 @@
     <Compile Include="Controls\DataGridColumnFilter_Date.xaml.cs">
       <DependentUpon>DataGridColumnFilter_Date.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Articles\V_ArticlesListGrid.xaml.cs">
+      <DependentUpon>V_ArticlesListGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\AttributesClasses\V_AttributesClassesListGrid.xaml.cs">
+      <DependentUpon>V_AttributesClassesListGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Contractors\V_ContractorsListGrid.xaml.cs">
+      <DependentUpon>V_ContractorsListGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Distributions\V_DistributionsListGrid.xaml.cs">
+      <DependentUpon>V_DistributionsListGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Documents\V_DocumentsListGrid.xaml.cs">
+      <DependentUpon>V_DocumentsListGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Employees\V_EmployeesListGrid.xaml.cs">
+      <DependentUpon>V_EmployeesListGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Families\V_FamiliesListGrid.xaml.cs">
+      <DependentUpon>V_FamiliesListGrid.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Groups\D_GroupsList.cs" />
     <Compile Include="Modules\Groups\V_GroupsList.xaml.cs">
       <DependentUpon>V_GroupsList.xaml</DependentUpon>
@@ -150,11 +171,20 @@
       <DependentUpon>V_GroupsNew.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Groups\D_GroupsNew.cs" />
-    <Compile Include="Modules\Groups\GroupsView.xaml.cs">
-      <DependentUpon>GroupsView.xaml</DependentUpon>
+    <Compile Include="Modules\Groups\V_GroupsView.xaml.cs">
+      <DependentUpon>V_GroupsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Globals\Commands.cs" />
     <Compile Include="Globals\Functions.cs" />
+    <Compile Include="Modules\Logs\V_LogsListGrid.xaml.cs">
+      <DependentUpon>V_LogsListGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Stores\V_StoresListGrid.xaml.cs">
+      <DependentUpon>V_StoresListGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Users\V_UsersListGrid.xaml.cs">
+      <DependentUpon>V_UsersListGrid.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\_base\D_ModuleList.cs" />
     <Compile Include="Modules\_base\D_ModuleNew.cs" />
     <Compile Include="Modules\_base\V_ModuleNew.cs" />
@@ -162,7 +192,7 @@
     <Compile Include="Models\M_Article.cs" />
     <Compile Include="Models\M_Attachment.cs" />
     <Compile Include="Models\M_AttributeClass.cs" />
-    <Compile Include="Models\M_Company.cs" />
+    <Compile Include="Models\M_Contractor.cs" />
     <Compile Include="Models\M_Config.cs" />
     <Compile Include="Models\M_Contact.cs" />
     <Compile Include="Models\M_Database.cs" />
@@ -225,8 +255,8 @@
     <Compile Include="Modules\Attachments\D_AttachmentsList.cs" />
     <Compile Include="Modules\AttributesClasses\D_AttributesClassesList.cs" />
     <Compile Include="Modules\AttributesClasses\D_AttributesClassesNew.cs" />
-    <Compile Include="Modules\Companies\D_CompaniesList.cs" />
-    <Compile Include="Modules\Companies\D_CompaniesNew.cs" />
+    <Compile Include="Modules\Contractors\D_ContractorsList.cs" />
+    <Compile Include="Modules\Contractors\D_ContractorsNew.cs" />
     <Compile Include="Modules\Distributions\D_DistributionsList.cs" />
     <Compile Include="Modules\Distributions\D_DistributionsNew.cs" />
     <Compile Include="Modules\Distributions\D_DistributionsStatus.cs" />
@@ -281,11 +311,11 @@
     <Compile Include="Modules\Users\V_UsersNew.xaml.cs">
       <DependentUpon>V_UsersNew.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Companies\V_CompaniesNew.xaml.cs">
-      <DependentUpon>V_CompaniesNew.xaml</DependentUpon>
+    <Compile Include="Modules\Contractors\V_ContractorsNew.xaml.cs">
+      <DependentUpon>V_ContractorsNew.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Companies\V_CompaniesList.xaml.cs">
-      <DependentUpon>V_CompaniesList.xaml</DependentUpon>
+    <Compile Include="Modules\Contractors\V_ContractorsList.xaml.cs">
+      <DependentUpon>V_ContractorsList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Distributions\V_DistributionsNew.xaml.cs">
       <DependentUpon>V_DistributionsNew.xaml</DependentUpon>
@@ -349,11 +379,6 @@
     </Compile>
     <Compile Include="Other\Prints.cs" />
     <Compile Include="Modules\_base\V_ModuleList.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="SQL\SQL.cs" />
     <Compile Include="SQL\SQL_Migration.cs" />
@@ -380,6 +405,46 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Modules\Articles\V_ArticlesListGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\AttributesClasses\V_AttributesClassesListGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Contractors\V_ContractorsListGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Distributions\V_DistributionsListGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Documents\V_DocumentsListGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Employees\V_EmployeesListGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Families\V_FamiliesListGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Logs\V_LogsListGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Stores\V_StoresListGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Users\V_UsersListGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Modules\_tabs\AdditionalsTab.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -396,7 +461,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Modules\Groups\GroupsView.xaml">
+    <Page Include="Modules\Groups\V_GroupsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -508,11 +573,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Companies\V_CompaniesNew.xaml">
+    <Page Include="Modules\Contractors\V_ContractorsNew.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Companies\V_CompaniesList.xaml">
+    <Page Include="Modules\Contractors\V_ContractorsList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -607,7 +672,6 @@
     <Resource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </Resource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

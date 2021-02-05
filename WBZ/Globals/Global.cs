@@ -31,7 +31,7 @@ namespace WBZ.Globals
             public const string ATTRIBUTES = "attributes";  // w wersji 1.2.0 przerobienie na submoduł
             public const string ATTRIBUTES_CLASSES = "attributes_classes";
             public const string COMMUNITY = "community";  // do dodania w wersji 1.3.0
-            public const string COMPANIES = "companies";
+            public const string CONTRACTORS = "contractors";
             public const string CONTACTS = "contacts";  // w wersji 1.2.0 przerobienie na submoduł
             public const string DISTRIBUTIONS = "distributions";
             public const string DOCUMENTS = "documents";
@@ -59,8 +59,8 @@ namespace WBZ.Globals
                     return "Klasy atrybutów";
                 case Module.COMMUNITY:
                     return "Społeczność";
-                case Module.COMPANIES:
-                    return "Firmy";
+                case Module.CONTRACTORS:
+                    return "Kontrahenci";
                 case Module.DISTRIBUTIONS:
                     return "Dystrybucje";
                 case Module.DOCUMENTS:
