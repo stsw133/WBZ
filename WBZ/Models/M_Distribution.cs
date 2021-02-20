@@ -27,7 +27,7 @@ namespace WBZ.Models
 		public M_Distribution()
 		{
 			Name = string.Empty;
-			fDateReal = new DateTime(DateTime.Now.Year, 1, 1);
+			fDateReal = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
 			DateReal = DateTime.Now;
 			Status = (short)DistributionStatus.Buffer;
 			Families = new List<M_DistributionFamily>();

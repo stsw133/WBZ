@@ -32,7 +32,7 @@ namespace WBZ.Modules.Personal
                 }
                 else
                 {
-                    if (SQL.Login(Global.User.Username, tbOldPassword.Password))
+                    if (SQL.Login(Global.User.Username, Global.sha256(tbOldPassword.Password)))
                         D.User.Newpass = tbNewPassword.Password;
                     else
                     {

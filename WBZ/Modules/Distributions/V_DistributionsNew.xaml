@@ -32,7 +32,7 @@
                 <StackPanel DockPanel.Dock="Top">
                     <c:Button Text="Zapisz" Margin="5,5,5,0" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_save.ico" Command="g:Commands.Save"/>
                     <Separator Height="5" Margin="0,5,0,0"/>
-                    <CheckBox x:Name="chckToBuffer" Content="Do bufora" Margin="5,5,5,0" IsChecked="True" IsEnabled="{Binding EditingMode}"/>
+                    <CheckBox Content="Do bufora" Margin="5,5,5,0" IsChecked="{Binding InstanceInfo.Status, Converter={g:conv_BoolInverted}}" IsEnabled="{Binding EditingMode}"/>
                     <Separator Height="5" Margin="0,5,0,0"/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">

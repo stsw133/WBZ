@@ -1,6 +1,6 @@
 ﻿namespace WBZ.Models
 {
-	public class M_Store : M_Address
+	public class M_Store : MA
 	{
 		public string Codename { get; set; }
 		public string Name { get; set; }

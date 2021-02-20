@@ -4,6 +4,7 @@
        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
        xmlns:b="clr-namespace:WBZ.Modules.Families"
+       xmlns:bdis="clr-namespace:WBZ.Modules.Distributions"
        xmlns:c="clr-namespace:WBZ.Controls"
        xmlns:g="clr-namespace:WBZ.Globals"
        xmlns:p="clr-namespace:WBZ.Properties"
@@ -116,19 +117,7 @@
                         <TabItem.Header>
                             <c:Header Text="Dystrybucje" Icon="/Resources/icon32_food.ico"/>
                         </TabItem.Header>
-                        <DataGrid Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
-                                  AutoGenerateColumns="False" ItemsSource="{Binding InstanceSources_Distributions}" IsReadOnly="True"
-                                  MouseDoubleClick="dgList_Distributions_MouseDoubleClick">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_ID, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                                <DataGridTextColumn Binding="{Binding Name}" Header="Nazwa" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_Name, Mode=OneWay, Converter={g:conv_BoolToVisibility}}" Width="*"/>
-                                <DataGridTextColumn Binding="{Binding FamiliesCount}" Header="Rodziny" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_FamiliesCount, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                                <DataGridTextColumn Binding="{Binding MembersCount}" Header="Osoby" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_MembersCount, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                                <DataGridTextColumn Binding="{Binding PositionsCount}" Header="Pozycje" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_PositionsCount, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                                <DataGridTextColumn Binding="{Binding Weight}" Header="Waga (kg)" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_Weight, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                                <DataGridTextColumn Binding="{Binding DateReal, StringFormat={}{0:yyyy-MM-dd}}" Header="Data realizacji" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_DateReal, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
+                        <bdis:DistributionsListGrid x:Name="dgList_Distributions" ItemsSource="{Binding InstanceSources_Distributions}" IsReadOnly="True" MouseDoubleClick="dgList_Distributions_MouseDoubleClick"/>
                     </TabItem>
                 </TabControl>
             </TabItem>

@@ -129,7 +129,6 @@ drop sequence if exists wbz.users_permissions_id_seq;
 CREATE TABLE wbz.employees
 (
     id serial NOT NULL,
-    ""user"" integer,
 	email character varying(60) COLLATE pg_catalog.""default"",
 	phone character varying(16) COLLATE pg_catalog.""default"",
 	forename character varying(50) COLLATE pg_catalog.""default"" NOT NULL,
@@ -142,12 +141,7 @@ CREATE TABLE wbz.employees
 	archival boolean NOT NULL DEFAULT false,
 	comment text COLLATE pg_catalog.""default"",
 	icon bytea,
-	CONSTRAINT employees_pkey PRIMARY KEY(id),
-	CONSTRAINT employees_user_fkey FOREIGN KEY(""user"")
-		REFERENCES wbz.users(id) MATCH SIMPLE
-		ON UPDATE CASCADE
-		ON DELETE SET NULL
-		NOT VALID
+	CONSTRAINT employees_pkey PRIMARY KEY(id)
 ) TABLESPACE pg_default;
 
 CREATE TABLE wbz.attributes_values
@@ -164,6 +158,20 @@ CREATE TABLE wbz.attributes_values
 ) TABLESPACE pg_default;
 
 							update wbz.config set value='1.1.0' where property='VERSION'", sqlConn, sqlTran);
+							sqlCmd.ExecuteNonQuery();
+						}
+						///1.1.0 => 1.2.0
+						if (SQL.GetPropertyValue("VERSION") == "1.1.0")
+						{
+							var sqlCmd = new NpgsqlCommand(@"
+update wbz.users_permissions set perm='contractors_preview' where perm='companies_preview';
+update wbz.users_permissions set perm='contractors_save' where perm='companies_save';
+update wbz.users_permissions set perm='contractors_delete' where perm='companies_delete';
+
+alter table wbz.companies rename to contractors;
+alter table wbz.documents rename column company to contractor;
+
+							update wbz.config set value='1.2.0' where property='VERSION'", sqlConn, sqlTran);
 							sqlCmd.ExecuteNonQuery();
 						}
 

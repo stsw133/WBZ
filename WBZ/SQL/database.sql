@@ -33,7 +33,7 @@ CREATE TABLE wbz.config
 TABLESPACE pg_default;
 
 INSERT INTO wbz.config (property, value) VALUES
-    ('VERSION', '1.1.0'),
+    ('VERSION', '1.2.0'),
     ('LOGS_ENABLED', '0'),
     ('EMAIL_HOST', 'smtp.gmail.com'),
 	('EMAIL_PORT', '587'),
@@ -70,7 +70,7 @@ CREATE TABLE wbz.users_permissions
         NOT VALID
 )
 TABLESPACE pg_default;
-
+/*
 INSERT INTO wbz.users_permissions ("user", perm) VALUES
     (1, 'admin'),
     (1, 'users_preview'), (1, 'users_save'), (1, 'users_delete'),
@@ -78,7 +78,7 @@ INSERT INTO wbz.users_permissions ("user", perm) VALUES
     (1, 'documents_preview'), (1, 'documents_save'), (1, 'documents_delete'),
     (1, 'articles_preview'), (1, 'articles_save'), (1, 'articles_delete'),
     (1, 'stores_preview'), (1, 'stores_save'), (1, 'stores_delete'),
-    (1, 'companies_preview'), (1, 'companies_save'), (1, 'companies_delete'),
+    (1, 'contractors_preview'), (1, 'contractors_save'), (1, 'contractors_delete'),
     (1, 'families_preview'), (1, 'families_save'), (1, 'families_delete'),
     (1, 'distributions_preview'), (1, 'distributions_save'), (1, 'distributions_delete'),
     (1, 'attributes_classes_preview'), (1, 'attributes_classes_save'), (1, 'attributes_classes_delete'),
@@ -86,7 +86,7 @@ INSERT INTO wbz.users_permissions ("user", perm) VALUES
     (1, 'logs_preview'), (1, 'logs_save'), (1, 'logs_delete'),
     (1, 'stats_preview'), (1, 'stats_save'), (1, 'stats_delete'),
     (1, 'community_preview'), (1, 'community_save'), (1, 'community_delete');
-
+*/
 -- Table: wbz.logs
 CREATE TABLE wbz.logs
 (
@@ -292,8 +292,8 @@ CREATE TABLE wbz.stores_articles
 )
 TABLESPACE pg_default;
 
--- Table: wbz.companies
-CREATE TABLE wbz.companies
+-- Table: wbz.contractors
+CREATE TABLE wbz.contractors
 (
     id serial NOT NULL,
     codename character varying(20) COLLATE pg_catalog."default",
@@ -307,7 +307,7 @@ CREATE TABLE wbz.companies
     archival boolean NOT NULL DEFAULT false,
     comment text COLLATE pg_catalog."default",
     icon bytea,
-    CONSTRAINT companies_pkey PRIMARY KEY (id)
+    CONSTRAINT contractors_pkey PRIMARY KEY (id)
 )
 TABLESPACE pg_default;
 
@@ -339,7 +339,7 @@ CREATE TABLE wbz.documents
     type character varying(50) COLLATE pg_catalog."default" NOT NULL,
     name character varying(50) COLLATE pg_catalog."default" NOT NULL,
     store integer NOT NULL,
-    company integer NOT NULL,
+    contractor integer NOT NULL,
     dateissue date NOT NULL DEFAULT now(),
     status smallint NOT NULL DEFAULT 0,
     archival boolean NOT NULL DEFAULT false,
@@ -350,8 +350,8 @@ CREATE TABLE wbz.documents
         REFERENCES wbz.stores (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE NO ACTION,
-    CONSTRAINT documents_headers_company_fkey FOREIGN KEY (company)
-        REFERENCES wbz.companies (id) MATCH SIMPLE
+    CONSTRAINT documents_headers_contractor_fkey FOREIGN KEY (contractor)
+        REFERENCES wbz.contractors (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE NO ACTION
 )
@@ -429,7 +429,6 @@ TABLESPACE pg_default;
 CREATE TABLE wbz.employees
 (
     id serial NOT NULL,
-    "user" integer,
     email character varying(60) COLLATE pg_catalog."default",
     phone character varying(16) COLLATE pg_catalog."default",
     forename character varying(50) COLLATE pg_catalog."default" NOT NULL,
@@ -442,12 +441,7 @@ CREATE TABLE wbz.employees
     archival boolean NOT NULL DEFAULT false,
     comment text COLLATE pg_catalog."default",
     icon bytea,
-    CONSTRAINT employees_pkey PRIMARY KEY (id),
-    CONSTRAINT employees_user_fkey FOREIGN KEY ("user")
-        REFERENCES wbz.users (id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE SET NULL
-        NOT VALID
+    CONSTRAINT employees_pkey PRIMARY KEY (id)
 )
 TABLESPACE pg_default;
 

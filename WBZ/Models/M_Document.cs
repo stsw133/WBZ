@@ -16,13 +16,13 @@ namespace WBZ.Models
 		public string Type { get; set; }
 		public string Name { get; set; }
 		public int Store { get; set; }
-		public int Company { get; set; }
+		public int Contractor { get; set; }
 		public DateTime fDateIssue { get; set; }
 		public DateTime DateIssue { get; set; }
 		public short Status { get; set; }
 		public DataTable Positions { get; set; }
 		public string StoreName { get; set; }
-		public string CompanyName { get; set; }
+		public string ContractorName { get; set; }
 		public int PositionsCount { get; set; }
 		public decimal Weight { get; set; }
 		public decimal Cost { get; set; }
@@ -34,12 +34,12 @@ namespace WBZ.Models
 			Type = "FS";
 			Name = string.Empty;
 			Store = stores.Count == 1 ? stores[0].ID : 0;
-			fDateIssue = new DateTime(DateTime.Now.Year, 1, 1);
+			fDateIssue = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
 			DateIssue = DateTime.Now;
 			Status = (short)DocumentStatus.Buffer;
 			Positions = new DataTable();
 			StoreName = stores.Count == 1 ? stores[0].Name : string.Empty;
-			CompanyName = string.Empty;
+			ContractorName = string.Empty;
 		}
 	}
 

@@ -60,7 +60,7 @@
                             <ComboBox SelectedValue="{Binding InstanceInfo.Module}" SelectedValuePath="Tag" Margin="5" VerticalContentAlignment="Center">
                                 <ComboBoxItem Content="Dokumenty" Tag="documents"/>
                                 <ComboBoxItem Content="Dystrybucje" Tag="distributions"/>
-                                <ComboBoxItem Content="Firmy" Tag="companies"/>
+                                <ComboBoxItem Content="Kontrahenci" Tag="contractors"/>
                                 <ComboBoxItem Content="Magazyny" Tag="stores"/>
                                 <ComboBoxItem Content="Pracownicy" Tag="employees"/>
                                 <ComboBoxItem Content="Rodziny" Tag="families"/>

@@ -250,6 +250,20 @@ namespace WBZ.Controls
         }
 
         /// <summary>
+        /// PreviewMouseDoubleClick
+        /// </summary>
+        private void TreeView_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                if (Global.User.Perms.Contains($"{Module}_{Global.UserPermType.SAVE}"))
+                    btnGroupsEdit_Click(null, null);
+                else
+                    btnGroupsPreview_Click(null, null);
+            }
+        }
+
+        /// <summary>
         /// PreviewMouseRightButtonDown
         /// </summary>
         private TreeViewItem VisualUpwardSearch(DependencyObject source)

@@ -1,18 +1,19 @@
-﻿<b:New x:Class="WBZ.Modules.Companies.CompaniesNew"
+﻿<b:New x:Class="WBZ.Modules.Contractors.ContractorsNew"
        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-       xmlns:b="clr-namespace:WBZ.Modules.Companies"
+       xmlns:b="clr-namespace:WBZ.Modules.Contractors"
+       xmlns:bdoc="clr-namespace:WBZ.Modules.Documents"
        xmlns:c="clr-namespace:WBZ.Controls"
        xmlns:g="clr-namespace:WBZ.Globals"
        xmlns:p="clr-namespace:WBZ.Properties"
        xmlns:t="clr-namespace:WBZ.Modules._tabs"
        mc:Ignorable="d"
-       Title="{Binding Title}" MinHeight="240" MinWidth="360" Height="{Binding Source={x:Static p:Settings.Default}, Path=config_CompaniesNew_WindowSize[1], Mode=TwoWay}" Width="{Binding Source={x:Static p:Settings.Default}, Path=config_CompaniesNew_WindowSize[0], Mode=TwoWay}"
+       Title="{Binding Title}" MinHeight="240" MinWidth="360" Height="{Binding Source={x:Static p:Settings.Default}, Path=config_ContractorsNew_WindowSize[1], Mode=TwoWay}" Width="{Binding Source={x:Static p:Settings.Default}, Path=config_ContractorsNew_WindowSize[0], Mode=TwoWay}"
             BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
-            Icon="/Resources/icon32_companies.ico" Loaded="Window_Loaded" Closed="Window_Closed">
+            Icon="/Resources/icon32_contractors.ico" Loaded="Window_Loaded" Closed="Window_Closed">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -26,7 +27,7 @@
         <!-- titleBar -->
         <c:TitleBar DockPanel.Dock="Top" SubIcon="{Binding ModeIcon}"/>
         <!-- buttonsPanel -->
-        <Border DockPanel.Dock="Right" Background="{Binding config_Companies_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="1,0,0,0">
+        <Border DockPanel.Dock="Right" Background="{Binding config_Contractors_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="1,0,0,0">
             <DockPanel>
                 <ToggleButton x:Name="btnToggle" BorderThickness="0" Width="5" IsChecked="{Binding config_ShowButtonTexts, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                 <StackPanel DockPanel.Dock="Top">
@@ -42,7 +43,7 @@
             </DockPanel>
             <Border.ContextMenu>
                 <ContextMenu>
-                    <c:MenuPanelColor Tag="{Binding config_Companies_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+                    <c:MenuPanelColor Tag="{Binding config_Contractors_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                 </ContextMenu>
             </Border.ContextMenu>
         </Border>
@@ -108,21 +109,7 @@
                         <TabItem.Header>
                             <c:Header Text="Dokumenty" Icon="/Resources/icon32_documents.ico"/>
                         </TabItem.Header>
-                        <DataGrid Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
-                                  AutoGenerateColumns="False" ItemsSource="{Binding InstanceSources_Documents}" IsReadOnly="True"
-                                  MouseDoubleClick="dgList_Documents_MouseDoubleClick">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_ID, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                                <DataGridTextColumn Binding="{Binding Type}" Header="Typ" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Type, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                                <DataGridTextColumn Binding="{Binding Name}" Header="Nazwa" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Name, Mode=OneWay, Converter={g:conv_BoolToVisibility}}" Width="*"/>
-                                <DataGridTextColumn Binding="{Binding StoreName}" Header="Magazyn" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_StoreName, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                                <DataGridTextColumn Binding="{Binding CompanyName}" Header="Firma" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_CompanyName, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                                <DataGridTextColumn Binding="{Binding PositionsCount}" Header="Pozycje" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_PositionsCount, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                                <DataGridTextColumn Binding="{Binding Weight}" Header="Waga (kg)" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Weight, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                                <DataGridTextColumn Binding="{Binding Cost}" Header="Kwota netto" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Cost, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                                <DataGridTextColumn Binding="{Binding DateIssue, StringFormat={}{0:yyyy-MM-dd}}" Header="Data wystawienia" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_DateIssue, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
+                        <bdoc:DocumentsListGrid x:Name="dgList_Documents" ItemsSource="{Binding InstanceSources_Documents}" IsReadOnly="True" MouseDoubleClick="dgList_Documents_MouseDoubleClick"/>
                     </TabItem>
                 </TabControl>
             </TabItem>

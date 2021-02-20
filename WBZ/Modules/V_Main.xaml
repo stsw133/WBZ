@@ -28,30 +28,30 @@
             <DockPanel>
                 <!-- menu -->
                 <Menu BorderBrush="Gray" BorderThickness="0,0,1,0">
-                    <MenuItem Header="System" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=2.25}">
-                        <MenuItem Header="Poradnik użytkownika" Command="g:Commands.Help">
+                    <MenuItem Header="{Tr Main.System, DefaultText='System', LanguageId={x:Static g:Global.Language}}" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=2.25}">
+                        <MenuItem Header="{Tr Main.UserManual, DefaultText='Poradnik użytkownika', LanguageId={x:Static g:Global.Language}}" Command="g:Commands.Help">
                             <MenuItem.Icon>
                                 <Image Source="/Resources/icon32_books.ico"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <Separator/>
-                        <MenuItem Header="Ustawienia" Click="menuSettings_Click">
+                        <MenuItem Header="{Tr Main.Settings, DefaultText='Ustawienia', LanguageId={x:Static g:Global.Language}}" Click="menuSettings_Click">
                             <MenuItem.Icon>
                                 <Image Source="/Resources/icon32_settings.ico"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <Separator/>
-                        <MenuItem Header="Odśwież" Command="g:Commands.Refresh">
+                        <MenuItem Header="{Tr Main.Refresh, DefaultText='Odśwież', LanguageId={x:Static g:Global.Language}}" Command="g:Commands.Refresh">
                             <MenuItem.Icon>
                                 <Image Source="/Resources/icon32_refresh.ico"/>
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="Wyloguj" Click="menuLogout_Click">
+                        <MenuItem Header="{Tr Main.Logout, DefaultText='Wyloguj', LanguageId={x:Static g:Global.Language}}" Click="menuLogout_Click">
                             <MenuItem.Icon>
                                 <Image Source="/Resources/icon32_return.ico"/>
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="Zamknij system" Command="g:Commands.Close">
+                        <MenuItem Header="{Tr Main.CloseApp, DefaultText='Zamknij aplikację', LanguageId={x:Static g:Global.Language}}" Command="g:Commands.Close">
                             <MenuItem.Icon>
                                 <Image Source="/Resources/icon32_close.ico"/>
                             </MenuItem.Icon>
@@ -60,21 +60,21 @@
                 </Menu>
                 <!-- personal -->
                 <Label DockPanel.Dock="Right" Content="{Binding Source={x:Static g:Global.User}, Path=Fullname}" Margin="5,0" Padding="1" VerticalContentAlignment="Center" FontWeight="Medium"/>
-                <Button DockPanel.Dock="Right" HorizontalAlignment="Right" BorderThickness="1,0" ToolTip="Pozostałe" Click="btnOther_Click">
+                <Button DockPanel.Dock="Right" HorizontalAlignment="Right" BorderThickness="1,0" ToolTip="{Tr Main.Other, DefaultText='Pozostałe', LanguageId={x:Static g:Global.Language}}" Click="btnOther_Click">
                     <Image Margin="2" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.75}" Source="/Resources/icon32_tools.ico"/>
                     <Button.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Profil" Click="btnProfile_Click">
+                            <MenuItem Header="{Tr Main.Profile, DefaultText='Profil', LanguageId={x:Static g:Global.Language}}" Click="btnProfile_Click">
                                 <MenuItem.Icon>
                                     <Image Source="/Resources/icon32_profile.ico"/>
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem Header="Terminarz" Click="btnCalendar_Click" IsEnabled="False">
+                            <MenuItem Header="{Tr Main.Timetable, DefaultText='Terminarz', LanguageId={x:Static g:Global.Language}}" Click="btnCalendar_Click" IsEnabled="False">
                                 <MenuItem.Icon>
                                     <Image Source="/Resources/icon32_calendar.ico"/>
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem Header="Wiadomości" Click="btnMail_Click" IsEnabled="False">
+                            <MenuItem Header="{Tr Main.Messages, DefaultText='Wiadomości', LanguageId={x:Static g:Global.Language}}" Click="btnMail_Click" IsEnabled="False">
                                 <MenuItem.Icon>
                                     <Image Source="/Resources/icon32_mail.ico"/>
                                 </MenuItem.Icon>
@@ -112,7 +112,7 @@
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_admin.ico" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="Admin" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}"/>
+                                <Label Margin="5" Content="{Tr Main.Admin, DefaultText='Admin', LanguageId={x:Static g:Global.Language}}" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}"/>
                             </StackPanel>
                         </Border>
                         <!--
@@ -122,10 +122,10 @@
                         -->
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
                                   IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=admin}"
-                                  Text="Konsola SQL" Icon="/Resources/icon32_source.ico" Click="btnConsoleSQL_Click"/>
+                                  Text="{Tr Main.ConsoleSQL, DefaultText='Konsola SQL', LanguageId={x:Static g:Global.Language}}" Icon="/Resources/icon32_code.ico" Click="btnConsoleSQL_Click"/>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
                                   IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=admin}"
-                                  Text="Wersje" Icon="/Resources/icon32_versions.ico" Click="btnVersions_Click"/>
+                                  Text="{Tr Main.Versions, DefaultText='Wersje', LanguageId={x:Static g:Global.Language}}" Icon="/Resources/icon32_versions.ico" Click="btnVersions_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -140,15 +140,15 @@
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_articles.ico" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="Towary" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}"/>
+                                <Label Margin="5" Content="{Tr Main.Articles, DefaultText='Towary', LanguageId={x:Static g:Global.Language}}" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}"/>
                             </StackPanel>
                         </Border>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
                                   IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=articles_preview}"
-                                  Text="Wyświetl listę" Icon="/Resources/icon32_list.ico" Click="btnArticlesList_Click"/>
+                                  Text="{Tr Main.ShowList, DefaultText='Wyświetl listę', LanguageId={x:Static g:Global.Language}}" Icon="/Resources/icon32_list.ico" Click="btnArticlesList_Click"/>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
                                   IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=articles_save}"
-                                  Text="Dodaj nowy" Icon="/Resources/icon32_add.ico" Click="btnArticlesNew_Click"/>
+                                  Text="{Tr Main.AddNew, DefaultText='Dodaj nowy', LanguageId={x:Static g:Global.Language}}" Icon="/Resources/icon32_add.ico" Click="btnArticlesNew_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -163,15 +163,15 @@
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_photos.ico" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="Załączniki" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}"/>
+                                <Label Margin="5" Content="{Tr Main.Attachments, DefaultText='Załączniki', LanguageId={x:Static g:Global.Language}}" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}"/>
                             </StackPanel>
                         </Border>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
                                   IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=attachments_preview}"
-                                  Text="Zarządzaj załącznikami" Icon="/Resources/icon32_photos.ico" Click="btnAttachmentsList_Click"/>
+                                  Text="{Tr Main.ShowAttachments, DefaultText='Wyświetl załączniki', LanguageId={x:Static g:Global.Language}}" Icon="/Resources/icon32_photos.ico" Click="btnAttachmentsList_Click"/>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
                                   IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=attachments_preview}"
-                                  Text="Galeria załączników" Icon="/Resources/icon32_gallery.ico" Click="btnAttachmentsGallery_Click"/>
+                                  Text="{Tr Main.AttachmentsGallery, DefaultText='Galeria załączników', LanguageId={x:Static g:Global.Language}}" Icon="/Resources/icon32_gallery.ico" Click="btnAttachmentsGallery_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -186,15 +186,15 @@
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_attributes.ico" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="Klasy atrybutów" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}"/>
+                                <Label Margin="5" Content="{Tr Main.AttributesClasses, DefaultText='Klasy atrybutów', LanguageId={x:Static g:Global.Language}}" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}"/>
                             </StackPanel>
                         </Border>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
                                   IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=attributes_classes_preview}"
-                                  Text="Wyświetl listę" Icon="/Resources/icon32_list.ico" Click="btnAttributesClassesList_Click"/>
+                                  Text="{Tr Main.ShowList, DefaultText='Wyświetl listę', LanguageId={x:Static g:Global.Language}}" Icon="/Resources/icon32_list.ico" Click="btnAttributesClassesList_Click"/>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
                                   IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=attributes_classes_save}"
-                                  Text="Dodaj nową" Icon="/Resources/icon32_add.ico" Click="btnAttributesClassesNew_Click"/>
+                                  Text="{Tr Main.AddNew, DefaultText='Dodaj nową', LanguageId={x:Static g:Global.Language}}" Icon="/Resources/icon32_add.ico" Click="btnAttributesClassesNew_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -202,26 +202,26 @@
                         </ContextMenu>
                     </Border.ContextMenu>
                 </Border>
-                <!-- companies -->
-                <Border x:Name="modCompanies" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Companies_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
+                <!-- contractors -->
+                <Border x:Name="modContractors" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=30}"
+                        Background="{Binding config_Contractors_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
                     <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Image Margin="10" Source="/Resources/icon32_companies.ico" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="Firmy" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}"/>
+                                <Image Margin="10" Source="/Resources/icon32_contractors.ico" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3}"/>
+                                <Label Margin="5" Content="{Tr Main.Contractors, DefaultText='Kontrahenci', LanguageId={x:Static g:Global.Language}}" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}"/>
                             </StackPanel>
                         </Border>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
-                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=companies_preview}"
-                                  Text="Wyświetl listę" Icon="/Resources/icon32_list.ico" Click="btnCompaniesList_Click"/>
+                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=contractors_preview}"
+                                  Text="{Tr Main.ShowList, DefaultText='Wyświetl listę', LanguageId={x:Static g:Global.Language}}" Icon="/Resources/icon32_list.ico" Click="btnContractorsList_Click"/>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
-                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=companies_save}"
-                                  Text="Dodaj nową" Icon="/Resources/icon32_add.ico" Click="btnCompaniesNew_Click"/>
+                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=contractors_save}"
+                                  Text="{Tr Main.AddNew, DefaultText='Dodaj nowego', LanguageId={x:Static g:Global.Language}}" Icon="/Resources/icon32_add.ico" Click="btnContractorsNew_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
-                            <c:MenuPanelColor Tag="{Binding config_Companies_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+                            <c:MenuPanelColor Tag="{Binding config_Contractors_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                         </ContextMenu>
                     </Border.ContextMenu>
                 </Border>
@@ -232,15 +232,15 @@
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_food.ico" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="Dystrybucje" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}"/>
+                                <Label Margin="5" Content="{Tr Main.Distributions, DefaultText='Dystrybucje', LanguageId={x:Static g:Global.Language}}" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}"/>
                             </StackPanel>
                         </Border>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
                                   IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=distributions_preview}"
-                                  Text="Wyświetl listę" Icon="/Resources/icon32_list.ico" Click="btnDistributionsList_Click"/>
+                                  Text="{Tr Main.ShowList, DefaultText='Wyświetl listę', LanguageId={x:Static g:Global.Language}}" Icon="/Resources/icon32_list.ico" Click="btnDistributionsList_Click"/>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
                                   IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=distributions_save}"
-                                  Text="Dodaj nową" Icon="/Resources/icon32_add.ico" Click="btnDistributionsNew_Click"/>
+                                  Text="{Tr Main.AddNew, DefaultText='Dodaj nową', LanguageId={x:Static g:Global.Language}}" Icon="/Resources/icon32_add.ico" Click="btnDistributionsNew_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -255,15 +255,15 @@
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_documents.ico" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="Dokumenty" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}"/>
+                                <Label Margin="5" Content="{Tr Main.Documents, DefaultText='Dokumenty', LanguageId={x:Static g:Global.Language}}" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}"/>
                             </StackPanel>
                         </Border>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
                                   IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=documents_preview}"
-                                  Text="Wyświetl listę" Icon="/Resources/icon32_list.ico" Click="btnDocumentsList_Click"/>
+                                  Text="{Tr Main.ShowList, DefaultText='Wyświetl listę', LanguageId={x:Static g:Global.Language}}" Icon="/Resources/icon32_list.ico" Click="btnDocumentsList_Click"/>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
                                   IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=documents_save}"
-                                  Text="Dodaj nowy" Icon="/Resources/icon32_add.ico" Click="btnDocumentsNew_Click"/>
+                                  Text="{Tr Main.AddNew, DefaultText='Dodaj nowy', LanguageId={x:Static g:Global.Language}}" Icon="/Resources/icon32_add.ico" Click="btnDocumentsNew_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -278,15 +278,15 @@
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_briefcase.ico" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="Pracownicy" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}"/>
+                                <Label Margin="5" Content="{Tr Main.Employees, DefaultText='Pracownicy', LanguageId={x:Static g:Global.Language}}" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}"/>
                             </StackPanel>
                         </Border>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
                                   IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=employees_preview}"
-                                  Text="Wyświetl listę" Icon="/Resources/icon32_list.ico" Click="btnEmployeesList_Click"/>
+                                  Text="{Tr Main.ShowList, DefaultText='Wyświetl listę', LanguageId={x:Static g:Global.Language}}" Icon="/Resources/icon32_list.ico" Click="btnEmployeesList_Click"/>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
                                   IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=employees_save}"
-                                  Text="Dodaj nowego" Icon="/Resources/icon32_add.ico" Click="btnEmployeesNew_Click"/>
+                                  Text="{Tr Main.AddNew, DefaultText='Dodaj nowego', LanguageId={x:Static g:Global.Language}}" Icon="/Resources/icon32_add.ico" Click="btnEmployeesNew_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -301,15 +301,15 @@
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_families.ico" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="Rodziny" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}"/>
+                                <Label Margin="5" Content="{Tr Main.Families, DefaultText='Rodziny', LanguageId={x:Static g:Global.Language}}" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}"/>
                             </StackPanel>
                         </Border>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
                                   IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=families_preview}"
-                                  Text="Wyświetl listę" Icon="/Resources/icon32_list.ico" Click="btnFamiliesList_Click"/>
+                                  Text="{Tr Main.ShowList, DefaultText='Wyświetl listę', LanguageId={x:Static g:Global.Language}}" Icon="/Resources/icon32_list.ico" Click="btnFamiliesList_Click"/>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
                                   IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=families_save}"
-                                  Text="Dodaj nową" Icon="/Resources/icon32_add.ico" Click="btnFamiliesNew_Click"/>
+                                  Text="{Tr Main.AddNew, DefaultText='Dodaj nową', LanguageId={x:Static g:Global.Language}}" Icon="/Resources/icon32_add.ico" Click="btnFamiliesNew_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -324,12 +324,12 @@
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_logs.ico" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="Logi" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}"/>
+                                <Label Margin="5" Content="{Tr Main.Logs, DefaultText='Logi', LanguageId={x:Static g:Global.Language}}" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}"/>
                             </StackPanel>
                         </Border>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
                                   IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=logs_preview}"
-                                  Text="Wyświetl logi" Icon="/Resources/icon32_logs.ico" Click="btnLogsList_Click"/>
+                                  Text="{Tr Main.ShowLogs, DefaultText='Wyświetl logi', LanguageId={x:Static g:Global.Language}}" Icon="/Resources/icon32_logs.ico" Click="btnLogsList_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -344,12 +344,12 @@
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_stats.ico" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="Statystyki" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}"/>
+                                <Label Margin="5" Content="{Tr Main.Stats, DefaultText='Statystyki', LanguageId={x:Static g:Global.Language}}" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}"/>
                             </StackPanel>
                         </Border>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
                                   IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=stats_preview}"
-                                  Text="Wyświetl statystyki" Icon="/Resources/icon32_stats.ico" Click="btnStats_Click"/>
+                                  Text="{Tr Main.ShowStats, DefaultText='Wyświetl statystyki', LanguageId={x:Static g:Global.Language}}" Icon="/Resources/icon32_stats.ico" Click="btnStats_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -364,15 +364,15 @@
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_stores.ico" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="Magazyny" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}"/>
+                                <Label Margin="5" Content="{Tr Main.Stores, DefaultText='Magazyny', LanguageId={x:Static g:Global.Language}}" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}"/>
                             </StackPanel>
                         </Border>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
                                   IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=stores_preview}"
-                                  Text="Wyświetl listę" Icon="/Resources/icon32_list.ico" Click="btnStoresList_Click"/>
+                                  Text="{Tr Main.ShowList, DefaultText='Wyświetl listę', LanguageId={x:Static g:Global.Language}}" Icon="/Resources/icon32_list.ico" Click="btnStoresList_Click"/>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
                                   IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=stores_save}"
-                                  Text="Dodaj nowy" Icon="/Resources/icon32_add.ico" Click="btnStoresNew_Click"/>
+                                  Text="{Tr Main.AddNew, DefaultText='Dodaj nowy', LanguageId={x:Static g:Global.Language}}" Icon="/Resources/icon32_add.ico" Click="btnStoresNew_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -387,15 +387,15 @@
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_users.ico" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="Użytkownicy" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}"/>
+                                <Label Margin="5" Content="{Tr Main.Users, DefaultText='Użytkownicy', LanguageId={x:Static g:Global.Language}}" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}"/>
                             </StackPanel>
                         </Border>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
                                   IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=users_preview}"
-                                  Text="Wyświetl listę" Icon="/Resources/icon32_list.ico" Click="btnUsersList_Click"/>
+                                  Text="{Tr Main.ShowList, DefaultText='Wyświetl listę', LanguageId={x:Static g:Global.Language}}" Icon="/Resources/icon32_list.ico" Click="btnUsersList_Click"/>
                         <c:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}"
                                   IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=users_save}"
-                                  Text="Dodaj nowego" Icon="/Resources/icon32_add.ico" Click="btnUsersNew_Click"/>
+                                  Text="{Tr Main.AddNew, DefaultText='Dodaj nowego', LanguageId={x:Static g:Global.Language}}" Icon="/Resources/icon32_add.ico" Click="btnUsersNew_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>

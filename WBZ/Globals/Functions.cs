@@ -8,7 +8,7 @@ using WBZ.Controls;
 using WBZ.Models;
 using WBZ.Modules.Articles;
 using WBZ.Modules.AttributesClasses;
-using WBZ.Modules.Companies;
+using WBZ.Modules.Contractors;
 using WBZ.Modules.Distributions;
 using WBZ.Modules.Documents;
 using WBZ.Modules.Employees;
@@ -68,9 +68,9 @@ namespace WBZ.Globals
 				case Global.Module.ATTRIBUTES_CLASSES:
 					window = new AttributesClassesNew(SQL.GetInstance<M_AttributeClass>(obj.Module, obj.Instance), mode);
 					break;
-				/// COMPANIES
-				case Global.Module.COMPANIES:
-					window = new CompaniesNew(SQL.GetInstance<M_Company>(obj.Module, obj.Instance), mode);
+				/// CONTRACTORS
+				case Global.Module.CONTRACTORS:
+					window = new ContractorsNew(SQL.GetInstance<M_Contractor>(obj.Module, obj.Instance), mode);
 					break;
 				/// DISTRIBUTIONS
 				case Global.Module.DISTRIBUTIONS:

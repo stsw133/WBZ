@@ -3,14 +3,14 @@ using System.Reflection;
 using WBZ.Globals;
 using WBZ.Models;
 using WBZ.Modules._base;
-using MODULE_MODEL = WBZ.Models.M_Company;
+using MODULE_MODEL = WBZ.Models.M_Contractor;
 
-namespace WBZ.Modules.Companies
+namespace WBZ.Modules.Contractors
 {
-    class D_CompaniesNew : D_ModuleNew<MODULE_MODEL>
+    class D_ContractorsNew : D_ModuleNew<MODULE_MODEL>
     {
         /// Module
-        public readonly string MODULE_TYPE = Global.Module.COMPANIES;
+        public readonly string MODULE_TYPE = Global.Module.CONTRACTORS;
 
         /// Window title
         public string Title
@@ -18,13 +18,13 @@ namespace WBZ.Modules.Companies
             get
             {
                 if (Mode == Commands.Type.NEW)
-                    return "Nowa firma";
+                    return "Nowy kontrahent";
                 else if (Mode == Commands.Type.DUPLICATE)
-                    return $"Duplikowanie firmy: {InstanceInfo.Name}";
+                    return $"Duplikowanie kontrahenta: {InstanceInfo.Name}";
                 else if (Mode == Commands.Type.EDIT)
-                    return $"Edycja firmy: {InstanceInfo.Name}";
+                    return $"Edycja kontrahenta: {InstanceInfo.Name}";
                 else
-                    return $"Podgląd firmy: {InstanceInfo.Name}";
+                    return $"Podgląd kontrahenta: {InstanceInfo.Name}";
             }
         }
         /// Instance source - documents

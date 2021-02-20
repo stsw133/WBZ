@@ -3,8 +3,20 @@ Zmiany w wersji 1.1.0 wzglêdem poprzedniej wersji 1.0.2:
  1. Dodano modu³ za³¹czników i galerii za³¹czników.
  2. Dodano modu³ pracowników.
  3. Zmiana modu³u klas atrybutów - wersja z osobnym oknem listy i oknem dodawania/edycji.
- 4. Przemeblowano pozycje w oknie g³ównym.
- 5. Mo¿liwoœæ definiowania w³asnych kolorów paneli.
+ 4. Dodano system grupowania rekordów.
+ 5. Zmieniony system filtrów wyszukiwania.
+ 6. Mo¿liwoœæ okreœlenia domyœlnego sortowania i limitu pobieranych rekordów.
+ 7. Mo¿liwoœæ duplikowania rekordów.
+ 8. Mo¿liwoœæ dodawania ikon do rekordów.
+ 9. Dodano skróty klawiszowe.
+ 10. Dodano mo¿liwoœæ wywo³ania operacji z poziomu menu konktekstowego.
+ 11. Przemeblowano pozycje w oknie g³ównym.
+ 12. Mo¿liwoœæ definiowania w³asnych kolorów paneli.
+ 13. Nowy system prezentowania i zapisywania b³êdów.
+ 14. Optymalizacja kodu programu.
+ 15. Liczne poprawki i usprawnienia.
+ 16. Kilka nowych ikon.
+ 17. Zaktualizowany poradnik u¿ytkownika.
 
 
 

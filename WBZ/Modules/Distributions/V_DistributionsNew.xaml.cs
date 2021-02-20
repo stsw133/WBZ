@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Input;
 using WBZ.Globals;
 using WBZ.Models;
 using WBZ.Modules._base;
@@ -32,10 +31,9 @@ namespace WBZ.Modules.Distributions
 				D.InstanceInfo = instance;
 			D.Mode = mode;
 
-			if (mode == Commands.Type.EDIT && instance.Status == (short)MODULE_MODEL.DistributionStatus.Buffer)
+			if (mode == Commands.Type.EDIT && D.InstanceInfo.Status != (short)MODULE_MODEL.DistributionStatus.Buffer)
 				D.Mode = Commands.Type.PREVIEW;
 
-			chckToBuffer.IsChecked = instance.Status == (short)MODULE_MODEL.DistributionStatus.Buffer;
 			D.InstanceInfo.Families = SQL.GetDistributionPositions(D.InstanceInfo.ID);
 			if (D.Mode.In(Commands.Type.DUPLICATE))
 				foreach (var family in D.InstanceInfo.Families)

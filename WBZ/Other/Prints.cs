@@ -208,10 +208,10 @@ z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danyc
             pSubject.Format.Font.Bold = false;
 
             ///Content
-            var dtCompanies = SQL.GetDonationSumCompany(dFrom, dTo);
+            var dtContractors = SQL.GetDonationSumContractor(dFrom, dTo);
 
             float columnWidth = ((float)document.DefaultPageSetup.PageHeight - (float)document.DefaultPageSetup.LeftMargin
-                - (float)document.DefaultPageSetup.RightMargin) / (2 * dtCompanies.Rows.Count + (4 * 2));
+                - (float)document.DefaultPageSetup.RightMargin) / (2 * dtContractors.Rows.Count + (4 * 2));
 
             Table tContent = section.AddTable();
             tContent.Borders.Width = 0.75;
@@ -237,7 +237,7 @@ z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danyc
             column = tContent.AddColumn(columnWidth);
             column.Format.Alignment = ParagraphAlignment.Center;
             ///GeneretColumns
-            foreach (DataRow drRow in dtCompanies.Rows)
+            foreach (DataRow drRow in dtContractors.Rows)
             {
                 column = tContent.AddColumn(columnWidth);
                 column.Format.Alignment = ParagraphAlignment.Center;
@@ -264,7 +264,7 @@ z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danyc
             row.Cells[cells].MergeRight = 1;
             cells += 2;
             gCells = cells;
-            foreach (DataRow drRow in dtCompanies.Rows)
+            foreach (DataRow drRow in dtContractors.Rows)
             {
                 row.Cells[cells].AddParagraph($"{drRow["name"]}");
                 row.Cells[cells].MergeRight = 1;
@@ -284,7 +284,7 @@ z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danyc
             row.Shading.Color = lColor;
             row.Format.Font.Bold = true;
 
-            foreach (DataRow drRow in dtCompanies.Rows)
+            foreach (DataRow drRow in dtContractors.Rows)
             {
                 row.Cells[gCells].AddParagraph("kg");
                 row.Cells[++gCells].AddParagraph("zł");
@@ -295,7 +295,7 @@ z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danyc
 
             Row row1 = null;
             int nr = 1;
-            float[] sumAll = new float[dtCompanies.Rows.Count * 2 + 2];
+            float[] sumAll = new float[dtContractors.Rows.Count * 2 + 2];
             Array.Clear(sumAll, 0, sumAll.Length);
 
             foreach (DataRow drRow in dtDate.Rows)
@@ -317,32 +317,32 @@ z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danyc
                 float sumAmount = 0;
                 float sumCost = 0;
                 index = 0;
-                foreach (DataRow dataRow in dtCompanies.Rows)
+                foreach (DataRow dataRow in dtContractors.Rows)
                 {
-                    var drCompaniesValue = SQL.GetDonationSumCompanyValue((DateTime)drRow["dateissue"], dataRow["name"].ToString());
+                    var drContractorsValue = SQL.GetDonationSumContractorValue((DateTime)drRow["dateissue"], dataRow["name"].ToString());
 
-                    if (drCompaniesValue["amount"].ToString().Length == 0)
+                    if (drContractorsValue["amount"].ToString().Length == 0)
                         row1.Cells[cells].AddParagraph("0");
                     else
-                        row1.Cells[cells].AddParagraph(drCompaniesValue["amount"].ToString());
+                        row1.Cells[cells].AddParagraph(drContractorsValue["amount"].ToString());
 
-                    if (drCompaniesValue["cost"].ToString().Length == 0)
+                    if (drContractorsValue["cost"].ToString().Length == 0)
                         row1.Cells[++cells].AddParagraph("0");
                     else
-                        row1.Cells[++cells].AddParagraph(drCompaniesValue["cost"].ToString());
+                        row1.Cells[++cells].AddParagraph(drContractorsValue["cost"].ToString());
                     cells++;
 
-                    if (drCompaniesValue["amount"].ToString().Length != 0)
+                    if (drContractorsValue["amount"].ToString().Length != 0)
                     {
-                        sumAmount += float.Parse(drCompaniesValue["amount"].ToString());
-                        sumAll[index] += float.Parse(drCompaniesValue["amount"].ToString());
+                        sumAmount += float.Parse(drContractorsValue["amount"].ToString());
+                        sumAll[index] += float.Parse(drContractorsValue["amount"].ToString());
                     }
                     index++;
 
-                    if (drCompaniesValue["cost"].ToString().Length != 0)
+                    if (drContractorsValue["cost"].ToString().Length != 0)
                     {
-                        sumCost += float.Parse(drCompaniesValue["cost"].ToString());
-                        sumAll[index] += float.Parse(drCompaniesValue["cost"].ToString());
+                        sumCost += float.Parse(drContractorsValue["cost"].ToString());
+                        sumAll[index] += float.Parse(drContractorsValue["cost"].ToString());
                     }
                     index++;
                 }
@@ -371,7 +371,7 @@ z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danyc
             cells += 4;
 
             index = 0;
-            foreach (DataRow dataRow in dtCompanies.Rows)
+            foreach (DataRow dataRow in dtContractors.Rows)
             {
                 rSum.Cells[cells].AddParagraph(sumAll[index].ToString());
                 rSum.Cells[++cells].AddParagraph(sumAll[++index].ToString());
