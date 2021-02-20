@@ -160,6 +160,20 @@ CREATE TABLE wbz.attributes_values
 							update wbz.config set value='1.1.0' where property='VERSION'", sqlConn, sqlTran);
 							sqlCmd.ExecuteNonQuery();
 						}
+						///1.1.0 => 1.2.0
+						if (SQL.GetPropertyValue("VERSION") == "1.1.0")
+						{
+							var sqlCmd = new NpgsqlCommand(@"
+update wbz.users_permissions set perm='contractors_preview' where perm='companies_preview';
+update wbz.users_permissions set perm='contractors_save' where perm='companies_save';
+update wbz.users_permissions set perm='contractors_delete' where perm='companies_delete';
+
+alter table wbz.companies rename to contractors;
+alter table wbz.documents rename column company to contractor;
+
+							update wbz.config set value='1.2.0' where property='VERSION'", sqlConn, sqlTran);
+							sqlCmd.ExecuteNonQuery();
+						}
 
 						sqlTran.Commit();
 					}

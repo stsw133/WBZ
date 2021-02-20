@@ -792,7 +792,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\icon32_companies.ico">
+    <Content Include="Resources\icon32_contractors.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

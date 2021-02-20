@@ -33,7 +33,7 @@ CREATE TABLE wbz.config
 TABLESPACE pg_default;
 
 INSERT INTO wbz.config (property, value) VALUES
-    ('VERSION', '1.1.0'),
+    ('VERSION', '1.2.0'),
     ('LOGS_ENABLED', '0'),
     ('EMAIL_HOST', 'smtp.gmail.com'),
 	('EMAIL_PORT', '587'),
@@ -70,7 +70,7 @@ CREATE TABLE wbz.users_permissions
         NOT VALID
 )
 TABLESPACE pg_default;
-
+/*
 INSERT INTO wbz.users_permissions ("user", perm) VALUES
     (1, 'admin'),
     (1, 'users_preview'), (1, 'users_save'), (1, 'users_delete'),
@@ -86,7 +86,7 @@ INSERT INTO wbz.users_permissions ("user", perm) VALUES
     (1, 'logs_preview'), (1, 'logs_save'), (1, 'logs_delete'),
     (1, 'stats_preview'), (1, 'stats_save'), (1, 'stats_delete'),
     (1, 'community_preview'), (1, 'community_save'), (1, 'community_delete');
-
+*/
 -- Table: wbz.logs
 CREATE TABLE wbz.logs
 (
