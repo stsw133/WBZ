@@ -193,6 +193,12 @@ namespace WBZ.Globals
 			return System.Convert.ToDouble(value, CultureInfo.InvariantCulture) / System.Convert.ToDouble(parameter, CultureInfo.InvariantCulture);
 		}
 	}
+
+	/// <summary>
+	/// Lighten/darken hex color using parameter from -1 to 1 : parameter must be number
+	/// To use negative parameter add ! sign instead of -
+	/// To get font color based on brightness of background color use @ as parameter
+	/// </summary>
 	public class conv_Color : MarkupExtension, IValueConverter
 	{
 		private static conv_Color _conv = null;
@@ -206,6 +212,10 @@ namespace WBZ.Globals
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			Color color = ColorTranslator.FromHtml(value.ToString());
+
+			if (parameter.ToString() == "@")
+				return color.GetBrightness() < 0.5 ? Color.White : Color.Black;
+
 			int r = color.R, g = color.G, b = color.B;
 			var param = System.Convert.ToDouble(parameter.ToString().Replace('!', '-'), CultureInfo.InvariantCulture);
 			r += System.Convert.ToInt32((param > 0 ? 255 - r : r) * param);
@@ -218,6 +228,10 @@ namespace WBZ.Globals
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			Color color = ColorTranslator.FromHtml(value.ToString());
+
+			if (parameter.ToString() == "@")
+				return value;
+
 			byte r = color.R, g = color.G, b = color.B;
 			var param = System.Convert.ToDouble(parameter.ToString().Replace('!', '-'), CultureInfo.InvariantCulture);
 			r = System.Convert.ToByte((-255 * param + r) / (1 - param));
