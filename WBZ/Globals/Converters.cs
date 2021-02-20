@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
@@ -190,6 +191,39 @@ namespace WBZ.Globals
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			return System.Convert.ToDouble(value, CultureInfo.InvariantCulture) / System.Convert.ToDouble(parameter, CultureInfo.InvariantCulture);
+		}
+	}
+	public class conv_Color : MarkupExtension, IValueConverter
+	{
+		private static conv_Color _conv = null;
+		public override object ProvideValue(IServiceProvider serviceProvider)
+		{
+			if (_conv == null)
+				_conv = new conv_Color();
+			return _conv;
+		}
+
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			Color color = ColorTranslator.FromHtml(value.ToString());
+			int r = color.R, g = color.G, b = color.B;
+			var param = System.Convert.ToDouble(parameter.ToString().Replace('!', '-'), CultureInfo.InvariantCulture);
+			r += System.Convert.ToInt32((param > 0 ? 255 - r : r) * param);
+			g += System.Convert.ToInt32((param > 0 ? 255 - g : g) * param);
+			b += System.Convert.ToInt32((param > 0 ? 255 - b : b) * param);
+
+			return ColorTranslator.ToHtml(Color.FromArgb(r, g, b));
+		}
+
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			Color color = ColorTranslator.FromHtml(value.ToString());
+			byte r = color.R, g = color.G, b = color.B;
+			var param = System.Convert.ToDouble(parameter.ToString().Replace('!', '-'), CultureInfo.InvariantCulture);
+			r = System.Convert.ToByte((-255 * param + r) / (1 - param));
+			g = System.Convert.ToByte((-255 * param + g) / (1 - param));
+			b = System.Convert.ToByte((-255 * param + b) / (1 - param));
+			return ColorTranslator.ToHtml(Color.FromArgb(r, g, b));
 		}
 	}
 }
