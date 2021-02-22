@@ -17,6 +17,14 @@ namespace WBZ.Modules
 		}
 
 		/// <summary>
+		/// iSize - ValueChanged
+		/// </summary>
+		private void sSize_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+		{
+			StswExpress.Globals.Properties.Size = Properties.Settings.Default.config_iSize;
+		}
+
+		/// <summary>
 		/// EmailPassword - Loaded
 		/// </summary>
 		private void pbEmailPassword_Loaded(object sender, RoutedEventArgs e)
@@ -52,5 +60,5 @@ namespace WBZ.Modules
 		{
 			Properties.Settings.Default.Save();
 		}
-	}
+    }
 }

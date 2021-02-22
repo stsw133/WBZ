@@ -12,6 +12,11 @@ namespace WBZ
 	/// </summary>
 	public partial class App : Application
 	{
+		public App()
+        {
+			StswExpress.Globals.Properties.Size = WBZ.Properties.Settings.Default.config_iSize;
+        }
+
 		/// <summary>
 		/// Startup
 		/// </summary>
