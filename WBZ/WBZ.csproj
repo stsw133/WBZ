@@ -1,690 +1,134 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{224F4D92-E958-4EC8-9925-56B34B65487E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>WBZ</RootNamespace>
-    <AssemblyName>WBZ</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
     <ApplicationIcon>Resources\icon64.ico</ApplicationIcon>
+    <Version>1.2.0</Version>
+    <Company>stsw</Company>
+    <Copyright>Copyright © Karol Staszewski 2020</Copyright>
+    <Authors>Karol Staszewski</Authors>
   </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="MigraDoc.DocumentObjectModel-wpf, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\PDFsharp-MigraDoc-wpf.1.50.5147\lib\net30\MigraDoc.DocumentObjectModel-wpf.dll</HintPath>
-    </Reference>
-    <Reference Include="MigraDoc.Rendering-wpf, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\PDFsharp-MigraDoc-wpf.1.50.5147\lib\net30\MigraDoc.Rendering-wpf.dll</HintPath>
-    </Reference>
-    <Reference Include="MigraDoc.RtfRendering-wpf, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\PDFsharp-MigraDoc-wpf.1.50.5147\lib\net30\MigraDoc.RtfRendering-wpf.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Npgsql, Version=4.1.1.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Npgsql.4.1.1\lib\net461\Npgsql.dll</HintPath>
-    </Reference>
-    <Reference Include="PdfSharp-wpf, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\PDFsharp-MigraDoc-wpf.1.50.5147\lib\net30\PdfSharp-wpf.dll</HintPath>
-    </Reference>
-    <Reference Include="PdfSharp.Charting-wpf, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\PDFsharp-MigraDoc-wpf.1.50.5147\lib\net30\PdfSharp.Charting-wpf.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.6.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Text.Encodings.Web, Version=4.0.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Encodings.Web.4.6.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Text.Json, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Json.4.6.0\lib\net461\System.Text.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.3\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="TranslateMe, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TranslateMe.1.0.3\lib\net452\TranslateMe.dll</HintPath>
-    </Reference>
-    <Reference Include="TranslateMe.WPF, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TranslateMe.1.0.3\lib\net452\TranslateMe.WPF.dll</HintPath>
-    </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
+    <EmbeddedResource Remove="Properties\Resources.resx" />
   </ItemGroup>
+
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="Controls\DataGrid.xaml.cs">
-      <DependentUpon>DataGrid.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\DataGridColumnFilter_Text.xaml.cs">
-      <DependentUpon>DataGridColumnFilter_Text.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\DataGridColumnFilter_Number.xaml.cs">
-      <DependentUpon>DataGridColumnFilter_Number.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\DataGridColumnFilter_Date.xaml.cs">
-      <DependentUpon>DataGridColumnFilter_Date.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Articles\V_ArticlesListGrid.xaml.cs">
-      <DependentUpon>V_ArticlesListGrid.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\AttributesClasses\V_AttributesClassesListGrid.xaml.cs">
-      <DependentUpon>V_AttributesClassesListGrid.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Contractors\V_ContractorsListGrid.xaml.cs">
-      <DependentUpon>V_ContractorsListGrid.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Distributions\V_DistributionsListGrid.xaml.cs">
-      <DependentUpon>V_DistributionsListGrid.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Documents\V_DocumentsListGrid.xaml.cs">
-      <DependentUpon>V_DocumentsListGrid.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Employees\V_EmployeesListGrid.xaml.cs">
-      <DependentUpon>V_EmployeesListGrid.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Families\V_FamiliesListGrid.xaml.cs">
-      <DependentUpon>V_FamiliesListGrid.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Groups\D_GroupsList.cs" />
-    <Compile Include="Modules\Groups\V_GroupsList.xaml.cs">
-      <DependentUpon>V_GroupsList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Groups\V_GroupsNew.xaml.cs">
-      <DependentUpon>V_GroupsNew.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Groups\D_GroupsNew.cs" />
-    <Compile Include="Modules\Groups\V_GroupsView.xaml.cs">
-      <DependentUpon>V_GroupsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Globals\Commands.cs" />
-    <Compile Include="Globals\Functions.cs" />
-    <Compile Include="Modules\Logs\V_LogsListGrid.xaml.cs">
-      <DependentUpon>V_LogsListGrid.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Stores\V_StoresListGrid.xaml.cs">
-      <DependentUpon>V_StoresListGrid.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Users\V_UsersListGrid.xaml.cs">
-      <DependentUpon>V_UsersListGrid.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\_base\D_ModuleList.cs" />
-    <Compile Include="Modules\_base\D_ModuleNew.cs" />
-    <Compile Include="Modules\_base\V_ModuleNew.cs" />
-    <Compile Include="Models\M_ComboValue.cs" />
-    <Compile Include="Models\M_Article.cs" />
-    <Compile Include="Models\M_Attachment.cs" />
-    <Compile Include="Models\M_AttributeClass.cs" />
-    <Compile Include="Models\M_Contractor.cs" />
-    <Compile Include="Models\M_Config.cs" />
-    <Compile Include="Models\M_Contact.cs" />
-    <Compile Include="Models\M_Database.cs" />
-    <Compile Include="Models\M_Distribution.cs" />
-    <Compile Include="Models\M_Document.cs" />
-    <Compile Include="Models\M_Family.cs" />
-    <Compile Include="Models\M_Group.cs" />
-    <Compile Include="Models\M_Log.cs" />
-    <Compile Include="Models\M_Employee.cs" />
-    <Compile Include="Models\M_User.cs" />
-    <Compile Include="Models\M_Store.cs" />
-    <Compile Include="Controls\StatusPanel.xaml.cs">
-      <DependentUpon>StatusPanel.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\_tabs\AdditionalsTab.xaml.cs">
-      <DependentUpon>AdditionalsTab.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\_tabs\ContactsTab.xaml.cs">
-      <DependentUpon>ContactsTab.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Windows\AttachmentsAdd.xaml.cs">
-      <DependentUpon>AttachmentsAdd.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\_tabs\AttachmentsTab.xaml.cs">
-      <DependentUpon>AttachmentsTab.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\_tabs\GroupsTab.xaml.cs">
-      <DependentUpon>GroupsTab.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\_tabs\LogsTab.xaml.cs">
-      <DependentUpon>LogsTab.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\_tabs\AttributesTab.xaml.cs">
-      <DependentUpon>AttributesTab.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Windows\MsgWin.xaml.cs">
-      <DependentUpon>MsgWin.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Header.xaml.cs">
-      <DependentUpon>Header.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Button.xaml.cs">
-      <DependentUpon>Button.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Windows\AttributeChange.xaml.cs">
-      <DependentUpon>AttributeChange.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Globals\Converters.cs" />
-    <Compile Include="Globals\Extensions.cs" />
-    <Compile Include="Globals\Global.cs" />
-    <Compile Include="Globals\GSM.cs" />
-    <Compile Include="Globals\Mail.cs" />
-    <Compile Include="Controls\TitleBar.xaml.cs">
-      <DependentUpon>TitleBar.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Models\M.cs" />
-    <Compile Include="Modules\Articles\D_ArticlesList.cs" />
-    <Compile Include="Modules\Articles\D_ArticlesNew.cs" />
-    <Compile Include="Modules\Attachments\D_AttachmentsGallery.cs" />
-    <Compile Include="Modules\Attachments\D_AttachmentsList.cs" />
-    <Compile Include="Modules\AttributesClasses\D_AttributesClassesList.cs" />
-    <Compile Include="Modules\AttributesClasses\D_AttributesClassesNew.cs" />
-    <Compile Include="Modules\Contractors\D_ContractorsList.cs" />
-    <Compile Include="Modules\Contractors\D_ContractorsNew.cs" />
-    <Compile Include="Modules\Distributions\D_DistributionsList.cs" />
-    <Compile Include="Modules\Distributions\D_DistributionsNew.cs" />
-    <Compile Include="Modules\Distributions\D_DistributionsStatus.cs" />
-    <Compile Include="Modules\Documents\D_DocumentsList.cs" />
-    <Compile Include="Modules\Documents\D_DocumentsNew.cs" />
-    <Compile Include="Modules\D_Main.cs" />
-    <Compile Include="Modules\Employees\D_EmployeesList.cs" />
-    <Compile Include="Modules\Employees\D_EmployeesNew.cs" />
-    <Compile Include="Modules\Families\D_FamiliesList.cs" />
-    <Compile Include="Modules\Families\D_FamiliesNew.cs" />
-    <Compile Include="Modules\Login\D_Login.cs" />
-    <Compile Include="Modules\Login\D_LoginAppAbout.cs" />
-    <Compile Include="Modules\Login\D_LoginDatabases.cs" />
-    <Compile Include="Modules\Login\D_Versions.cs" />
-    <Compile Include="Modules\Logs\D_LogsList.cs" />
-    <Compile Include="Modules\V_Main.xaml.cs">
-      <DependentUpon>V_Main.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Admin\ConsoleSQL.xaml.cs">
-      <DependentUpon>ConsoleSQL.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Employees\V_EmployeesNew.xaml.cs">
-      <DependentUpon>V_EmployeesNew.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Employees\V_EmployeesList.xaml.cs">
-      <DependentUpon>V_EmployeesList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Attachments\V_AttachmentsList.xaml.cs">
-      <DependentUpon>V_AttachmentsList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\AttributesClasses\V_AttributesClassesNew.xaml.cs">
-      <DependentUpon>V_AttributesClassesNew.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\AttributesClasses\V_AttributesClassesList.xaml.cs">
-      <DependentUpon>V_AttributesClassesList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Attachments\V_AttachmentsGallery.xaml.cs">
-      <DependentUpon>V_AttachmentsGallery.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Logs\V_LogsList.xaml.cs">
-      <DependentUpon>V_LogsList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Personal\D_Profile.cs" />
-    <Compile Include="Modules\Stats\D_Stats.cs" />
-    <Compile Include="Modules\Stores\D_StoresList.cs" />
-    <Compile Include="Modules\Stores\D_StoresNew.cs" />
-    <Compile Include="Modules\Users\D_UsersList.cs" />
-    <Compile Include="Modules\Users\D_UsersNew.cs" />
-    <Compile Include="Modules\Users\V_UsersList.xaml.cs">
-      <DependentUpon>V_UsersList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Users\V_UsersNew.xaml.cs">
-      <DependentUpon>V_UsersNew.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Contractors\V_ContractorsNew.xaml.cs">
-      <DependentUpon>V_ContractorsNew.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Contractors\V_ContractorsList.xaml.cs">
-      <DependentUpon>V_ContractorsList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Distributions\V_DistributionsNew.xaml.cs">
-      <DependentUpon>V_DistributionsNew.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Distributions\V_DistributionsList.xaml.cs">
-      <DependentUpon>V_DistributionsList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Distributions\V_DistributionsStatus.xaml.cs">
-      <DependentUpon>V_DistributionsStatus.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Families\V_FamiliesNew.xaml.cs">
-      <DependentUpon>V_FamiliesNew.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Families\V_FamiliesList.xaml.cs">
-      <DependentUpon>V_FamiliesList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Documents\V_DocumentsNew.xaml.cs">
-      <DependentUpon>V_DocumentsNew.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Documents\V_DocumentsList.xaml.cs">
-      <DependentUpon>V_DocumentsList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Articles\V_ArticlesNew.xaml.cs">
-      <DependentUpon>V_ArticlesNew.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Articles\V_ArticlesList.xaml.cs">
-      <DependentUpon>V_ArticlesList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Login\V_LoginAppAbout.xaml.cs">
-      <DependentUpon>V_LoginAppAbout.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Login\V_LoginDatabases.xaml.cs">
-      <DependentUpon>V_LoginDatabases.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Windows\Confirmation.xaml.cs">
-      <DependentUpon>Confirmation.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Login\V_LoginRegister.xaml.cs">
-      <DependentUpon>V_LoginRegister.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Login\V_Versions.xaml.cs">
-      <DependentUpon>V_Versions.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\V_Settings.xaml.cs">
-      <DependentUpon>V_Settings.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Personal\V_Profile.xaml.cs">
-      <DependentUpon>V_Profile.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Stats\V_Stats.xaml.cs">
-      <DependentUpon>V_Stats.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Stats\StatsReportsGenerator.xaml.cs">
-      <DependentUpon>StatsReportsGenerator.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Stores\V_StoresNew.xaml.cs">
-      <DependentUpon>V_StoresNew.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Stores\V_StoresList.xaml.cs">
-      <DependentUpon>V_StoresList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Other\Prints.cs" />
-    <Compile Include="Modules\_base\V_ModuleList.cs" />
-    <Compile Include="Settings.cs" />
-    <Compile Include="SQL\SQL.cs" />
-    <Compile Include="SQL\SQL_Migration.cs" />
-    <Compile Include="Controls\MenuPanelColor.xaml.cs">
-      <DependentUpon>MenuPanelColor.xaml</DependentUpon>
-    </Compile>
-    <Page Include="Controls\DataGrid.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\DataGridColumnFilter_Text.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\DataGridColumnFilter_Number.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\DataGridColumnFilter_Date.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\StatusPanel.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Articles\V_ArticlesListGrid.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\AttributesClasses\V_AttributesClassesListGrid.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Modules\Contractors\V_ContractorsListGrid.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Modules\Distributions\V_DistributionsListGrid.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Modules\Documents\V_DocumentsListGrid.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Modules\Employees\V_EmployeesListGrid.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Modules\Families\V_FamiliesListGrid.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Modules\Logs\V_LogsListGrid.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Modules\Stores\V_StoresListGrid.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Modules\Users\V_UsersListGrid.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Modules\_tabs\AdditionalsTab.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Modules\_tabs\ContactsTab.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Modules\Groups\V_GroupsList.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Modules\Groups\V_GroupsNew.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Modules\Groups\V_GroupsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Windows\AttachmentsAdd.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\_tabs\AttachmentsTab.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\_tabs\GroupsTab.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\_tabs\LogsTab.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Modules\_tabs\AttributesTab.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Windows\MsgWin.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\Header.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Button.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Windows\AttributeChange.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\TitleBar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Admin\ConsoleSQL.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Employees\V_EmployeesNew.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Employees\V_EmployeesList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Attachments\V_AttachmentsGallery.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Attachments\V_AttachmentsList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Logs\V_LogsList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Users\V_UsersNew.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\AttributesClasses\V_AttributesClassesNew.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\AttributesClasses\V_AttributesClassesList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Distributions\V_DistributionsNew.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Distributions\V_DistributionsList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Distributions\V_DistributionsStatus.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Login\V_Login.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Modules\Login\V_Login.xaml.cs">
-      <DependentUpon>V_Login.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="Modules\V_Main.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Users\V_UsersList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Contractors\V_ContractorsNew.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Contractors\V_ContractorsList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Families\V_FamiliesNew.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Families\V_FamiliesList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Documents\V_DocumentsNew.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Documents\V_DocumentsList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Articles\V_ArticlesNew.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Articles\V_ArticlesList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Login\V_LoginAppAbout.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Login\V_LoginDatabases.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Windows\Confirmation.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Modules\Login\V_LoginRegister.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Login\V_Versions.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\V_Settings.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Personal\V_Profile.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Stats\V_Stats.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Stats\StatsReportsGenerator.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Stores\V_StoresNew.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Stores\V_StoresList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\MenuPanelColor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <None Remove="Resources\icon32_accept.ico" />
+    <None Remove="Resources\icon32_add.ico" />
+    <None Remove="Resources\icon32_admin.ico" />
+    <None Remove="Resources\icon32_articles.ico" />
+    <None Remove="Resources\icon32_attmisc.ico" />
+    <None Remove="Resources\icon32_attributes.ico" />
+    <None Remove="Resources\icon32_books.ico" />
+    <None Remove="Resources\icon32_briefcase.ico" />
+    <None Remove="Resources\icon32_calendar.ico" />
+    <None Remove="Resources\icon32_camfile.ico" />
+    <None Remove="Resources\icon32_cancel.ico" />
+    <None Remove="Resources\icon32_circleblue.ico" />
+    <None Remove="Resources\icon32_circlegreen.ico" />
+    <None Remove="Resources\icon32_circlegrey.ico" />
+    <None Remove="Resources\icon32_circleorange.ico" />
+    <None Remove="Resources\icon32_circlered.ico" />
+    <None Remove="Resources\icon32_circleyellow.ico" />
+    <None Remove="Resources\icon32_clear.ico" />
+    <None Remove="Resources\icon32_close.ico" />
+    <None Remove="Resources\icon32_code.ico" />
+    <None Remove="Resources\icon32_color.ico" />
+    <None Remove="Resources\icon32_community.ico" />
+    <None Remove="Resources\icon32_contractors.ico" />
+    <None Remove="Resources\icon32_database.ico" />
+    <None Remove="Resources\icon32_delete.ico" />
+    <None Remove="Resources\icon32_descending.ico" />
+    <None Remove="Resources\icon32_documents.ico" />
+    <None Remove="Resources\icon32_download.ico" />
+    <None Remove="Resources\icon32_duplicate.ico" />
+    <None Remove="Resources\icon32_edit.ico" />
+    <None Remove="Resources\icon32_families.ico" />
+    <None Remove="Resources\icon32_filter.ico" />
+    <None Remove="Resources\icon32_folder.ico" />
+    <None Remove="Resources\icon32_font.ico" />
+    <None Remove="Resources\icon32_food.ico" />
+    <None Remove="Resources\icon32_gallery.ico" />
+    <None Remove="Resources\icon32_global.ico" />
+    <None Remove="Resources\icon32_greetings.ico" />
+    <None Remove="Resources\icon32_groups.ico" />
+    <None Remove="Resources\icon32_language_pl.ico" />
+    <None Remove="Resources\icon32_list.ico" />
+    <None Remove="Resources\icon32_locked.ico" />
+    <None Remove="Resources\icon32_login.ico" />
+    <None Remove="Resources\icon32_logs.ico" />
+    <None Remove="Resources\icon32_mail.ico" />
+    <None Remove="Resources\icon32_maximize.ico" />
+    <None Remove="Resources\icon32_minimize.ico" />
+    <None Remove="Resources\icon32_notifications.ico" />
+    <None Remove="Resources\icon32_photos.ico" />
+    <None Remove="Resources\icon32_printer.ico" />
+    <None Remove="Resources\icon32_profile.ico" />
+    <None Remove="Resources\icon32_random.ico" />
+    <None Remove="Resources\icon32_refresh.ico" />
+    <None Remove="Resources\icon32_remove.ico" />
+    <None Remove="Resources\icon32_restoredown.ico" />
+    <None Remove="Resources\icon32_return.ico" />
+    <None Remove="Resources\icon32_save.ico" />
+    <None Remove="Resources\icon32_scanner.ico" />
+    <None Remove="Resources\icon32_search.ico" />
+    <None Remove="Resources\icon32_select.ico" />
+    <None Remove="Resources\icon32_settings.ico" />
+    <None Remove="Resources\icon32_show.ico" />
+    <None Remove="Resources\icon32_source.ico" />
+    <None Remove="Resources\icon32_stats.ico" />
+    <None Remove="Resources\icon32_stores.ico" />
+    <None Remove="Resources\icon32_test.ico" />
+    <None Remove="Resources\icon32_tools.ico" />
+    <None Remove="Resources\icon32_transport.ico" />
+    <None Remove="Resources\icon32_unlocked.ico" />
+    <None Remove="Resources\icon32_upload.ico" />
+    <None Remove="Resources\icon32_user.ico" />
+    <None Remove="Resources\icon32_users.ico" />
+    <None Remove="Resources\icon32_versions.ico" />
+    <None Remove="Resources\icon32_web.ico" />
+    <None Remove="Resources\icon64.ico" />
+    <None Remove="Resources\logo.png" />
+    <None Remove="Resources\pl_manual.pdf" />
+    <None Remove="Resources\Translations.tm.json" />
+    <None Remove="Resources\_null.ico" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Content Include="Resources\pl_manual.pdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Translations.tm.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Resource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <SubType>Designer</SubType>
-    </Resource>
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
     <Content Include="Resources\icon32_accept.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\icon32_delete.ico">
+    <Content Include="Resources\icon32_add.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\icon32_source.ico">
+    <Content Include="Resources\icon32_admin.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_articles.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_attmisc.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_attributes.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_books.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_briefcase.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_calendar.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_camfile.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_cancel.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\icon32_circleblue.ico">
@@ -693,7 +137,7 @@
     <Content Include="Resources\icon32_circlegreen.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\icon32_circleyellow.ico">
+    <Content Include="Resources\icon32_circlegrey.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\icon32_circleorange.ico">
@@ -702,290 +146,223 @@
     <Content Include="Resources\icon32_circlered.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\icon32_circlegrey.ico">
+    <Content Include="Resources\icon32_circleyellow.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\icon32_font.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon32_show.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon32_transport.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon64.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\icon32_add.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\icon32_close.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\icon32_stats.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\icon32_refresh.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\icon32_edit.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\icon32_cancel.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\icon32_minimize.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\logo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\icon32_return.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\icon32_documents.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\icon32_camfile.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\icon32_scanner.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\icon32_articles.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\icon32_list.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\icon32_contractors.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\icon32_admin.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Resources\icon32_clear.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\icon32_random.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\icon32_families.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\icon32_remove.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\icon32_food.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\icon32_restoredown.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\icon32_maximize.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\icon32_books.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\_null.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\icon32_printer.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\icon32_greetings.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\icon32_download.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Modules\Transport\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\icon32_filter.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon32_attmisc.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon32_gallery.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon32_briefcase.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon32_folder.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon32_groups.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon32_select.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon32_duplicate.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon32_descending.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon32_language_pl.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon32_color.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SQL\database.sql" />
-    <Content Include="Resources\icon32_attributes.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon32_unlocked.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon32_locked.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon32_save.ico">
+    <Content Include="Resources\icon32_close.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\icon32_code.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\icon32_photos.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon32_global.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon32_users.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon32_user.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon32_logs.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon32_settings.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon32_upload.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon32_profile.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon32_mail.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon32_calendar.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon32_stores.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon32_versions.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon32_tools.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\icon32_login.ico">
+    <Content Include="Resources\icon32_color.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\icon32_community.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\icon32_contractors.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\icon32_database.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\icon32_web.ico">
+    <Content Include="Resources\icon32_delete.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\icon32_test.ico">
+    <Content Include="Resources\icon32_descending.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\icon32_search.ico">
+    <Content Include="Resources\icon32_documents.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_download.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_duplicate.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_edit.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_families.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_filter.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_folder.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_font.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_food.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_gallery.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_global.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_greetings.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_groups.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_language_pl.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_list.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_locked.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_login.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_logs.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_mail.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_maximize.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_minimize.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\icon32_notifications.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\icon32_photos.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_printer.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_profile.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_random.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_refresh.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_remove.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_restoredown.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_return.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_save.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_scanner.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_search.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_select.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_settings.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_show.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_source.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_stats.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_stores.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_test.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_tools.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_transport.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_unlocked.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_upload.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_user.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_users.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_versions.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_web.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon64.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\pl_manual.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Translations.tm.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\_null.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
+
   <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
+    <PackageReference Include="Npgsql" Version="5.0.3" />
+    <PackageReference Include="PDFsharp-MigraDoc-GDI" Version="1.50.5147" />
+    <PackageReference Include="System.IO.Ports" Version="5.0.0" />
+    <PackageReference Include="TranslateMe" Version="1.0.3" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
+  <ItemGroup>
+    <Resource Include="Properties\Resources.resx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
 </Project>

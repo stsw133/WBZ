@@ -178,22 +178,8 @@
     <Setting Name="columns_ArticlesList_Reserved" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="config_ContractorsNew_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
-      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;900&lt;/string&gt;
-  &lt;string&gt;600&lt;/string&gt;
-&lt;/ArrayOfString&gt;</Value>
-    </Setting>
     <Setting Name="config_Contractors_PanelColor" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FFEEEE55</Value>
-    </Setting>
-    <Setting Name="config_ContractorsList_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
-      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;975&lt;/string&gt;
-  &lt;string&gt;650&lt;/string&gt;
-&lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="config_FamiliesList_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
@@ -634,7 +620,7 @@
     <Setting Name="columns_DocumentsList_ContractorName" Type="System.String" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="config_ContractorsNew_WindowSize" Type="System.String" Scope="User">
+    <Setting Name="config_ContractorsNew_WindowSize1" Type="System.String" Scope="User">
       <Value Profile="(Default)">
           &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
             &lt;string&gt;900&lt;/string&gt;
@@ -642,10 +628,10 @@
           &lt;/ArrayOfString&gt;
         </Value>
     </Setting>
-    <Setting Name="config_Contractors_PanelColor" Type="System.String" Scope="User">
+    <Setting Name="config_Contractors_PanelColor1" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FFEEEE55</Value>
     </Setting>
-    <Setting Name="config_ContractorsList_WindowSize" Type="System.String" Scope="User">
+    <Setting Name="config_ContractorsList_WindowSize1" Type="System.String" Scope="User">
       <Value Profile="(Default)">
           &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
             &lt;string&gt;975&lt;/string&gt;
@@ -692,6 +678,12 @@
     </Setting>
     <Setting Name="columns_ContractorsList_Icon" Type="System.String" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="config_ContractorsNew_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="config_ContractorsList_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

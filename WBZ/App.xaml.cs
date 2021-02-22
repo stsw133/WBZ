@@ -17,7 +17,8 @@ namespace WBZ
 		/// </summary>
 		private void App_Startup(object sender, StartupEventArgs e)
 		{
-			TMLanguagesLoader.Instance.AddFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Resources\Translations.tm.json"));
+			if (File.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Resources\Translations.tm.json")))
+				TMLanguagesLoader.Instance.AddFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Resources\Translations.tm.json"));
 
 			if (M_Database.LoadAllDatabases().Count == 0)
 				new LoginDatabases().Show();
