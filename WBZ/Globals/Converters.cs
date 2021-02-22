@@ -23,7 +23,7 @@ namespace WBZ.Globals
 
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			if (targetType.Name == "Visibility")
+			if (targetType == typeof(Visibility))
 				return !System.Convert.ToBoolean(value) ? Visibility.Visible : Visibility.Collapsed;
 			else
 				return !System.Convert.ToBoolean(value);
@@ -31,7 +31,7 @@ namespace WBZ.Globals
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			if (targetType.Name == "Visibility")
+			if (targetType == typeof(Visibility))
 				return !System.Convert.ToBoolean(value) ? Visibility.Collapsed : Visibility.Visible;
 			else
 				return !System.Convert.ToBoolean(value);
@@ -105,14 +105,14 @@ namespace WBZ.Globals
 		{
 			if (value?.ToString() == (parameter?.ToString() ?? string.Empty))
 			{
-				if (targetType.Name == "Visibility")
+				if (targetType == typeof(Visibility))
 					return Visibility.Visible;
 				else
 					return true;
 			}
 			else
 			{
-				if (targetType.Name == "Visibility")
+				if (targetType == typeof(Visibility))
 					return Visibility.Collapsed;
 				else
 					return false;
@@ -121,11 +121,10 @@ namespace WBZ.Globals
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			if (targetType.Name == "Visibility")
+			if (targetType == typeof(Visibility))
 				return Visibility.Collapsed;
 			else
 				return false;
-			//return value;
 		}
 	}
 
@@ -147,14 +146,14 @@ namespace WBZ.Globals
 		{
 			if ((value as List<string>).Contains(parameter.ToString().TrimStart('!')))
 			{
-				if (targetType.Name == "Visibility")
+				if (targetType == typeof(Visibility))
 					return parameter.ToString()[0] != '!' ? Visibility.Visible : Visibility.Collapsed;
 				else
 					return parameter.ToString()[0] != '!' ? true : false;
 			}
 			else
 			{
-				if (targetType.Name == "Visibility")
+				if (targetType == typeof(Visibility))
 					return parameter.ToString()[0] != '!' ? Visibility.Collapsed : Visibility.Visible;
 				else
 					return parameter.ToString()[0] != '!' ? false : true;
@@ -163,7 +162,7 @@ namespace WBZ.Globals
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			if (targetType.Name == "Visibility")
+			if (targetType == typeof(Visibility))
 				return Visibility.Collapsed;
 			else
 				return false;
@@ -195,9 +194,8 @@ namespace WBZ.Globals
 	}
 
 	/// <summary>
-	/// Lighten/darken hex color using parameter from -1 to 1 : parameter must be number
-	/// To use negative parameter add ! sign instead of -
-	/// To get font color based on brightness of background color use @ as parameter
+	/// Lighten/darken hex color using parameter from -1.0 to 1.0 : parameter must be number
+	/// To get font color based on brightness of background color use ! as parameter
 	/// </summary>
 	public class conv_Color : MarkupExtension, IValueConverter
 	{
@@ -213,11 +211,11 @@ namespace WBZ.Globals
 		{
 			Color color = ColorTranslator.FromHtml(value.ToString());
 
-			if (parameter.ToString() == "@")
+			if (parameter.ToString() == "!")
 				return color.GetBrightness() < 0.5 ? Color.White : Color.Black;
 
 			int r = color.R, g = color.G, b = color.B;
-			var param = System.Convert.ToDouble(parameter.ToString().Replace('!', '-'), CultureInfo.InvariantCulture);
+			var param = System.Convert.ToDouble(parameter, CultureInfo.InvariantCulture);
 			r += System.Convert.ToInt32((param > 0 ? 255 - r : r) * param);
 			g += System.Convert.ToInt32((param > 0 ? 255 - g : g) * param);
 			b += System.Convert.ToInt32((param > 0 ? 255 - b : b) * param);
@@ -229,11 +227,11 @@ namespace WBZ.Globals
 		{
 			Color color = ColorTranslator.FromHtml(value.ToString());
 
-			if (parameter.ToString() == "@")
+			if (parameter.ToString() == "!")
 				return value;
 
 			byte r = color.R, g = color.G, b = color.B;
-			var param = System.Convert.ToDouble(parameter.ToString().Replace('!', '-'), CultureInfo.InvariantCulture);
+			var param = System.Convert.ToDouble(parameter, CultureInfo.InvariantCulture);
 			r = System.Convert.ToByte((-255 * param + r) / (1 - param));
 			g = System.Convert.ToByte((-255 * param + g) / (1 - param));
 			b = System.Convert.ToByte((-255 * param + b) / (1 - param));
