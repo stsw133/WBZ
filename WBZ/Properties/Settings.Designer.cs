@@ -800,9 +800,9 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("587")]
-        public string config_Email_Port {
+        public int config_Email_Port {
             get {
-                return ((string)(this["config_Email_Port"]));
+                return ((int)(this["config_Email_Port"]));
             }
             set {
                 this["config_Email_Port"] = value;

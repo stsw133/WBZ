@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using WBZ.Globals;
 
 namespace WBZ.Modules.Login
 {
@@ -12,7 +11,7 @@ namespace WBZ.Modules.Login
 		}
 
 		/// System version
-		public string Version => Global.Version;
+		public string Version => StswExpress.Globals.Global.AppVersion();
 		/// About app
 		public string AboutApp => $@"To w pełni darmowy program wspomagający pracę banków żywności. Oferuje modułowy sposób zarządzania zasobami i dystrybucją.";
 		/// About creators

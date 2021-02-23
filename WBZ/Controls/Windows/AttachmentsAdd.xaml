@@ -31,6 +31,6 @@
             <Label Content="Nazwa:" Margin="5,5,0,5" VerticalAlignment="Center"/>
             <TextBox x:Name="tbName" Margin="5" VerticalContentAlignment="Center"/>
         </DockPanel>
-        <sec:Button Margin="5" Text="Akceptuj" HorizontalAlignment="Center" Icon="/Resources/icon32_accept.ico" Click="btnAccept_Click"/>
+        <sec:Button Margin="5" Text="Akceptuj" HorizontalAlignment="Center" Icon="/Resources/icon32_accept.ico" IsDefault="True" Click="btnAccept_Click"/>
     </DockPanel>
 </Window>

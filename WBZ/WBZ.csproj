@@ -330,9 +330,6 @@
     <Content Include="Resources\pl_manual.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\StswExpress.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Translations.tm.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -350,13 +347,16 @@
 
   <ItemGroup>
     <Reference Include="StswExpress">
-      <HintPath>..\..\..\StswExpress\StswExpress\bin\Debug\netcoreapp3.1\StswExpress.dll</HintPath>
+      <HintPath>Resources\StswExpress.dll</HintPath>
     </Reference>
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Properties\Resources.resx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\StswExpress.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
 

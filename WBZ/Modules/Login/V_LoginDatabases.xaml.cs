@@ -86,7 +86,7 @@ namespace WBZ.Modules.Login
 			SQL.connWBZ = SQL.MakeConnString(tbServer.Text, Convert.ToInt32(tbPort.Text), tbDatabase.Text, tbUsername.Text, pbPassword.Password);
 			string dbv = SQL.GetPropertyValue("VERSION");
 
-			if (dbv == Global.Version)
+			if (dbv == StswExpress.Globals.Global.AppVersion())
 			{
 				lblStatus.Content = "Wersja bazy aktualna!";
 				lblStatus.Foreground = Brushes.Green;

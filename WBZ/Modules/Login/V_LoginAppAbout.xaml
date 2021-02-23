@@ -19,34 +19,29 @@
         <c:TitleBar DockPanel.Dock="Top"/>
         <!-- main -->
         <DockPanel Margin="0,0,0,5">
-            <Border DockPanel.Dock="Top" Margin="5,5,5,0" BorderBrush="#5E80" BorderThickness="2">
-                <DockPanel>
-                    <Border BorderBrush="#5E80" BorderThickness="0,0,2,0">
-                        <Image Margin="10" Stretch="None" Source="/Resources/icon64.ico"/>
-                    </Border>
-                    <StackPanel VerticalAlignment="Center">
-                        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Label Content="WBZ" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" FontWeight="Heavy"/>
-                            <Label Content="{Binding Version}" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" FontWeight="Heavy"/>
-                        </StackPanel>
-                        <TextBlock DockPanel.Dock="Top" Text="{Binding AboutApp}" Padding="5" TextAlignment="Center" TextWrapping="Wrap" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=25}"/>
+            <DockPanel DockPanel.Dock="Top" Margin="5,5,5,0">
+                <Image Margin="10" Stretch="None" Source="/Resources/icon64.ico"/>
+                <StackPanel VerticalAlignment="Center">
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label Content="WBZ" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" FontWeight="Heavy"/>
+                        <Label Content="{Binding Version}" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" FontWeight="Heavy"/>
                     </StackPanel>
-                </DockPanel>
-            </Border>
-            <Border DockPanel.Dock="Top" Margin="5,5,5,0" BorderBrush="#5047" BorderThickness="2">
-                <DockPanel>
-                    <StackPanel VerticalAlignment="Center">
-                        <TextBlock DockPanel.Dock="Top" Text="{Binding AboutCreators}" Padding="5" TextAlignment="Center" TextWrapping="Wrap" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=25}"/>
-                        <StackPanel DockPanel.Dock="Top">
-                            <Label Content="Karol Staszewski" Padding="5,5,5,0" HorizontalAlignment="Center" FontWeight="Medium"/>
-                            <Label Content="stsw.karolstaszewski@gmail.com" Padding="5,0,5,5" HorizontalAlignment="Center" Foreground="#239"/>
-                        </StackPanel>
-                        <StackPanel DockPanel.Dock="Top">
-                            <Label DockPanel.Dock="Top" Content="Arkadiusz Bryska" Padding="5" HorizontalAlignment="Center" FontWeight="Medium"/>
-                        </StackPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="{Binding AboutApp}" Padding="5" TextAlignment="Center" TextWrapping="Wrap" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=25}"/>
+                </StackPanel>
+            </DockPanel>
+            <Border DockPanel.Dock="Top" Margin="5" BorderBrush="Gray" BorderThickness="2"/>
+            <DockPanel DockPanel.Dock="Top">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock DockPanel.Dock="Top" Text="{Binding AboutCreators}" Padding="5" TextAlignment="Center" TextWrapping="Wrap" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=25}"/>
+                    <StackPanel DockPanel.Dock="Top">
+                        <Label Content="Karol Staszewski" Padding="5,5,5,0" HorizontalAlignment="Center" FontWeight="Medium"/>
+                        <Label Content="stsw.karolstaszewski@gmail.com" Padding="5,0,5,5" HorizontalAlignment="Center" Foreground="#239"/>
                     </StackPanel>
-                </DockPanel>
-            </Border>
+                    <StackPanel DockPanel.Dock="Top">
+                        <Label DockPanel.Dock="Top" Content="Arkadiusz Bryska" Padding="5" HorizontalAlignment="Center" FontWeight="Medium"/>
+                    </StackPanel>
+                </StackPanel>
+            </DockPanel>
         </DockPanel>
     </DockPanel>
 </Window>

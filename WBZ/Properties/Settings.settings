@@ -20,7 +20,7 @@
     <Setting Name="config_TitleBarStyle" Type="System.Byte" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="config_iSize" Type="System.Double" Scope="User">
+    <Setting Name="iSize" Type="System.Double" Scope="User">
       <Value Profile="(Default)">12</Value>
     </Setting>
     <Setting Name="config_UsersList_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
@@ -248,7 +248,7 @@
     <Setting Name="config_Email_Host" Type="System.String" Scope="User">
       <Value Profile="(Default)">smtp.gmail.com</Value>
     </Setting>
-    <Setting Name="config_Email_Port" Type="System.String" Scope="User">
+    <Setting Name="config_Email_Port" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">587</Value>
     </Setting>
     <Setting Name="config_Email_Email" Type="System.String" Scope="User">

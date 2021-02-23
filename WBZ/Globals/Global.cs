@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.IO;
-using System.Reflection;
 using System.Security.Cryptography;
 ﻿using System.Text;
 using WBZ.Models;
@@ -12,12 +11,8 @@ namespace WBZ.Globals
 {
     public static class Global
     {
-        /// App version
-        public static string Version => string.Concat(Assembly.GetEntryAssembly().GetName().Version.ToString().Reverse().Skip(2).Reverse());
         /// Newest version to download
         public static string VersionNewest { get; set; } = null;
-        /// Language
-        public static string Language => Properties.Settings.Default.Language;
         /// Chosen database
         public static M_Database Database { get; set; } = new M_Database();
         /// Logged user

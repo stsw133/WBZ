@@ -26,7 +26,7 @@
         <TextBox DockPanel.Dock="Top" Margin="5,0" Text="{Binding AttributeInfo.Value}" Visibility="{Binding FreeValues, Converter={seg:conv_BoolToVisibility}}"/>
         <ComboBox DockPanel.Dock="Top" Margin="5,0" ItemsSource="{Binding AttributeValues}" SelectedValue="{Binding AttributeInfo.Value}" SelectedValuePath="Name" Visibility="{Binding FreeValues, Converter={seg:conv_BoolInverted}}"/>
         <DockPanel DockPanel.Dock="Bottom" Margin="0,10,0,0" HorizontalAlignment="Center">
-            <Button Content="OK" Margin="5" HorizontalAlignment="Right" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=10}" IsEnabled="{Binding EditMode}" Click="btnOk_Click"/>
+            <Button Content="OK" Margin="5" HorizontalAlignment="Right" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=10}" IsEnabled="{Binding EditMode}" IsDefault="True" Click="btnOk_Click"/>
             <Button Content="Anuluj" Margin="5" HorizontalAlignment="Left" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=10}" Click="btnCancel_Click"/>
         </DockPanel>
     </DockPanel>

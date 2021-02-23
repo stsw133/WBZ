@@ -12,7 +12,7 @@ namespace WBZ.Modules
 		}
 
 		/// Title
-		public string Title { get; } = Global.Database.Name + TranslateMe.TM.Tr("Main", " - okno główne", Global.Language);
+		public string Title { get; } = Global.Database.Name + TranslateMe.TM.Tr("Main", " - okno główne", StswExpress.Globals.Properties.Language);
 		/// Want to logout
 		public bool WantToLogout { get; set; } = false;
 	}

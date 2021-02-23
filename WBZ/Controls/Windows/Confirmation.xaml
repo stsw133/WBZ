@@ -33,7 +33,7 @@
             <TextBox x:Name="tbLogin" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center"/>
             <Label Grid.Row="1" Grid.Column="0" Content="Hasło:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
             <PasswordBox x:Name="pbPassword" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center"/>
-            <sec:Button Grid.Row="2" Grid.Column="1" Text="Akceptuj" Margin="5" Icon="/Resources/icon32_accept.ico" Click="btnAccept_Click"/>
+            <sec:Button Grid.Row="2" Grid.Column="1" Text="Akceptuj" Margin="5" Icon="/Resources/icon32_accept.ico" IsDefault="True" Click="btnAccept_Click"/>
         </Grid>
     </DockPanel>
 </Window>

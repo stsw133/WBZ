@@ -39,7 +39,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnEmailTest_Click(object sender, MouseButtonEventArgs e)
 		{
-			if (Mail.TestMail())
+			if (StswExpress.Globals.Mail.SendMail(StswExpress.Globals.Mail.Email, new string[] { Global.User.Email }, string.Empty, string.Empty))
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.INFO, "Test poczty e-mail powiódł się.") { Owner = this }.ShowDialog();
 			else
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Test poczty e-mail nie powiódł się!") { Owner = this }.ShowDialog();
@@ -50,6 +50,10 @@ namespace WBZ.Modules
 		/// </summary>
 		private void Window_Closed(object sender, EventArgs e)
 		{
+			StswExpress.Globals.Mail.Host = Properties.Settings.Default.config_Email_Host;
+			StswExpress.Globals.Mail.Port = Properties.Settings.Default.config_Email_Port;
+			StswExpress.Globals.Mail.Email = Properties.Settings.Default.config_Email_Email;
+			StswExpress.Globals.Mail.Password = Properties.Settings.Default.config_Email_Password;
 			StswExpress.Globals.Properties.iSize = Properties.Settings.Default.iSize;
 			StswExpress.Globals.Properties.Language = Properties.Settings.Default.Language;
 			Properties.Settings.Default.Save();

@@ -19,7 +19,7 @@
         <!-- titleBar -->
         <c:TitleBar DockPanel.Dock="Top"/>
         <!-- main -->
-        <sec:Button DockPanel.Dock="Bottom" Margin="5,0,5,5" TextVisibility="False" HorizontalAlignment="Center" Icon="/Resources/icon32_accept.ico" PreviewMouseLeftButtonUp="btnStart_Click"/>
+        <sec:Button DockPanel.Dock="Bottom" Margin="5,0,5,5" TextVisibility="False" HorizontalAlignment="Center" Icon="/Resources/icon32_accept.ico" IsDefault="True" PreviewMouseLeftButtonUp="btnStart_Click"/>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition/>
