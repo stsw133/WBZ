@@ -53,7 +53,6 @@ namespace WBZ.Modules
 			StswExpress.Globals.Properties.iSize = Properties.Settings.Default.iSize;
 			StswExpress.Globals.Properties.Language = Properties.Settings.Default.Language;
 			Properties.Settings.Default.Save();
-			(Owner as Main).menuRefresh_Executed(null, null);
 		}
     }
 }

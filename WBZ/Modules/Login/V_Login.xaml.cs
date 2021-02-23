@@ -264,7 +264,12 @@ namespace WBZ.Modules.Login
 		{
 			var window = new Settings();
 			window.Owner = this;
-			window.ShowDialog();
+			if (window.ShowDialog() == true)
+            {
+				var login = new Login();
+				login.Show();
+				Close();
+			}
 		}
 
 		/// <summary>

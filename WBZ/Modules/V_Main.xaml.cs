@@ -90,7 +90,10 @@ namespace WBZ.Modules
 		}
 		private void menuSettings_Click(object sender, RoutedEventArgs e)
 		{
-			new Settings() { Owner = this }.ShowDialog();
+			if (new Settings() { Owner = this }.ShowDialog() == true)
+            {
+				menuRefresh_Executed(null, null);
+			}
 		}
 		internal void menuRefresh_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
