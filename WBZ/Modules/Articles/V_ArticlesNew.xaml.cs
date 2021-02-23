@@ -17,7 +17,7 @@ namespace WBZ.Modules.Articles
 	{
 		D_ArticlesNew D = new D_ArticlesNew();
 
-		public ArticlesNew(MODULE_MODEL instance, Commands.Type mode)
+		public ArticlesNew(MODULE_MODEL instance, StswExpress.Globals.Commands.Type mode)
 		{
 			InitializeComponent();
 			DataContext = D;
@@ -28,7 +28,7 @@ namespace WBZ.Modules.Articles
 			D.Mode = mode;
 
 			D.InstanceInfo.Measures = SQL.GetInstancePositions(D.MODULE_TYPE, D.InstanceInfo.ID);
-			if (D.Mode == Commands.Type.DUPLICATE)
+			if (D.Mode == StswExpress.Globals.Commands.Type.DUPLICATE)
 				foreach (DataRow row in D.InstanceInfo.Measures.Rows)
 					row.SetAdded();
 		}

@@ -11,7 +11,7 @@ namespace WBZ.Modules.AttributesClasses
 	{
 		D_AttributesClassesList D = new D_AttributesClassesList();
 
-		public AttributesClassesList(Commands.Type mode)
+		public AttributesClassesList(StswExpress.Globals.Commands.Type mode)
 		{
 			InitializeComponent();
 			DataContext = D;

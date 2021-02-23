@@ -4,12 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:c="clr-namespace:WBZ.Controls"
-        xmlns:g="clr-namespace:WBZ.Globals"
+        xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
+        xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
         Title="Generator raportów" SizeToContent="WidthAndHeight"
             BorderThickness="3" BorderBrush="#333" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner" WindowStyle="None"
-            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
+            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding Source={x:Static seg:Properties.iSize}}"
             Icon="/Resources/_null.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
@@ -27,15 +28,15 @@
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
-                <RowDefinition Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                <RowDefinition Height="{Binding Source={x:Static seg:Properties.iSize}, Mode=OneWay}"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Grid.ColumnSpan="3" Content="Podaj przedział czasowy raportu:" Margin="5" VerticalContentAlignment="Center"/>
             <DatePicker Grid.Row="1" Grid.Column="0" x:Name="dpFrom" Margin="20,5,5,5" VerticalContentAlignment="Center"/>
             <Label Grid.Row="1" Grid.Column="1" Content="/" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <DatePicker Grid.Row="1" Grid.Column="2" x:Name="dpTo" Margin="5,5,20,5" VerticalContentAlignment="Center"/>
-            <c:Button Grid.Row="3" Grid.ColumnSpan="3" Margin="5" IsEnabled="True" TextVisibility="True" HorizontalAlignment="Center"
-                            Text="Akceptuj" Icon="/Resources/icon32_accept.ico" PreviewMouseLeftButtonUp="btnAccept_Click"/>
+            <sec:Button Grid.Row="3" Grid.ColumnSpan="3" Margin="5" IsEnabled="True" TextVisibility="True" HorizontalAlignment="Center"
+                        Text="Akceptuj" Icon="/Resources/icon32_accept.ico" PreviewMouseLeftButtonUp="btnAccept_Click"/>
         </Grid>
     </DockPanel>
 </Window>

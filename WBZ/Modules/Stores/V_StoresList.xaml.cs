@@ -1,5 +1,4 @@
-﻿using WBZ.Globals;
-using WBZ.Modules._base;
+﻿using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_Store;
 
 namespace WBZ.Modules.Stores
@@ -11,7 +10,7 @@ namespace WBZ.Modules.Stores
 	{
 		D_StoresList D = new D_StoresList();
 
-		public StoresList(Commands.Type mode)
+		public StoresList(StswExpress.Globals.Commands.Type mode)
 		{
 			InitializeComponent();
 			DataContext = D;

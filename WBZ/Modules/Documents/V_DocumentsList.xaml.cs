@@ -1,5 +1,4 @@
-﻿using WBZ.Globals;
-using WBZ.Modules._base;
+﻿using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_Document;
 
 namespace WBZ.Modules.Documents
@@ -11,7 +10,7 @@ namespace WBZ.Modules.Documents
 	{
 		D_DocumentsList D = new D_DocumentsList();
 
-		public DocumentsList(Commands.Type mode)
+		public DocumentsList(StswExpress.Globals.Commands.Type mode)
 		{
 			InitializeComponent();
 			DataContext = D;

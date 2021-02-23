@@ -16,7 +16,7 @@ namespace WBZ.Modules.Families
     {
         D_FamiliesNew D = new D_FamiliesNew();
 
-        public FamiliesNew(MODULE_MODEL instance, Commands.Type mode)
+        public FamiliesNew(MODULE_MODEL instance, StswExpress.Globals.Commands.Type mode)
         {
             InitializeComponent();
             DataContext = D;

@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Reflection;
-using WBZ.Globals;
 
 namespace WBZ.Modules._base
 {
@@ -28,9 +27,9 @@ namespace WBZ.Modules._base
 			}
 		}
 		/// Mode
-		public Commands.Type Mode { get; set; }
+		public StswExpress.Globals.Commands.Type Mode { get; set; }
 		/// Selecting mode
-		public bool SelectingMode { get { return Mode == Commands.Type.SELECTING; } }
+		public bool SelectingMode { get { return Mode == StswExpress.Globals.Commands.Type.SELECT; } }
 		/// SQL filter
 		public string FilterSQL { get; set; }
 		/// Filter instance

@@ -1,5 +1,4 @@
-﻿using WBZ.Globals;
-using WBZ.Modules._base;
+﻿using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_Distribution;
 
 namespace WBZ.Modules.Distributions
@@ -11,7 +10,7 @@ namespace WBZ.Modules.Distributions
 	{
 		D_DistributionsList D = new D_DistributionsList();
 
-		public DistributionsList(Commands.Type mode)
+		public DistributionsList(StswExpress.Globals.Commands.Type mode)
 		{
 			InitializeComponent();
 			DataContext = D;

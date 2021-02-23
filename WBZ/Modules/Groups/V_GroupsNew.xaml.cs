@@ -1,5 +1,4 @@
-﻿using WBZ.Globals;
-using WBZ.Modules._base;
+﻿using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_Group;
 
 namespace WBZ.Modules.Groups
@@ -11,7 +10,7 @@ namespace WBZ.Modules.Groups
     {
         D_GroupsNew D = new D_GroupsNew();
 
-        public GroupsNew(MODULE_MODEL instance, Commands.Type mode)
+        public GroupsNew(MODULE_MODEL instance, StswExpress.Globals.Commands.Type mode)
         {
             InitializeComponent();
             DataContext = D;

@@ -13,7 +13,7 @@ namespace WBZ.Modules.Attachments
     {
         D_AttachmentsList D = new D_AttachmentsList();
 
-        public AttachmentsList(Commands.Type mode)
+        public AttachmentsList(StswExpress.Globals.Commands.Type mode)
         {
             InitializeComponent();
             DataContext = D;
@@ -41,7 +41,7 @@ namespace WBZ.Modules.Attachments
 		{
 			var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
 			foreach (MODULE_MODEL instance in selectedInstances)
-				Functions.OpenInstanceWindow(this, instance, Commands.Type.PREVIEW);
+				Functions.OpenInstanceWindow(this, instance, StswExpress.Globals.Commands.Type.PREVIEW);
 		}
 
 		/// <summary>
@@ -51,7 +51,7 @@ namespace WBZ.Modules.Attachments
 		{
 			var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
 			foreach (MODULE_MODEL instance in selectedInstances)
-				Functions.OpenInstanceWindow(this, instance, Commands.Type.EDIT);
+				Functions.OpenInstanceWindow(this, instance, StswExpress.Globals.Commands.Type.EDIT);
 		}
 
 		/// <summary>

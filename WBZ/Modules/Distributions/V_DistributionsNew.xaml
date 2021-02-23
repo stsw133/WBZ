@@ -5,22 +5,23 @@
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
        xmlns:b="clr-namespace:WBZ.Modules.Distributions"
        xmlns:c="clr-namespace:WBZ.Controls"
-       xmlns:g="clr-namespace:WBZ.Globals"
+       xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
+       xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
        xmlns:p="clr-namespace:WBZ.Properties"
        xmlns:t="clr-namespace:WBZ.Modules._tabs"
        mc:Ignorable="d"
        Title="{Binding Title}" MinHeight="240" MinWidth="360" Height="{Binding Source={x:Static p:Settings.Default}, Path=config_DistributionsNew_WindowSize[1], Mode=TwoWay}" Width="{Binding Source={x:Static p:Settings.Default}, Path=config_DistributionsNew_WindowSize[0], Mode=TwoWay}"
             BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
-            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
+            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding Source={x:Static seg:Properties.iSize}}"
             Icon="/Resources/icon32_food.ico" Loaded="Window_Loaded" Closed="Window_Closed">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
     <Window.CommandBindings>
-        <CommandBinding Command="g:Commands.Close" Executed="cmdClose_Executed"/>
-        <CommandBinding Command="g:Commands.Help" Executed="cmdHelp_Executed"/>
-        <CommandBinding Command="g:Commands.Refresh" Executed="cmdRefresh_Executed"/>
-        <CommandBinding Command="g:Commands.Save" Executed="cmdSave_Executed" CanExecute="cmdSave_CanExecute"/>
+        <CommandBinding Command="seg:Commands.Close" Executed="cmdClose_Executed"/>
+        <CommandBinding Command="seg:Commands.Help" Executed="cmdHelp_Executed"/>
+        <CommandBinding Command="seg:Commands.Refresh" Executed="cmdRefresh_Executed"/>
+        <CommandBinding Command="seg:Commands.Save" Executed="cmdSave_Executed" CanExecute="cmdSave_CanExecute"/>
     </Window.CommandBindings>
     <DockPanel>
         <!-- titleBar -->
@@ -30,24 +31,24 @@
             <DockPanel>
                 <ToggleButton x:Name="btnToggle" BorderThickness="0" Width="5" IsChecked="{Binding config_ShowButtonTexts, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                 <StackPanel DockPanel.Dock="Top">
-                    <c:Button Text="Zapisz" Margin="5,5,5,0" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_save.ico" Command="g:Commands.Save"/>
+                    <sec:Button Text="Zapisz" Margin="5,5,5,0" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_save.ico" Command="seg:Commands.Save"/>
                     <Separator Height="5" Margin="0,5,0,0"/>
-                    <CheckBox Content="Do bufora" Margin="5,5,5,0" IsChecked="{Binding InstanceInfo.Status, Converter={g:conv_BoolInverted}}" IsEnabled="{Binding EditingMode}"/>
+                    <CheckBox Content="Do bufora" Margin="5,5,5,0" IsChecked="{Binding InstanceInfo.Status, Converter={seg:conv_BoolInverted}}" IsEnabled="{Binding EditingMode}"/>
                     <Separator Height="5" Margin="0,5,0,0"/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                     <Separator Height="5" Margin="0,0,0,5"/>
-                    <c:Button Text="Drukuj" Margin="5,0,5,5" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_printer.ico" Click="btnPrint_Click">
-                        <c:Button.ContextMenu>
+                    <sec:Button Text="Drukuj" Margin="5,0,5,5" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_printer.ico" Click="btnPrint_Click">
+                        <sec:Button.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Header="Lista darowizn" Click="btnDistributionList_Click"/>
                             </ContextMenu>
-                        </c:Button.ContextMenu>
-                    </c:Button>
+                        </sec:Button.ContextMenu>
+                    </sec:Button>
                     <Separator Height="5" Margin="0,0,0,5"/>
-                    <c:Button Text="Odśwież" Margin="5,0,5,5" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_refresh.ico" Command="g:Commands.Refresh"/>
+                    <sec:Button Text="Odśwież" Margin="5,0,5,5" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_refresh.ico" Command="seg:Commands.Refresh"/>
                     <Separator Height="5" Margin="0,0,0,5"/>
-                    <c:Button Text="Zamknij okno" Margin="5,0,5,5" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_close.ico" Command="g:Commands.Close"/>
+                    <sec:Button Text="Zamknij okno" Margin="5,0,5,5" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_close.ico" Command="seg:Commands.Close"/>
                 </StackPanel>
             </DockPanel>
             <Border.ContextMenu>
@@ -61,20 +62,20 @@
             <!-- tabMain -->
             <TabItem>
                 <TabItem.Header>
-                    <c:Header Text="Ogólne" Icon="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
+                    <sec:Header Text="Ogólne" Icon="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
                 </TabItem.Header>
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <DockPanel Margin="10" IsEnabled="{Binding EditingMode}">
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Nazwa:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="Nazwa:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>
                             <TextBox Text="{Binding InstanceInfo.Name}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Data wystawienia:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={g:conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="Data wystawienia:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>
                             <DatePicker SelectedDate="{Binding InstanceInfo.DateReal}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-                            <Button ToolTip="Dodaj pozycję" HorizontalAlignment="Left" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=2}" Click="btnPositionsAdd_Click">
+                            <Button ToolTip="Dodaj pozycję" HorizontalAlignment="Left" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2}" Click="btnPositionsAdd_Click">
                                 <Image Margin="2" Source="/Resources/icon32_add.ico"/>
                             </Button>
                             <Label Content="Pozycje:"/>
@@ -88,7 +89,7 @@
                                 </CollectionViewSource>
                             </Grid.Resources>
                             <DataGrid x:Name="dgFamilies" ColumnHeaderHeight="0" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
-                                      AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding Source={StaticResource groups}}" IsReadOnly="{Binding EditMode, Converter={g:conv_BoolInverted}}"
+                                      AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding Source={StaticResource groups}}" IsReadOnly="{Binding EditMode, Converter={seg:conv_BoolInverted}}"
                                       CanUserAddRows="False">
                                 <DataGrid.GroupStyle>
                                     <GroupStyle>
@@ -137,13 +138,13 @@
                                                                     <Border Padding="10" Background="White" BorderBrush="Black" BorderThickness="1">
                                                                         <DockPanel>
                                                                             <DataGrid x:Name="dgPositions" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
-                                                                                      AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding Path=Items[0].Positions.DefaultView}" IsReadOnly="{Binding EditMode, Converter={g:conv_BoolInverted}}"
+                                                                                      AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding Path=Items[0].Positions.DefaultView}" IsReadOnly="{Binding EditMode, Converter={seg:conv_BoolInverted}}"
                                                                                       CanUserAddRows="False">
                                                                                 <DataGrid.Columns>
                                                                                     <DataGridTextColumn Binding="{Binding id}" Header="ID" IsReadOnly="True" Visibility="Hidden"/>
                                                                                     <DataGridTextColumn Binding="{Binding position}" Header="Lp"/>
                                                                                     <DataGridTextColumn Binding="{Binding storename}" Header="Nazwa magazynu" IsReadOnly="True"/>
-                                                                                    <DataGridTextColumn Binding="{Binding articlename}" Header="Nazwa towaru" IsReadOnly="True" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=25}"/>
+                                                                                    <DataGridTextColumn Binding="{Binding articlename}" Header="Nazwa towaru" IsReadOnly="True" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=25}"/>
                                                                                     <DataGridTextColumn Binding="{Binding measure}" Header="Jm" IsReadOnly="True"/>
                                                                                     <DataGridTextColumn Binding="{Binding amount}" Header="Ilość"/>
                                                                                 </DataGrid.Columns>
@@ -178,7 +179,7 @@
                         </Grid>
                         <!--
                         <DataGrid x:Name="dgPositions" DockPanel.Dock="Top" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
-                                  AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstanceInfo.Positions.DefaultView}" IsReadOnly="{Binding EditMode, Converter={g:conv_BoolInverted}}"
+                                  AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstanceInfo.Positions.DefaultView}" IsReadOnly="{Binding EditMode, Converter={seg:conv_BoolInverted}}"
                                   CanUserAddRows="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding id}" Header="ID" IsReadOnly="True" Visibility="Hidden"/>
@@ -214,35 +215,35 @@
             <!-- tabAdditional -->
             <TabItem>
                 <TabItem.Header>
-                    <c:Header Text="Dodatkowe" Icon="/Resources/icon32_tools.ico"/>
+                    <sec:Header Text="Dodatkowe" Icon="/Resources/icon32_tools.ico"/>
                 </TabItem.Header>
                 <t:AdditionalsTab/>
             </TabItem>
             <!-- tabGroups -->
             <TabItem>
                 <TabItem.Header>
-                    <c:Header Text="Grupy" Icon="/Resources/icon32_groups.ico"/>
+                    <sec:Header Text="Grupy" Icon="/Resources/icon32_groups.ico"/>
                 </TabItem.Header>
                 <t:GroupsTab/>
             </TabItem>
             <!-- tabAttributes -->
             <TabItem>
                 <TabItem.Header>
-                    <c:Header Text="Atrybuty" Icon="/Resources/icon32_attributes.ico"/>
+                    <sec:Header Text="Atrybuty" Icon="/Resources/icon32_attributes.ico"/>
                 </TabItem.Header>
                 <t:AttributesTab/>
             </TabItem>
             <!-- tabAttachments -->
             <TabItem>
                 <TabItem.Header>
-                    <c:Header Text="Załączniki" Icon="/Resources/icon32_photos.ico"/>
+                    <sec:Header Text="Załączniki" Icon="/Resources/icon32_photos.ico"/>
                 </TabItem.Header>
                 <t:AttachmentsTab/>
             </TabItem>
             <!-- tabLogs -->
             <TabItem>
                 <TabItem.Header>
-                    <c:Header Text="Historia" Icon="/Resources/icon32_logs.ico"/>
+                    <sec:Header Text="Historia" Icon="/Resources/icon32_logs.ico"/>
                 </TabItem.Header>
                 <t:LogsTab/>
             </TabItem>

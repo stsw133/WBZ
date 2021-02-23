@@ -54,7 +54,7 @@ namespace WBZ.Modules._tabs
 		/// </summary>
 		private void btnGroupAdd_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new GroupsList(Module, Commands.Type.SELECTING);
+			var window = new GroupsList(Module, StswExpress.Globals.Commands.Type.SELECT);
 			window.Owner = Window.GetWindow(this);
 			if (window.ShowDialog() == true)
             {
@@ -62,7 +62,7 @@ namespace WBZ.Modules._tabs
 				group.Owner = group.ID;
 				group.ID = SQL.NewInstanceID(Global.Module.GROUPS);
 				group.Instance = ID;
-				SQL.SetInstance(Global.Module.GROUPS, group, Commands.Type.NEW);
+				SQL.SetInstance(Global.Module.GROUPS, group, StswExpress.Globals.Commands.Type.NEW);
 				D.InstanceGroups = SQL.ListInstances<M_Group>(Global.Module.GROUPS, $"g.module='{Module}' and g.instance={ID}");
 			}
 		}

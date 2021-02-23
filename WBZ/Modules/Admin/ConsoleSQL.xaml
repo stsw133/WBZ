@@ -4,12 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:c="clr-namespace:WBZ.Controls"
-        xmlns:g="clr-namespace:WBZ.Globals"
+        xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
+        xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
         Title="Konsola SQL" MinHeight="180" MinWidth="270" Height="450" Width="675"
             BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
-            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
+            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding Source={x:Static seg:Properties.iSize}}"
             Icon="/Resources/icon32_code.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
@@ -18,7 +19,7 @@
         <!-- titleBar -->
         <c:TitleBar DockPanel.Dock="Top"/>
         <!-- main -->
-        <c:Button DockPanel.Dock="Bottom" Margin="5,0,5,5" TextVisibility="False" HorizontalAlignment="Center" Icon="/Resources/icon32_accept.ico" PreviewMouseLeftButtonUp="btnStart_Click"/>
+        <sec:Button DockPanel.Dock="Bottom" Margin="5,0,5,5" TextVisibility="False" HorizontalAlignment="Center" Icon="/Resources/icon32_accept.ico" PreviewMouseLeftButtonUp="btnStart_Click"/>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition/>

@@ -14,7 +14,7 @@ namespace WBZ.Modules.Contractors
     {
         D_ContractorsNew D = new D_ContractorsNew();
 
-        public ContractorsNew(MODULE_MODEL instance, Commands.Type mode)
+        public ContractorsNew(MODULE_MODEL instance, StswExpress.Globals.Commands.Type mode)
         {
             InitializeComponent();
             DataContext = D;

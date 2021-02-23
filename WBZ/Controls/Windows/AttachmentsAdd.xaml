@@ -4,12 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:c="clr-namespace:WBZ.Controls"
-        xmlns:g="clr-namespace:WBZ.Globals"
+        xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
+        xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
-        Title="Nowy załącznik" SizeToContent="Height" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=30}"
+        Title="Nowy załącznik" SizeToContent="Height" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
             BorderThickness="3" BorderBrush="#333" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner" WindowStyle="None"
-            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
+            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding Source={x:Static seg:Properties.iSize}}"
             Icon="/Resources/icon32_photos.ico" Loaded="Window_Loaded">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
@@ -19,17 +20,17 @@
         <c:TitleBar DockPanel.Dock="Top"/>
         <!-- main -->
         <DockPanel DockPanel.Dock="Top">
-            <c:Button ToolTip="Z przeglądarki" Margin="5,5,0,5" IsEnabled="{Binding EditMode}" TextVisibility="False" Icon="/Resources/icon32_web.ico" Click="btnLink_Click"/>
+            <sec:Button ToolTip="Z przeglądarki" Margin="5,5,0,5" IsEnabled="{Binding EditMode}" TextVisibility="False" Icon="/Resources/icon32_web.ico" Click="btnLink_Click"/>
             <TextBox x:Name="tbLink" Margin="5" VerticalContentAlignment="Center"/>
         </DockPanel>
         <DockPanel DockPanel.Dock="Top">
-            <c:Button ToolTip="Z dysku" Margin="5,5,0,5" IsEnabled="{Binding EditMode}" TextVisibility="False" Icon="/Resources/icon32_folder.ico" Click="btnDrive_Click"/>
+            <sec:Button ToolTip="Z dysku" Margin="5,5,0,5" IsEnabled="{Binding EditMode}" TextVisibility="False" Icon="/Resources/icon32_folder.ico" Click="btnDrive_Click"/>
             <TextBox x:Name="tbDrive" Margin="5" VerticalContentAlignment="Center"/>
         </DockPanel>
         <DockPanel x:Name="dpName" DockPanel.Dock="Top">
             <Label Content="Nazwa:" Margin="5,5,0,5" VerticalAlignment="Center"/>
             <TextBox x:Name="tbName" Margin="5" VerticalContentAlignment="Center"/>
         </DockPanel>
-        <c:Button Margin="5" Text="Akceptuj" HorizontalAlignment="Center" Icon="/Resources/icon32_accept.ico" Click="btnAccept_Click"/>
+        <sec:Button Margin="5" Text="Akceptuj" HorizontalAlignment="Center" Icon="/Resources/icon32_accept.ico" Click="btnAccept_Click"/>
     </DockPanel>
 </Window>

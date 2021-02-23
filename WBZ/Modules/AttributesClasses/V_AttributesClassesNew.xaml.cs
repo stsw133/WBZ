@@ -1,5 +1,4 @@
 ﻿using System.Data;
-using WBZ.Globals;
 using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_AttributeClass;
 
@@ -12,7 +11,7 @@ namespace WBZ.Modules.AttributesClasses
 	{
         D_AttributesClassesNew D = new D_AttributesClassesNew();
 
-        public AttributesClassesNew(MODULE_MODEL instance, Commands.Type mode)
+        public AttributesClassesNew(MODULE_MODEL instance, StswExpress.Globals.Commands.Type mode)
         {
             InitializeComponent();
             DataContext = D;
@@ -23,7 +22,7 @@ namespace WBZ.Modules.AttributesClasses
             D.Mode = mode;
 
             D.InstanceInfo.Values = SQL.GetInstancePositions(D.MODULE_TYPE, D.InstanceInfo.ID);
-            if (D.Mode == Commands.Type.DUPLICATE)
+            if (D.Mode == StswExpress.Globals.Commands.Type.DUPLICATE)
                 foreach (DataRow row in D.InstanceInfo.Values.Rows)
                     row.SetAdded();
         }

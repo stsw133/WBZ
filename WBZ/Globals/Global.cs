@@ -17,7 +17,7 @@ namespace WBZ.Globals
         /// Newest version to download
         public static string VersionNewest { get; set; } = null;
         /// Language
-        public static string Language => Properties.Settings.Default.language;
+        public static string Language => Properties.Settings.Default.Language;
         /// Chosen database
         public static M_Database Database { get; set; } = new M_Database();
         /// Logged user

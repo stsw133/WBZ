@@ -54,7 +54,7 @@ namespace WBZ.Controls
                 return;
 
             int id = (int)(SelectedItem as TreeViewItem).Tag;
-            new GroupsNew(SQL.GetInstance<M_Group>(Global.Module.GROUPS, id), Commands.Type.PREVIEW) { Owner = Window.GetWindow(this) }.ShowDialog();
+            new GroupsNew(SQL.GetInstance<M_Group>(Global.Module.GROUPS, id), StswExpress.Globals.Commands.Type.PREVIEW) { Owner = Window.GetWindow(this) }.ShowDialog();
             btnGroupsRefresh_Click(null, null);
         }
 
@@ -90,7 +90,7 @@ namespace WBZ.Controls
                 instance.Owner = (int)(SelectedItem as TreeViewItem).Tag;
                 instance.Path = path;
             }
-            new GroupsNew(instance, Commands.Type.NEW) { Owner = Window.GetWindow(this) }.ShowDialog();
+            new GroupsNew(instance, StswExpress.Globals.Commands.Type.NEW) { Owner = Window.GetWindow(this) }.ShowDialog();
             btnGroupsRefresh_Click(null, null);
         }
 
@@ -103,7 +103,7 @@ namespace WBZ.Controls
                 return;
 
             int id = (int)(SelectedItem as TreeViewItem).Tag;
-            new GroupsNew(SQL.GetInstance<M_Group>(Global.Module.GROUPS, id), Commands.Type.EDIT) { Owner = Window.GetWindow(this) }.ShowDialog();
+            new GroupsNew(SQL.GetInstance<M_Group>(Global.Module.GROUPS, id), StswExpress.Globals.Commands.Type.EDIT) { Owner = Window.GetWindow(this) }.ShowDialog();
             btnGroupsRefresh_Click(null, null);
         }
 
@@ -192,8 +192,8 @@ namespace WBZ.Controls
                     {
                         Source = Functions.LoadImage(group.Icon),
                         Margin = new Thickness(0, 0, 5, 0),
-                        Width = Properties.Settings.Default.config_iSize * 1.5,
-                        Height = Properties.Settings.Default.config_iSize * 1.5
+                        Width = Properties.Settings.Default.iSize * 1.5,
+                        Height = Properties.Settings.Default.iSize * 1.5
                     };
                     image.Visibility = image.Source != null ? Visibility.Visible : Visibility.Collapsed;
                     var tb = new TextBlock()

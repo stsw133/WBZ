@@ -14,11 +14,11 @@ namespace WBZ.Modules.AttributesClasses
         {
             get
             {
-                if (Mode == Commands.Type.NEW)
+                if (Mode == StswExpress.Globals.Commands.Type.NEW)
                     return "Nowa klasa atrybutu";
-                else if (Mode == Commands.Type.DUPLICATE)
+                else if (Mode == StswExpress.Globals.Commands.Type.DUPLICATE)
                     return $"Duplikowanie klasy atrybutu: {InstanceInfo.Name}";
-                else if (Mode == Commands.Type.EDIT)
+                else if (Mode == StswExpress.Globals.Commands.Type.EDIT)
                     return $"Edycja klasy atrybutu: {InstanceInfo.Name}";
                 else
                     return $"Podgląd klasy atrybutu: {InstanceInfo.Name}";

@@ -14,11 +14,11 @@ namespace WBZ.Modules.Users
 		{
 			get
 			{
-				if (Mode == Commands.Type.NEW)
+				if (Mode == StswExpress.Globals.Commands.Type.NEW)
 					return "Nowy użytkownik";
-				else if (Mode == Commands.Type.DUPLICATE)
+				else if (Mode == StswExpress.Globals.Commands.Type.DUPLICATE)
 					return $"Duplikowanie użytkownika: {InstanceInfo.Fullname}";
-				else if (Mode == Commands.Type.EDIT)
+				else if (Mode == StswExpress.Globals.Commands.Type.EDIT)
 					return $"Edycja użytkownika: {InstanceInfo.Fullname}";
 				else
 					return $"Podgląd użytkownika: {InstanceInfo.Fullname}";

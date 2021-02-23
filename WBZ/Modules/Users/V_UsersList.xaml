@@ -5,48 +5,50 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:b="clr-namespace:WBZ.Modules.Users"
         xmlns:c="clr-namespace:WBZ.Controls"
+        xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
         xmlns:g="clr-namespace:WBZ.Globals"
+        xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
         Title="Lista użytkowników" MinHeight="260" MinWidth="390" Height="{Binding Source={x:Static p:Settings.Default}, Path=config_UsersList_WindowSize[1], Mode=TwoWay}" Width="{Binding Source={x:Static p:Settings.Default}, Path=config_UsersList_WindowSize[0], Mode=TwoWay}"
             BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
-            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
+            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding Source={x:Static seg:Properties.iSize}}"
             Icon="/Resources/icon32_users.ico" Loaded="Window_Loaded" Closed="Window_Closed"
             FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
     <Window.CommandBindings>
-        <CommandBinding Command="g:Commands.Clear" Executed="cmdClear_Executed"/>
-        <CommandBinding Command="g:Commands.Close" Executed="cmdClose_Executed"/>
-        <CommandBinding Command="g:Commands.Delete" Executed="cmdDelete_Executed" CanExecute="cmdDelete_CanExecute"/>
-        <CommandBinding Command="g:Commands.Duplicate" Executed="cmdDuplicate_Executed" CanExecute="cmdDuplicate_CanExecute"/>
-        <CommandBinding Command="g:Commands.Edit" Executed="cmdEdit_Executed" CanExecute="cmdEdit_CanExecute"/>
-        <CommandBinding Command="g:Commands.Help" Executed="cmdHelp_Executed"/>
-        <CommandBinding Command="g:Commands.New" Executed="cmdNew_Executed" CanExecute="cmdNew_CanExecute"/>
-        <CommandBinding Command="g:Commands.Preview" Executed="cmdPreview_Executed" CanExecute="cmdPreview_CanExecute"/>
-        <CommandBinding Command="g:Commands.Refresh" Executed="cmdRefresh_Executed"/>
+        <CommandBinding Command="seg:Commands.Clear" Executed="cmdClear_Executed"/>
+        <CommandBinding Command="seg:Commands.Close" Executed="cmdClose_Executed"/>
+        <CommandBinding Command="seg:Commands.Delete" Executed="cmdDelete_Executed" CanExecute="cmdDelete_CanExecute"/>
+        <CommandBinding Command="seg:Commands.Duplicate" Executed="cmdDuplicate_Executed" CanExecute="cmdDuplicate_CanExecute"/>
+        <CommandBinding Command="seg:Commands.Edit" Executed="cmdEdit_Executed" CanExecute="cmdEdit_CanExecute"/>
+        <CommandBinding Command="seg:Commands.Help" Executed="cmdHelp_Executed"/>
+        <CommandBinding Command="seg:Commands.New" Executed="cmdNew_Executed" CanExecute="cmdNew_CanExecute"/>
+        <CommandBinding Command="seg:Commands.Preview" Executed="cmdPreview_Executed" CanExecute="cmdPreview_CanExecute"/>
+        <CommandBinding Command="seg:Commands.Refresh" Executed="cmdRefresh_Executed"/>
     </Window.CommandBindings>
     <DockPanel>
         <!-- titleBar -->
         <c:TitleBar DockPanel.Dock="Top" SubIcon="/Resources/icon32_list.ico"/>
         <!-- buttonsPanel -->
-        <Border DockPanel.Dock="Right" Background="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="1,0,0,0" Visibility="{Binding SelectingMode, Converter={g:conv_BoolInverted}}">
+        <Border DockPanel.Dock="Right" Background="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="1,0,0,0" Visibility="{Binding SelectingMode, Converter={seg:conv_BoolInverted}}">
             <DockPanel>
                 <ToggleButton x:Name="btnToggle" BorderThickness="0" Width="5" IsChecked="{Binding config_ShowButtonTexts, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                 <StackPanel DockPanel.Dock="Top">
-                    <c:Button Text="Podgląd" Margin="5,5,5,0" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_search.ico" Command="g:Commands.Preview"/>
-                    <c:Button Text="Dodaj" Margin="5,5,5,0" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_add.ico" Command="g:Commands.New"/>
-                    <c:Button Text="Duplikuj" Margin="5,5,5,0" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_duplicate.ico" Command="g:Commands.Duplicate"/>
-                    <c:Button Text="Edytuj" Margin="5,5,5,0" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_edit.ico" Command="g:Commands.Edit"/>
-                    <c:Button Text="Usuń" Margin="5,5,5,0" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_delete.ico" Command="g:Commands.Delete"/>
+                    <sec:Button Text="Podgląd" Margin="5,5,5,0" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_search.ico" Command="seg:Commands.Preview"/>
+                    <sec:Button Text="Dodaj" Margin="5,5,5,0" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_add.ico" Command="seg:Commands.New"/>
+                    <sec:Button Text="Duplikuj" Margin="5,5,5,0" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_duplicate.ico" Command="seg:Commands.Duplicate"/>
+                    <sec:Button Text="Edytuj" Margin="5,5,5,0" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_edit.ico" Command="seg:Commands.Edit"/>
+                    <sec:Button Text="Usuń" Margin="5,5,5,0" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_delete.ico" Command="seg:Commands.Delete"/>
                     <Separator Height="5" Margin="0,5,0,0"/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                     <Separator Height="5" Margin="0,0,0,5"/>
-                    <c:Button Text="Odśwież" Margin="5,0,5,5" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_refresh.ico" Command="g:Commands.Refresh"/>
+                    <sec:Button Text="Odśwież" Margin="5,0,5,5" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_refresh.ico" Command="seg:Commands.Refresh"/>
                     <Separator Height="5" Margin="0,0,0,5"/>
-                    <c:Button Text="Zamknij okno" Margin="5,0,5,5" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_close.ico" Command="g:Commands.Close"/>
+                    <sec:Button Text="Zamknij okno" Margin="5,0,5,5" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_close.ico" Command="seg:Commands.Close"/>
                 </StackPanel>
             </DockPanel>
             <Border.ContextMenu>
@@ -59,9 +61,9 @@
         <c:StatusPanel x:Name="StatusPanel" DockPanel.Dock="Bottom" Background="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"
                        EnableFilters="True" HasFilters="True" EnableGroups="True" HasGroups="True"/>
         <!-- groupsView -->
-        <c:GroupsView EditingMode="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=users_save}" Visibility="{Binding EnableGroups, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
+        <c:GroupsView EditingMode="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=users_save}" Visibility="{Binding EnableGroups, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
         <!-- otherFilters -->
-        <DockPanel DockPanel.Dock="Bottom" Visibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}">
+        <DockPanel DockPanel.Dock="Bottom" Visibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}">
             <CheckBox Margin="5,0,5,5" Content="Pokaż archiwalne" IsChecked="{Binding Filters.Archival}" HorizontalAlignment="Right" VerticalContentAlignment="Center"/>
         </DockPanel>
         <!-- dataGrid -->

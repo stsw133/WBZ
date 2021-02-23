@@ -5,6 +5,7 @@
           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
           xmlns:c="clr-namespace:WBZ.Controls"
           xmlns:g="clr-namespace:WBZ.Globals"
+          xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
           xmlns:p="clr-namespace:WBZ.Properties"
           mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800"
           Margin="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1" AutoGenerateColumns="False">
@@ -14,7 +15,7 @@
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="Background" Value="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
             <Setter Property="BorderThickness" Value="0,0,1,1"/>
-            <Setter Property="BorderBrush" Value="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={g:conv_Color}, ConverterParameter=-0.2}"/>
+            <Setter Property="BorderBrush" Value="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={seg:conv_Color}, ConverterParameter=-0.2}"/>
             <Setter Property="Padding" Value="4 3"/>
         </Style>
     </DataGrid.ColumnHeaderStyle>
@@ -23,31 +24,31 @@
     </DataGrid.Resources>
     <DataGrid.Columns>
         <!-- ID -->
-        <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_ID, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+        <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_ID, Mode=OneWay, Converter={seg:conv_BoolToVisibility}}"/>
         <!-- UserFullname -->
-        <DataGridTextColumn Binding="{Binding UserFullname}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_UserFullname, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
+        <DataGridTextColumn Binding="{Binding UserFullname}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_UserFullname, Mode=OneWay, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <c:DataGridColumnFilter_Text Text="Użytkownik" Value="{Binding Data.Filters.UserFullname, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
+                <c:DataGridColumnFilter_Text Text="Użytkownik" Value="{Binding Data.Filters.UserFullname, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Module -->
-        <DataGridTextColumn Binding="{Binding TranslatedModule}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Module, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
+        <DataGridTextColumn Binding="{Binding TranslatedModule}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Module, Mode=OneWay, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <c:DataGridColumnFilter_Text Text="Nazwa modułu" Value="{Binding Data.Filters.Module, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
+                <c:DataGridColumnFilter_Text Text="Nazwa modułu" Value="{Binding Data.Filters.Module, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Instance -->
-        <DataGridTextColumn Binding="{Binding Instance}" Header="ID instancji" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Obj, Mode=OneWay, Converter={g:conv_BoolToVisibility}}"/>
+        <DataGridTextColumn Binding="{Binding Instance}" Header="ID instancji" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Obj, Mode=OneWay, Converter={seg:conv_BoolToVisibility}}"/>
         <!-- Content -->
-        <DataGridTextColumn Binding="{Binding Content}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Content, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
+        <DataGridTextColumn Binding="{Binding Content}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Content, Mode=OneWay, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <c:DataGridColumnFilter_Text Text="Treść" Value="{Binding Data.Filters.Content, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
+                <c:DataGridColumnFilter_Text Text="Treść" Value="{Binding Data.Filters.Content, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- DateTime -->
-        <DataGridTextColumn Binding="{Binding DateTime, StringFormat={}{0:yyyy-MM-dd}}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_DateTime, Mode=OneWay, Converter={g:conv_BoolToVisibility}}">
+        <DataGridTextColumn Binding="{Binding DateTime, StringFormat={}{0:yyyy-MM-dd}}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_DateTime, Mode=OneWay, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <c:DataGridColumnFilter_Date Text="Data i czas" Value1="{Binding Data.Filters.fDateTime, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" Value2="{Binding Data.Filters.DateTime, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={g:conv_BoolToVisibility}}"/>
+                <c:DataGridColumnFilter_Date Text="Data i czas" Value1="{Binding Data.Filters.fDateTime, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" Value2="{Binding Data.Filters.DateTime, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
     </DataGrid.Columns>
@@ -75,8 +76,8 @@
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Sortowanie 1:"/>
-                            <ToggleButton IsChecked="{Binding sorting_LogsList[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=2.2}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=2.2}">
-                                <Image Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.1}" Source="/Resources/icon32_descending.ico"/>
+                            <ToggleButton IsChecked="{Binding sorting_LogsList[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.2}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.2}">
+                                <Image Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.1}" Source="/Resources/icon32_descending.ico"/>
                             </ToggleButton>
                             <ComboBox SelectedValue="{Binding sorting_LogsList[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
                                 <ComboBoxItem Content="Nazwisko i imię" Tag="l.userfullname"/>
@@ -91,8 +92,8 @@
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Sortowanie 2:"/>
-                            <ToggleButton IsChecked="{Binding sorting_LogsList[3], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=2.2}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=2.2}">
-                                <Image Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.1}" Source="/Resources/icon32_descending.ico"/>
+                            <ToggleButton IsChecked="{Binding sorting_LogsList[3], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.2}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.2}">
+                                <Image Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.1}" Source="/Resources/icon32_descending.ico"/>
                             </ToggleButton>
                             <ComboBox SelectedValue="{Binding sorting_LogsList[2], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
                                 <ComboBoxItem Content="Nazwisko i imię" Tag="l.userfullname"/>
@@ -107,40 +108,40 @@
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Limit wczytywania:"/>
-                            <TextBox Text="{Binding sorting_LogsList[4], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=5}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                            <TextBox Text="{Binding sorting_LogsList[4], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=5}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                         </StackPanel>
                     </MenuItem.Header>
                 </MenuItem>
             </MenuItem>
             <!-- Actions -->
             <Separator/>
-            <MenuItem Header="Podgląd" Command="g:Commands.Preview">
+            <MenuItem Header="Podgląd" Command="seg:Commands.Preview">
                 <MenuItem.Icon>
                     <Image Source="/Resources/icon32_search.ico"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Dodaj" Command="g:Commands.New">
+            <MenuItem Header="Dodaj" Command="seg:Commands.New">
                 <MenuItem.Icon>
                     <Image Source="/Resources/icon32_add.ico"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Duplikuj" Command="g:Commands.Duplicate">
+            <MenuItem Header="Duplikuj" Command="seg:Commands.Duplicate">
                 <MenuItem.Icon>
                     <Image Source="/Resources/icon32_duplicate.ico"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Edytuj" Command="g:Commands.Edit">
+            <MenuItem Header="Edytuj" Command="seg:Commands.Edit">
                 <MenuItem.Icon>
                     <Image Source="/Resources/icon32_edit.ico"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Usuń" Command="g:Commands.Delete">
+            <MenuItem Header="Usuń" Command="seg:Commands.Delete">
                 <MenuItem.Icon>
                     <Image Source="/Resources/icon32_delete.ico"/>
                 </MenuItem.Icon>
             </MenuItem>
             <Separator/>
-            <MenuItem Header="Odśwież" Command="g:Commands.Refresh">
+            <MenuItem Header="Odśwież" Command="seg:Commands.Refresh">
                 <MenuItem.Icon>
                     <Image Source="/Resources/icon32_refresh.ico"/>
                 </MenuItem.Icon>

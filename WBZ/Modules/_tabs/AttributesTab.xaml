@@ -4,8 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:c="clr-namespace:WBZ.Controls"
-             xmlns:g="clr-namespace:WBZ.Globals"
-             xmlns:p="clr-namespace:WBZ.Properties"
+             xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="750"
              Loaded="UserControl_Loaded">
     <c:DataGrid ItemsSource="{Binding InstanceAttributes}" IsReadOnly="True">
@@ -27,7 +26,7 @@
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
                         <DockPanel>
-                            <Button DockPanel.Dock="Right" Content=" • • • " FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.5}" Visibility="{Binding EditingMode, Converter={g:conv_BoolToVisibility}}" Click="btnAttributeChange_Click"/>
+                            <Button DockPanel.Dock="Right" Content=" • • • " FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.5}" Visibility="{Binding EditingMode, Converter={seg:conv_BoolToVisibility}}" Click="btnAttributeChange_Click"/>
                             <TextBlock Text="{Binding Value}"/>
                         </DockPanel>
                     </DataTemplate>

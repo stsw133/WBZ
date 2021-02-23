@@ -1,6 +1,6 @@
-﻿using System.ComponentModel;
+﻿using StswExpress.Globals;
+using System.ComponentModel;
 using System.Reflection;
-using WBZ.Globals;
 
 namespace WBZ.Modules._base
 {

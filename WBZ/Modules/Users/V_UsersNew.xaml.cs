@@ -13,7 +13,7 @@ namespace WBZ.Modules.Users
 	{
 		D_UsersNew D = new D_UsersNew();
 
-		public UsersNew(MODULE_MODEL instance, Commands.Type mode)
+		public UsersNew(MODULE_MODEL instance, StswExpress.Globals.Commands.Type mode)
 		{
 			InitializeComponent();
 			DataContext = D;
@@ -24,7 +24,7 @@ namespace WBZ.Modules.Users
 			D.Mode = mode;
 
 			D.InstanceInfo.Perms = SQL.GetUserPerms(D.InstanceInfo.ID);
-			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE))
+			if (D.Mode.In(StswExpress.Globals.Commands.Type.NEW, StswExpress.Globals.Commands.Type.DUPLICATE))
 				D.InstanceInfo.ID = SQL.NewInstanceID(D.MODULE_TYPE);
 		}
 

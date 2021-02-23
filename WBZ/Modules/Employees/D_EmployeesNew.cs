@@ -14,11 +14,11 @@ namespace WBZ.Modules.Employees
 		{
 			get
 			{
-				if (Mode == Commands.Type.NEW)
+				if (Mode == StswExpress.Globals.Commands.Type.NEW)
 					return "Nowy pracownik";
-				else if (Mode == Commands.Type.DUPLICATE)
+				else if (Mode == StswExpress.Globals.Commands.Type.DUPLICATE)
 					return $"Duplikowanie pracownika: {InstanceInfo.Fullname}";
-				else if (Mode == Commands.Type.EDIT)
+				else if (Mode == StswExpress.Globals.Commands.Type.EDIT)
 					return $"Edycja pracownika: {InstanceInfo.Fullname}";
 				else
 					return $"Podgląd pracownika: {InstanceInfo.Fullname}";

@@ -631,7 +631,7 @@ namespace WBZ
 					if (show)
 						new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"{msg}:{Environment.NewLine}{error.Content}").ShowDialog();
 					if (save)
-						SetInstance(Global.Module.LOGS, error, Commands.Type.NEW);
+						SetInstance(Global.Module.LOGS, error, StswExpress.Globals.Commands.Type.NEW);
 				}
 			}
 			catch { }
@@ -1074,7 +1074,7 @@ namespace WBZ
 		/// <param name="module">Nazwa modułu</param>
 		/// <param name="instance">Instancja</param>
 		/// <param name="mode">Tryb</param>
-		internal static bool SetInstance<T>(string module, T instance, Commands.Type mode)
+		internal static bool SetInstance<T>(string module, T instance, StswExpress.Globals.Commands.Type mode)
 		{
 			bool result = false;
 			string query;
@@ -1108,7 +1108,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)article.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Global.User.ID, module, article.ID, $"{(mode==Commands.Type.EDIT ? "Edytowano" : "Utworzono")} towar: {article.Name}.", sqlConn, sqlTran);
+							SetLog(Global.User.ID, module, article.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} towar: {article.Name}.", sqlConn, sqlTran);
 
 							///measures
 							foreach (DataRow measure in article.Measures.Rows)
@@ -1179,7 +1179,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)attributeClass.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Global.User.ID, module, attributeClass.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} klasę atrybutu: {attributeClass.Name}.", sqlConn, sqlTran);
+							SetLog(Global.User.ID, module, attributeClass.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} klasę atrybutu: {attributeClass.Name}.", sqlConn, sqlTran);
 
 							///values
 							foreach (DataRow value in attributeClass.Values.Rows)
@@ -1249,7 +1249,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)contractor.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Global.User.ID, module, contractor.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} kontrahenta: {contractor.Name}.", sqlConn, sqlTran);
+							SetLog(Global.User.ID, module, contractor.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} kontrahenta: {contractor.Name}.", sqlConn, sqlTran);
 							break;
 						/// DISTRIBUTIONS
 						case Global.Module.DISTRIBUTIONS:
@@ -1274,7 +1274,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)distribution.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Global.User.ID, module, distribution.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} dystrybucję: {distribution.Name}.", sqlConn, sqlTran);
+							SetLog(Global.User.ID, module, distribution.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} dystrybucję: {distribution.Name}.", sqlConn, sqlTran);
 
 							///positions
 							foreach (var posfam in distribution.Families)
@@ -1365,7 +1365,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)document.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Global.User.ID, module, document.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} dokument: {document.Name}.", sqlConn, sqlTran);
+							SetLog(Global.User.ID, module, document.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} dokument: {document.Name}.", sqlConn, sqlTran);
 
 							///positions
 							foreach (DataRow position in document.Positions.Rows)
@@ -1458,7 +1458,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)employee.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Global.User.ID, module, employee.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} pracownika: {employee.Fullname}.", sqlConn, sqlTran);
+							SetLog(Global.User.ID, module, employee.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} pracownika: {employee.Fullname}.", sqlConn, sqlTran);
 							break;
 						/// FAMILIES
 						case Global.Module.FAMILIES:
@@ -1489,7 +1489,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)family.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Global.User.ID, module, family.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} rodzinę: {family.Lastname}.", sqlConn, sqlTran);
+							SetLog(Global.User.ID, module, family.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} rodzinę: {family.Lastname}.", sqlConn, sqlTran);
 							break;
 						/// GROUPS
 						case Global.Module.GROUPS:
@@ -1510,7 +1510,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)group.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Global.User.ID, module, group.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} grupę: {group.Name}.", sqlConn, sqlTran);
+							SetLog(Global.User.ID, module, group.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} grupę: {group.Name}.", sqlConn, sqlTran);
 							break;
 						/// LOGS
 						case Global.Module.LOGS:
@@ -1550,7 +1550,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)store.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Global.User.ID, module, store.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} magazyn: {store.Name}.", sqlConn, sqlTran);
+							SetLog(Global.User.ID, module, store.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} magazyn: {store.Name}.", sqlConn, sqlTran);
 							break;
 						/// USERS
 						case Global.Module.USERS:
@@ -1573,7 +1573,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("archival", user.Archival);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Global.User.ID, module, user.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} użytkownika: {user.Fullname}.", sqlConn, sqlTran);
+							SetLog(Global.User.ID, module, user.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} użytkownika: {user.Fullname}.", sqlConn, sqlTran);
 
 							/// permissions
 							using (sqlCmd = new NpgsqlCommand(@"delete from wbz.users_permissions where ""user""=@user", sqlConn, sqlTran))

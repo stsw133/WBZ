@@ -4,10 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:c="clr-namespace:WBZ.Controls"
-             xmlns:g="clr-namespace:WBZ.Globals"
+             xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
+             xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="750"
              Loaded="UserControl_Loaded">
-    <c:DataGrid ItemsSource="{Binding InstanceContacts}" IsReadOnly="{Binding EditingMode, Converter={g:conv_BoolInverted}}">
+    <c:DataGrid ItemsSource="{Binding InstanceContacts}" IsReadOnly="{Binding EditingMode, Converter={seg:conv_BoolInverted}}">
         <DataGrid.Columns>
             <DataGridTextColumn Binding="{Binding id}" Header="ID" IsReadOnly="True" Visibility="Collapsed"/>
             <DataGridTextColumn Binding="{Binding forename}" Header="Imię" Width="1*"/>

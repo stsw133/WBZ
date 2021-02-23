@@ -4,28 +4,29 @@
           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
           xmlns:g="clr-namespace:WBZ.Globals"
+          xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
           xmlns:p="clr-namespace:WBZ.Properties"
           mc:Ignorable="d" d:DesignHeight="300"
           Margin="5,5,0,5" Padding="0,0,5,0" MinWidth="150"
                 Loaded="TreeView_Loaded" PreviewMouseDoubleClick="TreeView_PreviewMouseDoubleClick" PreviewMouseRightButtonDown="TreeView_PreviewMouseRightButtonDown" SelectedItemChanged="TreeView_SelectedItemChanged">
     <TreeView.ContextMenu>
         <ContextMenu>
-            <MenuItem Header="Podgląd" IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=groups_preview}" Click="btnGroupsPreview_Click">
+            <MenuItem Header="Podgląd" IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=groups_preview}" Click="btnGroupsPreview_Click">
                 <MenuItem.Icon>
                     <Image Source="/Resources/icon32_search.ico"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Dodaj" IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=groups_save}" Click="btnGroupsNew_Click">
+            <MenuItem Header="Dodaj" IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=groups_save}" Click="btnGroupsNew_Click">
                 <MenuItem.Icon>
                     <Image Source="/Resources/icon32_add.ico"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Edytuj" IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=groups_save}" Click="btnGroupsEdit_Click">
+            <MenuItem Header="Edytuj" IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=groups_save}" Click="btnGroupsEdit_Click">
                 <MenuItem.Icon>
                     <Image Source="/Resources/icon32_edit.ico"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Usuń" IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={g:conv_ListContains}, ConverterParameter=groups_delete}" Click="btnGroupsDelete_Click">
+            <MenuItem Header="Usuń" IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=groups_delete}" Click="btnGroupsDelete_Click">
                 <MenuItem.Icon>
                     <Image Source="/Resources/icon32_delete.ico"/>
                 </MenuItem.Icon>

@@ -14,7 +14,7 @@ namespace WBZ
 	{
 		public App()
         {
-			StswExpress.Globals.Properties.Size = WBZ.Properties.Settings.Default.config_iSize;
+			StswExpress.Globals.Properties.iSize = WBZ.Properties.Settings.Default.iSize;
         }
 
 		/// <summary>

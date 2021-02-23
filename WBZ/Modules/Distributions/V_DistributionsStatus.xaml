@@ -4,12 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:c="clr-namespace:WBZ.Controls"
-        xmlns:g="clr-namespace:WBZ.Globals"
+        xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
+        xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
         Title="{Binding Title}" SizeToContent="WidthAndHeight"
             BorderThickness="3" BorderBrush="#333" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" WindowStyle="None"
-            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}}"
+            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding Source={x:Static seg:Properties.iSize}}"
             Icon="/Resources/icon32_books.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
@@ -18,7 +19,7 @@
         <!-- titleBar -->
         <c:TitleBar DockPanel.Dock="Top"/>
         <!-- main -->
-        <GroupBox DockPanel.Dock="Top" Margin="10,10,10,0" Padding="5" Header="Uzgodniony sposób kontaktu" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=25}">
+        <GroupBox DockPanel.Dock="Top" Margin="10,10,10,0" Padding="5" Header="Uzgodniony sposób kontaktu" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=25}">
             <StackPanel>
                 <CheckBox Content="Wyślij wiadomość SMS" VerticalContentAlignment="Center" IsChecked="{Binding FamilyInfo.C_SMS}" IsEnabled="False"/>
                 <CheckBox Content="Rozmowa telefoniczna" VerticalContentAlignment="Center" IsChecked="{Binding FamilyInfo.C_Call}" IsEnabled="False"/>
@@ -37,14 +38,14 @@
                     <Label Content="{Binding FamilyContactsInfo.Rows[0][4]}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0" HorizontalAlignment="Center">
-                    <c:Button Margin="5,5,2.5,5" IsEnabled="{Binding FamilyInfo.C_SMS}" TextVisibility="True"
+                    <sec:Button Margin="5,5,2.5,5" IsEnabled="{Binding FamilyInfo.C_SMS}" TextVisibility="True"
                         Text="Wyślij SMS" Icon="/Resources/icon32_mail.ico" PreviewMouseLeftButtonUp="btnSendSMS_Click"/>
-                    <c:Button Margin="5,5,2.5,5" IsEnabled="{Binding FamilyInfo.C_Email}" TextVisibility="True"
+                    <sec:Button Margin="5,5,2.5,5" IsEnabled="{Binding FamilyInfo.C_Email}" TextVisibility="True"
                         Text="Wyślij e-mail" Icon="/Resources/icon32_mail.ico" PreviewMouseLeftButtonUp="btnSendEmail_Click"/>
                 </StackPanel>
             </StackPanel>
         </GroupBox>
-        <GroupBox DockPanel.Dock="Top" Margin="10,10,10,0" Padding="5" Header="Zmiana statusu" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=25}">
+        <GroupBox DockPanel.Dock="Top" Margin="10,10,10,0" Padding="5" Header="Zmiana statusu" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=25}">
             <StackPanel>
                 <RadioButton x:Name="rbStatus0" Content="Brak" GroupName="Status"/>
                 <RadioButton x:Name="rbStatus1" Content="Poinformowano" GroupName="Status"/>
@@ -52,8 +53,8 @@
             </StackPanel>
         </GroupBox>
         <DockPanel DockPanel.Dock="Bottom" Margin="0,10,0,0" HorizontalAlignment="Center">
-            <Button Content="OK" Margin="5" HorizontalAlignment="Right" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=2.5}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=10}" IsEnabled="{Binding EditMode}" Click="btnOk_Click"/>
-            <Button Content="Anuluj" Margin="5" HorizontalAlignment="Left" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=2.5}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=10}" Click="btnCancel_Click"/>
+            <Button Content="OK" Margin="5" HorizontalAlignment="Right" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=10}" IsEnabled="{Binding EditMode}" Click="btnOk_Click"/>
+            <Button Content="Anuluj" Margin="5" HorizontalAlignment="Left" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=10}" Click="btnCancel_Click"/>
         </DockPanel>
     </DockPanel>
 </Window>

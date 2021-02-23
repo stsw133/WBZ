@@ -21,7 +21,7 @@ namespace WBZ.Modules.Distributions
 	{
 		D_DistributionsNew D = new D_DistributionsNew();
 
-		public DistributionsNew(MODULE_MODEL instance, Commands.Type mode)
+		public DistributionsNew(MODULE_MODEL instance, StswExpress.Globals.Commands.Type mode)
 		{
 			InitializeComponent();
 			DataContext = D;
@@ -31,11 +31,11 @@ namespace WBZ.Modules.Distributions
 				D.InstanceInfo = instance;
 			D.Mode = mode;
 
-			if (mode == Commands.Type.EDIT && D.InstanceInfo.Status != (short)MODULE_MODEL.DistributionStatus.Buffer)
-				D.Mode = Commands.Type.PREVIEW;
+			if (mode == StswExpress.Globals.Commands.Type.EDIT && D.InstanceInfo.Status != (short)MODULE_MODEL.DistributionStatus.Buffer)
+				D.Mode = StswExpress.Globals.Commands.Type.PREVIEW;
 
 			D.InstanceInfo.Families = SQL.GetDistributionPositions(D.InstanceInfo.ID);
-			if (D.Mode.In(Commands.Type.DUPLICATE))
+			if (D.Mode.In(StswExpress.Globals.Commands.Type.DUPLICATE))
 				foreach (var family in D.InstanceInfo.Families)
 					foreach (DataRow row in family.Positions.Rows)
 						row.SetAdded();
@@ -92,7 +92,7 @@ namespace WBZ.Modules.Distributions
 		{
 			M_DistributionFamily family;
 
-			var window = new FamiliesList(Commands.Type.SELECTING);
+			var window = new FamiliesList(StswExpress.Globals.Commands.Type.SELECT);
 			if (window.ShowDialog() == true)
 			{
 				family = D.InstanceInfo.Families.FirstOrDefault(x => x.Family == window.Selected.ID);
@@ -114,7 +114,7 @@ namespace WBZ.Modules.Distributions
 			bool br = false;
 			do
 			{
-				var window2 = new ArticlesList(Commands.Type.SELECTING);
+				var window2 = new ArticlesList(StswExpress.Globals.Commands.Type.SELECT);
 				if (window2.ShowDialog() == true)
 				{
 					if (window2.Selected != null)

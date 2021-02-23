@@ -49,7 +49,7 @@ namespace WBZ.Modules.Logs
 		{
 			var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
 			foreach (MODULE_MODEL instance in selectedInstances)
-				Functions.OpenInstanceWindow(this, instance, Commands.Type.PREVIEW);
+				Functions.OpenInstanceWindow(this, instance, StswExpress.Globals.Commands.Type.PREVIEW);
 		}
 
 		/// <summary>
@@ -59,7 +59,7 @@ namespace WBZ.Modules.Logs
 		{
 			var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
 			foreach (MODULE_MODEL instance in selectedInstances)
-				Functions.OpenInstanceWindow(this, instance, Commands.Type.EDIT);
+				Functions.OpenInstanceWindow(this, instance, StswExpress.Globals.Commands.Type.EDIT);
 		}
 
 		/// <summary>

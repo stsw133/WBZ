@@ -349,6 +349,9 @@
   <data name="pl_manual" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pl_manual.pdf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="StswExpress" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\StswExpress.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="Translations_tm" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Translations.tm.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

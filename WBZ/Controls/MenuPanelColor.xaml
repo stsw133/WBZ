@@ -3,8 +3,7 @@
           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
           xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-          xmlns:g="clr-namespace:WBZ.Globals"
-          xmlns:p="clr-namespace:WBZ.Properties"
+          xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
           mc:Ignorable="d"
           Loaded="MenuItem_Loaded">
     <MenuItem.Icon>
@@ -13,100 +12,100 @@
     <MenuItem.Header>
         <StackPanel Orientation="Horizontal">
             <Label Content="Kolor paneli"/>
-            <ComboBox SelectedValuePath="Tag" SelectedValue="{Binding Tag, RelativeSource={RelativeSource FindAncestor, AncestorType=MenuItem}}" MaxWidth="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=15}" VerticalContentAlignment="Center">
+            <ComboBox SelectedValuePath="Tag" SelectedValue="{Binding Tag, RelativeSource={RelativeSource FindAncestor, AncestorType=MenuItem}}" MaxWidth="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}" VerticalContentAlignment="Center">
                 <ComboBoxItem Tag="#FFEEEEEE">
-                    <StackPanel Orientation="Horizontal" MinHeight="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}">
-                        <Rectangle Fill="#FFEEEEEE" Stroke="Gray" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}"/>
+                    <StackPanel Orientation="Horizontal" MinHeight="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}">
+                        <Rectangle Fill="#FFEEEEEE" Stroke="Gray" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                         <TextBlock Text="Jasny" Margin="5,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
                 </ComboBoxItem>
                 <ComboBoxItem Tag="#FF444444">
-                    <StackPanel Orientation="Horizontal" MinHeight="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}">
-                        <Rectangle Fill="#FF444444" Stroke="Gray" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}"/>
+                    <StackPanel Orientation="Horizontal" MinHeight="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}">
+                        <Rectangle Fill="#FF444444" Stroke="Gray" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                         <TextBlock Text="Ciemny" Margin="5,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
                 </ComboBoxItem>
                 <Separator/>
                 <ComboBoxItem Tag="#FF33AAEE">
-                    <StackPanel Orientation="Horizontal" MinHeight="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}">
-                        <Rectangle Fill="#FF33AAEE" Stroke="Gray" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}"/>
+                    <StackPanel Orientation="Horizontal" MinHeight="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}">
+                        <Rectangle Fill="#FF33AAEE" Stroke="Gray" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                         <TextBlock Text="Błękitny" Margin="5,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
                 </ComboBoxItem>
                 <ComboBoxItem Tag="#FFBB9966">
-                    <StackPanel Orientation="Horizontal" MinHeight="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}">
-                        <Rectangle Fill="#FFBB9966" Stroke="Gray" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}"/>
+                    <StackPanel Orientation="Horizontal" MinHeight="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}">
+                        <Rectangle Fill="#FFBB9966" Stroke="Gray" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                         <TextBlock Text="Brązowy" Margin="5,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
                 </ComboBoxItem>
                 <ComboBoxItem Tag="#FFEE5555">
-                    <StackPanel Orientation="Horizontal" MinHeight="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}">
-                        <Rectangle Fill="#FFEE5555" Stroke="Gray" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}"/>
+                    <StackPanel Orientation="Horizontal" MinHeight="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}">
+                        <Rectangle Fill="#FFEE5555" Stroke="Gray" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                         <TextBlock Text="Czerwony" Margin="5,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
                 </ComboBoxItem>
                 <ComboBoxItem Tag="#FFEEAA33">
-                    <StackPanel Orientation="Horizontal" MinHeight="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}">
-                        <Rectangle Fill="#FFEEAA33" Stroke="Gray" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}"/>
+                    <StackPanel Orientation="Horizontal" MinHeight="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}">
+                        <Rectangle Fill="#FFEEAA33" Stroke="Gray" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                         <TextBlock Text="Pomarańczowy" Margin="5,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
                 </ComboBoxItem>
                 <ComboBoxItem Tag="#FFBB88DD">
-                    <StackPanel Orientation="Horizontal" MinHeight="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}">
-                        <Rectangle Fill="#FFBB88DD" Stroke="Gray" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}"/>
+                    <StackPanel Orientation="Horizontal" MinHeight="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}">
+                        <Rectangle Fill="#FFBB88DD" Stroke="Gray" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                         <TextBlock Text="Purpurowy" Margin="5,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
                 </ComboBoxItem>
                 <ComboBoxItem Tag="#FFFF69B4">
-                    <StackPanel Orientation="Horizontal" MinHeight="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}">
-                        <Rectangle Fill="#FFFF69B4" Stroke="Gray" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}"/>
+                    <StackPanel Orientation="Horizontal" MinHeight="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}">
+                        <Rectangle Fill="#FFFF69B4" Stroke="Gray" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                         <TextBlock Text="Różowy" Margin="5,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
                 </ComboBoxItem>
                 <ComboBoxItem Tag="#FF99AABB">
-                    <StackPanel Orientation="Horizontal" MinHeight="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}">
-                        <Rectangle Fill="#FF99AABB" Stroke="Gray" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}"/>
+                    <StackPanel Orientation="Horizontal" MinHeight="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}">
+                        <Rectangle Fill="#FF99AABB" Stroke="Gray" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                         <TextBlock Text="Szaroniebieski" Margin="5,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
                 </ComboBoxItem>
                 <ComboBoxItem Tag="#FF44CCCC">
-                    <StackPanel Orientation="Horizontal" MinHeight="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}">
-                        <Rectangle Fill="#FF44CCCC" Stroke="Gray" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}"/>
+                    <StackPanel Orientation="Horizontal" MinHeight="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}">
+                        <Rectangle Fill="#FF44CCCC" Stroke="Gray" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                         <TextBlock Text="Turkusowy" Margin="5,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
                 </ComboBoxItem>
                 <ComboBoxItem Tag="#FF55DD55">
-                    <StackPanel Orientation="Horizontal" MinHeight="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}">
-                        <Rectangle Fill="#FF55DD55" Stroke="Gray" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}"/>
+                    <StackPanel Orientation="Horizontal" MinHeight="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}">
+                        <Rectangle Fill="#FF55DD55" Stroke="Gray" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                         <TextBlock Text="Zielony" Margin="5,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
                 </ComboBoxItem>
                 <ComboBoxItem Tag="#FFEEEE55">
-                    <StackPanel Orientation="Horizontal" MinHeight="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}">
-                        <Rectangle Fill="#FFEEEE55" Stroke="Gray" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}"/>
+                    <StackPanel Orientation="Horizontal" MinHeight="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}">
+                        <Rectangle Fill="#FFEEEE55" Stroke="Gray" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                         <TextBlock Text="Żółty" Margin="5,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
                 </ComboBoxItem>
                 <Separator/>
                 <ComboBoxItem Tag="{Binding RGB}" PreviewMouseLeftButtonUp="customColor_PreviewMouseLeftButtonUp">
-                    <StackPanel Orientation="Horizontal" MinHeight="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}">
-                        <Rectangle Fill="{Binding RGB}" Stroke="Gray" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.25}"/>
+                    <StackPanel Orientation="Horizontal" MinHeight="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}">
+                        <Rectangle Fill="{Binding RGB}" Stroke="Gray" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                         <TextBlock Text="Własny" Margin="5,0,5,0" VerticalAlignment="Center"/>
                         <StackPanel x:Name="colorChanger">
                             <StackPanel Orientation="Horizontal">
-                                <Slider x:Name="R" Maximum="255" Value="{Binding R}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=6}"/>
-                                <Rectangle Fill="#F00" Margin="5,0,0,0" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.75}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.75}"/>
-                                <TextBlock Text="{Binding R}" Margin="5,0,0,0" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.75}" VerticalAlignment="Center"/>
+                                <Slider x:Name="R" Maximum="255" Value="{Binding R}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=6}"/>
+                                <Rectangle Fill="#F00" Margin="5,0,0,0" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.75}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.75}"/>
+                                <TextBlock Text="{Binding R}" Margin="5,0,0,0" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.75}" VerticalAlignment="Center"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <Slider x:Name="G" Maximum="255" Value="{Binding G}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=6}"/>
-                                <Rectangle Fill="#0F0" Margin="5,0,0,0" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.75}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.75}"/>
-                                <TextBlock Text="{Binding G}" Margin="5,0,0,0" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.75}" VerticalAlignment="Center"/>
+                                <Slider x:Name="G" Maximum="255" Value="{Binding G}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=6}"/>
+                                <Rectangle Fill="#0F0" Margin="5,0,0,0" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.75}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.75}"/>
+                                <TextBlock Text="{Binding G}" Margin="5,0,0,0" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.75}" VerticalAlignment="Center"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <Slider x:Name="B" Maximum="255" Value="{Binding B}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=6}"/>
-                                <Rectangle Fill="#00F" Margin="5,0,0,0" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.75}" Width="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.75}"/>
-                                <TextBlock Text="{Binding B}" Margin="5,0,0,0" FontSize="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.75}" VerticalAlignment="Center"/>
+                                <Slider x:Name="B" Maximum="255" Value="{Binding B}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=6}"/>
+                                <Rectangle Fill="#00F" Margin="5,0,0,0" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.75}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.75}"/>
+                                <TextBlock Text="{Binding B}" Margin="5,0,0,0" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.75}" VerticalAlignment="Center"/>
                             </StackPanel>
                             <!--
                             <StackPanel.Style>

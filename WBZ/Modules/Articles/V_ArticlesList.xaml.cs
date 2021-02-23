@@ -14,7 +14,7 @@ namespace WBZ.Modules.Articles
 	{
 		D_ArticlesList D = new D_ArticlesList();
 
-		public ArticlesList(Commands.Type mode)
+		public ArticlesList(StswExpress.Globals.Commands.Type mode)
 		{
 			InitializeComponent();
 			DataContext = D;

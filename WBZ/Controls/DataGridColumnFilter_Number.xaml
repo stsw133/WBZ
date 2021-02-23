@@ -3,10 +3,10 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-            xmlns:g="clr-namespace:WBZ.Globals"
+            xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
             mc:Ignorable="d" d:DesignWidth="100">
     <StackPanel.CommandBindings>
-        <CommandBinding Command="g:Commands.Refresh" Executed="cmdRefresh_Executed"/>
+        <CommandBinding Command="seg:Commands.Refresh" Executed="cmdRefresh_Executed"/>
     </StackPanel.CommandBindings>
     <TextBlock Text="{Binding Text, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=StackPanel}}"/>
     <DockPanel Visibility="{Binding FilterVisibility, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=StackPanel}}">
@@ -22,7 +22,7 @@
         -->
         <TextBox Text="{Binding Value, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=StackPanel}, UpdateSourceTrigger=PropertyChanged}">
             <TextBox.InputBindings>
-                <KeyBinding Command="g:Commands.Refresh" Key="Return"/>
+                <KeyBinding Command="seg:Commands.Refresh" Key="Return"/>
             </TextBox.InputBindings>
         </TextBox>
     </DockPanel>

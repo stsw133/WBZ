@@ -53,7 +53,7 @@ namespace WBZ.Modules._base
             var selectedInstances = (W.dgList as DataGrid).SelectedItems.Cast<MODULE_MODEL>();
             foreach (MODULE_MODEL instance in selectedInstances)
             {
-                var window = Activator.CreateInstance(Type.GetType(HalfName + "New"), instance, Commands.Type.PREVIEW) as Window;
+                var window = Activator.CreateInstance(Type.GetType(HalfName + "New"), instance, StswExpress.Globals.Commands.Type.PREVIEW) as Window;
                 window.Show();
             }
         }
@@ -74,7 +74,7 @@ namespace WBZ.Modules._base
         }
         internal void cmdNew_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            var window = Activator.CreateInstance(Type.GetType(HalfName + "New"), null, Commands.Type.NEW) as Window;
+            var window = Activator.CreateInstance(Type.GetType(HalfName + "New"), null, StswExpress.Globals.Commands.Type.NEW) as Window;
             window.Show();
         }
 
@@ -97,7 +97,7 @@ namespace WBZ.Modules._base
             var selectedInstances = (W.dgList as DataGrid).SelectedItems.Cast<MODULE_MODEL>();
             foreach (MODULE_MODEL instance in selectedInstances)
             {
-                var window = Activator.CreateInstance(Type.GetType(HalfName + "New"), instance, Commands.Type.DUPLICATE) as Window;
+                var window = Activator.CreateInstance(Type.GetType(HalfName + "New"), instance, StswExpress.Globals.Commands.Type.DUPLICATE) as Window;
                 window.Show();
             }
         }
@@ -121,7 +121,7 @@ namespace WBZ.Modules._base
             var selectedInstances = (W.dgList as DataGrid).SelectedItems.Cast<MODULE_MODEL>();
             foreach (MODULE_MODEL instance in selectedInstances)
             {
-                var window = Activator.CreateInstance(Type.GetType(HalfName + "New"), instance, Commands.Type.EDIT) as Window;
+                var window = Activator.CreateInstance(Type.GetType(HalfName + "New"), instance, StswExpress.Globals.Commands.Type.EDIT) as Window;
                 window.Show();
             }
         }

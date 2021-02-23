@@ -17,11 +17,11 @@ namespace WBZ.Modules.Contractors
         {
             get
             {
-                if (Mode == Commands.Type.NEW)
+                if (Mode == StswExpress.Globals.Commands.Type.NEW)
                     return "Nowy kontrahent";
-                else if (Mode == Commands.Type.DUPLICATE)
+                else if (Mode == StswExpress.Globals.Commands.Type.DUPLICATE)
                     return $"Duplikowanie kontrahenta: {InstanceInfo.Name}";
-                else if (Mode == Commands.Type.EDIT)
+                else if (Mode == StswExpress.Globals.Commands.Type.EDIT)
                     return $"Edycja kontrahenta: {InstanceInfo.Name}";
                 else
                     return $"Podgląd kontrahenta: {InstanceInfo.Name}";

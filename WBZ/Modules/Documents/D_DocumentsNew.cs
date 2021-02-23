@@ -14,11 +14,11 @@ namespace WBZ.Modules.Documents
 		{
 			get
 			{
-				if (Mode == Commands.Type.NEW)
+				if (Mode == StswExpress.Globals.Commands.Type.NEW)
 					return "Nowy dokument";
-				else if (Mode == Commands.Type.DUPLICATE)
+				else if (Mode == StswExpress.Globals.Commands.Type.DUPLICATE)
 					return $"Duplikowanie dokumentu: {InstanceInfo.Name}";
-				else if (Mode == Commands.Type.EDIT)
+				else if (Mode == StswExpress.Globals.Commands.Type.EDIT)
 					return $"Edycja dokumentu: {InstanceInfo.Name}";
 				else
 					return $"Podgląd dokumentu: {InstanceInfo.Name}";

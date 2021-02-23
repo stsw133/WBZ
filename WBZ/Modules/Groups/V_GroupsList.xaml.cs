@@ -13,7 +13,7 @@ namespace WBZ.Modules.Groups
     {
         D_GroupsList D = new D_GroupsList();
 
-        public GroupsList(string module, Commands.Type mode)
+        public GroupsList(string module, StswExpress.Globals.Commands.Type mode)
         {
             InitializeComponent();
             DataContext = D;

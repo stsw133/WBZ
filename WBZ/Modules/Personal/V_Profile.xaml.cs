@@ -42,7 +42,7 @@ namespace WBZ.Modules.Personal
                 }
             }
 
-            if (SQL.SetInstance(Global.Module.USERS, D.User, Commands.Type.EDIT))
+            if (SQL.SetInstance(Global.Module.USERS, D.User, StswExpress.Globals.Commands.Type.EDIT))
 			    Close();
 		}
 	}

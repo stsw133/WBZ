@@ -14,7 +14,7 @@ namespace WBZ.Modules.Stores
 	{
 		D_StoresNew D = new D_StoresNew();
 
-		public StoresNew(MODULE_MODEL instance, Commands.Type mode)
+		public StoresNew(MODULE_MODEL instance, StswExpress.Globals.Commands.Type mode)
 		{
 			InitializeComponent();
 			DataContext = D;

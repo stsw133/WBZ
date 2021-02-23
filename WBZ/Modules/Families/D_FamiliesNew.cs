@@ -17,11 +17,11 @@ namespace WBZ.Modules.Families
         {
             get
             {
-                if (Mode == Commands.Type.NEW)
+                if (Mode == StswExpress.Globals.Commands.Type.NEW)
                     return "Nowa rodzina";
-                else if (Mode == Commands.Type.DUPLICATE)
+                else if (Mode == StswExpress.Globals.Commands.Type.DUPLICATE)
                     return $"Duplikowanie rodziny: {InstanceInfo.Lastname}";
-                else if (Mode == Commands.Type.EDIT)
+                else if (Mode == StswExpress.Globals.Commands.Type.EDIT)
                     return $"Edycja rodziny: {InstanceInfo.Lastname}";
                 else
                     return $"Podgląd rodziny: {InstanceInfo.Lastname}";

@@ -98,12 +98,12 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("12")]
-        public double config_iSize {
+        public double iSize {
             get {
-                return ((double)(this["config_iSize"]));
+                return ((double)(this["iSize"]));
             }
             set {
-                this["config_iSize"] = value;
+                this["iSize"] = value;
             }
         }
         
@@ -1808,12 +1808,12 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("pl")]
-        public string language {
+        public string Language {
             get {
-                return ((string)(this["language"]));
+                return ((string)(this["Language"]));
             }
             set {
-                this["language"] = value;
+                this["Language"] = value;
             }
         }
         

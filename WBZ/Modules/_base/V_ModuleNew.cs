@@ -30,7 +30,7 @@ namespace WBZ.Modules._base
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			int newID = (D.InstanceInfo as dynamic).ID;
-			if (((Commands.Type)D.Mode).In(Commands.Type.NEW, Commands.Type.DUPLICATE))
+			if (((StswExpress.Globals.Commands.Type)D.Mode).In(StswExpress.Globals.Commands.Type.NEW, StswExpress.Globals.Commands.Type.DUPLICATE))
 			{
 				newID = SQL.NewInstanceID(D.MODULE_TYPE);
 			}
@@ -126,7 +126,7 @@ namespace WBZ.Modules._base
 		{
 			if (e.LeftButton == MouseButtonState.Pressed)
 			{
-				Commands.Type perm = Global.User.Perms.Contains($"{module}_{Global.UserPermType.SAVE}") ? Commands.Type.EDIT : Commands.Type.PREVIEW;
+				StswExpress.Globals.Commands.Type perm = Global.User.Perms.Contains($"{module}_{Global.UserPermType.SAVE}") ? StswExpress.Globals.Commands.Type.EDIT : StswExpress.Globals.Commands.Type.PREVIEW;
 
 				var selectedInstances = (sender as DataGrid).SelectedItems.Cast<T>();
 				foreach (T instance in selectedInstances)
@@ -145,7 +145,7 @@ namespace WBZ.Modules._base
 		/// </summary>
 		private void Window_Closed(object sender, EventArgs e)
 		{
-			if (((Commands.Type)D.Mode).In(Commands.Type.NEW, Commands.Type.DUPLICATE) && !saved)
+			if (((StswExpress.Globals.Commands.Type)D.Mode).In(StswExpress.Globals.Commands.Type.NEW, StswExpress.Globals.Commands.Type.DUPLICATE) && !saved)
 				SQL.ClearObject(D.MODULE_TYPE, (D.InstanceInfo as dynamic).ID);
 
 			if (W.Owner != null)

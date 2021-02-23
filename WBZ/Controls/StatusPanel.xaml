@@ -4,28 +4,29 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:g="clr-namespace:WBZ.Globals"
+             xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
              xmlns:p="clr-namespace:WBZ.Properties"
              mc:Ignorable="d" d:DesignWidth="300">
     <Border BorderBrush="Gray" BorderThickness="0,1,0,0">
         <DockPanel>
             <!-- Higher (filters) -->
-            <DockPanel DockPanel.Dock="Top" Visibility="{Binding EnableFilters, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Converter={g:conv_BoolToVisibility}}">
+            <DockPanel DockPanel.Dock="Top" Visibility="{Binding EnableFilters, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Converter={seg:conv_BoolToVisibility}}">
                 <Button DockPanel.Dock="Right" Margin="2" VerticalAlignment="Center" ToolTip="Konfiguruj filtry">
-                    <Image Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.15}" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_edit.ico"/>
+                    <Image Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.15}" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_edit.ico"/>
                 </Button>
-                <Button DockPanel.Dock="Right" Margin="2,2,0,2" VerticalAlignment="Center" ToolTip="Czyść filtry" Command="g:Commands.Clear">
-                    <Image Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.15}" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_clear.ico"/>
+                <Button DockPanel.Dock="Right" Margin="2,2,0,2" VerticalAlignment="Center" ToolTip="Czyść filtry" Command="seg:Commands.Clear">
+                    <Image Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.15}" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_clear.ico"/>
                 </Button>
                 <Label Content="Filtr:" VerticalAlignment="Center"/>
                 <ComboBox Margin="5,0" ItemsSource="{Binding FiltersList}" SelectedValue="{Binding SelectedFilter}" SelectedValuePath="Name" FontWeight="Medium" VerticalAlignment="Center"/>
             </DockPanel>
             <!-- Lower (options, displayed) -->
             <DockPanel DockPanel.Dock="Top">
-                <ToggleButton Margin="2" ToolTip="Pokaż grupy" IsChecked="{Binding EnableGroups, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" Visibility="{Binding HasGroups, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Converter={g:conv_BoolToVisibility}}">
-                    <Image Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.15}" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_groups.ico"/>
+                <ToggleButton Margin="2" ToolTip="Pokaż grupy" IsChecked="{Binding EnableGroups, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" Visibility="{Binding HasGroups, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Converter={seg:conv_BoolToVisibility}}">
+                    <Image Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.15}" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_groups.ico"/>
                 </ToggleButton>
-                <ToggleButton Margin="0,2,2,2" ToolTip="Pokaż filtry" IsChecked="{Binding EnableFilters, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" Visibility="{Binding HasFilters, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Converter={g:conv_BoolToVisibility}}">
-                    <Image Margin="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=0.15}" Height="{Binding config_iSize, Source={x:Static p:Settings.Default}, Converter={g:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_filter.ico"/>
+                <ToggleButton Margin="0,2,2,2" ToolTip="Pokaż filtry" IsChecked="{Binding EnableFilters, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" Visibility="{Binding HasFilters, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Converter={seg:conv_BoolToVisibility}}">
+                    <Image Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.15}" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_filter.ico"/>
                 </ToggleButton>
                 <Label Content="Wyświetlono:" Margin="0,0,5,0" VerticalAlignment="Center"/>
                 <Label Content="{Binding InstancesList.Count}" FontWeight="Medium" VerticalAlignment="Center"/>
