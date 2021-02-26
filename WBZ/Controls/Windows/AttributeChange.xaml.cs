@@ -1,9 +1,9 @@
-﻿using System;
+﻿using StswExpress.Globals;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
-using WBZ.Globals;
 using WBZ.Models;
 
 namespace WBZ.Controls

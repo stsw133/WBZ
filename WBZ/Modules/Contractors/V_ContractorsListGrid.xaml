@@ -195,7 +195,7 @@
                 <DataTrigger Binding="{Binding Archival}" Value="True">
                     <Setter Property="Foreground" Value="Gray"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Comment, Converter={seg:conv_CompareStrings}}" Value="False">
+                <DataTrigger Binding="{Binding Comment, Converter={seg:conv_Compare}}" Value="False">
                     <Setter Property="ToolTip" Value="{Binding Comment}"/>
                 </DataTrigger>
             </Style.Triggers>

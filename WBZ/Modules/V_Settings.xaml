@@ -4,20 +4,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:c="clr-namespace:WBZ.Controls"
+        xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
         xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
-        xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
         mc:Ignorable="d"
         Title="{Tr Settings, DefaultText='Ustawienia', LanguageId={x:Static seg:Properties.Language}}" MinHeight="160" MinWidth="240" Height="400" Width="600"
             BorderThickness="3" BorderBrush="#333" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" WindowStyle="None"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding Source={x:Static seg:Properties.iSize}}"
-            Icon="/Resources/icon32_settings.ico" Closed="Window_Closed">
+            Icon="/Resources/icon32_settings.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
     <DockPanel>
         <!-- titleBar -->
         <c:TitleBar DockPanel.Dock="Top"/>
+        <!-- buttons -->
+        <UniformGrid Columns="2" DockPanel.Dock="Bottom" HorizontalAlignment="Center">
+            <sec:Button Margin="5" Text="Akceptuj" Icon="/Resources/icon32_accept.ico" IsDefault="True" Click="btnAccept_Click"/>
+            <sec:Button Margin="5" Text="Anuluj" Icon="/Resources/icon32_cancel.ico" Click="btnCancel_Click"/>
+        </UniformGrid>
+        <Border DockPanel.Dock="Bottom" Margin="0,5,0,0" BorderBrush="DarkGray" BorderThickness="0,1,0,0"/>
         <!-- tabs -->
         <TabControl DockPanel.Dock="Top" TabStripPlacement="Left">
             <!-- tabMain -->

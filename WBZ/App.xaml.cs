@@ -1,8 +1,9 @@
-﻿using System;
+﻿using StswExpress.Globals;
+using StswExpress.Models;
+using System;
 using System.IO;
 using System.Windows;
 using TranslateMe;
-using WBZ.Models;
 using WBZ.Modules.Login;
 
 namespace WBZ
@@ -14,13 +15,14 @@ namespace WBZ
 	{
 		public App()
         {
-			StswExpress.Globals.Mail.Host = WBZ.Properties.Settings.Default.config_Email_Host;
-			StswExpress.Globals.Mail.Port = WBZ.Properties.Settings.Default.config_Email_Port;
-			StswExpress.Globals.Mail.Email = WBZ.Properties.Settings.Default.config_Email_Email;
-			StswExpress.Globals.Mail.Password = WBZ.Properties.Settings.Default.config_Email_Password;
+			Mail.Host = WBZ.Properties.Settings.Default.config_Email_Host;
+			Mail.Port = WBZ.Properties.Settings.Default.config_Email_Port;
+			Mail.Email = WBZ.Properties.Settings.Default.config_Email_Email;
+			Mail.Password = WBZ.Properties.Settings.Default.config_Email_Password;
 			StswExpress.Globals.Properties.iSize = WBZ.Properties.Settings.Default.iSize;
 			StswExpress.Globals.Properties.Language = WBZ.Properties.Settings.Default.Language;
-        }
+			StswExpress.Globals.Properties.HashKey = "ejdndbfewbasjhdggjhbasbvdgewvbjdbsavdqgwjbdjsvdyugwqyubashjdbjfgdtyuqw";
+		}
 
 		/// <summary>
 		/// Startup

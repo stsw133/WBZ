@@ -1,10 +1,10 @@
-﻿using System;
+﻿using StswExpress.Globals;
+using System;
 using System.Data;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using WBZ.Globals;
 
 namespace WBZ.Modules._base
 {
@@ -30,7 +30,7 @@ namespace WBZ.Modules._base
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			int newID = (D.InstanceInfo as dynamic).ID;
-			if (((StswExpress.Globals.Commands.Type)D.Mode).In(StswExpress.Globals.Commands.Type.NEW, StswExpress.Globals.Commands.Type.DUPLICATE))
+			if (((Commands.Type)D.Mode).In(Commands.Type.NEW, Commands.Type.DUPLICATE))
 			{
 				newID = SQL.NewInstanceID(D.MODULE_TYPE);
 			}
@@ -108,7 +108,7 @@ namespace WBZ.Modules._base
 		/// </summary>
 		internal void cmdHelp_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
-			Functions.OpenHelp(this);
+			Globals.Functions.OpenHelp(this);
 		}
 
 		/// <summary>
@@ -126,7 +126,7 @@ namespace WBZ.Modules._base
 		{
 			if (e.LeftButton == MouseButtonState.Pressed)
 			{
-				StswExpress.Globals.Commands.Type perm = Global.User.Perms.Contains($"{module}_{Global.UserPermType.SAVE}") ? StswExpress.Globals.Commands.Type.EDIT : StswExpress.Globals.Commands.Type.PREVIEW;
+				Commands.Type perm = Globals.Global.User.Perms.Contains($"{module}_{Globals.Global.UserPermType.SAVE}") ? Commands.Type.EDIT : Commands.Type.PREVIEW;
 
 				var selectedInstances = (sender as DataGrid).SelectedItems.Cast<T>();
 				foreach (T instance in selectedInstances)
@@ -145,7 +145,7 @@ namespace WBZ.Modules._base
 		/// </summary>
 		private void Window_Closed(object sender, EventArgs e)
 		{
-			if (((StswExpress.Globals.Commands.Type)D.Mode).In(StswExpress.Globals.Commands.Type.NEW, StswExpress.Globals.Commands.Type.DUPLICATE) && !saved)
+			if (((Commands.Type)D.Mode).In(Commands.Type.NEW, Commands.Type.DUPLICATE) && !saved)
 				SQL.ClearObject(D.MODULE_TYPE, (D.InstanceInfo as dynamic).ID);
 
 			if (W.Owner != null)

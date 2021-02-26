@@ -12,7 +12,7 @@
                 <Border DockPanel.Dock="Top" Background="LightGray" BorderBrush="Gray" BorderThickness="1" VerticalAlignment="Top" Height="34" Width="34" AllowDrop="True" Drop="btnManageIcon_Drop" PreviewMouseLeftButtonUp="btnManageIcon_Click">
                     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Image Stretch="UniformToFill" Source="{Binding InstanceInfo.Icon}"/>
-                        <Image Stretch="UniformToFill" Source="/Resources/icon32_photos.ico" Visibility="{Binding InstanceInfo.Icon, Converter={seg:conv_CompareStrings}, ConverterParameter={x:Null}}"/>
+                        <Image Stretch="UniformToFill" Source="/Resources/icon32_photos.ico" Visibility="{Binding InstanceInfo.Icon, Converter={seg:conv_Compare}, ConverterParameter={x:Null}}"/>
                     </Grid>
                     <Border.ContextMenu>
                         <ContextMenu>

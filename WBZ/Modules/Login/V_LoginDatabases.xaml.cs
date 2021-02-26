@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using WBZ.Models;
 using WBZ.Controls;
-using WBZ.Globals;
+using StswExpress.Models;
 
 namespace WBZ.Modules.Login
 {

@@ -1,5 +1,5 @@
-﻿using System.ComponentModel;
-using WBZ.Globals;
+﻿using StswExpress.Globals;
+using System.ComponentModel;
 
 namespace WBZ.Modules
 {
@@ -12,7 +12,7 @@ namespace WBZ.Modules
 		}
 
 		/// Title
-		public string Title { get; } = Global.Database.Name + TranslateMe.TM.Tr("Main", " - okno główne", StswExpress.Globals.Properties.Language);
+		public string Title { get; } = Global.AppDatabase.Name + TranslateMe.TM.Tr("Main", " - okno główne", StswExpress.Globals.Properties.Language);
 		/// Want to logout
 		public bool WantToLogout { get; set; } = false;
 	}

@@ -93,7 +93,6 @@
     <None Remove="Resources\icon64.ico" />
     <None Remove="Resources\logo.png" />
     <None Remove="Resources\pl_manual.pdf" />
-    <None Remove="Resources\StswExpress.dll" />
     <None Remove="Resources\Translations.tm.json" />
     <None Remove="Resources\_null.ico" />
   </ItemGroup>
@@ -354,9 +353,6 @@
   <ItemGroup>
     <Resource Include="Properties\Resources.resx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\StswExpress.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
 

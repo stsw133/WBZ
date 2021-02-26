@@ -1,7 +1,7 @@
-﻿using System;
+﻿using StswExpress.Globals;
+using System;
 using System.Data;
 using System.Windows;
-using WBZ.Globals;
 using WBZ.Modules._base;
 using WBZ.Modules.Articles;
 using WBZ.Modules.Contractors;
@@ -17,7 +17,7 @@ namespace WBZ.Modules.Documents
 	{
 		D_DocumentsNew D = new D_DocumentsNew();
 
-		public DocumentsNew(MODULE_MODEL instance, StswExpress.Globals.Commands.Type mode)
+		public DocumentsNew(MODULE_MODEL instance, Commands.Type mode)
 		{
 			InitializeComponent();
 			DataContext = D;
@@ -27,11 +27,11 @@ namespace WBZ.Modules.Documents
 				D.InstanceInfo = instance;
 			D.Mode = mode;
 
-			if (mode == StswExpress.Globals.Commands.Type.EDIT && D.InstanceInfo.Status != (short)MODULE_MODEL.DocumentStatus.Buffer)
-				D.Mode = StswExpress.Globals.Commands.Type.PREVIEW;
+			if (mode == Commands.Type.EDIT && D.InstanceInfo.Status != (short)MODULE_MODEL.DocumentStatus.Buffer)
+				D.Mode = Commands.Type.PREVIEW;
 
 			D.InstanceInfo.Positions = SQL.GetInstancePositions(D.MODULE_TYPE, D.InstanceInfo.ID);
-			if (D.Mode.In(StswExpress.Globals.Commands.Type.DUPLICATE))
+			if (D.Mode.In(Commands.Type.DUPLICATE))
 				foreach (DataRow row in D.InstanceInfo.Positions.Rows)
 					row.SetAdded();
 		}
@@ -57,7 +57,7 @@ namespace WBZ.Modules.Documents
 		/// </summary>
 		private void btnSelectContractor_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new ContractorsList(StswExpress.Globals.Commands.Type.SELECT);
+			var window = new ContractorsList(Commands.Type.SELECT);
 			if (window.ShowDialog() == true)
 				if (window.Selected != null)
 				{
@@ -72,7 +72,7 @@ namespace WBZ.Modules.Documents
 		/// </summary>
 		private void btnSelectStore_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new StoresList(StswExpress.Globals.Commands.Type.SELECT);
+			var window = new StoresList(Commands.Type.SELECT);
 			if (window.ShowDialog() == true)
 				if (window.Selected != null)
 				{
@@ -87,7 +87,7 @@ namespace WBZ.Modules.Documents
 		/// </summary>
 		private void btnPositionsAdd_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new ArticlesList(StswExpress.Globals.Commands.Type.SELECT);
+			var window = new ArticlesList(Commands.Type.SELECT);
 			if (window.ShowDialog() == true)
 				if (window.Selected != null)
 				{

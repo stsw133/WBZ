@@ -9,6 +9,7 @@ using WBZ.Models;
 using WBZ.Globals;
 using WBZ.Controls;
 using System.Collections.ObjectModel;
+using StswExpress.Globals;
 
 namespace WBZ
 {
@@ -71,22 +72,22 @@ namespace WBZ
 
 					if (user.Rows.Count > 0)
 					{
-						Global.User = user.DataTableToList<M_User>()[0];
-						if (Global.User.Blocked)
+						Globals.Global.User = user.ToList<M_User>()[0];
+						if (Globals.Global.User.Blocked)
 							MessageBox.Show("Użytkownik o podanym loginie jest zablokowany.");
 						else
 						{
 							sqlCmd = new NpgsqlCommand(@"select user, perm
 								from wbz.users_permissions
 								where ""user""=@id", sqlConn);
-							sqlCmd.Parameters.AddWithValue("id", Global.User.ID);
+							sqlCmd.Parameters.AddWithValue("id", Globals.Global.User.ID);
 							using (var sqlDA = new NpgsqlDataAdapter(sqlCmd))
 							{
 								sqlDA.Fill(perms);
 							}
 
 							foreach (DataRow perm in perms.Rows)
-								Global.User.Perms.Add(perm["perm"].ToString());
+								Globals.Global.User.Perms.Add(perm["perm"].ToString());
 
 							result = true;
 						}
@@ -123,7 +124,7 @@ namespace WBZ
 						values (@email, @username, @password) returning id", sqlConn, sqlTran);
 					sqlCmd.Parameters.AddWithValue("email", email);
 					sqlCmd.Parameters.AddWithValue("username", username);
-					sqlCmd.Parameters.AddWithValue("password", Global.sha256(password));
+					sqlCmd.Parameters.AddWithValue("password", Globals.Global.sha256(password));
 					int id = (int)sqlCmd.ExecuteScalar();
 
 					///permissions
@@ -167,7 +168,7 @@ namespace WBZ
 					var sqlCmd = new NpgsqlCommand(@"update wbz.users
 						set password=@newpass
 						where email=@email", sqlConn, sqlTran);
-					sqlCmd.Parameters.AddWithValue("newpass", Global.sha256(newpass));
+					sqlCmd.Parameters.AddWithValue("newpass", Globals.Global.sha256(newpass));
 					sqlCmd.Parameters.AddWithValue("email", email);
 					sqlCmd.ExecuteNonQuery();
 
@@ -611,11 +612,11 @@ namespace WBZ
 			{
 				var error = new M_Log()
 				{
-					ID = NewInstanceID(Global.Module.LOGS),
+					ID = NewInstanceID(Globals.Global.Module.LOGS),
 					Instance = instance,
 					Module = module,
 					Group = 2,
-					User = Global.User.ID
+					User = Globals.Global.User.ID
 				};
 
 				var d = Application.Current.Dispatcher;
@@ -631,7 +632,7 @@ namespace WBZ
 					if (show)
 						new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"{msg}:{Environment.NewLine}{error.Content}").ShowDialog();
 					if (save)
-						SetInstance(Global.Module.LOGS, error, StswExpress.Globals.Commands.Type.NEW);
+						SetInstance(Globals.Global.Module.LOGS, error, StswExpress.Globals.Commands.Type.NEW);
 				}
 			}
 			catch { }
@@ -656,36 +657,36 @@ namespace WBZ
 					switch (module)
 					{
 						/// ARTICLES
-						case Global.Module.ARTICLES:
+						case Globals.Global.Module.ARTICLES:
 							query = @"select count(distinct a.id)
 								from wbz.articles a
 								left join wbz.stores_articles sa
 									on a.id=sa.article";
 							break;
 						/// ATTACHMENTS
-						case Global.Module.ATTACHMENTS:
+						case Globals.Global.Module.ATTACHMENTS:
 							query = @"select count(distinct a.id)
 								from wbz.attachments a
 								left join wbz.users u
 									on a.""user"" = u.id";
 							break;
 						/// ATTRIBUTES_CLASSES
-						case Global.Module.ATTRIBUTES_CLASSES:
+						case Globals.Global.Module.ATTRIBUTES_CLASSES:
 							query = @"select count(distinct ac.id)
 								from wbz.attributes_classes ac";
 							break;
 						/// CONTRACTORS
-						case Global.Module.CONTRACTORS:
+						case Globals.Global.Module.CONTRACTORS:
 							query = @"select count(distinct c.id)
 								from wbz.contractors c";
 							break;
 						/// DISTRIBUTIONS
-						case Global.Module.DISTRIBUTIONS:
+						case Globals.Global.Module.DISTRIBUTIONS:
 							query = @"select count(distinct d.id)
 								from wbz.distributions d";
 							break;
 						/// DOCUMENTS
-						case Global.Module.DOCUMENTS:
+						case Globals.Global.Module.DOCUMENTS:
 							query = @"select count(distinct d.id)
 								from wbz.documents d
 								left join wbz.documents_positions dp
@@ -696,38 +697,38 @@ namespace WBZ
 									on s.id=d.store";
 							break;
 						/// EMPLOYEES
-						case Global.Module.EMPLOYEES:
+						case Globals.Global.Module.EMPLOYEES:
 							query = @"select count(distinct e.id)
 								from wbz.employees e
 								left join wbz.users u
 									on u.id=e.""user""";
 							break;
 						/// GROUPS
-						case Global.Module.GROUPS:
+						case Globals.Global.Module.GROUPS:
 							query = @"select count(distinct g.id)
 								from wbz.groups g";
 							break;
 						/// FAMILIES
-						case Global.Module.FAMILIES:
+						case Globals.Global.Module.FAMILIES:
 							query = @"select count(distinct f.id)
 								from wbz.families f";
 							break;
 						/// LOGS
-						case Global.Module.LOGS:
+						case Globals.Global.Module.LOGS:
 							query = @"select count(distinct l.id)
 								from wbz.logs l
 								left join wbz.users u
 									on l.""user"" = u.id";
 							break;
 						/// STORES
-						case Global.Module.STORES:
+						case Globals.Global.Module.STORES:
 							query = @"select count(distinct s.id)
 								from wbz.stores s
 								left join wbz.stores_articles sa
 									on s.id = sa.store";
 							break;
 						/// USERS
-						case Global.Module.USERS:
+						case Globals.Global.Module.USERS:
 							query = @"select count(distinct u.id)
 								from wbz.users u";
 							break;
@@ -773,7 +774,7 @@ namespace WBZ
 
 						var dt = new DataTable();
 						sqlDA.Fill(dt);
-						result = dt.DataTableToList<M_ComboValue>();
+						result = dt.ToList<M_ComboValue>();
 					}
 				}
 			}
@@ -806,7 +807,7 @@ namespace WBZ
 					switch (module)
 					{
 						/// ARTICLES
-						case Global.Module.ARTICLES:
+						case Globals.Global.Module.ARTICLES:
 							query = $@"select a.id, a.codename, a.name, a.ean, coalesce(nullif(wbz.ArtDefMeaNam(a.id),''), 'kg') as measure,
 									coalesce(sum(sa.amount), 0) as amountraw, coalesce(sum(sa.amount) / wbz.ArtDefMeaCon(a.id), 0) as amount,
 									coalesce(sum(sa.reserved), 0) as reservedraw, coalesce(sum(sa.reserved) / wbz.ArtDefMeaCon(a.id), 0) as reserved,
@@ -818,7 +819,7 @@ namespace WBZ
 								group by a.id";
 							break;
 						/// ATTACHMENTS
-						case Global.Module.ATTACHMENTS:
+						case Globals.Global.Module.ATTACHMENTS:
 							query = $@"select a.id, a.""user"", a.module, a.instance, a.name, null as file
 								from wbz.attachments a
 								left join wbz.users u
@@ -826,21 +827,21 @@ namespace WBZ
 								where {filter}";
 							break;
 						/// ATTRIBUTES_CLASSES
-						case Global.Module.ATTRIBUTES_CLASSES:
+						case Globals.Global.Module.ATTRIBUTES_CLASSES:
 							query = $@"select ac.id as ""ID"", ac.module as ""Module"", ac.name as ""Name"", ac.type as ""Type"", ac.""values"" as ""Values"",
 									ac.archival, ac.comment, ac.icon
 								from wbz.attributes_classes ac
 								where {filter}";
 							break;
 						/// CONTRACTORS
-						case Global.Module.CONTRACTORS:
+						case Globals.Global.Module.CONTRACTORS:
 							query = $@"select c.id, c.codename, c.name, c.branch, c.nip, c.regon, c.postcode, c.city, c.address,
 									c.archival, c.comment, c.icon
 								from wbz.contractors c
 								where {filter}";
 							break;
 						/// DISTRIBUTIONS
-						case Global.Module.DISTRIBUTIONS:
+						case Globals.Global.Module.DISTRIBUTIONS:
 							query = $@"select d.id, d.name, d.datereal, d.status,
 									count(distinct dp.family) as familiescount, sum(members) as memberscount,
 									count(dp.*) as positionscount, sum(dp.amount) as weight,
@@ -852,7 +853,7 @@ namespace WBZ
 								group by d.id";
 							break;
 						/// DOCUMENTS
-						case Global.Module.DOCUMENTS:
+						case Globals.Global.Module.DOCUMENTS:
 							query = $@"select d.id, d.name, d.store, s.name as storename, d.contractor, c.name as contractorname,
 									d.type, d.dateissue, d.status, count(dp.*) as positionscount, sum(dp.amount) as weight, sum(dp.cost) as cost,
 									d.archival, d.comment, d.icon
@@ -867,7 +868,7 @@ namespace WBZ
 								group by d.id, c.id, s.id";
 							break;
 						/// EMPLOYEES
-						case Global.Module.EMPLOYEES:
+						case Globals.Global.Module.EMPLOYEES:
 							query = $@"select e.id, e.""user"", u.lastname || ' ' || u.forename as username,
 									e.forename, e.lastname, e.department, e.position,
 									e.email, e.phone, e.postcode, e.city, e.address,
@@ -878,7 +879,7 @@ namespace WBZ
 								where {filter}";
 							break;
 						/// GROUPS
-						case Global.Module.GROUPS:
+						case Globals.Global.Module.GROUPS:
 							query = $@"select g.id, g.module, g.name, g.instance, g.owner,
 									case when trim(concat(g1.name, '\', g2.name, '\', g3.name, '\', g4.name), '\') = '' then ''
 										else concat(trim(concat(g1.name, '\', g2.name, '\', g3.name, '\', g4.name), '\'), '\') end as path,
@@ -891,7 +892,7 @@ namespace WBZ
 								where {filter}";
 							break;
 						/// FAMILIES
-						case Global.Module.FAMILIES:
+						case Globals.Global.Module.FAMILIES:
 							query = $@"select f.id, f.declarant, f.lastname, f.members, f.postcode, f.city, f.address,
 									f.status, f.c_sms, f.c_call, f.c_email, max(d.datereal) as donationlast, sum(dp.amount) as donationweight,
 									f.archival, f.comment, f.icon
@@ -904,7 +905,7 @@ namespace WBZ
 								group by f.id";
 							break;
 						/// LOGS
-						case Global.Module.LOGS:
+						case Globals.Global.Module.LOGS:
 							query = $@"select l.id, l.""user"", u.lastname || ' ' || u.forename as userfullname,
 									l.module, l.instance, l.type as group, l.content, l.datetime
 								from wbz.logs l
@@ -913,7 +914,7 @@ namespace WBZ
 								where {filter}";
 							break;
 						/// STORES
-						case Global.Module.STORES:
+						case Globals.Global.Module.STORES:
 							query = $@"select s.id, s.codename, s.name, s.postcode, s.city, s.address,
 									coalesce(sum(amount),0) as amount, coalesce(sum(reserved),0) as reserved,
 									s.archival, s.comment, s.icon
@@ -924,7 +925,7 @@ namespace WBZ
 								group by s.id";
 							break;
 						/// USERS
-						case Global.Module.USERS:
+						case Globals.Global.Module.USERS:
 							query = $@"select u.id, u.username, '' as newpass, u.forename, u.lastname,
 									u.email, u.phone, u.blocked, u.archival
 								from wbz.users u
@@ -940,7 +941,7 @@ namespace WBZ
 
 						var dt = new DataTable();
 						sqlDA.Fill(dt);
-						result = dt.DataTableToList<T>();
+						result = dt.ToList<T>();
 					}
 				}
 			}
@@ -960,7 +961,7 @@ namespace WBZ
 		{
 			try
 			{
-				return ListInstances<T>(module, $"{Global.GetModuleAlias(module)}.id={id}")?[0];
+				return ListInstances<T>(module, $"{Globals.Global.GetModuleAlias(module)}.id={id}")?[0];
 			}
 			catch (Exception ex)
 			{
@@ -985,7 +986,7 @@ namespace WBZ
 					switch (module)
 					{
 						/// ARTICLES
-						case Global.Module.ARTICLES:
+						case Globals.Global.Module.ARTICLES:
 							query = @"select am.id, am.name, am.converter, am.""default"",
 									sa.amount / coalesce(nullif(am.converter,0),1) as amount, sa.reserved / coalesce(nullif(am.converter,0),1) as reserved
 								from wbz.articles a
@@ -996,13 +997,13 @@ namespace WBZ
 								where a.id=@id";
 							break;
 						/// ATTRIBUTES_CLASSES
-						case Global.Module.ATTRIBUTES_CLASSES:
+						case Globals.Global.Module.ATTRIBUTES_CLASSES:
 							query = @"select id, value, archival
 								from wbz.attributes_values av
 								where class=@id";
 							break;
 						/// DISTRIBUTIONS
-						case Global.Module.DISTRIBUTIONS:
+						case Globals.Global.Module.DISTRIBUTIONS:
 							query = @"select id, position, family, (select lastname from wbz.families where id=dp.family) as familyname, members,
 									store, (select name from wbz.stores where id=dp.store) as storename,
 									article, (select name from wbz.articles where id=dp.article) as articlename,
@@ -1011,7 +1012,7 @@ namespace WBZ
 								where distribution=@id";
 							break;
 						/// DOCUMENTS
-						case Global.Module.DOCUMENTS:
+						case Globals.Global.Module.DOCUMENTS:
 							query = @"select id, position, article, (select name from wbz.articles where id=dp.article) as articlename,
 									amount / wbz.ArtDefMeaCon(dp.article) as amount, coalesce(nullif(wbz.ArtDefMeaNam(dp.article),''), 'kg') as measure, cost
 								from wbz.documents_positions dp
@@ -1027,12 +1028,12 @@ namespace WBZ
 					}
 
 					/// ARTICLES
-					if (module == Global.Module.ARTICLES)
+					if (module == Globals.Global.Module.ARTICLES)
                     {
 						result.Columns["converter"].DefaultValue = 1.0;
 						result.Columns["default"].DefaultValue = false;
 					}
-					else if (module == Global.Module.DISTRIBUTIONS)
+					else if (module == Globals.Global.Module.DISTRIBUTIONS)
                     {
 
                     }
@@ -1090,7 +1091,7 @@ namespace WBZ
 					switch (module)
 					{
 						/// ARTICLES
-						case Global.Module.ARTICLES:
+						case Globals.Global.Module.ARTICLES:
 							var article = instance as M_Article;
 							query = @"insert into wbz.articles (id, codename, name, ean, archival, comment, icon)
 								values (@id, @codename, @name, @ean, @archival, @comment, @icon)
@@ -1108,7 +1109,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)article.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Global.User.ID, module, article.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} towar: {article.Name}.", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, article.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} towar: {article.Name}.", sqlConn, sqlTran);
 
 							///measures
 							foreach (DataRow measure in article.Measures.Rows)
@@ -1125,7 +1126,7 @@ namespace WBZ
 										sqlCmd.Parameters.AddWithValue("default", measure["default"]);
 										sqlCmd.ExecuteNonQuery();
 									}
-									SetLog(Global.User.ID, module, article.ID, $"Dodano jednostkę miary {measure["name"]}.", sqlConn, sqlTran);
+									SetLog(Globals.Global.User.ID, module, article.ID, $"Dodano jednostkę miary {measure["name"]}.", sqlConn, sqlTran);
 								}
 								///edit
 								else if (measure.RowState == DataRowState.Modified)
@@ -1140,7 +1141,7 @@ namespace WBZ
 										sqlCmd.Parameters.AddWithValue("default", measure["default"]);
 										sqlCmd.ExecuteNonQuery();
 									}
-									SetLog(Global.User.ID, module, article.ID, $"Edytowano jednostkę miary {measure["name", DataRowVersion.Original]}.", sqlConn, sqlTran);
+									SetLog(Globals.Global.User.ID, module, article.ID, $"Edytowano jednostkę miary {measure["name", DataRowVersion.Original]}.", sqlConn, sqlTran);
 								}
 								///delete
 								else if (measure.RowState == DataRowState.Deleted)
@@ -1151,16 +1152,16 @@ namespace WBZ
 										sqlCmd.Parameters.AddWithValue("id", measure["id", DataRowVersion.Original]);
 										sqlCmd.ExecuteNonQuery();
 									}
-									SetLog(Global.User.ID, module, article.ID, $"Usunięto jednostkę miary {measure["name", DataRowVersion.Original]}.", sqlConn, sqlTran);
+									SetLog(Globals.Global.User.ID, module, article.ID, $"Usunięto jednostkę miary {measure["name", DataRowVersion.Original]}.", sqlConn, sqlTran);
 								}
 							}
 							break;
 						/// ATTACHMENTS
-						case Global.Module.ATTACHMENTS:
+						case Globals.Global.Module.ATTACHMENTS:
 							query = @"";
 							break;
 						/// ATTRIBUTES_CLASSES
-						case Global.Module.ATTRIBUTES_CLASSES:
+						case Globals.Global.Module.ATTRIBUTES_CLASSES:
 							var attributeClass = instance as M_AttributeClass;
 							query = @"insert into wbz.attributes_classes (id, module, name, type, required, archival, comment, icon)
 								values (@id, @module, @name, @type, @required, @archival, @comment, @icon)
@@ -1179,7 +1180,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)attributeClass.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Global.User.ID, module, attributeClass.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} klasę atrybutu: {attributeClass.Name}.", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, attributeClass.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} klasę atrybutu: {attributeClass.Name}.", sqlConn, sqlTran);
 
 							///values
 							foreach (DataRow value in attributeClass.Values.Rows)
@@ -1195,7 +1196,7 @@ namespace WBZ
 										sqlCmd.Parameters.AddWithValue("archival", value["archival"]);
 										sqlCmd.ExecuteNonQuery();
 									}
-									SetLog(Global.User.ID, module, attributeClass.ID, $"Dodano wartość {value["name"]}.", sqlConn, sqlTran);
+									SetLog(Globals.Global.User.ID, module, attributeClass.ID, $"Dodano wartość {value["name"]}.", sqlConn, sqlTran);
 								}
 								///edit
 								else if (value.RowState == DataRowState.Modified)
@@ -1209,7 +1210,7 @@ namespace WBZ
 										sqlCmd.Parameters.AddWithValue("archival", value["archival"]);
 										sqlCmd.ExecuteNonQuery();
 									}
-									SetLog(Global.User.ID, module, attributeClass.ID, $"Edytowano wartość {value["name", DataRowVersion.Original]}.", sqlConn, sqlTran);
+									SetLog(Globals.Global.User.ID, module, attributeClass.ID, $"Edytowano wartość {value["name", DataRowVersion.Original]}.", sqlConn, sqlTran);
 								}
 								///delete
 								else if (value.RowState == DataRowState.Deleted)
@@ -1220,12 +1221,12 @@ namespace WBZ
 										sqlCmd.Parameters.AddWithValue("id", value["id", DataRowVersion.Original]);
 										sqlCmd.ExecuteNonQuery();
 									}
-									SetLog(Global.User.ID, module, attributeClass.ID, $"Usunięto wartość {value["name", DataRowVersion.Original]}.", sqlConn, sqlTran);
+									SetLog(Globals.Global.User.ID, module, attributeClass.ID, $"Usunięto wartość {value["name", DataRowVersion.Original]}.", sqlConn, sqlTran);
 								}
 							}
 							break;
 						/// CONTRACTORS
-						case Global.Module.CONTRACTORS:
+						case Globals.Global.Module.CONTRACTORS:
 							var contractor = instance as M_Contractor;
 							query = @"insert into wbz.contractors (id, codename, name, branch, nip, regon, postcode, city, address, archival, comment, icon)
 								values (@id, @codename, @name, @branch, @nip, @regon, @postcode, @city, @address, @archival, @comment, @icon)
@@ -1249,10 +1250,10 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)contractor.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Global.User.ID, module, contractor.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} kontrahenta: {contractor.Name}.", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, contractor.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} kontrahenta: {contractor.Name}.", sqlConn, sqlTran);
 							break;
 						/// DISTRIBUTIONS
-						case Global.Module.DISTRIBUTIONS:
+						case Globals.Global.Module.DISTRIBUTIONS:
 							var distribution = instance as M_Distribution;
 							using (sqlCmd = new NpgsqlCommand(@"select status from wbz.distributions where id=@id", sqlConn, sqlTran))
 							{
@@ -1274,7 +1275,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)distribution.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Global.User.ID, module, distribution.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} dystrybucję: {distribution.Name}.", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, distribution.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} dystrybucję: {distribution.Name}.", sqlConn, sqlTran);
 
 							///positions
 							foreach (var posfam in distribution.Families)
@@ -1296,7 +1297,7 @@ namespace WBZ
 										sqlCmd.Parameters.AddWithValue("measure", position["measure"]);
 										sqlCmd.Parameters.AddWithValue("status", posfam.Status);
 										sqlCmd.ExecuteNonQuery();
-										SetLog(Global.User.ID, module, distribution.ID, $"Dodano pozycję {position["position"]}.", sqlConn, sqlTran);
+										SetLog(Globals.Global.User.ID, module, distribution.ID, $"Dodano pozycję {position["position"]}.", sqlConn, sqlTran);
 									}
 									///edit
 									else if (position.RowState == DataRowState.Modified)
@@ -1315,7 +1316,7 @@ namespace WBZ
 										sqlCmd.Parameters.AddWithValue("measure", position["measure"]);
 										sqlCmd.Parameters.AddWithValue("status", posfam.Status);
 										sqlCmd.ExecuteNonQuery();
-										SetLog(Global.User.ID, module, distribution.ID, $"Edytowano pozycję {position["position", DataRowVersion.Original]}.", sqlConn, sqlTran);
+										SetLog(Globals.Global.User.ID, module, distribution.ID, $"Edytowano pozycję {position["position", DataRowVersion.Original]}.", sqlConn, sqlTran);
 									}
 									///delete
 									else if (position.RowState == DataRowState.Deleted)
@@ -1325,7 +1326,7 @@ namespace WBZ
 										sqlCmd.Parameters.Clear();
 										sqlCmd.Parameters.AddWithValue("id", position["id", DataRowVersion.Original]);
 										sqlCmd.ExecuteNonQuery();
-										SetLog(Global.User.ID, module, distribution.ID, $"Usunięto pozycję {position["position", DataRowVersion.Original]}.", sqlConn, sqlTran);
+										SetLog(Globals.Global.User.ID, module, distribution.ID, $"Usunięto pozycję {position["position", DataRowVersion.Original]}.", sqlConn, sqlTran);
 									}
 
 									///update articles amounts
@@ -1339,7 +1340,7 @@ namespace WBZ
 								}
 							break;
 						/// DOCUMENTS
-						case Global.Module.DOCUMENTS:
+						case Globals.Global.Module.DOCUMENTS:
 							var document = instance as M_Document;
 							using (sqlCmd = new NpgsqlCommand(@"select status from wbz.documents where id=@id", sqlConn, sqlTran))
 							{
@@ -1365,7 +1366,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)document.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Global.User.ID, module, document.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} dokument: {document.Name}.", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, document.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} dokument: {document.Name}.", sqlConn, sqlTran);
 
 							///positions
 							foreach (DataRow position in document.Positions.Rows)
@@ -1386,7 +1387,7 @@ namespace WBZ
 										sqlCmd.Parameters.AddWithValue("cost", position["cost"]);
 										sqlCmd.ExecuteNonQuery();
 									}
-									SetLog(Global.User.ID, module, document.ID, $"Dodano pozycję {position["position"]}.", sqlConn, sqlTran);
+									SetLog(Globals.Global.User.ID, module, document.ID, $"Dodano pozycję {position["position"]}.", sqlConn, sqlTran);
 								}
 								///edit
 								else if (position.RowState == DataRowState.Modified)
@@ -1405,7 +1406,7 @@ namespace WBZ
 										sqlCmd.Parameters.AddWithValue("cost", position["cost"]);
 										sqlCmd.ExecuteNonQuery();
 									}
-									SetLog(Global.User.ID, module, document.ID, $"Edytowano pozycję {position["position", DataRowVersion.Original]}.", sqlConn, sqlTran);
+									SetLog(Globals.Global.User.ID, module, document.ID, $"Edytowano pozycję {position["position", DataRowVersion.Original]}.", sqlConn, sqlTran);
 								}
 								///delete
 								else if (position.RowState == DataRowState.Deleted)
@@ -1417,7 +1418,7 @@ namespace WBZ
 										sqlCmd.Parameters.AddWithValue("id", position["id", DataRowVersion.Original]);
 										sqlCmd.ExecuteNonQuery();
 									}
-									SetLog(Global.User.ID, module, document.ID, $"Usunięto pozycję {position["position", DataRowVersion.Original]}.", sqlConn, sqlTran);
+									SetLog(Globals.Global.User.ID, module, document.ID, $"Usunięto pozycję {position["position", DataRowVersion.Original]}.", sqlConn, sqlTran);
 								}
 
 								///update articles amounts
@@ -1431,7 +1432,7 @@ namespace WBZ
 							}
 							break;
 						/// EMPLOYEES
-						case Global.Module.EMPLOYEES:
+						case Globals.Global.Module.EMPLOYEES:
 							var employee = instance as M_Employee;
 							query = @"insert into wbz.employees (id, forename, lastname, department, position,
 									email, phone, city, address, postcode, archival, comment, icon)
@@ -1458,10 +1459,10 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)employee.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Global.User.ID, module, employee.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} pracownika: {employee.Fullname}.", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, employee.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} pracownika: {employee.Fullname}.", sqlConn, sqlTran);
 							break;
 						/// FAMILIES
-						case Global.Module.FAMILIES:
+						case Globals.Global.Module.FAMILIES:
 							var family = instance as M_Family;
 							query = @"insert into wbz.families (id, declarant, lastname, members, postcode, city, address,
 									status, c_sms, c_call, c_email, archival, comment, icon)
@@ -1489,10 +1490,10 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)family.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Global.User.ID, module, family.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} rodzinę: {family.Lastname}.", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, family.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} rodzinę: {family.Lastname}.", sqlConn, sqlTran);
 							break;
 						/// GROUPS
-						case Global.Module.GROUPS:
+						case Globals.Global.Module.GROUPS:
 							var group = instance as M_Group;
 							query = @"insert into wbz.groups (id, module, name, instance, owner, archival, comment, icon)
 								values (@id, @module, @name, @instance, @owner, @archival, @comment, @icon)
@@ -1510,10 +1511,10 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)group.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Global.User.ID, module, group.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} grupę: {group.Name}.", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, group.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} grupę: {group.Name}.", sqlConn, sqlTran);
 							break;
 						/// LOGS
-						case Global.Module.LOGS:
+						case Globals.Global.Module.LOGS:
 							var log = instance as M_Log;
 							query = @"insert into wbz.logs (""user"", module, instance, type, content)
 								values (@user, @module, @instance, @type, @content)
@@ -1530,7 +1531,7 @@ namespace WBZ
 							}
 							break;
 						/// STORES
-						case Global.Module.STORES:
+						case Globals.Global.Module.STORES:
 							var store = instance as M_Store;
 							query = @"insert into wbz.stores (id, codename, name, city, address, postcode, archival, comment, icon)
 								values (@id, @codename, @name, @city, @address, @postcode, @archival, @comment, @icon)
@@ -1550,10 +1551,10 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)store.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Global.User.ID, module, store.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} magazyn: {store.Name}.", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, store.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} magazyn: {store.Name}.", sqlConn, sqlTran);
 							break;
 						/// USERS
-						case Global.Module.USERS:
+						case Globals.Global.Module.USERS:
 							var user = instance as M_User;
 							query = @"insert into wbz.users (id, username, password, forename, lastname, email, phone, blocked, archival)
 								values (@id, @username, @password, @forename, @lastname, @email, @phone, @blocked, @archival)
@@ -1564,7 +1565,7 @@ namespace WBZ
 							{
 								sqlCmd.Parameters.AddWithValue("id", user.ID);
 								sqlCmd.Parameters.AddWithValue("username", user.Username);
-								sqlCmd.Parameters.AddWithValue("password", Global.sha256(user.Newpass));
+								sqlCmd.Parameters.AddWithValue("password", Globals.Global.sha256(user.Newpass));
 								sqlCmd.Parameters.AddWithValue("forename", user.Forename);
 								sqlCmd.Parameters.AddWithValue("lastname", user.Lastname);
 								sqlCmd.Parameters.AddWithValue("email", user.Email);
@@ -1573,7 +1574,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("archival", user.Archival);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Global.User.ID, module, user.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} użytkownika: {user.Fullname}.", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, user.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} użytkownika: {user.Fullname}.", sqlConn, sqlTran);
 
 							/// permissions
 							using (sqlCmd = new NpgsqlCommand(@"delete from wbz.users_permissions where ""user""=@user", sqlConn, sqlTran))
@@ -1627,29 +1628,29 @@ namespace WBZ
 					switch (module)
 					{
 						/// ARTICLES
-						case Global.Module.ARTICLES:
+						case Globals.Global.Module.ARTICLES:
 							query = @"delete from wbz.stores_articles where article=@id;
 								delete from wbz.articles where id=@id";
-							SetLog(Global.User.ID, module, id, $"Usunięto towar: {name}", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, id, $"Usunięto towar: {name}", sqlConn, sqlTran);
 							break;
 						/// ATTACHMENTS
-						case Global.Module.ATTACHMENTS:
+						case Globals.Global.Module.ATTACHMENTS:
 							query = @"delete from wbz.attachments where id=@id";
-							SetLog(Global.User.ID, module, id, $"Usunięto załącznik: {name}", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, id, $"Usunięto załącznik: {name}", sqlConn, sqlTran);
 							break;
 						/// ATTRIBUTES_CLASSES
-						case Global.Module.ATTRIBUTES_CLASSES:
+						case Globals.Global.Module.ATTRIBUTES_CLASSES:
 							query = @"delete from wbz.attributes where class=@id;
 								delete from wbz.attributes_classes where id=@id";
-							SetLog(Global.User.ID, module, id, $"Usunięto klasę atrybutu: {name}", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, id, $"Usunięto klasę atrybutu: {name}", sqlConn, sqlTran);
 							break;
 						/// CONTRACTORS
-						case Global.Module.CONTRACTORS:
+						case Globals.Global.Module.CONTRACTORS:
 							query = @"delete from wbz.contractors where id=@id";
-							SetLog(Global.User.ID, module, id, $"Usunięto firmę: {name}", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, id, $"Usunięto firmę: {name}", sqlConn, sqlTran);
 							break;
 						/// DISTRIBUTIONS
-						case Global.Module.DISTRIBUTIONS:
+						case Globals.Global.Module.DISTRIBUTIONS:
 							if (id != 0)
 							{
 								using (var sqlCmd = new NpgsqlCommand(@"select status from wbz.distributions where id=@id", sqlConn, sqlTran))
@@ -1661,10 +1662,10 @@ namespace WBZ
 
 							query = @"delete from wbz.distributions_positions where distribution=@id;
 								delete from wbz.distributions where id=@id";
-							SetLog(Global.User.ID, module, id, $"Usunięto dystrybucję: {name}", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, id, $"Usunięto dystrybucję: {name}", sqlConn, sqlTran);
 							break;
 						/// DOCUMENTS
-						case Global.Module.DOCUMENTS:
+						case Globals.Global.Module.DOCUMENTS:
 							if (id != 0)
 							{
 								using (var sqlCmd_Doc = new NpgsqlCommand(@"select status from wbz.documents where id=@id", sqlConn, sqlTran))
@@ -1676,38 +1677,38 @@ namespace WBZ
 
 							query = @"delete from wbz.documents_positions WHERE document=@id;
 								delete from wbz.documents WHERE id=@id";
-							SetLog(Global.User.ID, module, id, $"Usunięto dokument: {name}", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, id, $"Usunięto dokument: {name}", sqlConn, sqlTran);
 							break;
 						/// EMPLOYEES
-						case Global.Module.EMPLOYEES:
+						case Globals.Global.Module.EMPLOYEES:
 							query = @"delete from wbz.employees where id=@id";
-							SetLog(Global.User.ID, module, id, $"Usunięto pracownika: {name}", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, id, $"Usunięto pracownika: {name}", sqlConn, sqlTran);
 							break;
 						/// FAMILIES
-						case Global.Module.FAMILIES:
+						case Globals.Global.Module.FAMILIES:
 							query = @"delete from wbz.families where id=@id";
-							SetLog(Global.User.ID, module, id, $"Usunięto rodzinę: {name}", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, id, $"Usunięto rodzinę: {name}", sqlConn, sqlTran);
 							break;
 						/// GROUPS
-						case Global.Module.GROUPS:
+						case Globals.Global.Module.GROUPS:
 							query = @"delete from wbz.groups where id=@id;
 								delete from wbz.groups where owner=@id";
-							SetLog(Global.User.ID, module, id, $"Usunięto grupę: {name}", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, id, $"Usunięto grupę: {name}", sqlConn, sqlTran);
 							break;
 						/// LOGS
-						case Global.Module.LOGS:
+						case Globals.Global.Module.LOGS:
 							query = @"delete from wbz.logs where id=@id";
 							break;
 						/// STORES
-						case Global.Module.STORES:
+						case Globals.Global.Module.STORES:
 							query = @"delete from wbz.stores_articles where store=@id;
 								delete from wbz.stores where id=@id";
-							SetLog(Global.User.ID, module, id, $"Usunięto magazyn: {name}", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, id, $"Usunięto magazyn: {name}", sqlConn, sqlTran);
 							break;
 						/// USERS
-						case Global.Module.USERS:
+						case Globals.Global.Module.USERS:
 							query = @"delete from wbz.users where id=@id";
-							SetLog(Global.User.ID, module, id, $"Usunięto użytkownika: {name}", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, id, $"Usunięto użytkownika: {name}", sqlConn, sqlTran);
 							break;
 						default:
 							throw new NotImplementedException();
@@ -1724,7 +1725,7 @@ namespace WBZ
 					if (oldstatus > 0)
 					{
 						/// DISTRIBUTIONS
-						if (module == Global.Module.DISTRIBUTIONS)
+						if (module == Globals.Global.Module.DISTRIBUTIONS)
 						{
 							var families = GetDistributionPositions(id);
 							foreach (var family in families)
@@ -1732,7 +1733,7 @@ namespace WBZ
 									ChangeArticleAmount((int)pos["store"], (int)pos["article"], (double)pos["amount"], (string)pos["measure"], false, sqlConn, sqlTran);
 						}
 						/// DOCUMENTS
-						else if (module == Global.Module.DOCUMENTS)
+						else if (module == Globals.Global.Module.DOCUMENTS)
 						{
 							var document = GetInstance<M_Document>("documents", id);
 							var positions = GetInstancePositions("documents", id);
@@ -1923,7 +1924,7 @@ namespace WBZ
 				{
 					var sqlCmd = new NpgsqlCommand(@"insert into wbz.attachments (""user"", module, instance, name, file, comment)
 						values (@user, @module, @instance, @name, @file, @comment) returning id", sqlConn, sqlTran);
-					sqlCmd.Parameters.AddWithValue("user", Global.User.ID);
+					sqlCmd.Parameters.AddWithValue("user", Globals.Global.User.ID);
 					sqlCmd.Parameters.AddWithValue("module", module);
 					sqlCmd.Parameters.AddWithValue("instance", instance);
 					sqlCmd.Parameters.AddWithValue("name", name);
@@ -1931,7 +1932,7 @@ namespace WBZ
 					sqlCmd.Parameters.AddWithValue("comment", comment);
 					result = Convert.ToInt32(sqlCmd.ExecuteScalar());
 
-					SetLog(Global.User.ID, module, instance, $"Dodano załącznik {name}.", sqlConn, sqlTran);
+					SetLog(Globals.Global.User.ID, module, instance, $"Dodano załącznik {name}.", sqlConn, sqlTran);
 
 					sqlTran.Commit();
 				}
@@ -1985,7 +1986,7 @@ namespace WBZ
 									Type = !Convert.IsDBNull(row["type"]) ? (string)row["type"] : string.Empty,
 									Required = !Convert.IsDBNull(row["required"]) ? (bool)row["required"] : false,
 									Icon = !Convert.IsDBNull(row["icon"]) ? (byte[])row["icon"] : null,
-									Values = GetInstancePositions(Global.Module.ATTRIBUTES_CLASSES, !Convert.IsDBNull(row["class"]) ? (int)row["class"] : 0)
+									Values = GetInstancePositions(Globals.Global.Module.ATTRIBUTES_CLASSES, !Convert.IsDBNull(row["class"]) ? (int)row["class"] : 0)
 								},
 								Instance = !Convert.IsDBNull(row["instance"]) ? (int)row["instance"] : 0,
 								Value = !Convert.IsDBNull(row["value"]) ? (string)row["value"] : string.Empty
@@ -1997,7 +1998,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				Error("Błąd podczas pobierania listy atrybutów", ex, Global.Module.ATTRIBUTES, 0);
+				Error("Błąd podczas pobierania listy atrybutów", ex, Globals.Global.Module.ATTRIBUTES, 0);
 			}
 
 			return result;
@@ -2024,7 +2025,7 @@ namespace WBZ
 						sqlCmd.Parameters.AddWithValue("class", attribute.Class.ID);
 						sqlCmd.Parameters.AddWithValue("value", attribute.Value);
 						sqlCmd.ExecuteNonQuery();
-						SetLog(Global.User.ID, attribute.Class.Module, attribute.Instance, $"Dodano atrybut {attribute.Class.Name}.", sqlConn, sqlTran);
+						SetLog(Globals.Global.User.ID, attribute.Class.Module, attribute.Instance, $"Dodano atrybut {attribute.Class.Name}.", sqlConn, sqlTran);
 					}
 					///edit
 					else if (!string.IsNullOrEmpty(attribute.Value))
@@ -2037,7 +2038,7 @@ namespace WBZ
 						sqlCmd.Parameters.AddWithValue("class", attribute.Class.ID);
 						sqlCmd.Parameters.AddWithValue("value", attribute.Value);
 						sqlCmd.ExecuteNonQuery();
-						SetLog(Global.User.ID, attribute.Class.Module, attribute.Instance, $"Edytowano atrybut {attribute.Class.Name}.", sqlConn, sqlTran);
+						SetLog(Globals.Global.User.ID, attribute.Class.Module, attribute.Instance, $"Edytowano atrybut {attribute.Class.Name}.", sqlConn, sqlTran);
 					}
 					///delete
 					else
@@ -2046,7 +2047,7 @@ namespace WBZ
 							where id=@id", sqlConn, sqlTran);
 						sqlCmd.Parameters.AddWithValue("id", attribute.ID);
 						sqlCmd.ExecuteNonQuery();
-						SetLog(Global.User.ID, attribute.Class.Module, attribute.Instance, $"Usunięto atrybut {attribute.Class.Name}.", sqlConn, sqlTran);
+						SetLog(Globals.Global.User.ID, attribute.Class.Module, attribute.Instance, $"Usunięto atrybut {attribute.Class.Name}.", sqlConn, sqlTran);
 					}
 
 					sqlTran.Commit();
@@ -2130,7 +2131,7 @@ namespace WBZ
 							sqlCmd.Parameters.AddWithValue("default", contact["default"]);
 							sqlCmd.Parameters.AddWithValue("archival", contact["archival"]);
 							sqlCmd.ExecuteNonQuery();
-							SetLog(Global.User.ID, module, instance, $"Dodano kontakt {contact["forename"]} {contact["lastname"]}.", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, instance, $"Dodano kontakt {contact["forename"]} {contact["lastname"]}.", sqlConn, sqlTran);
 						}
 						///edit
 						else if (contact.RowState == DataRowState.Modified)
@@ -2146,7 +2147,7 @@ namespace WBZ
 							sqlCmd.Parameters.AddWithValue("default", contact["default"]);
 							sqlCmd.Parameters.AddWithValue("archival", contact["archival"]);
 							sqlCmd.ExecuteNonQuery();
-							SetLog(Global.User.ID, module, instance, $"Edytowano kontakt {contact["forename", DataRowVersion.Original]} {contact["lastname", DataRowVersion.Original]}.", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, instance, $"Edytowano kontakt {contact["forename", DataRowVersion.Original]} {contact["lastname", DataRowVersion.Original]}.", sqlConn, sqlTran);
 						}
 						///delete
 						else if (contact.RowState == DataRowState.Deleted)
@@ -2155,7 +2156,7 @@ namespace WBZ
 								where id=@id", sqlConn, sqlTran);
 							sqlCmd.Parameters.AddWithValue("id", contact["id", DataRowVersion.Original]);
 							sqlCmd.ExecuteNonQuery();
-							SetLog(Global.User.ID, module, instance, $"Usunięto kontakt {contact["forename", DataRowVersion.Original]} {contact["lastname", DataRowVersion.Original]}.", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, instance, $"Usunięto kontakt {contact["forename", DataRowVersion.Original]} {contact["lastname", DataRowVersion.Original]}.", sqlConn, sqlTran);
 						}
 					}
 
@@ -2201,7 +2202,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				Error("Błąd podczas zapisywania logu", ex, Global.Module.LOGS, 0, true, false);
+				Error("Błąd podczas zapisywania logu", ex, Globals.Global.Module.LOGS, 0, true, false);
 			}
 
 			return result;

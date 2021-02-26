@@ -86,7 +86,7 @@
                         <Label DockPanel.Dock="Top" Content="Lista możliwych wartości:" Margin="5,5,5,0" HorizontalAlignment="Center"/>
                         <DataGrid x:Name="dgValues" DockPanel.Dock="Top" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
                                   AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstanceInfo.Values.DefaultView}" IsReadOnly="{Binding EditMode, Converter={seg:conv_BoolInverted}}"
-                                  IsEnabled="{Binding InstanceInfo.Type, Converter={seg:conv_CompareStrings}, ConverterParameter=list}">
+                                  IsEnabled="{Binding InstanceInfo.Type, Converter={seg:conv_Compare}, ConverterParameter=list}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding id}" Header="ID" IsReadOnly="True" Visibility="Collapsed"/>
                                 <DataGridTextColumn Binding="{Binding value}" Header="Wartość" Width="*"/>

@@ -1,7 +1,7 @@
 ﻿using Npgsql;
+using StswExpress.Globals;
 using System;
 using System.Windows;
-using WBZ.Globals;
 
 namespace WBZ
 {
@@ -17,10 +17,8 @@ namespace WBZ
 
 			try
 			{
-				using (var sqlConn = new NpgsqlConnection(SQL.connWBZ))
+				using (var sqlConn = SQL.connOpenedWBZ)
 				{
-					sqlConn.Open();
-
 					using (var sqlTran = sqlConn.BeginTransaction())
 					{
 						///1.0.0 => 1.0.1
@@ -160,7 +158,7 @@ CREATE TABLE wbz.attributes_values
 							update wbz.config set value='1.1.0' where property='VERSION'", sqlConn, sqlTran);
 							sqlCmd.ExecuteNonQuery();
 						}
-						///1.1.0 => 1.2.0
+						///1.1.0 => 1.2
 						if (SQL.GetPropertyValue("VERSION") == "1.1.0")
 						{
 							var sqlCmd = new NpgsqlCommand(@"
@@ -171,19 +169,17 @@ update wbz.users_permissions set perm='contractors_delete' where perm='companies
 alter table wbz.companies rename to contractors;
 alter table wbz.documents rename column company to contractor;
 
-							update wbz.config set value='1.2.0' where property='VERSION'", sqlConn, sqlTran);
+							update wbz.config set value='1.2' where property='VERSION'", sqlConn, sqlTran);
 							sqlCmd.ExecuteNonQuery();
 						}
 
 						sqlTran.Commit();
 					}
-
-					sqlConn.Close();
 				}
 
 				result = true;
 
-				Global.Database.Version = SQL.GetPropertyValue("VERSION");
+				Global.AppDatabase.Version = SQL.GetPropertyValue("VERSION");
 			}
 			catch (Exception ex)
 			{

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using StswExpress.Globals;
+using System;
 using System.Data;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using WBZ.Globals;
 using WBZ.Models;
 using WBZ.Modules._base;
 using WBZ.Modules.Articles;
@@ -21,7 +21,7 @@ namespace WBZ.Modules.Distributions
 	{
 		D_DistributionsNew D = new D_DistributionsNew();
 
-		public DistributionsNew(MODULE_MODEL instance, StswExpress.Globals.Commands.Type mode)
+		public DistributionsNew(MODULE_MODEL instance, Commands.Type mode)
 		{
 			InitializeComponent();
 			DataContext = D;
@@ -31,11 +31,11 @@ namespace WBZ.Modules.Distributions
 				D.InstanceInfo = instance;
 			D.Mode = mode;
 
-			if (mode == StswExpress.Globals.Commands.Type.EDIT && D.InstanceInfo.Status != (short)MODULE_MODEL.DistributionStatus.Buffer)
-				D.Mode = StswExpress.Globals.Commands.Type.PREVIEW;
+			if (mode == Commands.Type.EDIT && D.InstanceInfo.Status != (short)MODULE_MODEL.DistributionStatus.Buffer)
+				D.Mode = Commands.Type.PREVIEW;
 
 			D.InstanceInfo.Families = SQL.GetDistributionPositions(D.InstanceInfo.ID);
-			if (D.Mode.In(StswExpress.Globals.Commands.Type.DUPLICATE))
+			if (D.Mode.In(Commands.Type.DUPLICATE))
 				foreach (var family in D.InstanceInfo.Families)
 					foreach (DataRow row in family.Positions.Rows)
 						row.SetAdded();

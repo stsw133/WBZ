@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
+using StswExpress.Globals;
+using StswExpress.Models;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -6,7 +8,6 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Net.Http;
 using WBZ.Controls;
-using WBZ.Globals;
 using WBZ.Models;
 using Props = WBZ.Properties.Settings;
 
@@ -38,7 +39,7 @@ namespace WBZ.Modules.Login
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			CheckNewestVersion();
-			txtVersion.Content = StswExpress.Globals.Global.AppVersion();
+			txtVersion.Content = Global.AppVersion();
 
 			D.Databases = new ObservableCollection<M_Database>(M_Database.LoadAllDatabases());
 
@@ -59,11 +60,11 @@ namespace WBZ.Modules.Login
 				{
 					string result = await content.ReadAsStringAsync();
 					dynamic data = JObject.Parse(result);
-					Global.VersionNewest = (string)data.versions[0];
+					Globals.Global.VersionNewest = (string)data.versions[0];
 				}
 
 				/// check app version
-				if (StswExpress.Globals.Global.AppVersion() == Global.VersionNewest)
+				if (StswExpress.Globals.Global.AppVersion() == Globals.Global.VersionNewest)
 				{
 					imgVersion.Source = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resources/icon32_circlegreen.ico"));
 					imgVersion.ToolTip = "Posiadasz aktualną wersję programu.";
@@ -71,7 +72,7 @@ namespace WBZ.Modules.Login
 				else
 				{
 					imgVersion.Source = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resources/icon32_circleorange.ico"));
-					imgVersion.ToolTip = "Posiadasz nieaktualną wersję programu. Najnowsza wersja to " + Global.VersionNewest;
+					imgVersion.ToolTip = "Posiadasz nieaktualną wersję programu. Najnowsza wersja to " + Globals.Global.VersionNewest;
 				}
 			}
 			catch { }
@@ -108,9 +109,9 @@ namespace WBZ.Modules.Login
 			{
 				try
 				{
-					Global.Database = cbDatabase.SelectedItem as M_Database;
-					SQL.connWBZ = SQL.MakeConnString(Global.Database.Server, Global.Database.Port, Global.Database.Database, Global.Database.Username, Global.Database.Password);
-					Global.Database.Version = SQL.GetPropertyValue("VERSION");
+					Global.AppDatabase = cbDatabase.SelectedItem as M_Database;
+					SQL.connWBZ = SQL.MakeConnString(Global.AppDatabase.Server, Global.AppDatabase.Port, Global.AppDatabase.Database, Global.AppDatabase.Username, Global.AppDatabase.Password);
+					Global.AppDatabase.Version = SQL.GetPropertyValue("VERSION");
 
 					btnLogin.IsEnabled = true;
 					btnOther.IsEnabled = true;
@@ -127,14 +128,14 @@ namespace WBZ.Modules.Login
 		/// </summary>
 		private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-			if (Global.Database.Version != StswExpress.Globals.Global.AppVersion())
+			if (Global.AppDatabase.Version != Global.AppVersion())
 			{
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.WARNING, $"Wersja aplikacji {StswExpress.Globals.Global.AppVersion()} nie zgadza się z wersją bazy danych {Global.Database.Version}!" +
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.WARNING, $"Wersja aplikacji {Global.AppVersion()} nie zgadza się z wersją bazy danych {Global.AppDatabase.Version}!" +
 					Environment.NewLine + "Zaktualizuj bazę z menu dodatkowych opcji lub skontaktuj się z administratorem.") { Owner = this }.ShowDialog();
 				return;
 			}
 
-			if (SQL.Login(tbLogin.Text, Global.sha256(tbPassword.Password)))
+			if (SQL.Login(tbLogin.Text, Globals.Global.sha256(tbPassword.Password)))
 			{
 				M_Config.LoadConfig();
 				var window = new Main();
@@ -159,7 +160,7 @@ namespace WBZ.Modules.Login
 		private void btnOther_Click(object sender, RoutedEventArgs e)
 		{
 			///conditions of button "Dodaj administratora"
-			if (SQL.CountInstances(Global.Module.USERS, @"u.blocked=false and u.archival=false and exists(select from wbz.users_permissions where ""user""=u.id and perm='admin')") == 0)
+			if (SQL.CountInstances(Globals.Global.Module.USERS, @"u.blocked=false and u.archival=false and exists(select from wbz.users_permissions where ""user""=u.id and perm='admin')") == 0)
 			{
 				btnCreateAdmin.Visibility = Visibility.Visible;
 				btnCreateAdmin.IsEnabled = true;
@@ -171,11 +172,11 @@ namespace WBZ.Modules.Login
 			}
 
 			///conditions of button "Aktualizuj bazę danych"
-			if (Global.Database.Version != StswExpress.Globals.Global.AppVersion())
+			if (Global.AppDatabase.Version != Global.AppVersion())
 			{
 				btnUpdateDatabase.Visibility = Visibility.Visible;
 				btnUpdateDatabase.IsEnabled = true;
-				btnUpdateDatabase.Header = $"Aktualizuj bazę danych ({Global.Database.Version} → {StswExpress.Globals.Global.AppVersion()})";
+				btnUpdateDatabase.Header = $"Aktualizuj bazę danych ({Global.AppDatabase.Version} → {Global.AppVersion()})";
 			}
 			else
 			{
@@ -208,7 +209,7 @@ namespace WBZ.Modules.Login
 			conf.Owner = this;
 			if (conf.ShowDialog() == true)
 			{
-				var users = SQL.ListInstances<M_User>(Global.Module.USERS, $"(lower(username)='{conf.GetLogin.ToLower()}' or lower(email)='{conf.GetLogin.ToLower()}') and password='{Global.sha256(conf.GetPassword)}'");
+				var users = SQL.ListInstances<Models.M_User>(Globals.Global.Module.USERS, $"(lower(username)='{conf.GetLogin.ToLower()}' or lower(email)='{conf.GetLogin.ToLower()}') and password='{Globals.Global.sha256(conf.GetPassword)}'");
 				if (users.Count == 0 || !SQL.GetUserPerms(users[0].ID).Contains("admin"))
 				{
 					new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Brak uprawnień administracyjnych lub błędne dane użytkownika!") { Owner = this }.ShowDialog();
@@ -233,7 +234,7 @@ namespace WBZ.Modules.Login
 			if (window.ShowDialog() == true)
 			{
 				var loginData = SQL.GenerateNewPasswordForAccount(window.Value);
-				if (StswExpress.Globals.Mail.SendMail(Props.Default.config_Email_Email, new string[] { window.Value },
+				if (Mail.SendMail(Props.Default.config_Email_Email, new string[] { window.Value },
 						"WBZ - generowanie nowego hasła", $"Nazwa użytkownika: {loginData[0]}{Environment.NewLine}Hasło: {loginData[1]}"))
 					new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.INFO, "Wiadomość z nazwą użytkownika i hasłem wysłano na podany e-mail.") { Owner = this }.ShowDialog();
 			}
@@ -245,7 +246,7 @@ namespace WBZ.Modules.Login
 		private void btnManual_Click(object sender, RoutedEventArgs e)
 		{
 			//TODO - naprawić
-			Functions.OpenHelp(this);
+			Globals.Functions.OpenHelp(this);
 		}
 
 		/// <summary>
