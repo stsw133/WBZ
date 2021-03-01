@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:c="clr-namespace:WBZ.Controls"
         xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
         xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
@@ -17,7 +16,7 @@
     </WindowChrome.WindowChrome>
     <DockPanel Background="Black">
         <!-- titleBar -->
-        <c:TitleBar DockPanel.Dock="Top"/>
+        <sec:TitleBar DockPanel.Dock="Top"/>
         <!-- filtersPanel -->
         <Grid DockPanel.Dock="Top" Background="Black">
             <Expander x:Name="filtersExpander" Header="Filtry wyszukiwania" Background="Black" Foreground="White" BorderThickness="0">

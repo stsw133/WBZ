@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:c="clr-namespace:WBZ.Controls"
+        xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
         xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
@@ -16,7 +16,7 @@
     </WindowChrome.WindowChrome>
     <DockPanel Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=40}">
         <!-- titleBar -->
-        <c:TitleBar DockPanel.Dock="Top"/>
+        <sec:TitleBar DockPanel.Dock="Top"/>
         <!-- main -->
         <TextBlock DockPanel.Dock="Top" x:Name="txtMessage" Margin="5" TextAlignment="Center" TextWrapping="Wrap"/>
         <TextBox DockPanel.Dock="Top" x:Name="tbInput" Margin="5" Padding="5" VerticalContentAlignment="Center" Visibility="Collapsed"/>

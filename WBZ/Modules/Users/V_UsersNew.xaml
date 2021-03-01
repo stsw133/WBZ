@@ -25,7 +25,7 @@
     </Window.CommandBindings>
     <DockPanel>
         <!-- titleBar -->
-        <c:TitleBar DockPanel.Dock="Top" SubIcon="{Binding ModeIcon}"/>
+        <sec:TitleBar DockPanel.Dock="Top" SubIcon="{Binding ModeIcon}"/>
         <!-- buttonsPanel -->
         <Border DockPanel.Dock="Right" Background="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="1,0,0,0">
             <DockPanel>

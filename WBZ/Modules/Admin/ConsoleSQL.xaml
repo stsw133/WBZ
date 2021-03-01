@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:c="clr-namespace:WBZ.Controls"
         xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
         xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
@@ -17,7 +16,7 @@
     </WindowChrome.WindowChrome>
     <DockPanel>
         <!-- titleBar -->
-        <c:TitleBar DockPanel.Dock="Top"/>
+        <sec:TitleBar DockPanel.Dock="Top"/>
         <!-- main -->
         <sec:Button DockPanel.Dock="Bottom" Margin="5,0,5,5" TextVisibility="False" HorizontalAlignment="Center" Icon="/Resources/icon32_accept.ico" IsDefault="True" PreviewMouseLeftButtonUp="btnStart_Click"/>
         <Grid>
@@ -28,7 +27,7 @@
             </Grid.RowDefinitions>
             <TextBox x:Name="tbConsole" Grid.Row="0" Margin="5" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True"/>
             <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" ResizeDirection="Rows" Height="5"/>
-            <c:DataGrid x:Name="dgConsole" Grid.Row="2" AutoGenerateColumns="True" IsReadOnly="True"/>
+            <sec:DataGrid x:Name="dgConsole" Grid.Row="2" AutoGenerateColumns="True" IsReadOnly="True"/>
         </Grid>
     </DockPanel>
 </Window>

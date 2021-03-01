@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:c="clr-namespace:WBZ.Controls"
+        xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
         xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
@@ -16,15 +16,10 @@
     </WindowChrome.WindowChrome>
     <DockPanel>
         <!-- titleBar -->
-        <c:TitleBar DockPanel.Dock="Top" SubIcon="/Resources/icon32_settings.ico"/>
+        <sec:TitleBar DockPanel.Dock="Top" SubIcon="/Resources/icon32_settings.ico"/>
         <!-- buttonsPanel -->
         <Border DockPanel.Dock="Bottom" Background="#EEE" BorderBrush="Gray" BorderThickness="0,1,0,0">
-            <Button Margin="10" HorizontalAlignment="Center" MinWidth="150" Click="btnSave_Click">
-                <StackPanel Orientation="Horizontal">
-                    <Image Margin="4" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2}" Source="/Resources/icon32_accept.ico"/>
-                    <Label Content="Zapisz" VerticalAlignment="Center"/>
-                </StackPanel>
-            </Button>
+            <sec:Button Text="Zapisz" Margin="10" HorizontalAlignment="Center" MinWidth="150" Icon="\Resources\icon32_accept.ico" Click="btnSave_Click"/>
         </Border>
         <!-- listBox -->
         <DockPanel>
@@ -75,12 +70,7 @@
             <PasswordBox x:Name="pbPassword" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center" PasswordChanged="pbPassword_PasswordChanged"/>
             <Label Grid.Row="6" Grid.Column="0" Content="Status:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
             <Label x:Name="lblStatus" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center"/>
-            <Button Grid.Row="7" Grid.Column="1" Margin="5" Click="btnTest_Click">
-                <StackPanel Orientation="Horizontal">
-                    <Image Margin="4" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2}" Source="/Resources/icon32_test.ico"/>
-                    <Label Content="Testuj" VerticalAlignment="Center"/>
-                </StackPanel>
-            </Button>
+            <sec:Button Grid.Row="7" Grid.Column="1" Text="Testuj" Margin="5" Icon="/Resources/icon32_test.ico" Click="btnTest_Click"/>
         </Grid>
     </DockPanel>
 </Window>

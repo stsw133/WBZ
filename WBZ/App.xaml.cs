@@ -19,9 +19,10 @@ namespace WBZ
 			Mail.Port = WBZ.Properties.Settings.Default.config_Email_Port;
 			Mail.Email = WBZ.Properties.Settings.Default.config_Email_Email;
 			Mail.Password = WBZ.Properties.Settings.Default.config_Email_Password;
+			StswExpress.Globals.Properties.HashKey = "ejdndbfewbasjhdggjhbasbvdgewvbjdbsavdqgwjbdjsvdyugwqyubashjdbjfgdtyuqw";
 			StswExpress.Globals.Properties.iSize = WBZ.Properties.Settings.Default.iSize;
 			StswExpress.Globals.Properties.Language = WBZ.Properties.Settings.Default.Language;
-			StswExpress.Globals.Properties.HashKey = "ejdndbfewbasjhdggjhbasbvdgewvbjdbsavdqgwjbdjsvdyugwqyubashjdbjfgdtyuqw";
+			StswExpress.Globals.Properties.ThemeColor = "#444";
 		}
 
 		/// <summary>

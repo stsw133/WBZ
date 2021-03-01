@@ -26,7 +26,7 @@
     </Window.CommandBindings>
     <DockPanel>
         <!-- titleBar -->
-        <c:TitleBar DockPanel.Dock="Top" SubIcon="/Resources/icon32_add.ico"/>
+        <sec:TitleBar DockPanel.Dock="Top" SubIcon="/Resources/icon32_add.ico"/>
         <!-- buttonsPanel -->
         <Border DockPanel.Dock="Right" Background="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="1,0,0,0">
             <DockPanel>

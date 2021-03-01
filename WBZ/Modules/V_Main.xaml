@@ -9,7 +9,7 @@
         xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
         xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
         mc:Ignorable="d"
-        Title="{Binding Title}" MinHeight="220" MinWidth="330" Height="550" Width="825"
+        Title="{Binding Title}" Height="550" Width="825"
             BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding Source={x:Static seg:Properties.iSize}}"
             Icon="/Resources/icon64.ico"
@@ -24,7 +24,7 @@
     </Window.CommandBindings>
     <DockPanel>
         <!-- titleBar -->
-        <c:TitleBar DockPanel.Dock="Top"/>
+        <sec:TitleBar DockPanel.Dock="Top"/>
         <!-- menu -->
         <Border DockPanel.Dock="Top" BorderBrush="Gray" BorderThickness="1">
             <DockPanel>

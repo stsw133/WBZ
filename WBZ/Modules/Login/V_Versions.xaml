@@ -17,7 +17,7 @@
     </WindowChrome.WindowChrome>
     <DockPanel>
         <!-- titleBar -->
-        <c:TitleBar DockPanel.Dock="Top"/>
+        <sec:TitleBar DockPanel.Dock="Top"/>
         <!-- buttonsPanel -->
         <Border DockPanel.Dock="Right" Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="1,0,0,0">
             <DockPanel>

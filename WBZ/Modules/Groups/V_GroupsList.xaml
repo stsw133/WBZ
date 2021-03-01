@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:c="clr-namespace:WBZ.Controls"
+        xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
         xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
@@ -16,7 +17,7 @@
     </WindowChrome.WindowChrome>
     <DockPanel>
         <!-- titleBar -->
-        <c:TitleBar DockPanel.Dock="Top" SubIcon="/Resources/icon32_list.ico"/>
+        <sec:TitleBar DockPanel.Dock="Top" SubIcon="/Resources/icon32_list.ico"/>
         <!-- buttonsPanel -->
         <c:GroupsView x:Name="groupsView" Margin="5" MouseDoubleClick="groupsView_MouseDoubleClick"/>
     </DockPanel>
