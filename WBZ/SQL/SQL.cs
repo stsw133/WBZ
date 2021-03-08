@@ -1,14 +1,14 @@
 ﻿using Npgsql;
+using StswExpress.Globals;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Data;
 using System.Linq;
 using System.Windows;
 using WBZ.Models;
 using WBZ.Controls;
-using System.Collections.ObjectModel;
-using StswExpress.Globals;
 
 namespace WBZ
 {
@@ -56,7 +56,8 @@ namespace WBZ
 			{
 				using (var sqlConn = connOpenedWBZ)
 				{
-					DataTable user = new DataTable(), perms = new DataTable();
+					var user = new DataTable();
+					var perms = new DataTable();
 
 					var sqlCmd = new NpgsqlCommand(@"select id, username, email, phone, forename, lastname, blocked, archival
 						from wbz.users
@@ -76,18 +77,7 @@ namespace WBZ
 							MessageBox.Show("Użytkownik o podanym loginie jest zablokowany.");
 						else
 						{
-							sqlCmd = new NpgsqlCommand(@"select user, perm
-								from wbz.users_permissions
-								where ""user""=@id", sqlConn);
-							sqlCmd.Parameters.AddWithValue("id", Globals.Global.User.ID);
-							using (var sqlDA = new NpgsqlDataAdapter(sqlCmd))
-							{
-								sqlDA.Fill(perms);
-							}
-
-							foreach (DataRow perm in perms.Rows)
-								Globals.Global.User.Perms.Add(perm["perm"].ToString());
-
+							Globals.Global.User.Perms = GetUserPerms(Globals.Global.User.ID);
 							result = true;
 						}
 					}
@@ -103,7 +93,39 @@ namespace WBZ
 			return result;
 		}
 		/// <summary>
-		/// Tworzy konto użytkownika w bazie o podanych parametrach
+		/// Pobiera uprawnienia użytkownika
+		/// </summary>
+		/// <param name="id">ID użytkownika</param>
+		internal static List<string> GetUserPerms(int id)
+		{
+			var result = new List<string>();
+
+			try
+			{
+				using (var sqlConn = connOpenedWBZ)
+				{
+					var sqlCmd = new NpgsqlCommand(@"select up.perm
+						from wbz.users_permissions up
+						where ""user""=@id", sqlConn);
+					sqlCmd.Parameters.AddWithValue("id", id);
+					using (var sqlDA = new NpgsqlDataAdapter(sqlCmd))
+					{
+						var dt = new DataTable();
+						sqlDA.Fill(dt);
+						foreach (DataRow row in dt.Rows)
+							result.Add(row["perm"].ToString());
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.ToString());
+			}
+
+			return result;
+		}
+		/// <summary>
+		/// Tworzy konto użytkownika/administratora w bazie o podanych parametrach
 		/// </summary>
 		/// <param name="email">Adres e-mail</param>
 		/// <param name="username">Nazwa użytkownika</param>
@@ -193,39 +215,6 @@ namespace WBZ
 			return result;
 		}
 		#endregion
-
-		/// <summary>
-		/// Pobiera uprawnienia użytkownika
-		/// </summary>
-		/// <param name="id">ID użytkownika</param>
-		internal static List<string> GetUserPerms(int id)
-		{
-			var result = new List<string>();
-
-			try
-			{
-				using (var sqlConn = connOpenedWBZ)
-				{
-					var sqlCmd = new NpgsqlCommand(@"select up.perm
-						from wbz.users_permissions up
-						where ""user""=@id", sqlConn);
-					sqlCmd.Parameters.AddWithValue("id", id);
-					using (var sqlDA = new NpgsqlDataAdapter(sqlCmd))
-					{
-						var dt = new DataTable();
-						sqlDA.Fill(dt);
-						foreach (DataRow row in dt.Rows)
-							result.Add(row["perm"].ToString());
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.ToString());
-			}
-
-			return result;
-		}
 
 		/// <summary>
 		/// Pobiera przelicznik głównej jednostki miary towaru
@@ -631,7 +620,7 @@ namespace WBZ
 					if (show)
 						new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"{msg}:{Environment.NewLine}{error.Content}").ShowDialog();
 					if (save)
-						SetInstance(Globals.Global.Module.LOGS, error, StswExpress.Globals.Commands.Type.NEW);
+						SetInstance(Globals.Global.Module.LOGS, error, Commands.Type.NEW);
 				}
 			}
 			catch { }
@@ -1087,7 +1076,7 @@ namespace WBZ
 		/// <param name="module">Nazwa modułu</param>
 		/// <param name="instance">Instancja</param>
 		/// <param name="mode">Tryb</param>
-		internal static bool SetInstance<T>(string module, T instance, StswExpress.Globals.Commands.Type mode)
+		internal static bool SetInstance<T>(string module, T instance, Commands.Type mode)
 		{
 			bool result = false;
 			string query;
@@ -1121,7 +1110,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)article.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Globals.Global.User.ID, module, article.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} towar: {article.Name}.", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, article.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} towar: {article.Name}.", sqlConn, sqlTran);
 
 							///measures
 							foreach (DataRow measure in article.Measures.Rows)
@@ -1192,7 +1181,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)attributeClass.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Globals.Global.User.ID, module, attributeClass.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} klasę atrybutu: {attributeClass.Name}.", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, attributeClass.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} klasę atrybutu: {attributeClass.Name}.", sqlConn, sqlTran);
 
 							///values
 							foreach (DataRow value in attributeClass.Values.Rows)
@@ -1262,7 +1251,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)contractor.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Globals.Global.User.ID, module, contractor.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} kontrahenta: {contractor.Name}.", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, contractor.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} kontrahenta: {contractor.Name}.", sqlConn, sqlTran);
 							break;
 						/// DISTRIBUTIONS
 						case Globals.Global.Module.DISTRIBUTIONS:
@@ -1287,7 +1276,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)distribution.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Globals.Global.User.ID, module, distribution.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} dystrybucję: {distribution.Name}.", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, distribution.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} dystrybucję: {distribution.Name}.", sqlConn, sqlTran);
 
 							///positions
 							foreach (var posfam in distribution.Families)
@@ -1378,7 +1367,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)document.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Globals.Global.User.ID, module, document.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} dokument: {document.Name}.", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, document.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} dokument: {document.Name}.", sqlConn, sqlTran);
 
 							///positions
 							foreach (DataRow position in document.Positions.Rows)
@@ -1471,7 +1460,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)employee.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Globals.Global.User.ID, module, employee.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} pracownika: {employee.Fullname}.", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, employee.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} pracownika: {employee.Fullname}.", sqlConn, sqlTran);
 							break;
 						/// FAMILIES
 						case Globals.Global.Module.FAMILIES:
@@ -1502,7 +1491,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)family.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Globals.Global.User.ID, module, family.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} rodzinę: {family.Lastname}.", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, family.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} rodzinę: {family.Lastname}.", sqlConn, sqlTran);
 							break;
 						/// GROUPS
 						case Globals.Global.Module.GROUPS:
@@ -1523,7 +1512,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)group.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Globals.Global.User.ID, module, group.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} grupę: {group.Name}.", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, group.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} grupę: {group.Name}.", sqlConn, sqlTran);
 							break;
 						/// LOGS
 						case Globals.Global.Module.LOGS:
@@ -1608,9 +1597,11 @@ namespace WBZ
 						/// VEHICLES
 						case Globals.Global.Module.VEHICLES:
 							var vehicle = instance as M_Vehicle;
-							query = @"insert into wbz.vehicles (id, register, brand, model, capacity, forwarder, driver, prodyear,
+							query = @"insert into wbz.vehicles (id, register, brand, model, capacity,
+									forwarder, driver, prodyear,
 									archival, comment, icon)
-								values (@id, @register, @brand, @model, @capacity, @forwarder, @driver, @prodyear,
+								values (@id, @register, @brand, @model, @capacity,
+									@forwarder, @driver, @prodyear,
 									@archival, @comment, @icon)
 								on conflict(id) do
 								update set register=@register, brand=@brand, model=@model, capacity=@capacity,
