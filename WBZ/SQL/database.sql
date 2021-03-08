@@ -445,6 +445,33 @@ CREATE TABLE wbz.employees
 )
 TABLESPACE pg_default;
 
+-- Table: wbz.vehicles
+CREATE TABLE wbz.vehicles
+(
+    id serial NOT NULL,
+    register character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    brand character varying(40) COLLATE pg_catalog."default",
+    model character varying(60) COLLATE pg_catalog."default",
+    capacity decimal(18,3),
+    forwarder integer,
+    driver integer,
+    prodyear integer,
+    archival boolean NOT NULL DEFAULT false,
+    comment text COLLATE pg_catalog."default",
+    icon bytea,
+    CONSTRAINT vehicles_pkey PRIMARY KEY (id),
+    CONSTRAINT vehicles_register_key UNIQUE (register),
+    CONSTRAINT vehicles_headers_forwarder_fkey FOREIGN KEY (forwarder)
+        REFERENCES wbz.contractors (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE NO ACTION,
+    CONSTRAINT vehicles_headers_driver_fkey FOREIGN KEY (driver)
+        REFERENCES wbz.employees (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE NO ACTION
+)
+TABLESPACE pg_default;
+
 -- FUNCTION: wbz.artdefmeaval(integer, double precision)
 CREATE OR REPLACE FUNCTION wbz.artdefmeaval(
 	_article integer,

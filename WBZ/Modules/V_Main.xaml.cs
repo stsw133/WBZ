@@ -19,6 +19,7 @@ using WBZ.Modules.Logs;
 using WBZ.Modules.Personal;
 using WBZ.Modules.Stores;
 using WBZ.Modules.Users;
+using WBZ.Modules.Vehicles;
 
 namespace WBZ.Modules
 {
@@ -40,6 +41,9 @@ namespace WBZ.Modules
 		/// </summary>
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
+			///VEHICLES
+			if (!Global.User.Perms.Contains($"{Global.Module.VEHICLES}_{Global.UserPermType.PREVIEW}"))
+				gridModules.Children.Remove(modVehicles);
 			///USERS
 			if (!Global.User.Perms.Contains($"{Global.Module.USERS}_{Global.UserPermType.PREVIEW}"))
 				gridModules.Children.Remove(modUsers);
@@ -326,6 +330,18 @@ namespace WBZ.Modules
 		private void btnUsersNew_Click(object sender, RoutedEventArgs e)
 		{
 			new UsersNew(null, StswExpress.Globals.Commands.Type.NEW) { Owner = this }.Show();
+		}
+
+		/// <summary>
+		/// Vehicles
+		/// </summary>
+		private void btnVehiclesList_Click(object sender, RoutedEventArgs e)
+		{
+			new VehiclesList(StswExpress.Globals.Commands.Type.LIST) { Owner = this }.Show();
+		}
+		private void btnVehiclesNew_Click(object sender, RoutedEventArgs e)
+		{
+			new VehiclesNew(null, StswExpress.Globals.Commands.Type.NEW) { Owner = this }.Show();
 		}
 
 		/// <summary>

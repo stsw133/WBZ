@@ -384,6 +384,25 @@
                             <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=stats_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                       Tag="stats_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked" Visibility="Collapsed"/>
                         </Grid>
+                        <!-- vehicles -->
+                        <Grid DockPanel.Dock="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                <Image Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_transport.ico"/>
+                                <Label Content="Pojazdy:" VerticalContentAlignment="Center"/>
+                            </StackPanel>
+                            <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=vehicles_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="vehicles_preview" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="2" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=vehicles_save}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="vehicles_save" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=vehicles_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="vehicles_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                        </Grid>
                     </DockPanel>
                 </ScrollViewer>
             </TabItem>

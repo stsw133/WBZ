@@ -14,6 +14,7 @@ using WBZ.Modules.Employees;
 using WBZ.Modules.Families;
 using WBZ.Modules.Stores;
 using WBZ.Modules.Users;
+using WBZ.Modules.Vehicles;
 
 namespace WBZ.Globals
 {
@@ -94,6 +95,10 @@ namespace WBZ.Globals
 				/// USERS
 				case Global.Module.USERS:
 					window = new UsersNew(SQL.GetInstance<M_User>(obj.Module, obj.Instance), mode);
+					break;
+				/// VEHICLES
+				case Global.Module.VEHICLES:
+					window = new VehiclesNew(SQL.GetInstance<M_Vehicle>(obj.Module, obj.Instance), mode);
 					break;
 				default:
 					return;

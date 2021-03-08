@@ -6,7 +6,6 @@ using System.Data;
 using System.Linq;
 using System.Windows;
 using WBZ.Models;
-using WBZ.Globals;
 using WBZ.Controls;
 using System.Collections.ObjectModel;
 using StswExpress.Globals;
@@ -732,6 +731,11 @@ namespace WBZ
 							query = @"select count(distinct u.id)
 								from wbz.users u";
 							break;
+						/// VEHICLES
+						case Globals.Global.Module.VEHICLES:
+							query = @"select count(distinct v.id)
+								from wbz.vehicles v";
+							break;
 						default:
 							throw new NotImplementedException();
 					}
@@ -929,6 +933,14 @@ namespace WBZ
 							query = $@"select u.id, u.username, '' as newpass, u.forename, u.lastname,
 									u.email, u.phone, u.blocked, u.archival
 								from wbz.users u
+								where {filter}";
+							break;
+						/// VEHICLES
+						case Globals.Global.Module.VEHICLES:
+							query = $@"select v.id, v.register, v.brand, v.model, v.capacity,
+									v.forwarder, v.driver, v.prodyear,
+									v.archival, v.comment, v.icon
+								from wbz.vehicles v
 								where {filter}";
 							break;
 						default:
@@ -1551,7 +1563,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("icon", (object)store.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Globals.Global.User.ID, module, store.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} magazyn: {store.Name}.", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, store.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} magazyn: {store.Name}.", sqlConn, sqlTran);
 							break;
 						/// USERS
 						case Globals.Global.Module.USERS:
@@ -1574,7 +1586,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("archival", user.Archival);
 								sqlCmd.ExecuteNonQuery();
 							}
-							SetLog(Globals.Global.User.ID, module, user.ID, $"{(mode == StswExpress.Globals.Commands.Type.EDIT ? "Edytowano" : "Utworzono")} użytkownika: {user.Fullname}.", sqlConn, sqlTran);
+							SetLog(Globals.Global.User.ID, module, user.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} użytkownika: {user.Fullname}.", sqlConn, sqlTran);
 
 							/// permissions
 							using (sqlCmd = new NpgsqlCommand(@"delete from wbz.users_permissions where ""user""=@user", sqlConn, sqlTran))
@@ -1592,6 +1604,34 @@ namespace WBZ
 									sqlCmd.ExecuteNonQuery();
 								}
 							}
+							break;
+						/// VEHICLES
+						case Globals.Global.Module.VEHICLES:
+							var vehicle = instance as M_Vehicle;
+							query = @"insert into wbz.vehicles (id, register, brand, model, capacity, forwarder, driver, prodyear,
+									archival, comment, icon)
+								values (@id, @register, @brand, @model, @capacity, @forwarder, @driver, @prodyear,
+									@archival, @comment, @icon)
+								on conflict(id) do
+								update set register=@register, brand=@brand, model=@model, capacity=@capacity,
+									forwarder=@forwarder, driver=@driver, prodyear=@prodyear,
+									archival=@archival, comment=@comment, icon=@icon";
+							using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
+							{
+								sqlCmd.Parameters.AddWithValue("id", vehicle.ID);
+								sqlCmd.Parameters.AddWithValue("register", !string.IsNullOrEmpty(vehicle.Register) ? (object)vehicle.Register : DBNull.Value);
+								sqlCmd.Parameters.AddWithValue("brand", vehicle.Brand);
+								sqlCmd.Parameters.AddWithValue("model", vehicle.Model);
+								sqlCmd.Parameters.AddWithValue("capacity", (object)vehicle.Capacity ?? DBNull.Value);
+								sqlCmd.Parameters.AddWithValue("forwarder", vehicle.Forwarder.ID > 0 ? (object)vehicle.Forwarder.ID : DBNull.Value);
+								sqlCmd.Parameters.AddWithValue("driver", vehicle.Driver.ID > 0 ? (object)vehicle.Driver.ID : DBNull.Value);
+								sqlCmd.Parameters.AddWithValue("prodyear", (object)vehicle.ProdYear ?? DBNull.Value);
+								sqlCmd.Parameters.AddWithValue("archival", vehicle.Archival);
+								sqlCmd.Parameters.AddWithValue("comment", vehicle.Comment);
+								sqlCmd.Parameters.AddWithValue("icon", (object)vehicle.Icon ?? DBNull.Value);
+								sqlCmd.ExecuteNonQuery();
+							}
+							SetLog(Globals.Global.User.ID, module, vehicle.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} pojazd: {vehicle.Name}.", sqlConn, sqlTran);
 							break;
 						default:
 							throw new NotImplementedException();
@@ -1710,6 +1750,11 @@ namespace WBZ
 							query = @"delete from wbz.users where id=@id";
 							SetLog(Globals.Global.User.ID, module, id, $"Usunięto użytkownika: {name}", sqlConn, sqlTran);
 							break;
+						/// VEHICLES
+						case Globals.Global.Module.VEHICLES:
+							query = @"delete from wbz.vehicles where id=@id";
+							SetLog(Globals.Global.User.ID, module, id, $"Usunięto pojazd: {name}", sqlConn, sqlTran);
+							break;
 						default:
 							throw new NotImplementedException();
 					}
@@ -1752,7 +1797,7 @@ namespace WBZ
 			
 			return result;
 		}
-#endregion
+		#endregion
 
 		#region additional
 		/// <summary>

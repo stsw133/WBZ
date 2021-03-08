@@ -33,10 +33,10 @@ namespace WBZ.Globals
             //public const string SHIPMENTS = "shipments";  // do dodania w wersji 1.2.0
             public const string STATS = "stats";    // do ulepszenia w wersji 1.3.0
             public const string STORES = "stores";
-            //public const string TRANSPORT = "transport";  // do dodania w wersji 1.2.0
             public const string USERS = "users";
+            public const string VEHICLES = "vehicles";
         }
-        //TODO - przenieść tłumaczenia na różne języki do osobnego pliku (+ zaimportować bibliotekę TranslateMe) w wersji 1.2.0
+        //TODO - przenieść tłumaczenia na różne języki do osobnego pliku w wersji 1.2.0
         public static string TranslateModule(string module)
         {
             switch (module)
@@ -69,10 +69,10 @@ namespace WBZ.Globals
                     return "Statystyki";
                 case Module.STORES:
                     return "Magazyny";
-                //case Module.TRANSPORT:
-                //    return "Transport";
                 case Module.USERS:
                     return "Użytkownicy";
+                case Module.VEHICLES:
+                    return "Pojazdy";
                 default:
                     return "(nieznany)";
             }

@@ -7,7 +7,7 @@ using MODULE_MODEL = WBZ.Models.M_Store;
 
 namespace WBZ.Modules.Stores
 {
-    class D_StoresNew : D_ModuleNew<MODULE_MODEL>
+    class D_TransportNew : D_ModuleNew<MODULE_MODEL>
 	{
 		/// Module
 		public readonly string MODULE_TYPE = Global.Module.STORES;

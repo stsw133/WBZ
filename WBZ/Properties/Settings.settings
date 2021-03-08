@@ -685,5 +685,45 @@
     <Setting Name="config_ContractorsList_WindowSize" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="sorting_VehiclesList" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;v.register&lt;/string&gt;
+  &lt;string&gt;False&lt;/string&gt;
+  &lt;string&gt;v.brand&lt;/string&gt;
+  &lt;string&gt;False&lt;/string&gt;
+  &lt;string&gt;50&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="config_Vehicles_PanelColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FF55DD55</Value>
+    </Setting>
+    <Setting Name="columns_VehiclesList_ID" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="columns_VehiclesList_Register" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="columns_VehiclesList_Brand" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="columns_VehiclesList_Model" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="columns_VehiclesList_Capacity" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="columns_VehiclesList_Forwarder" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="columns_VehiclesList_Driver" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="columns_VehiclesList_ProdYear" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="columns_VehiclesList_Icon" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

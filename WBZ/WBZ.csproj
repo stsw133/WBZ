@@ -375,4 +375,16 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Page Update="Modules\Vehicles\V_VehiclesList.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Modules\Vehicles\V_VehiclesListGrid.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Modules\Vehicles\V_VehiclesNew.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+  </ItemGroup>
+
 </Project>

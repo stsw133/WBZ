@@ -405,6 +405,29 @@
                         </ContextMenu>
                     </Border.ContextMenu>
                 </Border>
+                <!-- vehicles -->
+                <Border x:Name="modVehicles" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
+                        Background="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
+                    <DockPanel>
+                        <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image Margin="10" Source="/Resources/icon32_transport.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=3}"/>
+                                <Label Margin="5" Content="{Tr Main.Vehicles, DefaultText='Pojazdy', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
+                            </StackPanel>
+                        </Border>
+                        <sec:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
+                                    IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=vehicles_preview}"
+                                    Text="{Tr Main.ShowList, DefaultText='Wyświetl listę', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_list.ico" Click="btnVehiclesList_Click"/>
+                        <sec:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
+                                    IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=vehicles_save}"
+                                    Text="{Tr Main.AddNew, DefaultText='Dodaj nowy', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_add.ico" Click="btnVehiclesNew_Click"/>
+                    </DockPanel>
+                    <Border.ContextMenu>
+                        <ContextMenu>
+                            <c:MenuPanelColor Tag="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+                        </ContextMenu>
+                    </Border.ContextMenu>
+                </Border>
             </WrapPanel>
         </ScrollViewer>
     </DockPanel>

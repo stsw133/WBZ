@@ -12,7 +12,7 @@ namespace WBZ.Modules.Stores
 	/// </summary>
 	public partial class StoresNew : New
 	{
-		D_StoresNew D = new D_StoresNew();
+		D_TransportNew D = new D_TransportNew();
 
 		public StoresNew(MODULE_MODEL instance, StswExpress.Globals.Commands.Type mode)
 		{

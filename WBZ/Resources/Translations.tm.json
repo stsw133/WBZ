@@ -131,6 +131,10 @@
 		"en": "Users",
 		"pl": "Użytkownicy"
 	},
+	"Main.Vehicles": {
+		"en": "Vehicles",
+		"pl": "Pojazdy"
+	},
 	"Main.Versions": {
 		"en": "Versions",
 		"pl": "Wersje"

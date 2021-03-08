@@ -1,0 +1,195 @@
+﻿<DataGrid x:Class="WBZ.Modules.Vehicles.VehiclesListGrid"
+          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+          xmlns:c="clr-namespace:WBZ.Controls"
+          xmlns:g="clr-namespace:WBZ.Globals"
+          xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
+          xmlns:p="clr-namespace:WBZ.Properties"
+          mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800"
+          Margin="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1" AutoGenerateColumns="False">
+    <DataGrid.ColumnHeaderStyle>
+        <Style TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Background" Value="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+            <Setter Property="BorderThickness" Value="0,0,1,1"/>
+            <Setter Property="BorderBrush" Value="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={seg:conv_Color}, ConverterParameter=-0.2}"/>
+            <Setter Property="Padding" Value="4 3"/>
+        </Style>
+    </DataGrid.ColumnHeaderStyle>
+    <DataGrid.Resources>
+        <g:BindingProxy x:Key="proxy" Data="{Binding}"/>
+    </DataGrid.Resources>
+    <DataGrid.Columns>
+        <!-- ID -->
+        <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_ID, Mode=OneWay, Converter={seg:conv_BoolToVisibility}}"/>
+        <!-- Icon -->
+        <DataGridTemplateColumn MaxWidth="50" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Icon, Mode=OneWay, Converter={seg:conv_BoolToVisibility}}">
+            <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                    <Image Source="{Binding Icon}"/>
+                </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+        <!-- Register -->
+        <DataGridTextColumn Binding="{Binding Register}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Register, Mode=OneWay, Converter={seg:conv_BoolToVisibility}}">
+            <DataGridTextColumn.Header>
+                <c:DataGridColumnFilter_Text Text="Nr rej." Value="{Binding Data.Filters.Register, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
+            </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+        <!-- Brand -->
+        <DataGridTextColumn Binding="{Binding Brand}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Brand, Mode=OneWay, Converter={seg:conv_BoolToVisibility}}" Width="*">
+            <DataGridTextColumn.Header>
+                <c:DataGridColumnFilter_Text Text="Marka" Value="{Binding Data.Filters.Brand, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
+            </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+        <!-- Model -->
+        <DataGridTextColumn Binding="{Binding Model}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Model, Mode=OneWay, Converter={seg:conv_BoolToVisibility}}">
+            <DataGridTextColumn.Header>
+                <c:DataGridColumnFilter_Text Text="Model" Value="{Binding Data.Filters.Model, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
+            </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+        <!-- Capacity -->
+        <DataGridTextColumn Binding="{Binding Capacity}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Capacity, Mode=OneWay, Converter={seg:conv_BoolToVisibility}}">
+            <DataGridTextColumn.Header>
+                <c:DataGridColumnFilter_Number Text="Pojemność" Value="{Binding Data.Filters.Capacity, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
+            </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+        <!-- Forwarder -->
+        <DataGridTextColumn Binding="{Binding Forwarder.Name}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Forwarder, Mode=OneWay, Converter={seg:conv_BoolToVisibility}}">
+            <DataGridTextColumn.Header>
+                <c:DataGridColumnFilter_Text Text="Spedytor" Value="{Binding Data.Filters.Forwarder.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
+            </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+        <!-- Driver -->
+        <DataGridTextColumn Binding="{Binding Driver.Fullname}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Driver, Mode=OneWay, Converter={seg:conv_BoolToVisibility}}">
+            <DataGridTextColumn.Header>
+                <c:DataGridColumnFilter_Text Text="Kierowca" Value="{Binding Data.Filters.Driver.Lastname, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
+            </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+        <!-- ProdYear -->
+        <DataGridTextColumn Binding="{Binding ProdYear}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Driver, Mode=OneWay, Converter={seg:conv_BoolToVisibility}}">
+            <DataGridTextColumn.Header>
+                <c:DataGridColumnFilter_Number Text="Rok produkcji" Value="{Binding Data.Filters.ProdYear, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
+            </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+    </DataGrid.Columns>
+    <DataGrid.ContextMenu>
+        <ContextMenu>
+            <!-- Columns -->
+            <MenuItem Header="Widoczność kolumn">
+                <MenuItem.Icon>
+                    <Image Source="/Resources/icon32_show.ico"/>
+                </MenuItem.Icon>
+                <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_ID, Mode=TwoWay}"/>
+                <MenuItem IsCheckable="True" Header="Ikona" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Icon, Mode=TwoWay}"/>
+                <MenuItem IsCheckable="True" Header="Nr rej." IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Register, Mode=TwoWay}"/>
+                <MenuItem IsCheckable="True" Header="Marka" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Brand, Mode=TwoWay}"/>
+                <MenuItem IsCheckable="True" Header="Model" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Model, Mode=TwoWay}"/>
+                <MenuItem IsCheckable="True" Header="Pojemność" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Capacity, Mode=TwoWay}"/>
+                <MenuItem IsCheckable="True" Header="Spedytor" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Forwarder, Mode=TwoWay}"/>
+                <MenuItem IsCheckable="True" Header="Kierowca" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Driver, Mode=TwoWay}"/>
+                <MenuItem IsCheckable="True" Header="Rok produkcji" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_ProdYear, Mode=TwoWay}"/>
+            </MenuItem>
+            <!-- Sorting -->
+            <MenuItem Header="Sortowanie danych">
+                <MenuItem.Icon>
+                    <Image Source="/Resources/icon32_descending.ico"/>
+                </MenuItem.Icon>
+                <MenuItem>
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Sortowanie 1:"/>
+                            <ToggleButton IsChecked="{Binding sorting_VehiclesList[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.2}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.2}">
+                                <Image Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.1}" Source="/Resources/icon32_descending.ico"/>
+                            </ToggleButton>
+                            <ComboBox SelectedValue="{Binding sorting_VehiclesList[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
+                                <ComboBoxItem Content="Nr rej." Tag="v.register"/>
+                                <ComboBoxItem Content="Marka" Tag="v.brand"/>
+                                <ComboBoxItem Content="Model" Tag="v.model"/>
+                                <ComboBoxItem Content="Pojemność" Tag="v.capacity"/>
+                                <ComboBoxItem Content="Spedytor" Tag="v.forwarder"/>
+                                <ComboBoxItem Content="Kierowca" Tag="v.driver"/>
+                                <ComboBoxItem Content="Rok produkcji" Tag="v.prodyear"/>
+                            </ComboBox>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+                <MenuItem>
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Sortowanie 2:"/>
+                            <ToggleButton IsChecked="{Binding sorting_VehiclesList[3], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.2}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.2}">
+                                <Image Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.1}" Source="/Resources/icon32_descending.ico"/>
+                            </ToggleButton>
+                            <ComboBox SelectedValue="{Binding sorting_VehiclesList[2], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
+                                <ComboBoxItem Content="Nr rej." Tag="v.register"/>
+                                <ComboBoxItem Content="Marka" Tag="v.brand"/>
+                                <ComboBoxItem Content="Model" Tag="v.model"/>
+                                <ComboBoxItem Content="Pojemność" Tag="v.capacity"/>
+                                <ComboBoxItem Content="Spedytor" Tag="v.forwarder"/>
+                                <ComboBoxItem Content="Kierowca" Tag="v.driver"/>
+                                <ComboBoxItem Content="Rok produkcji" Tag="v.prodyear"/>
+                            </ComboBox>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+                <MenuItem>
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Limit wczytywania:"/>
+                            <TextBox Text="{Binding sorting_VehiclesList[4], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=5}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+            </MenuItem>
+            <!-- Actions -->
+            <Separator/>
+            <MenuItem Header="Podgląd" Command="seg:Commands.Preview">
+                <MenuItem.Icon>
+                    <Image Source="/Resources/icon32_search.ico"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Dodaj" Command="seg:Commands.New">
+                <MenuItem.Icon>
+                    <Image Source="/Resources/icon32_add.ico"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Duplikuj" Command="seg:Commands.Duplicate">
+                <MenuItem.Icon>
+                    <Image Source="/Resources/icon32_duplicate.ico"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Edytuj" Command="seg:Commands.Edit">
+                <MenuItem.Icon>
+                    <Image Source="/Resources/icon32_edit.ico"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Usuń" Command="seg:Commands.Delete">
+                <MenuItem.Icon>
+                    <Image Source="/Resources/icon32_delete.ico"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator/>
+            <MenuItem Header="Odśwież" Command="seg:Commands.Refresh">
+                <MenuItem.Icon>
+                    <Image Source="/Resources/icon32_refresh.ico"/>
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
+    </DataGrid.ContextMenu>
+    <DataGrid.RowStyle>
+        <Style TargetType="DataGridRow">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Archival}" Value="True">
+                    <Setter Property="Foreground" Value="Gray"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Comment, Converter={seg:conv_Compare}}" Value="False">
+                    <Setter Property="ToolTip" Value="{Binding Comment}"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </DataGrid.RowStyle>
+</DataGrid>

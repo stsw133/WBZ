@@ -8,7 +8,7 @@ namespace WBZ.Modules.Stores
 	/// </summary>
 	public partial class StoresList : List
 	{
-		D_StoresList D = new D_StoresList();
+		D_TransportList D = new D_TransportList();
 
 		public StoresList(StswExpress.Globals.Commands.Type mode)
 		{

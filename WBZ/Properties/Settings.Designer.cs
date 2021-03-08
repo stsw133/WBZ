@@ -2149,5 +2149,144 @@ namespace WBZ.Properties {
                 this["config_ContractorsList_WindowSize"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>v.register</string>
+  <string>False</string>
+  <string>v.brand</string>
+  <string>False</string>
+  <string>50</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection sorting_VehiclesList {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_VehiclesList"]));
+            }
+            set {
+                this["sorting_VehiclesList"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF55DD55")]
+        public string config_Vehicles_PanelColor {
+            get {
+                return ((string)(this["config_Vehicles_PanelColor"]));
+            }
+            set {
+                this["config_Vehicles_PanelColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool columns_VehiclesList_ID {
+            get {
+                return ((bool)(this["columns_VehiclesList_ID"]));
+            }
+            set {
+                this["columns_VehiclesList_ID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool columns_VehiclesList_Register {
+            get {
+                return ((bool)(this["columns_VehiclesList_Register"]));
+            }
+            set {
+                this["columns_VehiclesList_Register"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool columns_VehiclesList_Brand {
+            get {
+                return ((bool)(this["columns_VehiclesList_Brand"]));
+            }
+            set {
+                this["columns_VehiclesList_Brand"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool columns_VehiclesList_Model {
+            get {
+                return ((bool)(this["columns_VehiclesList_Model"]));
+            }
+            set {
+                this["columns_VehiclesList_Model"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool columns_VehiclesList_Capacity {
+            get {
+                return ((bool)(this["columns_VehiclesList_Capacity"]));
+            }
+            set {
+                this["columns_VehiclesList_Capacity"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool columns_VehiclesList_Forwarder {
+            get {
+                return ((bool)(this["columns_VehiclesList_Forwarder"]));
+            }
+            set {
+                this["columns_VehiclesList_Forwarder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool columns_VehiclesList_Driver {
+            get {
+                return ((bool)(this["columns_VehiclesList_Driver"]));
+            }
+            set {
+                this["columns_VehiclesList_Driver"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool columns_VehiclesList_ProdYear {
+            get {
+                return ((bool)(this["columns_VehiclesList_ProdYear"]));
+            }
+            set {
+                this["columns_VehiclesList_ProdYear"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool columns_VehiclesList_Icon {
+            get {
+                return ((bool)(this["columns_VehiclesList_Icon"]));
+            }
+            set {
+                this["columns_VehiclesList_Icon"] = value;
+            }
+        }
     }
 }
