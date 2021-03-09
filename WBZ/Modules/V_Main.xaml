@@ -9,8 +9,8 @@
         xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
         xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
         mc:Ignorable="d"
-        Title="{Binding Title}" Height="550" Width="825"
-            BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
+        Title="{Binding Title}" Height="550" Width="825" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
+            BorderThickness="6" BorderBrush="{Binding Source={x:Static seg:Properties.ThemeColor}, Converter={seg:conv_Color}, ConverterParameter=-0.25}"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding Source={x:Static seg:Properties.iSize}}"
             Icon="/Resources/icon64.ico"
             Loaded="Window_Loaded" Closing="Window_Closing">

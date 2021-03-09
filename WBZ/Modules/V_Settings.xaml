@@ -7,8 +7,8 @@
         xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
-        Title="{Tr Settings, DefaultText='Ustawienia', LanguageId={x:Static seg:Properties.Language}}" MinHeight="160" MinWidth="240" Height="400" Width="600"
-            BorderThickness="3" BorderBrush="#333" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" WindowStyle="None"
+        Title="{Tr Settings, DefaultText='Ustawienia', LanguageId={x:Static seg:Properties.Language}}" Height="400" Width="600" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" WindowStyle="None"
+            BorderThickness="3" BorderBrush="{Binding Source={x:Static seg:Properties.ThemeColor}, Converter={seg:conv_Color}, ConverterParameter=-0.25}"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding Source={x:Static seg:Properties.iSize}}"
             Icon="/Resources/icon32_settings.ico">
     <WindowChrome.WindowChrome>
