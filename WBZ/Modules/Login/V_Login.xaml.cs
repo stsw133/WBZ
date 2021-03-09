@@ -228,15 +228,27 @@ namespace WBZ.Modules.Login
 		/// </summary>
 		private void btnGenerateNewpass_Click(object sender, RoutedEventArgs e)
 		{
-			//TODO - nowy sposób generowania hasła z wysłaniem kodu na maila
 			var window = new MsgWin(MsgWin.Type.InputBox, "Generowanie nowego hasła", "Podaj e-mail konta, którego hasło chcesz odzyskać:");
 			window.Owner = this;
 			if (window.ShowDialog() == true)
 			{
-				var loginData = SQL.GenerateNewPasswordForAccount(window.Value);
+				var rnd = new Random().Next(100_000, 1_000_000);
 				if (Mail.SendMail(Props.Default.config_Email_Email, new string[] { window.Value },
-						"WBZ - generowanie nowego hasła", $"Nazwa użytkownika: {loginData[0]}{Environment.NewLine}Hasło: {loginData[1]}"))
-					new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.INFO, "Wiadomość z nazwą użytkownika i hasłem wysłano na podany e-mail.") { Owner = this }.ShowDialog();
+						"WBZ - generowanie nowego hasła", $"Kod do zmiany hasła:{rnd}"))
+					if (new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.INFO, "Wiadomość z kodem do zmiany hasła wysłano na podany e-mail.") { Owner = this }.ShowDialog() == true)
+					{
+						var cwin = new MsgWin(MsgWin.Type.InputBox, "Kod zmiany hasła", "Podaj kod otrzymany w wiadomości e-mail:");
+						cwin.Owner = this;
+						if (cwin.ShowDialog() == true)
+                        {
+							if (cwin.Value == rnd.ToString())
+							{
+								new LoginChangePassword(window.Value) { Owner = this }.ShowDialog();
+							}
+							else
+								new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.INFO, "Niepoprawny kod! Spróbuj wygenerować kod na nowo.") { Owner = this }.ShowDialog();
+						}
+					}
 			}
 		}
 
