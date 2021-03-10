@@ -16,10 +16,7 @@ namespace WBZ.Modules._base
 		private MODULE_MODEL instanceInfo = new MODULE_MODEL();
 		public MODULE_MODEL InstanceInfo
 		{
-			get
-			{
-				return instanceInfo;
-			}
+			get => instanceInfo;
 			set
 			{
 				instanceInfo = value;

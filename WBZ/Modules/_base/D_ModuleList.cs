@@ -16,10 +16,7 @@ namespace WBZ.Modules._base
 		private ObservableCollection<MODULE_MODEL> instancesList;
 		public ObservableCollection<MODULE_MODEL> InstancesList
 		{
-			get
-			{
-				return instancesList;
-			}
+			get => instancesList;
 			set
 			{
 				instancesList = value;
@@ -36,10 +33,7 @@ namespace WBZ.Modules._base
 		private MODULE_MODEL filters = new MODULE_MODEL();
 		public MODULE_MODEL Filters
 		{
-			get
-			{
-				return filters;
-			}
+			get => filters;
 			set
 			{
 				filters = value;
@@ -50,10 +44,7 @@ namespace WBZ.Modules._base
 		private int page;
 		public int Page
 		{
-			get
-			{
-				return page;
-			}
+			get => page;
 			set
 			{
 				page = value;
@@ -64,10 +55,7 @@ namespace WBZ.Modules._base
 		private int totalItems;
 		public int TotalItems
 		{
-			get
-			{
-				return totalItems;
-			}
+			get => totalItems;
 			set
 			{
 				totalItems = value;

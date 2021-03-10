@@ -8,29 +8,51 @@
         xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
-        Title="Baza wersji aplikacji" MinHeight="200" MinWidth="300" Height="500" Width="750"
-            BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
+        Title="{Tr Versions, DefaultText='Baza wersji aplikacji', LanguageId={x:Static seg:Properties.Language}}"
+            Height="500" Width="750" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
+            BorderBrush="{Binding Source={x:Static seg:Properties.ThemeColor}, Converter={seg:conv_Color}, ConverterParameter=-0.25}" BorderThickness="6"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding Source={x:Static seg:Properties.iSize}}"
-            Icon="/Resources/icon32_versions.ico" Loaded="Window_Loaded" >
+            Icon="/Resources/icon32_versions.ico"
+            Loaded="Window_Loaded">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
+    <Window.CommandBindings>
+        <CommandBinding Command="seg:Commands.Close" Executed="cmdClose_Executed"/>
+        <CommandBinding Command="seg:Commands.Help" Executed="cmdHelp_Executed"/>
+        <CommandBinding Command="seg:Commands.Refresh" Executed="cmdRefresh_Executed"/>
+    </Window.CommandBindings>
     <DockPanel>
         <!-- titleBar -->
         <sec:TitleBar DockPanel.Dock="Top"/>
         <!-- buttonsPanel -->
-        <Border DockPanel.Dock="Right" Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="1,0,0,0">
+        <Border DockPanel.Dock="Right"
+                Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}}"
+                BorderBrush="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.5}"
+                BorderThickness="1,0,0,0">
             <DockPanel>
-                <ToggleButton x:Name="btnToggle" BorderThickness="0" Width="5" IsChecked="True"/>
-                <sec:Button DockPanel.Dock="Top" Margin="5,5,5,0" IsEnabled="True" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
-                                Text="Pobierz" Icon="/Resources/icon32_download.ico" PreviewMouseLeftButtonUp="btnDownload_Click"/>
-                <Separator DockPanel.Dock="Top" Margin="0,5,0,0" VerticalAlignment="Top" Height="5"/>
-                <sec:Button DockPanel.Dock="Bottom" Margin="5,0,5,5" IsEnabled="True" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
-                                Text="Zamknij okno" Icon="/Resources/icon32_close.ico" PreviewMouseLeftButtonUp="btnClose_Click"/>
-                <Separator DockPanel.Dock="Bottom" Margin="0,0,0,5" VerticalAlignment="Bottom" Height="5"/>
-                <sec:Button DockPanel.Dock="Bottom" Margin="5,0,5,5" IsEnabled="True" TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
-                                Text="Odśwież" Icon="/Resources/icon32_refresh.ico" PreviewMouseLeftButtonUp="btnRefresh_Click"/>
-                <Separator DockPanel.Dock="Bottom" Margin="0,0,0,5" VerticalAlignment="Bottom" Height="5"/>
+                <StackPanel DockPanel.Dock="Top">
+                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                Text="{Tr Buttons.Download, DefaultText='Pobierz', LanguageId={x:Static seg:Properties.Language}}"
+                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                Icon="/Resources/icon32_download.ico"
+                                Click="btnDownload_Click"/>
+                    <Separator/>
+                </StackPanel>
+                <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
+                    <Separator/>
+                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                Text="{Tr Buttons.Refresh, DefaultText='Odśwież', LanguageId={x:Static seg:Properties.Language}}"
+                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                Icon="/Resources/icon32_refresh.ico"
+                                Command="seg:Commands.Refresh"/>
+                    <Separator/>
+                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                Text="{Tr Buttons.CloseWindow, DefaultText='Zamknij okno', LanguageId={x:Static seg:Properties.Language}}"
+                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                Icon="/Resources/icon32_close.ico"
+                                Command="seg:Commands.Close"/>
+                </StackPanel>
             </DockPanel>
             <Border.ContextMenu>
                 <ContextMenu>
@@ -39,16 +61,26 @@
             </Border.ContextMenu>
         </Border>
         <!-- statusPanel -->
-        <Border DockPanel.Dock="Bottom" Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="0,1,0,0">
+        <!-- <c:StatusPanel x:Name="StatusPanel" DockPanel.Dock="Bottom" Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"
+                       EnableFilters="False" HasFilters="False" EnableGroups="False" HasGroups="False"/>
+        -->
+        <Border DockPanel.Dock="Bottom"
+                Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"
+                BorderBrush="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.5}"
+                BorderThickness="0,1,0,0">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
-                    <Label Content="Wyświetlono:" Margin="5,0"/>
+                    <Label Content="{Tr Buttons.Displayed, DefaultText='Wyświetlono:', LanguageId={x:Static seg:Properties.Language}}" Margin="5,0"/>
                     <Label Content="{Binding InstancesList.Count}" FontWeight="Medium"/>
                 </StackPanel>
             </DockPanel>
         </Border>
         <!-- listBox -->
-        <Label DockPanel.Dock="Top" Content="Lista wersji:"/>
-        <ListBox x:Name="lbList" DockPanel.Dock="Top" Margin="5" ItemsSource="{Binding InstancesList.versions}" MouseDoubleClick="lbList_MouseDoubleClick"/>
+        <Label DockPanel.Dock="Top" Content="{Tr Versions.VersionList, DefaultText='Lista wersji:', LanguageId={x:Static seg:Properties.Language}}"/>
+        <ListBox x:Name="lbList"
+                 DockPanel.Dock="Top"
+                 Margin="5"
+                 ItemsSource="{Binding InstancesList.versions}"
+                 MouseDoubleClick="lbList_MouseDoubleClick"/>
     </DockPanel>
 </Window>

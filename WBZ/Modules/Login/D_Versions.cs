@@ -15,14 +15,11 @@ namespace WBZ.Modules.Login
 		private dynamic instancesList;
 		public dynamic InstancesList
 		{
-			get
-			{
-				return instancesList;
-			}
+			get => instancesList;
 			set
 			{
 				instancesList = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
+				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
 			}
 		}
 	}

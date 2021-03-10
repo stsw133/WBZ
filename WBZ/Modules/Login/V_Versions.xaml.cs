@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Windows;
 using System.Windows.Input;
 using WBZ.Controls;
+using WBZ.Globals;
 
 namespace WBZ.Modules.Login
 {
@@ -28,18 +29,18 @@ namespace WBZ.Modules.Login
 		/// </summary>
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			btnRefresh_Click(null, null);
+			cmdRefresh_Executed(null, null);
 		}
 
 		/// <summary>
 		/// Download
 		/// </summary>
-		private async void btnDownload_Click(object sender, MouseButtonEventArgs e)
+		private async void btnDownload_Click(object sender, RoutedEventArgs e)
 		{
-			string version = ((dynamic)lbList.SelectedValue).ToString();
-
 			try
 			{
+				string version = ((dynamic)lbList.SelectedValue).ToString();
+
 				var dialog = new SaveFileDialog()
 				{
 					Filter = "Plik instalacyjny|*.exe"
@@ -79,7 +80,7 @@ namespace WBZ.Modules.Login
 		/// <summary>
 		/// Refresh
 		/// </summary>
-		private async void btnRefresh_Click(object sender, MouseButtonEventArgs e)
+		private async void cmdRefresh_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			try
 			{
@@ -99,9 +100,17 @@ namespace WBZ.Modules.Login
 		}
 
 		/// <summary>
+		/// Help
+		/// </summary>
+		private void cmdHelp_Executed(object sender, ExecutedRoutedEventArgs e)
+		{
+			Functions.OpenHelp(this);
+		}
+
+		/// <summary>
 		/// Close
 		/// </summary>
-		private void btnClose_Click(object sender, MouseButtonEventArgs e)
+		private void cmdClose_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			Close();
 		}

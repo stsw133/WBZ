@@ -594,7 +594,7 @@ namespace WBZ
 
 		#region basic
 		[STAThread]
-		private static void Error(string msg, Exception ex, string module, int instance, bool show = true, bool save = true)
+		private static void Error(string msg, Exception ex, string module, int instance, bool showWin = true, bool save = true)
         {
 			try
 			{
@@ -617,7 +617,7 @@ namespace WBZ
 #else
 					error.Content = ex.Message;
 #endif
-					if (show)
+					if (showWin)
 						new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"{msg}:{Environment.NewLine}{error.Content}").ShowDialog();
 					if (save)
 						SetInstance(Globals.Global.Module.LOGS, error, Commands.Type.NEW);

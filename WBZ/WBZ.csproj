@@ -55,7 +55,7 @@
     <None Remove="Resources\icon32_global.ico" />
     <None Remove="Resources\icon32_greetings.ico" />
     <None Remove="Resources\icon32_groups.ico" />
-    <None Remove="Resources\icon32_language_pl.ico" />
+    <None Remove="Resources\icon32_language.ico" />
     <None Remove="Resources\icon32_list.ico" />
     <None Remove="Resources\icon32_locked.ico" />
     <None Remove="Resources\icon32_login.ico" />
@@ -216,7 +216,7 @@
     <Content Include="Resources\icon32_groups.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\icon32_language_pl.ico">
+    <Content Include="Resources\icon32_language.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\icon32_list.ico">
@@ -324,10 +324,10 @@
     <Content Include="Resources\icon64.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\logo.png">
+    <Content Include="Resources\pl_manual.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\pl_manual.pdf">
+    <Content Include="Resources\StswExpress.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Translations.tm.json">
@@ -355,9 +355,12 @@
     <Resource Include="Properties\Resources.resx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\StswExpress.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <SplashScreen Include="Resources\logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </SplashScreen>
   </ItemGroup>
 
   <ItemGroup>

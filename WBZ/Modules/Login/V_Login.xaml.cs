@@ -64,7 +64,7 @@ namespace WBZ.Modules.Login
 				}
 
 				/// check app version
-				if (StswExpress.Globals.Global.AppVersion() == Globals.Global.VersionNewest)
+				if (Global.AppVersion() == Globals.Global.VersionNewest)
 				{
 					imgVersion.Source = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resources/icon32_circlegreen.ico"));
 					imgVersion.ToolTip = "Posiadasz aktualną wersję programu.";
@@ -72,7 +72,7 @@ namespace WBZ.Modules.Login
 				else
 				{
 					imgVersion.Source = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resources/icon32_circleorange.ico"));
-					imgVersion.ToolTip = "Posiadasz nieaktualną wersję programu. Najnowsza wersja to " + Globals.Global.VersionNewest;
+					imgVersion.ToolTip = "Posiadasz nieaktualną wersję programu. Najnowsza wersja: " + Globals.Global.VersionNewest;
 				}
 			}
 			catch { }
@@ -83,9 +83,7 @@ namespace WBZ.Modules.Login
 		/// </summary>
 		private void btnDatabases_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new LoginDatabases();
-			window.Owner = this;
-			if (window.ShowDialog() == true)
+			if (new LoginDatabases() { Owner = this }.ShowDialog() == true)
 				Window_Loaded(null, null);
 		}
 
@@ -109,8 +107,8 @@ namespace WBZ.Modules.Login
 			{
 				try
 				{
-					Global.AppDatabase = cbDatabase.SelectedItem as M_Database;
-					SQL.connWBZ = SQL.MakeConnString(Global.AppDatabase.Server, Global.AppDatabase.Port, Global.AppDatabase.Database, Global.AppDatabase.Username, Global.AppDatabase.Password);
+					var db = Global.AppDatabase = cbDatabase.SelectedItem as M_Database;
+					SQL.connWBZ = SQL.MakeConnString(db.Server, db.Port, db.Database, db.Username, db.Password);
 					Global.AppDatabase.Version = SQL.GetPropertyValue("VERSION");
 
 					btnLogin.IsEnabled = true;
@@ -138,8 +136,7 @@ namespace WBZ.Modules.Login
 			if (SQL.Login(tbLogin.Text, Globals.Global.sha256(tbPassword.Password)))
 			{
 				M_Config.LoadConfig();
-				var window = new Main();
-				window.Show();
+				new Main().Show();
 				Close();
 			}
 
@@ -195,9 +192,7 @@ namespace WBZ.Modules.Login
 		/// </summary>
 		private void btnCreateAdmin_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new LoginRegister();
-			window.Owner = this;
-			window.ShowDialog();
+			new LoginRegister() { Owner = this }.ShowDialog();
 		}
 
 		/// <summary>
@@ -257,7 +252,6 @@ namespace WBZ.Modules.Login
 		/// </summary>
 		private void btnManual_Click(object sender, RoutedEventArgs e)
 		{
-			//TODO - naprawić
 			Globals.Functions.OpenHelp(this);
 		}
 
@@ -266,9 +260,7 @@ namespace WBZ.Modules.Login
 		/// </summary>
 		private void btnVersions_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new Versions();
-			window.Owner = this;
-			window.ShowDialog();
+			new Versions() { Owner = this }.ShowDialog();
 		}
 
 		/// <summary>
@@ -276,12 +268,9 @@ namespace WBZ.Modules.Login
 		/// </summary>
 		private void btnSettings_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new Settings();
-			window.Owner = this;
-			if (window.ShowDialog() == true)
+			if (new Settings() { Owner = this }.ShowDialog() == true)
             {
-				var login = new Login();
-				login.Show();
+				new Login().Show();
 				Close();
 			}
 		}
@@ -291,9 +280,7 @@ namespace WBZ.Modules.Login
 		/// </summary>
 		private void btnAboutApp_Click(object sender, RoutedEventArgs e)
 		{
-			var window = new LoginAppAbout();
-			window.Owner = this;
-			window.ShowDialog();
+			new LoginAppAbout() { Owner = this }.ShowDialog();
 		}
 	}
 }

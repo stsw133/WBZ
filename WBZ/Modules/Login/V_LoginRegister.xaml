@@ -7,10 +7,10 @@
         xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
-        Title="Rejestracja" SizeToContent="WidthAndHeight"
-            BorderThickness="3" BorderBrush="#333" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner" WindowStyle="None"
-            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding Source={x:Static seg:Properties.iSize}}"
-            Icon="/Resources/_null.ico">
+        Title="Rejestracja"
+            SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner" WindowStyle="None"
+            BorderBrush="{Binding Source={x:Static seg:Properties.ThemeColor}, Converter={seg:conv_Color}, ConverterParameter=-0.25}" BorderThickness="3"
+            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding Source={x:Static seg:Properties.iSize}}">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -29,15 +29,42 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Content="E-mail:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <TextBox x:Name="tbEmail" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center"/>
-            <Label Grid.Row="1" Grid.Column="0" Content="Użytkownik:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <TextBox x:Name="tbUsername" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center"/>
-            <Label Grid.Row="2" Grid.Column="0" Content="Hasło:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <PasswordBox x:Name="pbPassword" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center"/>
-            <sec:Button Grid.Row="3" Grid.Column="1" Margin="5" IsEnabled="True" TextVisibility="True"
-                            Text="Akceptuj" Icon="/Resources/icon32_accept.ico" PreviewMouseLeftButtonUp="btnAccept_Click"/>
+            <Label Grid.Row="0" Grid.Column="0"
+                   Content="{Tr LoginRegister.Email, DefaultText='E-mail:', LanguageId={x:Static seg:Properties.Language}}"
+                   Margin="5"
+                   HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="tbEmail" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
+                     Margin="5"
+                     VerticalContentAlignment="Center"/>
+            <Label Grid.Row="1" Grid.Column="0"
+                   Content="{Tr LoginRegister.Username, DefaultText='Użytkownik:', LanguageId={x:Static seg:Properties.Language}}"
+                   Margin="5"
+                   HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="tbUsername" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+                     Margin="5"
+                     VerticalContentAlignment="Center"/>
+            <Label Grid.Row="2" Grid.Column="0"
+                   Content="{Tr LoginRegister.Password, DefaultText='Hasło:', LanguageId={x:Static seg:Properties.Language}}"
+                   Margin="5"
+                   HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <PasswordBox x:Name="pbPassword" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
+                         Margin="5"
+                         VerticalContentAlignment="Center"/>
+            <Label Grid.Row="3" Grid.Column="0"
+                   Content="{Tr LoginRegister.Repass, DefaultText='Powt. hasło:', LanguageId={x:Static seg:Properties.Language}}"
+                   Margin="5"
+                   HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <PasswordBox x:Name="pbRepass" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
+                         Margin="5"
+                         VerticalContentAlignment="Center"/>
+            <sec:Button Grid.Row="4" Grid.Column="1"
+                        Margin="5"
+                        Text="{Tr Buttons.Accept, DefaultText='Akceptuj', LanguageId={x:Static seg:Properties.Language}}"
+                        TextVisibility="True"
+                        Icon="/Resources/icon32_accept.ico"
+                        Click="btnAccept_Click"/>
         </Grid>
     </DockPanel>
 </Window>

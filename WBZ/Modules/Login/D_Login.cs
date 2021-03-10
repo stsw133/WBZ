@@ -17,10 +17,7 @@ namespace WBZ.Modules.Login
 		private ObservableCollection<M_Database> databases;
 		public ObservableCollection<M_Database> Databases
 		{
-			get
-			{
-				return databases;
-			}
+			get => databases;
 			set
 			{
 				databases = value;

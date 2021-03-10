@@ -18,11 +18,7 @@ namespace WBZ
 			StswExpress.Globals.Properties.HashKey = "ejdndbfewbasjhdggjhbasbvdgewvbjdbsavdqgwjbdjsvdyugwqyubashjdbjfgdtyuqw";
 			StswExpress.Globals.Properties.iSize = WBZ.Properties.Settings.Default.iSize;
 			StswExpress.Globals.Properties.Language = WBZ.Properties.Settings.Default.Language;
-#if DEBUG
-			StswExpress.Globals.Properties.ThemeColor = "#846";
-#else
-			StswExpress.Globals.Properties.ThemeColor = "#444";
-#endif
+			StswExpress.Globals.Properties.ThemeColor = WBZ.Properties.Settings.Default.ThemeColor;
 
 			Mail.Host = WBZ.Properties.Settings.Default.config_Email_Host;
 			Mail.Port = WBZ.Properties.Settings.Default.config_Email_Port;

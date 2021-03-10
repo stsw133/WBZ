@@ -17,10 +17,7 @@ namespace WBZ.Modules.Login
 		private ObservableCollection<M_Database> databases = new ObservableCollection<M_Database>(M_Database.LoadAllDatabases());
 		public ObservableCollection<M_Database> Databases
 		{
-			get
-			{
-				return databases;
-			}
+			get => databases;
 			set
 			{
 				databases = value;

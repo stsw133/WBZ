@@ -7,8 +7,9 @@
         xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
-        Title="{Tr Login, DefaultText='Logowanie', LanguageId={x:Static seg:Properties.Language}}" SizeToContent="WidthAndHeight"
-            BorderThickness="3" BorderBrush="#333" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" WindowStyle="None"
+        Title="{Tr Login, DefaultText='Logowanie', LanguageId={x:Static seg:Properties.Language}}"
+            SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" WindowStyle="None"
+            BorderThickness="3" BorderBrush="{Binding Source={x:Static seg:Properties.ThemeColor}, Converter={seg:conv_Color}, ConverterParameter=-0.25}"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding Source={x:Static seg:Properties.iSize}}"
             Icon="/Resources/icon32_login.ico"
             Loaded="Window_Loaded">
@@ -21,7 +22,9 @@
         <!-- main -->
         <DockPanel DockPanel.Dock="Top">
             <Border DockPanel.Dock="Top" Background="White" BorderBrush="Gray" BorderThickness="1">
-                <Image Source="/Resources/logo.png" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"/>
+                <Image Source="/Resources/logo.png"
+                       Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"
+                       Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"/>
             </Border>
             <Grid DockPanel.Dock="Top" Margin="5">
                 <Grid.RowDefinitions>
@@ -37,7 +40,10 @@
                 <Label Content="Baza danych:" Grid.Row="0" Grid.Column="0" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                 <DockPanel Grid.Row="0" Grid.Column="1" Margin="5">
                     <Button ToolTip="Zmień połączenie z główną bazą" Click="btnDatabases_Click">
-                        <Image Margin="2" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_database.ico"/>
+                        <Image Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.15}"
+                               Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"
+                               Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"
+                               Source="/Resources/icon32_database.ico"/>
                     </Button>
                     <ComboBox VerticalContentAlignment="Center" BorderThickness="0,1,1,1" DisplayMemberPath="Name" SelectedValuePath="Name" ItemsSource="{Binding Databases, Mode=OneWay}" SelectedValue="{Binding dbName, Source={x:Static p:Settings.Default}, Mode=TwoWay}" ToolTip="Identyfikator bazy danych" SelectionChanged="cbDatabase_SelectionChanged"/>
                 </DockPanel>
@@ -50,9 +56,9 @@
             <Separator DockPanel.Dock="Top" Margin="5"/>
             <Grid DockPanel.Dock="Bottom" Margin="5">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <DockPanel Grid.Column="0">
                     <Image x:Name="imgVersion" Margin="5" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2}" Source="/Resources/icon32_circlegrey.ico"/>
