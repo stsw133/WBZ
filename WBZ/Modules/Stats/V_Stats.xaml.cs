@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using WBZ.Globals;
 
 namespace WBZ.Modules.Stats
 {
@@ -20,7 +21,7 @@ namespace WBZ.Modules.Stats
 		/// <summary>
 		/// Report
 		/// </summary>
-		private void btnReportGenerate_Click(object sender, MouseButtonEventArgs e)
+		private void btnReportGenerate_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new StatsReportsGenerator(StatsReports.DonationsSum);
 			window.Owner = this;
@@ -30,7 +31,7 @@ namespace WBZ.Modules.Stats
 		/// <summary>
 		/// Refresh
 		/// </summary>
-		private async void btnRefresh_Click(object sender, MouseButtonEventArgs e)
+		private async void cmdRefresh_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			await Task.Run(() => {
 				D.StatsArticles = SQL.GetStatsArticles();
@@ -39,9 +40,17 @@ namespace WBZ.Modules.Stats
 		}
 
 		/// <summary>
+		/// Help
+		/// </summary>
+		private void cmdHelp_Executed(object sender, ExecutedRoutedEventArgs e)
+		{
+			Functions.OpenHelp(this);
+		}
+
+		/// <summary>
 		/// Close
 		/// </summary>
-		private void btnClose_Click(object sender, MouseButtonEventArgs e)
+		private void cmdClose_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			Close();
 		}

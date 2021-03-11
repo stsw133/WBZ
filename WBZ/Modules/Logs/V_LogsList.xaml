@@ -9,7 +9,7 @@
         xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
-        Title="Lista logów"
+        Title="{Tr LogsList, DefaultText='Lista logów', LanguageId={x:Static seg:Properties.Language}}"
             Height="650" Width="975" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding Source={x:Static seg:Properties.iSize}}"
             Icon="/Resources/icon32_logs.ico"
@@ -33,21 +33,44 @@
         <!-- buttonsPanel -->
         <Border DockPanel.Dock="Right" Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="1,0,0,0" Visibility="{Binding SelectingMode, Converter={seg:conv_BoolInverted}}">
             <DockPanel>
-                <ToggleButton x:Name="btnToggle" BorderThickness="0" Width="5" IsChecked="{Binding config_ShowButtonTexts, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                 <StackPanel DockPanel.Dock="Top">
-                    <sec:Button Text="Podgląd&#10;obiektu" Margin="5,5,5,0" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_search.ico" Command="seg:Commands.Preview"/>
-                    <sec:Button Text="Edycja&#10;obiektu" Margin="5,5,5,0" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_edit.ico" Command="seg:Commands.Edit"/>
-                    <Separator Height="5" Margin="0,5,0,0"/>
-                    <CheckBox Content="Logi włączone" x:Name="chckEnabled" Margin="5,5,5,0" Visibility="{Binding IsChecked, ElementName=btnToggle, Converter={seg:conv_BoolToVisibility}}" Checked="chckEnabled_Checked" Unchecked="chckEnabled_Checked"/>
-                    <Separator Height="5" Margin="0,5,0,0" Visibility="{Binding IsChecked, ElementName=btnToggle, Converter={seg:conv_BoolToVisibility}}"/>
-                    <sec:Button Text="Usuń" Margin="5,5,5,0" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_delete.ico" Command="seg:Commands.Delete"/>
-                    <Separator DockPanel.Dock="Top" Margin="0,5,0,0" VerticalAlignment="Top" Height="5" Visibility="{Binding IsChecked, ElementName=btnToggle, Converter={seg:conv_BoolToVisibility}}"/>
+                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                Text="Podgląd&#10;obiektu"
+                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                Icon="/Resources/icon32_search.ico"
+                                Command="seg:Commands.Preview"/>
+                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4;0;0.4;0.4}"
+                                Text="Edycja&#10;obiektu"
+                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                Icon="/Resources/icon32_edit.ico"
+                                Command="seg:Commands.Edit"/>
+                    <Separator/>
+                    <CheckBox x:Name="chckEnabled"
+                              Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                              Content="Logi włączone"
+                              Visibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}, Converter={seg:conv_BoolToVisibility}}"
+                              Checked="chckEnabled_Checked" Unchecked="chckEnabled_Checked"/>
+                    <Separator Visibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}, Converter={seg:conv_BoolToVisibility}}"/>
+                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                Text="Usuń"
+                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                Icon="/Resources/icon32_delete.ico"
+                                Command="seg:Commands.Delete"/>
+                    <Separator/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
-                    <Separator Height="5" Margin="0,0,0,5"/>
-                    <sec:Button Text="Odśwież" Margin="5,0,5,5" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_refresh.ico" Command="seg:Commands.Refresh"/>
-                    <Separator Height="5" Margin="0,0,0,5"/>
-                    <sec:Button Text="Zamknij okno" Margin="5,0,5,5" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_close.ico" Command="seg:Commands.Close"/>
+                    <Separator/>
+                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                Text="{Tr Buttons.Refresh, DefaultText='Odśwież', LanguageId={x:Static seg:Properties.Language}}"
+                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                Icon="/Resources/icon32_refresh.ico"
+                                Command="seg:Commands.Refresh"/>
+                    <Separator/>
+                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                Text="{Tr Buttons.CloseWindow, DefaultText='Zamknij okno', LanguageId={x:Static seg:Properties.Language}}"
+                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                Icon="/Resources/icon32_close.ico"
+                                Command="seg:Commands.Close"/>
                 </StackPanel>
             </DockPanel>
             <Border.ContextMenu>
@@ -57,11 +80,16 @@
             </Border.ContextMenu>
         </Border>
         <!-- statusPanel -->
-        <c:StatusPanel x:Name="StatusPanel" DockPanel.Dock="Bottom" Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"
+        <c:StatusPanel x:Name="StatusPanel"
+                       DockPanel.Dock="Bottom"
+                       Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"
                        EnableFilters="True" HasFilters="True" EnableGroups="True" HasGroups="True"/>
         <!-- groupsView -->
         <c:GroupsView EditingMode="False" Visibility="{Binding EnableGroups, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
         <!-- dataGrid -->
-        <b:LogsListGrid x:Name="dgList" ItemsSource="{Binding InstancesList}" IsReadOnly="True" MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged"/>
+        <b:LogsListGrid x:Name="dgList"
+                        ItemsSource="{Binding InstancesList}"
+                        IsReadOnly="True"
+                        MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged"/>
     </DockPanel>
 </b:List>
