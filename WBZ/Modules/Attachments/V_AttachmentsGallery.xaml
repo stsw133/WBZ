@@ -7,10 +7,12 @@
         xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
-        Title="Galeria załączników" MinHeight="280" MinWidth="420" Height="{Binding Source={x:Static p:Settings.Default}, Path=config_AttachmentsGallery_WindowSize[1], Mode=TwoWay}" Width="{Binding Source={x:Static p:Settings.Default}, Path=config_AttachmentsGallery_WindowSize[0], Mode=TwoWay}"
-            BorderThickness="6" BorderBrush="Black" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None" WindowState="Maximized"
+        Title="Galeria załączników"
+            Height="700" Width="1050" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowState="Maximized"
+            BorderThickness="6" BorderBrush="Black"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding Source={x:Static seg:Properties.iSize}}"
-            Icon="/Resources/icon32_gallery.ico" Closed="Window_Closed">
+            Icon="/Resources/icon32_gallery.ico"
+            Closed="Window_Closed">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>

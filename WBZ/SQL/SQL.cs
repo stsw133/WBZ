@@ -15,31 +15,7 @@ namespace WBZ
 	internal static class SQL
 	{
 		internal static string connWBZ = null; ///przypisywanie połączenia w oknie logowania
-		internal static NpgsqlConnection connOpenedWBZ => OpenConnection(new NpgsqlConnection(connWBZ));
-
-		/// <summary>
-		/// Podmienia połączenie do bazy na nowe
-		/// </summary>
-		/// <param name="server">Nazwa serwera</param>
-		/// <param name="port">Port serwera</param>
-		/// <param name="database">Nazwa bazy danych</param>
-		/// <param name="userID">Nazwa użytkownika</param>
-		/// <param name="password">Hasło użytkownika</param>
-		internal static string MakeConnString(string server, int port, string database, string userID, string password)
-		{
-			return $"Server={server};Port={port};Database={database};User Id={userID};Password={password};";
-		}
-
-		/// <summary>
-		/// Otwiera przekazane połączenie i zwraca je.
-		/// </summary>
-		/// <param name="sqlConn">Połączenie do otworzenia.</param>
-		/// <returns>Otwarte połączenie.</returns>
-		internal static NpgsqlConnection OpenConnection(NpgsqlConnection sqlConn)
-		{
-			sqlConn.Open();
-			return sqlConn;
-		}
+		internal static NpgsqlConnection connOpenedWBZ => (NpgsqlConnection)StswExpress.Globals.SQL.OpenConnection(new NpgsqlConnection(connWBZ));
 
 		#region Login
 		/// <summary>

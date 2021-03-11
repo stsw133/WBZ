@@ -108,7 +108,7 @@ namespace WBZ.Modules.Login
 				try
 				{
 					var db = Global.AppDatabase = cbDatabase.SelectedItem as M_Database;
-					SQL.connWBZ = SQL.MakeConnString(db.Server, db.Port, db.Database, db.Username, db.Password);
+					SQL.connWBZ = StswExpress.Globals.SQL.MakeConnString(db.Server, db.Port, db.Database, db.Username, db.Password);
 					Global.AppDatabase.Version = SQL.GetPropertyValue("VERSION");
 
 					btnLogin.IsEnabled = true;

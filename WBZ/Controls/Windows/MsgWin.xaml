@@ -7,8 +7,8 @@
         xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
-        Title="{Binding Title}" SizeToContent="WidthAndHeight"
-            BorderThickness="3" BorderBrush="#333" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" WindowStyle="None"
+        Title="{Binding Title}"
+            SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterOwner"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}, Mode=OneWay}" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Mode=OneWay}"
             Icon="{Binding Icon}">
     <WindowChrome.WindowChrome>

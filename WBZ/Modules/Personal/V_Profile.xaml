@@ -8,8 +8,8 @@
         xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
-        Title="Ustawienia profilu" MinHeight="140" MinWidth="140" Height="350" Width="350"
-            BorderThickness="3" BorderBrush="#333" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" WindowStyle="None"
+        Title="Ustawienia profilu"
+            Height="350" Width="350" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding Source={x:Static seg:Properties.iSize}}"
             Icon="/Resources/icon32_profile.ico">
     <WindowChrome.WindowChrome>

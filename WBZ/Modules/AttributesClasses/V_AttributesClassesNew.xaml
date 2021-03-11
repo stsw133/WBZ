@@ -10,10 +10,11 @@
        xmlns:p="clr-namespace:WBZ.Properties"
        xmlns:t="clr-namespace:WBZ.Modules._tabs"
        mc:Ignorable="d"
-       Title="{Binding Title}" MinHeight="240" MinWidth="360" Height="{Binding config_AttributesClassesNew_WindowSize[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding config_AttributesClassesNew_WindowSize[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-            BorderThickness="6" BorderBrush="#333" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
+       Title="{Binding Title}"
+            Height="600" Width="900" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding Source={x:Static seg:Properties.iSize}}"
-            Icon="/Resources/icon32_attributes.ico" Loaded="Window_Loaded" Closed="Window_Closed">
+            Icon="/Resources/icon32_attributes.ico"
+            Loaded="Window_Loaded" Closed="Window_Closed">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>

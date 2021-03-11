@@ -82,7 +82,7 @@ namespace WBZ.Modules.Login
 		/// </summary>
 		private void btnTest_Click(object sender, RoutedEventArgs e)
 		{
-			SQL.connWBZ = SQL.MakeConnString(tbServer.Text, Convert.ToInt32(tbPort.Text), tbDatabase.Text, tbUsername.Text, pbPassword.Password);
+			SQL.connWBZ = StswExpress.Globals.SQL.MakeConnString(tbServer.Text, Convert.ToInt32(tbPort.Text), tbDatabase.Text, tbUsername.Text, pbPassword.Password);
 			string dbv = SQL.GetPropertyValue("VERSION");
 
 			if (dbv == StswExpress.Globals.Global.AppVersion())
