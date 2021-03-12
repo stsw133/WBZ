@@ -2,7 +2,6 @@
 using System;
 using System.Data;
 using System.Windows;
-using System.Windows.Input;
 using WBZ.Controls;
 
 namespace WBZ.Modules.Admin
@@ -20,7 +19,7 @@ namespace WBZ.Modules.Admin
 		/// <summary>
 		/// Start
 		/// </summary>
-		private void btnStart_Click(object sender, MouseButtonEventArgs e)
+		private void btnStart_Click(object sender, RoutedEventArgs e)
 		{
 			var dt = new DataTable();
 

@@ -27,7 +27,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
-                <RowDefinition Height="{Binding Source={x:Static seg:Properties.iSize}, Mode=OneWay}"/>
+                <RowDefinition Height="{Binding Source={x:Static seg:Properties.iSize}}"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Grid.ColumnSpan="3" Content="Podaj przedział czasowy raportu:" Margin="5" VerticalContentAlignment="Center"/>

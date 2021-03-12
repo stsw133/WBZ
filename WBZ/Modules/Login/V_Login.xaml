@@ -44,7 +44,7 @@
                                Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"
                                Source="/Resources/icon32_database.ico"/>
                     </Button>
-                    <ComboBox VerticalContentAlignment="Center" BorderThickness="0,1,1,1" DisplayMemberPath="Name" SelectedValuePath="Name" ItemsSource="{Binding Databases, Mode=OneWay}" SelectedValue="{Binding dbName, Source={x:Static p:Settings.Default}, Mode=TwoWay}" ToolTip="Identyfikator bazy danych" SelectionChanged="cbDatabase_SelectionChanged"/>
+                    <ComboBox VerticalContentAlignment="Center" BorderThickness="0,1,1,1" DisplayMemberPath="Name" SelectedValuePath="Name" ItemsSource="{Binding Databases}" SelectedValue="{Binding dbName, Source={x:Static p:Settings.Default}, Mode=TwoWay}" ToolTip="Identyfikator bazy danych" SelectionChanged="cbDatabase_SelectionChanged"/>
                 </DockPanel>
                 <Label Content="Login:" Grid.Row="1" Grid.Column="0" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                 <TextBox x:Name="tbLogin" Grid.Row="1" Grid.Column="1" Margin="5" VerticalContentAlignment="Center" Text="{Binding userName, Source={x:Static p:Settings.Default}, Mode=TwoWay}" ToolTip="Nazwa użytkownika lub e-mail"/>

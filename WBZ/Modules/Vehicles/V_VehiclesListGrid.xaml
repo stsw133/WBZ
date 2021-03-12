@@ -13,9 +13,9 @@
         <Style TargetType="{x:Type DataGridColumnHeader}">
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="Background" Value="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+            <Setter Property="Background" Value="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}}"/>
             <Setter Property="BorderThickness" Value="0,0,1,1"/>
-            <Setter Property="BorderBrush" Value="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={seg:conv_Color}, ConverterParameter=-0.2}"/>
+            <Setter Property="BorderBrush" Value="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.25}"/>
             <Setter Property="Padding" Value="4 3"/>
         </Style>
     </DataGrid.ColumnHeaderStyle>
@@ -24,9 +24,9 @@
     </DataGrid.Resources>
     <DataGrid.Columns>
         <!-- ID -->
-        <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_ID, Mode=OneWay, Converter={seg:conv_BoolToVisibility}}"/>
+        <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_ID, Converter={seg:conv_BoolToVisibility}}"/>
         <!-- Icon -->
-        <DataGridTemplateColumn MaxWidth="50" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Icon, Mode=OneWay, Converter={seg:conv_BoolToVisibility}}">
+        <DataGridTemplateColumn MaxWidth="50" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Icon, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
                     <Image Source="{Binding Icon}"/>
@@ -34,43 +34,43 @@
             </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>
         <!-- Register -->
-        <DataGridTextColumn Binding="{Binding Register}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Register, Mode=OneWay, Converter={seg:conv_BoolToVisibility}}">
+        <DataGridTextColumn Binding="{Binding Register}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Register, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
                 <c:DataGridColumnFilter_Text Text="Nr rej." Value="{Binding Data.Filters.Register, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Brand -->
-        <DataGridTextColumn Binding="{Binding Brand}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Brand, Mode=OneWay, Converter={seg:conv_BoolToVisibility}}" Width="*">
+        <DataGridTextColumn Binding="{Binding Brand}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Brand, Converter={seg:conv_BoolToVisibility}}" Width="*">
             <DataGridTextColumn.Header>
                 <c:DataGridColumnFilter_Text Text="Marka" Value="{Binding Data.Filters.Brand, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Model -->
-        <DataGridTextColumn Binding="{Binding Model}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Model, Mode=OneWay, Converter={seg:conv_BoolToVisibility}}">
+        <DataGridTextColumn Binding="{Binding Model}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Model, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
                 <c:DataGridColumnFilter_Text Text="Model" Value="{Binding Data.Filters.Model, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Capacity -->
-        <DataGridTextColumn Binding="{Binding Capacity}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Capacity, Mode=OneWay, Converter={seg:conv_BoolToVisibility}}">
+        <DataGridTextColumn Binding="{Binding Capacity}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Capacity, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
                 <c:DataGridColumnFilter_Number Text="Pojemność" Value="{Binding Data.Filters.Capacity, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Forwarder -->
-        <DataGridTextColumn Binding="{Binding Forwarder.Name}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Forwarder, Mode=OneWay, Converter={seg:conv_BoolToVisibility}}">
+        <DataGridTextColumn Binding="{Binding Forwarder.Name}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Forwarder, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
                 <c:DataGridColumnFilter_Text Text="Spedytor" Value="{Binding Data.Filters.Forwarder.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Driver -->
-        <DataGridTextColumn Binding="{Binding Driver.Fullname}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Driver, Mode=OneWay, Converter={seg:conv_BoolToVisibility}}">
+        <DataGridTextColumn Binding="{Binding Driver.Fullname}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Driver, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
                 <c:DataGridColumnFilter_Text Text="Kierowca" Value="{Binding Data.Filters.Driver.Lastname, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- ProdYear -->
-        <DataGridTextColumn Binding="{Binding ProdYear}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Driver, Mode=OneWay, Converter={seg:conv_BoolToVisibility}}">
+        <DataGridTextColumn Binding="{Binding ProdYear}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Driver, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
                 <c:DataGridColumnFilter_Number Text="Rok produkcji" Value="{Binding Data.Filters.ProdYear, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
             </DataGridTextColumn.Header>

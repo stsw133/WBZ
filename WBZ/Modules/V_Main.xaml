@@ -109,7 +109,7 @@
             <WrapPanel x:Name="gridModules" Margin="5" HorizontalAlignment="Center">
                 <!-- admin -->
                 <Border x:Name="modAdmin" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
+                        Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}}" VerticalAlignment="Top">
                     <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -137,7 +137,7 @@
                 </Border>
                 <!-- articles -->
                 <Border x:Name="modArticles" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
+                        Background="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}}" VerticalAlignment="Top">
                     <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -160,7 +160,7 @@
                 </Border>
                 <!-- attachments -->
                 <Border x:Name="modAttachments" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Attachments_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
+                        Background="{Binding config_Attachments_PanelColor, Source={x:Static p:Settings.Default}}" VerticalAlignment="Top">
                     <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -183,7 +183,7 @@
                 </Border>
                 <!-- attributesClasses -->
                 <Border x:Name="modAttributesClasses" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
+                        Background="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}}" VerticalAlignment="Top">
                     <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -206,7 +206,7 @@
                 </Border>
                 <!-- contractors -->
                 <Border x:Name="modContractors" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Contractors_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
+                        Background="{Binding config_Contractors_PanelColor, Source={x:Static p:Settings.Default}}" VerticalAlignment="Top">
                     <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -229,7 +229,7 @@
                 </Border>
                 <!-- distributions -->
                 <Border x:Name="modDistributions" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
+                        Background="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}}" VerticalAlignment="Top">
                     <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -252,7 +252,7 @@
                 </Border>
                 <!-- documents -->
                 <Border x:Name="modDocuments" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
+                        Background="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}}" VerticalAlignment="Top">
                     <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -275,7 +275,7 @@
                 </Border>
                 <!-- employees -->
                 <Border x:Name="modEmployees" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Employees_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
+                        Background="{Binding config_Employees_PanelColor, Source={x:Static p:Settings.Default}}" VerticalAlignment="Top">
                     <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -298,7 +298,7 @@
                 </Border>
                 <!-- families -->
                 <Border x:Name="modFamilies" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
+                        Background="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}}" VerticalAlignment="Top">
                     <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -321,7 +321,7 @@
                 </Border>
                 <!-- logs -->
                 <Border x:Name="modLogs" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
+                        Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}}" VerticalAlignment="Top">
                     <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -341,7 +341,7 @@
                 </Border>
                 <!-- stats -->
                 <Border x:Name="modStats" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Stats_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
+                        Background="{Binding config_Stats_PanelColor, Source={x:Static p:Settings.Default}}" VerticalAlignment="Top">
                     <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -361,7 +361,7 @@
                 </Border>
                 <!-- stores -->
                 <Border x:Name="modStores" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
+                        Background="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}}" VerticalAlignment="Top">
                     <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -384,7 +384,7 @@
                 </Border>
                 <!-- users -->
                 <Border x:Name="modUsers" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
+                        Background="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}}" VerticalAlignment="Top">
                     <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -407,7 +407,7 @@
                 </Border>
                 <!-- vehicles -->
                 <Border x:Name="modVehicles" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" VerticalAlignment="Top">
+                        Background="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}}" VerticalAlignment="Top">
                     <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">

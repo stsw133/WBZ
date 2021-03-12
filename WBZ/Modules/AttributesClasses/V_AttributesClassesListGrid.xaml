@@ -13,9 +13,9 @@
         <Style TargetType="{x:Type DataGridColumnHeader}">
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="Background" Value="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+            <Setter Property="Background" Value="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}}"/>
             <Setter Property="BorderThickness" Value="0,0,1,1"/>
-            <Setter Property="BorderBrush" Value="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay, Converter={seg:conv_Color}, ConverterParameter=-0.2}"/>
+            <Setter Property="BorderBrush" Value="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.25}"/>
             <Setter Property="Padding" Value="4 3"/>
         </Style>
     </DataGrid.ColumnHeaderStyle>
@@ -24,9 +24,9 @@
     </DataGrid.Resources>
     <DataGrid.Columns>
         <!-- ID -->
-        <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_ID, Mode=OneWay, Converter={seg:conv_BoolToVisibility}}"/>
+        <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_ID, Converter={seg:conv_BoolToVisibility}}"/>
         <!-- Icon -->
-        <DataGridTemplateColumn MaxWidth="50" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Icon, Mode=OneWay, Converter={seg:conv_BoolToVisibility}}">
+        <DataGridTemplateColumn MaxWidth="50" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Icon, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
                     <Image Source="{Binding Icon}"/>
@@ -34,7 +34,7 @@
             </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>
         <!-- Module -->
-        <DataGridTextColumn Binding="{Binding TranslatedModule}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Module, Mode=OneWay, Converter={seg:conv_BoolToVisibility}}" Width="1*">
+        <DataGridTextColumn Binding="{Binding TranslatedModule}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Module, Converter={seg:conv_BoolToVisibility}}" Width="1*">
             <DataGridTextColumn.Header>
                 <StackPanel>
                     <TextBlock Text="Nazwa modułu"/>
@@ -55,13 +55,13 @@
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Name -->
-        <DataGridTextColumn Binding="{Binding Name}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Name, Mode=OneWay, Converter={seg:conv_BoolToVisibility}}" Width="2*">
+        <DataGridTextColumn Binding="{Binding Name}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Name, Converter={seg:conv_BoolToVisibility}}" Width="2*">
             <DataGridTextColumn.Header>
                 <c:DataGridColumnFilter_Text Text="Nazwa" Value="{Binding Data.Filters.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Type -->
-        <DataGridTextColumn Binding="{Binding Type}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Type, Mode=OneWay, Converter={seg:conv_BoolToVisibility}}" Width="1*">
+        <DataGridTextColumn Binding="{Binding Type}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Type, Converter={seg:conv_BoolToVisibility}}" Width="1*">
             <DataGridTextColumn.Header>
                 <StackPanel>
                     <TextBlock Text="Typ"/>
@@ -79,7 +79,7 @@
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Required -->
-        <DataGridCheckBoxColumn Binding="{Binding Required}" Header="Wymagany" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Required, Mode=OneWay, Converter={seg:conv_BoolToVisibility}}"/>
+        <DataGridCheckBoxColumn Binding="{Binding Required}" Header="Wymagany" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Required, Converter={seg:conv_BoolToVisibility}}"/>
     </DataGrid.Columns>
     <DataGrid.ContextMenu>
         <ContextMenu>
@@ -182,31 +182,31 @@
                     <Setter Property="Foreground" Value="Gray"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Module}" Value="articles">
-                    <Setter Property="Background" Value="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                    <Setter Property="Background" Value="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}}"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Module}" Value="attributes_classes">
-                    <Setter Property="Background" Value="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                    <Setter Property="Background" Value="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}}"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Module}" Value="contractors">
-                    <Setter Property="Background" Value="{Binding config_Contractors_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                    <Setter Property="Background" Value="{Binding config_Contractors_PanelColor, Source={x:Static p:Settings.Default}}"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Module}" Value="distributions">
-                    <Setter Property="Background" Value="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                    <Setter Property="Background" Value="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}}"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Module}" Value="documents">
-                    <Setter Property="Background" Value="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                    <Setter Property="Background" Value="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}}"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Module}" Value="employees">
-                    <Setter Property="Background" Value="{Binding config_Employees_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                    <Setter Property="Background" Value="{Binding config_Employees_PanelColor, Source={x:Static p:Settings.Default}}"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Module}" Value="families">
-                    <Setter Property="Background" Value="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                    <Setter Property="Background" Value="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}}"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Module}" Value="stores">
-                    <Setter Property="Background" Value="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                    <Setter Property="Background" Value="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}}"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Module}" Value="users">
-                    <Setter Property="Background" Value="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"/>
+                    <Setter Property="Background" Value="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}}"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Comment, Converter={seg:conv_Compare}}" Value="False">
                     <Setter Property="ToolTip" Value="{Binding Comment}"/>

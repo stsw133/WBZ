@@ -60,11 +60,11 @@
             </Border.ContextMenu>
         </Border>
         <!-- statusPanel -->
-        <!-- <c:StatusPanel x:Name="StatusPanel" DockPanel.Dock="Bottom" Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"
+        <!-- <c:StatusPanel x:Name="StatusPanel" DockPanel.Dock="Bottom" Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}}"
                        EnableFilters="False" HasFilters="False" EnableGroups="False" HasGroups="False"/>
         -->
         <Border DockPanel.Dock="Bottom"
-                Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"
+                Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}}"
                 BorderBrush="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.5}"
                 BorderThickness="0,1,0,0">
             <DockPanel>

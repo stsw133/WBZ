@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Input;
 using WBZ.Controls;
 using WBZ.Globals;
 
@@ -21,7 +20,7 @@ namespace WBZ.Modules.Personal
         /// <summary>
         /// Save
         /// </summary>
-		private void btnSave_Click(object sender, MouseButtonEventArgs e)
+		private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             if (!string.IsNullOrEmpty(tbOldPassword.Password) && !string.IsNullOrEmpty(tbNewPassword.Password) && !string.IsNullOrEmpty(tbRNewPassword.Password))
             {

@@ -31,7 +31,10 @@
         <!-- titleBar -->
         <sec:TitleBar DockPanel.Dock="Top" SubIcon="/Resources/icon32_list.ico"/>
         <!-- buttonsPanel -->
-        <Border DockPanel.Dock="Right" Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="1,0,0,0" Visibility="{Binding SelectingMode, Converter={seg:conv_BoolInverted}}">
+        <Border DockPanel.Dock="Right"
+                Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}}"
+                BorderBrush="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.5}"
+                BorderThickness="1,0,0,0">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Top">
                     <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
@@ -80,16 +83,15 @@
             </Border.ContextMenu>
         </Border>
         <!-- statusPanel -->
-        <c:StatusPanel x:Name="StatusPanel"
-                       DockPanel.Dock="Bottom"
-                       Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}"
+        <c:StatusPanel x:Name="StatusPanel" DockPanel.Dock="Bottom"
+                       Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}}"
                        EnableFilters="True" HasFilters="True" EnableGroups="True" HasGroups="True"/>
         <!-- groupsView -->
-        <c:GroupsView EditingMode="False" Visibility="{Binding EnableGroups, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
+        <c:GroupsView EditingMode="False"
+                      Visibility="{Binding EnableGroups, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
         <!-- dataGrid -->
         <b:LogsListGrid x:Name="dgList"
-                        ItemsSource="{Binding InstancesList}"
-                        IsReadOnly="True"
+                        ItemsSource="{Binding InstancesList}" IsReadOnly="True"
                         MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged"/>
     </DockPanel>
 </b:List>

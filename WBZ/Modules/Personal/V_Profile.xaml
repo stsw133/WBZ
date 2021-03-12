@@ -19,9 +19,12 @@
         <!-- titleBar -->
         <sec:TitleBar DockPanel.Dock="Top"/>
         <!-- buttonsPanel -->
-        <Border DockPanel.Dock="Bottom" Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="0,1,0,0">
-            <sec:Button Margin="5" IsEnabled="True" TextVisibility="True" HorizontalAlignment="Center"
-                        Text="Zapisz i zamknij" Icon="/Resources/icon32_save.ico" PreviewMouseLeftButtonUp="btnSave_Click"/>
+        <Border DockPanel.Dock="Bottom" Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}}" BorderBrush="Gray" BorderThickness="0,1,0,0">
+            <sec:Button Margin="5"
+                        Text="Zapisz i zamknij"
+                        HorizontalAlignment="Center"
+                        Icon="/Resources/icon32_save.ico"
+                        Click="btnSave_Click"/>
         </Border>
         <!-- tabs -->
         <TabControl DockPanel.Dock="Top">

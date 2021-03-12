@@ -28,28 +28,49 @@
         <!-- titleBar -->
         <sec:TitleBar DockPanel.Dock="Top" SubIcon="{Binding ModeIcon}"/>
         <!-- buttonsPanel -->
-        <Border DockPanel.Dock="Right" Background="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}, Mode=OneWay}" BorderBrush="Gray" BorderThickness="1,0,0,0">
+        <Border DockPanel.Dock="Right"
+                Background="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}}"
+                BorderBrush="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.5}"
+                BorderThickness="1,0,0,0">
             <DockPanel>
-                <ToggleButton x:Name="btnToggle" BorderThickness="0" Width="5" IsChecked="{Binding config_ShowButtonTexts, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                 <StackPanel DockPanel.Dock="Top">
-                    <sec:Button Text="Zapisz" Margin="5,5,5,0" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_save.ico" Command="seg:Commands.Save"/>
-                    <Separator Height="5" Margin="0,5,0,0"/>
-                    <CheckBox Content="Do bufora" Margin="5,5,5,0" IsChecked="{Binding InstanceInfo.Status, Converter={seg:conv_BoolInverted}}" IsEnabled="{Binding EditingMode}"/>
-                    <Separator Height="5" Margin="0,5,0,0"/>
+                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                Text="{Tr Buttons.Save, DefaultText='Zapisz', LanguageId={x:Static seg:Properties.Language}}"
+                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                Icon="/Resources/icon32_save.ico"
+                                Command="seg:Commands.Save"/>
+                    <Separator/>
+                    <CheckBox Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                              Content="{Tr Distributions.ToBuffer, DefaultText='Do bufora', LanguageId={x:Static seg:Properties.Language}}"
+                              IsChecked="{Binding InstanceInfo.Status, Converter={seg:conv_BoolInverted}}"
+                              IsEnabled="{Binding EditingMode}"/>
+                    <Separator/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
-                    <Separator Height="5" Margin="0,0,0,5"/>
-                    <sec:Button Text="Drukuj" Margin="5,0,5,5" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_printer.ico" Click="btnPrint_Click">
+                    <Separator/>
+                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                Text="{Tr Buttons.Print, DefaultText='Drukuj', LanguageId={x:Static seg:Properties.Language}}"
+                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                Icon="/Resources/icon32_printer.ico"
+                                Click="btnPrint_Click">
                         <sec:Button.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Header="Lista darowizn" Click="btnDistributionList_Click"/>
                             </ContextMenu>
                         </sec:Button.ContextMenu>
                     </sec:Button>
-                    <Separator Height="5" Margin="0,0,0,5"/>
-                    <sec:Button Text="Odśwież" Margin="5,0,5,5" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_refresh.ico" Command="seg:Commands.Refresh"/>
-                    <Separator Height="5" Margin="0,0,0,5"/>
-                    <sec:Button Text="Zamknij okno" Margin="5,0,5,5" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Icon="/Resources/icon32_close.ico" Command="seg:Commands.Close"/>
+                    <Separator/>
+                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                Text="{Tr Buttons.Refresh, DefaultText='Odśwież', LanguageId={x:Static seg:Properties.Language}}"
+                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                Icon="/Resources/icon32_refresh.ico"
+                                Command="seg:Commands.Refresh"/>
+                    <Separator/>
+                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                Text="{Tr Buttons.CloseWindow, DefaultText='Zamknij okno', LanguageId={x:Static seg:Properties.Language}}"
+                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                Icon="/Resources/icon32_close.ico"
+                                Command="seg:Commands.Close"/>
                 </StackPanel>
             </DockPanel>
             <Border.ContextMenu>

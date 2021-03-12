@@ -40,6 +40,9 @@
                     <StackPanel DockPanel.Dock="Top">
                         <Label DockPanel.Dock="Top" Content="Arkadiusz Bryska" Padding="5" HorizontalAlignment="Center" FontWeight="Medium"/>
                     </StackPanel>
+                    <StackPanel DockPanel.Dock="Top">
+                        <Label DockPanel.Dock="Top" Content="Patryk Makowski" Padding="5" HorizontalAlignment="Center" FontWeight="Medium"/>
+                    </StackPanel>
                 </StackPanel>
             </DockPanel>
         </DockPanel>
