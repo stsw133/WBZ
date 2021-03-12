@@ -12,7 +12,6 @@
        mc:Ignorable="d"
        Title="{Binding Title}"
             Height="600" Width="900" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
-            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding Source={x:Static seg:Properties.iSize}}"
             Icon="/Resources/icon32_food.ico"
             Loaded="Window_Loaded" Closed="Window_Closed">
     <WindowChrome.WindowChrome>

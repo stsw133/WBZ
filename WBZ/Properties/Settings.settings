@@ -197,7 +197,7 @@
     <Setting Name="columns_DistributionsList_DateReal" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="config_FontFamily" Type="System.String" Scope="User">
+    <Setting Name="iFont" Type="System.String" Scope="User">
       <Value Profile="(Default)">Segoe UI</Value>
     </Setting>
     <Setting Name="UpgradeRequired" Type="System.Boolean" Scope="User">
@@ -561,6 +561,9 @@
     </Setting>
     <Setting Name="ThemeColor" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FF444444</Value>
+    </Setting>
+    <Setting Name="config_ShowHeaderWithText" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

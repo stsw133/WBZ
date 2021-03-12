@@ -12,7 +12,6 @@
         mc:Ignorable="d"
         Title="{Tr ArticlesList, DefaultText='Lista towarów', LanguageId={x:Static seg:Properties.Language}}"
             Height="650" Width="975" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
-            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding Source={x:Static seg:Properties.iSize}}"
             Icon="/Resources/icon32_articles.ico"
             Loaded="Window_Loaded" Closed="Window_Closed"
             FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}">

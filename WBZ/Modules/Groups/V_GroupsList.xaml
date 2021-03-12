@@ -10,7 +10,6 @@
         mc:Ignorable="d"
         Title="Lista grup"
             Height="650" Width="975" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
-            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding Source={x:Static seg:Properties.iSize}}"
             Icon="/Resources/icon32_groups.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>

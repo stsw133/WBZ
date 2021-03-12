@@ -11,7 +11,6 @@
         mc:Ignorable="d"
         Title="{Tr Stats, DefaultText='Statystyki', LanguageId={x:Static seg:Properties.Language}}"
             Height="600" Width="900" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
-            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding Source={x:Static seg:Properties.iSize}}"
             Icon="/Resources/icon32_stats.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>

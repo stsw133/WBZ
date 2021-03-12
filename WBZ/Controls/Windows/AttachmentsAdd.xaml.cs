@@ -50,11 +50,7 @@ namespace WBZ.Controls
         {
             try
             {
-                var process = new Process();
-                process.StartInfo.FileName = "https://www.google.com/";
-                process.StartInfo.UseShellExecute = true;
-                process.StartInfo.Verb = "open";
-                process.Start();
+                StswExpress.Globals.Functions.OpenFile("https://www.google.com/");
             }
             catch { }
         }

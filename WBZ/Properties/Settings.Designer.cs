@@ -806,12 +806,12 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI")]
-        public string config_FontFamily {
+        public string iFont {
             get {
-                return ((string)(this["config_FontFamily"]));
+                return ((string)(this["iFont"]));
             }
             set {
-                this["config_FontFamily"] = value;
+                this["iFont"] = value;
             }
         }
         
@@ -1966,6 +1966,18 @@ namespace WBZ.Properties {
             }
             set {
                 this["ThemeColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool config_ShowHeaderWithText {
+            get {
+                return ((bool)(this["config_ShowHeaderWithText"]));
+            }
+            set {
+                this["config_ShowHeaderWithText"] = value;
             }
         }
     }

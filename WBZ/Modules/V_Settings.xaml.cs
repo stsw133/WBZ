@@ -18,19 +18,6 @@ namespace WBZ.Modules
 			DataContext = D;
 		}
 
-		private void Window_Loaded(object sender, RoutedEventArgs e)
-		{
-			try
-			{
-				var color = (Color)ColorConverter.ConvertFromString(Properties.Settings.Default.ThemeColor);
-				D.R = color.R;
-				D.G = color.G;
-				D.B = color.B;
-				D.RGB = Properties.Settings.Default.ThemeColor;
-			}
-			catch { }
-		}
-
 		/// <summary>
 		/// EmailPassword - Loaded
 		/// </summary>
@@ -65,9 +52,11 @@ namespace WBZ.Modules
 		/// </summary>
         private void btnAccept_Click(object sender, RoutedEventArgs e)
         {
+			StswExpress.Globals.Properties.iFont = Properties.Settings.Default.iFont;
 			StswExpress.Globals.Properties.iSize = Properties.Settings.Default.iSize;
 			StswExpress.Globals.Properties.Language = Properties.Settings.Default.Language;
-			StswExpress.Globals.Properties.ThemeColor = Properties.Settings.Default.ThemeColor = D.RGB;
+			StswExpress.Globals.Properties.ThemeColor = Properties.Settings.Default.ThemeColor;
+
 			Mail.Host = Properties.Settings.Default.config_Email_Host;
 			Mail.Port = Properties.Settings.Default.config_Email_Port;
 			Mail.Email = Properties.Settings.Default.config_Email_Email;

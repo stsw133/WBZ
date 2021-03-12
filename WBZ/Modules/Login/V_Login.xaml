@@ -9,7 +9,6 @@
         mc:Ignorable="d"
         Title="{Tr Login, DefaultText='Logowanie', LanguageId={x:Static seg:Properties.Language}}"
             SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen"
-            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding Source={x:Static seg:Properties.iSize}}"
             Icon="/Resources/icon32_login.ico"
             Loaded="Window_Loaded">
     <WindowChrome.WindowChrome>

@@ -8,10 +8,8 @@
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
         Title="{Tr Settings, DefaultText='Ustawienia', LanguageId={x:Static seg:Properties.Language}}"
-            Height="400" Width="500" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
-            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding Source={x:Static seg:Properties.iSize}}"
-            Icon="/Resources/icon32_settings.ico"
-            Loaded="Window_Loaded">
+            Height="400" Width="500" ResizeMode="CanResize"  WindowStartupLocation="CenterOwner"
+            Icon="/Resources/icon32_settings.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -87,36 +85,14 @@
                                 <RadioButton DockPanel.Dock="Top" Content="Domyślny" Margin="5" VerticalContentAlignment="Center" GroupName="TitleBarStyle" Visibility="Collapsed"/>
                                 <RadioButton DockPanel.Dock="Top" Content="Alternatywny" Margin="5" VerticalContentAlignment="Center" GroupName="TitleBarStyle" Visibility="Collapsed"/>
                                 <Label Content="{Tr Settings.Color, DefaultText='Kolor:', LanguageId={x:Static seg:Properties.Language}}" VerticalContentAlignment="Center"/>
-                                <!-- <sec:ColorSetter Fill="{Binding ThemeColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/> -->
-                                <Border BorderBrush="Gray" BorderThickness="1"
-                                        Margin="5"
-                                        Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}">
-                                    <Rectangle Fill="{Binding RGB}"/>
-                                </Border>
-                                <DockPanel>
-                                    <DockPanel DockPanel.Dock="Top">
-                                        <Label Content="R" FontWeight="Heavy" Foreground="Red" VerticalAlignment="Center"/>
-                                        <Label DockPanel.Dock="Right" Content="{Binding R}" FontWeight="Medium" VerticalAlignment="Center"/>
-                                        <Slider Maximum="255" Value="{Binding R}" VerticalAlignment="Center"/>
-                                    </DockPanel>
-                                    <DockPanel DockPanel.Dock="Top">
-                                        <Label Content="G" FontWeight="Heavy" Foreground="Green" VerticalAlignment="Center"/>
-                                        <Label DockPanel.Dock="Right" Content="{Binding G}" FontWeight="Medium" VerticalAlignment="Center"/>
-                                        <Slider Maximum="255" Value="{Binding G}" VerticalAlignment="Center"/>
-                                    </DockPanel>
-                                    <DockPanel DockPanel.Dock="Top">
-                                        <Label Content="B" FontWeight="Heavy" Foreground="Blue" VerticalAlignment="Center"/>
-                                        <Label DockPanel.Dock="Right" Content="{Binding B}" FontWeight="Medium" VerticalAlignment="Center"/>
-                                        <Slider Maximum="255" Value="{Binding B}" VerticalAlignment="Center"/>
-                                    </DockPanel>
-                                </DockPanel>
+                                <sec:ColorSetter Fill="{Binding ThemeColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                             </DockPanel>
                         </GroupBox>
                         <GroupBox Header="{Tr Settings.Interface, DefaultText='Interfejs', LanguageId={x:Static seg:Properties.Language}}" DockPanel.Dock="Top" Margin="5,5,5,0" VerticalAlignment="Top">
                             <DockPanel Margin="5">
                                 <DockPanel DockPanel.Dock="Top">
                                     <Label Content="{Tr Settings.Font, DefaultText='Czcionka:', LanguageId={x:Static seg:Properties.Language}}" Margin="5" VerticalContentAlignment="Center"/>
-                                    <ComboBox Margin="5" VerticalContentAlignment="Center" SelectedValuePath="Tag" SelectedValue="{Binding config_FontFamily, Source={x:Static p:Settings.Default}, Mode=TwoWay}">
+                                    <ComboBox Margin="5" VerticalContentAlignment="Center" SelectedValuePath="Tag" SelectedValue="{Binding iFont, Source={x:Static p:Settings.Default}, Mode=TwoWay}">
                                         <ComboBoxItem Content="Arial" FontFamily="Arial" Tag="Arial"/>
                                         <ComboBoxItem Content="Candara" FontFamily="Candara" Tag="Candara"/>
                                         <ComboBoxItem Content="Franklin Gothic" FontFamily="Franklin Gothic" Tag="Franklin Gothic"/>

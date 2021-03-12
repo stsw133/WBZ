@@ -9,7 +9,6 @@
         mc:Ignorable="d"
         Title="{Binding Title}"
             SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterOwner"
-            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding Source={x:Static seg:Properties.iSize}}"
             Icon="{Binding Icon}">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>

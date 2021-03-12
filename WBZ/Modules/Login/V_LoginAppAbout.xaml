@@ -5,11 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
         xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
-        xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
-        Title="O programie"
-            SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner"
-            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding Source={x:Static seg:Properties.iSize}}"
+        Title="{Tr LoginAppAbout, DefaultText='O programie', LanguageId={x:Static seg:Properties.Language}}"
+            SizeToContent="WidthAndHeight" ResizeMode="CanMinimize"  WindowStartupLocation="CenterOwner"
             Icon="/Resources/icon64.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>

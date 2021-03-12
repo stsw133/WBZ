@@ -16,6 +16,7 @@ namespace WBZ
 		public App()
         {
 			StswExpress.Globals.Properties.HashKey = "ejdndbfewbasjhdggjhbasbvdgewvbjdbsavdqgwjbdjsvdyugwqyubashjdbjfgdtyuqw";
+			StswExpress.Globals.Properties.iFont = WBZ.Properties.Settings.Default.iFont;
 			StswExpress.Globals.Properties.iSize = WBZ.Properties.Settings.Default.iSize;
 			StswExpress.Globals.Properties.Language = WBZ.Properties.Settings.Default.Language;
 			StswExpress.Globals.Properties.ThemeColor = WBZ.Properties.Settings.Default.ThemeColor;

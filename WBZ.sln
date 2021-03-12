@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WBZ", "WBZ\WBZ.csproj", "{65331EE7-6404-41C0-9BEA-BF732EB66B06}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "WBZ_SQL", "SQL\WBZ_SQL.sqlproj", "{87BE48AE-4541-4A9D-88A0-3DB0A3465FAA}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "WBZ_SQL", "WBZ_SQL\WBZ_SQL.sqlproj", "{87BE48AE-4541-4A9D-88A0-3DB0A3465FAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

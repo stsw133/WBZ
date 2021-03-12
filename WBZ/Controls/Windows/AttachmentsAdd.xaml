@@ -8,8 +8,7 @@
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
         Title="{Tr AttachmentsNew, DefaultText='Nowy załącznik', LanguageId={x:Static seg:Properties.Language}}"
-            SizeToContent="Height" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner"
-            FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding Source={x:Static seg:Properties.iSize}}"
+            SizeToContent="Height" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}" ResizeMode="CanMinimize"  WindowStartupLocation="CenterOwner"
             Icon="/Resources/icon32_photos.ico"
             Loaded="Window_Loaded">
     <WindowChrome.WindowChrome>
