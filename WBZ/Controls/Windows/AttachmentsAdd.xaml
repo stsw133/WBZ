@@ -7,29 +7,44 @@
         xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
-        Title="Nowy załącznik"
+        Title="{Tr AttachmentsNew, DefaultText='Nowy załącznik', LanguageId={x:Static seg:Properties.Language}}"
             SizeToContent="Height" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner"
             FontFamily="{Binding config_FontFamily, Source={x:Static p:Settings.Default}}" FontSize="{Binding Source={x:Static seg:Properties.iSize}}"
-            Icon="/Resources/icon32_photos.ico" Loaded="Window_Loaded">
+            Icon="/Resources/icon32_photos.ico"
+            Loaded="Window_Loaded">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
     <DockPanel>
         <!-- titleBar -->
-        <sec:TitleBar DockPanel.Dock="Top"/>
+        <sec:TitleBar DockPanel.Dock="Top" SubIcon="/Resources/icon32_add.ico"/>
         <!-- main -->
         <DockPanel DockPanel.Dock="Top">
-            <sec:Button ToolTip="Z przeglądarki" Margin="5,5,0,5" IsEnabled="{Binding EditMode}" TextVisibility="False" Icon="/Resources/icon32_web.ico" Click="btnLink_Click"/>
+            <sec:Button Margin="5,5,0,5"
+                        ToolTip="{Tr Buttons.FromBrowser, DefaultText='Z przeglądarki', LanguageId={x:Static seg:Properties.Language}}"
+                        TextVisibility="False"
+                        IsEnabled="{Binding EditMode}"
+                        Icon="/Resources/icon32_web.ico"
+                        Click="btnLink_Click"/>
             <TextBox x:Name="tbLink" Margin="5" VerticalContentAlignment="Center"/>
         </DockPanel>
         <DockPanel DockPanel.Dock="Top">
-            <sec:Button ToolTip="Z dysku" Margin="5,5,0,5" IsEnabled="{Binding EditMode}" TextVisibility="False" Icon="/Resources/icon32_folder.ico" Click="btnDrive_Click"/>
+            <sec:Button Margin="5,5,0,5"
+                        ToolTip="{Tr Buttons.FromDrive, DefaultText='Z dysku', LanguageId={x:Static seg:Properties.Language}}"
+                        TextVisibility="False"
+                        IsEnabled="{Binding EditMode}"
+                        Icon="/Resources/icon32_folder.ico"
+                        Click="btnDrive_Click"/>
             <TextBox x:Name="tbDrive" Margin="5" VerticalContentAlignment="Center"/>
         </DockPanel>
         <DockPanel x:Name="dpName" DockPanel.Dock="Top">
-            <Label Content="Nazwa:" Margin="5,5,0,5" VerticalAlignment="Center"/>
+            <Label Content="{Tr AttachmentsNew.Name, DefaultText='Nazwa:', LanguageId={x:Static seg:Properties.Language}}" Margin="5,5,0,5" VerticalAlignment="Center"/>
             <TextBox x:Name="tbName" Margin="5" VerticalContentAlignment="Center"/>
         </DockPanel>
-        <sec:Button Margin="5" Text="Akceptuj" HorizontalAlignment="Center" Icon="/Resources/icon32_accept.ico" IsDefault="True" Click="btnAccept_Click"/>
+        <sec:Button Margin="5" HorizontalAlignment="Center"
+                    Text="{Tr Buttons.Accept, DefaultText='Akceptuj', LanguageId={x:Static seg:Properties.Language}}"
+                    Icon="/Resources/icon32_accept.ico"
+                    IsDefault="True"
+                    Click="btnAccept_Click"/>
     </DockPanel>
 </Window>

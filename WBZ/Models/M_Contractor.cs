@@ -2,19 +2,10 @@
 {
 	public class M_Contractor : MA
 	{
-		public string Codename { get; set; }
-		public string Name { get; set; }
-		public string Branch { get; set; }
-		public string NIP { get; set; }
-		public string REGON { get; set; }
-
-		public M_Contractor()
-        {
-			Codename = string.Empty;
-			Name = string.Empty;
-			Branch = string.Empty;
-			NIP = string.Empty;
-			REGON = string.Empty;
-        }
+		public string Codename { get; set; } = string.Empty;
+		public string Name { get; set; } = string.Empty;
+		public string Branch { get; set; } = string.Empty;
+		public string NIP { get; set; } = string.Empty;
+		public string REGON { get; set; } = string.Empty;
 	}
 }

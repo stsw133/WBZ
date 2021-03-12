@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
@@ -21,35 +22,13 @@ namespace WBZ.Controls
                 dpName.Visibility = Visibility.Collapsed;
         }
 
-        public string GetLink
-        {
-            get
-            {
-                return tbLink.Text;
-            }
-        }
-
-        public string GetDrive
-        {
-            get
-            {
-                return tbDrive.Text;
-            }
-        }
-
-        public string GetName
-        {
-            get
-            {
-                return tbName.Text;
-            }
-        }
+        public string GetLink { get => tbLink.Text; }
+        public string GetDrive { get => tbDrive.Text; }
+        public string GetName { get => tbName.Text; }
 
         /// <summary>
         /// Loaded
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var clipboardText = Clipboard.GetText();
@@ -69,7 +48,15 @@ namespace WBZ.Controls
         /// </summary>
         private void btnLink_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("https://www.google.com/");
+            try
+            {
+                var process = new Process();
+                process.StartInfo.FileName = "https://www.google.com/";
+                process.StartInfo.UseShellExecute = true;
+                process.StartInfo.Verb = "open";
+                process.Start();
+            }
+            catch { }
         }
 
         /// <summary>
@@ -77,10 +64,7 @@ namespace WBZ.Controls
         /// </summary>
         private void btnDrive_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new OpenFileDialog()
-            {
-                Filter = "Wszystkie pliki|*.*"
-            };
+            var dialog = new OpenFileDialog() { Filter = "Wszystkie pliki|*.*" };
             if (dialog.ShowDialog() == true)
                 tbDrive.Text = dialog.FileName;
         }
@@ -95,7 +79,6 @@ namespace WBZ.Controls
                 new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Należy uzupełnić nazwę załącznika!") { Owner = this }.ShowDialog();
                 return;
             }
-
             DialogResult = true;
         }
     }

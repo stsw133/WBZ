@@ -14,24 +14,15 @@ namespace WBZ.Models
 			Approved = 1
 		}
 
-		public string Name { get; set; }
-		public DateTime fDateReal { get; set; }
-		public DateTime DateReal { get; set; }
-		public short Status { get; set; }
-		public List<M_DistributionFamily> Families { get; set; }
-		public int FamiliesCount { get; set; }
-		public int MembersCount { get; set; }
-		public int PositionsCount { get; set; }
-		public decimal Weight { get; set; }
-
-		public M_Distribution()
-		{
-			Name = string.Empty;
-			fDateReal = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-			DateReal = DateTime.Now;
-			Status = (short)DistributionStatus.Buffer;
-			Families = new List<M_DistributionFamily>();
-		}
+		public string Name { get; set; } = string.Empty;
+		public DateTime fDateReal { get; set; } = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+		public DateTime DateReal { get; set; } = DateTime.Now;
+		public short Status { get; set; } = (short)DistributionStatus.Buffer;
+		public List<M_DistributionFamily> Families { get; set; } = new List<M_DistributionFamily>();
+		public int FamiliesCount { get; set; } = 0;
+		public int MembersCount { get; set; } = 0;
+		public int PositionsCount { get; set; } = 0;
+		public decimal Weight { get; set; } = 0;
 	}
 
 	public class M_DistributionFamily
@@ -43,18 +34,11 @@ namespace WBZ.Models
 			Taken = 2
 		}
 
-		public int Family { get; set; }
-		public string FamilyName { get; set; }
-		public short Members { get; set; }
-		public short Status { get; set; }
-		public DataTable Positions { get; set; }
-
-		public M_DistributionFamily()
-		{
-			FamilyName = string.Empty;
-			Status = (short)DistributionFamilyStatus.None;
-			Positions = SQL.GetDistributionPositionsFormatting();
-		}
+		public int Family { get; set; } = 0;
+		public string FamilyName { get; set; } = string.Empty;
+		public short Members { get; set; } = 0;
+		public short Status { get; set; } = (short)DistributionFamilyStatus.None;
+		public DataTable Positions { get; set; } = SQL.GetDistributionPositionsFormatting();
 	}
 
 	public class M_DistributionPosition
@@ -66,7 +50,7 @@ namespace WBZ.Models
 		public int Article { get; set; }
 		public decimal Amount { get; set; }
 		public string StoreName { get; set; }
-		public string ArticleName { get; set; }
+		public string ArticleName { get; set; } = string.Empty;
 
 		public M_DistributionPosition()
 		{
@@ -74,7 +58,6 @@ namespace WBZ.Models
 
 			Store = stores.Count == 1 ? stores[0].ID : 0;
 			StoreName = stores.Count == 1 ? stores[0].Name : string.Empty;
-			ArticleName = string.Empty;
 		}
 	}
 }

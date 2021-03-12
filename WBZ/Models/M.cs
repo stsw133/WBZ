@@ -2,31 +2,18 @@
 {
     public class M
     {
-        public int ID { get; set; }
-        public bool Archival { get; set; }
-        public string Comment { get; set; }
-        public byte[] Icon { get; set; }
-        public int Group { get; set; }
-
-        public M()
-        {
-            Comment = string.Empty;
-        }
+        public int ID { get; set; } = 0;
+        public bool Archival { get; set; } = false;
+        public string Comment { get; set; } = string.Empty;
+        public byte[] Icon { get; set; } = null;
+        public int Group { get; set; } = 0;
     }
 
     public class MA : M
     {
-        public string Address { get; set; }
-        public string City { get; set; }
-        public string Country { get; set; }
-        public string Postcode { get; set; }
-
-        public MA()
-        {
-            Address = string.Empty;
-            City = string.Empty;
-            Country = string.Empty;
-            Postcode = string.Empty;
-        }
+        public string Address { get; set; } = string.Empty;
+        public string City { get; set; } = string.Empty;
+        public string Country { get; set; } = string.Empty;
+        public string Postcode { get; set; } = string.Empty;
     }
 }

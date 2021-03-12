@@ -2,12 +2,7 @@
 {
 	public class M_ComboValue
 	{
-		public int ID { get; set; }
-		public string Name { get; set; }
-
-		public M_ComboValue()
-        {
-			Name = string.Empty;
-        }
+		public int ID { get; set; } = 0;
+		public string Name { get; set; } = string.Empty;
 	}
 }

@@ -4,27 +4,14 @@ namespace WBZ.Models
 {
 	public class M_Attachment
 	{
-		public int ID { get; set; }
-		public int User { get; set; }
-		public string UserFullname { get; set; }
-		public string Module { get; set; }
-		public int Instance { get; set; }
-		public string Name { get; set; }
-		public byte[] File { get; set; }
+		public int ID { get; set; } = 0;
+		public int User { get; set; } = 0;
+		public string UserFullname { get; set; } = string.Empty;
+		public string Module { get; set; } = string.Empty;
+		public int Instance { get; set; } = 0;
+		public string Name { get; set; } = string.Empty;
+		public byte[] File { get; set; } = null;
 
-		public M_Attachment()
-        {
-			UserFullname = string.Empty;
-			Module = string.Empty;
-			Name = string.Empty;
-        }
-
-		public string TranslatedModule
-		{
-			get
-			{
-				return Global.TranslateModule(Module);
-			}
-		}
+		public string TranslatedModule { get => Global.TranslateModule(Module); }
 	}
 }

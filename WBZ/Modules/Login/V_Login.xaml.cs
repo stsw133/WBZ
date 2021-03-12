@@ -135,7 +135,6 @@ namespace WBZ.Modules.Login
 
 			if (SQL.Login(tbLogin.Text, Globals.Global.sha256(tbPassword.Password)))
 			{
-				M_Config.LoadConfig();
 				new Main().Show();
 				Close();
 			}
