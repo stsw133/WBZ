@@ -77,10 +77,8 @@ namespace WBZ.Globals
                     return "(nieznany)";
             }
         }
-        public static string GetModuleAlias(string module)
-        {
-            return string.Join(string.Empty, module.Split('_').Where(x => !string.IsNullOrEmpty(x)).Select(y => y[0]));
-        }
+        public static string GetModuleAlias(string module) => string.Join(string.Empty, module.Split('_').Where(x => !string.IsNullOrEmpty(x)).Select(y => y[0]));
+        
         public static class UserPermType
         {
             public const string PREVIEW = "preview";
@@ -106,14 +104,11 @@ namespace WBZ.Globals
     #region Proxy
     public class BindingProxy : Freezable
     {
-        protected override Freezable CreateInstanceCore()
-        {
-            return new BindingProxy();
-        }
+        protected override Freezable CreateInstanceCore() => new BindingProxy();
 
         public object Data
         {
-            get { return (object)GetValue(DataProperty); }
+            get => GetValue(DataProperty);
             set { SetValue(DataProperty, value); }
         }
 

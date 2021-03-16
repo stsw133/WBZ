@@ -579,7 +579,7 @@ namespace WBZ
 					ID = NewInstanceID(Globals.Global.Module.LOGS),
 					Instance = instance,
 					Module = module,
-					Group = 2,
+					Type = (short)M_Log.LogType.Error,
 					User = Globals.Global.User.ID
 				};
 
@@ -1502,7 +1502,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("user", log.User);
 								sqlCmd.Parameters.AddWithValue("module", log.Module);
 								sqlCmd.Parameters.AddWithValue("instance", log.Instance);
-								sqlCmd.Parameters.AddWithValue("type", log.Group);
+								sqlCmd.Parameters.AddWithValue("type", log.Type);
 								sqlCmd.Parameters.AddWithValue("content", log.Content);
 								sqlCmd.ExecuteNonQuery();
 							}

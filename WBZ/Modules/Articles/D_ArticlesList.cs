@@ -18,14 +18,11 @@ namespace WBZ.Modules.Articles
 		private ObservableCollection<M_ComboValue> storesList;
 		public ObservableCollection<M_ComboValue> StoresList
         {
-			get
-			{
-				return storesList;
-			}
+			get => storesList;
 			set
 			{
 				storesList = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
+				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
 			}
 		}
 	}

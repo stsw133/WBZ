@@ -26,7 +26,7 @@ namespace WBZ.Controls
 
         public bool EditingMode
         {
-            get { return (bool)GetValue(pEditingMode); }
+            get => (bool)GetValue(pEditingMode);
             set { SetValue(pEditingMode, value); }
         }
         public static readonly DependencyProperty pEditingMode

@@ -65,14 +65,11 @@ namespace WBZ.Controls
         private byte r;
         public byte R
         {
-            get
-            {
-                return r;
-            }
+            get => r;
             set
             {
                 r = value;
-                NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
+                NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
                 RGB = rgb;
             }
         }
@@ -80,14 +77,11 @@ namespace WBZ.Controls
         private byte g;
         public byte G
         {
-            get
-            {
-                return g;
-            }
+            get => g;
             set
             {
                 g = value;
-                NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
+                NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
                 RGB = rgb;
             }
         }
@@ -95,14 +89,11 @@ namespace WBZ.Controls
         private byte b;
         public byte B
         {
-            get
-            {
-                return b;
-            }
+            get => b;
             set
             {
                 b = value;
-                NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
+                NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
                 RGB = rgb;
             }
         }
@@ -110,14 +101,11 @@ namespace WBZ.Controls
         private string rgb;
         public string RGB
         {
-            get
-            {
-                return rgb;
-            }
+            get => rgb;
             set
             {
                 rgb = $"#FF{r:X2}{g:X2}{b:X2}";
-                NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
+                NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
             }
         }
     }

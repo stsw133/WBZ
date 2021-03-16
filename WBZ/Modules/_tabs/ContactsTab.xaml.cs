@@ -77,14 +77,11 @@ namespace WBZ.Modules._tabs
         private DataTable instanceContacts;
         public DataTable InstanceContacts
         {
-            get
-            {
-                return instanceContacts;
-            }
+            get => instanceContacts;
             set
             {
                 instanceContacts = value;
-                NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
+                NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
             }
         }
     }

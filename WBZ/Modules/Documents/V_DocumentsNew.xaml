@@ -185,7 +185,7 @@
             <!-- tabLogs -->
             <TabItem>
                 <TabItem.Header>
-                    <sec:Header Text="Historia" Icon="/Resources/icon32_logs.ico"/>
+                    <sec:Header Text="Historia" Icon="/Resources/icon32_history.ico"/>
                 </TabItem.Header>
                 <t:LogsTab/>
             </TabItem>

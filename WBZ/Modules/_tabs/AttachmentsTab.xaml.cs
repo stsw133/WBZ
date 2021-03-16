@@ -175,14 +175,11 @@ namespace WBZ.Modules._tabs
         private ObservableCollection<M_Attachment> instanceAttachments;
         public ObservableCollection<M_Attachment> InstanceAttachments
         {
-            get
-            {
-                return instanceAttachments;
-            }
+            get => instanceAttachments;
             set
             {
                 instanceAttachments = value;
-                NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
+                NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
             }
         }
     }

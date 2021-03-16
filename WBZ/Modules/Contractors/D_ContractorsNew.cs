@@ -31,14 +31,11 @@ namespace WBZ.Modules.Contractors
 		private ObservableCollection<M_Document> instanceSources_Documents;
         public ObservableCollection<M_Document> InstanceSources_Documents
         {
-            get
-            {
-                return instanceSources_Documents;
-            }
+            get => instanceSources_Documents;
             set
             {
                 instanceSources_Documents = value;
-                NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
+                NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
             }
         }
     }

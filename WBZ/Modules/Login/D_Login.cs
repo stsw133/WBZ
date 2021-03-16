@@ -21,7 +21,7 @@ namespace WBZ.Modules.Login
 			set
 			{
 				databases = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
+				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
 			}
 		}
 	}

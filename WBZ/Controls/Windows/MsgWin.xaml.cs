@@ -39,13 +39,7 @@ namespace WBZ.Controls
 				tbInput.Visibility = Visibility.Visible;
 		}
 
-		public string Value
-		{
-			get
-			{
-				return tbInput.Text;
-			}
-		}
+		public string Value { get => tbInput.Text; }
 
 		/// <summary>
 		/// OK
@@ -79,14 +73,11 @@ namespace WBZ.Controls
 		private string title;
 		public string Title
 		{
-			get
-			{
-				return title;
-			}
+			get => title;
 			set
 			{
 				title = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
+				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
 			}
 		}
 		/// Icon

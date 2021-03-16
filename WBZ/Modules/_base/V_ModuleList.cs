@@ -21,7 +21,7 @@ namespace WBZ.Modules._base
             W = GetWindow(this);
             D = W.DataContext;
             FullName = W.GetType().FullName;
-            HalfName = FullName.Substring(0, FullName.Length - 4);
+            HalfName = FullName[0..^4];
         }
 
         /// <summary>

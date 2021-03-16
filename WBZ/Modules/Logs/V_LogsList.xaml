@@ -84,13 +84,27 @@
         <!-- statusPanel -->
         <c:StatusPanel x:Name="StatusPanel" DockPanel.Dock="Bottom"
                        Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}}"
-                       EnableFilters="True" HasFilters="True" EnableGroups="True" HasGroups="True"/>
-        <!-- groupsView -->
-        <c:GroupsView EditingMode="False"
-                      Visibility="{Binding EnableGroups, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
+                       EnableFilters="True" HasFilters="True" EnableGroups="False" HasGroups="False"/>
         <!-- dataGrid -->
-        <b:LogsListGrid x:Name="dgList"
-                        ItemsSource="{Binding InstancesList}" IsReadOnly="True"
-                        MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged"/>
+        <TabControl x:Name="tcList" Padding="0" SelectionChanged="tcList_SelectionChanged">
+            <!-- logs -->
+            <TabItem>
+                <TabItem.Header>
+                    <sec:Header Text="Logi" Icon="/Resources/icon32_circleblue.ico"/>
+                </TabItem.Header>
+                <b:LogsListGrid x:Name="dgList_Logs"
+                                ItemsSource="{Binding InstancesList}" IsReadOnly="True"
+                                MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged"/>
+            </TabItem>
+            <!-- errors -->
+            <TabItem>
+                <TabItem.Header>
+                    <sec:Header Text="Błędy" Icon="/Resources/icon32_circlered.ico"/>
+                </TabItem.Header>
+                <b:LogsListGrid x:Name="dgList_Errors"
+                                ItemsSource="{Binding InstancesList}" IsReadOnly="True"
+                                MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged"/>
+            </TabItem>
+        </TabControl>
     </DockPanel>
 </b:List>

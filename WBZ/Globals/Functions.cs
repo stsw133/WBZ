@@ -54,7 +54,7 @@ namespace WBZ.Globals
 			/*
 			var moduleNames = (obj.Module as string).Split('_');
 			for (int i = 0; i < moduleNames.Length; i++)
-				moduleNames[i] = char.ToUpper(moduleNames[i][0]) + moduleNames[i].Substring(1);
+				moduleNames[i] = char.ToUpper(moduleNames[i][0]) + moduleNames[i][1..];
 			var moduleName = string.Join(string.Empty, moduleNames);
 			OpenWindow(owner, $"WBZ.Modules.{moduleName}.{moduleName}New", false, SQL.GetInstance<MODULE_MODEL>(obj.Module, obj.Instance), mode);
 			*/

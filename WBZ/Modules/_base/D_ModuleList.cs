@@ -20,7 +20,7 @@ namespace WBZ.Modules._base
 			set
 			{
 				instancesList = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
+				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
 			}
 		}
 		/// Mode
@@ -37,7 +37,7 @@ namespace WBZ.Modules._base
 			set
 			{
 				filters = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
+				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
 			}
 		}
 		/// Page number
@@ -48,7 +48,7 @@ namespace WBZ.Modules._base
 			set
 			{
 				page = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
+				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
 			}
 		}
 		/// Total instances number
@@ -59,7 +59,7 @@ namespace WBZ.Modules._base
 			set
 			{
 				totalItems = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
+				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
 			}
 		}
 	}

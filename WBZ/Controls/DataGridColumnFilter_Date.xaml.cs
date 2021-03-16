@@ -15,7 +15,7 @@ namespace WBZ.Controls
 
         public string Text
         {
-            get { return (string)GetValue(pText); }
+            get => (string)GetValue(pText);
             set { SetValue(pText, value); }
         }
         public static readonly DependencyProperty pText
@@ -28,7 +28,7 @@ namespace WBZ.Controls
 
         public string Filter
         {
-            get { return (string)GetValue(pFilter); }
+            get => (string)GetValue(pFilter);
             set { SetValue(pFilter, value); }
         }
         public static readonly DependencyProperty pFilter
@@ -41,7 +41,7 @@ namespace WBZ.Controls
 
         public bool FilterVisibility
         {
-            get { return (bool)GetValue(pFilterVisibility); }
+            get => (bool)GetValue(pFilterVisibility);
             set { SetValue(pFilterVisibility, value); }
         }
         public static readonly DependencyProperty pFilterVisibility
@@ -54,7 +54,7 @@ namespace WBZ.Controls
 
         public string Value1
         {
-            get { return (string)GetValue(pValue1); }
+            get => (string)GetValue(pValue1);
             set { SetValue(pValue1, value); }
         }
         public static readonly DependencyProperty pValue1
@@ -67,7 +67,7 @@ namespace WBZ.Controls
 
         public string Value2
         {
-            get { return (string)GetValue(pValue2); }
+            get => (string)GetValue(pValue2);
             set { SetValue(pValue2, value); }
         }
         public static readonly DependencyProperty pValue2

@@ -105,14 +105,11 @@ namespace WBZ.Modules._tabs
 		private ObservableCollection<M_Group> instanceGroups;
 		public ObservableCollection<M_Group> InstanceGroups
 		{
-			get
-			{
-				return instanceGroups;
-			}
+			get => instanceGroups;
 			set
 			{
 				instanceGroups = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
+				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
 			}
 		}
 	}

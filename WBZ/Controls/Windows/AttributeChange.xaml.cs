@@ -80,32 +80,26 @@ namespace WBZ.Controls
 		private M_Attribute attributeInfo;
 		public M_Attribute AttributeInfo
 		{
-			get
-			{
-				return attributeInfo;
-			}
+			get => attributeInfo;
 			set
 			{
 				attributeInfo = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
+				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
 			}
 		}
 		/// Attribute values
 		private ObservableCollection<M_ComboValue> attributeValues;
 		public ObservableCollection<M_ComboValue> AttributeValues
 		{
-			get
-			{
-				return attributeValues;
-			}
+			get => attributeValues;
 			set
 			{
 				attributeValues = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
+				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
 			}
 		}
 		/// Can attribute have any value
-		public bool FreeValues { get { return AttributeInfo.Class.Type != "list"; } }
+		public bool FreeValues { get => AttributeInfo.Class.Type != "list"; }
 		/// Edit mode
 		public bool EditMode { get; set; }
 	}

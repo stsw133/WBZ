@@ -38,6 +38,7 @@
     <None Remove="Resources\icon32_code.ico" />
     <None Remove="Resources\icon32_color.ico" />
     <None Remove="Resources\icon32_community.ico" />
+    <None Remove="Resources\icon32_contacts.ico" />
     <None Remove="Resources\icon32_contractors.ico" />
     <None Remove="Resources\icon32_database.ico" />
     <None Remove="Resources\icon32_delete.ico" />
@@ -55,6 +56,7 @@
     <None Remove="Resources\icon32_global.ico" />
     <None Remove="Resources\icon32_greetings.ico" />
     <None Remove="Resources\icon32_groups.ico" />
+    <None Remove="Resources\icon32_history.ico" />
     <None Remove="Resources\icon32_language.ico" />
     <None Remove="Resources\icon32_list.ico" />
     <None Remove="Resources\icon32_locked.ico" />
@@ -64,6 +66,7 @@
     <None Remove="Resources\icon32_maximize.ico" />
     <None Remove="Resources\icon32_minimize.ico" />
     <None Remove="Resources\icon32_notifications.ico" />
+    <None Remove="Resources\icon32_phone.ico" />
     <None Remove="Resources\icon32_photos.ico" />
     <None Remove="Resources\icon32_printer.ico" />
     <None Remove="Resources\icon32_profile.ico" />
@@ -165,6 +168,9 @@
     <Content Include="Resources\icon32_community.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\icon32_contacts.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\icon32_contractors.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -216,6 +222,9 @@
     <Content Include="Resources\icon32_groups.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\icon32_history.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\icon32_language.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -241,6 +250,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\icon32_notifications.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\icon32_phone.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\icon32_photos.ico">

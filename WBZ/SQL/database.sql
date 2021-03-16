@@ -70,23 +70,7 @@ CREATE TABLE wbz.users_permissions
         NOT VALID
 )
 TABLESPACE pg_default;
-/*
-INSERT INTO wbz.users_permissions ("user", perm) VALUES
-    (1, 'admin'),
-    (1, 'users_preview'), (1, 'users_save'), (1, 'users_delete'),
-    (1, 'employees_preview'), (1, 'employees_save'), (1, 'employees_delete'),
-    (1, 'documents_preview'), (1, 'documents_save'), (1, 'documents_delete'),
-    (1, 'articles_preview'), (1, 'articles_save'), (1, 'articles_delete'),
-    (1, 'stores_preview'), (1, 'stores_save'), (1, 'stores_delete'),
-    (1, 'contractors_preview'), (1, 'contractors_save'), (1, 'contractors_delete'),
-    (1, 'families_preview'), (1, 'families_save'), (1, 'families_delete'),
-    (1, 'distributions_preview'), (1, 'distributions_save'), (1, 'distributions_delete'),
-    (1, 'attributes_classes_preview'), (1, 'attributes_classes_save'), (1, 'attributes_classes_delete'),
-    (1, 'attachments_preview'), (1, 'attachments_save'), (1, 'attachments_delete'),
-    (1, 'logs_preview'), (1, 'logs_save'), (1, 'logs_delete'),
-    (1, 'stats_preview'), (1, 'stats_save'), (1, 'stats_delete'),
-    (1, 'community_preview'), (1, 'community_save'), (1, 'community_delete');
-*/
+
 -- Table: wbz.logs
 CREATE TABLE wbz.logs
 (
@@ -137,10 +121,6 @@ CREATE TABLE wbz.groups
     CONSTRAINT groups_pkey PRIMARY KEY (id)
 )
 TABLESPACE pg_default;
-
-INSERT INTO wbz.groups (id, module, name, instance, owner, archival, comment, icon) VALUES
-    (1, 'logs', 'Logi', null, 0, false, '', null),
-    (2, 'logs', 'B³êdy', null, 0, false, '', null);
 
 -- Table: wbz.attributes_classes
 CREATE TABLE wbz.attributes_classes

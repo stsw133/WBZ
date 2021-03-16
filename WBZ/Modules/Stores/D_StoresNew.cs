@@ -31,28 +31,22 @@ namespace WBZ.Modules.Stores
 		private ObservableCollection<M_Article> instanceSources_Articles;
 		public ObservableCollection<M_Article> InstanceSources_Articles
 		{
-			get
-			{
-				return instanceSources_Articles;
-			}
+			get => instanceSources_Articles;
 			set
 			{
 				instanceSources_Articles = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
+				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
 			}
 		}
 		/// Instance source - documents
 		private ObservableCollection<M_Document> instanceSources_Documents;
 		public ObservableCollection<M_Document> InstanceSources_Documents
 		{
-			get
-			{
-				return instanceSources_Documents;
-			}
+			get => instanceSources_Documents;
 			set
 			{
 				instanceSources_Documents = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
+				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
 			}
 		}
 	}

@@ -1,7 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 using WBZ.Globals;
 using WBZ.Models;
 using WBZ.Modules._base;
@@ -33,13 +36,29 @@ namespace WBZ.Modules.Logs
 		/// </summary>
 		public void UpdateFilters()
 		{
+			int index = 0;
+			tcList.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => { index = tcList.SelectedIndex; }));
+
 			D.FilterSQL = $"LOWER(COALESCE(u.lastname,'') || ' ' || COALESCE(u.forename,'')) like '%{D.Filters.UserFullname.ToLower()}%' and "
 						+ $"LOWER(COALESCE(l.module,'')) like '%{D.Filters.Module.ToLower()}%' and "
 						+ $"LOWER(COALESCE(l.content,'')) like '%{D.Filters.Content.ToLower()}%' and "
 						+ $"l.datetime >= '{D.Filters.fDateTime:yyyy-MM-dd}' and l.datetime <= '{D.Filters.DateTime:yyyy-MM-dd}' and "
-						+ $"l.type={D.Filters.Group} and ";
+						+ $"l.type={index + 1} and ";
 
 			D.FilterSQL = D.FilterSQL.TrimEnd(" and ".ToCharArray());
+		}
+
+		/// <summary>
+		/// Loaded
+		/// </summary>
+		private void Window_Loaded(object sender, RoutedEventArgs e)
+		{
+			if (D.SelectingMode)
+			{
+				dgList_Logs.SelectionMode = DataGridSelectionMode.Single;
+				dgList_Errors.SelectionMode = DataGridSelectionMode.Single;
+			}
+			cmdRefresh_Executed(null, null);
 		}
 
 		/// <summary>
@@ -47,9 +66,18 @@ namespace WBZ.Modules.Logs
 		/// </summary>
 		private void cmdPreview_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
-			var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
-			foreach (MODULE_MODEL instance in selectedInstances)
-				Functions.OpenInstanceWindow(this, instance, StswExpress.Globals.Commands.Type.PREVIEW);
+			if (tcList.SelectedIndex == 0) ///logs
+			{
+				var selectedInstances = dgList_Logs.SelectedItems.Cast<MODULE_MODEL>();
+				foreach (MODULE_MODEL instance in selectedInstances)
+					Functions.OpenInstanceWindow(this, instance, StswExpress.Globals.Commands.Type.PREVIEW);
+			}
+			else if (tcList.SelectedIndex == 1) ///errors
+			{
+				var selectedInstances = dgList_Errors.SelectedItems.Cast<MODULE_MODEL>();
+				foreach (MODULE_MODEL instance in selectedInstances)
+					Functions.OpenInstanceWindow(this, instance, StswExpress.Globals.Commands.Type.PREVIEW);
+			}
 		}
 
 		/// <summary>
@@ -57,9 +85,18 @@ namespace WBZ.Modules.Logs
 		/// </summary>
 		private void cmdEdit_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
-			var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
-			foreach (MODULE_MODEL instance in selectedInstances)
-				Functions.OpenInstanceWindow(this, instance, StswExpress.Globals.Commands.Type.EDIT);
+			if (tcList.SelectedIndex == 0) ///logs
+			{
+				var selectedInstances = dgList_Logs.SelectedItems.Cast<MODULE_MODEL>();
+				foreach (MODULE_MODEL instance in selectedInstances)
+					Functions.OpenInstanceWindow(this, instance, StswExpress.Globals.Commands.Type.EDIT);
+			}
+			else if (tcList.SelectedIndex == 1) ///errors
+			{
+				var selectedInstances = dgList_Errors.SelectedItems.Cast<MODULE_MODEL>();
+				foreach (MODULE_MODEL instance in selectedInstances)
+					Functions.OpenInstanceWindow(this, instance, StswExpress.Globals.Commands.Type.EDIT);
+			}
 		}
 
 		/// <summary>
@@ -80,6 +117,28 @@ namespace WBZ.Modules.Logs
 				SQL.SetPropertyValue("LOGS_ENABLED", "1");
 			else
 				SQL.SetPropertyValue("LOGS_ENABLED", "0");
+		}
+
+		/// <summary>
+		/// SelectionChanged
+		/// </summary>
+        private void tcList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+			if (D.InstancesList == null)
+				return;
+
+			if ((sender as TabControl).SelectedIndex == 0) ///logs
+			{
+				D.InstancesList_Errors = D.InstancesList;
+				D.InstancesList = D.InstancesList_Logs;
+				D.TotalItems = SQL.CountInstances(D.MODULE_TYPE, D.FilterSQL.Replace("l.type=2", "l.type=1"));
+			}
+			else if ((sender as TabControl).SelectedIndex == 1) ///errors
+			{
+				D.InstancesList_Logs = D.InstancesList;
+				D.InstancesList = D.InstancesList_Errors;
+				D.TotalItems = SQL.CountInstances(D.MODULE_TYPE, D.FilterSQL.Replace("l.type=1", "l.type=2"));
+			}
 		}
 	}
 

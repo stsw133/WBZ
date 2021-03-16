@@ -20,7 +20,7 @@ namespace WBZ.Modules._base
 			set
 			{
 				instanceInfo = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
+				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
 			}
 		}
 		/// Window mode

@@ -17,14 +17,11 @@ namespace WBZ.Modules.Personal
         private M_User user = Global.User;
         public M_User User
         {
-            get
-            {
-                return user;
-            }
+            get => user;
             set
             {
                 user = value;
-                NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
+                NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
             }
         }
     }

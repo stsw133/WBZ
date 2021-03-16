@@ -8,8 +8,7 @@
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
         Title="Generator raportów"
-            SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner"
-            Icon="/Resources/_null.ico">
+            SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>

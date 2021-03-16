@@ -12,20 +12,8 @@ namespace WBZ.Controls
 			InitializeComponent();
 		}
 
-		public string GetLogin
-		{
-			get
-			{
-				return tbLogin.Text;
-			}
-		}
-		public string GetPassword
-		{
-			get
-			{
-				return pbPassword.Password;
-			}
-		}
+		public string GetLogin { get => tbLogin.Text; }
+		public string GetPassword { get => pbPassword.Password; }
 
 		/// <summary>
 		/// Accept

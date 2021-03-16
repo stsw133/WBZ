@@ -16,28 +16,22 @@ namespace WBZ.Modules.Stats
 		private DataTable statsArticles = SQL.GetStatsArticles();
 		public DataTable StatsArticles
 		{
-			get
-			{
-				return statsArticles;
-			}
+			get => statsArticles;
 			set
 			{
 				statsArticles = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
+				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
 			}
 		}
 		/// Article stats - total
 		private double statsArticlesTotal = SQL.GetStatsArticlesTotal();
 		public double StatsArticlesTotal
 		{
-			get
-			{
-				return statsArticlesTotal;
-			}
+			get => statsArticlesTotal;
 			set
 			{
 				statsArticlesTotal = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
+				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
 			}
 		}
 	}

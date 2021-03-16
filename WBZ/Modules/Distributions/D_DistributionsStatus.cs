@@ -14,39 +14,27 @@ namespace WBZ.Modules.Distributions
 		}
 
 		/// Window title
-		public string Title
-		{
-			get
-			{
-				return $"Zmiana statusu rodziny: {FamilyInfo?.Lastname}";
-			}
-		}
+		public string Title { get => $"Zmiana statusu rodziny: {FamilyInfo?.Lastname}"; }
 		/// Family
 		private M_Family familyInfo;
 		public M_Family FamilyInfo
 		{
-			get
-			{
-				return familyInfo;
-			}
+			get => familyInfo;
 			set
 			{
 				familyInfo = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
+				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
 			}
 		}
 		/// Main family contact
 		private DataTable familyContactsInfo;
 		public DataTable FamilyContactsInfo
 		{
-			get
-			{
-				return familyContactsInfo;
-			}
+			get => familyContactsInfo;
 			set
 			{
 				familyContactsInfo = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
+				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
 			}
 		}
 	}

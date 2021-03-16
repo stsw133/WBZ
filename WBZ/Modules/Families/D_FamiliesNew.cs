@@ -31,14 +31,11 @@ namespace WBZ.Modules.Families
         private ObservableCollection<M_Distribution> instanceSources_Distributions;
         public ObservableCollection<M_Distribution> InstanceSources_Distributions
         {
-            get
-            {
-                return instanceSources_Distributions;
-            }
+            get => instanceSources_Distributions;
             set
             {
                 instanceSources_Distributions = value;
-                NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
+                NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
             }
         }
     }

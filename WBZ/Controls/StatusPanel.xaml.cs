@@ -15,7 +15,7 @@ namespace WBZ.Controls
 
         public bool EnableFilters
         {
-            get { return (bool)GetValue(pEnableFilters); }
+            get => (bool)GetValue(pEnableFilters);
             set { SetValue(pEnableFilters, value); }
         }
         public static readonly DependencyProperty pEnableFilters
@@ -28,7 +28,7 @@ namespace WBZ.Controls
 
         public bool HasFilters
         {
-            get { return (bool)GetValue(pHasFilters); }
+            get => (bool)GetValue(pHasFilters);
             set { SetValue(pHasFilters, value); }
         }
         public static readonly DependencyProperty pHasFilters
@@ -41,7 +41,7 @@ namespace WBZ.Controls
 
         public bool EnableGroups
         {
-            get { return (bool)GetValue(pEnableGroups); }
+            get => (bool)GetValue(pEnableGroups);
             set { SetValue(pEnableGroups, value); }
         }
         public static readonly DependencyProperty pEnableGroups
@@ -54,7 +54,7 @@ namespace WBZ.Controls
 
         public bool HasGroups
         {
-            get { return (bool)GetValue(pHasGroups); }
+            get => (bool)GetValue(pHasGroups);
             set { SetValue(pHasGroups, value); }
         }
         public static readonly DependencyProperty pHasGroups

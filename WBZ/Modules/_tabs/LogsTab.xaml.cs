@@ -61,14 +61,11 @@ namespace WBZ.Modules._tabs
         private ObservableCollection<M_Log> instanceLogs;
         public ObservableCollection<M_Log> InstanceLogs
         {
-            get
-            {
-                return instanceLogs;
-            }
+            get => instanceLogs;
             set
             {
                 instanceLogs = value;
-                NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
+                NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
             }
         }
     }

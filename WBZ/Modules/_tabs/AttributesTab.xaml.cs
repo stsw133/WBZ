@@ -87,14 +87,11 @@ namespace WBZ.Modules._tabs
         private List<M_Attribute> instanceAttributes;
         public List<M_Attribute> InstanceAttributes
         {
-            get
-            {
-                return instanceAttributes;
-            }
+            get => instanceAttributes;
             set
             {
                 instanceAttributes = value;
-                NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name.Substring(4));
+                NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
             }
         }
     }
