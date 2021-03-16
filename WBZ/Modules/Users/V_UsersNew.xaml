@@ -120,188 +120,16 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Image Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_search.ico"/>
-                                <Label Content="Podgląd:" VerticalContentAlignment="Center"/>
-                            </StackPanel>
-                            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Image Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_edit.ico"/>
-                                <Label Content="Edycja:" VerticalContentAlignment="Center"/>
-                            </StackPanel>
-                            <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Image Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_delete.ico"/>
-                                <Label Content="Usuwanie:" VerticalContentAlignment="Center"/>
-                            </StackPanel>
-                        </Grid>
-                        <!-- users -->
-                        <Grid DockPanel.Dock="Top">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                <Image Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_users.ico"/>
-                                <Label Content="Użytkownicy:" VerticalContentAlignment="Center"/>
-                            </StackPanel>
-                            <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=users_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="users_preview" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox Grid.Column="2" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=users_save}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="users_save" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=users_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="users_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                        </Grid>
-                        <!-- employees -->
-                        <Grid DockPanel.Dock="Top">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                <Image Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_briefcase.ico"/>
-                                <Label Content="Pracownicy:" VerticalContentAlignment="Center"/>
-                            </StackPanel>
-                            <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=employees_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="employees_preview" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox Grid.Column="2" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=employees_save}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="employees_save" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=employees_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="employees_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                        </Grid>
-                        <!-- community -->
-                        <Grid DockPanel.Dock="Top">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                <Image Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_community.ico"/>
-                                <Label Content="Społeczność:" VerticalContentAlignment="Center"/>
-                            </StackPanel>
-                            <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=community_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="community_preview" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox Grid.Column="2" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=community_save}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="community_save" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked" Visibility="Collapsed"/>
-                            <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=community_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="community_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked" Visibility="Collapsed"/>
-                        </Grid>
-                        <!-- groups -->
-                        <Grid DockPanel.Dock="Top">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                <Image Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_groups.ico"/>
-                                <Label Content="Grupy:" VerticalContentAlignment="Center"/>
-                            </StackPanel>
-                            <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=groups_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="groups_preview" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox Grid.Column="2" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=groups_save}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="groups_save" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=groups_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="groups_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                        </Grid>
-                        <!-- attributes_classes -->
-                        <Grid DockPanel.Dock="Top">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                <Image Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_attributes.ico"/>
-                                <Label Content="Klasy atrybutów:" VerticalContentAlignment="Center"/>
-                            </StackPanel>
-                            <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=attributes_classes_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="attributes_classes_preview" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox Grid.Column="2" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=attributes_classes_save}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="attributes_classes_save" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=attributes_classes_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="attributes_classes_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                        </Grid>
-                        <!-- attachments -->
-                        <Grid DockPanel.Dock="Top">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                <Image Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_photos.ico"/>
-                                <Label Content="Załączniki:" VerticalContentAlignment="Center"/>
-                            </StackPanel>
-                            <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=attachments_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="attachments_preview" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox Grid.Column="2" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=attachments_save}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="attachments_save" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=attachments_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="attachments_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                        </Grid>
-                        <!-- logs -->
-                        <Grid DockPanel.Dock="Top">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                <Image Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_logs.ico"/>
-                                <Label Content="Logi:" VerticalContentAlignment="Center"/>
-                            </StackPanel>
-                            <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=logs_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="logs_preview" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=logs_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="logs_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                        </Grid>
-                        <!-- documents -->
-                        <Grid DockPanel.Dock="Top">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                <Image Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_documents.ico"/>
-                                <Label Content="Dokumenty:" VerticalContentAlignment="Center"/>
-                            </StackPanel>
-                            <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=documents_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="documents_preview" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox Grid.Column="2" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=documents_save}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="documents_save" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=documents_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="documents_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                        </Grid>
-                        <!-- stores -->
-                        <Grid DockPanel.Dock="Top">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                <Image Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_stores.ico"/>
-                                <Label Content="Magazyny:" VerticalContentAlignment="Center"/>
-                            </StackPanel>
-                            <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=stores_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="stores_preview" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox Grid.Column="2" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=stores_save}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="stores_save" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=stores_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="stores_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <sec:Header Grid.Column="1" HorizontalAlignment="Center"
+                                        Text="Podgląd:" Icon="/Resources/icon32_search.ico"/>
+                            <sec:Header Grid.Column="2" HorizontalAlignment="Center"
+                                        Text="Edycja:" Icon="/Resources/icon32_edit.ico"/>
+                            <sec:Header Grid.Column="3" HorizontalAlignment="Center"
+                                        Text="Usuwanie:" Icon="/Resources/icon32_delete.ico"/>
+                            <sec:Header Grid.Column="4" HorizontalAlignment="Center"
+                                        Text="Grupy:" Icon="/Resources/icon32_groups.ico"/>
                         </Grid>
                         <!-- articles -->
                         <Grid DockPanel.Dock="Top">
@@ -310,17 +138,68 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
+                                <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                <Image Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_articles.ico"/>
-                                <Label Content="Towary:" VerticalContentAlignment="Center"/>
-                            </StackPanel>
+                            <sec:Header Grid.Column="0" Text="Towary:" Icon="/Resources/icon32_articles.ico"/>
                             <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=articles_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                       Tag="articles_preview" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
                             <CheckBox Grid.Column="2" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=articles_save}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                       Tag="articles_save" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
                             <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=articles_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                       Tag="articles_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="4" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=articles_groups}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="articles_groups" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                        </Grid>
+                        <!-- attachments -->
+                        <Grid DockPanel.Dock="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <sec:Header Grid.Column="0" Text="Załączniki:" Icon="/Resources/icon32_photos.ico"/>
+                            <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=attachments_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="attachments_preview" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="2" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=attachments_save}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="attachments_save" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=attachments_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="attachments_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="4" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=attachments_groups}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="attachments_groups" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                        </Grid>
+                        <!-- attributes_classes -->
+                        <Grid DockPanel.Dock="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <sec:Header Grid.Column="0" Text="Klasy atrybutów:" Icon="/Resources/icon32_attributes.ico"/>
+                            <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=attributes_classes_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="attributes_classes_preview" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="2" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=attributes_classes_save}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="attributes_classes_save" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=attributes_classes_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="attributes_classes_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="4" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=attributes_classes_groups}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="attributes_classes_groups" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                        </Grid>
+                        <!-- community -->
+                        <Grid DockPanel.Dock="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <sec:Header Grid.Column="0" Text="Społeczność:" Icon="/Resources/icon32_community.ico"/>
+                            <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=community_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="community_preview" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
                         </Grid>
                         <!-- contractors -->
                         <Grid DockPanel.Dock="Top">
@@ -329,36 +208,17 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
+                                <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                <Image Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_contractors.ico"/>
-                                <Label Content="Firmy:" VerticalContentAlignment="Center"/>
-                            </StackPanel>
+                            <sec:Header Grid.Column="0" Text="Kontrahenci:" Icon="/Resources/icon32_contractors.ico"/>
                             <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=contractors_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                       Tag="contractors_preview" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
                             <CheckBox Grid.Column="2" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=contractors_save}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                       Tag="contractors_save" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
                             <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=contractors_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                       Tag="contractors_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                        </Grid>
-                        <!-- families -->
-                        <Grid DockPanel.Dock="Top">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                <Image Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_families.ico"/>
-                                <Label Content="Rodziny:" VerticalContentAlignment="Center"/>
-                            </StackPanel>
-                            <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=families_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="families_preview" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox Grid.Column="2" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=families_save}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="families_save" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=families_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="families_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="4" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=contractors_groups}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="contractors_groups" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
                         </Grid>
                         <!-- distributions -->
                         <Grid DockPanel.Dock="Top">
@@ -367,17 +227,89 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
+                                <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                <Image Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_food.ico"/>
-                                <Label Content="Dystrybucja:" VerticalContentAlignment="Center"/>
-                            </StackPanel>
+                            <sec:Header Grid.Column="0" Text="Dystrybucje:" Icon="/Resources/icon32_food.ico"/>
                             <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=distributions_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                       Tag="distributions_preview" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
                             <CheckBox Grid.Column="2" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=distributions_save}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                       Tag="distributions_save" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
                             <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=distributions_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                       Tag="distributions_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="4" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=distributions_groups}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="distributions_groups" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                        </Grid>
+                        <!-- documents -->
+                        <Grid DockPanel.Dock="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <sec:Header Grid.Column="0" Text="Dokumenty:" Icon="/Resources/icon32_documents.ico"/>
+                            <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=documents_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="documents_preview" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="2" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=documents_save}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="documents_save" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=documents_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="documents_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="4" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=documents_groups}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="documents_groups" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                        </Grid>
+                        <!-- employees -->
+                        <Grid DockPanel.Dock="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <sec:Header Grid.Column="0" Text="Pracownicy:" Icon="/Resources/icon32_briefcase.ico"/>
+                            <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=employees_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="employees_preview" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="2" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=employees_save}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="employees_save" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=employees_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="employees_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="4" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=employees_groups}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="employees_groups" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                        </Grid>
+                        <!-- families -->
+                        <Grid DockPanel.Dock="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <sec:Header Grid.Column="0" Text="Rodziny:" Icon="/Resources/icon32_families.ico"/>
+                            <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=families_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="families_preview" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="2" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=families_save}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="families_save" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=families_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="families_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="4" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=families_groups}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="families_groups" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                        </Grid>
+                        <!-- logs -->
+                        <Grid DockPanel.Dock="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <sec:Header Grid.Column="0" Text="Logi:" Icon="/Resources/icon32_logs.ico"/>
+                            <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=logs_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="logs_preview" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=logs_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="logs_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
                         </Grid>
                         <!-- stats -->
                         <Grid DockPanel.Dock="Top">
@@ -386,17 +318,51 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
+                                <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                <Image Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_stats.ico"/>
-                                <Label Content="Statystyki:" VerticalContentAlignment="Center"/>
-                            </StackPanel>
+                            <sec:Header Grid.Column="0" Text="Statystyki:" Icon="/Resources/icon32_stats.ico"/>
                             <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=stats_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                       Tag="stats_preview" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
                             <CheckBox Grid.Column="2" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=stats_save}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                       Tag="stats_save" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=stats_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
-                                      Tag="stats_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked" Visibility="Collapsed"/>
+                        </Grid>
+                        <!-- stores -->
+                        <Grid DockPanel.Dock="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <sec:Header Grid.Column="0" Text="Magazyny:" Icon="/Resources/icon32_stores.ico"/>
+                            <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=stores_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="stores_preview" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="2" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=stores_save}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="stores_save" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=stores_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="stores_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="4" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=stores_groups}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="stores_groups" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                        </Grid>
+                        <!-- users -->
+                        <Grid DockPanel.Dock="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <sec:Header Grid.Column="0" Text="Użytkownicy:" Icon="/Resources/icon32_users.ico"/>
+                            <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=users_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="users_preview" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="2" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=users_save}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="users_save" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=users_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="users_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="4" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=users_groups}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="users_groups" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
                         </Grid>
                         <!-- vehicles -->
                         <Grid DockPanel.Dock="Top">
@@ -405,17 +371,17 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
+                                <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                <Image Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_transport.ico"/>
-                                <Label Content="Pojazdy:" VerticalContentAlignment="Center"/>
-                            </StackPanel>
+                            <sec:Header Grid.Column="0" Text="Pojazdy:" Icon="/Resources/icon32_transport.ico"/>
                             <CheckBox Grid.Column="1" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=vehicles_preview}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                       Tag="vehicles_preview" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
                             <CheckBox Grid.Column="2" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=vehicles_save}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                       Tag="vehicles_save" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
                             <CheckBox Grid.Column="3" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=vehicles_delete}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                       Tag="vehicles_delete" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <CheckBox Grid.Column="4" IsChecked="{Binding InstanceInfo.Perms, Mode=OneTime, Converter={seg:conv_ListContains}, ConverterParameter=vehicles_groups}" HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                      Tag="vehicles_groups" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
                         </Grid>
                     </DockPanel>
                 </ScrollViewer>

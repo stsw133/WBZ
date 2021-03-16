@@ -92,7 +92,7 @@
                        Background="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}}"
                        EnableFilters="True" HasFilters="True" EnableGroups="True" HasGroups="True"/>
         <!-- groupsView -->
-        <c:GroupsView EditingMode="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=families_save}"
+        <c:GroupsView EditingMode="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=families_groups}"
                       Visibility="{Binding EnableGroups, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
         <!-- otherFilters -->
         <DockPanel DockPanel.Dock="Bottom" Visibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}">

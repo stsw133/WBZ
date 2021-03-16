@@ -1,6 +1,4 @@
-﻿using WBZ.Globals;
-
-namespace WBZ.Models
+﻿namespace WBZ.Models
 {
     public class M_Contact
     {
@@ -14,6 +12,6 @@ namespace WBZ.Models
         public bool Default { get; set; } = false;
         public bool Archival { get; set; } = false;
 
-        public string TranslatedModule { get => Global.TranslateModule(Module); }
+        public string TranslatedModule { get => TranslateMe.TM.Tr(char.ToUpper(Module[0]) + Module[1..], languageId: StswExpress.Globals.Properties.Language); }
     }
 }

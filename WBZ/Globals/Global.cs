@@ -27,7 +27,7 @@ namespace WBZ.Globals
             public const string DOCUMENTS = "documents";
             public const string EMPLOYEES = "employees";
             public const string FAMILIES = "families";
-            public const string GROUPS = "groups";  // w wersji 1.2.0 przerobienie na submoduł
+            public const string GROUPS = "groups";
             public const string LOGS = "logs";
             //public const string ORDERS = "orders";  // do dodania w wersji 1.3.0
             //public const string SHIPMENTS = "shipments";  // do dodania w wersji 1.2.0
@@ -36,47 +36,6 @@ namespace WBZ.Globals
             public const string USERS = "users";
             public const string VEHICLES = "vehicles";
         }
-        //TODO - przenieść tłumaczenia na różne języki do osobnego pliku w wersji 1.2.0
-        public static string TranslateModule(string module)
-        {
-            switch (module)
-            {
-                case Module.ARTICLES:
-                    return "Towary";
-                case Module.ATTACHMENTS:
-                    return "Załączniki";
-                case Module.ATTRIBUTES_CLASSES:
-                    return "Klasy atrybutów";
-                case Module.COMMUNITY:
-                    return "Społeczność";
-                case Module.CONTRACTORS:
-                    return "Kontrahenci";
-                case Module.DISTRIBUTIONS:
-                    return "Dystrybucje";
-                case Module.DOCUMENTS:
-                    return "Dokumenty";
-                case Module.EMPLOYEES:
-                    return "Pracownicy";
-                case Module.FAMILIES:
-                    return "Rodziny";
-                case Module.LOGS:
-                    return "Logi";
-                //case Module.ORDERS:
-                //    return "Zamówienia";
-                //case Module.SHIPMENTS:
-                //    return "Wysyłki";
-                case Module.STATS:
-                    return "Statystyki";
-                case Module.STORES:
-                    return "Magazyny";
-                case Module.USERS:
-                    return "Użytkownicy";
-                case Module.VEHICLES:
-                    return "Pojazdy";
-                default:
-                    return "(nieznany)";
-            }
-        }
         public static string GetModuleAlias(string module) => string.Join(string.Empty, module.Split('_').Where(x => !string.IsNullOrEmpty(x)).Select(y => y[0]));
         
         public static class UserPermType
@@ -84,7 +43,7 @@ namespace WBZ.Globals
             public const string PREVIEW = "preview";
             public const string SAVE = "save";
             public const string DELETE = "delete";
-            //public const string DELETE = "groups";    /// do dodania w wersji 1.2.0
+            public const string GROUPS = "groups";
         }
 
         #region Crypto

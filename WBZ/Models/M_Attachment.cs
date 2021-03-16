@@ -1,6 +1,4 @@
-﻿using WBZ.Globals;
-
-namespace WBZ.Models
+﻿namespace WBZ.Models
 {
 	public class M_Attachment
 	{
@@ -12,6 +10,6 @@ namespace WBZ.Models
 		public string Name { get; set; } = string.Empty;
 		public byte[] File { get; set; } = null;
 
-		public string TranslatedModule { get => Global.TranslateModule(Module); }
+		public string TranslatedModule { get => TranslateMe.TM.Tr(char.ToUpper(Module[0]) + Module[1..], languageId: StswExpress.Globals.Properties.Language); }
 	}
 }

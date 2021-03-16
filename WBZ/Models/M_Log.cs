@@ -1,5 +1,4 @@
 ﻿using System;
-using WBZ.Globals;
 
 namespace WBZ.Models
 {
@@ -21,6 +20,6 @@ namespace WBZ.Models
 		public DateTime fDateTime { get; set; } = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
 		public DateTime DateTime { get; set; } = DateTime.Now;
 
-		public string TranslatedModule { get => Global.TranslateModule(Module); }
+		public string TranslatedModule { get => TranslateMe.TM.Tr(char.ToUpper(Module[0]) + Module[1..], languageId: StswExpress.Globals.Properties.Language); }
 	}
 }

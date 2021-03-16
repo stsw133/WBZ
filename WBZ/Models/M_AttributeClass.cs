@@ -1,5 +1,4 @@
 ﻿using System.Data;
-using WBZ.Globals;
 
 namespace WBZ.Models
 {
@@ -12,7 +11,7 @@ namespace WBZ.Models
 		public bool Required { get; set; } = false;
 		public DataTable Values { get; set; } = new DataTable();
 
-		public string TranslatedModule { get => Global.TranslateModule(Module); }
+		public string TranslatedModule { get => TranslateMe.TM.Tr(char.ToUpper(Module[0]) + Module[1..], languageId: StswExpress.Globals.Properties.Language); }
 	}
 
 	public class M_Attribute
