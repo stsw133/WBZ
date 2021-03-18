@@ -94,7 +94,7 @@
                             <TextBox Text="{Binding InstanceInfo.ReservedRaw}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True" Background="#EEE"/>
                         </DockPanel>
                         <Label DockPanel.Dock="Top" Content="Dodatkowe wagi i zasoby:" Margin="5,5,5,0" HorizontalAlignment="Center"/>
-                        <c:DataGrid x:Name="dgMeasures" DockPanel.Dock="Top" ItemsSource="{Binding InstanceInfo.Measures.DefaultView}" IsReadOnly="{Binding EditMode, Converter={seg:conv_BoolInverted}}" CellEditEnding="dgMeasures_CellEditEnding">
+                        <sec:DataGrid x:Name="dgMeasures" DockPanel.Dock="Top" ItemsSource="{Binding InstanceInfo.Measures.DefaultView}" IsReadOnly="{Binding EditMode, Converter={seg:conv_BoolInverted}}" CellEditEnding="dgMeasures_CellEditEnding">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding id}" Header="ID" IsReadOnly="True" Visibility="Collapsed"/>
                                 <DataGridTextColumn Binding="{Binding name}" Header="Jm" Width="*"/>
@@ -118,7 +118,7 @@
                                     </Style.Triggers>
                                 </Style>
                             </DataGrid.RowStyle>
-                        </c:DataGrid>
+                        </sec:DataGrid>
                     </DockPanel>
                 </ScrollViewer>
             </TabItem>

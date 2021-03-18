@@ -3,7 +3,7 @@
           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-          xmlns:c="clr-namespace:WBZ.Controls"
+          xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
           xmlns:g="clr-namespace:WBZ.Globals"
           xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
           xmlns:p="clr-namespace:WBZ.Properties"
@@ -28,19 +28,19 @@
         <!-- Fullname -->
         <DataGridTextColumn Binding="{Binding Fullname}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Fullname, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <c:DataGridColumnFilter_Text Text="Nazwisko" Value="{Binding Data.Filters.Lastname, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
+                <sec:ColumnFilter_Text Text="Nazwisko" Value="{Binding Data.Filters.Lastname, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Email -->
         <DataGridTextColumn Binding="{Binding Email}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Email, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <c:DataGridColumnFilter_Text Text="E-mail" Value="{Binding Data.Filters.Email, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
+                <sec:ColumnFilter_Text Text="E-mail" Value="{Binding Data.Filters.Email, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Phone -->
         <DataGridTextColumn Binding="{Binding Phone}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Phone, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <c:DataGridColumnFilter_Text Text="Telefon" Value="{Binding Data.Filters.Phone, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
+                <sec:ColumnFilter_Text Text="Telefon" Value="{Binding Data.Filters.Phone, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
     </DataGrid.Columns>

@@ -85,7 +85,7 @@
                                 <RadioButton DockPanel.Dock="Top" Content="Domyślny" Margin="5" VerticalContentAlignment="Center" GroupName="TitleBarStyle" Visibility="Collapsed"/>
                                 <RadioButton DockPanel.Dock="Top" Content="Alternatywny" Margin="5" VerticalContentAlignment="Center" GroupName="TitleBarStyle" Visibility="Collapsed"/>
                                 <Label Content="{Tr Settings.Color, DefaultText='Kolor:', LanguageId={x:Static seg:Properties.Language}}" VerticalContentAlignment="Center"/>
-                                <sec:ColorSetter Fill="{Binding ThemeColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+                                <sec:ColorSetter Color="{Binding ThemeColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                             </DockPanel>
                         </GroupBox>
                         <GroupBox Header="{Tr Settings.Interface, DefaultText='Interfejs', LanguageId={x:Static seg:Properties.Language}}" DockPanel.Dock="Top" Margin="5,5,5,0" VerticalAlignment="Top">

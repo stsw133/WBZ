@@ -205,7 +205,7 @@ namespace WBZ.Modules._base
                 }
                 else
                 {
-                    W.Selected = (W.dgList as DataGrid).SelectedItems.Cast<MODULE_MODEL>().FirstOrDefault();
+                    Selected = (W.dgList as DataGrid).SelectedItems.Cast<MODULE_MODEL>().FirstOrDefault();
                     W.DialogResult = true;
                 }
             }
