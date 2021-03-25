@@ -4,8 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
-        xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
-        xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
         Title="Konsola SQL"
             Height="450" Width="675" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"

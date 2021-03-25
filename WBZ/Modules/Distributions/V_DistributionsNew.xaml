@@ -74,7 +74,7 @@
             </DockPanel>
             <Border.ContextMenu>
                 <ContextMenu>
-                    <c:MenuPanelColor Tag="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+                    <sec:ColorSetter Color="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}" SliderWidth="256"/>
                 </ContextMenu>
             </Border.ContextMenu>
         </Border>
