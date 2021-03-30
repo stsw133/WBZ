@@ -63,24 +63,24 @@ namespace WBZ.Modules._base
 			}
 		}
 		/// Filters visible
-		private bool filtersVisible = true;
-		public bool FiltersVisible
+		private bool filtersVisibility = true;
+		public bool FiltersVisibility
 		{
-			get => filtersVisible;
+			get => filtersVisibility;
 			set
 			{
-				filtersVisible = value;
+				filtersVisibility = value;
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
 			}
 		}
 		/// Groups visible
-		private bool groupsVisible = true;
-		public bool GroupsVisible
+		private bool groupsVisibility = true;
+		public bool GroupsVisibility
 		{
-			get => groupsVisible;
+			get => groupsVisibility;
 			set
 			{
-				groupsVisible = value;
+				groupsVisibility = value;
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
 			}
 		}

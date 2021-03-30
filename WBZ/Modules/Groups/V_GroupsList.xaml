@@ -5,8 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:c="clr-namespace:WBZ.Controls"
         xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
-        xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
-        xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
         Title="Lista grup"
             Height="650" Width="975" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"

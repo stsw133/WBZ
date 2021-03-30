@@ -1959,7 +1959,7 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FF444444")]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF3C4B5A")]
         public string ThemeColor {
             get {
                 return ((string)(this["ThemeColor"]));

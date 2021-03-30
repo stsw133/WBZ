@@ -90,12 +90,12 @@
         <!-- statusPanel -->
         <c:StatusPanel x:Name="StatusPanel" DockPanel.Dock="Bottom"
                        Background="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}}"
-                       HasFilters="{Binding FiltersVisible, Mode=OneTime}" HasGroups="{Binding GroupsVisible, Mode=OneTime}"/>
+                       HasFilters="{Binding FiltersVisibility, Mode=OneTime}" HasGroups="{Binding GroupsVisibility, Mode=OneTime}"/>
         <!-- groupsView -->
         <c:GroupsView EditingMode="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=articles_groups}"
-                      Visibility="{Binding GroupsVisible, Converter={seg:conv_BoolToVisibility}}"/>
+                      Visibility="{Binding GroupsVisibility, Converter={seg:conv_BoolToVisibility}}"/>
         <!-- otherFilters -->
-        <DockPanel DockPanel.Dock="Bottom" Visibility="{Binding FiltersVisible, Converter={seg:conv_BoolToVisibility}}">
+        <DockPanel DockPanel.Dock="Bottom" Visibility="{Binding FiltersVisibility, Converter={seg:conv_BoolToVisibility}}">
             <Label Content="Magazyn:" Margin="5,0,0,5"/>
             <ComboBox Margin="5,0,5,5" VerticalContentAlignment="Center"
                       ItemsSource="{Binding StoresList}"

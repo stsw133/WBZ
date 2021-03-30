@@ -38,7 +38,8 @@
             <DataGridTextColumn.Header>
                 <StackPanel>
                     <TextBlock Text="Nazwa modułu"/>
-                    <ComboBox SelectedValue="{Binding Data.Filters.Module, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Tag" Visibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}">
+                    <ComboBox SelectedValue="{Binding Data.Filters.Module, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Tag"
+                              Visibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}, Converter={seg:conv_BoolToVisibility}}">
                         <ComboBoxItem Content="Dokumenty" Tag="documents"/>
                         <ComboBoxItem Content="Dystrybucje" Tag="distributions"/>
                         <ComboBoxItem Content="Kontrahenci" Tag="contractors"/>
@@ -57,7 +58,9 @@
         <!-- Name -->
         <DataGridTextColumn Binding="{Binding Name}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Name, Converter={seg:conv_BoolToVisibility}}" Width="2*">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Text="Nazwa" Value="{Binding Data.Filters.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
+                <sec:ColumnFilter_Text Text="Nazwa" MinWidth="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=12}"
+                                       Value="{Binding Data.Filters.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
+                                       FilterVisibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Type -->
@@ -65,7 +68,8 @@
             <DataGridTextColumn.Header>
                 <StackPanel>
                     <TextBlock Text="Typ"/>
-                    <ComboBox SelectedValue="{Binding Data.Filters.Type, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Tag" Visibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}">
+                    <ComboBox SelectedValue="{Binding Data.Filters.Type, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Tag"
+                              Visibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}, Converter={seg:conv_BoolToVisibility}}">
                         <ComboBoxItem Content="Ciąg znaków" Tag="string"/>
                         <ComboBoxItem Content="Data" Tag="date"/>
                         <ComboBoxItem Content="Liczba całkowita" Tag="int"/>

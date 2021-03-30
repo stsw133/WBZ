@@ -36,7 +36,6 @@
                 BorderBrush="{Binding config_Attachments_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.5}"
                 BorderThickness="1,0,0,0">
             <DockPanel>
-                <ToggleButton x:Name="btnToggle" BorderThickness="0" Width="5" IsChecked="{Binding config_ShowButtonTexts, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                 <StackPanel DockPanel.Dock="Top">
                     <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4;0.4;0.4;0}"
                                 Text="Podgląd&#10;obiektu"
@@ -84,166 +83,13 @@
         <!-- statusPanel -->
         <c:StatusPanel x:Name="StatusPanel" DockPanel.Dock="Bottom"
                        Background="{Binding config_Attachments_PanelColor, Source={x:Static p:Settings.Default}}"
-                       EnableFilters="True" HasFilters="True" EnableGroups="True" HasGroups="True"/>
+                       HasFilters="{Binding FiltersVisibility, Mode=OneTime}" HasGroups="{Binding GroupsVisibility, Mode=OneTime}"/>
         <!-- groupsView -->
         <c:GroupsView EditingMode="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=attachments_groups}"
-                      Visibility="{Binding EnableGroups, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
+                      Visibility="{Binding GroupsVisibility, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
         <!-- dataGrid -->
-        <sec:DataGrid x:Name="dgList"
-                    ItemsSource="{Binding InstancesList}" IsReadOnly="True"
-                    MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged">
-            <DataGrid.Resources>
-                <g:BindingProxy x:Key="proxy" Data="{Binding}"/>
-            </DataGrid.Resources>
-            <DataGrid.Columns>
-                <!-- ID -->
-                <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_ID, Converter={seg:conv_BoolToVisibility}}"/>
-                <!-- UserFullname -->
-                <DataGridTextColumn Binding="{Binding UserFullname}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_UserFullname, Converter={seg:conv_BoolToVisibility}}">
-                    <DataGridTextColumn.Header>
-                        <sec:ColumnFilter_Text Text="Użytkownik" Value="{Binding Data.Filters.UserFullname, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
-                    </DataGridTextColumn.Header>
-                </DataGridTextColumn>
-                <!-- Module -->
-                <DataGridTextColumn Binding="{Binding TranslatedModule}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Module, Converter={seg:conv_BoolToVisibility}}">
-                    <DataGridTextColumn.Header>
-                        <sec:ColumnFilter_Text Text="Nazwa modułu" Value="{Binding Data.Filters.Module, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
-                    </DataGridTextColumn.Header>
-                </DataGridTextColumn>
-                <!-- Instance -->
-                <DataGridTextColumn Binding="{Binding Instance}" Header="ID instancji" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Instance, Converter={seg:conv_BoolToVisibility}}"/>
-                <!-- Name -->
-                <DataGridTextColumn Binding="{Binding Name}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Name, Converter={seg:conv_BoolToVisibility}}">
-                    <DataGridTextColumn.Header>
-                        <sec:ColumnFilter_Text Text="Nazwa" Value="{Binding Data.Filters.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" FilterVisibility="{Binding EnableFilters, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
-                    </DataGridTextColumn.Header>
-                </DataGridTextColumn>
-            </DataGrid.Columns>
-            <DataGrid.ContextMenu>
-                <ContextMenu>
-                    <!-- Columns -->
-                    <MenuItem Header="Widoczność kolumn">
-                        <MenuItem.Icon>
-                            <Image Source="/Resources/icon32_show.ico"/>
-                        </MenuItem.Icon>
-                        <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_ID, Mode=TwoWay}"/>
-                        <MenuItem IsCheckable="True" Header="Użytkownik" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_UserFullname, Mode=TwoWay}"/>
-                        <MenuItem IsCheckable="True" Header="Nazwa modułu" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Module, Mode=TwoWay}"/>
-                        <MenuItem IsCheckable="True" Header="ID instancji" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Instance, Mode=TwoWay}"/>
-                        <MenuItem IsCheckable="True" Header="Nazwa" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Name, Mode=TwoWay}"/>
-                    </MenuItem>
-                    <!-- Sorting -->
-                    <MenuItem Header="Sortowanie danych">
-                        <MenuItem.Icon>
-                            <Image Source="/Resources/icon32_descending.ico"/>
-                        </MenuItem.Icon>
-                        <MenuItem>
-                            <MenuItem.Header>
-                                <StackPanel Orientation="Horizontal">
-                                    <Label Content="Sortowanie 1:"/>
-                                    <ToggleButton IsChecked="{Binding sorting_AttachmentsList[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.2}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.2}">
-                                        <Image Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.1}" Source="/Resources/icon32_descending.ico"/>
-                                    </ToggleButton>
-                                    <ComboBox SelectedValue="{Binding sorting_AttachmentsList[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
-                                        <ComboBoxItem Content="Nazwisko i imię" Tag="a.userfullname"/>
-                                        <ComboBoxItem Content="Moduł" Tag="a.module"/>
-                                        <ComboBoxItem Content="Nazwa" Tag="a.name"/>
-                                    </ComboBox>
-                                </StackPanel>
-                            </MenuItem.Header>
-                        </MenuItem>
-                        <MenuItem>
-                            <MenuItem.Header>
-                                <StackPanel Orientation="Horizontal">
-                                    <Label Content="Sortowanie 2:"/>
-                                    <ToggleButton IsChecked="{Binding sorting_AttachmentsList[3], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.2}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.2}">
-                                        <Image Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.1}" Source="/Resources/icon32_descending.ico"/>
-                                    </ToggleButton>
-                                    <ComboBox SelectedValue="{Binding sorting_AttachmentsList[2], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
-                                        <ComboBoxItem Content="Nazwisko i imię" Tag="a.userfullname"/>
-                                        <ComboBoxItem Content="Moduł" Tag="a.module"/>
-                                        <ComboBoxItem Content="Nazwa" Tag="a.name"/>
-                                    </ComboBox>
-                                </StackPanel>
-                            </MenuItem.Header>
-                        </MenuItem>
-                        <MenuItem>
-                            <MenuItem.Header>
-                                <StackPanel Orientation="Horizontal">
-                                    <Label Content="Limit wczytywania:"/>
-                                    <TextBox Text="{Binding sorting_AttachmentsList[4], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=5}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                                </StackPanel>
-                            </MenuItem.Header>
-                        </MenuItem>
-                    </MenuItem>
-                    <!-- Actions -->
-                    <Separator/>
-                    <MenuItem Header="Podgląd" Command="seg:Commands.Preview">
-                        <MenuItem.Icon>
-                            <Image Source="/Resources/icon32_search.ico"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="Dodaj" Command="seg:Commands.New">
-                        <MenuItem.Icon>
-                            <Image Source="/Resources/icon32_add.ico"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="Duplikuj" Command="seg:Commands.Duplicate">
-                        <MenuItem.Icon>
-                            <Image Source="/Resources/icon32_duplicate.ico"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="Edytuj" Command="seg:Commands.Edit">
-                        <MenuItem.Icon>
-                            <Image Source="/Resources/icon32_edit.ico"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="Usuń" Command="seg:Commands.Delete">
-                        <MenuItem.Icon>
-                            <Image Source="/Resources/icon32_delete.ico"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <Separator/>
-                    <MenuItem Header="Odśwież" Command="seg:Commands.Refresh">
-                        <MenuItem.Icon>
-                            <Image Source="/Resources/icon32_refresh.ico"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                </ContextMenu>
-            </DataGrid.ContextMenu>
-            <DataGrid.RowStyle>
-                <Style TargetType="DataGridRow">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Module}" Value="articles">
-                            <Setter Property="Background" Value="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}}"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Module}" Value="attributes_classes">
-                            <Setter Property="Background" Value="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}}"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Module}" Value="contractors">
-                            <Setter Property="Background" Value="{Binding config_Contractors_PanelColor, Source={x:Static p:Settings.Default}}"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Module}" Value="distributions">
-                            <Setter Property="Background" Value="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}}"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Module}" Value="documents">
-                            <Setter Property="Background" Value="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}}"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Module}" Value="employees">
-                            <Setter Property="Background" Value="{Binding config_Employees_PanelColor, Source={x:Static p:Settings.Default}}"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Module}" Value="families">
-                            <Setter Property="Background" Value="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}}"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Module}" Value="stores">
-                            <Setter Property="Background" Value="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}}"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Module}" Value="users">
-                            <Setter Property="Background" Value="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}}"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </DataGrid.RowStyle>
-        </sec:DataGrid>
+        <b:AttachmentsListGrid x:Name="dgList"
+                               ItemsSource="{Binding InstancesList}" IsReadOnly="True"
+                               MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged"/>
     </DockPanel>
 </b:List>

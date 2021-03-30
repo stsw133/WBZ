@@ -560,7 +560,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="ThemeColor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#FF444444</Value>
+      <Value Profile="(Default)">#FF3C4B5A</Value>
     </Setting>
     <Setting Name="config_ShowHeaderWithText" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>

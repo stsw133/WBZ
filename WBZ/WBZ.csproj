@@ -391,6 +391,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Modules\Attachments\V_AttachmentsListGrid.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
     <Page Update="Modules\Login\V_LoginChangePassword.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
