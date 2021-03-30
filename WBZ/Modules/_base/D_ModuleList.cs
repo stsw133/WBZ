@@ -62,7 +62,7 @@ namespace WBZ.Modules._base
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
 			}
 		}
-		/// Filters visible
+		/// Filters visibility
 		private bool filtersVisibility = true;
 		public bool FiltersVisibility
 		{
@@ -73,7 +73,7 @@ namespace WBZ.Modules._base
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
 			}
 		}
-		/// Groups visible
+		/// Groups visibility
 		private bool groupsVisibility = true;
 		public bool GroupsVisibility
 		{

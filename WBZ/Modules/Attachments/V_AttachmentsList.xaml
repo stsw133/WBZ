@@ -86,7 +86,7 @@
                        HasFilters="{Binding FiltersVisibility, Mode=OneTime}" HasGroups="{Binding GroupsVisibility, Mode=OneTime}"/>
         <!-- groupsView -->
         <c:GroupsView EditingMode="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=attachments_groups}"
-                      Visibility="{Binding GroupsVisibility, ElementName=StatusPanel, Converter={seg:conv_BoolToVisibility}}"/>
+                      Visibility="{Binding GroupsVisibility, Converter={seg:conv_BoolToVisibility}}"/>
         <!-- dataGrid -->
         <b:AttachmentsListGrid x:Name="dgList"
                                ItemsSource="{Binding InstancesList}" IsReadOnly="True"

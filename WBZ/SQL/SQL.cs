@@ -699,7 +699,9 @@ namespace WBZ
 						/// VEHICLES
 						case Globals.Global.Module.VEHICLES:
 							query = @"select count(distinct v.id)
-								from wbz.vehicles v";
+								from wbz.vehicles v
+								left join wbz.contractors c on c.id=v.forwarder
+								left join wbz.employees e on e.id=v.driver";
 							break;
 						default:
 							throw new NotImplementedException();
@@ -906,6 +908,8 @@ namespace WBZ
 									v.forwarder, v.driver, v.prodyear,
 									v.archival, v.comment, v.icon
 								from wbz.vehicles v
+								left join wbz.contractors c on c.id=v.forwarder
+								left join wbz.employees e on e.id=v.driver
 								where {filter}";
 							break;
 						default:
@@ -1590,8 +1594,8 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("brand", vehicle.Brand);
 								sqlCmd.Parameters.AddWithValue("model", vehicle.Model);
 								sqlCmd.Parameters.AddWithValue("capacity", (object)vehicle.Capacity ?? DBNull.Value);
-								sqlCmd.Parameters.AddWithValue("forwarder", vehicle.Forwarder.ID > 0 ? (object)vehicle.Forwarder.ID : DBNull.Value);
-								sqlCmd.Parameters.AddWithValue("driver", vehicle.Driver.ID > 0 ? (object)vehicle.Driver.ID : DBNull.Value);
+								sqlCmd.Parameters.AddWithValue("forwarder", vehicle.cForwarder.ID > 0 ? (object)vehicle.cForwarder.ID : DBNull.Value);
+								sqlCmd.Parameters.AddWithValue("driver", vehicle.cDriver.ID > 0 ? (object)vehicle.cDriver.ID : DBNull.Value);
 								sqlCmd.Parameters.AddWithValue("prodyear", (object)vehicle.ProdYear ?? DBNull.Value);
 								sqlCmd.Parameters.AddWithValue("archival", vehicle.Archival);
 								sqlCmd.Parameters.AddWithValue("comment", vehicle.Comment);

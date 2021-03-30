@@ -66,18 +66,18 @@
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Forwarder -->
-        <DataGridTextColumn Binding="{Binding Forwarder.Name}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Forwarder, Converter={seg:conv_BoolToVisibility}}">
+        <DataGridTextColumn Binding="{Binding cForwarder.Name}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Forwarder, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
                 <sec:ColumnFilter_Text Text="Spedytor" MinWidth="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=6}"
-                                       Value="{Binding Data.Filters.Forwarder.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
+                                       Value="{Binding Data.Filters.cForwarder.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
                                        FilterVisibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Driver -->
-        <DataGridTextColumn Binding="{Binding Driver.Fullname}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Driver, Converter={seg:conv_BoolToVisibility}}">
+        <DataGridTextColumn Binding="{Binding cDriver.Fullname}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Driver, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
                 <sec:ColumnFilter_Text Text="Kierowca" MinWidth="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=6}"
-                                       Value="{Binding Data.Filters.Driver.Lastname, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
+                                       Value="{Binding Data.Filters.cDriver.Lastname, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
                                        FilterVisibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
@@ -124,8 +124,8 @@
                                 <ComboBoxItem Content="Marka" Tag="v.brand"/>
                                 <ComboBoxItem Content="Model" Tag="v.model"/>
                                 <ComboBoxItem Content="Pojemność" Tag="v.capacity"/>
-                                <ComboBoxItem Content="Spedytor" Tag="v.forwarder"/>
-                                <ComboBoxItem Content="Kierowca" Tag="v.driver"/>
+                                <ComboBoxItem Content="Spedytor" Tag="c.name"/>
+                                <ComboBoxItem Content="Kierowca" Tag="e.lastname"/>
                                 <ComboBoxItem Content="Rok produkcji" Tag="v.prodyear"/>
                             </ComboBox>
                         </StackPanel>
@@ -143,8 +143,8 @@
                                 <ComboBoxItem Content="Marka" Tag="v.brand"/>
                                 <ComboBoxItem Content="Model" Tag="v.model"/>
                                 <ComboBoxItem Content="Pojemność" Tag="v.capacity"/>
-                                <ComboBoxItem Content="Spedytor" Tag="v.forwarder"/>
-                                <ComboBoxItem Content="Kierowca" Tag="v.driver"/>
+                                <ComboBoxItem Content="Spedytor" Tag="c.name"/>
+                                <ComboBoxItem Content="Kierowca" Tag="e.lastname"/>
                                 <ComboBoxItem Content="Rok produkcji" Tag="v.prodyear"/>
                             </ComboBox>
                         </StackPanel>
