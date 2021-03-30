@@ -13,19 +13,6 @@ namespace WBZ.Controls
 			InitializeComponent();
 		}
 
-        public bool EnableFilters
-        {
-            get => (bool)GetValue(pEnableFilters);
-            set { SetValue(pEnableFilters, value); }
-        }
-        public static readonly DependencyProperty pEnableFilters
-            = DependencyProperty.Register(
-                  nameof(EnableFilters),
-                  typeof(bool),
-                  typeof(StatusPanel),
-                  new PropertyMetadata(false)
-              );
-
         public bool HasFilters
         {
             get => (bool)GetValue(pHasFilters);
@@ -39,19 +26,6 @@ namespace WBZ.Controls
                   new PropertyMetadata(false)
               );
 
-        public bool EnableGroups
-        {
-            get => (bool)GetValue(pEnableGroups);
-            set { SetValue(pEnableGroups, value); }
-        }
-        public static readonly DependencyProperty pEnableGroups
-            = DependencyProperty.Register(
-                  nameof(EnableGroups),
-                  typeof(bool),
-                  typeof(StatusPanel),
-                  new PropertyMetadata(false)
-              );
-
         public bool HasGroups
         {
             get => (bool)GetValue(pHasGroups);
@@ -60,6 +34,31 @@ namespace WBZ.Controls
         public static readonly DependencyProperty pHasGroups
             = DependencyProperty.Register(
                   nameof(HasGroups),
+                  typeof(bool),
+                  typeof(StatusPanel),
+                  new PropertyMetadata(false)
+              );
+
+        public bool EnableFilters
+        {
+            get => (bool)GetValue(pEnableFilters);
+            set { SetValue(pEnableFilters, value); }
+        }
+        public static readonly DependencyProperty pEnableFilters
+            = DependencyProperty.Register(
+                  nameof(EnableFilters),
+                  typeof(bool),
+                  typeof(StatusPanel),
+                  new PropertyMetadata(false)
+              );
+        public bool EnableGroups
+        {
+            get => (bool)GetValue(pEnableGroups);
+            set { SetValue(pEnableGroups, value); }
+        }
+        public static readonly DependencyProperty pEnableGroups
+            = DependencyProperty.Register(
+                  nameof(EnableGroups),
                   typeof(bool),
                   typeof(StatusPanel),
                   new PropertyMetadata(false)

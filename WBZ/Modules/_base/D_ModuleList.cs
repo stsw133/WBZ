@@ -26,10 +26,10 @@ namespace WBZ.Modules._base
 		/// Mode
 		public StswExpress.Globals.Commands.Type Mode { get; set; }
 		/// Selecting mode
-		public bool SelectingMode { get { return Mode == StswExpress.Globals.Commands.Type.SELECT; } }
+		public bool SelectingMode { get => Mode == StswExpress.Globals.Commands.Type.SELECT; }
 		/// SQL filter
 		public string FilterSQL { get; set; }
-		/// Filter instance
+		/// Filters instance
 		private MODULE_MODEL filters = new MODULE_MODEL();
 		public MODULE_MODEL Filters
 		{
@@ -37,6 +37,50 @@ namespace WBZ.Modules._base
 			set
 			{
 				filters = value;
+				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
+			}
+		}
+		/// Filters list
+		private ObservableCollection<string> filtersList = new ObservableCollection<string>();
+		public ObservableCollection<string> FiltersList
+		{
+			get => filtersList;
+			set
+			{
+				filtersList = value;
+				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
+			}
+		}
+		/// Selected filter
+		private string selectedFilter;
+		public string SelectedFilter
+		{
+			get => selectedFilter;
+			set
+			{
+				selectedFilter = value;
+				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
+			}
+		}
+		/// Filters visible
+		private bool filtersVisible = true;
+		public bool FiltersVisible
+		{
+			get => filtersVisible;
+			set
+			{
+				filtersVisible = value;
+				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
+			}
+		}
+		/// Groups visible
+		private bool groupsVisible = true;
+		public bool GroupsVisible
+		{
+			get => groupsVisible;
+			set
+			{
+				groupsVisible = value;
 				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
 			}
 		}
