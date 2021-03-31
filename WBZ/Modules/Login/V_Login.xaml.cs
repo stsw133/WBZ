@@ -66,12 +66,12 @@ namespace WBZ.Modules.Login
 				/// check app version
 				if (Global.AppVersion() == Globals.Global.VersionNewest)
 				{
-					imgVersion.Source = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resources/icon32_circlegreen.ico"));
+					imgVersion.Source = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resources/icon32_shield_green.ico"));
 					imgVersion.ToolTip = "Posiadasz aktualną wersję programu.";
 				}
 				else
 				{
-					imgVersion.Source = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resources/icon32_circleorange.ico"));
+					imgVersion.Source = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resources/icon32_shield_orange.ico"));
 					imgVersion.ToolTip = "Posiadasz nieaktualną wersję programu. Najnowsza wersja: " + Globals.Global.VersionNewest;
 				}
 			}

@@ -50,7 +50,7 @@ namespace WBZ.Controls
 		/// </summary>
 		private void btnGroupsPreview_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedItem == null)
+            if (SelectedItem == null || (int)(SelectedItem as Control).Tag == 0)
                 return;
 
             int id = (int)(SelectedItem as TreeViewItem).Tag;
@@ -72,7 +72,7 @@ namespace WBZ.Controls
             }
 
             var instance = new M_Group();
-            if (SelectedItem == null)
+            if (SelectedItem == null || (int)(SelectedItem as Control).Tag == 0)
             {
                 instance.Module = Module;
                 instance.Owner = 0;
@@ -99,7 +99,7 @@ namespace WBZ.Controls
 		/// </summary>
 		private void btnGroupsEdit_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedItem == null)
+            if (SelectedItem == null || (int)(SelectedItem as Control).Tag == 0)
                 return;
 
             int id = (int)(SelectedItem as TreeViewItem).Tag;
@@ -112,7 +112,7 @@ namespace WBZ.Controls
         /// </summary>
         private void btnGroupsDelete_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedItem == null)
+            if (SelectedItem == null || (int)(SelectedItem as Control).Tag == 0)
                 return;
 
             if (MessageBox.Show("Czy na pewno usunąć zaznaczoną grupę?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
@@ -216,6 +216,7 @@ namespace WBZ.Controls
                 }
 
                 /// Add groups to TreeView
+                Items.Add(GetTreeViewHeader(new M_Group() { Name = ". . ." }));
                 foreach (var group1 in InstancesList.Where(x => x.Owner == 0))
                 {
                     var tvi1 = GetTreeViewHeader(group1);

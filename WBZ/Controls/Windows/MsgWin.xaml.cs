@@ -86,15 +86,15 @@ namespace WBZ.Controls
 			get
 			{
 				if (Title == MsgWin.MsgTitle.BLOCKADE)
-					return "/Resources/icon32_circleorange.ico";
+					return "/Resources/icon32_shield_orange.ico";
 				else if (Title == MsgWin.MsgTitle.ERROR)
-					return "/Resources/icon32_circlered.ico";
+					return "/Resources/icon32_shield_red.ico";
 				else if (Title == MsgWin.MsgTitle.INFO)
-					return "/Resources/icon32_circlegreen.ico";
+					return "/Resources/icon32_shield_green.ico";
 				else if (Title == MsgWin.MsgTitle.QUESTION)
-					return "/Resources/icon32_circleblue.ico";
+					return "/Resources/icon32_shield_blue.ico";
 				else if (Title == MsgWin.MsgTitle.WARNING)
-					return "/Resources/icon32_circleyellow.ico";
+					return "/Resources/icon32_shield_yellow.ico";
 				else
 					return null;
 			}
