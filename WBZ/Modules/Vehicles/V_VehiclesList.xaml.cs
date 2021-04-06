@@ -29,7 +29,7 @@ namespace WBZ.Modules.Vehicles
 						+ $"LOWER(COALESCE(v.model,'')) like '%{D.Filters.Model.ToLower()}%' and "
 						+ (D.Filters.Capacity > 0 ? $"COALESCE(v.capacity,0) = {D.Filters.Capacity} and " : string.Empty)
 						+ $"LOWER(COALESCE(c.name,'')) like '%{D.Filters.cForwarder.Name.ToLower()}%' and "
-						+ $"LOWER(COALESCE(e.lastname,'')) like '%{D.Filters.cDriver.Lastname.ToLower()}%' and "
+						+ $"LOWER(COALESCE(e.lastname || ' ' || e.forename,'')) like '%{D.Filters.cDriver.Name.ToLower()}%' and "
 						+ (!D.Filters.Archival ? $"v.archival=false and " : string.Empty)
 						+ (D.Filters.Group > 0 ? $"exists (select from wbz.groups g where g.instance=v.id and g.owner={D.Filters.Group}) and " : string.Empty);
 

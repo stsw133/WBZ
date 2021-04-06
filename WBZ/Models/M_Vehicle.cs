@@ -30,14 +30,14 @@
 		/// <summary>
 		/// Forwarder
 		/// </summary>
-		public int Forwarder { set { cForwarder = SQL.GetInstance<M_Contractor>(Globals.Global.Module.CONTRACTORS, value); } }
-		public M_Contractor cForwarder { get; set; } = new M_Contractor();
+		public int Forwarder { set { cForwarder = SQL.ComboInstances(Globals.Global.Module.CONTRACTORS, "c.name", $"c.id={value}", false)?[0]; } }
+		public M_ComboValue cForwarder { get; set; } = new M_ComboValue();
 
 		/// <summary>
 		/// Driver
 		/// </summary>
-		public int Driver { set { cDriver = SQL.GetInstance<M_Employee>(Globals.Global.Module.EMPLOYEES, value); } }
-		public M_Employee cDriver { get; set; } = new M_Employee();
+		public int Driver { set { cDriver = SQL.ComboInstances(Globals.Global.Module.EMPLOYEES, "e.lastname || ' ' || e.forename", $"e.id={value}", false)?[0]; } }
+		public M_ComboValue cDriver { get; set; } = new M_ComboValue();
 
 		/// <summary>
 		/// ProdYear

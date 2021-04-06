@@ -20,6 +20,7 @@ using WBZ.Modules.Personal;
 using WBZ.Modules.Stores;
 using WBZ.Modules.Users;
 using WBZ.Modules.Vehicles;
+using System.Linq;
 
 namespace WBZ.Modules
 {
@@ -83,6 +84,15 @@ namespace WBZ.Modules
 			///ADMIN
 			if (!Global.User.Perms.Contains($"admin"))
 				gridModules.Children.Remove(modAdmin);
+
+
+
+			var coll = gridModules.Children.Cast<Border>().OrderBy(x => ((((x.Child as DockPanel).Children[0] as Border).Child as StackPanel).Children[1] as Label).Content.ToString()).ToList();
+			gridModules.Children.RemoveRange(0, gridModules.Children.Count);
+			foreach (var item in coll)
+			{
+				gridModules.Children.Add(item);
+			}
 		}
 
 		/// <summary>

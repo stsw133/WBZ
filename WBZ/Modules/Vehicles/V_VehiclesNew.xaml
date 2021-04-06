@@ -98,7 +98,7 @@
                             <Button Margin="5,5,0,5" VerticalContentAlignment="Center" Click="btnSelectEmployee_Click">
                                 <Image Margin="2" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_briefcase.ico"/>
                             </Button>
-                            <TextBox Text="{Binding InstanceInfo.cDriver.Fullname, Mode=OneWay}" Tag="{Binding InstanceInfo.cDriver.ID}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True"/>
+                            <TextBox Text="{Binding InstanceInfo.cDriver.Name, Mode=OneWay}" Tag="{Binding InstanceInfo.cDriver.ID}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Rok produkcji:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>

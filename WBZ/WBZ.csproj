@@ -412,4 +412,8 @@
     </Page>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Modules\Icons\" />
+  </ItemGroup>
+
 </Project>

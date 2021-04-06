@@ -50,8 +50,7 @@ namespace WBZ.Modules.Vehicles
 				if (window.Selected != null)
 				{
 					D.InstanceInfo.cDriver.ID = window.Selected.ID;
-					D.InstanceInfo.cDriver.Lastname = window.Selected.Lastname;
-					D.InstanceInfo.cDriver.Forename = window.Selected.Forename;
+					D.InstanceInfo.cDriver.Name = $"{window.Selected.Lastname} {window.Selected.Forename}";
 					D.InstanceInfo = D.InstanceInfo;
 				}
 		}

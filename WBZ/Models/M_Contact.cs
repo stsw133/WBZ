@@ -11,7 +11,7 @@
         /// Module
         /// </summary>
         public string Module { get; set; } = string.Empty;
-        public string TranslatedModule => TranslateMe.TM.Tr(char.ToUpper(Module[0]) + Module[1..], languageId: StswExpress.Globals.Properties.Language);
+        public string TranslatedModule => Globals.Global.GetModuleTranslation(Module);
 
         /// <summary>
         /// Instance

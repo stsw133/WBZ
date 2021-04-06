@@ -106,13 +106,15 @@
             </ScrollViewer.Background>
             <WrapPanel x:Name="gridModules" Margin="5" HorizontalAlignment="Center">
                 <!-- admin -->
-                <Border x:Name="modAdmin" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}}" VerticalAlignment="Top">
+                <Border x:Name="modAdmin" DockPanel.Dock="Top"
+                        Margin="5" VerticalAlignment="Top" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
+                        BorderBrush="Gray" BorderThickness="2" Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}}">
                     <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_admin.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="{Tr Main.Admin, DefaultText='Admin', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
+                                <Label Margin="5" Content="{Tr Main.Admin, DefaultText='Admin', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
+                                       FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
                             </StackPanel>
                         </Border>
                         <!--
@@ -120,12 +122,18 @@
                                   IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=community_preview}"
                                   Text="Społeczność" Icon="/Resources/icon32_community.ico" PreviewMouseLeftButtonUp="btnCommunity_Click"/>
                         -->
-                        <sec:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
+                        <sec:Button Margin="10,10,0,10" HorizontalAlignment="Left"
+                                    Text="{Tr Main.Console, DefaultText='Konsola', LanguageId={x:Static seg:Properties.Language}}"
+                                    TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_code.ico"
                                     IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=admin}"
-                                    Text="{Tr Main.ConsoleSQL, DefaultText='Konsola SQL', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_code.ico" Click="btnConsoleSQL_Click"/>
-                        <sec:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
+                                    Click="btnConsoleSQL_Click"/>
+                        <sec:Button Margin="10,10,0,10" HorizontalAlignment="Left"
+                                    Text="{Tr Main.Versions, DefaultText='Wersje', LanguageId={x:Static seg:Properties.Language}}"
+                                    TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_versions.ico"
                                     IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=admin}"
-                                    Text="{Tr Main.Versions, DefaultText='Wersje', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_versions.ico" Click="btnVersions_Click"/>
+                                    Click="btnVersions_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -134,21 +142,29 @@
                     </Border.ContextMenu>
                 </Border>
                 <!-- articles -->
-                <Border x:Name="modArticles" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}}" VerticalAlignment="Top">
+                <Border x:Name="modArticles" DockPanel.Dock="Top"
+                        Margin="5" VerticalAlignment="Top" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
+                        BorderBrush="Gray" BorderThickness="2" Background="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}}">
                     <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_articles.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="{Tr Main.Articles, DefaultText='Towary', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
+                                <Label Margin="5" Content="{Tr Main.Articles, DefaultText='Towary', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
+                                       FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
                             </StackPanel>
                         </Border>
-                        <sec:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
+                        <sec:Button Margin="10,10,0,10" HorizontalAlignment="Left"
+                                    Text="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
+                                    TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_list.ico"
                                     IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=articles_preview}"
-                                    Text="{Tr Main.ShowList, DefaultText='Wyświetl listę', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_list.ico" Click="btnArticlesList_Click"/>
-                        <sec:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
+                                    Click="btnArticlesList_Click"/>
+                        <sec:Button Margin="10,10,0,10" HorizontalAlignment="Left"
+                                    Text="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
+                                    TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_add.ico"
                                     IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=articles_save}"
-                                    Text="{Tr Main.AddNew, DefaultText='Dodaj nowy', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_add.ico" Click="btnArticlesNew_Click"/>
+                                    Click="btnArticlesNew_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -157,21 +173,29 @@
                     </Border.ContextMenu>
                 </Border>
                 <!-- attachments -->
-                <Border x:Name="modAttachments" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Attachments_PanelColor, Source={x:Static p:Settings.Default}}" VerticalAlignment="Top">
+                <Border x:Name="modAttachments" DockPanel.Dock="Top"
+                        Margin="5" VerticalAlignment="Top" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
+                        BorderBrush="Gray" BorderThickness="2" Background="{Binding config_Attachments_PanelColor, Source={x:Static p:Settings.Default}}">
                     <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_photos.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="{Tr Main.Attachments, DefaultText='Załączniki', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
+                                <Label Margin="5" Content="{Tr Main.Attachments, DefaultText='Załączniki', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
+                                       FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
                             </StackPanel>
                         </Border>
-                        <sec:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
+                        <sec:Button Margin="10,10,0,10" HorizontalAlignment="Left"
+                                    Text="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
+                                    TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_list.ico"
                                     IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=attachments_preview}"
-                                    Text="{Tr Main.ShowAttachments, DefaultText='Wyświetl załączniki', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_photos.ico" Click="btnAttachmentsList_Click"/>
-                        <sec:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
+                                    Click="btnAttachmentsList_Click"/>
+                        <sec:Button Margin="10,10,0,10" HorizontalAlignment="Left"
+                                    Text="{Tr Main.Gallery, DefaultText='Galeria', LanguageId={x:Static seg:Properties.Language}}"
+                                    TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_gallery.ico"
                                     IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=attachments_preview}"
-                                    Text="{Tr Main.AttachmentsGallery, DefaultText='Galeria załączników', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_gallery.ico" Click="btnAttachmentsGallery_Click"/>
+                                    Click="btnAttachmentsGallery_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -180,21 +204,29 @@
                     </Border.ContextMenu>
                 </Border>
                 <!-- attributesClasses -->
-                <Border x:Name="modAttributesClasses" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}}" VerticalAlignment="Top">
+                <Border x:Name="modAttributesClasses" DockPanel.Dock="Top"
+                        Margin="5" VerticalAlignment="Top" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
+                        BorderBrush="Gray" BorderThickness="2" Background="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}}">
                     <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_attributes.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="{Tr Main.AttributesClasses, DefaultText='Klasy atrybutów', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
+                                <Label Margin="5" Content="{Tr Main.AttributesClasses, DefaultText='Klasy atrybutów', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
+                                       FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
                             </StackPanel>
                         </Border>
-                        <sec:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
+                        <sec:Button Margin="10,10,0,10" HorizontalAlignment="Left"
+                                    Text="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
+                                    TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_list.ico"
                                     IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=attributes_classes_preview}"
-                                    Text="{Tr Main.ShowList, DefaultText='Wyświetl listę', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_list.ico" Click="btnAttributesClassesList_Click"/>
-                        <sec:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
+                                    Click="btnAttributesClassesList_Click"/>
+                        <sec:Button Margin="10,10,0,10" HorizontalAlignment="Left"
+                                    Text="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
+                                    TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_add.ico"
                                     IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=attributes_classes_save}"
-                                    Text="{Tr Main.AddNew, DefaultText='Dodaj nową', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_add.ico" Click="btnAttributesClassesNew_Click"/>
+                                    Click="btnAttributesClassesNew_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -203,21 +235,29 @@
                     </Border.ContextMenu>
                 </Border>
                 <!-- contractors -->
-                <Border x:Name="modContractors" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Contractors_PanelColor, Source={x:Static p:Settings.Default}}" VerticalAlignment="Top">
+                <Border x:Name="modContractors" DockPanel.Dock="Top"
+                        Margin="5" VerticalAlignment="Top" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
+                        BorderBrush="Gray" BorderThickness="2" Background="{Binding config_Contractors_PanelColor, Source={x:Static p:Settings.Default}}">
                     <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_contractors.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="{Tr Main.Contractors, DefaultText='Kontrahenci', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
+                                <Label Margin="5" Content="{Tr Main.Contractors, DefaultText='Kontrahenci', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
+                                       FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
                             </StackPanel>
                         </Border>
-                        <sec:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
+                        <sec:Button Margin="10,10,0,10" HorizontalAlignment="Left"
+                                    Text="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
+                                    TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_list.ico"
                                     IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=contractors_preview}"
-                                    Text="{Tr Main.ShowList, DefaultText='Wyświetl listę', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_list.ico" Click="btnContractorsList_Click"/>
-                        <sec:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
+                                    Click="btnContractorsList_Click"/>
+                        <sec:Button Margin="10,10,0,10" HorizontalAlignment="Left"
+                                    Text="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
+                                    TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_add.ico"
                                     IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=contractors_save}"
-                                    Text="{Tr Main.AddNew, DefaultText='Dodaj nowego', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_add.ico" Click="btnContractorsNew_Click"/>
+                                    Click="btnContractorsNew_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -226,21 +266,29 @@
                     </Border.ContextMenu>
                 </Border>
                 <!-- distributions -->
-                <Border x:Name="modDistributions" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}}" VerticalAlignment="Top">
+                <Border x:Name="modDistributions" DockPanel.Dock="Top"
+                        Margin="5" VerticalAlignment="Top" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
+                        BorderBrush="Gray" BorderThickness="2" Background="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}}">
                     <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_food.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="{Tr Main.Distributions, DefaultText='Dystrybucje', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
+                                <Label Margin="5" Content="{Tr Main.Distributions, DefaultText='Dystrybucje', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
+                                       FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
                             </StackPanel>
                         </Border>
-                        <sec:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
+                        <sec:Button Margin="10,10,0,10" HorizontalAlignment="Left"
+                                    Text="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
+                                    TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_list.ico"
                                     IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=distributions_preview}"
-                                    Text="{Tr Main.ShowList, DefaultText='Wyświetl listę', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_list.ico" Click="btnDistributionsList_Click"/>
-                        <sec:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
+                                    Click="btnDistributionsList_Click"/>
+                        <sec:Button Margin="10,10,0,10" HorizontalAlignment="Left"
+                                    Text="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
+                                    TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_add.ico"
                                     IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=distributions_save}"
-                                    Text="{Tr Main.AddNew, DefaultText='Dodaj nową', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_add.ico" Click="btnDistributionsNew_Click"/>
+                                    Click="btnDistributionsNew_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -249,21 +297,29 @@
                     </Border.ContextMenu>
                 </Border>
                 <!-- documents -->
-                <Border x:Name="modDocuments" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}}" VerticalAlignment="Top">
+                <Border x:Name="modDocuments" DockPanel.Dock="Top"
+                        Margin="5" VerticalAlignment="Top" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
+                        BorderBrush="Gray" BorderThickness="2" Background="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}}">
                     <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_documents.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="{Tr Main.Documents, DefaultText='Dokumenty', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
+                                <Label Margin="5" Content="{Tr Main.Documents, DefaultText='Dokumenty', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
+                                       FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
                             </StackPanel>
                         </Border>
-                        <sec:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
+                        <sec:Button Margin="10,10,0,10" HorizontalAlignment="Left"
+                                    Text="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
+                                    TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_list.ico"
                                     IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=documents_preview}"
-                                    Text="{Tr Main.ShowList, DefaultText='Wyświetl listę', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_list.ico" Click="btnDocumentsList_Click"/>
-                        <sec:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
+                                    Click="btnDocumentsList_Click"/>
+                        <sec:Button Margin="10,10,0,10" HorizontalAlignment="Left"
+                                    Text="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
+                                    TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_add.ico"
                                     IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=documents_save}"
-                                    Text="{Tr Main.AddNew, DefaultText='Dodaj nowy', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_add.ico" Click="btnDocumentsNew_Click"/>
+                                    Click="btnDocumentsNew_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -272,21 +328,29 @@
                     </Border.ContextMenu>
                 </Border>
                 <!-- employees -->
-                <Border x:Name="modEmployees" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Employees_PanelColor, Source={x:Static p:Settings.Default}}" VerticalAlignment="Top">
+                <Border x:Name="modEmployees" DockPanel.Dock="Top"
+                        Margin="5" VerticalAlignment="Top" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
+                        BorderBrush="Gray" BorderThickness="2" Background="{Binding config_Employees_PanelColor, Source={x:Static p:Settings.Default}}">
                     <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_briefcase.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="{Tr Main.Employees, DefaultText='Pracownicy', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
+                                <Label Margin="5" Content="{Tr Main.Employees, DefaultText='Pracownicy', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
+                                       FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
                             </StackPanel>
                         </Border>
-                        <sec:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
+                        <sec:Button Margin="10,10,0,10" HorizontalAlignment="Left"
+                                    Text="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
+                                    TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_list.ico"
                                     IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=employees_preview}"
-                                    Text="{Tr Main.ShowList, DefaultText='Wyświetl listę', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_list.ico" Click="btnEmployeesList_Click"/>
-                        <sec:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
+                                    Click="btnEmployeesList_Click"/>
+                        <sec:Button Margin="10,10,0,10" HorizontalAlignment="Left"
+                                    Text="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
+                                    TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_add.ico"
                                     IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=employees_save}"
-                                    Text="{Tr Main.AddNew, DefaultText='Dodaj nowego', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_add.ico" Click="btnEmployeesNew_Click"/>
+                                    Click="btnEmployeesNew_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -295,21 +359,29 @@
                     </Border.ContextMenu>
                 </Border>
                 <!-- families -->
-                <Border x:Name="modFamilies" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}}" VerticalAlignment="Top">
+                <Border x:Name="modFamilies" DockPanel.Dock="Top"
+                        Margin="5" VerticalAlignment="Top" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
+                        BorderBrush="Gray" BorderThickness="2" Background="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}}">
                     <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_families.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="{Tr Main.Families, DefaultText='Rodziny', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
+                                <Label Margin="5" Content="{Tr Main.Families, DefaultText='Rodziny', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
+                                       FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
                             </StackPanel>
                         </Border>
-                        <sec:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
+                        <sec:Button Margin="10,10,0,10" HorizontalAlignment="Left"
+                                    Text="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
+                                    TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_list.ico"
                                     IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=families_preview}"
-                                    Text="{Tr Main.ShowList, DefaultText='Wyświetl listę', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_list.ico" Click="btnFamiliesList_Click"/>
-                        <sec:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
+                                    Click="btnFamiliesList_Click"/>
+                        <sec:Button Margin="10,10,0,10" HorizontalAlignment="Left"
+                                    Text="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
+                                    TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_add.ico"
                                     IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=families_save}"
-                                    Text="{Tr Main.AddNew, DefaultText='Dodaj nową', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_add.ico" Click="btnFamiliesNew_Click"/>
+                                    Click="btnFamiliesNew_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -318,18 +390,23 @@
                     </Border.ContextMenu>
                 </Border>
                 <!-- logs -->
-                <Border x:Name="modLogs" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}}" VerticalAlignment="Top">
+                <Border x:Name="modLogs" DockPanel.Dock="Top"
+                        Margin="5" VerticalAlignment="Top" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
+                        BorderBrush="Gray" BorderThickness="2" Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}}">
                     <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_logs.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="{Tr Main.Logs, DefaultText='Logi', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
+                                <Label Margin="5" Content="{Tr Main.Logs, DefaultText='Logi', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
+                                       FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
                             </StackPanel>
                         </Border>
-                        <sec:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
+                        <sec:Button Margin="10,10,0,10" HorizontalAlignment="Left"
+                                    Text="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
+                                    TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_list.ico"
                                     IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=logs_preview}"
-                                    Text="{Tr Main.ShowLogs, DefaultText='Wyświetl logi', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_logs.ico" Click="btnLogsList_Click"/>
+                                    Click="btnLogsList_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -338,18 +415,23 @@
                     </Border.ContextMenu>
                 </Border>
                 <!-- stats -->
-                <Border x:Name="modStats" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Stats_PanelColor, Source={x:Static p:Settings.Default}}" VerticalAlignment="Top">
+                <Border x:Name="modStats" DockPanel.Dock="Top"
+                        Margin="5" VerticalAlignment="Top" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
+                        BorderBrush="Gray" BorderThickness="2" Background="{Binding config_Stats_PanelColor, Source={x:Static p:Settings.Default}}">
                     <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_stats.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="{Tr Main.Stats, DefaultText='Statystyki', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
+                                <Label Margin="5" Content="{Tr Main.Stats, DefaultText='Statystyki', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
+                                       FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
                             </StackPanel>
                         </Border>
-                        <sec:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
+                        <sec:Button Margin="10,10,0,10" HorizontalAlignment="Left"
+                                    Text="{Tr Main.Stats, DefaultText='Statystyki', LanguageId={x:Static seg:Properties.Language}}"
+                                    TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_stats.ico"
                                     IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=stats_preview}"
-                                    Text="{Tr Main.ShowStats, DefaultText='Wyświetl statystyki', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_stats.ico" Click="btnStats_Click"/>
+                                    Click="btnStats_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -358,21 +440,29 @@
                     </Border.ContextMenu>
                 </Border>
                 <!-- stores -->
-                <Border x:Name="modStores" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}}" VerticalAlignment="Top">
+                <Border x:Name="modStores" DockPanel.Dock="Top"
+                        Margin="5" VerticalAlignment="Top" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
+                        BorderBrush="Gray" BorderThickness="2" Background="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}}">
                     <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_stores.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="{Tr Main.Stores, DefaultText='Magazyny', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
+                                <Label Margin="5" Content="{Tr Main.Stores, DefaultText='Magazyny', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
+                                       FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
                             </StackPanel>
                         </Border>
-                        <sec:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
+                        <sec:Button Margin="10,10,0,10" HorizontalAlignment="Left"
+                                    Text="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
+                                    TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_list.ico"
                                     IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=stores_preview}"
-                                    Text="{Tr Main.ShowList, DefaultText='Wyświetl listę', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_list.ico" Click="btnStoresList_Click"/>
-                        <sec:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
+                                    Click="btnStoresList_Click"/>
+                        <sec:Button Margin="10,10,0,10" HorizontalAlignment="Left"
+                                    Text="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
+                                    TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_add.ico"
                                     IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=stores_save}"
-                                    Text="{Tr Main.AddNew, DefaultText='Dodaj nowy', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_add.ico" Click="btnStoresNew_Click"/>
+                                    Click="btnStoresNew_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -381,21 +471,29 @@
                     </Border.ContextMenu>
                 </Border>
                 <!-- users -->
-                <Border x:Name="modUsers" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}}" VerticalAlignment="Top">
+                <Border x:Name="modUsers" DockPanel.Dock="Top"
+                        Margin="5" VerticalAlignment="Top" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
+                        BorderBrush="Gray" BorderThickness="2" Background="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}}">
                     <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_users.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="{Tr Main.Users, DefaultText='Użytkownicy', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
+                                <Label Margin="5" Content="{Tr Main.Users, DefaultText='Użytkownicy', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
+                                       FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
                             </StackPanel>
                         </Border>
-                        <sec:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
+                        <sec:Button Margin="10,10,0,10" HorizontalAlignment="Left"
+                                    Text="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
+                                    TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_list.ico"
                                     IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=users_preview}"
-                                    Text="{Tr Main.ShowList, DefaultText='Wyświetl listę', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_list.ico" Click="btnUsersList_Click"/>
-                        <sec:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
+                                    Click="btnUsersList_Click"/>
+                        <sec:Button Margin="10,10,0,10" HorizontalAlignment="Left"
+                                    Text="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
+                                    TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_add.ico"
                                     IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=users_save}"
-                                    Text="{Tr Main.AddNew, DefaultText='Dodaj nowego', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_add.ico" Click="btnUsersNew_Click"/>
+                                    Click="btnUsersNew_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
@@ -404,21 +502,29 @@
                     </Border.ContextMenu>
                 </Border>
                 <!-- vehicles -->
-                <Border x:Name="modVehicles" DockPanel.Dock="Top" Margin="5" Padding="0,0,0,10" BorderBrush="Gray" BorderThickness="2" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
-                        Background="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}}" VerticalAlignment="Top">
+                <Border x:Name="modVehicles" DockPanel.Dock="Top"
+                        Margin="5" VerticalAlignment="Top" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}"
+                        BorderBrush="Gray" BorderThickness="2" Background="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}}">
                     <DockPanel>
                         <Border DockPanel.Dock="Top" Margin="10,10,10,0" Background="White" BorderBrush="Gray" BorderThickness="1">
                             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Image Margin="10" Source="/Resources/icon32_transport.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=3}"/>
-                                <Label Margin="5" Content="{Tr Main.Vehicles, DefaultText='Pojazdy', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center" FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
+                                <Label Margin="5" Content="{Tr Main.Vehicles, DefaultText='Pojazdy', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
+                                       FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
                             </StackPanel>
                         </Border>
-                        <sec:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
+                        <sec:Button Margin="10,10,0,10" HorizontalAlignment="Left"
+                                    Text="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
+                                    TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_list.ico"
                                     IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=vehicles_preview}"
-                                    Text="{Tr Main.ShowList, DefaultText='Wyświetl listę', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_list.ico" Click="btnVehiclesList_Click"/>
-                        <sec:Button DockPanel.Dock="Top" Margin="10,10,10,0" HorizontalContentAlignment="Center" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
+                                    Click="btnVehiclesList_Click"/>
+                        <sec:Button Margin="10,10,0,10" HorizontalAlignment="Left"
+                                    Text="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
+                                    TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_add.ico"
                                     IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=vehicles_save}"
-                                    Text="{Tr Main.AddNew, DefaultText='Dodaj nowy', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_add.ico" Click="btnVehiclesNew_Click"/>
+                                    Click="btnVehiclesNew_Click"/>
                     </DockPanel>
                     <Border.ContextMenu>
                         <ContextMenu>
