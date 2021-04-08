@@ -1,13 +1,13 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace WBZ.Modules._base
 {
 	class D_ModuleList<MODULE_MODEL> : INotifyPropertyChanged where MODULE_MODEL : class, new()
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged(string name)
+		public void NotifyPropertyChanged([CallerMemberName] string name = "none passed")
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
@@ -20,7 +20,7 @@ namespace WBZ.Modules._base
 			set
 			{
 				instancesList = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
+				NotifyPropertyChanged();
 			}
 		}
 		/// Mode
@@ -37,7 +37,7 @@ namespace WBZ.Modules._base
 			set
 			{
 				filters = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
+				NotifyPropertyChanged();
 			}
 		}
 		/// Filters list
@@ -48,7 +48,7 @@ namespace WBZ.Modules._base
 			set
 			{
 				filtersList = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
+				NotifyPropertyChanged();
 			}
 		}
 		/// Selected filter
@@ -59,7 +59,7 @@ namespace WBZ.Modules._base
 			set
 			{
 				selectedFilter = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
+				NotifyPropertyChanged();
 			}
 		}
 		/// Filters visibility
@@ -70,7 +70,7 @@ namespace WBZ.Modules._base
 			set
 			{
 				filtersVisibility = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
+				NotifyPropertyChanged();
 			}
 		}
 		/// Groups visibility
@@ -81,7 +81,7 @@ namespace WBZ.Modules._base
 			set
 			{
 				groupsVisibility = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
+				NotifyPropertyChanged();
 			}
 		}
 		/// Page number
@@ -92,7 +92,7 @@ namespace WBZ.Modules._base
 			set
 			{
 				page = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
+				NotifyPropertyChanged();
 			}
 		}
 		/// Total instances number
@@ -103,7 +103,7 @@ namespace WBZ.Modules._base
 			set
 			{
 				totalItems = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
+				NotifyPropertyChanged();
 			}
 		}
 	}

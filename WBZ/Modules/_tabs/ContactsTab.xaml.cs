@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Data;
-using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -68,7 +68,7 @@ namespace WBZ.Modules._tabs
     class D_ContactsTab : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        public void NotifyPropertyChanged(string name)
+        public void NotifyPropertyChanged([CallerMemberName] string name = "none passed")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
@@ -81,7 +81,7 @@ namespace WBZ.Modules._tabs
             set
             {
                 instanceContacts = value;
-                NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
+                NotifyPropertyChanged();
             }
         }
     }

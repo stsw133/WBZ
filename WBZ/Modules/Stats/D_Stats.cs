@@ -1,13 +1,13 @@
 ﻿using System.ComponentModel;
 using System.Data;
-using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace WBZ.Modules.Stats
 {
     class D_Stats : INotifyPropertyChanged
     {
 		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged(string name)
+		public void NotifyPropertyChanged([CallerMemberName] string name = "none passed")
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
@@ -20,7 +20,7 @@ namespace WBZ.Modules.Stats
 			set
 			{
 				statsArticles = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
+				NotifyPropertyChanged();
 			}
 		}
 		/// Article stats - total
@@ -31,7 +31,7 @@ namespace WBZ.Modules.Stats
 			set
 			{
 				statsArticlesTotal = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
+				NotifyPropertyChanged();
 			}
 		}
 	}

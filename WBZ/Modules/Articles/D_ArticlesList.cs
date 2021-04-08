@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Reflection;
 using WBZ.Globals;
 using WBZ.Models;
 using WBZ.Modules._base;
@@ -22,7 +21,7 @@ namespace WBZ.Modules.Articles
 			set
 			{
 				storesList = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
+				NotifyPropertyChanged();
 			}
 		}
 	}

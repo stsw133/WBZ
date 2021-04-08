@@ -25,11 +25,11 @@
     <DataGrid.Columns>
         <!-- ID -->
         <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_ID, Converter={seg:conv_BoolToVisibility}}"/>
-        <!-- UserFullname -->
-        <DataGridTextColumn Binding="{Binding UserFullname}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_UserFullname, Converter={seg:conv_BoolToVisibility}}">
+        <!-- User -->
+        <DataGridTextColumn Binding="{Binding cUser.Name}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_User, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
                 <sec:ColumnFilter_Text Text="Użytkownik" MinWidth="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=12}"
-                                       Value="{Binding Data.Filters.UserFullname, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
+                                       Value="{Binding Data.Filters.cUser.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
                                        FilterVisibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
@@ -60,7 +60,7 @@
                     <Image Source="/Resources/icon32_show.ico"/>
                 </MenuItem.Icon>
                 <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_ID, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Użytkownik" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_UserFullname, Mode=TwoWay}"/>
+                <MenuItem IsCheckable="True" Header="Użytkownik" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_User, Mode=TwoWay}"/>
                 <MenuItem IsCheckable="True" Header="Nazwa modułu" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Module, Mode=TwoWay}"/>
                 <MenuItem IsCheckable="True" Header="ID instancji" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Instance, Mode=TwoWay}"/>
                 <MenuItem IsCheckable="True" Header="Nazwa" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Name, Mode=TwoWay}"/>

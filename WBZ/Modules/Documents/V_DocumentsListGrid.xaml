@@ -43,11 +43,11 @@
                                        FilterVisibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
-        <!-- StoreName -->
-        <DataGridTextColumn Binding="{Binding StoreName}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_StoreName, Converter={seg:conv_BoolToVisibility}}">
+        <!-- Store -->
+        <DataGridTextColumn Binding="{Binding cStore.Name}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Store, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
                 <sec:ColumnFilter_Text Text="Magazyn" MinWidth="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=6}"
-                                       Value="{Binding Data.Filters.StoreName, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
+                                       Value="{Binding Data.Filters.cStore.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
                                        FilterVisibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
@@ -104,7 +104,7 @@
                 <MenuItem IsCheckable="True" Header="Ikona" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Icon, Mode=TwoWay}"/>
                 <MenuItem IsCheckable="True" Header="Typ" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Type, Mode=TwoWay}"/>
                 <MenuItem IsCheckable="True" Header="Nazwa" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Name, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Magazyn" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_StoreName, Mode=TwoWay}"/>
+                <MenuItem IsCheckable="True" Header="Magazyn" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Store, Mode=TwoWay}"/>
                 <MenuItem IsCheckable="True" Header="Firma" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_ContractorName, Mode=TwoWay}"/>
                 <MenuItem IsCheckable="True" Header="Liczba pozycji" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_PositionsCount, Mode=TwoWay}"/>
                 <MenuItem IsCheckable="True" Header="Łączna waga (kg)" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Weight, Mode=TwoWay}"/>

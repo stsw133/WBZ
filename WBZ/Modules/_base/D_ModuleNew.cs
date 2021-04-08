@@ -1,13 +1,13 @@
 ﻿using StswExpress.Globals;
 using System.ComponentModel;
-using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace WBZ.Modules._base
 {
     class D_ModuleNew<MODULE_MODEL> : INotifyPropertyChanged where MODULE_MODEL : class, new()
     {
 		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged(string name)
+		public void NotifyPropertyChanged([CallerMemberName] string name = "none passed")
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
@@ -20,7 +20,7 @@ namespace WBZ.Modules._base
 			set
 			{
 				instanceInfo = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
+				NotifyPropertyChanged();
 			}
 		}
 		/// Window mode

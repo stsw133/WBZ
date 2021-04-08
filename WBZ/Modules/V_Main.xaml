@@ -102,15 +102,17 @@
         <!-- main -->
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <ScrollViewer.Background>
-                <SolidColorBrush Color="#AAA"/>
+                <SolidColorBrush Color="{Binding config_Main_PanelColor, Source={x:Static p:Settings.Default}}"/>
             </ScrollViewer.Background>
             <DockPanel x:Name="gridModules" Margin="5">
                 <!-- admin -->
                 <Border x:Name="modAdmin" DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top"
-                        BorderBrush="Gray" BorderThickness="2" Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}}">
+                        BorderBrush="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.4}"
+                        BorderThickness="2" Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}}">
                     <DockPanel>
                         <Border Margin="5" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
-                                Background="White" BorderBrush="Gray" BorderThickness="1">
+                                BorderBrush="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.25}"
+                                BorderThickness="1" Background="White">
                             <StackPanel Orientation="Horizontal">
                                 <Image Margin="5" Source="/Resources/icon32_admin.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
                                 <Label Margin="1" Content="{Tr Main.Admin, DefaultText='Admin', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
@@ -141,10 +143,12 @@
                 </Border>
                 <!-- articles -->
                 <Border x:Name="modArticles" DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top"
-                        BorderBrush="Gray" BorderThickness="2" Background="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}}">
+                        BorderBrush="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.4}"
+                        BorderThickness="2" Background="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}}">
                     <DockPanel>
                         <Border Margin="5" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
-                                Background="White" BorderBrush="Gray" BorderThickness="1">
+                                BorderBrush="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.25}"
+                                BorderThickness="1" Background="White">
                             <StackPanel Orientation="Horizontal">
                                 <Image Margin="5" Source="/Resources/icon32_articles.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
                                 <Label Margin="1" Content="{Tr Main.Articles, DefaultText='Towary', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
@@ -170,10 +174,12 @@
                 </Border>
                 <!-- attachments -->
                 <Border x:Name="modAttachments" DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top"
-                        BorderBrush="Gray" BorderThickness="2" Background="{Binding config_Attachments_PanelColor, Source={x:Static p:Settings.Default}}">
+                        BorderBrush="{Binding config_Attachments_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.4}"
+                        BorderThickness="2" Background="{Binding config_Attachments_PanelColor, Source={x:Static p:Settings.Default}}">
                     <DockPanel>
                         <Border Margin="5" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
-                                Background="White" BorderBrush="Gray" BorderThickness="1">
+                                BorderBrush="{Binding config_Attachments_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.25}"
+                                BorderThickness="1" Background="White">
                             <StackPanel Orientation="Horizontal">
                                 <Image Margin="5" Source="/Resources/icon32_photos.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
                                 <Label Margin="1" Content="{Tr Main.Attachments, DefaultText='Załączniki', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
@@ -199,10 +205,12 @@
                 </Border>
                 <!-- attributesClasses -->
                 <Border x:Name="modAttributesClasses" DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top"
-                        BorderBrush="Gray" BorderThickness="2" Background="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}}">
+                        BorderBrush="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.4}"
+                        BorderThickness="2" Background="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}}">
                     <DockPanel>
                         <Border Margin="5" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
-                                Background="White" BorderBrush="Gray" BorderThickness="1">
+                                BorderBrush="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.25}"
+                                BorderThickness="1" Background="White">
                             <StackPanel Orientation="Horizontal">
                                 <Image Margin="5" Source="/Resources/icon32_attributes.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
                                 <Label Margin="1" Content="{Tr Main.AttributesClasses, DefaultText='Klasy atrybutów', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
@@ -228,10 +236,12 @@
                 </Border>
                 <!-- contractors -->
                 <Border x:Name="modContractors" DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top"
-                        BorderBrush="Gray" BorderThickness="2" Background="{Binding config_Contractors_PanelColor, Source={x:Static p:Settings.Default}}">
+                        BorderBrush="{Binding config_Contractors_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.4}"
+                        BorderThickness="2" Background="{Binding config_Contractors_PanelColor, Source={x:Static p:Settings.Default}}">
                     <DockPanel>
                         <Border Margin="5" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
-                                Background="White" BorderBrush="Gray" BorderThickness="1">
+                                BorderBrush="{Binding config_Contractors_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.25}"
+                                BorderThickness="1" Background="White">
                             <StackPanel Orientation="Horizontal">
                                 <Image Margin="5" Source="/Resources/icon32_contractors.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
                                 <Label Margin="1" Content="{Tr Main.Contractors, DefaultText='Kontrahenci', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
@@ -257,10 +267,12 @@
                 </Border>
                 <!-- distributions -->
                 <Border x:Name="modDistributions" DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top"
-                        BorderBrush="Gray" BorderThickness="2" Background="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}}">
+                        BorderBrush="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.4}"
+                        BorderThickness="2" Background="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}}">
                     <DockPanel>
                         <Border Margin="5" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
-                                Background="White" BorderBrush="Gray" BorderThickness="1">
+                                BorderBrush="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.25}"
+                                BorderThickness="1" Background="White">
                             <StackPanel Orientation="Horizontal">
                                 <Image Margin="5" Source="/Resources/icon32_food.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
                                 <Label Margin="1" Content="{Tr Main.Distributions, DefaultText='Dystrybucje', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
@@ -286,10 +298,12 @@
                 </Border>
                 <!-- documents -->
                 <Border x:Name="modDocuments" DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top"
-                        BorderBrush="Gray" BorderThickness="2" Background="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}}">
+                        BorderBrush="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.4}"
+                        BorderThickness="2" Background="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}}">
                     <DockPanel>
                         <Border Margin="5" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
-                                Background="White" BorderBrush="Gray" BorderThickness="1">
+                                BorderBrush="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.25}"
+                                BorderThickness="1" Background="White">
                             <StackPanel Orientation="Horizontal">
                                 <Image Margin="5" Source="/Resources/icon32_documents.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
                                 <Label Margin="1" Content="{Tr Main.Documents, DefaultText='Dokumenty', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
@@ -315,10 +329,12 @@
                 </Border>
                 <!-- employees -->
                 <Border x:Name="modEmployees" DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top"
-                        BorderBrush="Gray" BorderThickness="2" Background="{Binding config_Employees_PanelColor, Source={x:Static p:Settings.Default}}">
+                        BorderBrush="{Binding config_Employees_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.4}"
+                        BorderThickness="2" Background="{Binding config_Employees_PanelColor, Source={x:Static p:Settings.Default}}">
                     <DockPanel>
                         <Border Margin="5" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
-                                Background="White" BorderBrush="Gray" BorderThickness="1">
+                                BorderBrush="{Binding config_Employees_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.25}"
+                                BorderThickness="1" Background="White">
                             <StackPanel Orientation="Horizontal">
                                 <Image Margin="5" Source="/Resources/icon32_briefcase.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
                                 <Label Margin="1" Content="{Tr Main.Employees, DefaultText='Pracownicy', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
@@ -344,10 +360,12 @@
                 </Border>
                 <!-- families -->
                 <Border x:Name="modFamilies" DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top"
-                        BorderBrush="Gray" BorderThickness="2" Background="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}}">
+                        BorderBrush="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.4}"
+                        BorderThickness="2" Background="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}}">
                     <DockPanel>
                         <Border Margin="5" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
-                                Background="White" BorderBrush="Gray" BorderThickness="1">
+                                BorderBrush="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.25}"
+                                BorderThickness="1" Background="White">
                             <StackPanel Orientation="Horizontal">
                                 <Image Margin="5" Source="/Resources/icon32_families.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
                                 <Label Margin="1" Content="{Tr Main.Families, DefaultText='Rodziny', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
@@ -373,10 +391,12 @@
                 </Border>
                 <!-- logs -->
                 <Border x:Name="modLogs" DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top"
-                        BorderBrush="Gray" BorderThickness="2" Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}}">
+                        BorderBrush="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.4}"
+                        BorderThickness="2" Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}}">
                     <DockPanel>
                         <Border Margin="5" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
-                                Background="White" BorderBrush="Gray" BorderThickness="1">
+                                BorderBrush="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.25}"
+                                BorderThickness="1" Background="White">
                             <StackPanel Orientation="Horizontal">
                                 <Image Margin="5" Source="/Resources/icon32_logs.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
                                 <Label Margin="1" Content="{Tr Main.Logs, DefaultText='Logi', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
@@ -397,10 +417,12 @@
                 </Border>
                 <!-- stats -->
                 <Border x:Name="modStats" DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top"
-                        BorderBrush="Gray" BorderThickness="2" Background="{Binding config_Stats_PanelColor, Source={x:Static p:Settings.Default}}">
+                        BorderBrush="{Binding config_Stats_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.4}"
+                        BorderThickness="2" Background="{Binding config_Stats_PanelColor, Source={x:Static p:Settings.Default}}">
                     <DockPanel>
                         <Border Margin="5" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
-                                Background="White" BorderBrush="Gray" BorderThickness="1">
+                                BorderBrush="{Binding config_Stats_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.25}"
+                                BorderThickness="1" Background="White">
                             <StackPanel Orientation="Horizontal">
                                 <Image Margin="5" Source="/Resources/icon32_stats.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
                                 <Label Margin="1" Content="{Tr Main.Stats, DefaultText='Statystyki', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
@@ -421,10 +443,12 @@
                 </Border>
                 <!-- stores -->
                 <Border x:Name="modStores" DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top"
-                        BorderBrush="Gray" BorderThickness="2" Background="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}}">
+                        BorderBrush="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.4}"
+                        BorderThickness="2" Background="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}}">
                     <DockPanel>
                         <Border Margin="5" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
-                                Background="White" BorderBrush="Gray" BorderThickness="1">
+                                BorderBrush="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.25}"
+                                BorderThickness="1" Background="White">
                             <StackPanel Orientation="Horizontal">
                                 <Image Margin="5" Source="/Resources/icon32_stores.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
                                 <Label Margin="1" Content="{Tr Main.Stores, DefaultText='Magazyny', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
@@ -450,10 +474,12 @@
                 </Border>
                 <!-- users -->
                 <Border x:Name="modUsers" DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top"
-                        BorderBrush="Gray" BorderThickness="2" Background="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}}">
+                        BorderBrush="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.4}"
+                        BorderThickness="2" Background="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}}">
                     <DockPanel>
                         <Border Margin="5" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
-                                Background="White" BorderBrush="Gray" BorderThickness="1">
+                                BorderBrush="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.25}"
+                                BorderThickness="1" Background="White">
                             <StackPanel Orientation="Horizontal">
                                 <Image Margin="5" Source="/Resources/icon32_users.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
                                 <Label Margin="1" Content="{Tr Main.Users, DefaultText='Użytkownicy', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
@@ -479,10 +505,12 @@
                 </Border>
                 <!-- vehicles -->
                 <Border x:Name="modVehicles" DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top"
-                        BorderBrush="Gray" BorderThickness="2" Background="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}}">
+                        BorderBrush="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.4}"
+                        BorderThickness="2" Background="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}}">
                     <DockPanel>
                         <Border Margin="5" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}"
-                                Background="White" BorderBrush="Gray" BorderThickness="1">
+                                BorderBrush="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.25}"
+                                BorderThickness="1" Background="White">
                             <StackPanel Orientation="Horizontal">
                                 <Image Margin="5" Source="/Resources/icon32_transport.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
                                 <Label Margin="1" Content="{Tr Main.Vehicles, DefaultText='Pojazdy', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
@@ -507,6 +535,11 @@
                     </Border.ContextMenu>
                 </Border>
             </DockPanel>
+            <ScrollViewer.ContextMenu>
+                <ContextMenu>
+                    <sec:ColorSetter Color="{Binding config_Main_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}" SliderWidth="256"/>
+                </ContextMenu>
+            </ScrollViewer.ContextMenu>
         </ScrollViewer>
     </DockPanel>
 </Window>

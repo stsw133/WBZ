@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
+        xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
         Title="Konsola SQL"
             Height="450" Width="675" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
@@ -11,7 +12,7 @@
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
-    <DockPanel>
+    <DockPanel Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}}">
         <!-- titleBar -->
         <sec:TitleBar DockPanel.Dock="Top"/>
         <!-- main -->
@@ -29,7 +30,8 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <TextBox x:Name="tbConsole" Grid.Row="0" Margin="5" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True"/>
-            <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" ResizeDirection="Rows" Height="5"/>
+            <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" ResizeDirection="Rows" Height="5"
+                          Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}}"/>
             <sec:DataGrid x:Name="dgConsole" Grid.Row="2" AutoGenerateColumns="True" IsReadOnly="True"/>
         </Grid>
     </DockPanel>

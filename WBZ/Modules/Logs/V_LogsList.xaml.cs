@@ -38,10 +38,10 @@ namespace WBZ.Modules.Logs
 			int index = 0;
 			tcList.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => { index = tcList.SelectedIndex; }));
 
-			D.FilterSQL = $"LOWER(COALESCE(u.lastname,'') || ' ' || COALESCE(u.forename,'')) like '%{D.Filters.UserFullname.ToLower()}%' and "
+			D.FilterSQL = $"LOWER(COALESCE(u.lastname,'') || ' ' || COALESCE(u.forename,'')) like '%{D.Filters.cUser.Name.ToLower()}%' and "
 						+ $"LOWER(COALESCE(l.module,'')) like '%{D.Filters.Module.ToLower()}%' and "
 						+ $"LOWER(COALESCE(l.content,'')) like '%{D.Filters.Content.ToLower()}%' and "
-						+ $"l.datetime >= '{D.Filters.fDateTime:yyyy-MM-dd}' and l.datetime <= '{D.Filters.DateTime:yyyy-MM-dd}' and "
+						+ $"l.datetime >= '{D.Filters.fDateTime:yyyy-MM-dd}' and l.datetime < '{D.Filters.DateTime.AddDays(1):yyyy-MM-dd}' and "
 						+ $"l.type={index + 1} and ";
 
 			D.FilterSQL = D.FilterSQL.TrimEnd(" and ".ToCharArray());

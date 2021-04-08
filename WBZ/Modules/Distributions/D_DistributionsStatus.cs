@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Data;
-using System.Reflection;
+using System.Runtime.CompilerServices;
 using WBZ.Models;
 
 namespace WBZ.Modules.Distributions
@@ -8,7 +8,7 @@ namespace WBZ.Modules.Distributions
     class D_DistributionsStatus : INotifyPropertyChanged
     {
 		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged(string name)
+		public void NotifyPropertyChanged([CallerMemberName] string name = "none passed")
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
@@ -23,7 +23,7 @@ namespace WBZ.Modules.Distributions
 			set
 			{
 				familyInfo = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
+				NotifyPropertyChanged();
 			}
 		}
 		/// Main family contact
@@ -34,7 +34,7 @@ namespace WBZ.Modules.Distributions
 			set
 			{
 				familyContactsInfo = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
+				NotifyPropertyChanged();
 			}
 		}
 	}

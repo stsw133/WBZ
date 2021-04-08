@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Reflection;
 using WBZ.Globals;
 using WBZ.Models;
 using WBZ.Modules._base;
@@ -35,7 +34,7 @@ namespace WBZ.Modules.Stores
 			set
 			{
 				instanceSources_Articles = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
+				NotifyPropertyChanged();
 			}
 		}
 		/// Instance source - documents
@@ -46,7 +45,7 @@ namespace WBZ.Modules.Stores
 			set
 			{
 				instanceSources_Documents = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
+				NotifyPropertyChanged();
 			}
 		}
 	}

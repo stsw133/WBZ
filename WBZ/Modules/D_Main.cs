@@ -1,12 +1,13 @@
 ﻿using StswExpress.Globals;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace WBZ.Modules
 {
     class D_Main : INotifyPropertyChanged
     {
 		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged(string name)
+		public void NotifyPropertyChanged([CallerMemberName] string name = "none passed")
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}

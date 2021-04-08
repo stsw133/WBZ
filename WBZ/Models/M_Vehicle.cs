@@ -30,13 +30,13 @@
 		/// <summary>
 		/// Forwarder
 		/// </summary>
-		public int Forwarder { set { cForwarder = SQL.ComboInstances(Globals.Global.Module.CONTRACTORS, "c.name", $"c.id={value}", false)?[0]; } }
+		public int Forwarder { set => cForwarder = SQL.ComboInstances(Globals.Global.Module.CONTRACTORS, "codename", $"id={value}", false)?[0]; }
 		public M_ComboValue cForwarder { get; set; } = new M_ComboValue();
 
 		/// <summary>
 		/// Driver
 		/// </summary>
-		public int Driver { set { cDriver = SQL.ComboInstances(Globals.Global.Module.EMPLOYEES, "e.lastname || ' ' || e.forename", $"e.id={value}", false)?[0]; } }
+		public int Driver { set => cDriver = SQL.ComboInstances(Globals.Global.Module.EMPLOYEES, "lastname || ' ' || forename", $"id={value}", false)?[0]; }
 		public M_ComboValue cDriver { get; set; } = new M_ComboValue();
 
 		/// <summary>

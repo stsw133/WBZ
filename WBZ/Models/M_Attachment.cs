@@ -10,12 +10,8 @@
 		/// <summary>
 		/// User
 		/// </summary>
-		public int User { get; set; } = 0;
-
-		/// <summary>
-		/// UserFullname
-		/// </summary>
-		public string UserFullname { get; set; } = string.Empty;
+		public int User { set => cUser = SQL.ComboInstances(Globals.Global.Module.USERS, "lastname || ' ' || forename", $"id={value}", false)?[0]; }
+		public M_ComboValue cUser { get; set; } = new M_ComboValue();
 
 		/// <summary>
 		/// Module

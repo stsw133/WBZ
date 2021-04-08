@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-using System.Reflection;
+using System.Runtime.CompilerServices;
 using WBZ.Globals;
 using WBZ.Models;
 
@@ -8,7 +8,7 @@ namespace WBZ.Modules.Personal
     class D_Profile : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        public void NotifyPropertyChanged(string name)
+        public void NotifyPropertyChanged([CallerMemberName] string name = "none passed")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
@@ -21,7 +21,7 @@ namespace WBZ.Modules.Personal
             set
             {
                 user = value;
-                NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
+                NotifyPropertyChanged();
             }
         }
     }

@@ -74,7 +74,7 @@
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Driver -->
-        <DataGridTextColumn Binding="{Binding cDriver.Fullname}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Driver, Converter={seg:conv_BoolToVisibility}}">
+        <DataGridTextColumn Binding="{Binding cDriver.Name}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Driver, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
                 <sec:ColumnFilter_Text Text="Kierowca" MinWidth="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=6}"
                                        Value="{Binding Data.Filters.cDriver.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"

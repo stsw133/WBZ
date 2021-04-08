@@ -9,10 +9,19 @@
         <DockPanel DockPanel.Dock="Top">
             <DockPanel DockPanel.Dock="Right">
                 <Label DockPanel.Dock="Top" Content="Ikona:"/>
-                <Border DockPanel.Dock="Top" Background="LightGray" BorderBrush="Gray" BorderThickness="1" VerticalAlignment="Top" Height="34" Width="34" AllowDrop="True" Drop="btnManageIcon_Drop" PreviewMouseLeftButtonUp="btnManageIcon_Click">
+                <Border DockPanel.Dock="Top" VerticalAlignment="Top" Height="34" Width="34"
+                        Background="LightGray" BorderBrush="Gray" BorderThickness="1"
+                        AllowDrop="True" Drop="btnManageIcon_Drop" PreviewMouseLeftButtonUp="btnManageIcon_Click">
                     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Image Stretch="UniformToFill" Source="{Binding InstanceInfo.Icon}"/>
-                        <Image Stretch="UniformToFill" Source="/Resources/icon32_photos.ico" Visibility="{Binding InstanceInfo.Icon, Converter={seg:conv_Compare}, ConverterParameter={x:Null}}"/>
+                        <Image Stretch="UniformToFill">
+                            <Image.Source>
+                                <Binding Path="InstanceInfo.Icon" >
+                                    <Binding.TargetNullValue>
+                                        <ImageSource>/Resources/icon32_photos.ico</ImageSource>
+                                    </Binding.TargetNullValue>
+                                </Binding>
+                            </Image.Source>
+                        </Image>
                     </Grid>
                     <Border.ContextMenu>
                         <ContextMenu>

@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Reflection;
 using WBZ.Globals;
 using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_Log;
@@ -21,7 +20,7 @@ namespace WBZ.Modules.Logs
 			set
 			{
 				instancesList_Logs = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
+				NotifyPropertyChanged();
 			}
 		}
 		
@@ -33,7 +32,7 @@ namespace WBZ.Modules.Logs
 			set
 			{
 				instancesList_Errors = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
+				NotifyPropertyChanged();
 			}
 		}
 	}

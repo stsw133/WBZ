@@ -77,7 +77,6 @@ namespace WBZ.Modules.Documents
 				if (window.Selected != null)
 				{
 					D.InstanceInfo.Store = window.Selected.ID;
-					D.InstanceInfo.StoreName = window.Selected.Name;
 					D.InstanceInfo = D.InstanceInfo;
 				}
 		}

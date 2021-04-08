@@ -26,9 +26,9 @@ namespace WBZ.Modules.Documents
 		{
 			D.FilterSQL = $"LOWER(COALESCE(d.type,'')) like '%{D.Filters.Type.ToLower()}%' and "
 						+ $"LOWER(COALESCE(d.name,'')) like '%{D.Filters.Name.ToLower()}%' and "
-						+ $"LOWER(COALESCE(s.name,'')) like '%{D.Filters.StoreName.ToLower()}%' and "
+						+ $"LOWER(COALESCE(s.name,'')) like '%{D.Filters.cStore.Name.ToLower()}%' and "
 						+ $"LOWER(COALESCE(c.name,'')) like '%{D.Filters.ContractorName.ToLower()}%' and "
-						+ $"d.dateissue >= '{D.Filters.fDateIssue:yyyy-MM-dd}' and d.dateissue <= '{D.Filters.DateIssue:yyyy-MM-dd}' and "
+						+ $"d.dateissue >= '{D.Filters.fDateIssue:yyyy-MM-dd}' and d.dateissue < '{D.Filters.DateIssue.AddDays(1):yyyy-MM-dd}' and "
 						+ (!D.Filters.Archival ? $"d.archival=false and " : string.Empty)
 						+ (D.Filters.Group > 0 ? $"exists (select from wbz.groups g where g.instance=d.id and g.owner={D.Filters.Group}) and " : string.Empty);
 

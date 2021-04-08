@@ -146,12 +146,12 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool columns_DocumentsList_StoreName {
+        public bool columns_DocumentsList_Store {
             get {
-                return ((bool)(this["columns_DocumentsList_StoreName"]));
+                return ((bool)(this["columns_DocumentsList_Store"]));
             }
             set {
-                this["columns_DocumentsList_StoreName"] = value;
+                this["columns_DocumentsList_Store"] = value;
             }
         }
         
@@ -890,12 +890,12 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool columns_LogsList_UserFullname {
+        public bool columns_LogsList_User {
             get {
-                return ((bool)(this["columns_LogsList_UserFullname"]));
+                return ((bool)(this["columns_LogsList_User"]));
             }
             set {
-                this["columns_LogsList_UserFullname"] = value;
+                this["columns_LogsList_User"] = value;
             }
         }
         
@@ -1490,12 +1490,12 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool columns_AttachmentsList_UserFullname {
+        public bool columns_AttachmentsList_User {
             get {
-                return ((bool)(this["columns_AttachmentsList_UserFullname"]));
+                return ((bool)(this["columns_AttachmentsList_User"]));
             }
             set {
-                this["columns_AttachmentsList_UserFullname"] = value;
+                this["columns_AttachmentsList_User"] = value;
             }
         }
         
@@ -1978,6 +1978,18 @@ namespace WBZ.Properties {
             }
             set {
                 this["config_ShowHeaderWithText"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF999999")]
+        public string config_Main_PanelColor {
+            get {
+                return ((string)(this["config_Main_PanelColor"]));
+            }
+            set {
+                this["config_Main_PanelColor"] = value;
             }
         }
     }

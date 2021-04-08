@@ -32,7 +32,7 @@
     <Setting Name="columns_DocumentsList_ID" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="columns_DocumentsList_StoreName" Type="System.Boolean" Scope="User">
+    <Setting Name="columns_DocumentsList_Store" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="columns_DocumentsList_Type" Type="System.Boolean" Scope="User">
@@ -218,7 +218,7 @@
     <Setting Name="columns_LogsList_ID" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="columns_LogsList_UserFullname" Type="System.Boolean" Scope="User">
+    <Setting Name="columns_LogsList_User" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="columns_LogsList_Module" Type="System.Boolean" Scope="User">
@@ -431,7 +431,7 @@
     <Setting Name="columns_AttachmentsList_Name" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="columns_AttachmentsList_UserFullname" Type="System.Boolean" Scope="User">
+    <Setting Name="columns_AttachmentsList_User" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="columns_AttachmentsList_Instance" Type="System.Boolean" Scope="User">
@@ -564,6 +564,9 @@
     </Setting>
     <Setting Name="config_ShowHeaderWithText" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="config_Main_PanelColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FF999999</Value>
     </Setting>
   </Settings>
 </SettingsFile>

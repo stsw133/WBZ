@@ -2,13 +2,13 @@
 using System.ComponentModel;
 using System.IO;
 using System.Net;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using WBZ.Models;
 using WBZ.Globals;
 using System.Collections.ObjectModel;
 using WBZ.Controls;
+using System.Runtime.CompilerServices;
 
 namespace WBZ.Modules._tabs
 {
@@ -166,7 +166,7 @@ namespace WBZ.Modules._tabs
     class D_AttachmentsTab : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        public void NotifyPropertyChanged(string name)
+        public void NotifyPropertyChanged([CallerMemberName] string name = "none passed")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
@@ -179,7 +179,7 @@ namespace WBZ.Modules._tabs
             set
             {
                 instanceAttachments = value;
-                NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
+                NotifyPropertyChanged();
             }
         }
     }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Reflection;
 using WBZ.Globals;
 using WBZ.Models;
 using WBZ.Modules._base;
@@ -35,7 +34,7 @@ namespace WBZ.Modules.Families
             set
             {
                 instanceSources_Distributions = value;
-                NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
+                NotifyPropertyChanged();
             }
         }
     }

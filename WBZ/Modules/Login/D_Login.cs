@@ -1,14 +1,14 @@
 ﻿using StswExpress.Models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace WBZ.Modules.Login
 {
     class D_Login : INotifyPropertyChanged
     {
 		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged(string name)
+		public void NotifyPropertyChanged([CallerMemberName] string name = "none passed")
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
@@ -21,7 +21,7 @@ namespace WBZ.Modules.Login
 			set
 			{
 				databases = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
+				NotifyPropertyChanged();
 			}
 		}
 	}

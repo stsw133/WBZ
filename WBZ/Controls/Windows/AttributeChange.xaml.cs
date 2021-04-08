@@ -2,7 +2,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using WBZ.Models;
 
@@ -58,7 +58,7 @@ namespace WBZ.Controls
 	public class D_AttributeValueChange : INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged(string name)
+		public void NotifyPropertyChanged([CallerMemberName] string name = "none passed")
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
@@ -84,7 +84,7 @@ namespace WBZ.Controls
 			set
 			{
 				attributeInfo = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
+				NotifyPropertyChanged();
 			}
 		}
 		/// Attribute values
@@ -95,7 +95,7 @@ namespace WBZ.Controls
 			set
 			{
 				attributeValues = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
+				NotifyPropertyChanged();
 			}
 		}
 		/// Can attribute have any value

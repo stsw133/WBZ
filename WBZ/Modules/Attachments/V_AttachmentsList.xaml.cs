@@ -27,7 +27,7 @@ namespace WBZ.Modules.Attachments
 		/// </summary>
 		public void UpdateFilters()
 		{
-			D.FilterSQL = $"LOWER(COALESCE(u.lastname,'') || ' ' || COALESCE(u.forename,'')) like '%{D.Filters.UserFullname.ToLower()}%' and "
+			D.FilterSQL = $"LOWER(COALESCE(u.lastname,'') || ' ' || COALESCE(u.forename,'')) like '%{D.Filters.cUser.Name.ToLower()}%' and "
 						+ $"LOWER(COALESCE(a.module,'')) like '%{D.Filters.Module.ToLower()}%' and "
 						+ $"LOWER(COALESCE(a.name,'')) like '%{D.Filters.Name.ToLower()}%' and ";
 

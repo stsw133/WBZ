@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel;
-using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace WBZ.Modules.Login
 {
     class D_Versions : INotifyPropertyChanged
     {
 		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged(string name)
+		public void NotifyPropertyChanged([CallerMemberName] string name = "none passed")
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
@@ -19,7 +19,7 @@ namespace WBZ.Modules.Login
 			set
 			{
 				instancesList = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
+				NotifyPropertyChanged();
 			}
 		}
 	}

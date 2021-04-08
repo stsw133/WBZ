@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data;
-using WBZ.Globals;
 
 namespace WBZ.Models
 {
@@ -26,8 +25,8 @@ namespace WBZ.Models
 		/// <summary>
 		/// Store
 		/// </summary>
-		public int Store { get; set; }
-		public string StoreName { get; set; }
+		public int Store { set => cStore = SQL.ComboInstances(Globals.Global.Module.STORES, "codename", $"id={value}", false)?[0]; }
+		public M_ComboValue cStore { get; set; } = new M_ComboValue();
 
 		/// <summary>
 		/// Contractor
@@ -65,14 +64,6 @@ namespace WBZ.Models
 		/// Cost
 		/// </summary>
 		public decimal Cost { get; set; } = 0;
-
-		public M_Document()
-		{
-			var stores = SQL.ListInstances<M_Store>(Global.Module.STORES, "true", null, 1);
-
-			Store = stores.Count == 1 ? stores[0].ID : 0;
-			StoreName = stores.Count == 1 ? stores[0].Name : string.Empty;
-		}
 	}
 
 	public class M_DocumentPosition

@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Windows;
 
 namespace WBZ.Controls
@@ -64,7 +64,7 @@ namespace WBZ.Controls
 	public class D_MsgWin : INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged(string name)
+		public void NotifyPropertyChanged([CallerMemberName] string name = "none passed")
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
@@ -77,7 +77,7 @@ namespace WBZ.Controls
 			set
 			{
 				title = value;
-				NotifyPropertyChanged(MethodBase.GetCurrentMethod().Name[4..]);
+				NotifyPropertyChanged();
 			}
 		}
 		/// Icon
