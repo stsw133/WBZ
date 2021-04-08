@@ -86,13 +86,14 @@ namespace WBZ.Modules
 				gridModules.Children.Remove(modAdmin);
 
 
-
+			/*
 			var coll = gridModules.Children.Cast<Border>().OrderBy(x => ((((x.Child as DockPanel).Children[0] as Border).Child as StackPanel).Children[1] as Label).Content.ToString()).ToList();
 			gridModules.Children.RemoveRange(0, gridModules.Children.Count);
 			foreach (var item in coll)
 			{
 				gridModules.Children.Add(item);
 			}
+			*/
 		}
 
 		/// <summary>
@@ -151,6 +152,12 @@ namespace WBZ.Modules
 			if (btn != null)
 				btn.ContextMenu.IsOpen = true;
 		}
+		private void btnOther_Click(object sender, MouseButtonEventArgs e)
+		{
+			var btn = sender as FrameworkElement;
+			if (btn != null)
+				btn.ContextMenu.IsOpen = true;
+		}
 
 		/// <summary>
 		/// Personal
@@ -193,10 +200,6 @@ namespace WBZ.Modules
 		/// <summary>
 		/// Admin
 		/// </summary>
-		private void btnCommunity_Click(object sender, RoutedEventArgs e)
-		{
-			//new Forum() { Owner = this }.ShowDialog();
-		}
 		private void btnConsoleSQL_Click(object sender, RoutedEventArgs e)
 		{
 			new ConsoleSQL() { Owner = this }.Show();
@@ -204,6 +207,10 @@ namespace WBZ.Modules
 		private void btnVersions_Click(object sender, RoutedEventArgs e)
 		{
 			new Versions() { Owner = this }.Show();
+		}
+		private void btnCommunity_Click(object sender, RoutedEventArgs e)
+		{
+			//new Forum() { Owner = this }.ShowDialog();
 		}
 
 		/// <summary>
