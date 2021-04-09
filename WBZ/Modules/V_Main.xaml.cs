@@ -21,6 +21,7 @@ using WBZ.Modules.Stores;
 using WBZ.Modules.Users;
 using WBZ.Modules.Vehicles;
 using System.Linq;
+using WBZ.Modules.Icons;
 
 namespace WBZ.Modules
 {
@@ -43,57 +44,55 @@ namespace WBZ.Modules
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			///VEHICLES
-			if (!Global.User.Perms.Contains($"{Global.Module.VEHICLES}_{Global.UserPermType.PREVIEW}"))
+			if (!Global.User.Perms.Contains($"{M_Module.Module.VEHICLES}_{Global.UserPermType.PREVIEW}"))
 				gridModules.Children.Remove(modVehicles);
 			///USERS
-			if (!Global.User.Perms.Contains($"{Global.Module.USERS}_{Global.UserPermType.PREVIEW}"))
+			if (!Global.User.Perms.Contains($"{M_Module.Module.USERS}_{Global.UserPermType.PREVIEW}"))
 				gridModules.Children.Remove(modUsers);
 			///STORES
-			if (!Global.User.Perms.Contains($"{Global.Module.STORES}_{Global.UserPermType.PREVIEW}"))
+			if (!Global.User.Perms.Contains($"{M_Module.Module.STORES}_{Global.UserPermType.PREVIEW}"))
 				gridModules.Children.Remove(modStores);
 			///STATS
-			if (!Global.User.Perms.Contains($"{Global.Module.STATS}_{Global.UserPermType.PREVIEW}"))
+			if (!Global.User.Perms.Contains($"{M_Module.Module.STATS}_{Global.UserPermType.PREVIEW}"))
 				gridModules.Children.Remove(modStats);
 			///LOGS
-			if (!Global.User.Perms.Contains($"{Global.Module.LOGS}_{Global.UserPermType.PREVIEW}"))
+			if (!Global.User.Perms.Contains($"{M_Module.Module.LOGS}_{Global.UserPermType.PREVIEW}"))
 				gridModules.Children.Remove(modLogs);
+			///ICONS
+			if (!Global.User.Perms.Contains($"{M_Module.Module.ICONS}_{Global.UserPermType.PREVIEW}"))
+				gridModules.Children.Remove(modIcons);
 			///FAMILIES
-			if (!Global.User.Perms.Contains($"{Global.Module.FAMILIES}_{Global.UserPermType.PREVIEW}"))
+			if (!Global.User.Perms.Contains($"{M_Module.Module.FAMILIES}_{Global.UserPermType.PREVIEW}"))
 				gridModules.Children.Remove(modFamilies);
 			///EMPLOYEES
-			if (!Global.User.Perms.Contains($"{Global.Module.EMPLOYEES}_{Global.UserPermType.PREVIEW}"))
+			if (!Global.User.Perms.Contains($"{M_Module.Module.EMPLOYEES}_{Global.UserPermType.PREVIEW}"))
 				gridModules.Children.Remove(modEmployees);
 			///DOCUMENTS
-			if (!Global.User.Perms.Contains($"{Global.Module.DOCUMENTS}_{Global.UserPermType.PREVIEW}"))
+			if (!Global.User.Perms.Contains($"{M_Module.Module.DOCUMENTS}_{Global.UserPermType.PREVIEW}"))
 				gridModules.Children.Remove(modDocuments);
 			///DISTRIBUTIONS
-			if (!Global.User.Perms.Contains($"{Global.Module.DISTRIBUTIONS}_{Global.UserPermType.PREVIEW}"))
+			if (!Global.User.Perms.Contains($"{M_Module.Module.DISTRIBUTIONS}_{Global.UserPermType.PREVIEW}"))
 				gridModules.Children.Remove(modDistributions);
 			///CONTRACTORS
-			if (!Global.User.Perms.Contains($"{Global.Module.CONTRACTORS}_{Global.UserPermType.PREVIEW}"))
+			if (!Global.User.Perms.Contains($"{M_Module.Module.CONTRACTORS}_{Global.UserPermType.PREVIEW}"))
 				gridModules.Children.Remove(modContractors);
 			///ATTRIBUTES_CLASSES
-			if (!Global.User.Perms.Contains($"{Global.Module.ATTRIBUTES_CLASSES}_{Global.UserPermType.PREVIEW}"))
+			if (!Global.User.Perms.Contains($"{M_Module.Module.ATTRIBUTES_CLASSES}_{Global.UserPermType.PREVIEW}"))
 				gridModules.Children.Remove(modAttributesClasses);
 			///ATTACHMENTS
-			if (!Global.User.Perms.Contains($"{Global.Module.ATTACHMENTS}_{Global.UserPermType.PREVIEW}"))
+			if (!Global.User.Perms.Contains($"{M_Module.Module.ATTACHMENTS}_{Global.UserPermType.PREVIEW}"))
 				gridModules.Children.Remove(modAttachments);
 			///ARTICLES
-			if (!Global.User.Perms.Contains($"{Global.Module.ARTICLES}_{Global.UserPermType.PREVIEW}"))
+			if (!Global.User.Perms.Contains($"{M_Module.Module.ARTICLES}_{Global.UserPermType.PREVIEW}"))
 				gridModules.Children.Remove(modArticles);
 			///ADMIN
 			if (!Global.User.Perms.Contains($"admin"))
 				gridModules.Children.Remove(modAdmin);
 
-
-			/*
-			var coll = gridModules.Children.Cast<Border>().OrderBy(x => ((((x.Child as DockPanel).Children[0] as Border).Child as StackPanel).Children[1] as Label).Content.ToString()).ToList();
+			var coll = gridModules.Children.Cast<Border>().OrderBy(x => (((x.Child as Border).Child as DockPanel).Children[1] as Label).Content.ToString()).ToList();
 			gridModules.Children.RemoveRange(0, gridModules.Children.Count);
 			foreach (var item in coll)
-			{
 				gridModules.Children.Add(item);
-			}
-			*/
 		}
 
 		/// <summary>
@@ -112,7 +111,7 @@ namespace WBZ.Modules
 		}
 		internal void menuRefresh_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
-			Global.User = SQL.GetInstance<M_User>(Global.Module.USERS, Global.User.ID);
+			Global.User = SQL.GetInstance<M_User>(M_Module.Module.USERS, Global.User.ID);
 			Global.User.Perms = SQL.GetUserPerms(Global.User.ID);
 
 			var window = new Main();
@@ -184,10 +183,9 @@ namespace WBZ.Modules
 
 			foreach (Border module in gridModules.Children)
 			{
-				var dp = (module.Child as DockPanel);
-				var bord = (dp.Children[0] as Border);
-				var sp = (bord.Child as StackPanel);
-				var lab = (sp.Children[1] as Label);
+				var bord = (module.Child as Border);
+				var dp = (bord.Child as DockPanel);
+				var lab = (dp.Children[1] as Label);
 				var moduleName = lab.Content.ToString().ToLower();
 
 				if (moduleName.Contains(searchText.ToLower()))
@@ -307,6 +305,18 @@ namespace WBZ.Modules
 		private void btnFamiliesNew_Click(object sender, RoutedEventArgs e)
 		{
 			new FamiliesNew(null, StswExpress.Globals.Commands.Type.NEW) { Owner = this }.Show();
+		}
+		
+		/// <summary>
+		/// Icons
+		/// </summary>
+		private void btnIconsList_Click(object sender, RoutedEventArgs e)
+		{
+			new IconsList(StswExpress.Globals.Commands.Type.LIST) { Owner = this }.Show();
+		}
+		private void btnIconsNew_Click(object sender, RoutedEventArgs e)
+		{
+			new IconsNew(null, StswExpress.Globals.Commands.Type.NEW) { Owner = this }.Show();
 		}
 
 		/// <summary>

@@ -41,7 +41,7 @@ namespace WBZ.Modules._base
 				foreach (M_Group group in SQL.ListInstances<M_Group>(D.MODULE_TYPE, $"{Global.GetModuleAlias(D.MODULE_TYPE)}.id={D.InstanceInfo.ID}"))
 				{
 					group.ID = newID;
-					SQL.SetInstance<M_Group>(Global.Module.GROUPS, group, Commands.Type.NEW);
+					SQL.SetInstance<M_Group>(M_Module.Module.GROUPS, group, Commands.Type.NEW);
 				}
 				/// contacts
 				DataTable contacts = SQL.ListContacts(D.MODULE_TYPE, D.InstanceInfo.ID);

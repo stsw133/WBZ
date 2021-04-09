@@ -38,7 +38,7 @@ namespace WBZ.Modules._tabs
 
                 if (ID != 0 && D.InstanceAttachments == null)
                 {
-                    D.InstanceAttachments = SQL.ListInstances<M_Attachment>(Global.Module.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}");
+                    D.InstanceAttachments = SQL.ListInstances<M_Attachment>(M_Module.Module.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}");
                     win.Closed += UserControl_Closed;
                 }
 
@@ -77,7 +77,7 @@ namespace WBZ.Modules._tabs
                     file = File.ReadAllBytes(filePath);
                 }
                 SQL.SetAttachment(Module, ID, window.GetName, file, filePath);
-                D.InstanceAttachments = SQL.ListInstances<M_Attachment>(Global.Module.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}");
+                D.InstanceAttachments = SQL.ListInstances<M_Attachment>(M_Module.Module.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}");
             }
         }
 
@@ -108,8 +108,8 @@ namespace WBZ.Modules._tabs
                 return;
             var item = lbAttachments.SelectedItem as M_Attachment;
 
-            SQL.DeleteInstance(Global.Module.ATTACHMENTS, item.ID, item.Name);
-            D.InstanceAttachments = SQL.ListInstances<M_Attachment>(Global.Module.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}");
+            SQL.DeleteInstance(M_Module.Module.ATTACHMENTS, item.ID, item.Name);
+            D.InstanceAttachments = SQL.ListInstances<M_Attachment>(M_Module.Module.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}");
         }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace WBZ.Modules._tabs
                 byte[] file = File.ReadAllBytes(files[0]);
 
                 SQL.SetAttachment(Module, ID, Path.GetFileName(files[0]), file, files[0]);
-                D.InstanceAttachments = SQL.ListInstances<M_Attachment>(Global.Module.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}");
+                D.InstanceAttachments = SQL.ListInstances<M_Attachment>(M_Module.Module.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}");
             }
         }
 

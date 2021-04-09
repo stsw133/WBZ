@@ -1,9 +1,9 @@
-﻿<b:List x:Class="WBZ.Modules.Users.UsersList"
+﻿<b:List x:Class="WBZ.Modules.Icons.IconsList"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:b="clr-namespace:WBZ.Modules.Users"
+        xmlns:b="clr-namespace:WBZ.Modules.Icons"
         xmlns:c="clr-namespace:WBZ.Controls"
         xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
         xmlns:g="clr-namespace:WBZ.Globals"
@@ -12,7 +12,7 @@
         mc:Ignorable="d"
         Title="{Binding Title}"
             Height="650" Width="975" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
-            Icon="/Resources/icon32_users.ico"
+            Icon="/Resources/icon32_icons.ico"
             Loaded="Window_Loaded" Closed="Window_Closed"
             FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}">
     <WindowChrome.WindowChrome>
@@ -34,8 +34,8 @@
         <sec:TitleBar DockPanel.Dock="Top" SubIcon="/Resources/icon32_list.ico"/>
         <!-- buttonsPanel -->
         <Border DockPanel.Dock="Right"
-                Background="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}}"
-                BorderBrush="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.5}"
+                Background="{Binding config_Icons_PanelColor, Source={x:Static p:Settings.Default}}"
+                BorderBrush="{Binding config_Icons_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.5}"
                 BorderThickness="1,0,0,0">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Top">
@@ -83,16 +83,16 @@
             </DockPanel>
             <Border.ContextMenu>
                 <ContextMenu>
-                    <sec:ColorSetter Color="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}" SliderWidth="256"/>
+                    <sec:ColorSetter Color="{Binding config_Icons_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}" SliderWidth="256"/>
                 </ContextMenu>
             </Border.ContextMenu>
         </Border>
         <!-- statusPanel -->
         <c:StatusPanel x:Name="StatusPanel" DockPanel.Dock="Bottom"
-                       Background="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}}"
+                       Background="{Binding config_Icons_PanelColor, Source={x:Static p:Settings.Default}}"
                        HasFilters="{Binding FiltersVisibility, Mode=OneTime}" HasGroups="{Binding GroupsVisibility, Mode=OneTime}"/>
         <!-- groupsView -->
-        <c:GroupsView EditingMode="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=users_groups}"
+        <c:GroupsView EditingMode="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=icons_groups}"
                       Visibility="{Binding GroupsVisibility, Converter={seg:conv_BoolToVisibility}}"/>
         <!-- otherFilters -->
         <DockPanel DockPanel.Dock="Bottom" Visibility="{Binding FiltersVisibility, Converter={seg:conv_BoolToVisibility}}">
@@ -101,7 +101,7 @@
                       IsChecked="{Binding Filters.Archival}"/>
         </DockPanel>
         <!-- dataGrid -->
-        <b:UsersListGrid x:Name="dgList"
+        <b:IconsListGrid x:Name="dgList"
                          ItemsSource="{Binding InstancesList}" IsReadOnly="True"
                          MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged"/>
     </DockPanel>

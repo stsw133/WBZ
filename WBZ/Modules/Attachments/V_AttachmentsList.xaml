@@ -10,7 +10,7 @@
         xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d"
-        Title="{Tr AttachmentsList, DefaultText='Lista załączników', LanguageId={x:Static seg:Properties.Language}}"
+        Title="{Binding Title}"
             Height="650" Width="975" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
             Icon="/Resources/icon32_photos.ico"
             Loaded="Window_Loaded" Closed="Window_Closed"

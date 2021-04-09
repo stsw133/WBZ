@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using WBZ.Globals;
+using WBZ.Models;
 using MODULE_MODEL = WBZ.Models.M_Group;
 
 namespace WBZ.Modules.Groups
@@ -33,7 +33,7 @@ namespace WBZ.Modules.Groups
                 if (D.SelectingMode)
                 {
                     var item = groupsView.SelectedItem as TreeViewItem;
-                    Selected = SQL.GetInstance<MODULE_MODEL>(Global.Module.GROUPS, (int)item.Tag);
+                    Selected = SQL.GetInstance<MODULE_MODEL>(M_Module.Module.GROUPS, (int)item.Tag);
                     DialogResult = true;
                 }
             }

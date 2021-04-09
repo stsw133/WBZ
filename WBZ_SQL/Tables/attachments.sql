@@ -6,7 +6,7 @@
     instance integer NOT NULL,
     name character varying(50) NOT NULL,
     file bytea NOT NULL,
-    comment text COLLATE pg_catalog."default",
+    comment text,
     CONSTRAINT attachments_perms_user_fkey FOREIGN KEY ("user")
         REFERENCES wbz.users (id) MATCH SIMPLE
         ON UPDATE CASCADE

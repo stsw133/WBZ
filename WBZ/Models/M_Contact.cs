@@ -11,7 +11,7 @@
         /// Module
         /// </summary>
         public string Module { get; set; } = string.Empty;
-        public string TranslatedModule => Globals.Global.GetModuleTranslation(Module);
+        public string TranslatedModule => M_Module.GetModuleTranslation(Module);
 
         /// <summary>
         /// Instance

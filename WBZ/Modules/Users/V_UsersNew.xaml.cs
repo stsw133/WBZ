@@ -1,6 +1,8 @@
 ﻿using StswExpress.Globals;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_User;
 
@@ -26,6 +28,19 @@ namespace WBZ.Modules.Users
 			D.InstanceInfo.Perms = SQL.GetUserPerms(D.InstanceInfo.ID);
 			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE))
 				D.InstanceInfo.ID = SQL.NewInstanceID(D.MODULE_TYPE);
+		}
+
+		/// <summary>
+		/// Loaded
+		/// </summary>
+		private void Window_Loaded(object sender, RoutedEventArgs e)
+		{
+			/*
+			var coll = dpPerms.Children.Cast<UniformGrid>().OrderBy(x => (x.Children[0] as StswExpress.Controls.Header)?.Text).ToList();
+			dpPerms.Children.RemoveRange(0, dpPerms.Children.Count);
+			foreach (var item in coll)
+				dpPerms.Children.Add(item);
+			*/
 		}
 
 		/// <summary>

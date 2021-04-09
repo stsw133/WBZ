@@ -1992,5 +1992,132 @@ namespace WBZ.Properties {
                 this["config_Main_PanelColor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFEEEE55")]
+        public string config_Icons_PanelColor {
+            get {
+                return ((string)(this["config_Icons_PanelColor"]));
+            }
+            set {
+                this["config_Icons_PanelColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>i.module</string>
+  <string>False</string>
+  <string>i.name</string>
+  <string>False</string>
+  <string>50</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection sorting_IconsList {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_IconsList"]));
+            }
+            set {
+                this["sorting_IconsList"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool columns_IconsList_ID {
+            get {
+                return ((bool)(this["columns_IconsList_ID"]));
+            }
+            set {
+                this["columns_IconsList_ID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool columns_IconsList_File {
+            get {
+                return ((bool)(this["columns_IconsList_File"]));
+            }
+            set {
+                this["columns_IconsList_File"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool columns_IconsList_Module {
+            get {
+                return ((bool)(this["columns_IconsList_Module"]));
+            }
+            set {
+                this["columns_IconsList_Module"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool columns_IconsList_Name {
+            get {
+                return ((bool)(this["columns_IconsList_Name"]));
+            }
+            set {
+                this["columns_IconsList_Name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool columns_IconsList_Format {
+            get {
+                return ((bool)(this["columns_IconsList_Format"]));
+            }
+            set {
+                this["columns_IconsList_Format"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool columns_IconsList_Path {
+            get {
+                return ((bool)(this["columns_IconsList_Path"]));
+            }
+            set {
+                this["columns_IconsList_Path"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool columns_IconsList_Height {
+            get {
+                return ((bool)(this["columns_IconsList_Height"]));
+            }
+            set {
+                this["columns_IconsList_Height"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool columns_IconsList_Width {
+            get {
+                return ((bool)(this["columns_IconsList_Width"]));
+            }
+            set {
+                this["columns_IconsList_Width"] = value;
+            }
+        }
     }
 }

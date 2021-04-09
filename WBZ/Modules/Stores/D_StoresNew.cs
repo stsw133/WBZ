@@ -1,5 +1,5 @@
-﻿using System.Collections.ObjectModel;
-using WBZ.Globals;
+﻿using StswExpress.Globals;
+using System.Collections.ObjectModel;
 using WBZ.Models;
 using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_Store;
@@ -9,21 +9,17 @@ namespace WBZ.Modules.Stores
     class D_TransportNew : D_ModuleNew<MODULE_MODEL>
 	{
 		/// Module
-		public readonly string MODULE_TYPE = Global.Module.STORES;
+		public readonly string MODULE_TYPE = M_Module.Module.STORES;
 
 		/// Window title
 		public string Title
 		{
 			get
 			{
-				if (Mode == StswExpress.Globals.Commands.Type.NEW)
-					return "Nowy magazyn";
-				else if (Mode == StswExpress.Globals.Commands.Type.DUPLICATE)
-					return $"Duplikowanie magazynu: {InstanceInfo.Name}";
-				else if (Mode == StswExpress.Globals.Commands.Type.EDIT)
-					return $"Edycja magazynu: {InstanceInfo.Name}";
-				else
-					return $"Podgląd magazynu: {InstanceInfo.Name}";
+				if		(Mode == Commands.Type.NEW)			return "Nowy magazyn";
+				else if (Mode == Commands.Type.DUPLICATE)	return $"Duplikowanie magazynu: {InstanceInfo.Name}";
+				else if (Mode == Commands.Type.EDIT)		return $"Edycja magazynu: {InstanceInfo.Name}";
+				else										return $"Podgląd magazynu: {InstanceInfo.Name}";
 			}
 		}
 		/// Instance source - articles

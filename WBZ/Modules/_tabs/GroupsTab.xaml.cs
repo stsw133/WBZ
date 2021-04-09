@@ -37,7 +37,7 @@ namespace WBZ.Modules._tabs
 				Window win = Window.GetWindow(this);
 
 				if (ID != 0 && D.InstanceGroups == null)
-					D.InstanceGroups = SQL.ListInstances<M_Group>(Global.Module.GROUPS, $"g.module='{Module}' and g.instance={ID}");
+					D.InstanceGroups = SQL.ListInstances<M_Group>(M_Module.Module.GROUPS, $"g.module='{Module}' and g.instance={ID}");
 
 				dynamic d = win?.DataContext;
 				if (d != null)
@@ -60,10 +60,10 @@ namespace WBZ.Modules._tabs
             {
 				var group = window.Selected;
 				group.Owner = group.ID;
-				group.ID = SQL.NewInstanceID(Global.Module.GROUPS);
+				group.ID = SQL.NewInstanceID(M_Module.Module.GROUPS);
 				group.Instance = ID;
-				SQL.SetInstance(Global.Module.GROUPS, group, StswExpress.Globals.Commands.Type.NEW);
-				D.InstanceGroups = SQL.ListInstances<M_Group>(Global.Module.GROUPS, $"g.module='{Module}' and g.instance={ID}");
+				SQL.SetInstance(M_Module.Module.GROUPS, group, StswExpress.Globals.Commands.Type.NEW);
+				D.InstanceGroups = SQL.ListInstances<M_Group>(M_Module.Module.GROUPS, $"g.module='{Module}' and g.instance={ID}");
 			}
 		}
 
@@ -76,8 +76,8 @@ namespace WBZ.Modules._tabs
 			if (selectedInstances.Count() > 0)
 			{
 				foreach (var instance in selectedInstances)
-					SQL.DeleteInstance(Global.Module.GROUPS, instance.ID, instance.Name);
-				D.InstanceGroups = SQL.ListInstances<M_Group>(Global.Module.GROUPS, $"g.module='{Module}' and g.instance={ID}");
+					SQL.DeleteInstance(M_Module.Module.GROUPS, instance.ID, instance.Name);
+				D.InstanceGroups = SQL.ListInstances<M_Group>(M_Module.Module.GROUPS, $"g.module='{Module}' and g.instance={ID}");
 			}
 		}
 

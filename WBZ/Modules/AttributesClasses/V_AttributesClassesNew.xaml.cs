@@ -9,7 +9,7 @@ namespace WBZ.Modules.AttributesClasses
 	/// </summary>
 	public partial class AttributesClassesNew : New
 	{
-        D_AttributesClassesNew D = new D_AttributesClassesNew();
+        D_IconsNew D = new D_IconsNew();
 
         public AttributesClassesNew(MODULE_MODEL instance, StswExpress.Globals.Commands.Type mode)
         {

@@ -89,4 +89,7 @@
     <None Include="Functions\artdefmeacon.sql" />
     <None Include="Functions\artdefmeanam.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Tables\icons.sql" />
+  </ItemGroup>
 </Project>

@@ -107,6 +107,23 @@ CREATE TABLE wbz.attachments
 )
 TABLESPACE pg_default;
 
+-- Table: wbz.icons
+CREATE TABLE wbz.icons
+(
+    id bigserial NOT NULL,
+    module character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    name character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    "format" character varying(10) COLLATE pg_catalog."default" NOT NULL,
+    "path" character varying(250) COLLATE pg_catalog."default" NULL,
+    height integer NOT NULL,
+    width integer NOT NULL,
+    file bytea NOT NULL,
+    archival boolean NOT NULL DEFAULT false,
+    comment text COLLATE pg_catalog."default",
+    CONSTRAINT icons_pkey PRIMARY KEY (id)
+)
+TABLESPACE pg_default;
+
 -- Table: wbz.groups
 CREATE TABLE wbz.groups
 (

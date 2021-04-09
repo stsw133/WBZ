@@ -30,7 +30,7 @@ namespace WBZ.Modules.Articles
 		{
 			if (D.SelectingMode)
 				dgList.SelectionMode = DataGridSelectionMode.Single;
-			D.StoresList = SQL.ComboInstances(Global.Module.STORES, "codename", "archival=false", !D.SelectingMode);
+			D.StoresList = SQL.ComboInstances(M_Module.Module.STORES, "codename", "archival=false", !D.SelectingMode);
 		}
 
 		/// <summary>
@@ -55,7 +55,7 @@ namespace WBZ.Modules.Articles
 		{
 			var cbStore = sender as ComboBox;
 			if (cbStore.SelectedValue != null && (int)cbStore.SelectedValue > 0)
-				D.Filters.MainStore = SQL.GetInstance<M_Store>(Global.Module.STORES, (int)cbStore.SelectedValue);
+				D.Filters.MainStore = SQL.GetInstance<M_Store>(M_Module.Module.STORES, (int)cbStore.SelectedValue);
 			else
 				D.Filters.MainStore = new M_Store();
 			cmdRefresh_Executed(null, null);

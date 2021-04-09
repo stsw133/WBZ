@@ -6,7 +6,7 @@
         xmlns:c="clr-namespace:WBZ.Controls"
         xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
         mc:Ignorable="d"
-        Title="Lista grup"
+        Title="{Binding Title}"
             Height="650" Width="975" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
             Icon="/Resources/icon32_groups.ico">
     <WindowChrome.WindowChrome>

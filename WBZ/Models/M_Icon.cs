@@ -1,6 +1,6 @@
 ﻿namespace WBZ.Models
 {
-	public class M_Group : M
+	public class M_Icon : M
 	{
 		/// <summary>
 		/// Module
@@ -14,19 +14,24 @@
 		public string Name { get; set; } = string.Empty;
 
 		/// <summary>
-		/// Instance
-		/// </summary>
-		public int Instance { get; set; } = 0;
-
-		/// <summary>
-		/// Owner
-		/// </summary>
-		public int Owner { get; set; } = 0;
-
-		/// <summary>
 		/// Path
 		/// </summary>
 		public string Path { get; set; } = string.Empty;
-		public string Fullpath => Path + Name;
+
+		/// <summary>
+		/// Format
+		/// </summary>
+		public string Format { get; set; } = string.Empty;
+
+		/// <summary>
+		/// Size
+		/// </summary>
+		public int Height { get; set; } = 0;
+		public int Width { get; set; } = 0;
+
+		/// <summary>
+		/// File
+		/// </summary>
+		public byte[] File { get; set; } = null;
 	}
 }

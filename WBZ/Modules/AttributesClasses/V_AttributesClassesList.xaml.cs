@@ -9,7 +9,7 @@ namespace WBZ.Modules.AttributesClasses
 	/// </summary>
 	public partial class AttributesClassesList : List
 	{
-		D_AttributesClassesList D = new D_AttributesClassesList();
+		D_IconsList D = new D_IconsList();
 
 		public AttributesClassesList(StswExpress.Globals.Commands.Type mode)
 		{

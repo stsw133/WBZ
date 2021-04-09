@@ -26,20 +26,16 @@ namespace WBZ.Modules._base
 		/// Window mode
 		public Commands.Type Mode { get; set; }
 		/// Editing mode
-		public bool EditingMode { get { return Mode != Commands.Type.PREVIEW; } }
+		public bool EditingMode { get => Mode != Commands.Type.PREVIEW; }
 		/// Additional window icon
 		public string ModeIcon
 		{
 			get
 			{
-				if (Mode == Commands.Type.NEW)
-					return "/Resources/icon32_add.ico";
-				else if (Mode == Commands.Type.DUPLICATE)
-					return "/Resources/icon32_duplicate.ico";
-				else if (Mode == Commands.Type.EDIT)
-					return "/Resources/icon32_edit.ico";
-				else
-					return "/Resources/icon32_search.ico";
+				if		(Mode == Commands.Type.NEW)			return "/Resources/icon32_add.ico";
+				else if (Mode == Commands.Type.DUPLICATE)	return "/Resources/icon32_duplicate.ico";
+				else if (Mode == Commands.Type.EDIT)		return "/Resources/icon32_edit.ico";
+				else										return "/Resources/icon32_search.ico";
 			}
 		}
 	}

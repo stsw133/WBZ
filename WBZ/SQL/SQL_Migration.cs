@@ -172,15 +172,15 @@ alter table wbz.documents rename column company to contractor;
 CREATE TABLE wbz.vehicles
 (
     id serial NOT NULL,
-    register character varying(20) COLLATE pg_catalog.""default"" NOT NULL,
-	brand character varying(40) COLLATE pg_catalog.""default"",
-	model character varying(60) COLLATE pg_catalog.""default"",
+    register character varying(20) NOT NULL,
+	brand character varying(40),
+	model character varying(60),
 	capacity decimal(18, 3),
 	forwarder integer,
 	driver integer,
 	prodyear integer,
 	archival boolean NOT NULL DEFAULT false,
-	comment text COLLATE pg_catalog.""default"",
+	comment text,
 	icon bytea,
 	CONSTRAINT vehicles_pkey PRIMARY KEY(id),
 	CONSTRAINT vehicles_register_key UNIQUE (register),
@@ -192,7 +192,21 @@ CREATE TABLE wbz.vehicles
 		REFERENCES wbz.employees(id) MATCH SIMPLE
 		ON UPDATE CASCADE
 		ON DELETE NO ACTION
-) TABLESPACE pg_default;
+);
+
+CREATE TABLE wbz.icons
+(
+    id bigserial PRIMARY KEY,
+    module character varying(50) NOT NULL,
+    name character varying(50) NOT NULL,
+    ""format"" character varying(10) NOT NULL,
+	""path"" character varying(250) NULL,
+	height integer NOT NULL,
+	width integer NOT NULL,
+	file bytea NOT NULL,
+	archival boolean NOT NULL DEFAULT false,
+	comment text
+);
 
 							update wbz.config set value='1.2' where property='VERSION'", sqlConn, sqlTran);
 							sqlCmd.ExecuteNonQuery();

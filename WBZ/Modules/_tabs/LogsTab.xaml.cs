@@ -33,7 +33,7 @@ namespace WBZ.Modules._tabs
                 Window win = Window.GetWindow(this);
 
                 if (ID != 0 && D.InstanceLogs == null)
-                    D.InstanceLogs = SQL.ListInstances<M_Log>(Global.Module.LOGS, $"l.module='{Module}' and l.instance={ID}");
+                    D.InstanceLogs = SQL.ListInstances<M_Log>(M_Module.Module.LOGS, $"l.module='{Module}' and l.instance={ID}");
 
                 dynamic d = win?.DataContext;
                 if (d != null)

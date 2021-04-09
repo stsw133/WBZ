@@ -11,6 +11,7 @@ namespace WBZ.Modules._base
     public class ModuleList<MODULE_MODEL> : Window where MODULE_MODEL : class, new()
     {
         dynamic W, D;
+        DataGrid dgList;
         string FullName, HalfName;
 
         /// <summary>
@@ -22,6 +23,7 @@ namespace WBZ.Modules._base
             D = W.DataContext;
             FullName = W.GetType().FullName;
             HalfName = FullName[0..^4];
+            dgList = W.dgList;
         }
 
         /// <summary>
@@ -30,7 +32,7 @@ namespace WBZ.Modules._base
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             if (D.SelectingMode)
-                W.dgList.SelectionMode = DataGridSelectionMode.Single;
+                dgList.SelectionMode = DataGridSelectionMode.Single;
             cmdRefresh_Executed(null, null);
         }
 
@@ -50,7 +52,7 @@ namespace WBZ.Modules._base
         }
         internal void cmdPreview_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            var selectedInstances = (W.dgList as DataGrid).SelectedItems.Cast<MODULE_MODEL>();
+            var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
             foreach (MODULE_MODEL instance in selectedInstances)
             {
                 var window = Activator.CreateInstance(Type.GetType(HalfName + "New"), instance, StswExpress.Globals.Commands.Type.PREVIEW) as Window;
@@ -94,7 +96,7 @@ namespace WBZ.Modules._base
         }
         internal void cmdDuplicate_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            var selectedInstances = (W.dgList as DataGrid).SelectedItems.Cast<MODULE_MODEL>();
+            var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
             foreach (MODULE_MODEL instance in selectedInstances)
             {
                 var window = Activator.CreateInstance(Type.GetType(HalfName + "New"), instance, StswExpress.Globals.Commands.Type.DUPLICATE) as Window;
@@ -118,7 +120,7 @@ namespace WBZ.Modules._base
         }
         internal void cmdEdit_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            var selectedInstances = (W.dgList as DataGrid).SelectedItems.Cast<MODULE_MODEL>();
+            var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
             foreach (MODULE_MODEL instance in selectedInstances)
             {
                 var window = Activator.CreateInstance(Type.GetType(HalfName + "New"), instance, StswExpress.Globals.Commands.Type.EDIT) as Window;
@@ -142,7 +144,7 @@ namespace WBZ.Modules._base
         }
         internal void cmdDelete_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            var selectedInstances = (W.dgList as DataGrid).SelectedItems.Cast<MODULE_MODEL>();
+            var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
             if (selectedInstances.Count() > 0 && MessageBox.Show("Czy na pewno usunąć zaznaczone rekordy?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
                 foreach (dynamic instance in selectedInstances)
@@ -205,7 +207,7 @@ namespace WBZ.Modules._base
                 }
                 else
                 {
-                    Selected = (W.dgList as DataGrid).SelectedItems.Cast<MODULE_MODEL>().FirstOrDefault();
+                    Selected = (sender as DataGrid).SelectedItems.Cast<MODULE_MODEL>().FirstOrDefault();
                     W.DialogResult = true;
                 }
             }

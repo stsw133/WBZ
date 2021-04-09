@@ -25,7 +25,7 @@ namespace WBZ.Models
 		/// <summary>
 		/// Store
 		/// </summary>
-		public int Store { set => cStore = SQL.ComboInstances(Globals.Global.Module.STORES, "codename", $"id={value}", false)?[0]; }
+		public int Store { set => cStore = SQL.ComboInstances(M_Module.Module.STORES, "codename", $"id={value}", false)?[0]; }
 		public M_ComboValue cStore { get; set; } = new M_ComboValue();
 
 		/// <summary>
