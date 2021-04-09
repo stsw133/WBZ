@@ -1,32 +1,23 @@
 ﻿using StswExpress.Globals;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace WBZ.Modules._base
 {
-    class D_ModuleNew<MODULE_MODEL> : INotifyPropertyChanged where MODULE_MODEL : class, new()
+    class D_ModuleNew<MODULE_MODEL> : D where MODULE_MODEL : class, new()
     {
-		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged([CallerMemberName] string name = "none passed")
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
-
 		/// Instance
 		private MODULE_MODEL instanceInfo = new MODULE_MODEL();
 		public MODULE_MODEL InstanceInfo
 		{
 			get => instanceInfo;
-			set
-			{
-				instanceInfo = value;
-				NotifyPropertyChanged();
-			}
+			set => SetField(ref instanceInfo, value, () => InstanceInfo);
 		}
+
 		/// Window mode
 		public Commands.Type Mode { get; set; }
+
 		/// Editing mode
 		public bool EditingMode { get => Mode != Commands.Type.PREVIEW; }
+
 		/// Additional window icon
 		public string ModeIcon
 		{

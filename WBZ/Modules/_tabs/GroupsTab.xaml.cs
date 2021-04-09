@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using WBZ.Globals;
 using WBZ.Models;
+using WBZ.Modules._base;
 using WBZ.Modules.Groups;
 
 namespace WBZ.Modules._tabs
@@ -93,24 +94,14 @@ namespace WBZ.Modules._tabs
 	/// <summary>
 	/// DataContext
 	/// </summary>
-	class D_GroupsTab : INotifyPropertyChanged
+	class D_GroupsTab : D
 	{
-		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged([CallerMemberName] string name = "none passed")
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
-
 		/// Groups
 		private ObservableCollection<M_Group> instanceGroups;
 		public ObservableCollection<M_Group> InstanceGroups
 		{
 			get => instanceGroups;
-			set
-			{
-				instanceGroups = value;
-				NotifyPropertyChanged();
-			}
+			set => SetField(ref instanceGroups, value, () => InstanceGroups);
 		}
 	}
 }

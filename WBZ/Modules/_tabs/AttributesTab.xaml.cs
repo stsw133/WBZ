@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using WBZ.Controls;
 using WBZ.Models;
+using WBZ.Modules._base;
 
 namespace WBZ.Modules._tabs
 {
@@ -75,24 +76,14 @@ namespace WBZ.Modules._tabs
 	/// <summary>
 	/// DataContext
 	/// </summary>
-	class D_AttributesTab : INotifyPropertyChanged
+	class D_AttributesTab : D
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void NotifyPropertyChanged([CallerMemberName] string name = "none passed")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
-
         /// Attributes
         private List<M_Attribute> instanceAttributes;
         public List<M_Attribute> InstanceAttributes
         {
             get => instanceAttributes;
-            set
-            {
-                instanceAttributes = value;
-                NotifyPropertyChanged();
-            }
+            set => SetField(ref instanceAttributes, value, () => InstanceAttributes);
         }
     }
 }

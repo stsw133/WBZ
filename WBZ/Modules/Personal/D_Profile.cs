@@ -2,27 +2,18 @@
 using System.Runtime.CompilerServices;
 using WBZ.Globals;
 using WBZ.Models;
+using WBZ.Modules._base;
 
 namespace WBZ.Modules.Personal
 {
-    class D_Profile : INotifyPropertyChanged
+    class D_Profile : D
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void NotifyPropertyChanged([CallerMemberName] string name = "none passed")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
-
         /// Logged user
         private M_User user = Global.User;
         public M_User User
         {
             get => user;
-            set
-            {
-                user = value;
-                NotifyPropertyChanged();
-            }
+            set => SetField(ref user, value, () => User);
         }
     }
 }

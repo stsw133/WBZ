@@ -1,14 +1,8 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using WBZ.Modules._base;
 
 namespace WBZ.Modules
 {
-    class D_Settings : INotifyPropertyChanged
+    class D_Settings : D
     {
-		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged([CallerMemberName] string name = "none passed")
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
     }
 }

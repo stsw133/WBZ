@@ -1,10 +1,9 @@
 ﻿using StswExpress.Globals;
 using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using WBZ.Models;
+using WBZ.Modules._base;
 
 namespace WBZ.Controls
 {
@@ -55,51 +54,38 @@ namespace WBZ.Controls
 	/// <summary>
 	/// DataContext
 	/// </summary>
-	public class D_AttributeValueChange : INotifyPropertyChanged
+	public class D_AttributeValueChange : D
 	{
-		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged([CallerMemberName] string name = "none passed")
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
-
 		/// Window title
 		public string Title
 		{
 			get
 			{
-				if (string.IsNullOrEmpty(AttributeInfo.Value))
-					return $"Wartość nowego atrybutu";
-				else if (EditMode)
-					return $"Edycja wartości atrybutu";
-				else
-					return $"Podgląd wartości atrybutu";
+				if		(string.IsNullOrEmpty(AttributeInfo.Value)) return $"Wartość nowego atrybutu";
+				else if (EditMode)									return $"Edycja wartości atrybutu";
+				else												return $"Podgląd wartości atrybutu";
 			}
 		}
+
 		/// Attribute
 		private M_Attribute attributeInfo;
 		public M_Attribute AttributeInfo
 		{
 			get => attributeInfo;
-			set
-			{
-				attributeInfo = value;
-				NotifyPropertyChanged();
-			}
+			set => SetField(ref attributeInfo, value, () => AttributeInfo);
 		}
+
 		/// Attribute values
 		private ObservableCollection<M_ComboValue> attributeValues;
 		public ObservableCollection<M_ComboValue> AttributeValues
 		{
 			get => attributeValues;
-			set
-			{
-				attributeValues = value;
-				NotifyPropertyChanged();
-			}
+			set => SetField(ref attributeValues, value, () => AttributeValues);
 		}
+
 		/// Can attribute have any value
 		public bool FreeValues { get => AttributeInfo.Class.Type != "list"; }
+
 		/// Edit mode
 		public bool EditMode { get; set; }
 	}

@@ -9,6 +9,7 @@ using WBZ.Globals;
 using System.Collections.ObjectModel;
 using WBZ.Controls;
 using System.Runtime.CompilerServices;
+using WBZ.Modules._base;
 
 namespace WBZ.Modules._tabs
 {
@@ -163,24 +164,14 @@ namespace WBZ.Modules._tabs
     /// <summary>
     /// DataContext
     /// </summary>
-    class D_AttachmentsTab : INotifyPropertyChanged
+    class D_AttachmentsTab : D
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void NotifyPropertyChanged([CallerMemberName] string name = "none passed")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
-
         /// Attachments
         private ObservableCollection<M_Attachment> instanceAttachments;
         public ObservableCollection<M_Attachment> InstanceAttachments
         {
             get => instanceAttachments;
-            set
-            {
-                instanceAttachments = value;
-                NotifyPropertyChanged();
-            }
+            set => SetField(ref instanceAttachments, value, () => InstanceAttachments);
         }
     }
 }

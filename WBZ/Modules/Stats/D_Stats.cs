@@ -1,38 +1,24 @@
-﻿using System.ComponentModel;
-using System.Data;
-using System.Runtime.CompilerServices;
+﻿using System.Data;
+using WBZ.Modules._base;
 
 namespace WBZ.Modules.Stats
 {
-    class D_Stats : INotifyPropertyChanged
+    class D_Stats : D
     {
-		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged([CallerMemberName] string name = "none passed")
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
-
 		/// Article stats
 		private DataTable statsArticles = SQL.GetStatsArticles();
 		public DataTable StatsArticles
 		{
 			get => statsArticles;
-			set
-			{
-				statsArticles = value;
-				NotifyPropertyChanged();
-			}
+			set => SetField(ref statsArticles, value, () => StatsArticles);
 		}
+
 		/// Article stats - total
 		private double statsArticlesTotal = SQL.GetStatsArticlesTotal();
 		public double StatsArticlesTotal
 		{
 			get => statsArticlesTotal;
-			set
-			{
-				statsArticlesTotal = value;
-				NotifyPropertyChanged();
-			}
+			set => SetField(ref statsArticlesTotal, value, () => StatsArticlesTotal);
 		}
 	}
 }

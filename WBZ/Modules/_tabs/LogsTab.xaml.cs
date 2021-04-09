@@ -5,6 +5,7 @@ using WBZ.Models;
 using WBZ.Globals;
 using System.Collections.ObjectModel;
 using System.Runtime.CompilerServices;
+using WBZ.Modules._base;
 
 namespace WBZ.Modules._tabs
 {
@@ -49,24 +50,14 @@ namespace WBZ.Modules._tabs
 	/// <summary>
 	/// DataContext
 	/// </summary>
-	class D_LogsTab : INotifyPropertyChanged
+	class D_LogsTab : D
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void NotifyPropertyChanged([CallerMemberName] string name = "none passed")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
-
         /// Logs
         private ObservableCollection<M_Log> instanceLogs;
         public ObservableCollection<M_Log> InstanceLogs
         {
             get => instanceLogs;
-            set
-            {
-                instanceLogs = value;
-                NotifyPropertyChanged();
-            }
+            set => SetField(ref instanceLogs, value, () => InstanceLogs);
         }
     }
 }

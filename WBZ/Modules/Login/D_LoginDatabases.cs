@@ -2,27 +2,18 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using WBZ.Modules._base;
 
 namespace WBZ.Modules.Login
 {
-    class D_LoginDatabases : INotifyPropertyChanged
+    class D_LoginDatabases : D
     {
-		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged([CallerMemberName] string name = "none passed")
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
-
 		/// Databases list
 		private ObservableCollection<M_Database> databases = new ObservableCollection<M_Database>(M_Database.LoadAllDatabases());
 		public ObservableCollection<M_Database> Databases
 		{
 			get => databases;
-			set
-			{
-				databases = value;
-				NotifyPropertyChanged();
-			}
+			set => SetField(ref databases, value, () => Databases);
 		}
 	}
 }

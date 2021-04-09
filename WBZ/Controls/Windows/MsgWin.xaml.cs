@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using WBZ.Modules._base;
 
 namespace WBZ.Controls
 {
@@ -61,42 +62,27 @@ namespace WBZ.Controls
 	/// <summary>
 	/// DataContext
 	/// </summary>
-	public class D_MsgWin : INotifyPropertyChanged
+	public class D_MsgWin : D
 	{
-		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged([CallerMemberName] string name = "none passed")
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
-
 		/// Title
 		private string title;
 		public string Title
 		{
 			get => title;
-			set
-			{
-				title = value;
-				NotifyPropertyChanged();
-			}
+			set => SetField(ref title, value, () => Title);
 		}
+
 		/// Icon
 		public string Icon
 		{
 			get
 			{
-				if (Title == MsgWin.MsgTitle.BLOCKADE)
-					return "/Resources/icon32_shield_orange.ico";
-				else if (Title == MsgWin.MsgTitle.ERROR)
-					return "/Resources/icon32_shield_red.ico";
-				else if (Title == MsgWin.MsgTitle.INFO)
-					return "/Resources/icon32_shield_green.ico";
-				else if (Title == MsgWin.MsgTitle.QUESTION)
-					return "/Resources/icon32_shield_blue.ico";
-				else if (Title == MsgWin.MsgTitle.WARNING)
-					return "/Resources/icon32_shield_yellow.ico";
-				else
-					return null;
+				if		(Title == MsgWin.MsgTitle.BLOCKADE)	return "/Resources/icon32_shield_orange.ico";
+				else if (Title == MsgWin.MsgTitle.ERROR)	return "/Resources/icon32_shield_red.ico";
+				else if (Title == MsgWin.MsgTitle.INFO)		return "/Resources/icon32_shield_green.ico";
+				else if (Title == MsgWin.MsgTitle.QUESTION)	return "/Resources/icon32_shield_blue.ico";
+				else if (Title == MsgWin.MsgTitle.WARNING)	return "/Resources/icon32_shield_yellow.ico";
+				else										return null;
 			}
 		}
 	}
