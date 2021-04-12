@@ -3,9 +3,69 @@
 		"en": "English",
 		"pl": "Polski"
 	},
+	"Admin": {
+		"en": "Admin",
+		"pl": "Admin"
+	},
+	"Articles": {
+		"en": "Articles",
+		"pl": "Towary"
+	},
+	"Attachments": {
+		"en": "Attachments",
+		"pl": "Załączniki"
+	},
+	"Attributes": {
+		"en": "Attributes",
+		"pl": "Atrybuty"
+	},
+	"AttributesClasses": {
+		"en": "Classes of attributes",
+		"pl": "Klasy atrybutów"
+	},
+	"Community": {
+		"en": "Community",
+		"pl": "Społeczność"
+	},
+	"Contacts": {
+		"en": "Contacts",
+		"pl": "Kontakty"
+	},
+	"Contractors": {
+		"en": "Contractors",
+		"pl": "Kontrahenci"
+	},
+	"Distributions": {
+		"en": "Distributions",
+		"pl": "Dystrybucje"
+	},
+	"Documents": {
+		"en": "Documents",
+		"pl": "Dokumenty"
+	},
+	"Employees": {
+		"en": "Employees",
+		"pl": "Pracownicy"
+	},
+	"Families": {
+		"en": "Families",
+		"pl": "Rodziny"
+	},
+	"Groups": {
+		"en": "Groups",
+		"pl": "Grupy"
+	},
+	"Icons": {
+		"en": "Icons",
+		"pl": "Ikony"
+	},
 	"Login": {
 		"en": "Logging",
 		"pl": "Logowanie"
+	},
+	"Logs": {
+		"en": "Logs",
+		"pl": "Logi"
 	},
 	"Main": {
 		"en": " - main window",
@@ -15,25 +75,9 @@
 		"en": "Add new",
 		"pl": "Dodaj nowy"
 	},
-	"Main.Admin": {
-		"en": "Admin",
-		"pl": "Admin"
-	},
-	"Main.Articles": {
-		"en": "Articles",
-		"pl": "Towary"
-	},
-	"Main.Attachments": {
-		"en": "Attachments",
-		"pl": "Załączniki"
-	},
 	"Main.AttachmentsGallery": {
 		"en": "Gallery of attachments",
 		"pl": "Galeria załączników"
-	},
-	"Main.AttributesClasses": {
-		"en": "Classes of attributes",
-		"pl": "Klasy atrybutów"
 	},
 	"Main.CloseApp": {
 		"en": "Close app",
@@ -43,33 +87,9 @@
 		"en": "SQL console",
 		"pl": "Konsola SQL"
 	},
-	"Main.Contractors": {
-		"en": "Contractors",
-		"pl": "Kontrahenci"
-	},
-	"Main.Distributions": {
-		"en": "Distributions",
-		"pl": "Dystrybucje"
-	},
-	"Main.Documents": {
-		"en": "Documents",
-		"pl": "Dokumenty"
-	},
-	"Main.Employees": {
-		"en": "Employees",
-		"pl": "Pracownicy"
-	},
-	"Main.Families": {
-		"en": "Families",
-		"pl": "Rodziny"
-	},
 	"Main.Logout": {
 		"en": "Log out",
 		"pl": "Wyloguj"
-	},
-	"Main.Logs": {
-		"en": "Logs",
-		"pl": "Logi"
 	},
 	"Main.Messages": {
 		"en": "Messages",
@@ -107,14 +127,6 @@
 		"en": "Show stats",
 		"pl": "Wyświetl statystyki"
 	},
-	"Main.Stats": {
-		"en": "Stats",
-		"pl": "Statystyki"
-	},
-	"Main.Stores": {
-		"en": "Stores",
-		"pl": "Magazyny"
-	},
 	"Main.System": {
 		"en": "System",
 		"pl": "System"
@@ -126,14 +138,6 @@
 	"Main.UserManual": {
 		"en": "User's manual",
 		"pl": "Poradnik użytkownika"
-	},
-	"Main.Users": {
-		"en": "Users",
-		"pl": "Użytkownicy"
-	},
-	"Main.Vehicles": {
-		"en": "Vehicles",
-		"pl": "Pojazdy"
 	},
 	"Main.Versions": {
 		"en": "Versions",
@@ -206,5 +210,21 @@
 	"Settings.Test": {
 		"en": "Test",
 		"pl": "Testuj"
+	},
+	"Stats": {
+		"en": "Stats",
+		"pl": "Statystyki"
+	},
+	"Stores": {
+		"en": "Stores",
+		"pl": "Magazyny"
+	},
+	"Users": {
+		"en": "Users",
+		"pl": "Użytkownicy"
+	},
+	"Vehicles": {
+		"en": "Vehicles",
+		"pl": "Pojazdy"
 	}
 }

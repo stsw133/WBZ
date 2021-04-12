@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Windows;
 using TranslateMe;
+using WBZ.Models;
 using WBZ.Modules.Login;
 
 namespace WBZ
@@ -34,6 +35,8 @@ namespace WBZ
 		{
 			if (File.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Resources\Translations.tm.json")))
 				TMLanguagesLoader.Instance.AddFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Resources\Translations.tm.json"));
+
+			M_Module.Modules.Sort((x, y) => x.Item2.CompareTo(y.Item2));
 
 			if (M_Database.LoadAllDatabases().Count == 0)
 				new LoginDatabases().Show();

@@ -4,7 +4,7 @@
        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
        xmlns:b="clr-namespace:WBZ.Modules.Icons"
-       xmlns:c="clr-namespace:WBZ.Controls"
+       xmlns:m="clr-namespace:WBZ.Models"
        xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
        xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
        xmlns:p="clr-namespace:WBZ.Properties"
@@ -72,15 +72,9 @@
                     <DockPanel Margin="10" IsEnabled="{Binding EditingMode}">
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Moduł:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>
-                            <ComboBox SelectedValue="{Binding InstanceInfo.Module}" SelectedValuePath="Tag" Margin="5" VerticalContentAlignment="Center">
-                                <ComboBoxItem Content="Dokumenty" Tag="documents"/>
-                                <ComboBoxItem Content="Dystrybucje" Tag="distributions"/>
-                                <ComboBoxItem Content="Kontrahenci" Tag="contractors"/>
-                                <ComboBoxItem Content="Magazyny" Tag="stores"/>
-                                <ComboBoxItem Content="Pracownicy" Tag="employees"/>
-                                <ComboBoxItem Content="Rodziny" Tag="families"/>
-                                <ComboBoxItem Content="Towary" Tag="articles"/>
-                            </ComboBox>
+                            <ComboBox Margin="5" VerticalContentAlignment="Center"
+                                      ItemsSource="{x:Static m:M_Module.Modules}" SelectedValue="{Binding InstanceInfo.Module}"
+                                      SelectedValuePath="Item1" DisplayMemberPath="Item2"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">
                             <Label Content="Nazwa:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>

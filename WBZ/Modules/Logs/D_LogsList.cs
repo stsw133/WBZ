@@ -27,11 +27,7 @@ namespace WBZ.Modules.Logs
 		public ObservableCollection<MODULE_MODEL> InstancesList_Logs
 		{
 			get => instancesList_Logs;
-			set
-			{
-				instancesList_Logs = value;
-				NotifyPropertyChanged();
-			}
+			set => SetField(ref instancesList_Logs, value, () => InstancesList_Logs);
 		}
 		
 		/// Instances list (errors)
@@ -39,11 +35,7 @@ namespace WBZ.Modules.Logs
 		public ObservableCollection<MODULE_MODEL> InstancesList_Errors
 		{
 			get => instancesList_Errors;
-			set
-			{
-				instancesList_Errors = value;
-				NotifyPropertyChanged();
-			}
+			set => SetField(ref instancesList_Errors, value, () => InstancesList_Errors);
 		}
 	}
 }

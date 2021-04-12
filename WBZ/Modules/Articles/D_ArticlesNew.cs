@@ -27,33 +27,21 @@ namespace WBZ.Modules.Articles
 		public ObservableCollection<M_Store> InstanceSources_Stores
 		{
 			get => instanceSources_Stores;
-			set
-			{
-				instanceSources_Stores = value;
-				NotifyPropertyChanged();
-			}
+			set => SetField(ref instanceSources_Stores, value, () => InstanceSources_Stores);
 		}
 		/// Instance source - documents
 		private ObservableCollection<M_Document> instanceSources_Documents;
 		public ObservableCollection<M_Document> InstanceSources_Documents
 		{
 			get => instanceSources_Documents;
-			set
-			{
-				instanceSources_Documents = value;
-				NotifyPropertyChanged();
-			}
+			set => SetField(ref instanceSources_Documents, value, () => InstanceSources_Documents);
 		}
 		/// Instance source - distributions
 		private ObservableCollection<M_Distribution> instanceSources_Distributions;
 		public ObservableCollection<M_Distribution> InstanceSources_Distributions
 		{
 			get => instanceSources_Distributions;
-			set
-			{
-				instanceSources_Distributions = value;
-				NotifyPropertyChanged();
-			}
+			set => SetField(ref instanceSources_Distributions, value, () => InstanceSources_Distributions);
 		}
 	}
 }

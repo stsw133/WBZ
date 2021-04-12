@@ -27,11 +27,7 @@ namespace WBZ.Modules.Contractors
         public ObservableCollection<M_Document> InstanceSources_Documents
         {
             get => instanceSources_Documents;
-            set
-            {
-                instanceSources_Documents = value;
-                NotifyPropertyChanged();
-            }
+            set => SetField(ref instanceSources_Documents, value, () => InstanceSources_Documents);
         }
     }
 }

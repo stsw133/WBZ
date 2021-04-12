@@ -27,11 +27,7 @@ namespace WBZ.Modules.Families
         public ObservableCollection<M_Distribution> InstanceSources_Distributions
         {
             get => instanceSources_Distributions;
-            set
-            {
-                instanceSources_Distributions = value;
-                NotifyPropertyChanged();
-            }
+            set => SetField(ref instanceSources_Distributions, value, () => InstanceSources_Distributions);
         }
     }
 }

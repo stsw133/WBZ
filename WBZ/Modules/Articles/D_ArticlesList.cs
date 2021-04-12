@@ -27,11 +27,7 @@ namespace WBZ.Modules.Articles
 		public ObservableCollection<M_ComboValue> StoresList
         {
 			get => storesList;
-			set
-			{
-				storesList = value;
-				NotifyPropertyChanged();
-			}
+			set => SetField(ref storesList, value, () => StoresList);
 		}
 	}
 }
