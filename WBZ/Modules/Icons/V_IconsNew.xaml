@@ -73,11 +73,15 @@
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Moduł:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>
                             <ComboBox Margin="5" VerticalContentAlignment="Center"
-                                      ItemsSource="{x:Static m:M_Module.Modules}" SelectedValue="{Binding InstanceInfo.Module}"
-                                      SelectedValuePath="Item1" DisplayMemberPath="Item2"/>
+                                      ItemsSource="{x:Static m:M_Module.Modules}"
+                                      SelectedValue="{Binding InstanceInfo.Module}" SelectedValuePath="Item1" DisplayMemberPath="Item2"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">
                             <Label Content="Nazwa:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>
+                            <TextBox Text="{Binding InstanceInfo.Name}" Margin="5" VerticalContentAlignment="Center"/>
+                        </DockPanel>
+                        <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">
+                            <Label Content="Ścieżka:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>
                             <TextBox Text="{Binding InstanceInfo.Name}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                     </DockPanel>

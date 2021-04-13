@@ -114,7 +114,7 @@
                             BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
                         <DockPanel>
                             <Image Margin="5" Source="/Resources/icon32_admin.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Main.Admin, DefaultText='Admin', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
+                            <Label Margin="1" Content="{Tr Admin, DefaultText='Admin', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
                                    FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                             <sec:Button Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" TextVisibility="False"
                                         ToolTip="{Tr Main.Console, DefaultText='Konsola', LanguageId={x:Static seg:Properties.Language}}"
@@ -159,7 +159,7 @@
                             BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
                         <DockPanel>
                             <Image Margin="5" Source="/Resources/icon32_articles.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Main.Articles, DefaultText='Towary', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
+                            <Label Margin="1" Content="{Tr Articles, DefaultText='Towary', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
                                    FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                             <sec:Button Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" TextVisibility="False"
                                         ToolTip="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
@@ -199,7 +199,7 @@
                             BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
                         <DockPanel>
                             <Image Margin="5" Source="/Resources/icon32_photos.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Main.Attachments, DefaultText='Załączniki', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
+                            <Label Margin="1" Content="{Tr Attachments, DefaultText='Załączniki', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
                                        FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                             <sec:Button Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" TextVisibility="False"
                                         ToolTip="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
@@ -239,7 +239,7 @@
                             BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
                         <DockPanel>
                             <Image Margin="5" Source="/Resources/icon32_attributes.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Main.AttributesClasses, DefaultText='Klasy atrybutów', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
+                            <Label Margin="1" Content="{Tr AttributesClasses, DefaultText='Klasy atrybutów', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
                                    FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                             <sec:Button Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" TextVisibility="False"
                                         ToolTip="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
@@ -279,7 +279,7 @@
                             BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
                         <DockPanel>
                             <Image Margin="5" Source="/Resources/icon32_contractors.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Main.Contractors, DefaultText='Kontrahenci', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
+                            <Label Margin="1" Content="{Tr Contractors, DefaultText='Kontrahenci', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
                                    FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                             <sec:Button Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" TextVisibility="False"
                                         ToolTip="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
@@ -319,7 +319,7 @@
                             BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
                         <DockPanel>
                             <Image Margin="5" Source="/Resources/icon32_food.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Main.Distributions, DefaultText='Dystrybucje', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
+                            <Label Margin="1" Content="{Tr Distributions, DefaultText='Dystrybucje', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
                                    FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                             <sec:Button Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" TextVisibility="False"
                                         ToolTip="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
@@ -359,7 +359,7 @@
                             BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
                         <DockPanel>
                             <Image Margin="5" Source="/Resources/icon32_documents.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Main.Documents, DefaultText='Dokumenty', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
+                            <Label Margin="1" Content="{Tr Documents, DefaultText='Dokumenty', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
                                    FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                             <sec:Button Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" TextVisibility="False"
                                         ToolTip="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
@@ -399,7 +399,7 @@
                             BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
                         <DockPanel>
                             <Image Margin="5" Source="/Resources/icon32_briefcase.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Main.Employees, DefaultText='Pracownicy', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
+                            <Label Margin="1" Content="{Tr Employees, DefaultText='Pracownicy', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
                                    FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                             <sec:Button Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" TextVisibility="False"
                                         ToolTip="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
@@ -439,7 +439,7 @@
                             BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
                         <DockPanel>
                             <Image Margin="5" Source="/Resources/icon32_families.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Main.Families, DefaultText='Rodziny', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
+                            <Label Margin="1" Content="{Tr Families, DefaultText='Rodziny', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
                                    FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                             <sec:Button Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" TextVisibility="False"
                                         ToolTip="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
@@ -479,7 +479,7 @@
                             BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
                         <DockPanel>
                             <Image Margin="5" Source="/Resources/icon32_icons.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Main.Icons, DefaultText='Ikony', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
+                            <Label Margin="1" Content="{Tr Icons, DefaultText='Ikony', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
                                    FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                             <sec:Button Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" TextVisibility="False"
                                         ToolTip="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
@@ -519,7 +519,7 @@
                             BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
                         <DockPanel>
                             <Image Margin="5" Source="/Resources/icon32_logs.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Main.Logs, DefaultText='Logi', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
+                            <Label Margin="1" Content="{Tr Logs, DefaultText='Logi', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
                                    FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                             <sec:Button Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" TextVisibility="False"
                                         ToolTip="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
@@ -552,7 +552,7 @@
                             BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
                         <DockPanel>
                             <Image Margin="5" Source="/Resources/icon32_stats.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Main.Stats, DefaultText='Statystyki', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
+                            <Label Margin="1" Content="{Tr Stats, DefaultText='Statystyki', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
                                    FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                             <sec:Button Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" TextVisibility="False"
                                         ToolTip="{Tr Main.Stats, DefaultText='Statystyki', LanguageId={x:Static seg:Properties.Language}}"
@@ -585,7 +585,7 @@
                             BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
                         <DockPanel>
                             <Image Margin="5" Source="/Resources/icon32_stores.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Main.Stores, DefaultText='Magazyny', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
+                            <Label Margin="1" Content="{Tr Stores, DefaultText='Magazyny', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
                                    FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                             <sec:Button Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" TextVisibility="False"
                                         ToolTip="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
@@ -625,7 +625,7 @@
                             BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
                         <DockPanel>
                             <Image Margin="5" Source="/Resources/icon32_users.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Main.Users, DefaultText='Użytkownicy', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
+                            <Label Margin="1" Content="{Tr Users, DefaultText='Użytkownicy', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
                                    FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                             <sec:Button Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" TextVisibility="False"
                                         ToolTip="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
@@ -665,7 +665,7 @@
                             BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
                         <DockPanel>
                             <Image Margin="5" Source="/Resources/icon32_transport.ico" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Main.Vehicles, DefaultText='Pojazdy', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
+                            <Label Margin="1" Content="{Tr Vehicles, DefaultText='Pojazdy', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
                                    FontWeight="Heavy" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                             <sec:Button Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" TextVisibility="False"
                                         ToolTip="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"

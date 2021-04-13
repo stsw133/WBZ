@@ -4,8 +4,9 @@
           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
           xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
-          xmlns:g="clr-namespace:WBZ.Globals"
           xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
+          xmlns:g="clr-namespace:WBZ.Globals"
+          xmlns:m="clr-namespace:WBZ.Models"
           xmlns:p="clr-namespace:WBZ.Properties"
           mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800"
           Margin="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1" AutoGenerateColumns="False">
@@ -38,16 +39,10 @@
             <DataGridTextColumn.Header>
                 <StackPanel>
                     <TextBlock Text="Nazwa modułu"/>
-                    <ComboBox SelectedValue="{Binding Data.Filters.Module, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Tag"
+                    <ComboBox VerticalContentAlignment="Center" Padding="1"
+                              ItemsSource="{x:Static m:M_Module.Modules}"
+                              SelectedValue="{Binding Data.Filters.Module, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Item1" DisplayMemberPath="Item2"
                               Visibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}, Converter={seg:conv_BoolToVisibility}}">
-                        <ComboBoxItem Content="Dokumenty" Tag="documents"/>
-                        <ComboBoxItem Content="Dystrybucje" Tag="distributions"/>
-                        <ComboBoxItem Content="Kontrahenci" Tag="contractors"/>
-                        <ComboBoxItem Content="Magazyny" Tag="stores"/>
-                        <ComboBoxItem Content="Pracownicy" Tag="employees"/>
-                        <ComboBoxItem Content="Rodziny" Tag="families"/>
-                        <ComboBoxItem Content="Towary" Tag="articles"/>
-                        <ComboBoxItem Content="Użytkownicy" Tag="users"/>
                         <ComboBox.InputBindings>
                             <KeyBinding Command="seg:Commands.Refresh" Key="Return"/>
                         </ComboBox.InputBindings>
