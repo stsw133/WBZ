@@ -2,14 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace WBZ.Models
+namespace WBZ.Globals
 {
-    public static class M_Module
-    {
+	public static class Config
+	{
+		public static string Version => SQL.GetPropertyValue("VERSION", StswExpress.Globals.Global.AppVersion());
+		public static string Email_Host => SQL.GetPropertyValue("EMAIL_HOST", "smtp.gmail.com");
+		public static string Email_Port => SQL.GetPropertyValue("EMAIL_PORT", 587.ToString());
+		public static string Email_Address => SQL.GetPropertyValue("EMAIL_ADDRESS", "wbz.email.testowy@gmail.com");
+		public static string Email_Password => SQL.GetPropertyValue("EMAIL_PASSWORD", string.Empty);
+		public static string Attachment_Size_Max => SQL.GetPropertyValue("ATTACHMENT_SIZE_MAX", (1024*1024*10).ToString());
+		public static string Icon_Dimensions_Max => SQL.GetPropertyValue("ICON_DIMENSIONS_MAX", 64.ToString());
+		public static string Icon_Size_Max => SQL.GetPropertyValue("ICON_SIZE_MAX", (1024 * 10).ToString());
+		public static string Logs_Enabled => SQL.GetPropertyValue("LOGS_ENABLED", 0.ToString());
+
         /// <summary>
-        /// Constants
+        /// Modules
         /// </summary>
-        public static class Module
+        public static class Modules
         {
             public const string ARTICLES = "articles";
             public const string ATTACHMENTS = "attachments";
@@ -38,27 +48,27 @@ namespace WBZ.Models
         /// <summary>
         /// List
         /// </summary>
-        public static List<Tuple<string, string>> Modules = new List<Tuple<string, string>>()
+        public static List<Tuple<string, string>> ListModules = new List<Tuple<string, string>>()
         {
             new Tuple<string, string>(string.Empty, string.Empty),
-            new Tuple<string, string>(Module.ARTICLES, GetModuleTranslation(Module.ARTICLES)),
-            new Tuple<string, string>(Module.ATTACHMENTS, GetModuleTranslation(Module.ATTACHMENTS)),
+            new Tuple<string, string>(Modules.ARTICLES, GetModuleTranslation(Modules.ARTICLES)),
+            new Tuple<string, string>(Modules.ATTACHMENTS, GetModuleTranslation(Modules.ATTACHMENTS)),
             //new Tuple<string, string>(Module.ATTRIBUTES, GetModuleTranslation(Module.ATTRIBUTES)),
-            new Tuple<string, string>(Module.ATTRIBUTES_CLASSES, GetModuleTranslation(Module.ATTRIBUTES_CLASSES)),
+            new Tuple<string, string>(Modules.ATTRIBUTES_CLASSES, GetModuleTranslation(Modules.ATTRIBUTES_CLASSES)),
             //new Tuple<string, string>(Module.COMMUNITY, GetModuleTranslation(Module.COMMUNITY)),
-            new Tuple<string, string>(Module.CONTRACTORS, GetModuleTranslation(Module.CONTRACTORS)),
+            new Tuple<string, string>(Modules.CONTRACTORS, GetModuleTranslation(Modules.CONTRACTORS)),
             //new Tuple<string, string>(Module.CONTACTS, GetModuleTranslation(Module.CONTACTS)),
-            new Tuple<string, string>(Module.DISTRIBUTIONS, GetModuleTranslation(Module.DISTRIBUTIONS)),
-            new Tuple<string, string>(Module.DOCUMENTS, GetModuleTranslation(Module.DOCUMENTS)),
-            new Tuple<string, string>(Module.EMPLOYEES, GetModuleTranslation(Module.EMPLOYEES)),
-            new Tuple<string, string>(Module.FAMILIES, GetModuleTranslation(Module.FAMILIES)),
+            new Tuple<string, string>(Modules.DISTRIBUTIONS, GetModuleTranslation(Modules.DISTRIBUTIONS)),
+            new Tuple<string, string>(Modules.DOCUMENTS, GetModuleTranslation(Modules.DOCUMENTS)),
+            new Tuple<string, string>(Modules.EMPLOYEES, GetModuleTranslation(Modules.EMPLOYEES)),
+            new Tuple<string, string>(Modules.FAMILIES, GetModuleTranslation(Modules.FAMILIES)),
             //new Tuple<string, string>(Module.GROUPS, GetModuleTranslation(Module.GROUPS)),
-            new Tuple<string, string>(Module.ICONS, GetModuleTranslation(Module.ICONS)),
-            new Tuple<string, string>(Module.LOGS, GetModuleTranslation(Module.LOGS)),
+            new Tuple<string, string>(Modules.ICONS, GetModuleTranslation(Modules.ICONS)),
+            new Tuple<string, string>(Modules.LOGS, GetModuleTranslation(Modules.LOGS)),
             //new Tuple<string, string>(Module.STATS, GetModuleTranslation(Module.STATS)),
-            new Tuple<string, string>(Module.STORES, GetModuleTranslation(Module.STORES)),
-            new Tuple<string, string>(Module.USERS, GetModuleTranslation(Module.USERS)),
-            new Tuple<string, string>(Module.VEHICLES, GetModuleTranslation(Module.VEHICLES)),
+            new Tuple<string, string>(Modules.STORES, GetModuleTranslation(Modules.STORES)),
+            new Tuple<string, string>(Modules.USERS, GetModuleTranslation(Modules.USERS)),
+            new Tuple<string, string>(Modules.VEHICLES, GetModuleTranslation(Modules.VEHICLES)),
         };
     }
 }

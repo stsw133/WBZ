@@ -22,7 +22,7 @@ namespace WBZ.Modules.Employees
 		/// <summary>
 		/// Update filters
 		/// </summary>
-		public void UpdateFilters()
+		public override void UpdateFilters()
 		{
 			D.FilterSQL = $"LOWER(COALESCE(e.forename,'')) like '%{D.Filters.Forename.ToLower()}%' and "
                         + $"LOWER(COALESCE(e.lastname,'')) like '%{D.Filters.Lastname.ToLower()}%' and "

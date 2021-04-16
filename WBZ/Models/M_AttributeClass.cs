@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using WBZ.Globals;
 
 namespace WBZ.Models
 {
@@ -8,7 +9,7 @@ namespace WBZ.Models
 		/// Module
 		/// </summary>
 		public string Module { get; set; } = string.Empty;
-		public string TranslatedModule => M_Module.GetModuleTranslation(Module);
+		public string TranslatedModule => Config.GetModuleTranslation(Module);
 
 		/// <summary>
 		/// Name

@@ -6,7 +6,6 @@
           xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
           xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
           xmlns:g="clr-namespace:WBZ.Globals"
-          xmlns:m="clr-namespace:WBZ.Models"
           xmlns:p="clr-namespace:WBZ.Properties"
           mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800"
           Margin="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1" AutoGenerateColumns="False">
@@ -40,7 +39,7 @@
                 <StackPanel>
                     <TextBlock Text="Nazwa modułu"/>
                     <ComboBox VerticalContentAlignment="Center" Padding="1"
-                              ItemsSource="{x:Static m:M_Module.Modules}"
+                              ItemsSource="{x:Static g:Config.ListModules}"
                               SelectedValue="{Binding Data.Filters.Module, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Item1" DisplayMemberPath="Item2"
                               Visibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}, Converter={seg:conv_BoolToVisibility}}">
                         <ComboBox.InputBindings>

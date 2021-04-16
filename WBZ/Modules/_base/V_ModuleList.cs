@@ -8,7 +8,7 @@ using WBZ.Globals;
 
 namespace WBZ.Modules._base
 {
-    public class ModuleList<MODULE_MODEL> : Window where MODULE_MODEL : class, new()
+    public abstract class ModuleList<MODULE_MODEL> : Window where MODULE_MODEL : class, new()
     {
         dynamic W, D;
         DataGrid dgList;
@@ -37,6 +37,12 @@ namespace WBZ.Modules._base
         }
 
         /// <summary>
+		/// Update filters
+		/// </summary>
+		public virtual void UpdateFilters()
+        { }
+
+        /// <summary>
         /// Preview
         /// </summary>
         internal void cmdPreview_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -50,7 +56,7 @@ namespace WBZ.Modules._base
             }
             catch { }
         }
-        internal void cmdPreview_Executed(object sender, ExecutedRoutedEventArgs e)
+        internal virtual void cmdPreview_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
             foreach (MODULE_MODEL instance in selectedInstances)
@@ -74,7 +80,7 @@ namespace WBZ.Modules._base
             }
             catch { }
         }
-        internal void cmdNew_Executed(object sender, ExecutedRoutedEventArgs e)
+        internal virtual void cmdNew_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var window = Activator.CreateInstance(Type.GetType(HalfName + "New"), null, StswExpress.Globals.Commands.Type.NEW) as Window;
             window.Show();
@@ -94,7 +100,7 @@ namespace WBZ.Modules._base
             }
             catch { }
         }
-        internal void cmdDuplicate_Executed(object sender, ExecutedRoutedEventArgs e)
+        internal virtual void cmdDuplicate_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
             foreach (MODULE_MODEL instance in selectedInstances)
@@ -118,7 +124,7 @@ namespace WBZ.Modules._base
             }
             catch { }
         }
-        internal void cmdEdit_Executed(object sender, ExecutedRoutedEventArgs e)
+        internal virtual void cmdEdit_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
             foreach (MODULE_MODEL instance in selectedInstances)
@@ -142,7 +148,7 @@ namespace WBZ.Modules._base
             }
             catch { }
         }
-        internal void cmdDelete_Executed(object sender, ExecutedRoutedEventArgs e)
+        internal virtual void cmdDelete_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
             if (selectedInstances.Count() > 0 && MessageBox.Show("Czy na pewno usunąć zaznaczone rekordy?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
@@ -156,7 +162,7 @@ namespace WBZ.Modules._base
         /// <summary>
 		/// Clear
 		/// </summary>
-		internal void cmdClear_Executed(object sender, ExecutedRoutedEventArgs e)
+		internal virtual void cmdClear_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             D.Filters = new MODULE_MODEL();
             cmdRefresh_Executed(null, null);
@@ -165,10 +171,10 @@ namespace WBZ.Modules._base
         /// <summary>
         /// Refresh
         /// </summary>
-        internal async void cmdRefresh_Executed(object sender, ExecutedRoutedEventArgs e)
+        internal async virtual void cmdRefresh_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             await Task.Run(() => {
-                W.UpdateFilters();
+                UpdateFilters();
                 D.TotalItems = SQL.CountInstances(D.MODULE_TYPE, D.FilterSQL);
                 D.InstancesList = SQL.ListInstances<MODULE_MODEL>(D.MODULE_TYPE, D.FilterSQL, D.SORTING, D.Page = 0);
             });

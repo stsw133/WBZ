@@ -62,47 +62,47 @@ namespace WBZ.Globals
 			switch (obj.Module)
 			{
 				/// ARTICLES
-				case M_Module.Module.ARTICLES:
+				case Config.Modules.ARTICLES:
 					window = new ArticlesNew(SQL.GetInstance<M_Article>(obj.Module, obj.Instance), mode);
 					break;
 				/// ATTRIBUTES_CLASSES
-				case M_Module.Module.ATTRIBUTES_CLASSES:
+				case Config.Modules.ATTRIBUTES_CLASSES:
 					window = new AttributesClassesNew(SQL.GetInstance<M_AttributeClass>(obj.Module, obj.Instance), mode);
 					break;
 				/// CONTRACTORS
-				case M_Module.Module.CONTRACTORS:
+				case Config.Modules.CONTRACTORS:
 					window = new ContractorsNew(SQL.GetInstance<M_Contractor>(obj.Module, obj.Instance), mode);
 					break;
 				/// DISTRIBUTIONS
-				case M_Module.Module.DISTRIBUTIONS:
+				case Config.Modules.DISTRIBUTIONS:
 					window = new DistributionsNew(SQL.GetInstance<M_Distribution>(obj.Module, obj.Instance), mode);
 					break;
 				/// DOCUMENTS
-				case M_Module.Module.DOCUMENTS:
+				case Config.Modules.DOCUMENTS:
 					window = new DocumentsNew(SQL.GetInstance<M_Document>(obj.Module, obj.Instance), mode);
 					break;
 				/// EMPLOYEES
-				case M_Module.Module.EMPLOYEES:
+				case Config.Modules.EMPLOYEES:
 					window = new EmployeesNew(SQL.GetInstance<M_Employee>(obj.Module, obj.Instance), mode);
 					break;
 				/// ICONS
-				case M_Module.Module.ICONS:
+				case Config.Modules.ICONS:
 					window = new IconsNew(SQL.GetInstance<M_Icon>(obj.Module, obj.Instance), mode);
 					break;
 				/// FAMILIES
-				case M_Module.Module.FAMILIES:
+				case Config.Modules.FAMILIES:
 					window = new FamiliesNew(SQL.GetInstance<M_Family>(obj.Module, obj.Instance), mode);
 					break;
 				/// STORES
-				case M_Module.Module.STORES:
+				case Config.Modules.STORES:
 					window = new StoresNew(SQL.GetInstance<M_Store>(obj.Module, obj.Instance), mode);
 					break;
 				/// USERS
-				case M_Module.Module.USERS:
+				case Config.Modules.USERS:
 					window = new UsersNew(SQL.GetInstance<M_User>(obj.Module, obj.Instance), mode);
 					break;
 				/// VEHICLES
-				case M_Module.Module.VEHICLES:
+				case Config.Modules.VEHICLES:
 					window = new VehiclesNew(SQL.GetInstance<M_Vehicle>(obj.Module, obj.Instance), mode);
 					break;
 				default:

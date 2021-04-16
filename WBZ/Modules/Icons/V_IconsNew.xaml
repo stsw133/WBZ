@@ -4,9 +4,9 @@
        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
        xmlns:b="clr-namespace:WBZ.Modules.Icons"
-       xmlns:m="clr-namespace:WBZ.Models"
        xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
        xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
+       xmlns:g="clr-namespace:WBZ.Globals"
        xmlns:p="clr-namespace:WBZ.Properties"
        xmlns:t="clr-namespace:WBZ.Modules._tabs"
        mc:Ignorable="d"
@@ -73,7 +73,7 @@
                         <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">
                             <Label Content="Moduł:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Bold" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>
                             <ComboBox Margin="5" VerticalContentAlignment="Center"
-                                      ItemsSource="{x:Static m:M_Module.Modules}"
+                                      ItemsSource="{x:Static g:Config.ListModules}"
                                       SelectedValue="{Binding InstanceInfo.Module}" SelectedValuePath="Item1" DisplayMemberPath="Item2"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top" VerticalAlignment="Top">

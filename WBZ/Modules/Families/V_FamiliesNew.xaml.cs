@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using WBZ.Globals;
 using WBZ.Models;
 using WBZ.Modules._base;
 using WBZ.Other;
@@ -50,7 +51,7 @@ namespace WBZ.Modules.Families
             if (tab?.Name == "tabSources_Distributions")
             {
 				if (D.InstanceInfo.ID != 0 && D.InstanceSources_Distributions == null)
-                    D.InstanceSources_Distributions = SQL.ListInstances<M_Distribution>(M_Module.Module.DISTRIBUTIONS, $"dp.family={D.InstanceInfo.ID}");
+                    D.InstanceSources_Distributions = SQL.ListInstances<M_Distribution>(Config.Modules.DISTRIBUTIONS, $"dp.family={D.InstanceInfo.ID}");
             }
         }
 
@@ -59,7 +60,7 @@ namespace WBZ.Modules.Families
 		/// </summary>
         private void dgList_Distributions_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            dgList_Module_MouseDoubleClick<M_Distribution>(sender, e, M_Module.Module.DISTRIBUTIONS);
+            dgList_Module_MouseDoubleClick<M_Distribution>(sender, e, Config.Modules.DISTRIBUTIONS);
         }
     }
 

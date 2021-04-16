@@ -6,11 +6,11 @@ using WBZ.Controls;
 
 namespace WBZ.Modules.Admin
 {
-	/// <summary>
-	/// Interaction logic for ConsoleSQL.xaml
-	/// </summary>
-	public partial class ConsoleSQL : Window
-	{
+    /// <summary>
+    /// Interaction logic for ConsoleSQL.xaml
+    /// </summary>
+    public partial class ConsoleSQL : Window
+    {
 		public ConsoleSQL()
 		{
 			InitializeComponent();

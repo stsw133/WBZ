@@ -32,10 +32,10 @@ namespace WBZ.Modules.Login
 				return;
 			};
 
-			var user = SQL.ListInstances<M_User>(M_Module.Module.USERS, $"u.email='{lblEmail.Content}'")?[0];
+			var user = SQL.ListInstances<M_User>(Config.Modules.USERS, $"u.email='{lblEmail.Content}'")?[0];
 			user.Newpass = pbPassword.Password;
-			if (SQL.SetInstance(M_Module.Module.USERS, user, StswExpress.Globals.Commands.Type.EDIT))
-				DialogResult = true;
+			if (SQL.SetInstance(Config.Modules.USERS, user, StswExpress.Globals.Commands.Type.EDIT))
+                DialogResult = true;
 		}
 	}
 }

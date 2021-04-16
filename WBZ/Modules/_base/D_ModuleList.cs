@@ -4,7 +4,7 @@ using WBZ.Models;
 
 namespace WBZ.Modules._base
 {
-	class D_ModuleList<MODULE_MODEL> : D where MODULE_MODEL : class, new()
+	abstract class D_ModuleList<MODULE_MODEL> : D where MODULE_MODEL : class, new()
 	{
 		/// Instances list
 		private ObservableCollection<MODULE_MODEL> instancesList;

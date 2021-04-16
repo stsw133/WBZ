@@ -1,5 +1,4 @@
-﻿using WBZ.Globals;
-using WBZ.Modules._base;
+﻿using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_AttributeClass;
 
 namespace WBZ.Modules.AttributesClasses
@@ -23,7 +22,7 @@ namespace WBZ.Modules.AttributesClasses
 		/// <summary>
 		/// Update filters
 		/// </summary>
-		public void UpdateFilters()
+		public override void UpdateFilters()
 		{
 			D.FilterSQL = $"LOWER(COALESCE(ac.module,'')) like '%{D.Filters.Module.ToLower()}%' and "
 						+ $"LOWER(COALESCE(ac.name,'')) like '%{D.Filters.Name.ToLower()}%' and "

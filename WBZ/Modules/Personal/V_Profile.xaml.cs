@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using WBZ.Controls;
 using WBZ.Globals;
-using WBZ.Models;
 
 namespace WBZ.Modules.Personal
 {
@@ -42,8 +41,8 @@ namespace WBZ.Modules.Personal
                 }
             }
 
-            if (SQL.SetInstance(M_Module.Module.USERS, D.User, StswExpress.Globals.Commands.Type.EDIT))
-			    Close();
+            if (SQL.SetInstance(Config.Modules.USERS, D.User, StswExpress.Globals.Commands.Type.EDIT))
+                Close();
 		}
 	}
 }

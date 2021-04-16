@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Modules\Admin\ConsoleSQL.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Modules\Articles\V_ArticlesList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Controls\Windows\AttachmentsAdd.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\Windows\AttributeChange.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\Windows\Confirmation.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\Windows\MsgWin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\GroupsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\StatusPanel.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\_tabs\AdditionalsTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\_tabs\AttachmentsTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\_tabs\AttributesTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\_tabs\ContactsTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\_tabs\GroupsTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\_tabs\LogsTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Admin\ConsoleSQL.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Articles\V_ArticlesList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Articles\V_ArticlesListGrid.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Articles\V_ArticlesNew.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Attachments\V_AttachmentsGallery.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Attachments\V_AttachmentsList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Attachments\V_AttachmentsListGrid.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\AttributesClasses\V_AttributesClassesList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\AttributesClasses\V_AttributesClassesListGrid.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\AttributesClasses\V_AttributesClassesNew.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Contractors\V_ContractorsList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Contractors\V_ContractorsListGrid.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Contractors\V_ContractorsNew.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Distributions\V_DistributionsList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Distributions\V_DistributionsListGrid.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Distributions\V_DistributionsNew.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Distributions\V_DistributionsStatus.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Documents\V_DocumentsList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Documents\V_DocumentsListGrid.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Documents\V_DocumentsNew.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Employees\V_EmployeesList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Employees\V_EmployeesListGrid.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Employees\V_EmployeesNew.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Families\V_FamiliesList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Families\V_FamiliesListGrid.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Families\V_FamiliesNew.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Groups\V_GroupsList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Groups\V_GroupsNew.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Icons\V_IconsList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Icons\V_IconsListGrid.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Icons\V_IconsNew.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Login\V_Login.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Login\V_LoginAppAbout.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Login\V_LoginChangePassword.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Login\V_LoginDatabases.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Login\V_LoginRegister.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Login\V_Versions.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Personal\V_Profile.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Stats\V_Stats.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Stores\V_StoresList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Stores\V_StoresListGrid.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Stores\V_StoresNew.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Users\V_UsersList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Users\V_UsersListGrid.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Users\V_UsersNew.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Vehicles\V_VehiclesList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Vehicles\V_VehiclesListGrid.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\Vehicles\V_VehiclesNew.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\V_Main.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modules\V_Settings.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Update="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+</Project>

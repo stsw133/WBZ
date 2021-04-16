@@ -22,7 +22,7 @@ namespace WBZ.Modules.Distributions
 		/// <summary>
 		/// Update filters
 		/// </summary>
-		public void UpdateFilters()
+		public override void UpdateFilters()
 		{
 			D.FilterSQL = $"LOWER(COALESCE(d.name,'')) like '%{D.Filters.Name}%' and "
 						+ $"d.datereal >= '{D.Filters.fDateReal:yyyy-MM-dd}' and d.datereal < '{D.Filters.DateReal.AddDays(1):yyyy-MM-dd}' and "

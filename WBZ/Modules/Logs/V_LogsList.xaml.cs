@@ -24,7 +24,7 @@ namespace WBZ.Modules.Logs
 			DataContext = D;
 			Init();
 
-			if (M_Config.Logs_Enabled == "1")
+			if (Config.Logs_Enabled == "1")
 				chckEnabled.IsChecked = true;
 			else
 				chckEnabled.IsChecked = false;
@@ -33,7 +33,7 @@ namespace WBZ.Modules.Logs
 		/// <summary>
 		/// Update filters
 		/// </summary>
-		public void UpdateFilters()
+		public override void UpdateFilters()
 		{
 			int index = 0;
 			tcList.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => { index = tcList.SelectedIndex; }));
@@ -63,7 +63,7 @@ namespace WBZ.Modules.Logs
 		/// <summary>
 		/// Preview
 		/// </summary>
-		private void cmdPreview_Executed(object sender, ExecutedRoutedEventArgs e)
+		internal override void cmdPreview_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			if (tcList.SelectedIndex == 0) ///logs
 			{
@@ -82,7 +82,7 @@ namespace WBZ.Modules.Logs
 		/// <summary>
 		/// Edit
 		/// </summary>
-		private void cmdEdit_Executed(object sender, ExecutedRoutedEventArgs e)
+		internal override void cmdEdit_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			if (tcList.SelectedIndex == 0) ///logs
 			{

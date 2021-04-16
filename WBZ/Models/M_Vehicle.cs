@@ -1,4 +1,6 @@
-﻿namespace WBZ.Models
+﻿using WBZ.Globals;
+
+namespace WBZ.Models
 {
 	public class M_Vehicle : M
 	{
@@ -30,13 +32,13 @@
 		/// <summary>
 		/// Forwarder
 		/// </summary>
-		public int Forwarder { set => cForwarder = SQL.ComboInstances(M_Module.Module.CONTRACTORS, "codename", $"id={value}", false)?[0]; }
+		public int Forwarder { set => cForwarder = SQL.ComboInstances(Config.Modules.CONTRACTORS, "codename", $"id={value}", false)?[0]; }
 		public M_ComboValue cForwarder { get; set; } = new M_ComboValue();
 
 		/// <summary>
 		/// Driver
 		/// </summary>
-		public int Driver { set => cDriver = SQL.ComboInstances(M_Module.Module.EMPLOYEES, "lastname || ' ' || forename", $"id={value}", false)?[0]; }
+		public int Driver { set => cDriver = SQL.ComboInstances(Config.Modules.EMPLOYEES, "lastname || ' ' || forename", $"id={value}", false)?[0]; }
 		public M_ComboValue cDriver { get; set; } = new M_ComboValue();
 
 		/// <summary>

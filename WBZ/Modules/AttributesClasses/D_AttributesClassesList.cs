@@ -1,6 +1,6 @@
 ﻿using StswExpress.Globals;
 using System.Collections.Specialized;
-using WBZ.Models;
+using WBZ.Globals;
 using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_AttributeClass;
 
@@ -9,7 +9,7 @@ namespace WBZ.Modules.AttributesClasses
     class D_IconsList : D_ModuleList<MODULE_MODEL>
 	{
 		/// Module
-		public readonly string MODULE_TYPE = M_Module.Module.ATTRIBUTES_CLASSES;
+		public readonly string MODULE_TYPE = Config.Modules.ATTRIBUTES_CLASSES;
 		public StringCollection SORTING = Properties.Settings.Default.sorting_AttributesClassesList;
 
 		/// Window title

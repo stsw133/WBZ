@@ -22,7 +22,7 @@ namespace WBZ.Modules.Vehicles
 		/// <summary>
 		/// Update filters
 		/// </summary>
-		public void UpdateFilters()
+		public override void UpdateFilters()
 		{
 			D.FilterSQL = $"LOWER(COALESCE(v.register,'')) like '%{D.Filters.Register.ToLower()}%' and "
 						+ $"LOWER(COALESCE(v.brand,'')) like '%{D.Filters.Brand.ToLower()}%' and "

@@ -34,7 +34,7 @@ namespace WBZ.Modules.Contractors
             if (tab?.Name == "tabSources_Documents")
             {
 				if (D.InstanceInfo.ID != 0 && D.InstanceSources_Documents == null)
-                    D.InstanceSources_Documents = SQL.ListInstances<M_Document>(M_Module.Module.DOCUMENTS, $"c.id={D.InstanceInfo.ID}");
+                    D.InstanceSources_Documents = SQL.ListInstances<M_Document>(Config.Modules.DOCUMENTS, $"c.id={D.InstanceInfo.ID}");
             }
         }
 
@@ -43,7 +43,7 @@ namespace WBZ.Modules.Contractors
 		/// </summary>
         private void dgList_Documents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            dgList_Module_MouseDoubleClick<M_Document>(sender, e, M_Module.Module.DOCUMENTS);
+            dgList_Module_MouseDoubleClick<M_Document>(sender, e, Config.Modules.DOCUMENTS);
         }
     }
 

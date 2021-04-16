@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace WBZ.Modules._base
 {
-    public class ModuleNew<MODULE_MODEL> : Window where MODULE_MODEL : class, new()
+    public abstract class ModuleNew<MODULE_MODEL> : Window where MODULE_MODEL : class, new()
     {
 		dynamic W,  D;
         string FullName, HalfName;

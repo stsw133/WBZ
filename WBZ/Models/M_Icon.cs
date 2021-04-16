@@ -1,4 +1,6 @@
-﻿namespace WBZ.Models
+﻿using WBZ.Globals;
+
+namespace WBZ.Models
 {
 	public class M_Icon : M
 	{
@@ -6,7 +8,7 @@
 		/// Module
 		/// </summary>
 		public string Module { get; set; } = string.Empty;
-		public string TranslatedModule => M_Module.GetModuleTranslation(Module);
+		public string TranslatedModule => Config.GetModuleTranslation(Module);
 
 		/// <summary>
 		/// Name

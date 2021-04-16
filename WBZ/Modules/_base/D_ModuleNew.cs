@@ -3,7 +3,7 @@ using WBZ.Models;
 
 namespace WBZ.Modules._base
 {
-    class D_ModuleNew<MODULE_MODEL> : D where MODULE_MODEL : class, new()
+    abstract class D_ModuleNew<MODULE_MODEL> : D where MODULE_MODEL : class, new()
     {
 		/// Instance
 		private MODULE_MODEL instanceInfo = new MODULE_MODEL();

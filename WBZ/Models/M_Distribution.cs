@@ -127,7 +127,7 @@ namespace WBZ.Models
 
 		public M_DistributionPosition()
 		{
-			var stores = SQL.ListInstances<M_Store>(M_Module.Module.STORES, "true", null, 1);
+			var stores = SQL.ListInstances<M_Store>(Config.Modules.STORES, "true", null, 1);
 
 			Store = stores.Count == 1 ? stores[0].ID : 0;
 			StoreName = stores.Count == 1 ? stores[0].Name : string.Empty;

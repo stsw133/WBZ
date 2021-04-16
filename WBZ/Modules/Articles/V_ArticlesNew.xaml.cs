@@ -66,17 +66,17 @@ namespace WBZ.Modules.Articles
 			if (tab?.Name?.EndsWith("_Stores") == true)
 			{
 				if (D.InstanceInfo.ID != 0 && D.InstanceSources_Stores == null)
-					D.InstanceSources_Stores = SQL.ListInstances<M_Store>(M_Module.Module.STORES, $"sa.article={D.InstanceInfo.ID}");
+                    D.InstanceSources_Stores = SQL.ListInstances<M_Store>(Config.Modules.STORES, $"sa.article={D.InstanceInfo.ID}");
 			}
 			else if (tab?.Name?.EndsWith("_Documents") == true)
 			{
 				if (D.InstanceInfo.ID != 0 && D.InstanceSources_Documents == null)
-					D.InstanceSources_Documents = SQL.ListInstances<M_Document>(M_Module.Module.DOCUMENTS, $"dp.article={D.InstanceInfo.ID}");
+                    D.InstanceSources_Documents = SQL.ListInstances<M_Document>(Config.Modules.DOCUMENTS, $"dp.article={D.InstanceInfo.ID}");
 			}
 			else if (tab?.Name?.EndsWith("_Distributions") == true)
 			{
 				if (D.InstanceInfo.ID != 0 && D.InstanceSources_Distributions == null)
-					D.InstanceSources_Distributions = SQL.ListInstances<M_Distribution>(M_Module.Module.DISTRIBUTIONS, $"dp.article={D.InstanceInfo.ID}");
+                    D.InstanceSources_Distributions = SQL.ListInstances<M_Distribution>(Config.Modules.DISTRIBUTIONS, $"dp.article={D.InstanceInfo.ID}");
 			}
 		}
 
@@ -85,7 +85,7 @@ namespace WBZ.Modules.Articles
 		/// </summary>
 		private void dgList_Stores_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
-			dgList_Module_MouseDoubleClick<M_Store>(sender, e, M_Module.Module.STORES);
+            dgList_Module_MouseDoubleClick<M_Store>(sender, e, Config.Modules.STORES);
 		}
 
 		/// <summary>
@@ -93,7 +93,7 @@ namespace WBZ.Modules.Articles
 		/// </summary>
 		private void dgList_Documents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
-			dgList_Module_MouseDoubleClick<M_Document>(sender, e, M_Module.Module.DOCUMENTS);
+            dgList_Module_MouseDoubleClick<M_Document>(sender, e, Config.Modules.DOCUMENTS);
 		}
 
 		/// <summary>
@@ -101,7 +101,7 @@ namespace WBZ.Modules.Articles
 		/// </summary>
 		private void dgList_Distributions_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
-			dgList_Module_MouseDoubleClick<M_Distribution>(sender, e, M_Module.Module.DISTRIBUTIONS);
+            dgList_Module_MouseDoubleClick<M_Distribution>(sender, e, Config.Modules.DISTRIBUTIONS);
 		}
 	}
 

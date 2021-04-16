@@ -1,5 +1,5 @@
 ﻿using StswExpress.Globals;
-using WBZ.Models;
+using WBZ.Globals;
 using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_Group;
 
@@ -8,7 +8,7 @@ namespace WBZ.Modules.Groups
     class D_GroupsNew : D_ModuleNew<MODULE_MODEL>
     {
         /// Module
-        public readonly string MODULE_TYPE = M_Module.Module.GROUPS;
+        public readonly string MODULE_TYPE = Config.Modules.GROUPS;
 
         /// Window title
         public string Title

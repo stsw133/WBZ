@@ -22,7 +22,7 @@ namespace WBZ.Modules.Icons
 		/// <summary>
 		/// Update filters
 		/// </summary>
-		public void UpdateFilters()
+		public override void UpdateFilters()
 		{
 			D.FilterSQL = $"LOWER(COALESCE(i.module,'')) like '%{D.Filters.Module.ToLower()}%' and "
 						+ $"LOWER(COALESCE(i.name,'')) like '%{D.Filters.Name.ToLower()}%' and "

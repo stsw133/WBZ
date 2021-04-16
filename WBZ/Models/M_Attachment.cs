@@ -1,4 +1,6 @@
-﻿namespace WBZ.Models
+﻿using WBZ.Globals;
+
+namespace WBZ.Models
 {
 	public class M_Attachment
 	{
@@ -10,14 +12,14 @@
 		/// <summary>
 		/// User
 		/// </summary>
-		public int User { set => cUser = SQL.ComboInstances(M_Module.Module.USERS, "lastname || ' ' || forename", $"id={value}", false)?[0]; }
+		public int User { set => cUser = SQL.ComboInstances(Config.Modules.USERS, "lastname || ' ' || forename", $"id={value}", false)?[0]; }
 		public M_ComboValue cUser { get; set; } = new M_ComboValue();
 
 		/// <summary>
 		/// Module
 		/// </summary>
 		public string Module { get; set; } = string.Empty;
-		public string TranslatedModule => M_Module.GetModuleTranslation(Module);
+		public string TranslatedModule => Config.GetModuleTranslation(Module);
 
 		/// <summary>
 		/// Instance

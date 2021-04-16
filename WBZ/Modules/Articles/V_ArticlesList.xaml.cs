@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using WBZ.Globals;
 using WBZ.Models;
 using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_Article;
@@ -29,13 +30,13 @@ namespace WBZ.Modules.Articles
 		{
 			if (D.SelectingMode)
 				dgList.SelectionMode = DataGridSelectionMode.Single;
-			D.StoresList = SQL.ComboInstances(M_Module.Module.STORES, "codename", "archival=false", !D.SelectingMode);
+			D.StoresList = SQL.ComboInstances(Config.Modules.STORES, "codename", "archival=false", !D.SelectingMode);
 		}
 
 		/// <summary>
 		/// Update filters
 		/// </summary>
-		public void UpdateFilters()
+		public override void UpdateFilters()
 		{
 			D.FilterSQL = $"LOWER(COALESCE(a.codename,'')) like '%{D.Filters.Codename.ToLower()}%' and "
 						+ $"LOWER(COALESCE(a.name,'')) like '%{D.Filters.Name.ToLower()}%' and "
@@ -47,19 +48,19 @@ namespace WBZ.Modules.Articles
 			D.FilterSQL = D.FilterSQL.TrimEnd(" and ".ToCharArray());
 		}
 
-        /// <summary>
-        /// Store - SelectionChanged
-        /// </summary>
+		/// <summary>
+		/// Store - SelectionChanged
+		/// </summary>
 		private void cbStore_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			var cbStore = sender as ComboBox;
 			if (cbStore.SelectedValue != null && (int)cbStore.SelectedValue > 0)
-				D.Filters.MainStore = SQL.GetInstance<M_Store>(M_Module.Module.STORES, (int)cbStore.SelectedValue);
+				D.Filters.MainStore = SQL.GetInstance<M_Store>(Config.Modules.STORES, (int)cbStore.SelectedValue);
 			else
 				D.Filters.MainStore = new M_Store();
 			cmdRefresh_Executed(null, null);
 		}
-    }
+	}
 
-    public class List : ModuleList<MODULE_MODEL> { }
+	public class List : ModuleList<MODULE_MODEL> { }
 }

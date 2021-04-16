@@ -25,7 +25,7 @@ namespace WBZ.Modules.Attachments
 		/// <summary>
 		/// Update filters
 		/// </summary>
-		public void UpdateFilters()
+		public override void UpdateFilters()
 		{
 			D.FilterSQL = $"LOWER(COALESCE(u.lastname,'') || ' ' || COALESCE(u.forename,'')) like '%{D.Filters.cUser.Name.ToLower()}%' and "
 						+ $"LOWER(COALESCE(a.module,'')) like '%{D.Filters.Module.ToLower()}%' and "
@@ -37,7 +37,7 @@ namespace WBZ.Modules.Attachments
 		/// <summary>
 		/// Preview
 		/// </summary>
-		private void cmdPreview_Executed(object sender, ExecutedRoutedEventArgs e)
+		internal override void cmdPreview_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
 			foreach (MODULE_MODEL instance in selectedInstances)
@@ -47,7 +47,7 @@ namespace WBZ.Modules.Attachments
 		/// <summary>
 		/// Edit
 		/// </summary>
-		private void cmdEdit_Executed(object sender, ExecutedRoutedEventArgs e)
+		internal override void cmdEdit_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
 			foreach (MODULE_MODEL instance in selectedInstances)

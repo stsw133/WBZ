@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using WBZ.Controls;
-using WBZ.Models;
+using WBZ.Globals;
 using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_Icon;
 
@@ -94,7 +94,7 @@ namespace WBZ.Modules.Icons
                     D.InstanceInfo.Width = 0;
                     D.InstanceInfo.Size = 0;
                     D.NotifyPropertyChanged("InstanceInfo");
-                    SQL.Error("Błąd podczas pobierania obrazu", ex, M_Module.Module.ICONS, D.InstanceInfo.ID, true, false);
+                    SQL.Error("Błąd podczas pobierania obrazu", ex, Config.Modules.ICONS, D.InstanceInfo.ID, true, false);
                 }
             });
         }
@@ -117,19 +117,19 @@ namespace WBZ.Modules.Icons
 		/// </summary>
 		internal override bool CheckDataValidation()
         {
-            if (D.InstanceInfo.Width > Convert.ToInt32(M_Config.Icon_Dimensions_Max))
+            if (D.InstanceInfo.Width > Convert.ToInt32(Config.Icon_Dimensions_Max))
             {
-                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Obraz przekracza dopuszczalną szerokość: " + M_Config.Icon_Dimensions_Max) { Owner = this }.ShowDialog();
+                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Obraz przekracza dopuszczalną szerokość: " + Config.Icon_Dimensions_Max) { Owner = this }.ShowDialog();
                 return false;
             }
-            if (D.InstanceInfo.Height > Convert.ToInt32(M_Config.Icon_Dimensions_Max))
+            if (D.InstanceInfo.Height > Convert.ToInt32(Config.Icon_Dimensions_Max))
             {
-                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Obraz przekracza dopuszczalną wysokość: " + M_Config.Icon_Dimensions_Max) { Owner = this }.ShowDialog();
+                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Obraz przekracza dopuszczalną wysokość: " + Config.Icon_Dimensions_Max) { Owner = this }.ShowDialog();
                 return false;
             }
-            if (D.InstanceInfo.Size > Convert.ToInt32(M_Config.Icon_Size_Max))
+            if (D.InstanceInfo.Size > Convert.ToInt32(Config.Icon_Size_Max))
             {
-                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Obraz przekracza dopuszczalny rozmiar: " + M_Config.Icon_Size_Max) { Owner = this }.ShowDialog();
+                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Obraz przekracza dopuszczalny rozmiar: " + Config.Icon_Size_Max) { Owner = this }.ShowDialog();
                 return false;
             }
             if (D.InstanceInfo.File == null)
