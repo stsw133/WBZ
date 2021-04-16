@@ -34,7 +34,9 @@ namespace WBZ.Modules.Groups
                 {
                     var item = groupsView.SelectedItem as TreeViewItem;
                     Selected = SQL.GetInstance<MODULE_MODEL>(M_Module.Module.GROUPS, (int)item.Tag);
-                    DialogResult = true;
+
+                    if (Selected != null)
+                        DialogResult = true;
                 }
             }
         }

@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using StswExpress.Globals;
+using System.Collections.ObjectModel;
+using WBZ.Models;
 
 namespace WBZ.Modules._base
 {
@@ -13,10 +15,10 @@ namespace WBZ.Modules._base
 		}
 
 		/// Mode
-		public StswExpress.Globals.Commands.Type Mode { get; set; }
+		public Commands.Type Mode { get; set; }
 
 		/// Selecting mode
-		public bool SelectingMode { get => Mode == StswExpress.Globals.Commands.Type.SELECT; }
+		public bool SelectingMode => Mode == Commands.Type.SELECT;
 
 		/// SQL filter
 		public string FilterSQL { get; set; }

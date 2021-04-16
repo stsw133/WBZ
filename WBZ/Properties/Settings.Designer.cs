@@ -2119,5 +2119,17 @@ namespace WBZ.Properties {
                 this["columns_IconsList_Width"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool columns_IconsList_Size {
+            get {
+                return ((bool)(this["columns_IconsList_Size"]));
+            }
+            set {
+                this["columns_IconsList_Size"] = value;
+            }
+        }
     }
 }

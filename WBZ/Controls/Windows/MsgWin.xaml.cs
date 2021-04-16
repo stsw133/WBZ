@@ -1,7 +1,5 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows;
-using WBZ.Modules._base;
+﻿using System.Windows;
+using WBZ.Models;
 
 namespace WBZ.Controls
 {

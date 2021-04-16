@@ -1,5 +1,5 @@
 ﻿using StswExpress.Globals;
-using WBZ.Modules._base;
+using WBZ.Models;
 
 namespace WBZ.Modules
 {

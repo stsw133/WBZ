@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using WBZ.Globals;
 using WBZ.Models;
 using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_Article;

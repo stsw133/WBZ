@@ -40,6 +40,7 @@ namespace WBZ.Models
         /// </summary>
         public static List<Tuple<string, string>> Modules = new List<Tuple<string, string>>()
         {
+            new Tuple<string, string>(string.Empty, string.Empty),
             new Tuple<string, string>(Module.ARTICLES, GetModuleTranslation(Module.ARTICLES)),
             new Tuple<string, string>(Module.ATTACHMENTS, GetModuleTranslation(Module.ATTACHMENTS)),
             //new Tuple<string, string>(Module.ATTRIBUTES, GetModuleTranslation(Module.ATTRIBUTES)),

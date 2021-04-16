@@ -1,16 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 
-namespace WBZ.Modules._base
+namespace WBZ.Models
 {
     public class D : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        public void NotifyPropertyChanged([CallerMemberName] string name = "none passed")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
         protected bool SetField<T>(ref T field, T value, Expression<Func<T>> selectorExpression)
         {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            //if (EqualityComparer<T>.Default.Equals(field, value)) return false;
             field = value;
 
             if (selectorExpression == null)

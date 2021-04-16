@@ -62,11 +62,9 @@ namespace WBZ.Modules._base
 		/// <summary>
 		/// Validation
 		/// </summary>
-		private bool CheckDataValidation()
+		internal virtual bool CheckDataValidation()
         {
-            bool result = true;
-
-            return result;
+            return true;
         }
 
 		/// <summary>

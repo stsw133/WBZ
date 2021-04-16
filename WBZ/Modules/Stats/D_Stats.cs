@@ -1,5 +1,5 @@
 ﻿using System.Data;
-using WBZ.Modules._base;
+using WBZ.Models;
 
 namespace WBZ.Modules.Stats
 {

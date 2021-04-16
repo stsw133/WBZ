@@ -1,16 +1,9 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using WBZ.Models;
 
 namespace WBZ.Modules.Login
 {
-    class D_Versions : INotifyPropertyChanged
+    class D_Versions : D
     {
-		public event PropertyChangedEventHandler PropertyChanged;
-		public void NotifyPropertyChanged([CallerMemberName] string name = "none passed")
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
-
 		/// Instances list
 		private dynamic instancesList;
 		public dynamic InstancesList

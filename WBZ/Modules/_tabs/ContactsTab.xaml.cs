@@ -1,10 +1,8 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Data;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using WBZ.Modules._base;
+using WBZ.Models;
 
 namespace WBZ.Modules._tabs
 {

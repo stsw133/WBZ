@@ -1,4 +1,5 @@
 ﻿using StswExpress.Globals;
+using WBZ.Models;
 
 namespace WBZ.Modules._base
 {
@@ -16,7 +17,7 @@ namespace WBZ.Modules._base
 		public Commands.Type Mode { get; set; }
 
 		/// Editing mode
-		public bool EditingMode { get => Mode != Commands.Type.PREVIEW; }
+		public bool EditingMode => Mode != Commands.Type.PREVIEW;
 
 		/// Additional window icon
 		public string ModeIcon

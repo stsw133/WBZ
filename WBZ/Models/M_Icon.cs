@@ -24,10 +24,15 @@
 		public string Format { get; set; } = string.Empty;
 
 		/// <summary>
-		/// Size
+		/// Dimensions
 		/// </summary>
 		public int Height { get; set; } = 0;
 		public int Width { get; set; } = 0;
+
+		/// <summary>
+		/// Size
+		/// </summary>
+		public double Size { get; set; } = 0;
 
 		/// <summary>
 		/// File

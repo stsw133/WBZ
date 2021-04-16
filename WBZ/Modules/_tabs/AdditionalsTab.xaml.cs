@@ -17,6 +17,19 @@ namespace WBZ.Modules._tabs
             InitializeComponent();
         }
 
+        public bool HasIcon
+        {
+            get => (bool)GetValue(pHasIcon);
+            set { SetValue(pHasIcon, value); }
+        }
+        public static readonly DependencyProperty pHasIcon
+            = DependencyProperty.Register(
+                  nameof(HasIcon),
+                  typeof(bool),
+                  typeof(GroupsView),
+                  new PropertyMetadata(true)
+              );
+
         /// <summary>
         /// ManageIcon - drop image
         /// </summary>

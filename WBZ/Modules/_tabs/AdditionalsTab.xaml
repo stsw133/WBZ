@@ -7,7 +7,7 @@
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="750">
     <DockPanel Margin="5" IsEnabled="{Binding EditingMode}">
         <DockPanel DockPanel.Dock="Top">
-            <DockPanel DockPanel.Dock="Right">
+            <DockPanel DockPanel.Dock="Right" Visibility="{Binding HasIcon, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Converter={seg:conv_BoolToVisibility}}">
                 <Label DockPanel.Dock="Top" Content="Ikona:"/>
                 <Border DockPanel.Dock="Top" VerticalAlignment="Top" Height="34" Width="34"
                         Background="LightGray" BorderBrush="Gray" BorderThickness="1"

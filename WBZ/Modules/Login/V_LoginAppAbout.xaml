@@ -35,12 +35,6 @@
                         <Label Content="Karol Staszewski" Padding="5,5,5,0" HorizontalAlignment="Center" FontWeight="Medium"/>
                         <Label Content="stsw.karolstaszewski@gmail.com" Padding="5,0,5,5" HorizontalAlignment="Center" Foreground="#239"/>
                     </StackPanel>
-                    <StackPanel DockPanel.Dock="Top">
-                        <Label DockPanel.Dock="Top" Content="Arkadiusz Bryska" Padding="5" HorizontalAlignment="Center" FontWeight="Medium"/>
-                    </StackPanel>
-                    <StackPanel DockPanel.Dock="Top">
-                        <Label DockPanel.Dock="Top" Content="Patryk Makowski" Padding="5" HorizontalAlignment="Center" FontWeight="Medium"/>
-                    </StackPanel>
                 </StackPanel>
             </DockPanel>
         </DockPanel>

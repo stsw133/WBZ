@@ -29,14 +29,6 @@ CREATE TABLE wbz.config
     value character varying(100)
 );
 
-INSERT INTO wbz.config (property, value) VALUES
-    ('VERSION', '1.2.0'),
-    ('EMAIL_HOST', 'smtp.gmail.com'),
-	('EMAIL_PORT', '587'),
-	('EMAIL_ADDRESS', 'wbz.email.testowy@gmail.com'),
-	('EMAIL_PASSWORD', ''),
-    ('LOGS_ENABLED', '0');
-
 -- Table: wbz.users
 CREATE TABLE wbz.users
 (
@@ -102,9 +94,10 @@ CREATE TABLE wbz.icons
     module character varying(50) NOT NULL,
     name character varying(50) NOT NULL,
     "format" character varying(10) NOT NULL,
-    "path" character varying(250) NULL,
+    "path" character varying(250) NOT NULL,
     height integer NOT NULL,
     width integer NOT NULL,
+    size integer NOT NULL,
     file bytea NOT NULL,
     archival boolean NOT NULL DEFAULT false,
     comment text

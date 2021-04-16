@@ -570,7 +570,7 @@ namespace WBZ
 
 		#region basic
 		[STAThread]
-		private static void Error(string msg, Exception ex, string module, int instance, bool showWin = true, bool save = true)
+		internal static void Error(string msg, Exception ex, string module, int instance, bool showWin = true, bool save = true)
         {
 			try
 			{
@@ -883,7 +883,7 @@ namespace WBZ
 						/// ICONS
 						case M_Module.Module.ICONS:
 							query = $@"select i.id, i.module, i.name, i.""format"", i.""path"",
-									i.file, i.height, i.width,
+									i.file, i.height, i.width, i.size,
 									i.archival, i.comment
 								from wbz.icons i
 								where {filter}";
@@ -1511,14 +1511,14 @@ namespace WBZ
 						case M_Module.Module.ICONS:
 							var icon = instance as M_Icon;
 							query = @"insert into wbz.icons (id, module, name, ""format"", ""path"",
-									file, height, width,
+									file, height, width, size,
 									archival, comment)
 								values (@id, @module, @name, @format, @path,
-									@file, @height, @width,
+									@file, @height, @width, @size,
 									@archival, @comment)
 								on conflict(id) do
 								update set module=@module, name=@name, ""format""=@format, ""path""=@path,
-									file=@file, height=@height, width=@width,
+									file=@file, height=@height, width=@width, size=@size,
 									archival=@archival, comment=@comment";
 							using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 							{
@@ -1530,6 +1530,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("file", icon.File);
 								sqlCmd.Parameters.AddWithValue("height", icon.Height);
 								sqlCmd.Parameters.AddWithValue("width", icon.Width);
+								sqlCmd.Parameters.AddWithValue("size", icon.Size);
 								sqlCmd.Parameters.AddWithValue("archival", icon.Archival);
 								sqlCmd.Parameters.AddWithValue("comment", icon.Comment);
 								sqlCmd.ExecuteNonQuery();
@@ -1822,7 +1823,8 @@ namespace WBZ
 		/// Pobiera wartość podanej właściwości z bazy danych
 		/// </summary>
 		/// <param name="property">Nazwa właściwości z tabeli wbz.config</param>
-		internal static string GetPropertyValue(string property)
+		/// <param name="def">Wartość domyślna jeśli zapis w tabeli wbz.config nie istnieje</param>
+		internal static string GetPropertyValue(string property, string def = null)
 		{
 			string result = null;
 
@@ -1833,6 +1835,12 @@ namespace WBZ
 				{
 					sqlCmd.Parameters.AddWithValue("property", property);
 					result = sqlCmd.ExecuteScalar().ToString();
+				}
+
+				if (result == string.Empty && def != null)
+                {
+					SetPropertyValue(property, def);
+					result = def;
 				}
 			}
 			catch (Exception ex)
