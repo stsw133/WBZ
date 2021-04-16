@@ -26,7 +26,7 @@
         <!-- ID -->
         <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_ID, Converter={seg:conv_BoolToVisibility}}"/>
         <!-- Icon -->
-        <DataGridTemplateColumn MaxWidth="50" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Icon, Converter={seg:conv_BoolToVisibility}}">
+        <DataGridTemplateColumn Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Icon, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
                     <Image Source="{Binding Icon}"/>

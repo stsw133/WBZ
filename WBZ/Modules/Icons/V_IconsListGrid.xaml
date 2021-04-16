@@ -26,7 +26,7 @@
         <!-- ID -->
         <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_ID, Converter={seg:conv_BoolToVisibility}}"/>
         <!-- File -->
-        <DataGridTemplateColumn MaxWidth="50" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_File, Converter={seg:conv_BoolToVisibility}}">
+        <DataGridTemplateColumn Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_File, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
                     <Image Source="{Binding File}"/>
@@ -204,36 +204,12 @@
     </DataGrid.ContextMenu>
     <DataGrid.RowStyle>
         <Style TargetType="DataGridRow">
+            <Style.Setters>
+                <Setter Property="Background" Value="{Binding Module, Converter={seg:conv_GenerateColor}, ConverterParameter=0.75}"/>
+            </Style.Setters>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Archival}" Value="True">
                     <Setter Property="Foreground" Value="Gray"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Module}" Value="articles">
-                    <Setter Property="Background" Value="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}}"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Module}" Value="attributes_classes">
-                    <Setter Property="Background" Value="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}}"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Module}" Value="contractors">
-                    <Setter Property="Background" Value="{Binding config_Contractors_PanelColor, Source={x:Static p:Settings.Default}}"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Module}" Value="distributions">
-                    <Setter Property="Background" Value="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}}"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Module}" Value="documents">
-                    <Setter Property="Background" Value="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}}"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Module}" Value="employees">
-                    <Setter Property="Background" Value="{Binding config_Employees_PanelColor, Source={x:Static p:Settings.Default}}"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Module}" Value="families">
-                    <Setter Property="Background" Value="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}}"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Module}" Value="stores">
-                    <Setter Property="Background" Value="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}}"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Module}" Value="users">
-                    <Setter Property="Background" Value="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}}"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Comment, Converter={seg:conv_Compare}}" Value="False">
                     <Setter Property="ToolTip" Value="{Binding Comment}"/>

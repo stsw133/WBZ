@@ -167,38 +167,9 @@
     </DataGrid.ContextMenu>
     <DataGrid.RowStyle>
         <Style TargetType="DataGridRow">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding Module}" Value="articles">
-                    <Setter Property="Background" Value="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}}"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Module}" Value="attachments">
-                    <Setter Property="Background" Value="{Binding config_Attachments_PanelColor, Source={x:Static p:Settings.Default}}"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Module}" Value="attributes_classes">
-                    <Setter Property="Background" Value="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}}"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Module}" Value="contractors">
-                    <Setter Property="Background" Value="{Binding config_Contractors_PanelColor, Source={x:Static p:Settings.Default}}"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Module}" Value="distributions">
-                    <Setter Property="Background" Value="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}}"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Module}" Value="documents">
-                    <Setter Property="Background" Value="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}}"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Module}" Value="employees">
-                    <Setter Property="Background" Value="{Binding config_Employees_PanelColor, Source={x:Static p:Settings.Default}}"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Module}" Value="families">
-                    <Setter Property="Background" Value="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}}"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Module}" Value="stores">
-                    <Setter Property="Background" Value="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}}"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Module}" Value="users">
-                    <Setter Property="Background" Value="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}}"/>
-                </DataTrigger>
-            </Style.Triggers>
+            <Style.Setters>
+                <Setter Property="Background" Value="{Binding Module, Converter={seg:conv_GenerateColor}, ConverterParameter=0.75}"/>
+            </Style.Setters>
         </Style>
     </DataGrid.RowStyle>
 </DataGrid>

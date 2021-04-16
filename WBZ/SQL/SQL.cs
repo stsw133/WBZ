@@ -10,6 +10,7 @@ using System.Windows;
 using WBZ.Models;
 using WBZ.Controls;
 using WBZ.Globals;
+using System.ComponentModel;
 
 namespace WBZ
 {
@@ -1827,6 +1828,8 @@ namespace WBZ
 		/// <param name="def">Wartość domyślna jeśli zapis w tabeli wbz.config nie istnieje</param>
 		internal static string GetPropertyValue(string property, string def = null)
 		{
+			if (DesignerProperties.GetIsInDesignMode(new DependencyObject())) return string.Empty;
+
 			string result = null;
 
 			try
