@@ -1,9 +1,9 @@
-﻿using StswExpress.Globals;
+﻿using StswExpress.Base;
+using StswExpress.Globals;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 using WBZ.Models;
-using WBZ.Modules._base;
 
 namespace WBZ.Controls
 {
@@ -84,7 +84,7 @@ namespace WBZ.Controls
 		}
 
 		/// Can attribute have any value
-		public bool FreeValues { get => AttributeInfo.Class.Type != "list"; }
+		public bool FreeValues => AttributeInfo.Class.Type != "list";
 
 		/// Edit mode
 		public bool EditMode { get; set; }

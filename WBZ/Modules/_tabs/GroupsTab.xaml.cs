@@ -1,12 +1,10 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
+﻿using StswExpress.Base;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using WBZ.Globals;
 using WBZ.Models;
-using WBZ.Modules._base;
 using WBZ.Modules.Groups;
 
 namespace WBZ.Modules._tabs

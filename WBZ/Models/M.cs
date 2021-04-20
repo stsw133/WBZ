@@ -1,4 +1,6 @@
-﻿namespace WBZ.Models
+﻿using System;
+
+namespace WBZ.Models
 {
     public class M
     {
@@ -20,7 +22,12 @@
         /// <summary>
         /// Icon
         /// </summary>
-        public byte[] Icon { get; set; } = null;
+        public int Icon
+        {
+            get => cIcon.Item1 ?? 0;
+            set => cIcon = new Tuple<int?, byte[]>(value, SQL.GetInstance<M_Icon>(Globals.Config.Modules.ICONS, value)?.File);
+        }
+        public Tuple<int?, byte[]> cIcon { get; set; } = new Tuple<int?, byte[]>(null, null);
 
         /// <summary>
         /// Group

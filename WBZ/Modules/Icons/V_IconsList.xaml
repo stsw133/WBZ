@@ -28,6 +28,7 @@
         <CommandBinding Command="seg:Commands.New" Executed="cmdNew_Executed" CanExecute="cmdNew_CanExecute"/>
         <CommandBinding Command="seg:Commands.Preview" Executed="cmdPreview_Executed" CanExecute="cmdPreview_CanExecute"/>
         <CommandBinding Command="seg:Commands.Refresh" Executed="cmdRefresh_Executed"/>
+        <CommandBinding Command="seg:Commands.Select" Executed="cmdSelect_Executed" CanExecute="cmdSelect_CanExecute"/>
     </Window.CommandBindings>
     <DockPanel>
         <!-- titleBar -->
@@ -38,6 +39,14 @@
                 BorderBrush="{Binding config_Icons_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.5}"
                 BorderThickness="1,0,0,0">
             <DockPanel>
+                <StackPanel DockPanel.Dock="Top" Visibility="{Binding SelectingMode, Converter={seg:conv_BoolToVisibility}}">
+                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                Text="{Tr Buttons.Select, DefaultText='Wybierz', LanguageId={x:Static seg:Properties.Language}}"
+                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                Icon="/Resources/icon32_select.ico"
+                                Command="seg:Commands.Select"/>
+                    <Separator/>
+                </StackPanel>
                 <StackPanel DockPanel.Dock="Top">
                     <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4;0.4;0.4;0}"
                                 Text="{Tr Buttons.Preview, DefaultText='Podgląd', LanguageId={x:Static seg:Properties.Language}}"

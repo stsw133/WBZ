@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
+﻿using StswExpress.Base;
+using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using WBZ.Controls;
 using WBZ.Models;
-using WBZ.Modules._base;
 
 namespace WBZ.Modules._tabs
 {

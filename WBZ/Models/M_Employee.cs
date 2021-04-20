@@ -17,7 +17,7 @@
 		/// </summary>
 		public string Forename { get; set; } = string.Empty;
 		public string Lastname { get; set; } = string.Empty;
-		public string Fullname { get => $"{Lastname} {Forename}"; }
+		public string Fullname => $"{Lastname} {Forename}";
 
 		/// <summary>
 		/// Department

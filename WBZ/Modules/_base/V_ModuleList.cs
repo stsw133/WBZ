@@ -67,6 +67,26 @@ namespace WBZ.Modules._base
         }
 
         /// <summary>
+		/// Select
+		/// </summary>
+		internal void cmdSelect_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            try
+            {
+                if (D.SelectingMode)
+                    e.CanExecute = true;
+                else
+                    e.CanExecute = false;
+            }
+            catch { }
+        }
+        internal virtual void cmdSelect_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Selected = dgList.SelectedItems.Cast<MODULE_MODEL>().FirstOrDefault();
+            W.DialogResult = true;
+        }
+
+        /// <summary>
 		/// New
 		/// </summary>
 		internal void cmdNew_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -211,11 +231,7 @@ namespace WBZ.Modules._base
                     else
                         cmdPreview_Executed(null, null);
                 }
-                else
-                {
-                    Selected = (sender as DataGrid).SelectedItems.Cast<MODULE_MODEL>().FirstOrDefault();
-                    W.DialogResult = true;
-                }
+                else cmdSelect_Executed(null, null);
             }
         }
 

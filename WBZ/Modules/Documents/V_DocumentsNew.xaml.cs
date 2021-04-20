@@ -62,7 +62,6 @@ namespace WBZ.Modules.Documents
 				if (window.Selected != null)
 				{
 					D.InstanceInfo.Contractor = window.Selected.ID;
-					D.InstanceInfo.ContractorName = window.Selected.Name;
 					D.InstanceInfo = D.InstanceInfo;
 				}
 		}

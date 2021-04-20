@@ -1,11 +1,9 @@
-﻿using System.ComponentModel;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using WBZ.Models;
 using WBZ.Globals;
 using System.Collections.ObjectModel;
-using System.Runtime.CompilerServices;
-using WBZ.Modules._base;
+using StswExpress.Base;
 
 namespace WBZ.Modules._tabs
 {

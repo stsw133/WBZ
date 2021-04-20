@@ -34,8 +34,7 @@ namespace WBZ.Modules.Vehicles
 			if (window.ShowDialog() == true)
 				if (window.Selected != null)
 				{
-					D.InstanceInfo.cForwarder.ID = window.Selected.ID;
-					D.InstanceInfo.cForwarder.Name = window.Selected.Name;
+					D.InstanceInfo.Forwarder = window.Selected.ID;
 					D.InstanceInfo = D.InstanceInfo;
 				}
 		}
@@ -49,8 +48,7 @@ namespace WBZ.Modules.Vehicles
 			if (window.ShowDialog() == true)
 				if (window.Selected != null)
 				{
-					D.InstanceInfo.cDriver.ID = window.Selected.ID;
-					D.InstanceInfo.cDriver.Name = $"{window.Selected.Lastname} {window.Selected.Forename}";
+					D.InstanceInfo.Driver = window.Selected.ID;
 					D.InstanceInfo = D.InstanceInfo;
 				}
 		}

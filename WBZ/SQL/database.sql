@@ -113,7 +113,11 @@ CREATE TABLE wbz.groups
     owner integer,
     archival boolean NOT NULL DEFAULT false,
     comment text,
-    icon bytea
+    icon integer,
+    CONSTRAINT groups_icon_fkey FOREIGN KEY (icon)
+        REFERENCES wbz.icons (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE NO ACTION
 );
 
 -- Table: wbz.attributes_classes
@@ -128,7 +132,11 @@ CREATE TABLE wbz.attributes_classes
     required boolean NOT NULL DEFAULT false,
     archival boolean NOT NULL DEFAULT false,
     comment text,
-    icon bytea
+    icon integer,
+    CONSTRAINT groups_icon_fkey FOREIGN KEY (icon)
+        REFERENCES wbz.icons (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE NO ACTION
 );
 
 -- Table: wbz.attributes
@@ -197,7 +205,11 @@ CREATE TABLE wbz.articles
     price numeric(16,2),
     archival boolean NOT NULL DEFAULT false,
     comment text,
-    icon bytea
+    icon integer,
+    CONSTRAINT groups_icon_fkey FOREIGN KEY (icon)
+        REFERENCES wbz.icons (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE NO ACTION
 );
 
 -- Table: wbz.articles_measures
@@ -225,7 +237,11 @@ CREATE TABLE wbz.stores
     postcode character varying(6) NOT NULL,
     archival boolean NOT NULL DEFAULT false,
     comment text,
-    icon bytea
+    icon integer,
+    CONSTRAINT groups_icon_fkey FOREIGN KEY (icon)
+        REFERENCES wbz.icons (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE NO ACTION
 );
 
 -- Table: wbz.stores_articles
@@ -260,7 +276,11 @@ CREATE TABLE wbz.contractors
     postcode character varying(6) NOT NULL,
     archival boolean NOT NULL DEFAULT false,
     comment text,
-    icon bytea
+    icon integer,
+    CONSTRAINT groups_icon_fkey FOREIGN KEY (icon)
+        REFERENCES wbz.icons (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE NO ACTION
 );
 
 -- Table: wbz.families
@@ -279,7 +299,11 @@ CREATE TABLE wbz.families
     c_email boolean NOT NULL DEFAULT false,
     archival boolean NOT NULL DEFAULT false,
     comment text,
-    icon bytea
+    icon integer,
+    CONSTRAINT groups_icon_fkey FOREIGN KEY (icon)
+        REFERENCES wbz.icons (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE NO ACTION
 );
 
 -- Table: wbz.documents
@@ -294,7 +318,11 @@ CREATE TABLE wbz.documents
     status smallint NOT NULL DEFAULT 0,
     archival boolean NOT NULL DEFAULT false,
     comment text,
-    icon bytea,
+    icon integer,
+    CONSTRAINT groups_icon_fkey FOREIGN KEY (icon)
+        REFERENCES wbz.icons (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE NO ACTION,
     CONSTRAINT documents_headers_store_fkey FOREIGN KEY (store)
         REFERENCES wbz.stores (id) MATCH SIMPLE
         ON UPDATE CASCADE
@@ -334,7 +362,11 @@ CREATE TABLE wbz.distributions
     status smallint NOT NULL DEFAULT 0,
     archival boolean NOT NULL,
     comment text,
-    icon bytea
+    icon integer,
+    CONSTRAINT groups_icon_fkey FOREIGN KEY (icon)
+        REFERENCES wbz.icons (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE NO ACTION
 );
 
 -- Table: wbz.distributions_positions
@@ -382,7 +414,11 @@ CREATE TABLE wbz.employees
     position character varying(40),
     archival boolean NOT NULL DEFAULT false,
     comment text,
-    icon bytea
+    icon integer,
+    CONSTRAINT groups_icon_fkey FOREIGN KEY (icon)
+        REFERENCES wbz.icons (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE NO ACTION
 );
 
 -- Table: wbz.vehicles
@@ -398,7 +434,11 @@ CREATE TABLE wbz.vehicles
     prodyear integer,
     archival boolean NOT NULL DEFAULT false,
     comment text,
-    icon bytea,
+    icon integer,
+    CONSTRAINT groups_icon_fkey FOREIGN KEY (icon)
+        REFERENCES wbz.icons (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE NO ACTION,
     CONSTRAINT vehicles_headers_forwarder_fkey FOREIGN KEY (forwarder)
         REFERENCES wbz.contractors (id) MATCH SIMPLE
         ON UPDATE CASCADE

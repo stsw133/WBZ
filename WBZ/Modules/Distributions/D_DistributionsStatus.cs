@@ -1,15 +1,13 @@
-﻿using System.ComponentModel;
+﻿using StswExpress.Base;
 using System.Data;
-using System.Runtime.CompilerServices;
 using WBZ.Models;
-using WBZ.Modules._base;
 
 namespace WBZ.Modules.Distributions
 {
     class D_DistributionsStatus : D
     {
 		/// Window title
-		public string Title { get => $"Zmiana statusu rodziny: {FamilyInfo?.Lastname}"; }
+		public string Title => $"Zmiana statusu rodziny: {FamilyInfo?.Lastname}";
 
 		/// Family
 		private M_Family familyInfo;

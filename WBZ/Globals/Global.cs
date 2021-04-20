@@ -9,9 +9,13 @@ namespace WBZ.Globals
     {
         /// Newest version to download
         public static string VersionNewest { get; set; } = null;
+
         /// Logged user
         public static M_User User { get; set; } = new M_User();
-        
+
+        /// <summary>
+        /// UserPermType
+        /// </summary>
         public static class UserPermType
         {
             public const string PREVIEW = "preview";

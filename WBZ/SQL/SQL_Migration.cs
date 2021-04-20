@@ -209,6 +209,28 @@ CREATE TABLE wbz.icons
 	comment text
 );
 
+alter table wbz.articles drop column if exists icon;
+alter table wbz.attributes_classes drop column if exists icon;
+alter table wbz.contractors drop column if exists icon;
+alter table wbz.distributions drop column if exists icon;
+alter table wbz.documents drop column if exists icon;
+alter table wbz.employees drop column if exists icon;
+alter table wbz.families drop column if exists icon;
+alter table wbz.groups drop column if exists icon;
+alter table wbz.stores drop column if exists icon;
+alter table wbz.vehicles drop column if exists icon;
+
+alter table wbz.articles add column if not exists icon integer;
+alter table wbz.attributes_classes add column if not exists icon integer;
+alter table wbz.contractors add column if not exists icon integer;
+alter table wbz.distributions add column if not exists icon integer;
+alter table wbz.documents add column if not exists icon integer;
+alter table wbz.employees add column if not exists icon integer;
+alter table wbz.families add column if not exists icon integer;
+alter table wbz.groups add column if not exists icon integer;
+alter table wbz.stores add column if not exists icon integer;
+alter table wbz.vehicles add column if not exists icon integer;
+
 							update wbz.config set value='1.2' where property='VERSION'", sqlConn, sqlTran);
 							sqlCmd.ExecuteNonQuery();
 						}

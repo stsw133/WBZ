@@ -88,7 +88,11 @@ namespace WBZ.Modules._base
 				return;
 
 			if (saved = SQL.SetInstance(D.MODULE_TYPE, D.InstanceInfo, D.Mode))
-				Close();
+			{
+				if (Owner != null)
+					DialogResult = true;
+                else Close();
+			}
 		}
 
 		/// <summary>

@@ -20,9 +20,9 @@ namespace WBZ.Controls
                 dpName.Visibility = Visibility.Collapsed;
         }
 
-        public string GetLink { get => tbLink.Text; }
-        public string GetDrive { get => tbDrive.Text; }
-        public string GetName { get => tbName.Text; }
+        public string GetLink=> tbLink.Text;
+        public string GetDrive => tbDrive.Text;
+        public string GetName => tbName.Text;
 
         /// <summary>
         /// Loaded

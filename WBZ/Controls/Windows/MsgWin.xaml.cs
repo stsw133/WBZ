@@ -1,5 +1,5 @@
-﻿using System.Windows;
-using WBZ.Models;
+﻿using StswExpress.Base;
+using System.Windows;
 
 namespace WBZ.Controls
 {
@@ -38,7 +38,7 @@ namespace WBZ.Controls
 				tbInput.Visibility = Visibility.Visible;
 		}
 
-		public string Value { get => tbInput.Text; }
+		public string Value => tbInput.Text;
 
 		/// <summary>
 		/// OK

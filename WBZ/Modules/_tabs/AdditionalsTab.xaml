@@ -4,32 +4,31 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
+             xmlns:g="clr-namespace:WBZ.Globals"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="750">
     <DockPanel Margin="5" IsEnabled="{Binding EditingMode}">
         <DockPanel DockPanel.Dock="Top">
             <DockPanel DockPanel.Dock="Right" Visibility="{Binding HasIcon, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Converter={seg:conv_BoolToVisibility}}">
                 <Label DockPanel.Dock="Top" Content="Ikona:"/>
-                <Border DockPanel.Dock="Top" VerticalAlignment="Top" Height="34" Width="34"
-                        Background="LightGray" BorderBrush="Gray" BorderThickness="1"
-                        AllowDrop="True" Drop="btnManageIcon_Drop" PreviewMouseLeftButtonUp="btnManageIcon_Click">
-                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Image Stretch="UniformToFill">
-                            <Image.Source>
-                                <Binding Path="InstanceInfo.Icon" >
-                                    <Binding.TargetNullValue>
-                                        <ImageSource>/Resources/icon32_photos.ico</ImageSource>
-                                    </Binding.TargetNullValue>
-                                </Binding>
-                            </Image.Source>
-                        </Image>
-                    </Grid>
-                    <Border.ContextMenu>
+                <Grid DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top"
+                      Height="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}" Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"
+                      PreviewMouseLeftButtonUp="btnManageIcon_Click">
+                    <Image Stretch="UniformToFill">
+                        <Image.Source>
+                            <Binding Path="InstanceInfo.cIcon.Item2">
+                                <Binding.TargetNullValue>
+                                    <ImageSource>/Resources/icon32_photos.ico</ImageSource>
+                                </Binding.TargetNullValue>
+                            </Binding>
+                        </Image.Source>
+                    </Image>
+                    <Grid.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Wczytaj" Click="btnLoad_Click"/>
+                            <MenuItem Header="Wybierz" Click="btnSelect_Click"/>
                             <MenuItem Header="Usuń" Click="btnDelete_Click"/>
                         </ContextMenu>
-                    </Border.ContextMenu>
-                </Border>
+                    </Grid.ContextMenu>
+                </Grid>
             </DockPanel>
             <CheckBox DockPanel.Dock="Top" Content="Archiwalny" Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" HorizontalAlignment="Left" VerticalContentAlignment="Center" IsChecked="{Binding InstanceInfo.Archival}"/>
             <Label DockPanel.Dock="Top" Content="Komentarz:" Margin="5,0" VerticalContentAlignment="Center"/>
