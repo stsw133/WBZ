@@ -47,9 +47,9 @@ namespace WBZ.Globals
 			if (SQL.CountInstances(obj.Module, $"{string.Join(string.Empty, ((obj.Module.Split('_') as string[]).AsQueryable().Cast<string>()).Select(str => str.Substring(0, 1)))}.id={obj.Instance}") == 0)
 				return;
 
-			if (!(mode == Commands.Type.EDIT && Global.User.Perms.Contains($"{obj.Module}_{Global.UserPermType.SAVE}")))
+			if (!(mode == Commands.Type.EDIT && Global.User.Perms.Contains($"{obj.Module}_{Global.PermType.SAVE}")))
 				mode = Commands.Type.PREVIEW;
-			if (!Global.User.Perms.Contains($"{obj.Module}_{Global.UserPermType.PREVIEW}") && !Global.User.Perms.Contains($"{obj.Module}_{Global.UserPermType.SAVE}"))
+			if (!Global.User.Perms.Contains($"{obj.Module}_{Global.PermType.PREVIEW}") && !Global.User.Perms.Contains($"{obj.Module}_{Global.PermType.SAVE}"))
 				return;
 			Window window;
 			/*

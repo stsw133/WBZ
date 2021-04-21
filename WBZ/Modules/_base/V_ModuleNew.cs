@@ -71,17 +71,7 @@ namespace WBZ.Modules._base
 		/// Save
 		/// </summary>
 		private bool saved = false;
-		internal void cmdSave_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-		{
-			try
-			{
-				if (D.EditingMode)
-					e.CanExecute = true;
-				else
-					e.CanExecute = false;
-			}
-			catch { }
-		}
+		internal void cmdSave_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = D?.EditingMode ?? false;
 		internal void cmdSave_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			if (!CheckDataValidation())
@@ -128,15 +118,15 @@ namespace WBZ.Modules._base
 		{
 			if (e.LeftButton == MouseButtonState.Pressed)
 			{
-				Commands.Type perm = Globals.Global.User.Perms.Contains($"{module}_{Globals.Global.UserPermType.SAVE}") ? Commands.Type.EDIT : Commands.Type.PREVIEW;
+				Commands.Type perm = Globals.Global.User.Perms.Contains($"{module}_{Globals.Global.PermType.SAVE}") ? Commands.Type.EDIT : Commands.Type.PREVIEW;
 
 				var selectedInstances = (sender as DataGrid).SelectedItems.Cast<T>();
 				foreach (T instance in selectedInstances)
 				{
 					var winNames = module.Split('_');
 					for (int i = 0; i < winNames.Length; i++)
-						winNames[i] = winNames[i].First().ToString().ToUpper() + string.Join("", winNames[i].Skip(1));
-					var window = Activator.CreateInstance(Type.GetType($"WBZ.Modules.{string.Join("",winNames)}.{string.Join("", winNames)}New"), instance, perm) as Window;
+						winNames[i] = winNames[i].First().ToString().ToUpper() + string.Join(string.Empty, winNames[i].Skip(1));
+					var window = Activator.CreateInstance(Type.GetType($"WBZ.Modules.{string.Join(string.Empty, winNames)}.{string.Join(string.Empty, winNames)}New"), instance, perm) as Window;
 					window.Show();
 				}
 			}

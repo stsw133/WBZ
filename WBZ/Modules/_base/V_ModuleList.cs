@@ -45,17 +45,7 @@ namespace WBZ.Modules._base
         /// <summary>
         /// Preview
         /// </summary>
-        internal void cmdPreview_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            try
-            {
-                if (Global.User.Perms.Contains($"{D.MODULE_TYPE}_{Global.UserPermType.PREVIEW}"))
-                    e.CanExecute = true;
-                else
-                    e.CanExecute = false;
-            }
-            catch { }
-        }
+        internal void cmdPreview_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = Global.User.Perms.Contains($"{D?.MODULE_TYPE}_{Global.PermType.PREVIEW}");
         internal virtual void cmdPreview_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
@@ -69,17 +59,7 @@ namespace WBZ.Modules._base
         /// <summary>
 		/// Select
 		/// </summary>
-		internal void cmdSelect_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            try
-            {
-                if (D.SelectingMode)
-                    e.CanExecute = true;
-                else
-                    e.CanExecute = false;
-            }
-            catch { }
-        }
+		internal void cmdSelect_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = D?.SelectingMode ?? false;
         internal virtual void cmdSelect_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Selected = dgList.SelectedItems.Cast<MODULE_MODEL>().FirstOrDefault();
@@ -89,17 +69,7 @@ namespace WBZ.Modules._base
         /// <summary>
 		/// New
 		/// </summary>
-		internal void cmdNew_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            try
-            {
-                if (Global.User.Perms.Contains($"{D.MODULE_TYPE}_{Global.UserPermType.SAVE}"))
-                    e.CanExecute = true;
-                else
-                    e.CanExecute = false;
-            }
-            catch { }
-        }
+		internal void cmdNew_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = Global.User.Perms.Contains($"{D?.MODULE_TYPE}_{Global.PermType.SAVE}");
         internal virtual void cmdNew_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var window = Activator.CreateInstance(Type.GetType(HalfName + "New"), null, StswExpress.Globals.Commands.Type.NEW) as Window;
@@ -109,17 +79,7 @@ namespace WBZ.Modules._base
         /// <summary>
         /// Duplicate
         /// </summary>
-        internal void cmdDuplicate_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            try
-            {
-                if (Global.User.Perms.Contains($"{D.MODULE_TYPE}_{Global.UserPermType.SAVE}"))
-                    e.CanExecute = true;
-                else
-                    e.CanExecute = false;
-            }
-            catch { }
-        }
+        internal void cmdDuplicate_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = Global.User.Perms.Contains($"{D?.MODULE_TYPE}_{Global.PermType.SAVE}");
         internal virtual void cmdDuplicate_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
@@ -133,17 +93,7 @@ namespace WBZ.Modules._base
         /// <summary>
         /// Edit
         /// </summary>
-        internal void cmdEdit_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            try
-            {
-                if (Global.User.Perms.Contains($"{D.MODULE_TYPE}_{Global.UserPermType.SAVE}"))
-                    e.CanExecute = true;
-                else
-                    e.CanExecute = false;
-            }
-            catch { }
-        }
+        internal void cmdEdit_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = Global.User.Perms.Contains($"{D?.MODULE_TYPE}_{Global.PermType.SAVE}");
         internal virtual void cmdEdit_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
@@ -157,17 +107,7 @@ namespace WBZ.Modules._base
         /// <summary>
         /// Delete
         /// </summary>
-        internal void cmdDelete_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            try
-            {
-                if (Global.User.Perms.Contains($"{D.MODULE_TYPE}_{Global.UserPermType.DELETE}"))
-                    e.CanExecute = true;
-                else
-                    e.CanExecute = false;
-            }
-            catch { }
-        }
+        internal void cmdDelete_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = Global.User.Perms.Contains($"{D?.MODULE_TYPE}_{Global.PermType.DELETE}");
         internal virtual void cmdDelete_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
@@ -226,7 +166,7 @@ namespace WBZ.Modules._base
             {
                 if (!D.SelectingMode)
                 {
-                    if (Global.User.Perms.Contains($"{D.MODULE_TYPE}_{Global.UserPermType.SAVE}"))
+                    if (Global.User.Perms.Contains($"{D.MODULE_TYPE}_{Global.PermType.SAVE}"))
                         cmdEdit_Executed(null, null);
                     else
                         cmdPreview_Executed(null, null);

@@ -146,7 +146,7 @@
                     </Border>
                     <Border.ContextMenu>
                         <ContextMenu>
-                            <sec:ColorSetter Color="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}" SliderWidth="256"/>
+                            <sec:ColorSetter Color="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                         </ContextMenu>
                     </Border.ContextMenu>
                 </Border>
@@ -186,7 +186,7 @@
                     </Border>
                     <Border.ContextMenu>
                         <ContextMenu>
-                            <sec:ColorSetter Color="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}" SliderWidth="256"/>
+                            <sec:ColorSetter Color="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                         </ContextMenu>
                     </Border.ContextMenu>
                 </Border>
@@ -226,7 +226,7 @@
                     </Border>
                     <Border.ContextMenu>
                         <ContextMenu>
-                            <sec:ColorSetter Color="{Binding config_Attachments_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}" SliderWidth="256"/>
+                            <sec:ColorSetter Color="{Binding config_Attachments_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                         </ContextMenu>
                     </Border.ContextMenu>
                 </Border>
@@ -266,7 +266,7 @@
                     </Border>
                     <Border.ContextMenu>
                         <ContextMenu>
-                            <sec:ColorSetter Color="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}" SliderWidth="256"/>
+                            <sec:ColorSetter Color="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                         </ContextMenu>
                     </Border.ContextMenu>
                 </Border>
@@ -306,7 +306,7 @@
                     </Border>
                     <Border.ContextMenu>
                         <ContextMenu>
-                            <sec:ColorSetter Color="{Binding config_Contractors_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}" SliderWidth="256"/>
+                            <sec:ColorSetter Color="{Binding config_Contractors_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                         </ContextMenu>
                     </Border.ContextMenu>
                 </Border>
@@ -346,7 +346,7 @@
                     </Border>
                     <Border.ContextMenu>
                         <ContextMenu>
-                            <sec:ColorSetter Color="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}" SliderWidth="256"/>
+                            <sec:ColorSetter Color="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                         </ContextMenu>
                     </Border.ContextMenu>
                 </Border>
@@ -386,7 +386,7 @@
                     </Border>
                     <Border.ContextMenu>
                         <ContextMenu>
-                            <sec:ColorSetter Color="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}" SliderWidth="256"/>
+                            <sec:ColorSetter Color="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                         </ContextMenu>
                     </Border.ContextMenu>
                 </Border>
@@ -426,7 +426,7 @@
                     </Border>
                     <Border.ContextMenu>
                         <ContextMenu>
-                            <sec:ColorSetter Color="{Binding config_Employees_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}" SliderWidth="256"/>
+                            <sec:ColorSetter Color="{Binding config_Employees_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                         </ContextMenu>
                     </Border.ContextMenu>
                 </Border>
@@ -466,7 +466,7 @@
                     </Border>
                     <Border.ContextMenu>
                         <ContextMenu>
-                            <sec:ColorSetter Color="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}" SliderWidth="256"/>
+                            <sec:ColorSetter Color="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                         </ContextMenu>
                     </Border.ContextMenu>
                 </Border>
@@ -506,7 +506,7 @@
                     </Border>
                     <Border.ContextMenu>
                         <ContextMenu>
-                            <sec:ColorSetter Color="{Binding config_Icons_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}" SliderWidth="256"/>
+                            <sec:ColorSetter Color="{Binding config_Icons_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                         </ContextMenu>
                     </Border.ContextMenu>
                 </Border>
@@ -539,7 +539,7 @@
                     </Border>
                     <Border.ContextMenu>
                         <ContextMenu>
-                            <sec:ColorSetter Color="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}" SliderWidth="256"/>
+                            <sec:ColorSetter Color="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                         </ContextMenu>
                     </Border.ContextMenu>
                 </Border>
@@ -572,7 +572,7 @@
                     </Border>
                     <Border.ContextMenu>
                         <ContextMenu>
-                            <sec:ColorSetter Color="{Binding config_Stats_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}" SliderWidth="256"/>
+                            <sec:ColorSetter Color="{Binding config_Stats_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                         </ContextMenu>
                     </Border.ContextMenu>
                 </Border>
@@ -612,7 +612,7 @@
                     </Border>
                     <Border.ContextMenu>
                         <ContextMenu>
-                            <sec:ColorSetter Color="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}" SliderWidth="256"/>
+                            <sec:ColorSetter Color="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                         </ContextMenu>
                     </Border.ContextMenu>
                 </Border>
@@ -652,7 +652,7 @@
                     </Border>
                     <Border.ContextMenu>
                         <ContextMenu>
-                            <sec:ColorSetter Color="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}" SliderWidth="256"/>
+                            <sec:ColorSetter Color="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                         </ContextMenu>
                     </Border.ContextMenu>
                 </Border>
@@ -692,14 +692,14 @@
                     </Border>
                     <Border.ContextMenu>
                         <ContextMenu>
-                            <sec:ColorSetter Color="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}" SliderWidth="256"/>
+                            <sec:ColorSetter Color="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                         </ContextMenu>
                     </Border.ContextMenu>
                 </Border>
             </WrapPanel>
             <ScrollViewer.ContextMenu>
                 <ContextMenu>
-                    <sec:ColorSetter Color="{Binding config_Main_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}" SliderWidth="256"/>
+                    <sec:ColorSetter Color="{Binding config_Main_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                 </ContextMenu>
             </ScrollViewer.ContextMenu>
         </ScrollViewer>

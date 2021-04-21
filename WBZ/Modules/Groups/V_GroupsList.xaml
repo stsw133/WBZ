@@ -14,7 +14,7 @@
     </WindowChrome.WindowChrome>
     <DockPanel>
         <!-- titleBar -->
-        <sec:TitleBar DockPanel.Dock="Top" SubIcon="/Resources/icon32_list.ico"/>
+        <sec:TitleBar DockPanel.Dock="Top" SubIcon="/Resources/icon32_select.ico"/>
         <!-- buttonsPanel -->
         <c:GroupsView x:Name="groupsView" Margin="5" MouseDoubleClick="groupsView_MouseDoubleClick"/>
     </DockPanel>

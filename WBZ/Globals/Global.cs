@@ -16,7 +16,7 @@ namespace WBZ.Globals
         /// <summary>
         /// UserPermType
         /// </summary>
-        public static class UserPermType
+        public static class PermType
         {
             public const string PREVIEW = "preview";
             public const string SAVE = "save";

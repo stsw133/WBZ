@@ -57,7 +57,7 @@
             </DockPanel>
             <Border.ContextMenu>
                 <ContextMenu>
-                    <sec:ColorSetter Color="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}" SliderWidth="256"/>
+                    <sec:ColorSetter Color="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                 </ContextMenu>
             </Border.ContextMenu>
         </Border>

@@ -19,7 +19,7 @@ namespace WBZ.Controls
         public bool HasFilters
         {
             get => (bool)GetValue(pHasFilters);
-            set { SetValue(pHasFilters, value); }
+            set => SetValue(pHasFilters, value);
         }
         public static readonly DependencyProperty pHasFilters
             = DependencyProperty.Register(
@@ -35,7 +35,7 @@ namespace WBZ.Controls
         public bool HasGroups
         {
             get => (bool)GetValue(pHasGroups);
-            set { SetValue(pHasGroups, value); }
+            set => SetValue(pHasGroups, value);
         }
         public static readonly DependencyProperty pHasGroups
             = DependencyProperty.Register(

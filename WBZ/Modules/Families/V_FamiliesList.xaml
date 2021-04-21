@@ -32,7 +32,7 @@
     </Window.CommandBindings>
     <DockPanel>
         <!-- titleBar -->
-        <sec:TitleBar DockPanel.Dock="Top" SubIcon="/Resources/icon32_list.ico"/>
+        <sec:TitleBar DockPanel.Dock="Top" SubIcon="{Binding ModeIcon}"/>
         <!-- buttonsPanel -->
         <Border DockPanel.Dock="Right"
                 Background="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}}"
@@ -92,7 +92,7 @@
             </DockPanel>
             <Border.ContextMenu>
                 <ContextMenu>
-                    <sec:ColorSetter Color="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}" SliderWidth="256"/>
+                    <sec:ColorSetter Color="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                 </ContextMenu>
             </Border.ContextMenu>
         </Border>

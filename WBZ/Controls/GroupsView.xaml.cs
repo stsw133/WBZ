@@ -27,7 +27,7 @@ namespace WBZ.Controls
         public bool EditingMode
         {
             get => (bool)GetValue(pEditingMode);
-            set { SetValue(pEditingMode, value); }
+            set => SetValue(pEditingMode, value);
         }
         public static readonly DependencyProperty pEditingMode
             = DependencyProperty.Register(
@@ -257,7 +257,7 @@ namespace WBZ.Controls
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                if (Global.User.Perms.Contains($"{Module}_{Global.UserPermType.SAVE}"))
+                if (Global.User.Perms.Contains($"{Module}_{Global.PermType.SAVE}"))
                     btnGroupsEdit_Click(null, null);
                 else
                     btnGroupsPreview_Click(null, null);

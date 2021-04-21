@@ -20,6 +20,16 @@ namespace WBZ.Modules._base
 		/// Selecting mode
 		public bool SelectingMode => Mode == Commands.Type.SELECT;
 
+		/// Additional window icon
+		public string ModeIcon
+		{
+			get
+			{
+				if (Mode == Commands.Type.SELECT)	return "/Resources/icon32_select.ico";
+				else								return "/Resources/icon32_list.ico";
+			}
+		}
+
 		/// SQL filter
 		public string FilterSQL { get; set; }
 
