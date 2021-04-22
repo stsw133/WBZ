@@ -3,6 +3,7 @@ using System.Data;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using WBZ.Controls;
 using WBZ.Globals;
 using WBZ.Models;
 using WBZ.Modules._base;
@@ -102,6 +103,20 @@ namespace WBZ.Modules.Articles
 		private void dgList_Distributions_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
             dgList_Module_MouseDoubleClick<M_Distribution>(sender, e, Config.Modules.DISTRIBUTIONS);
+		}
+
+		/// <summary>
+		/// Validation
+		/// </summary>
+		internal override bool CheckDataValidation()
+		{
+			if (string.IsNullOrEmpty(D.InstanceInfo.Name))
+			{
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano nazwy!") { Owner = this }.ShowDialog();
+				return false;
+			}
+
+			return true;
 		}
 	}
 

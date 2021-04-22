@@ -78,7 +78,10 @@ CREATE TABLE wbz.attachments
     "user" integer NOT NULL,
     module character varying(50) NOT NULL,
     instance integer NOT NULL,
-    name character varying(50) NOT NULL,
+    name character varying(255) NOT NULL,
+    "format" character varying(10) NOT NULL,
+    "path" character varying(2000) NOT NULL,
+    size integer NOT NULL,
     file bytea NOT NULL,
     comment text,
     CONSTRAINT attachments_perms_user_fkey FOREIGN KEY ("user")
@@ -92,9 +95,9 @@ CREATE TABLE wbz.icons
 (
     id bigserial PRIMARY KEY,
     module character varying(50) NOT NULL,
-    name character varying(50) NOT NULL,
+    name character varying(255) NOT NULL,
     "format" character varying(10) NOT NULL,
-    "path" character varying(250) NOT NULL,
+    "path" character varying(2000) NOT NULL,
     height integer NOT NULL,
     width integer NOT NULL,
     size integer NOT NULL,

@@ -798,7 +798,8 @@ namespace WBZ
 							break;
 						/// ATTACHMENTS
 						case Config.Modules.ATTACHMENTS:
-							query = $@"select a.id, a.""user"", a.module, a.instance, a.name, null as file
+							query = $@"select a.id, a.""user"", a.module, a.instance, a.name,
+								a.""format"", a.""path"", a.size, null as file
 								from wbz.attachments a
 								left join wbz.users u
 									on a.""user"" = u.id	
@@ -1991,7 +1992,7 @@ namespace WBZ
 		/// <param name="instance">Numer ID obiektu</param>
 		/// <param name="name">Nazwa załącznika</param>
 		/// <param name="file">Plik</param>
-		internal static int SetAttachment(string module, int instance, string name, byte[] file, string comment)
+		internal static int SetAttachment(string module, int instance, string name, string path, byte[] file, string comment)
 		{
 			int result = 0;
 
@@ -2000,12 +2001,17 @@ namespace WBZ
 				using (var sqlConn = connOpenedWBZ)
 				using (var sqlTran = sqlConn.BeginTransaction())
 				{
-					var sqlCmd = new NpgsqlCommand(@"insert into wbz.attachments (""user"", module, instance, name, file, comment)
-						values (@user, @module, @instance, @name, @file, @comment) returning id", sqlConn, sqlTran);
+					var sqlCmd = new NpgsqlCommand(@"insert into wbz.attachments (""user"", module, instance,
+							name, ""format"", ""path"", file, comment)
+						values (@user, @module, @instance,
+							@name, @format, @path, @file, @comment) returning id", sqlConn, sqlTran);
 					sqlCmd.Parameters.AddWithValue("user", Globals.Global.User.ID);
 					sqlCmd.Parameters.AddWithValue("module", module);
 					sqlCmd.Parameters.AddWithValue("instance", instance);
 					sqlCmd.Parameters.AddWithValue("name", name);
+					sqlCmd.Parameters.AddWithValue("format", path.Split('.').Last());
+					sqlCmd.Parameters.AddWithValue("path", path);
+					sqlCmd.Parameters.AddWithValue("size", file.Length);
 					sqlCmd.Parameters.AddWithValue("file", file);
 					sqlCmd.Parameters.AddWithValue("comment", comment);
 					result = Convert.ToInt32(sqlCmd.ExecuteScalar());

@@ -32,6 +32,21 @@ namespace WBZ.Models
 		public string Name { get; set; } = string.Empty;
 
 		/// <summary>
+		/// Path
+		/// </summary>
+		public string Path { get; set; } = string.Empty;
+
+		/// <summary>
+		/// Format
+		/// </summary>
+		public string Format { get; set; } = string.Empty;
+
+		/// <summary>
+		/// Size
+		/// </summary>
+		public double Size { get; set; } = 0;
+
+		/// <summary>
 		/// File
 		/// </summary>
 		public byte[] File { get; set; } = null;

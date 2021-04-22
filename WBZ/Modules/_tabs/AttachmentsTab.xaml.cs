@@ -75,7 +75,14 @@ namespace WBZ.Modules._tabs
                     filePath = window.GetDrive;
                     file = File.ReadAllBytes(filePath);
                 }
-                SQL.SetAttachment(Module, ID, window.GetName, file, filePath);
+
+                if (file.Length > Convert.ToInt32(Config.Attachment_Size_Max))
+                {
+                    new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Załącznik przekracza dopuszczalny rozmiar: " + Config.Attachment_Size_Max) { Owner = Window.GetWindow(this) }.ShowDialog();
+                    return;
+                }
+
+                SQL.SetAttachment(Module, ID, window.GetName, filePath, file, filePath);
                 D.InstanceAttachments = SQL.ListInstances<M_Attachment>(Config.Modules.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}");
             }
         }
@@ -121,7 +128,7 @@ namespace WBZ.Modules._tabs
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
                 byte[] file = File.ReadAllBytes(files[0]);
 
-                SQL.SetAttachment(Module, ID, Path.GetFileName(files[0]), file, files[0]);
+                SQL.SetAttachment(Module, ID, Path.GetFileName(files[0]), files[0], file, files[0]);
                 D.InstanceAttachments = SQL.ListInstances<M_Attachment>(Config.Modules.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}");
             }
         }

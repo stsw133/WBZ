@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using WBZ.Controls;
 using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_User;
 
@@ -70,7 +71,26 @@ namespace WBZ.Modules.Users
         {
 			D.InstanceInfo.Newpass = (sender as PasswordBox).Password;
         }
-    }
+
+		/// <summary>
+		/// Validation
+		/// </summary>
+		internal override bool CheckDataValidation()
+		{
+			if (string.IsNullOrEmpty(D.InstanceInfo.Username))
+			{
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano nazwy użytkownika!") { Owner = this }.ShowDialog();
+				return false;
+			}
+			if (string.IsNullOrEmpty(D.InstanceInfo.Email))
+			{
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano adresu e-mail!") { Owner = this }.ShowDialog();
+				return false;
+			}
+
+			return true;
+		}
+	}
 
     public class New : ModuleNew<MODULE_MODEL> { }
 }

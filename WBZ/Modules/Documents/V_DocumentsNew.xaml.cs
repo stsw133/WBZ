@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Windows;
+using WBZ.Controls;
 using WBZ.Modules._base;
 using WBZ.Modules.Articles;
 using WBZ.Modules.Contractors;
@@ -100,6 +101,40 @@ namespace WBZ.Modules.Documents
 
 					D.InstanceInfo.Positions.Rows.Add(row);
 				}
+		}
+
+		/// <summary>
+		/// Validation
+		/// </summary>
+		internal override bool CheckDataValidation()
+		{
+			if (string.IsNullOrEmpty(D.InstanceInfo.Type))
+			{
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie wybrano typu dokumentu!") { Owner = this }.ShowDialog();
+				return false;
+			}
+			if (string.IsNullOrEmpty(D.InstanceInfo.Name))
+			{
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano nazwy (numeru) dokumentu!") { Owner = this }.ShowDialog();
+				return false;
+			}
+			if (D.InstanceInfo.cStore == null)
+			{
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie wybrano magazynu!") { Owner = this }.ShowDialog();
+				return false;
+			}
+			if (D.InstanceInfo.Contractor == 0)
+			{
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie wybrano kontrahenta!") { Owner = this }.ShowDialog();
+				return false;
+			}
+			if (D.InstanceInfo.Positions.Rows.Count == 0)
+			{
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Brak pozycji na dokumencie!") { Owner = this }.ShowDialog();
+				return false;
+			}
+
+			return true;
 		}
 	}
 

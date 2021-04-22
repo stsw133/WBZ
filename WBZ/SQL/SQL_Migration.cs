@@ -155,7 +155,7 @@ CREATE TABLE wbz.attributes_values
 		ON DELETE CASCADE
 ) TABLESPACE pg_default;
 
-							update wbz.config set value='1.1.0' where property='VERSION'", sqlConn, sqlTran);
+								update wbz.config set value='1.1.0' where property='VERSION'", sqlConn, sqlTran);
 							sqlCmd.ExecuteNonQuery();
 						}
 						///1.1.0 => 1.2
@@ -198,9 +198,9 @@ CREATE TABLE wbz.icons
 (
     id bigserial PRIMARY KEY,
     module character varying(50) NOT NULL,
-    name character varying(50) NOT NULL,
+    name character varying(255) NOT NULL,
     ""format"" character varying(10) NOT NULL,
-	""path"" character varying(250) NOT NULL,
+	""path"" character varying(2000) NOT NULL,
 	height integer NOT NULL,
 	width integer NOT NULL,
 	size integer NOT NULL,
@@ -231,7 +231,12 @@ alter table wbz.groups add column if not exists icon integer;
 alter table wbz.stores add column if not exists icon integer;
 alter table wbz.vehicles add column if not exists icon integer;
 
-							update wbz.config set value='1.2' where property='VERSION'", sqlConn, sqlTran);
+alter table wbz.attachments add column if not exists path character varying(2000);
+alter table wbz.attachments add column if not exists format character varying(10);
+alter table wbz.attachments add column if not exists size integer;
+alter table wbz.attachments alter column name type varchar(255);
+
+								update wbz.config set value='1.2' where property='VERSION'", sqlConn, sqlTran);
 							sqlCmd.ExecuteNonQuery();
 						}
 

@@ -1,5 +1,6 @@
 ﻿using StswExpress.Globals;
 using System.Windows;
+using WBZ.Controls;
 using WBZ.Modules._base;
 using WBZ.Modules.Contractors;
 using WBZ.Modules.Employees;
@@ -61,6 +62,20 @@ namespace WBZ.Modules.Vehicles
 			var btn = sender as FrameworkElement;
 			if (btn != null)
 				btn.ContextMenu.IsOpen = true;
+		}
+
+		/// <summary>
+		/// Validation
+		/// </summary>
+		internal override bool CheckDataValidation()
+		{
+			if (string.IsNullOrEmpty(D.InstanceInfo.Register))
+			{
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano numeru rejestracyjnego!") { Owner = this }.ShowDialog();
+				return false;
+			}
+
+			return true;
 		}
 	}
 

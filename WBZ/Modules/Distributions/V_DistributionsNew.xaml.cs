@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using WBZ.Controls;
 using WBZ.Models;
 using WBZ.Modules._base;
 using WBZ.Modules.Articles;
@@ -163,6 +164,20 @@ namespace WBZ.Modules.Distributions
 						pos.SetModified();
 				((CollectionViewSource)gridGroups.Resources["groups"]).View.Refresh();
 			}
+		}
+
+		/// <summary>
+		/// Validation
+		/// </summary>
+		internal override bool CheckDataValidation()
+		{
+			if (D.InstanceInfo.Families.Count == 0)
+			{
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Brak pozycji na dystrybucji!") { Owner = this }.ShowDialog();
+				return false;
+			}
+
+			return true;
 		}
 	}
 

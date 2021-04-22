@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using WBZ.Controls;
 using WBZ.Globals;
 using WBZ.Models;
 using WBZ.Modules._base;
@@ -61,6 +62,45 @@ namespace WBZ.Modules.Families
         private void dgList_Distributions_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             dgList_Module_MouseDoubleClick<M_Distribution>(sender, e, Config.Modules.DISTRIBUTIONS);
+        }
+
+        /// <summary>
+		/// Validation
+		/// </summary>
+		internal override bool CheckDataValidation()
+        {
+            if (string.IsNullOrEmpty(D.InstanceInfo.Declarant))
+            {
+                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano osoby zgłaszającej!") { Owner = this }.ShowDialog();
+                return false;
+            }
+            if (string.IsNullOrEmpty(D.InstanceInfo.Lastname))
+            {
+                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano nazwiska rodziny!") { Owner = this }.ShowDialog();
+                return false;
+            }
+            if (D.InstanceInfo.Members == 0)
+            {
+                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano liczby osób w rodzinie!") { Owner = this }.ShowDialog();
+                return false;
+            }
+            if (string.IsNullOrEmpty(D.InstanceInfo.City))
+            {
+                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano miasta!") { Owner = this }.ShowDialog();
+                return false;
+            }
+            if (string.IsNullOrEmpty(D.InstanceInfo.Address))
+            {
+                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano adresu!") { Owner = this }.ShowDialog();
+                return false;
+            }
+            if (string.IsNullOrEmpty(D.InstanceInfo.Postcode))
+            {
+                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano kodu pocztowego!") { Owner = this }.ShowDialog();
+                return false;
+            }
+
+            return true;
         }
     }
 
