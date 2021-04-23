@@ -4,9 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
+             xmlns:g="clr-namespace:WBZ.Globals"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="750"
              Loaded="UserControl_Loaded">
-    <sec:DataGrid x:Name="dgList" ItemsSource="{Binding InstanceGroups}" IsReadOnly="True">
+    <DataGrid x:Name="dgList" ItemsSource="{Binding InstanceGroups}" IsReadOnly="True"
+              Margin="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1" AutoGenerateColumns="False">
+        <DataGrid.Resources>
+            <g:BindingProxy x:Key="proxy" Data="{Binding}"/>
+        </DataGrid.Resources>
         <DataGrid.Columns>
             <!-- ID -->
             <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" Visibility="Collapsed"/>
@@ -53,5 +58,5 @@
                 </Style.Triggers>
             </Style>
         </DataGrid.RowStyle>
-    </sec:DataGrid>
+    </DataGrid>
 </UserControl>

@@ -32,16 +32,14 @@ namespace WBZ.Modules._tabs
             try
             {
                 Window win = Window.GetWindow(this);
-
-                if (ID != 0 && D.InstanceAttributes == null)
-                    D.InstanceAttributes = SQL.ListAttributes(Module, ID);
-
                 dynamic d = win?.DataContext;
                 if (d != null)
                 {
                     Module = (string)d.MODULE_TYPE;
                     ID = (int)d.InstanceInfo.ID;
                 }
+                if (ID != 0 && D.InstanceAttributes == null)
+                    D.InstanceAttributes = SQL.ListAttributes(Module, ID);
             }
             catch { }
         }

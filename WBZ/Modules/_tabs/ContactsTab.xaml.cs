@@ -30,19 +30,17 @@ namespace WBZ.Modules._tabs
             try
             {
                 Window win = Window.GetWindow(this);
-
-                if (ID != 0 && D.InstanceContacts == null)
-                {
-                    D.InstanceContacts = SQL.ListContacts(Module, ID);
-                    win.Closed += UserControl_Closed;
-                }
-
                 dynamic d = win?.DataContext;
                 if (d != null)
                 {
                     Module = (string)d.MODULE_TYPE;
                     ID = (int)d.InstanceInfo.ID;
                     EditingMode = (bool)d.InstanceInfo.EditingMode;
+                }
+                if (ID != 0 && D.InstanceContacts == null)
+                {
+                    D.InstanceContacts = SQL.ListContacts(Module, ID);
+                    win.Closed += UserControl_Closed;
                 }
             }
             catch { }

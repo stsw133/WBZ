@@ -19,6 +19,9 @@ namespace WBZ.Modules._tabs
             InitializeComponent();
         }
 
+        /// <summary>
+        /// HasIcon
+        /// </summary>
         public bool HasIcon
         {
             get => (bool)GetValue(pHasIcon);

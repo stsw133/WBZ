@@ -24,6 +24,9 @@ namespace WBZ.Controls
             InitializeComponent();
         }
 
+        /// <summary>
+        /// EditingMode
+        /// </summary>
         public bool EditingMode
         {
             get => (bool)GetValue(pEditingMode);
@@ -255,6 +258,9 @@ namespace WBZ.Controls
         /// </summary>
         private void TreeView_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            if (Window.GetWindow(this).GetType() == typeof(GroupsList))
+                return;
+
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 if (Global.User.Perms.Contains($"{Module}_{Global.PermType.SAVE}"))

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System.IO;
+using System.Linq;
 using System.Windows;
 
 namespace WBZ.Controls
@@ -34,11 +35,11 @@ namespace WBZ.Controls
                 tbLink.Text = clipboardText;
             else if (clipboardText.StartsWith("C:"))
                 tbDrive.Text = clipboardText;
-            try
-            {
-                tbName.Text = Path.GetFileName(clipboardText);
-            }
-            catch { }
+
+            if (!string.IsNullOrEmpty(tbLink.Text))
+                tbName.Text = tbLink.Text.Split('\\').Last().Split('.').First();
+            else if (!string.IsNullOrEmpty(tbDrive.Text))
+                tbName.Text = tbDrive.Text.Split('/').Last().Split('.').First();
         }
 
         /// <summary>

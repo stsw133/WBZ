@@ -958,13 +958,13 @@ namespace WBZ
 		{
 			try
 			{
-				return ListInstances<T>(module, $"{Config.GetModuleAlias(module)}.id={id}")?[0];
+				return ListInstances<T>(module, $"{Config.GetModuleAlias(module)}.id={id}").FirstOrDefault();
 			}
 			catch (Exception ex)
 			{
 				Error("Błąd podczas pobierania instancji", ex, module, id);
 			}
-			return default(T);
+			return default;
 		}
 		/// <summary>
 		/// Pobiera listę pozycji instancji

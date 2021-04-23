@@ -27,23 +27,19 @@ namespace WBZ.Modules._tabs
 		/// <summary>
 		/// Loaded
 		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
 			try
 			{
 				Window win = Window.GetWindow(this);
-
-				if (ID != 0 && D.InstanceGroups == null)
-                    D.InstanceGroups = SQL.ListInstances<M_Group>(Config.Modules.GROUPS, $"g.module='{Module}' and g.instance={ID}");
-
 				dynamic d = win?.DataContext;
 				if (d != null)
 				{
 					Module = (string)d.MODULE_TYPE;
 					ID = (int)d.InstanceInfo.ID;
 				}
+				if (ID != 0 && D.InstanceGroups == null)
+					D.InstanceGroups = SQL.ListInstances<M_Group>(Config.Modules.GROUPS, $"g.module='{Module}' and g.instance={ID}");
 			}
 			catch { }
 		}
