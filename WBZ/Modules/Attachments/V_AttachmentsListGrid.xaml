@@ -86,7 +86,7 @@
                                 <Image Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.1}" Source="/Resources/icon32_descending.ico"/>
                             </ToggleButton>
                             <ComboBox SelectedValue="{Binding sorting_AttachmentsList[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
-                                <ComboBoxItem Content="Nazwisko i imię" Tag="a.userfullname"/>
+                                <ComboBoxItem Content="Nazwisko i imię" Tag="u.lastname || u.forename"/>
                                 <ComboBoxItem Content="Moduł" Tag="a.module"/>
                                 <ComboBoxItem Content="Nazwa" Tag="a.name"/>
                             </ComboBox>
@@ -101,7 +101,7 @@
                                 <Image Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.1}" Source="/Resources/icon32_descending.ico"/>
                             </ToggleButton>
                             <ComboBox SelectedValue="{Binding sorting_AttachmentsList[2], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
-                                <ComboBoxItem Content="Nazwisko i imię" Tag="a.userfullname"/>
+                                <ComboBoxItem Content="Nazwisko i imię" Tag="u.lastname || u.forename"/>
                                 <ComboBoxItem Content="Moduł" Tag="a.module"/>
                                 <ComboBoxItem Content="Nazwa" Tag="a.name"/>
                             </ComboBox>

@@ -97,7 +97,7 @@
                                 <Image Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.1}" Source="/Resources/icon32_descending.ico"/>
                             </ToggleButton>
                             <ComboBox SelectedValue="{Binding sorting_LogsList[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
-                                <ComboBoxItem Content="Nazwisko i imię" Tag="l.userfullname"/>
+                                <ComboBoxItem Content="Nazwisko i imię" Tag="u.lastname || u.forename"/>
                                 <ComboBoxItem Content="Moduł" Tag="l.module"/>
                                 <ComboBoxItem Content="Treść" Tag="l.content"/>
                                 <ComboBoxItem Content="Data" Tag="l.datetime"/>
@@ -113,7 +113,7 @@
                                 <Image Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.1}" Source="/Resources/icon32_descending.ico"/>
                             </ToggleButton>
                             <ComboBox SelectedValue="{Binding sorting_LogsList[2], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
-                                <ComboBoxItem Content="Nazwisko i imię" Tag="l.userfullname"/>
+                                <ComboBoxItem Content="Nazwisko i imię" Tag="u.lastname || u.forename"/>
                                 <ComboBoxItem Content="Moduł" Tag="l.module"/>
                                 <ComboBoxItem Content="Treść" Tag="l.content"/>
                                 <ComboBoxItem Content="Data" Tag="l.datetime"/>

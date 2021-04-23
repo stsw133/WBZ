@@ -5,7 +5,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 using WBZ.Globals;
-using WBZ.Models;
 using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_Log;
 
@@ -36,7 +35,7 @@ namespace WBZ.Modules.Logs
 		public override void UpdateFilters()
 		{
 			int index = 0;
-			tcList.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => { index = tcList.SelectedIndex; }));
+			tcList.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => index = tcList.SelectedIndex));
 
 			D.FilterSQL = $"LOWER(COALESCE(u.lastname,'') || ' ' || COALESCE(u.forename,'')) like '%{D.Filters.cUser.Name.ToLower()}%' and "
 						+ $"LOWER(COALESCE(l.module,'')) like '%{D.Filters.Module.ToLower()}%' and "
@@ -50,13 +49,20 @@ namespace WBZ.Modules.Logs
 		/// <summary>
 		/// Loaded
 		/// </summary>
-		private void Window_Loaded(object sender, RoutedEventArgs e)
+		internal override void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			if (D.SelectingMode)
 			{
 				dgList_Logs.SelectionMode = DataGridSelectionMode.Single;
 				dgList_Errors.SelectionMode = DataGridSelectionMode.Single;
 			}
+
+			tcList.SelectedIndex = 1;
+			UpdateFilters();
+			D.TotalItems = SQL.CountInstances(D.MODULE_TYPE, D.FilterSQL);
+			D.InstancesList = SQL.ListInstances<MODULE_MODEL>(D.MODULE_TYPE, D.FilterSQL, D.SORTING, D.Page = 0);
+			tcList.SelectedIndex = 0;
+
 			cmdRefresh_Executed(null, null);
 		}
 

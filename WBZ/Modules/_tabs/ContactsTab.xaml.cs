@@ -35,7 +35,7 @@ namespace WBZ.Modules._tabs
                 {
                     Module = (string)d.MODULE_TYPE;
                     ID = (int)d.InstanceInfo.ID;
-                    EditingMode = (bool)d.InstanceInfo.EditingMode;
+                    EditingMode = (bool)d.EditingMode;
                 }
                 if (ID != 0 && D.InstanceContacts == null)
                 {

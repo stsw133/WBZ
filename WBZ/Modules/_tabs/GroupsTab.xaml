@@ -16,10 +16,10 @@
             <!-- ID -->
             <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" Visibility="Collapsed"/>
             <!-- Icon -->
-            <DataGridTemplateColumn MaxWidth="50">
+            <DataGridTemplateColumn Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <Image Source="{Binding Icon}"/>
+                        <Image Source="{Binding cIcon.Item2}"/>
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>

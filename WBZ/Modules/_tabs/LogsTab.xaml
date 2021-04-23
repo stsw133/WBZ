@@ -3,14 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
+             xmlns:g="clr-namespace:WBZ.Globals"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="750"
              Loaded="UserControl_Loaded">
-    <sec:DataGrid ItemsSource="{Binding InstanceLogs}" IsReadOnly="True">
+    <DataGrid ItemsSource="{Binding InstanceLogs}" IsReadOnly="True"
+              Margin="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1" AutoGenerateColumns="False">
+        <DataGrid.Resources>
+            <g:BindingProxy x:Key="proxy" Data="{Binding}"/>
+        </DataGrid.Resources>
         <DataGrid.Columns>
-            <DataGridTextColumn Binding="{Binding UserFullname}" Header="Użytkownik"/>
+            <DataGridTextColumn Binding="{Binding cUser.Name}" Header="Użytkownik"/>
             <DataGridTextColumn Binding="{Binding Content}" Header="Treść" Width="*"/>
             <DataGridTextColumn Binding="{Binding DateTime, StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}" Header="Data i czas"/>
         </DataGrid.Columns>
-    </sec:DataGrid>
+    </DataGrid>
 </UserControl>

@@ -29,7 +29,7 @@ namespace WBZ.Modules._base
         /// <summary>
         /// Loaded
         /// </summary>
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        internal virtual void Window_Loaded(object sender, RoutedEventArgs e)
         {
             if (D.SelectingMode)
                 dgList.SelectionMode = DataGridSelectionMode.Single;

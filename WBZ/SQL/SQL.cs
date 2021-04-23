@@ -893,8 +893,7 @@ namespace WBZ
 							break;
 						/// LOGS
 						case Config.Modules.LOGS:
-							query = $@"select l.id, l.""user"", u.lastname || ' ' || u.forename as userfullname,
-									l.module, l.instance, l.type as group, l.content, l.datetime
+							query = $@"select l.id, l.""user"", l.module, l.instance, l.type as group, l.content, l.datetime
 								from wbz.logs l
 								left join wbz.users u
 									on l.""user"" = u.id
