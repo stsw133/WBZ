@@ -17,8 +17,9 @@ namespace WBZ.Modules.Icons
 		{
 			get
 			{
-				if (Mode == Commands.Type.SELECT)	return "Wybór ikony";
-				else								return "Lista ikon";
+				if		(Mode == Commands.Type.LIST)	return "Lista ikon";
+				else if (Mode == Commands.Type.SELECT)	return "Wybór ikony";
+				else									return string.Empty;
 			}
 		}
 	}

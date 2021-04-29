@@ -84,7 +84,7 @@
         <!-- statusPanel -->
         <c:StatusPanel x:Name="StatusPanel" DockPanel.Dock="Bottom"
                        Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}}"
-                       HasFilters="{Binding FiltersVisibility, Mode=OneTime}" HasGroups="False"/>
+                       HasFilters="{Binding AreFiltersVisible, Mode=OneTime}" HasGroups="False"/>
         <!-- dataGrid -->
         <TabControl x:Name="tcList" Padding="0" SelectionChanged="tcList_SelectionChanged">
             <!-- logs -->

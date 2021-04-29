@@ -17,8 +17,9 @@ namespace WBZ.Modules.Distributions
 		{
 			get
 			{
-				if (Mode == Commands.Type.SELECT)	return "Wybór dystrybucji";
-				else								return "Lista dystrybucji";
+				if		(Mode == Commands.Type.LIST)	return "Lista dystrybucji";
+				else if (Mode == Commands.Type.SELECT)	return "Wybór dystrybucji";
+				else									return string.Empty;
 			}
 		}
 	}

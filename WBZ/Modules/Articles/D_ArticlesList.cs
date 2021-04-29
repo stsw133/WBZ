@@ -19,8 +19,9 @@ namespace WBZ.Modules.Articles
 		{
 			get
 			{
-				if (Mode == Commands.Type.SELECT)	return "Wybór towaru";
-				else								return "Lista towarów";
+				if		(Mode == Commands.Type.LIST)	return "Lista towarów";
+				else if (Mode == Commands.Type.SELECT)	return "Wybór towaru";
+				else									return string.Empty;
 			}
 		}
 		/// Stores list

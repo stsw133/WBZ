@@ -99,12 +99,12 @@
         <!-- statusPanel -->
         <c:StatusPanel x:Name="StatusPanel" DockPanel.Dock="Bottom"
                        Background="{Binding config_Icons_PanelColor, Source={x:Static p:Settings.Default}}"
-                       HasFilters="{Binding FiltersVisibility, Mode=OneTime}" HasGroups="{Binding GroupsVisibility, Mode=OneTime}"/>
+                       HasFilters="{Binding AreFiltersVisible, Mode=OneTime}" HasGroups="{Binding AreGroupsVisible, Mode=OneTime}"/>
         <!-- groupsView -->
         <c:GroupsView EditingMode="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=icons_groups}"
-                      Visibility="{Binding GroupsVisibility, Converter={seg:conv_BoolToVisibility}}"/>
+                      Visibility="{Binding AreGroupsVisible, Converter={seg:conv_BoolToVisibility}}"/>
         <!-- otherFilters -->
-        <DockPanel DockPanel.Dock="Bottom" Visibility="{Binding FiltersVisibility, Converter={seg:conv_BoolToVisibility}}">
+        <DockPanel DockPanel.Dock="Bottom" Visibility="{Binding AreFiltersVisible, Converter={seg:conv_BoolToVisibility}}">
             <CheckBox Margin="5,0,5,5" HorizontalAlignment="Right" VerticalContentAlignment="Center"
                       Content="Pokaż archiwalne"
                       IsChecked="{Binding Filters.Archival}"/>

@@ -17,8 +17,9 @@ namespace WBZ.Modules.Users
 		{
 			get
 			{
-				if (Mode == Commands.Type.SELECT)	return "Wybór użytkownika";
-				else								return "Lista użytkowników";
+				if		(Mode == Commands.Type.LIST)	return "Lista użytkowników";
+				else if (Mode == Commands.Type.SELECT)	return "Wybór użytkownika";
+				else									return string.Empty;
 			}
 		}
 	}

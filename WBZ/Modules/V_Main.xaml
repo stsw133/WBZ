@@ -126,18 +126,12 @@
                         </DockPanel>
                         <Border.ContextMenu>
                             <ContextMenu>
+                                <!-- ConsoleSQL -->
                                 <MenuItem Header="{Tr Main.Console, DefaultText='Konsola', LanguageId={x:Static seg:Properties.Language}}"
                                           IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=admin}"
                                           Click="btnConsoleSQL_Click">
                                     <MenuItem.Icon>
                                         <Image Source="/Resources/icon32_code.ico"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
-                                <MenuItem Header="{Tr Main.Versions, DefaultText='Wersje', LanguageId={x:Static seg:Properties.Language}}"
-                                          IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=admin}"
-                                          Click="btnVersions_Click">
-                                    <MenuItem.Icon>
-                                        <Image Source="/Resources/icon32_versions.ico"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
                                 <!--
@@ -171,6 +165,7 @@
                         </DockPanel>
                         <Border.ContextMenu>
                             <ContextMenu>
+                                <!-- List -->
                                 <MenuItem Header="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
                                           IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=articles_preview}"
                                           Click="btnArticlesList_Click">
@@ -178,6 +173,7 @@
                                         <Image Source="/Resources/icon32_list.ico"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
+                                <!-- New -->
                                 <MenuItem Header="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
                                           IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=articles_save}"
                                           Click="btnArticlesNew_Click">
@@ -211,6 +207,7 @@
                         </DockPanel>
                         <Border.ContextMenu>
                             <ContextMenu>
+                                <!-- List -->
                                 <MenuItem Header="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
                                                   IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=attachments_preview}"
                                                   Click="btnAttachmentsList_Click">
@@ -218,6 +215,7 @@
                                         <Image Source="/Resources/icon32_list.ico"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
+                                <!-- Gallery -->
                                 <MenuItem Header="{Tr Main.Gallery, DefaultText='Galeria', LanguageId={x:Static seg:Properties.Language}}"
                                                   IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=attachments_preview}"
                                                   Click="btnAttachmentsGallery_Click">
@@ -251,6 +249,7 @@
                         </DockPanel>
                         <Border.ContextMenu>
                             <ContextMenu>
+                                <!-- List -->
                                 <MenuItem Header="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
                                           IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=attributes_classes_preview}"
                                           Click="btnAttributesClassesList_Click">
@@ -258,6 +257,7 @@
                                         <Image Source="/Resources/icon32_list.ico"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
+                                <!-- New -->
                                 <MenuItem Header="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
                                           IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=attributes_classes_save}"
                                           Click="btnAttributesClassesNew_Click">
@@ -291,6 +291,7 @@
                         </DockPanel>
                         <Border.ContextMenu>
                             <ContextMenu>
+                                <!-- List -->
                                 <MenuItem Header="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
                                           IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=contractors_preview}"
                                           Click="btnContractorsList_Click">
@@ -298,6 +299,7 @@
                                         <Image Source="/Resources/icon32_list.ico"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
+                                <!-- New -->
                                 <MenuItem Header="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
                                           IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=contractors_save}"
                                           Click="btnContractorsNew_Click">
@@ -331,6 +333,7 @@
                         </DockPanel>
                         <Border.ContextMenu>
                             <ContextMenu>
+                                <!-- List -->
                                 <MenuItem Header="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
                                           IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=distributions_preview}"
                                           Click="btnDistributionsList_Click">
@@ -338,6 +341,7 @@
                                         <Image Source="/Resources/icon32_list.ico"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
+                                <!-- New -->
                                 <MenuItem Header="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
                                           IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=distributions_save}"
                                           Click="btnDistributionsNew_Click">
@@ -371,6 +375,7 @@
                         </DockPanel>
                         <Border.ContextMenu>
                             <ContextMenu>
+                                <!-- List -->
                                 <MenuItem Header="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
                                           IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=documents_preview}"
                                           Click="btnDocumentsList_Click">
@@ -378,6 +383,7 @@
                                         <Image Source="/Resources/icon32_list.ico"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
+                                <!-- New -->
                                 <MenuItem Header="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
                                           IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=documents_save}"
                                           Click="btnDocumentsNew_Click">
@@ -411,6 +417,7 @@
                         </DockPanel>
                         <Border.ContextMenu>
                             <ContextMenu>
+                                <!-- List -->
                                 <MenuItem Header="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
                                           IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=employees_preview}"
                                           Click="btnEmployeesList_Click">
@@ -418,6 +425,7 @@
                                         <Image Source="/Resources/icon32_list.ico"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
+                                <!-- New -->
                                 <MenuItem Header="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
                                           IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=employees_save}"
                                           Click="btnEmployeesNew_Click">
@@ -451,6 +459,7 @@
                         </DockPanel>
                         <Border.ContextMenu>
                             <ContextMenu>
+                                <!-- List -->
                                 <MenuItem Header="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
                                           IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=families_preview}"
                                           Click="btnFamiliesList_Click">
@@ -458,6 +467,7 @@
                                         <Image Source="/Resources/icon32_list.ico"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
+                                <!-- New -->
                                 <MenuItem Header="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
                                           IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=families_save}"
                                           Click="btnFamiliesNew_Click">
@@ -491,6 +501,7 @@
                         </DockPanel>
                         <Border.ContextMenu>
                             <ContextMenu>
+                                <!-- List -->
                                 <MenuItem Header="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
                                           IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=icons_preview}"
                                           Click="btnIconsList_Click">
@@ -498,6 +509,7 @@
                                         <Image Source="/Resources/icon32_list.ico"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
+                                <!-- New -->
                                 <MenuItem Header="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
                                           IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=icons_save}"
                                           Click="btnIconsNew_Click">
@@ -531,6 +543,7 @@
                         </DockPanel>
                         <Border.ContextMenu>
                             <ContextMenu>
+                                <!-- List -->
                                 <MenuItem Header="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
                                           IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=logs_preview}"
                                           Click="btnLogsList_Click">
@@ -564,6 +577,7 @@
                         </DockPanel>
                         <Border.ContextMenu>
                             <ContextMenu>
+                                <!-- Stats -->
                                 <MenuItem Header="{Tr Main.Stats, DefaultText='Statystyki', LanguageId={x:Static seg:Properties.Language}}"
                                           IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=stats_preview}"
                                           Click="btnStats_Click">
@@ -597,6 +611,7 @@
                         </DockPanel>
                         <Border.ContextMenu>
                             <ContextMenu>
+                                <!-- List -->
                                 <MenuItem Header="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
                                           IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=stores_preview}"
                                           Click="btnStoresList_Click">
@@ -604,6 +619,7 @@
                                         <Image Source="/Resources/icon32_list.ico"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
+                                <!-- New -->
                                 <MenuItem Header="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
                                           IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=stores_save}"
                                           Click="btnStoresNew_Click">
@@ -637,6 +653,7 @@
                         </DockPanel>
                         <Border.ContextMenu>
                             <ContextMenu>
+                                <!-- List -->
                                 <MenuItem Header="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
                                           IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=users_preview}"
                                           Click="btnUsersList_Click">
@@ -644,6 +661,7 @@
                                         <Image Source="/Resources/icon32_list.ico"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
+                                <!-- New -->
                                 <MenuItem Header="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
                                           IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=users_save}"
                                           Click="btnUsersNew_Click">
@@ -677,6 +695,7 @@
                         </DockPanel>
                         <Border.ContextMenu>
                             <ContextMenu>
+                                <!-- List -->
                                 <MenuItem Header="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
                                           IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=vehicles_preview}"
                                           Click="btnVehiclesList_Click">
@@ -684,6 +703,7 @@
                                         <Image Source="/Resources/icon32_list.ico"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
+                                <!-- New -->
                                 <MenuItem Header="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
                                           IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=vehicles_save}"
                                           Click="btnVehiclesNew_Click">

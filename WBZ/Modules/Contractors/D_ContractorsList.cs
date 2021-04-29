@@ -17,8 +17,9 @@ namespace WBZ.Modules.Contractors
 		{
 			get
 			{
-				if (Mode == Commands.Type.SELECT)	return "Wybór kontrahenta";
-				else								return "Lista kontrahentów";
+				if		(Mode == Commands.Type.LIST)	return "Lista kontrahentów";
+				else if (Mode == Commands.Type.SELECT)	return "Wybór kontrahenta";
+				else									return string.Empty;
 			}
 		}
 	}

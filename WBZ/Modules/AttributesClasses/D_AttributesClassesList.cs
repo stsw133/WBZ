@@ -17,8 +17,9 @@ namespace WBZ.Modules.AttributesClasses
 		{
 			get
 			{
-				if (Mode == Commands.Type.SELECT)	return "Wybór klasy atrybutu";
-				else								return "Lista klas atrybutów";
+				if		(Mode == Commands.Type.LIST)	return "Lista klas atrybutów";
+				else if (Mode == Commands.Type.SELECT)	return "Wybór klasy atrybutu";
+				else									return string.Empty;
 			}
 		}
 	}

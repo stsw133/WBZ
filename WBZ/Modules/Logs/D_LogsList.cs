@@ -18,8 +18,9 @@ namespace WBZ.Modules.Logs
 		{
 			get
 			{
-				if (Mode == Commands.Type.SELECT)	return "Wybór logu";
-				else								return "Lista logów";
+				if		(Mode == Commands.Type.LIST)	return "Lista logów";
+				else if (Mode == Commands.Type.SELECT)	return "Wybór logu";
+				else									return string.Empty;
 			}
 		}
 		/// Instances list (logs)

@@ -17,8 +17,9 @@ namespace WBZ.Modules.Employees
 		{
 			get
 			{
-				if (Mode == Commands.Type.SELECT)	return "Wybór pracownika";
-				else								return "Lista pracowników";
+				if		(Mode == Commands.Type.LIST)	return "Lista pracowników";
+				else if (Mode == Commands.Type.SELECT)	return "Wybór pracownika";
+				else									return string.Empty;
 			}
 		}
 	}

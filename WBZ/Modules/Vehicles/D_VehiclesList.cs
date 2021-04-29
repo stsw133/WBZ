@@ -17,8 +17,9 @@ namespace WBZ.Modules.Vehicles
 		{
 			get
 			{
-				if (Mode == Commands.Type.SELECT)	return "Wybór pojazdu";
-				else								return "Lista pojazdów";
+				if		(Mode == Commands.Type.LIST)	return "Lista pojazdów";
+				else if (Mode == Commands.Type.SELECT)	return "Wybór pojazdu";
+				else									return string.Empty;
 			}
 		}
 	}

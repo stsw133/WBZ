@@ -29,16 +29,13 @@ namespace WBZ.Modules._base
 			InitializeComponent();
 			DataContext = D;
 
+			D.Type = type;
 			D.Title = title;
-			txtMessage.Text = message;
-			tbInput.Text = value;
-
-			///InputBox
-			if (type == Type.InputBox)
-				tbInput.Visibility = Visibility.Visible;
+			D.Message = message;
+			D.InputValue = value;
 		}
 
-		public string Value => tbInput.Text ?? string.Empty;
+		public string Value => D.InputValue;
 
 		/// <summary>
 		/// OK
@@ -62,12 +59,36 @@ namespace WBZ.Modules._base
 	/// </summary>
 	public class D_MsgWin : D
 	{
+		/// Type
+		private MsgWin.Type type;
+		public MsgWin.Type Type
+		{
+			get => type;
+			set => SetField(ref type, value, () => Type);
+		}
+		
 		/// Title
 		private string title;
 		public string Title
 		{
 			get => title;
 			set => SetField(ref title, value, () => Title);
+		}
+
+		/// Message
+		private string message;
+		public string Message
+		{
+			get => message;
+			set => SetField(ref message, value, () => Message);
+		}
+
+		/// InputValue
+		private string inputValue;
+		public string InputValue
+		{
+			get => inputValue ?? string.Empty;
+			set => SetField(ref inputValue, value, () => InputValue);
 		}
 
 		/// Icon

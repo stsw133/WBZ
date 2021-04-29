@@ -17,8 +17,9 @@ namespace WBZ.Modules.Documents
 		{
 			get
 			{
-				if (Mode == Commands.Type.SELECT)	return "Wybór dokumentu";
-				else								return "Lista dokumentów";
+				if		(Mode == Commands.Type.LIST)	return "Lista dokumentów";
+				else if (Mode == Commands.Type.SELECT)	return "Wybór dokumentu";
+				else									return string.Empty;
 			}
 		}
 	}

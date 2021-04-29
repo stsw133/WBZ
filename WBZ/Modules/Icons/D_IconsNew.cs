@@ -15,10 +15,11 @@ namespace WBZ.Modules.Icons
         {
             get
             {
-                if      (Mode == Commands.Type.NEW)         return "Nowa ikona";
+                if      (Mode == Commands.Type.NEW)         return $"Nowa ikona";
                 else if (Mode == Commands.Type.DUPLICATE)   return $"Duplikowanie ikony: {InstanceInfo.Name}";
                 else if (Mode == Commands.Type.EDIT)        return $"Edycja ikony: {InstanceInfo.Name}";
-                else                                        return $"Podgląd ikony: {InstanceInfo.Name}";
+                else if (Mode == Commands.Type.PREVIEW)     return $"Podgląd ikony: {InstanceInfo.Name}";
+                else                                        return string.Empty;
             }
         }
     }

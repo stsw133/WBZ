@@ -25,8 +25,9 @@ namespace WBZ.Modules._base
 		{
 			get
 			{
-				if (Mode == Commands.Type.SELECT)	return "/Resources/icon32_select.ico";
-				else								return "/Resources/icon32_list.ico";
+				if		(Mode == Commands.Type.LIST)	return "/Resources/icon32_list.ico";
+				else if	(Mode == Commands.Type.SELECT)	return "/Resources/icon32_select.ico";
+				else									return null;
 			}
 		}
 
@@ -57,20 +58,20 @@ namespace WBZ.Modules._base
 			set => SetField(ref selectedFilter, value, () => SelectedFilter);
 		}
 
-		/// Filters visibility
-		private bool filtersVisibility = true;
-		public bool FiltersVisibility
+		/// Are filters visible
+		private bool areFiltersVisible = true;
+		public bool AreFiltersVisible
 		{
-			get => filtersVisibility;
-			set => SetField(ref filtersVisibility, value, () => FiltersVisibility);
+			get => areFiltersVisible;
+			set => SetField(ref areFiltersVisible, value, () => AreFiltersVisible);
 		}
 
-		/// Groups visibility
-		private bool groupsVisibility = true;
-		public bool GroupsVisibility
+		/// Are groups visible
+		private bool areGroupsVisible = true;
+		public bool AreGroupsVisible
 		{
-			get => groupsVisibility;
-			set => SetField(ref groupsVisibility, value, () => GroupsVisibility);
+			get => areGroupsVisible;
+			set => SetField(ref areGroupsVisible, value, () => AreGroupsVisible);
 		}
 
 		/// Page number

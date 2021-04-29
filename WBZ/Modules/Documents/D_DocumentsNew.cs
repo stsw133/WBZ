@@ -15,10 +15,11 @@ namespace WBZ.Modules.Documents
 		{
 			get
 			{
-				if		(Mode == Commands.Type.NEW)			return "Nowy dokument";
+				if		(Mode == Commands.Type.NEW)			return $"Nowy dokument";
 				else if (Mode == Commands.Type.DUPLICATE)	return $"Duplikowanie dokumentu: {InstanceInfo.Name}";
 				else if (Mode == Commands.Type.EDIT)		return $"Edycja dokumentu: {InstanceInfo.Name}";
-				else										return $"Podgląd dokumentu: {InstanceInfo.Name}";
+				else if (Mode == Commands.Type.PREVIEW)		return $"Podgląd dokumentu: {InstanceInfo.Name}";
+				else										return string.Empty;
 			}
 		}
 	}

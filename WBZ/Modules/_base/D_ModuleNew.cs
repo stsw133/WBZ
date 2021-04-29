@@ -27,7 +27,8 @@ namespace WBZ.Modules._base
 				if		(Mode == Commands.Type.NEW)			return "/Resources/icon32_add.ico";
 				else if (Mode == Commands.Type.DUPLICATE)	return "/Resources/icon32_duplicate.ico";
 				else if (Mode == Commands.Type.EDIT)		return "/Resources/icon32_edit.ico";
-				else										return "/Resources/icon32_search.ico";
+				else if (Mode == Commands.Type.PREVIEW)		return "/Resources/icon32_search.ico";
+				else										return null;
 			}
 		}
 	}

@@ -41,7 +41,7 @@
                     <ComboBox VerticalContentAlignment="Center" Padding="1"
                               ItemsSource="{x:Static g:Config.ListModules}"
                               SelectedValue="{Binding Data.Filters.Module, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Item1" DisplayMemberPath="Item2"
-                              Visibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}, Converter={seg:conv_BoolToVisibility}}">
+                              Visibility="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}, Converter={seg:conv_BoolToVisibility}}">
                         <ComboBox.InputBindings>
                             <KeyBinding Command="seg:Commands.Refresh" Key="Return"/>
                         </ComboBox.InputBindings>
@@ -54,7 +54,7 @@
             <DataGridTextColumn.Header>
                 <sec:ColumnFilter_Text Header="Nazwa" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=12}"
                                        Value="{Binding Data.Filters.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       IsFilterVisible="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
+                                       IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Type -->
@@ -63,7 +63,7 @@
                 <StackPanel>
                     <TextBlock Text="Typ"/>
                     <ComboBox SelectedValue="{Binding Data.Filters.Type, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Tag"
-                              Padding="1" Visibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}, Converter={seg:conv_BoolToVisibility}}">
+                              Padding="1" Visibility="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}, Converter={seg:conv_BoolToVisibility}}">
                         <ComboBoxItem Content="Ciąg znaków" Tag="string"/>
                         <ComboBoxItem Content="Data" Tag="date"/>
                         <ComboBoxItem Content="Liczba całkowita" Tag="int"/>

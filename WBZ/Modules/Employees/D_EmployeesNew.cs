@@ -15,10 +15,11 @@ namespace WBZ.Modules.Employees
 		{
 			get
 			{
-				if		(Mode == Commands.Type.NEW)			return "Nowy pracownik";
+				if		(Mode == Commands.Type.NEW)			return $"Nowy pracownik";
 				else if (Mode == Commands.Type.DUPLICATE)	return $"Duplikowanie pracownika: {InstanceInfo.Fullname}";
 				else if (Mode == Commands.Type.EDIT)		return $"Edycja pracownika: {InstanceInfo.Fullname}";
-				else										return $"Podgląd pracownika: {InstanceInfo.Fullname}";
+				else if (Mode == Commands.Type.PREVIEW)		return $"Podgląd pracownika: {InstanceInfo.Fullname}";
+				else										return string.Empty;
 			}
 		}
 	}

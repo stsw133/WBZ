@@ -17,10 +17,11 @@ namespace WBZ.Modules.Stores
 		{
 			get
 			{
-				if		(Mode == Commands.Type.NEW)			return "Nowy magazyn";
+				if		(Mode == Commands.Type.NEW)			return $"Nowy magazyn";
 				else if (Mode == Commands.Type.DUPLICATE)	return $"Duplikowanie magazynu: {InstanceInfo.Name}";
 				else if (Mode == Commands.Type.EDIT)		return $"Edycja magazynu: {InstanceInfo.Name}";
-				else										return $"Podgląd magazynu: {InstanceInfo.Name}";
+				else if (Mode == Commands.Type.PREVIEW)		return $"Podgląd magazynu: {InstanceInfo.Name}";
+				else										return string.Empty;
 			}
 		}
 		/// Instance source - articles

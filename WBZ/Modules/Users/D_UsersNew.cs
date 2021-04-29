@@ -15,10 +15,11 @@ namespace WBZ.Modules.Users
 		{
 			get
 			{
-				if		(Mode == Commands.Type.NEW)			return "Nowy użytkownik";
+				if		(Mode == Commands.Type.NEW)			return $"Nowy użytkownik";
 				else if (Mode == Commands.Type.DUPLICATE)	return $"Duplikowanie użytkownika: {InstanceInfo.Fullname}";
 				else if (Mode == Commands.Type.EDIT)		return $"Edycja użytkownika: {InstanceInfo.Fullname}";
-				else										return $"Podgląd użytkownika: {InstanceInfo.Fullname}";
+				else if (Mode == Commands.Type.PREVIEW)		return $"Podgląd użytkownika: {InstanceInfo.Fullname}";
+				else										return string.Empty;
 			}
 		}
 	}

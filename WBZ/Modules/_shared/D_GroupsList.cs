@@ -17,8 +17,9 @@ namespace WBZ.Modules._shared
 		{
 			get
 			{
-				if (Mode == Commands.Type.SELECT)	return "Wybór grupy";
-				else								return "Lista grup";
+				if		(Mode == Commands.Type.LIST)	return "Lista grup";
+				else if (Mode == Commands.Type.SELECT)	return "Wybór grupy";
+				else									return string.Empty;
 			}
 		}
 	}

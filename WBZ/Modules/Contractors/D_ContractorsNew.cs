@@ -17,10 +17,11 @@ namespace WBZ.Modules.Contractors
         {
             get
             {
-                if      (Mode == Commands.Type.NEW)         return "Nowy kontrahent";
+                if      (Mode == Commands.Type.NEW)         return $"Nowy kontrahent";
                 else if (Mode == Commands.Type.DUPLICATE)   return $"Duplikowanie kontrahenta: {InstanceInfo.Name}";
                 else if (Mode == Commands.Type.EDIT)        return $"Edycja kontrahenta: {InstanceInfo.Name}";
-                else                                        return $"Podgląd kontrahenta: {InstanceInfo.Name}";
+                else if (Mode == Commands.Type.PREVIEW)     return $"Podgląd kontrahenta: {InstanceInfo.Name}";
+                else                                        return string.Empty;
             }
         }
         /// Instance source - documents

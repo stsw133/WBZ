@@ -15,10 +15,11 @@ namespace WBZ.Modules._shared
         {
             get
             {
-                if      (Mode == Commands.Type.NEW)         return "Nowa grupa";
+                if      (Mode == Commands.Type.NEW)         return $"Nowa grupa";
                 else if (Mode == Commands.Type.DUPLICATE)   return $"Duplikowanie grupy: {InstanceInfo.Name}";
                 else if (Mode == Commands.Type.EDIT)        return $"Edycja grupy: {InstanceInfo.Name}";
-                else                                        return $"Podgląd grupy: {InstanceInfo.Name}";
+                else if (Mode == Commands.Type.PREVIEW)     return $"Podgląd grupy: {InstanceInfo.Name}";
+                else                                        return string.Empty;
             }
         }
     }

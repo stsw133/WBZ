@@ -17,10 +17,11 @@ namespace WBZ.Modules.Families
         {
             get
             {
-                if      (Mode == Commands.Type.NEW)         return "Nowa rodzina";
+                if      (Mode == Commands.Type.NEW)         return $"Nowa rodzina";
                 else if (Mode == Commands.Type.DUPLICATE)   return $"Duplikowanie rodziny: {InstanceInfo.Lastname}";
                 else if (Mode == Commands.Type.EDIT)        return $"Edycja rodziny: {InstanceInfo.Lastname}";
-                else                                        return $"Podgląd rodziny: {InstanceInfo.Lastname}";
+                else if (Mode == Commands.Type.PREVIEW)     return $"Podgląd rodziny: {InstanceInfo.Lastname}";
+                else                                        return string.Empty;
             }
         }
         /// Instance source - distributions

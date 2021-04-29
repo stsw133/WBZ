@@ -15,10 +15,11 @@ namespace WBZ.Modules.Distributions
 		{
 			get
 			{
-				if		(Mode == Commands.Type.NEW)			return "Nowa dystrybucja";
+				if		(Mode == Commands.Type.NEW)			return $"Nowa dystrybucja";
 				else if (Mode == Commands.Type.DUPLICATE)	return $"Duplikowanie dystrybucji: {InstanceInfo.Name}";
 				else if (Mode == Commands.Type.EDIT)		return $"Edycja dystrybucji: {InstanceInfo.Name}";
-				else										return $"Podgląd dystrybucji: {InstanceInfo.Name}";
+				else if (Mode == Commands.Type.PREVIEW)		return $"Podgląd dystrybucji: {InstanceInfo.Name}";
+				else										return string.Empty;
 			}
 		}
 	}

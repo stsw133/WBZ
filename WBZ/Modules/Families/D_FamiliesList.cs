@@ -17,8 +17,9 @@ namespace WBZ.Modules.Families
 		{
 			get
 			{
-				if (Mode == Commands.Type.SELECT)	return "Wybór rodziny";
-				else								return "Lista rodzin";
+				if		(Mode == Commands.Type.LIST)	return "Lista rodzin";
+				else if (Mode == Commands.Type.SELECT)	return "Wybór rodziny";
+				else									return string.Empty;
 			}
 		}
 	}

@@ -15,10 +15,11 @@ namespace WBZ.Modules.Vehicles
 		{
 			get
 			{
-				if		(Mode == Commands.Type.NEW)			return "Nowy pojazd";
+				if		(Mode == Commands.Type.NEW)			return $"Nowy pojazd";
 				else if (Mode == Commands.Type.DUPLICATE)	return $"Duplikowanie pojazdu: {InstanceInfo.Name}";
 				else if (Mode == Commands.Type.EDIT)		return $"Edycja pojazdu: {InstanceInfo.Name}";
-				else										return $"Podgląd pojazdu: {InstanceInfo.Name}";
+				else if (Mode == Commands.Type.PREVIEW)		return $"Podgląd pojazdu: {InstanceInfo.Name}";
+				else										return string.Empty;
 			}
 		}
 	}

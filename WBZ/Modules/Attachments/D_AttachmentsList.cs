@@ -17,8 +17,9 @@ namespace WBZ.Modules.Attachments
 		{
 			get
 			{
-				if (Mode == Commands.Type.SELECT)	return "Wybór załącznika";
-				else								return "Lista załączników";
+				if		(Mode == Commands.Type.LIST)	return "Lista załączników";
+				else if (Mode == Commands.Type.SELECT)	return "Wybór załącznika";
+				else									return string.Empty;
 			}
 		}
 	}
