@@ -36,65 +36,65 @@
         <!-- Fullname -->
         <DataGridTextColumn Binding="{Binding Fullname}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Fullname, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Text="Nazwisko" MinWidth="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=12}"
+                <sec:ColumnFilter_Text Header="Nazwisko" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=12}"
                                        Value="{Binding Data.Filters.Lastname, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       FilterVisibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
+                                       IsFilterVisible="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Department -->
         <DataGridTextColumn Binding="{Binding Department}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Department, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Text="Dział" MinWidth="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=6}"
+                <sec:ColumnFilter_Text Header="Dział" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
                                        Value="{Binding Data.Filters.Department, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       FilterVisibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
+                                       IsFilterVisible="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Position -->
         <DataGridTextColumn Binding="{Binding Position}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Position, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Text="Stanowisko" MinWidth="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=6}"
+                <sec:ColumnFilter_Text Header="Stanowisko" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
                                        Value="{Binding Data.Filters.Position, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       FilterVisibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
+                                       IsFilterVisible="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Email -->
         <DataGridTextColumn Binding="{Binding Email}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Email, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Text="E-mail" MinWidth="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=18}"
+                <sec:ColumnFilter_Text Header="E-mail" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=18}"
                                        Value="{Binding Data.Filters.Email, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       FilterVisibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
+                                       IsFilterVisible="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Phone -->
         <DataGridTextColumn Binding="{Binding Phone}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Phone, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Text="Telefon" MinWidth="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=6}"
+                <sec:ColumnFilter_Text Header="Telefon" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
                                        Value="{Binding Data.Filters.Phone, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       FilterVisibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
+                                       IsFilterVisible="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Postcode -->
         <DataGridTextColumn Binding="{Binding Postcode}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Postcode, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Text="Kod pocztowy"
+                <sec:ColumnFilter_Text Header="Kod pocztowy"
                                        Value="{Binding Data.Filters.Postcode, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       FilterVisibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
+                                       IsFilterVisible="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- City -->
         <DataGridTextColumn Binding="{Binding City}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_City, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Text="Miejscowość"
+                <sec:ColumnFilter_Text Header="Miejscowość"
                                        Value="{Binding Data.Filters.City, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       FilterVisibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
+                                       IsFilterVisible="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Address -->
         <DataGridTextColumn Binding="{Binding Address}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Address, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Text="Adres"
+                <sec:ColumnFilter_Text Header="Adres"
                                        Value="{Binding Data.Filters.Address, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       FilterVisibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
+                                       IsFilterVisible="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
     </DataGrid.Columns>
@@ -125,10 +125,14 @@
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Sortowanie 1:"/>
-                            <ToggleButton IsChecked="{Binding sorting_EmployeesList[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.2}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.2}">
-                                <Image Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.1}" Source="/Resources/icon32_descending.ico"/>
+                            <ToggleButton IsChecked="{Binding sorting_EmployeesList[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+                                          Height="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}"
+                                          Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}">
+                                <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.1}"
+                                       Source="/Resources/icon32_descending.ico"/>
                             </ToggleButton>
-                            <ComboBox SelectedValue="{Binding sorting_EmployeesList[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
+                            <ComboBox SelectedValue="{Binding sorting_EmployeesList[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+                                      SelectedValuePath="Tag" VerticalContentAlignment="Center">
                                 <ComboBoxItem Content="Imię" Tag="e.forename"/>
                                 <ComboBoxItem Content="Nazwisko" Tag="e.lastname"/>
                                 <ComboBoxItem Content="E-mail" Tag="e.email"/>
@@ -141,10 +145,14 @@
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Sortowanie 2:"/>
-                            <ToggleButton IsChecked="{Binding sorting_EmployeesList[3], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.2}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.2}">
-                                <Image Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.1}" Source="/Resources/icon32_descending.ico"/>
+                            <ToggleButton IsChecked="{Binding sorting_EmployeesList[3], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+                                          Height="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}"
+                                          Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}">
+                                <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.1}"
+                                       Source="/Resources/icon32_descending.ico"/>
                             </ToggleButton>
-                            <ComboBox SelectedValue="{Binding sorting_EmployeesList[2], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
+                            <ComboBox SelectedValue="{Binding sorting_EmployeesList[2], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+                                      SelectedValuePath="Tag" VerticalContentAlignment="Center">
                                 <ComboBoxItem Content="Imię" Tag="e.forename"/>
                                 <ComboBoxItem Content="Nazwisko" Tag="e.lastname"/>
                                 <ComboBoxItem Content="E-mail" Tag="e.email"/>
@@ -157,7 +165,9 @@
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Limit wczytywania:"/>
-                            <TextBox Text="{Binding sorting_EmployeesList[4], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=5}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                            <TextBox Text="{Binding sorting_EmployeesList[4], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+                                     Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=5}"
+                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                         </StackPanel>
                     </MenuItem.Header>
                 </MenuItem>

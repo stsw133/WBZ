@@ -8,9 +8,9 @@ using System.Data;
 using System.Linq;
 using System.Windows;
 using WBZ.Models;
-using WBZ.Controls;
 using WBZ.Globals;
 using System.ComponentModel;
+using WBZ.Modules._base;
 
 namespace WBZ
 {

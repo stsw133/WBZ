@@ -17,7 +17,7 @@
         <sec:TitleBar DockPanel.Dock="Top" SubIcon="/Resources/icon32_settings.ico"/>
         <!-- buttonsPanel -->
         <Border DockPanel.Dock="Bottom" Background="#EEE" BorderBrush="Gray" BorderThickness="0,1,0,0">
-            <sec:Button Margin="5"
+            <sec:IconButton Margin="5"
                         Text="Zapisz"
                         HorizontalAlignment="Center"
                         Icon="\Resources\icon32_accept.ico"
@@ -28,21 +28,30 @@
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
                 <Button Margin="5,5,0,5" Click="btnAddDatabase_Click" ToolTip="Dodaj nowe połączenie z bazą danych">
                     <Grid>
-                        <Image Margin="2" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2}" Source="/Resources/icon32_database.ico"/>
-                        <Image Height="{Binding Source={x:Static seg:Properties.iSize}}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Source="/Resources/icon32_add.ico"/>
+                        <Image Margin="2"
+                               Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2}"
+                               Source="/Resources/icon32_database.ico"/>
+                        <Image Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay}"
+                               HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                               Source="/Resources/icon32_add.ico"/>
                     </Grid>
                 </Button>
                 <Button Margin="5,5,0,5" Click="btnRemoveDatabase_Click" ToolTip="Usuń zaznaczone połączenie z bazą danych">
                     <Grid>
-                        <Image Margin="2" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2}" Source="/Resources/icon32_database.ico"/>
-                        <Image Height="{Binding Source={x:Static seg:Properties.iSize}}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Source="/Resources/icon32_remove.ico"/>
+                        <Image Margin="2"
+                               Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2}"
+                               Source="/Resources/icon32_database.ico"/>
+                        <Image Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay}"
+                               HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                               Source="/Resources/icon32_remove.ico"/>
                     </Grid>
                 </Button>
             </StackPanel>
             <ListBox x:Name="lbDatabases" Margin="5,0,5,5" Width="200" ItemsSource="{Binding Databases}" SelectedValuePath="Name" DisplayMemberPath="Name" SelectionChanged="lbDatabases_SelectionChanged"/>
         </DockPanel>
         <!-- main -->
-        <Grid x:Name="gridDatabaseInfo" DataContext="{Binding ElementName=lbDatabases, Path=SelectedItem}" Margin="5" VerticalAlignment="Center" IsEnabled="False" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}">
+        <Grid x:Name="gridDatabaseInfo" DataContext="{Binding ElementName=lbDatabases, Path=SelectedItem}" Margin="5" VerticalAlignment="Center" IsEnabled="False"
+              Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=30}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -72,7 +81,7 @@
             <PasswordBox x:Name="pbPassword" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center" PasswordChanged="pbPassword_PasswordChanged"/>
             <Label Grid.Row="6" Grid.Column="0" Content="Status:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
             <Label x:Name="lblStatus" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center"/>
-            <sec:Button Grid.Row="7" Grid.Column="1" Margin="5"
+            <sec:IconButton Grid.Row="7" Grid.Column="1" Margin="5"
                         Text="Testuj"
                         Icon="/Resources/icon32_test.ico"
                         Click="btnTest_Click"/>

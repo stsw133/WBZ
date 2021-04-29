@@ -36,43 +36,43 @@
                 BorderThickness="1,0,0,0">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Top">
-                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                Text="Podgląd&#10;obiektu"
-                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                Icon="/Resources/icon32_search.ico"
-                                Command="seg:Commands.Preview"/>
-                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4;0;0.4;0.4}"
-                                Text="Edycja&#10;obiektu"
-                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                Icon="/Resources/icon32_edit.ico"
-                                Command="seg:Commands.Edit"/>
+                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                    Text="Podgląd&#10;obiektu"
+                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_search.ico"
+                                    Command="seg:Commands.Preview"/>
+                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4;0;0.4;0.4}"
+                                    Text="Edycja&#10;obiektu"
+                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_edit.ico"
+                                    Command="seg:Commands.Edit"/>
                     <Separator/>
                     <CheckBox x:Name="chckEnabled"
-                              Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                              Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
                               Content="Logi włączone"
                               Visibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}, Converter={seg:conv_BoolToVisibility}}"
                               Checked="chckEnabled_Checked" Unchecked="chckEnabled_Checked"/>
                     <Separator Visibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}, Converter={seg:conv_BoolToVisibility}}"/>
-                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                Text="Usuń"
-                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                Icon="/Resources/icon32_delete.ico"
-                                Command="seg:Commands.Delete"/>
+                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                    Text="Usuń"
+                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_delete.ico"
+                                    Command="seg:Commands.Delete"/>
                     <Separator/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                     <Separator/>
-                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                Text="{Tr Buttons.Refresh, DefaultText='Odśwież', LanguageId={x:Static seg:Properties.Language}}"
-                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                Icon="/Resources/icon32_refresh.ico"
-                                Command="seg:Commands.Refresh"/>
+                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                    Text="{Tr Buttons.Refresh, DefaultText='Odśwież', LanguageId={x:Static seg:Properties.Language}}"
+                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_refresh.ico"
+                                    Command="seg:Commands.Refresh"/>
                     <Separator/>
-                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                Text="{Tr Buttons.CloseWindow, DefaultText='Zamknij okno', LanguageId={x:Static seg:Properties.Language}}"
-                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                Icon="/Resources/icon32_close.ico"
-                                Command="seg:Commands.Close"/>
+                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                    Text="{Tr Buttons.CloseWindow, DefaultText='Zamknij okno', LanguageId={x:Static seg:Properties.Language}}"
+                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_close.ico"
+                                    Command="seg:Commands.Close"/>
                 </StackPanel>
             </DockPanel>
             <Border.ContextMenu>

@@ -28,9 +28,9 @@
         <!-- User -->
         <DataGridTextColumn Binding="{Binding cUser.Name}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_User, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Text="Użytkownik" MinWidth="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=12}"
+                <sec:ColumnFilter_Text Header="Użytkownik" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=12}"
                                        Value="{Binding Data.Filters.cUser.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       FilterVisibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
+                                       IsFilterVisible="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Module -->
@@ -54,9 +54,9 @@
         <!-- Name -->
         <DataGridTextColumn Binding="{Binding Name}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Name, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Text="Nazwa" MinWidth="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=12}"
+                <sec:ColumnFilter_Text Header="Nazwa" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=12}"
                                        Value="{Binding Data.Filters.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       FilterVisibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
+                                       IsFilterVisible="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
     </DataGrid.Columns>
@@ -82,10 +82,14 @@
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Sortowanie 1:"/>
-                            <ToggleButton IsChecked="{Binding sorting_AttachmentsList[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.2}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.2}">
-                                <Image Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.1}" Source="/Resources/icon32_descending.ico"/>
+                            <ToggleButton IsChecked="{Binding sorting_AttachmentsList[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+                                          Height="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}"
+                                          Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}">
+                                <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.1}"
+                                       Source="/Resources/icon32_descending.ico"/>
                             </ToggleButton>
-                            <ComboBox SelectedValue="{Binding sorting_AttachmentsList[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
+                            <ComboBox SelectedValue="{Binding sorting_AttachmentsList[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+                                      SelectedValuePath="Tag" VerticalContentAlignment="Center">
                                 <ComboBoxItem Content="Nazwisko i imię" Tag="u.lastname || u.forename"/>
                                 <ComboBoxItem Content="Moduł" Tag="a.module"/>
                                 <ComboBoxItem Content="Nazwa" Tag="a.name"/>
@@ -97,10 +101,14 @@
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Sortowanie 2:"/>
-                            <ToggleButton IsChecked="{Binding sorting_AttachmentsList[3], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.2}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.2}">
-                                <Image Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.1}" Source="/Resources/icon32_descending.ico"/>
+                            <ToggleButton IsChecked="{Binding sorting_AttachmentsList[3], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+                                          Height="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}"
+                                          Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}">
+                                <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.1}"
+                                       Source="/Resources/icon32_descending.ico"/>
                             </ToggleButton>
-                            <ComboBox SelectedValue="{Binding sorting_AttachmentsList[2], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
+                            <ComboBox SelectedValue="{Binding sorting_AttachmentsList[2], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+                                      SelectedValuePath="Tag" VerticalContentAlignment="Center">
                                 <ComboBoxItem Content="Nazwisko i imię" Tag="u.lastname || u.forename"/>
                                 <ComboBoxItem Content="Moduł" Tag="a.module"/>
                                 <ComboBoxItem Content="Nazwa" Tag="a.name"/>
@@ -112,7 +120,9 @@
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Limit wczytywania:"/>
-                            <TextBox Text="{Binding sorting_AttachmentsList[4], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=5}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                            <TextBox Text="{Binding sorting_AttachmentsList[4], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+                                     Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=5}"
+                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                         </StackPanel>
                     </MenuItem.Header>
                 </MenuItem>

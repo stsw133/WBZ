@@ -7,7 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using WBZ.Globals;
 using WBZ.Models;
-using WBZ.Modules.Groups;
+using WBZ.Modules._shared;
 
 namespace WBZ.Controls
 {

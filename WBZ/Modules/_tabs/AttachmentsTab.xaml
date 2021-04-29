@@ -7,7 +7,8 @@
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="750"
              Loaded="UserControl_Loaded">
     <DockPanel Margin="5">
-        <ListBox x:Name="lbAttachments" ItemsSource="{Binding InstanceAttachments}" DisplayMemberPath="Name" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=15}" AllowDrop="True" Drop="lbAttachments_Drop" SelectionChanged="lbAttachments_SelectionChanged">
+        <ListBox x:Name="lbAttachments" ItemsSource="{Binding InstanceAttachments}" DisplayMemberPath="Name"
+                 Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=15}" AllowDrop="True" Drop="lbAttachments_Drop" SelectionChanged="lbAttachments_SelectionChanged">
             <ListBox.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Dodaj" IsEnabled="{Binding EditingMode}" Click="btnAttachmentAdd_Click">

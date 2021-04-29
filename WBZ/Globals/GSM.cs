@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO.Ports;
 using System.Threading;
-using WBZ.Controls;
+using WBZ.Modules._base;
 
 namespace WBZ.Globals
 {

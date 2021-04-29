@@ -1,10 +1,9 @@
 ﻿using StswExpress.Globals;
 using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Windows;
-using WBZ.Controls;
 using WBZ.Models;
+using WBZ.Modules._base;
 using WBZ.Modules.Articles;
 using WBZ.Modules.AttributesClasses;
 using WBZ.Modules.Contractors;
@@ -121,12 +120,7 @@ namespace WBZ.Globals
 			//TODO - odpalenie poradnika z dowolnego miejsca w aplikacji (App.xaml)
             try
             {
-                var process = new Process();
-                string path = AppDomain.CurrentDomain.BaseDirectory + @"/Resources/pl_manual.pdf";
-                process.StartInfo.FileName = new Uri(path, UriKind.RelativeOrAbsolute).LocalPath;
-				process.StartInfo.UseShellExecute = true;
-				process.StartInfo.Verb = "open";
-                process.Start();
+				StswExpress.Globals.Functions.OpenFile(AppDomain.CurrentDomain.BaseDirectory + @"/Resources/pl_manual.pdf");
             }
             catch (Exception ex)
             {

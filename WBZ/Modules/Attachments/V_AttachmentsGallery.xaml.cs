@@ -48,7 +48,7 @@ namespace WBZ.Modules.Attachments
 		/// <summary>
 		/// Clear filters
 		/// </summary>
-		private void btnFiltersClear_Click(object sender, MouseButtonEventArgs e)
+		private void btnFiltersClear_Click(object sender, RoutedEventArgs e)
 		{
 			D.Filters = new MODULE_MODEL();
 			btnRefresh_Click(null, null);
@@ -57,7 +57,7 @@ namespace WBZ.Modules.Attachments
 		/// <summary>
 		/// Refresh
 		/// </summary>
-		private async void btnRefresh_Click(object sender, MouseButtonEventArgs e)
+		private async void btnRefresh_Click(object sender, RoutedEventArgs e)
 		{
 			await Task.Run(() => {
 				UpdateFilters();

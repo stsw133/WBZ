@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using WBZ.Controls;
+using WBZ.Modules._base;
 
 namespace WBZ.Modules.Login
 {

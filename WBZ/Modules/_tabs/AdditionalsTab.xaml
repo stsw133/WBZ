@@ -30,7 +30,7 @@
                     </Grid.ContextMenu>
                 </Grid>
             </DockPanel>
-            <CheckBox DockPanel.Dock="Top" Content="Archiwalny" Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" HorizontalAlignment="Left" VerticalContentAlignment="Center" IsChecked="{Binding InstanceInfo.Archival}"/>
+            <CheckBox DockPanel.Dock="Top" Content="Archiwalny" Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.5}" HorizontalAlignment="Left" VerticalContentAlignment="Center" IsChecked="{Binding InstanceInfo.Archival}"/>
             <Label DockPanel.Dock="Top" Content="Komentarz:" Margin="5,0" VerticalContentAlignment="Center"/>
         </DockPanel>
         <TextBox Text="{Binding InstanceInfo.Comment}" Margin="5" TextWrapping="Wrap" AcceptsReturn="True"/>

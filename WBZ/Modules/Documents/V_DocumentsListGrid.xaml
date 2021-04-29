@@ -38,58 +38,58 @@
         <!-- Name -->
         <DataGridTextColumn Binding="{Binding Name}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Name, Converter={seg:conv_BoolToVisibility}}" Width="*">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Text="Nazwa" MinWidth="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=12}"
+                <sec:ColumnFilter_Text Header="Nazwa" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=12}"
                                        Value="{Binding Data.Filters.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       FilterVisibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
+                                       IsFilterVisible="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Store -->
         <DataGridTextColumn Binding="{Binding cStore.Name}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Store, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Text="Magazyn" MinWidth="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=6}"
+                <sec:ColumnFilter_Text Header="Magazyn" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
                                        Value="{Binding Data.Filters.cStore.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       FilterVisibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
+                                       IsFilterVisible="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- ContractorName -->
         <DataGridTextColumn Binding="{Binding ContractorName}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_ContractorName, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Text="Kontrahent" MinWidth="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=6}"
+                <sec:ColumnFilter_Text Header="Kontrahent" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
                                        Value="{Binding Data.Filters.ContractorName, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       FilterVisibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
+                                       IsFilterVisible="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- PositionsCount -->
         <DataGridTextColumn Binding="{Binding PositionsCount}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_PositionsCount, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Number Text="Pozycje" MinWidth="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=6}"
+                <sec:ColumnFilter_Number Header="Pozycje" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
                                          Value="{Binding Data.Filters.PositionsCount, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                         FilterVisibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
+                                         IsFilterVisible="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Weight -->
         <DataGridTextColumn Binding="{Binding Weight}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Weight, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Number Text="Waga (kg)" MinWidth="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=6}"
+                <sec:ColumnFilter_Number Header="Waga (kg)" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
                                          Value="{Binding Data.Filters.Weight, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                         FilterVisibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
+                                         IsFilterVisible="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Cost -->
         <DataGridTextColumn Binding="{Binding Cost}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Cost, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Number Text="Kwota netto" MinWidth="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=6}"
+                <sec:ColumnFilter_Number Header="Kwota netto" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
                                          Value="{Binding Data.Filters.Cost, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                         FilterVisibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
+                                         IsFilterVisible="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- DateIssue -->
         <DataGridTextColumn Binding="{Binding DateIssue, StringFormat={}{0:yyyy-MM-dd}}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_DateIssue, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Date Text="Data wystawienia"
+                <sec:ColumnFilter_Date Header="Data wystawienia"
                                        Value1="{Binding Data.Filters.fDateIssue, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
                                        Value2="{Binding Data.Filters.DateIssue, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       FilterVisibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
+                                       IsFilterVisible="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
     </DataGrid.Columns>
@@ -120,10 +120,14 @@
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Sortowanie 1:"/>
-                            <ToggleButton IsChecked="{Binding sorting_DocumentsList[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.2}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.2}">
-                                <Image Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.1}" Source="/Resources/icon32_descending.ico"/>
+                            <ToggleButton IsChecked="{Binding sorting_DocumentsList[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+                                          Height="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}"
+                                          Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}">
+                                <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.1}"
+                                       Source="/Resources/icon32_descending.ico"/>
                             </ToggleButton>
-                            <ComboBox SelectedValue="{Binding sorting_DocumentsList[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
+                            <ComboBox SelectedValue="{Binding sorting_DocumentsList[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+                                      SelectedValuePath="Tag" VerticalContentAlignment="Center">
                                 <ComboBoxItem Content="Typ" Tag="d.type"/>
                                 <ComboBoxItem Content="Nazwa" Tag="d.name"/>
                                 <ComboBoxItem Content="Magazyn" Tag="s.name"/>
@@ -137,10 +141,14 @@
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Sortowanie 2:"/>
-                            <ToggleButton IsChecked="{Binding sorting_DocumentsList[3], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.2}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.2}">
-                                <Image Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.1}" Source="/Resources/icon32_descending.ico"/>
+                            <ToggleButton IsChecked="{Binding sorting_DocumentsList[3], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+                                          Height="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}"
+                                          Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}">
+                                <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.1}"
+                                       Source="/Resources/icon32_descending.ico"/>
                             </ToggleButton>
-                            <ComboBox SelectedValue="{Binding sorting_DocumentsList[2], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
+                            <ComboBox SelectedValue="{Binding sorting_DocumentsList[2], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+                                      SelectedValuePath="Tag" VerticalContentAlignment="Center">
                                 <ComboBoxItem Content="Typ" Tag="d.type"/>
                                 <ComboBoxItem Content="Nazwa" Tag="d.name"/>
                                 <ComboBoxItem Content="Magazyn" Tag="s.name"/>
@@ -154,7 +162,9 @@
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Limit wczytywania:"/>
-                            <TextBox Text="{Binding sorting_DocumentsList[4], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=5}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                            <TextBox Text="{Binding sorting_DocumentsList[4], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+                                     Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=5}"
+                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                         </StackPanel>
                     </MenuItem.Header>
                 </MenuItem>

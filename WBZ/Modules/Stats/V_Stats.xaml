@@ -30,27 +30,27 @@
                 BorderThickness="1,0,0,0">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Top">
-                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                Text="{Tr Stats.GenerateReport, DefaultText='Generuj raport', LanguageId={x:Static seg:Properties.Language}}"
-                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=stats_save}"
-                                Icon="/Resources/icon32_list.ico"
-                                Click="btnReportGenerate_Click"/>
+                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                    Text="{Tr Stats.GenerateReport, DefaultText='Generuj raport', LanguageId={x:Static seg:Properties.Language}}"
+                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=stats_save}"
+                                    Icon="/Resources/icon32_list.ico"
+                                    Click="btnReportGenerate_Click"/>
                     <Separator/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                     <Separator/>
-                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                Text="{Tr Buttons.Refresh, DefaultText='Odśwież', LanguageId={x:Static seg:Properties.Language}}"
-                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                Icon="/Resources/icon32_refresh.ico"
-                                Command="seg:Commands.Refresh"/>
+                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                    Text="{Tr Buttons.Refresh, DefaultText='Odśwież', LanguageId={x:Static seg:Properties.Language}}"
+                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_refresh.ico"
+                                    Command="seg:Commands.Refresh"/>
                     <Separator/>
-                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                Text="{Tr Buttons.CloseWindow, DefaultText='Zamknij okno', LanguageId={x:Static seg:Properties.Language}}"
-                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                Icon="/Resources/icon32_close.ico"
-                                Command="seg:Commands.Close"/>
+                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                    Text="{Tr Buttons.CloseWindow, DefaultText='Zamknij okno', LanguageId={x:Static seg:Properties.Language}}"
+                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_close.ico"
+                                    Command="seg:Commands.Close"/>
                 </StackPanel>
             </DockPanel>
             <Border.ContextMenu>
@@ -69,7 +69,9 @@
                             <ScrollViewer Padding="10">
                                 <DockPanel>
                                     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                                        <Image Margin="3" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.75}" Source="/Resources/icon32_articles.ico"/>
+                                        <Image Margin="3"
+                                               Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.75}"
+                                               Source="/Resources/icon32_articles.ico"/>
                                         <Label Content="Towary" VerticalAlignment="Center"/>
                                     </StackPanel>
                                     <Label DockPanel.Dock="Top" Content="Towary otrzymane wg lat i miesięcy (kg):" VerticalAlignment="Center" FontWeight="Normal"/>

@@ -34,38 +34,38 @@
                 BorderThickness="1,0,0,0">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Top">
-                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                Text="{Tr Buttons.Save, DefaultText='Zapisz', LanguageId={x:Static seg:Properties.Language}}"
-                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                Icon="/Resources/icon32_save.ico"
-                                Command="seg:Commands.Save"/>
+                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                    Text="{Tr Buttons.Save, DefaultText='Zapisz', LanguageId={x:Static seg:Properties.Language}}"
+                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_save.ico"
+                                    Command="seg:Commands.Save"/>
                     <Separator/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                     <Separator Height="5" Margin="0,0,0,5"/>
-                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                Text="{Tr Buttons.Print, DefaultText='Drukuj', LanguageId={x:Static seg:Properties.Language}}"
-                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                Icon="/Resources/icon32_printer.ico"
-                                Click="btnPrint_Click">
-                        <sec:Button.ContextMenu>
+                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                    Text="{Tr Buttons.Print, DefaultText='Drukuj', LanguageId={x:Static seg:Properties.Language}}"
+                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_printer.ico"
+                                    Click="btnPrint_Click">
+                        <sec:IconButton.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Header="Formularz RODO" Click="btnRodo_Click"/>
                             </ContextMenu>
-                        </sec:Button.ContextMenu>
-                    </sec:Button>
+                        </sec:IconButton.ContextMenu>
+                    </sec:IconButton>
                     <Separator/>
-                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                Text="{Tr Buttons.Refresh, DefaultText='Odśwież', LanguageId={x:Static seg:Properties.Language}}"
-                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                Icon="/Resources/icon32_refresh.ico"
-                                Command="seg:Commands.Refresh"/>
+                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                    Text="{Tr Buttons.Refresh, DefaultText='Odśwież', LanguageId={x:Static seg:Properties.Language}}"
+                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_refresh.ico"
+                                    Command="seg:Commands.Refresh"/>
                     <Separator/>
-                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                Text="{Tr Buttons.CloseWindow, DefaultText='Zamknij okno', LanguageId={x:Static seg:Properties.Language}}"
-                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                Icon="/Resources/icon32_close.ico"
-                                Command="seg:Commands.Close"/>
+                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                    Text="{Tr Buttons.CloseWindow, DefaultText='Zamknij okno', LanguageId={x:Static seg:Properties.Language}}"
+                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_close.ico"
+                                    Command="seg:Commands.Close"/>
                 </StackPanel>
             </DockPanel>
             <Border.ContextMenu>
@@ -108,7 +108,8 @@
                             <TextBox Text="{Binding InstanceInfo.Address}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <CheckBox DockPanel.Dock="Top" Content="Status - aktywna" Margin="20" HorizontalAlignment="Center" VerticalContentAlignment="Center" IsChecked="{Binding InstanceInfo.Status}"/>
-                        <GroupBox DockPanel.Dock="Top" Header="Uzgodniony sposób kontaktu" Padding="0,0,0,10" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=25}">
+                        <GroupBox DockPanel.Dock="Top" Header="Uzgodniony sposób kontaktu" Padding="0,0,0,10"
+                                  Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=25}">
                             <StackPanel>
                                 <CheckBox Content="Wyślij wiadomość SMS" Margin="10,10,10,0" VerticalContentAlignment="Center" IsChecked="{Binding InstanceInfo.C_SMS}"/>
                                 <CheckBox Content="Rozmowa telefoniczna" Margin="10,10,10,0" VerticalContentAlignment="Center" IsChecked="{Binding InstanceInfo.C_Call}"/>

@@ -21,7 +21,7 @@
         <!-- filtersPanel -->
         <Grid DockPanel.Dock="Top" Background="Black">
             <Expander x:Name="filtersExpander" Header="Filtry wyszukiwania" Background="Black" Foreground="White" BorderThickness="0">
-                <TabControl MaxHeight="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=20}">
+                <TabControl MaxHeight="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=20}">
                     <!-- tabMain -->
                     <TabItem>
                         <TabItem.Header>
@@ -51,10 +51,10 @@
                 </TabControl>
             </Expander>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
-                <sec:Button Margin="0,4,4,4" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Visibility="{Binding IsExpanded, ElementName=filtersExpander, Converter={seg:conv_BoolToVisibility}}"
-                                Text="Akceptuj" Icon="/Resources/icon32_accept.ico" PreviewMouseLeftButtonUp="btnRefresh_Click"/>
-                <sec:Button Margin="0,4,4,4" TextVisibility="{Binding IsChecked, ElementName=btnToggle}" Visibility="{Binding IsExpanded, ElementName=filtersExpander, Converter={seg:conv_BoolToVisibility}}"
-                                Text="Czyść" Icon="/Resources/icon32_clear.ico" PreviewMouseLeftButtonUp="btnFiltersClear_Click"/>
+                <sec:IconButton Margin="0,4,4,4" IsTextVisible="{Binding IsChecked, ElementName=btnToggle}" Visibility="{Binding IsExpanded, ElementName=filtersExpander, Converter={seg:conv_BoolToVisibility}}"
+                                Text="Akceptuj" Icon="/Resources/icon32_accept.ico" Click="btnRefresh_Click"/>
+                <sec:IconButton Margin="0,4,4,4" IsTextVisible="{Binding IsChecked, ElementName=btnToggle}" Visibility="{Binding IsExpanded, ElementName=filtersExpander, Converter={seg:conv_BoolToVisibility}}"
+                                Text="Czyść" Icon="/Resources/icon32_clear.ico" Click="btnFiltersClear_Click"/>
             </StackPanel>
         </Grid>
         <!-- selectionPanel -->

@@ -3,7 +3,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using WBZ.Models;
-using WBZ.Controls;
 using WBZ.Globals;
 using WBZ.Modules.Admin;
 using WBZ.Modules.Articles;
@@ -22,6 +21,7 @@ using WBZ.Modules.Users;
 using WBZ.Modules.Vehicles;
 using System.Linq;
 using WBZ.Modules.Icons;
+using WBZ.Modules._base;
 
 namespace WBZ.Modules
 {

@@ -4,7 +4,7 @@ using System.Windows.Input;
 using WBZ.Globals;
 using MODULE_MODEL = WBZ.Models.M_Group;
 
-namespace WBZ.Modules.Groups
+namespace WBZ.Modules._shared
 {
     /// <summary>
     /// Logika interakcji dla klasy GroupsList.xaml

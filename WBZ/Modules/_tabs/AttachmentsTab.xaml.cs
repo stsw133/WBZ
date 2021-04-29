@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using WBZ.Models;
 using WBZ.Globals;
 using WBZ.Controls;
+using WBZ.Modules._base;
 
 namespace WBZ.Modules._tabs
 {

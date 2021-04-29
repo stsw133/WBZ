@@ -33,13 +33,13 @@
                 BorderThickness="1,0,0,0">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Top">
-                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                Text="{Tr Buttons.Save, DefaultText='Zapisz', LanguageId={x:Static seg:Properties.Language}}"
-                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                Icon="/Resources/icon32_save.ico"
-                                Command="seg:Commands.Save"/>
+                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                    Text="{Tr Buttons.Save, DefaultText='Zapisz', LanguageId={x:Static seg:Properties.Language}}"
+                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_save.ico"
+                                    Command="seg:Commands.Save"/>
                     <Separator/>
-                    <CheckBox Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                    <CheckBox Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
                               Content="{Tr Documents.ToBuffer, DefaultText='Do bufora', LanguageId={x:Static seg:Properties.Language}}"
                               IsChecked="{Binding InstanceInfo.Status, Converter={seg:conv_BoolInverted}}"
                               IsEnabled="{Binding EditingMode}"/>
@@ -47,32 +47,32 @@
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                     <Separator Visibility="Collapsed"/>
-                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                Text="{Tr Buttons.FromFile, DefaultText='Z pliku', LanguageId={x:Static seg:Properties.Language}}"
-                                TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
-                                IsEnabled="{Binding EditingMode}"
-                                Icon="/Resources/icon32_camfile.ico"
-                                Click="btnGetFromFile_Click"
-                                Visibility="Collapsed"/>
-                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                Text="{Tr Buttons.FromScanner, DefaultText='Ze skanera', LanguageId={x:Static seg:Properties.Language}}"
-                                TextVisibility="{Binding IsChecked, ElementName=btnToggle}"
-                                IsEnabled="{Binding EditingMode}"
-                                Icon="/Resources/icon32_scanner.ico"
-                                Click="btnGetByScaner_Click"
-                                Visibility="Collapsed"/>
+                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                    Text="{Tr Buttons.FromFile, DefaultText='Z pliku', LanguageId={x:Static seg:Properties.Language}}"
+                                    IsTextVisible="{Binding IsChecked, ElementName=btnToggle}"
+                                    IsEnabled="{Binding EditingMode}"
+                                    Icon="/Resources/icon32_camfile.ico"
+                                    Click="btnGetFromFile_Click"
+                                    Visibility="Collapsed"/>
+                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                    Text="{Tr Buttons.FromScanner, DefaultText='Ze skanera', LanguageId={x:Static seg:Properties.Language}}"
+                                    IsTextVisible="{Binding IsChecked, ElementName=btnToggle}"
+                                    IsEnabled="{Binding EditingMode}"
+                                    Icon="/Resources/icon32_scanner.ico"
+                                    Click="btnGetByScaner_Click"
+                                    Visibility="Collapsed"/>
                     <Separator/>
-                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                Text="{Tr Buttons.Refresh, DefaultText='Odśwież', LanguageId={x:Static seg:Properties.Language}}"
-                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                Icon="/Resources/icon32_refresh.ico"
-                                Command="seg:Commands.Refresh"/>
+                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                    Text="{Tr Buttons.Refresh, DefaultText='Odśwież', LanguageId={x:Static seg:Properties.Language}}"
+                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_refresh.ico"
+                                    Command="seg:Commands.Refresh"/>
                     <Separator/>
-                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                Text="{Tr Buttons.CloseWindow, DefaultText='Zamknij okno', LanguageId={x:Static seg:Properties.Language}}"
-                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                Icon="/Resources/icon32_close.ico"
-                                Command="seg:Commands.Close"/>
+                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                    Text="{Tr Buttons.CloseWindow, DefaultText='Zamknij okno', LanguageId={x:Static seg:Properties.Language}}"
+                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_close.ico"
+                                    Command="seg:Commands.Close"/>
                 </StackPanel>
             </DockPanel>
             <Border.ContextMenu>
@@ -93,14 +93,20 @@
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Firma:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>
                             <Button Margin="5,5,0,5" VerticalContentAlignment="Center" Click="btnSelectContractor_Click">
-                                <Image Margin="2" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_contractors.ico"/>
+                                <Image Margin="2"
+                                       Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.5}"
+                                       Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.5}"
+                                       Source="/Resources/icon32_contractors.ico"/>
                             </Button>
                             <TextBox Text="{Binding InstanceInfo.ContractorName}" Tag="{Binding InstanceInfo.Contractor}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Magazyn:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>
                             <Button Margin="5,5,0,5" VerticalContentAlignment="Center" Click="btnSelectStore_Click">
-                                <Image Margin="2" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_stores.ico"/>
+                                <Image Margin="2"
+                                       Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.5}"
+                                       Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.5}"
+                                       Source="/Resources/icon32_stores.ico"/>
                             </Button>
                             <TextBox Text="{Binding InstanceInfo.StoreName}" Tag="{Binding InstanceInfo.Store}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True"/>
                         </DockPanel>
@@ -119,7 +125,9 @@
                             <DatePicker SelectedDate="{Binding InstanceInfo.DateIssue}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-                            <Button ToolTip="Dodaj pozycję" HorizontalAlignment="Left" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2}" Click="btnPositionsAdd_Click">
+                            <Button ToolTip="Dodaj pozycję" HorizontalAlignment="Left"
+                                    Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2}"
+                                    Click="btnPositionsAdd_Click">
                                 <Image Margin="2" Source="/Resources/icon32_add.ico"/>
                             </Button>
                             <Label Content="Pozycje:"/>

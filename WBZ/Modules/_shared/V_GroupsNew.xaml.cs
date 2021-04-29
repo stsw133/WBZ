@@ -1,7 +1,7 @@
 ﻿using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_Group;
 
-namespace WBZ.Modules.Groups
+namespace WBZ.Modules._shared
 {
     /// <summary>
     /// Logika interakcji dla klasy GroupsNew.xaml

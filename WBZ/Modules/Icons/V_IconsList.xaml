@@ -40,54 +40,54 @@
                 BorderThickness="1,0,0,0">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Top" Visibility="{Binding SelectingMode, Converter={seg:conv_BoolToVisibility}}">
-                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                Text="{Tr Buttons.Select, DefaultText='Wybierz', LanguageId={x:Static seg:Properties.Language}}"
-                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                Icon="/Resources/icon32_select.ico"
-                                Command="seg:Commands.Select"/>
+                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                    Text="{Tr Buttons.Select, DefaultText='Wybierz', LanguageId={x:Static seg:Properties.Language}}"
+                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_select.ico"
+                                    Command="seg:Commands.Select"/>
                     <Separator/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Top">
-                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4;0.4;0.4;0}"
-                                Text="{Tr Buttons.Preview, DefaultText='Podgląd', LanguageId={x:Static seg:Properties.Language}}"
-                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                Icon="/Resources/icon32_search.ico"
-                                Command="seg:Commands.Preview"/>
-                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4;0.4;0.4;0}"
-                                Text="{Tr Buttons.New, DefaultText='Dodaj', LanguageId={x:Static seg:Properties.Language}}"
-                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                Icon="/Resources/icon32_add.ico"
-                                Command="seg:Commands.New"/>
-                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4;0.4;0.4;0}"
-                                Text="{Tr Buttons.Duplicate, DefaultText='Duplikuj', LanguageId={x:Static seg:Properties.Language}}"
-                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                Icon="/Resources/icon32_duplicate.ico"
-                                Command="seg:Commands.Duplicate"/>
-                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4;0.4;0.4;0}"
-                                Text="{Tr Buttons.Edit, DefaultText='Edytuj', LanguageId={x:Static seg:Properties.Language}}"
-                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                Icon="/Resources/icon32_edit.ico"
-                                Command="seg:Commands.Edit"/>
-                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                Text="{Tr Buttons.Delete, DefaultText='Usuń', LanguageId={x:Static seg:Properties.Language}}"
-                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                Icon="/Resources/icon32_delete.ico"
-                                Command="seg:Commands.Delete"/>
+                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4;0.4;0.4;0}"
+                                    Text="{Tr Buttons.Preview, DefaultText='Podgląd', LanguageId={x:Static seg:Properties.Language}}"
+                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_search.ico"
+                                    Command="seg:Commands.Preview"/>
+                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4;0.4;0.4;0}"
+                                    Text="{Tr Buttons.New, DefaultText='Dodaj', LanguageId={x:Static seg:Properties.Language}}"
+                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_add.ico"
+                                    Command="seg:Commands.New"/>
+                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4;0.4;0.4;0}"
+                                    Text="{Tr Buttons.Duplicate, DefaultText='Duplikuj', LanguageId={x:Static seg:Properties.Language}}"
+                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_duplicate.ico"
+                                    Command="seg:Commands.Duplicate"/>
+                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4;0.4;0.4;0}"
+                                    Text="{Tr Buttons.Edit, DefaultText='Edytuj', LanguageId={x:Static seg:Properties.Language}}"
+                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_edit.ico"
+                                    Command="seg:Commands.Edit"/>
+                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                    Text="{Tr Buttons.Delete, DefaultText='Usuń', LanguageId={x:Static seg:Properties.Language}}"
+                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_delete.ico"
+                                    Command="seg:Commands.Delete"/>
                     <Separator/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                     <Separator/>
-                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                Text="{Tr Buttons.Refresh, DefaultText='Odśwież', LanguageId={x:Static seg:Properties.Language}}"
-                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                Icon="/Resources/icon32_refresh.ico"
-                                Command="seg:Commands.Refresh"/>
+                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                    Text="{Tr Buttons.Refresh, DefaultText='Odśwież', LanguageId={x:Static seg:Properties.Language}}"
+                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_refresh.ico"
+                                    Command="seg:Commands.Refresh"/>
                     <Separator/>
-                    <sec:Button Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                Text="{Tr Buttons.CloseWindow, DefaultText='Zamknij okno', LanguageId={x:Static seg:Properties.Language}}"
-                                TextVisibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                Icon="/Resources/icon32_close.ico"
-                                Command="seg:Commands.Close"/>
+                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
+                                    Text="{Tr Buttons.CloseWindow, DefaultText='Zamknij okno', LanguageId={x:Static seg:Properties.Language}}"
+                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    Icon="/Resources/icon32_close.ico"
+                                    Command="seg:Commands.Close"/>
                 </StackPanel>
             </DockPanel>
             <Border.ContextMenu>

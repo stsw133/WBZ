@@ -26,7 +26,7 @@ namespace WBZ.Modules.Articles
 		/// <summary>
 		/// Loaded
 		/// </summary>
-		public void Window_Loaded(object sender, RoutedEventArgs e)
+		internal override void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			if (D.SelectingMode)
 				dgList.SelectionMode = DataGridSelectionMode.Single;

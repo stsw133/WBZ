@@ -15,7 +15,7 @@
         <!-- titleBar -->
         <sec:TitleBar DockPanel.Dock="Top"/>
         <!-- main -->
-        <Grid MinWidth="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=30}">
+        <Grid MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=30}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -56,12 +56,12 @@
             <PasswordBox x:Name="pbRepass" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
                          Margin="5"
                          VerticalContentAlignment="Center"/>
-            <sec:Button Grid.Row="4" Grid.Column="1"
-                        Margin="5"
-                        Text="{Tr Buttons.Accept, DefaultText='Akceptuj', LanguageId={x:Static seg:Properties.Language}}"
-                        TextVisibility="True"
-                        Icon="/Resources/icon32_accept.ico"
-                        Click="btnAccept_Click"/>
+            <sec:IconButton Grid.Row="4" Grid.Column="1"
+                            Margin="5"
+                            Text="{Tr Buttons.Accept, DefaultText='Akceptuj', LanguageId={x:Static seg:Properties.Language}}"
+                            IsTextVisible="True"
+                            Icon="/Resources/icon32_accept.ico"
+                            Click="btnAccept_Click"/>
         </Grid>
     </DockPanel>
 </Window>

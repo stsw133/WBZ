@@ -22,6 +22,7 @@ namespace WBZ.Globals
             public const string SAVE = "save";
             public const string DELETE = "delete";
             public const string GROUPS = "groups";
+            public const string FILTERS = "filters";
         }
 
         #region Crypto

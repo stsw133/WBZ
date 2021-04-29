@@ -29,7 +29,7 @@ namespace WBZ.Modules.Distributions
 		/// <summary>
 		/// Send SMS
 		/// </summary>
-		private void btnSendSMS_Click(object sender, MouseButtonEventArgs e)
+		private void btnSendSMS_Click(object sender, RoutedEventArgs e)
 		{
 			if (GSM.SendSMS(new string[] { D.FamilyContactsInfo.Rows[0]["phone"].ToString() }))
 				(sender as Button).IsEnabled = false;
@@ -38,7 +38,7 @@ namespace WBZ.Modules.Distributions
 		/// <summary>
 		/// Send Email
 		/// </summary>
-		private void btnSendEmail_Click(object sender, MouseButtonEventArgs e)
+		private void btnSendEmail_Click(object sender, RoutedEventArgs e)
 		{
 			if (StswExpress.Globals.Mail.SendMail(Properties.Settings.Default.config_Email_Email, new string[] { D.FamilyContactsInfo.Rows[0]["email"].ToString() }, "Darowizna do odebrania",
 					Properties.Settings.Default.config_GSM_message + $"\n\n\nWiadomosc generowana automatycznie. Proszę nie odpisywać."))

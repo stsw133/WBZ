@@ -36,57 +36,57 @@
         <!-- Register -->
         <DataGridTextColumn Binding="{Binding Register}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Register, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Text="Nr rej." MinWidth="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=6}"
+                <sec:ColumnFilter_Text Header="Nr rej." MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
                                        Value="{Binding Data.Filters.Register, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       FilterVisibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
+                                       IsFilterVisible="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Brand -->
         <DataGridTextColumn Binding="{Binding Brand}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Brand, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Text="Marka" MinWidth="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=12}"
+                <sec:ColumnFilter_Text Header="Marka" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=12}"
                                        Value="{Binding Data.Filters.Brand, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       FilterVisibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
+                                       IsFilterVisible="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Model -->
         <DataGridTextColumn Binding="{Binding Model}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Model, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Text="Model" MinWidth="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=12}"
+                <sec:ColumnFilter_Text Header="Model" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=12}"
                                        Value="{Binding Data.Filters.Model, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       FilterVisibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
+                                       IsFilterVisible="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Capacity -->
         <DataGridTextColumn Binding="{Binding Capacity}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Capacity, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Number Text="Pojemność" MinWidth="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=6}"
+                <sec:ColumnFilter_Number Header="Pojemność" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
                                          Value="{Binding Data.Filters.Capacity, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                         FilterVisibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
+                                         IsFilterVisible="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Forwarder -->
         <DataGridTextColumn Binding="{Binding cForwarder.Name}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Forwarder, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Text="Spedytor" MinWidth="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=6}"
+                <sec:ColumnFilter_Text Header="Spedytor" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
                                        Value="{Binding Data.Filters.cForwarder.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       FilterVisibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
+                                       IsFilterVisible="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Driver -->
         <DataGridTextColumn Binding="{Binding cDriver.Name}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Driver, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Text="Kierowca" MinWidth="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=6}"
+                <sec:ColumnFilter_Text Header="Kierowca" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
                                        Value="{Binding Data.Filters.cDriver.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       FilterVisibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
+                                       IsFilterVisible="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- ProdYear -->
         <DataGridTextColumn Binding="{Binding ProdYear}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Driver, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Number Text="Rok produkcji" MinWidth="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=6}"
+                <sec:ColumnFilter_Number Header="Rok produkcji" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
                                          Value="{Binding Data.Filters.ProdYear, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                         FilterVisibility="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
+                                         IsFilterVisible="{Binding Data.FiltersVisibility, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
     </DataGrid.Columns>
@@ -116,10 +116,14 @@
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Sortowanie 1:"/>
-                            <ToggleButton IsChecked="{Binding sorting_VehiclesList[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.2}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.2}">
-                                <Image Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.1}" Source="/Resources/icon32_descending.ico"/>
+                            <ToggleButton IsChecked="{Binding sorting_VehiclesList[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+                                          Height="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}"
+                                          Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}">
+                                <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.1}"
+                                       Source="/Resources/icon32_descending.ico"/>
                             </ToggleButton>
-                            <ComboBox SelectedValue="{Binding sorting_VehiclesList[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
+                            <ComboBox SelectedValue="{Binding sorting_VehiclesList[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+                                      SelectedValuePath="Tag" VerticalContentAlignment="Center">
                                 <ComboBoxItem Content="Nr rej." Tag="v.register"/>
                                 <ComboBoxItem Content="Marka" Tag="v.brand"/>
                                 <ComboBoxItem Content="Model" Tag="v.model"/>
@@ -135,10 +139,14 @@
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Sortowanie 2:"/>
-                            <ToggleButton IsChecked="{Binding sorting_VehiclesList[3], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Height="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.2}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=2.2}">
-                                <Image Margin="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=0.1}" Source="/Resources/icon32_descending.ico"/>
+                            <ToggleButton IsChecked="{Binding sorting_VehiclesList[3], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+                                          Height="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}"
+                                          Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}">
+                                <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.1}"
+                                       Source="/Resources/icon32_descending.ico"/>
                             </ToggleButton>
-                            <ComboBox SelectedValue="{Binding sorting_VehiclesList[2], Source={x:Static p:Settings.Default}, Mode=TwoWay}" SelectedValuePath="Tag" VerticalContentAlignment="Center">
+                            <ComboBox SelectedValue="{Binding sorting_VehiclesList[2], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+                                      SelectedValuePath="Tag" VerticalContentAlignment="Center">
                                 <ComboBoxItem Content="Nr rej." Tag="v.register"/>
                                 <ComboBoxItem Content="Marka" Tag="v.brand"/>
                                 <ComboBoxItem Content="Model" Tag="v.model"/>
@@ -154,7 +162,9 @@
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Limit wczytywania:"/>
-                            <TextBox Text="{Binding sorting_VehiclesList[4], Source={x:Static p:Settings.Default}, Mode=TwoWay}" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=5}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                            <TextBox Text="{Binding sorting_VehiclesList[4], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+                                     Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=5}"
+                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                         </StackPanel>
                     </MenuItem.Header>
                 </MenuItem>

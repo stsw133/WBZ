@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using WBZ.Globals;
 using WBZ.Models;
-using WBZ.Modules.Groups;
+using WBZ.Modules._shared;
 
 namespace WBZ.Modules._tabs
 {

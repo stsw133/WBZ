@@ -6,8 +6,8 @@ using System.IO;
 using System.Net.Http;
 using System.Windows;
 using System.Windows.Input;
-using WBZ.Controls;
 using WBZ.Globals;
+using WBZ.Modules._base;
 
 namespace WBZ.Modules.Login
 {

@@ -1,6 +1,6 @@
 ﻿using System.Windows;
-using WBZ.Controls;
 using WBZ.Globals;
+using WBZ.Modules._base;
 
 namespace WBZ.Modules.Personal
 {

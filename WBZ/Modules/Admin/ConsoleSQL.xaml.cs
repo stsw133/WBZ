@@ -2,7 +2,7 @@
 using System;
 using System.Data;
 using System.Windows;
-using WBZ.Controls;
+using WBZ.Modules._base;
 
 namespace WBZ.Modules.Admin
 {

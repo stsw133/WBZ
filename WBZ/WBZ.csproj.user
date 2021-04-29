@@ -24,7 +24,7 @@
     <Page Update="Controls\Windows\Confirmation.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Controls\Windows\MsgWin.xaml">
+    <Page Update="Modules\_base\MsgWin.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Controls\GroupsView.xaml">
@@ -129,10 +129,10 @@
     <Page Update="Modules\Families\V_FamiliesNew.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Modules\Groups\V_GroupsList.xaml">
+    <Page Update="Modules\_shared\V_GroupsList.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Modules\Groups\V_GroupsNew.xaml">
+    <Page Update="Modules\_shared\V_GroupsNew.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Modules\Icons\V_IconsList.xaml">

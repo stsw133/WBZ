@@ -4,6 +4,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 using WBZ.Models;
+using WBZ.Modules._base;
 
 namespace WBZ.Controls
 {

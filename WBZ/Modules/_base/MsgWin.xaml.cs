@@ -1,7 +1,7 @@
 ﻿using StswExpress.Base;
 using System.Windows;
 
-namespace WBZ.Controls
+namespace WBZ.Modules._base
 {
 	/// <summary>
 	/// Interaction logic for MsgWin.xaml
@@ -24,7 +24,7 @@ namespace WBZ.Controls
 
 		D_MsgWin D = new D_MsgWin();
 
-		public MsgWin(Type type, string title, string message = "", string value = "")
+		public MsgWin(Type type, string title, string message = null, string value = null)
 		{
 			InitializeComponent();
 			DataContext = D;
@@ -38,7 +38,7 @@ namespace WBZ.Controls
 				tbInput.Visibility = Visibility.Visible;
 		}
 
-		public string Value => tbInput.Text;
+		public string Value => tbInput.Text ?? string.Empty;
 
 		/// <summary>
 		/// OK

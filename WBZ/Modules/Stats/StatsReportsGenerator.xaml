@@ -25,15 +25,15 @@
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
-                <RowDefinition Height="{Binding Source={x:Static seg:Properties.iSize}}"/>
+                <RowDefinition Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay}"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Grid.ColumnSpan="3" Content="Podaj przedział czasowy raportu:" Margin="5" VerticalContentAlignment="Center"/>
             <DatePicker Grid.Row="1" Grid.Column="0" x:Name="dpFrom" Margin="20,5,5,5" VerticalContentAlignment="Center"/>
             <Label Grid.Row="1" Grid.Column="1" Content="/" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <DatePicker Grid.Row="1" Grid.Column="2" x:Name="dpTo" Margin="5,5,20,5" VerticalContentAlignment="Center"/>
-            <sec:Button Grid.Row="3" Grid.ColumnSpan="3" Margin="5" IsEnabled="True" TextVisibility="True" HorizontalAlignment="Center"
-                        Text="Akceptuj" Icon="/Resources/icon32_accept.ico" PreviewMouseLeftButtonUp="btnAccept_Click"/>
+            <sec:IconButton Grid.Row="3" Grid.ColumnSpan="3" Margin="5" IsEnabled="True" IsTextVisible="True" HorizontalAlignment="Center"
+                            Text="Akceptuj" Icon="/Resources/icon32_accept.ico" PreviewMouseLeftButtonUp="btnAccept_Click"/>
         </Grid>
     </DockPanel>
 </Window>

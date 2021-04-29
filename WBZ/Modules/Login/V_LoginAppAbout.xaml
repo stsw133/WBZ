@@ -21,16 +21,22 @@
                 <Image Margin="10" Stretch="None" Source="/Resources/icon64.ico"/>
                 <StackPanel VerticalAlignment="Center">
                     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Label Content="WBZ" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" FontWeight="Heavy"/>
-                        <Label Content="{Binding Version}" FontSize="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=1.5}" FontWeight="Heavy"/>
+                        <Label Content="WBZ"
+                               FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.5}"
+                               FontWeight="Heavy"/>
+                        <Label Content="{Binding Version}"
+                               FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.5}"
+                               FontWeight="Heavy"/>
                     </StackPanel>
-                    <TextBlock DockPanel.Dock="Top" Text="{Binding AboutApp}" Padding="5" TextAlignment="Center" TextWrapping="Wrap" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=25}"/>
+                    <TextBlock DockPanel.Dock="Top" Text="{Binding AboutApp}" Padding="5" TextAlignment="Center" TextWrapping="Wrap"
+                               Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=25}"/>
                 </StackPanel>
             </DockPanel>
             <Border DockPanel.Dock="Top" Margin="5" BorderBrush="Gray" BorderThickness="2"/>
             <DockPanel DockPanel.Dock="Top">
                 <StackPanel VerticalAlignment="Center">
-                    <TextBlock DockPanel.Dock="Top" Text="{Binding AboutCreators}" Padding="5" TextAlignment="Center" TextWrapping="Wrap" Width="{Binding Source={x:Static seg:Properties.iSize}, Converter={seg:conv_Size}, ConverterParameter=25}"/>
+                    <TextBlock DockPanel.Dock="Top" Text="{Binding AboutCreators}" Padding="5" TextAlignment="Center" TextWrapping="Wrap"
+                               Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=25}"/>
                     <StackPanel DockPanel.Dock="Top">
                         <Label Content="Karol Staszewski" Padding="5,5,5,0" HorizontalAlignment="Center" FontWeight="Medium"/>
                         <Label Content="stsw.karolstaszewski@gmail.com" Padding="5,0,5,5" HorizontalAlignment="Center" Foreground="#239"/>

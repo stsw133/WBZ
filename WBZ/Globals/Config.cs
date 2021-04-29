@@ -12,7 +12,7 @@ namespace WBZ.Globals
 		public static string Email_Address => SQL.GetPropertyValue("EMAIL_ADDRESS", "wbz.email.testowy@gmail.com");
 		public static string Email_Password => SQL.GetPropertyValue("EMAIL_PASSWORD", string.Empty);
 		public static string Attachment_Size_Max => SQL.GetPropertyValue("ATTACHMENT_SIZE_MAX", (1024*1024*10).ToString());
-		public static string Icon_Dimensions_Max => SQL.GetPropertyValue("ICON_DIMENSIONS_MAX", 64.ToString());
+		public static string Icon_Dimensions_Max => SQL.GetPropertyValue("ICON_DIMENSIONS_MAX", 32.ToString());
 		public static string Icon_Size_Max => SQL.GetPropertyValue("ICON_SIZE_MAX", (1024 * 10).ToString());
 		public static string Logs_Enabled => SQL.GetPropertyValue("LOGS_ENABLED", 0.ToString());
 

@@ -16,84 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Resources\icon32_accept.ico" />
-    <None Remove="Resources\icon32_add.ico" />
-    <None Remove="Resources\icon32_admin.ico" />
-    <None Remove="Resources\icon32_articles.ico" />
-    <None Remove="Resources\icon32_attmisc.ico" />
-    <None Remove="Resources\icon32_attributes.ico" />
-    <None Remove="Resources\icon32_books.ico" />
-    <None Remove="Resources\icon32_briefcase.ico" />
-    <None Remove="Resources\icon32_calendar.ico" />
-    <None Remove="Resources\icon32_camfile.ico" />
-    <None Remove="Resources\icon32_cancel.ico" />
-    <None Remove="Resources\icon32_clear.ico" />
-    <None Remove="Resources\icon32_close.ico" />
-    <None Remove="Resources\icon32_code.ico" />
-    <None Remove="Resources\icon32_color.ico" />
-    <None Remove="Resources\icon32_community.ico" />
-    <None Remove="Resources\icon32_contacts.ico" />
-    <None Remove="Resources\icon32_contractors.ico" />
-    <None Remove="Resources\icon32_database.ico" />
-    <None Remove="Resources\icon32_delete.ico" />
-    <None Remove="Resources\icon32_descending.ico" />
-    <None Remove="Resources\icon32_documents.ico" />
-    <None Remove="Resources\icon32_download.ico" />
-    <None Remove="Resources\icon32_duplicate.ico" />
-    <None Remove="Resources\icon32_edit.ico" />
-    <None Remove="Resources\icon32_families.ico" />
-    <None Remove="Resources\icon32_filter.ico" />
-    <None Remove="Resources\icon32_folder.ico" />
-    <None Remove="Resources\icon32_font.ico" />
-    <None Remove="Resources\icon32_food.ico" />
-    <None Remove="Resources\icon32_gallery.ico" />
-    <None Remove="Resources\icon32_global.ico" />
-    <None Remove="Resources\icon32_greetings.ico" />
-    <None Remove="Resources\icon32_groups.ico" />
-    <None Remove="Resources\icon32_history.ico" />
-    <None Remove="Resources\icon32_icons.ico" />
-    <None Remove="Resources\icon32_language.ico" />
-    <None Remove="Resources\icon32_list.ico" />
-    <None Remove="Resources\icon32_locked.ico" />
-    <None Remove="Resources\icon32_login.ico" />
-    <None Remove="Resources\icon32_logs.ico" />
-    <None Remove="Resources\icon32_mail.ico" />
-    <None Remove="Resources\icon32_maximize.ico" />
-    <None Remove="Resources\icon32_minimize.ico" />
-    <None Remove="Resources\icon32_notifications.ico" />
-    <None Remove="Resources\icon32_phone.ico" />
-    <None Remove="Resources\icon32_photos.ico" />
-    <None Remove="Resources\icon32_printer.ico" />
-    <None Remove="Resources\icon32_profile.ico" />
-    <None Remove="Resources\icon32_random.ico" />
-    <None Remove="Resources\icon32_refresh.ico" />
-    <None Remove="Resources\icon32_remove.ico" />
-    <None Remove="Resources\icon32_restoredown.ico" />
-    <None Remove="Resources\icon32_return.ico" />
-    <None Remove="Resources\icon32_save.ico" />
-    <None Remove="Resources\icon32_scanner.ico" />
-    <None Remove="Resources\icon32_search.ico" />
-    <None Remove="Resources\icon32_select.ico" />
-    <None Remove="Resources\icon32_settings.ico" />
-    <None Remove="Resources\icon32_shield_blue.ico" />
-    <None Remove="Resources\icon32_shield_green.ico" />
-    <None Remove="Resources\icon32_shield_orange.ico" />
-    <None Remove="Resources\icon32_shield_red.ico" />
-    <None Remove="Resources\icon32_shield_white.ico" />
-    <None Remove="Resources\icon32_shield_yellow.ico" />
-    <None Remove="Resources\icon32_show.ico" />
-    <None Remove="Resources\icon32_source.ico" />
-    <None Remove="Resources\icon32_stats.ico" />
-    <None Remove="Resources\icon32_stores.ico" />
-    <None Remove="Resources\icon32_test.ico" />
-    <None Remove="Resources\icon32_tools.ico" />
-    <None Remove="Resources\icon32_transport.ico" />
-    <None Remove="Resources\icon32_unlocked.ico" />
-    <None Remove="Resources\icon32_upload.ico" />
-    <None Remove="Resources\icon32_user.ico" />
-    <None Remove="Resources\icon32_users.ico" />
-    <None Remove="Resources\icon32_versions.ico" />
-    <None Remove="Resources\icon32_web.ico" />
     <None Remove="Resources\icon64.ico" />
     <None Remove="Resources\logo.png" />
     <None Remove="Resources\pl_manual.pdf" />
@@ -362,9 +284,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="StswExpress">
-      <HintPath>Resources\StswExpress.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\..\StswExpress\StswExpress\StswExpress.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -419,6 +339,12 @@
     <Page Update="Modules\Vehicles\V_VehiclesNew.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Modules\Equipment\" />
+    <Folder Include="Modules\Orders\" />
+    <Folder Include="Modules\Shipments\" />
   </ItemGroup>
 
 </Project>
