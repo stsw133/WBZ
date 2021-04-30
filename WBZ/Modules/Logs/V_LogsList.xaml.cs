@@ -17,11 +17,13 @@ namespace WBZ.Modules.Logs
 	{
 		D_LogsList D = new D_LogsList();
 
-		public LogsList()
+		public LogsList(StswExpress.Globals.Commands.Type mode)
 		{
 			InitializeComponent();
 			DataContext = D;
 			Init();
+
+			D.Mode = mode;
 
 			if (Config.Logs_Enabled == "1")
 				chckEnabled.IsChecked = true;
@@ -37,7 +39,7 @@ namespace WBZ.Modules.Logs
 			int index = 0;
 			tcList.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => index = tcList.SelectedIndex));
 
-			D.FilterSQL = $"LOWER(COALESCE(u.lastname,'') || ' ' || COALESCE(u.forename,'')) like '%{D.Filters.cUser.Name.ToLower()}%' and "
+			D.FilterSQL = $"LOWER(COALESCE(u.lastname,'') || ' ' || COALESCE(u.forename,'')) like '%{D.Filters.cUser.Value?.ToString()?.ToLower()}%' and "
 						+ $"LOWER(COALESCE(l.module,'')) like '%{D.Filters.Module.ToLower()}%' and "
 						+ $"LOWER(COALESCE(l.content,'')) like '%{D.Filters.Content.ToLower()}%' and "
 						+ $"l.datetime >= '{D.Filters.fDateTime:yyyy-MM-dd}' and l.datetime < '{D.Filters.DateTime.AddDays(1):yyyy-MM-dd}' and "

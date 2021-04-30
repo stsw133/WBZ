@@ -15,7 +15,7 @@
                       PreviewMouseLeftButtonUp="btnManageIcon_Click">
                     <Image Stretch="UniformToFill">
                         <Image.Source>
-                            <Binding Path="InstanceInfo.cIcon.Item2">
+                            <Binding Path="InstanceInfo.cIcon.Value">
                                 <Binding.TargetNullValue>
                                     <ImageSource>/Resources/icon32_photos.ico</ImageSource>
                                 </Binding.TargetNullValue>

@@ -26,10 +26,10 @@
         <!-- ID -->
         <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_ID, Converter={seg:conv_BoolToVisibility}}"/>
         <!-- User -->
-        <DataGridTextColumn Binding="{Binding cUser.Name}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_User, Converter={seg:conv_BoolToVisibility}}">
+        <DataGridTextColumn Binding="{Binding cUser.Value}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_User, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Header="Użytkownik" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=12}"
-                                       Value="{Binding Data.Filters.cUser.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
+                <sec:ColumnFilter_Text Header="Użytkownik" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=12}"
+                                       Value="{Binding Data.Filters.cUser.Value, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
                                        IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
@@ -54,7 +54,7 @@
         <!-- Content -->
         <DataGridTextColumn Binding="{Binding Content}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Content, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Header="Treść" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=12}"
+                <sec:ColumnFilter_Text Header="Treść" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=12}"
                                        Value="{Binding Data.Filters.Content, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
                                        IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
@@ -94,9 +94,9 @@
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Sortowanie 1:"/>
                             <ToggleButton IsChecked="{Binding sorting_LogsList[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                          Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}"
-                                          Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}">
-                                <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.1}"
+                                          Height="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}"
+                                          Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}">
+                                <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.1}"
                                        Source="/Resources/icon32_descending.ico"/>
                             </ToggleButton>
                             <ComboBox SelectedValue="{Binding sorting_LogsList[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
@@ -114,9 +114,9 @@
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Sortowanie 2:"/>
                             <ToggleButton IsChecked="{Binding sorting_LogsList[3], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                          Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}"
-                                          Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}">
-                                <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.1}"
+                                          Height="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}"
+                                          Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}">
+                                <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.1}"
                                        Source="/Resources/icon32_descending.ico"/>
                             </ToggleButton>
                             <ComboBox SelectedValue="{Binding sorting_LogsList[2], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
@@ -134,7 +134,7 @@
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Limit wczytywania:"/>
                             <TextBox Text="{Binding sorting_LogsList[4], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                     Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=5}"
+                                     Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=5}"
                                      HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                         </StackPanel>
                     </MenuItem.Header>

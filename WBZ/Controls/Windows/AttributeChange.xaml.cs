@@ -21,7 +21,7 @@ namespace WBZ.Controls
 			DataContext = D;
 
 			D.AttributeInfo = attribute;
-			D.AttributeValues = SQL.ComboInstances("attributes_values", "value", $"class={attribute.Class.ID} and archival=false", true);
+			D.AttributeValues = SQL.ListValues("attributes_values", "value", $"class={attribute.Class.ID} and archival=false", true);
 			D.EditMode = editMode;
 		}
 
@@ -77,8 +77,8 @@ namespace WBZ.Controls
 		}
 
 		/// Attribute values
-		private ObservableCollection<M_ComboValue> attributeValues;
-		public ObservableCollection<M_ComboValue> AttributeValues
+		private ObservableCollection<MV> attributeValues;
+		public ObservableCollection<MV> AttributeValues
 		{
 			get => attributeValues;
 			set => SetField(ref attributeValues, value, () => AttributeValues);

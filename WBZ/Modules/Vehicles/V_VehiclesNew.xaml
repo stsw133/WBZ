@@ -94,7 +94,7 @@
                                        Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.5}"
                                        Source="/Resources/icon32_contractors.ico"/>
                             </Button>
-                            <TextBox Text="{Binding InstanceInfo.cForwarder.Name}" Tag="{Binding InstanceInfo.cForwarder.ID}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True"/>
+                            <TextBox Text="{Binding InstanceInfo.cForwarder.Value}" Tag="{Binding InstanceInfo.cForwarder.ID}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Kierowca:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>
@@ -104,7 +104,7 @@
                                        Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.5}"
                                        Source="/Resources/icon32_briefcase.ico"/>
                             </Button>
-                            <TextBox Text="{Binding InstanceInfo.cDriver.Name, Mode=OneWay}" Tag="{Binding InstanceInfo.cDriver.ID}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True"/>
+                            <TextBox Text="{Binding InstanceInfo.cDriver.Value, Mode=OneWay}" Tag="{Binding InstanceInfo.cDriver.ID}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Rok produkcji:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>

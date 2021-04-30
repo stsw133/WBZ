@@ -12,7 +12,7 @@
             <g:BindingProxy x:Key="proxy" Data="{Binding}"/>
         </DataGrid.Resources>
         <DataGrid.Columns>
-            <DataGridTextColumn Binding="{Binding cUser.Name}" Header="Użytkownik"/>
+            <DataGridTextColumn Binding="{Binding cUser.Value}" Header="Użytkownik"/>
             <DataGridTextColumn Binding="{Binding Content}" Header="Treść" Width="*"/>
             <DataGridTextColumn Binding="{Binding DateTime, StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}" Header="Data i czas"/>
         </DataGrid.Columns>

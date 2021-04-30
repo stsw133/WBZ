@@ -729,36 +729,36 @@ namespace WBZ
 			return result;
 		}
 		/// <summary>
-		/// Pobiera listę instancji do ComboBoxów (zazwyczaj ID i Name)
+		/// Pobiera listę ID i wartości (zazwyczaj ID i Name)
 		/// </summary>
 		/// <param name="module">Moduł</param>
-		/// <param name="column">Kolumna z której będą wyświetlane nazwy</param>
+		/// <param name="column">Kolumna z której będą pobierane wartości</param>
 		/// <param name="filter">Filtr SQL</param>
-		internal static ObservableCollection<M_ComboValue> ComboInstances(string module, string column, string filter, bool allowEmpty)
+		internal static ObservableCollection<MV> ListValues(string module, string column, string filter, bool allowEmpty)
 		{
-			var result = new ObservableCollection<M_ComboValue>();
+			var result = new ObservableCollection<MV>();
 
 			try
 			{
 				using (var sqlConn = connOpenedWBZ)
 				{
-					using (var sqlDA = new NpgsqlDataAdapter($@"select id, {column} as name
+					using (var sqlDA = new NpgsqlDataAdapter($@"select id, {column} as value
 						from wbz.{module}
 						where {filter}
 						order by 2 asc", sqlConn))
 					{
 						if (allowEmpty)
-							sqlDA.SelectCommand.CommandText = "select 0 as id, '' as name union " + sqlDA.SelectCommand.CommandText;
+							sqlDA.SelectCommand.CommandText = "select 0 as id, '' as value union " + sqlDA.SelectCommand.CommandText;
 
 						var dt = new DataTable();
 						sqlDA.Fill(dt);
-						result = dt.ToList<M_ComboValue>();
+						result = dt.ToList<MV>();
 					}
 				}
 			}
 			catch (Exception ex)
 			{
-				Error("Błąd podczas pobierania wartości listy rozwijanej", ex, module, 0);
+				Error("Błąd podczas pobierania listy wartości", ex, module, 0);
 			}
 
 			return result;

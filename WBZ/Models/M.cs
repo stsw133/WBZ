@@ -1,4 +1,4 @@
-﻿using System;
+﻿using WBZ.Globals;
 
 namespace WBZ.Models
 {
@@ -22,12 +22,12 @@ namespace WBZ.Models
         /// <summary>
         /// Icon
         /// </summary>
+        public MV cIcon { get; set; } = new MV();
         public int Icon
         {
-            get => cIcon.Item1 ?? 0;
-            set => cIcon = new Tuple<int?, byte[]>(value, SQL.GetInstance<M_Icon>(Globals.Config.Modules.ICONS, value)?.File);
+            get => cIcon.ID;
+            set => cIcon = SQL.ListValues(Config.Modules.ICONS, "file", $"id={value}", false)?[0];
         }
-        public Tuple<int?, byte[]> cIcon { get; set; } = new Tuple<int?, byte[]>(null, null);
 
         /// <summary>
         /// Group
@@ -56,5 +56,18 @@ namespace WBZ.Models
         /// Postcode
         /// </summary>
         public string Postcode { get; set; } = string.Empty;
+    }
+
+    public class MV
+    {
+        /// <summary>
+        /// ID
+        /// </summary>
+        public int ID { get; set; } = 0;
+
+        /// <summary>
+        /// Value
+        /// </summary>
+        public object Value { get; set; } = null;
     }
 }

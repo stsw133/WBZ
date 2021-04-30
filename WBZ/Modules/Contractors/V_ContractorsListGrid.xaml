@@ -29,14 +29,14 @@
         <DataGridTemplateColumn Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_Icon, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
-                    <Image Source="{Binding cIcon.Item2}"/>
+                    <Image Source="{Binding cIcon.Value}"/>
                 </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>
         <!-- Codename -->
         <DataGridTextColumn Binding="{Binding Codename}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_Codename, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Header="Kod" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=3}"
+                <sec:ColumnFilter_Text Header="Kod" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=3}"
                                        Value="{Binding Data.Filters.Codename, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
                                        IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
@@ -44,7 +44,7 @@
         <!-- Name -->
         <DataGridTextColumn Binding="{Binding Name}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_Name, Converter={seg:conv_BoolToVisibility}}" Width="*">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Header="Nazwa" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=12}"
+                <sec:ColumnFilter_Text Header="Nazwa" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=12}"
                                        Value="{Binding Data.Filters.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
                                        IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
@@ -52,7 +52,7 @@
         <!-- Branch -->
         <DataGridTextColumn Binding="{Binding Branch}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_Branch, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Header="Oddział" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
+                <sec:ColumnFilter_Text Header="Oddział" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
                                        Value="{Binding Data.Filters.Branch, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
                                        IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
@@ -60,7 +60,7 @@
         <!-- NIP -->
         <DataGridTextColumn Binding="{Binding NIP}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_NIP, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Header="NIP" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
+                <sec:ColumnFilter_Text Header="NIP" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
                                        Value="{Binding Data.Filters.NIP, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
                                        IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
@@ -68,7 +68,7 @@
         <!-- REGON -->
         <DataGridTextColumn Binding="{Binding REGON}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_REGON, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Header="REGON" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
+                <sec:ColumnFilter_Text Header="REGON" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
                                        Value="{Binding Data.Filters.REGON, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
                                        IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
@@ -76,7 +76,7 @@
         <!-- Postcode -->
         <DataGridTextColumn Binding="{Binding Postcode}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_Postcode, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Header="Kod pocztowy" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
+                <sec:ColumnFilter_Text Header="Kod pocztowy" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
                                        Value="{Binding Data.Filters.Postcode, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
                                        IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
@@ -84,7 +84,7 @@
         <!-- City -->
         <DataGridTextColumn Binding="{Binding City}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_City, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Header="Miasto" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
+                <sec:ColumnFilter_Text Header="Miasto" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
                                        Value="{Binding Data.Filters.City, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
                                        IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
@@ -92,7 +92,7 @@
         <!-- Address -->
         <DataGridTextColumn Binding="{Binding Address}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_Address, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Header="Adres" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=12}"
+                <sec:ColumnFilter_Text Header="Adres" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=12}"
                                        Value="{Binding Data.Filters.Address, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
                                        IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>

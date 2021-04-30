@@ -32,14 +32,22 @@ namespace WBZ.Models
 		/// <summary>
 		/// Forwarder
 		/// </summary>
-		public int Forwarder { set => cForwarder = SQL.ComboInstances(Config.Modules.CONTRACTORS, "codename", $"id={value}", false)?[0]; }
-		public M_ComboValue cForwarder { get; set; } = new M_ComboValue();
+		public MV cForwarder { get; set; } = new MV();
+		public int Forwarder
+		{
+			get => cForwarder.ID;
+			set => cForwarder = SQL.ListValues(Config.Modules.CONTRACTORS, "codename", $"id={value}", false)?[0];
+		}
 
 		/// <summary>
 		/// Driver
 		/// </summary>
-		public int Driver { set => cDriver = SQL.ComboInstances(Config.Modules.EMPLOYEES, "lastname || ' ' || forename", $"id={value}", false)?[0]; }
-		public M_ComboValue cDriver { get; set; } = new M_ComboValue();
+		public MV cDriver { get; set; } = new MV();
+		public int Driver
+		{
+			get => cDriver.ID;
+			set => cDriver = SQL.ListValues(Config.Modules.EMPLOYEES, "lastname || ' ' || forename", $"id={value}", false)?[0];
+		}
 
 		/// <summary>
 		/// ProdYear

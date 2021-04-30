@@ -29,14 +29,14 @@
         <DataGridTemplateColumn Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Icon, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
-                    <Image Source="{Binding cIcon.Item2}"/>
+                    <Image Source="{Binding cIcon.Value}"/>
                 </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>
         <!-- Register -->
         <DataGridTextColumn Binding="{Binding Register}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Register, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Header="Nr rej." MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
+                <sec:ColumnFilter_Text Header="Nr rej." MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
                                        Value="{Binding Data.Filters.Register, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
                                        IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
@@ -44,7 +44,7 @@
         <!-- Brand -->
         <DataGridTextColumn Binding="{Binding Brand}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Brand, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Header="Marka" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=12}"
+                <sec:ColumnFilter_Text Header="Marka" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=12}"
                                        Value="{Binding Data.Filters.Brand, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
                                        IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
@@ -52,7 +52,7 @@
         <!-- Model -->
         <DataGridTextColumn Binding="{Binding Model}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Model, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Header="Model" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=12}"
+                <sec:ColumnFilter_Text Header="Model" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=12}"
                                        Value="{Binding Data.Filters.Model, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
                                        IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
@@ -60,31 +60,31 @@
         <!-- Capacity -->
         <DataGridTextColumn Binding="{Binding Capacity}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Capacity, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Number Header="Pojemność" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
+                <sec:ColumnFilter_Number Header="Pojemność" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
                                          Value="{Binding Data.Filters.Capacity, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
                                          IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Forwarder -->
-        <DataGridTextColumn Binding="{Binding cForwarder.Name}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Forwarder, Converter={seg:conv_BoolToVisibility}}">
+        <DataGridTextColumn Binding="{Binding cForwarder.Value}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Forwarder, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Header="Spedytor" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
-                                       Value="{Binding Data.Filters.cForwarder.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
+                <sec:ColumnFilter_Text Header="Spedytor" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
+                                       Value="{Binding Data.Filters.cForwarder.Value, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
                                        IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Driver -->
-        <DataGridTextColumn Binding="{Binding cDriver.Name}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Driver, Converter={seg:conv_BoolToVisibility}}">
+        <DataGridTextColumn Binding="{Binding cDriver.Value}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Driver, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Header="Kierowca" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
-                                       Value="{Binding Data.Filters.cDriver.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
+                <sec:ColumnFilter_Text Header="Kierowca" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
+                                       Value="{Binding Data.Filters.cDriver.Value, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
                                        IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- ProdYear -->
         <DataGridTextColumn Binding="{Binding ProdYear}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Driver, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Number Header="Rok produkcji" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
+                <sec:ColumnFilter_Number Header="Rok produkcji" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=6}"
                                          Value="{Binding Data.Filters.ProdYear, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
                                          IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>

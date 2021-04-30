@@ -12,8 +12,12 @@ namespace WBZ.Models
 		/// <summary>
 		/// User
 		/// </summary>
-		public int User { set => cUser = SQL.ComboInstances(Config.Modules.USERS, "lastname || ' ' || forename", $"id={value}", false)?[0]; }
-		public M_ComboValue cUser { get; set; } = new M_ComboValue();
+		public MV cUser { get; set; } = new MV();
+		public int User
+		{
+			get => cUser.ID;
+			set => cUser = SQL.ListValues(Config.Modules.USERS, "lastname || ' ' || forename", $"id={value}", false)?[0];
+		}
 
 		/// <summary>
 		/// Module

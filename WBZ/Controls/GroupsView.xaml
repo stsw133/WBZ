@@ -14,22 +14,22 @@
             SelectedItemChanged="TreeView_SelectedItemChanged">
     <TreeView.ContextMenu>
         <ContextMenu>
-            <MenuItem Header="Podgląd" IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=groups_preview}" Click="btnGroupsPreview_Click">
+            <MenuItem Header="Podgląd" Click="btnGroupsPreview_Click">
                 <MenuItem.Icon>
                     <Image Source="/Resources/icon32_search.ico"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Dodaj" IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=groups_save}" Click="btnGroupsNew_Click">
+            <MenuItem Header="Dodaj" Click="btnGroupsNew_Click">
                 <MenuItem.Icon>
                     <Image Source="/Resources/icon32_add.ico"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Edytuj" IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=groups_save}" Click="btnGroupsEdit_Click">
+            <MenuItem Header="Edytuj" Click="btnGroupsEdit_Click">
                 <MenuItem.Icon>
                     <Image Source="/Resources/icon32_edit.ico"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Usuń" IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=groups_delete}" Click="btnGroupsDelete_Click">
+            <MenuItem Header="Usuń" Click="btnGroupsDelete_Click">
                 <MenuItem.Icon>
                     <Image Source="/Resources/icon32_delete.ico"/>
                 </MenuItem.Icon>

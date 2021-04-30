@@ -108,7 +108,7 @@
             <Label Content="Magazyn:" Margin="5,0,0,5"/>
             <ComboBox Margin="5,0,5,5" VerticalContentAlignment="Center"
                       ItemsSource="{Binding StoresList}"
-                      DisplayMemberPath="Name" SelectedValuePath="ID" SelectedIndex="0"
+                      DisplayMemberPath="Value" SelectedValuePath="ID" SelectedIndex="0"
                       SelectionChanged="cbStore_SelectionChanged"/>
             <CheckBox Margin="5,0,5,5" HorizontalAlignment="Right" VerticalContentAlignment="Center"
                       Content="Pokaż archiwalne"

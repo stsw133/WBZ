@@ -19,7 +19,7 @@
             <DataGridTemplateColumn Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <Image Source="{Binding cIcon.Item2}"/>
+                        <Image Source="{Binding cIcon.Value}"/>
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>

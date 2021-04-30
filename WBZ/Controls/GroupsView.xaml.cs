@@ -193,7 +193,7 @@ namespace WBZ.Controls
                     };
                     var image = new Image()
                     {
-                        Source = StswExpress.Globals.Functions.LoadImage(group.cIcon.Item2),
+                        Source = StswExpress.Globals.Functions.LoadImage(group.cIcon.Value as byte[]),
                         Margin = new Thickness(0, 0, 5, 0),
                         Width = Properties.Settings.Default.iSize * 1.5,
                         Height = Properties.Settings.Default.iSize * 1.5

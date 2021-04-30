@@ -25,8 +25,8 @@ namespace WBZ.Modules.Articles
 			}
 		}
 		/// Stores list
-		private ObservableCollection<M_ComboValue> storesList;
-		public ObservableCollection<M_ComboValue> StoresList
+		private ObservableCollection<MV> storesList;
+		public ObservableCollection<MV> StoresList
         {
 			get => storesList;
 			set => SetField(ref storesList, value, () => StoresList);
