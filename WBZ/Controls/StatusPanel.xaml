@@ -11,11 +11,13 @@
             <DockPanel DockPanel.Dock="Top" Visibility="{Binding AreFiltersVisible, Converter={seg:conv_BoolToVisibility}}">
                 <Button DockPanel.Dock="Right" Margin="2" VerticalAlignment="Center" ToolTip="Czyść filtry" Command="seg:Commands.Clear">
                     <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.15}"
-                           Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_clear.ico"/>
+                           Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.5}"
+                           Source="/Resources/icon32_clear.ico"/>
                 </Button>
                 <Button DockPanel.Dock="Right" Margin="2,2,0,2" VerticalAlignment="Center" ToolTip="Konfiguruj filtry">
                     <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.15}"
-                           Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.5}" Source="/Resources/icon32_edit.ico"/>
+                           Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.5}"
+                           Source="/Resources/icon32_settings.ico"/>
                 </Button>
                 <Label Content="Filtr:" VerticalAlignment="Center"/>
                 <ComboBox Margin="5,0" ItemsSource="{Binding FiltersList}" SelectedValue="{Binding SelectedFilter}" SelectedValuePath="Name" FontWeight="Medium" VerticalAlignment="Center"/>

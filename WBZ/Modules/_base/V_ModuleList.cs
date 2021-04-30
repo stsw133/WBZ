@@ -43,6 +43,16 @@ namespace WBZ.Modules._base
         { }
 
         /// <summary>
+		/// Select
+		/// </summary>
+		internal void cmdSelect_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = D?.SelectingMode ?? false;
+        internal virtual void cmdSelect_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Selected = dgList.SelectedItems.Cast<MODULE_MODEL>().FirstOrDefault();
+            W.DialogResult = true;
+        }
+
+        /// <summary>
         /// Preview
         /// </summary>
         internal void cmdPreview_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = Global.User.Perms.Contains($"{D?.MODULE_TYPE}_{Global.PermType.PREVIEW}");
@@ -54,16 +64,6 @@ namespace WBZ.Modules._base
                 var window = Activator.CreateInstance(Type.GetType(HalfName + "New"), instance, StswExpress.Globals.Commands.Type.PREVIEW) as Window;
                 window.Show();
             }
-        }
-
-        /// <summary>
-		/// Select
-		/// </summary>
-		internal void cmdSelect_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = D?.SelectingMode ?? false;
-        internal virtual void cmdSelect_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            Selected = dgList.SelectedItems.Cast<MODULE_MODEL>().FirstOrDefault();
-            W.DialogResult = true;
         }
 
         /// <summary>

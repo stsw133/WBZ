@@ -3,17 +3,15 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-       xmlns:b="clr-namespace:WBZ.Modules.Vehicles"
-       xmlns:c="clr-namespace:WBZ.Controls"
        xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
        xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
+       xmlns:b="clr-namespace:WBZ.Modules.Vehicles"
        xmlns:p="clr-namespace:WBZ.Properties"
        xmlns:t="clr-namespace:WBZ.Modules._tabs"
-       mc:Ignorable="d"
-       Title="{Binding Title}"
-            Height="600" Width="900" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
-            Icon="/Resources/icon32_transport.ico"
-            Loaded="Window_Loaded" Closed="Window_Closed">
+       mc:Ignorable="d" Height="600" Width="900" ResizeMode="CanResize"
+       Title="{Binding Title}" Icon="/Resources/icon32_transport.ico"
+       Loaded="Window_Loaded" Closed="Window_Closed"
+       FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -33,8 +31,7 @@
                 BorderThickness="1,0,0,0">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Top">
-                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                    Text="{Tr Buttons.Save, DefaultText='Zapisz', LanguageId={x:Static seg:Properties.Language}}"
+                    <sec:IconButton Margin="5" Text="{Tr Buttons.Save, DefaultText='Zapisz', LanguageId={x:Static seg:Properties.Language}}"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_save.ico"
                                     Command="seg:Commands.Save"/>
@@ -42,14 +39,12 @@
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                     <Separator/>
-                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                    Text="{Tr Buttons.Refresh, DefaultText='Odśwież', LanguageId={x:Static seg:Properties.Language}}"
+                    <sec:IconButton Margin="5" Text="{Tr Buttons.Refresh, DefaultText='Odśwież', LanguageId={x:Static seg:Properties.Language}}"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_refresh.ico"
                                     Command="seg:Commands.Refresh"/>
                     <Separator/>
-                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                    Text="{Tr Buttons.CloseWindow, DefaultText='Zamknij okno', LanguageId={x:Static seg:Properties.Language}}"
+                    <sec:IconButton Margin="5" Text="{Tr Buttons.CloseWindow, DefaultText='Zamknij okno', LanguageId={x:Static seg:Properties.Language}}"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_close.ico"
                                     Command="seg:Commands.Close"/>
@@ -84,7 +79,8 @@
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Pojemność (t):" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>
-                            <TextBox Text="{Binding InstanceInfo.Capacity}" Margin="5" VerticalContentAlignment="Center"/>
+                            <sec:NumericUpDown Margin="5" VerticalContentAlignment="Center" ButtonsAlignment="Left"
+                                               Value="{Binding InstanceInfo.Capacity}" ValueMin="0"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Spedytor:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>
@@ -108,7 +104,8 @@
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Rok produkcji:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>
-                            <TextBox Text="{Binding InstanceInfo.ProdYear}" Margin="5" VerticalContentAlignment="Center"/>
+                            <sec:NumericUpDown Margin="5" VerticalContentAlignment="Center" ButtonsAlignment="Left"
+                                               Value="{Binding InstanceInfo.ProdYear}" ValueMin="0"/>
                         </DockPanel>
                     </DockPanel>
                 </ScrollViewer>

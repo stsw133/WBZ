@@ -3,6 +3,7 @@ using StswExpress.Globals;
 using System;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 using TranslateMe;
 using WBZ.Globals;
 using WBZ.Modules.Login;
@@ -16,6 +17,8 @@ namespace WBZ
 	{
 		public App()
         {
+			ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(int.MaxValue));
+
 			StswExpress.Globals.Properties.HashKey = "ejdndbfewbasjhdggjhbasbvdgewvbjdbsavdqgwjbdjsvdyugwqyubashjdbjfgdtyuqw";
 			StswExpress.Globals.Properties.iFont = WBZ.Properties.Settings.Default.iFont;
 			StswExpress.Globals.Properties.iSize = WBZ.Properties.Settings.Default.iSize;

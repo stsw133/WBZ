@@ -1,8 +1,8 @@
 ﻿<UserControl x:Class="WBZ.Modules._tabs.AdditionalsTab"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
              xmlns:g="clr-namespace:WBZ.Globals"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="750">
@@ -10,10 +10,9 @@
         <DockPanel DockPanel.Dock="Top">
             <DockPanel DockPanel.Dock="Right" Visibility="{Binding HasIcon, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Converter={seg:conv_BoolToVisibility}}">
                 <Label DockPanel.Dock="Top" Content="Ikona:"/>
-                <Grid DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top"
-                      Height="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}" Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"
-                      PreviewMouseLeftButtonUp="btnManageIcon_Click">
-                    <Image Stretch="UniformToFill">
+                <Image DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" Stretch="UniformToFill"
+                       Height="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}" Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"
+                       PreviewMouseLeftButtonUp="btnManageIcon_Click">
                         <Image.Source>
                             <Binding Path="InstanceInfo.cIcon.Value">
                                 <Binding.TargetNullValue>
@@ -21,18 +20,17 @@
                                 </Binding.TargetNullValue>
                             </Binding>
                         </Image.Source>
-                    </Image>
-                    <Grid.ContextMenu>
+                    <Image.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Wybierz" Click="btnSelect_Click"/>
-                            <MenuItem Header="Usuń" Click="btnDelete_Click"/>
+                            <MenuItem Header="Wybierz" Icon="/Resources/icon32_select.ico" Click="btnSelect_Click"/>
+                            <MenuItem Header="Usuń" Icon="/Resources/icon32_remove.ico" Click="btnDelete_Click"/>
                         </ContextMenu>
-                    </Grid.ContextMenu>
-                </Grid>
+                    </Image.ContextMenu>
+                </Image>
             </DockPanel>
-            <CheckBox DockPanel.Dock="Top" Content="Archiwalny" Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.5}" HorizontalAlignment="Left" VerticalContentAlignment="Center" IsChecked="{Binding InstanceInfo.Archival}"/>
-            <Label DockPanel.Dock="Top" Content="Komentarz:" Margin="5,0" VerticalContentAlignment="Center"/>
+            <CheckBox DockPanel.Dock="Top" Content="Archiwalny" Margin="20" VerticalContentAlignment="Center" IsChecked="{Binding InstanceInfo.Archival}"/>
+            <Label DockPanel.Dock="Top" Content="Komentarz:" Margin="5,0"/>
         </DockPanel>
-        <TextBox Text="{Binding InstanceInfo.Comment}" Margin="5" TextWrapping="Wrap" AcceptsReturn="True"/>
+        <TextBox Margin="5" Text="{Binding InstanceInfo.Comment}" TextWrapping="Wrap" AcceptsReturn="True"/>
     </DockPanel>
 </UserControl>
