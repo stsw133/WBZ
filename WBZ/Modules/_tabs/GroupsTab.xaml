@@ -28,22 +28,10 @@
         </DataGrid.Columns>
         <DataGrid.ContextMenu>
             <ContextMenu>
-                <MenuItem Header="Dodaj" IsEnabled="{Binding EditingMode}" Click="btnGroupAdd_Click">
-                    <MenuItem.Icon>
-                        <Image Source="/Resources/icon32_add.ico"/>
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem Header="Usuń" IsEnabled="{Binding EditingMode}" Click="btnGroupRemove_Click">
-                    <MenuItem.Icon>
-                        <Image Source="/Resources/icon32_delete.ico"/>
-                    </MenuItem.Icon>
-                </MenuItem>
+                <sec:MenuItem Header="Dodaj" IconUri="/Resources/icon32_add.ico" IsEnabled="{Binding EditingMode}" Click="btnGroupAdd_Click"/>
+                <sec:MenuItem Header="Usuń" IconUri="/Resources/icon32_delete.ico" IsEnabled="{Binding EditingMode}" Click="btnGroupRemove_Click"/>
                 <Separator Visibility="Collapsed"/>
-                <MenuItem Header="Ustaw jako główną" IsEnabled="{Binding EditingMode}" Click="btnGroupSelectAsMain_Click" Visibility="Collapsed">
-                    <MenuItem.Icon>
-                        <Image Source="/Resources/icon32_select.ico"/>
-                    </MenuItem.Icon>
-                </MenuItem>
+                <sec:MenuItem Header="Ustaw jako główną" IconUri="/Resources/icon32_select.ico" IsEnabled="{Binding EditingMode}" Click="btnGroupSelectAsMain_Click" Visibility="Collapsed"/>
             </ContextMenu>
         </DataGrid.ContextMenu>
         <DataGrid.RowStyle>

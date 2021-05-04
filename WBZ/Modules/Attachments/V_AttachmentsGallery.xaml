@@ -5,13 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
         xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
-        xmlns:p="clr-namespace:WBZ.Properties"
-        mc:Ignorable="d"
-        Title="Galeria załączników"
-            Height="700" Width="1050" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowState="Maximized"
-            BorderThickness="6" BorderBrush="Black"
-            Icon="/Resources/icon32_gallery.ico"
-            Closed="Window_Closed">
+        mc:Ignorable="d" Height="700" Width="1050" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowState="Maximized"
+        Title="Galeria załączników" Icon="/Resources/icon32_gallery.ico"
+        Closed="Window_Closed">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -21,7 +17,7 @@
         <!-- filtersPanel -->
         <Grid DockPanel.Dock="Top" Background="Black">
             <Expander x:Name="filtersExpander" Header="Filtry wyszukiwania" Background="Black" Foreground="White" BorderThickness="0">
-                <TabControl MaxHeight="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=20}">
+                <TabControl>
                     <!-- tabMain -->
                     <TabItem>
                         <TabItem.Header>

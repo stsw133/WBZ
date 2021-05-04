@@ -6,11 +6,9 @@
         xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
         xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
-        mc:Ignorable="d"
-        Title="{Tr Login, DefaultText='Logowanie', LanguageId={x:Static seg:Properties.Language}}"
-            SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen"
-            Icon="/Resources/icon32_login.ico"
-            Loaded="Window_Loaded">
+        mc:Ignorable="d" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen"
+        Title="{Tr Login, DefaultText='Logowanie', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_login.ico"
+        Loaded="Window_Loaded">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -26,10 +24,10 @@
             </Border>
             <Grid DockPanel.Dock="Top" Margin="5">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
@@ -65,42 +63,25 @@
                     <Image Margin="2" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2}" Source="/Resources/icon32_tools.ico"/>
                     <Button.ContextMenu>
                         <ContextMenu>
-                            <MenuItem x:Name="btnCreateAdmin" Header="Utwórz administratora" IsEnabled="False" Visibility="Collapsed" Click="btnCreateAdmin_Click">
-                                <MenuItem.Icon>
-                                    <Image Source="/Resources/icon32_admin.ico"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem x:Name="btnUpdateDatabase" Header="Aktualizuj bazę danych" IsEnabled="False" Visibility="Collapsed" Click="btnUpdateDatabase_Click">
-                                <MenuItem.Icon>
-                                    <Image Source="/Resources/icon32_database.ico"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Header="Generuj nowe hasło" Click="btnGenerateNewpass_Click">
-                                <MenuItem.Icon>
-                                    <Image Source="/Resources/icon32_random.ico"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Header="Poradnik użytkownika" Click="btnManual_Click">
-                                <MenuItem.Icon>
-                                    <Image Source="/Resources/icon32_books.ico"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
+                            <sec:MenuItem x:Name="btnCreateAdmin"
+                                          Header="Utwórz administratora" IconUri="/Resources/icon32_admin.ico"
+                                          IsEnabled="False" Visibility="Collapsed"
+                                          Click="btnCreateAdmin_Click"/>
+                            <sec:MenuItem x:Name="btnUpdateDatabase"
+                                          Header="Aktualizuj bazę danych" IconUri="/Resources/icon32_database.ico"
+                                          IsEnabled="False" Visibility="Collapsed"
+                                          Click="btnUpdateDatabase_Click"/>
+                            <sec:MenuItem Header="Generuj nowe hasło" IconUri="/Resources/icon32_random.ico"
+                                          Click="btnGenerateNewpass_Click"/>
+                            <sec:MenuItem Header="Poradnik użytkownika" IconUri="/Resources/icon32_books.ico"
+                                          Click="btnManual_Click"/>
                             <Separator/>
-                            <MenuItem Header="Baza wersji aplikacji" Click="btnVersions_Click">
-                                <MenuItem.Icon>
-                                    <Image Source="/Resources/icon32_versions.ico"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Header="Ustawienia" Click="btnSettings_Click">
-                                <MenuItem.Icon>
-                                    <Image Source="/Resources/icon32_settings.ico"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Header="O programie" Click="btnAboutApp_Click">
-                                <MenuItem.Icon>
-                                    <Image Source="/Resources/icon64.ico"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
+                            <sec:MenuItem Header="Baza wersji aplikacji" IconUri="/Resources/icon32_versions.ico"
+                                          Click="btnVersions_Click"/>
+                            <sec:MenuItem Header="Ustawienia" IconUri="/Resources/icon32_settings.ico"
+                                          Click="btnSettings_Click"/>
+                            <sec:MenuItem Header="O programie" IconUri="/Resources/icon64.ico"
+                                          Click="btnAboutApp_Click"/>
                         </ContextMenu>
                     </Button.ContextMenu>
                 </Button>

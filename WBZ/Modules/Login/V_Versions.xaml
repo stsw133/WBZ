@@ -3,15 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:c="clr-namespace:WBZ.Controls"
         xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
         xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
-        mc:Ignorable="d"
-        Title="{Tr Versions, DefaultText='Baza wersji aplikacji', LanguageId={x:Static seg:Properties.Language}}"
-            Height="500" Width="750" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
-            Icon="/Resources/icon32_versions.ico"
-            Loaded="Window_Loaded">
+        mc:Ignorable="d" Height="500" Width="750" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
+        Title="{Tr Versions, DefaultText='Baza wersji aplikacji', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_versions.ico"
+        Loaded="Window_Loaded">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -30,8 +27,7 @@
                 BorderThickness="1,0,0,0">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Top">
-                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                    Text="{Tr Buttons.Download, DefaultText='Pobierz', LanguageId={x:Static seg:Properties.Language}}"
+                    <sec:IconButton Margin="5" Text="{Tr Buttons.Download, DefaultText='Pobierz', LanguageId={x:Static seg:Properties.Language}}"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_download.ico"
                                     Click="btnDownload_Click"/>
@@ -39,14 +35,12 @@
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                     <Separator/>
-                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                    Text="{Tr Buttons.Refresh, DefaultText='Odśwież', LanguageId={x:Static seg:Properties.Language}}"
+                    <sec:IconButton Margin="5" Text="{Tr Buttons.Refresh, DefaultText='Odśwież', LanguageId={x:Static seg:Properties.Language}}"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_refresh.ico"
                                     Command="seg:Commands.Refresh"/>
                     <Separator/>
-                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                    Text="{Tr Buttons.CloseWindow, DefaultText='Zamknij okno', LanguageId={x:Static seg:Properties.Language}}"
+                    <sec:IconButton Margin="5" Text="{Tr Buttons.CloseWindow, DefaultText='Zamknij okno', LanguageId={x:Static seg:Properties.Language}}"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_close.ico"
                                     Command="seg:Commands.Close"/>
@@ -75,9 +69,7 @@
         </Border>
         <!-- listBox -->
         <Label DockPanel.Dock="Top" Content="{Tr Versions.VersionList, DefaultText='Lista wersji:', LanguageId={x:Static seg:Properties.Language}}"/>
-        <ListBox x:Name="lbList"
-                 DockPanel.Dock="Top"
-                 Margin="5"
+        <ListBox x:Name="lbList" DockPanel.Dock="Top" Margin="5"
                  ItemsSource="{Binding InstancesList.versions}"
                  MouseDoubleClick="lbList_MouseDoubleClick"/>
     </DockPanel>

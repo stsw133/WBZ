@@ -3,18 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
+        xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
         xmlns:b="clr-namespace:WBZ.Modules.Attachments"
         xmlns:c="clr-namespace:WBZ.Controls"
-        xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
         xmlns:g="clr-namespace:WBZ.Globals"
-        xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
-        mc:Ignorable="d"
-        Title="{Binding Title}"
-            Height="650" Width="975" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
-            Icon="/Resources/icon32_photos.ico"
-            Loaded="Window_Loaded" Closed="Window_Closed"
-            FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}">
+        mc:Ignorable="d" Height="650" Width="975" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
+        Title="{Binding Title}" Icon="/Resources/icon32_photos.ico"
+        Loaded="Window_Loaded" Closed="Window_Closed"
+        FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -37,13 +35,11 @@
                 BorderThickness="1,0,0,0">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Top">
-                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4;0.4;0.4;0}"
-                                    Text="Podgląd&#10;obiektu"
+                    <sec:IconButton Margin="5" Text="Podgląd&#10;obiektu"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_search.ico"
                                     Command="seg:Commands.Preview"/>
-                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                    Text="Edycja&#10;obiektu"
+                    <sec:IconButton Margin="5" Text="Edycja&#10;obiektu"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_edit.ico"
                                     Command="seg:Commands.Edit"/>
@@ -52,8 +48,7 @@
                     <CheckBox Content="Podgląd zdjęć" x:Name="chckShowPictures" Margin="5,5,5,0" Visibility="{Binding IsChecked, ElementName=btnToggle, Converter={seg:conv_BoolToVisibility}}"/>
                     <Separator Height="5" Margin="0,5,0,0" Visibility="{Binding IsChecked, ElementName=btnToggle, Converter={seg:conv_BoolToVisibility}}"/>
                     -->
-                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                    Text="{Tr Buttons.Delete, DefaultText='Usuń', LanguageId={x:Static seg:Properties.Language}}"
+                    <sec:IconButton Margin="5" Text="{Tr Buttons.Delete, DefaultText='Usuń', LanguageId={x:Static seg:Properties.Language}}"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_delete.ico"
                                     Command="seg:Commands.Delete"/>
@@ -61,14 +56,12 @@
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                     <Separator/>
-                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                    Text="{Tr Buttons.Refresh, DefaultText='Odśwież', LanguageId={x:Static seg:Properties.Language}}"
+                    <sec:IconButton Margin="5" Text="{Tr Buttons.Refresh, DefaultText='Odśwież', LanguageId={x:Static seg:Properties.Language}}"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_refresh.ico"
                                     Command="seg:Commands.Refresh"/>
                     <Separator/>
-                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                    Text="{Tr Buttons.CloseWindow, DefaultText='Zamknij okno', LanguageId={x:Static seg:Properties.Language}}"
+                    <sec:IconButton Margin="5" Text="{Tr Buttons.CloseWindow, DefaultText='Zamknij okno', LanguageId={x:Static seg:Properties.Language}}"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_close.ico"
                                     Command="seg:Commands.Close"/>
@@ -88,8 +81,7 @@
         <c:GroupsView EditingMode="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=attachments_groups}"
                       Visibility="{Binding AreGroupsVisible, Converter={seg:conv_BoolToVisibility}}"/>
         <!-- dataGrid -->
-        <b:AttachmentsListGrid x:Name="dgList"
-                               ItemsSource="{Binding InstancesList}" IsReadOnly="True"
+        <b:AttachmentsListGrid x:Name="dgList" ItemsSource="{Binding InstancesList}" IsReadOnly="True"
                                MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged"/>
     </DockPanel>
 </b:List>

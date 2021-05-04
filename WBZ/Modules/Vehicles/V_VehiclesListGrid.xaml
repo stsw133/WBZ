@@ -180,13 +180,13 @@
             </MenuItem>
             <!-- Actions -->
             <Separator/>
-            <MenuItem Header="Podgląd" Icon="/Resources/icon32_search.ico" Command="seg:Commands.Preview"/>
-            <MenuItem Header="Dodaj" Icon="/Resources/icon32_add.ico" Command="seg:Commands.New"/>
-            <MenuItem Header="Duplikuj" Icon="/Resources/icon32_duplicate.ico" Command="seg:Commands.Duplicate"/>
-            <MenuItem Header="Edytuj" Icon="/Resources/icon32_edit.ico" Command="seg:Commands.Edit"/>
-            <MenuItem Header="Usuń" Icon="/Resources/icon32_delete.ico" Command="seg:Commands.Delete"/>
+            <sec:MenuItem Header="Podgląd" IconUri="/Resources/icon32_search.ico" Command="seg:Commands.Preview"/>
+            <sec:MenuItem Header="Dodaj" IconUri="/Resources/icon32_add.ico" Command="seg:Commands.New"/>
+            <sec:MenuItem Header="Duplikuj" IconUri="/Resources/icon32_duplicate.ico" Command="seg:Commands.Duplicate"/>
+            <sec:MenuItem Header="Edytuj" IconUri="/Resources/icon32_edit.ico" Command="seg:Commands.Edit"/>
+            <sec:MenuItem Header="Usuń" IconUri="/Resources/icon32_delete.ico" Command="seg:Commands.Delete"/>
             <Separator/>
-            <MenuItem Header="Odśwież" Icon="/Resources/icon32_refresh.ico" Command="seg:Commands.Refresh"/>
+            <sec:MenuItem Header="Odśwież" IconUri="/Resources/icon32_refresh.ico" Command="seg:Commands.Refresh"/>
         </ContextMenu>
     </DataGrid.ContextMenu>
     <DataGrid.RowStyle>

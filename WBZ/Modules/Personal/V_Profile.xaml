@@ -3,14 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:c="clr-namespace:WBZ.Controls"
         xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
         xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
+        xmlns:c="clr-namespace:WBZ.Controls"
         xmlns:p="clr-namespace:WBZ.Properties"
-        mc:Ignorable="d"
-        Title="Ustawienia profilu"
-            Height="350" Width="350" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen"
-            Icon="/Resources/icon32_profile.ico">
+        mc:Ignorable="d" Height="350" Width="350" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen"
+        Title="Ustawienia profilu" Icon="/Resources/icon32_profile.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -19,23 +17,17 @@
         <sec:TitleBar DockPanel.Dock="Top"/>
         <!-- buttonsPanel -->
         <Border DockPanel.Dock="Bottom" Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}}" BorderBrush="Gray" BorderThickness="0,1,0,0">
-            <sec:IconButton Margin="5"
-                        Text="Zapisz i zamknij"
-                        HorizontalAlignment="Center"
-                        Icon="/Resources/icon32_save.ico"
-                        Click="btnSave_Click"/>
+            <sec:IconButton Margin="5" Text="Zapisz i zamknij"
+                            HorizontalAlignment="Center"
+                            Icon="/Resources/icon32_save.ico"
+                            Click="btnSave_Click"/>
         </Border>
         <!-- tabs -->
         <TabControl DockPanel.Dock="Top">
             <!-- tabMain -->
             <TabItem>
                 <TabItem.Header>
-                    <StackPanel Orientation="Horizontal" Margin="2">
-                        <Image Margin="2"
-                               Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.5}"
-                               Source="/Resources/icon32_profile.ico"/>
-                        <TextBlock Text="Ogólne" Margin="2" VerticalAlignment="Center"/>
-                    </StackPanel>
+                    <sec:Header Text="Ogólne" Icon="/Resources/icon32_profile.ico"/>
                 </TabItem.Header>
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <DockPanel>
@@ -82,12 +74,7 @@
             <!-- tabSecurity -->
             <TabItem>
                 <TabItem.Header>
-                    <StackPanel Orientation="Horizontal" Margin="2">
-                        <Image Margin="2"
-                               Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.5}"
-                               Source="/Resources/icon32_locked.ico"/>
-                        <TextBlock Text="Bezpieczeństwo" Margin="2" VerticalAlignment="Center"/>
-                    </StackPanel>
+                    <sec:Header Text="Bezpieczeństwo" Icon="/Resources/icon32_locked.ico"/>
                 </TabItem.Header>
                 <DockPanel>
                     <Grid DockPanel.Dock="Top" Margin="5,5,5,0">

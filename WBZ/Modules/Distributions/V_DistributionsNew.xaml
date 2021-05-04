@@ -3,17 +3,15 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-       xmlns:b="clr-namespace:WBZ.Modules.Distributions"
-       xmlns:c="clr-namespace:WBZ.Controls"
        xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
        xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
+       xmlns:b="clr-namespace:WBZ.Modules.Distributions"
        xmlns:p="clr-namespace:WBZ.Properties"
        xmlns:t="clr-namespace:WBZ.Modules._tabs"
-       mc:Ignorable="d"
-       Title="{Binding Title}"
-            Height="600" Width="900" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
-            Icon="/Resources/icon32_food.ico"
-            Loaded="Window_Loaded" Closed="Window_Closed">
+       mc:Ignorable="d" Height="600" Width="900" ResizeMode="CanResize"
+       Title="{Binding Title}" Icon="/Resources/icon32_food.ico"
+       Loaded="Window_Loaded" Closed="Window_Closed"
+       FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -33,22 +31,19 @@
                 BorderThickness="1,0,0,0">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Top">
-                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                    Text="{Tr Buttons.Save, DefaultText='Zapisz', LanguageId={x:Static seg:Properties.Language}}"
+                    <sec:IconButton Margin="5" Text="{Tr Buttons.Save, DefaultText='Zapisz', LanguageId={x:Static seg:Properties.Language}}"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_save.ico"
                                     Command="seg:Commands.Save"/>
                     <Separator/>
-                    <CheckBox Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                              Content="{Tr Distributions.ToBuffer, DefaultText='Do bufora', LanguageId={x:Static seg:Properties.Language}}"
+                    <CheckBox Margin="5" Content="{Tr Distributions.ToBuffer, DefaultText='Do bufora', LanguageId={x:Static seg:Properties.Language}}"
                               IsChecked="{Binding InstanceInfo.Status, Converter={seg:conv_BoolInverted}}"
                               IsEnabled="{Binding EditingMode}"/>
                     <Separator/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                     <Separator/>
-                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                    Text="{Tr Buttons.Print, DefaultText='Drukuj', LanguageId={x:Static seg:Properties.Language}}"
+                    <sec:IconButton Margin="5" Text="{Tr Buttons.Print, DefaultText='Drukuj', LanguageId={x:Static seg:Properties.Language}}"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_printer.ico"
                                     Click="btnPrint_Click">
@@ -59,14 +54,12 @@
                         </sec:IconButton.ContextMenu>
                     </sec:IconButton>
                     <Separator/>
-                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                    Text="{Tr Buttons.Refresh, DefaultText='Odśwież', LanguageId={x:Static seg:Properties.Language}}"
+                    <sec:IconButton Margin="5" Text="{Tr Buttons.Refresh, DefaultText='Odśwież', LanguageId={x:Static seg:Properties.Language}}"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_refresh.ico"
                                     Command="seg:Commands.Refresh"/>
                     <Separator/>
-                    <sec:IconButton Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.4}"
-                                    Text="{Tr Buttons.CloseWindow, DefaultText='Zamknij okno', LanguageId={x:Static seg:Properties.Language}}"
+                    <sec:IconButton Margin="5" Text="{Tr Buttons.CloseWindow, DefaultText='Zamknij okno', LanguageId={x:Static seg:Properties.Language}}"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_close.ico"
                                     Command="seg:Commands.Close"/>
@@ -200,38 +193,6 @@
                                 </DataGrid.GroupStyle>
                             </DataGrid>
                         </Grid>
-                        <!--
-                        <DataGrid x:Name="dgPositions" DockPanel.Dock="Top" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
-                                  AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstanceInfo.Positions.DefaultView}" IsReadOnly="{Binding EditMode, Converter={seg:conv_BoolInverted}}"
-                                  CanUserAddRows="False">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding id}" Header="ID" IsReadOnly="True" Visibility="Hidden"/>
-                                <DataGridTextColumn Binding="{Binding position}" Header="Lp"/>
-                                <DataGridTextColumn Binding="{Binding familyname}" Header="Nazwisko rodziny" IsReadOnly="True"/>
-                                <DataGridTextColumn Binding="{Binding members}" Header="Liczba osób" IsReadOnly="True"/>
-                                <DataGridTextColumn Binding="{Binding storename}" Header="Nazwa magazynu" IsReadOnly="True"/>
-                                <DataGridTextColumn Binding="{Binding articlename}" Header="Nazwa towaru" IsReadOnly="True" Width="*"/>
-                                <DataGridTextColumn Binding="{Binding measure}" Header="Jm" IsReadOnly="True"/>
-                                <DataGridTextColumn Binding="{Binding amount}" Header="Ilość"/>
-                                <DataGridTextColumn Binding="{Binding status}" Header="Status" IsReadOnly="True"/>
-                            </DataGrid.Columns>
-                            <DataGrid.RowStyle>
-                                <Style TargetType="DataGridRow">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding RowState}" Value="DataRowState.Added">
-                                            <Setter Property="Background" Value="LightGreen"></Setter>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding RowState}" Value="DataRowState.Modified">
-                                            <Setter Property="Background" Value="LightYellow"></Setter>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding RowState}" Value="DataRowState.Deleted">
-                                            <Setter Property="Background" Value="LightPink"></Setter>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </DataGrid.RowStyle>
-                        </DataGrid>
-                        -->
                     </DockPanel>
                 </ScrollViewer>
             </TabItem>

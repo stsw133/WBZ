@@ -5,9 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
         xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
-        mc:Ignorable="d"
-        Title="{Tr LoginRegister, DefaultText='Rejestracja', LanguageId={x:Static seg:Properties.Language}}"
-            SizeToContent="WidthAndHeight" ResizeMode="CanMinimize"  WindowStartupLocation="CenterOwner">
+        mc:Ignorable="d" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize"  WindowStartupLocation="CenterOwner"
+        Title="{Tr LoginRegister, DefaultText='Rejestracja', LanguageId={x:Static seg:Properties.Language}}">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -28,37 +27,19 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Grid.Column="0"
-                   Content="{Tr LoginRegister.Email, DefaultText='E-mail:', LanguageId={x:Static seg:Properties.Language}}"
-                   Margin="5"
-                   HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <TextBox x:Name="tbEmail" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
-                     Margin="5"
-                     VerticalContentAlignment="Center"/>
-            <Label Grid.Row="1" Grid.Column="0"
-                   Content="{Tr LoginRegister.Username, DefaultText='Użytkownik:', LanguageId={x:Static seg:Properties.Language}}"
-                   Margin="5"
-                   HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <TextBox x:Name="tbUsername" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
-                     Margin="5"
-                     VerticalContentAlignment="Center"/>
-            <Label Grid.Row="2" Grid.Column="0"
-                   Content="{Tr LoginRegister.Password, DefaultText='Hasło:', LanguageId={x:Static seg:Properties.Language}}"
-                   Margin="5"
-                   HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <PasswordBox x:Name="pbPassword" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
-                         Margin="5"
-                         VerticalContentAlignment="Center"/>
-            <Label Grid.Row="3" Grid.Column="0"
-                   Content="{Tr LoginRegister.Repass, DefaultText='Powt. hasło:', LanguageId={x:Static seg:Properties.Language}}"
-                   Margin="5"
-                   HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <PasswordBox x:Name="pbRepass" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
-                         Margin="5"
-                         VerticalContentAlignment="Center"/>
-            <sec:IconButton Grid.Row="4" Grid.Column="1"
-                            Margin="5"
-                            Text="{Tr Buttons.Accept, DefaultText='Akceptuj', LanguageId={x:Static seg:Properties.Language}}"
+            <Label Grid.Row="0" Grid.Column="0" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                   Content="{Tr LoginRegister.Email, DefaultText='E-mail:', LanguageId={x:Static seg:Properties.Language}}"/>
+            <TextBox x:Name="tbEmail" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center"/>
+            <Label Grid.Row="1" Grid.Column="0" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                   Content="{Tr LoginRegister.Username, DefaultText='Użytkownik:', LanguageId={x:Static seg:Properties.Language}}"/>
+            <TextBox x:Name="tbUsername" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center"/>
+            <Label Grid.Row="2" Grid.Column="0" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                   Content="{Tr LoginRegister.Password, DefaultText='Hasło:', LanguageId={x:Static seg:Properties.Language}}"/>
+            <PasswordBox x:Name="pbPassword" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center"/>
+            <Label Grid.Row="3" Grid.Column="0" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                   Content="{Tr LoginRegister.Repass, DefaultText='Powt. hasło:', LanguageId={x:Static seg:Properties.Language}}"/>
+            <PasswordBox x:Name="pbRepass" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center"/>
+            <sec:IconButton Grid.Row="4" Grid.Column="1" Margin="5" Text="{Tr Buttons.Accept, DefaultText='Akceptuj', LanguageId={x:Static seg:Properties.Language}}"
                             IsTextVisible="True"
                             Icon="/Resources/icon32_accept.ico"
                             Click="btnAccept_Click"/>

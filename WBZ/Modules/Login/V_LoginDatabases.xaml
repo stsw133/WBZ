@@ -5,10 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
         xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
-        mc:Ignorable="d"
-        Title="{Tr LoginDatabases, DefaultText='Lista baz danych', LanguageId={x:Static seg:Properties.Language}}"
-            SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner"
-            Icon="/Resources/icon32_database.ico">
+        mc:Ignorable="d" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner"
+        Title="{Tr LoginDatabases, DefaultText='Lista baz danych', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_database.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -17,11 +15,10 @@
         <sec:TitleBar DockPanel.Dock="Top" SubIcon="/Resources/icon32_settings.ico"/>
         <!-- buttonsPanel -->
         <Border DockPanel.Dock="Bottom" Background="#EEE" BorderBrush="Gray" BorderThickness="0,1,0,0">
-            <sec:IconButton Margin="5"
-                        Text="Zapisz"
-                        HorizontalAlignment="Center"
-                        Icon="\Resources\icon32_accept.ico"
-                        Click="btnSave_Click"/>
+            <sec:IconButton Margin="5" Text="Zapisz"
+                            HorizontalAlignment="Center"
+                            Icon="\Resources\icon32_accept.ico"
+                            Click="btnSave_Click"/>
         </Border>
         <!-- listBox -->
         <DockPanel>
@@ -81,10 +78,9 @@
             <PasswordBox x:Name="pbPassword" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center" PasswordChanged="pbPassword_PasswordChanged"/>
             <Label Grid.Row="6" Grid.Column="0" Content="Status:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
             <Label x:Name="lblStatus" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center"/>
-            <sec:IconButton Grid.Row="7" Grid.Column="1" Margin="5"
-                        Text="Testuj"
-                        Icon="/Resources/icon32_test.ico"
-                        Click="btnTest_Click"/>
+            <sec:IconButton Grid.Row="7" Grid.Column="1" Margin="5" Text="Testuj"
+                            Icon="/Resources/icon32_test.ico"
+                            Click="btnTest_Click"/>
         </Grid>
     </DockPanel>
 </Window>

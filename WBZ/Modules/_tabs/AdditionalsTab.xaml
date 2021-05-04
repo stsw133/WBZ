@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
              xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
              xmlns:g="clr-namespace:WBZ.Globals"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="750">
@@ -22,8 +23,8 @@
                         </Image.Source>
                     <Image.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Wybierz" Icon="/Resources/icon32_select.ico" Click="btnSelect_Click"/>
-                            <MenuItem Header="Usuń" Icon="/Resources/icon32_remove.ico" Click="btnDelete_Click"/>
+                            <sec:MenuItem Header="Wybierz" IconUri="/Resources/icon32_select.ico" Click="btnSelect_Click"/>
+                            <sec:MenuItem Header="Usuń" IconUri="/Resources/icon32_remove.ico" Click="btnDelete_Click"/>
                         </ContextMenu>
                     </Image.ContextMenu>
                 </Image>

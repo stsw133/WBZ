@@ -5,10 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
-        mc:Ignorable="d"
-        Title="Konsola SQL"
-            Height="450" Width="675" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
-            Icon="/Resources/icon32_code.ico">
+        mc:Ignorable="d" Height="450" Width="675" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
+        Title="Konsola SQL" Icon="/Resources/icon32_code.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -16,13 +14,10 @@
         <!-- titleBar -->
         <sec:TitleBar DockPanel.Dock="Top"/>
         <!-- main -->
-        <sec:IconButton DockPanel.Dock="Bottom"
-                        Margin="5,0,5,5"
+        <sec:IconButton DockPanel.Dock="Bottom" Margin="5,0,5,5" HorizontalAlignment="Center"
                         IsTextVisible="False"
-                        HorizontalAlignment="Center"
                         Icon="/Resources/icon32_accept.ico"
-                        IsDefault="True"
-                        Click="btnStart_Click"/>
+                        IsDefault="True" Click="btnStart_Click"/>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition/>

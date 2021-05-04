@@ -5,17 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
         xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
-        mc:Ignorable="d"
-        Title="Potwierdzenie"
-            SizeToContent="Height" Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=30}" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner">
-<WindowChrome.WindowChrome>
+        mc:Ignorable="d" SizeToContent="Height" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner"
+        Title="Potwierdzenie">
+    <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
     <DockPanel>
         <!-- titleBar -->
         <sec:TitleBar DockPanel.Dock="Top"/>
         <!-- main -->
-        <Grid>
+        <Grid Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=30}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>

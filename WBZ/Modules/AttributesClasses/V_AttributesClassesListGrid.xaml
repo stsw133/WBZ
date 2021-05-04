@@ -24,9 +24,11 @@
     </DataGrid.Resources>
     <DataGrid.Columns>
         <!-- ID -->
-        <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_ID, Converter={seg:conv_BoolToVisibility}}"/>
+        <DataGridTextColumn Binding="{Binding ID}" Header="ID"
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_ID, Converter={seg:conv_BoolToVisibility}}"/>
         <!-- Icon -->
-        <DataGridTemplateColumn Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Icon, Converter={seg:conv_BoolToVisibility}}">
+        <DataGridTemplateColumn Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"
+                                Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Icon, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
                     <Image Source="{Binding cIcon.Value}"/>
@@ -34,13 +36,14 @@
             </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>
         <!-- Module -->
-        <DataGridTextColumn Binding="{Binding TranslatedModule}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Module, Converter={seg:conv_BoolToVisibility}}" Width="1*">
+        <DataGridTextColumn Binding="{Binding TranslatedModule}" Width="*"
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Module, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
                 <StackPanel>
                     <TextBlock Text="Nazwa modułu"/>
                     <ComboBox VerticalContentAlignment="Center" Padding="1"
-                              ItemsSource="{x:Static g:Config.ListModules}"
-                              SelectedValue="{Binding Data.Filters.Module, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Item1" DisplayMemberPath="Item2"
+                              ItemsSource="{x:Static g:Config.ListModules}" SelectedValuePath="Item1" DisplayMemberPath="Item2"
+                              SelectedValue="{Binding Data.Filters.Module, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
                               Visibility="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}, Converter={seg:conv_BoolToVisibility}}">
                         <ComboBox.InputBindings>
                             <KeyBinding Command="seg:Commands.Refresh" Key="Return"/>
@@ -50,15 +53,17 @@
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Name -->
-        <DataGridTextColumn Binding="{Binding Name}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Name, Converter={seg:conv_BoolToVisibility}}" Width="2*">
+        <DataGridTextColumn Binding="{Binding Name}" Width="*"
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Name, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Header="Nazwa" MinWidth="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=12}"
+                <sec:ColumnFilter_Text Header="Nazwa"
                                        Value="{Binding Data.Filters.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
                                        IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Type -->
-        <DataGridTextColumn Binding="{Binding Type}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Type, Converter={seg:conv_BoolToVisibility}}" Width="1*">
+        <DataGridTextColumn Binding="{Binding Type}" Width="*"
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Type, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
                 <StackPanel>
                     <TextBlock Text="Typ"/>
@@ -77,7 +82,8 @@
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Required -->
-        <DataGridCheckBoxColumn Binding="{Binding Required}" Header="Wymagany" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Required, Converter={seg:conv_BoolToVisibility}}"/>
+        <DataGridCheckBoxColumn Binding="{Binding Required}" Header="Wymagany" Width="*"
+                                Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Required, Converter={seg:conv_BoolToVisibility}}"/>
     </DataGrid.Columns>
     <DataGrid.ContextMenu>
         <ContextMenu>
@@ -150,37 +156,13 @@
             </MenuItem>
             <!-- Actions -->
             <Separator/>
-            <MenuItem Header="Podgląd" Command="seg:Commands.Preview">
-                <MenuItem.Icon>
-                    <Image Source="/Resources/icon32_search.ico"/>
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Header="Dodaj" Command="seg:Commands.New">
-                <MenuItem.Icon>
-                    <Image Source="/Resources/icon32_add.ico"/>
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Header="Duplikuj" Command="seg:Commands.Duplicate">
-                <MenuItem.Icon>
-                    <Image Source="/Resources/icon32_duplicate.ico"/>
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Header="Edytuj" Command="seg:Commands.Edit">
-                <MenuItem.Icon>
-                    <Image Source="/Resources/icon32_edit.ico"/>
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Header="Usuń" Command="seg:Commands.Delete">
-                <MenuItem.Icon>
-                    <Image Source="/Resources/icon32_delete.ico"/>
-                </MenuItem.Icon>
-            </MenuItem>
+            <sec:MenuItem Header="Podgląd" IconUri="/Resources/icon32_search.ico" Command="seg:Commands.Preview"/>
+            <sec:MenuItem Header="Dodaj" IconUri="/Resources/icon32_add.ico" Command="seg:Commands.New"/>
+            <sec:MenuItem Header="Duplikuj" IconUri="/Resources/icon32_duplicate.ico" Command="seg:Commands.Duplicate"/>
+            <sec:MenuItem Header="Edytuj" IconUri="/Resources/icon32_edit.ico" Command="seg:Commands.Edit"/>
+            <sec:MenuItem Header="Usuń" IconUri="/Resources/icon32_delete.ico" Command="seg:Commands.Delete"/>
             <Separator/>
-            <MenuItem Header="Odśwież" Command="seg:Commands.Refresh">
-                <MenuItem.Icon>
-                    <Image Source="/Resources/icon32_refresh.ico"/>
-                </MenuItem.Icon>
-            </MenuItem>
+            <sec:MenuItem Header="Odśwież" IconUri="/Resources/icon32_refresh.ico" Command="seg:Commands.Refresh"/>
         </ContextMenu>
     </DataGrid.ContextMenu>
     <DataGrid.RowStyle>

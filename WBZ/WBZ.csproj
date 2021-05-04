@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\icon32_select.ico" />
     <None Remove="Resources\icon64.ico" />
     <None Remove="Resources\logo.png" />
     <None Remove="Resources\pl_manual.pdf" />

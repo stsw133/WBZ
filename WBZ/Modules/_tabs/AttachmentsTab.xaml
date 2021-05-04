@@ -3,29 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
              xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="750"
              Loaded="UserControl_Loaded">
     <DockPanel Margin="5">
-        <ListBox x:Name="lbAttachments" ItemsSource="{Binding InstanceAttachments}" DisplayMemberPath="Name"
-                 Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=15}" AllowDrop="True" Drop="lbAttachments_Drop" SelectionChanged="lbAttachments_SelectionChanged">
+        <ListBox x:Name="lbAttachments" ItemsSource="{Binding InstanceAttachments}" DisplayMemberPath="Name" AllowDrop="True"
+                 Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=15}"
+                 Drop="lbAttachments_Drop" SelectionChanged="lbAttachments_SelectionChanged">
             <ListBox.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Dodaj" IsEnabled="{Binding EditingMode}" Click="btnAttachmentAdd_Click">
-                        <MenuItem.Icon>
-                            <Image Source="/Resources/icon32_add.ico"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="Edytuj" IsEnabled="{Binding EditingMode}" Click="btnAttachmentEdit_Click">
-                        <MenuItem.Icon>
-                            <Image Source="/Resources/icon32_edit.ico"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="Usuń" IsEnabled="{Binding EditingMode}" Click="btnAttachmentRemove_Click">
-                        <MenuItem.Icon>
-                            <Image Source="/Resources/icon32_delete.ico"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
+                    <sec:MenuItem Header="Dodaj" IconUri="/Resources/icon32_add.ico" IsEnabled="{Binding EditingMode}" Click="btnAttachmentAdd_Click"/>
+                    <sec:MenuItem Header="Edytuj" IconUri="/Resources/icon32_edit.ico" IsEnabled="{Binding EditingMode}" Click="btnAttachmentEdit_Click"/>
+                    <sec:MenuItem Header="Usuń" IconUri="/Resources/icon32_delete.ico" IsEnabled="{Binding EditingMode}" Click="btnAttachmentRemove_Click"/>
                 </ContextMenu>
             </ListBox.ContextMenu>
         </ListBox>
