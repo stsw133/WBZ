@@ -1,4 +1,5 @@
 ﻿using StswExpress.Globals;
+using StswExpress.Translate;
 using System.Windows;
 using WBZ.Modules._base;
 
@@ -51,9 +52,10 @@ namespace WBZ.Modules
 		/// </summary>
         private void btnAccept_Click(object sender, RoutedEventArgs e)
         {
+			TM.Instance.CurrentLanguage = Properties.Settings.Default.Language;
+
 			StswExpress.Globals.Properties.iFont = Properties.Settings.Default.iFont;
 			StswExpress.Globals.Properties.iSize = Properties.Settings.Default.iSize;
-			StswExpress.Globals.Properties.Language = Properties.Settings.Default.Language;
 			StswExpress.Globals.Properties.ThemeColor = Properties.Settings.Default.ThemeColor;
 
 			Mail.Host = Properties.Settings.Default.config_Email_Host;

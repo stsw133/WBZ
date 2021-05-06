@@ -43,7 +43,7 @@ namespace WBZ.Globals
             public const string VEHICLES = "vehicles";
         }
         public static string GetModuleAlias(string module) => string.Join(string.Empty, module.Split('_').Where(x => !string.IsNullOrEmpty(x)).Select(y => y[0]));
-        public static string GetModuleTranslation(string module) => TranslateMe.TM.Tr(string.Join("", module.Split('_').Select(x => x.Substring(0, 1).ToUpper() + x[1..]).ToArray()), languageId: StswExpress.Globals.Properties.Language);
+        public static string GetModuleTranslation(string module) => StswExpress.Translate.TM.Tr(string.Join("", module.Split('_').Select(x => x.Substring(0, 1).ToUpper() + x[1..]).ToArray()));
 
         /// <summary>
         /// List

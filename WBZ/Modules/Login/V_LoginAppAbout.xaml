@@ -6,7 +6,7 @@
         xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
         xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
         mc:Ignorable="d" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize"  WindowStartupLocation="CenterOwner"
-        Title="{Tr LoginAppAbout, DefaultText='O programie', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon64.ico">
+        Title="{Tr AboutApp}" Icon="/Resources/icon64.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>

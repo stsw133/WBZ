@@ -31,19 +31,19 @@
                 BorderThickness="1,0,0,0">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Top">
-                    <sec:IconButton Margin="5" Text="{Tr Buttons.Save, DefaultText='Zapisz', LanguageId={x:Static seg:Properties.Language}}"
+                    <sec:IconButton Text="{Tr Save}" Margin="5"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_save.ico"
                                     Command="seg:Commands.Save"/>
                     <Separator/>
-                    <CheckBox Margin="5" Content="{Tr Distributions.ToBuffer, DefaultText='Do bufora', LanguageId={x:Static seg:Properties.Language}}"
+                    <CheckBox Content="{Tr ToBuffer}" Margin="5"
                               IsChecked="{Binding InstanceInfo.Status, Converter={seg:conv_BoolInverted}}"
                               IsEnabled="{Binding EditingMode}"/>
                     <Separator/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                     <Separator/>
-                    <sec:IconButton Margin="5" Text="{Tr Buttons.Print, DefaultText='Drukuj', LanguageId={x:Static seg:Properties.Language}}"
+                    <sec:IconButton Text="{Tr Print}" Margin="5"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_printer.ico"
                                     Click="btnPrint_Click">
@@ -54,12 +54,12 @@
                         </sec:IconButton.ContextMenu>
                     </sec:IconButton>
                     <Separator/>
-                    <sec:IconButton Margin="5" Text="{Tr Buttons.Refresh, DefaultText='Odśwież', LanguageId={x:Static seg:Properties.Language}}"
+                    <sec:IconButton Text="{Tr Refresh}" Margin="5"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_refresh.ico"
                                     Command="seg:Commands.Refresh"/>
                     <Separator/>
-                    <sec:IconButton Margin="5" Text="{Tr Buttons.CloseWindow, DefaultText='Zamknij okno', LanguageId={x:Static seg:Properties.Language}}"
+                    <sec:IconButton Text="{Tr CloseWindow}" Margin="5"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_close.ico"
                                     Command="seg:Commands.Close"/>

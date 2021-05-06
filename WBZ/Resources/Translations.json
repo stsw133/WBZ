@@ -1,0 +1,338 @@
+{
+	"LanguageName": {
+		"en": "English",
+		"pl": "Polski"
+	},
+	"AboutApp": {
+		"en": "About app",
+		"pl": "O programie"
+	},
+	"Accept": {
+		"en": "Accept",
+		"pl": "Akceptuj"
+	},
+	"Address": {
+		"en": "Address",
+		"pl": "Adres"
+	},
+	"Admin": {
+		"en": "Admin",
+		"pl": "Admin"
+	},
+	"Articles": {
+		"en": "Articles",
+		"pl": "Towary"
+	},
+	"Attachments": {
+		"en": "Attachments",
+		"pl": "Załączniki"
+	},
+	"Attributes": {
+		"en": "Attributes",
+		"pl": "Atrybuty"
+	},
+	"AttributesClasses": {
+		"en": "Classes of attributes",
+		"pl": "Klasy atrybutów"
+	},
+	"Cancel": {
+		"en": "Cancel",
+		"pl": "Anuluj"
+	},
+	"CloseApp": {
+		"en": "Close app",
+		"pl": "Zamknij aplikację"
+	},
+	"CloseWindow": {
+		"en": "Close window",
+		"pl": "Zamknij okno"
+	},
+	"Color": {
+		"en": "Color",
+		"pl": "Kolor"
+	},
+	"Communication": {
+		"en": "Communication",
+		"pl": "Komunikacja"
+	},
+	"Community": {
+		"en": "Community",
+		"pl": "Społeczność"
+	},
+	"Console": {
+		"en": "Console",
+		"pl": "Konsola"
+	},
+	"Contacts": {
+		"en": "Contacts",
+		"pl": "Kontakty"
+	},
+	"Contractors": {
+		"en": "Contractors",
+		"pl": "Kontrahenci"
+	},
+	"Delete": {
+		"en": "Delete",
+		"pl": "Usuń"
+	},
+	"Displayed": {
+		"en": "Displayed",
+		"pl": "Wyświetlono"
+	},
+	"Distributions": {
+		"en": "Distributions",
+		"pl": "Dystrybucje"
+	},
+	"Documents": {
+		"en": "Documents",
+		"pl": "Dokumenty"
+	},
+	"Download": {
+		"en": "Download",
+		"pl": "Pobierz"
+	},
+	"Duplicate": {
+		"en": "Duplicate",
+		"pl": "Duplikuj"
+	},
+	"Edit": {
+		"en": "Edit",
+		"pl": "Edytuj"
+	},
+	"Email": {
+		"en": "E-mail",
+		"pl": "E-mail"
+	},
+	"Employees": {
+		"en": "Employees",
+		"pl": "Pracownicy"
+	},
+	"Families": {
+		"en": "Families",
+		"pl": "Rodziny"
+	},
+	"Font": {
+		"en": "Font",
+		"pl": "Czcionka"
+	},
+	"FromBrowser": {
+		"en": "From browser",
+		"pl": "Z przeglądarki"
+	},
+	"FromDrive": {
+		"en": "From drive",
+		"pl": "Z dysku"
+	},
+	"FromFile": {
+		"en": "From file",
+		"pl": "Z pliku"
+	},
+	"FromScanner": {
+		"en": "From scanner",
+		"pl": "Ze skanera"
+	},
+	"Gallery": {
+		"en": "Gallery",
+		"pl": "Galeria"
+	},
+	"General": {
+		"en": "General",
+		"pl": "Ogólne"
+	},
+	"GenerateReport": {
+		"en": "Generate report",
+		"pl": "Generuj raport"
+	},
+	"Groups": {
+		"en": "Groups",
+		"pl": "Grupy"
+	},
+	"Host": {
+		"en": "Host",
+		"pl": "Host"
+	},
+	"Icons": {
+		"en": "Icons",
+		"pl": "Ikony"
+	},
+	"Interface": {
+		"en": "Interface",
+		"pl": "Interfejs"
+	},
+	"InterfaceSize": {
+		"en": "Interface size:",
+		"pl": "Rozmiar interfejsu:"
+	},
+	"Language": {
+		"en": "Language",
+		"pl": "Język"
+	},
+	"List": {
+		"en": "List",
+		"pl": "Lista"
+	},
+	"ListOfDatabases": {
+		"en": "List of databases",
+		"pl": "Lista baz danych"
+	},
+	"ListOfVersions": {
+		"en": "List of versions",
+		"pl": "Lista wersji"
+	},
+	"Login": {
+		"en": "Logging",
+		"pl": "Logowanie"
+	},
+	"Logs": {
+		"en": "Logs",
+		"pl": "Logi"
+	},
+	"Logout": {
+		"en": "Log out",
+		"pl": "Wyloguj"
+	},
+	"MainWindow": {
+		"en": " - main window",
+		"pl": " - okno główne"
+	},
+	"MessageContent": {
+		"en": "Message content",
+		"pl": "Treść wiadomości"
+	},
+	"Messages": {
+		"en": "Messages",
+		"pl": "Wiadomości"
+	},
+	"Name": {
+		"en": "Name",
+		"pl": "Nazwa"
+	},
+	"Network": {
+		"en": "Network",
+		"pl": "Sieć"
+	},
+	"New": {
+		"en": "New",
+		"pl": "Nowy"
+	},
+	"NewAttachment": {
+		"en": "New attachment",
+		"pl": "Nowy załącznik"
+	},
+	"NewPassword": {
+		"en": "New password",
+		"pl": "Nowe hasło"
+	},
+	"Others": {
+		"en": "Others",
+		"pl": "Pozostałe"
+	},
+	"Password": {
+		"en": "Password",
+		"pl": "Hasło"
+	},
+	"PasswordChange": {
+		"en": "Password change",
+		"pl": "Zmiana hasła"
+	},
+	"Port": {
+		"en": "Port",
+		"pl": "Port"
+	},
+	"Preview": {
+		"en": "Preview",
+		"pl": "Podgląd"
+	},
+	"Print": {
+		"en": "Print",
+		"pl": "Drukuj"
+	},
+	"Profile": {
+		"en": "Profile",
+		"pl": "Profil"
+	},
+	"Refresh": {
+		"en": "Refresh",
+		"pl": "Odśwież"
+	},
+	"Region": {
+		"en": "Region",
+		"pl": "Region"
+	},
+	"Register": {
+		"en": "Register",
+		"pl": "Rejestracja"
+	},
+	"Repass": {
+		"en": "Repeat pass.",
+		"pl": "Powt. hasło"
+	},
+	"Save": {
+		"en": "Save",
+		"pl": "Zapisz"
+	},
+	"Select": {
+		"en": "Select",
+		"pl": "Wybierz"
+	},
+	"Settings": {
+		"en": "Settings",
+		"pl": "Ustawienia"
+	},
+	"ShowButtonsWithNames": {
+		"en": "Show buttons with names",
+		"pl": "Pokaż nazwy w przyciskach"
+	},
+	"Stats": {
+		"en": "Stats",
+		"pl": "Statystyki"
+	},
+	"Stores": {
+		"en": "Stores",
+		"pl": "Magazyny"
+	},
+	"StyleAndFont": {
+		"en": "Style & Font",
+		"pl": "Styl i czcionka"
+	},
+	"System": {
+		"en": "System",
+		"pl": "System"
+	},
+	"Test": {
+		"en": "Test",
+		"pl": "Test"
+	},
+	"Timetable": {
+		"en": "Timetable",
+		"pl": "Terminarz"
+	},
+	"TitleBar": {
+		"en": "Title bar",
+		"pl": "Pasek tytułowy"
+	},
+	"ToBuffer": {
+		"en": "To buffer",
+		"pl": "Do bufora"
+	},
+	"UserManual": {
+		"en": "User's manual",
+		"pl": "Poradnik użytkownika"
+	},
+	"Username": {
+		"en": "Username",
+		"pl": "Użytkownik"
+	},
+	"Users": {
+		"en": "Users",
+		"pl": "Użytkownicy"
+	},
+	"Vehicles": {
+		"en": "Vehicles",
+		"pl": "Pojazdy"
+	},
+	"Versions": {
+		"en": "Versions",
+		"pl": "Wersje"
+	}
+}

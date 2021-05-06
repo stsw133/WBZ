@@ -31,35 +31,35 @@
                 BorderThickness="1,0,0,0">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Top">
-                    <sec:IconButton Margin="5" Text="{Tr Buttons.Save, DefaultText='Zapisz', LanguageId={x:Static seg:Properties.Language}}"
+                    <sec:IconButton Text="{Tr Save}" Margin="5"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_save.ico"
                                     Command="seg:Commands.Save"/>
                     <Separator/>
-                    <CheckBox Margin="5" Content="{Tr Documents.ToBuffer, DefaultText='Do bufora', LanguageId={x:Static seg:Properties.Language}}"
+                    <CheckBox Content="{Tr ToBuffer}" Margin="5"
                               IsChecked="{Binding InstanceInfo.Status, Converter={seg:conv_BoolInverted}}"
                               IsEnabled="{Binding EditingMode}"/>
                     <Separator/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                     <Separator Visibility="Collapsed"/>
-                    <sec:IconButton Margin="5" Text="{Tr Buttons.FromFile, DefaultText='Z pliku', LanguageId={x:Static seg:Properties.Language}}"
+                    <sec:IconButton Text="{Tr FromFile}" Margin="5"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     IsEnabled="{Binding EditingMode}" Visibility="Collapsed"
                                     Icon="/Resources/icon32_camfile.ico"
                                     Click="btnGetFromFile_Click"/>
-                    <sec:IconButton Margin="5" Text="{Tr Buttons.FromScanner, DefaultText='Ze skanera', LanguageId={x:Static seg:Properties.Language}}"
+                    <sec:IconButton Text="{Tr FromScanner}" Margin="5"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     IsEnabled="{Binding EditingMode}" Visibility="Collapsed"
                                     Icon="/Resources/icon32_scanner.ico"
                                     Click="btnGetByScaner_Click"/>
                     <Separator/>
-                    <sec:IconButton Margin="5" Text="{Tr Buttons.Refresh, DefaultText='Odśwież', LanguageId={x:Static seg:Properties.Language}}"
+                    <sec:IconButton Text="{Tr Refresh}" Margin="5"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_refresh.ico"
                                     Command="seg:Commands.Refresh"/>
                     <Separator/>
-                    <sec:IconButton Margin="5" Text="{Tr Buttons.CloseWindow, DefaultText='Zamknij okno', LanguageId={x:Static seg:Properties.Language}}"
+                    <sec:IconButton Text="{Tr CloseWindow}" Margin="5"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_close.ico"
                                     Command="seg:Commands.Close"/>

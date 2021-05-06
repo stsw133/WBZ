@@ -38,30 +38,30 @@
                 BorderThickness="1,0,0,0">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Top" Visibility="{Binding SelectingMode, Converter={seg:conv_BoolToVisibility}}">
-                    <sec:IconButton Margin="5" Text="{Tr Buttons.Select, DefaultText='Wybierz', LanguageId={x:Static seg:Properties.Language}}"
+                    <sec:IconButton Text="{Tr Select}" Margin="5"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_select.ico"
                                     Command="seg:Commands.Select"/>
                     <Separator/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Top">
-                    <sec:IconButton Margin="5" Text="{Tr Buttons.Preview, DefaultText='Podgląd', LanguageId={x:Static seg:Properties.Language}}"
+                    <sec:IconButton Text="{Tr Preview}" Margin="5"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_search.ico"
                                     Command="seg:Commands.Preview"/>
-                    <sec:IconButton Margin="5" Text="{Tr Buttons.New, DefaultText='Dodaj', LanguageId={x:Static seg:Properties.Language}}"
+                    <sec:IconButton Text="{Tr New}" Margin="5"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_add.ico"
                                     Command="seg:Commands.New"/>
-                    <sec:IconButton Margin="5" Text="{Tr Buttons.Duplicate, DefaultText='Duplikuj', LanguageId={x:Static seg:Properties.Language}}"
+                    <sec:IconButton Text="{Tr Duplicate}" Margin="5"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_duplicate.ico"
                                     Command="seg:Commands.Duplicate"/>
-                    <sec:IconButton Margin="5" Text="{Tr Buttons.Edit, DefaultText='Edytuj', LanguageId={x:Static seg:Properties.Language}}"
+                    <sec:IconButton Text="{Tr Edit}" Margin="5"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_edit.ico"
                                     Command="seg:Commands.Edit"/>
-                    <sec:IconButton Margin="5" Text="{Tr Buttons.Delete, DefaultText='Usuń', LanguageId={x:Static seg:Properties.Language}}"
+                    <sec:IconButton Text="{Tr Delete}" Margin="5"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_delete.ico"
                                     Command="seg:Commands.Delete"/>
@@ -69,12 +69,12 @@
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                     <Separator/>
-                    <sec:IconButton Margin="5" Text="{Tr Buttons.Refresh, DefaultText='Odśwież', LanguageId={x:Static seg:Properties.Language}}"
+                    <sec:IconButton Text="{Tr Refresh}" Margin="5"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_refresh.ico"
                                     Command="seg:Commands.Refresh"/>
                     <Separator/>
-                    <sec:IconButton Margin="5" Text="{Tr Buttons.CloseWindow, DefaultText='Zamknij okno', LanguageId={x:Static seg:Properties.Language}}"
+                    <sec:IconButton Text="{Tr CloseWindow}" Margin="5"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_close.ico"
                                     Command="seg:Commands.Close"/>

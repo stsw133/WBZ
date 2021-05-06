@@ -7,11 +7,9 @@
         xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
         xmlns:g="clr-namespace:WBZ.Globals"
         xmlns:p="clr-namespace:WBZ.Properties"
-        mc:Ignorable="d"
-        Title="{Binding Title}"
-            Height="550" Width="825" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
-            Icon="/Resources/icon64.ico"
-            Loaded="Window_Loaded" Closing="Window_Closing">
+        mc:Ignorable="d" Height="550" Width="825" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
+        Title="{Binding Title}" Icon="/Resources/icon64.ico"
+        Loaded="Window_Loaded" Closing="Window_Closing">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -28,65 +26,34 @@
             <DockPanel>
                 <!-- menu -->
                 <Menu BorderBrush="Gray" BorderThickness="0,0,1,0">
-                    <MenuItem Header="{Tr Main.System, DefaultText='System', LanguageId={x:Static seg:Properties.Language}}"
-                              Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.25}">
-                        <MenuItem Header="{Tr Main.UserManual, DefaultText='Poradnik użytkownika', LanguageId={x:Static seg:Properties.Language}}" Command="seg:Commands.Help">
-                            <MenuItem.Icon>
-                                <Image Source="/Resources/icon32_books.ico"/>
-                            </MenuItem.Icon>
-                        </MenuItem>
+                    <MenuItem Header="{Tr System}" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.5}">
+                        <sec:MenuItem Header="{Tr UserManual}" IconUri="/Resources/icon32_books.ico" Command="seg:Commands.Help"/>
                         <Separator/>
-                        <MenuItem Header="{Tr Main.Settings, DefaultText='Ustawienia', LanguageId={x:Static seg:Properties.Language}}" Click="menuSettings_Click">
-                            <MenuItem.Icon>
-                                <Image Source="/Resources/icon32_settings.ico"/>
-                            </MenuItem.Icon>
-                        </MenuItem>
+                        <sec:MenuItem Header="{Tr Settings}" IconUri="/Resources/icon32_settings.ico" Click="menuSettings_Click"/>
                         <Separator/>
-                        <MenuItem Header="{Tr Main.Refresh, DefaultText='Odśwież', LanguageId={x:Static seg:Properties.Language}}" Command="seg:Commands.Refresh">
-                            <MenuItem.Icon>
-                                <Image Source="/Resources/icon32_refresh.ico"/>
-                            </MenuItem.Icon>
-                        </MenuItem>
-                        <MenuItem Header="{Tr Main.Logout, DefaultText='Wyloguj', LanguageId={x:Static seg:Properties.Language}}" Click="menuLogout_Click">
-                            <MenuItem.Icon>
-                                <Image Source="/Resources/icon32_return.ico"/>
-                            </MenuItem.Icon>
-                        </MenuItem>
-                        <MenuItem Header="{Tr Main.CloseApp, DefaultText='Zamknij aplikację', LanguageId={x:Static seg:Properties.Language}}" Command="seg:Commands.Close">
-                            <MenuItem.Icon>
-                                <Image Source="/Resources/icon32_close.ico"/>
-                            </MenuItem.Icon>
-                        </MenuItem>
+                        <sec:MenuItem Header="{Tr Refresh}" IconUri="/Resources/icon32_refresh.ico" Command="seg:Commands.Refresh"/>
+                        <sec:MenuItem Header="{Tr Logout}" IconUri="/Resources/icon32_return.ico" Click="menuLogout_Click"/>
+                        <sec:MenuItem Header="{Tr CloseApp}" IconUri="/Resources/icon32_close.ico" Command="seg:Commands.Close"/>
                     </MenuItem>
                 </Menu>
                 <!-- personal -->
                 <Label DockPanel.Dock="Right" Content="{Binding Source={x:Static g:Global.User}, Path=Fullname}" Margin="5,0" Padding="1" VerticalContentAlignment="Center" FontWeight="Medium"/>
-                <Button DockPanel.Dock="Right" HorizontalAlignment="Right" BorderThickness="1,0" ToolTip="{Tr Main.Other, DefaultText='Pozostałe', LanguageId={x:Static seg:Properties.Language}}" Click="btnOther_Click">
+                <Button DockPanel.Dock="Right" HorizontalAlignment="Right" BorderThickness="1,0" ToolTip="{Tr Others}" Click="btnOther_Click">
                     <Image Margin="2"
                            Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.75}"
                            Source="/Resources/icon32_tools.ico"/>
                     <Button.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="{Tr Main.Profile, DefaultText='Profil', LanguageId={x:Static seg:Properties.Language}}" Click="btnProfile_Click">
-                                <MenuItem.Icon>
-                                    <Image Source="/Resources/icon32_profile.ico"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Header="{Tr Main.Timetable, DefaultText='Terminarz', LanguageId={x:Static seg:Properties.Language}}" Click="btnCalendar_Click" IsEnabled="False">
-                                <MenuItem.Icon>
-                                    <Image Source="/Resources/icon32_calendar.ico"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Header="{Tr Main.Messages, DefaultText='Wiadomości', LanguageId={x:Static seg:Properties.Language}}" Click="btnMail_Click" IsEnabled="False">
-                                <MenuItem.Icon>
-                                    <Image Source="/Resources/icon32_mail.ico"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
+                            <sec:MenuItem Header="{Tr Profile}" IconUri="/Resources/icon32_profile.ico" Click="btnProfile_Click"/>
+                            <sec:MenuItem Header="{Tr Timetable}" IconUri="/Resources/icon32_calendar.ico" Click="btnCalendar_Click" IsEnabled="False"/>
+                            <sec:MenuItem Header="{Tr Messages}" IconUri="/Resources/icon32_mail.ico" Click="btnMail_Click" IsEnabled="False"/>
                         </ContextMenu>
                     </Button.ContextMenu>
                 </Button>
                 <!-- searchBar -->
-                <TextBox DockPanel.Dock="Top" Margin="1" Padding="30,0,0,0" VerticalContentAlignment="Center" TextChanged="tbSearch_TextChanged">
+                <TextBox DockPanel.Dock="Top" Margin="1" VerticalContentAlignment="Center"
+                         Padding="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2;0;0;0}"
+                         TextChanged="tbSearch_TextChanged">
                     <TextBox.Background>
                         <ImageBrush ImageSource="/Resources/icon32_search.ico" AlignmentX="Left" Stretch="Uniform">
                             <ImageBrush.Transform>
@@ -118,24 +85,19 @@
                             BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
                         <DockPanel>
                             <Image Margin="5" Source="/Resources/icon32_admin.ico" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Admin, DefaultText='Admin', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
-                                   FontWeight="Heavy" FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
+                            <Label Margin="1" Content="{Tr Admin}" VerticalAlignment="Center" FontWeight="Heavy"
+                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                             <sec:IconButton Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsTextVisible="False"
-                                            ToolTip="{Tr Main.Console, DefaultText='Konsola', LanguageId={x:Static seg:Properties.Language}}"
-                                            Icon="/Resources/icon32_code.ico" Click="btnConsoleSQL_Click"/>
+                                            ToolTip="{Tr Console}" Icon="/Resources/icon32_code.ico" Click="btnConsoleSQL_Click"/>
                         </DockPanel>
                         <Border.ContextMenu>
                             <ContextMenu>
                                 <!-- ConsoleSQL -->
-                                <MenuItem Header="{Tr Main.Console, DefaultText='Konsola', LanguageId={x:Static seg:Properties.Language}}"
-                                          IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=admin}"
-                                          Click="btnConsoleSQL_Click">
-                                    <MenuItem.Icon>
-                                        <Image Source="/Resources/icon32_code.ico"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
+                                <sec:MenuItem Header="{Tr Console}" IconUri="/Resources/icon32_code.ico"
+                                              IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=admin}"
+                                              Click="btnConsoleSQL_Click"/>
                                 <!--
-                                <MenuItem Text="{Tr Main.Community, DefaultText='Społeczność', LanguageId={x:Static seg:Properties.Language}}"
+                                <MenuItem Text="{Tr Community}"
                                           IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=community_preview}"
                                           Icon="/Resources/icon32_community.ico" Click="btnVersions_Click"/>
                                 -->
@@ -157,30 +119,21 @@
                             BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
                         <DockPanel>
                             <Image Margin="5" Source="/Resources/icon32_articles.ico" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Articles, DefaultText='Towary', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
-                                   FontWeight="Heavy" FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
+                            <Label Margin="1" Content="{Tr Articles}" VerticalAlignment="Center" FontWeight="Heavy"
+                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                             <sec:IconButton Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsTextVisible="False"
-                                            ToolTip="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
-                                            Icon="/Resources/icon32_list.ico" Click="btnArticlesList_Click"/>
+                                            ToolTip="{Tr List}" Icon="/Resources/icon32_list.ico" Click="btnArticlesList_Click"/>
                         </DockPanel>
                         <Border.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
-                                <MenuItem Header="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
-                                          IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=articles_preview}"
-                                          Click="btnArticlesList_Click">
-                                    <MenuItem.Icon>
-                                        <Image Source="/Resources/icon32_list.ico"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
+                                <sec:MenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
+                                              IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=articles_preview}"
+                                              Click="btnArticlesList_Click"/>
                                 <!-- New -->
-                                <MenuItem Header="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
-                                          IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=articles_save}"
-                                          Click="btnArticlesNew_Click">
-                                    <MenuItem.Icon>
-                                        <Image Source="/Resources/icon32_add.ico"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
+                                <sec:MenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
+                                              IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=articles_save}"
+                                              Click="btnArticlesNew_Click"/>
                             </ContextMenu>
                         </Border.ContextMenu>
                     </Border>
@@ -199,30 +152,21 @@
                             BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
                         <DockPanel>
                             <Image Margin="5" Source="/Resources/icon32_photos.ico" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Attachments, DefaultText='Załączniki', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
-                                       FontWeight="Heavy" FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
+                            <Label Margin="1" Content="{Tr Attachments}" VerticalAlignment="Center" FontWeight="Heavy"
+                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                             <sec:IconButton Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsTextVisible="False"
-                                            ToolTip="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
-                                            Icon="/Resources/icon32_list.ico" Click="btnAttachmentsList_Click"/>
+                                            ToolTip="{Tr List}" Icon="/Resources/icon32_list.ico" Click="btnAttachmentsList_Click"/>
                         </DockPanel>
                         <Border.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
-                                <MenuItem Header="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
-                                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=attachments_preview}"
-                                                  Click="btnAttachmentsList_Click">
-                                    <MenuItem.Icon>
-                                        <Image Source="/Resources/icon32_list.ico"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
+                                <sec:MenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
+                                              IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=attachments_preview}"
+                                              Click="btnAttachmentsList_Click"/>
                                 <!-- Gallery -->
-                                <MenuItem Header="{Tr Main.Gallery, DefaultText='Galeria', LanguageId={x:Static seg:Properties.Language}}"
-                                                  IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=attachments_preview}"
-                                                  Click="btnAttachmentsGallery_Click">
-                                    <MenuItem.Icon>
-                                        <Image Source="/Resources/icon32_gallery.ico"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
+                                <sec:MenuItem Header="{Tr Gallery}" IconUri="/Resources/icon32_gallery.ico"
+                                              IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=attachments_preview}"
+                                              Click="btnAttachmentsGallery_Click"/>
                             </ContextMenu>
                         </Border.ContextMenu>
                     </Border>
@@ -241,30 +185,21 @@
                             BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
                         <DockPanel>
                             <Image Margin="5" Source="/Resources/icon32_attributes.ico" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr AttributesClasses, DefaultText='Klasy atrybutów', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
-                                   FontWeight="Heavy" FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
+                            <Label Margin="1" Content="{Tr AttributesClasses}" VerticalAlignment="Center" FontWeight="Heavy"
+                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                             <sec:IconButton Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsTextVisible="False"
-                                            ToolTip="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
-                                            Icon="/Resources/icon32_list.ico" Click="btnAttributesClassesList_Click"/>
+                                            ToolTip="{Tr List}" Icon="/Resources/icon32_list.ico" Click="btnAttributesClassesList_Click"/>
                         </DockPanel>
                         <Border.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
-                                <MenuItem Header="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
-                                          IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=attributes_classes_preview}"
-                                          Click="btnAttributesClassesList_Click">
-                                    <MenuItem.Icon>
-                                        <Image Source="/Resources/icon32_list.ico"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
+                                <sec:MenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
+                                              IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=attributes_classes_preview}"
+                                              Click="btnAttributesClassesList_Click"/>
                                 <!-- New -->
-                                <MenuItem Header="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
-                                          IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=attributes_classes_save}"
-                                          Click="btnAttributesClassesNew_Click">
-                                    <MenuItem.Icon>
-                                        <Image Source="/Resources/icon32_add.ico"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
+                                <sec:MenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
+                                              IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=attributes_classes_save}"
+                                              Click="btnAttributesClassesNew_Click"/>
                             </ContextMenu>
                         </Border.ContextMenu>
                     </Border>
@@ -283,30 +218,21 @@
                             BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
                         <DockPanel>
                             <Image Margin="5" Source="/Resources/icon32_contractors.ico" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Contractors, DefaultText='Kontrahenci', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
-                                   FontWeight="Heavy" FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
+                            <Label Margin="1" Content="{Tr Contractors}" VerticalAlignment="Center" FontWeight="Heavy"
+                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                             <sec:IconButton Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsTextVisible="False"
-                                            ToolTip="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
-                                            Icon="/Resources/icon32_list.ico" Click="btnContractorsList_Click"/>
+                                            ToolTip="{Tr List}" Icon="/Resources/icon32_list.ico" Click="btnContractorsList_Click"/>
                         </DockPanel>
                         <Border.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
-                                <MenuItem Header="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
-                                          IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=contractors_preview}"
-                                          Click="btnContractorsList_Click">
-                                    <MenuItem.Icon>
-                                        <Image Source="/Resources/icon32_list.ico"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
+                                <sec:MenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
+                                              IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=contractors_preview}"
+                                              Click="btnContractorsList_Click"/>
                                 <!-- New -->
-                                <MenuItem Header="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
-                                          IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=contractors_save}"
-                                          Click="btnContractorsNew_Click">
-                                    <MenuItem.Icon>
-                                        <Image Source="/Resources/icon32_add.ico"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
+                                <sec:MenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
+                                              IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=contractors_save}"
+                                              Click="btnContractorsNew_Click"/>
                             </ContextMenu>
                         </Border.ContextMenu>
                     </Border>
@@ -325,30 +251,21 @@
                             BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
                         <DockPanel>
                             <Image Margin="5" Source="/Resources/icon32_food.ico" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Distributions, DefaultText='Dystrybucje', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
-                                   FontWeight="Heavy" FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
+                            <Label Margin="1" Content="{Tr Distributions}" VerticalAlignment="Center" FontWeight="Heavy"
+                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                             <sec:IconButton Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsTextVisible="False"
-                                            ToolTip="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
-                                            Icon="/Resources/icon32_list.ico" Click="btnDistributionsList_Click"/>
+                                            ToolTip="{Tr List}" Icon="/Resources/icon32_list.ico" Click="btnDistributionsList_Click"/>
                         </DockPanel>
                         <Border.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
-                                <MenuItem Header="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
-                                          IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=distributions_preview}"
-                                          Click="btnDistributionsList_Click">
-                                    <MenuItem.Icon>
-                                        <Image Source="/Resources/icon32_list.ico"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
+                                <sec:MenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
+                                              IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=distributions_preview}"
+                                              Click="btnDistributionsList_Click"/>
                                 <!-- New -->
-                                <MenuItem Header="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
-                                          IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=distributions_save}"
-                                          Click="btnDistributionsNew_Click">
-                                    <MenuItem.Icon>
-                                        <Image Source="/Resources/icon32_add.ico"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
+                                <sec:MenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
+                                              IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=distributions_save}"
+                                              Click="btnDistributionsNew_Click"/>
                             </ContextMenu>
                         </Border.ContextMenu>
                     </Border>
@@ -367,30 +284,21 @@
                             BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
                         <DockPanel>
                             <Image Margin="5" Source="/Resources/icon32_documents.ico" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Documents, DefaultText='Dokumenty', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
-                                   FontWeight="Heavy" FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
+                            <Label Margin="1" Content="{Tr Documents}" VerticalAlignment="Center" FontWeight="Heavy"
+                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                             <sec:IconButton Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsTextVisible="False"
-                                            ToolTip="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
-                                            Icon="/Resources/icon32_list.ico" Click="btnDocumentsList_Click"/>
+                                            ToolTip="{Tr List}" Icon="/Resources/icon32_list.ico" Click="btnDocumentsList_Click"/>
                         </DockPanel>
                         <Border.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
-                                <MenuItem Header="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
-                                          IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=documents_preview}"
-                                          Click="btnDocumentsList_Click">
-                                    <MenuItem.Icon>
-                                        <Image Source="/Resources/icon32_list.ico"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
+                                <sec:MenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
+                                              IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=documents_preview}"
+                                              Click="btnDocumentsList_Click"/>
                                 <!-- New -->
-                                <MenuItem Header="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
-                                          IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=documents_save}"
-                                          Click="btnDocumentsNew_Click">
-                                    <MenuItem.Icon>
-                                        <Image Source="/Resources/icon32_add.ico"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
+                                <sec:MenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
+                                              IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=documents_save}"
+                                              Click="btnDocumentsNew_Click"/>
                             </ContextMenu>
                         </Border.ContextMenu>
                     </Border>
@@ -409,30 +317,21 @@
                             BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
                         <DockPanel>
                             <Image Margin="5" Source="/Resources/icon32_briefcase.ico" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Employees, DefaultText='Pracownicy', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
-                                   FontWeight="Heavy" FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
+                            <Label Margin="1" Content="{Tr Employees}" VerticalAlignment="Center" FontWeight="Heavy"
+                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                             <sec:IconButton Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsTextVisible="False"
-                                            ToolTip="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
-                                            Icon="/Resources/icon32_list.ico" Click="btnEmployeesList_Click"/>
+                                            ToolTip="{Tr List}" Icon="/Resources/icon32_list.ico" Click="btnEmployeesList_Click"/>
                         </DockPanel>
                         <Border.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
-                                <MenuItem Header="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
-                                          IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=employees_preview}"
-                                          Click="btnEmployeesList_Click">
-                                    <MenuItem.Icon>
-                                        <Image Source="/Resources/icon32_list.ico"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
+                                <sec:MenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
+                                              IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=employees_preview}"
+                                              Click="btnEmployeesList_Click"/>
                                 <!-- New -->
-                                <MenuItem Header="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
-                                          IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=employees_save}"
-                                          Click="btnEmployeesNew_Click">
-                                    <MenuItem.Icon>
-                                        <Image Source="/Resources/icon32_add.ico"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
+                                <sec:MenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
+                                              IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=employees_save}"
+                                              Click="btnEmployeesNew_Click"/>
                             </ContextMenu>
                         </Border.ContextMenu>
                     </Border>
@@ -451,30 +350,21 @@
                             BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
                         <DockPanel>
                             <Image Margin="5" Source="/Resources/icon32_families.ico" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Families, DefaultText='Rodziny', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
-                                   FontWeight="Heavy" FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
+                            <Label Margin="1" Content="{Tr Families}" VerticalAlignment="Center" FontWeight="Heavy"
+                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                             <sec:IconButton Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsTextVisible="False"
-                                            ToolTip="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
-                                            Icon="/Resources/icon32_list.ico" Click="btnFamiliesList_Click"/>
+                                            ToolTip="{Tr List}" Icon="/Resources/icon32_list.ico" Click="btnFamiliesList_Click"/>
                         </DockPanel>
                         <Border.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
-                                <MenuItem Header="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
-                                          IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=families_preview}"
-                                          Click="btnFamiliesList_Click">
-                                    <MenuItem.Icon>
-                                        <Image Source="/Resources/icon32_list.ico"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
+                                <sec:MenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
+                                              IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=families_preview}"
+                                              Click="btnFamiliesList_Click"/>
                                 <!-- New -->
-                                <MenuItem Header="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
-                                          IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=families_save}"
-                                          Click="btnFamiliesNew_Click">
-                                    <MenuItem.Icon>
-                                        <Image Source="/Resources/icon32_add.ico"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
+                                <sec:MenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
+                                              IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=families_save}"
+                                              Click="btnFamiliesNew_Click"/>
                             </ContextMenu>
                         </Border.ContextMenu>
                     </Border>
@@ -493,30 +383,21 @@
                             BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
                         <DockPanel>
                             <Image Margin="5" Source="/Resources/icon32_icons.ico" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Icons, DefaultText='Ikony', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
-                                   FontWeight="Heavy" FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
+                            <Label Margin="1" Content="{Tr Icons}" VerticalAlignment="Center" FontWeight="Heavy"
+                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                             <sec:IconButton Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsTextVisible="False"
-                                            ToolTip="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
-                                            Icon="/Resources/icon32_list.ico" Click="btnIconsList_Click"/>
+                                            ToolTip="{Tr List}" Icon="/Resources/icon32_list.ico" Click="btnIconsList_Click"/>
                         </DockPanel>
                         <Border.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
-                                <MenuItem Header="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
-                                          IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=icons_preview}"
-                                          Click="btnIconsList_Click">
-                                    <MenuItem.Icon>
-                                        <Image Source="/Resources/icon32_list.ico"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
+                                <sec:MenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
+                                              IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=icons_preview}"
+                                              Click="btnIconsList_Click"/>
                                 <!-- New -->
-                                <MenuItem Header="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
-                                          IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=icons_save}"
-                                          Click="btnIconsNew_Click">
-                                    <MenuItem.Icon>
-                                        <Image Source="/Resources/icon32_add.ico"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
+                                <sec:MenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
+                                              IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=icons_save}"
+                                              Click="btnIconsNew_Click"/>
                             </ContextMenu>
                         </Border.ContextMenu>
                     </Border>
@@ -535,22 +416,17 @@
                             BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
                         <DockPanel>
                             <Image Margin="5" Source="/Resources/icon32_logs.ico" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Logs, DefaultText='Logi', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
-                                   FontWeight="Heavy" FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
+                            <Label Margin="1" Content="{Tr Logs}" VerticalAlignment="Center" FontWeight="Heavy"
+                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                             <sec:IconButton Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsTextVisible="False"
-                                            ToolTip="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
-                                            Icon="/Resources/icon32_list.ico" Click="btnLogsList_Click"/>
+                                            ToolTip="{Tr List}" Icon="/Resources/icon32_list.ico" Click="btnLogsList_Click"/>
                         </DockPanel>
                         <Border.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
-                                <MenuItem Header="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
-                                          IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=logs_preview}"
-                                          Click="btnLogsList_Click">
-                                    <MenuItem.Icon>
-                                        <Image Source="/Resources/icon32_list.ico"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
+                                <sec:MenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
+                                              IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=logs_preview}"
+                                              Click="btnLogsList_Click"/>
                             </ContextMenu>
                         </Border.ContextMenu>
                     </Border>
@@ -569,22 +445,17 @@
                             BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
                         <DockPanel>
                             <Image Margin="5" Source="/Resources/icon32_stats.ico" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Stats, DefaultText='Statystyki', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
-                                   FontWeight="Heavy" FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
+                            <Label Margin="1" Content="{Tr Stats}" VerticalAlignment="Center" FontWeight="Heavy"
+                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                             <sec:IconButton Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsTextVisible="False"
-                                            ToolTip="{Tr Main.Stats, DefaultText='Statystyki', LanguageId={x:Static seg:Properties.Language}}"
-                                            Icon="/Resources/icon32_stats.ico" Click="btnStats_Click"/>
+                                            ToolTip="{Tr Stats}" Icon="/Resources/icon32_stats.ico" Click="btnStats_Click"/>
                         </DockPanel>
                         <Border.ContextMenu>
                             <ContextMenu>
                                 <!-- Stats -->
-                                <MenuItem Header="{Tr Main.Stats, DefaultText='Statystyki', LanguageId={x:Static seg:Properties.Language}}"
-                                          IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=stats_preview}"
-                                          Click="btnStats_Click">
-                                    <MenuItem.Icon>
-                                        <Image Source="/Resources/icon32_stats.ico"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
+                                <sec:MenuItem Header="{Tr Stats}" IconUri="/Resources/icon32_stats.ico"
+                                              IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=stats_preview}"
+                                              Click="btnStats_Click"/>
                             </ContextMenu>
                         </Border.ContextMenu>
                     </Border>
@@ -603,30 +474,21 @@
                             BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
                         <DockPanel>
                             <Image Margin="5" Source="/Resources/icon32_stores.ico" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Stores, DefaultText='Magazyny', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
-                                   FontWeight="Heavy" FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
+                            <Label Margin="1" Content="{Tr Stores}" VerticalAlignment="Center" FontWeight="Heavy"
+                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                             <sec:IconButton Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsTextVisible="False"
-                                            ToolTip="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
-                                            Icon="/Resources/icon32_list.ico" Click="btnStoresList_Click"/>
+                                            ToolTip="{Tr List}" Icon="/Resources/icon32_list.ico" Click="btnStoresList_Click"/>
                         </DockPanel>
                         <Border.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
-                                <MenuItem Header="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
-                                          IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=stores_preview}"
-                                          Click="btnStoresList_Click">
-                                    <MenuItem.Icon>
-                                        <Image Source="/Resources/icon32_list.ico"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
+                                <sec:MenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
+                                              IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=stores_preview}"
+                                              Click="btnStoresList_Click"/>
                                 <!-- New -->
-                                <MenuItem Header="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
-                                          IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=stores_save}"
-                                          Click="btnStoresNew_Click">
-                                    <MenuItem.Icon>
-                                        <Image Source="/Resources/icon32_add.ico"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
+                                <sec:MenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
+                                              IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=stores_save}"
+                                              Click="btnStoresNew_Click"/>
                             </ContextMenu>
                         </Border.ContextMenu>
                     </Border>
@@ -645,30 +507,21 @@
                             BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
                         <DockPanel>
                             <Image Margin="5" Source="/Resources/icon32_users.ico" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Users, DefaultText='Użytkownicy', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
-                                   FontWeight="Heavy" FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
+                            <Label Margin="1" Content="{Tr Users}" VerticalAlignment="Center" FontWeight="Heavy"
+                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                             <sec:IconButton Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsTextVisible="False"
-                                            ToolTip="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
-                                            Icon="/Resources/icon32_list.ico" Click="btnUsersList_Click"/>
+                                            ToolTip="{Tr List}" Icon="/Resources/icon32_list.ico" Click="btnUsersList_Click"/>
                         </DockPanel>
                         <Border.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
-                                <MenuItem Header="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
-                                          IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=users_preview}"
-                                          Click="btnUsersList_Click">
-                                    <MenuItem.Icon>
-                                        <Image Source="/Resources/icon32_list.ico"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
+                                <sec:MenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
+                                              IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=users_preview}"
+                                              Click="btnUsersList_Click"/>
                                 <!-- New -->
-                                <MenuItem Header="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
-                                          IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=users_save}"
-                                          Click="btnUsersNew_Click">
-                                    <MenuItem.Icon>
-                                        <Image Source="/Resources/icon32_add.ico"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
+                                <sec:MenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
+                                              IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=users_save}"
+                                              Click="btnUsersNew_Click"/>
                             </ContextMenu>
                         </Border.ContextMenu>
                     </Border>
@@ -687,30 +540,21 @@
                             BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
                         <DockPanel>
                             <Image Margin="5" Source="/Resources/icon32_transport.ico" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Vehicles, DefaultText='Pojazdy', LanguageId={x:Static seg:Properties.Language}}" VerticalAlignment="Center"
-                                   FontWeight="Heavy" FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
+                            <Label Margin="1" Content="{Tr Vehicles}" VerticalAlignment="Center" FontWeight="Heavy"
+                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.25}"/>
                             <sec:IconButton Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsTextVisible="False"
-                                            ToolTip="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
-                                            Icon="/Resources/icon32_list.ico" Click="btnVehiclesList_Click"/>
+                                            ToolTip="{Tr List}" Icon="/Resources/icon32_list.ico" Click="btnVehiclesList_Click"/>
                         </DockPanel>
                         <Border.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
-                                <MenuItem Header="{Tr Main.List, DefaultText='Lista', LanguageId={x:Static seg:Properties.Language}}"
-                                          IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=vehicles_preview}"
-                                          Click="btnVehiclesList_Click">
-                                    <MenuItem.Icon>
-                                        <Image Source="/Resources/icon32_list.ico"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
+                                <sec:MenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
+                                              IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=vehicles_preview}"
+                                              Click="btnVehiclesList_Click"/>
                                 <!-- New -->
-                                <MenuItem Header="{Tr Main.New, DefaultText='Nowy', LanguageId={x:Static seg:Properties.Language}}"
-                                          IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=vehicles_save}"
-                                          Click="btnVehiclesNew_Click">
-                                    <MenuItem.Icon>
-                                        <Image Source="/Resources/icon32_add.ico"/>
-                                    </MenuItem.Icon>
-                                </MenuItem>
+                                <sec:MenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
+                                              IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=vehicles_save}"
+                                              Click="btnVehiclesNew_Click"/>
                             </ContextMenu>
                         </Border.ContextMenu>
                     </Border>

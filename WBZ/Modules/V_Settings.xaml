@@ -6,10 +6,8 @@
         xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
         xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
-        mc:Ignorable="d"
-        Title="{Tr Settings, DefaultText='Ustawienia', LanguageId={x:Static seg:Properties.Language}}"
-            Height="400" Width="500" ResizeMode="CanResize"  WindowStartupLocation="CenterOwner"
-            Icon="/Resources/icon32_settings.ico">
+        mc:Ignorable="d" Height="400" Width="500" ResizeMode="CanResize"  WindowStartupLocation="CenterOwner"
+        Title="{Tr Settings}" Icon="/Resources/icon32_settings.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -18,14 +16,12 @@
         <sec:TitleBar DockPanel.Dock="Top"/>
         <!-- buttons -->
         <UniformGrid DockPanel.Dock="Bottom" Columns="2" HorizontalAlignment="Center">
-            <sec:IconButton Margin="5"
-                        Text="{Tr Buttons.Accept, DefaultText='Akceptuj', LanguageId={x:Static seg:Properties.Language}}"
-                        Icon="/Resources/icon32_accept.ico"
-                        Click="btnAccept_Click" IsDefault="True"/>
-            <sec:IconButton Margin="5"
-                        Text="{Tr Buttons.Cancel, DefaultText='Anuluj', LanguageId={x:Static seg:Properties.Language}}"
-                        Icon="/Resources/icon32_cancel.ico"
-                        Click="btnCancel_Click"/>
+            <sec:IconButton Text="{Tr Accept}" Margin="5"
+                            Icon="/Resources/icon32_accept.ico"
+                            Click="btnAccept_Click" IsDefault="True"/>
+            <sec:IconButton Text="{Tr Cancel}" Margin="5"
+                            Icon="/Resources/icon32_cancel.ico"
+                            Click="btnCancel_Click"/>
         </UniformGrid>
         <Border DockPanel.Dock="Bottom" Margin="0,5,0,0" BorderBrush="DarkGray" BorderThickness="0,1,0,0"/>
         <!-- tabs -->
@@ -33,17 +29,17 @@
             <!-- tabMain -->
             <TabItem>
                 <TabItem.Header>
-                    <sec:Header Text="{Tr Settings.General, DefaultText='Ogólne', LanguageId={x:Static seg:Properties.Language}}" Icon="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
+                    <sec:Header Text="{Tr General}" Icon="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
                 </TabItem.Header>
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <DockPanel>
                         <!-- region -->
                         <GroupBox DockPanel.Dock="Top" Margin="5,5,5,0" VerticalAlignment="Top">
                             <GroupBox.Header>
-                                <sec:Header Text="{Tr Settings.Region, DefaultText='Region', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_language.ico"/>
+                                <sec:Header Text="{Tr Region}" Icon="/Resources/icon32_language.ico"/>
                             </GroupBox.Header>
                             <DockPanel Margin="5">
-                                <Label Content="{Tr Settings.Language, DefaultText='Język:', LanguageId={x:Static seg:Properties.Language}}" Margin="5" VerticalContentAlignment="Center"/>
+                                <Label Content="{Tr Language, Suffix=':'}" Margin="5" VerticalContentAlignment="Center"/>
                                 <ComboBox Margin="5" VerticalContentAlignment="Center" SelectedValuePath="Tag" SelectedValue="{Binding Language, Source={x:Static p:Settings.Default}}">
                                     <ComboBoxItem Tag="en" Content="English"/>
                                     <ComboBoxItem Tag="pl" Content="Polski"/>
@@ -53,7 +49,7 @@
                         <!-- network -->
                         <GroupBox DockPanel.Dock="Top" Margin="5,5,5,0" VerticalAlignment="Top">
                             <GroupBox.Header>
-                                <sec:Header Text="{Tr Settings.Network, DefaultText='Sieć', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_web.ico"/>
+                                <sec:Header Text="{Tr Network}" Icon="/Resources/icon32_web.ico"/>
                             </GroupBox.Header>
                             <DockPanel Margin="5">
                                 <Label Content="API URL:" Margin="5" VerticalContentAlignment="Center"/>
@@ -63,10 +59,11 @@
                         <!-- other -->
                         <GroupBox DockPanel.Dock="Top" Margin="5,5,5,0" VerticalAlignment="Top">
                             <GroupBox.Header>
-                                <sec:Header Text="{Tr Settings.Other, DefaultText='Pozostałe', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_tools.ico"/>
+                                <sec:Header Text="{Tr Others}" Icon="/Resources/icon32_tools.ico"/>
                             </GroupBox.Header>
                             <StackPanel Margin="5">
-                                <CheckBox Content="{Tr Settings.ShowButtonWithText, DefaultText='Pokaż nazwy w przyciskach', LanguageId={x:Static seg:Properties.Language}}" IsChecked="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}" Margin="5" VerticalContentAlignment="Center"/>
+                                <CheckBox Content="{Tr ShowButtonWithNames}" Margin="5" VerticalContentAlignment="Center"
+                                          IsChecked="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"/>
                             </StackPanel>
                         </GroupBox>
                     </DockPanel>
@@ -75,23 +72,23 @@
             <!-- tabStyle -->
             <TabItem>
                 <TabItem.Header>
-                    <sec:Header Text="{Tr Settings.StyleAndFont, DefaultText='Styl i czcionka', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_font.ico"/>
+                    <sec:Header Text="{Tr StyleAndFont}" Icon="/Resources/icon32_font.ico"/>
                 </TabItem.Header>
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <DockPanel>
                         <CheckBox DockPanel.Dock="Top" Content="Tryb ciemny" Margin="10,10,10,5" Visibility="Collapsed"/>
-                        <GroupBox DockPanel.Dock="Top" Header="{Tr Settings.TitleBar, DefaultText='Pasek tytułowy okien', LanguageId={x:Static seg:Properties.Language}}" Margin="5,5,5,0" VerticalAlignment="Top">
+                        <GroupBox DockPanel.Dock="Top" Header="{Tr TitleBar}" Margin="5,5,5,0" VerticalAlignment="Top">
                             <DockPanel Margin="5">
                                 <RadioButton DockPanel.Dock="Top" Content="Domyślny" Margin="5" VerticalContentAlignment="Center" GroupName="TitleBarStyle" Visibility="Collapsed"/>
                                 <RadioButton DockPanel.Dock="Top" Content="Alternatywny" Margin="5" VerticalContentAlignment="Center" GroupName="TitleBarStyle" Visibility="Collapsed"/>
-                                <Label Content="{Tr Settings.Color, DefaultText='Kolor:', LanguageId={x:Static seg:Properties.Language}}" VerticalContentAlignment="Center"/>
+                                <Label Content="{Tr Color, Suffix=':'}" VerticalContentAlignment="Center"/>
                                 <sec:ColorSetter Color="{Binding ThemeColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                             </DockPanel>
                         </GroupBox>
-                        <GroupBox Header="{Tr Settings.Interface, DefaultText='Interfejs', LanguageId={x:Static seg:Properties.Language}}" DockPanel.Dock="Top" Margin="5,5,5,0" VerticalAlignment="Top">
+                        <GroupBox DockPanel.Dock="Top" Header="{Tr Interface}" Margin="5,5,5,0" VerticalAlignment="Top">
                             <DockPanel Margin="5">
                                 <DockPanel DockPanel.Dock="Top">
-                                    <Label Content="{Tr Settings.Font, DefaultText='Czcionka:', LanguageId={x:Static seg:Properties.Language}}" Margin="5" VerticalContentAlignment="Center"/>
+                                    <Label Content="{Tr Font, Suffix=':'}" Margin="5" VerticalContentAlignment="Center"/>
                                     <ComboBox Margin="5" VerticalContentAlignment="Center" SelectedValuePath="Tag" SelectedValue="{Binding iFont, Source={x:Static p:Settings.Default}, Mode=TwoWay}">
                                         <ComboBoxItem Content="Arial" FontFamily="Arial" Tag="Arial"/>
                                         <ComboBoxItem Content="Candara" FontFamily="Candara" Tag="Candara"/>
@@ -102,7 +99,7 @@
                                     </ComboBox>
                                 </DockPanel>
                                 <DockPanel DockPanel.Dock="Top">
-                                    <Label Content="{Tr Settings.InterfaceSize, DefaultText='Rozmiar interfejsu:', LanguageId={x:Static seg:Properties.Language}}" Margin="5" VerticalContentAlignment="Center"/>
+                                    <Label Content="{Tr InterfaceSize, Suffix=':'}" Margin="5" VerticalContentAlignment="Center"/>
                                     <Label Content="{Binding iSize, Source={x:Static p:Settings.Default}}" VerticalContentAlignment="Center" FontWeight="Medium"/>
                                 </DockPanel>
                                 <Slider DockPanel.Dock="Top" Value="{Binding iSize, Source={x:Static p:Settings.Default}, Mode=TwoWay}" IsSnapToTickEnabled="True" Minimum="8" Maximum="16" TickFrequency="0.5" TickPlacement="BottomRight"/>
@@ -114,14 +111,14 @@
             <!-- tabCommunication -->
             <TabItem>
                 <TabItem.Header>
-                    <sec:Header Text="{Tr Settings.Communication, DefaultText='Komunikacja', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_mail.ico"/>
+                    <sec:Header Text="{Tr Communication}" Icon="/Resources/icon32_mail.ico"/>
                 </TabItem.Header>
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <DockPanel>
                         <!-- email -->
                         <GroupBox DockPanel.Dock="Top" Margin="5,5,5,0" VerticalAlignment="Top">
                             <GroupBox.Header>
-                                <sec:Header Text="{Tr Settings.Email, DefaultText='E-mail', LanguageId={x:Static seg:Properties.Language}}" Icon="/Resources/icon32_mail.ico"/>
+                                <sec:Header Text="{Tr Email}" Icon="/Resources/icon32_mail.ico"/>
                             </GroupBox.Header>
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -136,18 +133,18 @@
                                     <RowDefinition/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
-                                <Label Grid.Row="0" Grid.Column="0" Content="{Tr Settings.Host, DefaultText='Host:', LanguageId={x:Static seg:Properties.Language}}" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                                <Label Grid.Row="0" Grid.Column="0" Content="{Tr Host, Suffix=':'}" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                                 <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding config_Email_Host, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Margin="5" VerticalContentAlignment="Center"/>
-                                <Label Grid.Row="1" Grid.Column="0" Content="{Tr Settings.Port, DefaultText='Port:', LanguageId={x:Static seg:Properties.Language}}" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                                <Label Grid.Row="1" Grid.Column="0" Content="{Tr Port, Suffix=':'}" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                                 <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding config_Email_Port, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Margin="5" VerticalContentAlignment="Center"/>
-                                <Label Grid.Row="2" Grid.Column="0" Content="{Tr Settings.Address, DefaultText='Adres:', LanguageId={x:Static seg:Properties.Language}}" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                                <Label Grid.Row="2" Grid.Column="0" Content="{Tr Address, Suffix=':'}" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                                 <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding config_Email_Email, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Margin="5" VerticalContentAlignment="Center"/>
-                                <Label Grid.Row="3" Grid.Column="0" Content="{Tr Settings.Password, DefaultText='Hasło:', LanguageId={x:Static seg:Properties.Language}}" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                                <Label Grid.Row="3" Grid.Column="0" Content="{Tr Password, Suffix=':'}" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                                 <PasswordBox x:Name="pbEmailPassword" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center" Loaded="pbEmailPassword_Loaded" PasswordChanged="pbEmailPassword_PasswordChanged"/>
                                 <sec:IconButton Grid.Row="4" Grid.Column="1" Margin="5" HorizontalAlignment="Center"
-                                            Text="{Tr Settings.Test, DefaultText='Testuj', LanguageId={x:Static seg:Properties.Language}}"
-                                            Icon="/Resources/icon32_test.ico"
-                                            Click="btnEmailTest_Click"/>
+                                                Text="{Tr Test}"
+                                                Icon="/Resources/icon32_test.ico"
+                                                Click="btnEmailTest_Click"/>
                             </Grid>
                         </GroupBox>
                         <!-- GSM -->
@@ -164,9 +161,9 @@
                                     <RowDefinition/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
-                                <Label Grid.Row="0" Grid.Column="0" Content="{Tr Settings.Port, DefaultText='Port:', LanguageId={x:Static seg:Properties.Language}}" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                                <Label Grid.Row="0" Grid.Column="0" Content="{Tr Port, Suffix=':'}" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                                 <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding config_GSM_com, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Margin="5" VerticalContentAlignment="Center"/>
-                                <GroupBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Header="{Tr Settings.MessageContent, DefaultText='Treść wiadomości:', LanguageId={x:Static seg:Properties.Language}}" Margin="5">
+                                <GroupBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Header="{Tr MessageContent, Suffix=':'}" Margin="5">
                                     <TextBox Text="{Binding config_GSM_message, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Margin="5" MinHeight="150" TextWrapping="Wrap" MaxLength="240"/>
                                 </GroupBox>
                             </Grid>
