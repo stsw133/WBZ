@@ -70,26 +70,26 @@
                     <DockPanel Margin="10" IsEnabled="{Binding EditingMode}">
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Kod:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>
-                            <TextBox Text="{Binding InstanceInfo.Codename}" Margin="5" VerticalContentAlignment="Center"/>
+                            <TextBox Text="{Binding InstanceData.Codename}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Nazwa:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>
-                            <TextBox Text="{Binding InstanceInfo.Name}" Margin="5" VerticalContentAlignment="Center"/>
+                            <TextBox Text="{Binding InstanceData.Name}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="EAN:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>
-                            <TextBox Text="{Binding InstanceInfo.EAN}" Margin="5" VerticalContentAlignment="Center"/>
+                            <TextBox Text="{Binding InstanceData.EAN}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Ilość (kg):" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>
-                            <TextBox Text="{Binding InstanceInfo.AmountRaw}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True" Background="#EEE"/>
+                            <TextBox Text="{Binding InstanceData.AmountRaw}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True" Background="#EEE"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Zarezerwowano (kg):" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>
-                            <TextBox Text="{Binding InstanceInfo.ReservedRaw}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True" Background="#EEE"/>
+                            <TextBox Text="{Binding InstanceData.ReservedRaw}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True" Background="#EEE"/>
                         </DockPanel>
                         <Label DockPanel.Dock="Top" Content="Dodatkowe wagi i zasoby:" Margin="5,5,5,0" HorizontalAlignment="Center"/>
-                        <sec:DataGrid x:Name="dgMeasures" DockPanel.Dock="Top" ItemsSource="{Binding InstanceInfo.Measures.DefaultView}" IsReadOnly="{Binding EditMode, Converter={seg:conv_BoolInverted}}" CellEditEnding="dgMeasures_CellEditEnding">
+                        <sec:DataGrid x:Name="dgMeasures" DockPanel.Dock="Top" ItemsSource="{Binding InstanceData.Measures.DefaultView}" IsReadOnly="{Binding EditMode, Converter={seg:conv_BoolInverted}}" CellEditEnding="dgMeasures_CellEditEnding">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding id}" Header="ID" IsReadOnly="True" Visibility="Collapsed"/>
                                 <DataGridTextColumn Binding="{Binding name}" Header="Jm" Width="*"/>

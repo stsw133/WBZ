@@ -25,7 +25,7 @@ namespace WBZ.Modules.Families
             Init();
 
             if (instance != null)
-                D.InstanceInfo = instance;
+                D.InstanceData = instance;
             D.Mode = mode;
         }
 
@@ -40,7 +40,7 @@ namespace WBZ.Modules.Families
         }
         private void btnRodo_Click(object sender, RoutedEventArgs e)
         {
-            Prints.Print_RODO(D.InstanceInfo, SQL.ListContacts(D.MODULE_TYPE, D.InstanceInfo.ID, "default = true").ToList<M_Contact>()?[0]);
+            Prints.Print_RODO(D.InstanceData, SQL.ListContacts(D.Module, D.InstanceData.ID, "default = true").ToList<M_Contact>()?[0]);
         }
 
         /// <summary>
@@ -51,8 +51,8 @@ namespace WBZ.Modules.Families
             var tab = (e.AddedItems.Count > 0 ? e.AddedItems[0] : null) as TabItem;
             if (tab?.Name == "tabSources_Distributions")
             {
-				if (D.InstanceInfo.ID != 0 && D.InstanceSources_Distributions == null)
-                    D.InstanceSources_Distributions = SQL.ListInstances<M_Distribution>(Config.Modules.DISTRIBUTIONS, $"dp.family={D.InstanceInfo.ID}");
+				if (D.InstanceData.ID != 0 && D.InstanceSources_Distributions == null)
+                    D.InstanceSources_Distributions = SQL.ListInstances<M_Distribution>(Config.Modules.DISTRIBUTIONS, $"dp.family={D.InstanceData.ID}");
             }
         }
 
@@ -69,32 +69,32 @@ namespace WBZ.Modules.Families
 		/// </summary>
 		internal override bool CheckDataValidation()
         {
-            if (string.IsNullOrEmpty(D.InstanceInfo.Declarant))
+            if (string.IsNullOrEmpty(D.InstanceData.Declarant))
             {
                 new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano osoby zgłaszającej!") { Owner = this }.ShowDialog();
                 return false;
             }
-            if (string.IsNullOrEmpty(D.InstanceInfo.Lastname))
+            if (string.IsNullOrEmpty(D.InstanceData.Lastname))
             {
                 new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano nazwiska rodziny!") { Owner = this }.ShowDialog();
                 return false;
             }
-            if (D.InstanceInfo.Members == 0)
+            if (D.InstanceData.Members == 0)
             {
                 new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano liczby osób w rodzinie!") { Owner = this }.ShowDialog();
                 return false;
             }
-            if (string.IsNullOrEmpty(D.InstanceInfo.City))
+            if (string.IsNullOrEmpty(D.InstanceData.City))
             {
                 new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano miasta!") { Owner = this }.ShowDialog();
                 return false;
             }
-            if (string.IsNullOrEmpty(D.InstanceInfo.Address))
+            if (string.IsNullOrEmpty(D.InstanceData.Address))
             {
                 new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano adresu!") { Owner = this }.ShowDialog();
                 return false;
             }
-            if (string.IsNullOrEmpty(D.InstanceInfo.Postcode))
+            if (string.IsNullOrEmpty(D.InstanceData.Postcode))
             {
                 new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano kodu pocztowego!") { Owner = this }.ShowDialog();
                 return false;

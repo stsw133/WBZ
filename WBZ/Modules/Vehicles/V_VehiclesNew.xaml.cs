@@ -18,10 +18,10 @@ namespace WBZ.Modules.Vehicles
 		{
 			InitializeComponent();
 			DataContext = D;
-			Init();
+			base.Init();
 
 			if (instance != null)
-				D.InstanceInfo = instance;
+				D.InstanceData = instance;
 			D.Mode = mode;
 		}
 
@@ -34,8 +34,8 @@ namespace WBZ.Modules.Vehicles
 			if (window.ShowDialog() == true)
 				if (window.Selected != null)
 				{
-					D.InstanceInfo.Forwarder = window.Selected.ID;
-					D.InstanceInfo = D.InstanceInfo;
+					D.InstanceData.Forwarder = window.Selected.ID;
+					D.InstanceData = D.InstanceData;
 				}
 		}
 
@@ -48,8 +48,8 @@ namespace WBZ.Modules.Vehicles
 			if (window.ShowDialog() == true)
 				if (window.Selected != null)
 				{
-					D.InstanceInfo.Driver = window.Selected.ID;
-					D.InstanceInfo = D.InstanceInfo;
+					D.InstanceData.Driver = window.Selected.ID;
+					D.InstanceData = D.InstanceData;
 				}
 		}
 
@@ -58,7 +58,7 @@ namespace WBZ.Modules.Vehicles
 		/// </summary>
 		internal override bool CheckDataValidation()
 		{
-			if (string.IsNullOrEmpty(D.InstanceInfo.Register))
+			if (string.IsNullOrEmpty(D.InstanceData.Register))
 			{
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano numeru rejestracyjnego!") { Owner = this }.ShowDialog();
 				return false;

@@ -35,8 +35,8 @@ namespace WBZ.Modules._tabs
                 dynamic d = win?.DataContext;
                 if (d != null)
                 {
-                    Module = (string)d.MODULE_TYPE;
-                    ID = (int)d.InstanceInfo.ID;
+                    Module = (string)d.Module;
+                    ID = (int)d.InstanceData.ID;
                 }
                 if (ID != 0 && D.InstanceAttributes == null)
                     D.InstanceAttributes = SQL.ListAttributes(Module, ID);
@@ -54,7 +54,7 @@ namespace WBZ.Modules._tabs
 
             dynamic d = win?.DataContext;
             if (d != null)
-                EditingMode = (bool)d.EditingMode;
+                EditingMode = (bool)(d.Mode != StswExpress.Globals.Commands.Type.PREVIEW);
 
             var indexes = dataGrid.SelectedItems.Cast<M_Attribute>().Select(x => D.InstanceAttributes.IndexOf(x));
             foreach (int index in indexes)

@@ -17,7 +17,7 @@ namespace WBZ.Modules._shared
             Init();
 
             if (instance != null)
-                D.InstanceInfo = instance;
+                D.InstanceData = instance;
             D.Mode = mode;
         }
     }

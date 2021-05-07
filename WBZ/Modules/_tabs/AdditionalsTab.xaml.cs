@@ -49,8 +49,8 @@ namespace WBZ.Modules._tabs
                 dynamic d = win?.DataContext;
                 if (d != null)
                 {
-                    d.InstanceInfo.cIcon.Value = file;
-                    d.InstanceInfo = d.InstanceInfo;
+                    d.InstanceData.cIcon.Value = file;
+                    d.InstanceData = d.InstanceData;
                 }
             }
         }
@@ -75,13 +75,13 @@ namespace WBZ.Modules._tabs
             if (d != null)
             {
                 var window = new IconsList(Commands.Type.SELECT);
-                (window.DataContext as D_IconsList).Filters.Module = d.MODULE_TYPE;
+                (window.DataContext as D_IconsList).Filters.Module = d.Module;
                 if (window.ShowDialog() == true)
                     if (window.Selected != null)
                     {
-                        if (window.Selected.Module.In(string.Empty, d.MODULE_TYPE as string))
-                            d.InstanceInfo.Icon = window.Selected.ID;
-                        d.InstanceInfo = d.InstanceInfo;
+                        if (window.Selected.Module.In(string.Empty, d.Module as string))
+                            d.InstanceData.Icon = window.Selected.ID;
+                        d.InstanceData = d.InstanceData;
                     }
             }
         }
@@ -95,8 +95,8 @@ namespace WBZ.Modules._tabs
             dynamic d = win?.DataContext;
             if (d != null)
             {
-                d.InstanceInfo.cIcon = new MV();
-                d.InstanceInfo = d.InstanceInfo;
+                d.InstanceData.cIcon = new MV();
+                d.InstanceData = d.InstanceData;
             }
         }
     }

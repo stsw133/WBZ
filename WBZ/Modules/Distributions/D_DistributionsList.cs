@@ -9,7 +9,7 @@ namespace WBZ.Modules.Distributions
     class D_DistributionsList : D_ModuleList<MODULE_MODEL>
 	{
 		/// Module
-		public readonly string MODULE_TYPE = Config.Modules.DISTRIBUTIONS;
+		public readonly string Module = Config.Modules.DISTRIBUTIONS;
 		public StringCollection SORTING = Properties.Settings.Default.sorting_DistributionsList;
 
 		/// Window title

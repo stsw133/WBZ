@@ -8,7 +8,7 @@ namespace WBZ.Modules.Users
     class D_UsersNew : D_ModuleNew<MODULE_MODEL>
 	{
 		/// Module
-		public readonly string MODULE_TYPE = Config.Modules.USERS;
+		public readonly string Module = Config.Modules.USERS;
 
 		/// Window title
 		public string Title
@@ -16,9 +16,9 @@ namespace WBZ.Modules.Users
 			get
 			{
 				if		(Mode == Commands.Type.NEW)			return $"Nowy użytkownik";
-				else if (Mode == Commands.Type.DUPLICATE)	return $"Duplikowanie użytkownika: {InstanceInfo.Fullname}";
-				else if (Mode == Commands.Type.EDIT)		return $"Edycja użytkownika: {InstanceInfo.Fullname}";
-				else if (Mode == Commands.Type.PREVIEW)		return $"Podgląd użytkownika: {InstanceInfo.Fullname}";
+				else if (Mode == Commands.Type.DUPLICATE)	return $"Duplikowanie użytkownika: {InstanceData.Fullname}";
+				else if (Mode == Commands.Type.EDIT)		return $"Edycja użytkownika: {InstanceData.Fullname}";
+				else if (Mode == Commands.Type.PREVIEW)		return $"Podgląd użytkownika: {InstanceData.Fullname}";
 				else										return string.Empty;
 			}
 		}

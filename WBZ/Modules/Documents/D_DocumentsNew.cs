@@ -8,7 +8,7 @@ namespace WBZ.Modules.Documents
     class D_DocumentsNew : D_ModuleNew<MODULE_MODEL>
 	{
 		/// Module
-		public readonly string MODULE_TYPE = Config.Modules.DOCUMENTS;
+		public readonly string Module = Config.Modules.DOCUMENTS;
 		
 		/// Window title
 		public string Title
@@ -16,9 +16,9 @@ namespace WBZ.Modules.Documents
 			get
 			{
 				if		(Mode == Commands.Type.NEW)			return $"Nowy dokument";
-				else if (Mode == Commands.Type.DUPLICATE)	return $"Duplikowanie dokumentu: {InstanceInfo.Name}";
-				else if (Mode == Commands.Type.EDIT)		return $"Edycja dokumentu: {InstanceInfo.Name}";
-				else if (Mode == Commands.Type.PREVIEW)		return $"Podgląd dokumentu: {InstanceInfo.Name}";
+				else if (Mode == Commands.Type.DUPLICATE)	return $"Duplikowanie dokumentu: {InstanceData.Name}";
+				else if (Mode == Commands.Type.EDIT)		return $"Edycja dokumentu: {InstanceData.Name}";
+				else if (Mode == Commands.Type.PREVIEW)		return $"Podgląd dokumentu: {InstanceData.Name}";
 				else										return string.Empty;
 			}
 		}

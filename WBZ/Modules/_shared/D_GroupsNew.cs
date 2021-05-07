@@ -8,7 +8,7 @@ namespace WBZ.Modules._shared
     class D_GroupsNew : D_ModuleNew<MODULE_MODEL>
     {
         /// Module
-        public readonly string MODULE_TYPE = Config.Modules.GROUPS;
+        public readonly string Module = Config.Modules.GROUPS;
 
         /// Window title
         public string Title
@@ -16,9 +16,9 @@ namespace WBZ.Modules._shared
             get
             {
                 if      (Mode == Commands.Type.NEW)         return $"Nowa grupa";
-                else if (Mode == Commands.Type.DUPLICATE)   return $"Duplikowanie grupy: {InstanceInfo.Name}";
-                else if (Mode == Commands.Type.EDIT)        return $"Edycja grupy: {InstanceInfo.Name}";
-                else if (Mode == Commands.Type.PREVIEW)     return $"Podgląd grupy: {InstanceInfo.Name}";
+                else if (Mode == Commands.Type.DUPLICATE)   return $"Duplikowanie grupy: {InstanceData.Name}";
+                else if (Mode == Commands.Type.EDIT)        return $"Edycja grupy: {InstanceData.Name}";
+                else if (Mode == Commands.Type.PREVIEW)     return $"Podgląd grupy: {InstanceData.Name}";
                 else                                        return string.Empty;
             }
         }

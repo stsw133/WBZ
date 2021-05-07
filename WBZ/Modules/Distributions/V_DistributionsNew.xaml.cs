@@ -29,15 +29,15 @@ namespace WBZ.Modules.Distributions
 			Init();
 
 			if (instance != null)
-				D.InstanceInfo = instance;
+				D.InstanceData = instance;
 			D.Mode = mode;
 
-			if (mode == Commands.Type.EDIT && D.InstanceInfo.Status != (short)MODULE_MODEL.DistributionStatus.Buffer)
+			if (mode == Commands.Type.EDIT && D.InstanceData.Status != (short)MODULE_MODEL.DistributionStatus.Buffer)
 				D.Mode = Commands.Type.PREVIEW;
 
-			D.InstanceInfo.Families = SQL.GetDistributionPositions(D.InstanceInfo.ID);
+			D.InstanceData.Families = SQL.GetDistributionPositions(D.InstanceData.ID);
 			if (D.Mode.In(Commands.Type.DUPLICATE))
-				foreach (var family in D.InstanceInfo.Families)
+				foreach (var family in D.InstanceData.Families)
 					foreach (DataRow row in family.Positions.Rows)
 						row.SetAdded();
 		}
@@ -51,7 +51,7 @@ namespace WBZ.Modules.Distributions
 				return;
 
 			int counter = 0;
-			foreach (var family in D.InstanceInfo.Families)
+			foreach (var family in D.InstanceData.Families)
 			{
 				counter += family.Positions.Rows.Count;
 				if (chckToBuffer.IsChecked == false && family.Status != (short)C_DistributionFamily.DistributionFamilyStatus.Taken)
@@ -67,8 +67,8 @@ namespace WBZ.Modules.Distributions
 				return;
 			}
 
-			D.InstanceInfo.Status = (short)(chckToBuffer.IsChecked == true ? MODULE_MODEL.DistributionStatus.Buffer : MODULE_MODEL.DistributionStatus.Approved);
-			if (saved = SQL.SetInstance(D.MODULE_TYPE, D.InstanceInfo, D.Mode))
+			D.InstanceData.Status = (short)(chckToBuffer.IsChecked == true ? MODULE_MODEL.DistributionStatus.Buffer : MODULE_MODEL.DistributionStatus.Approved);
+			if (saved = SQL.SetInstance(D.Module, D.InstanceData, D.Mode))
 				Close();
 		}
 		*/
@@ -83,7 +83,7 @@ namespace WBZ.Modules.Distributions
 		}
 		private void btnDistributionList_Click(object sender, RoutedEventArgs e)
 		{
-			Prints.Print_DistributionList(D.InstanceInfo);
+			Prints.Print_DistributionList(D.InstanceData);
 		}
 
 		/// <summary>
@@ -96,7 +96,7 @@ namespace WBZ.Modules.Distributions
 			var window = new FamiliesList(StswExpress.Globals.Commands.Type.SELECT);
 			if (window.ShowDialog() == true)
 			{
-				family = D.InstanceInfo.Families.FirstOrDefault(x => x.Family == window.Selected.ID);
+				family = D.InstanceData.Families.FirstOrDefault(x => x.Family == window.Selected.ID);
 				if (family == null)
 				{
 					family = new M_DistributionFamily()
@@ -105,7 +105,7 @@ namespace WBZ.Modules.Distributions
 						FamilyName = window.Selected.Lastname,
 						Members = window.Selected.Members
 					};
-					D.InstanceInfo.Families.Add(family);
+					D.InstanceData.Families.Add(family);
 					((CollectionViewSource)gridGroups.Resources["groups"]).View.Refresh();
 				}
 			}
@@ -123,7 +123,7 @@ namespace WBZ.Modules.Distributions
 						var row = family.Positions.NewRow();
 
 						int counter = 0;
-						foreach (var f in D.InstanceInfo.Families)
+						foreach (var f in D.InstanceData.Families)
 							counter += f.Positions.Rows.Count;
 
 						row["position"] = counter + 1;
@@ -171,7 +171,7 @@ namespace WBZ.Modules.Distributions
 		/// </summary>
 		internal override bool CheckDataValidation()
 		{
-			if (D.InstanceInfo.Families.Count == 0)
+			if (D.InstanceData.Families.Count == 0)
 			{
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Brak pozycji na dystrybucji!") { Owner = this }.ShowDialog();
 				return false;

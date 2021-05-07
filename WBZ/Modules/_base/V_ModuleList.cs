@@ -58,7 +58,7 @@ namespace WBZ.Modules._base
         /// <summary>
         /// Preview
         /// </summary>
-        internal void cmdPreview_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = Global.User.Perms.Contains($"{D?.MODULE_TYPE}_{Global.PermType.PREVIEW}");
+        internal void cmdPreview_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = Global.User.Perms.Contains($"{D?.Module}_{Global.PermType.PREVIEW}");
         internal virtual void cmdPreview_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
@@ -72,7 +72,7 @@ namespace WBZ.Modules._base
         /// <summary>
 		/// New
 		/// </summary>
-		internal void cmdNew_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = Global.User.Perms.Contains($"{D?.MODULE_TYPE}_{Global.PermType.SAVE}");
+		internal void cmdNew_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = Global.User.Perms.Contains($"{D?.Module}_{Global.PermType.SAVE}");
         internal virtual void cmdNew_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var window = Activator.CreateInstance(Type.GetType(HalfName + "New"), null, StswExpress.Globals.Commands.Type.NEW) as Window;
@@ -82,7 +82,7 @@ namespace WBZ.Modules._base
         /// <summary>
         /// Duplicate
         /// </summary>
-        internal void cmdDuplicate_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = Global.User.Perms.Contains($"{D?.MODULE_TYPE}_{Global.PermType.SAVE}");
+        internal void cmdDuplicate_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = Global.User.Perms.Contains($"{D?.Module}_{Global.PermType.SAVE}");
         internal virtual void cmdDuplicate_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
@@ -96,7 +96,7 @@ namespace WBZ.Modules._base
         /// <summary>
         /// Edit
         /// </summary>
-        internal void cmdEdit_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = Global.User.Perms.Contains($"{D?.MODULE_TYPE}_{Global.PermType.SAVE}");
+        internal void cmdEdit_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = Global.User.Perms.Contains($"{D?.Module}_{Global.PermType.SAVE}");
         internal virtual void cmdEdit_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
@@ -110,14 +110,14 @@ namespace WBZ.Modules._base
         /// <summary>
         /// Delete
         /// </summary>
-        internal void cmdDelete_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = Global.User.Perms.Contains($"{D?.MODULE_TYPE}_{Global.PermType.DELETE}");
+        internal void cmdDelete_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = Global.User.Perms.Contains($"{D?.Module}_{Global.PermType.DELETE}");
         internal virtual void cmdDelete_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
             if (selectedInstances.Count() > 0 && MessageBox.Show("Czy na pewno usunąć zaznaczone rekordy?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
                 foreach (dynamic instance in selectedInstances)
-                    SQL.DeleteInstance(D.MODULE_TYPE, instance.ID, instance.Name);
+                    SQL.DeleteInstance(D.Module, instance.ID, instance.Name);
                 cmdRefresh_Executed(null, null);
             }
         }
@@ -139,8 +139,8 @@ namespace WBZ.Modules._base
             Cursor = Cursors.Wait;
             await Task.Run(() => {
                 UpdateFilters();
-                D.TotalItems = SQL.CountInstances(D.MODULE_TYPE, D.FilterSQL);
-                D.InstancesList = SQL.ListInstances<MODULE_MODEL>(D.MODULE_TYPE, D.FilterSQL, D.SORTING, D.Page = 0);
+                D.TotalItems = SQL.CountInstances(D.Module, D.FilterSQL);
+                D.InstancesList = SQL.ListInstances<MODULE_MODEL>(D.Module, D.FilterSQL, D.SORTING, D.Page = 0);
             });
             Cursor = Cursors.Arrow;
         }
@@ -165,7 +165,7 @@ namespace WBZ.Modules._base
             {
                 if (D.Mode != StswExpress.Globals.Commands.Type.SELECT)
                 {
-                    if (Global.User.Perms.Contains($"{D.MODULE_TYPE}_{Global.PermType.SAVE}"))
+                    if (Global.User.Perms.Contains($"{D.Module}_{Global.PermType.SAVE}"))
                         cmdEdit_Executed(null, null);
                     else
                         cmdPreview_Executed(null, null);
@@ -182,7 +182,7 @@ namespace WBZ.Modules._base
             if (e.VerticalChange > 0 && e.VerticalOffset + e.ViewportHeight == e.ExtentHeight && D.InstancesList.Count < D.TotalItems)
             {
                 Cursor = Cursors.Wait;
-                foreach (var i in SQL.ListInstances<MODULE_MODEL>(D.MODULE_TYPE, D.FilterSQL, D.SORTING, ++D.Page))
+                foreach (var i in SQL.ListInstances<MODULE_MODEL>(D.Module, D.FilterSQL, D.SORTING, ++D.Page))
                     D.InstancesList.Add(i);
                 (e.OriginalSource as ScrollViewer).ScrollToVerticalOffset(e.VerticalOffset);
                 Cursor = Cursors.Arrow;
@@ -197,17 +197,17 @@ namespace WBZ.Modules._base
             var sort = CollectionViewSource.GetDefaultView(dgList.ItemsSource).SortDescriptions;
             if (sort.Any(x => x.PropertyName == e.Column.SortMemberPath))
             {
-                D.SORTING[D.SORTING.IndexOf($"{Config.GetModuleAlias(D.MODULE_TYPE)}.{e.Column.SortMemberPath.ToLower()}") + 1] = (e.Column.SortDirection == ListSortDirection.Descending).ToString();
+                D.SORTING[D.SORTING.IndexOf($"{Config.GetModuleAlias(D.Module)}.{e.Column.SortMemberPath.ToLower()}") + 1] = (e.Column.SortDirection == ListSortDirection.Descending).ToString();
                 return;
             }
 
             var limit = Convert.ToInt32(D.SORTING?[4] ?? 50);
             D.SORTING = new StringCollection();
-            D.SORTING.Add($"{Config.GetModuleAlias(D.MODULE_TYPE)}.{e.Column.SortMemberPath.ToLower()}");
+            D.SORTING.Add($"{Config.GetModuleAlias(D.Module)}.{e.Column.SortMemberPath.ToLower()}");
             D.SORTING.Add((e.Column.SortDirection == ListSortDirection.Descending).ToString());
             if (sort.Count > 0)
             {
-                D.SORTING.Add($"{Config.GetModuleAlias(D.MODULE_TYPE)}.{sort[0].PropertyName.ToLower()}");
+                D.SORTING.Add($"{Config.GetModuleAlias(D.Module)}.{sort[0].PropertyName.ToLower()}");
                 D.SORTING.Add((sort[0].Direction == ListSortDirection.Descending).ToString());
             }
             else

@@ -19,12 +19,12 @@ namespace WBZ.Modules.AttributesClasses
             Init();
 
             if (instance != null)
-                D.InstanceInfo = instance;
+                D.InstanceData = instance;
             D.Mode = mode;
 
-            D.InstanceInfo.Values = SQL.GetInstancePositions(D.MODULE_TYPE, D.InstanceInfo.ID);
+            D.InstanceData.Values = SQL.GetInstancePositions(D.Module, D.InstanceData.ID);
             if (D.Mode == StswExpress.Globals.Commands.Type.DUPLICATE)
-                foreach (DataRow row in D.InstanceInfo.Values.Rows)
+                foreach (DataRow row in D.InstanceData.Values.Rows)
                     row.SetAdded();
         }
 
@@ -33,17 +33,17 @@ namespace WBZ.Modules.AttributesClasses
 		/// </summary>
 		internal override bool CheckDataValidation()
 		{
-			if (string.IsNullOrEmpty(D.InstanceInfo.Module))
+			if (string.IsNullOrEmpty(D.InstanceData.Module))
 			{
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie wybrano modułu!") { Owner = this }.ShowDialog();
 				return false;
 			}
-			if (string.IsNullOrEmpty(D.InstanceInfo.Name))
+			if (string.IsNullOrEmpty(D.InstanceData.Name))
 			{
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano nazwy!") { Owner = this }.ShowDialog();
 				return false;
 			}
-			if (string.IsNullOrEmpty(D.InstanceInfo.Type))
+			if (string.IsNullOrEmpty(D.InstanceData.Type))
 			{
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie wybrano typu!") { Owner = this }.ShowDialog();
 				return false;

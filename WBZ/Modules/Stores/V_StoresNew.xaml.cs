@@ -22,7 +22,7 @@ namespace WBZ.Modules.Stores
 			Init();
 
 			if (instance != null)
-				D.InstanceInfo = instance;
+				D.InstanceData = instance;
 			D.Mode = mode;
 		}
 
@@ -34,13 +34,13 @@ namespace WBZ.Modules.Stores
 			var tab = (e.AddedItems.Count > 0 ? e.AddedItems[0] : null) as TabItem;
 			if (tab?.Name == "tabSources_Articles")
 			{
-				if (D.InstanceInfo.ID != 0 && D.InstanceSources_Articles == null)
-                    D.InstanceSources_Articles = SQL.ListInstances<M_Article>(Config.Modules.ARTICLES, $"sa.store={D.InstanceInfo.ID}");
+				if (D.InstanceData.ID != 0 && D.InstanceSources_Articles == null)
+                    D.InstanceSources_Articles = SQL.ListInstances<M_Article>(Config.Modules.ARTICLES, $"sa.store={D.InstanceData.ID}");
 			}
 			else if (tab?.Name == "tabSources_Documents")
 			{
-				if (D.InstanceInfo.ID != 0 && D.InstanceSources_Documents == null)
-                    D.InstanceSources_Documents = SQL.ListInstances<M_Document>(Config.Modules.DOCUMENTS, $"d.store={D.InstanceInfo.ID}");
+				if (D.InstanceData.ID != 0 && D.InstanceSources_Documents == null)
+                    D.InstanceSources_Documents = SQL.ListInstances<M_Document>(Config.Modules.DOCUMENTS, $"d.store={D.InstanceData.ID}");
 			}
 		}
 
@@ -65,22 +65,22 @@ namespace WBZ.Modules.Stores
 		/// </summary>
 		internal override bool CheckDataValidation()
 		{
-			if (string.IsNullOrEmpty(D.InstanceInfo.Name))
+			if (string.IsNullOrEmpty(D.InstanceData.Name))
 			{
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano nazwy!") { Owner = this }.ShowDialog();
 				return false;
 			}
-			if (string.IsNullOrEmpty(D.InstanceInfo.City))
+			if (string.IsNullOrEmpty(D.InstanceData.City))
 			{
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano miasta!") { Owner = this }.ShowDialog();
 				return false;
 			}
-			if (string.IsNullOrEmpty(D.InstanceInfo.Address))
+			if (string.IsNullOrEmpty(D.InstanceData.Address))
 			{
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano adresu!") { Owner = this }.ShowDialog();
 				return false;
 			}
-			if (string.IsNullOrEmpty(D.InstanceInfo.Postcode))
+			if (string.IsNullOrEmpty(D.InstanceData.Postcode))
 			{
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano kodu pocztowego!") { Owner = this }.ShowDialog();
 				return false;

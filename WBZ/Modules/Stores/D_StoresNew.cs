@@ -10,7 +10,7 @@ namespace WBZ.Modules.Stores
     class D_TransportNew : D_ModuleNew<MODULE_MODEL>
 	{
 		/// Module
-		public readonly string MODULE_TYPE = Config.Modules.STORES;
+		public readonly string Module = Config.Modules.STORES;
 
 		/// Window title
 		public string Title
@@ -18,9 +18,9 @@ namespace WBZ.Modules.Stores
 			get
 			{
 				if		(Mode == Commands.Type.NEW)			return $"Nowy magazyn";
-				else if (Mode == Commands.Type.DUPLICATE)	return $"Duplikowanie magazynu: {InstanceInfo.Name}";
-				else if (Mode == Commands.Type.EDIT)		return $"Edycja magazynu: {InstanceInfo.Name}";
-				else if (Mode == Commands.Type.PREVIEW)		return $"Podgląd magazynu: {InstanceInfo.Name}";
+				else if (Mode == Commands.Type.DUPLICATE)	return $"Duplikowanie magazynu: {InstanceData.Name}";
+				else if (Mode == Commands.Type.EDIT)		return $"Edycja magazynu: {InstanceData.Name}";
+				else if (Mode == Commands.Type.PREVIEW)		return $"Podgląd magazynu: {InstanceData.Name}";
 				else										return string.Empty;
 			}
 		}

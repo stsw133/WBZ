@@ -29,34 +29,34 @@ namespace WBZ.Modules._base
 		/// </summary>
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			int newID = (D.InstanceInfo as dynamic).ID;
+			int newID = (D.InstanceData as dynamic).ID;
 			if (((Commands.Type)D.Mode).In(Commands.Type.NEW, Commands.Type.DUPLICATE))
 			{
-				newID = SQL.NewInstanceID(D.MODULE_TYPE);
+				newID = SQL.NewInstanceID(D.Module);
 			}
 			/*
 			if ((Commands.Type)D.Mode == Commands.Type.DUPLICATE)
             {
 				/// groups
-				foreach (M_Group group in SQL.ListInstances<M_Group>(D.MODULE_TYPE, $"{Global.GetModuleAlias(D.MODULE_TYPE)}.id={D.InstanceInfo.ID}"))
+				foreach (M_Group group in SQL.ListInstances<M_Group>(D.Module, $"{Global.GetModuleAlias(D.Module)}.id={D.InstanceData.ID}"))
 				{
 					group.ID = newID;
 					SQL.SetInstance<M_Group>(M_Module.Module.GROUPS, group, Commands.Type.NEW);
 				}
 				/// contacts
-				DataTable contacts = SQL.ListContacts(D.MODULE_TYPE, D.InstanceInfo.ID);
+				DataTable contacts = SQL.ListContacts(D.Module, D.InstanceData.ID);
 				foreach (DataRow contact in contacts.Rows)
 					contact.SetAdded();
-				SQL.UpdateContacts(D.MODULE_TYPE, D.InstanceInfo.ID, contacts);
+				SQL.UpdateContacts(D.Module, D.InstanceData.ID, contacts);
 				/// attributes
-				foreach (M_Attribute attribute in SQL.ListAttributes(D.MODULE_TYPE, D.InstanceInfo.ID))
+				foreach (M_Attribute attribute in SQL.ListAttributes(D.Module, D.InstanceData.ID))
 				{
-					attribute.Instance = D.InstanceInfo.ID;
+					attribute.Instance = D.InstanceData.ID;
 					SQL.UpdateAttribute(attribute);
 				}
             }
 			*/
-			(D.InstanceInfo as dynamic).ID = newID;
+			(D.InstanceData as dynamic).ID = newID;
 		}
 
 		/// <summary>
@@ -68,13 +68,13 @@ namespace WBZ.Modules._base
 		/// Save
 		/// </summary>
 		private bool saved = false;
-		internal void cmdSave_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = D?.EditingMode ?? false;
+		internal void cmdSave_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = (D?.Mode != Commands.Type.PREVIEW);
 		internal void cmdSave_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			if (!CheckDataValidation())
 				return;
 
-			if (saved = SQL.SetInstance(D.MODULE_TYPE, D.InstanceInfo, D.Mode))
+			if (saved = SQL.SetInstance(D.Module, D.InstanceData, D.Mode))
 			{
 				if (Owner != null)
 					DialogResult = true;
@@ -87,7 +87,7 @@ namespace WBZ.Modules._base
 		/// </summary>
 		internal void cmdRefresh_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
-			if ((D.InstanceInfo as dynamic).ID == 0)
+			if ((D.InstanceData as dynamic).ID == 0)
 				return;
 			//TODO - dorobić odświeżanie zmienionych danych
 		}
@@ -129,7 +129,7 @@ namespace WBZ.Modules._base
 		private void Window_Closed(object sender, EventArgs e)
 		{
 			if (((Commands.Type)D.Mode).In(Commands.Type.NEW, Commands.Type.DUPLICATE) && !saved)
-				SQL.ClearObject(D.MODULE_TYPE, (D.InstanceInfo as dynamic).ID);
+				SQL.ClearObject(D.Module, (D.InstanceData as dynamic).ID);
 
 			if (W.Owner != null)
 				W.Owner.Focus();

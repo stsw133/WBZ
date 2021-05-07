@@ -178,7 +178,7 @@ namespace WBZ.Controls
                 dynamic d = win?.DataContext;
                 if (d != null)
                 {
-                    Module = (string)d.MODULE_TYPE;
+                    Module = (string)d.Module;
                     InstancesList = SQL.ListInstances<M_Group>(Config.Modules.GROUPS, $"g.module='{Module}' and g.instance is null", Properties.Settings.Default.sorting_GroupsList);
                 }
 

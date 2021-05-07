@@ -9,7 +9,7 @@ namespace WBZ.Modules.Attachments
     class D_AttachmentsList : D_ModuleList<MODULE_MODEL>
     {
 		/// Module
-		public readonly string MODULE_TYPE = Config.Modules.ATTACHMENTS;
+		public readonly string Module = Config.Modules.ATTACHMENTS;
 		public StringCollection SORTING = Properties.Settings.Default.sorting_AttachmentsList;
 
 		/// Window title

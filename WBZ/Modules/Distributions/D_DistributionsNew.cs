@@ -8,7 +8,7 @@ namespace WBZ.Modules.Distributions
     class D_DistributionsNew : D_ModuleNew<MODULE_MODEL>
 	{
 		/// Module
-		public readonly string MODULE_TYPE = Config.Modules.DISTRIBUTIONS;
+		public readonly string Module = Config.Modules.DISTRIBUTIONS;
 		
 		/// Window title
 		public string Title
@@ -16,9 +16,9 @@ namespace WBZ.Modules.Distributions
 			get
 			{
 				if		(Mode == Commands.Type.NEW)			return $"Nowa dystrybucja";
-				else if (Mode == Commands.Type.DUPLICATE)	return $"Duplikowanie dystrybucji: {InstanceInfo.Name}";
-				else if (Mode == Commands.Type.EDIT)		return $"Edycja dystrybucji: {InstanceInfo.Name}";
-				else if (Mode == Commands.Type.PREVIEW)		return $"Podgląd dystrybucji: {InstanceInfo.Name}";
+				else if (Mode == Commands.Type.DUPLICATE)	return $"Duplikowanie dystrybucji: {InstanceData.Name}";
+				else if (Mode == Commands.Type.EDIT)		return $"Edycja dystrybucji: {InstanceData.Name}";
+				else if (Mode == Commands.Type.PREVIEW)		return $"Podgląd dystrybucji: {InstanceData.Name}";
 				else										return string.Empty;
 			}
 		}

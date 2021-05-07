@@ -8,7 +8,7 @@ namespace WBZ.Modules.Icons
     class D_IconsNew : D_ModuleNew<MODULE_MODEL>
     {
         /// Module
-        public readonly string MODULE_TYPE = Config.Modules.ICONS;
+        public readonly string Module = Config.Modules.ICONS;
         
         /// Window title
         public string Title
@@ -16,9 +16,9 @@ namespace WBZ.Modules.Icons
             get
             {
                 if      (Mode == Commands.Type.NEW)         return $"Nowa ikona";
-                else if (Mode == Commands.Type.DUPLICATE)   return $"Duplikowanie ikony: {InstanceInfo.Name}";
-                else if (Mode == Commands.Type.EDIT)        return $"Edycja ikony: {InstanceInfo.Name}";
-                else if (Mode == Commands.Type.PREVIEW)     return $"Podgląd ikony: {InstanceInfo.Name}";
+                else if (Mode == Commands.Type.DUPLICATE)   return $"Duplikowanie ikony: {InstanceData.Name}";
+                else if (Mode == Commands.Type.EDIT)        return $"Edycja ikony: {InstanceData.Name}";
+                else if (Mode == Commands.Type.PREVIEW)     return $"Podgląd ikony: {InstanceData.Name}";
                 else                                        return string.Empty;
             }
         }

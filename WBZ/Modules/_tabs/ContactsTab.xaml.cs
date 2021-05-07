@@ -33,9 +33,9 @@ namespace WBZ.Modules._tabs
                 dynamic d = win?.DataContext;
                 if (d != null)
                 {
-                    Module = (string)d.MODULE_TYPE;
-                    ID = (int)d.InstanceInfo.ID;
-                    EditingMode = (bool)d.EditingMode;
+                    Module = (string)d.Module;
+                    ID = (int)d.InstanceData.ID;
+                    EditingMode = (bool)(d.Mode != StswExpress.Globals.Commands.Type.PREVIEW);
                 }
                 if (ID != 0 && D.InstanceContacts == null)
                 {

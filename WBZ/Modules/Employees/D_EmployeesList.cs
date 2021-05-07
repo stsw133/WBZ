@@ -9,7 +9,7 @@ namespace WBZ.Modules.Employees
     class D_EmployeesList : D_ModuleList<MODULE_MODEL>
 	{
 		/// Module
-		public readonly string MODULE_TYPE = Config.Modules.EMPLOYEES;
+		public readonly string Module = Config.Modules.EMPLOYEES;
 		public StringCollection SORTING = Properties.Settings.Default.sorting_EmployeesList;
 
 		/// Window title

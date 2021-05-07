@@ -11,6 +11,10 @@
 		"en": "Accept",
 		"pl": "Akceptuj"
 	},
+	"Additional": {
+		"en": "Additional",
+		"pl": "Dodatkowe"
+	},
 	"Address": {
 		"en": "Address",
 		"pl": "Adres"
@@ -162,6 +166,10 @@
 	"Groups": {
 		"en": "Groups",
 		"pl": "Grupy"
+	},
+	"History": {
+		"en": "History",
+		"pl": "Historia"
 	},
 	"Host": {
 		"en": "Host",

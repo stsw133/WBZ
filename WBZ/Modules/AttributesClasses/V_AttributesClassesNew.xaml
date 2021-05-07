@@ -70,15 +70,15 @@
                             <Label Content="Moduł:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>
                             <ComboBox Margin="5" VerticalContentAlignment="Center"
                                       ItemsSource="{x:Static g:Config.ListModules}"
-                                      SelectedValue="{Binding InstanceInfo.Module}" SelectedValuePath="Item1" DisplayMemberPath="Item2"/>
+                                      SelectedValue="{Binding InstanceData.Module}" SelectedValuePath="Item1" DisplayMemberPath="Item2"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Nazwa:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>
-                            <TextBox Text="{Binding InstanceInfo.Name}" Margin="5" VerticalContentAlignment="Center"/>
+                            <TextBox Text="{Binding InstanceData.Name}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Typ:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>
-                            <ComboBox SelectedValue="{Binding InstanceInfo.Type}" SelectedValuePath="Tag" Margin="5" VerticalContentAlignment="Center">
+                            <ComboBox SelectedValue="{Binding InstanceData.Type}" SelectedValuePath="Tag" Margin="5" VerticalContentAlignment="Center">
                                 <ComboBoxItem Content="Ciąg znaków" Tag="string"/>
                                 <ComboBoxItem Content="Data" Tag="date"/>
                                 <ComboBoxItem Content="Liczba całkowita" Tag="int"/>
@@ -86,11 +86,11 @@
                                 <ComboBoxItem Content="Lista" Tag="list"/>
                             </ComboBox>
                         </DockPanel>
-                        <CheckBox DockPanel.Dock="Top" Content="Wymagana" Margin="20" HorizontalAlignment="Center" VerticalContentAlignment="Center" IsChecked="{Binding InstanceInfo.Required}"/>
+                        <CheckBox DockPanel.Dock="Top" Content="Wymagana" Margin="20" HorizontalAlignment="Center" VerticalContentAlignment="Center" IsChecked="{Binding InstanceData.Required}"/>
                         <Label DockPanel.Dock="Top" Content="Lista możliwych wartości:" Margin="5,5,5,0" HorizontalAlignment="Center"/>
                         <DataGrid x:Name="dgValues" DockPanel.Dock="Top" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
-                                  AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstanceInfo.Values.DefaultView}" IsReadOnly="{Binding EditMode, Converter={seg:conv_BoolInverted}}"
-                                  IsEnabled="{Binding InstanceInfo.Type, Converter={seg:conv_Compare}, ConverterParameter=list}">
+                                  AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstanceData.Values.DefaultView}" IsReadOnly="{Binding EditMode, Converter={seg:conv_BoolInverted}}"
+                                  IsEnabled="{Binding InstanceData.Type, Converter={seg:conv_Compare}, ConverterParameter=list}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding id}" Header="ID" IsReadOnly="True" Visibility="Collapsed"/>
                                 <DataGridTextColumn Binding="{Binding value}" Header="Wartość" Width="*"/>

@@ -9,7 +9,7 @@ namespace WBZ.Modules._shared
     class D_GroupsList : D_ModuleList<MODULE_MODEL>
     {
         /// Module
-        public string MODULE_TYPE = Config.Modules.GROUPS;
+        public string Module = Config.Modules.GROUPS;
         public StringCollection SORTING = Properties.Settings.Default.sorting_GroupsList;
 
 		/// Window title

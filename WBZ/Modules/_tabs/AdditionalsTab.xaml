@@ -15,7 +15,7 @@
                        Height="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}" Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"
                        PreviewMouseLeftButtonUp="btnManageIcon_Click">
                         <Image.Source>
-                            <Binding Path="InstanceInfo.cIcon.Value">
+                            <Binding Path="InstanceData.cIcon.Value">
                                 <Binding.TargetNullValue>
                                     <ImageSource>/Resources/icon32_photos.ico</ImageSource>
                                 </Binding.TargetNullValue>
@@ -23,15 +23,15 @@
                         </Image.Source>
                     <Image.ContextMenu>
                         <ContextMenu>
-                            <sec:MenuItem Header="Wybierz" IconUri="/Resources/icon32_select.ico" Click="btnSelect_Click"/>
-                            <sec:MenuItem Header="Usuń" IconUri="/Resources/icon32_remove.ico" Click="btnDelete_Click"/>
+                            <sec:MenuItem Header="{Tr Select}" IconUri="/Resources/icon32_select.ico" Click="btnSelect_Click"/>
+                            <sec:MenuItem Header="{Tr Delete}" IconUri="/Resources/icon32_remove.ico" Click="btnDelete_Click"/>
                         </ContextMenu>
                     </Image.ContextMenu>
                 </Image>
             </DockPanel>
-            <CheckBox DockPanel.Dock="Top" Content="Archiwalny" Margin="20" VerticalContentAlignment="Center" IsChecked="{Binding InstanceInfo.Archival}"/>
+            <CheckBox DockPanel.Dock="Top" Content="Archiwalny" Margin="20" VerticalContentAlignment="Center" IsChecked="{Binding InstanceData.Archival}"/>
             <Label DockPanel.Dock="Top" Content="Komentarz:" Margin="5,0"/>
         </DockPanel>
-        <TextBox Margin="5" Text="{Binding InstanceInfo.Comment}" TextWrapping="Wrap" AcceptsReturn="True"/>
+        <TextBox Margin="5" Text="{Binding InstanceData.Comment}" TextWrapping="Wrap" AcceptsReturn="True"/>
     </DockPanel>
 </UserControl>

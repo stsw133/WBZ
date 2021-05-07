@@ -9,7 +9,7 @@ namespace WBZ.Modules.Contractors
     class D_ContractorsList : D_ModuleList<MODULE_MODEL>
     {
         /// Module
-        public readonly string MODULE_TYPE = Config.Modules.CONTRACTORS;
+        public readonly string Module = Config.Modules.CONTRACTORS;
         public StringCollection SORTING = Properties.Settings.Default.sorting_ContractorsList;
 
 		/// Window title

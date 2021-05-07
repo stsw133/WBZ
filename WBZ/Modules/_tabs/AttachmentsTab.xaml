@@ -13,9 +13,9 @@
                  Drop="lbAttachments_Drop" SelectionChanged="lbAttachments_SelectionChanged">
             <ListBox.ContextMenu>
                 <ContextMenu>
-                    <sec:MenuItem Header="Dodaj" IconUri="/Resources/icon32_add.ico" IsEnabled="{Binding EditingMode}" Click="btnAttachmentAdd_Click"/>
-                    <sec:MenuItem Header="Edytuj" IconUri="/Resources/icon32_edit.ico" IsEnabled="{Binding EditingMode}" Click="btnAttachmentEdit_Click"/>
-                    <sec:MenuItem Header="Usuń" IconUri="/Resources/icon32_delete.ico" IsEnabled="{Binding EditingMode}" Click="btnAttachmentRemove_Click"/>
+                    <sec:MenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico" IsEnabled="{Binding EditingMode}" Click="btnAttachmentAdd_Click"/>
+                    <sec:MenuItem Header="{Tr Edit}" IconUri="/Resources/icon32_edit.ico" IsEnabled="{Binding EditingMode}" Click="btnAttachmentEdit_Click"/>
+                    <sec:MenuItem Header="{Tr Delete}" IconUri="/Resources/icon32_delete.ico" IsEnabled="{Binding EditingMode}" Click="btnAttachmentRemove_Click"/>
                 </ContextMenu>
             </ListBox.ContextMenu>
         </ListBox>

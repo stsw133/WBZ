@@ -18,7 +18,7 @@ namespace WBZ.Modules.Employees
 			Init();
 
 			if (instance != null)
-				D.InstanceInfo = instance;
+				D.InstanceData = instance;
 			D.Mode = mode;
 		}
 
@@ -27,12 +27,12 @@ namespace WBZ.Modules.Employees
 		/// </summary>
 		internal override bool CheckDataValidation()
         {
-            if (string.IsNullOrEmpty(D.InstanceInfo.Forename))
+            if (string.IsNullOrEmpty(D.InstanceData.Forename))
             {
                 new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano imienia!") { Owner = this }.ShowDialog();
                 return false;
             }
-            if (string.IsNullOrEmpty(D.InstanceInfo.Lastname))
+            if (string.IsNullOrEmpty(D.InstanceData.Lastname))
             {
                 new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano nazwiska!") { Owner = this }.ShowDialog();
                 return false;

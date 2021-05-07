@@ -25,12 +25,12 @@ namespace WBZ.Modules.Articles
 			Init();
 
 			if (instance != null)
-				D.InstanceInfo = instance;
+				D.InstanceData = instance;
 			D.Mode = mode;
 
-			D.InstanceInfo.Measures = SQL.GetInstancePositions(D.MODULE_TYPE, D.InstanceInfo.ID);
+			D.InstanceData.Measures = SQL.GetInstancePositions(D.Module, D.InstanceData.ID);
 			if (D.Mode == StswExpress.Globals.Commands.Type.DUPLICATE)
-				foreach (DataRow row in D.InstanceInfo.Measures.Rows)
+				foreach (DataRow row in D.InstanceData.Measures.Rows)
 					row.SetAdded();
 		}
 
@@ -49,11 +49,11 @@ namespace WBZ.Modules.Articles
 		{
 			await Task.Delay(10);
 			await Task.Run(() => {
-				if (D.InstanceInfo.ID != 0 && index < D.InstanceInfo.Measures.Rows.Count)
+				if (D.InstanceData.ID != 0 && index < D.InstanceData.Measures.Rows.Count)
 				{
-					double conv = Convert.IsDBNull(D.InstanceInfo.Measures.Rows[index]["converter"]) ? 1 : (double)D.InstanceInfo.Measures.Rows[index]["converter"];
-					D.InstanceInfo.Measures.Rows[index]["amount"] = Convert.ToDouble(D.InstanceInfo.AmountRaw) / conv;
-					D.InstanceInfo.Measures.Rows[index]["reserved"] = Convert.ToDouble(D.InstanceInfo.ReservedRaw) / conv;
+					double conv = Convert.IsDBNull(D.InstanceData.Measures.Rows[index]["converter"]) ? 1 : (double)D.InstanceData.Measures.Rows[index]["converter"];
+					D.InstanceData.Measures.Rows[index]["amount"] = Convert.ToDouble(D.InstanceData.AmountRaw) / conv;
+					D.InstanceData.Measures.Rows[index]["reserved"] = Convert.ToDouble(D.InstanceData.ReservedRaw) / conv;
 				}
 			});
 		}
@@ -66,18 +66,18 @@ namespace WBZ.Modules.Articles
 			var tab = (e.AddedItems.Count > 0 ? e.AddedItems[0] : null) as TabItem;
 			if (tab?.Name?.EndsWith("_Stores") == true)
 			{
-				if (D.InstanceInfo.ID != 0 && D.InstanceSources_Stores == null)
-                    D.InstanceSources_Stores = SQL.ListInstances<M_Store>(Config.Modules.STORES, $"sa.article={D.InstanceInfo.ID}");
+				if (D.InstanceData.ID != 0 && D.InstanceSources_Stores == null)
+                    D.InstanceSources_Stores = SQL.ListInstances<M_Store>(Config.Modules.STORES, $"sa.article={D.InstanceData.ID}");
 			}
 			else if (tab?.Name?.EndsWith("_Documents") == true)
 			{
-				if (D.InstanceInfo.ID != 0 && D.InstanceSources_Documents == null)
-                    D.InstanceSources_Documents = SQL.ListInstances<M_Document>(Config.Modules.DOCUMENTS, $"dp.article={D.InstanceInfo.ID}");
+				if (D.InstanceData.ID != 0 && D.InstanceSources_Documents == null)
+                    D.InstanceSources_Documents = SQL.ListInstances<M_Document>(Config.Modules.DOCUMENTS, $"dp.article={D.InstanceData.ID}");
 			}
 			else if (tab?.Name?.EndsWith("_Distributions") == true)
 			{
-				if (D.InstanceInfo.ID != 0 && D.InstanceSources_Distributions == null)
-                    D.InstanceSources_Distributions = SQL.ListInstances<M_Distribution>(Config.Modules.DISTRIBUTIONS, $"dp.article={D.InstanceInfo.ID}");
+				if (D.InstanceData.ID != 0 && D.InstanceSources_Distributions == null)
+                    D.InstanceSources_Distributions = SQL.ListInstances<M_Distribution>(Config.Modules.DISTRIBUTIONS, $"dp.article={D.InstanceData.ID}");
 			}
 		}
 
@@ -110,7 +110,7 @@ namespace WBZ.Modules.Articles
 		/// </summary>
 		internal override bool CheckDataValidation()
 		{
-			if (string.IsNullOrEmpty(D.InstanceInfo.Name))
+			if (string.IsNullOrEmpty(D.InstanceData.Name))
 			{
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano nazwy!") { Owner = this }.ShowDialog();
 				return false;

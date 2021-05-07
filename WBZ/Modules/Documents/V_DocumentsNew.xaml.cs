@@ -25,15 +25,15 @@ namespace WBZ.Modules.Documents
 			Init();
 
 			if (instance != null)
-				D.InstanceInfo = instance;
+				D.InstanceData = instance;
 			D.Mode = mode;
 
-			if (mode == Commands.Type.EDIT && D.InstanceInfo.Status != (short)MODULE_MODEL.DocumentStatus.Buffer)
+			if (mode == Commands.Type.EDIT && D.InstanceData.Status != (short)MODULE_MODEL.DocumentStatus.Buffer)
 				D.Mode = Commands.Type.PREVIEW;
 
-			D.InstanceInfo.Positions = SQL.GetInstancePositions(D.MODULE_TYPE, D.InstanceInfo.ID);
+			D.InstanceData.Positions = SQL.GetInstancePositions(D.Module, D.InstanceData.ID);
 			if (D.Mode.In(Commands.Type.DUPLICATE))
-				foreach (DataRow row in D.InstanceInfo.Positions.Rows)
+				foreach (DataRow row in D.InstanceData.Positions.Rows)
 					row.SetAdded();
 		}
 
@@ -62,8 +62,8 @@ namespace WBZ.Modules.Documents
 			if (window.ShowDialog() == true)
 				if (window.Selected != null)
 				{
-					D.InstanceInfo.Contractor = window.Selected.ID;
-					D.InstanceInfo = D.InstanceInfo;
+					D.InstanceData.Contractor = window.Selected.ID;
+					D.InstanceData = D.InstanceData;
 				}
 		}
 
@@ -76,8 +76,8 @@ namespace WBZ.Modules.Documents
 			if (window.ShowDialog() == true)
 				if (window.Selected != null)
 				{
-					D.InstanceInfo.Store = window.Selected.ID;
-					D.InstanceInfo = D.InstanceInfo;
+					D.InstanceData.Store = window.Selected.ID;
+					D.InstanceData = D.InstanceData;
 				}
 		}
 
@@ -90,16 +90,16 @@ namespace WBZ.Modules.Documents
 			if (window.ShowDialog() == true)
 				if (window.Selected != null)
 				{
-					var row = D.InstanceInfo.Positions.NewRow();
+					var row = D.InstanceData.Positions.NewRow();
 
-					row["position"] = D.InstanceInfo.Positions.Rows.Count + 1;
+					row["position"] = D.InstanceData.Positions.Rows.Count + 1;
 					row["article"] = window.Selected.ID;
 					row["articlename"] = window.Selected.Name;
 					row["amount"] = DBNull.Value;
 					row["measure"] = window.Selected.Measure;
 					row["cost"] = DBNull.Value;
 
-					D.InstanceInfo.Positions.Rows.Add(row);
+					D.InstanceData.Positions.Rows.Add(row);
 				}
 		}
 
@@ -108,27 +108,27 @@ namespace WBZ.Modules.Documents
 		/// </summary>
 		internal override bool CheckDataValidation()
 		{
-			if (string.IsNullOrEmpty(D.InstanceInfo.Type))
+			if (string.IsNullOrEmpty(D.InstanceData.Type))
 			{
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie wybrano typu dokumentu!") { Owner = this }.ShowDialog();
 				return false;
 			}
-			if (string.IsNullOrEmpty(D.InstanceInfo.Name))
+			if (string.IsNullOrEmpty(D.InstanceData.Name))
 			{
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano nazwy (numeru) dokumentu!") { Owner = this }.ShowDialog();
 				return false;
 			}
-			if (D.InstanceInfo.cStore == null)
+			if (D.InstanceData.cStore == null)
 			{
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie wybrano magazynu!") { Owner = this }.ShowDialog();
 				return false;
 			}
-			if (D.InstanceInfo.Contractor == 0)
+			if (D.InstanceData.Contractor == 0)
 			{
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie wybrano kontrahenta!") { Owner = this }.ShowDialog();
 				return false;
 			}
-			if (D.InstanceInfo.Positions.Rows.Count == 0)
+			if (D.InstanceData.Positions.Rows.Count == 0)
 			{
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Brak pozycji na dokumencie!") { Owner = this }.ShowDialog();
 				return false;

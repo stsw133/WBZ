@@ -6,10 +6,12 @@ namespace WBZ.Modules._base
 {
 	abstract class D_ModuleList<MODULE_MODEL> : D where MODULE_MODEL : class, new()
 	{
+		/// Module
+		//public string Module => GetType().Namespace.ToLower().Split('.').Last();
+		public string Module => GetType().Name.ToLower()[2..^4];
+
 		/// Mode
 		public Commands.Type Mode { get; set; }
-
-		/// Additional window icon
 		public string ModeIcon
 		{
 			get

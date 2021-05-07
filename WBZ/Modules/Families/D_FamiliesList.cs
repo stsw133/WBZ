@@ -9,7 +9,7 @@ namespace WBZ.Modules.Families
     class D_FamiliesList : D_ModuleList<MODULE_MODEL>
     {
         /// Module
-        public readonly string MODULE_TYPE = Config.Modules.FAMILIES;
+        public readonly string Module = Config.Modules.FAMILIES;
         public StringCollection SORTING = Properties.Settings.Default.sorting_FamiliesList;
 
 		/// Window title

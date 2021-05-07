@@ -19,7 +19,7 @@ namespace WBZ.Modules._shared
             DataContext = D;
 
             D.Mode = mode;
-            D.MODULE_TYPE = module;
+            D.Module = module;
         }
         
         /// <summary>

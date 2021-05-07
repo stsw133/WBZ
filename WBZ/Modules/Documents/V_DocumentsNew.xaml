@@ -37,7 +37,7 @@
                                     Command="seg:Commands.Save"/>
                     <Separator/>
                     <CheckBox Content="{Tr ToBuffer}" Margin="5"
-                              IsChecked="{Binding InstanceInfo.Status, Converter={seg:conv_BoolInverted}}"
+                              IsChecked="{Binding InstanceData.Status, Converter={seg:conv_BoolInverted}}"
                               IsEnabled="{Binding EditingMode}"/>
                     <Separator/>
                 </StackPanel>
@@ -88,7 +88,7 @@
                                        Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.5}"
                                        Source="/Resources/icon32_contractors.ico"/>
                             </Button>
-                            <TextBox Text="{Binding InstanceInfo.ContractorName}" Tag="{Binding InstanceInfo.Contractor}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True"/>
+                            <TextBox Text="{Binding InstanceData.ContractorName}" Tag="{Binding InstanceData.Contractor}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Magazyn:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>
@@ -98,21 +98,21 @@
                                        Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.5}"
                                        Source="/Resources/icon32_stores.ico"/>
                             </Button>
-                            <TextBox Text="{Binding InstanceInfo.StoreName}" Tag="{Binding InstanceInfo.Store}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True"/>
+                            <TextBox Text="{Binding InstanceData.StoreName}" Tag="{Binding InstanceData.Store}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Typ:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>
-                            <ComboBox SelectedValue="{Binding InstanceInfo.Type}" SelectedValuePath="Tag" Margin="5" VerticalContentAlignment="Center">
+                            <ComboBox SelectedValue="{Binding InstanceData.Type}" SelectedValuePath="Tag" Margin="5" VerticalContentAlignment="Center">
                                 <ComboBoxItem Content="Faktura" Tag="FS"/>
                             </ComboBox>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Nazwa:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>
-                            <TextBox Text="{Binding InstanceInfo.Name}" Margin="5" VerticalContentAlignment="Center"/>
+                            <TextBox Text="{Binding InstanceData.Name}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Data wystawienia:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>
-                            <DatePicker SelectedDate="{Binding InstanceInfo.DateIssue}" Margin="5" VerticalContentAlignment="Center"/>
+                            <DatePicker SelectedDate="{Binding InstanceData.DateIssue}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
                             <Button ToolTip="Dodaj pozycję" HorizontalAlignment="Left"
@@ -123,7 +123,7 @@
                             <Label Content="Pozycje:"/>
                         </StackPanel>
                         <DataGrid x:Name="dgPositions" DockPanel.Dock="Top" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
-                                  AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstanceInfo.Positions.DefaultView}" IsReadOnly="{Binding EditMode, Converter={seg:conv_BoolInverted}}"
+                                  AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstanceData.Positions.DefaultView}" IsReadOnly="{Binding EditMode, Converter={seg:conv_BoolInverted}}"
                                   CanUserAddRows="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding id}" Header="ID" IsReadOnly="True" Visibility="Hidden"/>

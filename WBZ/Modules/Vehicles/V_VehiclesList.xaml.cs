@@ -14,7 +14,7 @@ namespace WBZ.Modules.Vehicles
 		{
 			InitializeComponent();
 			DataContext = D;
-			Init();
+			base.Init();
 
 			D.Mode = mode;
 		}

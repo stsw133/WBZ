@@ -10,7 +10,7 @@ namespace WBZ.Modules.Contractors
     class D_ContractorsNew : D_ModuleNew<MODULE_MODEL>
     {
         /// Module
-        public readonly string MODULE_TYPE = Config.Modules.CONTRACTORS;
+        public readonly string Module = Config.Modules.CONTRACTORS;
 
         /// Window title
         public string Title
@@ -18,9 +18,9 @@ namespace WBZ.Modules.Contractors
             get
             {
                 if      (Mode == Commands.Type.NEW)         return $"Nowy kontrahent";
-                else if (Mode == Commands.Type.DUPLICATE)   return $"Duplikowanie kontrahenta: {InstanceInfo.Name}";
-                else if (Mode == Commands.Type.EDIT)        return $"Edycja kontrahenta: {InstanceInfo.Name}";
-                else if (Mode == Commands.Type.PREVIEW)     return $"Podgląd kontrahenta: {InstanceInfo.Name}";
+                else if (Mode == Commands.Type.DUPLICATE)   return $"Duplikowanie kontrahenta: {InstanceData.Name}";
+                else if (Mode == Commands.Type.EDIT)        return $"Edycja kontrahenta: {InstanceData.Name}";
+                else if (Mode == Commands.Type.PREVIEW)     return $"Podgląd kontrahenta: {InstanceData.Name}";
                 else                                        return string.Empty;
             }
         }

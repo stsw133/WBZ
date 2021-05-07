@@ -8,7 +8,7 @@ namespace WBZ.Modules.Employees
     class D_EmployeesNew : D_ModuleNew<MODULE_MODEL>
 	{
 		/// Module
-		public readonly string MODULE_TYPE = Config.Modules.EMPLOYEES;
+		public readonly string Module = Config.Modules.EMPLOYEES;
 
 		/// Window title
 		public string Title
@@ -16,9 +16,9 @@ namespace WBZ.Modules.Employees
 			get
 			{
 				if		(Mode == Commands.Type.NEW)			return $"Nowy pracownik";
-				else if (Mode == Commands.Type.DUPLICATE)	return $"Duplikowanie pracownika: {InstanceInfo.Fullname}";
-				else if (Mode == Commands.Type.EDIT)		return $"Edycja pracownika: {InstanceInfo.Fullname}";
-				else if (Mode == Commands.Type.PREVIEW)		return $"Podgląd pracownika: {InstanceInfo.Fullname}";
+				else if (Mode == Commands.Type.DUPLICATE)	return $"Duplikowanie pracownika: {InstanceData.Fullname}";
+				else if (Mode == Commands.Type.EDIT)		return $"Edycja pracownika: {InstanceData.Fullname}";
+				else if (Mode == Commands.Type.PREVIEW)		return $"Podgląd pracownika: {InstanceData.Fullname}";
 				else										return string.Empty;
 			}
 		}

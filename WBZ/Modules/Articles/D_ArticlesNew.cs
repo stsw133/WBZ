@@ -10,7 +10,7 @@ namespace WBZ.Modules.Articles
     class D_ArticlesNew : D_ModuleNew<MODULE_MODEL>
 	{
 		/// Module
-		public readonly string MODULE_TYPE = Config.Modules.ARTICLES;
+		public readonly string Module = Config.Modules.ARTICLES;
 
 		/// Window title
 		public string Title
@@ -18,9 +18,9 @@ namespace WBZ.Modules.Articles
 			get
 			{
 				if		(Mode == Commands.Type.NEW)			return $"Nowy towar";
-				else if (Mode == Commands.Type.DUPLICATE)	return $"Duplikowanie towaru: {InstanceInfo.Name}";
-				else if (Mode == Commands.Type.EDIT)		return $"Edycja towaru: {InstanceInfo.Name}";
-				else if (Mode == Commands.Type.PREVIEW)		return $"Podgląd towaru: {InstanceInfo.Name}";
+				else if (Mode == Commands.Type.DUPLICATE)	return $"Duplikowanie towaru: {InstanceData.Name}";
+				else if (Mode == Commands.Type.EDIT)		return $"Edycja towaru: {InstanceData.Name}";
+				else if (Mode == Commands.Type.PREVIEW)		return $"Podgląd towaru: {InstanceData.Name}";
 				else										return string.Empty;
 			}
 		}

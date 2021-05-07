@@ -9,7 +9,7 @@ namespace WBZ.Modules.Users
     class D_UsersList : D_ModuleList<MODULE_MODEL>
 	{
 		/// Module
-		public readonly string MODULE_TYPE = Config.Modules.USERS;
+		public readonly string Module = Config.Modules.USERS;
 		public StringCollection SORTING = Properties.Settings.Default.sorting_UsersList;
 
 		/// Window title

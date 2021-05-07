@@ -9,7 +9,7 @@ namespace WBZ.Modules.Stores
     class D_TransportList : D_ModuleList<MODULE_MODEL>
 	{
 		/// Module
-		public readonly string MODULE_TYPE = Config.Modules.STORES;
+		public readonly string Module = Config.Modules.STORES;
 		public StringCollection SORTING = Properties.Settings.Default.sorting_StoresList;
 
 		/// Window title

@@ -9,7 +9,7 @@ namespace WBZ.Modules.Documents
     class D_DocumentsList : D_ModuleList<MODULE_MODEL>
 	{
 		/// Module
-		public readonly string MODULE_TYPE = Config.Modules.DOCUMENTS;
+		public readonly string Module = Config.Modules.DOCUMENTS;
 		public StringCollection SORTING = Properties.Settings.Default.sorting_DocumentsList;
 
 		/// Window title

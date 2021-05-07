@@ -11,7 +11,7 @@ namespace WBZ.Modules.Articles
     class D_ArticlesList : D_ModuleList<MODULE_MODEL>
 	{
 		/// Module
-		public readonly string MODULE_TYPE = Config.Modules.ARTICLES;
+		public readonly string Module = Config.Modules.ARTICLES;
 		public StringCollection SORTING = Properties.Settings.Default.sorting_ArticlesList;
 
 		/// Window title

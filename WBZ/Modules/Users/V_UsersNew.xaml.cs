@@ -20,12 +20,12 @@ namespace WBZ.Modules.Users
 			Init();
 
 			if (instance != null)
-				D.InstanceInfo = instance;
+				D.InstanceData = instance;
 			D.Mode = mode;
 
-			D.InstanceInfo.Perms = SQL.GetUserPerms(D.InstanceInfo.ID);
+			D.InstanceData.Perms = SQL.GetUserPerms(D.InstanceData.ID);
 			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE))
-				D.InstanceInfo.ID = SQL.NewInstanceID(D.MODULE_TYPE);
+				D.InstanceData.ID = SQL.NewInstanceID(D.Module);
 		}
 
 		/// <summary>
@@ -47,8 +47,8 @@ namespace WBZ.Modules.Users
 		private void chckPerms_Checked(object sender, RoutedEventArgs e)
 		{
 			var perm = (sender as CheckBox).Tag.ToString();
-			if (!D.InstanceInfo.Perms.Contains(perm))
-				D.InstanceInfo.Perms.Add(perm);
+			if (!D.InstanceData.Perms.Contains(perm))
+				D.InstanceData.Perms.Add(perm);
 		}
 
 		/// <summary>
@@ -57,8 +57,8 @@ namespace WBZ.Modules.Users
 		private void chckPerms_Unchecked(object sender, RoutedEventArgs e)
 		{
 			var perm = (sender as CheckBox).Tag.ToString();
-			if (D.InstanceInfo.Perms.Contains(perm))
-				D.InstanceInfo.Perms.Remove(perm);
+			if (D.InstanceData.Perms.Contains(perm))
+				D.InstanceData.Perms.Remove(perm);
 		}
 
 		/// <summary>
@@ -66,7 +66,7 @@ namespace WBZ.Modules.Users
 		/// </summary>
 		private void tbNewpass_PasswordChanged(object sender, RoutedEventArgs e)
         {
-			D.InstanceInfo.Newpass = (sender as PasswordBox).Password;
+			D.InstanceData.Newpass = (sender as PasswordBox).Password;
         }
 
 		/// <summary>
@@ -74,12 +74,12 @@ namespace WBZ.Modules.Users
 		/// </summary>
 		internal override bool CheckDataValidation()
 		{
-			if (string.IsNullOrEmpty(D.InstanceInfo.Username))
+			if (string.IsNullOrEmpty(D.InstanceData.Username))
 			{
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano nazwy użytkownika!") { Owner = this }.ShowDialog();
 				return false;
 			}
-			if (string.IsNullOrEmpty(D.InstanceInfo.Email))
+			if (string.IsNullOrEmpty(D.InstanceData.Email))
 			{
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano adresu e-mail!") { Owner = this }.ShowDialog();
 				return false;

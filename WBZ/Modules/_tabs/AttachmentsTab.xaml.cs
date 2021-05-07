@@ -38,8 +38,8 @@ namespace WBZ.Modules._tabs
                 dynamic d = win?.DataContext;
                 if (d != null)
                 {
-                    Module = (string)d.MODULE_TYPE;
-                    ID = (int)d.InstanceInfo.ID;
+                    Module = (string)d.Module;
+                    ID = (int)d.InstanceData.ID;
                 }
                 if (ID != 0 && D.InstanceAttachments == null)
                 {

@@ -5,21 +5,12 @@ namespace WBZ.Modules._base
 {
     abstract class D_ModuleNew<MODULE_MODEL> : D where MODULE_MODEL : class, new()
     {
-		/// Instance
-		private MODULE_MODEL instanceInfo = new MODULE_MODEL();
-		public MODULE_MODEL InstanceInfo
-		{
-			get => instanceInfo;
-			set => SetField(ref instanceInfo, value, () => InstanceInfo);
-		}
+		/// Module
+		//public string Module => GetType().Namespace.ToLower().Split('.').Last();
+		public string Module => GetType().Name.ToLower()[2..^3];
 
-		/// Window mode
+		/// Mode
 		public Commands.Type Mode { get; set; }
-
-		/// Editing mode
-		public bool EditingMode => Mode != Commands.Type.PREVIEW;
-
-		/// Additional window icon
 		public string ModeIcon
 		{
 			get
@@ -30,6 +21,14 @@ namespace WBZ.Modules._base
 				else if (Mode == Commands.Type.PREVIEW)		return "/Resources/icon32_search.ico";
 				else										return null;
 			}
+		}
+
+		/// Instance
+		private MODULE_MODEL instanceData = new MODULE_MODEL();
+		public MODULE_MODEL InstanceData
+		{
+			get => instanceData;
+			set => SetField(ref instanceData, value, () => InstanceData);
 		}
 	}
 }

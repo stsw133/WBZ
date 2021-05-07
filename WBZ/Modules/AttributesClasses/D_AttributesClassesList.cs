@@ -9,7 +9,7 @@ namespace WBZ.Modules.AttributesClasses
     class D_IconsList : D_ModuleList<MODULE_MODEL>
 	{
 		/// Module
-		public readonly string MODULE_TYPE = Config.Modules.ATTRIBUTES_CLASSES;
+		public readonly string Module = Config.Modules.ATTRIBUTES_CLASSES;
 		public StringCollection SORTING = Properties.Settings.Default.sorting_AttributesClassesList;
 
 		/// Window title

@@ -37,7 +37,7 @@
                                     Command="seg:Commands.Save"/>
                     <Separator/>
                     <CheckBox Content="{Tr ToBuffer}" Margin="5"
-                              IsChecked="{Binding InstanceInfo.Status, Converter={seg:conv_BoolInverted}}"
+                              IsChecked="{Binding InstanceData.Status, Converter={seg:conv_BoolInverted}}"
                               IsEnabled="{Binding EditingMode}"/>
                     <Separator/>
                 </StackPanel>
@@ -82,11 +82,11 @@
                     <DockPanel Margin="10" IsEnabled="{Binding EditingMode}">
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Nazwa:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>
-                            <TextBox Text="{Binding InstanceInfo.Name}" Margin="5" VerticalContentAlignment="Center"/>
+                            <TextBox Text="{Binding InstanceData.Name}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Data wystawienia:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>
-                            <DatePicker SelectedDate="{Binding InstanceInfo.DateReal}" Margin="5" VerticalContentAlignment="Center"/>
+                            <DatePicker SelectedDate="{Binding InstanceData.DateReal}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
                             <Button ToolTip="Dodaj pozycję" HorizontalAlignment="Left"
@@ -98,7 +98,7 @@
                         </StackPanel>
                         <Grid x:Name="gridGroups" DockPanel.Dock="Top">
                             <Grid.Resources>
-                                <CollectionViewSource x:Key="groups" Source="{Binding InstanceInfo.Families}">
+                                <CollectionViewSource x:Key="groups" Source="{Binding InstanceData.Families}">
                                     <CollectionViewSource.GroupDescriptions>
                                         <PropertyGroupDescription PropertyName="Family"/>
                                     </CollectionViewSource.GroupDescriptions>
