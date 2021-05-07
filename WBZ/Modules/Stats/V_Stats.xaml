@@ -29,7 +29,7 @@
                 <StackPanel DockPanel.Dock="Top">
                     <sec:IconButton Text="{Tr GenerateReport}" Margin="5"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                    IsEnabled="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=stats_save}"
+                                    IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={seg:conv_ListContains}, ConverterParameter=stats_save}"
                                     Icon="/Resources/icon32_list.ico"
                                     Click="btnReportGenerate_Click"/>
                     <Separator/>

@@ -53,8 +53,8 @@
             </Border.ContextMenu>
         </Border>
         <!-- statusPanel -->
-        <!-- <c:StatusPanel x:Name="StatusPanel" DockPanel.Dock="Bottom" Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}}"
-                       EnableFilters="False" HasFilters="False" EnableGroups="False" HasGroups="False"/>
+        <!-- <c:StatusPanel DockPanel.Dock="Bottom" Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}}"
+                       HasFilters="False" HasGroups="False"/>
         -->
         <Border DockPanel.Dock="Bottom"
                 Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}}"
@@ -68,7 +68,7 @@
             </DockPanel>
         </Border>
         <!-- listBox -->
-        <Label DockPanel.Dock="Top" Content="{Tr ListOfVersions, Suffix=':'}"/>
+        <Label DockPanel.Dock="Top" Content="{Tr VersionsList, Suffix=':'}"/>
         <ListBox x:Name="lbList" DockPanel.Dock="Top" Margin="5"
                  ItemsSource="{Binding InstancesList.versions}"
                  MouseDoubleClick="lbList_MouseDoubleClick"/>

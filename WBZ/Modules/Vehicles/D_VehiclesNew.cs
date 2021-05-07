@@ -1,4 +1,5 @@
 ﻿using StswExpress.Globals;
+using StswExpress.Translate;
 using WBZ.Globals;
 using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_Vehicle;
@@ -15,10 +16,10 @@ namespace WBZ.Modules.Vehicles
 		{
 			get
 			{
-				if		(Mode == Commands.Type.NEW)			return $"Nowy pojazd";
-				else if (Mode == Commands.Type.DUPLICATE)	return $"Duplikowanie pojazdu: {InstanceInfo.Name}";
-				else if (Mode == Commands.Type.EDIT)		return $"Edycja pojazdu: {InstanceInfo.Name}";
-				else if (Mode == Commands.Type.PREVIEW)		return $"Podgląd pojazdu: {InstanceInfo.Name}";
+				if		(Mode == Commands.Type.NEW)			return TM.Tr("VehicleNew");
+				else if (Mode == Commands.Type.DUPLICATE)	return TM.Tr("VehicleDuplicate") + $": {InstanceInfo.Name}";
+				else if (Mode == Commands.Type.EDIT)		return TM.Tr("VehicleEdit") + $": {InstanceInfo.Name}";
+				else if (Mode == Commands.Type.PREVIEW)		return TM.Tr("VehiclePreview") + $": {InstanceInfo.Name}";
 				else										return string.Empty;
 			}
 		}

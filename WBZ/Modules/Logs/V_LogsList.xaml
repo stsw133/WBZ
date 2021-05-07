@@ -74,17 +74,16 @@
             </Border.ContextMenu>
         </Border>
         <!-- statusPanel -->
-        <c:StatusPanel x:Name="StatusPanel" DockPanel.Dock="Bottom"
-                       Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}}"
+        <c:StatusPanel DockPanel.Dock="Bottom" Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}}"
                        HasFilters="{Binding AreFiltersVisible, Mode=OneTime}" HasGroups="False"/>
         <!-- dataGrid -->
-        <TabControl x:Name="tcList" Padding="0" SelectionChanged="tcList_SelectionChanged">
+        <TabControl Padding="0" SelectedIndex="{Binding SelectedTab}" SelectionChanged="tcList_SelectionChanged">
             <!-- logs -->
             <TabItem>
                 <TabItem.Header>
                     <sec:Header Text="Logi" Icon="/Resources/icon32_shield_blue.ico"/>
                 </TabItem.Header>
-                <b:LogsListGrid x:Name="dgList_Logs" ItemsSource="{Binding InstancesList}" IsReadOnly="True"
+                <b:LogsListGrid x:Name="dgList_Logs" ItemsSource="{Binding InstancesList, Mode=OneWay}" IsReadOnly="True"
                                 MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged"/>
             </TabItem>
             <!-- errors -->
@@ -92,7 +91,7 @@
                 <TabItem.Header>
                     <sec:Header Text="Błędy" Icon="/Resources/icon32_shield_red.ico"/>
                 </TabItem.Header>
-                <b:LogsListGrid x:Name="dgList_Errors" ItemsSource="{Binding InstancesList}" IsReadOnly="True"
+                <b:LogsListGrid x:Name="dgList_Errors" ItemsSource="{Binding InstancesList, Mode=OneWay}" IsReadOnly="True"
                                 MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged"/>
             </TabItem>
         </TabControl>

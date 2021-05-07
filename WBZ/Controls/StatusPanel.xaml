@@ -3,8 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
              xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
-             mc:Ignorable="d" d:DesignWidth="300">
+             mc:Ignorable="d" d:DesignWidth="400">
     <Border BorderBrush="Gray" BorderThickness="0,1,0,0">
         <DockPanel>
             <!-- Higher (filters) -->
@@ -38,6 +39,11 @@
                            Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.5}"
                            Source="/Resources/icon32_filter.ico"/>
                 </ToggleButton>
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                    <Label Content="{Tr LimitPerPage, Suffix=':'}" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <sec:NumericUpDown Margin="0,0,5,0" VerticalAlignment="Center" Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=5}"
+                                       Value="{Binding SORTING[4], Mode=TwoWay}" ValueMin="0"/>
+                </StackPanel>
                 <Label Content="Wyświetlono:" Margin="0,0,5,0" VerticalAlignment="Center"/>
                 <Label Content="{Binding InstancesList.Count}" FontWeight="Medium" VerticalAlignment="Center"/>
                 <Label Content=" / " Padding="2.5" VerticalAlignment="Center"/>

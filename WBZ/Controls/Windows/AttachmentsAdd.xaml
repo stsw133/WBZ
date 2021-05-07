@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
         mc:Ignorable="d" SizeToContent="Height" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner"
-        Title="{Tr NewAttachment}" Icon="/Resources/icon32_photos.ico"
+        Title="{Tr AttachmentNew}" Icon="/Resources/icon32_photos.ico"
         Loaded="Window_Loaded">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>

@@ -1,4 +1,5 @@
 ﻿using StswExpress.Globals;
+using StswExpress.Translate;
 using System.Collections.Specialized;
 using WBZ.Globals;
 using WBZ.Modules._base;
@@ -10,15 +11,19 @@ namespace WBZ.Modules.Vehicles
 	{
 		/// Module
 		public readonly string MODULE_TYPE = Config.Modules.VEHICLES;
-		public StringCollection SORTING = Properties.Settings.Default.sorting_VehiclesList;
+		public StringCollection SORTING
+		{
+			get => Properties.Settings.Default.sorting_VehiclesList;
+			set => Properties.Settings.Default.sorting_VehiclesList = value;
+		}
 
 		/// Window title
 		public string Title
 		{
 			get
 			{
-				if		(Mode == Commands.Type.LIST)	return "Lista pojazdów";
-				else if (Mode == Commands.Type.SELECT)	return "Wybór pojazdu";
+				if		(Mode == Commands.Type.LIST)	return TM.Tr("VehiclesList");
+				else if (Mode == Commands.Type.SELECT)	return TM.Tr("VehicleSelect");
 				else									return string.Empty;
 			}
 		}

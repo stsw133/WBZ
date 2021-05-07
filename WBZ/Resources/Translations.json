@@ -23,6 +23,10 @@
 		"en": "Articles",
 		"pl": "Towary"
 	},
+	"AttachmentNew": {
+		"en": "New attachment",
+		"pl": "Nowy załącznik"
+	},
 	"Attachments": {
 		"en": "Attachments",
 		"pl": "Załączniki"
@@ -51,6 +55,10 @@
 		"en": "Color",
 		"pl": "Kolor"
 	},
+	"ColumnsVisibility": {
+		"en": "Columns' visbility",
+		"pl": "Widoczność kolumn"
+	},
 	"Communication": {
 		"en": "Communication",
 		"pl": "Komunikacja"
@@ -70,6 +78,14 @@
 	"Contractors": {
 		"en": "Contractors",
 		"pl": "Kontrahenci"
+	},
+	"DatabasesList": {
+		"en": "List of databases",
+		"pl": "Lista baz danych"
+	},
+	"DataSorting": {
+		"en": "Sorting of data",
+		"pl": "Sortowanie danych"
 	},
 	"Delete": {
 		"en": "Delete",
@@ -167,17 +183,13 @@
 		"en": "Language",
 		"pl": "Język"
 	},
+	"LimitPerPage": {
+		"en": "Limit per page",
+		"pl": "Limit na stronę"
+	},
 	"List": {
 		"en": "List",
 		"pl": "Lista"
-	},
-	"ListOfDatabases": {
-		"en": "List of databases",
-		"pl": "Lista baz danych"
-	},
-	"ListOfVersions": {
-		"en": "List of versions",
-		"pl": "Lista wersji"
 	},
 	"Login": {
 		"en": "Logging",
@@ -214,10 +226,6 @@
 	"New": {
 		"en": "New",
 		"pl": "Nowy"
-	},
-	"NewAttachment": {
-		"en": "New attachment",
-		"pl": "Nowy załącznik"
 	},
 	"NewPassword": {
 		"en": "New password",
@@ -327,12 +335,40 @@
 		"en": "Users",
 		"pl": "Użytkownicy"
 	},
+	"VehicleDuplicate": {
+		"en": "Duplicate vehicle",
+		"pl": "Duplikat pojazdu"
+	},
+	"VehicleEdit": {
+		"en": "Edit vehicle",
+		"pl": "Edycja pojazdu"
+	},
+	"VehicleNew": {
+		"en": "New vehicle",
+		"pl": "Nowy pojazd"
+	},
+	"VehiclePreview": {
+		"en": "Preview vehicle",
+		"pl": "Podgląd pojazdu"
+	},
 	"Vehicles": {
 		"en": "Vehicles",
 		"pl": "Pojazdy"
 	},
+	"VehicleSelect": {
+		"en": "Select vehicle",
+		"pl": "Wybór pojazdu"
+	},
+	"VehiclesList": {
+		"en": "List of vehicles",
+		"pl": "Lista pojazdów"
+	},
 	"Versions": {
 		"en": "Versions",
 		"pl": "Wersje"
+	},
+	"VersionsList": {
+		"en": "List of versions",
+		"pl": "Lista wersji"
 	}
 }

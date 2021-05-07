@@ -6,19 +6,8 @@ namespace WBZ.Modules._base
 {
 	abstract class D_ModuleList<MODULE_MODEL> : D where MODULE_MODEL : class, new()
 	{
-		/// Instances list
-		private ObservableCollection<MODULE_MODEL> instancesList;
-		public ObservableCollection<MODULE_MODEL> InstancesList
-		{
-			get => instancesList;
-			set => SetField(ref instancesList, value, () => InstancesList);
-		}
-
 		/// Mode
 		public Commands.Type Mode { get; set; }
-
-		/// Selecting mode
-		public bool SelectingMode => Mode == Commands.Type.SELECT;
 
 		/// Additional window icon
 		public string ModeIcon
@@ -29,6 +18,37 @@ namespace WBZ.Modules._base
 				else if	(Mode == Commands.Type.SELECT)	return "/Resources/icon32_select.ico";
 				else									return null;
 			}
+		}
+
+		/// Selected tab
+		private int selectedTab = 0;
+		public int SelectedTab
+        {
+			get => selectedTab;
+			set
+			{
+				SetField(ref selectedTab, value, () => SelectedTab);
+				InstancesList = instancesLists[value];
+			}
+		}
+
+		/// Instances lists
+		private ObservableCollection<ObservableCollection<MODULE_MODEL>> instancesLists = new ObservableCollection<ObservableCollection<MODULE_MODEL>>()
+		{
+			new ObservableCollection<MODULE_MODEL>() //0
+		};
+		public ObservableCollection<ObservableCollection<MODULE_MODEL>> InstancesLists
+		{
+			get => instancesLists;
+			set => SetField(ref instancesLists, value, () => InstancesLists);
+		}
+
+		/// Instances list
+		private ObservableCollection<MODULE_MODEL> instancesList;
+		public ObservableCollection<MODULE_MODEL> InstancesList
+		{
+			get => instancesList;
+			set => SetField(ref instancesList, value, () => InstancesList);
 		}
 
 		/// SQL filter

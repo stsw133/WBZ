@@ -37,7 +37,7 @@
                 BorderBrush="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.5}"
                 BorderThickness="1,0,0,0">
             <DockPanel>
-                <StackPanel DockPanel.Dock="Top" Visibility="{Binding SelectingMode, Converter={seg:conv_BoolToVisibility}}">
+                <StackPanel DockPanel.Dock="Top" Visibility="{Binding Mode, Converter={seg:conv_Compare}, ConverterParameter=SELECT}">
                     <sec:IconButton Text="{Tr Select}" Margin="5"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_select.ico"
@@ -87,11 +87,10 @@
             </Border.ContextMenu>
         </Border>
         <!-- statusPanel -->
-        <c:StatusPanel x:Name="StatusPanel" DockPanel.Dock="Bottom"
-                       Background="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}}"
+        <c:StatusPanel DockPanel.Dock="Bottom" Background="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}}"
                        HasFilters="{Binding AreFiltersVisible, Mode=OneTime}" HasGroups="{Binding AreGroupsVisible, Mode=OneTime}"/>
         <!-- groupsView -->
-        <c:GroupsView EditingMode="{Binding Source={x:Static g:Global.User}, Path=Perms, Converter={seg:conv_ListContains}, ConverterParameter=stores_groups}"
+        <c:GroupsView EditingMode="{Binding Perms, Source={x:Static g:Global.User}, Converter={seg:conv_ListContains}, ConverterParameter=stores_groups}"
                       Visibility="{Binding AreGroupsVisible, Converter={seg:conv_BoolToVisibility}}"/>
         <!-- otherFilters -->
         <DockPanel DockPanel.Dock="Bottom" Visibility="{Binding AreFiltersVisible, Converter={seg:conv_BoolToVisibility}}">

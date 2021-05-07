@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using WBZ.Globals;
 
@@ -31,7 +34,7 @@ namespace WBZ.Modules._base
         /// </summary>
         internal virtual void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if (D.SelectingMode)
+            if (D.Mode == StswExpress.Globals.Commands.Type.SELECT)
                 dgList.SelectionMode = DataGridSelectionMode.Single;
             cmdRefresh_Executed(null, null);
         }
@@ -45,7 +48,7 @@ namespace WBZ.Modules._base
         /// <summary>
 		/// Select
 		/// </summary>
-		internal void cmdSelect_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = D?.SelectingMode ?? false;
+		internal void cmdSelect_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = D?.Mode == StswExpress.Globals.Commands.Type.SELECT ?? false;
         internal virtual void cmdSelect_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Selected = dgList.SelectedItems.Cast<MODULE_MODEL>().FirstOrDefault();
@@ -160,7 +163,7 @@ namespace WBZ.Modules._base
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                if (!D.SelectingMode)
+                if (D.Mode != StswExpress.Globals.Commands.Type.SELECT)
                 {
                     if (Global.User.Perms.Contains($"{D.MODULE_TYPE}_{Global.PermType.SAVE}"))
                         cmdEdit_Executed(null, null);
@@ -184,6 +187,35 @@ namespace WBZ.Modules._base
                 (e.OriginalSource as ScrollViewer).ScrollToVerticalOffset(e.VerticalOffset);
                 Cursor = Cursors.Arrow;
             }
+        }
+
+        /// <summary>
+        /// Sorting
+        /// </summary>
+        private void dgList_Sorting(object sender, DataGridSortingEventArgs e)
+        {
+            var sort = CollectionViewSource.GetDefaultView(dgList.ItemsSource).SortDescriptions;
+            if (sort.Any(x => x.PropertyName == e.Column.SortMemberPath))
+            {
+                D.SORTING[D.SORTING.IndexOf($"{Config.GetModuleAlias(D.MODULE_TYPE)}.{e.Column.SortMemberPath.ToLower()}") + 1] = (e.Column.SortDirection == ListSortDirection.Descending).ToString();
+                return;
+            }
+
+            var limit = Convert.ToInt32(D.SORTING?[4] ?? 50);
+            D.SORTING = new StringCollection();
+            D.SORTING.Add($"{Config.GetModuleAlias(D.MODULE_TYPE)}.{e.Column.SortMemberPath.ToLower()}");
+            D.SORTING.Add((e.Column.SortDirection == ListSortDirection.Descending).ToString());
+            if (sort.Count > 0)
+            {
+                D.SORTING.Add($"{Config.GetModuleAlias(D.MODULE_TYPE)}.{sort[0].PropertyName.ToLower()}");
+                D.SORTING.Add((sort[0].Direction == ListSortDirection.Descending).ToString());
+            }
+            else
+            {
+                D.SORTING.Add(D.SORTING[0]);
+                D.SORTING.Add(D.SORTING[1]);
+            }
+            D.SORTING.Add(limit.ToString());
         }
 
         /// <summary>

@@ -8,7 +8,8 @@
           xmlns:g="clr-namespace:WBZ.Globals"
           xmlns:p="clr-namespace:WBZ.Properties"
           mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800"
-          Margin="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1" AutoGenerateColumns="False">
+          Margin="5" AutoGenerateColumns="False" RowHeaderWidth="0" IsReadOnly="True"
+          HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray">
     <DataGrid.ColumnHeaderStyle>
         <Style TargetType="{x:Type DataGridColumnHeader}">
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -91,7 +92,7 @@
         </DataGridTextColumn>
         <!-- ProdYear -->
         <DataGridTextColumn Binding="{Binding ProdYear}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Driver, Converter={seg:conv_BoolToVisibility}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_ProdYear, Converter={seg:conv_BoolToVisibility}}">
             <DataGridTextColumn.Header>
                 <sec:ColumnFilter_Number Header="Rok produkcji"
                                          Value="{Binding Data.Filters.ProdYear, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
@@ -102,91 +103,26 @@
     <DataGrid.ContextMenu>
         <ContextMenu>
             <!-- Columns -->
-            <MenuItem Header="Widoczność kolumn">
-                <MenuItem.Icon>
-                    <Image Source="/Resources/icon32_show.ico"/>
-                </MenuItem.Icon>
-                <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_ID, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Ikona" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Icon, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Nr rej." IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Register, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Marka" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Brand, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Model" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Model, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Pojemność" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Capacity, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Spedytor" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Forwarder, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Kierowca" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Driver, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Rok produkcji" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_ProdYear, Mode=TwoWay}"/>
-            </MenuItem>
-            <!-- Sorting -->
-            <MenuItem Header="Sortowanie danych">
-                <MenuItem.Icon>
-                    <Image Source="/Resources/icon32_descending.ico"/>
-                </MenuItem.Icon>
-                <MenuItem>
-                    <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Sortowanie 1:"/>
-                            <ToggleButton IsChecked="{Binding sorting_VehiclesList[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                          Height="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}"
-                                          Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}">
-                                <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.1}"
-                                       Source="/Resources/icon32_descending.ico"/>
-                            </ToggleButton>
-                            <ComboBox SelectedValue="{Binding sorting_VehiclesList[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                      SelectedValuePath="Tag" VerticalContentAlignment="Center">
-                                <ComboBoxItem Content="Nr rej." Tag="v.register"/>
-                                <ComboBoxItem Content="Marka" Tag="v.brand"/>
-                                <ComboBoxItem Content="Model" Tag="v.model"/>
-                                <ComboBoxItem Content="Pojemność" Tag="v.capacity"/>
-                                <ComboBoxItem Content="Spedytor" Tag="c.name"/>
-                                <ComboBoxItem Content="Kierowca" Tag="e.lastname"/>
-                                <ComboBoxItem Content="Rok produkcji" Tag="v.prodyear"/>
-                            </ComboBox>
-                        </StackPanel>
-                    </MenuItem.Header>
-                </MenuItem>
-                <MenuItem>
-                    <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Sortowanie 2:"/>
-                            <ToggleButton IsChecked="{Binding sorting_VehiclesList[3], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                          Height="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}"
-                                          Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}">
-                                <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.1}"
-                                       Source="/Resources/icon32_descending.ico"/>
-                            </ToggleButton>
-                            <ComboBox SelectedValue="{Binding sorting_VehiclesList[2], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                      SelectedValuePath="Tag" VerticalContentAlignment="Center">
-                                <ComboBoxItem Content="Nr rej." Tag="v.register"/>
-                                <ComboBoxItem Content="Marka" Tag="v.brand"/>
-                                <ComboBoxItem Content="Model" Tag="v.model"/>
-                                <ComboBoxItem Content="Pojemność" Tag="v.capacity"/>
-                                <ComboBoxItem Content="Spedytor" Tag="c.name"/>
-                                <ComboBoxItem Content="Kierowca" Tag="e.lastname"/>
-                                <ComboBoxItem Content="Rok produkcji" Tag="v.prodyear"/>
-                            </ComboBox>
-                        </StackPanel>
-                    </MenuItem.Header>
-                </MenuItem>
-                <MenuItem>
-                    <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Limit wczytywania:"/>
-                            <TextBox Text="{Binding sorting_VehiclesList[4], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                     Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=5}"
-                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                    </MenuItem.Header>
-                </MenuItem>
-            </MenuItem>
+            <sec:MenuItem Header="{Tr ColumnsVisibility}" IconUri="/Resources/icon32_show.ico">
+                <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_ID}"/>
+                <MenuItem IsCheckable="True" Header="Ikona" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Icon}"/>
+                <MenuItem IsCheckable="True" Header="Nr rej." IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Register}"/>
+                <MenuItem IsCheckable="True" Header="Marka" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Brand}"/>
+                <MenuItem IsCheckable="True" Header="Model" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Model}"/>
+                <MenuItem IsCheckable="True" Header="Pojemność" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Capacity}"/>
+                <MenuItem IsCheckable="True" Header="Spedytor" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Forwarder}"/>
+                <MenuItem IsCheckable="True" Header="Kierowca" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Driver}"/>
+                <MenuItem IsCheckable="True" Header="Rok produkcji" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_ProdYear}"/>
+            </sec:MenuItem>
             <!-- Actions -->
             <Separator/>
-            <sec:MenuItem Header="Podgląd" IconUri="/Resources/icon32_search.ico" Command="seg:Commands.Preview"/>
-            <sec:MenuItem Header="Dodaj" IconUri="/Resources/icon32_add.ico" Command="seg:Commands.New"/>
-            <sec:MenuItem Header="Duplikuj" IconUri="/Resources/icon32_duplicate.ico" Command="seg:Commands.Duplicate"/>
-            <sec:MenuItem Header="Edytuj" IconUri="/Resources/icon32_edit.ico" Command="seg:Commands.Edit"/>
-            <sec:MenuItem Header="Usuń" IconUri="/Resources/icon32_delete.ico" Command="seg:Commands.Delete"/>
+            <sec:MenuItem Header="{Tr Preview}" IconUri="/Resources/icon32_search.ico" Command="seg:Commands.Preview"/>
+            <sec:MenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico" Command="seg:Commands.New"/>
+            <sec:MenuItem Header="{Tr Duplicate}" IconUri="/Resources/icon32_duplicate.ico" Command="seg:Commands.Duplicate"/>
+            <sec:MenuItem Header="{Tr Edit}" IconUri="/Resources/icon32_edit.ico" Command="seg:Commands.Edit"/>
+            <sec:MenuItem Header="{Tr Delete}" IconUri="/Resources/icon32_delete.ico" Command="seg:Commands.Delete"/>
             <Separator/>
-            <sec:MenuItem Header="Odśwież" IconUri="/Resources/icon32_refresh.ico" Command="seg:Commands.Refresh"/>
+            <sec:MenuItem Header="{Tr Refresh}" IconUri="/Resources/icon32_refresh.ico" Command="seg:Commands.Refresh"/>
         </ContextMenu>
     </DataGrid.ContextMenu>
     <DataGrid.RowStyle>

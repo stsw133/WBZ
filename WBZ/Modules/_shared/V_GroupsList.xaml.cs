@@ -30,7 +30,7 @@ namespace WBZ.Modules._shared
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                if (D.SelectingMode)
+                if (D.Mode == StswExpress.Globals.Commands.Type.SELECT)
                 {
                     var item = groupsView.SelectedItem as TreeViewItem;
                     Selected = SQL.GetInstance<MODULE_MODEL>(Config.Modules.GROUPS, (int)item.Tag);

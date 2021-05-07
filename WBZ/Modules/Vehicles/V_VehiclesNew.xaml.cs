@@ -1,6 +1,5 @@
 ﻿using StswExpress.Globals;
 using System.Windows;
-using WBZ.Controls;
 using WBZ.Modules._base;
 using WBZ.Modules.Contractors;
 using WBZ.Modules.Employees;
@@ -52,16 +51,6 @@ namespace WBZ.Modules.Vehicles
 					D.InstanceInfo.Driver = window.Selected.ID;
 					D.InstanceInfo = D.InstanceInfo;
 				}
-		}
-
-		/// <summary>
-		/// Select color
-		/// </summary>
-		private void btnSelectColor_Click(object sender, RoutedEventArgs e)
-		{
-			var btn = sender as FrameworkElement;
-			if (btn != null)
-				btn.ContextMenu.IsOpen = true;
 		}
 
 		/// <summary>

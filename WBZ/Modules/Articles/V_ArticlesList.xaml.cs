@@ -28,9 +28,9 @@ namespace WBZ.Modules.Articles
 		/// </summary>
 		internal override void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			if (D.SelectingMode)
+			if (D.Mode == StswExpress.Globals.Commands.Type.SELECT)
 				dgList.SelectionMode = DataGridSelectionMode.Single;
-			D.StoresList = SQL.ListValues(Config.Modules.STORES, "codename", "archival=false", !D.SelectingMode);
+			D.StoresList = SQL.ListValues(Config.Modules.STORES, "codename", "archival=false", D.Mode != StswExpress.Globals.Commands.Type.SELECT);
 		}
 
 		/// <summary>
