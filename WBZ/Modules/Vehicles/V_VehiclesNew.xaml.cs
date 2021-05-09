@@ -12,7 +12,7 @@ namespace WBZ.Modules.Vehicles
 	/// </summary>
 	public partial class VehiclesNew : New
 	{
-		D_VehiclesNew D = new D_VehiclesNew();
+        readonly D_VehiclesNew D = new D_VehiclesNew();
 
 		public VehiclesNew(MODULE_MODEL instance, Commands.Type mode)
 		{
@@ -35,7 +35,7 @@ namespace WBZ.Modules.Vehicles
 				if (window.Selected != null)
 				{
 					D.InstanceData.Forwarder = window.Selected.ID;
-					D.InstanceData = D.InstanceData;
+					//D.InstanceData = D.InstanceData;
 				}
 		}
 
@@ -49,7 +49,7 @@ namespace WBZ.Modules.Vehicles
 				if (window.Selected != null)
 				{
 					D.InstanceData.Driver = window.Selected.ID;
-					D.InstanceData = D.InstanceData;
+					//D.InstanceData = D.InstanceData;
 				}
 		}
 

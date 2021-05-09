@@ -47,16 +47,16 @@
                     <sec:IconButton Text="{Tr Preview}" Margin="5" Icon="/Resources/icon32_search.ico"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Command="seg:Commands.Preview"/>
-                    <sec:IconButton Text="{Tr New}" Margin="5" Icon="/Resources/icon32_add.ico"
+                    <sec:IconButton Text="{Tr New}" Margin="5,0,5,5" Icon="/Resources/icon32_add.ico"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Command="seg:Commands.New"/>
-                    <sec:IconButton Text="{Tr Duplicate}" Margin="5" Icon="/Resources/icon32_duplicate.ico"
+                    <sec:IconButton Text="{Tr Duplicate}" Margin="5,0,5,5" Icon="/Resources/icon32_duplicate.ico"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Command="seg:Commands.Duplicate"/>
-                    <sec:IconButton Text="{Tr Edit}" Margin="5" Icon="/Resources/icon32_edit.ico"
+                    <sec:IconButton Text="{Tr Edit}" Margin="5,0,5,5" Icon="/Resources/icon32_edit.ico"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Command="seg:Commands.Edit"/>
-                    <sec:IconButton Text="{Tr Delete}" Margin="5" Icon="/Resources/icon32_delete.ico"
+                    <sec:IconButton Text="{Tr Delete}" Margin="5,0,5,5" Icon="/Resources/icon32_delete.ico"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Command="seg:Commands.Delete"/>
                     <Separator/>
@@ -90,7 +90,6 @@
                       Content="Pokaż archiwalne" IsChecked="{Binding Filters.Archival}"/>
         </DockPanel>
         <!-- dataGrid -->
-        <b:VehiclesListGrid x:Name="dgList" ItemsSource="{Binding InstancesList}"
-                            MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged" Sorting="dgList_Sorting"/>
+        <b:VehiclesListGrid ItemsSource="{Binding InstancesList}" MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged" Sorting="dgList_Sorting"/>
     </DockPanel>
 </b:List>

@@ -1,5 +1,4 @@
 ﻿using StswExpress.Globals;
-using WBZ.Globals;
 using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_Document;
 
@@ -7,9 +6,6 @@ namespace WBZ.Modules.Documents
 {
     class D_DocumentsNew : D_ModuleNew<MODULE_MODEL>
 	{
-		/// Module
-		public readonly string Module = Config.Modules.DOCUMENTS;
-		
 		/// Window title
 		public string Title
 		{

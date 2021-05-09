@@ -32,22 +32,32 @@ namespace WBZ.Models
 		/// <summary>
 		/// Forwarder
 		/// </summary>
-		public MV cForwarder { get; set; } = new MV();
 		public int Forwarder
 		{
-			get => cForwarder.ID;
-			set => cForwarder = SQL.ListValues(Config.Modules.CONTRACTORS, "codename", $"id={value}", false)?[0];
+			set
+			{
+				var mv = SQL.ListValues(Config.Modules.CONTRACTORS, "codename", $"id={value}", false)?[0];
+				ForwarderID = mv.ID;
+				ForwarderName = mv.Value.ToString();
+			}
 		}
+		public int ForwarderID { get; set; } = 0;
+		public string ForwarderName { get; set; } = string.Empty;
 
 		/// <summary>
 		/// Driver
 		/// </summary>
-		public MV cDriver { get; set; } = new MV();
 		public int Driver
 		{
-			get => cDriver.ID;
-			set => cDriver = SQL.ListValues(Config.Modules.EMPLOYEES, "lastname || ' ' || forename", $"id={value}", false)?[0];
+			set
+			{
+				var mv = SQL.ListValues(Config.Modules.EMPLOYEES, "lastname || ' ' || forename", $"id={value}", false)?[0];
+				DriverID = mv.ID;
+				DriverName = mv.Value.ToString();
+			}
 		}
+		public int DriverID { get; set; } = 0;
+		public string DriverName { get; set; } = string.Empty;
 
 		/// <summary>
 		/// ProdYear

@@ -42,7 +42,7 @@
                 <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
                     <Label Content="{Tr LimitPerPage, Suffix=':'}" Margin="0,0,5,0" VerticalAlignment="Center"/>
                     <sec:NumericUpDown Margin="0,0,5,0" VerticalAlignment="Center" ValueAlignment="Center"
-                                       Value="{Binding SORTING[4], Mode=TwoWay}" ValueMin="0"
+                                       Value="{Binding Sorting[4], Mode=TwoWay}" ValueMin="0"
                                        Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=5}"/>
                 </StackPanel>
                 <Label Content="Wyświetlono:" Margin="0,0,5,0" VerticalAlignment="Center"/>

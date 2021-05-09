@@ -1,6 +1,7 @@
 ﻿using StswExpress.Base;
 using StswExpress.Globals;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace WBZ.Modules._base
 {
@@ -35,10 +36,7 @@ namespace WBZ.Modules._base
 		}
 
 		/// Instances lists
-		private ObservableCollection<ObservableCollection<MODULE_MODEL>> instancesLists = new ObservableCollection<ObservableCollection<MODULE_MODEL>>()
-		{
-			new ObservableCollection<MODULE_MODEL>() //0
-		};
+		private ObservableCollection<ObservableCollection<MODULE_MODEL>> instancesLists;
 		public ObservableCollection<ObservableCollection<MODULE_MODEL>> InstancesLists
 		{
 			get => instancesLists;
@@ -52,6 +50,9 @@ namespace WBZ.Modules._base
 			get => instancesList;
 			set => SetField(ref instancesList, value, () => InstancesList);
 		}
+
+		/// Sorting
+		public abstract StringCollection Sorting { get; set; }
 
 		/// SQL filter
 		public string FilterSQL { get; set; }

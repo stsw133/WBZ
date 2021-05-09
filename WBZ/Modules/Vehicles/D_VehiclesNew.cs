@@ -7,7 +7,7 @@ namespace WBZ.Modules.Vehicles
 {
     class D_VehiclesNew : D_ModuleNew<MODULE_MODEL>
 	{
-		/// Window title
+		/// Title
 		public string Title
 		{
 			get

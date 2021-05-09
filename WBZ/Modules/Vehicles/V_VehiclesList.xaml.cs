@@ -28,8 +28,9 @@ namespace WBZ.Modules.Vehicles
 						+ $"LOWER(COALESCE(v.brand,'')) like '%{D.Filters.Brand.ToLower()}%' and "
 						+ $"LOWER(COALESCE(v.model,'')) like '%{D.Filters.Model.ToLower()}%' and "
 						+ (D.Filters.Capacity > 0 ? $"COALESCE(v.capacity,0) = {D.Filters.Capacity} and " : string.Empty)
-						+ $"LOWER(COALESCE(c.name,'')) like '%{D.Filters.cForwarder.Value?.ToString()?.ToLower()}%' and "
-						+ $"LOWER(COALESCE(e.lastname || ' ' || e.forename,'')) like '%{D.Filters.cDriver.Value?.ToString()?.ToLower()}%' and "
+						+ $"LOWER(COALESCE(c.name,'')) like '%{D.Filters.ForwarderName.ToLower()}%' and "
+						+ $"LOWER(COALESCE(e.lastname || ' ' || e.forename,'')) like '%{D.Filters.DriverName.ToLower()}%' and "
+						+ (D.Filters.ProdYear > 0 ? $"COALESCE(v.prodyear,0) = {D.Filters.ProdYear} and " : string.Empty)
 						+ (!D.Filters.Archival ? $"v.archival=false and " : string.Empty)
 						+ (D.Filters.Group > 0 ? $"exists (select from wbz.groups g where g.instance=v.id and g.owner={D.Filters.Group}) and " : string.Empty);
 

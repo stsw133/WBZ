@@ -9,13 +9,13 @@ namespace WBZ.Modules.Vehicles
     class D_VehiclesList : D_ModuleList<MODULE_MODEL>
 	{
 		/// Sorting
-		public StringCollection SORTING
+		public override StringCollection Sorting
 		{
 			get => Properties.Settings.Default.sorting_VehiclesList;
 			set => Properties.Settings.Default.sorting_VehiclesList = value;
 		}
 
-		/// Window title
+		/// Title
 		public string Title
 		{
 			get

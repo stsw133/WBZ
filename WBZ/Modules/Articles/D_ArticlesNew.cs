@@ -9,9 +9,6 @@ namespace WBZ.Modules.Articles
 {
     class D_ArticlesNew : D_ModuleNew<MODULE_MODEL>
 	{
-		/// Module
-		public readonly string Module = Config.Modules.ARTICLES;
-
 		/// Window title
 		public string Title
 		{

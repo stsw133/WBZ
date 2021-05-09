@@ -1,5 +1,4 @@
 ﻿using StswExpress.Globals;
-using WBZ.Globals;
 using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_Distribution;
 
@@ -7,9 +6,6 @@ namespace WBZ.Modules.Distributions
 {
     class D_DistributionsNew : D_ModuleNew<MODULE_MODEL>
 	{
-		/// Module
-		public readonly string Module = Config.Modules.DISTRIBUTIONS;
-		
 		/// Window title
 		public string Title
 		{

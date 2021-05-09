@@ -1,5 +1,4 @@
 ﻿using System.Collections.Specialized;
-using WBZ.Globals;
 using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_Attachment;
 
@@ -7,8 +6,11 @@ namespace WBZ.Modules.Attachments
 {
     class D_AttachmentsGallery : D_ModuleList<MODULE_MODEL>
 	{
-		/// Module
-		public readonly string Module = Config.Modules.ATTACHMENTS;
-		public StringCollection SORTING = Properties.Settings.Default.sorting_AttachmentsGallery;
-	}
+		/// Sorting
+        public override StringCollection Sorting
+		{
+			get => Properties.Settings.Default.sorting_AttachmentsGallery;
+			set => throw new System.NotImplementedException();
+		}
+    }
 }

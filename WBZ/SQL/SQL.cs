@@ -778,7 +778,7 @@ namespace WBZ
 			try
 			{
 				if (sort == null)
-					sort = new StringCollection() { "1", "false", "2", "false", "50" };
+					sort = new StringCollection() { "2", "asc", "3", "asc", "50" };
 
 				using (var sqlConn = connOpenedWBZ)
 				{
@@ -920,7 +920,9 @@ namespace WBZ
 						/// VEHICLES
 						case Config.Modules.VEHICLES:
 							query = $@"select v.id, v.register, v.brand, v.model, v.capacity,
-									v.forwarder, v.driver, v.prodyear,
+									c.id as forwarderid, c.codename as forwardername,
+									e.id as driverid, e.lastname || ' ' || e.forename as drivername,
+									v.prodyear,
 									v.archival, v.comment, v.icon
 								from wbz.vehicles v
 								left join wbz.contractors c on c.id=v.forwarder
@@ -932,7 +934,7 @@ namespace WBZ
 					}
 					using (var sqlDA = new NpgsqlDataAdapter(query, sqlConn))
 					{
-						sqlDA.SelectCommand.CommandText += $" order by {sort[0]} {(Convert.ToBoolean(sort[1]) ? "desc" : "asc")}, {sort[2]} {(Convert.ToBoolean(sort[3]) ? "desc" : "asc")}";
+						sqlDA.SelectCommand.CommandText += $" order by {sort[0]} {sort[1]}, {sort[2]} {sort[3]}";
 						sqlDA.SelectCommand.CommandText += $" limit {sort[4]} offset {Convert.ToInt32(sort[4]) * page}";
 
 						var dt = new DataTable();
@@ -1626,25 +1628,25 @@ namespace WBZ
 									forwarder, driver, prodyear,
 									archival, comment, icon)
 								values (@id, @register, @brand, @model, @capacity,
-									@forwarder, @driver, @prodyear,
+									nullif(@forwarder, 0), nullif(@driver, 0), @prodyear,
 									@archival, @comment, nullif(@icon, 0))
 								on conflict(id) do
 								update set register=@register, brand=@brand, model=@model, capacity=@capacity,
-									forwarder=@forwarder, driver=@driver, prodyear=@prodyear,
+									forwarder=nullif(@forwarder, 0), driver=nullif(@driver, 0), prodyear=@prodyear,
 									archival=@archival, comment=@comment, icon=nullif(@icon, 0)";
 							using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 							{
 								sqlCmd.Parameters.AddWithValue("id", vehicle.ID);
-								sqlCmd.Parameters.AddWithValue("register", !string.IsNullOrEmpty(vehicle.Register) ? (object)vehicle.Register : DBNull.Value);
-								sqlCmd.Parameters.AddWithValue("brand", vehicle.Brand);
-								sqlCmd.Parameters.AddWithValue("model", vehicle.Model);
+								sqlCmd.Parameters.AddWithValue("register", (object)vehicle.Register ?? DBNull.Value);
+								sqlCmd.Parameters.AddWithValue("brand", (object)vehicle.Brand ?? DBNull.Value);
+								sqlCmd.Parameters.AddWithValue("model", (object)vehicle.Model ?? DBNull.Value);
 								sqlCmd.Parameters.AddWithValue("capacity", (object)vehicle.Capacity ?? DBNull.Value);
-								sqlCmd.Parameters.AddWithValue("forwarder", vehicle.cForwarder.ID > 0 ? (object)vehicle.cForwarder.ID : DBNull.Value);
-								sqlCmd.Parameters.AddWithValue("driver", vehicle.cDriver.ID > 0 ? (object)vehicle.cDriver.ID : DBNull.Value);
+								sqlCmd.Parameters.AddWithValue("forwarder", (object)vehicle.ForwarderID ?? DBNull.Value);
+								sqlCmd.Parameters.AddWithValue("driver", (object)vehicle.DriverID ?? DBNull.Value);
 								sqlCmd.Parameters.AddWithValue("prodyear", (object)vehicle.ProdYear ?? DBNull.Value);
-								sqlCmd.Parameters.AddWithValue("archival", vehicle.Archival);
-								sqlCmd.Parameters.AddWithValue("comment", vehicle.Comment);
-								sqlCmd.Parameters.AddWithValue("icon", vehicle.Icon);
+								sqlCmd.Parameters.AddWithValue("archival", (object)vehicle.Archival ?? DBNull.Value);
+								sqlCmd.Parameters.AddWithValue("comment", (object)vehicle.Comment ?? DBNull.Value);
+								sqlCmd.Parameters.AddWithValue("icon", (object)vehicle.Icon ?? DBNull.Value);
 								sqlCmd.ExecuteNonQuery();
 							}
                             SetLog(Globals.Global.User.ID, module, vehicle.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} pojazd: {vehicle.Name}.", sqlConn, sqlTran);
@@ -1828,7 +1830,8 @@ namespace WBZ
 		/// <param name="def">Wartość domyślna jeśli zapis w tabeli wbz.config nie istnieje</param>
 		internal static string GetPropertyValue(string property, string def = null)
 		{
-			if (DesignerProperties.GetIsInDesignMode(new DependencyObject())) return string.Empty;
+			if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+				return def;
 
 			string result = null;
 

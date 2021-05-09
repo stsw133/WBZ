@@ -1,6 +1,5 @@
 ﻿using StswExpress.Globals;
 using System.Collections.ObjectModel;
-using WBZ.Globals;
 using WBZ.Models;
 using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_Family;
@@ -9,9 +8,6 @@ namespace WBZ.Modules.Families
 {
     class D_FamiliesNew : D_ModuleNew<MODULE_MODEL>
     {
-        /// Module
-        public readonly string Module = Config.Modules.FAMILIES;
-
         /// Window title
         public string Title
         {

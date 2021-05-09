@@ -1072,9 +1072,9 @@ namespace WBZ.Properties {
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
   <string>e.lastname</string>
-  <string>False</string>
+  <string>asc</string>
   <string>e.forename</string>
-  <string>False</string>
+  <string>asc</string>
   <string>50</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection sorting_EmployeesList {
@@ -1091,9 +1091,9 @@ namespace WBZ.Properties {
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
   <string>u.lastname</string>
-  <string>False</string>
+  <string>asc</string>
   <string>u.forename</string>
-  <string>False</string>
+  <string>asc</string>
   <string>50</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection sorting_UsersList {
@@ -1110,9 +1110,9 @@ namespace WBZ.Properties {
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
   <string>a.codename</string>
-  <string>False</string>
+  <string>asc</string>
   <string>a.name</string>
-  <string>False</string>
+  <string>asc</string>
   <string>50</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection sorting_ArticlesList {
@@ -1129,9 +1129,9 @@ namespace WBZ.Properties {
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
   <string>s.codename</string>
-  <string>False</string>
+  <string>asc</string>
   <string>s.name</string>
-  <string>False</string>
+  <string>asc</string>
   <string>50</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection sorting_StoresList {
@@ -1148,9 +1148,9 @@ namespace WBZ.Properties {
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
   <string>f.lastname</string>
-  <string>False</string>
+  <string>asc</string>
   <string>f.city</string>
-  <string>False</string>
+  <string>asc</string>
   <string>50</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection sorting_FamiliesList {
@@ -1167,9 +1167,9 @@ namespace WBZ.Properties {
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
   <string>d.dateissue</string>
-  <string>True</string>
+  <string>desc</string>
   <string>d.name</string>
-  <string>False</string>
+  <string>asc</string>
   <string>50</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection sorting_DocumentsList {
@@ -1186,9 +1186,9 @@ namespace WBZ.Properties {
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
   <string>d.datereal</string>
-  <string>True</string>
+  <string>desc</string>
   <string>d.name</string>
-  <string>False</string>
+  <string>asc</string>
   <string>50</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection sorting_DistributionsList {
@@ -1205,9 +1205,9 @@ namespace WBZ.Properties {
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
   <string>l.datetime</string>
-  <string>True</string>
+  <string>desc</string>
   <string>l.id</string>
-  <string>True</string>
+  <string>desc</string>
   <string>50</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection sorting_LogsList {
@@ -1224,9 +1224,9 @@ namespace WBZ.Properties {
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
   <string>ac.module</string>
-  <string>False</string>
+  <string>asc</string>
   <string>ac.name</string>
-  <string>False</string>
+  <string>asc</string>
   <string>50</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection sorting_AttributesClassesList {
@@ -1243,9 +1243,9 @@ namespace WBZ.Properties {
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
   <string>g.module</string>
-  <string>False</string>
+  <string>asc</string>
   <string>g.name</string>
-  <string>False</string>
+  <string>asc</string>
   <string>50</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection sorting_GroupsList {
@@ -1262,9 +1262,9 @@ namespace WBZ.Properties {
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
   <string>a.module</string>
-  <string>False</string>
+  <string>asc</string>
   <string>a.name</string>
-  <string>False</string>
+  <string>asc</string>
   <string>20</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection sorting_AttachmentsGallery {
@@ -1437,9 +1437,9 @@ namespace WBZ.Properties {
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
   <string>a.module</string>
-  <string>False</string>
+  <string>asc</string>
   <string>a.name</string>
-  <string>False</string>
+  <string>asc</string>
   <string>50</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection sorting_AttachmentsList {
@@ -1780,9 +1780,9 @@ namespace WBZ.Properties {
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
   <string>c.codename</string>
-  <string>False</string>
+  <string>asc</string>
   <string>c.name</string>
-  <string>False</string>
+  <string>asc</string>
   <string>50</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection sorting_ContractorsList {
@@ -1811,9 +1811,9 @@ namespace WBZ.Properties {
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
   <string>v.register</string>
-  <string>False</string>
+  <string>asc</string>
   <string>v.brand</string>
-  <string>False</string>
+  <string>asc</string>
   <string>50</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection sorting_VehiclesList {
@@ -2010,9 +2010,9 @@ namespace WBZ.Properties {
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
   <string>i.module</string>
-  <string>False</string>
+  <string>asc</string>
   <string>i.name</string>
-  <string>False</string>
+  <string>asc</string>
   <string>50</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection sorting_IconsList {

@@ -126,9 +126,14 @@ namespace WBZ.Modules.Login
 		/// </summary>
 		private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-			if (Global.AppDatabase.Version != Global.AppVersion())
+			if (Global.AppDatabase.Version == null)
+            {
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"Nie udało się połączyć z wybraną bazą danych!") { Owner = this }.ShowDialog();
+				return;
+			}
+			else if (Global.AppDatabase.Version != Global.AppVersion())
 			{
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.WARNING, $"Wersja aplikacji {Global.AppVersion()} nie zgadza się z wersją bazy danych {Global.AppDatabase.Version}!" +
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, $"Wersja aplikacji {Global.AppVersion()} nie zgadza się z wersją bazy danych {Global.AppDatabase.Version}!" +
 					Environment.NewLine + "Zaktualizuj bazę z menu dodatkowych opcji lub skontaktuj się z administratorem.") { Owner = this }.ShowDialog();
 				return;
 			}

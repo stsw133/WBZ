@@ -62,7 +62,7 @@ namespace WBZ.Modules.Attachments
 			await Task.Run(() => {
 				UpdateFilters();
 				D.TotalItems = SQL.CountInstances(D.Module, D.FilterSQL);
-				D.InstancesList = SQL.ListInstances<MODULE_MODEL>(D.Module, D.FilterSQL, D.SORTING, D.Page = 0);
+				D.InstancesList = SQL.ListInstances<MODULE_MODEL>(D.Module, D.FilterSQL, D.Sorting, D.Page = 0);
 
 				foreach (var img in D.InstancesList)
 					img.File = SQL.GetAttachmentFile(img.ID);
@@ -106,7 +106,7 @@ namespace WBZ.Modules.Attachments
 		{
 			if (e.HorizontalChange > 0 && e.HorizontalOffset + e.ViewportWidth == e.ExtentWidth && D.InstancesList.Count < D.TotalItems)
 			{
-				foreach (var i in SQL.ListInstances<MODULE_MODEL>(D.Module, D.FilterSQL, D.SORTING, ++D.Page)) D.InstancesList.Add(i);
+				foreach (var i in SQL.ListInstances<MODULE_MODEL>(D.Module, D.FilterSQL, D.Sorting, ++D.Page)) D.InstancesList.Add(i);
 				foreach (var img in D.InstancesList)
 					img.File = SQL.GetAttachmentFile(img.ID);
 				(e.OriginalSource as ScrollViewer).ScrollToVerticalOffset(e.HorizontalOffset);

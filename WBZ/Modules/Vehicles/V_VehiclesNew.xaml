@@ -8,7 +8,7 @@
        xmlns:b="clr-namespace:WBZ.Modules.Vehicles"
        xmlns:p="clr-namespace:WBZ.Properties"
        xmlns:t="clr-namespace:WBZ.Modules._tabs"
-       mc:Ignorable="d" Height="600" Width="900" ResizeMode="CanResize"
+       mc:Ignorable="d" Height="600" Width="900" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
        Title="{Binding Title}" Icon="/Resources/icon32_transport.ico"
        Loaded="Window_Loaded" Closed="Window_Closed"
        FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}">
@@ -92,7 +92,7 @@
                                        Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.5}"
                                        Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
                             </Button>
-                            <TextBox Text="{Binding InstanceData.cForwarder.Value}" Tag="{Binding InstanceData.cForwarder.ID}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True"/>
+                            <TextBox Text="{Binding InstanceData.ForwarderName}" Tag="{Binding InstanceData.ForwarderID}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Kierowca:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal"
@@ -102,7 +102,7 @@
                                        Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.5}"
                                        Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
                             </Button>
-                            <TextBox Text="{Binding InstanceData.cDriver.Value, Mode=OneWay}" Tag="{Binding InstanceData.cDriver.ID}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True"/>
+                            <TextBox Text="{Binding InstanceData.DriverName, Mode=OneWay}" Tag="{Binding InstanceData.DriverID}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Rok produkcji:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal"
