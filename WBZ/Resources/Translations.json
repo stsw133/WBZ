@@ -127,9 +127,17 @@
 		"en": "Employees",
 		"pl": "Pracownicy"
 	},
+	"ExpandGroups": {
+		"en": "Expand groups",
+		"pl": "Rozwiń grupy"
+	},
 	"Families": {
 		"en": "Families",
 		"pl": "Rodziny"
+	},
+	"Filter": {
+		"en": "Filter",
+		"pl": "Filtr"
 	},
 	"Font": {
 		"en": "Font",
@@ -295,6 +303,10 @@
 		"en": "Settings",
 		"pl": "Ustawienia"
 	},
+	"ShowArchival": {
+		"en": "Show archival",
+		"pl": "Pokaż archiwalne"
+	},
 	"ShowButtonsWithNames": {
 		"en": "Show buttons with names",
 		"pl": "Pokaż nazwy w przyciskach"
@@ -343,33 +355,33 @@
 		"en": "Users",
 		"pl": "Użytkownicy"
 	},
-	"VehicleDuplicate": {
-		"en": "Duplicate vehicle",
-		"pl": "Duplikat pojazdu"
-	},
-	"VehicleEdit": {
-		"en": "Edit vehicle",
-		"pl": "Edycja pojazdu"
-	},
-	"VehicleNew": {
-		"en": "New vehicle",
-		"pl": "Nowy pojazd"
-	},
-	"VehiclePreview": {
-		"en": "Preview vehicle",
-		"pl": "Podgląd pojazdu"
-	},
 	"Vehicles": {
 		"en": "Vehicles",
 		"pl": "Pojazdy"
 	},
-	"VehicleSelect": {
-		"en": "Select vehicle",
-		"pl": "Wybór pojazdu"
+	"VehiclesDuplicate": {
+		"en": "Duplicate vehicle",
+		"pl": "Duplikat pojazdu"
+	},
+	"VehiclesEdit": {
+		"en": "Edit vehicle",
+		"pl": "Edycja pojazdu"
 	},
 	"VehiclesList": {
 		"en": "List of vehicles",
 		"pl": "Lista pojazdów"
+	},
+	"VehiclesNew": {
+		"en": "New vehicle",
+		"pl": "Nowy pojazd"
+	},
+	"VehiclesPreview": {
+		"en": "Preview vehicle",
+		"pl": "Podgląd pojazdu"
+	},
+	"VehiclesSelect": {
+		"en": "Select vehicle",
+		"pl": "Wybór pojazdu"
 	},
 	"Versions": {
 		"en": "Versions",

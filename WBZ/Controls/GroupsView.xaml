@@ -4,22 +4,23 @@
           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
           xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
+          xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
           xmlns:p="clr-namespace:WBZ.Properties"
-          mc:Ignorable="d" d:DesignHeight="300"
-          Margin="5,5,0,5" Padding="0,0,5,0" MinWidth="150"
+          mc:Ignorable="d" d:DesignHeight="300" Padding="5" BorderBrush="Gray" BorderThickness="0,0,1,0"
+          Width="{Binding iSize, Source={x:Static p:Settings.Default}, Converter={seg:conv_Size}, ConverterParameter=15}"
           Loaded="TreeView_Loaded"
           PreviewMouseDoubleClick="TreeView_PreviewMouseDoubleClick"
           PreviewMouseRightButtonDown="TreeView_PreviewMouseRightButtonDown"
           SelectedItemChanged="TreeView_SelectedItemChanged">
     <TreeView.ContextMenu>
         <ContextMenu>
-            <sec:MenuItem Header="Podgląd" IconUri="/Resources/icon32_search.ico" Click="btnGroupsPreview_Click"/>
-            <sec:MenuItem Header="Dodaj" IconUri="/Resources/icon32_add.ico" Click="btnGroupsNew_Click"/>
-            <sec:MenuItem Header="Edytuj" IconUri="/Resources/icon32_edit.ico" Click="btnGroupsEdit_Click"/>
-            <sec:MenuItem Header="Usuń" IconUri="/Resources/icon32_delete.ico" Click="btnGroupsDelete_Click"/>
+            <sec:MenuItem Header="{Tr Preview}" IconUri="/Resources/icon32_search.ico" Click="btnGroupsPreview_Click"/>
+            <sec:MenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico" Click="btnGroupsNew_Click"/>
+            <sec:MenuItem Header="{Tr Edit}" IconUri="/Resources/icon32_edit.ico" Click="btnGroupsEdit_Click"/>
+            <sec:MenuItem Header="{Tr Delete}" IconUri="/Resources/icon32_delete.ico" Click="btnGroupsDelete_Click"/>
             <Separator/>
-            <MenuItem Header="Rozwiń grupy" IsCheckable="True" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=config_ExpandGroups, Mode=TwoWay}" Click="btnGroupsExpandAll_Click"/>
-            <sec:MenuItem Header="Odśwież" IconUri="/Resources/icon32_refresh.ico" Click="btnGroupsRefresh_Click"/>
+            <MenuItem Header="{Tr ExpandGroups}" IsCheckable="True" IsChecked="{Binding config_ExpandGroups, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Click="btnGroupsExpandAll_Click"/>
+            <sec:MenuItem Header="{Tr Refresh}" IconUri="/Resources/icon32_refresh.ico" Click="btnGroupsRefresh_Click"/>
         </ContextMenu>
     </TreeView.ContextMenu>
 </TreeView>

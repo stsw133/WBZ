@@ -26,9 +26,9 @@ namespace WBZ.Modules.Vehicles
 		}
 
 		/// <summary>
-		/// Select: Contractor
+		/// Select: Forwarder
 		/// </summary>
-		private void btnSelectContractor_Click(object sender, RoutedEventArgs e)
+		private void btnSelectForwarder_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new ContractorsList(Commands.Type.SELECT);
 			if (window.ShowDialog() == true)
@@ -40,9 +40,9 @@ namespace WBZ.Modules.Vehicles
 		}
 
 		/// <summary>
-		/// Select: Employee
+		/// Select: Driver
 		/// </summary>
-		private void btnSelectEmployee_Click(object sender, RoutedEventArgs e)
+		private void btnSelectDriver_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new EmployeesList(Commands.Type.SELECT);
 			if (window.ShowDialog() == true)

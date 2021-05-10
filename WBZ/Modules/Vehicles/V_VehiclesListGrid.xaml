@@ -8,7 +8,7 @@
           xmlns:g="clr-namespace:WBZ.Globals"
           xmlns:p="clr-namespace:WBZ.Properties"
           mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800"
-          Margin="5" AutoGenerateColumns="False" RowHeaderWidth="0" IsReadOnly="True"
+          AutoGenerateColumns="False" BorderThickness="0" RowHeaderWidth="0" IsReadOnly="True"
           HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray">
     <DataGrid.ColumnHeaderStyle>
         <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -28,14 +28,8 @@
         <DataGridTextColumn Binding="{Binding ID}" Header="ID"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_ID, Converter={seg:conv_BoolToVisibility}}"/>
         <!-- Icon -->
-        <DataGridTemplateColumn Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"
-                                Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Icon, Converter={seg:conv_BoolToVisibility}}">
-            <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate>
-                    <Image Source="{Binding cIcon.Value}"/>
-                </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-        </DataGridTemplateColumn>
+        <sec:DataGridImageColumn Image="{Binding cIcon.Value}" Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"
+                                 Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Icon, Converter={seg:conv_BoolToVisibility}}"/>
         <!-- Register -->
         <DataGridTextColumn Binding="{Binding Register}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Register, Converter={seg:conv_BoolToVisibility}}">

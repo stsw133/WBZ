@@ -133,7 +133,7 @@ namespace WBZ.Modules._base
             await Task.Run(() => {
                 UpdateFilters();
                 D.TotalItems = SQL.CountInstances(D.Module, D.FilterSQL);
-                D.InstancesList = SQL.ListInstances<MODULE_MODEL>(D.Module, D.FilterSQL, D.Sorting, D.Page = 0);
+                D.InstancesList = SQL.ListInstances<MODULE_MODEL>(D.Module, D.FilterSQL, D.Sorting, (D.InstancesList as dynamic)?.Count ?? 0);
             });
             Cursor = Cursors.Arrow;
         }
@@ -175,7 +175,7 @@ namespace WBZ.Modules._base
             if (e.VerticalChange > 0 && e.VerticalOffset + e.ViewportHeight == e.ExtentHeight && D.InstancesList.Count < D.TotalItems)
             {
                 Cursor = Cursors.Wait;
-                foreach (var i in SQL.ListInstances<MODULE_MODEL>(D.Module, D.FilterSQL, D.Sorting, ++D.Page))
+                foreach (var i in SQL.ListInstances<MODULE_MODEL>(D.Module, D.FilterSQL, D.Sorting, (D.InstancesList as dynamic)?.Count ?? 0))
                     D.InstancesList.Add(i);
                 (e.OriginalSource as ScrollViewer).ScrollToVerticalOffset(e.VerticalOffset);
                 Cursor = Cursors.Arrow;

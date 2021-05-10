@@ -1,12 +1,13 @@
 ﻿using StswExpress.Base;
 using StswExpress.Globals;
+using StswExpress.Translate;
+using WBZ.Models;
 
 namespace WBZ.Modules._base
 {
     abstract class D_ModuleNew<MODULE_MODEL> : D where MODULE_MODEL : class, new()
     {
 		/// Module
-		//public string Module => GetType().Namespace.ToLower().Split('.').Last();
 		public string Module => GetType().Name.ToLower()[2..^3];
 
 		/// Mode
@@ -22,6 +23,7 @@ namespace WBZ.Modules._base
 				else										return null;
 			}
 		}
+		public string Title => TM.Tr(Module.Capitalize() + Mode.ToString().Capitalize()) + (InstanceData != null ? $": {(InstanceData as M).Name}" : string.Empty);
 
 		/// Instance
 		private MODULE_MODEL instanceData = new MODULE_MODEL();

@@ -20,8 +20,9 @@
                            Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.5}"
                            Source="/Resources/icon32_settings.ico"/>
                 </Button>
-                <Label Content="Filtr:" VerticalAlignment="Center"/>
-                <ComboBox Margin="5,0" ItemsSource="{Binding FiltersList}" SelectedValue="{Binding SelectedFilter}" SelectedValuePath="Name" FontWeight="Medium" VerticalAlignment="Center"/>
+                <Label Content="{Tr Filter, Suffix=':'}" VerticalAlignment="Center"/>
+                <ComboBox Margin="5,0" VerticalAlignment="Center" FontWeight="Medium"
+                          ItemsSource="{Binding FiltersList}" SelectedValue="{Binding SelectedFilter}" SelectedValuePath="Name"/>
             </DockPanel>
             <!-- Lower (options, displayed) -->
             <DockPanel DockPanel.Dock="Top">
@@ -40,12 +41,12 @@
                            Source="/Resources/icon32_filter.ico"/>
                 </ToggleButton>
                 <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-                    <Label Content="{Tr LimitPerPage, Suffix=':'}" Margin="0,0,5,0" VerticalAlignment="Center"/>
-                    <sec:NumericUpDown Margin="0,0,5,0" VerticalAlignment="Center" ValueAlignment="Center"
+                    <Label Content="{Tr LimitPerPage, Suffix=':'}" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                    <sec:NumericUpDown Margin="2" ValueAlignment="Center"
                                        Value="{Binding Sorting[4], Mode=TwoWay}" ValueMin="0"
                                        Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=5}"/>
                 </StackPanel>
-                <Label Content="Wyświetlono:" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <Label Content="{Tr Displayed, Suffix=':'}" Margin="0,0,5,0" VerticalAlignment="Center"/>
                 <Label Content="{Binding InstancesList.Count}" FontWeight="Medium" VerticalAlignment="Center"/>
                 <Label Content=" / " Padding="2.5" VerticalAlignment="Center"/>
                 <Label Content="{Binding TotalItems}" FontWeight="Medium" VerticalAlignment="Center"/>

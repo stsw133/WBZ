@@ -10,6 +10,11 @@ namespace WBZ.Models
         public int ID { get; set; } = 0;
 
         /// <summary>
+        /// Name
+        /// </summary>
+        public virtual string Name { get; set; } = string.Empty;
+
+        /// <summary>
         /// Archival
         /// </summary>
         public bool Archival { get; set; } = false;

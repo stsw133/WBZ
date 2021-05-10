@@ -1,5 +1,6 @@
 ﻿using StswExpress.Base;
 using StswExpress.Globals;
+using StswExpress.Translate;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 
@@ -8,7 +9,6 @@ namespace WBZ.Modules._base
 	abstract class D_ModuleList<MODULE_MODEL> : D where MODULE_MODEL : class, new()
 	{
 		/// Module
-		//public string Module => GetType().Namespace.ToLower().Split('.').Last();
 		public string Module => GetType().Name.ToLower()[2..^4];
 
 		/// Mode
@@ -22,6 +22,7 @@ namespace WBZ.Modules._base
 				else									return null;
 			}
 		}
+		public string Title => TM.Tr(Module.Capitalize() + Mode.ToString().Capitalize());
 
 		/// Selected tab
 		private int selectedTab = 0;
@@ -97,15 +98,7 @@ namespace WBZ.Modules._base
 			set => SetField(ref areGroupsVisible, value, () => AreGroupsVisible);
 		}
 
-		/// Page number
-		private int page;
-		public int Page
-		{
-			get => page;
-			set => SetField(ref page, value, () => Page);
-		}
-
-		/// Total instances number
+		/// Total items
 		private int totalItems;
 		public int TotalItems
 		{
