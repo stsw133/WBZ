@@ -22,10 +22,10 @@ namespace WBZ
 		{
 			ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(int.MaxValue));
 
-			StswExpress.Globals.Properties.HashKey = "ejdndbfewbasjhdggjhbasbvdgewvbjdbsavdqgwjbdjsvdyugwqyubashjdbjfgdtyuqw";
-			StswExpress.Globals.Properties.iFont = WBZ.Properties.Settings.Default.iFont;
-			StswExpress.Globals.Properties.iSize = WBZ.Properties.Settings.Default.iSize;
-			StswExpress.Globals.Properties.ThemeColor = WBZ.Properties.Settings.Default.ThemeColor;
+			StswExpress.Properties.Settings.Default.HashKey = "ejdndbfewbasjhdggjhbasbvdgewvbjdbsavdqgwjbdjsvdyugwqyubashjdbjfgdtyuqw";
+			StswExpress.Properties.Settings.Default.iFont = WBZ.Properties.Settings.Default.iFont;
+			StswExpress.Properties.Settings.Default.iSize = WBZ.Properties.Settings.Default.iSize;
+			StswExpress.Properties.Settings.Default.ThemeColor = WBZ.Properties.Settings.Default.ThemeColor;
 
 			Mail.Host = WBZ.Properties.Settings.Default.config_Email_Host;
 			Mail.Port = WBZ.Properties.Settings.Default.config_Email_Port;

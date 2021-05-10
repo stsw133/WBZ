@@ -32,6 +32,7 @@
             <DockPanel>
                 <DockPanel.Resources>
                     <Style TargetType="{x:Type sec:IconButton}">
+                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
                         <Setter Property="IsTextVisible" Value="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"/>
                     </Style>
                 </DockPanel.Resources>
@@ -68,6 +69,7 @@
                                 <Setter Property="IconSize" Value="{Binding iSize, Source={x:Static p:Settings.Default}, Converter={seg:conv_Size}, ConverterParameter=1.5}"/>
                                 <Setter Property="IsTextVisible" Value="False"/>
                                 <Setter Property="Margin" Value="5,5,0,5"/>
+                                <Setter Property="Padding" Value="0"/>
                                 <Setter Property="Width" Value="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"/>
                             </Style>
                             <Style TargetType="{x:Type sec:Label}">
@@ -108,12 +110,12 @@
                             </DockPanel>
                             <DockPanel DockPanel.Dock="Top">
                                 <sec:Label Content="Spedytor:" FontWeight="Normal"/>
-                                <sec:IconButton Icon="/Resources/icon32_contractors.ico" Click="btnSelectForwarder_Click"/>
+                                <sec:IconButton HorizontalContentAlignment="Center" Icon="/Resources/icon32_contractors.ico" Click="btnSelectForwarder_Click"/>
                                 <sec:TextBox Text="{Binding InstanceData.ForwarderName}" Tag="{Binding InstanceData.ForwarderID}" IsReadOnly="True"/>
                             </DockPanel>
                             <DockPanel DockPanel.Dock="Top">
                                 <sec:Label Content="Kierowca:" FontWeight="Normal"/>
-                                <sec:IconButton Icon="/Resources/icon32_briefcase.ico" Click="btnSelectDriver_Click"/>
+                                <sec:IconButton HorizontalContentAlignment="Center" Icon="/Resources/icon32_briefcase.ico" Click="btnSelectDriver_Click"/>
                                 <sec:TextBox Text="{Binding InstanceData.DriverName}" Tag="{Binding InstanceData.DriverID}" IsReadOnly="True"/>
                             </DockPanel>
                             <DockPanel DockPanel.Dock="Top">

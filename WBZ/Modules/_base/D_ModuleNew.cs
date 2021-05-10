@@ -9,6 +9,7 @@ namespace WBZ.Modules._base
     {
 		/// Module
 		public string Module => GetType().Name.ToLower()[2..^3];
+		public string Title => TM.Tr(Module.Capitalize() + Mode.ToString().Capitalize()) + (InstanceData != null ? $": {(InstanceData as M).Name}" : string.Empty);
 
 		/// Mode
 		public Commands.Type Mode { get; set; }
@@ -23,7 +24,6 @@ namespace WBZ.Modules._base
 				else										return null;
 			}
 		}
-		public string Title => TM.Tr(Module.Capitalize() + Mode.ToString().Capitalize()) + (InstanceData != null ? $": {(InstanceData as M).Name}" : string.Empty);
 
 		/// Instance
 		private MODULE_MODEL instanceData = new MODULE_MODEL();

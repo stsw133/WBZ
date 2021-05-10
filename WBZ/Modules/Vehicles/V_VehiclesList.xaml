@@ -39,6 +39,7 @@
             <DockPanel>
                 <DockPanel.Resources>
                     <Style TargetType="{x:Type sec:IconButton}">
+                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
                         <Setter Property="IsTextVisible" Value="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"/>
                     </Style>
                 </DockPanel.Resources>

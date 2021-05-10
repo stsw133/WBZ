@@ -6,6 +6,7 @@
         xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
         xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
         mc:Ignorable="d" SizeToContent="Height" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner"
+        Width="{Binding FontSize, RelativeSource={RelativeSource Mode=Self}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=30}"
         Title="Potwierdzenie">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
@@ -14,7 +15,7 @@
         <!-- titleBar -->
         <sec:TitleBar DockPanel.Dock="Top"/>
         <!-- main -->
-        <Grid Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=30}">
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>

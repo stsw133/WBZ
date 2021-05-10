@@ -38,7 +38,11 @@ namespace WBZ.Modules._base
             if (D.Mode == StswExpress.Globals.Commands.Type.SELECT)
                 foreach (var dg in dgLists)
                     dg.SelectionMode = DataGridSelectionMode.Single;
-            //cmdRefresh_Executed(null, null);
+
+            if (dgLists.Count > 1)
+                D.TotalItems = SQL.CountInstances(D.Module);
+            else
+                cmdRefresh_Executed(null, null);
         }
 
         /// <summary>

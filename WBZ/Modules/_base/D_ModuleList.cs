@@ -10,6 +10,7 @@ namespace WBZ.Modules._base
 	{
 		/// Module
 		public string Module => GetType().Name.ToLower()[2..^4];
+		public string Title => TM.Tr(Module.Capitalize() + Mode.ToString().Capitalize());
 
 		/// Mode
 		public Commands.Type Mode { get; set; }
@@ -22,7 +23,6 @@ namespace WBZ.Modules._base
 				else									return null;
 			}
 		}
-		public string Title => TM.Tr(Module.Capitalize() + Mode.ToString().Capitalize());
 
 		/// Selected tab
 		private int selectedTab = 0;
@@ -45,7 +45,7 @@ namespace WBZ.Modules._base
 		}
 
 		/// Instances list
-		private ObservableCollection<MODULE_MODEL> instancesList;
+		private ObservableCollection<MODULE_MODEL> instancesList = new ObservableCollection<MODULE_MODEL>();
 		public ObservableCollection<MODULE_MODEL> InstancesList
 		{
 			get => instancesList;

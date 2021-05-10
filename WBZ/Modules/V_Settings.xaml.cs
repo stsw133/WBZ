@@ -54,9 +54,9 @@ namespace WBZ.Modules
         {
 			TM.Instance.CurrentLanguage = Properties.Settings.Default.Language;
 
-			StswExpress.Globals.Properties.iFont = Properties.Settings.Default.iFont;
-			StswExpress.Globals.Properties.iSize = Properties.Settings.Default.iSize;
-			StswExpress.Globals.Properties.ThemeColor = Properties.Settings.Default.ThemeColor;
+			StswExpress.Properties.Settings.Default.iFont = Properties.Settings.Default.iFont;
+			StswExpress.Properties.Settings.Default.iSize = Properties.Settings.Default.iSize;
+			StswExpress.Properties.Settings.Default.ThemeColor = Properties.Settings.Default.ThemeColor;
 
 			Mail.Host = Properties.Settings.Default.config_Email_Host;
 			Mail.Port = Properties.Settings.Default.config_Email_Port;
