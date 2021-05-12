@@ -53,7 +53,11 @@ namespace WBZ.Modules._base
 		}
 
 		/// Sorting
-		public abstract StringCollection Sorting { get; set; }
+		public StringCollection Sorting
+		{
+			get => (StringCollection)Properties.Settings.Default[$"sorting_{Module.Capitalize()}List"];
+			set => Properties.Settings.Default[$"sorting_{Module.Capitalize()}List"] = value;
+		}
 
 		/// SQL filter
 		public string FilterSQL { get; set; }

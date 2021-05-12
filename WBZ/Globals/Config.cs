@@ -34,6 +34,7 @@ namespace WBZ.Globals
             public const string FAMILIES = "families";
             public const string GROUPS = "groups";
             public const string ICONS = "icons";
+            public const string LOGIN = "login";
             public const string LOGS = "logs";
             //public const string ORDERS = "orders";  // do dodania w wersji 1.3.0
             //public const string SHIPMENTS = "shipments";  // do dodania w wersji 1.3.0
@@ -64,6 +65,7 @@ namespace WBZ.Globals
             new Tuple<string, string>(Modules.FAMILIES, GetModuleTranslation(Modules.FAMILIES)),
             //new Tuple<string, string>(Module.GROUPS, GetModuleTranslation(Module.GROUPS)),
             new Tuple<string, string>(Modules.ICONS, GetModuleTranslation(Modules.ICONS)),
+            //new Tuple<string, string>(Modules.LOGIN, GetModuleTranslation(Modules.LOGIN)),
             new Tuple<string, string>(Modules.LOGS, GetModuleTranslation(Modules.LOGS)),
             //new Tuple<string, string>(Module.STATS, GetModuleTranslation(Module.STATS)),
             new Tuple<string, string>(Modules.STORES, GetModuleTranslation(Modules.STORES)),

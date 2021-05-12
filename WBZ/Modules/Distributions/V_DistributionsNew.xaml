@@ -37,7 +37,7 @@
                                     Command="seg:Commands.Save"/>
                     <Separator/>
                     <CheckBox Content="{Tr ToBuffer}" Margin="5"
-                              IsChecked="{Binding InstanceData.Status, Converter={seg:conv_BoolInverted}}"
+                              IsChecked="{Binding InstanceData.Status, Converter={seg:conv_Bool}, ConverterParameter=!}"
                               IsEnabled="{Binding EditingMode}"/>
                     <Separator/>
                 </StackPanel>
@@ -105,7 +105,7 @@
                                 </CollectionViewSource>
                             </Grid.Resources>
                             <DataGrid x:Name="dgFamilies" ColumnHeaderHeight="0" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
-                                      AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding Source={StaticResource groups}}" IsReadOnly="{Binding EditMode, Converter={seg:conv_BoolInverted}}"
+                                      AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding Source={StaticResource groups}}" IsReadOnly="{Binding EditMode, Converter={seg:conv_Bool}, ConverterParameter=!}"
                                       CanUserAddRows="False">
                                 <DataGrid.GroupStyle>
                                     <GroupStyle>
@@ -154,7 +154,7 @@
                                                                     <Border Padding="10" Background="White" BorderBrush="Black" BorderThickness="1">
                                                                         <DockPanel>
                                                                             <DataGrid x:Name="dgPositions" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
-                                                                                      AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding Path=Items[0].Positions.DefaultView}" IsReadOnly="{Binding EditMode, Converter={seg:conv_BoolInverted}}"
+                                                                                      AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding Path=Items[0].Positions.DefaultView}" IsReadOnly="{Binding EditMode, Converter={seg:conv_Bool}, ConverterParameter=!}"
                                                                                       CanUserAddRows="False">
                                                                                 <DataGrid.Columns>
                                                                                     <DataGridTextColumn Binding="{Binding id}" Header="ID" IsReadOnly="True" Visibility="Hidden"/>

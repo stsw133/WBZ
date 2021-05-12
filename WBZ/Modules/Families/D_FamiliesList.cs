@@ -17,12 +17,5 @@ namespace WBZ.Modules.Families
 				else									return string.Empty;
 			}
 		}
-
-		/// Sorting
-		public override StringCollection Sorting
-		{
-			get => Properties.Settings.Default.sorting_FamiliesList;
-			set => throw new System.NotImplementedException();
-		}
 	}
 }

@@ -26,12 +26,5 @@ namespace WBZ.Modules.Articles
 			get => storesList;
 			set => SetField(ref storesList, value, () => StoresList);
 		}
-
-		/// Sorting
-        public override StringCollection Sorting
-		{
-			get => Properties.Settings.Default.sorting_ArticlesList;
-			set => throw new System.NotImplementedException();
-		}
     }
 }

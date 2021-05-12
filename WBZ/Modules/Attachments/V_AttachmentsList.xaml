@@ -45,8 +45,8 @@
                                     Command="seg:Commands.Edit"/>
                     <Separator/>
                     <!--
-                    <CheckBox Content="Podgląd zdjęć" x:Name="chckShowPictures" Margin="5,5,5,0" Visibility="{Binding IsChecked, ElementName=btnToggle, Converter={seg:conv_BoolToVisibility}}"/>
-                    <Separator Height="5" Margin="0,5,0,0" Visibility="{Binding IsChecked, ElementName=btnToggle, Converter={seg:conv_BoolToVisibility}}"/>
+                    <CheckBox Content="Podgląd zdjęć" x:Name="chckShowPictures" Margin="5,5,5,0" Visibility="{Binding IsChecked, ElementName=btnToggle, Converter={seg:conv_Bool}}"/>
+                    <Separator Height="5" Margin="0,5,0,0" Visibility="{Binding IsChecked, ElementName=btnToggle, Converter={seg:conv_Bool}}"/>
                     -->
                     <sec:IconButton Text="{Tr Delete}" Margin="5"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
@@ -78,7 +78,7 @@
                        HasFilters="{Binding AreFiltersVisible, Mode=OneTime}" HasGroups="{Binding AreGroupsVisible, Mode=OneTime}"/>
         <!-- groupsView -->
         <c:GroupsView EditingMode="{Binding Perms, Source={x:Static g:Global.User}, Converter={seg:conv_ListContains}, ConverterParameter=attachments_groups}"
-                      Visibility="{Binding AreGroupsVisible, Converter={seg:conv_BoolToVisibility}}"/>
+                      Visibility="{Binding AreGroupsVisible, Converter={seg:conv_Bool}}"/>
         <!-- dataGrid -->
         <b:AttachmentsListGrid x:Name="dgList" ItemsSource="{Binding InstancesList}" IsReadOnly="True"
                                MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged"/>

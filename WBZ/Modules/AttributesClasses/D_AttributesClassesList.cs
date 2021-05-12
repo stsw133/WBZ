@@ -17,12 +17,5 @@ namespace WBZ.Modules.AttributesClasses
 				else									return string.Empty;
 			}
 		}
-
-		/// Sorting
-		public override StringCollection Sorting
-		{
-			get => Properties.Settings.Default.sorting_AttributesClassesList;
-			set => throw new System.NotImplementedException();
-		}
 	}
 }

@@ -25,10 +25,10 @@
     <DataGrid.Columns>
         <!-- ID -->
         <DataGridTextColumn Binding="{Binding ID}" Header="ID"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_ID, Converter={seg:conv_BoolToVisibility}}"/>
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_ID, Converter={seg:conv_Bool}}"/>
         <!-- User -->
         <DataGridTextColumn Binding="{Binding cUser.Value}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_User, Converter={seg:conv_BoolToVisibility}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_User, Converter={seg:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <sec:ColumnFilter_Text Header="Użytkownik"
                                        Value="{Binding Data.Filters.cUser.Value, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
@@ -37,14 +37,14 @@
         </DataGridTextColumn>
         <!-- Module -->
         <DataGridTextColumn Binding="{Binding TranslatedModule}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Module, Converter={seg:conv_BoolToVisibility}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Module, Converter={seg:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <StackPanel>
                     <TextBlock Text="Nazwa modułu"/>
                     <ComboBox VerticalContentAlignment="Center" Padding="1"
                               ItemsSource="{x:Static g:Config.ListModules}" SelectedValuePath="Item1" DisplayMemberPath="Item2"
                               SelectedValue="{Binding Data.Filters.Module, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                              Visibility="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}, Converter={seg:conv_BoolToVisibility}}">
+                              Visibility="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}, Converter={seg:conv_Bool}}">
                         <ComboBox.InputBindings>
                             <KeyBinding Command="seg:Commands.Refresh" Key="Return"/>
                         </ComboBox.InputBindings>
@@ -54,10 +54,10 @@
         </DataGridTextColumn>
         <!-- Instance -->
         <DataGridTextColumn Binding="{Binding Instance}" Header="ID instancji" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Instance, Converter={seg:conv_BoolToVisibility}}"/>
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Instance, Converter={seg:conv_Bool}}"/>
         <!-- Name -->
         <DataGridTextColumn Binding="{Binding Name}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Name, Converter={seg:conv_BoolToVisibility}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Name, Converter={seg:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <sec:ColumnFilter_Text Header="Nazwa"
                                        Value="{Binding Data.Filters.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"

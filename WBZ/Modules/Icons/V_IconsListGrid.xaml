@@ -25,10 +25,10 @@
     <DataGrid.Columns>
         <!-- ID -->
         <DataGridTextColumn Binding="{Binding ID}" Header="ID"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_ID, Converter={seg:conv_BoolToVisibility}}"/>
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_ID, Converter={seg:conv_Bool}}"/>
         <!-- File -->
         <DataGridTemplateColumn Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"
-                                Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_File, Converter={seg:conv_BoolToVisibility}}">
+                                Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_File, Converter={seg:conv_Bool}}">
             <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
                     <Image Source="{Binding File}"/>
@@ -37,14 +37,14 @@
         </DataGridTemplateColumn>
         <!-- Module -->
         <DataGridTextColumn Binding="{Binding TranslatedModule}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Module, Converter={seg:conv_BoolToVisibility}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Module, Converter={seg:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <StackPanel>
                     <TextBlock Text="Nazwa modułu"/>
                     <ComboBox VerticalContentAlignment="Center" Padding="1"
                               ItemsSource="{x:Static g:Config.ListModules}" SelectedValuePath="Item1" DisplayMemberPath="Item2"
                               SelectedValue="{Binding Data.Filters.Module, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                              Visibility="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}, Converter={seg:conv_BoolToVisibility}}">
+                              Visibility="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}, Converter={seg:conv_Bool}}">
                         <ComboBox.InputBindings>
                             <KeyBinding Command="seg:Commands.Refresh" Key="Return"/>
                         </ComboBox.InputBindings>
@@ -54,7 +54,7 @@
         </DataGridTextColumn>
         <!-- Name -->
         <DataGridTextColumn Binding="{Binding Name}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Name, Converter={seg:conv_BoolToVisibility}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Name, Converter={seg:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <sec:ColumnFilter_Text Header="Nazwa"
                                        Value="{Binding Data.Filters.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
@@ -63,7 +63,7 @@
         </DataGridTextColumn>
         <!-- Format -->
         <DataGridTextColumn Binding="{Binding Format}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Format, Converter={seg:conv_BoolToVisibility}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Format, Converter={seg:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <sec:ColumnFilter_Text Header="Format"
                                        Value="{Binding Data.Filters.Format, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
@@ -72,7 +72,7 @@
         </DataGridTextColumn>
         <!-- Path -->
         <DataGridTextColumn Binding="{Binding Path}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Path, Converter={seg:conv_BoolToVisibility}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Path, Converter={seg:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <sec:ColumnFilter_Text Header="Ścieżka"
                                        Value="{Binding Data.Filters.Path, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
@@ -81,7 +81,7 @@
         </DataGridTextColumn>
         <!-- Height -->
         <DataGridTextColumn Binding="{Binding Height}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Height, Converter={seg:conv_BoolToVisibility}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Height, Converter={seg:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <sec:ColumnFilter_Number Header="Wysokość"
                                          Value="{Binding Data.Filters.Height, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
@@ -90,7 +90,7 @@
         </DataGridTextColumn>
         <!-- Width -->
         <DataGridTextColumn Binding="{Binding Width}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Width, Converter={seg:conv_BoolToVisibility}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Width, Converter={seg:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <sec:ColumnFilter_Number Header="Szerokość"
                                          Value="{Binding Data.Filters.Width, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
@@ -99,7 +99,7 @@
         </DataGridTextColumn>
         <!-- Size -->
         <DataGridTextColumn Binding="{Binding Size}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Size, Converter={seg:conv_BoolToVisibility}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Size, Converter={seg:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <sec:ColumnFilter_Number Header="Rozmiar"
                                          Value="{Binding Data.Filters.Size, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"

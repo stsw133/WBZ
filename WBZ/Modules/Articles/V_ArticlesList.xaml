@@ -91,9 +91,9 @@
                        HasFilters="{Binding AreFiltersVisible, Mode=OneTime}" HasGroups="{Binding AreGroupsVisible, Mode=OneTime}"/>
         <!-- groupsView -->
         <c:GroupsView EditingMode="{Binding Perms, Source={x:Static g:Global.User}, Converter={seg:conv_ListContains}, ConverterParameter=articles_groups}"
-                      Visibility="{Binding AreGroupsVisible, Converter={seg:conv_BoolToVisibility}}"/>
+                      Visibility="{Binding AreGroupsVisible, Converter={seg:conv_Bool}}"/>
         <!-- otherFilters -->
-        <DockPanel DockPanel.Dock="Bottom" Visibility="{Binding AreFiltersVisible, Converter={seg:conv_BoolToVisibility}}">
+        <DockPanel DockPanel.Dock="Bottom" Visibility="{Binding AreFiltersVisible, Converter={seg:conv_Bool}}">
             <Label Content="Magazyn:" Margin="5,0,0,5"/>
             <ComboBox Margin="5,0,5,5" VerticalContentAlignment="Center"
                       ItemsSource="{Binding StoresList}" DisplayMemberPath="Value" SelectedValuePath="ID" SelectedIndex="0"

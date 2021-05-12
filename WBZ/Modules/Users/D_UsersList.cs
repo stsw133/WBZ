@@ -17,12 +17,5 @@ namespace WBZ.Modules.Users
 				else									return string.Empty;
 			}
 		}
-
-		/// Sorting
-		public override StringCollection Sorting
-		{
-			get => Properties.Settings.Default.sorting_UsersList;
-			set => throw new System.NotImplementedException();
-		}
 	}
 }

@@ -7,7 +7,7 @@ namespace WBZ.Modules.Attachments
     class D_AttachmentsGallery : D_ModuleList<MODULE_MODEL>
 	{
 		/// Sorting
-        public override StringCollection Sorting
+        public StringCollection Sorting
 		{
 			get => Properties.Settings.Default.sorting_AttachmentsGallery;
 			set => throw new System.NotImplementedException();

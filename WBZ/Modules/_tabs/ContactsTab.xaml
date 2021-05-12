@@ -7,7 +7,7 @@
              xmlns:g="clr-namespace:WBZ.Globals"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="750"
              Loaded="UserControl_Loaded">
-    <DataGrid ItemsSource="{Binding InstanceContacts}" IsReadOnly="{Binding EditingMode, Converter={seg:conv_BoolInverted}}"
+    <DataGrid ItemsSource="{Binding InstanceContacts}" IsReadOnly="{Binding EditingMode, Converter={seg:conv_Bool}, ConverterParameter=!}"
               Margin="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1" AutoGenerateColumns="False">
         <DataGrid.Resources>
             <g:BindingProxy x:Key="proxy" Data="{Binding}"/>

@@ -25,10 +25,10 @@
     <DataGrid.Columns>
         <!-- ID -->
         <DataGridTextColumn Binding="{Binding ID}" Header="ID"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_ID, Converter={seg:conv_BoolToVisibility}}"/>
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_ID, Converter={seg:conv_Bool}}"/>
         <!-- Icon -->
         <DataGridTemplateColumn Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"
-                                Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Icon, Converter={seg:conv_BoolToVisibility}}">
+                                Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Icon, Converter={seg:conv_Bool}}">
             <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
                     <Image Source="{Binding cIcon.Value}"/>
@@ -37,7 +37,7 @@
         </DataGridTemplateColumn>
         <!-- Codename -->
         <DataGridTextColumn Binding="{Binding Codename}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Codename, Converter={seg:conv_BoolToVisibility}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Codename, Converter={seg:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <sec:ColumnFilter_Text Header="Kod"
                                        Value="{Binding Data.Filters.Codename, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
@@ -46,7 +46,7 @@
         </DataGridTextColumn>
         <!-- Name -->
         <DataGridTextColumn Binding="{Binding Name}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Name, Converter={seg:conv_BoolToVisibility}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Name, Converter={seg:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <sec:ColumnFilter_Text Header="Nazwa"
                                        Value="{Binding Data.Filters.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
@@ -55,7 +55,7 @@
         </DataGridTextColumn>
         <!-- EAN -->
         <DataGridTextColumn Binding="{Binding EAN}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_EAN, Converter={seg:conv_BoolToVisibility}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_EAN, Converter={seg:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <sec:ColumnFilter_Text Header="EAN"
                                        Value="{Binding Data.Filters.EAN, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
@@ -64,13 +64,13 @@
         </DataGridTextColumn>
         <!-- Measure -->
         <DataGridTextColumn Binding="{Binding Measure}" Header="Jm" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Measure, Converter={seg:conv_BoolToVisibility}}"/>
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Measure, Converter={seg:conv_Bool}}"/>
         <!-- Amount -->
         <DataGridTextColumn Binding="{Binding Amount}" Header="Ilość" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Amount, Converter={seg:conv_BoolToVisibility}}"/>
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Amount, Converter={seg:conv_Bool}}"/>
         <!-- Reserved -->
         <DataGridTextColumn Binding="{Binding Reserved}" Header="Zarezerwowano" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Reserved, Converter={seg:conv_BoolToVisibility}}"/>
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Reserved, Converter={seg:conv_Bool}}"/>
     </DataGrid.Columns>
     <DataGrid.ContextMenu>
         <ContextMenu>

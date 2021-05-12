@@ -17,12 +17,5 @@ namespace WBZ.Modules.Attachments
 				else									return string.Empty;
 			}
 		}
-
-		/// Sorting
-		public override StringCollection Sorting
-		{
-			get => Properties.Settings.Default.sorting_AttachmentsList;
-			set => throw new System.NotImplementedException();
-		}
 	}
 }

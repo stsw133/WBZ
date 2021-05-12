@@ -47,9 +47,9 @@
                 </TabControl>
             </Expander>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
-                <sec:IconButton Margin="0,4,4,4" IsTextVisible="{Binding IsChecked, ElementName=btnToggle}" Visibility="{Binding IsExpanded, ElementName=filtersExpander, Converter={seg:conv_BoolToVisibility}}"
+                <sec:IconButton Margin="0,4,4,4" IsTextVisible="{Binding IsChecked, ElementName=btnToggle}" Visibility="{Binding IsExpanded, ElementName=filtersExpander, Converter={seg:conv_Bool}}"
                                 Text="Akceptuj" Icon="/Resources/icon32_accept.ico" Click="btnRefresh_Click"/>
-                <sec:IconButton Margin="0,4,4,4" IsTextVisible="{Binding IsChecked, ElementName=btnToggle}" Visibility="{Binding IsExpanded, ElementName=filtersExpander, Converter={seg:conv_BoolToVisibility}}"
+                <sec:IconButton Margin="0,4,4,4" IsTextVisible="{Binding IsChecked, ElementName=btnToggle}" Visibility="{Binding IsExpanded, ElementName=filtersExpander, Converter={seg:conv_Bool}}"
                                 Text="Czyść" Icon="/Resources/icon32_clear.ico" Click="btnFiltersClear_Click"/>
             </StackPanel>
         </Grid>

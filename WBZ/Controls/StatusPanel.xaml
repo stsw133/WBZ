@@ -9,7 +9,7 @@
     <Border BorderBrush="Gray" BorderThickness="0,1,0,0">
         <DockPanel>
             <!-- Higher (filters) -->
-            <DockPanel DockPanel.Dock="Top" Visibility="{Binding AreFiltersVisible, Converter={seg:conv_BoolToVisibility}}">
+            <DockPanel DockPanel.Dock="Top" Visibility="{Binding AreFiltersVisible, Converter={seg:conv_Bool}}">
                 <Button DockPanel.Dock="Right" Margin="2" VerticalAlignment="Center" ToolTip="Czyść filtry" Command="seg:Commands.Clear">
                     <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.15}"
                            Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.5}"
@@ -28,14 +28,14 @@
             <DockPanel DockPanel.Dock="Top">
                 <ToggleButton Margin="2,2,0,2" ToolTip="Pokaż grupy"
                               IsChecked="{Binding AreGroupsVisible}"
-                              Visibility="{Binding HasGroups, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Converter={seg:conv_BoolToVisibility}}">
+                              Visibility="{Binding HasGroups, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Converter={seg:conv_Bool}}">
                     <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.15}"
                            Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.5}"
                            Source="/Resources/icon32_groups.ico"/>
                 </ToggleButton>
                 <ToggleButton Margin="2,2,0,2" ToolTip="Pokaż filtry"
                               IsChecked="{Binding AreFiltersVisible}"
-                              Visibility="{Binding HasFilters, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Converter={seg:conv_BoolToVisibility}}">
+                              Visibility="{Binding HasFilters, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Converter={seg:conv_Bool}}">
                     <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.15}"
                            Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=1.5}"
                            Source="/Resources/icon32_filter.ico"/>

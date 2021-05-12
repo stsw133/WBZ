@@ -65,7 +65,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.ToString());
+				Error("Błąd logowania do systemu", ex, Config.Modules.LOGIN);
 			}
 
 			return result;
@@ -97,7 +97,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.ToString());
+				Error("Błąd pobierania uprawnień użytkownika", ex, Config.Modules.LOGIN, id);
 			}
 
 			return result;
@@ -110,7 +110,7 @@ namespace WBZ
 		/// <param name="password">Hasło do konta</param>
 		/// <param name="admin">Czy nadać uprawnienia administracyjne</param>
 		/// <returns></returns>
-		internal static bool Register(string email, string username, string password, bool admin)
+		internal static bool Register(string email, string username, string password, bool admin = true)
 		{
 			bool result = false;
 
@@ -127,13 +127,16 @@ namespace WBZ
 					int id = (int)sqlCmd.ExecuteScalar();
 
 					///permissions
-					sqlCmd = new NpgsqlCommand(@"insert into wbz.users_permissions (""user"", perm)
+					if (admin)
+					{
+						sqlCmd = new NpgsqlCommand(@"insert into wbz.users_permissions (""user"", perm)
 							values (@id, 'admin'),
 								(@id, 'users_preview'),
 								(@id, 'users_save'),
 								(@id, 'users_delete')", sqlConn, sqlTran);
-					sqlCmd.Parameters.AddWithValue("id", id);
-					sqlCmd.ExecuteNonQuery();
+						sqlCmd.Parameters.AddWithValue("id", id);
+						sqlCmd.ExecuteNonQuery();
+					}
 
 					sqlTran.Commit();
 				}
@@ -142,7 +145,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.ToString());
+				Error("Błąd rejestracji użytkownika", ex, Config.Modules.LOGIN);
 			}
 
 			return result;
@@ -187,7 +190,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.ToString());
+				Error("Błąd generowania nowego hasła użytkownika", ex, Config.Modules.LOGIN);
 			}
 
 			return result;
@@ -214,7 +217,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.ToString());
+				Error("Błąd pobierania przelicznika głównej jednostki miary towaru", ex, Config.Modules.ARTICLES, article);
 			}
 
 			return result;
@@ -274,7 +277,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.ToString());
+				Error("Błąd zmiany ilości towaru na stanie", ex, Config.Modules.ARTICLES, article);
 			}
 
 			return result;
@@ -572,7 +575,7 @@ namespace WBZ
 
 		#region basic
 		[STAThread]
-		internal static void Error(string msg, Exception ex, string module, int instance, bool showWin = true, bool save = true)
+		internal static void Error(string msg, Exception ex, string module = "", int instance = 0, bool showWin = true, bool save = true)
         {
 			try
 			{
@@ -723,7 +726,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				Error("Błąd podczas pobierania liczby instancji", ex, module, 0);
+				Error("Błąd pobierania liczby instancji", ex, module);
 			}
 
 			return result;
@@ -758,7 +761,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				Error("Błąd podczas pobierania listy wartości", ex, module, 0);
+				Error("Błąd pobierania listy wartości", ex, module);
 			}
 
 			return result;
@@ -945,7 +948,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				Error("Błąd podczas pobierania listy", ex, module, 0);
+				Error("Błąd pobierania listy instancji", ex, module);
 			}
 			
 			return result;
@@ -963,7 +966,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				Error("Błąd podczas pobierania instancji", ex, module, id);
+				Error("Błąd pobierania instancji", ex, module, id);
 			}
 			return default;
 		}
@@ -1039,7 +1042,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				Error("Błąd podczas pobierania pozycji instancji", ex, module, id);
+				Error("Błąd pobierania pozycji instancji", ex, module, id);
 			}
 
 			return result;
@@ -1062,7 +1065,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				Error("Błąd podczas pobierania nowego identyfikatora", ex, module, 0);
+				Error("Błąd pobierania nowego identyfikatora", ex, module);
 			}
 
 			return result;
@@ -1662,7 +1665,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				Error("Błąd podczas zapisywania instancji", ex, module, (instance as M).ID);
+				Error("Błąd zapisywania instancji", ex, module, (instance as M).ID);
 			}
 			
 			return result;
@@ -1815,7 +1818,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				Error("Błąd podczas usuwania instancji", ex, module, id);
+				Error("Błąd usuwania instancji", ex, module, id);
 			}
 			
 			return result;
@@ -2084,7 +2087,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-                Error("Błąd podczas pobierania listy atrybutów", ex, Config.Modules.ATTRIBUTES, 0);
+                Error("Błąd pobierania listy atrybutów", ex, Config.Modules.ATTRIBUTES);
 			}
 
 			return result;
@@ -2288,7 +2291,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-                Error("Błąd podczas zapisywania logu", ex, Config.Modules.LOGS, 0, true, false);
+                Error("Błąd zapisywania logu", ex, Config.Modules.LOGS, 0, true, false);
 			}
 
 			return result;

@@ -17,12 +17,5 @@ namespace WBZ.Modules.Documents
 				else									return string.Empty;
 			}
 		}
-
-		/// Sorting
-		public override StringCollection Sorting
-		{
-			get => Properties.Settings.Default.sorting_DocumentsList;
-			set => throw new System.NotImplementedException();
-		}
 	}
 }

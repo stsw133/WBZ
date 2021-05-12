@@ -17,12 +17,5 @@ namespace WBZ.Modules.Stores
 				else									return string.Empty;
 			}
 		}
-
-		/// Sorting
-		public override StringCollection Sorting
-		{
-			get => Properties.Settings.Default.sorting_StoresList;
-			set => throw new System.NotImplementedException();
-		}
 	}
 }

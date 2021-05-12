@@ -45,9 +45,9 @@
                     <Separator/>
                     <CheckBox x:Name="chckEnabled"
                               Margin="5" Content="Logi włączone"
-                              Visibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}, Converter={seg:conv_BoolToVisibility}}"
+                              Visibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}, Converter={seg:conv_Bool}}"
                               Checked="chckEnabled_Checked" Unchecked="chckEnabled_Checked"/>
-                    <Separator Visibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}, Converter={seg:conv_BoolToVisibility}}"/>
+                    <Separator Visibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}, Converter={seg:conv_Bool}}"/>
                     <sec:IconButton Margin="5" Text="Usuń"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_delete.ico"

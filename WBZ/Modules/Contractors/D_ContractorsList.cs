@@ -17,12 +17,5 @@ namespace WBZ.Modules.Contractors
 				else									return string.Empty;
 			}
 		}
-
-		/// Sorting
-		public override StringCollection Sorting
-		{
-			get => Properties.Settings.Default.sorting_ContractorsList;
-			set => throw new System.NotImplementedException();
-		}
 	}
 }

@@ -17,12 +17,5 @@ namespace WBZ.Modules.Distributions
 				else									return string.Empty;
 			}
 		}
-
-		/// Sorting
-		public override StringCollection Sorting
-		{
-			get => Properties.Settings.Default.sorting_DistributionsList;
-			set => throw new System.NotImplementedException();
-		}
 	}
 }

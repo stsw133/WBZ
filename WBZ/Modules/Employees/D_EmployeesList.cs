@@ -17,12 +17,5 @@ namespace WBZ.Modules.Employees
 				else									return string.Empty;
 			}
 		}
-
-		/// Sorting
-		public override StringCollection Sorting
-		{
-			get => Properties.Settings.Default.sorting_EmployeesList;
-			set => throw new System.NotImplementedException();
-		}
 	}
 }

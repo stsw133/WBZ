@@ -25,10 +25,10 @@
     <DataGrid.Columns>
         <!-- ID -->
         <DataGridTextColumn Binding="{Binding ID}" Header="ID"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_ID, Converter={seg:conv_BoolToVisibility}}"/>
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_ID, Converter={seg:conv_Bool}}"/>
         <!-- Icon -->
         <DataGridTemplateColumn Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"
-                                Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Icon, Converter={seg:conv_BoolToVisibility}}">
+                                Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Icon, Converter={seg:conv_Bool}}">
             <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
                     <Image Source="{Binding cIcon.Value}"/>
@@ -37,7 +37,7 @@
         </DataGridTemplateColumn>
         <!-- Declarant -->
         <DataGridTextColumn Binding="{Binding Declarant}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Declarant, Converter={seg:conv_BoolToVisibility}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Declarant, Converter={seg:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <sec:ColumnFilter_Text Header="Zgłaszający"
                                        Value="{Binding Data.Filters.Declarant, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
@@ -46,7 +46,7 @@
         </DataGridTextColumn>
         <!-- Lastname -->
         <DataGridTextColumn Binding="{Binding Lastname}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Lastname, Converter={seg:conv_BoolToVisibility}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Lastname, Converter={seg:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <sec:ColumnFilter_Text Header="Rodzina"
                                        Value="{Binding Data.Filters.Lastname, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
@@ -55,7 +55,7 @@
         </DataGridTextColumn>
         <!-- Members -->
         <DataGridTextColumn Binding="{Binding Members}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Members, Converter={seg:conv_BoolToVisibility}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Members, Converter={seg:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <sec:ColumnFilter_Number Header="Ilość osób"
                                          Value="{Binding Data.Filters.Members, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
@@ -64,7 +64,7 @@
         </DataGridTextColumn>
         <!-- Postcode -->
         <DataGridTextColumn Binding="{Binding Postcode}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Postcode, Converter={seg:conv_BoolToVisibility}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Postcode, Converter={seg:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <sec:ColumnFilter_Text Header="Kod pocztowy"
                                        Value="{Binding Data.Filters.Postcode, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
@@ -73,7 +73,7 @@
         </DataGridTextColumn>
         <!-- City -->
         <DataGridTextColumn Binding="{Binding City}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_City, Converter={seg:conv_BoolToVisibility}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_City, Converter={seg:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <sec:ColumnFilter_Text Header="Miejscowość"
                                        Value="{Binding Data.Filters.City, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
@@ -82,7 +82,7 @@
         </DataGridTextColumn>
         <!-- Address -->
         <DataGridTextColumn Binding="{Binding Address}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Address, Converter={seg:conv_BoolToVisibility}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Address, Converter={seg:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <sec:ColumnFilter_Text Header="Adres"
                                        Value="{Binding Data.Filters.Address, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
@@ -91,10 +91,10 @@
         </DataGridTextColumn>
         <!-- DonationWeight -->
         <DataGridTextColumn Binding="{Binding DonationWeight}" Header="Przekazano (kg)" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_DonationWeight, Converter={seg:conv_BoolToVisibility}}"/>
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_DonationWeight, Converter={seg:conv_Bool}}"/>
         <!-- Status -->
-        <DataGridTextColumn Binding="{Binding Status, Converter={seg:conv_BoolToString}, ConverterParameter='Aktywna~Nieaktywna'}" Header="Status" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Status, Converter={seg:conv_BoolToVisibility}}">
+        <DataGridTextColumn Binding="{Binding Status, Converter={seg:conv_Bool}, ConverterParameter='Aktywna~Nieaktywna'}" Header="Status" Width="*"
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Status, Converter={seg:conv_Bool}}">
             <DataGridTextColumn.CellStyle>
                 <Style TargetType="DataGridCell">
                     <Style.Triggers >
@@ -117,7 +117,7 @@
         </DataGridTextColumn>
         <!-- DonationLast -->
         <DataGridTextColumn Binding="{Binding DonationLast, StringFormat={}{0:yyyy-MM-dd}}" Header="Ostatnia darowizna" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_DonationLast, Converter={seg:conv_BoolToVisibility}}"/>
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_DonationLast, Converter={seg:conv_Bool}}"/>
     </DataGrid.Columns>
     <DataGrid.ContextMenu>
         <ContextMenu>

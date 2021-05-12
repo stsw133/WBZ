@@ -25,10 +25,10 @@
     <DataGrid.Columns>
         <!-- ID -->
         <DataGridTextColumn Binding="{Binding ID}" Header="ID"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_ID, Converter={seg:conv_BoolToVisibility}}"/>
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_ID, Converter={seg:conv_Bool}}"/>
         <!-- Icon -->
         <DataGridTemplateColumn Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"
-                                Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_Icon, Converter={seg:conv_BoolToVisibility}}">
+                                Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_Icon, Converter={seg:conv_Bool}}">
             <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
                     <Image Source="{Binding cIcon.Value}"/>
@@ -37,7 +37,7 @@
         </DataGridTemplateColumn>
         <!-- Name -->
         <DataGridTextColumn Binding="{Binding Name}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_Name, Converter={seg:conv_BoolToVisibility}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_Name, Converter={seg:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <sec:ColumnFilter_Text Header="Nazwa"
                                        Value="{Binding Data.Filters.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
@@ -46,7 +46,7 @@
         </DataGridTextColumn>
         <!-- FamiliesCount -->
         <DataGridTextColumn Binding="{Binding FamiliesCount}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_FamiliesCount, Converter={seg:conv_BoolToVisibility}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_FamiliesCount, Converter={seg:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <sec:ColumnFilter_Number Header="Rodziny"
                                          Value="{Binding Data.Filters.FamiliesCount, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
@@ -55,7 +55,7 @@
         </DataGridTextColumn>
         <!-- MembersCount -->
         <DataGridTextColumn Binding="{Binding MembersCount}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_MembersCount, Converter={seg:conv_BoolToVisibility}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_MembersCount, Converter={seg:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <sec:ColumnFilter_Number Header="Osoby"
                                          Value="{Binding Data.Filters.MembersCount, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
@@ -64,7 +64,7 @@
         </DataGridTextColumn>
         <!-- PositionsCount -->
         <DataGridTextColumn Binding="{Binding PositionsCount}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_PositionsCount, Converter={seg:conv_BoolToVisibility}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_PositionsCount, Converter={seg:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <sec:ColumnFilter_Number Header="Pozycje"
                                          Value="{Binding Data.Filters.PositionsCount, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
@@ -73,7 +73,7 @@
         </DataGridTextColumn>
         <!-- Weight -->
         <DataGridTextColumn Binding="{Binding Weight}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_Weight, Converter={seg:conv_BoolToVisibility}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_Weight, Converter={seg:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <sec:ColumnFilter_Number Header="Waga (kg)"
                                          Value="{Binding Data.Filters.Weight, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
@@ -82,7 +82,7 @@
         </DataGridTextColumn>
         <!-- DateReal -->
         <DataGridTextColumn Binding="{Binding DateReal, StringFormat={}{0:yyyy-MM-dd}}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_DateReal, Converter={seg:conv_BoolToVisibility}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DistributionsList_DateReal, Converter={seg:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <sec:ColumnFilter_Date Header="Data realizacji"
                                        Value1="{Binding Data.Filters.fDateReal, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
