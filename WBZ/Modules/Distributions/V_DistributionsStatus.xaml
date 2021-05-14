@@ -3,8 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
-        xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
+        xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
         mc:Ignorable="d" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterOwner"
         Title="{Binding Title}" Icon="/Resources/icon32_books.ico">
     <WindowChrome.WindowChrome>
@@ -12,10 +11,10 @@
     </WindowChrome.WindowChrome>
     <DockPanel>
         <!-- titleBar -->
-        <sec:TitleBar DockPanel.Dock="Top"/>
+        <se:TitleBar DockPanel.Dock="Top"/>
         <!-- main -->
         <GroupBox DockPanel.Dock="Top" Margin="10,10,10,0" Padding="5" Header="Uzgodniony sposób kontaktu"
-                  Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=25}">
+                  Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=25}">
             <StackPanel>
                 <CheckBox Content="Wyślij wiadomość SMS" VerticalContentAlignment="Center" IsChecked="{Binding FamilyInfo.C_SMS}" IsEnabled="False"/>
                 <CheckBox Content="Rozmowa telefoniczna" VerticalContentAlignment="Center" IsChecked="{Binding FamilyInfo.C_Call}" IsEnabled="False"/>
@@ -34,15 +33,15 @@
                     <Label Content="{Binding FamilyContactsInfo.Rows[0][4]}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0" HorizontalAlignment="Center">
-                    <sec:IconButton Margin="5,5,2.5,5" IsEnabled="{Binding FamilyInfo.C_SMS}" IsTextVisible="True"
+                    <se:IconButton Margin="5,5,2.5,5" IsEnabled="{Binding FamilyInfo.C_SMS}" IsTextVisible="True"
                                     Text="Wyślij SMS" Icon="/Resources/icon32_mail.ico" Click="btnSendSMS_Click"/>
-                    <sec:IconButton Margin="5,5,2.5,5" IsEnabled="{Binding FamilyInfo.C_Email}" IsTextVisible="True"
+                    <se:IconButton Margin="5,5,2.5,5" IsEnabled="{Binding FamilyInfo.C_Email}" IsTextVisible="True"
                                     Text="Wyślij e-mail" Icon="/Resources/icon32_mail.ico" Click="btnSendEmail_Click"/>
                 </StackPanel>
             </StackPanel>
         </GroupBox>
         <GroupBox DockPanel.Dock="Top" Margin="10,10,10,0" Padding="5" Header="Zmiana statusu"
-                  Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=25}">
+                  Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=25}">
             <StackPanel>
                 <RadioButton x:Name="rbStatus0" Content="Brak" GroupName="Status"/>
                 <RadioButton x:Name="rbStatus1" Content="Poinformowano" GroupName="Status"/>
@@ -51,12 +50,12 @@
         </GroupBox>
         <DockPanel DockPanel.Dock="Bottom" Margin="0,10,0,0" HorizontalAlignment="Center">
             <Button Content="OK" Margin="5" HorizontalAlignment="Right"
-                    Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.5}"
-                    Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=10}"
+                    Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.5}"
+                    Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=10}"
                     IsEnabled="{Binding EditMode}" Click="btnOk_Click"/>
             <Button Content="Anuluj" Margin="5" HorizontalAlignment="Left"
-                    Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.5}"
-                    Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=10}"
+                    Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.5}"
+                    Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=10}"
                     Click="btnCancel_Click"/>
         </DockPanel>
     </DockPanel>

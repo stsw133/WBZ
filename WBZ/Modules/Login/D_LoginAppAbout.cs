@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using StswExpress;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace WBZ.Modules.Login
@@ -12,7 +13,7 @@ namespace WBZ.Modules.Login
 		}
 
 		/// System version
-		public string Version => StswExpress.Globals.Global.AppVersion();
+		public string Version => Fn.AppVersion();
 		/// About app
 		public string AboutApp => $@"To w pełni darmowy program biznesowy posiadający szeroki asortyment funkcjonalności. Oferuje modułowy sposób zarządzania zasobami i dystrybucją.";
 		/// About creators

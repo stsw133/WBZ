@@ -1,4 +1,5 @@
-﻿using WBZ.Modules._base;
+﻿using StswExpress;
+using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_AttributeClass;
 
 namespace WBZ.Modules.AttributesClasses
@@ -10,7 +11,7 @@ namespace WBZ.Modules.AttributesClasses
 	{
 		D_IconsList D = new D_IconsList();
 
-		public AttributesClassesList(StswExpress.Globals.Commands.Type mode)
+		public AttributesClassesList(Commands.Type mode)
 		{
 			InitializeComponent();
 			DataContext = D;

@@ -3,8 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
-        xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
+        xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
         mc:Ignorable="d" Height="700" Width="1050" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowState="Maximized"
         Title="Galeria załączników" Icon="/Resources/icon32_gallery.ico"
         Closed="Window_Closed">
@@ -13,7 +12,7 @@
     </WindowChrome.WindowChrome>
     <DockPanel Background="Black">
         <!-- titleBar -->
-        <sec:TitleBar DockPanel.Dock="Top"/>
+        <se:TitleBar DockPanel.Dock="Top"/>
         <!-- filtersPanel -->
         <Grid DockPanel.Dock="Top" Background="Black">
             <Expander x:Name="filtersExpander" Header="Filtry wyszukiwania" Background="Black" Foreground="White" BorderThickness="0">
@@ -21,12 +20,12 @@
                     <!-- tabMain -->
                     <TabItem>
                         <TabItem.Header>
-                            <sec:Header Text="Ogólne" Icon="/Resources/icon32_filter.ico"/>
+                            <se:Header Text="Ogólne" Icon="/Resources/icon32_filter.ico"/>
                         </TabItem.Header>
                         <ScrollViewer>
                             <DockPanel Margin="5">
                                 <DockPanel DockPanel.Dock="Top">
-                                    <Label Content="Moduł:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>
+                                    <Label Content="Moduł:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={se:conv_Size}, ConverterParameter=0.25}"/>
                                     <ComboBox SelectedValue="{Binding Filters.Module}" SelectedValuePath="Tag" Margin="2.5" VerticalContentAlignment="Center">
                                         <ComboBoxItem Content="Dokumenty" Tag="documents"/>
                                         <ComboBoxItem Content="Dystrybucje" Tag="distributions"/>
@@ -38,7 +37,7 @@
                                     </ComboBox>
                                 </DockPanel>
                                 <DockPanel DockPanel.Dock="Top">
-                                    <Label Content="Nazwa:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>
+                                    <Label Content="Nazwa:" Margin="2.5" HorizontalContentAlignment="Right" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={se:conv_Size}, ConverterParameter=0.25}"/>
                                     <TextBox Text="{Binding Filters.Name}" Margin="2.5" VerticalContentAlignment="Center" KeyUp="dpFilter_KeyUp"/>
                                 </DockPanel>
                             </DockPanel>
@@ -47,9 +46,9 @@
                 </TabControl>
             </Expander>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
-                <sec:IconButton Margin="0,4,4,4" IsTextVisible="{Binding IsChecked, ElementName=btnToggle}" Visibility="{Binding IsExpanded, ElementName=filtersExpander, Converter={seg:conv_Bool}}"
+                <se:IconButton Margin="0,4,4,4" IsTextVisible="{Binding IsChecked, ElementName=btnToggle}" Visibility="{Binding IsExpanded, ElementName=filtersExpander, Converter={se:conv_Bool}}"
                                 Text="Akceptuj" Icon="/Resources/icon32_accept.ico" Click="btnRefresh_Click"/>
-                <sec:IconButton Margin="0,4,4,4" IsTextVisible="{Binding IsChecked, ElementName=btnToggle}" Visibility="{Binding IsExpanded, ElementName=filtersExpander, Converter={seg:conv_Bool}}"
+                <se:IconButton Margin="0,4,4,4" IsTextVisible="{Binding IsChecked, ElementName=btnToggle}" Visibility="{Binding IsExpanded, ElementName=filtersExpander, Converter={se:conv_Bool}}"
                                 Text="Czyść" Icon="/Resources/icon32_clear.ico" Click="btnFiltersClear_Click"/>
             </StackPanel>
         </Grid>

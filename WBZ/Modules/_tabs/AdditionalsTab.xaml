@@ -3,13 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
-             xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
+             xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
              xmlns:g="clr-namespace:WBZ.Globals"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="750">
     <DockPanel Margin="5" IsEnabled="{Binding EditingMode}">
         <DockPanel DockPanel.Dock="Top">
-            <DockPanel DockPanel.Dock="Right" Visibility="{Binding HasIcon, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Converter={seg:conv_Bool}}">
+            <DockPanel DockPanel.Dock="Right" Visibility="{Binding HasIcon, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Converter={se:conv_Bool}}">
                 <Label DockPanel.Dock="Top" Content="Ikona:"/>
                 <Image DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" Stretch="UniformToFill"
                        Height="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}" Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"
@@ -23,8 +22,8 @@
                         </Image.Source>
                     <Image.ContextMenu>
                         <ContextMenu>
-                            <sec:MenuItem Header="{Tr Select}" IconUri="/Resources/icon32_select.ico" Click="btnSelect_Click"/>
-                            <sec:MenuItem Header="{Tr Delete}" IconUri="/Resources/icon32_remove.ico" Click="btnDelete_Click"/>
+                            <se:MenuItem Header="{Tr Select}" IconUri="/Resources/icon32_select.ico" Click="btnSelect_Click"/>
+                            <se:MenuItem Header="{Tr Delete}" IconUri="/Resources/icon32_remove.ico" Click="btnDelete_Click"/>
                         </ContextMenu>
                     </Image.ContextMenu>
                 </Image>

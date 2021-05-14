@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using SE = StswExpress;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -15,7 +16,7 @@ namespace WBZ.Modules.Logs
 	{
 		D_LogsList D = new D_LogsList();
 
-		public LogsList(StswExpress.Globals.Commands.Type mode)
+		public LogsList(SE.Commands.Type mode)
 		{
 			InitializeComponent();
 			DataContext = D;
@@ -59,7 +60,7 @@ namespace WBZ.Modules.Logs
 		/// </summary>
 		internal override void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			if (D.Mode == StswExpress.Globals.Commands.Type.SELECT)
+			if (D.Mode == SE.Commands.Type.SELECT)
 			{
 				dgList_Logs.SelectionMode = DataGridSelectionMode.Single;
 				dgList_Errors.SelectionMode = DataGridSelectionMode.Single;
@@ -74,7 +75,7 @@ namespace WBZ.Modules.Logs
 		{
 			var selectedInstances = GetDataGrid(D.SelectedTab).SelectedItems.Cast<MODULE_MODEL>();
 			foreach (MODULE_MODEL instance in selectedInstances)
-				Functions.OpenInstanceWindow(this, instance, StswExpress.Globals.Commands.Type.PREVIEW);
+				Functions.OpenInstanceWindow(this, instance, SE.Commands.Type.PREVIEW);
 		}
 
 		/// <summary>
@@ -84,7 +85,7 @@ namespace WBZ.Modules.Logs
 		{
 			var selectedInstances = GetDataGrid(D.SelectedTab).SelectedItems.Cast<MODULE_MODEL>();
 			foreach (MODULE_MODEL instance in selectedInstances)
-				Functions.OpenInstanceWindow(this, instance, StswExpress.Globals.Commands.Type.EDIT);
+				Functions.OpenInstanceWindow(this, instance, SE.Commands.Type.EDIT);
 		}
 
 		/// <summary>

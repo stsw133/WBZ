@@ -3,8 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
-        xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
+        xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d" Height="400" Width="500" ResizeMode="CanResize"  WindowStartupLocation="CenterOwner"
         Title="{Tr Settings}" Icon="/Resources/icon32_settings.ico">
@@ -13,13 +12,13 @@
     </WindowChrome.WindowChrome>
     <DockPanel>
         <!-- titleBar -->
-        <sec:TitleBar DockPanel.Dock="Top"/>
+        <se:TitleBar DockPanel.Dock="Top"/>
         <!-- buttons -->
         <UniformGrid DockPanel.Dock="Bottom" Columns="2" HorizontalAlignment="Center">
-            <sec:IconButton Text="{Tr Accept}" Margin="5"
+            <se:IconButton Text="{Tr Accept}" Margin="5"
                             Icon="/Resources/icon32_accept.ico"
                             Click="btnAccept_Click" IsDefault="True"/>
-            <sec:IconButton Text="{Tr Cancel}" Margin="5"
+            <se:IconButton Text="{Tr Cancel}" Margin="5"
                             Icon="/Resources/icon32_cancel.ico"
                             Click="btnCancel_Click"/>
         </UniformGrid>
@@ -29,14 +28,14 @@
             <!-- tabMain -->
             <TabItem>
                 <TabItem.Header>
-                    <sec:Header Text="{Tr General}" Icon="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
+                    <se:Header Text="{Tr General}" Icon="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
                 </TabItem.Header>
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <DockPanel>
                         <!-- region -->
                         <GroupBox DockPanel.Dock="Top" Margin="5,5,5,0" VerticalAlignment="Top">
                             <GroupBox.Header>
-                                <sec:Header Text="{Tr Region}" Icon="/Resources/icon32_language.ico"/>
+                                <se:Header Text="{Tr Region}" Icon="/Resources/icon32_language.ico"/>
                             </GroupBox.Header>
                             <DockPanel Margin="5">
                                 <Label Content="{Tr Language, Suffix=':'}" Margin="5" VerticalContentAlignment="Center"/>
@@ -49,7 +48,7 @@
                         <!-- network -->
                         <GroupBox DockPanel.Dock="Top" Margin="5,5,5,0" VerticalAlignment="Top">
                             <GroupBox.Header>
-                                <sec:Header Text="{Tr Network}" Icon="/Resources/icon32_web.ico"/>
+                                <se:Header Text="{Tr Network}" Icon="/Resources/icon32_web.ico"/>
                             </GroupBox.Header>
                             <DockPanel Margin="5">
                                 <Label Content="API URL:" Margin="5" VerticalContentAlignment="Center"/>
@@ -59,7 +58,7 @@
                         <!-- other -->
                         <GroupBox DockPanel.Dock="Top" Margin="5,5,5,0" VerticalAlignment="Top">
                             <GroupBox.Header>
-                                <sec:Header Text="{Tr Others}" Icon="/Resources/icon32_tools.ico"/>
+                                <se:Header Text="{Tr Others}" Icon="/Resources/icon32_tools.ico"/>
                             </GroupBox.Header>
                             <StackPanel Margin="5">
                                 <CheckBox Content="{Tr ShowButtonWithNames}" Margin="5" VerticalContentAlignment="Center"
@@ -72,7 +71,7 @@
             <!-- tabStyle -->
             <TabItem>
                 <TabItem.Header>
-                    <sec:Header Text="{Tr StyleAndFont}" Icon="/Resources/icon32_font.ico"/>
+                    <se:Header Text="{Tr StyleAndFont}" Icon="/Resources/icon32_font.ico"/>
                 </TabItem.Header>
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <DockPanel>
@@ -82,7 +81,7 @@
                                 <RadioButton DockPanel.Dock="Top" Content="Domyślny" Margin="5" VerticalContentAlignment="Center" GroupName="TitleBarStyle" Visibility="Collapsed"/>
                                 <RadioButton DockPanel.Dock="Top" Content="Alternatywny" Margin="5" VerticalContentAlignment="Center" GroupName="TitleBarStyle" Visibility="Collapsed"/>
                                 <Label Content="{Tr Color, Suffix=':'}" VerticalContentAlignment="Center"/>
-                                <sec:ColorSetter Color="{Binding ThemeColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+                                <se:ColorSetter Color="{Binding ThemeColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                             </DockPanel>
                         </GroupBox>
                         <GroupBox DockPanel.Dock="Top" Header="{Tr Interface}" Margin="5,5,5,0" VerticalAlignment="Top">
@@ -111,14 +110,14 @@
             <!-- tabCommunication -->
             <TabItem>
                 <TabItem.Header>
-                    <sec:Header Text="{Tr Communication}" Icon="/Resources/icon32_mail.ico"/>
+                    <se:Header Text="{Tr Communication}" Icon="/Resources/icon32_mail.ico"/>
                 </TabItem.Header>
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <DockPanel>
                         <!-- email -->
                         <GroupBox DockPanel.Dock="Top" Margin="5,5,5,0" VerticalAlignment="Top">
                             <GroupBox.Header>
-                                <sec:Header Text="{Tr Email}" Icon="/Resources/icon32_mail.ico"/>
+                                <se:Header Text="{Tr Email}" Icon="/Resources/icon32_mail.ico"/>
                             </GroupBox.Header>
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -141,7 +140,7 @@
                                 <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding config_Email_Email, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Margin="5" VerticalContentAlignment="Center"/>
                                 <Label Grid.Row="3" Grid.Column="0" Content="{Tr Password, Suffix=':'}" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                                 <PasswordBox x:Name="pbEmailPassword" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center" Loaded="pbEmailPassword_Loaded" PasswordChanged="pbEmailPassword_PasswordChanged"/>
-                                <sec:IconButton Grid.Row="4" Grid.Column="1" Margin="5" HorizontalAlignment="Center"
+                                <se:IconButton Grid.Row="4" Grid.Column="1" Margin="5" HorizontalAlignment="Center"
                                                 Text="{Tr Test}"
                                                 Icon="/Resources/icon32_test.ico"
                                                 Click="btnEmailTest_Click"/>
@@ -150,7 +149,7 @@
                         <!-- GSM -->
                         <GroupBox DockPanel.Dock="Top" Margin="5,5,5,0" VerticalAlignment="Top">
                             <GroupBox.Header>
-                                <sec:Header Text="GSM" Icon="/Resources/icon32_phone.ico"/>
+                                <se:Header Text="GSM" Icon="/Resources/icon32_phone.ico"/>
                             </GroupBox.Header>
                             <Grid>
                                 <Grid.ColumnDefinitions>

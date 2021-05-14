@@ -3,8 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
-        xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
+        xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
         mc:Ignorable="d" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner"
         Title="{Tr DatabasesList}" Icon="/Resources/icon32_database.ico">
     <WindowChrome.WindowChrome>
@@ -12,10 +11,10 @@
     </WindowChrome.WindowChrome>
     <DockPanel>
         <!-- titleBar -->
-        <sec:TitleBar DockPanel.Dock="Top" SubIcon="/Resources/icon32_settings.ico"/>
+        <se:TitleBar DockPanel.Dock="Top" SubIcon="/Resources/icon32_settings.ico"/>
         <!-- buttonsPanel -->
         <Border DockPanel.Dock="Bottom" Background="#EEE" BorderBrush="Gray" BorderThickness="0,1,0,0">
-            <sec:IconButton Margin="5" Text="Zapisz"
+            <se:IconButton Margin="5" Text="Zapisz"
                             HorizontalAlignment="Center"
                             Icon="\Resources\icon32_accept.ico"
                             Click="btnSave_Click"/>
@@ -26,7 +25,7 @@
                 <Button Margin="5,5,0,5" Click="btnAddDatabase_Click" ToolTip="Dodaj nowe połączenie z bazą danych">
                     <Grid>
                         <Image Margin="2"
-                               Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2}"
+                               Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2}"
                                Source="/Resources/icon32_database.ico"/>
                         <Image Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay}"
                                HorizontalAlignment="Right" VerticalAlignment="Bottom"
@@ -36,7 +35,7 @@
                 <Button Margin="5,5,0,5" Click="btnRemoveDatabase_Click" ToolTip="Usuń zaznaczone połączenie z bazą danych">
                     <Grid>
                         <Image Margin="2"
-                               Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2}"
+                               Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2}"
                                Source="/Resources/icon32_database.ico"/>
                         <Image Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay}"
                                HorizontalAlignment="Right" VerticalAlignment="Bottom"
@@ -48,7 +47,7 @@
         </DockPanel>
         <!-- main -->
         <Grid x:Name="gridDatabaseInfo" DataContext="{Binding ElementName=lbDatabases, Path=SelectedItem}" Margin="5" VerticalAlignment="Center" IsEnabled="False"
-              Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=30}">
+              Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=30}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -78,7 +77,7 @@
             <PasswordBox x:Name="pbPassword" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center" PasswordChanged="pbPassword_PasswordChanged"/>
             <Label Grid.Row="6" Grid.Column="0" Content="Status:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
             <Label x:Name="lblStatus" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center"/>
-            <sec:IconButton Grid.Row="7" Grid.Column="1" Margin="5" Text="Testuj"
+            <se:IconButton Grid.Row="7" Grid.Column="1" Margin="5" Text="Testuj"
                             Icon="/Resources/icon32_test.ico"
                             Click="btnTest_Click"/>
         </Grid>

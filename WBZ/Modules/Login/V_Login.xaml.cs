@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
-using StswExpress.Base;
-using StswExpress.Globals;
+using StswExpress;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -39,9 +38,9 @@ namespace WBZ.Modules.Login
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			CheckNewestVersion();
-			txtVersion.Content = Global.AppVersion();
+			txtVersion.Content = Fn.AppVersion();
 
-			D.Databases = new ObservableCollection<M_Database>(M_Database.LoadAllDatabases());
+			D.Databases = new ObservableCollection<DB>(DB.LoadAllDatabases());
 
 			if (!string.IsNullOrEmpty(Props.Default.userPass))
                 tbPassword.Password = Props.Default.userPass;
@@ -64,7 +63,7 @@ namespace WBZ.Modules.Login
 				}
 
 				/// check app version
-				if (Global.AppVersion() == Globals.Global.VersionNewest)
+				if (Fn.AppVersion() == Globals.Global.VersionNewest)
 				{
 					imgVersion.Source = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resources/icon32_shield_green.ico"));
 					imgVersion.ToolTip = "Posiadasz aktualną wersję programu.";
@@ -107,9 +106,9 @@ namespace WBZ.Modules.Login
 			{
 				try
 				{
-					var db = Global.AppDatabase = cbDatabase.SelectedItem as M_Database;
-					SQL.connWBZ = StswExpress.Globals.SQL.MakeConnString(db.Server, db.Port, db.Database, db.Username, db.Password);
-					Global.AppDatabase.Version = SQL.GetPropertyValue("VERSION");
+					var db = Fn.AppDatabase = cbDatabase.SelectedItem as DB;
+					SQL.connWBZ = StswExpress.SQL.MakeConnString(db.Server, db.Port, db.Database, db.Username, db.Password);
+					Fn.AppDatabase.Version = SQL.GetPropertyValue("VERSION");
 
 					btnLogin.IsEnabled = true;
 					btnOther.IsEnabled = true;
@@ -126,14 +125,14 @@ namespace WBZ.Modules.Login
 		/// </summary>
 		private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-			if (Global.AppDatabase.Version == null)
+			if (Fn.AppDatabase.Version == null)
             {
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"Nie udało się połączyć z wybraną bazą danych!") { Owner = this }.ShowDialog();
 				return;
 			}
-			else if (Global.AppDatabase.Version != Global.AppVersion())
+			else if (Fn.AppDatabase.Version != Fn.AppVersion())
 			{
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, $"Wersja aplikacji {Global.AppVersion()} nie zgadza się z wersją bazy danych {Global.AppDatabase.Version}!" +
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, $"Wersja aplikacji {Fn.AppVersion()} nie zgadza się z wersją bazy danych {Fn.AppDatabase.Version}!" +
 					Environment.NewLine + "Zaktualizuj bazę z menu dodatkowych opcji lub skontaktuj się z administratorem.") { Owner = this }.ShowDialog();
 				return;
 			}
@@ -173,11 +172,11 @@ namespace WBZ.Modules.Login
 			}
 
 			///conditions of button "Aktualizuj bazę danych"
-			if (Global.AppDatabase.Version != Global.AppVersion())
+			if (Fn.AppDatabase.Version != Fn.AppVersion())
 			{
 				btnUpdateDatabase.Visibility = Visibility.Visible;
 				btnUpdateDatabase.IsEnabled = true;
-				btnUpdateDatabase.Header = $"Aktualizuj bazę danych ({Global.AppDatabase.Version} → {Global.AppVersion()})";
+				btnUpdateDatabase.Header = $"Aktualizuj bazę danych ({Fn.AppDatabase.Version} → {Fn.AppVersion()})";
 			}
 			else
 			{

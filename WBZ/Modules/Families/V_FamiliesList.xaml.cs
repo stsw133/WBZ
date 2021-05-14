@@ -1,4 +1,5 @@
-﻿using WBZ.Modules._base;
+﻿using StswExpress;
+using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_Family;
 
 namespace WBZ.Modules.Families
@@ -10,7 +11,7 @@ namespace WBZ.Modules.Families
     {
         D_FamiliesList D = new D_FamiliesList();
 
-        public FamiliesList(StswExpress.Globals.Commands.Type mode)
+        public FamiliesList(Commands.Type mode)
         {
             InitializeComponent();
             DataContext = D;

@@ -1,8 +1,7 @@
-﻿using StswExpress.Globals;
+﻿using StswExpress;
 using System;
 using System.Data;
 using System.Windows;
-using WBZ.Controls;
 using WBZ.Modules._base;
 using WBZ.Modules.Articles;
 using WBZ.Modules.Contractors;

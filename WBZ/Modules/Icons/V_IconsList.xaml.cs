@@ -1,4 +1,5 @@
-﻿using WBZ.Modules._base;
+﻿using StswExpress;
+using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_Icon;
 
 namespace WBZ.Modules.Icons
@@ -10,7 +11,7 @@ namespace WBZ.Modules.Icons
 	{
 		D_IconsList D = new D_IconsList();
 
-		public IconsList(StswExpress.Globals.Commands.Type mode)
+		public IconsList(Commands.Type mode)
 		{
 			InitializeComponent();
 			DataContext = D;

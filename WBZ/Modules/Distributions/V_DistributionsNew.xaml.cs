@@ -1,11 +1,10 @@
-﻿using StswExpress.Globals;
+﻿using StswExpress;
 using System;
 using System.Data;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using WBZ.Controls;
 using WBZ.Models;
 using WBZ.Modules._base;
 using WBZ.Modules.Articles;
@@ -93,7 +92,7 @@ namespace WBZ.Modules.Distributions
 		{
 			M_DistributionFamily family;
 
-			var window = new FamiliesList(StswExpress.Globals.Commands.Type.SELECT);
+			var window = new FamiliesList(Commands.Type.SELECT);
 			if (window.ShowDialog() == true)
 			{
 				family = D.InstanceData.Families.FirstOrDefault(x => x.Family == window.Selected.ID);
@@ -115,7 +114,7 @@ namespace WBZ.Modules.Distributions
 			bool br = false;
 			do
 			{
-				var window2 = new ArticlesList(StswExpress.Globals.Commands.Type.SELECT);
+				var window2 = new ArticlesList(Commands.Type.SELECT);
 				if (window2.ShowDialog() == true)
 				{
 					if (window2.Selected != null)

@@ -1,6 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using StswExpress;
+using System.Windows.Controls;
 using System.Windows.Input;
-using WBZ.Controls;
 using WBZ.Globals;
 using WBZ.Models;
 using WBZ.Modules._base;
@@ -15,7 +15,7 @@ namespace WBZ.Modules.Contractors
     {
         D_ContractorsNew D = new D_ContractorsNew();
 
-        public ContractorsNew(MODULE_MODEL instance, StswExpress.Globals.Commands.Type mode)
+        public ContractorsNew(MODULE_MODEL instance, Commands.Type mode)
         {
             InitializeComponent();
             DataContext = D;

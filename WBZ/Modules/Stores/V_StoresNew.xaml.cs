@@ -1,6 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using StswExpress;
+using System.Windows.Controls;
 using System.Windows.Input;
-using WBZ.Controls;
 using WBZ.Globals;
 using WBZ.Models;
 using WBZ.Modules._base;
@@ -15,7 +15,7 @@ namespace WBZ.Modules.Stores
 	{
 		D_TransportNew D = new D_TransportNew();
 
-		public StoresNew(MODULE_MODEL instance, StswExpress.Globals.Commands.Type mode)
+		public StoresNew(MODULE_MODEL instance, Commands.Type mode)
 		{
 			InitializeComponent();
 			DataContext = D;

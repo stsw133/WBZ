@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
+        xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
         xmlns:c="clr-namespace:WBZ.Controls"
         mc:Ignorable="d" Height="650" Width="975" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
         Title="{Binding Title}" Icon="/Resources/icon32_groups.ico">
@@ -12,7 +12,7 @@
     </WindowChrome.WindowChrome>
     <DockPanel>
         <!-- titleBar -->
-        <sec:TitleBar DockPanel.Dock="Top" SubIcon="/Resources/icon32_select.ico"/>
+        <se:TitleBar DockPanel.Dock="Top" SubIcon="/Resources/icon32_select.ico"/>
         <!-- buttonsPanel -->
         <c:GroupsView x:Name="groupsView" Margin="5" MouseDoubleClick="groupsView_MouseDoubleClick"/>
     </DockPanel>

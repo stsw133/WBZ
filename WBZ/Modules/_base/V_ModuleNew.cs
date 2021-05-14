@@ -1,10 +1,9 @@
-﻿using StswExpress.Globals;
-using System;
+﻿using System;
 using System.Data;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
+using StswExpress;
 
 namespace WBZ.Modules._base
 {
@@ -111,7 +110,7 @@ namespace WBZ.Modules._base
 			{
 				var perm = Globals.Global.User.Perms.Contains($"{module}_{Globals.Global.PermType.SAVE}") ? Commands.Type.EDIT : Commands.Type.PREVIEW;
 
-				var selectedInstances = (sender as DataGrid).SelectedItems.Cast<T>();
+				var selectedInstances = (sender as System.Windows.Controls.DataGrid).SelectedItems.Cast<T>();
 				foreach (T instance in selectedInstances)
 				{
 					var winNames = module.Split('_');

@@ -1,4 +1,4 @@
-﻿using StswExpress.Base;
+﻿using StswExpress;
 using System.Windows;
 
 namespace WBZ.Modules._base

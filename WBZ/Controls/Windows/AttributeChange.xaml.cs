@@ -1,5 +1,4 @@
-﻿using StswExpress.Base;
-using StswExpress.Globals;
+﻿using StswExpress;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;

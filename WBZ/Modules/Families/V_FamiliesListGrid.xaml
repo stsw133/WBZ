@@ -3,8 +3,7 @@
           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-          xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
-          xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
+          xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
           xmlns:g="clr-namespace:WBZ.Globals"
           xmlns:p="clr-namespace:WBZ.Properties"
           mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800"
@@ -15,7 +14,7 @@
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="Background" Value="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}}"/>
             <Setter Property="BorderThickness" Value="0,0,1,1"/>
-            <Setter Property="BorderBrush" Value="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.25}"/>
+            <Setter Property="BorderBrush" Value="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.25}"/>
             <Setter Property="Padding" Value="4 3"/>
         </Style>
     </DataGrid.ColumnHeaderStyle>
@@ -25,10 +24,10 @@
     <DataGrid.Columns>
         <!-- ID -->
         <DataGridTextColumn Binding="{Binding ID}" Header="ID"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_ID, Converter={seg:conv_Bool}}"/>
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_ID, Converter={se:conv_Bool}}"/>
         <!-- Icon -->
         <DataGridTemplateColumn Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"
-                                Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Icon, Converter={seg:conv_Bool}}">
+                                Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Icon, Converter={se:conv_Bool}}">
             <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
                     <Image Source="{Binding cIcon.Value}"/>
@@ -37,64 +36,64 @@
         </DataGridTemplateColumn>
         <!-- Declarant -->
         <DataGridTextColumn Binding="{Binding Declarant}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Declarant, Converter={seg:conv_Bool}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Declarant, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Header="Zgłaszający"
+                <se:ColumnFilter_Text Header="Zgłaszający"
                                        Value="{Binding Data.Filters.Declarant, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
                                        IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Lastname -->
         <DataGridTextColumn Binding="{Binding Lastname}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Lastname, Converter={seg:conv_Bool}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Lastname, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Header="Rodzina"
+                <se:ColumnFilter_Text Header="Rodzina"
                                        Value="{Binding Data.Filters.Lastname, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
                                        IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Members -->
         <DataGridTextColumn Binding="{Binding Members}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Members, Converter={seg:conv_Bool}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Members, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Number Header="Ilość osób"
+                <se:ColumnFilter_Number Header="Ilość osób"
                                          Value="{Binding Data.Filters.Members, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
                                          IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Postcode -->
         <DataGridTextColumn Binding="{Binding Postcode}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Postcode, Converter={seg:conv_Bool}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Postcode, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Header="Kod pocztowy"
+                <se:ColumnFilter_Text Header="Kod pocztowy"
                                        Value="{Binding Data.Filters.Postcode, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
                                        IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- City -->
         <DataGridTextColumn Binding="{Binding City}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_City, Converter={seg:conv_Bool}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_City, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Header="Miejscowość"
+                <se:ColumnFilter_Text Header="Miejscowość"
                                        Value="{Binding Data.Filters.City, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
                                        IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Address -->
         <DataGridTextColumn Binding="{Binding Address}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Address, Converter={seg:conv_Bool}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Address, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Header="Adres"
+                <se:ColumnFilter_Text Header="Adres"
                                        Value="{Binding Data.Filters.Address, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
                                        IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- DonationWeight -->
         <DataGridTextColumn Binding="{Binding DonationWeight}" Header="Przekazano (kg)" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_DonationWeight, Converter={seg:conv_Bool}}"/>
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_DonationWeight, Converter={se:conv_Bool}}"/>
         <!-- Status -->
-        <DataGridTextColumn Binding="{Binding Status, Converter={seg:conv_Bool}, ConverterParameter='Aktywna~Nieaktywna'}" Header="Status" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Status, Converter={seg:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Status, Converter={se:conv_Bool}, ConverterParameter='Aktywna~Nieaktywna'}" Header="Status" Width="*"
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Status, Converter={se:conv_Bool}}">
             <DataGridTextColumn.CellStyle>
                 <Style TargetType="DataGridCell">
                     <Style.Triggers >
@@ -117,7 +116,7 @@
         </DataGridTextColumn>
         <!-- DonationLast -->
         <DataGridTextColumn Binding="{Binding DonationLast, StringFormat={}{0:yyyy-MM-dd}}" Header="Ostatnia darowizna" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_DonationLast, Converter={seg:conv_Bool}}"/>
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_DonationLast, Converter={se:conv_Bool}}"/>
     </DataGrid.Columns>
     <DataGrid.ContextMenu>
         <ContextMenu>
@@ -148,9 +147,9 @@
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Sortowanie 1:"/>
                             <ToggleButton IsChecked="{Binding sorting_FamiliesList[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                          Height="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}"
-                                          Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}">
-                                <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.1}"
+                                          Height="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.2}"
+                                          Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.2}">
+                                <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.1}"
                                        Source="/Resources/icon32_descending.ico"/>
                             </ToggleButton>
                             <ComboBox SelectedValue="{Binding sorting_FamiliesList[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
@@ -170,9 +169,9 @@
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Sortowanie 2:"/>
                             <ToggleButton IsChecked="{Binding sorting_FamiliesList[3], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                          Height="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}"
-                                          Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2.2}">
-                                <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.1}"
+                                          Height="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.2}"
+                                          Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.2}">
+                                <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.1}"
                                        Source="/Resources/icon32_descending.ico"/>
                             </ToggleButton>
                             <ComboBox SelectedValue="{Binding sorting_FamiliesList[2], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
@@ -192,7 +191,7 @@
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Limit wczytywania:"/>
                             <TextBox Text="{Binding sorting_FamiliesList[4], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                     Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=5}"
+                                     Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=5}"
                                      HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                         </StackPanel>
                     </MenuItem.Header>
@@ -200,13 +199,13 @@
             </MenuItem>
             <!-- Actions -->
             <Separator/>
-            <sec:MenuItem Header="Podgląd" IconUri="/Resources/icon32_search.ico" Command="seg:Commands.Preview"/>
-            <sec:MenuItem Header="Dodaj" IconUri="/Resources/icon32_add.ico" Command="seg:Commands.New"/>
-            <sec:MenuItem Header="Duplikuj" IconUri="/Resources/icon32_duplicate.ico" Command="seg:Commands.Duplicate"/>
-            <sec:MenuItem Header="Edytuj" IconUri="/Resources/icon32_edit.ico" Command="seg:Commands.Edit"/>
-            <sec:MenuItem Header="Usuń" IconUri="/Resources/icon32_delete.ico" Command="seg:Commands.Delete"/>
+            <se:MenuItem Header="Podgląd" IconUri="/Resources/icon32_search.ico" Command="se:Commands.Preview"/>
+            <se:MenuItem Header="Dodaj" IconUri="/Resources/icon32_add.ico" Command="se:Commands.New"/>
+            <se:MenuItem Header="Duplikuj" IconUri="/Resources/icon32_duplicate.ico" Command="se:Commands.Duplicate"/>
+            <se:MenuItem Header="Edytuj" IconUri="/Resources/icon32_edit.ico" Command="se:Commands.Edit"/>
+            <se:MenuItem Header="Usuń" IconUri="/Resources/icon32_delete.ico" Command="se:Commands.Delete"/>
             <Separator/>
-            <sec:MenuItem Header="Odśwież" IconUri="/Resources/icon32_refresh.ico" Command="seg:Commands.Refresh"/>
+            <se:MenuItem Header="Odśwież" IconUri="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
         </ContextMenu>
     </DataGrid.ContextMenu>
     <DataGrid.RowStyle>
@@ -215,7 +214,7 @@
                 <DataTrigger Binding="{Binding Archival}" Value="True">
                     <Setter Property="Foreground" Value="Gray"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Comment, Converter={seg:conv_Compare}}" Value="False">
+                <DataTrigger Binding="{Binding Comment, Converter={se:conv_Compare}}" Value="False">
                     <Setter Property="ToolTip" Value="{Binding Comment}"/>
                 </DataTrigger>
             </Style.Triggers>

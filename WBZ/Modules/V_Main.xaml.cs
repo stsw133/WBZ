@@ -21,6 +21,7 @@ using WBZ.Modules.Users;
 using WBZ.Modules.Vehicles;
 using WBZ.Modules.Icons;
 using WBZ.Modules._base;
+using SE = StswExpress;
 
 namespace WBZ.Modules
 {
@@ -211,11 +212,11 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnArticlesList_Click(object sender, RoutedEventArgs e)
 		{
-			new ArticlesList(StswExpress.Globals.Commands.Type.LIST) { Owner = this }.Show();
+			new ArticlesList(SE.Commands.Type.LIST) { Owner = this }.Show();
 		}
 		private void btnArticlesNew_Click(object sender, RoutedEventArgs e)
 		{
-			new ArticlesNew(null, StswExpress.Globals.Commands.Type.NEW) { Owner = this }.Show();
+			new ArticlesNew(null, SE.Commands.Type.NEW) { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -223,7 +224,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnAttachmentsList_Click(object sender, RoutedEventArgs e)
 		{
-			new AttachmentsList(StswExpress.Globals.Commands.Type.LIST) { Owner = this }.Show();
+			new AttachmentsList(SE.Commands.Type.LIST) { Owner = this }.Show();
 		}
 		private void btnAttachmentsGallery_Click(object sender, RoutedEventArgs e)
 		{
@@ -235,11 +236,11 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnAttributesClassesList_Click(object sender, RoutedEventArgs e)
 		{
-			new AttributesClassesList(StswExpress.Globals.Commands.Type.LIST) { Owner = this }.Show();
+			new AttributesClassesList(SE.Commands.Type.LIST) { Owner = this }.Show();
 		}
 		private void btnAttributesClassesNew_Click(object sender, RoutedEventArgs e)
 		{
-			new AttributesClassesNew(null, StswExpress.Globals.Commands.Type.NEW) { Owner = this }.Show();
+			new AttributesClassesNew(null, SE.Commands.Type.NEW) { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -247,11 +248,11 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnContractorsList_Click(object sender, RoutedEventArgs e)
 		{
-			new ContractorsList(StswExpress.Globals.Commands.Type.LIST) { Owner = this }.Show();
+			new ContractorsList(SE.Commands.Type.LIST) { Owner = this }.Show();
 		}
 		private void btnContractorsNew_Click(object sender, RoutedEventArgs e)
 		{
-			new ContractorsNew(null, StswExpress.Globals.Commands.Type.NEW) { Owner = this }.Show();
+			new ContractorsNew(null, SE.Commands.Type.NEW) { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -259,11 +260,11 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnDistributionsList_Click(object sender, RoutedEventArgs e)
 		{
-			new DistributionsList(StswExpress.Globals.Commands.Type.LIST) { Owner = this }.Show();
+			new DistributionsList(SE.Commands.Type.LIST) { Owner = this }.Show();
 		}
 		private void btnDistributionsNew_Click(object sender, RoutedEventArgs e)
 		{
-			new DistributionsNew(null, StswExpress.Globals.Commands.Type.NEW) { Owner = this }.Show();
+			new DistributionsNew(null, SE.Commands.Type.NEW) { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -271,11 +272,11 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnDocumentsList_Click(object sender, RoutedEventArgs e)
 		{
-			new DocumentsList(StswExpress.Globals.Commands.Type.LIST) { Owner = this }.Show();
+			new DocumentsList(SE.Commands.Type.LIST) { Owner = this }.Show();
 		}
 		private void btnDocumentsNew_Click(object sender, RoutedEventArgs e)
 		{
-			new DocumentsNew(null, StswExpress.Globals.Commands.Type.NEW) { Owner = this }.Show();
+			new DocumentsNew(null, SE.Commands.Type.NEW) { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -283,11 +284,11 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnEmployeesList_Click(object sender, RoutedEventArgs e)
 		{
-			new EmployeesList(StswExpress.Globals.Commands.Type.LIST) { Owner = this }.Show();
+			new EmployeesList(SE.Commands.Type.LIST) { Owner = this }.Show();
 		}
 		private void btnEmployeesNew_Click(object sender, RoutedEventArgs e)
 		{
-			new EmployeesNew(null, StswExpress.Globals.Commands.Type.NEW) { Owner = this }.Show();
+			new EmployeesNew(null, SE.Commands.Type.NEW) { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -295,11 +296,11 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnFamiliesList_Click(object sender, RoutedEventArgs e)
 		{
-			new FamiliesList(StswExpress.Globals.Commands.Type.LIST) { Owner = this }.Show();
+			new FamiliesList(SE.Commands.Type.LIST) { Owner = this }.Show();
 		}
 		private void btnFamiliesNew_Click(object sender, RoutedEventArgs e)
 		{
-			new FamiliesNew(null, StswExpress.Globals.Commands.Type.NEW) { Owner = this }.Show();
+			new FamiliesNew(null, SE.Commands.Type.NEW) { Owner = this }.Show();
 		}
 		
 		/// <summary>
@@ -307,11 +308,11 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnIconsList_Click(object sender, RoutedEventArgs e)
 		{
-			new IconsList(StswExpress.Globals.Commands.Type.LIST) { Owner = this }.Show();
+			new IconsList(SE.Commands.Type.LIST) { Owner = this }.Show();
 		}
 		private void btnIconsNew_Click(object sender, RoutedEventArgs e)
 		{
-			new IconsNew(null, StswExpress.Globals.Commands.Type.NEW) { Owner = this }.Show();
+			new IconsNew(null, SE.Commands.Type.NEW) { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -319,7 +320,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnLogsList_Click(object sender, RoutedEventArgs e)
 		{
-			new LogsList(StswExpress.Globals.Commands.Type.LIST) { Owner = this }.Show();
+			new LogsList(SE.Commands.Type.LIST) { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -335,11 +336,11 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnStoresList_Click(object sender, RoutedEventArgs e)
 		{
-			new StoresList(StswExpress.Globals.Commands.Type.LIST) { Owner = this }.Show();
+			new StoresList(SE.Commands.Type.LIST) { Owner = this }.Show();
 		}
 		private void btnStoresNew_Click(object sender, RoutedEventArgs e)
 		{
-			new StoresNew(null, StswExpress.Globals.Commands.Type.NEW) { Owner = this }.Show();
+			new StoresNew(null, SE.Commands.Type.NEW) { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -347,11 +348,11 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnUsersList_Click(object sender, RoutedEventArgs e)
 		{
-			new UsersList(StswExpress.Globals.Commands.Type.LIST) { Owner = this }.Show();
+			new UsersList(SE.Commands.Type.LIST) { Owner = this }.Show();
 		}
 		private void btnUsersNew_Click(object sender, RoutedEventArgs e)
 		{
-			new UsersNew(null, StswExpress.Globals.Commands.Type.NEW) { Owner = this }.Show();
+			new UsersNew(null, SE.Commands.Type.NEW) { Owner = this }.Show();
 		}
 
 		/// <summary>
@@ -359,11 +360,11 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnVehiclesList_Click(object sender, RoutedEventArgs e)
 		{
-			new VehiclesList(StswExpress.Globals.Commands.Type.LIST) { Owner = this }.Show();
+			new VehiclesList(SE.Commands.Type.LIST) { Owner = this }.Show();
 		}
 		private void btnVehiclesNew_Click(object sender, RoutedEventArgs e)
 		{
-			new VehiclesNew(null, StswExpress.Globals.Commands.Type.NEW) { Owner = this }.Show();
+			new VehiclesNew(null, SE.Commands.Type.NEW) { Owner = this }.Show();
 		}
 
 		/// <summary>

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
+             xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
              xmlns:g="clr-namespace:WBZ.Globals"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="750"
              Loaded="UserControl_Loaded">
@@ -31,8 +31,8 @@
                     <DataTemplate>
                         <DockPanel>
                             <Button DockPanel.Dock="Right" Content=" • • • "
-                                    FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=0.5}"
-                                    Visibility="{Binding EditingMode, Converter={seg:conv_Bool}}"
+                                    FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.5}"
+                                    Visibility="{Binding EditingMode, Converter={se:conv_Bool}}"
                                     Click="btnAttributeChange_Click"/>
                             <TextBlock Text="{Binding Value}"/>
                         </DockPanel>

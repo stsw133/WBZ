@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using StswExpress;
+using System.Windows;
 using System.Windows.Controls;
 using WBZ.Globals;
 using WBZ.Models;
@@ -14,7 +15,7 @@ namespace WBZ.Modules.Articles
 	{
 		D_ArticlesList D = new D_ArticlesList();
 
-		public ArticlesList(StswExpress.Globals.Commands.Type mode)
+		public ArticlesList(Commands.Type mode)
 		{
 			InitializeComponent();
 			DataContext = D;
@@ -28,9 +29,9 @@ namespace WBZ.Modules.Articles
 		/// </summary>
 		internal override void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			if (D.Mode == StswExpress.Globals.Commands.Type.SELECT)
+			if (D.Mode == Commands.Type.SELECT)
 				dgList.SelectionMode = DataGridSelectionMode.Single;
-			D.StoresList = SQL.ListValues(Config.Modules.STORES, "codename", "archival=false", D.Mode != StswExpress.Globals.Commands.Type.SELECT);
+			D.StoresList = SQL.ListValues(Config.Modules.STORES, "codename", "archival=false", D.Mode != Commands.Type.SELECT);
 		}
 
 		/// <summary>

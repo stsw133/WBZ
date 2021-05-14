@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using WBZ.Models;
 using WBZ.Globals;
+using StswExpress;
 
 namespace WBZ.Modules.Distributions
 {
@@ -40,7 +40,7 @@ namespace WBZ.Modules.Distributions
 		/// </summary>
 		private void btnSendEmail_Click(object sender, RoutedEventArgs e)
 		{
-			if (StswExpress.Globals.Mail.SendMail(Properties.Settings.Default.config_Email_Email, new string[] { D.FamilyContactsInfo.Rows[0]["email"].ToString() }, "Darowizna do odebrania",
+			if (Mail.SendMail(Properties.Settings.Default.config_Email_Email, new string[] { D.FamilyContactsInfo.Rows[0]["email"].ToString() }, "Darowizna do odebrania",
 					Properties.Settings.Default.config_GSM_message + $"\n\n\nWiadomosc generowana automatycznie. Proszę nie odpisywać."))
 				(sender as Button).IsEnabled = false;
 		}

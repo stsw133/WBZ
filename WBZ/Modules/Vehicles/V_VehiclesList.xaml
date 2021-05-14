@@ -3,8 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
-        xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
+        xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
         xmlns:b="clr-namespace:WBZ.Modules.Vehicles"
         xmlns:c="clr-namespace:WBZ.Controls"
         xmlns:g="clr-namespace:WBZ.Globals"
@@ -17,20 +16,20 @@
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
     <Window.CommandBindings>
-        <CommandBinding Command="seg:Commands.Clear" Executed="cmdClear_Executed"/>
-        <CommandBinding Command="seg:Commands.Close" Executed="cmdClose_Executed"/>
-        <CommandBinding Command="seg:Commands.Delete" Executed="cmdDelete_Executed" CanExecute="cmdDelete_CanExecute"/>
-        <CommandBinding Command="seg:Commands.Duplicate" Executed="cmdDuplicate_Executed" CanExecute="cmdDuplicate_CanExecute"/>
-        <CommandBinding Command="seg:Commands.Edit" Executed="cmdEdit_Executed" CanExecute="cmdEdit_CanExecute"/>
-        <CommandBinding Command="seg:Commands.Help" Executed="cmdHelp_Executed"/>
-        <CommandBinding Command="seg:Commands.New" Executed="cmdNew_Executed" CanExecute="cmdNew_CanExecute"/>
-        <CommandBinding Command="seg:Commands.Preview" Executed="cmdPreview_Executed" CanExecute="cmdPreview_CanExecute"/>
-        <CommandBinding Command="seg:Commands.Refresh" Executed="cmdRefresh_Executed"/>
-        <CommandBinding Command="seg:Commands.Select" Executed="cmdSelect_Executed" CanExecute="cmdSelect_CanExecute"/>
+        <CommandBinding Command="se:Commands.Clear" Executed="cmdClear_Executed"/>
+        <CommandBinding Command="se:Commands.Close" Executed="cmdClose_Executed"/>
+        <CommandBinding Command="se:Commands.Delete" Executed="cmdDelete_Executed" CanExecute="cmdDelete_CanExecute"/>
+        <CommandBinding Command="se:Commands.Duplicate" Executed="cmdDuplicate_Executed" CanExecute="cmdDuplicate_CanExecute"/>
+        <CommandBinding Command="se:Commands.Edit" Executed="cmdEdit_Executed" CanExecute="cmdEdit_CanExecute"/>
+        <CommandBinding Command="se:Commands.Help" Executed="cmdHelp_Executed"/>
+        <CommandBinding Command="se:Commands.New" Executed="cmdNew_Executed" CanExecute="cmdNew_CanExecute"/>
+        <CommandBinding Command="se:Commands.Preview" Executed="cmdPreview_Executed" CanExecute="cmdPreview_CanExecute"/>
+        <CommandBinding Command="se:Commands.Refresh" Executed="cmdRefresh_Executed"/>
+        <CommandBinding Command="se:Commands.Select" Executed="cmdSelect_Executed" CanExecute="cmdSelect_CanExecute"/>
     </Window.CommandBindings>
     <DockPanel>
         <!-- titleBar -->
-        <sec:TitleBar DockPanel.Dock="Top" SubIcon="{Binding ModeIcon}"/>
+        <se:TitleBar DockPanel.Dock="Top" SubIcon="{Binding ModeIcon}"/>
         <!-- buttonsPanel -->
         <Border DockPanel.Dock="Right"
                 Background="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}}"
@@ -38,33 +37,33 @@
                 BorderThickness="1,0,0,0">
             <DockPanel>
                 <DockPanel.Resources>
-                    <Style TargetType="{x:Type sec:IconButton}">
+                    <Style TargetType="{x:Type se:IconButton}">
                         <Setter Property="HorizontalContentAlignment" Value="Left"/>
                         <Setter Property="IsTextVisible" Value="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"/>
                     </Style>
                 </DockPanel.Resources>
-                <StackPanel DockPanel.Dock="Top" Visibility="{Binding Mode, Converter={seg:conv_Compare}, ConverterParameter=SELECT}">
-                    <sec:IconButton Text="{Tr Select}" Margin="5" Icon="/Resources/icon32_select.ico" Command="seg:Commands.Select"/>
+                <StackPanel DockPanel.Dock="Top" Visibility="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=SELECT}">
+                    <se:IconButton Text="{Tr Select}" Margin="5" Icon="/Resources/icon32_select.ico" Command="se:Commands.Select"/>
                     <Separator/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Top">
-                    <sec:IconButton Text="{Tr Preview}" Margin="5" Icon="/Resources/icon32_search.ico" Command="seg:Commands.Preview"/>
-                    <sec:IconButton Text="{Tr New}" Margin="5,0,5,5" Icon="/Resources/icon32_add.ico" Command="seg:Commands.New"/>
-                    <sec:IconButton Text="{Tr Duplicate}" Margin="5,0,5,5" Icon="/Resources/icon32_duplicate.ico" Command="seg:Commands.Duplicate"/>
-                    <sec:IconButton Text="{Tr Edit}" Margin="5,0,5,5" Icon="/Resources/icon32_edit.ico" Command="seg:Commands.Edit"/>
-                    <sec:IconButton Text="{Tr Delete}" Margin="5,0,5,5" Icon="/Resources/icon32_delete.ico" Command="seg:Commands.Delete"/>
+                    <se:IconButton Text="{Tr Preview}" Margin="5" Icon="/Resources/icon32_search.ico" Command="se:Commands.Preview"/>
+                    <se:IconButton Text="{Tr New}" Margin="5,0,5,5" Icon="/Resources/icon32_add.ico" Command="se:Commands.New"/>
+                    <se:IconButton Text="{Tr Duplicate}" Margin="5,0,5,5" Icon="/Resources/icon32_duplicate.ico" Command="se:Commands.Duplicate"/>
+                    <se:IconButton Text="{Tr Edit}" Margin="5,0,5,5" Icon="/Resources/icon32_edit.ico" Command="se:Commands.Edit"/>
+                    <se:IconButton Text="{Tr Delete}" Margin="5,0,5,5" Icon="/Resources/icon32_delete.ico" Command="se:Commands.Delete"/>
                     <Separator/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                     <Separator/>
-                    <sec:IconButton Text="{Tr Refresh}" Margin="5" Icon="/Resources/icon32_refresh.ico" Command="seg:Commands.Refresh"/>
+                    <se:IconButton Text="{Tr Refresh}" Margin="5" Icon="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
                     <Separator/>
-                    <sec:IconButton Text="{Tr CloseWindow}" Margin="5" Icon="/Resources/icon32_close.ico" Command="seg:Commands.Close"/>
+                    <se:IconButton Text="{Tr CloseWindow}" Margin="5" Icon="/Resources/icon32_close.ico" Command="se:Commands.Close"/>
                 </StackPanel>
             </DockPanel>
             <Border.ContextMenu>
                 <ContextMenu>
-                    <sec:ColorSetter Color="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+                    <se:ColorSetter Color="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                 </ContextMenu>
             </Border.ContextMenu>
         </Border>
@@ -72,11 +71,11 @@
         <c:StatusPanel DockPanel.Dock="Bottom" Background="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}}"
                        HasFilters="{Binding AreFiltersVisible, Mode=OneTime}" HasGroups="{Binding AreGroupsVisible, Mode=OneTime}"/>
         <!-- groupsView -->
-        <c:GroupsView EditingMode="{Binding Perms, Source={x:Static g:Global.User}, Converter={seg:conv_ListContains}, ConverterParameter=vehicles_groups}"
-                      Visibility="{Binding AreGroupsVisible, Converter={seg:conv_Bool}}"/>
+        <c:GroupsView EditingMode="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_ListContains}, ConverterParameter=vehicles_groups}"
+                      Visibility="{Binding AreGroupsVisible, Converter={se:conv_Bool}}"/>
         <!-- otherFilters -->
-        <DockPanel DockPanel.Dock="Bottom" Visibility="{Binding AreFiltersVisible, Converter={seg:conv_Bool}}">
-            <sec:CheckBox Content="{Tr ShowArchival}" IsChecked="{Binding Filters.Archival}" Margin="5" HorizontalAlignment="Right"/>
+        <DockPanel DockPanel.Dock="Bottom" Visibility="{Binding AreFiltersVisible, Converter={se:conv_Bool}}">
+            <se:CheckBox Content="{Tr ShowArchival}" IsChecked="{Binding Filters.Archival}" Margin="5" HorizontalAlignment="Right"/>
         </DockPanel>
         <!-- dataGrid -->
         <b:VehiclesListGrid ItemsSource="{Binding InstancesList}" BorderBrush="Gray" BorderThickness="0,0,0,1"

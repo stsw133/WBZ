@@ -3,19 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
-             xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
+             xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="750"
              Loaded="UserControl_Loaded">
     <DockPanel Margin="5">
         <ListBox x:Name="lbAttachments" ItemsSource="{Binding InstanceAttachments}" DisplayMemberPath="Name" AllowDrop="True"
-                 Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=15}"
+                 Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=15}"
                  Drop="lbAttachments_Drop" SelectionChanged="lbAttachments_SelectionChanged">
             <ListBox.ContextMenu>
                 <ContextMenu>
-                    <sec:MenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico" IsEnabled="{Binding EditingMode}" Click="btnAttachmentAdd_Click"/>
-                    <sec:MenuItem Header="{Tr Edit}" IconUri="/Resources/icon32_edit.ico" IsEnabled="{Binding EditingMode}" Click="btnAttachmentEdit_Click"/>
-                    <sec:MenuItem Header="{Tr Delete}" IconUri="/Resources/icon32_delete.ico" IsEnabled="{Binding EditingMode}" Click="btnAttachmentRemove_Click"/>
+                    <se:MenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico" IsEnabled="{Binding EditingMode}" Click="btnAttachmentAdd_Click"/>
+                    <se:MenuItem Header="{Tr Edit}" IconUri="/Resources/icon32_edit.ico" IsEnabled="{Binding EditingMode}" Click="btnAttachmentEdit_Click"/>
+                    <se:MenuItem Header="{Tr Delete}" IconUri="/Resources/icon32_delete.ico" IsEnabled="{Binding EditingMode}" Click="btnAttachmentRemove_Click"/>
                 </ContextMenu>
             </ListBox.ContextMenu>
         </ListBox>

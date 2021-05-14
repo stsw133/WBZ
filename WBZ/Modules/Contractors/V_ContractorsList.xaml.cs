@@ -1,4 +1,5 @@
-﻿using WBZ.Modules._base;
+﻿using StswExpress;
+using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_Contractor;
 
 namespace WBZ.Modules.Contractors
@@ -10,7 +11,7 @@ namespace WBZ.Modules.Contractors
     {
         D_ContractorsList D = new D_ContractorsList();
 
-        public ContractorsList(StswExpress.Globals.Commands.Type mode)
+        public ContractorsList(Commands.Type mode)
         {
             InitializeComponent();
             DataContext = D;

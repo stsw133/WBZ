@@ -41,7 +41,7 @@ namespace WBZ.Modules.Personal
                 }
             }
 
-            if (SQL.SetInstance(Config.Modules.USERS, D.User, StswExpress.Globals.Commands.Type.EDIT))
+            if (SQL.SetInstance(Config.Modules.USERS, D.User, StswExpress.Commands.Type.EDIT))
                 Close();
 		}
 	}

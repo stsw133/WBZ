@@ -3,9 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
-        xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
-        xmlns:p="clr-namespace:WBZ.Properties"
+        xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
         mc:Ignorable="d"
         Title="Generator raportów"
             SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner">
@@ -14,7 +12,7 @@
     </WindowChrome.WindowChrome>
     <DockPanel HorizontalAlignment="Center">
         <!-- titleBar -->
-        <sec:TitleBar DockPanel.Dock="Top"/>
+        <se:TitleBar DockPanel.Dock="Top"/>
         <!-- main -->
         <Grid>
             <Grid.ColumnDefinitions>
@@ -32,7 +30,7 @@
             <DatePicker Grid.Row="1" Grid.Column="0" x:Name="dpFrom" Margin="20,5,5,5" VerticalContentAlignment="Center"/>
             <Label Grid.Row="1" Grid.Column="1" Content="/" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <DatePicker Grid.Row="1" Grid.Column="2" x:Name="dpTo" Margin="5,5,20,5" VerticalContentAlignment="Center"/>
-            <sec:IconButton Grid.Row="3" Grid.ColumnSpan="3" Margin="5" IsEnabled="True" IsTextVisible="True" HorizontalAlignment="Center"
+            <se:IconButton Grid.Row="3" Grid.ColumnSpan="3" Margin="5" IsEnabled="True" IsTextVisible="True" HorizontalAlignment="Center"
                             Text="Akceptuj" Icon="/Resources/icon32_accept.ico" PreviewMouseLeftButtonUp="btnAccept_Click"/>
         </Grid>
     </DockPanel>

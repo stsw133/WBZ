@@ -1,4 +1,4 @@
-﻿using StswExpress.Base;
+﻿using StswExpress;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -54,7 +54,7 @@ namespace WBZ.Modules._tabs
 
             dynamic d = win?.DataContext;
             if (d != null)
-                EditingMode = (bool)(d.Mode != StswExpress.Globals.Commands.Type.PREVIEW);
+                EditingMode = (bool)(d.Mode != Commands.Type.PREVIEW);
 
             var indexes = dataGrid.SelectedItems.Cast<M_Attribute>().Select(x => D.InstanceAttributes.IndexOf(x));
             foreach (int index in indexes)

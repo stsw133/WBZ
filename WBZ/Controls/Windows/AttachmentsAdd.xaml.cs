@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using StswExpress;
 using System.Linq;
 using System.Windows;
 using WBZ.Modules._base;
@@ -49,7 +50,7 @@ namespace WBZ.Controls
         {
             try
             {
-                StswExpress.Globals.Functions.OpenFile("https://www.google.com/");
+                Fn.OpenFile("https://www.google.com/");
             }
             catch { }
         }

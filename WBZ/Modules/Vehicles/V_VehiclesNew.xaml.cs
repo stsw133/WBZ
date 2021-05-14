@@ -1,4 +1,4 @@
-﻿using StswExpress.Globals;
+﻿using StswExpress;
 using System.Windows;
 using WBZ.Modules._base;
 using WBZ.Modules.Contractors;

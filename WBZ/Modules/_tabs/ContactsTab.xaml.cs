@@ -1,4 +1,4 @@
-﻿using StswExpress.Base;
+﻿using StswExpress;
 using System;
 using System.Data;
 using System.Windows;
@@ -35,7 +35,7 @@ namespace WBZ.Modules._tabs
                 {
                     Module = (string)d.Module;
                     ID = (int)d.InstanceData.ID;
-                    EditingMode = (bool)(d.Mode != StswExpress.Globals.Commands.Type.PREVIEW);
+                    EditingMode = (bool)(d.Mode != Commands.Type.PREVIEW);
                 }
                 if (ID != 0 && D.InstanceContacts == null)
                 {

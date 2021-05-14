@@ -1,4 +1,4 @@
-﻿using StswExpress.Base;
+﻿using StswExpress;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -29,7 +29,7 @@ namespace WBZ.Modules.Login
 		/// </summary>
 		private void btnAddDatabase_Click(object sender, RoutedEventArgs e)
 		{
-			var db = new M_Database()
+			var db = new DB()
 			{
 				Name = $"db_{D.Databases.Count + 1}"
 			};
@@ -60,7 +60,7 @@ namespace WBZ.Modules.Login
 				return;
 			}
 
-			pbPassword.Password = (lbDatabases.SelectedItem as M_Database).Password;
+			pbPassword.Password = (lbDatabases.SelectedItem as DB).Password;
 			lblStatus.Content = string.Empty;
 
 			gridDatabaseInfo.IsEnabled = true;
@@ -74,7 +74,7 @@ namespace WBZ.Modules.Login
 			if (lbDatabases.SelectedIndex == -1)
 				return;
 
-			(lbDatabases.SelectedItem as M_Database).Password = (sender as PasswordBox).Password;
+			(lbDatabases.SelectedItem as DB).Password = (sender as PasswordBox).Password;
 		}
 
 		/// <summary>
@@ -82,10 +82,10 @@ namespace WBZ.Modules.Login
 		/// </summary>
 		private void btnTest_Click(object sender, RoutedEventArgs e)
 		{
-			SQL.connWBZ = StswExpress.Globals.SQL.MakeConnString(tbServer.Text, Convert.ToInt32(tbPort.Text), tbDatabase.Text, tbUsername.Text, pbPassword.Password);
+			SQL.connWBZ = StswExpress.SQL.MakeConnString(tbServer.Text, Convert.ToInt32(tbPort.Text), tbDatabase.Text, tbUsername.Text, pbPassword.Password);
 			string dbv = SQL.GetPropertyValue("VERSION");
 
-			if (dbv == StswExpress.Globals.Global.AppVersion())
+			if (dbv == Fn.AppVersion())
 			{
 				lblStatus.Content = "Wersja bazy aktualna!";
 				lblStatus.Foreground = Brushes.Green;
@@ -109,7 +109,7 @@ namespace WBZ.Modules.Login
 		{
 			try
 			{
-				M_Database.SaveAllDatabases(new List<M_Database>(D.Databases));
+				DB.SaveAllDatabases(new List<DB>(D.Databases));
 				if (Owner == null && D.Databases.Count > 0)
 				{
 					var window = new Login();

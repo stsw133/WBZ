@@ -1,9 +1,9 @@
-﻿using System;
+﻿using StswExpress;
+using System;
 using System.Data;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
-using WBZ.Controls;
 using WBZ.Globals;
 using WBZ.Models;
 using WBZ.Modules._base;
@@ -18,7 +18,7 @@ namespace WBZ.Modules.Articles
 	{
 		D_ArticlesNew D = new D_ArticlesNew();
 
-		public ArticlesNew(MODULE_MODEL instance, StswExpress.Globals.Commands.Type mode)
+		public ArticlesNew(MODULE_MODEL instance, Commands.Type mode)
 		{
 			InitializeComponent();
 			DataContext = D;
@@ -29,7 +29,7 @@ namespace WBZ.Modules.Articles
 			D.Mode = mode;
 
 			D.InstanceData.Measures = SQL.GetInstancePositions(D.Module, D.InstanceData.ID);
-			if (D.Mode == StswExpress.Globals.Commands.Type.DUPLICATE)
+			if (D.Mode == Commands.Type.DUPLICATE)
 				foreach (DataRow row in D.InstanceData.Measures.Rows)
 					row.SetAdded();
 		}

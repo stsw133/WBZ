@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using SE = StswExpress;
+using System.Linq;
 using System.Windows.Input;
 using WBZ.Globals;
 using WBZ.Modules._base;
@@ -13,7 +14,7 @@ namespace WBZ.Modules.Attachments
     {
         D_AttachmentsList D = new D_AttachmentsList();
 
-        public AttachmentsList(StswExpress.Globals.Commands.Type mode)
+        public AttachmentsList(SE.Commands.Type mode)
         {
             InitializeComponent();
             DataContext = D;
@@ -41,7 +42,7 @@ namespace WBZ.Modules.Attachments
 		{
 			var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
 			foreach (MODULE_MODEL instance in selectedInstances)
-				Functions.OpenInstanceWindow(this, instance, StswExpress.Globals.Commands.Type.PREVIEW);
+				Functions.OpenInstanceWindow(this, instance, SE.Commands.Type.PREVIEW);
 		}
 
 		/// <summary>
@@ -51,7 +52,7 @@ namespace WBZ.Modules.Attachments
 		{
 			var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
 			foreach (MODULE_MODEL instance in selectedInstances)
-				Functions.OpenInstanceWindow(this, instance, StswExpress.Globals.Commands.Type.EDIT);
+				Functions.OpenInstanceWindow(this, instance, SE.Commands.Type.EDIT);
 		}
 
 		/// <summary>

@@ -1,5 +1,4 @@
 ﻿using Npgsql;
-using StswExpress.Globals;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,13 +10,14 @@ using System.Windows;
 using WBZ.Models;
 using WBZ.Globals;
 using WBZ.Modules._base;
+using StswExpress;
 
 namespace WBZ
 {
 	internal static class SQL
 	{
 		internal static string connWBZ = null; ///przypisywanie połączenia w oknie logowania
-		internal static NpgsqlConnection connOpenedWBZ => (NpgsqlConnection)StswExpress.Globals.SQL.OpenConnection(new NpgsqlConnection(connWBZ));
+		internal static NpgsqlConnection connOpenedWBZ => (NpgsqlConnection)StswExpress.SQL.OpenConnection(new NpgsqlConnection(connWBZ));
 
 		#region Login
 		/// <summary>
@@ -1586,7 +1586,7 @@ namespace WBZ
 							break;
 						/// USERS
 						case Config.Modules.USERS:
-							var user = instance as M_User;
+							var user = instance as Models.M_User;
 							query = @"insert into wbz.users (id, username, password, forename, lastname, email, phone, blocked, archival)
 								values (@id, @username, @password, @forename, @lastname, @email, @phone, @blocked, @archival)
 								on conflict(id) do

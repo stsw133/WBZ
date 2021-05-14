@@ -2,7 +2,7 @@
 using MigraDoc.DocumentObjectModel.Shapes;
 using MigraDoc.DocumentObjectModel.Tables;
 using MigraDoc.Rendering;
-using StswExpress.Globals;
+using StswExpress;
 using System;
 using System.Data;
 using System.Diagnostics;
@@ -31,7 +31,7 @@ z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danyc
                 Document document = new Document();
                 document.Info.Title = "Kwestionariusz dodania rodziny";
                 document.Info.Subject = $"Dodawanie rodziny: {family.Lastname}";
-                document.Info.Author = $"{Global.AppDatabase.Name}";
+                document.Info.Author = $"{Fn.AppDatabase.Name}";
 
                 ///Title
                 Section section = document.AddSection();
@@ -49,7 +49,7 @@ z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danyc
                 ///Subject
                 Paragraph pSubject = section.Headers.Primary.AddParagraph("Wielkopolski Bank Żywności");
                 pSubject.AddLineBreak();
-                pSubject.AddText($"{Global.AppDatabase.Name}");
+                pSubject.AddText($"{Fn.AppDatabase.Name}");
                 pSubject.AddLineBreak();
                 pSubject.AddLineBreak();
                 pSubject.AddText("Dodawanie rodziny");
@@ -177,7 +177,7 @@ z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danyc
             Document document = new Document();
             document.Info.Title = $"Raport sumaryczny darowizn";
             document.Info.Subject = $"Raport sumaryczny darowizn {dFrom:dd.MM.yyyy} -> {dTo:dd.MM.yyyy}";
-            document.Info.Author = $"{Global.AppDatabase.Name}";
+            document.Info.Author = $"{Fn.AppDatabase.Name}";
             document.DefaultPageSetup.Orientation = Orientation.Landscape;
 
             ///Title
@@ -195,13 +195,13 @@ z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danyc
             ///Subject
             Paragraph pSubject = section.Headers.Primary.AddParagraph("Wielkopolski Bank Żywności");
             pSubject.AddLineBreak();
-            pSubject.AddText($"{Global.AppDatabase.Name}");
+            pSubject.AddText($"{Fn.AppDatabase.Name}");
             pSubject.AddLineBreak();
             pSubject.AddLineBreak();
             pSubject.AddText("Raport sumaryczny darowizn");
             pSubject.AddLineBreak();
             pSubject.AddText($"{dFrom:yyyy.MM.dd} - {dTo:yyyy.MM.dd}");
-            document.Info.Author = $"{Global.AppDatabase.Name}";
+            document.Info.Author = $"{Fn.AppDatabase.Name}";
             pSubject.Format.Alignment = ParagraphAlignment.Left;
             pSubject.Format.Font.Size = 11;
             pSubject.Format.Font.Color = color;
@@ -418,7 +418,7 @@ z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danyc
             Document document = new Document();
             document.Info.Title = $"Realizacja darowizn";
             document.Info.Subject = $"Realizacja darowizn: {distribution.ID} - {distribution.DateReal}";
-            document.Info.Author = $"{Global.AppDatabase.Name}";
+            document.Info.Author = $"{Fn.AppDatabase.Name}";
 
             ///Title
             Section section = document.AddSection();
@@ -435,7 +435,7 @@ z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danyc
             ///Subject
             Paragraph pSubject = section.Headers.Primary.AddParagraph("Wielkopolski Bank Żywności");
             pSubject.AddLineBreak();
-            pSubject.AddText($"{Global.AppDatabase.Name}");
+            pSubject.AddText($"{Fn.AppDatabase.Name}");
             pSubject.AddLineBreak();
             pSubject.AddLineBreak();
             pSubject.AddText("Realizacja darowizn");

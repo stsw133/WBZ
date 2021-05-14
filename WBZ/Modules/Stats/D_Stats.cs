@@ -1,4 +1,4 @@
-﻿using StswExpress.Base;
+﻿using StswExpress;
 using System.Data;
 
 namespace WBZ.Modules.Stats

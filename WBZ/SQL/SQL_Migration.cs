@@ -1,5 +1,5 @@
 ﻿using Npgsql;
-using StswExpress.Globals;
+using StswExpress;
 using System;
 using System.Windows;
 
@@ -246,7 +246,7 @@ alter table wbz.attachments alter column name type varchar(255);
 
 				result = true;
 
-				Global.AppDatabase.Version = SQL.GetPropertyValue("VERSION");
+				Fn.AppDatabase.Version = SQL.GetPropertyValue("VERSION");
 			}
 			catch (Exception ex)
 			{

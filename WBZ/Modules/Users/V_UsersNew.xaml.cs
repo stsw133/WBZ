@@ -1,8 +1,8 @@
-﻿using StswExpress.Globals;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_User;
+using StswExpress;
 
 namespace WBZ.Modules.Users
 {
@@ -46,7 +46,7 @@ namespace WBZ.Modules.Users
 		/// </summary>
 		private void chckPerms_Checked(object sender, RoutedEventArgs e)
 		{
-			var perm = (sender as CheckBox).Tag.ToString();
+			var perm = (sender as System.Windows.Controls.CheckBox).Tag.ToString();
 			if (!D.InstanceData.Perms.Contains(perm))
 				D.InstanceData.Perms.Add(perm);
 		}
@@ -56,7 +56,7 @@ namespace WBZ.Modules.Users
 		/// </summary>
 		private void chckPerms_Unchecked(object sender, RoutedEventArgs e)
 		{
-			var perm = (sender as CheckBox).Tag.ToString();
+			var perm = (sender as System.Windows.Controls.CheckBox).Tag.ToString();
 			if (D.InstanceData.Perms.Contains(perm))
 				D.InstanceData.Perms.Remove(perm);
 		}

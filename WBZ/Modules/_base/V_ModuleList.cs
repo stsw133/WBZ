@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SE = StswExpress;
+using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -34,8 +35,8 @@ namespace WBZ.Modules._base
         /// </summary>
         internal virtual void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            dgLists = new ObservableCollection<DataGrid>(StswExpress.Globals.Extensions.FindVisualChildren<DataGrid>(W));
-            if (D.Mode == StswExpress.Globals.Commands.Type.SELECT)
+            dgLists = new ObservableCollection<DataGrid>(SE.Extensions.FindVisualChildren<DataGrid>(W));
+            if (D.Mode == SE.Commands.Type.SELECT)
                 foreach (var dg in dgLists)
                     dg.SelectionMode = DataGridSelectionMode.Single;
 
@@ -53,7 +54,7 @@ namespace WBZ.Modules._base
         /// <summary>
 		/// Select
 		/// </summary>
-		internal void cmdSelect_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = D?.Mode == StswExpress.Globals.Commands.Type.SELECT;
+		internal void cmdSelect_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = D?.Mode == SE.Commands.Type.SELECT;
         internal virtual void cmdSelect_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Selected = dgLists[D.SelectedTab].SelectedItems.Cast<MODULE_MODEL>().FirstOrDefault();
@@ -68,7 +69,7 @@ namespace WBZ.Modules._base
         {
             var selectedInstances = dgLists[D.SelectedTab].SelectedItems.Cast<MODULE_MODEL>();
             foreach (MODULE_MODEL instance in selectedInstances)
-                (Activator.CreateInstance(Type.GetType(Namespace + "New"), instance, StswExpress.Globals.Commands.Type.PREVIEW) as Window).Show();
+                (Activator.CreateInstance(Type.GetType(Namespace + "New"), instance, SE.Commands.Type.PREVIEW) as Window).Show();
         }
 
         /// <summary>
@@ -77,7 +78,7 @@ namespace WBZ.Modules._base
 		internal void cmdNew_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = Global.User.Perms.Contains($"{D?.Module}_{Global.PermType.SAVE}");
         internal virtual void cmdNew_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            (Activator.CreateInstance(Type.GetType(Namespace + "New"), null, StswExpress.Globals.Commands.Type.NEW) as Window).Show();
+            (Activator.CreateInstance(Type.GetType(Namespace + "New"), null, SE.Commands.Type.NEW) as Window).Show();
         }
 
         /// <summary>
@@ -88,7 +89,7 @@ namespace WBZ.Modules._base
         {
             var selectedInstances = dgLists[D.SelectedTab].SelectedItems.Cast<MODULE_MODEL>();
             foreach (MODULE_MODEL instance in selectedInstances)
-                (Activator.CreateInstance(Type.GetType(Namespace + "New"), instance, StswExpress.Globals.Commands.Type.DUPLICATE) as Window).Show();
+                (Activator.CreateInstance(Type.GetType(Namespace + "New"), instance, SE.Commands.Type.DUPLICATE) as Window).Show();
         }
 
         /// <summary>
@@ -99,7 +100,7 @@ namespace WBZ.Modules._base
         {
             var selectedInstances = dgLists[D.SelectedTab].SelectedItems.Cast<MODULE_MODEL>();
             foreach (MODULE_MODEL instance in selectedInstances)
-                (Activator.CreateInstance(Type.GetType(Namespace + "New"), instance, StswExpress.Globals.Commands.Type.EDIT) as Window).Show();
+                (Activator.CreateInstance(Type.GetType(Namespace + "New"), instance, SE.Commands.Type.EDIT) as Window).Show();
         }
 
         /// <summary>
@@ -160,7 +161,7 @@ namespace WBZ.Modules._base
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                if (D.Mode != StswExpress.Globals.Commands.Type.SELECT)
+                if (D.Mode != SE.Commands.Type.SELECT)
                 {
                     if (Global.User.Perms.Contains($"{D.Module}_{Global.PermType.SAVE}"))
                         cmdEdit_Executed(null, null);

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using StswExpress;
 using System;
 using System.IO;
 using System.Linq;
@@ -6,7 +7,6 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using WBZ.Controls;
 using WBZ.Globals;
 using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_Icon;
@@ -20,7 +20,7 @@ namespace WBZ.Modules.Icons
 	{
         D_IconsNew D = new D_IconsNew();
 
-        public IconsNew(MODULE_MODEL instance, StswExpress.Globals.Commands.Type mode)
+        public IconsNew(MODULE_MODEL instance, StswExpress.Commands.Type mode)
         {
             InitializeComponent();
             DataContext = D;
@@ -38,7 +38,7 @@ namespace WBZ.Modules.Icons
         {
             try
             {
-                StswExpress.Globals.Functions.OpenFile("https://www.google.com/");
+                Fn.OpenFile("https://www.google.com/");
             }
             catch { }
         }
@@ -61,7 +61,7 @@ namespace WBZ.Modules.Icons
         /// </summary>
         private async void tbPath_TextChanged(object sender, TextChangedEventArgs e)
         {
-            D.InstanceData.Path = (sender as TextBox).Text;
+            D.InstanceData.Path = (sender as System.Windows.Controls.TextBox).Text;
             await Task.Run(() =>
             {
                 try
@@ -80,7 +80,7 @@ namespace WBZ.Modules.Icons
                     if (string.IsNullOrEmpty(D.InstanceData.Name))
                         D.InstanceData.Name = Path.GetFileName(D.InstanceData.Path).TrimEnd(D.InstanceData.Format.ToCharArray());
 
-                    var image = StswExpress.Globals.Functions.LoadImage(D.InstanceData.File);
+                    var image = Fn.LoadImage(D.InstanceData.File);
                     
                     D.InstanceData.Height = image.PixelHeight;
                     D.InstanceData.Width = image.PixelWidth;

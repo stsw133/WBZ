@@ -1,4 +1,5 @@
-﻿using WBZ.Modules._base;
+﻿using StswExpress;
+using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_Vehicle;
 
 namespace WBZ.Modules.Vehicles
@@ -10,7 +11,7 @@ namespace WBZ.Modules.Vehicles
 	{
 		D_VehiclesList D = new D_VehiclesList();
 
-		public VehiclesList(StswExpress.Globals.Commands.Type mode)
+		public VehiclesList(Commands.Type mode)
 		{
 			InitializeComponent();
 			DataContext = D;

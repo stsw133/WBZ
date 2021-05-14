@@ -3,8 +3,7 @@
           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-          xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
-          xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
+          xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
           xmlns:g="clr-namespace:WBZ.Globals"
           xmlns:p="clr-namespace:WBZ.Properties"
           mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800"
@@ -13,8 +12,8 @@
     <DataGrid.ColumnHeaderStyle>
         <Style TargetType="{x:Type DataGridColumnHeader}">
             <Setter Property="Background" Value="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}}"/>
-            <Setter Property="BorderBrush" Value="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.2}"/>
-            <Setter Property="BorderThickness" Value="1,0,1,1"/>
+            <Setter Property="BorderBrush" Value="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.2}"/>
+            <Setter Property="BorderThickness" Value="0,0,1,1"/>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="Padding" Value="4 3"/>
@@ -26,78 +25,78 @@
     <DataGrid.Columns>
         <!-- ID -->
         <DataGridTextColumn Binding="{Binding ID}" Header="ID"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_ID, Converter={seg:conv_Bool}}"/>
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_ID, Converter={se:conv_Bool}}"/>
         <!-- Icon -->
-        <sec:DataGridImageColumn Image="{Binding cIcon.Value}" Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"
-                                 Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Icon, Converter={seg:conv_Bool}}"/>
+        <se:DataGridImageColumn Image="{Binding cIcon.Value}" Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"
+                                Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Icon, Converter={se:conv_Bool}}"/>
         <!-- Register -->
         <DataGridTextColumn Binding="{Binding Register}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Register, Converter={seg:conv_Bool}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Register, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Header="Nr rej."
-                                       Value="{Binding Data.Filters.Register, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+                <se:ColumnFilter_Text Header="Nr rej."
+                                      Value="{Binding Data.Filters.Register, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
+                                      IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Brand -->
         <DataGridTextColumn Binding="{Binding Brand}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Brand, Converter={seg:conv_Bool}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Brand, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Header="Marka"
-                                       Value="{Binding Data.Filters.Brand, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+                <se:ColumnFilter_Text Header="Marka"
+                                      Value="{Binding Data.Filters.Brand, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
+                                      IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Model -->
         <DataGridTextColumn Binding="{Binding Model}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Model, Converter={seg:conv_Bool}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Model, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Header="Model"
-                                       Value="{Binding Data.Filters.Model, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+                <se:ColumnFilter_Text Header="Model"
+                                      Value="{Binding Data.Filters.Model, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
+                                      IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Capacity -->
         <DataGridTextColumn Binding="{Binding Capacity}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Capacity, Converter={seg:conv_Bool}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Capacity, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Number Header="Pojemność"
-                                         Value="{Binding Data.Filters.Capacity, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                         IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+                <se:ColumnFilter_Number Header="Pojemność"
+                                        Value="{Binding Data.Filters.Capacity, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
+                                        IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Forwarder -->
         <DataGridTextColumn Binding="{Binding ForwarderName}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Forwarder, Converter={seg:conv_Bool}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Forwarder, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Header="Spedytor"
-                                       Value="{Binding Data.Filters.ForwarderName, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+                <se:ColumnFilter_Text Header="Spedytor"
+                                      Value="{Binding Data.Filters.ForwarderName, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
+                                      IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Driver -->
         <DataGridTextColumn Binding="{Binding DriverName}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Driver, Converter={seg:conv_Bool}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Driver, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Text Header="Kierowca"
-                                       Value="{Binding Data.Filters.DriverName, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+                <se:ColumnFilter_Text Header="Kierowca"
+                                      Value="{Binding Data.Filters.DriverName, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
+                                      IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- ProdYear -->
         <DataGridTextColumn Binding="{Binding ProdYear}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_ProdYear, Converter={seg:conv_Bool}}">
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_ProdYear, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <sec:ColumnFilter_Number Header="Rok produkcji"
-                                         Value="{Binding Data.Filters.ProdYear, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                         IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+                <se:ColumnFilter_Number Header="Rok produkcji"
+                                        Value="{Binding Data.Filters.ProdYear, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
+                                        IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
     </DataGrid.Columns>
     <DataGrid.ContextMenu>
         <ContextMenu>
             <!-- Columns -->
-            <sec:MenuItem Header="{Tr ColumnsVisibility}" IconUri="/Resources/icon32_show.ico">
+            <se:MenuItem Header="{Tr ColumnsVisibility}" IconUri="/Resources/icon32_show.ico">
                 <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_ID}"/>
                 <MenuItem IsCheckable="True" Header="Ikona" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Icon}"/>
                 <MenuItem IsCheckable="True" Header="Nr rej." IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Register}"/>
@@ -107,16 +106,16 @@
                 <MenuItem IsCheckable="True" Header="Spedytor" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Forwarder}"/>
                 <MenuItem IsCheckable="True" Header="Kierowca" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Driver}"/>
                 <MenuItem IsCheckable="True" Header="Rok produkcji" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_ProdYear}"/>
-            </sec:MenuItem>
+            </se:MenuItem>
             <!-- Actions -->
             <Separator/>
-            <sec:MenuItem Header="{Tr Preview}" IconUri="/Resources/icon32_search.ico" Command="seg:Commands.Preview"/>
-            <sec:MenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico" Command="seg:Commands.New"/>
-            <sec:MenuItem Header="{Tr Duplicate}" IconUri="/Resources/icon32_duplicate.ico" Command="seg:Commands.Duplicate"/>
-            <sec:MenuItem Header="{Tr Edit}" IconUri="/Resources/icon32_edit.ico" Command="seg:Commands.Edit"/>
-            <sec:MenuItem Header="{Tr Delete}" IconUri="/Resources/icon32_delete.ico" Command="seg:Commands.Delete"/>
+            <se:MenuItem Header="{Tr Preview}" IconUri="/Resources/icon32_search.ico" Command="se:Commands.Preview"/>
+            <se:MenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico" Command="se:Commands.New"/>
+            <se:MenuItem Header="{Tr Duplicate}" IconUri="/Resources/icon32_duplicate.ico" Command="se:Commands.Duplicate"/>
+            <se:MenuItem Header="{Tr Edit}" IconUri="/Resources/icon32_edit.ico" Command="se:Commands.Edit"/>
+            <se:MenuItem Header="{Tr Delete}" IconUri="/Resources/icon32_delete.ico" Command="se:Commands.Delete"/>
             <Separator/>
-            <sec:MenuItem Header="{Tr Refresh}" IconUri="/Resources/icon32_refresh.ico" Command="seg:Commands.Refresh"/>
+            <se:MenuItem Header="{Tr Refresh}" IconUri="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
         </ContextMenu>
     </DataGrid.ContextMenu>
     <DataGrid.RowStyle>
@@ -125,7 +124,7 @@
                 <DataTrigger Binding="{Binding Archival}" Value="True">
                     <Setter Property="Foreground" Value="Gray"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Comment, Converter={seg:conv_Compare}}" Value="False">
+                <DataTrigger Binding="{Binding Comment, Converter={se:conv_Compare}}" Value="False">
                     <Setter Property="ToolTip" Value="{Binding Comment}"/>
                 </DataTrigger>
             </Style.Triggers>

@@ -1,4 +1,4 @@
-﻿using StswExpress.Globals;
+﻿using StswExpress;
 using System;
 using System.Linq;
 using System.Windows;
@@ -120,7 +120,7 @@ namespace WBZ.Globals
 			//TODO - odpalenie poradnika z dowolnego miejsca w aplikacji (App.xaml)
             try
             {
-				StswExpress.Globals.Functions.OpenFile(AppDomain.CurrentDomain.BaseDirectory + @"/Resources/pl_manual.pdf");
+				Fn.OpenFile(AppDomain.CurrentDomain.BaseDirectory + @"/Resources/pl_manual.pdf");
             }
             catch (Exception ex)
             {

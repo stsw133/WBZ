@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StswExpress;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,7 +7,7 @@ namespace WBZ.Globals
 {
 	public static class Config
 	{
-		public static string Version => SQL.GetPropertyValue("VERSION", StswExpress.Globals.Global.AppVersion());
+		public static string Version => SQL.GetPropertyValue("VERSION", Fn.AppVersion());
 		public static string Email_Host => SQL.GetPropertyValue("EMAIL_HOST", "smtp.gmail.com");
 		public static string Email_Port => SQL.GetPropertyValue("EMAIL_PORT", 587.ToString());
 		public static string Email_Address => SQL.GetPropertyValue("EMAIL_ADDRESS", "wbz.email.testowy@gmail.com");

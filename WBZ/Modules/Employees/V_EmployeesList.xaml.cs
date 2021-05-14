@@ -1,4 +1,5 @@
-﻿using WBZ.Modules._base;
+﻿using StswExpress;
+using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_Employee;
 
 namespace WBZ.Modules.Employees
@@ -10,7 +11,7 @@ namespace WBZ.Modules.Employees
     {
         D_EmployeesList D = new D_EmployeesList();
 
-        public EmployeesList(StswExpress.Globals.Commands.Type mode)
+        public EmployeesList(Commands.Type mode)
         {
             InitializeComponent();
             DataContext = D;

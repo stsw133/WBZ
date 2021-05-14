@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using StswExpress;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using WBZ.Globals;
@@ -13,7 +14,7 @@ namespace WBZ.Modules._shared
     {
         D_GroupsList D = new D_GroupsList();
 
-        public GroupsList(string module, StswExpress.Globals.Commands.Type mode)
+        public GroupsList(string module, Commands.Type mode)
         {
             InitializeComponent();
             DataContext = D;
@@ -30,7 +31,7 @@ namespace WBZ.Modules._shared
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                if (D.Mode == StswExpress.Globals.Commands.Type.SELECT)
+                if (D.Mode == Commands.Type.SELECT)
                 {
                     var item = groupsView.SelectedItem as TreeViewItem;
                     Selected = SQL.GetInstance<MODULE_MODEL>(Config.Modules.GROUPS, (int)item.Tag);

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using StswExpress;
+using System.Windows;
 using WBZ.Globals;
 using WBZ.Models;
 using WBZ.Modules._base;
@@ -34,7 +35,7 @@ namespace WBZ.Modules.Login
 
 			var user = SQL.ListInstances<M_User>(Config.Modules.USERS, $"u.email='{lblEmail.Content}'")?[0];
 			user.Newpass = pbPassword.Password;
-			if (SQL.SetInstance(Config.Modules.USERS, user, StswExpress.Globals.Commands.Type.EDIT))
+			if (SQL.SetInstance(Config.Modules.USERS, user, Commands.Type.EDIT))
                 DialogResult = true;
 		}
 	}

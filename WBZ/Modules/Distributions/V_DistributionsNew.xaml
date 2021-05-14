@@ -3,8 +3,7 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-       xmlns:sec="clr-namespace:StswExpress.Controls;assembly=StswExpress"
-       xmlns:seg="clr-namespace:StswExpress.Globals;assembly=StswExpress"
+       xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
        xmlns:b="clr-namespace:WBZ.Modules.Distributions"
        xmlns:p="clr-namespace:WBZ.Properties"
        xmlns:t="clr-namespace:WBZ.Modules._tabs"
@@ -16,58 +15,58 @@
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
     <Window.CommandBindings>
-        <CommandBinding Command="seg:Commands.Close" Executed="cmdClose_Executed"/>
-        <CommandBinding Command="seg:Commands.Help" Executed="cmdHelp_Executed"/>
-        <CommandBinding Command="seg:Commands.Refresh" Executed="cmdRefresh_Executed"/>
-        <CommandBinding Command="seg:Commands.Save" Executed="cmdSave_Executed" CanExecute="cmdSave_CanExecute"/>
+        <CommandBinding Command="se:Commands.Close" Executed="cmdClose_Executed"/>
+        <CommandBinding Command="se:Commands.Help" Executed="cmdHelp_Executed"/>
+        <CommandBinding Command="se:Commands.Refresh" Executed="cmdRefresh_Executed"/>
+        <CommandBinding Command="se:Commands.Save" Executed="cmdSave_Executed" CanExecute="cmdSave_CanExecute"/>
     </Window.CommandBindings>
     <DockPanel>
         <!-- titleBar -->
-        <sec:TitleBar DockPanel.Dock="Top" SubIcon="{Binding ModeIcon}"/>
+        <se:TitleBar DockPanel.Dock="Top" SubIcon="{Binding ModeIcon}"/>
         <!-- buttonsPanel -->
         <Border DockPanel.Dock="Right"
                 Background="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}}"
-                BorderBrush="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}, Converter={seg:conv_Color}, ConverterParameter=-0.5}"
+                BorderBrush="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.5}"
                 BorderThickness="1,0,0,0">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Top">
-                    <sec:IconButton Text="{Tr Save}" Margin="5"
+                    <se:IconButton Text="{Tr Save}" Margin="5"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_save.ico"
-                                    Command="seg:Commands.Save"/>
+                                    Command="se:Commands.Save"/>
                     <Separator/>
                     <CheckBox Content="{Tr ToBuffer}" Margin="5"
-                              IsChecked="{Binding InstanceData.Status, Converter={seg:conv_Bool}, ConverterParameter=!}"
+                              IsChecked="{Binding InstanceData.Status, Converter={se:conv_Bool}, ConverterParameter=!}"
                               IsEnabled="{Binding EditingMode}"/>
                     <Separator/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                     <Separator/>
-                    <sec:IconButton Text="{Tr Print}" Margin="5"
+                    <se:IconButton Text="{Tr Print}" Margin="5"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_printer.ico"
                                     Click="btnPrint_Click">
-                        <sec:IconButton.ContextMenu>
+                        <se:IconButton.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Header="Lista darowizn" Click="btnDistributionList_Click"/>
                             </ContextMenu>
-                        </sec:IconButton.ContextMenu>
-                    </sec:IconButton>
+                        </se:IconButton.ContextMenu>
+                    </se:IconButton>
                     <Separator/>
-                    <sec:IconButton Text="{Tr Refresh}" Margin="5"
+                    <se:IconButton Text="{Tr Refresh}" Margin="5"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_refresh.ico"
-                                    Command="seg:Commands.Refresh"/>
+                                    Command="se:Commands.Refresh"/>
                     <Separator/>
-                    <sec:IconButton Text="{Tr CloseWindow}" Margin="5"
+                    <se:IconButton Text="{Tr CloseWindow}" Margin="5"
                                     IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_close.ico"
-                                    Command="seg:Commands.Close"/>
+                                    Command="se:Commands.Close"/>
                 </StackPanel>
             </DockPanel>
             <Border.ContextMenu>
                 <ContextMenu>
-                    <sec:ColorSetter Color="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+                    <se:ColorSetter Color="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                 </ContextMenu>
             </Border.ContextMenu>
         </Border>
@@ -76,21 +75,21 @@
             <!-- tabMain -->
             <TabItem>
                 <TabItem.Header>
-                    <sec:Header Text="Ogólne" Icon="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
+                    <se:Header Text="Ogólne" Icon="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
                 </TabItem.Header>
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <DockPanel Margin="10" IsEnabled="{Binding EditingMode}">
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Nazwa:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="Nazwa:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={se:conv_Size}, ConverterParameter=0.25}"/>
                             <TextBox Text="{Binding InstanceData.Name}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Data wystawienia:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={seg:conv_Size}, ConverterParameter=0.25}"/>
+                            <Label Content="Data wystawienia:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={se:conv_Size}, ConverterParameter=0.25}"/>
                             <DatePicker SelectedDate="{Binding InstanceData.DateReal}" Margin="5" VerticalContentAlignment="Center"/>
                         </DockPanel>
                         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
                             <Button ToolTip="Dodaj pozycję" HorizontalAlignment="Left"
-                                    Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={seg:conv_Size}, ConverterParameter=2}"
+                                    Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2}"
                                     Click="btnPositionsAdd_Click">
                                 <Image Margin="2" Source="/Resources/icon32_add.ico"/>
                             </Button>
@@ -105,7 +104,7 @@
                                 </CollectionViewSource>
                             </Grid.Resources>
                             <DataGrid x:Name="dgFamilies" ColumnHeaderHeight="0" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
-                                      AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding Source={StaticResource groups}}" IsReadOnly="{Binding EditMode, Converter={seg:conv_Bool}, ConverterParameter=!}"
+                                      AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding Source={StaticResource groups}}" IsReadOnly="{Binding EditMode, Converter={se:conv_Bool}, ConverterParameter=!}"
                                       CanUserAddRows="False">
                                 <DataGrid.GroupStyle>
                                     <GroupStyle>
@@ -154,7 +153,7 @@
                                                                     <Border Padding="10" Background="White" BorderBrush="Black" BorderThickness="1">
                                                                         <DockPanel>
                                                                             <DataGrid x:Name="dgPositions" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
-                                                                                      AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding Path=Items[0].Positions.DefaultView}" IsReadOnly="{Binding EditMode, Converter={seg:conv_Bool}, ConverterParameter=!}"
+                                                                                      AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding Path=Items[0].Positions.DefaultView}" IsReadOnly="{Binding EditMode, Converter={se:conv_Bool}, ConverterParameter=!}"
                                                                                       CanUserAddRows="False">
                                                                                 <DataGrid.Columns>
                                                                                     <DataGridTextColumn Binding="{Binding id}" Header="ID" IsReadOnly="True" Visibility="Hidden"/>
@@ -199,35 +198,35 @@
             <!-- tabAdditional -->
             <TabItem>
                 <TabItem.Header>
-                    <sec:Header Text="Dodatkowe" Icon="/Resources/icon32_tools.ico"/>
+                    <se:Header Text="Dodatkowe" Icon="/Resources/icon32_tools.ico"/>
                 </TabItem.Header>
                 <t:AdditionalsTab/>
             </TabItem>
             <!-- tabGroups -->
             <TabItem>
                 <TabItem.Header>
-                    <sec:Header Text="Grupy" Icon="/Resources/icon32_groups.ico"/>
+                    <se:Header Text="Grupy" Icon="/Resources/icon32_groups.ico"/>
                 </TabItem.Header>
                 <t:GroupsTab/>
             </TabItem>
             <!-- tabAttributes -->
             <TabItem>
                 <TabItem.Header>
-                    <sec:Header Text="Atrybuty" Icon="/Resources/icon32_attributes.ico"/>
+                    <se:Header Text="Atrybuty" Icon="/Resources/icon32_attributes.ico"/>
                 </TabItem.Header>
                 <t:AttributesTab/>
             </TabItem>
             <!-- tabAttachments -->
             <TabItem>
                 <TabItem.Header>
-                    <sec:Header Text="Załączniki" Icon="/Resources/icon32_photos.ico"/>
+                    <se:Header Text="Załączniki" Icon="/Resources/icon32_photos.ico"/>
                 </TabItem.Header>
                 <t:AttachmentsTab/>
             </TabItem>
             <!-- tabLogs -->
             <TabItem>
                 <TabItem.Header>
-                    <sec:Header Text="Historia" Icon="/Resources/icon32_history.ico"/>
+                    <se:Header Text="Historia" Icon="/Resources/icon32_history.ico"/>
                 </TabItem.Header>
                 <t:LogsTab/>
             </TabItem>

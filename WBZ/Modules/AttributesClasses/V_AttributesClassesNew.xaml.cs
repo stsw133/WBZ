@@ -1,5 +1,5 @@
-﻿using System.Data;
-using WBZ.Controls;
+﻿using StswExpress;
+using System.Data;
 using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_AttributeClass;
 
@@ -12,7 +12,7 @@ namespace WBZ.Modules.AttributesClasses
 	{
         D_IconsNew D = new D_IconsNew();
 
-        public AttributesClassesNew(MODULE_MODEL instance, StswExpress.Globals.Commands.Type mode)
+        public AttributesClassesNew(MODULE_MODEL instance, Commands.Type mode)
         {
             InitializeComponent();
             DataContext = D;
@@ -23,7 +23,7 @@ namespace WBZ.Modules.AttributesClasses
             D.Mode = mode;
 
             D.InstanceData.Values = SQL.GetInstancePositions(D.Module, D.InstanceData.ID);
-            if (D.Mode == StswExpress.Globals.Commands.Type.DUPLICATE)
+            if (D.Mode == Commands.Type.DUPLICATE)
                 foreach (DataRow row in D.InstanceData.Values.Rows)
                     row.SetAdded();
         }
