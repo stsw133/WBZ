@@ -127,6 +127,30 @@
 		"en": "Employees",
 		"pl": "Pracownicy"
 	},
+	"EmployeesDuplicate": {
+		"en": "Duplicate employee",
+		"pl": "Duplikat pracownika"
+	},
+	"EmployeesEdit": {
+		"en": "Edit employee",
+		"pl": "Edycja pracownika"
+	},
+	"EmployeesList": {
+		"en": "List of employees",
+		"pl": "Lista pracowników"
+	},
+	"EmployeesNew": {
+		"en": "New employee",
+		"pl": "Nowy pracownik"
+	},
+	"EmployeesPreview": {
+		"en": "Preview employee",
+		"pl": "Podgląd pracownik"
+	},
+	"EmployeesSelect": {
+		"en": "Select employee",
+		"pl": "Wybór pracownika"
+	},
 	"ExpandGroups": {
 		"en": "Expand groups",
 		"pl": "Rozwiń grupy"

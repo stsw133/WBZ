@@ -15,7 +15,7 @@ namespace WBZ.Models
 		public MV cUser { get; set; } = new MV();
 		public int User
 		{
-			get => cUser.ID;
+			get => (int)cUser.ID;
 			set => cUser = SQL.ListValues(Config.Modules.USERS, "lastname || ' ' || forename", $"id={value}", false)?[0];
 		}
 

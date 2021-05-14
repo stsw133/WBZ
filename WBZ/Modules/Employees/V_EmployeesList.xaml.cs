@@ -15,7 +15,7 @@ namespace WBZ.Modules.Employees
         {
             InitializeComponent();
             DataContext = D;
-            Init();
+            base.Init();
 
 			D.Mode = mode;
 		}

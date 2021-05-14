@@ -31,10 +31,8 @@
         <!-- titleBar -->
         <se:TitleBar DockPanel.Dock="Top" SubIcon="{Binding ModeIcon}"/>
         <!-- buttonsPanel -->
-        <Border DockPanel.Dock="Right"
-                Background="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}}"
-                BorderBrush="Gray"
-                BorderThickness="1,0,0,0">
+        <Border DockPanel.Dock="Right" BorderBrush="Gray" BorderThickness="1,0,0,0"
+                Background="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}}">
             <DockPanel>
                 <DockPanel.Resources>
                     <Style TargetType="{x:Type se:IconButton}">

@@ -15,7 +15,7 @@ namespace WBZ.Modules.Employees
         {
             InitializeComponent();
             DataContext = D;
-			Init();
+			base.Init();
 
 			if (instance != null)
 				D.InstanceData = instance;

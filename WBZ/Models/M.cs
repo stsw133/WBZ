@@ -30,7 +30,7 @@ namespace WBZ.Models
         public MV cIcon { get; set; } = new MV();
         public int Icon
         {
-            get => cIcon.ID;
+            get => (int)cIcon.ID;
             set => cIcon = SQL.ListValues(Config.Modules.ICONS, "file", $"id={value}", false)?[0];
         }
 
@@ -68,7 +68,7 @@ namespace WBZ.Models
         /// <summary>
         /// ID
         /// </summary>
-        public int ID { get; set; } = 0;
+        public object ID { get; set; } = null;
 
         /// <summary>
         /// Value

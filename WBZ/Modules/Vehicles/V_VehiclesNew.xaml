@@ -95,28 +95,34 @@
                                 <se:Label Content="Nr rej.:" FontWeight="Bold"/>
                                 <se:TextBox Text="{Binding InstanceData.Register}"/>
                             </DockPanel>
+                            <!-- Brand -->
                             <DockPanel DockPanel.Dock="Top">
                                 <se:Label Content="Marka:" FontWeight="Normal"/>
                                 <se:TextBox Text="{Binding InstanceData.Brand}"/>
                             </DockPanel>
+                            <!-- Model -->
                             <DockPanel DockPanel.Dock="Top">
                                 <se:Label Content="Model:" FontWeight="Normal"/>
                                 <se:TextBox Text="{Binding InstanceData.Model}"/>
                             </DockPanel>
+                            <!-- Capacity -->
                             <DockPanel DockPanel.Dock="Top">
                                 <se:Label Content="Pojemność (t):" FontWeight="Normal"/>
                                 <se:NumericUpDown Value="{Binding InstanceData.Capacity}" ValueMin="0"/>
                             </DockPanel>
+                            <!-- Forwarder -->
                             <DockPanel DockPanel.Dock="Top">
                                 <se:Label Content="Spedytor:" FontWeight="Normal"/>
                                 <se:IconButton HorizontalContentAlignment="Center" Icon="/Resources/icon32_contractors.ico" Click="btnSelectForwarder_Click"/>
                                 <se:TextBox Text="{Binding InstanceData.ForwarderName}" Tag="{Binding InstanceData.ForwarderID}" IsReadOnly="True"/>
                             </DockPanel>
+                            <!-- Driver -->
                             <DockPanel DockPanel.Dock="Top">
                                 <se:Label Content="Kierowca:" FontWeight="Normal"/>
                                 <se:IconButton HorizontalContentAlignment="Center" Icon="/Resources/icon32_briefcase.ico" Click="btnSelectDriver_Click"/>
                                 <se:TextBox Text="{Binding InstanceData.DriverName}" Tag="{Binding InstanceData.DriverID}" IsReadOnly="True"/>
                             </DockPanel>
+                            <!-- ProdYear -->
                             <DockPanel DockPanel.Dock="Top">
                                 <se:Label Content="Rok produkcji:" FontWeight="Normal"/>
                                 <se:NumericUpDown Value="{Binding InstanceData.ProdYear}" ValueMin="0"/>

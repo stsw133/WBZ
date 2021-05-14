@@ -31,13 +31,12 @@ namespace WBZ.Modules.Vehicles
 		private void btnSelectForwarder_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new ContractorsList(Commands.Type.SELECT);
-			if (window.ShowDialog() == true)
-				if (window.Selected != null)
-				{
-					D.InstanceData.ForwarderID = window.Selected.ID;
-					D.InstanceData.ForwarderName = window.Selected.Name;
-					D.InstanceData = D.InstanceData;
-				}
+			if (window.ShowDialog() == true && window.Selected != null)
+			{
+				D.InstanceData.ForwarderID = window.Selected.ID;
+				D.InstanceData.ForwarderName = window.Selected.Name;
+				//D.InstanceData = D.InstanceData;
+			}
 		}
 
 		/// <summary>
@@ -46,13 +45,12 @@ namespace WBZ.Modules.Vehicles
 		private void btnSelectDriver_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new EmployeesList(Commands.Type.SELECT);
-			if (window.ShowDialog() == true)
-				if (window.Selected != null)
-				{
-					D.InstanceData.DriverID = window.Selected.ID;
-					D.InstanceData.DriverName = window.Selected.Name;
-					D.InstanceData = D.InstanceData;
-				}
+			if (window.ShowDialog() == true && window.Selected != null)
+			{
+				D.InstanceData.DriverID = window.Selected.ID;
+				D.InstanceData.DriverName = window.Selected.Name;
+				//D.InstanceData = D.InstanceData;
+			}
 		}
 
 		/// <summary>

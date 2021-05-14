@@ -30,14 +30,32 @@
 		/// <summary>
 		/// Forwarder
 		/// </summary>
-		public int ForwarderID { get; set; } = 0;
-		public string ForwarderName { get; set; } = string.Empty;
+		private MV forwarder { get; set; } = new MV();
+		public int ForwarderID
+		{
+			get => (int)forwarder.ID;
+            set => forwarder.ID = value;
+		}
+		public string ForwarderName
+		{
+			get => (string)forwarder.Value;
+			set => forwarder.Value = value;
+		}
 
 		/// <summary>
 		/// Driver
 		/// </summary>
-		public int DriverID { get; set; } = 0;
-		public string DriverName { get; set; } = string.Empty;
+		private MV driver { get; set; } = new MV();
+		public int DriverID
+		{
+			get => (int)driver.ID;
+			set => driver.ID = value;
+		}
+		public string DriverName
+		{
+			get => (string)driver.Value;
+			set => driver.Value = value;
+		}
 
 		/// <summary>
 		/// ProdYear

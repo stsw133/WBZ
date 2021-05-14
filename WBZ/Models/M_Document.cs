@@ -29,7 +29,7 @@ namespace WBZ.Models
 		public MV cStore { get; set; } = new MV();
 		public int Store
 		{
-			get => cStore.ID;
+			get => (int)cStore.ID;
 			set => cStore = SQL.ListValues(Config.Modules.STORES, "codename", $"id={value}", false)?[0];
 		}
 

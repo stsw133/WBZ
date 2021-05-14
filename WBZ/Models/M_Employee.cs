@@ -3,6 +3,13 @@
 	public class M_Employee : MA
 	{
 		/// <summary>
+		/// Name
+		/// </summary>
+		public override string Name => $"{Lastname} {Forename}";
+		public string Forename { get; set; } = string.Empty;
+		public string Lastname { get; set; } = string.Empty;
+
+		/// <summary>
 		/// Email
 		/// </summary>
 		public string Email { get; set; } = string.Empty;
@@ -11,13 +18,6 @@
 		/// Phone
 		/// </summary>
 		public string Phone { get; set; } = string.Empty;
-
-		/// <summary>
-		/// Name
-		/// </summary>
-		public string Forename { get; set; } = string.Empty;
-		public string Lastname { get; set; } = string.Empty;
-		public string Fullname => $"{Lastname} {Forename}";
 
 		/// <summary>
 		/// Department
