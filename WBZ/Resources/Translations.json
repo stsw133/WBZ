@@ -283,6 +283,10 @@
 		"en": "Password change",
 		"pl": "Zmiana hasła"
 	},
+	"Permissions": {
+		"en": "Permissions",
+		"pl": "Uprawnienia"
+	},
 	"Port": {
 		"en": "Port",
 		"pl": "Port"
@@ -378,6 +382,30 @@
 	"Users": {
 		"en": "Users",
 		"pl": "Użytkownicy"
+	},
+	"UsersDuplicate": {
+		"en": "Duplicate user",
+		"pl": "Duplikat użytkownika"
+	},
+	"UsersEdit": {
+		"en": "Edit user",
+		"pl": "Edycja użytkownika"
+	},
+	"UsersList": {
+		"en": "List of users",
+		"pl": "Lista użytkowników"
+	},
+	"UsersNew": {
+		"en": "New user",
+		"pl": "Nowy użytkownik"
+	},
+	"UsersPreview": {
+		"en": "Preview user",
+		"pl": "Podgląd użytkownika"
+	},
+	"UsersSelect": {
+		"en": "Select user",
+		"pl": "Wybór użytkownika"
 	},
 	"Vehicles": {
 		"en": "Vehicles",

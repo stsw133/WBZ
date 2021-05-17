@@ -9,7 +9,7 @@ namespace WBZ.Modules.Employees
     /// </summary>
     public partial class EmployeesList : List
     {
-        D_EmployeesList D = new D_EmployeesList();
+        readonly D_EmployeesList D = new D_EmployeesList();
 
         public EmployeesList(Commands.Type mode)
         {
@@ -25,19 +25,19 @@ namespace WBZ.Modules.Employees
 		/// </summary>
 		public override void UpdateFilters()
 		{
-			D.FilterSQL = $"LOWER(COALESCE(e.forename,'')) like '%{D.Filters.Forename.ToLower()}%' and "
-                        + $"LOWER(COALESCE(e.lastname,'')) like '%{D.Filters.Lastname.ToLower()}%' and "
-                        + $"LOWER(COALESCE(e.department,'')) like '%{D.Filters.Department.ToLower()}%' and "
-                        + $"LOWER(COALESCE(e.position,'')) like '%{D.Filters.Position.ToLower()}%' and "
-                        + $"LOWER(COALESCE(e.email,'')) like '%{D.Filters.Email.ToLower()}%' and "
-                        + $"LOWER(COALESCE(e.phone,'')) like '%{D.Filters.Phone.ToLower()}%' and "
-                        + $"LOWER(COALESCE(e.postcode,'')) like '%{D.Filters.Postcode.ToLower()}%' and "
-                        + $"LOWER(COALESCE(e.city,'')) like '%{D.Filters.City.ToLower()}%' and "
-                        + $"LOWER(COALESCE(e.address,'')) like '%{D.Filters.Address.ToLower()}%' and "
-                        + (!D.Filters.Archival ? $"e.archival=false and " : string.Empty)
-                        + (D.Filters.Group > 0 ? $"exists (select from wbz.groups g where g.instance=e.id and g.owner={D.Filters.Group}) and " : string.Empty);
+			D.FilterSQL = $"LOWER(COALESCE(e.forename,'')) LIKE '%{D.Filters.Forename.ToLower()}%' AND "
+                        + $"LOWER(COALESCE(e.lastname,'')) LIKE '%{D.Filters.Lastname.ToLower()}%' AND "
+                        + $"LOWER(COALESCE(e.department,'')) LIKE '%{D.Filters.Department.ToLower()}%' AND "
+                        + $"LOWER(COALESCE(e.position,'')) LIKE '%{D.Filters.Position.ToLower()}%' AND "
+                        + $"LOWER(COALESCE(e.email,'')) LIKE '%{D.Filters.Email.ToLower()}%' AND "
+                        + $"LOWER(COALESCE(e.phone,'')) LIKE '%{D.Filters.Phone.ToLower()}%' AND "
+                        + $"LOWER(COALESCE(e.postcode,'')) LIKE '%{D.Filters.Postcode.ToLower()}%' AND "
+                        + $"LOWER(COALESCE(e.city,'')) LIKE '%{D.Filters.City.ToLower()}%' AND "
+                        + $"LOWER(COALESCE(e.address,'')) LIKE '%{D.Filters.Address.ToLower()}%' AND "
+                        + (!D.Filters.Archival ? $"e.archival=false AND " : string.Empty)
+                        + (D.Filters.Group > 0 ? $"EXISTS (SELECT FROM wbz.groups g WHERE g.instance=e.id AND g.owner={D.Filters.Group}) AND " : string.Empty);
 
-            D.FilterSQL = D.FilterSQL.TrimEnd(" and ".ToCharArray());
+            D.FilterSQL = D.FilterSQL.TrimEnd(" AND ".ToCharArray());
 		}
 	}
 

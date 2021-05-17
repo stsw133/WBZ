@@ -9,7 +9,7 @@ namespace WBZ.Modules.Employees
     /// </summary>
     public partial class EmployeesNew : New
     {
-        D_EmployeesNew D = new D_EmployeesNew();
+        readonly D_EmployeesNew D = new D_EmployeesNew();
 
         public EmployeesNew(MODULE_MODEL instance, Commands.Type mode)
         {

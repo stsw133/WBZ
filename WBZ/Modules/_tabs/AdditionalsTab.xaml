@@ -22,8 +22,8 @@
                         </Image.Source>
                     <Image.ContextMenu>
                         <ContextMenu>
-                            <se:MenuItem Header="{Tr Select}" IconUri="/Resources/icon32_select.ico" Click="btnSelect_Click"/>
-                            <se:MenuItem Header="{Tr Delete}" IconUri="/Resources/icon32_remove.ico" Click="btnDelete_Click"/>
+                            <se:ExtMenuItem Header="{Tr Select}" IconUri="/Resources/icon32_select.ico" Click="btnSelect_Click"/>
+                            <se:ExtMenuItem Header="{Tr Delete}" IconUri="/Resources/icon32_remove.ico" Click="btnDelete_Click"/>
                         </ContextMenu>
                     </Image.ContextMenu>
                 </Image>

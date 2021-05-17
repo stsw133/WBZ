@@ -187,13 +187,13 @@
             </MenuItem>
             <!-- Actions -->
             <Separator/>
-            <se:MenuItem Header="Podgląd" IconUri="/Resources/icon32_search.ico" Command="se:Commands.Preview"/>
-            <se:MenuItem Header="Dodaj" IconUri="/Resources/icon32_add.ico" Command="se:Commands.New"/>
-            <se:MenuItem Header="Duplikuj" IconUri="/Resources/icon32_duplicate.ico" Command="se:Commands.Duplicate"/>
-            <se:MenuItem Header="Edytuj" IconUri="/Resources/icon32_edit.ico" Command="se:Commands.Edit"/>
-            <se:MenuItem Header="Usuń" IconUri="/Resources/icon32_delete.ico" Command="se:Commands.Delete"/>
+            <se:ExtMenuItem Header="Podgląd" IconUri="/Resources/icon32_search.ico" Command="se:Commands.Preview"/>
+            <se:ExtMenuItem Header="Dodaj" IconUri="/Resources/icon32_add.ico" Command="se:Commands.New"/>
+            <se:ExtMenuItem Header="Duplikuj" IconUri="/Resources/icon32_duplicate.ico" Command="se:Commands.Duplicate"/>
+            <se:ExtMenuItem Header="Edytuj" IconUri="/Resources/icon32_edit.ico" Command="se:Commands.Edit"/>
+            <se:ExtMenuItem Header="Usuń" IconUri="/Resources/icon32_delete.ico" Command="se:Commands.Delete"/>
             <Separator/>
-            <se:MenuItem Header="Odśwież" IconUri="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
+            <se:ExtMenuItem Header="Odśwież" IconUri="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
         </ContextMenu>
     </DataGrid.ContextMenu>
     <DataGrid.RowStyle>

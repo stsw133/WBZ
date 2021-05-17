@@ -89,7 +89,7 @@
         <c:StatusPanel DockPanel.Dock="Bottom" Background="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}}"
                        HasFilters="{Binding AreFiltersVisible, Mode=OneTime}" HasGroups="{Binding AreGroupsVisible, Mode=OneTime}"/>
         <!-- groupsView -->
-        <c:GroupsView EditingMode="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_ListContains}, ConverterParameter=documents_groups}"
+        <c:GroupsView EditingMode="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=documents_groups}"
                       Visibility="{Binding AreGroupsVisible, Converter={se:conv_Bool}}"/>
         <!-- otherFilters -->
         <DockPanel DockPanel.Dock="Bottom" Visibility="{Binding AreFiltersVisible, Converter={se:conv_Bool}}">

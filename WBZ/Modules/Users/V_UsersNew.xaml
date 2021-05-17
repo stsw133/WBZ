@@ -7,8 +7,8 @@
        xmlns:b="clr-namespace:WBZ.Modules.Users"
        xmlns:p="clr-namespace:WBZ.Properties"
        xmlns:t="clr-namespace:WBZ.Modules._tabs"
-       mc:Ignorable="d" Height="600" Width="900" ResizeMode="CanResize"
-       Title="{Binding Title}" Icon="/Resources/icon32_users.ico"
+       mc:Ignorable="d" Height="600" Width="900" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
+       Title="{Binding Title}" Icon="/Resources/icon32_user.ico"
        Loaded="Window_Loaded" Closed="Window_Closed"
        FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}">
     <WindowChrome.WindowChrome>
@@ -24,29 +24,24 @@
         <!-- titleBar -->
         <se:TitleBar DockPanel.Dock="Top" SubIcon="{Binding ModeIcon}"/>
         <!-- buttonsPanel -->
-        <Border DockPanel.Dock="Right"
-                Background="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}}"
-                BorderBrush="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.5}"
-                BorderThickness="1,0,0,0">
+        <Border DockPanel.Dock="Right" BorderBrush="Gray" BorderThickness="1,0,0,0"
+                Background="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}}">
             <DockPanel>
+                <DockPanel.Resources>
+                    <Style TargetType="{x:Type se:IconButton}">
+                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                        <Setter Property="IsTextVisible" Value="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"/>
+                    </Style>
+                </DockPanel.Resources>
                 <StackPanel DockPanel.Dock="Top">
-                    <se:IconButton Text="{Tr Save}" Margin="5"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                    Icon="/Resources/icon32_save.ico"
-                                    Command="se:Commands.Save"/>
+                    <se:IconButton Text="{Tr Save}" Margin="5" Icon="/Resources/icon32_save.ico" Command="se:Commands.Save"/>
                     <Separator/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                     <Separator/>
-                    <se:IconButton Text="{Tr Refresh}" Margin="5"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                    Icon="/Resources/icon32_refresh.ico"
-                                    Command="se:Commands.Refresh"/>
+                    <se:IconButton Text="{Tr Refresh}" Margin="5" Icon="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
                     <Separator/>
-                    <se:IconButton Text="{Tr CloseWindow}" Margin="5"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                    Icon="/Resources/icon32_close.ico"
-                                    Command="se:Commands.Close"/>
+                    <se:IconButton Text="{Tr CloseWindow}" Margin="5" Icon="/Resources/icon32_close.ico" Command="se:Commands.Close"/>
                 </StackPanel>
             </DockPanel>
             <Border.ContextMenu>
@@ -60,56 +55,101 @@
             <!-- tabMain -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="Ogólne" Icon="/Resources/icon32_user.ico"/>
+                    <se:Header Text="{Tr General}" Icon="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
                 </TabItem.Header>
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <DockPanel Margin="10" IsEnabled="{Binding EditingMode}" VerticalAlignment="Top">
-                        <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Nazwa użytkownika:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={se:conv_Size}, ConverterParameter=0.25}"/>
-                            <TextBox Text="{Binding InstanceData.Username}" Margin="5" VerticalContentAlignment="Center"/>
+                    <Grid Margin="10" VerticalAlignment="Top" IsEnabled="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=!PREVIEW}">
+                        <Grid.Resources>
+                            <Style TargetType="{x:Type se:IconButton}">
+                                <Setter Property="CornerRadius" Value="0"/>
+                                <Setter Property="IconMargin" Value="0"/>
+                                <Setter Property="IconSize" Value="{Binding iSize, Source={x:Static p:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=1.5}"/>
+                                <Setter Property="IsTextVisible" Value="False"/>
+                                <Setter Property="Margin" Value="5,5,0,5"/>
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="Width" Value="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"/>
+                            </Style>
+                            <Style TargetType="{x:Type se:ExtLabel}">
+                                <Setter Property="HorizontalContentAlignment" Value="Right"/>
+                                <Setter Property="Margin" Value="5"/>
+                                <Setter Property="Width" Value="{Binding iSize, Source={x:Static p:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=10}"/>
+                            </Style>
+                            <Style TargetType="{x:Type se:NumericUpDown}">
+                                <Setter Property="HorizontalAlignment" Value="Left"/>
+                                <Setter Property="Margin" Value="5"/>
+                                <Setter Property="Width" Value="{Binding iSize, Source={x:Static p:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=10}"/>
+                            </Style>
+                            <Style TargetType="{x:Type se:ExtTextBox}">
+                                <Setter Property="Margin" Value="5"/>
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <DockPanel Grid.Column="0" Grid.ColumnSpan="2">
+                            <!-- Username -->
+                            <DockPanel DockPanel.Dock="Top">
+                                <se:ExtLabel Content="Nazwa użytk.:" FontWeight="Bold"/>
+                                <se:ExtTextBox Text="{Binding InstanceData.Username}"/>
+                            </DockPanel>
+                            <!-- Newpass -->
+                            <DockPanel DockPanel.Dock="Top">
+                                <se:ExtLabel Content="Nowe hasło:" FontWeight="Normal"/>
+                                <PasswordBox Margin="5" PasswordChanged="tbNewpass_PasswordChanged"/>
+                            </DockPanel>
+                            <!-- Email -->
+                            <DockPanel DockPanel.Dock="Top">
+                                <se:ExtLabel Content="E-mail:" FontWeight="Bold"/>
+                                <se:ExtTextBox Text="{Binding InstanceData.Email}"/>
+                            </DockPanel>
+                            <!-- Phone -->
+                            <DockPanel DockPanel.Dock="Top">
+                                <se:ExtLabel Content="Nr telefonu:" FontWeight="Normal"/>
+                                <se:ExtTextBox Text="{Binding InstanceData.Phone}"/>
+                            </DockPanel>
+                            <!-- Forename -->
+                            <DockPanel DockPanel.Dock="Top">
+                                <se:ExtLabel Content="Imię:" FontWeight="Normal"/>
+                                <se:ExtTextBox Text="{Binding InstanceData.Forename}"/>
+                            </DockPanel>
+                            <!-- Lastname -->
+                            <DockPanel DockPanel.Dock="Top">
+                                <se:ExtLabel Content="Nazwisko:" FontWeight="Normal"/>
+                                <se:ExtTextBox Text="{Binding InstanceData.Lastname}"/>
+                            </DockPanel>
+                            <!-- Blocked -->
+                            <DockPanel DockPanel.Dock="Top">
+                                <se:ExtLabel Content="Zablokowany:" FontWeight="Normal"/>
+                                <se:ExtCheckBox Margin="5" IsChecked="{Binding InstanceData.Blocked}"/>
+                            </DockPanel>
+                            <!-- Archival -->
+                            <DockPanel DockPanel.Dock="Top">
+                                <se:ExtLabel Content="Archiwalny:" FontWeight="Normal"/>
+                                <se:ExtCheckBox Margin="5" IsChecked="{Binding InstanceData.Archival}"/>
+                            </DockPanel>
                         </DockPanel>
-                        <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Nowe hasło:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={se:conv_Size}, ConverterParameter=0.25}"/>
-                            <PasswordBox Margin="5" VerticalContentAlignment="Center" PasswordChanged="tbNewpass_PasswordChanged"/>
-                        </DockPanel>
-                        <DockPanel DockPanel.Dock="Top">
-                            <Label Content="E-mail:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={se:conv_Size}, ConverterParameter=0.25}"/>
-                            <TextBox Text="{Binding InstanceData.Email}" Margin="5" VerticalContentAlignment="Center"/>
-                        </DockPanel>
-                        <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Nr telefonu:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={se:conv_Size}, ConverterParameter=0.25}"/>
-                            <TextBox Text="{Binding InstanceData.Phone}" Margin="5" VerticalContentAlignment="Center"/>
-                        </DockPanel>
-                        <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Imię:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={se:conv_Size}, ConverterParameter=0.25}"/>
-                            <TextBox Text="{Binding InstanceData.Forename}" Margin="5" VerticalContentAlignment="Center"/>
-                        </DockPanel>
-                        <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Nazwisko:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={se:conv_Size}, ConverterParameter=0.25}"/>
-                            <TextBox Text="{Binding InstanceData.Lastname}" Margin="5" VerticalContentAlignment="Center"/>
-                        </DockPanel>
-                        <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Zablokowany:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={se:conv_Size}, ConverterParameter=0.25}"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Blocked}" Margin="5" VerticalContentAlignment="Center"/>
-                        </DockPanel>
-                        <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Archiwalny:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={se:conv_Size}, ConverterParameter=0.25}"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Archival}" Margin="5" VerticalContentAlignment="Center"/>
-                        </DockPanel>
-                    </DockPanel>
+                    </Grid>
                 </ScrollViewer>
             </TabItem>
             <!-- tabPerms -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="Uprawnienia" Icon="/Resources/icon32_accept.ico"/>
+                    <se:Header Text="{Tr Permissions}" Icon="/Resources/icon32_accept.ico"/>
                 </TabItem.Header>
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <DockPanel x:Name="dpPerms" Margin="10" IsEnabled="{Binding EditingMode}" VerticalAlignment="Top">
+                    <DockPanel x:Name="dpPerms" Margin="10" VerticalAlignment="Top" IsEnabled="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=!PREVIEW}">
+                        <DockPanel.Resources>
+                            <Style TargetType="{x:Type se:ExtCheckBox}">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <EventSetter Event="Checked" Handler="chckPerms_Checked"/>
+                                <EventSetter Event="Unchecked" Handler="chckPerms_Unchecked"/>
+                            </Style>
+                        </DockPanel.Resources>
                         <!-- admin -->
                         <UniformGrid DockPanel.Dock="Top">
-                            <CheckBox Margin="0,5" VerticalContentAlignment="Center" IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=admin}"
-                                      Content="Uprawnienia administracyjne" Tag="admin" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <se:ExtCheckBox Margin="0,5" IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=admin}" Tag="admin"
+                                            Content="Uprawnienia administracyjne" HorizontalAlignment="Left"/>
                         </UniformGrid>
                         <!-- headers -->
                         <UniformGrid DockPanel.Dock="Top" Rows="1">
@@ -121,227 +161,123 @@
                         </UniformGrid>
                         <!-- articles -->
                         <UniformGrid DockPanel.Dock="Top" Rows="1">
-                            <se:Header Text="Towary:" HorizontalAlignment="Left" Icon="/Resources/icon32_articles.ico"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=articles_preview}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="articles_preview"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=articles_save}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="articles_save"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=articles_delete}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="articles_delete"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=articles_groups}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="articles_groups"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <se:Header Text="Towary:" Icon="/Resources/icon32_articles.ico"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=articles_preview}" Tag="articles_preview"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=articles_save}" Tag="articles_save"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=articles_delete}" Tag="articles_delete"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=articles_groups}" Tag="articles_groups"/>
                         </UniformGrid>
                         <!-- attachments -->
                         <UniformGrid DockPanel.Dock="Top" Rows="1">
-                            <se:Header Text="Załączniki:" HorizontalAlignment="Left" Icon="/Resources/icon32_photos.ico"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=attachments_preview}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="attachments_preview"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=attachments_save}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="attachments_save"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=attachments_delete}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="attachments_delete"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=attachments_groups}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="attachments_groups"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <se:Header Text="Załączniki:" Icon="/Resources/icon32_photos.ico"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=attachments_preview}" Tag="attachments_preview"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=attachments_save}" Tag="attachments_save"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=attachments_delete}" Tag="attachments_delete"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=attachments_groups}" Tag="attachments_groups"/>
                         </UniformGrid>
                         <!-- attributes_classes -->
                         <UniformGrid DockPanel.Dock="Top" Rows="1">
-                            <se:Header Text="Klasy atrybutów:" HorizontalAlignment="Left" Icon="/Resources/icon32_attributes.ico"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=attributes_classes_preview}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="attributes_classes_preview"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=attributes_classes_save}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="attributes_classes_save"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=attributes_classes_delete}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="attributes_classes_delete"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=attributes_classes_groups}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="attributes_classes_groups"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <se:Header Text="Klasy atrybutów:" Icon="/Resources/icon32_attributes.ico"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=attributes_classes_preview}" Tag="attributes_classes_preview"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=attributes_classes_save}" Tag="attributes_classes_save"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=attributes_classes_delete}" Tag="attributes_classes_delete"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=attributes_classes_groups}" Tag="attributes_classes_groups"/>
                         </UniformGrid>
                         <!-- community -->
                         <UniformGrid DockPanel.Dock="Top" Rows="1">
-                            <se:Header Text="Społeczność:" HorizontalAlignment="Left" Icon="/Resources/icon32_community.ico"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=community_preview}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="community_preview"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <se:Header Text="Społeczność:" Icon="/Resources/icon32_community.ico"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=community_preview}" Tag="community_preview"/>
                             <TextBlock/>
                             <TextBlock/>
                             <TextBlock/>
                         </UniformGrid>
                         <!-- contractors -->
                         <UniformGrid DockPanel.Dock="Top" Rows="1">
-                            <se:Header Text="Kontrahenci:" HorizontalAlignment="Left" Icon="/Resources/icon32_contractors.ico"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=contractors_preview}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="contractors_preview"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=contractors_save}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="contractors_save"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=contractors_delete}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="contractors_delete"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=contractors_groups}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="contractors_groups"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <se:Header Text="Kontrahenci:" Icon="/Resources/icon32_contractors.ico"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=contractors_preview}" Tag="contractors_preview"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=contractors_save}" Tag="contractors_save"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=contractors_delete}" Tag="contractors_delete"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=contractors_groups}" Tag="contractors_groups"/>
                         </UniformGrid>
                         <!-- distributions -->
                         <UniformGrid DockPanel.Dock="Top" Rows="1">
-                            <se:Header Text="Dystrybucje:" HorizontalAlignment="Left" Icon="/Resources/icon32_food.ico"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=distributions_preview}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="distributions_preview"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=distributions_save}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="distributions_save"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=distributions_delete}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="distributions_delete"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=distributions_groups}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="distributions_groups"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <se:Header Text="Dystrybucje:" Icon="/Resources/icon32_food.ico"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=distributions_preview}" Tag="distributions_preview"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=distributions_save}" Tag="distributions_save"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=distributions_delete}" Tag="distributions_delete"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=distributions_groups}" Tag="distributions_groups"/>
                         </UniformGrid>
                         <!-- documents -->
                         <UniformGrid DockPanel.Dock="Top" Rows="1">
-                            <se:Header Text="Dokumenty:" HorizontalAlignment="Left" Icon="/Resources/icon32_documents.ico"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=documents_preview}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="documents_preview"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=documents_save}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="documents_save"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=documents_delete}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="documents_delete"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=documents_groups}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="documents_groups"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <se:Header Text="Dokumenty:" Icon="/Resources/icon32_documents.ico"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=documents_preview}" Tag="documents_preview"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=documents_save}" Tag="documents_save"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=documents_delete}" Tag="documents_delete"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=documents_groups}" Tag="documents_groups"/>
                         </UniformGrid>
                         <!-- employees -->
                         <UniformGrid DockPanel.Dock="Top" Rows="1">
-                            <se:Header Text="Pracownicy:" HorizontalAlignment="Left" Icon="/Resources/icon32_briefcase.ico"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=employees_preview}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="employees_preview"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=employees_save}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="employees_save"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=employees_delete}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="employees_delete"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=employees_groups}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="employees_groups"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <se:Header Text="Pracownicy:" Icon="/Resources/icon32_briefcase.ico"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=employees_preview}" Tag="employees_preview"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=employees_save}" Tag="employees_save"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=employees_delete}" Tag="employees_delete"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=employees_groups}" Tag="employees_groups"/>
                         </UniformGrid>
                         <!-- families -->
                         <UniformGrid DockPanel.Dock="Top" Rows="1">
-                            <se:Header Text="Rodziny:" HorizontalAlignment="Left" Icon="/Resources/icon32_families.ico"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=families_preview}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="families_preview"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=families_save}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="families_save"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=families_delete}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="families_delete"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=families_groups}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="families_groups"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <se:Header Text="Rodziny:" Icon="/Resources/icon32_families.ico"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=families_preview}" Tag="families_preview"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=families_save}" Tag="families_save"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=families_delete}" Tag="families_delete"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=families_groups}" Tag="families_groups"/>
                         </UniformGrid>
                         <!-- icons -->
                         <UniformGrid DockPanel.Dock="Top" Rows="1">
-                            <se:Header Text="Ikony:" HorizontalAlignment="Left" Icon="/Resources/icon32_icons.ico"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=icons_preview}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="icons_preview"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=icons_save}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="icons_save"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=icons_delete}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="icons_delete"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=icons_groups}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="icons_groups"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <se:Header Text="Ikony:" Icon="/Resources/icon32_icons.ico"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=icons_preview}" Tag="icons_preview"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=icons_save}" Tag="icons_save"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=icons_delete}" Tag="icons_delete"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=icons_groups}" Tag="icons_groups"/>
                         </UniformGrid>
                         <!-- logs -->
                         <UniformGrid DockPanel.Dock="Top" Rows="1">
-                            <se:Header Text="Logi:" HorizontalAlignment="Left" Icon="/Resources/icon32_logs.ico"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=logs_preview}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="logs_preview"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <se:Header Text="Logi:" Icon="/Resources/icon32_logs.ico"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=logs_preview}" Tag="logs_preview"/>
                             <TextBlock/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=logs_delete}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="logs_delete"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=logs_delete}" Tag="logs_delete"/>
                             <TextBlock/>
                         </UniformGrid>
                         <!-- stats -->
                         <UniformGrid DockPanel.Dock="Top" Rows="1">
-                            <se:Header Text="Statystyki:" HorizontalAlignment="Left" Icon="/Resources/icon32_stats.ico"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=stats_preview}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="stats_preview" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=stats_save}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="stats_save" Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <se:Header Text="Statystyki:" Icon="/Resources/icon32_stats.ico"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=stats_preview}" Tag="stats_preview"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=stats_save}" Tag="stats_save"/>
                             <TextBlock/>
                             <TextBlock/>
                         </UniformGrid>
                         <!-- stores -->
                         <UniformGrid DockPanel.Dock="Top" Rows="1">
-                            <se:Header Text="Magazyny:" HorizontalAlignment="Left" Icon="/Resources/icon32_stores.ico"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=stores_preview}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="stores_preview"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=stores_save}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="stores_save"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=stores_delete}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="stores_delete"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=stores_groups}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="stores_groups"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <se:Header Text="Magazyny:" Icon="/Resources/icon32_stores.ico"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=stores_preview}" Tag="stores_preview"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=stores_save}" Tag="stores_save"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=stores_delete}" Tag="stores_delete"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=stores_groups}" Tag="stores_groups"/>
                         </UniformGrid>
                         <!-- users -->
                         <UniformGrid DockPanel.Dock="Top" Rows="1">
-                            <se:Header Text="Użytkownicy:" HorizontalAlignment="Left" Icon="/Resources/icon32_users.ico"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=users_preview}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="users_preview"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=users_save}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="users_save"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=users_delete}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="users_delete"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=users_groups}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="users_groups"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <se:Header Text="Użytkownicy:" Icon="/Resources/icon32_users.ico"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=users_preview}" Tag="users_preview"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=users_save}" Tag="users_save"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=users_delete}" Tag="users_delete"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=users_groups}" Tag="users_groups"/>
                         </UniformGrid>
                         <!-- vehicles -->
                         <UniformGrid DockPanel.Dock="Top" Rows="1">
-                            <se:Header Text="Pojazdy:" HorizontalAlignment="Left" Icon="/Resources/icon32_transport.ico"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=vehicles_preview}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="vehicles_preview"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=vehicles_save}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="vehicles_save"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=vehicles_delete}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="vehicles_delete"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
-                            <CheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_ListContains}, ConverterParameter=vehicles_groups}"
-                                      HorizontalAlignment="Center" VerticalContentAlignment="Center" Tag="vehicles_groups"
-                                      Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                            <se:Header Text="Pojazdy:" Icon="/Resources/icon32_transport.ico"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=vehicles_preview}" Tag="vehicles_preview"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=vehicles_save}" Tag="vehicles_save"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=vehicles_delete}" Tag="vehicles_delete"/>
+                            <se:ExtCheckBox IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=vehicles_groups}" Tag="vehicles_groups"/>
                         </UniformGrid>
                     </DockPanel>
                 </ScrollViewer>
@@ -349,7 +285,7 @@
             <!-- tabLogs -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="Historia" Icon="/Resources/icon32_history.ico"/>
+                    <se:Header Text="{Tr History}" Icon="/Resources/icon32_history.ico"/>
                 </TabItem.Header>
                 <t:LogsTab/>
             </TabItem>

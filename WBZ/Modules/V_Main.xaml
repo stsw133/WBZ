@@ -26,13 +26,13 @@
                 <!-- menu -->
                 <Menu BorderBrush="Gray" BorderThickness="0,0,1,0">
                     <MenuItem Header="{Tr System}" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.5}">
-                        <se:MenuItem Header="{Tr UserManual}" IconUri="/Resources/icon32_books.ico" Command="se:Commands.Help"/>
+                        <se:ExtMenuItem Header="{Tr UserManual}" IconUri="/Resources/icon32_books.ico" Command="se:Commands.Help"/>
                         <Separator/>
-                        <se:MenuItem Header="{Tr Settings}" IconUri="/Resources/icon32_settings.ico" Click="menuSettings_Click"/>
+                        <se:ExtMenuItem Header="{Tr Settings}" IconUri="/Resources/icon32_settings.ico" Click="menuSettings_Click"/>
                         <Separator/>
-                        <se:MenuItem Header="{Tr Refresh}" IconUri="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
-                        <se:MenuItem Header="{Tr Logout}" IconUri="/Resources/icon32_return.ico" Click="menuLogout_Click"/>
-                        <se:MenuItem Header="{Tr CloseApp}" IconUri="/Resources/icon32_close.ico" Command="se:Commands.Close"/>
+                        <se:ExtMenuItem Header="{Tr Refresh}" IconUri="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
+                        <se:ExtMenuItem Header="{Tr Logout}" IconUri="/Resources/icon32_return.ico" Click="menuLogout_Click"/>
+                        <se:ExtMenuItem Header="{Tr CloseApp}" IconUri="/Resources/icon32_close.ico" Command="se:Commands.Close"/>
                     </MenuItem>
                 </Menu>
                 <!-- personal -->
@@ -43,9 +43,9 @@
                            Source="/Resources/icon32_tools.ico"/>
                     <Button.ContextMenu>
                         <ContextMenu>
-                            <se:MenuItem Header="{Tr Profile}" IconUri="/Resources/icon32_profile.ico" Click="btnProfile_Click"/>
-                            <se:MenuItem Header="{Tr Timetable}" IconUri="/Resources/icon32_calendar.ico" Click="btnCalendar_Click" IsEnabled="False"/>
-                            <se:MenuItem Header="{Tr Messages}" IconUri="/Resources/icon32_mail.ico" Click="btnMail_Click" IsEnabled="False"/>
+                            <se:ExtMenuItem Header="{Tr Profile}" IconUri="/Resources/icon32_profile.ico" Click="btnProfile_Click"/>
+                            <se:ExtMenuItem Header="{Tr Timetable}" IconUri="/Resources/icon32_calendar.ico" Click="btnCalendar_Click" IsEnabled="False"/>
+                            <se:ExtMenuItem Header="{Tr Messages}" IconUri="/Resources/icon32_mail.ico" Click="btnMail_Click" IsEnabled="False"/>
                         </ContextMenu>
                     </Button.ContextMenu>
                 </Button>
@@ -92,12 +92,12 @@
                         <Border.ContextMenu>
                             <ContextMenu>
                                 <!-- ConsoleSQL -->
-                                <se:MenuItem Header="{Tr Console}" IconUri="/Resources/icon32_code.ico"
-                                              IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_ListContains}, ConverterParameter=admin}"
-                                              Click="btnConsoleSQL_Click"/>
+                                <se:ExtMenuItem Header="{Tr Console}" IconUri="/Resources/icon32_code.ico"
+                                                IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=admin}"
+                                                Click="btnConsoleSQL_Click"/>
                                 <!--
                                 <MenuItem Text="{Tr Community}"
-                                          IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_ListContains}, ConverterParameter=community_preview}"
+                                          IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=community_preview}"
                                           Icon="/Resources/icon32_community.ico" Click="btnVersions_Click"/>
                                 -->
                             </ContextMenu>
@@ -126,13 +126,13 @@
                         <Border.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
-                                <se:MenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
-                                              IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_ListContains}, ConverterParameter=articles_preview}"
-                                              Click="btnArticlesList_Click"/>
+                                <se:ExtMenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
+                                                IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=articles_preview}"
+                                                Click="btnArticlesList_Click"/>
                                 <!-- New -->
-                                <se:MenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
-                                              IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_ListContains}, ConverterParameter=articles_save}"
-                                              Click="btnArticlesNew_Click"/>
+                                <se:ExtMenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
+                                                IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=articles_save}"
+                                                Click="btnArticlesNew_Click"/>
                             </ContextMenu>
                         </Border.ContextMenu>
                     </Border>
@@ -159,13 +159,13 @@
                         <Border.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
-                                <se:MenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
-                                              IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_ListContains}, ConverterParameter=attachments_preview}"
-                                              Click="btnAttachmentsList_Click"/>
+                                <se:ExtMenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
+                                                IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=attachments_preview}"
+                                                Click="btnAttachmentsList_Click"/>
                                 <!-- Gallery -->
-                                <se:MenuItem Header="{Tr Gallery}" IconUri="/Resources/icon32_gallery.ico"
-                                              IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_ListContains}, ConverterParameter=attachments_preview}"
-                                              Click="btnAttachmentsGallery_Click"/>
+                                <se:ExtMenuItem Header="{Tr Gallery}" IconUri="/Resources/icon32_gallery.ico"
+                                                IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=attachments_preview}"
+                                                Click="btnAttachmentsGallery_Click"/>
                             </ContextMenu>
                         </Border.ContextMenu>
                     </Border>
@@ -192,13 +192,13 @@
                         <Border.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
-                                <se:MenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
-                                              IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_ListContains}, ConverterParameter=attributes_classes_preview}"
-                                              Click="btnAttributesClassesList_Click"/>
+                                <se:ExtMenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
+                                                IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=attributes_classes_preview}"
+                                                Click="btnAttributesClassesList_Click"/>
                                 <!-- New -->
-                                <se:MenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
-                                              IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_ListContains}, ConverterParameter=attributes_classes_save}"
-                                              Click="btnAttributesClassesNew_Click"/>
+                                <se:ExtMenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
+                                                IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=attributes_classes_save}"
+                                                Click="btnAttributesClassesNew_Click"/>
                             </ContextMenu>
                         </Border.ContextMenu>
                     </Border>
@@ -225,13 +225,13 @@
                         <Border.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
-                                <se:MenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
-                                              IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_ListContains}, ConverterParameter=contractors_preview}"
-                                              Click="btnContractorsList_Click"/>
+                                <se:ExtMenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
+                                                IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=contractors_preview}"
+                                                Click="btnContractorsList_Click"/>
                                 <!-- New -->
-                                <se:MenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
-                                              IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_ListContains}, ConverterParameter=contractors_save}"
-                                              Click="btnContractorsNew_Click"/>
+                                <se:ExtMenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
+                                                IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=contractors_save}"
+                                                Click="btnContractorsNew_Click"/>
                             </ContextMenu>
                         </Border.ContextMenu>
                     </Border>
@@ -258,13 +258,13 @@
                         <Border.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
-                                <se:MenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
-                                              IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_ListContains}, ConverterParameter=distributions_preview}"
-                                              Click="btnDistributionsList_Click"/>
+                                <se:ExtMenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
+                                                IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=distributions_preview}"
+                                                Click="btnDistributionsList_Click"/>
                                 <!-- New -->
-                                <se:MenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
-                                              IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_ListContains}, ConverterParameter=distributions_save}"
-                                              Click="btnDistributionsNew_Click"/>
+                                <se:ExtMenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
+                                                IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=distributions_save}"
+                                                Click="btnDistributionsNew_Click"/>
                             </ContextMenu>
                         </Border.ContextMenu>
                     </Border>
@@ -291,13 +291,13 @@
                         <Border.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
-                                <se:MenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
-                                              IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_ListContains}, ConverterParameter=documents_preview}"
-                                              Click="btnDocumentsList_Click"/>
+                                <se:ExtMenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
+                                                IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=documents_preview}"
+                                                Click="btnDocumentsList_Click"/>
                                 <!-- New -->
-                                <se:MenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
-                                              IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_ListContains}, ConverterParameter=documents_save}"
-                                              Click="btnDocumentsNew_Click"/>
+                                <se:ExtMenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
+                                                IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=documents_save}"
+                                                Click="btnDocumentsNew_Click"/>
                             </ContextMenu>
                         </Border.ContextMenu>
                     </Border>
@@ -324,13 +324,13 @@
                         <Border.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
-                                <se:MenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
-                                              IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_ListContains}, ConverterParameter=employees_preview}"
-                                              Click="btnEmployeesList_Click"/>
+                                <se:ExtMenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
+                                                IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=employees_preview}"
+                                                Click="btnEmployeesList_Click"/>
                                 <!-- New -->
-                                <se:MenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
-                                              IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_ListContains}, ConverterParameter=employees_save}"
-                                              Click="btnEmployeesNew_Click"/>
+                                <se:ExtMenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
+                                                IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=employees_save}"
+                                                Click="btnEmployeesNew_Click"/>
                             </ContextMenu>
                         </Border.ContextMenu>
                     </Border>
@@ -357,13 +357,13 @@
                         <Border.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
-                                <se:MenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
-                                              IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_ListContains}, ConverterParameter=families_preview}"
-                                              Click="btnFamiliesList_Click"/>
+                                <se:ExtMenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
+                                                IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=families_preview}"
+                                                Click="btnFamiliesList_Click"/>
                                 <!-- New -->
-                                <se:MenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
-                                              IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_ListContains}, ConverterParameter=families_save}"
-                                              Click="btnFamiliesNew_Click"/>
+                                <se:ExtMenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
+                                                IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=families_save}"
+                                                Click="btnFamiliesNew_Click"/>
                             </ContextMenu>
                         </Border.ContextMenu>
                     </Border>
@@ -390,13 +390,13 @@
                         <Border.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
-                                <se:MenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
-                                              IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_ListContains}, ConverterParameter=icons_preview}"
-                                              Click="btnIconsList_Click"/>
+                                <se:ExtMenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
+                                                IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=icons_preview}"
+                                                Click="btnIconsList_Click"/>
                                 <!-- New -->
-                                <se:MenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
-                                              IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_ListContains}, ConverterParameter=icons_save}"
-                                              Click="btnIconsNew_Click"/>
+                                <se:ExtMenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
+                                                IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=icons_save}"
+                                                Click="btnIconsNew_Click"/>
                             </ContextMenu>
                         </Border.ContextMenu>
                     </Border>
@@ -423,9 +423,9 @@
                         <Border.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
-                                <se:MenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
-                                              IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_ListContains}, ConverterParameter=logs_preview}"
-                                              Click="btnLogsList_Click"/>
+                                <se:ExtMenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
+                                                IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=logs_preview}"
+                                                Click="btnLogsList_Click"/>
                             </ContextMenu>
                         </Border.ContextMenu>
                     </Border>
@@ -452,9 +452,9 @@
                         <Border.ContextMenu>
                             <ContextMenu>
                                 <!-- Stats -->
-                                <se:MenuItem Header="{Tr Stats}" IconUri="/Resources/icon32_stats.ico"
-                                              IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_ListContains}, ConverterParameter=stats_preview}"
-                                              Click="btnStats_Click"/>
+                                <se:ExtMenuItem Header="{Tr Stats}" IconUri="/Resources/icon32_stats.ico"
+                                                IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=stats_preview}"
+                                                Click="btnStats_Click"/>
                             </ContextMenu>
                         </Border.ContextMenu>
                     </Border>
@@ -481,13 +481,13 @@
                         <Border.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
-                                <se:MenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
-                                              IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_ListContains}, ConverterParameter=stores_preview}"
-                                              Click="btnStoresList_Click"/>
+                                <se:ExtMenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
+                                                IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=stores_preview}"
+                                                Click="btnStoresList_Click"/>
                                 <!-- New -->
-                                <se:MenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
-                                              IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_ListContains}, ConverterParameter=stores_save}"
-                                              Click="btnStoresNew_Click"/>
+                                <se:ExtMenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
+                                                IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=stores_save}"
+                                                Click="btnStoresNew_Click"/>
                             </ContextMenu>
                         </Border.ContextMenu>
                     </Border>
@@ -514,13 +514,13 @@
                         <Border.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
-                                <se:MenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
-                                              IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_ListContains}, ConverterParameter=users_preview}"
-                                              Click="btnUsersList_Click"/>
+                                <se:ExtMenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
+                                                IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=users_preview}"
+                                                Click="btnUsersList_Click"/>
                                 <!-- New -->
-                                <se:MenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
-                                              IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_ListContains}, ConverterParameter=users_save}"
-                                              Click="btnUsersNew_Click"/>
+                                <se:ExtMenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
+                                                IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=users_save}"
+                                                Click="btnUsersNew_Click"/>
                             </ContextMenu>
                         </Border.ContextMenu>
                     </Border>
@@ -547,13 +547,13 @@
                         <Border.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
-                                <se:MenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
-                                              IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_ListContains}, ConverterParameter=vehicles_preview}"
-                                              Click="btnVehiclesList_Click"/>
+                                <se:ExtMenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
+                                                IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=vehicles_preview}"
+                                                Click="btnVehiclesList_Click"/>
                                 <!-- New -->
-                                <se:MenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
-                                              IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_ListContains}, ConverterParameter=vehicles_save}"
-                                              Click="btnVehiclesNew_Click"/>
+                                <se:ExtMenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
+                                                IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=vehicles_save}"
+                                                Click="btnVehiclesNew_Click"/>
                             </ContextMenu>
                         </Border.ContextMenu>
                     </Border>

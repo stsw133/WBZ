@@ -24,10 +24,8 @@
         <!-- titleBar -->
         <se:TitleBar DockPanel.Dock="Top" SubIcon="{Binding ModeIcon}"/>
         <!-- buttonsPanel -->
-        <Border DockPanel.Dock="Right"
-                Background="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}}"
-                BorderBrush="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.5}"
-                BorderThickness="1,0,0,0">
+        <Border DockPanel.Dock="Right" BorderBrush="Gray" BorderThickness="1,0,0,0"
+                Background="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}}">
             <DockPanel>
                 <DockPanel.Resources>
                     <Style TargetType="{x:Type se:IconButton}">
@@ -71,7 +69,7 @@
                                 <Setter Property="Padding" Value="0"/>
                                 <Setter Property="Width" Value="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"/>
                             </Style>
-                            <Style TargetType="{x:Type se:Label}">
+                            <Style TargetType="{x:Type se:ExtLabel}">
                                 <Setter Property="HorizontalContentAlignment" Value="Right"/>
                                 <Setter Property="Margin" Value="5"/>
                                 <Setter Property="Width" Value="{Binding iSize, Source={x:Static p:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=10}"/>
@@ -81,7 +79,7 @@
                                 <Setter Property="Margin" Value="5"/>
                                 <Setter Property="Width" Value="{Binding iSize, Source={x:Static p:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=10}"/>
                             </Style>
-                            <Style TargetType="{x:Type se:TextBox}">
+                            <Style TargetType="{x:Type se:ExtTextBox}">
                                 <Setter Property="Margin" Value="5"/>
                             </Style>
                         </Grid.Resources>
@@ -92,40 +90,40 @@
                         <DockPanel Grid.Column="0" Grid.ColumnSpan="2">
                             <!-- Register -->
                             <DockPanel DockPanel.Dock="Top">
-                                <se:Label Content="Nr rej.:" FontWeight="Bold"/>
-                                <se:TextBox Text="{Binding InstanceData.Register}"/>
+                                <se:ExtLabel Content="Nr rej.:" FontWeight="Bold"/>
+                                <se:ExtTextBox Text="{Binding InstanceData.Register}"/>
                             </DockPanel>
                             <!-- Brand -->
                             <DockPanel DockPanel.Dock="Top">
-                                <se:Label Content="Marka:" FontWeight="Normal"/>
-                                <se:TextBox Text="{Binding InstanceData.Brand}"/>
+                                <se:ExtLabel Content="Marka:" FontWeight="Normal"/>
+                                <se:ExtTextBox Text="{Binding InstanceData.Brand}"/>
                             </DockPanel>
                             <!-- Model -->
                             <DockPanel DockPanel.Dock="Top">
-                                <se:Label Content="Model:" FontWeight="Normal"/>
-                                <se:TextBox Text="{Binding InstanceData.Model}"/>
+                                <se:ExtLabel Content="Model:" FontWeight="Normal"/>
+                                <se:ExtTextBox Text="{Binding InstanceData.Model}"/>
                             </DockPanel>
                             <!-- Capacity -->
                             <DockPanel DockPanel.Dock="Top">
-                                <se:Label Content="Pojemność (t):" FontWeight="Normal"/>
-                                <se:NumericUpDown Value="{Binding InstanceData.Capacity}" ValueMin="0"/>
+                                <se:ExtLabel Content="Pojemność (t):" FontWeight="Normal"/>
+                                <se:NumericUpDown Value="{Binding InstanceData.Capacity}" Min="0"/>
                             </DockPanel>
                             <!-- Forwarder -->
                             <DockPanel DockPanel.Dock="Top">
-                                <se:Label Content="Spedytor:" FontWeight="Normal"/>
+                                <se:ExtLabel Content="Spedytor:" FontWeight="Normal"/>
                                 <se:IconButton HorizontalContentAlignment="Center" Icon="/Resources/icon32_contractors.ico" Click="btnSelectForwarder_Click"/>
-                                <se:TextBox Text="{Binding InstanceData.ForwarderName}" Tag="{Binding InstanceData.ForwarderID}" IsReadOnly="True"/>
+                                <se:ExtTextBox Text="{Binding InstanceData.ForwarderName}" Tag="{Binding InstanceData.ForwarderID}" IsReadOnly="True"/>
                             </DockPanel>
                             <!-- Driver -->
                             <DockPanel DockPanel.Dock="Top">
-                                <se:Label Content="Kierowca:" FontWeight="Normal"/>
+                                <se:ExtLabel Content="Kierowca:" FontWeight="Normal"/>
                                 <se:IconButton HorizontalContentAlignment="Center" Icon="/Resources/icon32_briefcase.ico" Click="btnSelectDriver_Click"/>
-                                <se:TextBox Text="{Binding InstanceData.DriverName}" Tag="{Binding InstanceData.DriverID}" IsReadOnly="True"/>
+                                <se:ExtTextBox Text="{Binding InstanceData.DriverName}" Tag="{Binding InstanceData.DriverID}" IsReadOnly="True"/>
                             </DockPanel>
                             <!-- ProdYear -->
                             <DockPanel DockPanel.Dock="Top">
-                                <se:Label Content="Rok produkcji:" FontWeight="Normal"/>
-                                <se:NumericUpDown Value="{Binding InstanceData.ProdYear}" ValueMin="0"/>
+                                <se:ExtLabel Content="Rok produkcji:" FontWeight="Normal"/>
+                                <se:NumericUpDown Value="{Binding InstanceData.ProdYear}" Min="0"/>
                             </DockPanel>
                         </DockPanel>
                         <!--

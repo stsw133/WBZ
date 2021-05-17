@@ -105,7 +105,7 @@
     <DataGrid.ContextMenu>
         <ContextMenu>
             <!-- Columns -->
-            <se:MenuItem Header="{Tr ColumnsVisibility}" IconUri="/Resources/icon32_show.ico">
+            <se:ExtMenuItem Header="{Tr ColumnsVisibility}" IconUri="/Resources/icon32_show.ico">
                 <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_ID}"/>
                 <MenuItem IsCheckable="True" Header="Ikona" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Icon}"/>
                 <MenuItem IsCheckable="True" Header="Nazwisko" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Fullname}"/>
@@ -116,16 +116,16 @@
                 <MenuItem IsCheckable="True" Header="Kod pocztowy" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Postcode}"/>
                 <MenuItem IsCheckable="True" Header="Miejscowość" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_City}"/>
                 <MenuItem IsCheckable="True" Header="Adres" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Address}"/>
-            </se:MenuItem>
+            </se:ExtMenuItem>
             <!-- Actions -->
             <Separator/>
-            <se:MenuItem Header="{Tr Preview}" IconUri="/Resources/icon32_search.ico" Command="se:Commands.Preview"/>
-            <se:MenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico" Command="se:Commands.New"/>
-            <se:MenuItem Header="{Tr Duplicate}" IconUri="/Resources/icon32_duplicate.ico" Command="se:Commands.Duplicate"/>
-            <se:MenuItem Header="{Tr Edit}" IconUri="/Resources/icon32_edit.ico" Command="se:Commands.Edit"/>
-            <se:MenuItem Header="{Tr Delete}" IconUri="/Resources/icon32_delete.ico" Command="se:Commands.Delete"/>
+            <se:ExtMenuItem Header="{Tr Preview}" IconUri="/Resources/icon32_search.ico" Command="se:Commands.Preview"/>
+            <se:ExtMenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico" Command="se:Commands.New"/>
+            <se:ExtMenuItem Header="{Tr Duplicate}" IconUri="/Resources/icon32_duplicate.ico" Command="se:Commands.Duplicate"/>
+            <se:ExtMenuItem Header="{Tr Edit}" IconUri="/Resources/icon32_edit.ico" Command="se:Commands.Edit"/>
+            <se:ExtMenuItem Header="{Tr Delete}" IconUri="/Resources/icon32_delete.ico" Command="se:Commands.Delete"/>
             <Separator/>
-            <se:MenuItem Header="{Tr Refresh}" IconUri="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
+            <se:ExtMenuItem Header="{Tr Refresh}" IconUri="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
         </ContextMenu>
     </DataGrid.ContextMenu>
     <DataGrid.RowStyle>

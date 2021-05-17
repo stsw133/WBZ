@@ -62,25 +62,20 @@
                     <Image Margin="2" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2}" Source="/Resources/icon32_tools.ico"/>
                     <Button.ContextMenu>
                         <ContextMenu>
-                            <se:MenuItem x:Name="btnCreateAdmin"
-                                          Header="Utwórz administratora" IconUri="/Resources/icon32_admin.ico"
-                                          IsEnabled="False" Visibility="Collapsed"
-                                          Click="btnCreateAdmin_Click"/>
-                            <se:MenuItem x:Name="btnUpdateDatabase"
-                                          Header="Aktualizuj bazę danych" IconUri="/Resources/icon32_database.ico"
-                                          IsEnabled="False" Visibility="Collapsed"
-                                          Click="btnUpdateDatabase_Click"/>
-                            <se:MenuItem Header="Generuj nowe hasło" IconUri="/Resources/icon32_random.ico"
-                                          Click="btnGenerateNewpass_Click"/>
-                            <se:MenuItem Header="Poradnik użytkownika" IconUri="/Resources/icon32_books.ico"
-                                          Click="btnManual_Click"/>
+                            <se:ExtMenuItem x:Name="btnCreateAdmin"
+                                            Header="Utwórz administratora" IconUri="/Resources/icon32_admin.ico"
+                                            IsEnabled="False" Visibility="Collapsed"
+                                            Click="btnCreateAdmin_Click"/>
+                            <se:ExtMenuItem x:Name="btnUpdateDatabase"
+                                            Header="Aktualizuj bazę danych" IconUri="/Resources/icon32_database.ico"
+                                            IsEnabled="False" Visibility="Collapsed"
+                                            Click="btnUpdateDatabase_Click"/>
+                            <se:ExtMenuItem Header="Generuj nowe hasło" IconUri="/Resources/icon32_random.ico" Click="btnGenerateNewpass_Click"/>
+                            <se:ExtMenuItem Header="Poradnik użytkownika" IconUri="/Resources/icon32_books.ico" Click="btnManual_Click"/>
                             <Separator/>
-                            <se:MenuItem Header="Baza wersji aplikacji" IconUri="/Resources/icon32_versions.ico"
-                                          Click="btnVersions_Click"/>
-                            <se:MenuItem Header="Ustawienia" IconUri="/Resources/icon32_settings.ico"
-                                          Click="btnSettings_Click"/>
-                            <se:MenuItem Header="O programie" IconUri="/Resources/icon64.ico"
-                                          Click="btnAboutApp_Click"/>
+                            <se:ExtMenuItem Header="Baza wersji aplikacji" IconUri="/Resources/icon32_versions.ico" Click="btnVersions_Click"/>
+                            <se:ExtMenuItem Header="Ustawienia" IconUri="/Resources/icon32_settings.ico" Click="btnSettings_Click"/>
+                            <se:ExtMenuItem Header="O programie" IconUri="/Resources/icon64.ico" Click="btnAboutApp_Click"/>
                         </ContextMenu>
                     </Button.ContextMenu>
                 </Button>

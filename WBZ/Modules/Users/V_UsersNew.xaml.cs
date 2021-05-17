@@ -1,8 +1,8 @@
-﻿using System.Windows;
+﻿using StswExpress;
+using System.Windows;
 using System.Windows.Controls;
 using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_User;
-using StswExpress;
 
 namespace WBZ.Modules.Users
 {
@@ -11,19 +11,20 @@ namespace WBZ.Modules.Users
 	/// </summary>
 	public partial class UsersNew : New
 	{
-		D_UsersNew D = new D_UsersNew();
+        readonly D_UsersNew D = new D_UsersNew();
 
 		public UsersNew(MODULE_MODEL instance, Commands.Type mode)
 		{
 			InitializeComponent();
 			DataContext = D;
-			Init();
+			base.Init();
 
 			if (instance != null)
 				D.InstanceData = instance;
 			D.Mode = mode;
 
 			D.InstanceData.Perms = SQL.GetUserPerms(D.InstanceData.ID);
+			// TODO - do sprawdzenia czy można usunąć
 			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE))
 				D.InstanceData.ID = SQL.NewInstanceID(D.Module);
 		}
@@ -33,6 +34,7 @@ namespace WBZ.Modules.Users
 		/// </summary>
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
+			// TODO - do sprawdzenia czy można usunąć
 			/*
 			var coll = dpPerms.Children.Cast<UniformGrid>().OrderBy(x => (x.Children[0] as StswExpress.Controls.Header)?.Text).ToList();
 			dpPerms.Children.RemoveRange(0, dpPerms.Children.Count);
@@ -46,7 +48,7 @@ namespace WBZ.Modules.Users
 		/// </summary>
 		private void chckPerms_Checked(object sender, RoutedEventArgs e)
 		{
-			var perm = (sender as System.Windows.Controls.CheckBox).Tag.ToString();
+			var perm = (sender as CheckBox).Tag.ToString();
 			if (!D.InstanceData.Perms.Contains(perm))
 				D.InstanceData.Perms.Add(perm);
 		}
@@ -56,7 +58,7 @@ namespace WBZ.Modules.Users
 		/// </summary>
 		private void chckPerms_Unchecked(object sender, RoutedEventArgs e)
 		{
-			var perm = (sender as System.Windows.Controls.CheckBox).Tag.ToString();
+			var perm = (sender as CheckBox).Tag.ToString();
 			if (D.InstanceData.Perms.Contains(perm))
 				D.InstanceData.Perms.Remove(perm);
 		}
@@ -64,10 +66,7 @@ namespace WBZ.Modules.Users
 		/// <summary>
 		/// PasswordChanged
 		/// </summary>
-		private void tbNewpass_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-			D.InstanceData.Newpass = (sender as PasswordBox).Password;
-        }
+		private void tbNewpass_PasswordChanged(object sender, RoutedEventArgs e) => D.InstanceData.Newpass = (sender as PasswordBox).Password;
 
 		/// <summary>
 		/// Validation

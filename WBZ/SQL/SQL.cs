@@ -1605,7 +1605,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("archival", user.Archival);
 								sqlCmd.ExecuteNonQuery();
 							}
-                            SetLog(Global.User.ID, module, user.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} użytkownika: {user.Fullname}.", sqlConn, sqlTran);
+                            SetLog(Global.User.ID, module, user.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} użytkownika: {user.Name}.", sqlConn, sqlTran);
 
 							/// permissions
 							using (sqlCmd = new NpgsqlCommand(@"delete from wbz.users_permissions where ""user""=@user", sqlConn, sqlTran))

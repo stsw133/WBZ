@@ -28,10 +28,10 @@
         </DataGrid.Columns>
         <DataGrid.ContextMenu>
             <ContextMenu>
-                <se:MenuItem Header="Dodaj" IconUri="/Resources/icon32_add.ico" IsEnabled="{Binding EditingMode}" Click="btnGroupAdd_Click"/>
-                <se:MenuItem Header="Usuń" IconUri="/Resources/icon32_delete.ico" IsEnabled="{Binding EditingMode}" Click="btnGroupRemove_Click"/>
+                <se:ExtMenuItem Header="Dodaj" IconUri="/Resources/icon32_add.ico" IsEnabled="{Binding EditingMode}" Click="btnGroupAdd_Click"/>
+                <se:ExtMenuItem Header="Usuń" IconUri="/Resources/icon32_delete.ico" IsEnabled="{Binding EditingMode}" Click="btnGroupRemove_Click"/>
                 <Separator Visibility="Collapsed"/>
-                <se:MenuItem Header="Ustaw jako główną" IconUri="/Resources/icon32_select.ico" IsEnabled="{Binding EditingMode}" Click="btnGroupSelectAsMain_Click" Visibility="Collapsed"/>
+                <se:ExtMenuItem Header="Ustaw jako główną" IconUri="/Resources/icon32_select.ico" IsEnabled="{Binding EditingMode}" Click="btnGroupSelectAsMain_Click" Visibility="Collapsed"/>
             </ContextMenu>
         </DataGrid.ContextMenu>
         <DataGrid.RowStyle>

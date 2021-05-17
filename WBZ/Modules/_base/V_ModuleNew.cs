@@ -30,9 +30,8 @@ namespace WBZ.Modules._base
 		{
 			int newID = (D.InstanceData as dynamic).ID;
 			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE))
-			{
 				newID = SQL.NewInstanceID(D.Module);
-			}
+			
 			/*
 			if ((Commands.Type)D.Mode == Commands.Type.DUPLICATE)
             {

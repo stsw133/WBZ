@@ -7,14 +7,15 @@
           xmlns:g="clr-namespace:WBZ.Globals"
           xmlns:p="clr-namespace:WBZ.Properties"
           mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800"
-          Margin="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1" AutoGenerateColumns="False">
+          AutoGenerateColumns="False" BorderThickness="0" RowHeaderWidth="0" IsReadOnly="True"
+          HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray">
     <DataGrid.ColumnHeaderStyle>
         <Style TargetType="{x:Type DataGridColumnHeader}">
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="Background" Value="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}}"/>
+            <Setter Property="BorderBrush" Value="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.2}"/>
             <Setter Property="BorderThickness" Value="0,0,1,1"/>
-            <Setter Property="BorderBrush" Value="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.25}"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="Padding" Value="4 3"/>
         </Style>
     </DataGrid.ColumnHeaderStyle>
@@ -26,12 +27,12 @@
         <DataGridTextColumn Binding="{Binding ID}" Header="ID"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_ID, Converter={se:conv_Bool}}"/>
         <!-- Fullname -->
-        <DataGridTextColumn Binding="{Binding Fullname}" Width="*"
+        <DataGridTextColumn Binding="{Binding Name}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Fullname, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <se:ColumnFilter_Text Header="Nazwisko"
-                                       Value="{Binding Data.Filters.Lastname, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+                                      Value="{Binding Data.Filters.Lastname, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
+                                      IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Email -->
@@ -39,8 +40,8 @@
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Email, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <se:ColumnFilter_Text Header="E-mail"
-                                       Value="{Binding Data.Filters.Email, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+                                      Value="{Binding Data.Filters.Email, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
+                                      IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Phone -->
@@ -48,98 +49,39 @@
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Phone, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <se:ColumnFilter_Text Header="Telefon"
-                                       Value="{Binding Data.Filters.Phone, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+                                      Value="{Binding Data.Filters.Phone, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
+                                      IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
     </DataGrid.Columns>
     <DataGrid.ContextMenu>
         <ContextMenu>
             <!-- Columns -->
-            <MenuItem Header="Widoczność kolumn">
-                <MenuItem.Icon>
-                    <Image Source="/Resources/icon32_show.ico"/>
-                </MenuItem.Icon>
-                <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_ID, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Nazwisko" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Fullname, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="E-mail" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Email, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Telefon" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Phone, Mode=TwoWay}"/>
-            </MenuItem>
-            <!-- Sorting -->
-            <MenuItem Header="Sortowanie danych">
-                <MenuItem.Icon>
-                    <Image Source="/Resources/icon32_descending.ico"/>
-                </MenuItem.Icon>
-                <MenuItem>
-                    <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Sortowanie 1:"/>
-                            <ToggleButton IsChecked="{Binding sorting_UsersList[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                          Height="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.2}"
-                                          Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.2}">
-                                <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.1}"
-                                       Source="/Resources/icon32_descending.ico"/>
-                            </ToggleButton>
-                            <ComboBox SelectedValue="{Binding sorting_UsersList[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                      SelectedValuePath="Tag" VerticalContentAlignment="Center">
-                                <ComboBoxItem Content="Imię" Tag="u.forename"/>
-                                <ComboBoxItem Content="Nazwisko" Tag="u.lastname"/>
-                                <ComboBoxItem Content="E-mail" Tag="u.email"/>
-                                <ComboBoxItem Content="Telefon" Tag="u.phone"/>
-                            </ComboBox>
-                        </StackPanel>
-                    </MenuItem.Header>
-                </MenuItem>
-                <MenuItem>
-                    <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Sortowanie 2:"/>
-                            <ToggleButton IsChecked="{Binding sorting_UsersList[3], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                          Height="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.2}"
-                                          Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.2}">
-                                <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.1}"
-                                       Source="/Resources/icon32_descending.ico"/>
-                            </ToggleButton>
-                            <ComboBox SelectedValue="{Binding sorting_UsersList[2], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                      SelectedValuePath="Tag" VerticalContentAlignment="Center">
-                                <ComboBoxItem Content="Imię" Tag="u.forename"/>
-                                <ComboBoxItem Content="Nazwisko" Tag="u.lastname"/>
-                                <ComboBoxItem Content="E-mail" Tag="u.email"/>
-                                <ComboBoxItem Content="Telefon" Tag="u.phone"/>
-                            </ComboBox>
-                        </StackPanel>
-                    </MenuItem.Header>
-                </MenuItem>
-                <MenuItem>
-                    <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Limit wczytywania:"/>
-                            <TextBox Text="{Binding sorting_UsersList[4], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                     Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=5}"
-                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                    </MenuItem.Header>
-                </MenuItem>
-            </MenuItem>
+            <se:ExtMenuItem Header="Widoczność kolumn" IconUri="/Resources/icon32_show.ico">
+                <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_ID}"/>
+                <MenuItem IsCheckable="True" Header="Nazwisko" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Fullname}"/>
+                <MenuItem IsCheckable="True" Header="E-mail" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Email}"/>
+                <MenuItem IsCheckable="True" Header="Telefon" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Phone}"/>
+            </se:ExtMenuItem>
             <!-- Actions -->
             <Separator/>
-            <se:MenuItem Header="Podgląd" IconUri="/Resources/icon32_search.ico" Command="se:Commands.Preview"/>
-            <se:MenuItem Header="Dodaj" IconUri="/Resources/icon32_add.ico" Command="se:Commands.New"/>
-            <se:MenuItem Header="Duplikuj" IconUri="/Resources/icon32_duplicate.ico" Command="se:Commands.Duplicate"/>
-            <se:MenuItem Header="Edytuj" IconUri="/Resources/icon32_edit.ico"  Command="se:Commands.Edit"/>
-            <se:MenuItem Header="Usuń" IconUri="/Resources/icon32_delete.ico" Command="se:Commands.Delete"/>
+            <se:ExtMenuItem Header="{Tr Preview}" IconUri="/Resources/icon32_search.ico" Command="se:Commands.Preview"/>
+            <se:ExtMenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico" Command="se:Commands.New"/>
+            <se:ExtMenuItem Header="{Tr Duplicate}" IconUri="/Resources/icon32_duplicate.ico" Command="se:Commands.Duplicate"/>
+            <se:ExtMenuItem Header="{Tr Edit}" IconUri="/Resources/icon32_edit.ico" Command="se:Commands.Edit"/>
+            <se:ExtMenuItem Header="{Tr Delete}" IconUri="/Resources/icon32_delete.ico" Command="se:Commands.Delete"/>
             <Separator/>
-            <se:MenuItem Header="Odśwież" IconUri="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
+            <se:ExtMenuItem Header="{Tr Refresh}" IconUri="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
         </ContextMenu>
     </DataGrid.ContextMenu>
     <DataGrid.RowStyle>
         <Style TargetType="DataGridRow">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Blocked}" Value="True">
-                    <Setter Property="Foreground" Value="Red"/>
-                </DataTrigger>
                 <DataTrigger Binding="{Binding Archival}" Value="True">
                     <Setter Property="Foreground" Value="Gray"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Blocked}" Value="True">
+                    <Setter Property="Foreground" Value="Red"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Comment, Converter={se:conv_Compare}}" Value="False">
                     <Setter Property="ToolTip" Value="{Binding Comment}"/>

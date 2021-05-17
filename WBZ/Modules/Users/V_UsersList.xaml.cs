@@ -9,13 +9,13 @@ namespace WBZ.Modules.Users
 	/// </summary>
 	public partial class UsersList : List
 	{
-		D_UsersList D = new D_UsersList();
+        readonly D_UsersList D = new D_UsersList();
 
 		public UsersList(Commands.Type mode)
 		{
 			InitializeComponent();
 			DataContext = D;
-			Init();
+			base.Init();
 
 			D.Mode = mode;
 		}
@@ -25,14 +25,14 @@ namespace WBZ.Modules.Users
 		/// </summary>
 		public override void UpdateFilters()
 		{
-			D.FilterSQL = $"LOWER(COALESCE(u.forename,'')) like '%{D.Filters.Forename.ToLower()}%' and "
-						+ $"LOWER(COALESCE(u.lastname,'')) like '%{D.Filters.Lastname.ToLower()}%' and "
-						+ $"LOWER(COALESCE(u.email,'')) like '%{D.Filters.Email.ToLower()}%' and "
-						+ $"LOWER(COALESCE(u.phone,'')) like '%{D.Filters.Phone.ToLower()}%' and "
-						+ (!D.Filters.Archival ? $"u.archival=false and " : string.Empty)
-						+ (D.Filters.Group > 0 ? $"exists (select from wbz.groups g where g.instance=u.id and g.owner={D.Filters.Group}) and " : string.Empty);
+			D.FilterSQL = $"LOWER(COALESCE(u.forename,'')) LIKE '%{D.Filters.Forename.ToLower()}%' AND "
+						+ $"LOWER(COALESCE(u.lastname,'')) LIKE '%{D.Filters.Lastname.ToLower()}%' AND "
+						+ $"LOWER(COALESCE(u.email,'')) LIKE '%{D.Filters.Email.ToLower()}%' AND "
+						+ $"LOWER(COALESCE(u.phone,'')) LIKE '%{D.Filters.Phone.ToLower()}%' AND "
+						+ (!D.Filters.Archival ? $"u.archival=false AND " : string.Empty)
+						+ (D.Filters.Group > 0 ? $"EXISTS (SELECT FROM wbz.groups g WHERE g.instance=u.id AND g.owner={D.Filters.Group}) AND " : string.Empty);
 
-			D.FilterSQL = D.FilterSQL.TrimEnd(" and ".ToCharArray());
+			D.FilterSQL = D.FilterSQL.TrimEnd(" AND ".ToCharArray());
 		}
 	}
 

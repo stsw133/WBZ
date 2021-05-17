@@ -24,10 +24,8 @@
         <!-- titleBar -->
         <se:TitleBar DockPanel.Dock="Top" SubIcon="{Binding ModeIcon}"/>
         <!-- buttonsPanel -->
-        <Border DockPanel.Dock="Right"
-                Background="{Binding config_Employees_PanelColor, Source={x:Static p:Settings.Default}}"
-                BorderBrush="{Binding config_Employees_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.5}"
-                BorderThickness="1,0,0,0">
+        <Border DockPanel.Dock="Right" BorderBrush="Gray" BorderThickness="1,0,0,0"
+                Background="{Binding config_Employees_PanelColor, Source={x:Static p:Settings.Default}}">
             <DockPanel>
                 <DockPanel.Resources>
                     <Style TargetType="{x:Type se:IconButton}">
@@ -71,7 +69,7 @@
                                 <Setter Property="Padding" Value="0"/>
                                 <Setter Property="Width" Value="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"/>
                             </Style>
-                            <Style TargetType="{x:Type se:Label}">
+                            <Style TargetType="{x:Type se:ExtLabel}">
                                 <Setter Property="HorizontalContentAlignment" Value="Right"/>
                                 <Setter Property="Margin" Value="5"/>
                                 <Setter Property="Width" Value="{Binding iSize, Source={x:Static p:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=10}"/>
@@ -81,7 +79,7 @@
                                 <Setter Property="Margin" Value="5"/>
                                 <Setter Property="Width" Value="{Binding iSize, Source={x:Static p:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=10}"/>
                             </Style>
-                            <Style TargetType="{x:Type se:TextBox}">
+                            <Style TargetType="{x:Type se:ExtTextBox}">
                                 <Setter Property="Margin" Value="5"/>
                             </Style>
                         </Grid.Resources>
@@ -92,48 +90,48 @@
                         <DockPanel Grid.Column="0" Grid.ColumnSpan="2">
                             <!-- Forename -->
                             <DockPanel DockPanel.Dock="Top">
-                                <se:Label Content="Imię:" FontWeight="Bold"/>
-                                <se:TextBox Text="{Binding InstanceData.Forename}"/>
+                                <se:ExtLabel Content="Imię:" FontWeight="Bold"/>
+                                <se:ExtTextBox Text="{Binding InstanceData.Forename}"/>
                             </DockPanel>
                             <!-- Lastname -->
                             <DockPanel DockPanel.Dock="Top">
-                                <se:Label Content="Nazwisko:" FontWeight="Bold"/>
-                                <se:TextBox Text="{Binding InstanceData.Lastname}"/>
+                                <se:ExtLabel Content="Nazwisko:" FontWeight="Bold"/>
+                                <se:ExtTextBox Text="{Binding InstanceData.Lastname}"/>
                             </DockPanel>
                             <!-- Department -->
                             <DockPanel DockPanel.Dock="Top">
-                                <se:Label Content="Dział:" FontWeight="Normal"/>
-                                <se:TextBox Text="{Binding InstanceData.Department}"/>
+                                <se:ExtLabel Content="Dział:" FontWeight="Normal"/>
+                                <se:ExtTextBox Text="{Binding InstanceData.Department}"/>
                             </DockPanel>
                             <!-- Position -->
                             <DockPanel DockPanel.Dock="Top">
-                                <se:Label Content="Stanowisko:" FontWeight="Normal"/>
-                                <se:TextBox Text="{Binding InstanceData.Position}"/>
+                                <se:ExtLabel Content="Stanowisko:" FontWeight="Normal"/>
+                                <se:ExtTextBox Text="{Binding InstanceData.Position}"/>
                             </DockPanel>
                             <!-- Email -->
                             <DockPanel DockPanel.Dock="Top">
-                                <se:Label Content="E-mail:" FontWeight="Normal"/>
-                                <se:TextBox Text="{Binding InstanceData.Email}"/>
+                                <se:ExtLabel Content="E-mail:" FontWeight="Normal"/>
+                                <se:ExtTextBox Text="{Binding InstanceData.Email}"/>
                             </DockPanel>
                             <!-- Phone -->
                             <DockPanel DockPanel.Dock="Top">
-                                <se:Label Content="Nr telefonu:" FontWeight="Normal"/>
-                                <se:TextBox Text="{Binding InstanceData.Phone}"/>
+                                <se:ExtLabel Content="Nr telefonu:" FontWeight="Normal"/>
+                                <se:ExtTextBox Text="{Binding InstanceData.Phone}"/>
                             </DockPanel>
                             <!-- Postcode -->
                             <DockPanel DockPanel.Dock="Top">
-                                <se:Label Content="Kod pocztowy:" FontWeight="Normal"/>
-                                <se:TextBox Text="{Binding InstanceData.Postcode}"/>
+                                <se:ExtLabel Content="Kod pocztowy:" FontWeight="Normal"/>
+                                <se:ExtTextBox Text="{Binding InstanceData.Postcode}"/>
                             </DockPanel>
                             <!-- City -->
                             <DockPanel DockPanel.Dock="Top">
-                                <se:Label Content="Miasto:" FontWeight="Normal"/>
-                                <se:TextBox Text="{Binding InstanceData.City}"/>
+                                <se:ExtLabel Content="Miasto:" FontWeight="Normal"/>
+                                <se:ExtTextBox Text="{Binding InstanceData.City}"/>
                             </DockPanel>
                             <!-- Address -->
                             <DockPanel DockPanel.Dock="Top">
-                                <se:Label Content="Adres:" FontWeight="Normal"/>
-                                <se:TextBox Text="{Binding InstanceData.Address}"/>
+                                <se:ExtLabel Content="Adres:" FontWeight="Normal"/>
+                                <se:ExtTextBox Text="{Binding InstanceData.Address}"/>
                             </DockPanel>
                         </DockPanel>
                         <!--
