@@ -18,7 +18,7 @@ namespace WBZ.Modules.Vehicles
 		{
 			InitializeComponent();
 			DataContext = D;
-			base.Init();
+			Init();
 
 			if (instance != null)
 				D.InstanceData = instance;
@@ -35,7 +35,7 @@ namespace WBZ.Modules.Vehicles
 			{
 				D.InstanceData.ForwarderID = window.Selected.ID;
 				D.InstanceData.ForwarderName = window.Selected.Name;
-				//D.InstanceData = D.InstanceData;
+				D.InstanceData = D.InstanceData;
 			}
 		}
 
@@ -49,7 +49,7 @@ namespace WBZ.Modules.Vehicles
 			{
 				D.InstanceData.DriverID = window.Selected.ID;
 				D.InstanceData.DriverName = window.Selected.Name;
-				//D.InstanceData = D.InstanceData;
+				D.InstanceData = D.InstanceData;
 			}
 		}
 

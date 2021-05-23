@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using StswExpress;
+using WBZ.Models;
 
 namespace WBZ.Modules._base
 {
@@ -28,7 +29,7 @@ namespace WBZ.Modules._base
 		/// </summary>
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			int newID = (D.InstanceData as dynamic).ID;
+			int newID = (D.InstanceData as M).ID;
 			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE))
 				newID = SQL.NewInstanceID(D.Module);
 			
@@ -54,7 +55,7 @@ namespace WBZ.Modules._base
 				}
             }
 			*/
-			(D.InstanceData as dynamic).ID = newID;
+			(D.InstanceData as M).ID = newID;
 		}
 
 		/// <summary>
@@ -85,7 +86,7 @@ namespace WBZ.Modules._base
 		/// </summary>
 		internal void cmdRefresh_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
-			if ((D.InstanceData as dynamic).ID == 0)
+			if ((D.InstanceData as M).ID == 0)
 				return;
 			//TODO - dorobić odświeżanie zmienionych danych
 		}
@@ -126,7 +127,7 @@ namespace WBZ.Modules._base
 		private void Window_Closed(object sender, EventArgs e)
 		{
 			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE) && !saved)
-				SQL.ClearObject(D.Module, (D.InstanceData as dynamic).ID);
+				SQL.ClearObject(D.Module, (D.InstanceData as M).ID);
 
 			Properties.Settings.Default.Save();
 			if (W.Owner != null)

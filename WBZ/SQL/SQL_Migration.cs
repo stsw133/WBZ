@@ -17,7 +17,7 @@ namespace WBZ
 
 			try
 			{
-				using (var sqlConn = SQL.connOpenedWBZ)
+				using (var sqlConn = SQL.ConnOpenedWBZ)
 				{
 					using (var sqlTran = sqlConn.BeginTransaction())
 					{

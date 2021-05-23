@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using WBZ.Globals;
+using WBZ.Models;
 
 namespace WBZ.Modules._base
 {
@@ -49,7 +50,23 @@ namespace WBZ.Modules._base
         /// <summary>
 		/// Update filters
 		/// </summary>
-		public virtual void UpdateFilters() { }
+		[STAThread]
+        internal virtual void UpdateFilters()
+        {
+            var d = Application.Current.Dispatcher;
+            d.BeginInvoke((Action)UpdateFilters);
+
+            void UpdateFilters()
+            {
+                D.FilterSQL = string.Empty;
+                var dgList = dgLists[D.SelectedTab];
+                foreach (var col in dgList.Columns)
+                    if (col.Header is SE.ColumnFilter c && c?.FilterSQL != null)
+                        D.FilterSQL += c.FilterSQL + " and ";
+                D.FilterSQL += (!(D.Filters as M).Archival ? $"{Config.GetModuleAlias(D.Module)}.archival=false and " : string.Empty);
+                D.FilterSQL += ((D.Filters as M).Group > 0 ? $"exists (select from wbz.groups g where g.instance={Config.GetModuleAlias(D.Module)}.id and g.owner={(D.Filters as M).Group}) and " : string.Empty);
+            }
+        }
 
         /// <summary>
 		/// Select
@@ -112,9 +129,9 @@ namespace WBZ.Modules._base
             var selectedInstances = dgLists[D.SelectedTab].SelectedItems.Cast<MODULE_MODEL>();
             if (selectedInstances.Count() > 0 && MessageBox.Show("Czy na pewno usunąć zaznaczone rekordy?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                foreach (dynamic instance in selectedInstances)
+                foreach (object instance in selectedInstances)
                 {
-                    SQL.DeleteInstance(D.Module, instance.ID, instance.Name);
+                    SQL.DeleteInstance(D.Module, (instance as M).ID, (instance as M).Name);
                     dgLists[D.SelectedTab].Items.Remove(instance);
                 }
             }
@@ -138,7 +155,7 @@ namespace WBZ.Modules._base
             await Task.Run(() => {
                 UpdateFilters();
                 D.TotalItems = SQL.CountInstances(D.Module, D.FilterSQL);
-                D.InstancesList = SQL.ListInstances<MODULE_MODEL>(D.Module, D.FilterSQL, D.Sorting, (D.InstancesList as dynamic)?.Count ?? 0);
+                D.InstancesList = SQL.ListInstances<MODULE_MODEL>(D.Module, D.FilterSQL, D.Sorting, 0);
             });
             Cursor = Cursors.Arrow;
         }
@@ -180,7 +197,7 @@ namespace WBZ.Modules._base
             if (e.VerticalChange > 0 && e.VerticalOffset + e.ViewportHeight == e.ExtentHeight && D.InstancesList.Count < D.TotalItems)
             {
                 Cursor = Cursors.Wait;
-                foreach (var i in SQL.ListInstances<MODULE_MODEL>(D.Module, D.FilterSQL, D.Sorting, (D.InstancesList as dynamic)?.Count ?? 0))
+                foreach (var i in SQL.ListInstances<MODULE_MODEL>(D.Module, D.FilterSQL, D.Sorting, (D.InstancesList as ObservableCollection<M>)?.Count ?? 0))
                     D.InstancesList.Add(i);
                 (e.OriginalSource as ScrollViewer).ScrollToVerticalOffset(e.VerticalOffset);
                 Cursor = Cursors.Arrow;

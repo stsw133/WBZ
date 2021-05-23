@@ -17,7 +17,7 @@ namespace WBZ.Modules.Users
 		{
 			InitializeComponent();
 			DataContext = D;
-			base.Init();
+			Init();
 
 			if (instance != null)
 				D.InstanceData = instance;

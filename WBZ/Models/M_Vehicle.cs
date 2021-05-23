@@ -30,31 +30,31 @@
 		/// <summary>
 		/// Forwarder
 		/// </summary>
-		private MV forwarder { get; set; } = new MV();
+		public MV Forwarder { get; set; } = new MV();
 		public int ForwarderID
 		{
-			get => (int)forwarder.ID;
-            set => forwarder.ID = value;
+			get => (int)(Forwarder.ID ?? 0);
+            set => Forwarder.ID = value;
 		}
 		public string ForwarderName
 		{
-			get => (string)forwarder.Value;
-			set => forwarder.Value = value;
+			get => (string)Forwarder.Value;
+			set => Forwarder.Value = value;
 		}
 
 		/// <summary>
 		/// Driver
 		/// </summary>
-		private MV driver { get; set; } = new MV();
+		public MV Driver { get; set; } = new MV();
 		public int DriverID
 		{
-			get => (int)driver.ID;
-			set => driver.ID = value;
+			get => (int)(Driver.ID ?? 0);
+			set => Driver.ID = value;
 		}
 		public string DriverName
 		{
-			get => (string)driver.Value;
-			set => driver.Value = value;
+			get => (string)Driver.Value;
+			set => Driver.Value = value;
 		}
 
 		/// <summary>

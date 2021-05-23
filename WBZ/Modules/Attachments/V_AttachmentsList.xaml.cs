@@ -26,7 +26,7 @@ namespace WBZ.Modules.Attachments
 		/// <summary>
 		/// Update filters
 		/// </summary>
-		public override void UpdateFilters()
+		internal override void UpdateFilters()
 		{
 			D.FilterSQL = $"LOWER(COALESCE(u.lastname,'') || ' ' || COALESCE(u.forename,'')) like '%{D.Filters.cUser.Value?.ToString()?.ToLower()}%' and "
 						+ $"LOWER(COALESCE(a.module,'')) like '%{D.Filters.Module.ToLower()}%' and "

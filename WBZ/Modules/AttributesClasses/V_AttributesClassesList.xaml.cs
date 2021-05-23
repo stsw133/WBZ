@@ -23,7 +23,7 @@ namespace WBZ.Modules.AttributesClasses
 		/// <summary>
 		/// Update filters
 		/// </summary>
-		public override void UpdateFilters()
+		internal override void UpdateFilters()
 		{
 			D.FilterSQL = $"LOWER(COALESCE(ac.module,'')) like '%{D.Filters.Module.ToLower()}%' and "
 						+ $"LOWER(COALESCE(ac.name,'')) like '%{D.Filters.Name.ToLower()}%' and "
