@@ -180,7 +180,8 @@ namespace WBZ.Controls
                 if (d != null)
                 {
                     Module = (string)d.Module;
-                    InstancesList = SQL.ListInstances<M_Group>(Config.Modules.GROUPS, $"g.module='{Module}' and g.instance is null", Properties.Settings.Default.sorting_GroupsList);
+                    // TODO - filtr do parametryzacji
+                    InstancesList = SQL.ListInstances<M_Group>(Config.Modules.GROUPS, $"g.module='{Module}' and g.instance is null", null, Properties.Settings.Default.sorting_GroupsList);
                 }
 
                 /// Clear groups

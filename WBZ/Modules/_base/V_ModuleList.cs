@@ -11,6 +11,8 @@ using System.Windows.Data;
 using System.Windows.Input;
 using WBZ.Globals;
 using WBZ.Models;
+using System.Collections.Generic;
+using Npgsql;
 
 namespace WBZ.Modules._base
 {
@@ -58,13 +60,27 @@ namespace WBZ.Modules._base
 
             void UpdateFilters()
             {
-                D.FilterSQL = string.Empty;
+                D.FilterSqlString = string.Empty;
+                D.FilterSqlParams = new List<NpgsqlParameter>();
+
                 var dgList = dgLists[D.SelectedTab];
                 foreach (var col in dgList.Columns)
                     if (col.Header is SE.ColumnFilter c && c?.FilterSQL != null)
-                        D.FilterSQL += c.FilterSQL + " and ";
-                D.FilterSQL += (!(D.Filters as M).Archival ? $"{Config.GetModuleAlias(D.Module)}.archival=false and " : string.Empty);
-                D.FilterSQL += ((D.Filters as M).Group > 0 ? $"exists (select from wbz.groups g where g.instance={Config.GetModuleAlias(D.Module)}.id and g.owner={(D.Filters as M).Group}) and " : string.Empty);
+                    {
+                        D.FilterSqlString += c.FilterSQL + " and ";
+                        D.FilterSqlParams.Add(new NpgsqlParameter()
+                        {
+                            ParameterName = $"@{c.NameSQL.Replace(".", "")}1",
+                            Value = c.Value1
+                        });
+                        D.FilterSqlParams.Add(new NpgsqlParameter()
+                        {
+                            ParameterName = $"@{c.NameSQL.Replace(".", "")}2",
+                            Value = c.Value2
+                        });
+                    }
+                D.FilterSqlString += !(D.Filters as M).Archival ? $"{Config.GetModuleAlias(D.Module)}.archival=false and " : string.Empty;
+                D.FilterSqlString += (D.Filters as M).Group > 0 ? $"exists (select from wbz.groups g where g.instance={Config.GetModuleAlias(D.Module)}.id and g.owner={(D.Filters as M).Group}) and " : string.Empty;
             }
         }
 
@@ -154,8 +170,8 @@ namespace WBZ.Modules._base
             Cursor = Cursors.Wait;
             await Task.Run(() => {
                 UpdateFilters();
-                D.TotalItems = SQL.CountInstances(D.Module, D.FilterSQL);
-                D.InstancesList = SQL.ListInstances<MODULE_MODEL>(D.Module, D.FilterSQL, D.Sorting, 0);
+                D.TotalItems = SQL.CountInstances(D.Module, D.FilterSqlString);
+                D.InstancesList = SQL.ListInstances<MODULE_MODEL>(D.Module, D.FilterSqlString, D.FilterSqlParams, D.Sorting, 0);
             });
             Cursor = Cursors.Arrow;
         }
@@ -197,7 +213,7 @@ namespace WBZ.Modules._base
             if (e.VerticalChange > 0 && e.VerticalOffset + e.ViewportHeight == e.ExtentHeight && D.InstancesList.Count < D.TotalItems)
             {
                 Cursor = Cursors.Wait;
-                foreach (var i in SQL.ListInstances<MODULE_MODEL>(D.Module, D.FilterSQL, D.Sorting, (D.InstancesList as ObservableCollection<M>)?.Count ?? 0))
+                foreach (var i in SQL.ListInstances<MODULE_MODEL>(D.Module, D.FilterSqlString, D.FilterSqlParams, D.Sorting, (D.InstancesList as ObservableCollection<M>)?.Count ?? 0))
                     D.InstancesList.Add(i);
                 (e.OriginalSource as ScrollViewer).ScrollToVerticalOffset(e.VerticalOffset);
                 Cursor = Cursors.Arrow;

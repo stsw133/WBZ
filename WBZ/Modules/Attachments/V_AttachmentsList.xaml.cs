@@ -28,11 +28,11 @@ namespace WBZ.Modules.Attachments
 		/// </summary>
 		internal override void UpdateFilters()
 		{
-			D.FilterSQL = $"LOWER(COALESCE(u.lastname,'') || ' ' || COALESCE(u.forename,'')) like '%{D.Filters.cUser.Value?.ToString()?.ToLower()}%' and "
+			D.FilterSqlString = $"LOWER(COALESCE(u.lastname,'') || ' ' || COALESCE(u.forename,'')) like '%{D.Filters.cUser.Value?.ToString()?.ToLower()}%' and "
 						+ $"LOWER(COALESCE(a.module,'')) like '%{D.Filters.Module.ToLower()}%' and "
 						+ $"LOWER(COALESCE(a.name,'')) like '%{D.Filters.Name.ToLower()}%' and ";
 
-			D.FilterSQL = D.FilterSQL.TrimEnd(" and ".ToCharArray());
+			D.FilterSqlString = D.FilterSqlString.TrimEnd(" and ".ToCharArray());
 		}
 
 		/// <summary>

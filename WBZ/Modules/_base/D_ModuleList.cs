@@ -1,5 +1,7 @@
-﻿using StswExpress;
+﻿using Npgsql;
+using StswExpress;
 using StswExpress.Translate;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 
@@ -59,7 +61,8 @@ namespace WBZ.Modules._base
 		}
 
 		/// SQL filter
-		public string FilterSQL { get; set; }
+		public string FilterSqlString { get; set; }
+		public List<NpgsqlParameter> FilterSqlParams { get; set; }
 
 		/// Filters instance
 		private MODULE_MODEL filters = new MODULE_MODEL();

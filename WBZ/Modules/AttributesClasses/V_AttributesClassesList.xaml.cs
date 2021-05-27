@@ -25,13 +25,13 @@ namespace WBZ.Modules.AttributesClasses
 		/// </summary>
 		internal override void UpdateFilters()
 		{
-			D.FilterSQL = $"LOWER(COALESCE(ac.module,'')) like '%{D.Filters.Module.ToLower()}%' and "
+			D.FilterSqlString = $"LOWER(COALESCE(ac.module,'')) like '%{D.Filters.Module.ToLower()}%' and "
 						+ $"LOWER(COALESCE(ac.name,'')) like '%{D.Filters.Name.ToLower()}%' and "
 						+ $"LOWER(COALESCE(ac.type,'')) like '%{D.Filters.Type.ToLower()}%' and "
 						+ (!D.Filters.Archival ? $"ac.archival=false and " : string.Empty)
 						+ (D.Filters.Group > 0 ? $"exists (select from wbz.groups g where g.instance=ac.id and g.owner={D.Filters.Group}) and " : string.Empty);
 
-			D.FilterSQL = D.FilterSQL.TrimEnd(" and ".ToCharArray());
+			D.FilterSqlString = D.FilterSqlString.TrimEnd(" and ".ToCharArray());
 		}
 	}
 

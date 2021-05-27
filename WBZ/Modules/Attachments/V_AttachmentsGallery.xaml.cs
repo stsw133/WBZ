@@ -29,11 +29,11 @@ namespace WBZ.Modules.Attachments
 		/// </summary>
 		private void UpdateFilters()
 		{
-			D.FilterSQL = $"LOWER(COALESCE(a.module,'')) like '%{D.Filters.Module.ToLower()}%' and "
+			D.FilterSqlString = $"LOWER(COALESCE(a.module,'')) like '%{D.Filters.Module.ToLower()}%' and "
 						+ $"LOWER(COALESCE(a.name,'')) like '%{D.Filters.Name.ToLower()}%' and "
 						+ $"(LOWER(a.name) like '%.png' or LOWER(a.name) like '%.jpg') and ";
 
-			D.FilterSQL = D.FilterSQL.TrimEnd(" and ".ToCharArray());
+			D.FilterSqlString = D.FilterSqlString.TrimEnd(" and ".ToCharArray());
 		}
 
 		/// <summary>
@@ -61,8 +61,8 @@ namespace WBZ.Modules.Attachments
 		{
 			await Task.Run(() => {
 				UpdateFilters();
-				D.TotalItems = SQL.CountInstances(D.Module, D.FilterSQL);
-				D.InstancesList = SQL.ListInstances<MODULE_MODEL>(D.Module, D.FilterSQL, D.Sorting, D.InstancesList?.Count ?? 0);
+				D.TotalItems = SQL.CountInstances(D.Module, D.FilterSqlString);
+				D.InstancesList = SQL.ListInstances<MODULE_MODEL>(D.Module, D.FilterSqlString, D.FilterSqlParams, D.Sorting, D.InstancesList?.Count ?? 0);
 
 				foreach (var img in D.InstancesList)
 					img.File = SQL.GetAttachmentFile(img.ID);
@@ -106,7 +106,7 @@ namespace WBZ.Modules.Attachments
 		{
 			if (e.HorizontalChange > 0 && e.HorizontalOffset + e.ViewportWidth == e.ExtentWidth && D.InstancesList.Count < D.TotalItems)
 			{
-				foreach (var i in SQL.ListInstances<MODULE_MODEL>(D.Module, D.FilterSQL, D.Sorting, D.InstancesList?.Count ?? 0)) D.InstancesList.Add(i);
+				foreach (var i in SQL.ListInstances<MODULE_MODEL>(D.Module, D.FilterSqlString, D.FilterSqlParams, D.Sorting, D.InstancesList?.Count ?? 0)) D.InstancesList.Add(i);
 				foreach (var img in D.InstancesList)
 					img.File = SQL.GetAttachmentFile(img.ID);
 				(e.OriginalSource as ScrollViewer).ScrollToVerticalOffset(e.HorizontalOffset);

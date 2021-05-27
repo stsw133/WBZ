@@ -25,7 +25,7 @@ namespace WBZ.Modules.Families
         /// </summary>
         internal override void UpdateFilters()
         {
-            D.FilterSQL = $"LOWER(COALESCE(f.declarant,'')) like '%{D.Filters.Declarant.ToLower()}%' and "
+            D.FilterSqlString = $"LOWER(COALESCE(f.declarant,'')) like '%{D.Filters.Declarant.ToLower()}%' and "
                         + $"LOWER(COALESCE(f.lastname,'')) like '%{D.Filters.Lastname.ToLower()}%' and "
                         + (D.Filters.Members > 0 ? $"COALESCE(f.members,0) = {D.Filters.Members} and " : string.Empty)
                         + $"LOWER(COALESCE(f.postcode,'')) like '%{D.Filters.Postcode.ToLower()}%' and "
@@ -34,7 +34,7 @@ namespace WBZ.Modules.Families
                         + (!D.Filters.Archival ? $"f.archival=false and " : string.Empty)
                         + (D.Filters.Group > 0 ? $"exists (select from wbz.groups g where g.instance=f.id and g.owner={D.Filters.Group}) and " : string.Empty);
 
-            D.FilterSQL = D.FilterSQL.TrimEnd(" and ".ToCharArray());
+            D.FilterSqlString = D.FilterSqlString.TrimEnd(" and ".ToCharArray());
         }
     }
 

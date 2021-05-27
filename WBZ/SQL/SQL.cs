@@ -702,7 +702,7 @@ left join wbz.employees e on e.id=v.driver",
 		/// <param name="filter">Filtr SQL</param>
 		/// <param name="sort">Kolekcja sortowania</param>
 		/// <param name="displayed">Liczba obecnie wyświetlonych rekordów</param>
-		internal static ObservableCollection<T> ListInstances<T>(string module, string filter, StringCollection sort = null, int displayed = 0) where T : class, new()
+		internal static ObservableCollection<T> ListInstances<T>(string module, string filter, List<NpgsqlParameter> parameters = null, StringCollection sort = null, int displayed = 0) where T : class, new()
 		{
 			var result = new ObservableCollection<T>();
 			string query;
@@ -827,6 +827,9 @@ where {filter}",
                     _ => throw new NotImplementedException(),
                 };
                 using var sqlDA = new NpgsqlDataAdapter(query, sqlConn);
+				if (parameters != null)
+					foreach (var param in parameters)
+						sqlDA.SelectCommand.Parameters.AddWithValue(param.ParameterName, param.Value);
                 sqlDA.SelectCommand.CommandText += $" order by {sort[0]} {sort[1]}, {sort[2]} {sort[3]}";
                 sqlDA.SelectCommand.CommandText += $" limit {sort[4]} offset {displayed}";
 

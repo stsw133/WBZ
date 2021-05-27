@@ -25,7 +25,7 @@ namespace WBZ.Modules.Documents
 		/// </summary>
 		internal override void UpdateFilters()
 		{
-			D.FilterSQL = $"LOWER(COALESCE(d.type,'')) like '%{D.Filters.Type.ToLower()}%' and "
+			D.FilterSqlString = $"LOWER(COALESCE(d.type,'')) like '%{D.Filters.Type.ToLower()}%' and "
 						+ $"LOWER(COALESCE(d.name,'')) like '%{D.Filters.Name.ToLower()}%' and "
 						+ $"LOWER(COALESCE(s.name,'')) like '%{D.Filters.cStore.Value?.ToString()?.ToLower()}%' and "
 						+ $"LOWER(COALESCE(c.name,'')) like '%{D.Filters.ContractorName.ToLower()}%' and "
@@ -33,7 +33,7 @@ namespace WBZ.Modules.Documents
 						+ (!D.Filters.Archival ? $"d.archival=false and " : string.Empty)
 						+ (D.Filters.Group > 0 ? $"exists (select from wbz.groups g where g.instance=d.id and g.owner={D.Filters.Group}) and " : string.Empty);
 
-			D.FilterSQL = D.FilterSQL.TrimEnd(" and ".ToCharArray());
+			D.FilterSqlString = D.FilterSqlString.TrimEnd(" and ".ToCharArray());
 		}
 	}
 
