@@ -52,40 +52,26 @@ namespace WBZ.Modules._base
         /// <summary>
 		/// Update filters
 		/// </summary>
-		[STAThread]
         internal virtual void UpdateFilters()
         {
-            var d = Application.Current.Dispatcher;
-            d.BeginInvoke((Action)UpdateFilters);
+            D.FilterSqlString = string.Empty;
+            D.FilterSqlParams = new List<NpgsqlParameter>();
 
-            void UpdateFilters()
-            {
-                D.FilterSqlString = string.Empty;
-                D.FilterSqlParams = new List<NpgsqlParameter>();
-
-                var dgList = dgLists[D.SelectedTab];
-                foreach (var col in dgList.Columns)
-                    if (col.Header is SE.ColumnFilter c && c?.FilterSQL != null)
-                    {
-                        D.FilterSqlString += c.FilterSQL + " and ";
-                        D.FilterSqlParams.Add(new NpgsqlParameter()
-                        {
-                            ParameterName = $"@{c.NameSQL.Replace(".", "")}1",
-                            Value = c.Value1
-                        });
-                        D.FilterSqlParams.Add(new NpgsqlParameter()
-                        {
-                            ParameterName = $"@{c.NameSQL.Replace(".", "")}2",
-                            Value = c.Value2
-                        });
-                    }
-                D.FilterSqlString += !(D.Filters as M).Archival ? $"{Config.GetModuleAlias(D.Module)}.archival=false and " : string.Empty;
-                D.FilterSqlString += (D.Filters as M).Group > 0 ? $"exists (select from wbz.groups g where g.instance={Config.GetModuleAlias(D.Module)}.id and g.owner={(D.Filters as M).Group}) and " : string.Empty;
-            }
+            var dgList = dgLists[D.SelectedTab];
+            foreach (var col in dgList.Columns)
+                if (col.Header is SE.ColumnFilter c && c?.FilterSQL != null)
+                {
+                    D.FilterSqlString += c.FilterSQL + " and ";
+                    D.FilterSqlParams.Add(new NpgsqlParameter() { ParameterName = c.ParamSQL + "1", Value = c.Value1 ?? DBNull.Value });
+                    D.FilterSqlParams.Add(new NpgsqlParameter() { ParameterName = c.ParamSQL + "2", Value = c.Value2 ?? DBNull.Value });
+                }
+            D.FilterSqlString += !(D.Filters as M).Archival ? $"{Config.GetModuleAlias(D.Module)}.archival=false and " : string.Empty;
+            D.FilterSqlString += (D.Filters as M).Group > 0 ? $"exists (select from wbz.groups g where g.instance={Config.GetModuleAlias(D.Module)}.id and g.owner={(D.Filters as M).Group}) and " : string.Empty;
+            D.FilterSqlString = D.FilterSqlString.TrimEnd(" and ".ToCharArray());
         }
 
         /// <summary>
-		/// Select
+		/// Select instance
 		/// </summary>
 		internal void cmdSelect_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = D?.Mode == SE.Commands.Type.SELECT;
         internal virtual void cmdSelect_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -95,7 +81,7 @@ namespace WBZ.Modules._base
         }
 
         /// <summary>
-        /// Preview
+        /// Preview instances
         /// </summary>
         internal void cmdPreview_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = Global.User.Perms.Contains($"{D?.Module}_{Global.PermType.PREVIEW}");
         internal virtual void cmdPreview_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -106,7 +92,7 @@ namespace WBZ.Modules._base
         }
 
         /// <summary>
-		/// New
+		/// New instance
 		/// </summary>
 		internal void cmdNew_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = Global.User.Perms.Contains($"{D?.Module}_{Global.PermType.SAVE}");
         internal virtual void cmdNew_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -115,7 +101,7 @@ namespace WBZ.Modules._base
         }
 
         /// <summary>
-        /// Duplicate
+        /// Duplicate instances
         /// </summary>
         internal void cmdDuplicate_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = Global.User.Perms.Contains($"{D?.Module}_{Global.PermType.SAVE}");
         internal virtual void cmdDuplicate_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -126,7 +112,7 @@ namespace WBZ.Modules._base
         }
 
         /// <summary>
-        /// Edit
+        /// Edit instances
         /// </summary>
         internal void cmdEdit_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = Global.User.Perms.Contains($"{D?.Module}_{Global.PermType.SAVE}");
         internal virtual void cmdEdit_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -137,7 +123,7 @@ namespace WBZ.Modules._base
         }
 
         /// <summary>
-        /// Delete
+        /// Delete instances
         /// </summary>
         internal void cmdDelete_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = Global.User.Perms.Contains($"{D?.Module}_{Global.PermType.DELETE}");
         internal virtual void cmdDelete_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -154,11 +140,19 @@ namespace WBZ.Modules._base
         }
 
         /// <summary>
-		/// Clear
+		/// Clear filters
 		/// </summary>
 		internal virtual void cmdClear_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             D.Filters = new MODULE_MODEL();
+
+            var dgList = dgLists[D.SelectedTab];
+            foreach (var col in dgList.Columns)
+                if (col.Header is SE.ColumnFilter c)
+                {
+                    c.Value1 = null;
+                    c.Value2 = null;
+                }
             cmdRefresh_Executed(null, null);
         }
 
@@ -168,8 +162,8 @@ namespace WBZ.Modules._base
         internal async virtual void cmdRefresh_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Cursor = Cursors.Wait;
+            UpdateFilters();
             await Task.Run(() => {
-                UpdateFilters();
                 D.TotalItems = SQL.CountInstances(D.Module, D.FilterSqlString);
                 D.InstancesList = SQL.ListInstances<MODULE_MODEL>(D.Module, D.FilterSqlString, D.FilterSqlParams, D.Sorting, 0);
             });

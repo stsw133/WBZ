@@ -595,57 +595,57 @@ namespace WBZ
                 query = module switch
                 {
                     Config.Modules.ARTICLES => @"
-select count(distinct a.id)
-from wbz.articles a
-left join wbz.stores_articles sa on a.id=sa.article",
+						select count(distinct a.id)
+						from wbz.articles a
+						left join wbz.stores_articles sa on a.id=sa.article",
                     Config.Modules.ATTACHMENTS => @"
-select count(distinct a.id)
-from wbz.attachments a
-left join wbz.users u on a.""user"" = u.id",
+						select count(distinct a.id)
+						from wbz.attachments a
+						left join wbz.users u on a.""user"" = u.id",
                     Config.Modules.ATTRIBUTES_CLASSES => @"
-select count(distinct ac.id)
-from wbz.attributes_classes ac",
+						select count(distinct ac.id)
+						from wbz.attributes_classes ac",
                     Config.Modules.CONTRACTORS => @"
-select count(distinct c.id)
-from wbz.contractors c",
+						select count(distinct c.id)
+						from wbz.contractors c",
                     Config.Modules.DISTRIBUTIONS => @"
-select count(distinct d.id)
-from wbz.distributions d",
+						select count(distinct d.id)
+						from wbz.distributions d",
                     Config.Modules.DOCUMENTS => @"
-select count(distinct d.id)
-from wbz.documents d
-left join wbz.documents_positions dp on dp.document=d.id
-left join wbz.contractors c on c.id=d.contractor
-left join wbz.stores s on s.id=d.store",
+						select count(distinct d.id)
+						from wbz.documents d
+						left join wbz.documents_positions dp on dp.document=d.id
+						left join wbz.contractors c on c.id=d.contractor
+						left join wbz.stores s on s.id=d.store",
                     Config.Modules.EMPLOYEES => @"
-select count(distinct e.id)
-from wbz.employees e
-left join wbz.users u on u.id=e.""user""",
+						select count(distinct e.id)
+						from wbz.employees e
+						left join wbz.users u on u.id=e.""user""",
                     Config.Modules.FAMILIES => @"
-select count(distinct f.id)
-from wbz.families f",
+						select count(distinct f.id)
+						from wbz.families f",
                     Config.Modules.GROUPS => @"
-select count(distinct g.id)
-from wbz.groups g",
+						select count(distinct g.id)
+						from wbz.groups g",
                     Config.Modules.ICONS => @"
-select count(distinct i.id)
-from wbz.icons i",
+						select count(distinct i.id)
+						from wbz.icons i",
                     Config.Modules.LOGS => @"
-select count(distinct l.id)
-from wbz.logs l
-left join wbz.users u on l.""user"" = u.id",
+						select count(distinct l.id)
+						from wbz.logs l
+						left join wbz.users u on l.""user"" = u.id",
                     Config.Modules.STORES => @"
-select count(distinct s.id)
-from wbz.stores s
-left join wbz.stores_articles sa on s.id = sa.store",
+						select count(distinct s.id)
+						from wbz.stores s
+						left join wbz.stores_articles sa on s.id = sa.store",
                     Config.Modules.USERS => @"
-select count(distinct u.id)
-from wbz.users u",
+						select count(distinct u.id)
+						from wbz.users u",
                     Config.Modules.VEHICLES => @"
-select count(distinct v.id)
-from wbz.vehicles v
-left join wbz.contractors c on c.id=v.forwarder
-left join wbz.employees e on e.id=v.driver",
+						select count(distinct v.id)
+						from wbz.vehicles v
+						left join wbz.contractors c on c.id=v.forwarder
+						left join wbz.employees e on e.id=v.driver",
                     _ => throw new NotImplementedException(),
                 };
                 using var sqlCmd = new NpgsqlCommand(query, sqlConn);
@@ -719,111 +719,111 @@ left join wbz.employees e on e.id=v.driver",
                 query = module switch
                 {
                     Config.Modules.ARTICLES => $@"
-select a.id, a.codename, a.name, a.ean, coalesce(nullif(wbz.ArtDefMeaNam(a.id),''), 'kg') as measure,
-	coalesce(sum(sa.amount), 0) as amountraw, coalesce(sum(sa.amount) / wbz.ArtDefMeaCon(a.id), 0) as amount,
-	coalesce(sum(sa.reserved), 0) as reservedraw, coalesce(sum(sa.reserved) / wbz.ArtDefMeaCon(a.id), 0) as reserved,
-	a.archival, a.comment, a.icon
-from wbz.articles a
-left join wbz.stores_articles sa on a.id=sa.article
-where {filter}
-group by a.id",
+						select a.id, a.codename, a.name, a.ean, coalesce(nullif(wbz.ArtDefMeaNam(a.id),''), 'kg') as measure,
+							coalesce(sum(sa.amount), 0) as amountraw, coalesce(sum(sa.amount) / wbz.ArtDefMeaCon(a.id), 0) as amount,
+							coalesce(sum(sa.reserved), 0) as reservedraw, coalesce(sum(sa.reserved) / wbz.ArtDefMeaCon(a.id), 0) as reserved,
+							a.archival, a.comment, a.icon
+						from wbz.articles a
+						left join wbz.stores_articles sa on a.id=sa.article
+						where {filter}
+						group by a.id",
                     Config.Modules.ATTACHMENTS => $@"
-select a.id, a.""user"", a.module, a.instance, a.name,
-a.""format"", a.""path"", a.size, null as file
-from wbz.attachments a
-left join wbz.users u on a.""user"" = u.id	
-where {filter}",
+						select a.id, a.""user"", a.module, a.instance, a.name,
+						a.""format"", a.""path"", a.size, null as file
+						from wbz.attachments a
+						left join wbz.users u on a.""user"" = u.id	
+						where {filter}",
                     Config.Modules.ATTRIBUTES_CLASSES => $@"
-select ac.id as ""ID"", ac.module as ""Module"", ac.name as ""Name"", ac.type as ""Type"", ac.""values"" as ""Values"",
-	ac.archival, ac.comment, ac.icon
-from wbz.attributes_classes ac
-where {filter}",
+						select ac.id as ""ID"", ac.module as ""Module"", ac.name as ""Name"", ac.type as ""Type"", ac.""values"" as ""Values"",
+							ac.archival, ac.comment, ac.icon
+						from wbz.attributes_classes ac
+						where {filter}",
                     Config.Modules.CONTRACTORS => $@"
-select c.id, c.codename, c.name, c.branch, c.nip, c.regon, c.postcode, c.city, c.address,
-	c.archival, c.comment, c.icon
-from wbz.contractors c
-where {filter}",
+						select c.id, c.codename, c.name, c.branch, c.nip, c.regon, c.postcode, c.city, c.address,
+							c.archival, c.comment, c.icon
+						from wbz.contractors c
+						where {filter}",
                     Config.Modules.DISTRIBUTIONS => $@"
-select d.id, d.name, d.datereal, d.status,
-	count(distinct dp.family) as familiescount, sum(members) as memberscount,
-	count(dp.*) as positionscount, sum(dp.amount) as weight,
-	d.archival, d.comment, d.icon
-from wbz.distributions d
-left join wbz.distributions_positions dp on dp.distribution=d.id
-where {filter}
-group by d.id",
+						select d.id, d.name, d.datereal, d.status,
+							count(distinct dp.family) as familiescount, sum(members) as memberscount,
+							count(dp.*) as positionscount, sum(dp.amount) as weight,
+							d.archival, d.comment, d.icon
+						from wbz.distributions d
+						left join wbz.distributions_positions dp on dp.distribution=d.id
+						where {filter}
+						group by d.id",
                     Config.Modules.DOCUMENTS => $@"
-select d.id, d.name, d.store, s.name as storename, d.contractor, c.name as contractorname,
-	d.type, d.dateissue, d.status, count(dp.*) as positionscount, sum(dp.amount) as weight, sum(dp.cost) as cost,
-	d.archival, d.comment, d.icon
-from wbz.documents d
-left join wbz.documents_positions dp on dp.document=d.id
-left join wbz.contractors c on c.id=d.contractor
-left join wbz.stores s on s.id=d.store
-where {filter}
-group by d.id, c.id, s.id",
+						select d.id, d.name, d.store, s.name as storename, d.contractor, c.name as contractorname,
+							d.type, d.dateissue, d.status, count(dp.*) as positionscount, sum(dp.amount) as weight, sum(dp.cost) as cost,
+							d.archival, d.comment, d.icon
+						from wbz.documents d
+						left join wbz.documents_positions dp on dp.document=d.id
+						left join wbz.contractors c on c.id=d.contractor
+						left join wbz.stores s on s.id=d.store
+						where {filter}
+						group by d.id, c.id, s.id",
                     Config.Modules.EMPLOYEES => $@"
-select e.id, e.""user"", u.lastname || ' ' || u.forename as username,
-	e.forename, e.lastname, e.department, e.position,
-	e.email, e.phone, e.postcode, e.city, e.address,
-	e.archival, e.comment, e.icon
-from wbz.employees e
-left join wbz.users u on u.id=e.""user""
-where {filter}",
+						select e.id, e.""user"", u.lastname || ' ' || u.forename as username,
+							e.forename, e.lastname, e.department, e.position,
+							e.email, e.phone, e.postcode, e.city, e.address,
+							e.archival, e.comment, e.icon
+						from wbz.employees e
+						left join wbz.users u on u.id=e.""user""
+						where {filter}",
                     Config.Modules.FAMILIES => $@"
-select f.id, f.declarant, f.lastname, f.members, f.postcode, f.city, f.address,
-	f.status, f.c_sms, f.c_call, f.c_email, max(d.datereal) as donationlast, sum(dp.amount) as donationweight,
-	f.archival, f.comment, f.icon
-from wbz.families f
-left join wbz.distributions_positions dp on f.id=dp.family
-left join wbz.distributions d on dp.distribution=d.id
-where {filter}
-group by f.id",
+						select f.id, f.declarant, f.lastname, f.members, f.postcode, f.city, f.address,
+							f.status, f.c_sms, f.c_call, f.c_email, max(d.datereal) as donationlast, sum(dp.amount) as donationweight,
+							f.archival, f.comment, f.icon
+						from wbz.families f
+						left join wbz.distributions_positions dp on f.id=dp.family
+						left join wbz.distributions d on dp.distribution=d.id
+						where {filter}
+						group by f.id",
                     Config.Modules.GROUPS => $@"
-select g.id, g.module, g.name, g.instance, g.owner,
-	case when trim(concat(g1.name, '\', g2.name, '\', g3.name, '\', g4.name), '\') = '' then ''
-		else concat(trim(concat(g1.name, '\', g2.name, '\', g3.name, '\', g4.name), '\'), '\') end as path,
-	g.archival, g.comment, g.icon
-from wbz.groups g
-left join wbz.groups g4 on g4.id=g.owner
-left join wbz.groups g3 on g3.id=g4.owner
-left join wbz.groups g2 on g2.id=g3.owner
-left join wbz.groups g1 on g1.id=g2.owner
-where {filter}",
+						select g.id, g.module, g.name, g.instance, g.owner,
+							case when trim(concat(g1.name, '\', g2.name, '\', g3.name, '\', g4.name), '\') = '' then ''
+								else concat(trim(concat(g1.name, '\', g2.name, '\', g3.name, '\', g4.name), '\'), '\') end as path,
+							g.archival, g.comment, g.icon
+						from wbz.groups g
+						left join wbz.groups g4 on g4.id=g.owner
+						left join wbz.groups g3 on g3.id=g4.owner
+						left join wbz.groups g2 on g2.id=g3.owner
+						left join wbz.groups g1 on g1.id=g2.owner
+						where {filter}",
                     Config.Modules.ICONS => $@"
-select i.id, i.module, i.name, i.""format"", i.""path"",
-	i.file, i.height, i.width, i.size,
-	i.archival, i.comment
-from wbz.icons i
-where {filter}",
+						select i.id, i.module, i.name, i.""format"", i.""path"",
+							i.file, i.height, i.width, i.size,
+							i.archival, i.comment
+						from wbz.icons i
+						where {filter}",
                     Config.Modules.LOGS => $@"
-select l.id, l.""user"", l.module, l.instance, l.type as group, l.content, l.datetime
-from wbz.logs l
-left join wbz.users u on l.""user"" = u.id
-where {filter}",
+						select l.id, l.""user"", l.module, l.instance, l.type as group, l.content, l.datetime
+						from wbz.logs l
+						left join wbz.users u on l.""user"" = u.id
+						where {filter}",
                     Config.Modules.STORES => $@"
-select s.id, s.codename, s.name, s.postcode, s.city, s.address,
-	coalesce(sum(amount),0) as amount, coalesce(sum(reserved),0) as reserved,
-	s.archival, s.comment, s.icon
-from wbz.stores s
-left join wbz.stores_articles sa on s.id = sa.store
-where {filter}
-group by s.id",
+						select s.id, s.codename, s.name, s.postcode, s.city, s.address,
+							coalesce(sum(amount),0) as amount, coalesce(sum(reserved),0) as reserved,
+							s.archival, s.comment, s.icon
+						from wbz.stores s
+						left join wbz.stores_articles sa on s.id = sa.store
+						where {filter}
+						group by s.id",
                     Config.Modules.USERS => $@"
-select u.id, u.username, '' as newpass, u.forename, u.lastname,
-	u.email, u.phone, u.blocked, u.archival
-from wbz.users u
-where {filter}",
+						select u.id, u.username, '' as newpass, u.forename, u.lastname,
+							u.email, u.phone, u.blocked, u.archival
+						from wbz.users u
+						where {filter}",
                     Config.Modules.VEHICLES => $@"
-select v.id, v.register, v.brand, v.model, v.capacity,
-	c.id as forwarderid, c.codename as forwardername,
-	e.id as driverid, e.lastname || ' ' || e.forename as drivername,
-	v.prodyear,
-	v.archival, v.comment, v.icon
-from wbz.vehicles v
-left join wbz.contractors c on c.id=v.forwarder
-left join wbz.employees e on e.id=v.driver
-where {filter}",
+						select v.id, v.register, v.brand, v.model, v.capacity,
+							c.id as forwarderid, c.codename as forwardername,
+							e.id as driverid, e.lastname || ' ' || e.forename as drivername,
+							v.prodyear,
+							v.archival, v.comment, v.icon
+						from wbz.vehicles v
+						left join wbz.contractors c on c.id=v.forwarder
+						left join wbz.employees e on e.id=v.driver
+						where {filter}",
                     _ => throw new NotImplementedException(),
                 };
                 using var sqlDA = new NpgsqlDataAdapter(query, sqlConn);
@@ -877,28 +877,28 @@ where {filter}",
                 query = module switch
                 {
                     Config.Modules.ARTICLES => @"
-select am.id, am.name, am.converter, am.""default"",
-	sa.amount / coalesce(nullif(am.converter,0),1) as amount, sa.reserved / coalesce(nullif(am.converter,0),1) as reserved
-from wbz.articles a
-inner join wbz.articles_measures am on a.id = am.article
-left join wbz.stores_articles sa on a.id = sa.article
-where a.id=@id",
+						select am.id, am.name, am.converter, am.""default"",
+							sa.amount / coalesce(nullif(am.converter,0),1) as amount, sa.reserved / coalesce(nullif(am.converter,0),1) as reserved
+						from wbz.articles a
+						inner join wbz.articles_measures am on a.id = am.article
+						left join wbz.stores_articles sa on a.id = sa.article
+						where a.id=@id",
                     Config.Modules.ATTRIBUTES_CLASSES => @"
-select id, value, archival
-from wbz.attributes_values av
-where class=@id",
+						select id, value, archival
+						from wbz.attributes_values av
+						where class=@id",
                     Config.Modules.DISTRIBUTIONS => @"
-select id, position, family, (select lastname from wbz.families where id=dp.family) as familyname, members,
-	store, (select name from wbz.stores where id=dp.store) as storename,
-	article, (select name from wbz.articles where id=dp.article) as articlename,
-	amount / wbz.ArtDefMeaCon(dp.article) as amount, coalesce(nullif(wbz.ArtDefMeaNam(dp.article),''), 'kg') as measure, status
-from wbz.distributions_positions dp
-where distribution=@id",
+						select id, position, family, (select lastname from wbz.families where id=dp.family) as familyname, members,
+							store, (select name from wbz.stores where id=dp.store) as storename,
+							article, (select name from wbz.articles where id=dp.article) as articlename,
+							amount / wbz.ArtDefMeaCon(dp.article) as amount, coalesce(nullif(wbz.ArtDefMeaNam(dp.article),''), 'kg') as measure, status
+						from wbz.distributions_positions dp
+						where distribution=@id",
                     Config.Modules.DOCUMENTS => @"
-select id, position, article, (select name from wbz.articles where id=dp.article) as articlename,
-	amount / wbz.ArtDefMeaCon(dp.article) as amount, coalesce(nullif(wbz.ArtDefMeaNam(dp.article),''), 'kg') as measure, cost
-from wbz.documents_positions dp
-where document=@id",
+						select id, position, article, (select name from wbz.articles where id=dp.article) as articlename,
+							amount / wbz.ArtDefMeaCon(dp.article) as amount, coalesce(nullif(wbz.ArtDefMeaNam(dp.article),''), 'kg') as measure, cost
+						from wbz.documents_positions dp
+						where document=@id",
                     _ => throw new NotImplementedException(),
                 };
                 using (var sqlDA = new NpgsqlDataAdapter(query, sqlConn))
