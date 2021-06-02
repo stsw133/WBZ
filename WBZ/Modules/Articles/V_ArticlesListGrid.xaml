@@ -7,149 +7,96 @@
           xmlns:g="clr-namespace:WBZ.Globals"
           xmlns:p="clr-namespace:WBZ.Properties"
           mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800"
-          Margin="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1" AutoGenerateColumns="False">
+          AutoGenerateColumns="False" BorderThickness="0" RowHeaderWidth="0" IsReadOnly="True"
+          HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray">
     <DataGrid.ColumnHeaderStyle>
         <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="Background" Value="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}}"/>
-            <Setter Property="BorderThickness" Value="0,0,1,1"/>
             <Setter Property="BorderBrush" Value="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.25}"/>
+            <Setter Property="BorderThickness" Value="0,0,1,1"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="Padding" Value="4 3"/>
         </Style>
     </DataGrid.ColumnHeaderStyle>
     <DataGrid.Resources>
         <g:BindingProxy x:Key="proxy" Data="{Binding}"/>
-    </DataGrid.Resources>
+		<Style TargetType="{x:Type se:ColumnFilter}">
+			<Setter Property="IsFilterVisible" Value="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+		</Style>
+	</DataGrid.Resources>
     <DataGrid.Columns>
         <!-- ID -->
         <DataGridTextColumn Binding="{Binding ID}" Header="ID"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_ID, Converter={se:conv_Bool}}"/>
         <!-- Icon -->
-        <DataGridTemplateColumn Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"
-                                Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Icon, Converter={se:conv_Bool}}">
-            <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate>
-                    <Image Source="{Binding cIcon.Value}"/>
-                </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-        </DataGridTemplateColumn>
-        <!-- Codename -->
+		<se:DataGridImageColumn Image="{Binding cIcon.Value}" Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"
+                                Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Icon, Converter={se:conv_Bool}}"/>
+		<!-- Codename -->
         <DataGridTextColumn Binding="{Binding Codename}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Codename, Converter={se:conv_Bool}}">
-            <DataGridTextColumn.Header>
-                <se:ColumnFilter_Text Header="Kod"
-                                       Value="{Binding Data.Filters.Codename, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
-            </DataGridTextColumn.Header>
-        </DataGridTextColumn>
+			<DataGridTextColumn.Header>
+				<se:ColumnFilter Header="Kod" FilterType="Text" NameSQL="a.codename"/>
+			</DataGridTextColumn.Header>
+		</DataGridTextColumn>
         <!-- Name -->
-        <DataGridTextColumn Binding="{Binding Name}" Width="*"
+		<DataGridTextColumn Binding="{Binding Name}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Name, Converter={se:conv_Bool}}">
-            <DataGridTextColumn.Header>
-                <se:ColumnFilter_Text Header="Nazwa"
-                                       Value="{Binding Data.Filters.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
-            </DataGridTextColumn.Header>
-        </DataGridTextColumn>
-        <!-- EAN -->
-        <DataGridTextColumn Binding="{Binding EAN}" Width="*"
+			<DataGridTextColumn.Header>
+				<se:ColumnFilter Header="Nazwa" FilterType="Text" NameSQL="a.name"/>
+			</DataGridTextColumn.Header>
+		</DataGridTextColumn>
+		<!-- EAN -->
+		<DataGridTextColumn Binding="{Binding EAN}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_EAN, Converter={se:conv_Bool}}">
-            <DataGridTextColumn.Header>
-                <se:ColumnFilter_Text Header="EAN"
-                                       Value="{Binding Data.Filters.EAN, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
-            </DataGridTextColumn.Header>
-        </DataGridTextColumn>
-        <!-- Measure -->
-        <DataGridTextColumn Binding="{Binding Measure}" Header="Jm" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Measure, Converter={se:conv_Bool}}"/>
+			<DataGridTextColumn.Header>
+				<se:ColumnFilter Header="EAN" FilterType="Text" NameSQL="a.ean"/>
+			</DataGridTextColumn.Header>
+		</DataGridTextColumn>
+		<!-- Measure -->
+		<DataGridTextColumn Binding="{Binding Measure}" Width="*"
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Measure, Converter={se:conv_Bool}}">
+			<DataGridTextColumn.Header>
+				<se:ColumnFilter Header="Jm" FilterType="Text" NameSQL="wbz.ArtDefMeaNam(a.id)"/>
+			</DataGridTextColumn.Header>
+		</DataGridTextColumn>
         <!-- Amount -->
-        <DataGridTextColumn Binding="{Binding Amount}" Header="Ilość" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Amount, Converter={se:conv_Bool}}"/>
+		<DataGridTextColumn Binding="{Binding Amount}" Width="*"
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Amount, Converter={se:conv_Bool}}">
+			<DataGridTextColumn.Header>
+				<se:ColumnFilter Header="Ilość" FilterType="Number" NameSQL="sum(sa.amount) / wbz.ArtDefMeaCon(a.id)"/>
+			</DataGridTextColumn.Header>
+		</DataGridTextColumn>
         <!-- Reserved -->
-        <DataGridTextColumn Binding="{Binding Reserved}" Header="Zarezerwowano" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Reserved, Converter={se:conv_Bool}}"/>
-    </DataGrid.Columns>
+		<DataGridTextColumn Binding="{Binding Reserved}" Width="*"
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Reserved, Converter={se:conv_Bool}}">
+			<DataGridTextColumn.Header>
+				<se:ColumnFilter Header="Zarezerwowano" FilterType="Number" NameSQL="sum(sa.reserved) / wbz.ArtDefMeaCon(a.id)"/>
+			</DataGridTextColumn.Header>
+		</DataGridTextColumn>
+	</DataGrid.Columns>
     <DataGrid.ContextMenu>
         <ContextMenu>
             <!-- Columns -->
-            <MenuItem Header="Widoczność kolumn">
-                <MenuItem.Icon>
-                    <Image Source="/Resources/icon32_show.ico"/>
-                </MenuItem.Icon>
-                <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_ID, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Ikona" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Icon, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Kod" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Codename, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Nazwa" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Name, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="EAN" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_EAN, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Jm" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Measure, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Ilość" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Amount, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Zarezerwowano" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Reserved, Mode=TwoWay}"/>
-            </MenuItem>
-            <!-- Sorting -->
-            <MenuItem Header="Sortowanie danych">
-                <MenuItem.Icon>
-                    <Image Source="/Resources/icon32_descending.ico"/>
-                </MenuItem.Icon>
-                <MenuItem>
-                    <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Sortowanie 1:"/>
-                            <ToggleButton IsChecked="{Binding sorting_ArticlesList[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                          Height="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.2}"
-                                          Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.2}">
-                                <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.1}"
-                                       Source="/Resources/icon32_descending.ico"/>
-                            </ToggleButton>
-                            <ComboBox SelectedValue="{Binding sorting_ArticlesList[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                      SelectedValuePath="Tag" VerticalContentAlignment="Center">
-                                <ComboBoxItem Content="Kod" Tag="a.codename"/>
-                                <ComboBoxItem Content="Nazwa" Tag="a.name"/>
-                                <ComboBoxItem Content="EAN" Tag="a.ean"/>
-                            </ComboBox>
-                        </StackPanel>
-                    </MenuItem.Header>
-                </MenuItem>
-                <MenuItem>
-                    <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Sortowanie 2:"/>
-                            <ToggleButton IsChecked="{Binding sorting_ArticlesList[3], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                          Height="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.2}"
-                                          Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.2}">
-                                <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, ConverterParameter=0.1}"
-                                       Source="/Resources/icon32_descending.ico"/>
-                            </ToggleButton>
-                            <ComboBox SelectedValue="{Binding sorting_ArticlesList[2], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                      SelectedValuePath="Tag" VerticalContentAlignment="Center">
-                                <ComboBoxItem Content="Kod" Tag="a.codename"/>
-                                <ComboBoxItem Content="Nazwa" Tag="a.name"/>
-                                <ComboBoxItem Content="EAN" Tag="a.ean"/>
-                            </ComboBox>
-                        </StackPanel>
-                    </MenuItem.Header>
-                </MenuItem>
-                <MenuItem>
-                    <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Limit wczytywania:"/>
-                            <TextBox Text="{Binding sorting_ArticlesList[4], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                     Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=5}"
-                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                    </MenuItem.Header>
-                </MenuItem>
-            </MenuItem>
-            <!-- Actions -->
+			<se:ExtMenuItem Header="{Tr ColumnVisibility}" IconUri="/Resources/icon32_show.ico">
+				<MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_ID}"/>
+				<MenuItem IsCheckable="True" Header="Ikona" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Icon}"/>
+				<MenuItem IsCheckable="True" Header="Kod" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Codename}"/>
+				<MenuItem IsCheckable="True" Header="Nazwa" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Name}"/>
+				<MenuItem IsCheckable="True" Header="EAN" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_EAN}"/>
+				<MenuItem IsCheckable="True" Header="Jm" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Measure}"/>
+				<MenuItem IsCheckable="True" Header="Ilość" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Amount}"/>
+				<MenuItem IsCheckable="True" Header="Zarezerwowano" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Reserved}"/>
+			</se:ExtMenuItem>
+			<!-- Actions -->
             <Separator/>
-            <se:ExtMenuItem Header="Podgląd" IconUri="/Resources/icon32_search.ico" Command="se:Commands.Preview"/>
-            <se:ExtMenuItem Header="Dodaj" IconUri="/Resources/icon32_add.ico" Command="se:Commands.New"/>
-            <se:ExtMenuItem Header="Duplikuj" IconUri="/Resources/icon32_duplicate.ico" Command="se:Commands.Duplicate"/>
-            <se:ExtMenuItem Header="Edytuj" IconUri="/Resources/icon32_edit.ico" Command="se:Commands.Edit"/>
-            <se:ExtMenuItem Header="Usuń" IconUri="/Resources/icon32_delete.ico" Command="se:Commands.Delete"/>
+			<se:ExtMenuItem Header="{Tr Preview}" IconUri="/Resources/icon32_search.ico" Command="se:Commands.Preview"/>
+			<se:ExtMenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico" Command="se:Commands.New"/>
+			<se:ExtMenuItem Header="{Tr Duplicate}" IconUri="/Resources/icon32_duplicate.ico" Command="se:Commands.Duplicate"/>
+			<se:ExtMenuItem Header="{Tr Edit}" IconUri="/Resources/icon32_edit.ico" Command="se:Commands.Edit"/>
+			<se:ExtMenuItem Header="{Tr Delete}" IconUri="/Resources/icon32_delete.ico" Command="se:Commands.Delete"/>
             <Separator/>
-            <se:ExtMenuItem Header="Odśwież" IconUri="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
+			<se:ExtMenuItem Header="{Tr Refresh}" IconUri="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
         </ContextMenu>
     </DataGrid.ContextMenu>
     <DataGrid.RowStyle>

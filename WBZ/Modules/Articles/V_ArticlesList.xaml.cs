@@ -13,7 +13,7 @@ namespace WBZ.Modules.Articles
 	/// </summary>
 	public partial class ArticlesList : List
 	{
-		D_ArticlesList D = new D_ArticlesList();
+		readonly D_ArticlesList D = new D_ArticlesList();
 
 		public ArticlesList(Commands.Type mode)
 		{
@@ -29,8 +29,7 @@ namespace WBZ.Modules.Articles
 		/// </summary>
 		internal override void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			if (D.Mode == Commands.Type.SELECT)
-				dgList.SelectionMode = DataGridSelectionMode.Single;
+			base.Window_Loaded(sender, e);
 			D.StoresList = SQL.ListValues(Config.Modules.STORES, "codename", "archival=false", D.Mode != Commands.Type.SELECT);
 		}
 
@@ -39,13 +38,8 @@ namespace WBZ.Modules.Articles
 		/// </summary>
 		internal override void UpdateFilters()
 		{
-			D.FilterSqlString = $"LOWER(COALESCE(a.codename,'')) like '%{D.Filters.Codename.ToLower()}%' and "
-						+ $"LOWER(COALESCE(a.name,'')) like '%{D.Filters.Name.ToLower()}%' and "
-						+ $"LOWER(COALESCE(a.ean,'')) like '%{D.Filters.EAN.ToLower()}%' and "
-						+ (!D.Filters.Archival ? $"a.archival=false and " : string.Empty)
-						+ (D.Filters.Group > 0 ? $"exists (select from wbz.groups g where g.instance=a.id and g.owner={D.Filters.Group}) and " : string.Empty)
-						+ (D.Filters.MainStore.ID > 0 ? $"sa.store={D.Filters.MainStore.ID} and " : string.Empty);
-
+			base.UpdateFilters();
+			D.FilterSqlString += D.Filters.MainStore.ID > 0 ? $"sa.store={D.Filters.MainStore.ID} and " : string.Empty;
 			D.FilterSqlString = D.FilterSqlString.TrimEnd(" and ".ToCharArray());
 		}
 

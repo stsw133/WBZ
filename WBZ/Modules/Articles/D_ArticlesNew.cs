@@ -1,5 +1,4 @@
-﻿using StswExpress;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using WBZ.Models;
 using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_Article;
@@ -8,18 +7,6 @@ namespace WBZ.Modules.Articles
 {
     class D_ArticlesNew : D_ModuleNew<MODULE_MODEL>
 	{
-		/// Window title
-		public string Title
-		{
-			get
-			{
-				if		(Mode == Commands.Type.NEW)			return $"Nowy towar";
-				else if (Mode == Commands.Type.DUPLICATE)	return $"Duplikowanie towaru: {InstanceData.Name}";
-				else if (Mode == Commands.Type.EDIT)		return $"Edycja towaru: {InstanceData.Name}";
-				else if (Mode == Commands.Type.PREVIEW)		return $"Podgląd towaru: {InstanceData.Name}";
-				else										return string.Empty;
-			}
-		}
 		/// Instance source - stores
 		private ObservableCollection<M_Store> instanceSources_Stores;
 		public ObservableCollection<M_Store> InstanceSources_Stores

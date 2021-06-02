@@ -12,7 +12,7 @@ namespace WBZ.Models
 		/// <summary>
 		/// Name
 		/// </summary>
-		public string Name { get; set; } = string.Empty;
+		public override string Name { get; set; } = string.Empty;
 
 		/// <summary>
 		/// EAN
@@ -48,7 +48,7 @@ namespace WBZ.Models
 		/// Amount
 		/// </summary>
 		public decimal Amount { get; set; } = 0;
-		
+
 		/// <summary>
 		/// ReservedRaw
 		/// </summary>
@@ -59,7 +59,7 @@ namespace WBZ.Models
 		/// </summary>
 		public decimal Reserved { get; set; } = 0;
 	}
-	
+
 	public class M_ArticleMeasure
 	{
 		/// <summary>

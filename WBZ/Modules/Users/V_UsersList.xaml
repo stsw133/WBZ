@@ -45,10 +45,10 @@
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Top">
                     <se:IconButton Text="{Tr Preview}" Margin="5" Icon="/Resources/icon32_search.ico" Command="se:Commands.Preview"/>
-                    <se:IconButton Text="{Tr New}" Margin="5" Icon="/Resources/icon32_add.ico" Command="se:Commands.New"/>
-                    <se:IconButton Text="{Tr Duplicate}" Margin="5" Icon="/Resources/icon32_duplicate.ico" Command="se:Commands.Duplicate"/>
-                    <se:IconButton Text="{Tr Edit}" Margin="5" Icon="/Resources/icon32_edit.ico" Command="se:Commands.Edit"/>
-                    <se:IconButton Text="{Tr Delete}" Margin="5" Icon="/Resources/icon32_delete.ico" Command="se:Commands.Delete"/>
+					<se:IconButton Text="{Tr New}" Margin="5,0,5,5" Icon="/Resources/icon32_add.ico" Command="se:Commands.New"/>
+					<se:IconButton Text="{Tr Duplicate}" Margin="5,0,5,5" Icon="/Resources/icon32_duplicate.ico" Command="se:Commands.Duplicate"/>
+					<se:IconButton Text="{Tr Edit}" Margin="5,0,5,5" Icon="/Resources/icon32_edit.ico" Command="se:Commands.Edit"/>
+					<se:IconButton Text="{Tr Delete}" Margin="5,0,5,5" Icon="/Resources/icon32_delete.ico" Command="se:Commands.Delete"/>
                     <Separator/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">

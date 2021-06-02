@@ -27,6 +27,30 @@
 		"en": "Articles",
 		"pl": "Towary"
 	},
+	"ArticlesDuplicate": {
+		"en": "Duplicate article",
+		"pl": "Duplikat towaru"
+	},
+	"ArticlesEdit": {
+		"en": "Edit article",
+		"pl": "Edycja towaru"
+	},
+	"ArticlesList": {
+		"en": "List of articles",
+		"pl": "Lista towarów"
+	},
+	"ArticlesNew": {
+		"en": "New article",
+		"pl": "Nowy towar"
+	},
+	"ArticlesPreview": {
+		"en": "Preview article",
+		"pl": "Podgląd towaru"
+	},
+	"ArticlesSelect": {
+		"en": "Select article",
+		"pl": "Wybór towaru"
+	},
 	"AttachmentNew": {
 		"en": "New attachment",
 		"pl": "Nowy załącznik"

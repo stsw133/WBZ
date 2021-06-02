@@ -138,14 +138,14 @@
                         <TabItem.Header>
                             <se:Header Text="{Tr Articles}" Icon="/Resources/icon32_articles.ico"/>
                         </TabItem.Header>
-                        <bart:ArticlesListGrid x:Name="dgList_Articles" ItemsSource="{Binding InstanceSources_Articles}" MouseDoubleClick="dgList_Articles_MouseDoubleClick"/>
+                        <bart:ArticlesListGrid ItemsSource="{Binding InstanceSources_Articles}" MouseDoubleClick="dgList_Articles_MouseDoubleClick"/>
                     </TabItem>
                     <!-- tabDocuments -->
                     <TabItem x:Name="tabSources_Documents">
                         <TabItem.Header>
                             <se:Header Text="{Tr Documents}" Icon="/Resources/icon32_documents.ico"/>
                         </TabItem.Header>
-                        <bdoc:DocumentsListGrid x:Name="dgList_Documents" ItemsSource="{Binding InstanceSources_Documents}" MouseDoubleClick="dgList_Documents_MouseDoubleClick"/>
+                        <bdoc:DocumentsListGrid ItemsSource="{Binding InstanceSources_Documents}" MouseDoubleClick="dgList_Documents_MouseDoubleClick"/>
                     </TabItem>
                 </TabControl>
             </TabItem>

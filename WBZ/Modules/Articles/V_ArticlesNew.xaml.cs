@@ -59,9 +59,9 @@ namespace WBZ.Modules.Articles
 		}
 
 		/// <summary>
-		/// Tab changed
+		/// Tab changed for source
 		/// </summary>
-		private void tabs_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		private void tcSources_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			var tab = (e.AddedItems.Count > 0 ? e.AddedItems[0] : null) as TabItem;
 			if (tab?.Name?.EndsWith("_Stores") == true)
@@ -80,30 +80,9 @@ namespace WBZ.Modules.Articles
                     D.InstanceSources_Distributions = SQL.ListInstances<M_Distribution>(Config.Modules.DISTRIBUTIONS, $"dp.article={D.InstanceData.ID}");
 			}
 		}
-
-		/// <summary>
-		/// Open: Store
-		/// </summary>
-		private void dgList_Stores_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-		{
-            dgSourceList_MouseDoubleClick<M_Store>(sender, e, Config.Modules.STORES);
-		}
-
-		/// <summary>
-		/// Open: Document
-		/// </summary>
-		private void dgList_Documents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-		{
-            dgSourceList_MouseDoubleClick<M_Document>(sender, e, Config.Modules.DOCUMENTS);
-		}
-
-		/// <summary>
-		/// Open: Distribution
-		/// </summary>
-		private void dgList_Distributions_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-		{
-            dgSourceList_MouseDoubleClick<M_Distribution>(sender, e, Config.Modules.DISTRIBUTIONS);
-		}
+		private void dgList_Stores_MouseDoubleClick(object sender, MouseButtonEventArgs e) => dgSourceList_MouseDoubleClick<M_Store>(sender, e, Config.Modules.STORES);
+		private void dgList_Documents_MouseDoubleClick(object sender, MouseButtonEventArgs e) => dgSourceList_MouseDoubleClick<M_Document>(sender, e, Config.Modules.DOCUMENTS);
+		private void dgList_Distributions_MouseDoubleClick(object sender, MouseButtonEventArgs e) => dgSourceList_MouseDoubleClick<M_Distribution>(sender, e, Config.Modules.DISTRIBUTIONS);
 
 		/// <summary>
 		/// Validation

@@ -25,7 +25,7 @@ namespace WBZ.Models
 		/// Email
 		/// </summary>
 		public string Email { get; set; } = string.Empty;
-		
+
 		/// <summary>
 		/// Phone
 		/// </summary>
