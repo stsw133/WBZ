@@ -339,6 +339,10 @@
 		"en": "Show buttons with names",
 		"pl": "Pokaż nazwy w przyciskach"
 	},
+	"Sources": {
+		"en": "Sources",
+		"pl": "Źródła"
+	},
 	"Stats": {
 		"en": "Stats",
 		"pl": "Statystyki"
@@ -346,6 +350,30 @@
 	"Stores": {
 		"en": "Stores",
 		"pl": "Magazyny"
+	},
+	"StoresDuplicate": {
+		"en": "Duplicate store",
+		"pl": "Duplikat magazynu"
+	},
+	"StoresEdit": {
+		"en": "Edit store",
+		"pl": "Edycja magazynu"
+	},
+	"StoresList": {
+		"en": "List of stores",
+		"pl": "Lista magazynów"
+	},
+	"StoresNew": {
+		"en": "New store",
+		"pl": "Nowy magazyn"
+	},
+	"StoresPreview": {
+		"en": "Preview store",
+		"pl": "Podgląd magazynu"
+	},
+	"StoresSelect": {
+		"en": "Select store",
+		"pl": "Wybór magazynu"
 	},
 	"StyleAndFont": {
 		"en": "Style & Font",

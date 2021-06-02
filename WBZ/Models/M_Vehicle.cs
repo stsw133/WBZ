@@ -30,7 +30,7 @@
 		/// <summary>
 		/// Forwarder
 		/// </summary>
-		public MV Forwarder { get; set; } = new MV();
+		private readonly MV Forwarder = new MV();
 		public int ForwarderID
 		{
 			get => (int)(Forwarder.ID ?? 0);
@@ -45,7 +45,7 @@
 		/// <summary>
 		/// Driver
 		/// </summary>
-		public MV Driver { get; set; } = new MV();
+		private readonly MV Driver = new MV();
 		public int DriverID
 		{
 			get => (int)(Driver.ID ?? 0);

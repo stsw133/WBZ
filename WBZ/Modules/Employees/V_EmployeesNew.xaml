@@ -24,8 +24,7 @@
         <!-- titleBar -->
         <se:TitleBar DockPanel.Dock="Top" SubIcon="{Binding ModeIcon}"/>
         <!-- buttonsPanel -->
-        <Border DockPanel.Dock="Right" BorderBrush="Gray" BorderThickness="1,0,0,0"
-                Background="{Binding config_Employees_PanelColor, Source={x:Static p:Settings.Default}}">
+        <Border DockPanel.Dock="Right" BorderBrush="Gray" BorderThickness="1,0,0,0" Background="{Binding config_Employees_PanelColor, Source={x:Static p:Settings.Default}}">
             <DockPanel>
                 <DockPanel.Resources>
                     <Style TargetType="{x:Type se:IconButton}">
@@ -85,9 +84,10 @@
                         </Grid.Resources>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
+                            <ColumnDefinition Width="auto"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <DockPanel Grid.Column="0" Grid.ColumnSpan="2">
+                        <DockPanel Grid.Column="0" Grid.ColumnSpan="3">
                             <!-- Forename -->
                             <DockPanel DockPanel.Dock="Top">
                                 <se:ExtLabel Content="Imię:" FontWeight="Bold"/>
@@ -134,11 +134,6 @@
                                 <se:ExtTextBox Text="{Binding InstanceData.Address}"/>
                             </DockPanel>
                         </DockPanel>
-                        <!--
-                        <DockPanel Grid.Column="1">
-
-                        </DockPanel>
-                        -->
                     </Grid>
                 </ScrollViewer>
             </TabItem>

@@ -26,7 +26,7 @@ namespace WBZ.Modules.Vehicles
 		}
 
 		/// <summary>
-		/// Select: Forwarder
+		/// Select
 		/// </summary>
 		private void btnSelectForwarder_Click(object sender, RoutedEventArgs e)
 		{
@@ -38,10 +38,6 @@ namespace WBZ.Modules.Vehicles
 				D.InstanceData = D.InstanceData;
 			}
 		}
-
-		/// <summary>
-		/// Select: Driver
-		/// </summary>
 		private void btnSelectDriver_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new EmployeesList(Commands.Type.SELECT);

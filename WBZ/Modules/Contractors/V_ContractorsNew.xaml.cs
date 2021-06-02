@@ -44,7 +44,7 @@ namespace WBZ.Modules.Contractors
 		/// </summary>
         private void dgList_Documents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            dgList_Module_MouseDoubleClick<M_Document>(sender, e, Config.Modules.DOCUMENTS);
+            dgSourceList_MouseDoubleClick<M_Document>(sender, e, Config.Modules.DOCUMENTS);
         }
 
 		/// <summary>

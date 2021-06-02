@@ -1,25 +1,12 @@
-﻿using StswExpress;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using WBZ.Models;
 using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_Store;
 
 namespace WBZ.Modules.Stores
 {
-    class D_TransportNew : D_ModuleNew<MODULE_MODEL>
+    class D_StoresNew : D_ModuleNew<MODULE_MODEL>
 	{
-		/// Window title
-		public string Title
-		{
-			get
-			{
-				if		(Mode == Commands.Type.NEW)			return $"Nowy magazyn";
-				else if (Mode == Commands.Type.DUPLICATE)	return $"Duplikowanie magazynu: {InstanceData.Name}";
-				else if (Mode == Commands.Type.EDIT)		return $"Edycja magazynu: {InstanceData.Name}";
-				else if (Mode == Commands.Type.PREVIEW)		return $"Podgląd magazynu: {InstanceData.Name}";
-				else										return string.Empty;
-			}
-		}
 		/// Instance source - articles
 		private ObservableCollection<M_Article> instanceSources_Articles;
 		public ObservableCollection<M_Article> InstanceSources_Articles

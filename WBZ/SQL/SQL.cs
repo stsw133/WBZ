@@ -576,90 +576,6 @@ namespace WBZ
 
 		#region modules
 		/// <summary>
-		/// Liczy ilość instancji
-		/// </summary>
-		/// <param name="module">Modułu</param>
-		/// <param name="filter">Filtr SQL</param>
-		internal static int CountInstances(string module, string filter = "true")
-		{
-			var result = 0;
-			string query;
-
-			try
-			{
-				filter = filter?.TrimEnd(" and ".ToCharArray());
-				if (string.IsNullOrWhiteSpace(filter))
-					filter = "true";
-
-                using var sqlConn = ConnOpenedWBZ;
-                query = module switch
-                {
-                    Config.Modules.ARTICLES => @"
-						select count(distinct a.id)
-						from wbz.articles a
-						left join wbz.stores_articles sa on a.id=sa.article",
-                    Config.Modules.ATTACHMENTS => @"
-						select count(distinct a.id)
-						from wbz.attachments a
-						left join wbz.users u on a.""user"" = u.id",
-                    Config.Modules.ATTRIBUTES_CLASSES => @"
-						select count(distinct ac.id)
-						from wbz.attributes_classes ac",
-                    Config.Modules.CONTRACTORS => @"
-						select count(distinct c.id)
-						from wbz.contractors c",
-                    Config.Modules.DISTRIBUTIONS => @"
-						select count(distinct d.id)
-						from wbz.distributions d",
-                    Config.Modules.DOCUMENTS => @"
-						select count(distinct d.id)
-						from wbz.documents d
-						left join wbz.documents_positions dp on dp.document=d.id
-						left join wbz.contractors c on c.id=d.contractor
-						left join wbz.stores s on s.id=d.store",
-                    Config.Modules.EMPLOYEES => @"
-						select count(distinct e.id)
-						from wbz.employees e
-						left join wbz.users u on u.id=e.""user""",
-                    Config.Modules.FAMILIES => @"
-						select count(distinct f.id)
-						from wbz.families f",
-                    Config.Modules.GROUPS => @"
-						select count(distinct g.id)
-						from wbz.groups g",
-                    Config.Modules.ICONS => @"
-						select count(distinct i.id)
-						from wbz.icons i",
-                    Config.Modules.LOGS => @"
-						select count(distinct l.id)
-						from wbz.logs l
-						left join wbz.users u on l.""user"" = u.id",
-                    Config.Modules.STORES => @"
-						select count(distinct s.id)
-						from wbz.stores s
-						left join wbz.stores_articles sa on s.id = sa.store",
-                    Config.Modules.USERS => @"
-						select count(distinct u.id)
-						from wbz.users u",
-                    Config.Modules.VEHICLES => @"
-						select count(distinct v.id)
-						from wbz.vehicles v
-						left join wbz.contractors c on c.id=v.forwarder
-						left join wbz.employees e on e.id=v.driver",
-                    _ => throw new NotImplementedException(),
-                };
-                using var sqlCmd = new NpgsqlCommand(query, sqlConn);
-                sqlCmd.CommandText += $" where {filter}";
-                result = Convert.ToInt32(sqlCmd.ExecuteScalar());
-            }
-			catch (Exception ex)
-			{
-				Error("Błąd pobierania liczby instancji", ex, module);
-			}
-
-			return result;
-		}
-		/// <summary>
 		/// Pobiera listę ID i wartości (zazwyczaj ID i Name)
 		/// </summary>
 		/// <param name="module">Moduł</param>
@@ -671,26 +587,124 @@ namespace WBZ
 
 			try
 			{
-				filter = filter?.TrimEnd(" and ".ToCharArray());
+				if (string.IsNullOrWhiteSpace(filter))
+					filter = "true";
+
+				using var sqlConn = ConnOpenedWBZ;
+				var query = $@"select id, {column} as value
+					from wbz.{module}
+					where {filter}
+					order by 2 asc";
+				using var sqlDA = new NpgsqlDataAdapter(query, sqlConn);
+				if (allowEmpty)
+					sqlDA.SelectCommand.CommandText = "select 0 as id, '' as value union " + sqlDA.SelectCommand.CommandText;
+
+				var dt = new DataTable();
+				sqlDA.Fill(dt);
+				result = dt.ToList<MV>();
+			}
+			catch (Exception ex)
+			{
+				Error("Błąd pobierania listy wartości", ex, module);
+			}
+
+			return result;
+		}
+		/// <summary>
+		/// Liczy ilość instancji
+		/// </summary>
+		/// <param name="module">Modułu</param>
+		/// <param name="filter">Filtr SQL</param>
+		internal static int CountInstances(string module, string filter, List<Tuple<string, object>> parameters = null)
+		{
+			var result = 0;
+			string query;
+
+			try
+			{
 				if (string.IsNullOrWhiteSpace(filter))
 					filter = "true";
 
                 using var sqlConn = ConnOpenedWBZ;
-                var query = $@"select id, {column} as value
-					from wbz.{module}
-					where {filter}
-					order by 2 asc";
-                using var sqlDA = new NpgsqlDataAdapter(query, sqlConn);
-                if (allowEmpty)
-                    sqlDA.SelectCommand.CommandText = "select 0 as id, '' as value union " + sqlDA.SelectCommand.CommandText;
-
-                var dt = new DataTable();
-                sqlDA.Fill(dt);
-                result = dt.ToList<MV>();
+                query = module switch
+                {
+                    Config.Modules.ARTICLES => $@"
+						select count(distinct a.id)
+						from wbz.articles a
+						left join wbz.stores_articles sa on a.id=sa.article
+						where {filter}",
+                    Config.Modules.ATTACHMENTS => $@"
+						select count(distinct a.id)
+						from wbz.attachments a
+						left join wbz.users u on a.""user"" = u.id
+						where {filter}",
+                    Config.Modules.ATTRIBUTES_CLASSES => $@"
+						select count(distinct ac.id)
+						from wbz.attributes_classes ac
+						where {filter}",
+                    Config.Modules.CONTRACTORS => $@"
+						select count(distinct c.id)
+						from wbz.contractors c
+						where {filter}",
+                    Config.Modules.DISTRIBUTIONS => $@"
+						select count(distinct d.id)
+						from wbz.distributions d
+						where {filter}",
+                    Config.Modules.DOCUMENTS => $@"
+						select count(distinct d.id)
+						from wbz.documents d
+						left join wbz.documents_positions dp on dp.document=d.id
+						left join wbz.contractors c on c.id=d.contractor
+						left join wbz.stores s on s.id=d.store
+						where {filter}",
+                    Config.Modules.EMPLOYEES => $@"
+						select count(distinct e.id)
+						from wbz.employees e
+						left join wbz.users u on u.id=e.""user""
+						where {filter}",
+                    Config.Modules.FAMILIES => $@"
+						select count(distinct f.id)
+						from wbz.families f
+						where {filter}",
+                    Config.Modules.GROUPS => $@"
+						select count(distinct g.id)
+						from wbz.groups g
+						where {filter}",
+                    Config.Modules.ICONS => $@"
+						select count(distinct i.id)
+						from wbz.icons i
+						where {filter}",
+                    Config.Modules.LOGS => $@"
+						select count(distinct l.id)
+						from wbz.logs l
+						left join wbz.users u on l.""user"" = u.id
+						where {filter}",
+                    Config.Modules.STORES => $@"
+						select count(distinct s.id)
+						from wbz.stores s
+						left join wbz.stores_articles sa on s.id = sa.store
+						where {filter}",
+                    Config.Modules.USERS => $@"
+						select count(distinct u.id)
+						from wbz.users u
+						where {filter}",
+                    Config.Modules.VEHICLES => $@"
+						select count(distinct v.id)
+						from wbz.vehicles v
+						left join wbz.contractors c on c.id=v.forwarder
+						left join wbz.employees e on e.id=v.driver
+						where {filter}",
+                    _ => throw new NotImplementedException(),
+                };
+                using var sqlCmd = new NpgsqlCommand(query, sqlConn);
+				if (parameters != null)
+					foreach (var param in parameters)
+						sqlCmd.Parameters.AddWithValue(param.Item1, param.Item2);
+				result = Convert.ToInt32(sqlCmd.ExecuteScalar());
             }
 			catch (Exception ex)
 			{
-				Error("Błąd pobierania listy wartości", ex, module);
+				Error("Błąd pobierania liczby instancji", ex, module);
 			}
 
 			return result;
@@ -702,14 +716,13 @@ namespace WBZ
 		/// <param name="filter">Filtr SQL</param>
 		/// <param name="sort">Kolekcja sortowania</param>
 		/// <param name="displayed">Liczba obecnie wyświetlonych rekordów</param>
-		internal static ObservableCollection<T> ListInstances<T>(string module, string filter, List<NpgsqlParameter> parameters = null, StringCollection sort = null, int displayed = 0) where T : class, new()
+		internal static ObservableCollection<T> ListInstances<T>(string module, string filter, List<Tuple<string, object>> parameters = null, StringCollection sort = null, int displayed = 0) where T : class, new()
 		{
 			var result = new ObservableCollection<T>();
 			string query;
 
 			try
 			{
-				filter = filter?.TrimEnd(" and ".ToCharArray());
 				if (string.IsNullOrWhiteSpace(filter))
 					filter = "true";
 				if (sort == null)
@@ -803,7 +816,7 @@ namespace WBZ
 						where {filter}",
                     Config.Modules.STORES => $@"
 						select s.id, s.codename, s.name, s.postcode, s.city, s.address,
-							coalesce(sum(amount),0) as amount, coalesce(sum(reserved),0) as reserved,
+							coalesce(sum(sa.amount),0) as amount, coalesce(sum(sa.reserved),0) as reserved,
 							s.archival, s.comment, s.icon
 						from wbz.stores s
 						left join wbz.stores_articles sa on s.id = sa.store
@@ -829,7 +842,7 @@ namespace WBZ
                 using var sqlDA = new NpgsqlDataAdapter(query, sqlConn);
 				if (parameters != null)
 					foreach (var param in parameters)
-						sqlDA.SelectCommand.Parameters.AddWithValue(param.ParameterName, param.Value);
+						sqlDA.SelectCommand.Parameters.AddWithValue(param.Item1, param.Item2);
                 sqlDA.SelectCommand.CommandText += $" order by {sort[0]} {sort[1]}, {sort[2]} {sort[3]}";
                 sqlDA.SelectCommand.CommandText += $" limit {sort[4]} offset {displayed}";
 

@@ -1,4 +1,4 @@
-﻿using SE = StswExpress;
+﻿using StswExpress;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -11,8 +11,6 @@ using System.Windows.Data;
 using System.Windows.Input;
 using WBZ.Globals;
 using WBZ.Models;
-using System.Collections.Generic;
-using Npgsql;
 
 namespace WBZ.Modules._base
 {
@@ -38,13 +36,13 @@ namespace WBZ.Modules._base
         /// </summary>
         internal virtual void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            dgLists = new ObservableCollection<DataGrid>(SE.Extensions.FindVisualChildren<DataGrid>(W));
-            if (D.Mode == SE.Commands.Type.SELECT)
+            dgLists = new ObservableCollection<DataGrid>(Extensions.FindVisualChildren<DataGrid>(W));
+            if (D.Mode == Commands.Type.SELECT)
                 foreach (var dg in dgLists)
                     dg.SelectionMode = DataGridSelectionMode.Single;
 
             if (dgLists.Count > 1)
-                D.TotalItems = SQL.CountInstances(D.Module);
+                D.TotalItems = SQL.CountInstances(D.Module, D.FilterSqlString, D.FilterSqlParams);
             else
                 cmdRefresh_Executed(null, null);
         }
@@ -54,17 +52,7 @@ namespace WBZ.Modules._base
 		/// </summary>
         internal virtual void UpdateFilters()
         {
-            D.FilterSqlString = string.Empty;
-            D.FilterSqlParams = new List<NpgsqlParameter>();
-
-            var dgList = dgLists[D.SelectedTab];
-            foreach (var col in dgList.Columns)
-                if (col.Header is SE.ColumnFilter c && c?.FilterSQL != null)
-                {
-                    D.FilterSqlString += c.FilterSQL + " and ";
-                    D.FilterSqlParams.Add(new NpgsqlParameter() { ParameterName = c.ParamSQL + "1", Value = c.Value1 ?? DBNull.Value });
-                    D.FilterSqlParams.Add(new NpgsqlParameter() { ParameterName = c.ParamSQL + "2", Value = c.Value2 ?? DBNull.Value });
-                }
+            Fn.GetColumnFilters(dgLists[D.SelectedTab], out var a, out var b); D.FilterSqlString = a; D.FilterSqlParams = b;
             D.FilterSqlString += !(D.Filters as M).Archival ? $"{Config.GetModuleAlias(D.Module)}.archival=false and " : string.Empty;
             D.FilterSqlString += (D.Filters as M).Group > 0 ? $"exists (select from wbz.groups g where g.instance={Config.GetModuleAlias(D.Module)}.id and g.owner={(D.Filters as M).Group}) and " : string.Empty;
             D.FilterSqlString = D.FilterSqlString.TrimEnd(" and ".ToCharArray());
@@ -73,7 +61,7 @@ namespace WBZ.Modules._base
         /// <summary>
 		/// Select instance
 		/// </summary>
-		internal void cmdSelect_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = D?.Mode == SE.Commands.Type.SELECT;
+		internal void cmdSelect_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = D?.Mode == Commands.Type.SELECT;
         internal virtual void cmdSelect_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Selected = dgLists[D.SelectedTab].SelectedItems.Cast<MODULE_MODEL>().FirstOrDefault();
@@ -88,7 +76,7 @@ namespace WBZ.Modules._base
         {
             var selectedInstances = dgLists[D.SelectedTab].SelectedItems.Cast<MODULE_MODEL>();
             foreach (MODULE_MODEL instance in selectedInstances)
-                (Activator.CreateInstance(Type.GetType(Namespace + "New"), instance, SE.Commands.Type.PREVIEW) as Window).Show();
+                (Activator.CreateInstance(Type.GetType(Namespace + "New"), instance, Commands.Type.PREVIEW) as Window).Show();
         }
 
         /// <summary>
@@ -97,7 +85,7 @@ namespace WBZ.Modules._base
 		internal void cmdNew_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = Global.User.Perms.Contains($"{D?.Module}_{Global.PermType.SAVE}");
         internal virtual void cmdNew_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            (Activator.CreateInstance(Type.GetType(Namespace + "New"), null, SE.Commands.Type.NEW) as Window).Show();
+            (Activator.CreateInstance(Type.GetType(Namespace + "New"), null, Commands.Type.NEW) as Window).Show();
         }
 
         /// <summary>
@@ -108,7 +96,7 @@ namespace WBZ.Modules._base
         {
             var selectedInstances = dgLists[D.SelectedTab].SelectedItems.Cast<MODULE_MODEL>();
             foreach (MODULE_MODEL instance in selectedInstances)
-                (Activator.CreateInstance(Type.GetType(Namespace + "New"), instance, SE.Commands.Type.DUPLICATE) as Window).Show();
+                (Activator.CreateInstance(Type.GetType(Namespace + "New"), instance, Commands.Type.DUPLICATE) as Window).Show();
         }
 
         /// <summary>
@@ -119,7 +107,7 @@ namespace WBZ.Modules._base
         {
             var selectedInstances = dgLists[D.SelectedTab].SelectedItems.Cast<MODULE_MODEL>();
             foreach (MODULE_MODEL instance in selectedInstances)
-                (Activator.CreateInstance(Type.GetType(Namespace + "New"), instance, SE.Commands.Type.EDIT) as Window).Show();
+                (Activator.CreateInstance(Type.GetType(Namespace + "New"), instance, Commands.Type.EDIT) as Window).Show();
         }
 
         /// <summary>
@@ -145,14 +133,7 @@ namespace WBZ.Modules._base
 		internal virtual void cmdClear_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             D.Filters = new MODULE_MODEL();
-
-            var dgList = dgLists[D.SelectedTab];
-            foreach (var col in dgList.Columns)
-                if (col.Header is SE.ColumnFilter c)
-                {
-                    c.Value1 = null;
-                    c.Value2 = null;
-                }
+            Fn.ClearColumnFilters(dgLists[D.SelectedTab]);
             cmdRefresh_Executed(null, null);
         }
 
@@ -188,7 +169,7 @@ namespace WBZ.Modules._base
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                if (D.Mode != SE.Commands.Type.SELECT)
+                if (D.Mode != Commands.Type.SELECT)
                 {
                     if (Global.User.Perms.Contains($"{D.Module}_{Global.PermType.SAVE}"))
                         cmdEdit_Executed(null, null);

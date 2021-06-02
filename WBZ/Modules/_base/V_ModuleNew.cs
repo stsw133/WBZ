@@ -61,7 +61,11 @@ namespace WBZ.Modules._base
 		/// <summary>
 		/// Validation
 		/// </summary>
-		internal virtual bool CheckDataValidation() => true;
+		internal virtual bool CheckDataValidation()
+		{
+			//TODO - dynamicznie po FontWeight->Bold w zakładce głównej (???)
+			return true;
+		}
 
 		/// <summary>
 		/// Save
@@ -104,7 +108,7 @@ namespace WBZ.Modules._base
 		/// <summary>
 		/// Open module
 		/// </summary>
-		internal void dgList_Module_MouseDoubleClick<T>(object sender, MouseButtonEventArgs e, string module)
+		internal void dgSourceList_MouseDoubleClick<T>(object sender, MouseButtonEventArgs e, string module)
 		{
 			if (e.LeftButton == MouseButtonState.Pressed)
 			{
