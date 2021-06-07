@@ -38,72 +38,56 @@
         <DataGridTextColumn Binding="{Binding Codename}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_Codename, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter_Text Header="Kod"
-                                       Value="{Binding Data.Filters.Codename, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+                <se:ColumnFilter Header="Kod"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Name -->
         <DataGridTextColumn Binding="{Binding Name}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_Name, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter_Text Header="Nazwa"
-                                       Value="{Binding Data.Filters.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+                <se:ColumnFilter Header="Nazwa"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Branch -->
         <DataGridTextColumn Binding="{Binding Branch}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_Branch, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter_Text Header="Oddział"
-                                       Value="{Binding Data.Filters.Branch, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+                <se:ColumnFilter Header="Oddział"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- NIP -->
         <DataGridTextColumn Binding="{Binding NIP}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_NIP, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter_Text Header="NIP"
-                                       Value="{Binding Data.Filters.NIP, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+                <se:ColumnFilter Header="NIP"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- REGON -->
         <DataGridTextColumn Binding="{Binding REGON}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_REGON, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter_Text Header="REGON"
-                                       Value="{Binding Data.Filters.REGON, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+                <se:ColumnFilter Header="REGON"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Postcode -->
         <DataGridTextColumn Binding="{Binding Postcode}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_Postcode, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter_Text Header="Kod pocztowy"
-                                       Value="{Binding Data.Filters.Postcode, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+                <se:ColumnFilter Header="Kod pocztowy"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- City -->
         <DataGridTextColumn Binding="{Binding City}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_City, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter_Text Header="Miasto"
-                                       Value="{Binding Data.Filters.City, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+                <se:ColumnFilter Header="Miasto"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Address -->
         <DataGridTextColumn Binding="{Binding Address}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_Address, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter_Text Header="Adres"
-                                       Value="{Binding Data.Filters.Address, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+                <se:ColumnFilter Header="Adres"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
     </DataGrid.Columns>

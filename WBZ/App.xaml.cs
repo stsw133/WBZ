@@ -35,7 +35,7 @@ namespace WBZ
 			if (File.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Resources\Translations.json")))
 				TMLanguagesLoader.Instance.AddFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Resources\Translations.json"));
 
-			Config.ListModules.Sort((x, y) => x.Item2.CompareTo(y.Item2));
+			Config.ListModules.Sort((x, y) => (x.Value as string).CompareTo(y.Value as string));
 
 			if (DB.LoadAllDatabases().Count == 0)
 				new LoginDatabases().Show();

@@ -41,64 +41,49 @@
         <DataGridTextColumn Binding="{Binding Name}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Name, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter_Text Header="Nazwa"
-                                       Value="{Binding Data.Filters.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+                <se:ColumnFilter Header="Nazwa"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Store -->
         <DataGridTextColumn Binding="{Binding cStore.Value}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Store, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter_Text Header="Magazyn"
-                                       Value="{Binding Data.Filters.cStore.Value, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+                <se:ColumnFilter Header="Magazyn"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- ContractorName -->
         <DataGridTextColumn Binding="{Binding ContractorName}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_ContractorName, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter_Text Header="Kontrahent"
-                                       Value="{Binding Data.Filters.ContractorName, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+                <se:ColumnFilter Header="Kontrahent"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- PositionsCount -->
         <DataGridTextColumn Binding="{Binding PositionsCount}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_PositionsCount, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter_Number Header="Pozycje"
-                                         Value="{Binding Data.Filters.PositionsCount, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                         IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+                <se:ColumnFilter Header="Pozycje"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Weight -->
         <DataGridTextColumn Binding="{Binding Weight}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Weight, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter_Number Header="Waga (kg)"
-                                         Value="{Binding Data.Filters.Weight, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                         IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+                <se:ColumnFilter Header="Waga (kg)"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Cost -->
         <DataGridTextColumn Binding="{Binding Cost}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Cost, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter_Number Header="Kwota netto"
-                                         Value="{Binding Data.Filters.Cost, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                         IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+                <se:ColumnFilter Header="Kwota netto"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- DateIssue -->
         <DataGridTextColumn Binding="{Binding DateIssue, StringFormat={}{0:yyyy-MM-dd}}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_DateIssue, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter_Date Header="Data wystawienia"
-                                       Value1="{Binding Data.Filters.fDateIssue, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       Value2="{Binding Data.Filters.DateIssue, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+                <se:ColumnFilter Header="Data wystawienia"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
     </DataGrid.Columns>

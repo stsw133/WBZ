@@ -10,7 +10,7 @@ namespace WBZ.Modules.AttributesClasses
 	/// </summary>
 	public partial class AttributesClassesNew : New
 	{
-        D_IconsNew D = new D_IconsNew();
+        readonly D_IconsNew D = new D_IconsNew();
 
         public AttributesClassesNew(MODULE_MODEL instance, Commands.Type mode)
         {

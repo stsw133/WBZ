@@ -53,9 +53,9 @@ namespace WBZ.Modules._base
         internal virtual void UpdateFilters()
         {
             Fn.GetColumnFilters(dgLists[D.SelectedTab], out var a, out var b); D.FilterSqlString = a; D.FilterSqlParams = b;
-            D.FilterSqlString += !(D.Filters as M).Archival ? $"{Config.GetModuleAlias(D.Module)}.archival=false and " : string.Empty;
-            D.FilterSqlString += (D.Filters as M).Group > 0 ? $"exists (select from wbz.groups g where g.instance={Config.GetModuleAlias(D.Module)}.id and g.owner={(D.Filters as M).Group}) and " : string.Empty;
-            D.FilterSqlString = D.FilterSqlString.TrimEnd(" and ".ToCharArray());
+            D.FilterSqlString += !(D.Filters as M).Archival ? $" and {Config.GetModuleAlias(D.Module)}.archival=false" : string.Empty;
+            D.FilterSqlString += (D.Filters as M).Group > 0 ? $" and exists (select from wbz.groups g where g.instance={Config.GetModuleAlias(D.Module)}.id and g.owner={(D.Filters as M).Group})" : string.Empty;
+            D.FilterSqlString = D.FilterSqlString.TrimStart(" and ".ToCharArray());
         }
 
         /// <summary>

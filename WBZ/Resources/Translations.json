@@ -64,12 +64,40 @@
 		"pl": "Atrybuty"
 	},
 	"AttributesClasses": {
-		"en": "Classes of attributes",
+		"en": "Attribute classes",
 		"pl": "Klasy atrybutów"
+	},
+	"AttributesClassesDuplicate": {
+		"en": "Duplicate attribute class",
+		"pl": "Duplikat klasy atrybutu"
+	},
+	"AttributesClassesEdit": {
+		"en": "Edit attribute class",
+		"pl": "Edycja klasy atrybutu"
+	},
+	"AttributesClassesList": {
+		"en": "List of attribute classes",
+		"pl": "Lista klas atrybutów"
+	},
+	"AttributesClassesNew": {
+		"en": "New attribute class",
+		"pl": "Nowa klasa atrybutu"
+	},
+	"AttributesClassesPreview": {
+		"en": "Preview attribute class",
+		"pl": "Podgląd klasy atrybutu"
+	},
+	"AttributesClassesSelect": {
+		"en": "Select attribute class",
+		"pl": "Wybór klasy atrybutu"
 	},
 	"Cancel": {
 		"en": "Cancel",
 		"pl": "Anuluj"
+	},
+	"ClearFilters": {
+		"en": "Clear filters",
+		"pl": "Czyść filtry"
 	},
 	"CloseApp": {
 		"en": "Close app",
@@ -94,6 +122,10 @@
 	"Community": {
 		"en": "Community",
 		"pl": "Społeczność"
+	},
+	"ConfigureFilters": {
+		"en": "Configure filters",
+		"pl": "Konfiguruj filtry"
 	},
 	"Console": {
 		"en": "Console",
@@ -362,6 +394,14 @@
 	"ShowButtonsWithNames": {
 		"en": "Show buttons with names",
 		"pl": "Pokaż nazwy w przyciskach"
+	},
+	"ShowFilters": {
+		"en": "Show filters",
+		"pl": "Pokaż filtry"
+	},
+	"ShowGroups": {
+		"en": "Show groups",
+		"pl": "Pokaż grupy"
 	},
 	"Sources": {
 		"en": "Sources",

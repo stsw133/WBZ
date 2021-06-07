@@ -37,14 +37,11 @@ namespace WBZ.Modules.Articles
 		/// <summary>
 		/// Measures - CellEditEnding
 		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
 		private void dgMeasures_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
 		{
 			int index = e.Row.GetIndex();
 			dgMeasures_Convert(index);
 		}
-
 		private async void dgMeasures_Convert(int index)
 		{
 			await Task.Delay(10);

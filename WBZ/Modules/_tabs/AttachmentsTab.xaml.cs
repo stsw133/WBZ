@@ -43,7 +43,7 @@ namespace WBZ.Modules._tabs
                 }
                 if (ID != 0 && D.InstanceAttachments == null)
                 {
-                    D.InstanceAttachments = SQL.ListInstances<M_Attachment>(Config.Modules.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}");
+                    D.InstanceAttachments = SQL.ListInstances<M_Attachment>(Config.SubModules.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}");
                     win.Closed += UserControl_Closed;
                 }
             }
@@ -82,7 +82,7 @@ namespace WBZ.Modules._tabs
                 }
 
                 SQL.SetAttachment(Module, ID, window.GetName, filePath, file, filePath);
-                D.InstanceAttachments = SQL.ListInstances<M_Attachment>(Config.Modules.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}");
+                D.InstanceAttachments = SQL.ListInstances<M_Attachment>(Config.SubModules.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}");
             }
         }
 
@@ -113,8 +113,8 @@ namespace WBZ.Modules._tabs
                 return;
             var item = lbAttachments.SelectedItem as M_Attachment;
 
-            SQL.DeleteInstance(Config.Modules.ATTACHMENTS, item.ID, item.Name);
-            D.InstanceAttachments = SQL.ListInstances<M_Attachment>(Config.Modules.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}");
+            SQL.DeleteInstance(Config.SubModules.ATTACHMENTS, item.ID, item.Name);
+            D.InstanceAttachments = SQL.ListInstances<M_Attachment>(Config.SubModules.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}");
         }
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace WBZ.Modules._tabs
                 byte[] file = File.ReadAllBytes(files[0]);
 
                 SQL.SetAttachment(Module, ID, Path.GetFileName(files[0]), files[0], file, files[0]);
-                D.InstanceAttachments = SQL.ListInstances<M_Attachment>(Config.Modules.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}");
+                D.InstanceAttachments = SQL.ListInstances<M_Attachment>(Config.SubModules.ATTACHMENTS, $"a.module='{Module}' and a.instance={ID}");
             }
         }
 

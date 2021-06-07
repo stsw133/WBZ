@@ -63,7 +63,7 @@ namespace WBZ.Modules._base
 
 		/// SQL filter
 		public string FilterSqlString { get; set; }
-		public List<Tuple<string, object>> FilterSqlParams { get; set; }
+		public List<(string name, object val)> FilterSqlParams { get; set; }
 
 		/// Filters instance
 		private MODULE_MODEL filters = new MODULE_MODEL();

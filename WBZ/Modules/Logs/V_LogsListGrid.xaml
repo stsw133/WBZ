@@ -29,9 +29,7 @@
         <DataGridTextColumn Binding="{Binding cUser.Value}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_User, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter_Text Header="Użytkownik"
-                                       Value="{Binding Data.Filters.cUser.Value, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+                <se:ColumnFilter Header="Użytkownik"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Module -->
@@ -58,19 +56,14 @@
         <DataGridTextColumn Binding="{Binding Content}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Content, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter_Text Header="Treść"
-                                       Value="{Binding Data.Filters.Content, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+                <se:ColumnFilter Header="Treść"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- DateTime -->
         <DataGridTextColumn Binding="{Binding DateTime, StringFormat={}{0:yyyy-MM-dd}}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_DateTime, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter_Date Header="Data i czas"
-                                       Value1="{Binding Data.Filters.fDateTime, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       Value2="{Binding Data.Filters.DateTime, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+                <se:ColumnFilter Header="Data i czas"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
     </DataGrid.Columns>

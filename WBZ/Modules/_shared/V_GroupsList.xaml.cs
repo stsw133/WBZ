@@ -34,7 +34,7 @@ namespace WBZ.Modules._shared
                 if (D.Mode == Commands.Type.SELECT)
                 {
                     var item = groupsView.SelectedItem as TreeViewItem;
-                    Selected = SQL.GetInstance<MODULE_MODEL>(Config.Modules.GROUPS, (int)item.Tag);
+                    Selected = SQL.GetInstance<MODULE_MODEL>(Config.SubModules.GROUPS, (int)item.Tag);
 
                     if (Selected != null)
                         DialogResult = true;

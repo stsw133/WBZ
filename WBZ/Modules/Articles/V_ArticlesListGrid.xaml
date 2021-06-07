@@ -10,7 +10,7 @@
           AutoGenerateColumns="False" BorderThickness="0" RowHeaderWidth="0" IsReadOnly="True"
           HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray">
     <DataGrid.ColumnHeaderStyle>
-        <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+        <Style TargetType="{x:Type DataGridColumnHeader}">
             <Setter Property="Background" Value="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}}"/>
             <Setter Property="BorderBrush" Value="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.25}"/>
             <Setter Property="BorderThickness" Value="0,0,1,1"/>

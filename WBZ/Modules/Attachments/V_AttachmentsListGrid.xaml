@@ -29,9 +29,7 @@
         <DataGridTextColumn Binding="{Binding cUser.Value}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_User, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter_Text Header="Użytkownik"
-                                       Value="{Binding Data.Filters.cUser.Value, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+                <se:ColumnFilter Header="Użytkownik"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Module -->
@@ -58,9 +56,7 @@
         <DataGridTextColumn Binding="{Binding Name}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Name, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter_Text Header="Nazwa"
-                                       Value="{Binding Data.Filters.Name, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                                       IsFilterVisible="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+                <se:ColumnFilter Header="Nazwa"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
     </DataGrid.Columns>

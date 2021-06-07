@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 using WBZ.Globals;
 
 namespace WBZ.Models
@@ -12,14 +13,17 @@ namespace WBZ.Models
 		public string TranslatedModule => Config.GetModuleTranslation(Module);
 
 		/// <summary>
-		/// Name
-		/// </summary>
-		public string Name { get; set; } = string.Empty;
-
-		/// <summary>
 		/// Type
 		/// </summary>
 		public string Type { get; set; } = string.Empty;
+		public List<MV> Types { get; } = new List<MV>()
+		{
+			new MV() { ID = "string", Value = "Ciąg znaków" },
+			new MV() { ID = "date", Value = "Data" },
+			new MV() { ID = "int", Value = "Liczba całkowita" },
+			new MV() { ID = "double", Value = "Liczba przecinkowa" },
+			new MV() { ID = "list", Value = "Lista" }
+		};
 
 		/// <summary>
 		/// DefValue

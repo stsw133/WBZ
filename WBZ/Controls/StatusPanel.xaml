@@ -9,14 +9,14 @@
         <DockPanel>
             <!-- Higher (filters) -->
             <DockPanel DockPanel.Dock="Top" Visibility="{Binding AreFiltersVisible, Converter={se:conv_Bool}}">
-                <Button DockPanel.Dock="Right" Margin="2" VerticalAlignment="Center" ToolTip="Czyść filtry" Command="se:Commands.Clear">
-                    <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.15}"
-                           Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.5}"
+                <Button DockPanel.Dock="Right" Margin="2" VerticalAlignment="Center" ToolTip="{Tr ClearFilters}" Command="se:Commands.Clear">
+                    <Image Margin="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.15}"
+                           Height="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.5}"
                            Source="/Resources/icon32_clear.ico"/>
                 </Button>
-                <Button DockPanel.Dock="Right" Margin="2,2,0,2" VerticalAlignment="Center" ToolTip="Konfiguruj filtry">
-                    <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.15}"
-                           Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.5}"
+                <Button DockPanel.Dock="Right" Margin="2,2,0,2" VerticalAlignment="Center" ToolTip="{Tr ConfigureFilters}">
+                    <Image Margin="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.15}"
+                           Height="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.5}"
                            Source="/Resources/icon32_settings.ico"/>
                 </Button>
                 <Label Content="{Tr Filter, Suffix=':'}" VerticalAlignment="Center"/>
@@ -25,30 +25,27 @@
             </DockPanel>
             <!-- Lower (options, displayed) -->
             <DockPanel DockPanel.Dock="Top">
-                <ToggleButton Margin="2,2,0,2" ToolTip="Pokaż grupy"
-                              IsChecked="{Binding AreGroupsVisible}"
+                <ToggleButton Margin="2,2,0,2" ToolTip="{Tr ShowGroups}" IsChecked="{Binding AreGroupsVisible}"
                               Visibility="{Binding HasGroups, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Converter={se:conv_Bool}}">
-                    <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.15}"
-                           Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.5}"
+                    <Image Margin="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.15}"
+                           Height="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.5}"
                            Source="/Resources/icon32_groups.ico"/>
                 </ToggleButton>
-                <ToggleButton Margin="2,2,0,2" ToolTip="Pokaż filtry"
-                              IsChecked="{Binding AreFiltersVisible}"
+                <ToggleButton Margin="2,2,0,2" ToolTip="{Tr ShowFilters}" IsChecked="{Binding AreFiltersVisible}"
                               Visibility="{Binding HasFilters, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Converter={se:conv_Bool}}">
-                    <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.15}"
-                           Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.5}"
+                    <Image Margin="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.15}"
+                           Height="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.5}"
                            Source="/Resources/icon32_filter.ico"/>
                 </ToggleButton>
                 <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
                     <Label Content="{Tr LimitPerPage, Suffix=':'}" Margin="5,0,0,0" VerticalAlignment="Center"/>
-                    <se:NumericUpDown Margin="2" BoxAlignment="Center"
-                                       Value="{Binding Sorting[4], Mode=TwoWay}" Min="0"
-                                       Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=5}"/>
+                    <se:NumericUpDown Margin="2" BoxAlignment="Center" Value="{Binding Sorting[4], Mode=TwoWay}" Min="0"
+                                      Width="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=5}"/>
                 </StackPanel>
-                <Label Content="{Tr Displayed, Suffix=':'}" Margin="0,0,5,0" VerticalAlignment="Center"/>
-                <Label Content="{Binding InstancesList.Count}" FontWeight="Medium" VerticalAlignment="Center"/>
-                <Label Content=" / " Padding="2.5" VerticalAlignment="Center"/>
-                <Label Content="{Binding TotalItems}" FontWeight="Medium" VerticalAlignment="Center"/>
+                <se:ExtLabel Content="{Tr Displayed, Suffix=':'}"/>
+                <se:ExtLabel Content="{Binding InstancesList.Count}" FontWeight="Medium"/>
+                <se:ExtLabel Content=" / " Padding="0"/>
+                <se:ExtLabel Content="{Binding TotalItems}" FontWeight="Medium"/>
             </DockPanel>
         </DockPanel>
     </Border>

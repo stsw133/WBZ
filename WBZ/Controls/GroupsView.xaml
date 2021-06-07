@@ -6,7 +6,7 @@
           xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
           xmlns:p="clr-namespace:WBZ.Properties"
           mc:Ignorable="d" d:DesignHeight="300" Padding="5" BorderBrush="Gray" BorderThickness="0,0,1,0"
-          Width="{Binding iSize, Source={x:Static p:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=15}"
+          Width="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=15}"
           Loaded="TreeView_Loaded"
           PreviewMouseDoubleClick="TreeView_PreviewMouseDoubleClick"
           PreviewMouseRightButtonDown="TreeView_PreviewMouseRightButtonDown"
