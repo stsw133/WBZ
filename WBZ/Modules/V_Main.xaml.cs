@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using StswExpress;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,7 +22,6 @@ using WBZ.Modules.Users;
 using WBZ.Modules.Vehicles;
 using WBZ.Modules.Icons;
 using WBZ.Modules._base;
-using SE = StswExpress;
 
 namespace WBZ.Modules
 {
@@ -89,7 +89,7 @@ namespace WBZ.Modules
 			if (!Global.User.Perms.Contains($"admin"))
 				gridModules.Children.Remove(modAdmin);
 
-			var coll = gridModules.Children.Cast<Border>().OrderBy(x => (((x.Child as Border).Child as DockPanel).Children[1] as Label).Content.ToString()).ToList();
+			var coll = gridModules.Children.Cast<Border>().OrderBy(x => (x.Child as IconButton).Text).ToList();
 			gridModules.Children.RemoveRange(0, gridModules.Children.Count);
 			foreach (var item in coll)
 				gridModules.Children.Add(item);
@@ -98,24 +98,18 @@ namespace WBZ.Modules
 		/// <summary>
 		/// Menu
 		/// </summary>
-		private void menuHelp_Executed(object sender, ExecutedRoutedEventArgs e)
-		{
-			Functions.OpenHelp(this);
-		}
+		private void menuHelp_Executed(object sender, ExecutedRoutedEventArgs e) => Functions.OpenHelp(this);
 		private void menuSettings_Click(object sender, RoutedEventArgs e)
 		{
 			if (new Settings() { Owner = this }.ShowDialog() == true)
-            {
 				menuRefresh_Executed(null, null);
-			}
 		}
 		internal void menuRefresh_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
             Global.User = SQL.GetInstance<M_User>(Config.Modules.USERS, Global.User.ID);
 			Global.User.Perms = SQL.GetUserPerms(Global.User.ID);
 
-			var window = new Main();
-			window.Show();
+			new Main().Show();
 
 			D.WantToLogout = true;
 			Close();
@@ -127,8 +121,10 @@ namespace WBZ.Modules
 				Global.User = new M_User();
 
 				foreach (Window x in App.Current.Windows)
+				{
 					if (x != this)
 						x.Close();
+				}
 
 				var window = new Login.Login();
 				window.Show();
@@ -137,34 +133,26 @@ namespace WBZ.Modules
 				Close();
 			}
 		}
-		private void menuClose_Executed(object sender, ExecutedRoutedEventArgs e)
-		{
-			Close();
-		}
+		private void menuClose_Executed(object sender, ExecutedRoutedEventArgs e) => Close();
 
 		/// <summary>
 		/// Personal - open context menu
 		/// </summary>
 		private void btnOther_Click(object sender, RoutedEventArgs e)
 		{
-			var btn = sender as FrameworkElement;
-			if (btn != null)
+			if (sender is FrameworkElement btn)
 				btn.ContextMenu.IsOpen = true;
 		}
 		private void btnOther_Click(object sender, MouseButtonEventArgs e)
 		{
-			var btn = sender as FrameworkElement;
-			if (btn != null)
+			if (sender is FrameworkElement btn)
 				btn.ContextMenu.IsOpen = true;
 		}
 
 		/// <summary>
 		/// Personal
 		/// </summary>
-		private void btnProfile_Click(object sender, RoutedEventArgs e)
-		{
-			new Profile() { Owner = this }.ShowDialog();
-		}
+		private void btnProfile_Click(object sender, RoutedEventArgs e) => new Profile() { Owner = this }.ShowDialog();
 		private void btnCalendar_Click(object sender, RoutedEventArgs e)
 		{
 			//new Calendar() { Owner = this }.ShowDialog();
@@ -183,25 +171,17 @@ namespace WBZ.Modules
 
 			foreach (Border module in gridModules.Children)
 			{
-				var bord = (module.Child as Border);
-				var dp = (bord.Child as DockPanel);
-				var lab = (dp.Children[1] as Label);
-				var moduleName = lab.Content.ToString().ToLower();
+				var btn = module.Child as IconButton;
+				var moduleName = btn.Text.ToLower();
 
-				if (moduleName.Contains(searchText.ToLower()))
-					module.Visibility = Visibility.Visible;
-				else
-					module.Visibility = Visibility.Collapsed;
+				module.Visibility = moduleName.Contains(searchText.ToLower()) ? Visibility.Visible : Visibility.Collapsed;
 			}
 		}
-		
+
 		/// <summary>
 		/// Admin
 		/// </summary>
-		private void btnConsoleSQL_Click(object sender, RoutedEventArgs e)
-		{
-			new ConsoleSQL() { Owner = this }.Show();
-		}
+		private void btnConsoleSQL_Click(object sender, RoutedEventArgs e) => new ConsoleSQL() { Owner = this }.Show();
 		private void btnCommunity_Click(object sender, RoutedEventArgs e)
 		{
 			//new Forum() { Owner = this }.ShowDialog();
@@ -210,162 +190,84 @@ namespace WBZ.Modules
 		/// <summary>
 		/// Articles
 		/// </summary>
-		private void btnArticlesList_Click(object sender, RoutedEventArgs e)
-		{
-			new ArticlesList(SE.Commands.Type.LIST) { Owner = this }.Show();
-		}
-		private void btnArticlesNew_Click(object sender, RoutedEventArgs e)
-		{
-			new ArticlesNew(null, SE.Commands.Type.NEW) { Owner = this }.Show();
-		}
+		private void btnArticlesList_Click(object sender, RoutedEventArgs e) => new ArticlesList(Commands.Type.LIST) { Owner = this }.Show();
+		private void btnArticlesNew_Click(object sender, RoutedEventArgs e) => new ArticlesNew(null, Commands.Type.NEW) { Owner = this }.Show();
 
 		/// <summary>
 		/// Attachments
 		/// </summary>
-		private void btnAttachmentsList_Click(object sender, RoutedEventArgs e)
-		{
-			new AttachmentsList(SE.Commands.Type.LIST) { Owner = this }.Show();
-		}
-		private void btnAttachmentsGallery_Click(object sender, RoutedEventArgs e)
-		{
-			new AttachmentsGallery() { Owner = this }.Show();
-		}
+		private void btnAttachmentsList_Click(object sender, RoutedEventArgs e) => new AttachmentsList(Commands.Type.LIST) { Owner = this }.Show();
+		private void btnAttachmentsGallery_Click(object sender, RoutedEventArgs e) => new AttachmentsGallery() { Owner = this }.Show();
 
 		/// <summary>
 		/// AttributesClasses
 		/// </summary>
-		private void btnAttributesClassesList_Click(object sender, RoutedEventArgs e)
-		{
-			new AttributesClassesList(SE.Commands.Type.LIST) { Owner = this }.Show();
-		}
-		private void btnAttributesClassesNew_Click(object sender, RoutedEventArgs e)
-		{
-			new AttributesClassesNew(null, SE.Commands.Type.NEW) { Owner = this }.Show();
-		}
+		private void btnAttributesClassesList_Click(object sender, RoutedEventArgs e) => new AttributesClassesList(Commands.Type.LIST) { Owner = this }.Show();
+		private void btnAttributesClassesNew_Click(object sender, RoutedEventArgs e) => new AttributesClassesNew(null, Commands.Type.NEW) { Owner = this }.Show();
 
 		/// <summary>
 		/// Contractors
 		/// </summary>
-		private void btnContractorsList_Click(object sender, RoutedEventArgs e)
-		{
-			new ContractorsList(SE.Commands.Type.LIST) { Owner = this }.Show();
-		}
-		private void btnContractorsNew_Click(object sender, RoutedEventArgs e)
-		{
-			new ContractorsNew(null, SE.Commands.Type.NEW) { Owner = this }.Show();
-		}
+		private void btnContractorsList_Click(object sender, RoutedEventArgs e) => new ContractorsList(Commands.Type.LIST) { Owner = this }.Show();
+		private void btnContractorsNew_Click(object sender, RoutedEventArgs e) => new ContractorsNew(null, Commands.Type.NEW) { Owner = this }.Show();
 
 		/// <summary>
 		/// Distributions
 		/// </summary>
-		private void btnDistributionsList_Click(object sender, RoutedEventArgs e)
-		{
-			new DistributionsList(SE.Commands.Type.LIST) { Owner = this }.Show();
-		}
-		private void btnDistributionsNew_Click(object sender, RoutedEventArgs e)
-		{
-			new DistributionsNew(null, SE.Commands.Type.NEW) { Owner = this }.Show();
-		}
+		private void btnDistributionsList_Click(object sender, RoutedEventArgs e) => new DistributionsList(Commands.Type.LIST) { Owner = this }.Show();
+		private void btnDistributionsNew_Click(object sender, RoutedEventArgs e) => new DistributionsNew(null, Commands.Type.NEW) { Owner = this }.Show();
 
 		/// <summary>
 		/// Documents
 		/// </summary>
-		private void btnDocumentsList_Click(object sender, RoutedEventArgs e)
-		{
-			new DocumentsList(SE.Commands.Type.LIST) { Owner = this }.Show();
-		}
-		private void btnDocumentsNew_Click(object sender, RoutedEventArgs e)
-		{
-			new DocumentsNew(null, SE.Commands.Type.NEW) { Owner = this }.Show();
-		}
+		private void btnDocumentsList_Click(object sender, RoutedEventArgs e) => new DocumentsList(Commands.Type.LIST) { Owner = this }.Show();
+		private void btnDocumentsNew_Click(object sender, RoutedEventArgs e) => new DocumentsNew(null, Commands.Type.NEW) { Owner = this }.Show();
 
 		/// <summary>
 		/// Employees
 		/// </summary>
-		private void btnEmployeesList_Click(object sender, RoutedEventArgs e)
-		{
-			new EmployeesList(SE.Commands.Type.LIST) { Owner = this }.Show();
-		}
-		private void btnEmployeesNew_Click(object sender, RoutedEventArgs e)
-		{
-			new EmployeesNew(null, SE.Commands.Type.NEW) { Owner = this }.Show();
-		}
+		private void btnEmployeesList_Click(object sender, RoutedEventArgs e) => new EmployeesList(Commands.Type.LIST) { Owner = this }.Show();
+		private void btnEmployeesNew_Click(object sender, RoutedEventArgs e) => new EmployeesNew(null, Commands.Type.NEW) { Owner = this }.Show();
 
 		/// <summary>
 		/// Families
 		/// </summary>
-		private void btnFamiliesList_Click(object sender, RoutedEventArgs e)
-		{
-			new FamiliesList(SE.Commands.Type.LIST) { Owner = this }.Show();
-		}
-		private void btnFamiliesNew_Click(object sender, RoutedEventArgs e)
-		{
-			new FamiliesNew(null, SE.Commands.Type.NEW) { Owner = this }.Show();
-		}
-		
+		private void btnFamiliesList_Click(object sender, RoutedEventArgs e) => new FamiliesList(Commands.Type.LIST) { Owner = this }.Show();
+		private void btnFamiliesNew_Click(object sender, RoutedEventArgs e) => new FamiliesNew(null, Commands.Type.NEW) { Owner = this }.Show();
+
 		/// <summary>
 		/// Icons
 		/// </summary>
-		private void btnIconsList_Click(object sender, RoutedEventArgs e)
-		{
-			new IconsList(SE.Commands.Type.LIST) { Owner = this }.Show();
-		}
-		private void btnIconsNew_Click(object sender, RoutedEventArgs e)
-		{
-			new IconsNew(null, SE.Commands.Type.NEW) { Owner = this }.Show();
-		}
+		private void btnIconsList_Click(object sender, RoutedEventArgs e) => new IconsList(Commands.Type.LIST) { Owner = this }.Show();
+		private void btnIconsNew_Click(object sender, RoutedEventArgs e) => new IconsNew(null, Commands.Type.NEW) { Owner = this }.Show();
 
 		/// <summary>
 		/// Logs
 		/// </summary>
-		private void btnLogsList_Click(object sender, RoutedEventArgs e)
-		{
-			new LogsList(SE.Commands.Type.LIST) { Owner = this }.Show();
-		}
+		private void btnLogsList_Click(object sender, RoutedEventArgs e) => new LogsList(Commands.Type.LIST) { Owner = this }.Show();
 
 		/// <summary>
 		/// Stats
 		/// </summary>
-		private void btnStats_Click(object sender, RoutedEventArgs e)
-		{
-			new Stats.Stats() { Owner = this }.Show();
-		}
+		private void btnStats_Click(object sender, RoutedEventArgs e) => new Stats.Stats() { Owner = this }.Show();
 
 		/// <summary>
 		/// Stores
 		/// </summary>
-		private void btnStoresList_Click(object sender, RoutedEventArgs e)
-		{
-			new StoresList(SE.Commands.Type.LIST) { Owner = this }.Show();
-		}
-		private void btnStoresNew_Click(object sender, RoutedEventArgs e)
-		{
-			new StoresNew(null, SE.Commands.Type.NEW) { Owner = this }.Show();
-		}
+		private void btnStoresList_Click(object sender, RoutedEventArgs e) => new StoresList(Commands.Type.LIST) { Owner = this }.Show();
+		private void btnStoresNew_Click(object sender, RoutedEventArgs e) => new StoresNew(null, Commands.Type.NEW) { Owner = this }.Show();
 
 		/// <summary>
 		/// Users
 		/// </summary>
-		private void btnUsersList_Click(object sender, RoutedEventArgs e)
-		{
-			new UsersList(SE.Commands.Type.LIST) { Owner = this }.Show();
-		}
-		private void btnUsersNew_Click(object sender, RoutedEventArgs e)
-		{
-			new UsersNew(null, SE.Commands.Type.NEW) { Owner = this }.Show();
-		}
+		private void btnUsersList_Click(object sender, RoutedEventArgs e) => new UsersList(Commands.Type.LIST) { Owner = this }.Show();
+		private void btnUsersNew_Click(object sender, RoutedEventArgs e) => new UsersNew(null, Commands.Type.NEW) { Owner = this }.Show();
 
 		/// <summary>
 		/// Vehicles
 		/// </summary>
-		private void btnVehiclesList_Click(object sender, RoutedEventArgs e)
-		{
-			new VehiclesList(SE.Commands.Type.LIST) { Owner = this }.Show();
-		}
-		private void btnVehiclesNew_Click(object sender, RoutedEventArgs e)
-		{
-			new VehiclesNew(null, SE.Commands.Type.NEW) { Owner = this }.Show();
-		}
+		private void btnVehiclesList_Click(object sender, RoutedEventArgs e) => new VehiclesList(Commands.Type.LIST) { Owner = this }.Show();
+		private void btnVehiclesNew_Click(object sender, RoutedEventArgs e) => new VehiclesNew(null, Commands.Type.NEW) { Owner = this }.Show();
 
 		/// <summary>
 		/// Closing

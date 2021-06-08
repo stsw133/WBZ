@@ -25,7 +25,7 @@
             <DockPanel>
                 <!-- menu -->
                 <Menu BorderBrush="Gray" BorderThickness="0,0,1,0">
-                    <MenuItem Header="{Tr System}" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.5}">
+                    <MenuItem Header="{Tr System}" Height="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.5}">
                         <se:ExtMenuItem Header="{Tr UserManual}" IconUri="/Resources/icon32_books.ico" Command="se:Commands.Help"/>
                         <Separator/>
                         <se:ExtMenuItem Header="{Tr Settings}" IconUri="/Resources/icon32_settings.ico" Click="menuSettings_Click"/>
@@ -39,7 +39,7 @@
                 <Label DockPanel.Dock="Right" Content="{Binding Source={x:Static g:Global.User}, Path=Fullname}" Margin="5,0" Padding="1" VerticalContentAlignment="Center" FontWeight="Medium"/>
                 <Button DockPanel.Dock="Right" HorizontalAlignment="Right" BorderThickness="1,0" ToolTip="{Tr Others}" Click="btnOther_Click">
                     <Image Margin="2"
-                           Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.75}"
+                           Height="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.75}"
                            Source="/Resources/icon32_tools.ico"/>
                     <Button.ContextMenu>
                         <ContextMenu>
@@ -51,7 +51,7 @@
                 </Button>
                 <!-- searchBar -->
                 <TextBox DockPanel.Dock="Top" Margin="1" VerticalContentAlignment="Center"
-                         Padding="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2;0;0;0}"
+                         Padding="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2;0;0;0}"
                          TextChanged="tbSearch_TextChanged">
                     <TextBox.Background>
                         <ImageBrush ImageSource="/Resources/icon32_search.ico" AlignmentX="Left" Stretch="Uniform">
@@ -60,8 +60,8 @@
                                     <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
                                     <SkewTransform/>
                                     <RotateTransform/>
-                                    <TranslateTransform X="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.2}"
-                                                        Y="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.2}"/>
+                                    <TranslateTransform X="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.2}"
+                                                        Y="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.2}"/>
                                 </TransformGroup>
                             </ImageBrush.Transform>
                         </ImageBrush>
@@ -75,21 +75,25 @@
                 <SolidColorBrush Color="{Binding config_Main_PanelColor, Source={x:Static p:Settings.Default}}"/>
             </ScrollViewer.Background>
             <WrapPanel x:Name="gridModules" Margin="5" HorizontalAlignment="Center">
+				<WrapPanel.Resources>
+					<Style TargetType="{x:Type Border}">
+						<Setter Property="BorderBrush" Value="Gray"/>
+						<Setter Property="BorderThickness" Value="2"/>
+						<Setter Property="Margin" Value="5"/>
+						<Setter Property="VerticalAlignment" Value="Top"/>
+					</Style>
+					<Style TargetType="{x:Type se:IconButton}">
+						<Setter Property="IconMargin" Value="5"/>
+						<Setter Property="IconSize" Value="32"/>
+						<Setter Property="Margin" Value="10"/>
+						<Setter Property="Orientation" Value="Vertical"/>
+						<Setter Property="Width" Value="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=10}"/>
+					</Style>
+				</WrapPanel.Resources>
                 <!-- admin -->
-                <Border x:Name="modAdmin" DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top"
-                        BorderBrush="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.4}"
-                        BorderThickness="2" Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}}">
-                    <Border Margin="5" Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=20}"
-                            BorderBrush="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.4}"
-                            BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
-                        <DockPanel>
-                            <Image Margin="5" Source="/Resources/icon32_admin.ico" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Admin}" VerticalAlignment="Center" FontWeight="Heavy"
-                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.25}"/>
-                            <se:IconButton Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsTextVisible="False"
-                                            ToolTip="{Tr Console}" Icon="/Resources/icon32_code.ico" Click="btnConsoleSQL_Click"/>
-                        </DockPanel>
-                        <Border.ContextMenu>
+                <Border x:Name="modAdmin" Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}}">
+					<se:IconButton Text="{Tr Admin}" Icon="/Resources/icon32_admin.ico" MouseRightButtonDown="btnOther_Click">
+						<se:IconButton.ContextMenu>
                             <ContextMenu>
                                 <!-- ConsoleSQL -->
                                 <se:ExtMenuItem Header="{Tr Console}" IconUri="/Resources/icon32_code.ico"
@@ -101,8 +105,8 @@
                                           Icon="/Resources/icon32_community.ico" Click="btnVersions_Click"/>
                                 -->
                             </ContextMenu>
-                        </Border.ContextMenu>
-                    </Border>
+                        </se:IconButton.ContextMenu>
+					</se:IconButton>
                     <Border.ContextMenu>
                         <ContextMenu>
                             <se:ColorSetter Color="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
@@ -110,53 +114,31 @@
                     </Border.ContextMenu>
                 </Border>
                 <!-- articles -->
-                <Border x:Name="modArticles" DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top"
-                        BorderBrush="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.4}"
-                        BorderThickness="2" Background="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}}">
-                    <Border Margin="5" Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=20}"
-                            BorderBrush="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.4}"
-                            BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
-                        <DockPanel>
-                            <Image Margin="5" Source="/Resources/icon32_articles.ico" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Articles}" VerticalAlignment="Center" FontWeight="Heavy"
-                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.25}"/>
-                            <se:IconButton Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsTextVisible="False"
-                                            ToolTip="{Tr List}" Icon="/Resources/icon32_list.ico" Click="btnArticlesList_Click"/>
-                        </DockPanel>
-                        <Border.ContextMenu>
-                            <ContextMenu>
-                                <!-- List -->
-                                <se:ExtMenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
+                <Border x:Name="modArticles" Background="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}}">
+					<se:IconButton Text="{Tr Articles}" Icon="/Resources/icon32_articles.ico" MouseRightButtonDown="btnOther_Click">
+						<se:IconButton.ContextMenu>
+							<ContextMenu>
+								<!-- List -->
+								<se:ExtMenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
                                                 IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=articles_preview}"
                                                 Click="btnArticlesList_Click"/>
-                                <!-- New -->
-                                <se:ExtMenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
+								<!-- New -->
+								<se:ExtMenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico"
                                                 IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=articles_save}"
                                                 Click="btnArticlesNew_Click"/>
-                            </ContextMenu>
-                        </Border.ContextMenu>
-                    </Border>
-                    <Border.ContextMenu>
+							</ContextMenu>
+						</se:IconButton.ContextMenu>
+					</se:IconButton>
+					<Border.ContextMenu>
                         <ContextMenu>
                             <se:ColorSetter Color="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                         </ContextMenu>
                     </Border.ContextMenu>
                 </Border>
                 <!-- attachments -->
-                <Border x:Name="modAttachments" DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top"
-                        BorderBrush="{Binding config_Attachments_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.4}"
-                        BorderThickness="2" Background="{Binding config_Attachments_PanelColor, Source={x:Static p:Settings.Default}}">
-                    <Border Margin="5" Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=20}"
-                            BorderBrush="{Binding config_Attachments_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.4}"
-                            BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
-                        <DockPanel>
-                            <Image Margin="5" Source="/Resources/icon32_photos.ico" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Attachments}" VerticalAlignment="Center" FontWeight="Heavy"
-                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.25}"/>
-                            <se:IconButton Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsTextVisible="False"
-                                            ToolTip="{Tr List}" Icon="/Resources/icon32_list.ico" Click="btnAttachmentsList_Click"/>
-                        </DockPanel>
-                        <Border.ContextMenu>
+                <Border x:Name="modAttachments" Background="{Binding config_Attachments_PanelColor, Source={x:Static p:Settings.Default}}">
+					<se:IconButton Text="{Tr Attachments}" Icon="/Resources/icon32_photos.ico" MouseRightButtonDown="btnOther_Click">
+						<se:IconButton.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
                                 <se:ExtMenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
@@ -167,8 +149,8 @@
                                                 IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=attachments_preview}"
                                                 Click="btnAttachmentsGallery_Click"/>
                             </ContextMenu>
-                        </Border.ContextMenu>
-                    </Border>
+                        </se:IconButton.ContextMenu>
+                    </se:IconButton>
                     <Border.ContextMenu>
                         <ContextMenu>
                             <se:ColorSetter Color="{Binding config_Attachments_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
@@ -176,20 +158,9 @@
                     </Border.ContextMenu>
                 </Border>
                 <!-- attributesClasses -->
-                <Border x:Name="modAttributesClasses" DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top"
-                        BorderBrush="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.4}"
-                        BorderThickness="2" Background="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}}">
-                    <Border Margin="5" Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=20}"
-                            BorderBrush="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.4}"
-                            BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
-                        <DockPanel>
-                            <Image Margin="5" Source="/Resources/icon32_attributes.ico" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr AttributesClasses}" VerticalAlignment="Center" FontWeight="Heavy"
-                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.25}"/>
-                            <se:IconButton Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsTextVisible="False"
-                                            ToolTip="{Tr List}" Icon="/Resources/icon32_list.ico" Click="btnAttributesClassesList_Click"/>
-                        </DockPanel>
-                        <Border.ContextMenu>
+                <Border x:Name="modAttributesClasses" Background="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}}">
+					<se:IconButton Text="{Tr AttributesClasses}" Icon="/Resources/icon32_attributes.ico" MouseRightButtonDown="btnOther_Click">
+						<se:IconButton.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
                                 <se:ExtMenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
@@ -200,8 +171,8 @@
                                                 IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=attributes_classes_save}"
                                                 Click="btnAttributesClassesNew_Click"/>
                             </ContextMenu>
-                        </Border.ContextMenu>
-                    </Border>
+                        </se:IconButton.ContextMenu>
+                    </se:IconButton>
                     <Border.ContextMenu>
                         <ContextMenu>
                             <se:ColorSetter Color="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
@@ -209,20 +180,9 @@
                     </Border.ContextMenu>
                 </Border>
                 <!-- contractors -->
-                <Border x:Name="modContractors" DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top"
-                        BorderBrush="{Binding config_Contractors_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.4}"
-                        BorderThickness="2" Background="{Binding config_Contractors_PanelColor, Source={x:Static p:Settings.Default}}">
-                    <Border Margin="5" Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=20}"
-                            BorderBrush="{Binding config_Contractors_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.4}"
-                            BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
-                        <DockPanel>
-                            <Image Margin="5" Source="/Resources/icon32_contractors.ico" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Contractors}" VerticalAlignment="Center" FontWeight="Heavy"
-                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.25}"/>
-                            <se:IconButton Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsTextVisible="False"
-                                            ToolTip="{Tr List}" Icon="/Resources/icon32_list.ico" Click="btnContractorsList_Click"/>
-                        </DockPanel>
-                        <Border.ContextMenu>
+                <Border x:Name="modContractors" Background="{Binding config_Contractors_PanelColor, Source={x:Static p:Settings.Default}}">
+					<se:IconButton Text="{Tr Contractors}" Icon="/Resources/icon32_contractors.ico" MouseRightButtonDown="btnOther_Click">
+						<se:IconButton.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
                                 <se:ExtMenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
@@ -233,8 +193,8 @@
                                                 IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=contractors_save}"
                                                 Click="btnContractorsNew_Click"/>
                             </ContextMenu>
-                        </Border.ContextMenu>
-                    </Border>
+                        </se:IconButton.ContextMenu>
+					</se:IconButton>
                     <Border.ContextMenu>
                         <ContextMenu>
                             <se:ColorSetter Color="{Binding config_Contractors_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
@@ -242,20 +202,9 @@
                     </Border.ContextMenu>
                 </Border>
                 <!-- distributions -->
-                <Border x:Name="modDistributions" DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top"
-                        BorderBrush="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.4}"
-                        BorderThickness="2" Background="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}}">
-                    <Border Margin="5" Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=20}"
-                            BorderBrush="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.4}"
-                            BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
-                        <DockPanel>
-                            <Image Margin="5" Source="/Resources/icon32_food.ico" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Distributions}" VerticalAlignment="Center" FontWeight="Heavy"
-                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.25}"/>
-                            <se:IconButton Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsTextVisible="False"
-                                            ToolTip="{Tr List}" Icon="/Resources/icon32_list.ico" Click="btnDistributionsList_Click"/>
-                        </DockPanel>
-                        <Border.ContextMenu>
+                <Border x:Name="modDistributions" Background="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}}">
+					<se:IconButton Text="{Tr Distributions}" Icon="/Resources/icon32_food.ico" MouseRightButtonDown="btnOther_Click">
+						<se:IconButton.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
                                 <se:ExtMenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
@@ -266,8 +215,8 @@
                                                 IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=distributions_save}"
                                                 Click="btnDistributionsNew_Click"/>
                             </ContextMenu>
-                        </Border.ContextMenu>
-                    </Border>
+                        </se:IconButton.ContextMenu>
+					</se:IconButton>
                     <Border.ContextMenu>
                         <ContextMenu>
                             <se:ColorSetter Color="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
@@ -275,20 +224,9 @@
                     </Border.ContextMenu>
                 </Border>
                 <!-- documents -->
-                <Border x:Name="modDocuments" DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top"
-                        BorderBrush="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.4}"
-                        BorderThickness="2" Background="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}}">
-                    <Border Margin="5" Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=20}"
-                            BorderBrush="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.4}"
-                            BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
-                        <DockPanel>
-                            <Image Margin="5" Source="/Resources/icon32_documents.ico" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Documents}" VerticalAlignment="Center" FontWeight="Heavy"
-                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.25}"/>
-                            <se:IconButton Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsTextVisible="False"
-                                            ToolTip="{Tr List}" Icon="/Resources/icon32_list.ico" Click="btnDocumentsList_Click"/>
-                        </DockPanel>
-                        <Border.ContextMenu>
+                <Border x:Name="modDocuments" Background="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}}">
+					<se:IconButton Text="{Tr Documents}" Icon="/Resources/icon32_documents.ico" MouseRightButtonDown="btnOther_Click">
+						<se:IconButton.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
                                 <se:ExtMenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
@@ -299,8 +237,8 @@
                                                 IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=documents_save}"
                                                 Click="btnDocumentsNew_Click"/>
                             </ContextMenu>
-                        </Border.ContextMenu>
-                    </Border>
+                        </se:IconButton.ContextMenu>
+                    </se:IconButton>
                     <Border.ContextMenu>
                         <ContextMenu>
                             <se:ColorSetter Color="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
@@ -308,20 +246,9 @@
                     </Border.ContextMenu>
                 </Border>
                 <!-- employees -->
-                <Border x:Name="modEmployees" DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top"
-                        BorderBrush="{Binding config_Employees_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.4}"
-                        BorderThickness="2" Background="{Binding config_Employees_PanelColor, Source={x:Static p:Settings.Default}}">
-                    <Border Margin="5" Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=20}"
-                            BorderBrush="{Binding config_Employees_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.4}"
-                            BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
-                        <DockPanel>
-                            <Image Margin="5" Source="/Resources/icon32_briefcase.ico" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Employees}" VerticalAlignment="Center" FontWeight="Heavy"
-                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.25}"/>
-                            <se:IconButton Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsTextVisible="False"
-                                            ToolTip="{Tr List}" Icon="/Resources/icon32_list.ico" Click="btnEmployeesList_Click"/>
-                        </DockPanel>
-                        <Border.ContextMenu>
+                <Border x:Name="modEmployees" Background="{Binding config_Employees_PanelColor, Source={x:Static p:Settings.Default}}">
+					<se:IconButton Text="{Tr Employees}" Icon="/Resources/icon32_briefcase.ico" MouseRightButtonDown="btnOther_Click">
+						<se:IconButton.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
                                 <se:ExtMenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
@@ -332,8 +259,8 @@
                                                 IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=employees_save}"
                                                 Click="btnEmployeesNew_Click"/>
                             </ContextMenu>
-                        </Border.ContextMenu>
-                    </Border>
+                        </se:IconButton.ContextMenu>
+					</se:IconButton>
                     <Border.ContextMenu>
                         <ContextMenu>
                             <se:ColorSetter Color="{Binding config_Employees_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
@@ -341,20 +268,9 @@
                     </Border.ContextMenu>
                 </Border>
                 <!-- families -->
-                <Border x:Name="modFamilies" DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top"
-                        BorderBrush="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.4}"
-                        BorderThickness="2" Background="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}}">
-                    <Border Margin="5" Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=20}"
-                            BorderBrush="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.4}"
-                            BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
-                        <DockPanel>
-                            <Image Margin="5" Source="/Resources/icon32_families.ico" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Families}" VerticalAlignment="Center" FontWeight="Heavy"
-                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.25}"/>
-                            <se:IconButton Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsTextVisible="False"
-                                            ToolTip="{Tr List}" Icon="/Resources/icon32_list.ico" Click="btnFamiliesList_Click"/>
-                        </DockPanel>
-                        <Border.ContextMenu>
+                <Border x:Name="modFamilies" Background="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}}">
+					<se:IconButton Text="{Tr Families}" Icon="/Resources/icon32_families.ico" MouseRightButtonDown="btnOther_Click">
+						<se:IconButton.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
                                 <se:ExtMenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
@@ -365,8 +281,8 @@
                                                 IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=families_save}"
                                                 Click="btnFamiliesNew_Click"/>
                             </ContextMenu>
-                        </Border.ContextMenu>
-                    </Border>
+                        </se:IconButton.ContextMenu>
+					</se:IconButton>
                     <Border.ContextMenu>
                         <ContextMenu>
                             <se:ColorSetter Color="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
@@ -374,20 +290,9 @@
                     </Border.ContextMenu>
                 </Border>
                 <!-- icons -->
-                <Border x:Name="modIcons" DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top"
-                        BorderBrush="{Binding config_Icons_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.4}"
-                        BorderThickness="2" Background="{Binding config_Icons_PanelColor, Source={x:Static p:Settings.Default}}">
-                    <Border Margin="5" Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=20}"
-                            BorderBrush="{Binding config_Icons_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.4}"
-                            BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
-                        <DockPanel>
-                            <Image Margin="5" Source="/Resources/icon32_icons.ico" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Icons}" VerticalAlignment="Center" FontWeight="Heavy"
-                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.25}"/>
-                            <se:IconButton Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsTextVisible="False"
-                                            ToolTip="{Tr List}" Icon="/Resources/icon32_list.ico" Click="btnIconsList_Click"/>
-                        </DockPanel>
-                        <Border.ContextMenu>
+                <Border x:Name="modIcons" Background="{Binding config_Icons_PanelColor, Source={x:Static p:Settings.Default}}">
+					<se:IconButton Text="{Tr Icons}" Icon="/Resources/icon32_icons.ico" MouseRightButtonDown="btnOther_Click">
+						<se:IconButton.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
                                 <se:ExtMenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
@@ -398,8 +303,8 @@
                                                 IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=icons_save}"
                                                 Click="btnIconsNew_Click"/>
                             </ContextMenu>
-                        </Border.ContextMenu>
-                    </Border>
+                        </se:IconButton.ContextMenu>
+					</se:IconButton>
                     <Border.ContextMenu>
                         <ContextMenu>
                             <se:ColorSetter Color="{Binding config_Icons_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
@@ -407,28 +312,17 @@
                     </Border.ContextMenu>
                 </Border>
                 <!-- logs -->
-                <Border x:Name="modLogs" DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top"
-                        BorderBrush="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.4}"
-                        BorderThickness="2" Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}}">
-                    <Border Margin="5" Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=20}"
-                            BorderBrush="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.4}"
-                            BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
-                        <DockPanel>
-                            <Image Margin="5" Source="/Resources/icon32_logs.ico" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Logs}" VerticalAlignment="Center" FontWeight="Heavy"
-                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.25}"/>
-                            <se:IconButton Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsTextVisible="False"
-                                            ToolTip="{Tr List}" Icon="/Resources/icon32_list.ico" Click="btnLogsList_Click"/>
-                        </DockPanel>
-                        <Border.ContextMenu>
+                <Border x:Name="modLogs" Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}}">
+					<se:IconButton Text="{Tr Logs}" Icon="/Resources/icon32_logs.ico" MouseRightButtonDown="btnOther_Click">
+						<se:IconButton.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
                                 <se:ExtMenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
                                                 IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=logs_preview}"
                                                 Click="btnLogsList_Click"/>
                             </ContextMenu>
-                        </Border.ContextMenu>
-                    </Border>
+                        </se:IconButton.ContextMenu>
+					</se:IconButton>
                     <Border.ContextMenu>
                         <ContextMenu>
                             <se:ColorSetter Color="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
@@ -436,28 +330,17 @@
                     </Border.ContextMenu>
                 </Border>
                 <!-- stats -->
-                <Border x:Name="modStats" DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top"
-                        BorderBrush="{Binding config_Stats_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.4}"
-                        BorderThickness="2" Background="{Binding config_Stats_PanelColor, Source={x:Static p:Settings.Default}}">
-                    <Border Margin="5" Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=20}"
-                            BorderBrush="{Binding config_Stats_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.4}"
-                            BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
-                        <DockPanel>
-                            <Image Margin="5" Source="/Resources/icon32_stats.ico" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Stats}" VerticalAlignment="Center" FontWeight="Heavy"
-                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.25}"/>
-                            <se:IconButton Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsTextVisible="False"
-                                            ToolTip="{Tr Stats}" Icon="/Resources/icon32_stats.ico" Click="btnStats_Click"/>
-                        </DockPanel>
-                        <Border.ContextMenu>
+                <Border x:Name="modStats" Background="{Binding config_Stats_PanelColor, Source={x:Static p:Settings.Default}}">
+					<se:IconButton Text="{Tr Stats}" Icon="/Resources/icon32_stats.ico" MouseRightButtonDown="btnOther_Click">
+						<se:IconButton.ContextMenu>
                             <ContextMenu>
                                 <!-- Stats -->
                                 <se:ExtMenuItem Header="{Tr Stats}" IconUri="/Resources/icon32_stats.ico"
                                                 IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=stats_preview}"
                                                 Click="btnStats_Click"/>
                             </ContextMenu>
-                        </Border.ContextMenu>
-                    </Border>
+                        </se:IconButton.ContextMenu>
+					</se:IconButton>
                     <Border.ContextMenu>
                         <ContextMenu>
                             <se:ColorSetter Color="{Binding config_Stats_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
@@ -465,20 +348,9 @@
                     </Border.ContextMenu>
                 </Border>
                 <!-- stores -->
-                <Border x:Name="modStores" DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top"
-                        BorderBrush="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.4}"
-                        BorderThickness="2" Background="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}}">
-                    <Border Margin="5" Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=20}"
-                            BorderBrush="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.4}"
-                            BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
-                        <DockPanel>
-                            <Image Margin="5" Source="/Resources/icon32_stores.ico" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Stores}" VerticalAlignment="Center" FontWeight="Heavy"
-                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.25}"/>
-                            <se:IconButton Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsTextVisible="False"
-                                            ToolTip="{Tr List}" Icon="/Resources/icon32_list.ico" Click="btnStoresList_Click"/>
-                        </DockPanel>
-                        <Border.ContextMenu>
+                <Border x:Name="modStores" Background="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}}">
+					<se:IconButton Text="{Tr Stores}" Icon="/Resources/icon32_stores.ico" MouseRightButtonDown="btnOther_Click">
+						<se:IconButton.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
                                 <se:ExtMenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
@@ -489,8 +361,8 @@
                                                 IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=stores_save}"
                                                 Click="btnStoresNew_Click"/>
                             </ContextMenu>
-                        </Border.ContextMenu>
-                    </Border>
+                        </se:IconButton.ContextMenu>
+					</se:IconButton>
                     <Border.ContextMenu>
                         <ContextMenu>
                             <se:ColorSetter Color="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
@@ -498,20 +370,9 @@
                     </Border.ContextMenu>
                 </Border>
                 <!-- users -->
-                <Border x:Name="modUsers" DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top"
-                        BorderBrush="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.4}"
-                        BorderThickness="2" Background="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}}">
-                    <Border Margin="5" Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=20}"
-                            BorderBrush="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.4}"
-                            BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
-                        <DockPanel>
-                            <Image Margin="5" Source="/Resources/icon32_users.ico" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Users}" VerticalAlignment="Center" FontWeight="Heavy"
-                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.25}"/>
-                            <se:IconButton Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsTextVisible="False"
-                                            ToolTip="{Tr List}" Icon="/Resources/icon32_list.ico" Click="btnUsersList_Click"/>
-                        </DockPanel>
-                        <Border.ContextMenu>
+                <Border x:Name="modUsers" Background="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}}">
+					<se:IconButton Text="{Tr Users}" Icon="/Resources/icon32_users.ico" MouseRightButtonDown="btnOther_Click">
+						<se:IconButton.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
                                 <se:ExtMenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
@@ -522,8 +383,8 @@
                                                 IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=users_save}"
                                                 Click="btnUsersNew_Click"/>
                             </ContextMenu>
-                        </Border.ContextMenu>
-                    </Border>
+                        </se:IconButton.ContextMenu>
+					</se:IconButton>
                     <Border.ContextMenu>
                         <ContextMenu>
                             <se:ColorSetter Color="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
@@ -531,20 +392,9 @@
                     </Border.ContextMenu>
                 </Border>
                 <!-- vehicles -->
-                <Border x:Name="modVehicles" DockPanel.Dock="Top" Margin="5" VerticalAlignment="Top"
-                        BorderBrush="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.4}"
-                        BorderThickness="2" Background="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}}">
-                    <Border Margin="5" Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=20}"
-                            BorderBrush="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.4}"
-                            BorderThickness="1" Background="White" MouseRightButtonDown="btnOther_Click">
-                        <DockPanel>
-                            <Image Margin="5" Source="/Resources/icon32_transport.ico" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.5}"/>
-                            <Label Margin="1" Content="{Tr Vehicles}" VerticalAlignment="Center" FontWeight="Heavy"
-                                   FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.25}"/>
-                            <se:IconButton Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsTextVisible="False"
-                                            ToolTip="{Tr List}" Icon="/Resources/icon32_list.ico" Click="btnVehiclesList_Click"/>
-                        </DockPanel>
-                        <Border.ContextMenu>
+                <Border x:Name="modVehicles" Background="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}}">
+					<se:IconButton Text="{Tr Vehicles}" Icon="/Resources/icon32_transport.ico" MouseRightButtonDown="btnOther_Click">
+						<se:IconButton.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
                                 <se:ExtMenuItem Header="{Tr List}" IconUri="/Resources/icon32_list.ico"
@@ -555,8 +405,8 @@
                                                 IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=vehicles_save}"
                                                 Click="btnVehiclesNew_Click"/>
                             </ContextMenu>
-                        </Border.ContextMenu>
-                    </Border>
+                        </se:IconButton.ContextMenu>
+					</se:IconButton>
                     <Border.ContextMenu>
                         <ContextMenu>
                             <se:ColorSetter Color="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
