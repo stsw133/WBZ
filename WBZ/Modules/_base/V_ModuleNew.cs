@@ -96,11 +96,6 @@ namespace WBZ.Modules._base
 		}
 
 		/// <summary>
-		/// Help
-		/// </summary>
-		internal void cmdHelp_Executed(object sender, ExecutedRoutedEventArgs e) => Globals.Functions.OpenHelp(this);
-
-		/// <summary>
 		/// Close
 		/// </summary>
 		internal void cmdClose_Executed(object sender, ExecutedRoutedEventArgs e) => W.Close();

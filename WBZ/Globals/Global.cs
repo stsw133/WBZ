@@ -12,11 +12,11 @@ namespace WBZ.Globals
 
         /// Logged user
         public static M_User User { get; set; } = new M_User();
-
-        /// <summary>
-        /// UserPermType
-        /// </summary>
-        public static class PermType
+		
+		/// <summary>
+		/// UserPermType
+		/// </summary>
+		public static class PermType
         {
             public const string PREVIEW = "preview";
             public const string SAVE = "save";

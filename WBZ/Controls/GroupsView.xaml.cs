@@ -197,8 +197,8 @@ namespace WBZ.Controls
                     {
                         Source = Fn.LoadImage(group.cIcon.Value as byte[]),
                         Margin = new Thickness(0, 0, 5, 0),
-                        Width = Properties.Settings.Default.iSize * 1.5,
-                        Height = Properties.Settings.Default.iSize * 1.5
+                        Width = Settings.Default.iSize * 1.5,
+                        Height = Settings.Default.iSize * 1.5
                     };
                     image.Visibility = image.Source != null ? Visibility.Visible : Visibility.Collapsed;
                     var tb = new TextBlock()

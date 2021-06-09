@@ -12,5 +12,19 @@ namespace WBZ.Modules.Login
 			get => databases;
 			set => SetField(ref databases, value, () => Databases);
 		}
+
+		/// Can...
+		private bool canUpdateDatabase = false;
+		public bool CanUpdateDatabase
+		{
+			get => canUpdateDatabase;
+			set => SetField(ref canUpdateDatabase, value, () => CanUpdateDatabase);
+		}
+		private bool canCreateAdmin = false;
+		public bool CanCreateAdmin
+		{
+			get => canCreateAdmin;
+			set => SetField(ref canCreateAdmin, value, () => CanCreateAdmin);
+		}
 	}
 }

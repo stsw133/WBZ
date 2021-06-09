@@ -4,9 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
+        xmlns:g="clr-namespace:WBZ.Globals"
         xmlns:p="clr-namespace:WBZ.Properties"
-        mc:Ignorable="d" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen"
-        Title="{Tr Login}" Icon="/Resources/icon32_login.ico"
+		mc:Ignorable="d" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen"
+        x:Name="winLogin" Title="{Tr Login}" Icon="/Resources/icon32_login.ico"
         Loaded="Window_Loaded">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
@@ -16,69 +17,81 @@
         <se:TitleBar DockPanel.Dock="Top"/>
         <!-- main -->
         <DockPanel DockPanel.Dock="Top">
+			<!-- logo -->
             <Border DockPanel.Dock="Top" Background="White" BorderBrush="Gray" BorderThickness="1">
                 <Image Source="/Resources/logo.png"
-                       Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.5}"
-                       Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=30}"/>
+                       Margin="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=1.5}"
+                       Width="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=30}"/>
             </Border>
-            <Grid DockPanel.Dock="Top" Margin="5">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="2*"/>
-                </Grid.ColumnDefinitions>
-                <Label Content="Baza danych:" Grid.Row="0" Grid.Column="0" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-                <DockPanel Grid.Row="0" Grid.Column="1" Margin="5">
-                    <Button ToolTip="Zmień połączenie z główną bazą" Click="btnDatabases_Click">
-                        <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.15}"
-                               Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.5}"
-                               Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.5}"
-                               Source="/Resources/icon32_database.ico"/>
-                    </Button>
-                    <ComboBox VerticalContentAlignment="Center" BorderThickness="0,1,1,1" DisplayMemberPath="Name" SelectedValuePath="Name" ItemsSource="{Binding Databases}" SelectedValue="{Binding dbName, Source={x:Static p:Settings.Default}, Mode=TwoWay}" ToolTip="Identyfikator bazy danych" SelectionChanged="cbDatabase_SelectionChanged"/>
-                </DockPanel>
-                <Label Content="Login:" Grid.Row="1" Grid.Column="0" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-                <TextBox x:Name="tbLogin" Grid.Row="1" Grid.Column="1" Margin="5" VerticalContentAlignment="Center" Text="{Binding userName, Source={x:Static p:Settings.Default}, Mode=TwoWay}" ToolTip="Nazwa użytkownika lub e-mail"/>
-                <Label Content="Hasło:" Grid.Row="2" Grid.Column="0" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-                <PasswordBox x:Name="tbPassword" Grid.Row="2" Grid.Column="1" Margin="5" VerticalContentAlignment="Center"/>
-                <CheckBox Content="Zapamiętaj dane logowania" Grid.Row="3" Grid.Column="1" Margin="5" VerticalContentAlignment="Center" IsChecked="{Binding rememberMe, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
-            </Grid>
-            <Separator DockPanel.Dock="Top" Margin="5"/>
+			<!-- login data -->
+			<UniformGrid DockPanel.Dock="Top" Margin="5" Columns="1">
+				<UniformGrid.Resources>
+					<Style TargetType="{x:Type se:ExtLabel}">
+						<Setter Property="Margin" Value="0,0,5,0"/>
+						<Setter Property="HorizontalContentAlignment" Value="Right"/>
+						<Setter Property="Width" Value="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=10}"/>
+					</Style>
+				</UniformGrid.Resources>
+				<!-- database -->
+				<DockPanel Margin="5">
+					<se:ExtLabel Content="{Tr Database, Suffix=':'}"/>
+					<se:IconButton CornerRadius="0" IsTextVisible="False" ToolTip="Zmień połączenie z główną bazą"
+								   Icon="/Resources/icon32_database.ico"
+								   IconMargin="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=0.1}"
+								   IconSize="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=1.5}"
+								   Click="btnDatabases_Click"/>
+					<ComboBox VerticalContentAlignment="Center" BorderThickness="0,1,1,1" ToolTip="Identyfikator bazy danych"
+							  ItemsSource="{Binding Databases}" DisplayMemberPath="Name" SelectedValuePath="Name"
+							  SelectedValue="{Binding Login_Database, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+							  SelectionChanged="cbDatabase_SelectionChanged"/>
+				</DockPanel>
+				<!-- login -->
+				<DockPanel Margin="5">
+					<se:ExtLabel Content="Login:"/>
+					<se:ExtTextBox x:Name="tbLogin" Text="{Binding Login_Username, Source={x:Static p:Settings.Default}, Mode=TwoWay}" ToolTip="Nazwa użytkownika lub e-mail"/>
+				</DockPanel>
+				<!-- password -->
+				<DockPanel Margin="5">
+					<se:ExtLabel Content="{Tr Password, Suffix=':'}"/>
+					<PasswordBox x:Name="tbPassword" VerticalContentAlignment="Center"/>
+				</DockPanel>
+				<!-- remember -->
+				<DockPanel Margin="5">
+					<se:ExtLabel/>
+					<se:ExtCheckBox Content="Zapamiętaj dane logowania" IsChecked="{Binding Login_RememberMe, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+				</DockPanel>
+			</UniformGrid>
+			<!-- buttons -->
+            <Separator DockPanel.Dock="Top" Margin="10,5"/>
             <UniformGrid DockPanel.Dock="Bottom" Margin="5" Rows="1">
+				<!-- version -->
                 <DockPanel>
-                    <Image x:Name="imgVersion" Margin="5" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2}" Source="/Resources/icon32_shield_white.ico"/>
+                    <Image x:Name="imgVersion" Margin="5" Height="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=2}"
+						   Source="/Resources/icon32_shield_white.ico"/>
                     <StackPanel VerticalAlignment="Center" Margin="5">
-                        <Label Content="Wersja:" Padding="1"/>
+                        <Label Content="{Tr Version, Suffix=':'}" Padding="1"/>
                         <Label x:Name="txtVersion" Padding="1" FontWeight="Medium"/>
                     </StackPanel>
                 </DockPanel>
-                <Button x:Name="btnLogin" Content="Zaloguj" Margin="5" IsEnabled="False" Click="btnLogin_Click" IsDefault="True"/>
-                <Button x:Name="btnOther" ToolTip="Pozostałe" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" IsEnabled="False" Click="btnOther_Click">
-                    <Image Margin="2" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2}" Source="/Resources/icon32_tools.ico"/>
-                    <Button.ContextMenu>
-                        <ContextMenu>
-                            <se:ExtMenuItem x:Name="btnCreateAdmin"
-                                            Header="Utwórz administratora" IconUri="/Resources/icon32_admin.ico"
-                                            IsEnabled="False" Visibility="Collapsed"
-                                            Click="btnCreateAdmin_Click"/>
-                            <se:ExtMenuItem x:Name="btnUpdateDatabase"
-                                            Header="Aktualizuj bazę danych" IconUri="/Resources/icon32_database.ico"
-                                            IsEnabled="False" Visibility="Collapsed"
-                                            Click="btnUpdateDatabase_Click"/>
-                            <se:ExtMenuItem Header="Generuj nowe hasło" IconUri="/Resources/icon32_random.ico" Click="btnGenerateNewpass_Click"/>
-                            <se:ExtMenuItem Header="Poradnik użytkownika" IconUri="/Resources/icon32_books.ico" Click="btnManual_Click"/>
+				<!-- login -->
+                <se:IconButton Content="{Tr LogIn}" Margin="5"
+							   IsEnabled="{Binding Version, Source={x:Static se:Fn.AppDatabase}, Converter={se:conv_Compare}, ConverterParameter={x:Null}}"
+							   Click="btnLogin_Click" IsDefault="True"/>
+				<!-- others -->
+				<se:IconButton IsTextVisible="False" Icon="/Resources/icon32_tools.ico" ToolTip="{Tr Others}" Margin="5" HorizontalAlignment="Right"
+							   Click="btnContextMenu_Click">
+					<se:IconButton.ContextMenu>
+						<ContextMenu>
+							<se:ExtMenuItem Header="{Tr GenerateNewPassword}" IconUri="/Resources/icon32_random.ico" Click="btnGenerateNewpass_Click"/>
+							<se:ExtMenuItem Header="{Tr UserManual}" IconUri="/Resources/icon32_books.ico" Command="se:Commands.Help"/>
                             <Separator/>
-                            <se:ExtMenuItem Header="Baza wersji aplikacji" IconUri="/Resources/icon32_versions.ico" Click="btnVersions_Click"/>
-                            <se:ExtMenuItem Header="Ustawienia" IconUri="/Resources/icon32_settings.ico" Click="btnSettings_Click"/>
-                            <se:ExtMenuItem Header="O programie" IconUri="/Resources/icon64.ico" Click="btnAboutApp_Click"/>
+							<se:ExtMenuItem Header="{Tr Settings}" IconUri="/Resources/icon32_settings.ico" Command="se:Commands.Settings"/>
+							<Separator/>
+							<se:ExtMenuItem Header="{Tr Versions}" IconUri="/Resources/icon32_versions.ico" Click="btnVersions_Click"/>
+                            <se:ExtMenuItem Header="{Tr AboutApp}" IconUri="/Resources/icon64.ico" Click="btnAboutApp_Click"/>
                         </ContextMenu>
-                    </Button.ContextMenu>
-                </Button>
+                    </se:IconButton.ContextMenu>
+                </se:IconButton>
             </UniformGrid>
         </DockPanel>
     </DockPanel>

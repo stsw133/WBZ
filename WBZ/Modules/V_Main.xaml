@@ -13,43 +13,43 @@
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
     <Window.CommandBindings>
-        <CommandBinding Command="se:Commands.Close" Executed="menuClose_Executed"/>
-        <CommandBinding Command="se:Commands.Help" Executed="menuHelp_Executed"/>
-        <CommandBinding Command="se:Commands.Refresh" Executed="menuRefresh_Executed"/>
+		<CommandBinding Command="se:Commands.Close" Executed="menuClose_Executed"/>
+		<CommandBinding Command="se:Commands.Refresh" Executed="menuRefresh_Executed"/>
     </Window.CommandBindings>
     <DockPanel>
         <!-- titleBar -->
         <se:TitleBar DockPanel.Dock="Top"/>
         <!-- menu -->
-        <Border DockPanel.Dock="Top" BorderBrush="Gray" BorderThickness="1">
+        <Border DockPanel.Dock="Top" BorderBrush="Gray" BorderThickness="0,1">
             <DockPanel>
-                <!-- menu -->
-                <Menu BorderBrush="Gray" BorderThickness="0,0,1,0">
-                    <MenuItem Header="{Tr System}" Height="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.5}">
-                        <se:ExtMenuItem Header="{Tr UserManual}" IconUri="/Resources/icon32_books.ico" Command="se:Commands.Help"/>
-                        <Separator/>
-                        <se:ExtMenuItem Header="{Tr Settings}" IconUri="/Resources/icon32_settings.ico" Click="menuSettings_Click"/>
-                        <Separator/>
-                        <se:ExtMenuItem Header="{Tr Refresh}" IconUri="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
-                        <se:ExtMenuItem Header="{Tr Logout}" IconUri="/Resources/icon32_return.ico" Click="menuLogout_Click"/>
-                        <se:ExtMenuItem Header="{Tr CloseApp}" IconUri="/Resources/icon32_close.ico" Command="se:Commands.Close"/>
-                    </MenuItem>
-                </Menu>
-                <!-- personal -->
+                <!-- system menu -->
+				<se:IconButton DockPanel.Dock="Left" BorderThickness="1,0" CornerRadius="0" IsTextVisible="False" ToolTip="{Tr System}"
+							   Icon="/Resources/icon32_system.ico" Click="btnContextMenu_Click">
+					<se:IconButton.ContextMenu>
+						<ContextMenu>
+							<se:ExtMenuItem Header="{Tr UserManual}" IconUri="/Resources/icon32_books.ico" Command="se:Commands.Help"/>
+							<Separator/>
+							<se:ExtMenuItem Header="{Tr Settings}" IconUri="/Resources/icon32_settings.ico" Command="se:Commands.Settings"/>
+							<Separator/>
+							<se:ExtMenuItem Header="{Tr Refresh}" IconUri="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
+							<se:ExtMenuItem Header="{Tr LogOut}" IconUri="/Resources/icon32_return.ico" Click="menuLogout_Click"/>
+							<se:ExtMenuItem Header="{Tr CloseApp}" IconUri="/Resources/icon32_close.ico" Command="se:Commands.Close"/>
+						</ContextMenu>
+					</se:IconButton.ContextMenu>
+				</se:IconButton>
+				<!-- personal -->
                 <Label DockPanel.Dock="Right" Content="{Binding Source={x:Static g:Global.User}, Path=Fullname}" Margin="5,0" Padding="1" VerticalContentAlignment="Center" FontWeight="Medium"/>
-                <Button DockPanel.Dock="Right" HorizontalAlignment="Right" BorderThickness="1,0" ToolTip="{Tr Others}" Click="btnOther_Click">
-                    <Image Margin="2"
-                           Height="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.75}"
-                           Source="/Resources/icon32_tools.ico"/>
-                    <Button.ContextMenu>
-                        <ContextMenu>
-                            <se:ExtMenuItem Header="{Tr Profile}" IconUri="/Resources/icon32_profile.ico" Click="btnProfile_Click"/>
-                            <se:ExtMenuItem Header="{Tr Timetable}" IconUri="/Resources/icon32_calendar.ico" Click="btnCalendar_Click" IsEnabled="False"/>
-                            <se:ExtMenuItem Header="{Tr Messages}" IconUri="/Resources/icon32_mail.ico" Click="btnMail_Click" IsEnabled="False"/>
-                        </ContextMenu>
-                    </Button.ContextMenu>
-                </Button>
-                <!-- searchBar -->
+				<se:IconButton DockPanel.Dock="Right" BorderThickness="1,0" CornerRadius="0" IsTextVisible="False" ToolTip="{Tr Others}"
+							   Icon="/Resources/icon32_tools.ico" Click="btnContextMenu_Click">
+					<se:IconButton.ContextMenu>
+						<ContextMenu>
+							<se:ExtMenuItem Header="{Tr Profile}" IconUri="/Resources/icon32_profile.ico" Click="btnProfile_Click"/>
+							<se:ExtMenuItem Header="{Tr Timetable}" IconUri="/Resources/icon32_calendar.ico" Click="btnCalendar_Click" IsEnabled="False"/>
+							<se:ExtMenuItem Header="{Tr Messages}" IconUri="/Resources/icon32_mail.ico" Click="btnMail_Click" IsEnabled="False"/>
+						</ContextMenu>
+					</se:IconButton.ContextMenu>
+				</se:IconButton>
+				<!-- searchBar -->
                 <TextBox DockPanel.Dock="Top" Margin="1" VerticalContentAlignment="Center"
                          Padding="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2;0;0;0}"
                          TextChanged="tbSearch_TextChanged">
@@ -92,7 +92,7 @@
 				</WrapPanel.Resources>
                 <!-- admin -->
                 <Border x:Name="modAdmin" Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}}">
-					<se:IconButton Text="{Tr Admin}" Icon="/Resources/icon32_admin.ico" MouseRightButtonDown="btnOther_Click">
+					<se:IconButton Text="{Tr Admin}" Icon="/Resources/icon32_admin.ico" Click="btnContextMenu_Click">
 						<se:IconButton.ContextMenu>
                             <ContextMenu>
                                 <!-- ConsoleSQL -->
@@ -115,7 +115,7 @@
                 </Border>
                 <!-- articles -->
                 <Border x:Name="modArticles" Background="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}}">
-					<se:IconButton Text="{Tr Articles}" Icon="/Resources/icon32_articles.ico" MouseRightButtonDown="btnOther_Click">
+					<se:IconButton Text="{Tr Articles}" Icon="/Resources/icon32_articles.ico" Click="btnContextMenu_Click">
 						<se:IconButton.ContextMenu>
 							<ContextMenu>
 								<!-- List -->
@@ -137,7 +137,7 @@
                 </Border>
                 <!-- attachments -->
                 <Border x:Name="modAttachments" Background="{Binding config_Attachments_PanelColor, Source={x:Static p:Settings.Default}}">
-					<se:IconButton Text="{Tr Attachments}" Icon="/Resources/icon32_photos.ico" MouseRightButtonDown="btnOther_Click">
+					<se:IconButton Text="{Tr Attachments}" Icon="/Resources/icon32_photos.ico" Click="btnContextMenu_Click">
 						<se:IconButton.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
@@ -159,7 +159,7 @@
                 </Border>
                 <!-- attributesClasses -->
                 <Border x:Name="modAttributesClasses" Background="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}}">
-					<se:IconButton Text="{Tr AttributesClasses}" Icon="/Resources/icon32_attributes.ico" MouseRightButtonDown="btnOther_Click">
+					<se:IconButton Text="{Tr AttributesClasses}" Icon="/Resources/icon32_attributes.ico" Click="btnContextMenu_Click">
 						<se:IconButton.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
@@ -181,7 +181,7 @@
                 </Border>
                 <!-- contractors -->
                 <Border x:Name="modContractors" Background="{Binding config_Contractors_PanelColor, Source={x:Static p:Settings.Default}}">
-					<se:IconButton Text="{Tr Contractors}" Icon="/Resources/icon32_contractors.ico" MouseRightButtonDown="btnOther_Click">
+					<se:IconButton Text="{Tr Contractors}" Icon="/Resources/icon32_contractors.ico" Click="btnContextMenu_Click">
 						<se:IconButton.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
@@ -203,7 +203,7 @@
                 </Border>
                 <!-- distributions -->
                 <Border x:Name="modDistributions" Background="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}}">
-					<se:IconButton Text="{Tr Distributions}" Icon="/Resources/icon32_food.ico" MouseRightButtonDown="btnOther_Click">
+					<se:IconButton Text="{Tr Distributions}" Icon="/Resources/icon32_food.ico" Click="btnContextMenu_Click">
 						<se:IconButton.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
@@ -225,7 +225,7 @@
                 </Border>
                 <!-- documents -->
                 <Border x:Name="modDocuments" Background="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}}">
-					<se:IconButton Text="{Tr Documents}" Icon="/Resources/icon32_documents.ico" MouseRightButtonDown="btnOther_Click">
+					<se:IconButton Text="{Tr Documents}" Icon="/Resources/icon32_documents.ico" Click="btnContextMenu_Click">
 						<se:IconButton.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
@@ -247,7 +247,7 @@
                 </Border>
                 <!-- employees -->
                 <Border x:Name="modEmployees" Background="{Binding config_Employees_PanelColor, Source={x:Static p:Settings.Default}}">
-					<se:IconButton Text="{Tr Employees}" Icon="/Resources/icon32_briefcase.ico" MouseRightButtonDown="btnOther_Click">
+					<se:IconButton Text="{Tr Employees}" Icon="/Resources/icon32_briefcase.ico" Click="btnContextMenu_Click">
 						<se:IconButton.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
@@ -269,7 +269,7 @@
                 </Border>
                 <!-- families -->
                 <Border x:Name="modFamilies" Background="{Binding config_Families_PanelColor, Source={x:Static p:Settings.Default}}">
-					<se:IconButton Text="{Tr Families}" Icon="/Resources/icon32_families.ico" MouseRightButtonDown="btnOther_Click">
+					<se:IconButton Text="{Tr Families}" Icon="/Resources/icon32_families.ico" Click="btnContextMenu_Click">
 						<se:IconButton.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
@@ -291,7 +291,7 @@
                 </Border>
                 <!-- icons -->
                 <Border x:Name="modIcons" Background="{Binding config_Icons_PanelColor, Source={x:Static p:Settings.Default}}">
-					<se:IconButton Text="{Tr Icons}" Icon="/Resources/icon32_icons.ico" MouseRightButtonDown="btnOther_Click">
+					<se:IconButton Text="{Tr Icons}" Icon="/Resources/icon32_icons.ico" Click="btnContextMenu_Click">
 						<se:IconButton.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
@@ -313,7 +313,7 @@
                 </Border>
                 <!-- logs -->
                 <Border x:Name="modLogs" Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}}">
-					<se:IconButton Text="{Tr Logs}" Icon="/Resources/icon32_logs.ico" MouseRightButtonDown="btnOther_Click">
+					<se:IconButton Text="{Tr Logs}" Icon="/Resources/icon32_logs.ico" Click="btnContextMenu_Click">
 						<se:IconButton.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
@@ -331,7 +331,7 @@
                 </Border>
                 <!-- stats -->
                 <Border x:Name="modStats" Background="{Binding config_Stats_PanelColor, Source={x:Static p:Settings.Default}}">
-					<se:IconButton Text="{Tr Stats}" Icon="/Resources/icon32_stats.ico" MouseRightButtonDown="btnOther_Click">
+					<se:IconButton Text="{Tr Stats}" Icon="/Resources/icon32_stats.ico" Click="btnContextMenu_Click">
 						<se:IconButton.ContextMenu>
                             <ContextMenu>
                                 <!-- Stats -->
@@ -349,7 +349,7 @@
                 </Border>
                 <!-- stores -->
                 <Border x:Name="modStores" Background="{Binding config_Stores_PanelColor, Source={x:Static p:Settings.Default}}">
-					<se:IconButton Text="{Tr Stores}" Icon="/Resources/icon32_stores.ico" MouseRightButtonDown="btnOther_Click">
+					<se:IconButton Text="{Tr Stores}" Icon="/Resources/icon32_stores.ico" Click="btnContextMenu_Click">
 						<se:IconButton.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
@@ -371,7 +371,7 @@
                 </Border>
                 <!-- users -->
                 <Border x:Name="modUsers" Background="{Binding config_Users_PanelColor, Source={x:Static p:Settings.Default}}">
-					<se:IconButton Text="{Tr Users}" Icon="/Resources/icon32_users.ico" MouseRightButtonDown="btnOther_Click">
+					<se:IconButton Text="{Tr Users}" Icon="/Resources/icon32_users.ico" Click="btnContextMenu_Click">
 						<se:IconButton.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->
@@ -393,7 +393,7 @@
                 </Border>
                 <!-- vehicles -->
                 <Border x:Name="modVehicles" Background="{Binding config_Vehicles_PanelColor, Source={x:Static p:Settings.Default}}">
-					<se:IconButton Text="{Tr Vehicles}" Icon="/Resources/icon32_transport.ico" MouseRightButtonDown="btnOther_Click">
+					<se:IconButton Text="{Tr Vehicles}" Icon="/Resources/icon32_transport.ico" Click="btnContextMenu_Click">
 						<se:IconButton.ContextMenu>
                             <ContextMenu>
                                 <!-- List -->

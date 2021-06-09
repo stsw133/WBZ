@@ -12,7 +12,7 @@ namespace WBZ.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -38,48 +38,48 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string userName {
+        public string Login_Username {
             get {
-                return ((string)(this["userName"]));
+                return ((string)(this["Login_Username"]));
             }
             set {
-                this["userName"] = value;
+                this["Login_Username"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string userPass {
+        public string Login_Password {
             get {
-                return ((string)(this["userPass"]));
+                return ((string)(this["Login_Password"]));
             }
             set {
-                this["userPass"] = value;
+                this["Login_Password"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string dbName {
+        public string Login_Database {
             get {
-                return ((string)(this["dbName"]));
+                return ((string)(this["Login_Database"]));
             }
             set {
-                this["dbName"] = value;
+                this["Login_Database"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool rememberMe {
+        public bool Login_RememberMe {
             get {
-                return ((bool)(this["rememberMe"]));
+                return ((bool)(this["Login_RememberMe"]));
             }
             set {
-                this["rememberMe"] = value;
+                this["Login_RememberMe"] = value;
             }
         }
         
@@ -92,18 +92,6 @@ namespace WBZ.Properties {
             }
             set {
                 this["config_TitleBarStyle"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("12")]
-        public double iSize {
-            get {
-                return ((double)(this["iSize"]));
-            }
-            set {
-                this["iSize"] = value;
             }
         }
         
@@ -800,18 +788,6 @@ namespace WBZ.Properties {
             }
             set {
                 this["columns_DistributionsList_DateReal"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI")]
-        public string iFont {
-            get {
-                return ((string)(this["iFont"]));
-            }
-            set {
-                this["iFont"] = value;
             }
         }
         

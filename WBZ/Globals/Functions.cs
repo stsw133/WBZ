@@ -3,7 +3,6 @@ using System;
 using System.Linq;
 using System.Windows;
 using WBZ.Models;
-using WBZ.Modules._base;
 using WBZ.Modules.Articles;
 using WBZ.Modules.AttributesClasses;
 using WBZ.Modules.Contractors;
@@ -43,13 +42,14 @@ namespace WBZ.Globals
 		{
 			if (obj.Instance == 0)
 				return;
-			if (SQL.CountInstances(obj.Module, $"{string.Join(string.Empty, ((obj.Module.Split('_') as string[]).AsQueryable().Cast<string>()).Select(str => str.Substring(0, 1)))}.id={obj.Instance}") == 0)
+			if (SQL.CountInstances(obj.Module, $"{string.Join(string.Empty, (obj.Module.Split('_') as string[]).AsQueryable().Cast<string>().Select(str => str.Substring(0, 1)))}.id={obj.Instance}") == 0)
 				return;
 
 			if (!(mode == Commands.Type.EDIT && Global.User.Perms.Contains($"{obj.Module}_{Global.PermType.SAVE}")))
 				mode = Commands.Type.PREVIEW;
 			if (!Global.User.Perms.Contains($"{obj.Module}_{Global.PermType.PREVIEW}") && !Global.User.Perms.Contains($"{obj.Module}_{Global.PermType.SAVE}"))
 				return;
+
 			Window window;
 			/*
 			var moduleNames = (obj.Module as string).Split('_');
@@ -110,22 +110,5 @@ namespace WBZ.Globals
 			window.Owner = owner;
 			window.Show();
 		}
-
-		/// <summary>
-		/// Open window - Help
-		/// </summary>
-		internal static void OpenHelp(Window owner)
-        {
-			//TODO - przerobienie poradnika na okno pomocy w wersji 1.2.0 (?)
-			//TODO - odpalenie poradnika z dowolnego miejsca w aplikacji (App.xaml)
-            try
-            {
-				Fn.OpenFile(AppDomain.CurrentDomain.BaseDirectory + @"/Resources/pl_manual.pdf");
-            }
-            catch (Exception ex)
-            {
-                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Błąd otwierania poradnika: " + ex.Message) { Owner = owner }.ShowDialog();
-            }
-        }
 	}
 }

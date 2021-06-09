@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using WBZ.Controls;
+using WBZ.Globals;
 using WBZ.Modules._base;
 
 namespace WBZ.Modules.Login
@@ -89,17 +91,57 @@ namespace WBZ.Modules.Login
 			{
 				lblStatus.Content = "Wersja bazy aktualna!";
 				lblStatus.Foreground = Brushes.Green;
+
+				D.CanUpdateDatabase = false;
+				D.CanCreateAdmin = SQL.CountInstances(Config.Modules.USERS, @"u.blocked=false and u.archival=false and exists(select from wbz.users_permissions where ""user""=u.id and perm='admin')") == 0;
 			}
 			else if (dbv == null)
 			{
 				lblStatus.Content = "Połączenie z bazą nie powiodło się!";
 				lblStatus.Foreground = Brushes.Red;
+
+				D.CanUpdateDatabase = false;
+				D.CanCreateAdmin = false;
 			}
 			else
 			{
 				lblStatus.Content = "Wersja bazy nieaktualna!";
 				lblStatus.Foreground = Brushes.Orange;
+
+				D.CanUpdateDatabase = true;
+				D.CanCreateAdmin = false;
 			}
+		}
+
+		/// <summary>
+		/// UpdateDatabase
+		/// </summary>
+		private void btnUpdateDatabase_Click(object sender, RoutedEventArgs e)
+		{
+			var conf = new Confirmation { Owner = this };
+			if (conf.ShowDialog() == true)
+			{
+				var users = SQL.ListInstances<Models.M_User>(Config.Modules.USERS, $"(lower(username)='{conf.GetLogin.ToLower()}' or lower(email)='{conf.GetLogin.ToLower()}') and password='{Globals.Global.sha256(conf.GetPassword)}'");
+				if (users.Count == 0 || !SQL.GetUserPerms(users[0].ID).Contains("admin"))
+				{
+					new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Brak uprawnień administracyjnych lub błędne dane użytkownika!") { Owner = this }.ShowDialog();
+					return;
+				}
+
+				if (SQL_Migration.DoWork())
+					new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.INFO, "Migracja przeprowadzona pomyślnie.") { Owner = this }.ShowDialog();
+				else
+					new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Nie udało się przeprowadzić migracji!") { Owner = this }.ShowDialog();
+			}
+		}
+
+		/// <summary>
+		/// CreateAdmin
+		/// </summary>
+		private void btnCreateAdmin_Click(object sender, RoutedEventArgs e)
+		{
+			if (new LoginRegister() { Owner = this }.ShowDialog() == true)
+				D.CanCreateAdmin = false;
 		}
 
 		/// <summary>
@@ -111,10 +153,7 @@ namespace WBZ.Modules.Login
 			{
 				DB.SaveAllDatabases(new List<DB>(D.Databases));
 				if (Owner == null && D.Databases.Count > 0)
-				{
-					var window = new Login();
-					window.Show();
-				}
+					new Login().Show();
 
 				if (Owner != null)
 					DialogResult = true;

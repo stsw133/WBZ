@@ -96,14 +96,17 @@ namespace WBZ.Modules
 		}
 
 		/// <summary>
+		/// Opens context menu
+		/// </summary>
+		private void btnContextMenu_Click(object sender, RoutedEventArgs e)
+		{
+			if (sender is FrameworkElement btn)
+				btn.ContextMenu.IsOpen = true;
+		}
+
+		/// <summary>
 		/// Menu
 		/// </summary>
-		private void menuHelp_Executed(object sender, ExecutedRoutedEventArgs e) => Functions.OpenHelp(this);
-		private void menuSettings_Click(object sender, RoutedEventArgs e)
-		{
-			if (new Settings() { Owner = this }.ShowDialog() == true)
-				menuRefresh_Executed(null, null);
-		}
 		internal void menuRefresh_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
             Global.User = SQL.GetInstance<M_User>(Config.Modules.USERS, Global.User.ID);
@@ -134,20 +137,6 @@ namespace WBZ.Modules
 			}
 		}
 		private void menuClose_Executed(object sender, ExecutedRoutedEventArgs e) => Close();
-
-		/// <summary>
-		/// Personal - open context menu
-		/// </summary>
-		private void btnOther_Click(object sender, RoutedEventArgs e)
-		{
-			if (sender is FrameworkElement btn)
-				btn.ContextMenu.IsOpen = true;
-		}
-		private void btnOther_Click(object sender, MouseButtonEventArgs e)
-		{
-			if (sender is FrameworkElement btn)
-				btn.ContextMenu.IsOpen = true;
-		}
 
 		/// <summary>
 		/// Personal

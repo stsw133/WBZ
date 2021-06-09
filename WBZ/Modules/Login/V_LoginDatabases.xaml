@@ -14,72 +14,93 @@
         <se:TitleBar DockPanel.Dock="Top" SubIcon="/Resources/icon32_settings.ico"/>
         <!-- buttonsPanel -->
         <Border DockPanel.Dock="Bottom" Background="#EEE" BorderBrush="Gray" BorderThickness="0,1,0,0">
-            <se:IconButton Margin="5" Text="Zapisz"
-                            HorizontalAlignment="Center"
-                            Icon="\Resources\icon32_accept.ico"
-                            Click="btnSave_Click"/>
+			<se:IconButton Text="{Tr Save}" Icon="\Resources\icon32_accept.ico" Margin="5" HorizontalAlignment="Center" Click="btnSave_Click"/>
         </Border>
         <!-- listBox -->
-        <DockPanel>
-            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                <Button Margin="5,5,0,5" Click="btnAddDatabase_Click" ToolTip="Dodaj nowe połączenie z bazą danych">
+        <DockPanel DockPanel.Dock="Left">
+			<StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+				<Button Margin="5,5,0,5" ToolTip="Dodaj nowe połączenie z bazą danych" Click="btnAddDatabase_Click">
                     <Grid>
-                        <Image Margin="2"
-                               Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2}"
+						<Image Height="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=2}" Margin="2"
                                Source="/Resources/icon32_database.ico"/>
-                        <Image Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay}"
-                               HorizontalAlignment="Right" VerticalAlignment="Bottom"
+						<Image Height="{Binding iSize, Source={x:Static se:Settings.Default}}" HorizontalAlignment="Right" VerticalAlignment="Bottom"
                                Source="/Resources/icon32_add.ico"/>
                     </Grid>
                 </Button>
-                <Button Margin="5,5,0,5" Click="btnRemoveDatabase_Click" ToolTip="Usuń zaznaczone połączenie z bazą danych">
+				<Button Margin="5,5,0,5" ToolTip="Usuń zaznaczone połączenie z bazą danych" Click="btnRemoveDatabase_Click">
                     <Grid>
-                        <Image Margin="2"
-                               Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2}"
+						<Image Height="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=2}" Margin="2"
                                Source="/Resources/icon32_database.ico"/>
-                        <Image Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay}"
-                               HorizontalAlignment="Right" VerticalAlignment="Bottom"
+						<Image Height="{Binding iSize, Source={x:Static se:Settings.Default}}" HorizontalAlignment="Right" VerticalAlignment="Bottom"
                                Source="/Resources/icon32_remove.ico"/>
                     </Grid>
                 </Button>
             </StackPanel>
-            <ListBox x:Name="lbDatabases" Margin="5,0,5,5" Width="200" ItemsSource="{Binding Databases}" SelectedValuePath="Name" DisplayMemberPath="Name" SelectionChanged="lbDatabases_SelectionChanged"/>
+			<ListBox x:Name="lbDatabases" Margin="5,0,5,5" Width="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=15}"
+					 ItemsSource="{Binding Databases}" SelectedValuePath="Name" DisplayMemberPath="Name"
+					 SelectionChanged="lbDatabases_SelectionChanged"/>
         </DockPanel>
         <!-- main -->
-        <Grid x:Name="gridDatabaseInfo" DataContext="{Binding ElementName=lbDatabases, Path=SelectedItem}" Margin="5" VerticalAlignment="Center" IsEnabled="False"
-              Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=30}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Content="Nazwa:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <TextBox x:Name="tbName" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center" Text="{Binding Name, Mode=TwoWay}"/>
-            <Label Grid.Row="1" Grid.Column="0" Content="Serwer:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <TextBox x:Name="tbServer" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center" Text="{Binding Server, Mode=TwoWay}"/>
-            <Label Grid.Row="2" Grid.Column="0" Content="Port:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <TextBox x:Name="tbPort" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center" Text="{Binding Port, Mode=TwoWay}"/>
-            <Label Grid.Row="3" Grid.Column="0" Content="Baza:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <TextBox x:Name="tbDatabase" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center" Text="{Binding Database, Mode=TwoWay}"/>
-            <Label Grid.Row="4" Grid.Column="0" Content="Użytkownik:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <TextBox x:Name="tbUsername" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center" Text="{Binding Username, Mode=TwoWay}"/>
-            <Label Grid.Row="5" Grid.Column="0" Content="Hasło:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <PasswordBox x:Name="pbPassword" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center" PasswordChanged="pbPassword_PasswordChanged"/>
-            <Label Grid.Row="6" Grid.Column="0" Content="Status:" Margin="5" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <Label x:Name="lblStatus" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" VerticalContentAlignment="Center"/>
-            <se:IconButton Grid.Row="7" Grid.Column="1" Margin="5" Text="Testuj"
-                            Icon="/Resources/icon32_test.ico"
-                            Click="btnTest_Click"/>
-        </Grid>
+		<UniformGrid x:Name="gridDatabaseInfo" DataContext="{Binding ElementName=lbDatabases, Path=SelectedItem}" Margin="5" VerticalAlignment="Center" IsEnabled="False"
+					 Width="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=30}" Columns="1">
+			<UniformGrid.Resources>
+				<Style TargetType="{x:Type se:ExtLabel}">
+					<Setter Property="HorizontalContentAlignment" Value="Right"/>
+					<Setter Property="Margin" Value="5"/>
+					<Setter Property="Width" Value="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=10}"/>
+				</Style>
+				<Style TargetType="{x:Type se:ExtTextBox}">
+					<Setter Property="Margin" Value="5"/>
+				</Style>
+			</UniformGrid.Resources>
+			<!-- Name -->
+			<DockPanel>
+				<se:ExtLabel Content="Nazwa:"/>
+				<se:ExtTextBox x:Name="tbName" Text="{Binding Name}"/>
+			</DockPanel>
+			<!-- Server -->
+			<DockPanel>
+				<se:ExtLabel Content="Serwer:"/>
+				<se:ExtTextBox x:Name="tbServer" Text="{Binding Server}"/>
+			</DockPanel>
+			<!-- Port -->
+			<DockPanel>
+				<se:ExtLabel Content="Port:"/>
+				<se:ExtTextBox x:Name="tbPort" Text="{Binding Port}"/>
+			</DockPanel>
+			<!-- Database -->
+			<DockPanel>
+				<se:ExtLabel Content="Baza:"/>
+				<se:ExtTextBox x:Name="tbDatabase" Text="{Binding Database, Mode=TwoWay}"/>
+			</DockPanel>
+			<!-- Username -->
+			<DockPanel>
+				<se:ExtLabel Content="Użytkownik:"/>
+				<se:ExtTextBox x:Name="tbUsername" Text="{Binding Username, Mode=TwoWay}"/>
+			</DockPanel>
+			<!-- Password -->
+			<DockPanel>
+				<se:ExtLabel Content="Hasło:"/>
+				<PasswordBox x:Name="pbPassword" Margin="5" VerticalContentAlignment="Center" PasswordChanged="pbPassword_PasswordChanged"/>
+			</DockPanel>
+			<!-- Status -->
+			<DockPanel>
+				<se:ExtLabel Content="Status:"/>
+				<Label x:Name="lblStatus" Margin="5" VerticalContentAlignment="Center"/>
+			</DockPanel>
+			<!-- buttons -->
+			<UniformGrid HorizontalAlignment="Center" Rows="1">
+				<UniformGrid.Resources>
+					<Style TargetType="{x:Type se:IconButton}">
+						<Setter Property="Margin" Value="2.5,0"/>
+					</Style>
+				</UniformGrid.Resources>
+				<se:IconButton IsTextVisible="False" ToolTip="{Tr Test}" Icon="/Resources/icon32_test.ico" Click="btnTest_Click"/>
+				<se:IconButton IsTextVisible="False" ToolTip="{Tr UpdateDatabase}" Icon="/Resources/icon32_database.ico"
+							   IsEnabled="{Binding CanUpdateDatabase}" Click="btnUpdateDatabase_Click"/>
+				<se:IconButton IsTextVisible="False" ToolTip="{Tr CreateAdmin}" Icon="/Resources/icon32_admin.ico"
+							   IsEnabled="{Binding CanCreateAdmin}" Click="btnCreateAdmin_Click"/>
+			</UniformGrid>
+		</UniformGrid>
     </DockPanel>
 </Window>

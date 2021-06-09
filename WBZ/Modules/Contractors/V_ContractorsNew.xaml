@@ -16,9 +16,8 @@
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
     <Window.CommandBindings>
-        <CommandBinding Command="se:Commands.Close" Executed="cmdClose_Executed"/>
-        <CommandBinding Command="se:Commands.Help" Executed="cmdHelp_Executed"/>
-        <CommandBinding Command="se:Commands.Refresh" Executed="cmdRefresh_Executed"/>
+		<CommandBinding Command="se:Commands.Close" Executed="cmdClose_Executed"/>
+		<CommandBinding Command="se:Commands.Refresh" Executed="cmdRefresh_Executed"/>
         <CommandBinding Command="se:Commands.Save" Executed="cmdSave_Executed" CanExecute="cmdSave_CanExecute"/>
     </Window.CommandBindings>
     <DockPanel>

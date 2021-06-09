@@ -325,6 +325,9 @@
   <data name="icon32_stores" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_stores.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icon32_system" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon32_system.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="icon32_test" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32_test.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

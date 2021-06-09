@@ -100,14 +100,6 @@ namespace WBZ.Modules.Login
 		}
 
 		/// <summary>
-		/// Help
-		/// </summary>
-		private void cmdHelp_Executed(object sender, ExecutedRoutedEventArgs e)
-		{
-			Functions.OpenHelp(this);
-		}
-
-		/// <summary>
 		/// Close
 		/// </summary>
 		private void cmdClose_Executed(object sender, ExecutedRoutedEventArgs e)

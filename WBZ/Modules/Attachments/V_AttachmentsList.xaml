@@ -19,9 +19,8 @@
         <CommandBinding Command="se:Commands.Clear" Executed="cmdClear_Executed"/>
         <CommandBinding Command="se:Commands.Close" Executed="cmdClose_Executed"/>
         <CommandBinding Command="se:Commands.Delete" Executed="cmdDelete_Executed" CanExecute="cmdDelete_CanExecute"/>
-        <CommandBinding Command="se:Commands.Edit" Executed="cmdEdit_Executed" CanExecute="cmdEdit_CanExecute"/>
-        <CommandBinding Command="se:Commands.Help" Executed="cmdHelp_Executed"/>
-        <CommandBinding Command="se:Commands.Preview" Executed="cmdPreview_Executed" CanExecute="cmdPreview_CanExecute"/>
+		<CommandBinding Command="se:Commands.Edit" Executed="cmdEdit_Executed" CanExecute="cmdEdit_CanExecute"/>
+		<CommandBinding Command="se:Commands.Preview" Executed="cmdPreview_Executed" CanExecute="cmdPreview_CanExecute"/>
         <CommandBinding Command="se:Commands.Refresh" Executed="cmdRefresh_Executed"/>
     </Window.CommandBindings>
     <DockPanel>

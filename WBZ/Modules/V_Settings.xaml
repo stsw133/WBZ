@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
-        mc:Ignorable="d" Height="400" Width="500" ResizeMode="CanResize"  WindowStartupLocation="CenterOwner"
+        mc:Ignorable="d" Height="400" Width="550" ResizeMode="CanResize" WindowStartupLocation="CenterOwner"
         Title="{Tr Settings}" Icon="/Resources/icon32_settings.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
@@ -61,7 +61,7 @@
                                 <se:Header Text="{Tr Others}" Icon="/Resources/icon32_tools.ico"/>
                             </GroupBox.Header>
                             <StackPanel Margin="5">
-                                <CheckBox Content="{Tr ShowButtonWithNames}" Margin="5" VerticalContentAlignment="Center"
+                                <CheckBox Content="{Tr ShowButtonsWithNames}" Margin="5" VerticalContentAlignment="Center"
                                           IsChecked="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"/>
                             </StackPanel>
                         </GroupBox>
@@ -88,7 +88,7 @@
                             <DockPanel Margin="5">
                                 <DockPanel DockPanel.Dock="Top">
                                     <Label Content="{Tr Font, Suffix=':'}" Margin="5" VerticalContentAlignment="Center"/>
-                                    <ComboBox Margin="5" VerticalContentAlignment="Center" SelectedValuePath="Tag" SelectedValue="{Binding iFont, Source={x:Static p:Settings.Default}, Mode=TwoWay}">
+                                    <ComboBox Margin="5" VerticalContentAlignment="Center" SelectedValuePath="Tag" SelectedValue="{Binding iFont, Source={x:Static se:Settings.Default}, Mode=TwoWay}">
                                         <ComboBoxItem Content="Arial" FontFamily="Arial" Tag="Arial"/>
                                         <ComboBoxItem Content="Candara" FontFamily="Candara" Tag="Candara"/>
                                         <ComboBoxItem Content="Franklin Gothic" FontFamily="Franklin Gothic" Tag="Franklin Gothic"/>
@@ -99,9 +99,9 @@
                                 </DockPanel>
                                 <DockPanel DockPanel.Dock="Top">
                                     <Label Content="{Tr InterfaceSize, Suffix=':'}" Margin="5" VerticalContentAlignment="Center"/>
-                                    <Label Content="{Binding iSize, Source={x:Static p:Settings.Default}}" VerticalContentAlignment="Center" FontWeight="Medium"/>
+                                    <Label Content="{Binding iSize, Source={x:Static se:Settings.Default}}" VerticalContentAlignment="Center" FontWeight="Medium"/>
                                 </DockPanel>
-                                <Slider DockPanel.Dock="Top" Value="{Binding iSize, Source={x:Static p:Settings.Default}, Mode=TwoWay}" IsSnapToTickEnabled="True" Minimum="8" Maximum="16" TickFrequency="0.5" TickPlacement="BottomRight"/>
+                                <Slider DockPanel.Dock="Top" Value="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=TwoWay}" IsSnapToTickEnabled="True" Minimum="8" Maximum="16" TickFrequency="0.5" TickPlacement="BottomRight"/>
                             </DockPanel>
                         </GroupBox>
                     </DockPanel>

@@ -139,6 +139,14 @@
 		"en": "Contractors",
 		"pl": "Kontrahenci"
 	},
+	"CreateAdministrator": {
+		"en": "Create administrator",
+		"pl": "Utwórz administratora"
+	},
+	"Database": {
+		"en": "Database",
+		"pl": "Baza danych"
+	},
 	"DatabasesList": {
 		"en": "List of databases",
 		"pl": "Lista baz danych"
@@ -247,6 +255,10 @@
 		"en": "General",
 		"pl": "Ogólne"
 	},
+	"GenerateNewPassword": {
+		"en": "Generate new password",
+		"pl": "Generuj nowe hasło"
+	},
 	"GenerateReport": {
 		"en": "Generate report",
 		"pl": "Generuj raport"
@@ -291,11 +303,15 @@
 		"en": "Logging",
 		"pl": "Logowanie"
 	},
+	"LogIn": {
+		"en": "Log in",
+		"pl": "Zaloguj"
+	},
 	"Logs": {
 		"en": "Logs",
 		"pl": "Logi"
 	},
-	"Logout": {
+	"LogOut": {
 		"en": "Log out",
 		"pl": "Wyloguj"
 	},
@@ -463,6 +479,10 @@
 		"en": "To buffer",
 		"pl": "Do bufora"
 	},
+	"UpdateDatabase": {
+		"en": "Update database",
+		"pl": "Zaktualizuj bazę danych"
+	},
 	"UserManual": {
 		"en": "User's manual",
 		"pl": "Poradnik użytkownika"
@@ -526,6 +546,10 @@
 	"VehiclesSelect": {
 		"en": "Select vehicle",
 		"pl": "Wybór pojazdu"
+	},
+	"Version": {
+		"en": "Version",
+		"pl": "Wersja"
 	},
 	"Versions": {
 		"en": "Versions",
