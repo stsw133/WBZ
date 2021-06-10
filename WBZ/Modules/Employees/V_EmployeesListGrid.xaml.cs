@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using StswExpress;
+using System.Windows.Controls;
 
 namespace WBZ.Modules.Employees
 {
@@ -10,6 +11,7 @@ namespace WBZ.Modules.Employees
         public EmployeesListGrid()
         {
             InitializeComponent();
-        }
+			ExtDataGrid.Load(this, Properties.Settings.Default.config_Employees_PanelColor);
+		}
     }
 }

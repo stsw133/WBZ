@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using StswExpress;
+using System.Windows.Controls;
 
 namespace WBZ.Modules.Stores
 {
@@ -10,6 +11,7 @@ namespace WBZ.Modules.Stores
         public StoresListGrid()
         {
             InitializeComponent();
+			ExtDataGrid.Load(this, Properties.Settings.Default.config_Stores_PanelColor);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using StswExpress;
+using System.Windows.Controls;
 
 namespace WBZ.Modules.Contractors
 {
@@ -10,6 +11,7 @@ namespace WBZ.Modules.Contractors
         public ContractorsListGrid()
         {
             InitializeComponent();
-        }
+			ExtDataGrid.Load(this, Properties.Settings.Default.config_Contractors_PanelColor);
+		}
     }
 }

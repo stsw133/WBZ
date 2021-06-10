@@ -75,7 +75,7 @@
                 </DockPanel>
 				<!-- login -->
                 <se:IconButton Content="{Tr LogIn}" Margin="5"
-							   IsEnabled="{Binding Version, Source={x:Static se:Fn.AppDatabase}, Converter={se:conv_Compare}, ConverterParameter={x:Null}}"
+							   IsEnabled="{Binding Version, Source={x:Static se:Fn.AppDatabase}, Converter={se:conv_Compare}, ConverterParameter=!{}}"
 							   Click="btnLogin_Click" IsDefault="True"/>
 				<!-- others -->
 				<se:IconButton IsTextVisible="False" Icon="/Resources/icon32_tools.ico" ToolTip="{Tr Others}" Margin="5" HorizontalAlignment="Right"

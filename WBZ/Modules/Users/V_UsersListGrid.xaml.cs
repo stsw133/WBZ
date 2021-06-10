@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using StswExpress;
+using System.Windows.Controls;
 
 namespace WBZ.Modules.Users
 {
@@ -10,6 +11,7 @@ namespace WBZ.Modules.Users
         public UsersListGrid()
         {
             InitializeComponent();
-        }
+			ExtDataGrid.Load(this, Properties.Settings.Default.config_Users_PanelColor);
+		}
     }
 }

@@ -1633,18 +1633,6 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FFEEEE55")]
-        public string config_Contractors_PanelColor1 {
-            get {
-                return ((string)(this["config_Contractors_PanelColor1"]));
-            }
-            set {
-                this["config_Contractors_PanelColor1"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public string columns_ContractorsList_ID {
             get {

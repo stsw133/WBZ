@@ -467,9 +467,6 @@
     <Setting Name="columns_DocumentsList_ContractorName" Type="System.String" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="config_Contractors_PanelColor1" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#FFEEEE55</Value>
-    </Setting>
     <Setting Name="columns_ContractorsList_ID" Type="System.String" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>

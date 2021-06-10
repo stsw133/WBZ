@@ -8,7 +8,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Net.Http;
-using WBZ.Controls;
 using WBZ.Modules._base;
 using Props = WBZ.Properties.Settings;
 

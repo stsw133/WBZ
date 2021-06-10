@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using StswExpress;
+using System.Windows.Controls;
 
 namespace WBZ.Modules.Logs
 {
@@ -10,6 +11,7 @@ namespace WBZ.Modules.Logs
         public LogsListGrid()
         {
             InitializeComponent();
-        }
+			ExtDataGrid.Load(this, Properties.Settings.Default.config_Logs_PanelColor);
+		}
     }
 }

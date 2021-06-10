@@ -98,11 +98,7 @@ namespace WBZ.Modules
 		/// <summary>
 		/// Opens context menu
 		/// </summary>
-		private void btnContextMenu_Click(object sender, RoutedEventArgs e)
-		{
-			if (sender is FrameworkElement btn)
-				btn.ContextMenu.IsOpen = true;
-		}
+		private void btnContextMenu_Click(object sender, RoutedEventArgs e) => Fn.OpenContextMenu(sender);
 
 		/// <summary>
 		/// Menu

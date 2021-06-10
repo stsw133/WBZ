@@ -97,9 +97,11 @@
 				</UniformGrid.Resources>
 				<se:IconButton IsTextVisible="False" ToolTip="{Tr Test}" Icon="/Resources/icon32_test.ico" Click="btnTest_Click"/>
 				<se:IconButton IsTextVisible="False" ToolTip="{Tr UpdateDatabase}" Icon="/Resources/icon32_database.ico"
-							   IsEnabled="{Binding CanUpdateDatabase}" Click="btnUpdateDatabase_Click"/>
+							   IsEnabled="{Binding DataContext.CanUpdateDatabase, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+							   Click="btnUpdateDatabase_Click"/>
 				<se:IconButton IsTextVisible="False" ToolTip="{Tr CreateAdmin}" Icon="/Resources/icon32_admin.ico"
-							   IsEnabled="{Binding CanCreateAdmin}" Click="btnCreateAdmin_Click"/>
+							   IsEnabled="{Binding DataContext.CanCreateAdmin, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+							   Click="btnCreateAdmin_Click"/>
 			</UniformGrid>
 		</UniformGrid>
     </DockPanel>

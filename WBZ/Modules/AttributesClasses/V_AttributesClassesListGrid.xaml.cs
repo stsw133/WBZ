@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using StswExpress;
+using System.Windows.Controls;
 
 namespace WBZ.Modules.AttributesClasses
 {
@@ -10,6 +11,7 @@ namespace WBZ.Modules.AttributesClasses
         public AttributesClassesListGrid()
         {
             InitializeComponent();
-        }
+			ExtDataGrid.Load(this, Properties.Settings.Default.config_AttributesClasses_PanelColor);
+		}
     }
 }

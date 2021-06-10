@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using StswExpress;
+using System.Windows.Controls;
 
 namespace WBZ.Modules.Distributions
 {
@@ -10,6 +11,7 @@ namespace WBZ.Modules.Distributions
         public DistributionsListGrid()
         {
             InitializeComponent();
-        }
+			ExtDataGrid.Load(this, Properties.Settings.Default.config_Distributions_PanelColor);
+		}
     }
 }

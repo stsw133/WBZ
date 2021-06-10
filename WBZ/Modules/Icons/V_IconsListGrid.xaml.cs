@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using StswExpress;
+using System.Windows.Controls;
 
 namespace WBZ.Modules.Icons
 {
@@ -10,6 +11,7 @@ namespace WBZ.Modules.Icons
         public IconsListGrid()
         {
             InitializeComponent();
-        }
+			ExtDataGrid.Load(this, Properties.Settings.Default.config_Icons_PanelColor);
+		}
     }
 }

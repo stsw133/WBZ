@@ -7,20 +7,13 @@
           xmlns:g="clr-namespace:WBZ.Globals"
           xmlns:p="clr-namespace:WBZ.Properties"
           mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800"
-          Margin="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1" AutoGenerateColumns="False">
-    <DataGrid.ColumnHeaderStyle>
-        <Style TargetType="{x:Type DataGridColumnHeader}">
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="Background" Value="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}}"/>
-            <Setter Property="BorderThickness" Value="0,0,1,1"/>
-            <Setter Property="BorderBrush" Value="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.25}"/>
-            <Setter Property="Padding" Value="4 3"/>
-        </Style>
-    </DataGrid.ColumnHeaderStyle>
-    <DataGrid.Resources>
+          BorderThickness="0" IsReadOnly="True">
+	<DataGrid.Resources>
         <g:BindingProxy x:Key="proxy" Data="{Binding}"/>
-    </DataGrid.Resources>
+		<Style TargetType="{x:Type se:ColumnFilter}">
+			<Setter Property="IsFilterVisible" Value="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+		</Style>
+	</DataGrid.Resources>
     <DataGrid.Columns>
         <!-- ID -->
         <DataGridTextColumn Binding="{Binding ID}" Header="ID"

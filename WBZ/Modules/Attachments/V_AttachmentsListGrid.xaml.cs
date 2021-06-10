@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using StswExpress;
+using System.Windows.Controls;
 
 namespace WBZ.Modules.Attachments
 {
@@ -10,6 +11,7 @@ namespace WBZ.Modules.Attachments
         public AttachmentsListGrid()
         {
             InitializeComponent();
-        }
+			ExtDataGrid.Load(this, Properties.Settings.Default.config_Attachments_PanelColor);
+		}
     }
 }

@@ -7,19 +7,8 @@
           xmlns:g="clr-namespace:WBZ.Globals"
           xmlns:p="clr-namespace:WBZ.Properties"
           mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800"
-          AutoGenerateColumns="False" BorderThickness="0" RowHeaderWidth="0" IsReadOnly="True"
-          HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray">
-    <DataGrid.ColumnHeaderStyle>
-        <Style TargetType="{x:Type DataGridColumnHeader}">
-            <Setter Property="Background" Value="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}}"/>
-            <Setter Property="BorderBrush" Value="{Binding config_AttributesClasses_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.25}"/>
-            <Setter Property="BorderThickness" Value="0,0,1,1"/>
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            <Setter Property="Padding" Value="4 3"/>
-        </Style>
-    </DataGrid.ColumnHeaderStyle>
-    <DataGrid.Resources>
+          BorderThickness="0" IsReadOnly="True">
+	<DataGrid.Resources>
         <g:BindingProxy x:Key="proxy" Data="{Binding}"/>
         <Style TargetType="{x:Type se:ColumnFilter}">
             <Setter Property="IsFilterVisible" Value="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>

@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using StswExpress;
+using System.Windows.Controls;
 
 namespace WBZ.Modules.Vehicles
 {
@@ -10,6 +11,7 @@ namespace WBZ.Modules.Vehicles
         public VehiclesListGrid()
         {
             InitializeComponent();
-        }
+			ExtDataGrid.Load(this, Properties.Settings.Default.config_Vehicles_PanelColor);
+		}
     }
 }

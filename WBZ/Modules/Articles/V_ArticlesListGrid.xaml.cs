@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using StswExpress;
+using System.Windows.Controls;
 
 namespace WBZ.Modules.Articles
 {
@@ -10,6 +11,7 @@ namespace WBZ.Modules.Articles
         public ArticlesListGrid()
         {
             InitializeComponent();
-        }
+			ExtDataGrid.Load(this, Properties.Settings.Default.config_Articles_PanelColor);
+		}
     }
 }

@@ -51,17 +51,17 @@
 				</se:IconButton>
 				<!-- searchBar -->
                 <TextBox DockPanel.Dock="Top" Margin="1" VerticalContentAlignment="Center"
-                         Padding="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2;0;0;0}"
+                         Padding="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=2.5;0;0;0}"
                          TextChanged="tbSearch_TextChanged">
                     <TextBox.Background>
                         <ImageBrush ImageSource="/Resources/icon32_search.ico" AlignmentX="Left" Stretch="Uniform">
                             <ImageBrush.Transform>
                                 <TransformGroup>
-                                    <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                                    <ScaleTransform ScaleX="0.7" ScaleY="0.7"/>
                                     <SkewTransform/>
                                     <RotateTransform/>
-                                    <TranslateTransform X="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.2}"
-                                                        Y="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.2}"/>
+                                    <TranslateTransform X="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.4}"
+                                                        Y="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.4}"/>
                                 </TransformGroup>
                             </ImageBrush.Transform>
                         </ImageBrush>
@@ -83,6 +83,7 @@
 						<Setter Property="VerticalAlignment" Value="Top"/>
 					</Style>
 					<Style TargetType="{x:Type se:IconButton}">
+						<Setter Property="FontWeight" Value="Medium"/>
 						<Setter Property="IconMargin" Value="5"/>
 						<Setter Property="IconSize" Value="32"/>
 						<Setter Property="Margin" Value="10"/>

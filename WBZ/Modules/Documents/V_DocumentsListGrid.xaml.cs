@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using StswExpress;
+using System.Windows.Controls;
 
 namespace WBZ.Modules.Documents
 {
@@ -10,6 +11,7 @@ namespace WBZ.Modules.Documents
         public DocumentsListGrid()
         {
             InitializeComponent();
-        }
+			ExtDataGrid.Load(this, Properties.Settings.Default.config_Documents_PanelColor);
+		}
     }
 }
