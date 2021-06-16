@@ -19,8 +19,8 @@ namespace WBZ.Modules._shared
             InitializeComponent();
             DataContext = D;
 
+			D.Module = module;
             D.Mode = mode;
-            D.Module = module;
         }
         
         /// <summary>
@@ -33,8 +33,8 @@ namespace WBZ.Modules._shared
             {
                 if (D.Mode == Commands.Type.SELECT)
                 {
-                    var item = groupsView.SelectedItem as TreeViewItem;
-                    Selected = SQL.GetInstance<MODULE_MODEL>(Config.SubModules.GROUPS, (int)item.Tag);
+					if (groupsView.SelectedItem is TreeViewItem itm)
+						Selected = SQL.GetInstance<MODULE_MODEL>(Config.SubModules.GROUPS, (int)itm.Tag);
 
                     if (Selected != null)
                         DialogResult = true;

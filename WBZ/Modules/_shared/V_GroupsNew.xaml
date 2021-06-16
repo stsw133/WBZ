@@ -7,7 +7,7 @@
        xmlns:b="clr-namespace:WBZ.Modules._shared"
        xmlns:p="clr-namespace:WBZ.Properties"
        xmlns:t="clr-namespace:WBZ.Modules._tabs"
-       mc:Ignorable="d" Height="600" Width="900" ResizeMode="CanResize"
+       mc:Ignorable="d" Height="600" Width="900" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
        Title="{Binding Title}" Icon="/Resources/icon32_groups.ico"
        Loaded="Window_Loaded" Closed="Window_Closed"
        FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}">
@@ -23,29 +23,23 @@
         <!-- titleBar -->
         <se:TitleBar DockPanel.Dock="Top" SubIcon="{Binding ModeIcon}"/>
         <!-- buttonsPanel -->
-        <Border DockPanel.Dock="Right"
-                Background="{Binding config_Groups_PanelColor, Source={x:Static p:Settings.Default}}"
-                BorderBrush="{Binding config_Groups_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.5}"
-                BorderThickness="1,0,0,0">
+		<Border DockPanel.Dock="Right" BorderBrush="Gray" BorderThickness="1,0,0,0" Background="{Binding config_Groups_PanelColor, Source={x:Static p:Settings.Default}}">
             <DockPanel>
-                <StackPanel DockPanel.Dock="Top">
-                    <se:IconButton Text="{Tr Save}" Margin="5"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                    Icon="/Resources/icon32_save.ico"
-                                    Command="se:Commands.Save"/>
+				<DockPanel.Resources>
+					<Style TargetType="{x:Type se:IconButton}">
+						<Setter Property="HorizontalContentAlignment" Value="Left"/>
+						<Setter Property="IsTextVisible" Value="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"/>
+					</Style>
+				</DockPanel.Resources>
+				<StackPanel DockPanel.Dock="Top">
+                    <se:IconButton Text="{Tr Save}" Margin="5" Icon="/Resources/icon32_save.ico" Command="se:Commands.Save"/>
                     <Separator/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                     <Separator/>
-                    <se:IconButton Text="{Tr Refresh}" Margin="5"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                    Icon="/Resources/icon32_refresh.ico"
-                                    Command="se:Commands.Refresh"/>
+                    <se:IconButton Text="{Tr Refresh}" Margin="5" Icon="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
                     <Separator/>
-                    <se:IconButton Text="{Tr CloseWindow}" Margin="5"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                    Icon="/Resources/icon32_close.ico"
-                                    Command="se:Commands.Close"/>
+                    <se:IconButton Text="{Tr CloseWindow}" Margin="5" Icon="/Resources/icon32_close.ico" Command="se:Commands.Close"/>
                 </StackPanel>
             </DockPanel>
             <Border.ContextMenu>
@@ -59,18 +53,25 @@
             <!-- tabMain -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="Ogólne" Icon="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
+					<se:Header Text="{Tr General}" Icon="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
                 </TabItem.Header>
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <DockPanel Margin="10" IsEnabled="{Binding EditingMode}">
+					<DockPanel Margin="10" IsEnabled="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=!PREVIEW}">
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Moduł:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Normal" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={se:conv_Size}, ConverterParameter=0.25}"/>
-                            <TextBox Text="{Binding InstanceData.TranslatedModule, Mode=OneWay}" Margin="5" VerticalContentAlignment="Center" IsReadOnly="True" Background="#EEE"/>
+                            <se:ExtLabel Content="Moduł:" FontWeight="Normal"
+										 Margin="5" HorizontalContentAlignment="Right"
+										 Width="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=10}"/>
+							<se:ExtTextBox Text="{Binding InstanceData.TranslatedModule}"
+										   Margin="5" IsReadOnly="True" Background="#EEE"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Nazwa:" Margin="5" HorizontalContentAlignment="Right" FontWeight="Medium" Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DockPanel}}, Converter={se:conv_Size}, ConverterParameter=0.25}"/>
-                            <TextBox Text="{Binding InstanceData.Path}" Margin="5,5,0,5" VerticalContentAlignment="Center" IsReadOnly="True" Background="#EEE"/>
-                            <TextBox Text="{Binding InstanceData.Name}" Margin="0,5,5,5" VerticalContentAlignment="Center"/>
+							<se:ExtLabel Content="Nazwa:" FontWeight="Medium"
+										 Margin="5" HorizontalContentAlignment="Right"
+										 Width="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=10}"/>
+                            <se:ExtTextBox Text="{Binding InstanceData.Path}"
+										   Margin="5,5,0,5" IsReadOnly="True" Background="#EEE"/>
+                            <se:ExtTextBox Text="{Binding InstanceData.Name}"
+										   Margin="0,5,5,5"/>
                         </DockPanel>
                         <t:AdditionalsTab/>
                     </DockPanel>
@@ -79,14 +80,14 @@
             <!-- tabAttributes -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="Atrybuty" Icon="/Resources/icon32_attributes.ico"/>
+					<se:Header Text="{Tr Attributes}" Icon="/Resources/icon32_attributes.ico"/>
                 </TabItem.Header>
                 <t:AttributesTab/>
             </TabItem>
             <!-- tabLogs -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="Historia" Icon="/Resources/icon32_history.ico"/>
+					<se:Header Text="{Tr History}" Icon="/Resources/icon32_history.ico"/>
                 </TabItem.Header>
                 <t:LogsTab/>
             </TabItem>

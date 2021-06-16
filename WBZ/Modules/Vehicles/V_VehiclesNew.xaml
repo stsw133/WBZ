@@ -61,7 +61,7 @@
                             <Style TargetType="{x:Type se:IconButton}">
                                 <Setter Property="CornerRadius" Value="0"/>
                                 <Setter Property="IconMargin" Value="0"/>
-                                <Setter Property="IconSize" Value="{Binding iSize, Source={x:Static p:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=1.5}"/>
+                                <Setter Property="IconSize" Value="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=1.5}"/>
                                 <Setter Property="IsTextVisible" Value="False"/>
                                 <Setter Property="Margin" Value="5,5,0,5"/>
                                 <Setter Property="Padding" Value="0"/>
@@ -70,12 +70,12 @@
                             <Style TargetType="{x:Type se:ExtLabel}">
                                 <Setter Property="HorizontalContentAlignment" Value="Right"/>
                                 <Setter Property="Margin" Value="5"/>
-                                <Setter Property="Width" Value="{Binding iSize, Source={x:Static p:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=10}"/>
+                                <Setter Property="Width" Value="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=10}"/>
                             </Style>
                             <Style TargetType="{x:Type se:NumericUpDown}">
                                 <Setter Property="HorizontalAlignment" Value="Left"/>
                                 <Setter Property="Margin" Value="5"/>
-                                <Setter Property="Width" Value="{Binding iSize, Source={x:Static p:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=10}"/>
+                                <Setter Property="Width" Value="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=10}"/>
                             </Style>
                             <Style TargetType="{x:Type se:ExtTextBox}">
                                 <Setter Property="Margin" Value="5"/>

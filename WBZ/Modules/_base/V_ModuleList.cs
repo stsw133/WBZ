@@ -160,7 +160,7 @@ namespace WBZ.Modules._base
         /// Select
         /// </summary>
 		internal MODULE_MODEL Selected;
-        private void dgList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        internal void dgList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
@@ -190,10 +190,10 @@ namespace WBZ.Modules._base
             }
         }
 
-        /// <summary>
-        /// Sorting
-        /// </summary>
-        private void dgList_Sorting(object sender, DataGridSortingEventArgs e)
+		/// <summary>
+		/// Sorting
+		/// </summary>
+		internal void dgList_Sorting(object sender, DataGridSortingEventArgs e)
         {
             var sort = CollectionViewSource.GetDefaultView((sender as DataGrid).ItemsSource).SortDescriptions;
             if (sort.Any(x => x.PropertyName == e.Column.SortMemberPath))
@@ -221,10 +221,10 @@ namespace WBZ.Modules._base
             D.Sorting.Add(limit.ToString());
         }
 
-        /// <summary>
-        /// Closed
-        /// </summary>
-        private void Window_Closed(object sender, EventArgs e)
+		/// <summary>
+		/// Closed
+		/// </summary>
+		internal void Window_Closed(object sender, EventArgs e)
         {
             Properties.Settings.Default.Save();
             if (W.Owner != null)

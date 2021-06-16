@@ -23,10 +23,11 @@ namespace WBZ.Globals
             public const string DELETE = "delete";
             public const string GROUPS = "groups";
             public const string FILTERS = "filters";
-        }
+			//public const string STATS = "stats";  // do dodania w wersji 1.3.0
+		}
 
-        #region Crypto
-        internal static string sha256(string pass)
+		#region Crypto
+		internal static string sha256(string pass)
         {
             var crypt = new SHA256Managed();
             var hash256 = new StringBuilder();

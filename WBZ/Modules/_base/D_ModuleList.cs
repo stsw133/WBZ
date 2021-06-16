@@ -1,7 +1,5 @@
-﻿using Npgsql;
-using StswExpress;
+﻿using StswExpress;
 using StswExpress.Translate;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;

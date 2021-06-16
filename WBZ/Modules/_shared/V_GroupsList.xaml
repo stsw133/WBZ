@@ -6,13 +6,14 @@
         xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
         xmlns:c="clr-namespace:WBZ.Controls"
         mc:Ignorable="d" Height="650" Width="975" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
-        Title="{Binding Title}" Icon="/Resources/icon32_groups.ico">
+        Title="{Binding Title}" Icon="/Resources/icon32_groups.ico"
+		FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
     <DockPanel>
         <!-- titleBar -->
-        <se:TitleBar DockPanel.Dock="Top" SubIcon="/Resources/icon32_select.ico"/>
+		<se:TitleBar DockPanel.Dock="Top" SubIcon="{Binding ModeIcon}"/>
         <!-- buttonsPanel -->
         <c:GroupsView x:Name="groupsView" Margin="5" MouseDoubleClick="groupsView_MouseDoubleClick"/>
     </DockPanel>

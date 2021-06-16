@@ -1,5 +1,4 @@
 ﻿using StswExpress;
-using System;
 using System.Linq;
 using System.Windows;
 using WBZ.Models;
@@ -22,7 +21,8 @@ namespace WBZ.Globals
         /// <summary>
         /// Open window
         /// </summary>
-        internal static void OpenWindow(Window owner, string fullname, bool dialog, params object[] args)
+		/*
+		internal static void OpenWindow(Window owner, string fullname, bool dialog, params object[] args)
         {
             var window = Activator.CreateInstance(Type.GetType(fullname), args) as Window;
 
@@ -34,7 +34,7 @@ namespace WBZ.Globals
             else
                 window.Show();
         }
-
+		*/
 		/// <summary>
 		/// Open instance window
 		/// </summary>

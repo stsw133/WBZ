@@ -24,6 +24,7 @@ namespace WBZ.Globals
         {
             public const string ARTICLES = "articles";
             public const string ATTRIBUTES_CLASSES = "attributes_classes";
+            //public const string GALLERY = "gallery";  // do dodania w wersji 1.3.0
             //public const string COMMUNITY = "community";  // do dodania w wersji 1.3.0
             public const string CONTRACTORS = "contractors";
             public const string DISTRIBUTIONS = "distributions";
@@ -33,7 +34,7 @@ namespace WBZ.Globals
             public const string ICONS = "icons";
             //public const string ORDERS = "orders";  // do dodania w wersji 1.3.0
             //public const string SHIPMENTS = "shipments";  // do dodania w wersji 1.3.0
-            public const string STATS = "stats";    // do ulepszenia w wersji 1.3.0
+            public const string STATS = "stats";    // do ulepszenia (lub jako nowe okno do każdego modułu) w wersji 1.3.0
             public const string STORES = "stores";
             public const string USERS = "users";
             public const string VEHICLES = "vehicles";
@@ -45,8 +46,9 @@ namespace WBZ.Globals
             public const string CONTACTS = "contacts";
             public const string GROUPS = "groups";
             public const string LOGS = "logs";
-        }
-        public static string GetModuleAlias(string module) => string.Join(string.Empty, module.Split('_').Where(x => !string.IsNullOrEmpty(x)).Select(y => y[0]));
+			//public const string TRANSLATIONS = "translations";  // do dodania w wersji 1.4.0
+		}
+		public static string GetModuleAlias(string module) => string.Join(string.Empty, module.Split('_').Where(x => !string.IsNullOrEmpty(x)).Select(y => y[0]));
         public static string GetModuleTranslation(string module) => StswExpress.Translate.TM.Tr(string.Join("", module.Split('_').Select(x => x.Substring(0, 1).ToUpper() + x[1..]).ToArray()));
 
         /// <summary>

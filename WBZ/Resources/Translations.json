@@ -267,6 +267,30 @@
 		"en": "Groups",
 		"pl": "Grupy"
 	},
+	"GroupsDuplicate": {
+		"en": "Duplicate group",
+		"pl": "Duplikat grupy"
+	},
+	"GroupsEdit": {
+		"en": "Edit group",
+		"pl": "Edycja grupy"
+	},
+	"GroupsList": {
+		"en": "List of groups",
+		"pl": "Lista grup"
+	},
+	"GroupsNew": {
+		"en": "New group",
+		"pl": "Nowa grupa"
+	},
+	"GroupsPreview": {
+		"en": "Preview group",
+		"pl": "Podgląd grupy"
+	},
+	"GroupsSelect": {
+		"en": "Select group",
+		"pl": "Wybór grupy"
+	},
 	"History": {
 		"en": "History",
 		"pl": "Historia"

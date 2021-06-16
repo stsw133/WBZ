@@ -27,7 +27,7 @@ namespace WBZ.Modules._base
 		/// <summary>
 		/// Loaded
 		/// </summary>
-		private void Window_Loaded(object sender, RoutedEventArgs e)
+		internal void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			int newID = (D.InstanceData as M).ID;
 			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE))
@@ -123,7 +123,7 @@ namespace WBZ.Modules._base
 		/// <summary>
 		/// Closed
 		/// </summary>
-		private void Window_Closed(object sender, EventArgs e)
+		internal void Window_Closed(object sender, EventArgs e)
 		{
 			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE) && !saved)
 				SQL.ClearObject(D.Module, (D.InstanceData as M).ID);
