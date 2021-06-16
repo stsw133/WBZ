@@ -9,7 +9,7 @@ namespace WBZ.Modules._base
 	abstract class D_ModuleList<MODULE_MODEL> : D where MODULE_MODEL : class, new()
 	{
 		/// Module
-		public string Module => GetType().Name.ToLower()[2..^4];
+		public string Module => Fn.AddCharBeforeUpperLetters(GetType().Name[2..^4], '_').ToLower();
 		public string Title => TM.Tr(Module.Capitalize() + Mode.ToString().Capitalize());
 
 		/// Mode
@@ -55,8 +55,8 @@ namespace WBZ.Modules._base
 		/// Sorting
 		public StringCollection Sorting
 		{
-			get => (StringCollection)Properties.Settings.Default[$"sorting_{Module.Capitalize()}List"];
-			set => Properties.Settings.Default[$"sorting_{Module.Capitalize()}List"] = value;
+			get => (StringCollection)Properties.Settings.Default[$"sorting_{GetType().Name[2..^4]}List"];
+			set => Properties.Settings.Default[$"sorting_{GetType().Name[2..^4]}List"] = value;
 		}
 
 		/// SQL filter

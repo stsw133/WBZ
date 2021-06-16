@@ -16,7 +16,7 @@ namespace WBZ.Modules.Articles
 	/// </summary>
 	public partial class ArticlesNew : New
 	{
-		D_ArticlesNew D = new D_ArticlesNew();
+        readonly D_ArticlesNew D = new D_ArticlesNew();
 
 		public ArticlesNew(MODULE_MODEL instance, Commands.Type mode)
 		{

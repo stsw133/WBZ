@@ -13,7 +13,7 @@ namespace WBZ.Modules.Contractors
     /// </summary>
     public partial class ContractorsNew : New
     {
-        D_ContractorsNew D = new D_ContractorsNew();
+        readonly D_ContractorsNew D = new D_ContractorsNew();
 
         public ContractorsNew(MODULE_MODEL instance, Commands.Type mode)
         {
@@ -26,26 +26,19 @@ namespace WBZ.Modules.Contractors
             D.Mode = mode;
         }
 
-        /// <summary>
-		/// Tab changed
+		/// <summary>
+		/// Tab changed for source
 		/// </summary>
-        private void tabs_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		private void tcSources_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var tab = (e.AddedItems.Count > 0 ? e.AddedItems[0] : null) as TabItem;
-            if (tab?.Name == "tabSources_Documents")
+            if (tab?.Name?.EndsWith("_Documents") == true)
             {
 				if (D.InstanceData.ID != 0 && D.InstanceSources_Documents == null)
-                    D.InstanceSources_Documents = SQL.ListInstances<M_Document>(Config.Modules.DOCUMENTS, $"c.id={D.InstanceData.ID}");
+                    D.InstanceSources_Documents = SQL.ListInstances<M_Document>(Config.Modules.DOCUMENTS, $"d.contractor={D.InstanceData.ID}");
             }
         }
-
-        /// <summary>
-		/// Open: Document
-		/// </summary>
-        private void dgList_Documents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            dgSourceList_MouseDoubleClick<M_Document>(sender, e, Config.Modules.DOCUMENTS);
-        }
+		private void dgList_Documents_MouseDoubleClick(object sender, MouseButtonEventArgs e) => dgSourceList_MouseDoubleClick<M_Document>(sender, e, Config.Modules.DOCUMENTS);
 
 		/// <summary>
 		/// Validation

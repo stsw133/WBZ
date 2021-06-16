@@ -7,7 +7,7 @@ namespace WBZ.Modules._base
     abstract class D_ModuleNew<MODULE_MODEL> : D where MODULE_MODEL : class, new()
     {
 		/// Module
-		public string Module => GetType().Name.ToLower()[2..^3];
+		public string Module => Fn.AddCharBeforeUpperLetters(GetType().Name[2..^3], '_').ToLower();
 		public string Title => TM.Tr(Module.Capitalize() + Mode.ToString().Capitalize()) + (InstanceData != null ? $": {(InstanceData as M).Name}" : string.Empty);
 
 		/// Mode

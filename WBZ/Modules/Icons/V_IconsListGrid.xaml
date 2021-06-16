@@ -31,7 +31,7 @@
                 <StackPanel>
                     <TextBlock Text="Nazwa modułu"/>
                     <ComboBox VerticalContentAlignment="Center" Padding="1"
-                              ItemsSource="{x:Static g:Config.ListModules}" SelectedValuePath="Item1" DisplayMemberPath="Item2"
+                              ItemsSource="{x:Static g:Config.ListModules}" DisplayMemberPath="Value" SelectedValuePath="ID"
                               SelectedValue="{Binding Data.Filters.Module, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
                               Visibility="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}, Converter={se:conv_Bool}}">
                         <ComboBox.InputBindings>

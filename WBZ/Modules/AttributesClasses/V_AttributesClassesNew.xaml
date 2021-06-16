@@ -6,6 +6,7 @@
        xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
        xmlns:b="clr-namespace:WBZ.Modules.AttributesClasses"
        xmlns:g="clr-namespace:WBZ.Globals"
+       xmlns:m="clr-namespace:WBZ.Models"
        xmlns:p="clr-namespace:WBZ.Properties"
        xmlns:t="clr-namespace:WBZ.Modules._tabs"
        mc:Ignorable="d" Height="600" Width="900" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
@@ -62,7 +63,7 @@
                             <Style TargetType="{x:Type se:IconButton}">
                                 <Setter Property="CornerRadius" Value="0"/>
                                 <Setter Property="IconMargin" Value="0"/>
-                                <Setter Property="IconSize" Value="{Binding iSize, Source={x:Static p:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=1.5}"/>
+                                <Setter Property="IconSize" Value="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=1.5}"/>
                                 <Setter Property="IsTextVisible" Value="False"/>
                                 <Setter Property="Margin" Value="5,5,0,5"/>
                                 <Setter Property="Padding" Value="0"/>
@@ -71,12 +72,12 @@
                             <Style TargetType="{x:Type se:ExtLabel}">
                                 <Setter Property="HorizontalContentAlignment" Value="Right"/>
                                 <Setter Property="Margin" Value="5"/>
-                                <Setter Property="Width" Value="{Binding iSize, Source={x:Static p:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=10}"/>
+                                <Setter Property="Width" Value="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=10}"/>
                             </Style>
                             <Style TargetType="{x:Type se:NumericUpDown}">
                                 <Setter Property="HorizontalAlignment" Value="Left"/>
                                 <Setter Property="Margin" Value="5"/>
-                                <Setter Property="Width" Value="{Binding iSize, Source={x:Static p:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=10}"/>
+                                <Setter Property="Width" Value="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=10}"/>
                             </Style>
                             <Style TargetType="{x:Type se:ExtTextBox}">
                                 <Setter Property="Margin" Value="5"/>
@@ -104,7 +105,7 @@
                             <DockPanel DockPanel.Dock="Top">
                                 <se:ExtLabel Content="Typ:" FontWeight="Bold"/>
                                 <ComboBox Margin="5" VerticalContentAlignment="Center"
-                                          ItemsSource="{Binding InstanceData.Types}" DisplayMemberPath="Value" SelectedValuePath="ID"
+                                          ItemsSource="{Binding Source={x:Static m:M_AttributeTypes.Types}}" DisplayMemberPath="Value" SelectedValuePath="ID"
                                           SelectedValue="{Binding InstanceData.Type}"/>
                             </DockPanel>
                             <!-- Required -->

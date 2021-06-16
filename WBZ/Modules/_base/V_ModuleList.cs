@@ -55,7 +55,8 @@ namespace WBZ.Modules._base
             Fn.GetColumnFilters(dgLists[D.SelectedTab], out var a, out var b); D.FilterSqlString = a; D.FilterSqlParams = b;
             D.FilterSqlString += !(D.Filters as M).Archival ? $" and {Config.GetModuleAlias(D.Module)}.archival=false" : string.Empty;
             D.FilterSqlString += (D.Filters as M).Group > 0 ? $" and exists (select from wbz.groups g where g.instance={Config.GetModuleAlias(D.Module)}.id and g.owner={(D.Filters as M).Group})" : string.Empty;
-            D.FilterSqlString = D.FilterSqlString.TrimStart(" and ".ToCharArray());
+            if (D.FilterSqlString.StartsWith(" and "))
+                D.FilterSqlString = D.FilterSqlString[5..];
         }
 
         /// <summary>

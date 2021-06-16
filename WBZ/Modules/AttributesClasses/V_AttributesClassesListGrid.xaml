@@ -5,6 +5,7 @@
           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
           xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
           xmlns:g="clr-namespace:WBZ.Globals"
+          xmlns:m="clr-namespace:WBZ.Models"
           xmlns:p="clr-namespace:WBZ.Properties"
           mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800"
           BorderThickness="0" IsReadOnly="True">
@@ -41,7 +42,7 @@
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Type, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <se:ColumnFilter Header="Typ" FilterType="List" NameSQL="ac.type"
-                                 ItemsSource="{Binding Types}" DisplayMemberPath="Value" SelectedValuePath="ID"/>
+                                 ItemsSource="{Binding Source={x:Static m:M_AttributeTypes.Types}}" DisplayMemberPath="Value" SelectedValuePath="ID"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Required -->

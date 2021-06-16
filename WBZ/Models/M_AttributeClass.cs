@@ -16,14 +16,6 @@ namespace WBZ.Models
 		/// Type
 		/// </summary>
 		public string Type { get; set; } = string.Empty;
-		public List<MV> Types { get; } = new List<MV>()
-		{
-			new MV() { ID = "string", Value = "Ciąg znaków" },
-			new MV() { ID = "date", Value = "Data" },
-			new MV() { ID = "int", Value = "Liczba całkowita" },
-			new MV() { ID = "double", Value = "Liczba przecinkowa" },
-			new MV() { ID = "list", Value = "Lista" }
-		};
 
 		/// <summary>
 		/// DefValue
@@ -67,5 +59,17 @@ namespace WBZ.Models
 		/// Archival
 		/// </summary>
 		public bool Archival { get; set; } = false;
+	}
+
+	public static class M_AttributeTypes
+	{
+		public static List<MV> Types { get; } = new List<MV>()
+		{
+			new MV() { ID = "string", Value = "Ciąg znaków" },
+			new MV() { ID = "date", Value = "Data" },
+			new MV() { ID = "int", Value = "Liczba całkowita" },
+			new MV() { ID = "double", Value = "Liczba ułamkowa" },
+			new MV() { ID = "list", Value = "Lista" }
+		};
 	}
 }

@@ -139,6 +139,30 @@
 		"en": "Contractors",
 		"pl": "Kontrahenci"
 	},
+	"ContractorsDuplicate": {
+		"en": "Duplicate contractor",
+		"pl": "Duplikat kontrahenta"
+	},
+	"ContractorsEdit": {
+		"en": "Edit contractor",
+		"pl": "Edycja kontrahenta"
+	},
+	"ContractorsList": {
+		"en": "List of contractors",
+		"pl": "Lista kontrahentów"
+	},
+	"ContractorsNew": {
+		"en": "New contractor",
+		"pl": "Nowy kontrahent"
+	},
+	"ContractorsPreview": {
+		"en": "Preview contractor",
+		"pl": "Podgląd kontrahenta"
+	},
+	"ContractorsSelect": {
+		"en": "Select contractor",
+		"pl": "Wybór kontrahenta"
+	},
 	"CreateAdministrator": {
 		"en": "Create administrator",
 		"pl": "Utwórz administratora"

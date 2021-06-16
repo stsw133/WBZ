@@ -9,7 +9,7 @@ namespace WBZ.Modules.AttributesClasses
 	/// </summary>
 	public partial class AttributesClassesList : List
 	{
-        readonly D_IconsList D = new D_IconsList();
+        readonly D_AttributesClassesList D = new D_AttributesClassesList();
 
 		public AttributesClassesList(Commands.Type mode)
 		{
