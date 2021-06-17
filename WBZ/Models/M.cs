@@ -66,13 +66,18 @@ namespace WBZ.Models
     public class MV
     {
         /// <summary>
-        /// Value
-        /// </summary>
-        public object Value { get; set; } = null;
-
-        /// <summary>
         /// Display
         /// </summary>
         public object Display { get; set; } = null;
-    }
+
+		/// <summary>
+		/// Value
+		/// </summary>
+		public object Value { get; set; } = null;
+
+		/// <summary>
+		/// Tag
+		/// </summary>
+		public object Tag { get; set; } = null;
+	}
 }

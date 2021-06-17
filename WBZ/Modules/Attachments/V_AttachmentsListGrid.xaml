@@ -29,7 +29,7 @@
         <DataGridTextColumn Binding="{Binding TranslatedModule}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Module, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter Header="Moduł" FilterType="List" NameSQL="a.module"
+				<se:ColumnFilter FilterType="List" Header="Moduł" NameSQL="a.module"
                                  ItemsSource="{x:Static g:Config.ListModules}" DisplayMemberPath="Display" SelectedValuePath="Value"/>
 			</DataGridTextColumn.Header>
         </DataGridTextColumn>

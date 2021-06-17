@@ -1,4 +1,5 @@
-﻿using SE = StswExpress;
+﻿using StswExpress;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,16 +15,16 @@ namespace WBZ.Modules.Logs
 	/// </summary>
 	public partial class LogsList : List
 	{
-		D_LogsList D = new D_LogsList();
+		readonly D_LogsList D = new D_LogsList();
 
-		public LogsList(SE.Commands.Type mode)
+		public LogsList(Commands.Type mode)
 		{
 			InitializeComponent();
 			DataContext = D;
-			base.Init();
+			Init();
 
 			D.Mode = mode;
-			D.InstancesLists.Add(new System.Collections.ObjectModel.ObservableCollection<MODULE_MODEL>());
+			D.InstancesLists.Add(new ObservableCollection<MODULE_MODEL>());
 
 			if (Config.Logs_Enabled == "1")
 				chckEnabled.IsChecked = true;
@@ -46,13 +47,10 @@ namespace WBZ.Modules.Logs
 		/// </summary>
 		internal override void UpdateFilters()
 		{
-			D.FilterSqlString = $"LOWER(COALESCE(u.lastname,'') || ' ' || COALESCE(u.forename,'')) like '%{D.Filters.cUser.Display?.ToString()?.ToLower()}%' and "
-						+ $"LOWER(COALESCE(l.module,'')) like '%{D.Filters.Module.ToLower()}%' and "
-						+ $"LOWER(COALESCE(l.content,'')) like '%{D.Filters.Content.ToLower()}%' and "
-						+ $"l.datetime >= '{D.Filters.fDateTime:yyyy-MM-dd}' and l.datetime < '{D.Filters.DateTime.AddDays(1):yyyy-MM-dd}' and "
-						+ $"l.type={D.SelectedTab + 1} and ";
-
-			D.FilterSqlString = D.FilterSqlString.TrimEnd(" and ".ToCharArray());
+			base.UpdateFilters();
+			D.FilterSqlString += $" and l.type={D.SelectedTab + 1}";
+			if (D.FilterSqlString.StartsWith(" and "))
+				D.FilterSqlString = D.FilterSqlString[5..];
 		}
 
 		/// <summary>
@@ -60,7 +58,7 @@ namespace WBZ.Modules.Logs
 		/// </summary>
 		internal override void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			if (D.Mode == SE.Commands.Type.SELECT)
+			if (D.Mode == Commands.Type.SELECT)
 			{
 				dgList_Logs.SelectionMode = DataGridSelectionMode.Single;
 				dgList_Errors.SelectionMode = DataGridSelectionMode.Single;
@@ -75,7 +73,7 @@ namespace WBZ.Modules.Logs
 		{
 			var selectedInstances = GetDataGrid(D.SelectedTab).SelectedItems.Cast<MODULE_MODEL>();
 			foreach (MODULE_MODEL instance in selectedInstances)
-				Functions.OpenInstanceWindow(this, instance, SE.Commands.Type.PREVIEW);
+				Functions.OpenInstanceWindow(this, instance, Commands.Type.PREVIEW);
 		}
 
 		/// <summary>
@@ -85,13 +83,13 @@ namespace WBZ.Modules.Logs
 		{
 			var selectedInstances = GetDataGrid(D.SelectedTab).SelectedItems.Cast<MODULE_MODEL>();
 			foreach (MODULE_MODEL instance in selectedInstances)
-				Functions.OpenInstanceWindow(this, instance, SE.Commands.Type.EDIT);
+				Functions.OpenInstanceWindow(this, instance, Commands.Type.EDIT);
 		}
 
 		/// <summary>
 		/// Select
 		/// </summary>
-		private void dgList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		internal override void dgList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			if (e.LeftButton == MouseButtonState.Pressed)
 				cmdEdit_Executed(null, null);

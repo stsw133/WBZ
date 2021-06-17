@@ -19,30 +19,23 @@
         <!-- titleBar -->
         <se:TitleBar DockPanel.Dock="Top"/>
         <!-- buttonsPanel -->
-        <Border DockPanel.Dock="Right"
-                Background="{Binding config_Stats_PanelColor, Source={x:Static p:Settings.Default}}"
-                BorderBrush="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.5}"
-                BorderThickness="1,0,0,0">
+		<Border DockPanel.Dock="Right" BorderBrush="Gray" BorderThickness="1,0,0,0" Background="{Binding config_Stats_PanelColor, Source={x:Static p:Settings.Default}}">
             <DockPanel>
-                <StackPanel DockPanel.Dock="Top">
-                    <se:IconButton Text="{Tr GenerateReport}" Margin="5"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                    IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=stats_save}"
-                                    Icon="/Resources/icon32_list.ico"
-                                    Click="btnReportGenerate_Click"/>
+				<DockPanel.Resources>
+					<Style TargetType="{x:Type se:IconButton}">
+						<Setter Property="HorizontalContentAlignment" Value="Left"/>
+						<Setter Property="IsTextVisible" Value="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"/>
+					</Style>
+				</DockPanel.Resources>
+				<StackPanel DockPanel.Dock="Top">
+                    <se:IconButton Text="{Tr GenerateReport}" Margin="5" Icon="/Resources/icon32_list.ico" Click="btnReportGenerate_Click"/>
                     <Separator/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                     <Separator/>
-                    <se:IconButton Text="{Tr Refresh}" Margin="5"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                    Icon="/Resources/icon32_refresh.ico"
-                                    Command="se:Commands.Refresh"/>
+                    <se:IconButton Text="{Tr Refresh}" Margin="5" Icon="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
                     <Separator/>
-                    <se:IconButton Text="{Tr CloseWindow}" Margin="5"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                    Icon="/Resources/icon32_close.ico"
-                                    Command="se:Commands.Close"/>
+                    <se:IconButton Text="{Tr CloseWindow}" Margin="5" Icon="/Resources/icon32_close.ico" Command="se:Commands.Close"/>
                 </StackPanel>
             </DockPanel>
             <Border.ContextMenu>
@@ -60,12 +53,9 @@
                         <Border Background="White" BorderBrush="Gray" BorderThickness="1">
                             <ScrollViewer Padding="10">
                                 <DockPanel>
-                                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                                        <Image Margin="3" Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.75}"
-                                               Source="/Resources/icon32_articles.ico"/>
-                                        <Label Content="Towary" VerticalAlignment="Center"/>
-                                    </StackPanel>
-                                    <Label DockPanel.Dock="Top" Content="Towary otrzymane wg lat i miesięcy (kg):" VerticalAlignment="Center" FontWeight="Normal"/>
+									<se:Header DockPanel.Dock="Top" Margin="3" Text="Towary" Icon="/Resources/icon32_articles.ico"
+											   IconSize="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=2}"/>
+									<Label DockPanel.Dock="Top" Content="Towary otrzymane wg lat i miesięcy (kg):" VerticalAlignment="Center" FontWeight="Normal"/>
                                     <DataGrid DockPanel.Dock="Top" Margin="5,0,5,5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
                                               AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding StatsArticles.DefaultView}" IsReadOnly="True" FontWeight="Normal">
                                         <DataGrid.Columns>

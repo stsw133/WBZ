@@ -22,28 +22,28 @@
         <DataGridTextColumn Binding="{Binding Name}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Fullname, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="Nazwisko" FilterType="Text" NameSQL="u.lastname || ' ' || u.forename"/>
+				<se:ColumnFilter FilterType="Text" Header="Nazwisko" NameSQL="u.lastname || ' ' || u.forename"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Email -->
         <DataGridTextColumn Binding="{Binding Email}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Email, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="E-mail" FilterType="Text" NameSQL="u.email"/>
+				<se:ColumnFilter FilterType="Text" Header="E-mail" NameSQL="u.email"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Phone -->
         <DataGridTextColumn Binding="{Binding Phone}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Phone, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="Telefon" FilterType="Text" NameSQL="u.phone"/>
+				<se:ColumnFilter FilterType="Text" Header="Telefon" NameSQL="u.phone"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
     </DataGrid.Columns>
     <DataGrid.ContextMenu>
         <ContextMenu>
             <!-- Columns -->
-            <se:ExtMenuItem Header="Widoczność kolumn" IconUri="/Resources/icon32_show.ico">
+            <se:ExtMenuItem Header="{Tr ColumnVisibility}" IconUri="/Resources/icon32_show.ico">
                 <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_ID}"/>
                 <MenuItem IsCheckable="True" Header="Nazwisko" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Fullname}"/>
                 <MenuItem IsCheckable="True" Header="E-mail" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Email}"/>

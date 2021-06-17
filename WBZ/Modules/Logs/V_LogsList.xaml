@@ -26,43 +26,30 @@
         <!-- titleBar -->
         <se:TitleBar DockPanel.Dock="Top" SubIcon="{Binding ModeIcon}"/>
         <!-- buttonsPanel -->
-        <Border DockPanel.Dock="Right"
-                Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}}"
-                BorderBrush="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.5}"
-                BorderThickness="1,0,0,0">
+		<Border DockPanel.Dock="Right" BorderBrush="Gray" BorderThickness="1,0,0,0" Background="{Binding config_Logs_PanelColor, Source={x:Static p:Settings.Default}}">
             <DockPanel>
+				<DockPanel.Resources>
+					<Style TargetType="{x:Type se:IconButton}">
+						<Setter Property="HorizontalContentAlignment" Value="Left"/>
+						<Setter Property="IsTextVisible" Value="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"/>
+					</Style>
+				</DockPanel.Resources>
                 <StackPanel DockPanel.Dock="Top">
-                    <se:IconButton Margin="5"  Text="Podgląd&#10;obiektu"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                    Icon="/Resources/icon32_search.ico"
-                                    Command="se:Commands.Preview"/>
-                    <se:IconButton Margin="5" Text="Edycja&#10;obiektu"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                    Icon="/Resources/icon32_edit.ico"
-                                    Command="se:Commands.Edit"/>
+                    <se:IconButton Margin="5" Text="Podgląd&#10;obiektu" Icon="/Resources/icon32_search.ico" Command="se:Commands.Preview"/>
+                    <se:IconButton Margin="5" Text="Edycja&#10;obiektu" Icon="/Resources/icon32_edit.ico" Command="se:Commands.Edit"/>
                     <Separator/>
-                    <CheckBox x:Name="chckEnabled"
-                              Margin="5" Content="Logi włączone"
-                              Visibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}, Converter={se:conv_Bool}}"
-                              Checked="chckEnabled_Checked" Unchecked="chckEnabled_Checked"/>
+                    <se:ExtCheckBox x:Name="chckEnabled" Margin="5" Content="Logi włączone"
+									Visibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}, Converter={se:conv_Bool}}"
+									Checked="chckEnabled_Checked" Unchecked="chckEnabled_Checked"/>
                     <Separator Visibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}, Converter={se:conv_Bool}}"/>
-                    <se:IconButton Margin="5" Text="Usuń"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                    Icon="/Resources/icon32_delete.ico"
-                                    Command="se:Commands.Delete"/>
+                    <se:IconButton Margin="5" Text="{Tr Delete}" Icon="/Resources/icon32_delete.ico" Command="se:Commands.Delete"/>
                     <Separator/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                     <Separator/>
-                    <se:IconButton Text="{Tr Refresh}" Margin="5"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                    Icon="/Resources/icon32_refresh.ico"
-                                    Command="se:Commands.Refresh"/>
+                    <se:IconButton Text="{Tr Refresh}" Margin="5" Icon="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
                     <Separator/>
-                    <se:IconButton Text="{Tr CloseWindow}" Margin="5"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                    Icon="/Resources/icon32_close.ico"
-                                    Command="se:Commands.Close"/>
+                    <se:IconButton Text="{Tr CloseWindow}" Margin="5" Icon="/Resources/icon32_close.ico" Command="se:Commands.Close"/>
                 </StackPanel>
             </DockPanel>
             <Border.ContextMenu>
@@ -79,18 +66,18 @@
             <!-- logs -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="Logi" Icon="/Resources/icon32_shield_blue.ico"/>
+                    <se:Header Text="{Tr Logs}" Icon="/Resources/icon32_shield_blue.ico"/>
                 </TabItem.Header>
-                <b:LogsListGrid x:Name="dgList_Logs" ItemsSource="{Binding InstancesList, Mode=OneWay}" IsReadOnly="True"
-                                MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged"/>
+				<b:LogsListGrid x:Name="dgList_Logs" ItemsSource="{Binding InstancesList, Mode=OneWay}" BorderBrush="Gray" BorderThickness="0,0,0,1"
+                                MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged" Sorting="dgList_Sorting"/>
             </TabItem>
             <!-- errors -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="Błędy" Icon="/Resources/icon32_shield_red.ico"/>
+                    <se:Header Text="{Tr Errors}" Icon="/Resources/icon32_shield_red.ico"/>
                 </TabItem.Header>
-                <b:LogsListGrid x:Name="dgList_Errors" ItemsSource="{Binding InstancesList, Mode=OneWay}" IsReadOnly="True"
-                                MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged"/>
+				<b:LogsListGrid x:Name="dgList_Errors" ItemsSource="{Binding InstancesList, Mode=OneWay}" BorderBrush="Gray" BorderThickness="0,0,0,1"
+                                MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged" Sorting="dgList_Sorting"/>
             </TabItem>
         </TabControl>
     </DockPanel>

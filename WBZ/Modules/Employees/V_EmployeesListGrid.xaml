@@ -25,56 +25,56 @@
         <DataGridTextColumn Binding="{Binding Fullname}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Fullname, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="Nazwisko" FilterType="Text" NameSQL="e.lastname || ' ' || e.forename"/>
+				<se:ColumnFilter FilterType="Text" Header="Nazwisko" NameSQL="e.lastname || ' ' || e.forename"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Department -->
         <DataGridTextColumn Binding="{Binding Department}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Department, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="Dział" FilterType="Text" NameSQL="e.department"/>
+				<se:ColumnFilter FilterType="Text" Header="Dział" NameSQL="e.department"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Position -->
         <DataGridTextColumn Binding="{Binding Position}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Position, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="Stanowisko" FilterType="Text" NameSQL="e.position"/>
+				<se:ColumnFilter FilterType="Text" Header="Stanowisko" NameSQL="e.position"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Email -->
         <DataGridTextColumn Binding="{Binding Email}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Email, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="E-mail" FilterType="Text" NameSQL="e.email"/>
+				<se:ColumnFilter FilterType="Text" Header="E-mail" NameSQL="e.email"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Phone -->
         <DataGridTextColumn Binding="{Binding Phone}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Phone, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="Telefon" FilterType="Text" NameSQL="e.phone"/>
+				<se:ColumnFilter FilterType="Text" Header="Telefon" NameSQL="e.phone"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Postcode -->
         <DataGridTextColumn Binding="{Binding Postcode}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Postcode, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="Kod pocztowy" FilterType="Text" NameSQL="e.postcode"/>
+				<se:ColumnFilter FilterType="Text" Header="Kod pocztowy" NameSQL="e.postcode"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- City -->
         <DataGridTextColumn Binding="{Binding City}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_City, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="Miejscowość" FilterType="Text" NameSQL="e.city"/>
+				<se:ColumnFilter FilterType="Text" Header="Miejscowość" NameSQL="e.city"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Address -->
         <DataGridTextColumn Binding="{Binding Address}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Address, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="Adres" FilterType="Text" NameSQL="e.address"/>
+				<se:ColumnFilter FilterType="Text" Header="Adres" NameSQL="e.address"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
     </DataGrid.Columns>

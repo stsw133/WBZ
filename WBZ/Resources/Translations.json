@@ -403,6 +403,30 @@
 		"en": "Logs",
 		"pl": "Logi"
 	},
+	"LogsDuplicate": {
+		"en": "Duplicate log",
+		"pl": "Duplikat logu"
+	},
+	"LogsEdit": {
+		"en": "Edit log",
+		"pl": "Edycja logu"
+	},
+	"LogsList": {
+		"en": "List of logs",
+		"pl": "Lista logów"
+	},
+	"LogsNew": {
+		"en": "New log",
+		"pl": "Nowy log"
+	},
+	"LogsPreview": {
+		"en": "Preview log",
+		"pl": "Podgląd logu"
+	},
+	"LogsSelect": {
+		"en": "Select log",
+		"pl": "Wybór logu"
+	},
 	"LogOut": {
 		"en": "Log out",
 		"pl": "Wyloguj"
