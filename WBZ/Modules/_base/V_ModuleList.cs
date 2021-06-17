@@ -161,7 +161,7 @@ namespace WBZ.Modules._base
         /// Select
         /// </summary>
 		internal MODULE_MODEL Selected;
-        internal void dgList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        internal virtual void dgList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {

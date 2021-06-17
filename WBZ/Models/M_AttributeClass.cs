@@ -4,6 +4,18 @@ using WBZ.Globals;
 
 namespace WBZ.Models
 {
+	public static class MS_AttributesClasses
+	{
+		public static List<MV> Types { get; } = new List<MV>()
+		{
+			new MV() { Value = "string", Display = "Ciąg znaków" },
+			new MV() { Value = "date", Display = "Data" },
+			new MV() { Value = "int", Display = "Liczba całkowita" },
+			new MV() { Value = "double", Display = "Liczba ułamkowa" },
+			new MV() { Value = "list", Display = "Lista" }
+		};
+	}
+
 	public class M_AttributeClass : M
 	{
 		/// <summary>
@@ -59,17 +71,5 @@ namespace WBZ.Models
 		/// Archival
 		/// </summary>
 		public bool Archival { get; set; } = false;
-	}
-
-	public static class M_AttributeTypes
-	{
-		public static List<MV> Types { get; } = new List<MV>()
-		{
-			new MV() { Value = "string", Display = "Ciąg znaków" },
-			new MV() { Value = "date", Display = "Data" },
-			new MV() { Value = "int", Display = "Liczba całkowita" },
-			new MV() { Value = "double", Display = "Liczba ułamkowa" },
-			new MV() { Value = "list", Display = "Lista" }
-		};
 	}
 }

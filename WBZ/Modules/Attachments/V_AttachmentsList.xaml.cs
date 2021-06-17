@@ -1,4 +1,4 @@
-﻿using SE = StswExpress;
+﻿using StswExpress;
 using System.Linq;
 using System.Windows.Input;
 using WBZ.Globals;
@@ -12,9 +12,9 @@ namespace WBZ.Modules.Attachments
     /// </summary>
     public partial class AttachmentsList : List
     {
-        D_AttachmentsList D = new D_AttachmentsList();
+		readonly D_AttachmentsList D = new D_AttachmentsList();
 
-        public AttachmentsList(SE.Commands.Type mode)
+        public AttachmentsList(Commands.Type mode)
         {
             InitializeComponent();
             DataContext = D;
@@ -24,25 +24,13 @@ namespace WBZ.Modules.Attachments
         }
 
 		/// <summary>
-		/// Update filters
-		/// </summary>
-		internal override void UpdateFilters()
-		{
-			D.FilterSqlString = $"LOWER(COALESCE(u.lastname,'') || ' ' || COALESCE(u.forename,'')) like '%{D.Filters.cUser.Display?.ToString()?.ToLower()}%' and "
-						+ $"LOWER(COALESCE(a.module,'')) like '%{D.Filters.Module.ToLower()}%' and "
-						+ $"LOWER(COALESCE(a.name,'')) like '%{D.Filters.Name.ToLower()}%' and ";
-
-			D.FilterSqlString = D.FilterSqlString.TrimEnd(" and ".ToCharArray());
-		}
-
-		/// <summary>
 		/// Preview
 		/// </summary>
 		internal override void cmdPreview_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
 			foreach (MODULE_MODEL instance in selectedInstances)
-				Functions.OpenInstanceWindow(this, instance, SE.Commands.Type.PREVIEW);
+				Functions.OpenInstanceWindow(this, instance, Commands.Type.PREVIEW);
 		}
 
 		/// <summary>
@@ -52,13 +40,13 @@ namespace WBZ.Modules.Attachments
 		{
 			var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
 			foreach (MODULE_MODEL instance in selectedInstances)
-				Functions.OpenInstanceWindow(this, instance, SE.Commands.Type.EDIT);
+				Functions.OpenInstanceWindow(this, instance, Commands.Type.EDIT);
 		}
 
 		/// <summary>
 		/// Select
 		/// </summary>
-		private void dgList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		internal override void dgList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			if (e.LeftButton == MouseButtonState.Pressed)
 				cmdEdit_Executed(null, null);

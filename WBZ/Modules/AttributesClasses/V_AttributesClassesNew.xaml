@@ -105,7 +105,7 @@
                             <DockPanel DockPanel.Dock="Top">
                                 <se:ExtLabel Content="Typ:" FontWeight="Bold"/>
                                 <ComboBox Margin="5" VerticalContentAlignment="Center"
-                                          ItemsSource="{Binding Source={x:Static m:M_AttributeTypes.Types}}" DisplayMemberPath="Display" SelectedValuePath="Value"
+                                          ItemsSource="{Binding Source={x:Static m:MS_AttributesClasses.Types}}" DisplayMemberPath="Display" SelectedValuePath="Value"
                                           SelectedValue="{Binding InstanceData.Type}"/>
                             </DockPanel>
                             <!-- Required -->

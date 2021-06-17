@@ -51,13 +51,33 @@
 		"en": "Select article",
 		"pl": "Wybór towaru"
 	},
-	"AttachmentNew": {
-		"en": "New attachment",
-		"pl": "Nowy załącznik"
-	},
 	"Attachments": {
 		"en": "Attachments",
 		"pl": "Załączniki"
+	},
+	"AttachmentsDuplicate": {
+		"en": "Duplicate attachment",
+		"pl": "Duplikat załącznika"
+	},
+	"AttachmentsEdit": {
+		"en": "Edit attachment",
+		"pl": "Edycja załącznika"
+	},
+	"AttachmentsList": {
+		"en": "List of attachments",
+		"pl": "Lista załączników"
+	},
+	"AttachmentsNew": {
+		"en": "New attachment",
+		"pl": "Nowy załącznik"
+	},
+	"AttachmentsPreview": {
+		"en": "Preview attachment",
+		"pl": "Podgląd załącznika"
+	},
+	"AttachmentsSelect": {
+		"en": "Select attachment",
+		"pl": "Wybór załącznika"
 	},
 	"Attributes": {
 		"en": "Attributes",

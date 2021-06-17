@@ -146,9 +146,11 @@
                                                 IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=attachments_preview}"
                                                 Click="btnAttachmentsList_Click"/>
                                 <!-- Gallery -->
+								<!--
                                 <se:ExtMenuItem Header="{Tr Gallery}" IconUri="/Resources/icon32_gallery.ico"
                                                 IsEnabled="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=attachments_preview}"
                                                 Click="btnAttachmentsGallery_Click"/>
+								-->
                             </ContextMenu>
                         </se:IconButton.ContextMenu>
                     </se:IconButton>

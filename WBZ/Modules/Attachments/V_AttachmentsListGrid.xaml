@@ -10,7 +10,10 @@
           BorderThickness="0" IsReadOnly="True">
 	<DataGrid.Resources>
         <g:BindingProxy x:Key="proxy" Data="{Binding}"/>
-    </DataGrid.Resources>
+		<Style TargetType="{x:Type se:ColumnFilter}">
+			<Setter Property="IsFilterVisible" Value="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+		</Style>
+	</DataGrid.Resources>
     <DataGrid.Columns>
         <!-- ID -->
         <DataGridTextColumn Binding="{Binding ID}" Header="ID"
@@ -19,114 +22,52 @@
         <DataGridTextColumn Binding="{Binding cUser.Value}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_User, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="Użytkownik"/>
+				<se:ColumnFilter FilterType="Text" Header="Użytkownik" NameSQL="v.user"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Module -->
         <DataGridTextColumn Binding="{Binding TranslatedModule}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Module, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <StackPanel>
-                    <TextBlock Text="Nazwa modułu"/>
-                    <ComboBox VerticalContentAlignment="Center" Padding="1"
-                              ItemsSource="{x:Static g:Config.ListModules}" SelectedValuePath="Item1" DisplayMemberPath="Item2"
-                              SelectedValue="{Binding Data.Filters.Module, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                              Visibility="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}, Converter={se:conv_Bool}}">
-                        <ComboBox.InputBindings>
-                            <KeyBinding Command="se:Commands.Refresh" Key="Return"/>
-                        </ComboBox.InputBindings>
-                    </ComboBox>
-                </StackPanel>
-            </DataGridTextColumn.Header>
+				<se:ColumnFilter Header="Moduł" FilterType="List" NameSQL="a.module"
+                                 ItemsSource="{x:Static g:Config.ListModules}" DisplayMemberPath="Display" SelectedValuePath="Value"/>
+			</DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Instance -->
-        <DataGridTextColumn Binding="{Binding Instance}" Header="ID instancji" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Instance, Converter={se:conv_Bool}}"/>
+		<DataGridTextColumn Binding="{Binding Instance}" Width="*"
+                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Instance, Converter={se:conv_Bool}}">
+			<DataGridTextColumn.Header>
+				<se:ColumnFilter FilterType="Number" Header="ID instancji" NameSQL="a.instance"/>
+			</DataGridTextColumn.Header>
+		</DataGridTextColumn>
         <!-- Name -->
         <DataGridTextColumn Binding="{Binding Name}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Name, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="Nazwa"/>
+				<se:ColumnFilter FilterType="Text" Header="Nazwa" NameSQL="a.name"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
     </DataGrid.Columns>
     <DataGrid.ContextMenu>
         <ContextMenu>
             <!-- Columns -->
-            <MenuItem Header="Widoczność kolumn">
-                <MenuItem.Icon>
-                    <Image Source="/Resources/icon32_show.ico"/>
-                </MenuItem.Icon>
-                <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_ID, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Użytkownik" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_User, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Nazwa modułu" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Module, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="ID instancji" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Instance, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Nazwa" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Name, Mode=TwoWay}"/>
-            </MenuItem>
-            <!-- Sorting -->
-            <MenuItem Header="Sortowanie danych">
-                <MenuItem.Icon>
-                    <Image Source="/Resources/icon32_descending.ico"/>
-                </MenuItem.Icon>
-                <MenuItem>
-                    <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Sortowanie 1:"/>
-                            <ToggleButton IsChecked="{Binding sorting_AttachmentsList[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                          Height="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.2}"
-                                          Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.2}">
-                                <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.1}"
-                                       Source="/Resources/icon32_descending.ico"/>
-                            </ToggleButton>
-                            <ComboBox SelectedValue="{Binding sorting_AttachmentsList[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                      SelectedValuePath="Tag" VerticalContentAlignment="Center">
-                                <ComboBoxItem Content="Nazwisko i imię" Tag="u.lastname || u.forename"/>
-                                <ComboBoxItem Content="Moduł" Tag="a.module"/>
-                                <ComboBoxItem Content="Nazwa" Tag="a.name"/>
-                            </ComboBox>
-                        </StackPanel>
-                    </MenuItem.Header>
-                </MenuItem>
-                <MenuItem>
-                    <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Sortowanie 2:"/>
-                            <ToggleButton IsChecked="{Binding sorting_AttachmentsList[3], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                          Height="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.2}"
-                                          Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.2}">
-                                <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.1}"
-                                       Source="/Resources/icon32_descending.ico"/>
-                            </ToggleButton>
-                            <ComboBox SelectedValue="{Binding sorting_AttachmentsList[2], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                      SelectedValuePath="Tag" VerticalContentAlignment="Center">
-                                <ComboBoxItem Content="Nazwisko i imię" Tag="u.lastname || u.forename"/>
-                                <ComboBoxItem Content="Moduł" Tag="a.module"/>
-                                <ComboBoxItem Content="Nazwa" Tag="a.name"/>
-                            </ComboBox>
-                        </StackPanel>
-                    </MenuItem.Header>
-                </MenuItem>
-                <MenuItem>
-                    <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Limit wczytywania:"/>
-                            <TextBox Text="{Binding sorting_AttachmentsList[4], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                     Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=5}"
-                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                    </MenuItem.Header>
-                </MenuItem>
-            </MenuItem>
-            <!-- Actions -->
-            <Separator/>
-            <se:ExtMenuItem Header="Podgląd" IconUri="/Resources/icon32_search.ico" Command="se:Commands.Preview"/>
-            <se:ExtMenuItem Header="Dodaj" IconUri="/Resources/icon32_add.ico" Command="se:Commands.New"/>
-            <se:ExtMenuItem Header="Duplikuj" IconUri="/Resources/icon32_duplicate.ico" Command="se:Commands.Duplicate"/>
-            <se:ExtMenuItem Header="Edytuj" IconUri="/Resources/icon32_edit.ico" Command="se:Commands.Edit"/>
-            <se:ExtMenuItem Header="Usuń" IconUri="/Resources/icon32_delete.ico" Command="se:Commands.Delete"/>
-            <Separator/>
-            <se:ExtMenuItem Header="Odśwież" IconUri="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
-        </ContextMenu>
+			<se:ExtMenuItem Header="{Tr ColumnsVisibility}" IconUri="/Resources/icon32_show.ico">
+				<MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_ID}"/>
+				<MenuItem IsCheckable="True" Header="Użytkownik" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_User}"/>
+				<MenuItem IsCheckable="True" Header="Nazwa modułu" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Module}"/>
+				<MenuItem IsCheckable="True" Header="ID instancji" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Instance}"/>
+				<MenuItem IsCheckable="True" Header="Nazwa" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Name}"/>
+			</se:ExtMenuItem>
+			<!-- Actions -->
+			<Separator/>
+			<se:ExtMenuItem Header="{Tr Preview}" IconUri="/Resources/icon32_search.ico" Command="se:Commands.Preview"/>
+			<se:ExtMenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico" Command="se:Commands.New"/>
+			<se:ExtMenuItem Header="{Tr Duplicate}" IconUri="/Resources/icon32_duplicate.ico" Command="se:Commands.Duplicate"/>
+			<se:ExtMenuItem Header="{Tr Edit}" IconUri="/Resources/icon32_edit.ico" Command="se:Commands.Edit"/>
+			<se:ExtMenuItem Header="{Tr Delete}" IconUri="/Resources/icon32_delete.ico" Command="se:Commands.Delete"/>
+			<Separator/>
+			<se:ExtMenuItem Header="{Tr Refresh}" IconUri="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
+		</ContextMenu>
     </DataGrid.ContextMenu>
     <DataGrid.RowStyle>
         <Style TargetType="DataGridRow">

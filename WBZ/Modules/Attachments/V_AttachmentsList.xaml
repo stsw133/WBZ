@@ -27,42 +27,30 @@
         <!-- titleBar -->
         <se:TitleBar DockPanel.Dock="Top" SubIcon="{Binding ModeIcon}"/>
         <!-- buttonsPanel -->
-        <Border DockPanel.Dock="Right"
-                Background="{Binding config_Attachments_PanelColor, Source={x:Static p:Settings.Default}}"
-                BorderBrush="{Binding config_Attachments_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.5}"
-                BorderThickness="1,0,0,0">
+		<Border DockPanel.Dock="Right" BorderBrush="Gray" BorderThickness="1,0,0,0" Background="{Binding config_Attachments_PanelColor, Source={x:Static p:Settings.Default}}">
             <DockPanel>
-                <StackPanel DockPanel.Dock="Top">
-                    <se:IconButton Text="Podgląd&#10;obiektu" Margin="5"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                    Icon="/Resources/icon32_search.ico"
-                                    Command="se:Commands.Preview"/>
-                    <se:IconButton Text="Edycja&#10;obiektu" Margin="5"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                    Icon="/Resources/icon32_edit.ico"
-                                    Command="se:Commands.Edit"/>
+				<DockPanel.Resources>
+					<Style TargetType="{x:Type se:IconButton}">
+						<Setter Property="HorizontalContentAlignment" Value="Left"/>
+						<Setter Property="IsTextVisible" Value="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"/>
+					</Style>
+				</DockPanel.Resources>
+				<StackPanel DockPanel.Dock="Top">
+                    <se:IconButton Text="Podgląd&#10;obiektu" Margin="5" Icon="/Resources/icon32_search.ico" Command="se:Commands.Preview"/>
+                    <se:IconButton Text="Edycja&#10;obiektu" Margin="5,0,5,5" Icon="/Resources/icon32_edit.ico" Command="se:Commands.Edit"/>
                     <Separator/>
                     <!--
                     <CheckBox Content="Podgląd zdjęć" x:Name="chckShowPictures" Margin="5,5,5,0" Visibility="{Binding IsChecked, ElementName=btnToggle, Converter={se:conv_Bool}}"/>
                     <Separator Height="5" Margin="0,5,0,0" Visibility="{Binding IsChecked, ElementName=btnToggle, Converter={se:conv_Bool}}"/>
                     -->
-                    <se:IconButton Text="{Tr Delete}" Margin="5"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                    Icon="/Resources/icon32_delete.ico"
-                                    Command="se:Commands.Delete"/>
+                    <se:IconButton Text="{Tr Delete}" Margin="5" Icon="/Resources/icon32_delete.ico" Command="se:Commands.Delete"/>
                     <Separator/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                     <Separator/>
-                    <se:IconButton Text="{Tr Refresh}" Margin="5"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                    Icon="/Resources/icon32_refresh.ico"
-                                    Command="se:Commands.Refresh"/>
+                    <se:IconButton Text="{Tr Refresh}" Margin="5" Icon="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
                     <Separator/>
-                    <se:IconButton Text="{Tr CloseWindow}" Margin="5"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                    Icon="/Resources/icon32_close.ico"
-                                    Command="se:Commands.Close"/>
+                    <se:IconButton Text="{Tr CloseWindow}" Margin="5" Icon="/Resources/icon32_close.ico" Command="se:Commands.Close"/>
                 </StackPanel>
             </DockPanel>
             <Border.ContextMenu>
@@ -78,7 +66,7 @@
         <c:GroupsView EditingMode="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=attachments_groups}"
                       Visibility="{Binding AreGroupsVisible, Converter={se:conv_Bool}}"/>
         <!-- dataGrid -->
-        <b:AttachmentsListGrid x:Name="dgList" ItemsSource="{Binding InstancesList}" IsReadOnly="True"
-                               MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged"/>
+		<b:AttachmentsListGrid x:Name="dgList" ItemsSource="{Binding InstancesList}" BorderBrush="Gray" BorderThickness="0,0,0,1"
+                               MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged" Sorting="dgList_Sorting"/>
     </DockPanel>
 </b:List>
