@@ -18,9 +18,9 @@ namespace WBZ.Modules.Icons
 	/// </summary>
 	public partial class IconsNew : New
 	{
-        D_IconsNew D = new D_IconsNew();
+		readonly D_IconsNew D = new D_IconsNew();
 
-        public IconsNew(MODULE_MODEL instance, StswExpress.Commands.Type mode)
+        public IconsNew(MODULE_MODEL instance, Commands.Type mode)
         {
             InitializeComponent();
             DataContext = D;
@@ -61,7 +61,7 @@ namespace WBZ.Modules.Icons
         /// </summary>
         private async void tbPath_TextChanged(object sender, TextChangedEventArgs e)
         {
-            D.InstanceData.Path = (sender as System.Windows.Controls.TextBox).Text;
+            D.InstanceData.Path = (sender as TextBox).Text;
             await Task.Run(() =>
             {
                 try

@@ -33,13 +33,13 @@
 		private readonly MV Forwarder = new MV();
 		public int ForwarderID
 		{
-			get => (int)(Forwarder.ID ?? 0);
-			set => Forwarder.ID = value;
+			get => (int)(Forwarder.Value ?? 0);
+			set => Forwarder.Value = value;
 		}
 		public string ForwarderName
 		{
-			get => (string)Forwarder.Value;
-			set => Forwarder.Value = value;
+			get => (string)Forwarder.Display;
+			set => Forwarder.Display = value;
 		}
 
 		/// <summary>
@@ -48,13 +48,13 @@
 		private readonly MV Driver = new MV();
 		public int DriverID
 		{
-			get => (int)(Driver.ID ?? 0);
-			set => Driver.ID = value;
+			get => (int)(Driver.Value ?? 0);
+			set => Driver.Value = value;
 		}
 		public string DriverName
 		{
-			get => (string)Driver.Value;
-			set => Driver.Value = value;
+			get => (string)Driver.Display;
+			set => Driver.Display = value;
 		}
 
 		/// <summary>

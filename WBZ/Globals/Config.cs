@@ -56,28 +56,28 @@ namespace WBZ.Globals
         /// </summary>
         public static List<MV> ListModules { get; } = new List<MV>()
         {
-            new MV() { ID = string.Empty, Value = string.Empty },
-            new MV() { ID = Modules.ARTICLES, Value = GetModuleTranslation(Modules.ARTICLES) },
-            new MV() { ID = Modules.ATTRIBUTES_CLASSES, Value = GetModuleTranslation(Modules.ATTRIBUTES_CLASSES) },
+            new MV() { Value = string.Empty, Display = string.Empty },
+            new MV() { Value = Modules.ARTICLES, Display = GetModuleTranslation(Modules.ARTICLES) },
+            new MV() { Value = Modules.ATTRIBUTES_CLASSES, Display = GetModuleTranslation(Modules.ATTRIBUTES_CLASSES) },
           //new MV() { ID = Module.COMMUNITY, Value = GetModuleTranslation(Module.COMMUNITY) },
-            new MV() { ID = Modules.CONTRACTORS, Value = GetModuleTranslation(Modules.CONTRACTORS) },
-            new MV() { ID = Modules.DISTRIBUTIONS, Value = GetModuleTranslation(Modules.DISTRIBUTIONS) },
-            new MV() { ID = Modules.DOCUMENTS, Value = GetModuleTranslation(Modules.DOCUMENTS) },
-            new MV() { ID = Modules.EMPLOYEES, Value = GetModuleTranslation(Modules.EMPLOYEES) },
-            new MV() { ID = Modules.FAMILIES, Value = GetModuleTranslation(Modules.FAMILIES) },
-            new MV() { ID = Modules.ICONS, Value = GetModuleTranslation(Modules.ICONS) },
+            new MV() { Value = Modules.CONTRACTORS, Display = GetModuleTranslation(Modules.CONTRACTORS) },
+            new MV() { Value = Modules.DISTRIBUTIONS, Display = GetModuleTranslation(Modules.DISTRIBUTIONS) },
+            new MV() { Value = Modules.DOCUMENTS, Display = GetModuleTranslation(Modules.DOCUMENTS) },
+            new MV() { Value = Modules.EMPLOYEES, Display = GetModuleTranslation(Modules.EMPLOYEES) },
+            new MV() { Value = Modules.FAMILIES, Display = GetModuleTranslation(Modules.FAMILIES) },
+            new MV() { Value = Modules.ICONS, Display = GetModuleTranslation(Modules.ICONS) },
           //new MV() { ID = Module.STATS, Value = GetModuleTranslation(Module.STATS) },
-            new MV() { ID = Modules.STORES, Value = GetModuleTranslation(Modules.STORES) },
-            new MV() { ID = Modules.USERS, Value = GetModuleTranslation(Modules.USERS) },
-            new MV() { ID = Modules.VEHICLES, Value = GetModuleTranslation(Modules.VEHICLES) }
+            new MV() { Value = Modules.STORES, Display = GetModuleTranslation(Modules.STORES) },
+            new MV() { Value = Modules.USERS, Display = GetModuleTranslation(Modules.USERS) },
+            new MV() { Value = Modules.VEHICLES, Display = GetModuleTranslation(Modules.VEHICLES) }
         };
         public static List<MV> ListSubModules = new List<MV>()
         {
-            new MV() { ID = SubModules.ATTACHMENTS, Value = GetModuleTranslation(SubModules.ATTACHMENTS) },
-            new MV() { ID = SubModules.ATTRIBUTES, Value = GetModuleTranslation(SubModules.ATTRIBUTES) },
-            new MV() { ID = SubModules.CONTACTS, Value = GetModuleTranslation(SubModules.CONTACTS) },
-            new MV() { ID = SubModules.GROUPS, Value = GetModuleTranslation(SubModules.GROUPS) },
-            new MV() { ID = SubModules.LOGS, Value = GetModuleTranslation(SubModules.LOGS) }
+            new MV() { Value = SubModules.ATTACHMENTS, Display = GetModuleTranslation(SubModules.ATTACHMENTS) },
+            new MV() { Value = SubModules.ATTRIBUTES, Display = GetModuleTranslation(SubModules.ATTRIBUTES) },
+            new MV() { Value = SubModules.CONTACTS, Display = GetModuleTranslation(SubModules.CONTACTS) },
+            new MV() { Value = SubModules.GROUPS, Display = GetModuleTranslation(SubModules.GROUPS) },
+            new MV() { Value = SubModules.LOGS, Display = GetModuleTranslation(SubModules.LOGS) }
         };
     }
 }

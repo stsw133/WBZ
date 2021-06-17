@@ -65,11 +65,11 @@ namespace WBZ.Models
 	{
 		public static List<MV> Types { get; } = new List<MV>()
 		{
-			new MV() { ID = "string", Value = "Ciąg znaków" },
-			new MV() { ID = "date", Value = "Data" },
-			new MV() { ID = "int", Value = "Liczba całkowita" },
-			new MV() { ID = "double", Value = "Liczba ułamkowa" },
-			new MV() { ID = "list", Value = "Lista" }
+			new MV() { Value = "string", Display = "Ciąg znaków" },
+			new MV() { Value = "date", Display = "Data" },
+			new MV() { Value = "int", Display = "Liczba całkowita" },
+			new MV() { Value = "double", Display = "Liczba ułamkowa" },
+			new MV() { Value = "list", Display = "Lista" }
 		};
 	}
 }

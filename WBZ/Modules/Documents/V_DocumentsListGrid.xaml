@@ -176,7 +176,7 @@
                 <DataTrigger Binding="{Binding Archival}" Value="True">
                     <Setter Property="Foreground" Value="Gray"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Comment, Converter={se:conv_Compare}}" Value="False">
+                <DataTrigger Binding="{Binding Comment, Converter={se:conv_Compare}, ConverterParameter=''}" Value="False">
                     <Setter Property="ToolTip" Value="{Binding Comment}"/>
                 </DataTrigger>
             </Style.Triggers>

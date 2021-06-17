@@ -27,7 +27,7 @@
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Module, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <se:ColumnFilter Header="Moduł" FilterType="List" NameSQL="ac.module"
-                                 ItemsSource="{x:Static g:Config.ListModules}" DisplayMemberPath="Value" SelectedValuePath="ID"/>
+                                 ItemsSource="{x:Static g:Config.ListModules}" DisplayMemberPath="Display" SelectedValuePath="Value"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Name -->
@@ -42,7 +42,7 @@
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Type, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <se:ColumnFilter Header="Typ" FilterType="List" NameSQL="ac.type"
-                                 ItemsSource="{Binding Source={x:Static m:M_AttributeTypes.Types}}" DisplayMemberPath="Value" SelectedValuePath="ID"/>
+                                 ItemsSource="{Binding Source={x:Static m:M_AttributeTypes.Types}}" DisplayMemberPath="Display" SelectedValuePath="Value"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Required -->
@@ -85,7 +85,7 @@
                 <DataTrigger Binding="{Binding Archival}" Value="True">
                     <Setter Property="Foreground" Value="Gray"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Comment, Converter={se:conv_Compare}}" Value="False">
+                <DataTrigger Binding="{Binding Comment, Converter={se:conv_Compare}, ConverterParameter=''}" Value="False">
                     <Setter Property="ToolTip" Value="{Binding Comment}"/>
                 </DataTrigger>
             </Style.Triggers>

@@ -46,7 +46,7 @@ namespace WBZ.Modules.Logs
 		/// </summary>
 		internal override void UpdateFilters()
 		{
-			D.FilterSqlString = $"LOWER(COALESCE(u.lastname,'') || ' ' || COALESCE(u.forename,'')) like '%{D.Filters.cUser.Value?.ToString()?.ToLower()}%' and "
+			D.FilterSqlString = $"LOWER(COALESCE(u.lastname,'') || ' ' || COALESCE(u.forename,'')) like '%{D.Filters.cUser.Display?.ToString()?.ToLower()}%' and "
 						+ $"LOWER(COALESCE(l.module,'')) like '%{D.Filters.Module.ToLower()}%' and "
 						+ $"LOWER(COALESCE(l.content,'')) like '%{D.Filters.Content.ToLower()}%' and "
 						+ $"l.datetime >= '{D.Filters.fDateTime:yyyy-MM-dd}' and l.datetime < '{D.Filters.DateTime.AddDays(1):yyyy-MM-dd}' and "

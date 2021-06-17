@@ -10,169 +10,92 @@
           BorderThickness="0" IsReadOnly="True">
 	<DataGrid.Resources>
         <g:BindingProxy x:Key="proxy" Data="{Binding}"/>
-    </DataGrid.Resources>
+		<Style TargetType="{x:Type se:ColumnFilter}">
+			<Setter Property="IsFilterVisible" Value="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
+		</Style>
+	</DataGrid.Resources>
     <DataGrid.Columns>
         <!-- ID -->
         <DataGridTextColumn Binding="{Binding ID}" Header="ID"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_ID, Converter={se:conv_Bool}}"/>
         <!-- File -->
-        <DataGridTemplateColumn Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"
-                                Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_File, Converter={se:conv_Bool}}">
-            <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate>
-                    <Image Source="{Binding File}"/>
-                </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-        </DataGridTemplateColumn>
-        <!-- Module -->
+		<se:DataGridImageColumn Image="{Binding File}" Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"
+                                Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_File, Converter={se:conv_Bool}}"/>
+		<!-- Module -->
         <DataGridTextColumn Binding="{Binding TranslatedModule}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Module, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <StackPanel>
-                    <TextBlock Text="Nazwa modułu"/>
-                    <ComboBox VerticalContentAlignment="Center" Padding="1"
-                              ItemsSource="{x:Static g:Config.ListModules}" DisplayMemberPath="Value" SelectedValuePath="ID"
-                              SelectedValue="{Binding Data.Filters.Module, Mode=TwoWay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"
-                              Visibility="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}, Converter={se:conv_Bool}}">
-                        <ComboBox.InputBindings>
-                            <KeyBinding Command="se:Commands.Refresh" Key="Return"/>
-                        </ComboBox.InputBindings>
-                    </ComboBox>
-                </StackPanel>
+				<se:ColumnFilter FilterType="List" Header="Moduł" NameSQL="i.module"
+                                 ItemsSource="{x:Static g:Config.ListModules}" DisplayMemberPath="Display" SelectedValuePath="Value"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Name -->
         <DataGridTextColumn Binding="{Binding Name}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Name, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="Nazwa"/>
+				<se:ColumnFilter FilterType="Text" Header="Nazwa" NameSQL="i.name"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Format -->
         <DataGridTextColumn Binding="{Binding Format}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Format, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="Format"/>
+				<se:ColumnFilter FilterType="Text" Header="Format" NameSQL="i.format"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Path -->
         <DataGridTextColumn Binding="{Binding Path}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Path, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="Ścieżka"/>
+				<se:ColumnFilter FilterType="Text" Header="Ścieżka" NameSQL="i.path"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Height -->
         <DataGridTextColumn Binding="{Binding Height}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Height, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="Wysokość"/>
+				<se:ColumnFilter FilterType="Number" Header="Wysokość" NameSQL="i.height"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Width -->
         <DataGridTextColumn Binding="{Binding Width}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Width, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="Szerokość"/>
-            </DataGridTextColumn.Header>
+				<se:ColumnFilter FilterType="Number" Header="Szerokość" NameSQL="i.width"/>
+			</DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Size -->
         <DataGridTextColumn Binding="{Binding Size}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Size, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="Rozmiar"/>
-            </DataGridTextColumn.Header>
+				<se:ColumnFilter FilterType="Number" Header="Rozmiar" NameSQL="i.size"/>
+			</DataGridTextColumn.Header>
         </DataGridTextColumn>
     </DataGrid.Columns>
     <DataGrid.ContextMenu>
         <ContextMenu>
-            <!-- Columns -->
-            <MenuItem Header="Widoczność kolumn">
-                <MenuItem.Icon>
-                    <Image Source="/Resources/icon32_show.ico"/>
-                </MenuItem.Icon>
-                <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_ID, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Ikona" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_File, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Moduł" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Module, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Nazwa" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Name, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Format" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Format, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Ścieżka" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Path, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Wysokość" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Height, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Szerokość" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Width, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Rozmiar" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Size, Mode=TwoWay}"/>
-            </MenuItem>
-            <!-- Sorting -->
-            <MenuItem Header="Sortowanie danych">
-                <MenuItem.Icon>
-                    <Image Source="/Resources/icon32_descending.ico"/>
-                </MenuItem.Icon>
-                <MenuItem>
-                    <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Sortowanie 1:"/>
-                            <ToggleButton IsChecked="{Binding sorting_IconsList[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                          Height="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.2}"
-                                          Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.2}">
-                                <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.1}"
-                                       Source="/Resources/icon32_descending.ico"/>
-                            </ToggleButton>
-                            <ComboBox SelectedValue="{Binding sorting_IconsList[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                      SelectedValuePath="Tag" VerticalContentAlignment="Center">
-                                <ComboBoxItem Content="Moduł" Tag="i.module"/>
-                                <ComboBoxItem Content="Nazwa" Tag="i.name"/>
-                                <ComboBoxItem Content="Format" Tag="i.format"/>
-                                <ComboBoxItem Content="Ścieżka" Tag="i.path"/>
-                                <ComboBoxItem Content="Wysokość" Tag="i.height"/>
-                                <ComboBoxItem Content="Szerokość" Tag="i.width"/>
-                                <ComboBoxItem Content="Rozmiar" Tag="i.size"/>
-                            </ComboBox>
-                        </StackPanel>
-                    </MenuItem.Header>
-                </MenuItem>
-                <MenuItem>
-                    <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Sortowanie 2:"/>
-                            <ToggleButton IsChecked="{Binding sorting_IconsList[3], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                          Height="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.2}"
-                                          Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.2}">
-                                <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.1}"
-                                       Source="/Resources/icon32_descending.ico"/>
-                            </ToggleButton>
-                            <ComboBox SelectedValue="{Binding sorting_IconsList[2], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                      SelectedValuePath="Tag" VerticalContentAlignment="Center">
-                                <ComboBoxItem Content="Moduł" Tag="i.module"/>
-                                <ComboBoxItem Content="Nazwa" Tag="i.name"/>
-                                <ComboBoxItem Content="Format" Tag="i.format"/>
-                                <ComboBoxItem Content="Ścieżka" Tag="i.path"/>
-                                <ComboBoxItem Content="Wysokość" Tag="i.height"/>
-                                <ComboBoxItem Content="Szerokość" Tag="i.width"/>
-                                <ComboBoxItem Content="Rozmiar" Tag="i.size"/>
-                            </ComboBox>
-                        </StackPanel>
-                    </MenuItem.Header>
-                </MenuItem>
-                <MenuItem>
-                    <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Limit wczytywania:"/>
-                            <TextBox Text="{Binding sorting_IconsList[4], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                     Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=5}"
-                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                    </MenuItem.Header>
-                </MenuItem>
-            </MenuItem>
-            <!-- Actions -->
-            <Separator/>
-            <se:ExtMenuItem Header="Podgląd" IconUri="/Resources/icon32_search.ico" Command="se:Commands.Preview"/>
-            <se:ExtMenuItem Header="Dodaj" IconUri="/Resources/icon32_add.ico" Command="se:Commands.New"/>
-            <se:ExtMenuItem Header="Duplikuj" IconUri="/Resources/icon32_duplicate.ico" Command="se:Commands.Duplicate"/>
-            <se:ExtMenuItem Header="Edytuj" IconUri="/Resources/icon32_edit.ico" Command="se:Commands.Edit"/>
-            <se:ExtMenuItem Header="Usuń" IconUri="/Resources/icon32_delete.ico" Command="se:Commands.Delete"/>
-            <Separator/>
-            <se:ExtMenuItem Header="Odśwież" IconUri="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
-        </ContextMenu>
+			<!-- Columns -->
+			<se:ExtMenuItem Header="{Tr ColumnsVisibility}" IconUri="/Resources/icon32_show.ico">
+				<MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_ID}"/>
+				<MenuItem IsCheckable="True" Header="Ikona" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_File}"/>
+				<MenuItem IsCheckable="True" Header="Moduł" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Module}"/>
+				<MenuItem IsCheckable="True" Header="Nazwa" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Name}"/>
+				<MenuItem IsCheckable="True" Header="Format" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Format}"/>
+				<MenuItem IsCheckable="True" Header="Ścieżka" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Path}"/>
+				<MenuItem IsCheckable="True" Header="Wysokość" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Height}"/>
+				<MenuItem IsCheckable="True" Header="Szerokość" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Width}"/>
+				<MenuItem IsCheckable="True" Header="Rozmiar" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Size}"/>
+			</se:ExtMenuItem>
+			<!-- Actions -->
+			<Separator/>
+			<se:ExtMenuItem Header="{Tr Preview}" IconUri="/Resources/icon32_search.ico" Command="se:Commands.Preview"/>
+			<se:ExtMenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico" Command="se:Commands.New"/>
+			<se:ExtMenuItem Header="{Tr Duplicate}" IconUri="/Resources/icon32_duplicate.ico" Command="se:Commands.Duplicate"/>
+			<se:ExtMenuItem Header="{Tr Edit}" IconUri="/Resources/icon32_edit.ico" Command="se:Commands.Edit"/>
+			<se:ExtMenuItem Header="{Tr Delete}" IconUri="/Resources/icon32_delete.ico" Command="se:Commands.Delete"/>
+			<Separator/>
+			<se:ExtMenuItem Header="{Tr Refresh}" IconUri="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
+		</ContextMenu>
     </DataGrid.ContextMenu>
     <DataGrid.RowStyle>
         <Style TargetType="DataGridRow">
@@ -183,7 +106,7 @@
                 <DataTrigger Binding="{Binding Archival}" Value="True">
                     <Setter Property="Foreground" Value="Gray"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Comment, Converter={se:conv_Compare}}" Value="False">
+                <DataTrigger Binding="{Binding Comment, Converter={se:conv_Compare}, ConverterParameter=''}" Value="False">
                     <Setter Property="ToolTip" Value="{Binding Comment}"/>
                 </DataTrigger>
             </Style.Triggers>

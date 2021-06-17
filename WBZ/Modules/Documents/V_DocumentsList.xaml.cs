@@ -27,7 +27,7 @@ namespace WBZ.Modules.Documents
 		{
 			D.FilterSqlString = $"LOWER(COALESCE(d.type,'')) like '%{D.Filters.Type.ToLower()}%' and "
 						+ $"LOWER(COALESCE(d.name,'')) like '%{D.Filters.Name.ToLower()}%' and "
-						+ $"LOWER(COALESCE(s.name,'')) like '%{D.Filters.cStore.Value?.ToString()?.ToLower()}%' and "
+						+ $"LOWER(COALESCE(s.name,'')) like '%{D.Filters.cStore.Display?.ToString()?.ToLower()}%' and "
 						+ $"LOWER(COALESCE(c.name,'')) like '%{D.Filters.ContractorName.ToLower()}%' and "
 						+ $"d.dateissue >= '{D.Filters.fDateIssue:yyyy-MM-dd}' and d.dateissue < '{D.Filters.DateIssue.AddDays(1):yyyy-MM-dd}' and "
 						+ (!D.Filters.Archival ? $"d.archival=false and " : string.Empty)

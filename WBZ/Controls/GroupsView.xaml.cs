@@ -195,7 +195,7 @@ namespace WBZ.Controls
                     };
                     var image = new Image()
                     {
-                        Source = Fn.LoadImage(group.cIcon.Value as byte[]),
+                        Source = Fn.LoadImage(group.cIcon.Display as byte[]),
                         Margin = new Thickness(0, 0, 5, 0),
                         Width = Settings.Default.iSize * 1.5,
                         Height = Settings.Default.iSize * 1.5

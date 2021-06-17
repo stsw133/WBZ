@@ -327,6 +327,30 @@
 		"en": "Icons",
 		"pl": "Ikony"
 	},
+	"IconsDuplicate": {
+		"en": "Duplicate icon",
+		"pl": "Duplikat ikony"
+	},
+	"IconsEdit": {
+		"en": "Edit icon",
+		"pl": "Edycja ikony"
+	},
+	"IconsList": {
+		"en": "List of icons",
+		"pl": "Lista ikon"
+	},
+	"IconsNew": {
+		"en": "New icon",
+		"pl": "Nowa ikona"
+	},
+	"IconsPreview": {
+		"en": "Preview icon",
+		"pl": "Podgląd ikony"
+	},
+	"IconsSelect": {
+		"en": "Select icon",
+		"pl": "Wybór pojazdu"
+	},
 	"Interface": {
 		"en": "Interface",
 		"pl": "Interfejs"

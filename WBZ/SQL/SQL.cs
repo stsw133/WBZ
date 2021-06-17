@@ -1248,7 +1248,7 @@ namespace WBZ
 								sqlCmd.Parameters.AddWithValue("id", document.ID);
 								sqlCmd.Parameters.AddWithValue("name", document.Name);
 								sqlCmd.Parameters.AddWithValue("type", document.Type);
-								sqlCmd.Parameters.AddWithValue("store", document.cStore.ID);
+								sqlCmd.Parameters.AddWithValue("store", document.cStore.Value);
 								sqlCmd.Parameters.AddWithValue("contractor", document.Contractor);
 								sqlCmd.Parameters.AddWithValue("dateissue", document.DateIssue);
 								sqlCmd.Parameters.AddWithValue("status", document.Status);
@@ -1316,9 +1316,9 @@ namespace WBZ
 								if (oldstatus != document.Status)
 								{
 									if (oldstatus <= 0 && document.Status > 0)
-                                        ChangeArticleAmount((int)document.cStore.ID, (int)position["article"], Convert.ToDouble(position["amount"]), (string)position["measure"], false, sqlConn, sqlTran);
+                                        ChangeArticleAmount((int)document.cStore.Value, (int)position["article"], Convert.ToDouble(position["amount"]), (string)position["measure"], false, sqlConn, sqlTran);
 									else if (oldstatus > 0 && document.Status < 0)
-                                        ChangeArticleAmount((int)document.cStore.ID, (int)position["article"], -Convert.ToDouble(position["amount"]), (string)position["measure"], false, sqlConn, sqlTran);
+                                        ChangeArticleAmount((int)document.cStore.Value, (int)position["article"], -Convert.ToDouble(position["amount"]), (string)position["measure"], false, sqlConn, sqlTran);
 								}
 							}
 							break;
@@ -1443,7 +1443,7 @@ namespace WBZ
 								update set ""user""=@user, module=@module, instance=@instance, type=@type, content=@content";
 							using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 							{
-								sqlCmd.Parameters.AddWithValue("user", log.cUser.ID);
+								sqlCmd.Parameters.AddWithValue("user", log.cUser.Value);
 								sqlCmd.Parameters.AddWithValue("module", log.Module);
 								sqlCmd.Parameters.AddWithValue("instance", log.Instance);
 								sqlCmd.Parameters.AddWithValue("type", log.Type);
@@ -1694,7 +1694,7 @@ namespace WBZ
                         var document = GetInstance<M_Document>(Config.Modules.DOCUMENTS, id);
                         var positions = GetInstancePositions(Config.Modules.DOCUMENTS, id);
                         foreach (DataRow pos in positions.Rows)
-                            ChangeArticleAmount((int)document.cStore.ID, (int)pos["article"], -(double)pos["amount"], (string)pos["measure"], false, sqlConn, sqlTran);
+                            ChangeArticleAmount((int)document.cStore.Value, (int)pos["article"], -(double)pos["amount"], (string)pos["measure"], false, sqlConn, sqlTran);
                     }
                 }
 

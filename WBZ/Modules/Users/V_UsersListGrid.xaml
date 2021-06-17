@@ -69,7 +69,7 @@
                 <DataTrigger Binding="{Binding Blocked}" Value="True">
                     <Setter Property="Foreground" Value="Red"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Comment, Converter={se:conv_Compare}}" Value="False">
+                <DataTrigger Binding="{Binding Comment, Converter={se:conv_Compare}, ConverterParameter=''}" Value="False">
                     <Setter Property="ToolTip" Value="{Binding Comment}"/>
                 </DataTrigger>
             </Style.Triggers>
