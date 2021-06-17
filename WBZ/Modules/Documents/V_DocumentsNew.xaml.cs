@@ -15,7 +15,7 @@ namespace WBZ.Modules.Documents
 	/// </summary>
 	public partial class DocumentsNew : New
 	{
-		D_DocumentsNew D = new D_DocumentsNew();
+		readonly D_DocumentsNew D = new D_DocumentsNew();
 
 		public DocumentsNew(MODULE_MODEL instance, Commands.Type mode)
 		{
@@ -41,7 +41,6 @@ namespace WBZ.Modules.Documents
 		/// </summary>
 		private void btnGetFromFile_Click(object sender, RoutedEventArgs e)
 		{
-			
 		}
 
 		/// <summary>
@@ -49,35 +48,28 @@ namespace WBZ.Modules.Documents
 		/// </summary>
 		private void btnGetByScaner_Click(object sender, RoutedEventArgs e)
 		{
-			
 		}
 
 		/// <summary>
-		/// Select: Contractor
+		/// Select
 		/// </summary>
 		private void btnSelectContractor_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new ContractorsList(Commands.Type.SELECT);
-			if (window.ShowDialog() == true)
-				if (window.Selected != null)
-				{
-					D.InstanceData.Contractor = window.Selected.ID;
-					D.InstanceData = D.InstanceData;
-				}
+			if (window.ShowDialog() == true && window.Selected != null)
+			{
+				D.InstanceData.Contractor = window.Selected.ID;
+				D.InstanceData = D.InstanceData;
+			}
 		}
-
-		/// <summary>
-		/// Select: Store
-		/// </summary>
 		private void btnSelectStore_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new StoresList(Commands.Type.SELECT);
-			if (window.ShowDialog() == true)
-				if (window.Selected != null)
-				{
-					D.InstanceData.Store = window.Selected.ID;
-					D.InstanceData = D.InstanceData;
-				}
+			if (window.ShowDialog() == true && window.Selected != null)
+			{
+				D.InstanceData.Store = window.Selected.ID;
+				D.InstanceData = D.InstanceData;
+			}
 		}
 
 		/// <summary>
@@ -86,20 +78,17 @@ namespace WBZ.Modules.Documents
 		private void btnPositionsAdd_Click(object sender, RoutedEventArgs e)
 		{
 			var window = new ArticlesList(Commands.Type.SELECT);
-			if (window.ShowDialog() == true)
-				if (window.Selected != null)
-				{
-					var row = D.InstanceData.Positions.NewRow();
-
-					row["position"] = D.InstanceData.Positions.Rows.Count + 1;
-					row["article"] = window.Selected.ID;
-					row["articlename"] = window.Selected.Name;
-					row["amount"] = DBNull.Value;
-					row["measure"] = window.Selected.Measure;
-					row["cost"] = DBNull.Value;
-
-					D.InstanceData.Positions.Rows.Add(row);
-				}
+			if (window.ShowDialog() == true && window.Selected != null)
+			{
+				var row = D.InstanceData.Positions.NewRow();
+				row["position"] = D.InstanceData.Positions.Rows.Count + 1;
+				row["article"] = window.Selected.ID;
+				row["articlename"] = window.Selected.Name;
+				row["amount"] = DBNull.Value;
+				row["measure"] = window.Selected.Measure;
+				row["cost"] = DBNull.Value;
+				D.InstanceData.Positions.Rows.Add(row);
+			}
 		}
 
 		/// <summary>

@@ -215,6 +215,30 @@
 		"en": "Documents",
 		"pl": "Dokumenty"
 	},
+	"DocumentsDuplicate": {
+		"en": "Duplicate document",
+		"pl": "Duplikat dokumentu"
+	},
+	"DocumentsEdit": {
+		"en": "Edit document",
+		"pl": "Edycja dokumentu"
+	},
+	"DocumentsList": {
+		"en": "List of documents",
+		"pl": "Lista dokumentów"
+	},
+	"DocumentsNew": {
+		"en": "New document",
+		"pl": "Nowy dokument"
+	},
+	"DocumentsPreview": {
+		"en": "Preview document",
+		"pl": "Podgląd dokumentu"
+	},
+	"DocumentsSelect": {
+		"en": "Select document",
+		"pl": "Wybór dokumentu"
+	},
 	"Download": {
 		"en": "Download",
 		"pl": "Pobierz"

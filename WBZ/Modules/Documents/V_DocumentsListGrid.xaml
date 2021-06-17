@@ -16,153 +16,86 @@
         <DataGridTextColumn Binding="{Binding ID}" Header="ID"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_ID, Converter={se:conv_Bool}}"/>
         <!-- Icon -->
-        <DataGridTemplateColumn Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"
-                                Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Icon, Converter={se:conv_Bool}}">
-            <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate>
-                    <Image Source="{Binding cIcon.Value}"/>
-                </DataTemplate>
-            </DataGridTemplateColumn.CellTemplate>
-        </DataGridTemplateColumn>
-        <!-- Type -->
+		<se:DataGridImageColumn Image="{Binding cIcon.Value}" Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"
+                                Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Icon, Converter={se:conv_Bool}}"/>
+		<!-- Type -->
         <DataGridTextColumn Binding="{Binding Type}" Header="Typ" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Type, Converter={se:conv_Bool}}"/>
         <!-- Name -->
         <DataGridTextColumn Binding="{Binding Name}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Name, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="Nazwa"/>
+                <se:ColumnFilter FilterType="Text" Header="Nazwa" NameSQL="d.name"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Store -->
         <DataGridTextColumn Binding="{Binding cStore.Value}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Store, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="Magazyn"/>
+				<se:ColumnFilter FilterType="Text" Header="Magazyn" NameSQL="s.codename"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- ContractorName -->
         <DataGridTextColumn Binding="{Binding ContractorName}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_ContractorName, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="Kontrahent"/>
+				<se:ColumnFilter FilterType="Text" Header="Kontrahent" NameSQL="c.codename"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- PositionsCount -->
         <DataGridTextColumn Binding="{Binding PositionsCount}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_PositionsCount, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="Pozycje"/>
+                <se:ColumnFilter FilterType="Number" Header="Pozycje" NameSQL="d.positionscount"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Weight -->
         <DataGridTextColumn Binding="{Binding Weight}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Weight, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="Waga (kg)"/>
+				<se:ColumnFilter FilterType="Number" Header="Waga (kg)" NameSQL="d.weight"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Cost -->
         <DataGridTextColumn Binding="{Binding Cost}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Cost, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="Kwota netto"/>
+				<se:ColumnFilter FilterType="Number" Header="Kwota netto" NameSQL="d.cost"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- DateIssue -->
         <DataGridTextColumn Binding="{Binding DateIssue, StringFormat={}{0:yyyy-MM-dd}}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_DateIssue, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="Data wystawienia"/>
+                <se:ColumnFilter FilterType="Date" Header="Data wystawienia" NameSQL="cast(d.dateissue as date)"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
     </DataGrid.Columns>
     <DataGrid.ContextMenu>
         <ContextMenu>
             <!-- Columns -->
-            <MenuItem Header="Widoczność kolumn">
-                <MenuItem.Icon>
-                    <Image Source="/Resources/icon32_show.ico"/>
-                </MenuItem.Icon>
-                <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_ID, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Ikona" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Icon, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Typ" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Type, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Nazwa" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Name, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Magazyn" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Store, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Firma" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_ContractorName, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Liczba pozycji" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_PositionsCount, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Łączna waga (kg)" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Weight, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Łączny koszt netto" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Cost, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Data wystawienia" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_DateIssue, Mode=TwoWay}"/>
-            </MenuItem>
-            <!-- Sorting -->
-            <MenuItem Header="Sortowanie danych">
-                <MenuItem.Icon>
-                    <Image Source="/Resources/icon32_descending.ico"/>
-                </MenuItem.Icon>
-                <MenuItem>
-                    <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Sortowanie 1:"/>
-                            <ToggleButton IsChecked="{Binding sorting_DocumentsList[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                          Height="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.2}"
-                                          Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.2}">
-                                <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.1}"
-                                       Source="/Resources/icon32_descending.ico"/>
-                            </ToggleButton>
-                            <ComboBox SelectedValue="{Binding sorting_DocumentsList[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                      SelectedValuePath="Tag" VerticalContentAlignment="Center">
-                                <ComboBoxItem Content="Typ" Tag="d.type"/>
-                                <ComboBoxItem Content="Nazwa" Tag="d.name"/>
-                                <ComboBoxItem Content="Magazyn" Tag="s.name"/>
-                                <ComboBoxItem Content="Firma" Tag="c.name"/>
-                                <ComboBoxItem Content="Data wystawienia" Tag="d.dateissue"/>
-                            </ComboBox>
-                        </StackPanel>
-                    </MenuItem.Header>
-                </MenuItem>
-                <MenuItem>
-                    <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Sortowanie 2:"/>
-                            <ToggleButton IsChecked="{Binding sorting_DocumentsList[3], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                          Height="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.2}"
-                                          Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.2}">
-                                <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.1}"
-                                       Source="/Resources/icon32_descending.ico"/>
-                            </ToggleButton>
-                            <ComboBox SelectedValue="{Binding sorting_DocumentsList[2], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                      SelectedValuePath="Tag" VerticalContentAlignment="Center">
-                                <ComboBoxItem Content="Typ" Tag="d.type"/>
-                                <ComboBoxItem Content="Nazwa" Tag="d.name"/>
-                                <ComboBoxItem Content="Magazyn" Tag="s.name"/>
-                                <ComboBoxItem Content="Firma" Tag="c.name"/>
-                                <ComboBoxItem Content="Data wystawienia" Tag="d.dateissue"/>
-                            </ComboBox>
-                        </StackPanel>
-                    </MenuItem.Header>
-                </MenuItem>
-                <MenuItem>
-                    <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Limit wczytywania:"/>
-                            <TextBox Text="{Binding sorting_DocumentsList[4], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                     Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=5}"
-                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                    </MenuItem.Header>
-                </MenuItem>
-            </MenuItem>
-            <!-- Actions -->
-            <Separator/>
-            <se:ExtMenuItem Header="Podgląd" IconUri="/Resources/icon32_search.ico" Command="se:Commands.Preview"/>
-            <se:ExtMenuItem Header="Dodaj" IconUri="/Resources/icon32_add.ico" Command="se:Commands.New"/>
-            <se:ExtMenuItem Header="Duplikuj" IconUri="/Resources/icon32_duplicate.ico" Command="se:Commands.Duplicate"/>
-            <se:ExtMenuItem Header="Edytuj" IconUri="/Resources/icon32_edit.ico" Command="se:Commands.Edit"/>
-            <se:ExtMenuItem Header="Usuń" IconUri="/Resources/icon32_delete.ico" Command="se:Commands.Delete"/>
-            <Separator/>
-            <se:ExtMenuItem Header="Odśwież" IconUri="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
-        </ContextMenu>
+			<se:ExtMenuItem Header="{Tr ColumnVisibility}" IconUri="/Resources/icon32_show.ico">
+				<MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_ID}"/>
+				<MenuItem IsCheckable="True" Header="Ikona" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Icon}"/>
+				<MenuItem IsCheckable="True" Header="Typ" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Type}"/>
+				<MenuItem IsCheckable="True" Header="Nazwa" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Name}"/>
+				<MenuItem IsCheckable="True" Header="Magazyn" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Store}"/>
+				<MenuItem IsCheckable="True" Header="Firma" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_ContractorName}"/>
+				<MenuItem IsCheckable="True" Header="Liczba pozycji" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_PositionsCount}"/>
+				<MenuItem IsCheckable="True" Header="Łączna waga (kg)" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Weight}"/>
+				<MenuItem IsCheckable="True" Header="Łączny koszt netto" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Cost}"/>
+				<MenuItem IsCheckable="True" Header="Data wystawienia" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_DateIssue}"/>
+			</se:ExtMenuItem>
+			<!-- Actions -->
+			<Separator/>
+			<se:ExtMenuItem Header="{Tr Preview}" IconUri="/Resources/icon32_search.ico" Command="se:Commands.Preview"/>
+			<se:ExtMenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico" Command="se:Commands.New"/>
+			<se:ExtMenuItem Header="{Tr Duplicate}" IconUri="/Resources/icon32_duplicate.ico" Command="se:Commands.Duplicate"/>
+			<se:ExtMenuItem Header="{Tr Edit}" IconUri="/Resources/icon32_edit.ico" Command="se:Commands.Edit"/>
+			<se:ExtMenuItem Header="{Tr Delete}" IconUri="/Resources/icon32_delete.ico" Command="se:Commands.Delete"/>
+			<Separator/>
+			<se:ExtMenuItem Header="{Tr Refresh}" IconUri="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
+		</ContextMenu>
     </DataGrid.ContextMenu>
     <DataGrid.RowStyle>
         <Style TargetType="DataGridRow">
