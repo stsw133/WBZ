@@ -547,7 +547,7 @@ namespace WBZ
 			{
 				var error = new M_Log()
 				{
-					ID = NewInstanceID(Config.SubModules.LOGS),
+					ID = NewInstanceID(Config.Modules.LOGS),
 					Instance = instance,
 					Module = module,
 					Type = (short)M_Log.LogType.Error,
@@ -567,7 +567,7 @@ namespace WBZ
 					if (showWin)
 						new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"{msg}:{Environment.NewLine}{error.Content}").ShowDialog();
 					if (save)
-                        SetInstance(Config.SubModules.LOGS, error, Commands.Type.NEW);
+                        SetInstance(Config.Modules.LOGS, error, Commands.Type.NEW);
 				}
 			}
 			catch { }
@@ -633,7 +633,7 @@ namespace WBZ
 						from wbz.articles a
 						left join wbz.stores_articles sa on a.id=sa.article
 						where {filter}",
-                    Config.SubModules.ATTACHMENTS => $@"
+                    Config.Modules.ATTACHMENTS => $@"
 						select count(distinct a.id)
 						from wbz.attachments a
 						left join wbz.users u on a.""user"" = u.id
@@ -666,7 +666,7 @@ namespace WBZ
 						select count(distinct f.id)
 						from wbz.families f
 						where {filter}",
-                    Config.SubModules.GROUPS => $@"
+                    Config.Modules.GROUPS => $@"
 						select count(distinct g.id)
 						from wbz.groups g
 						where {filter}",
@@ -674,7 +674,7 @@ namespace WBZ
 						select count(distinct i.id)
 						from wbz.icons i
 						where {filter}",
-                    Config.SubModules.LOGS => $@"
+                    Config.Modules.LOGS => $@"
 						select count(distinct l.id)
 						from wbz.logs l
 						left join wbz.users u on l.""user"" = u.id
@@ -740,7 +740,7 @@ namespace WBZ
 						left join wbz.stores_articles sa on a.id=sa.article
 						where {filter}
 						group by a.id",
-                    Config.SubModules.ATTACHMENTS => $@"
+                    Config.Modules.ATTACHMENTS => $@"
 						select a.id, a.""user"", a.module, a.instance, a.name,
 						a.""format"", a.""path"", a.size, null as file
 						from wbz.attachments a
@@ -792,7 +792,7 @@ namespace WBZ
 						left join wbz.distributions d on dp.distribution=d.id
 						where {filter}
 						group by f.id",
-                    Config.SubModules.GROUPS => $@"
+                    Config.Modules.GROUPS => $@"
 						select g.id, g.module, g.name, g.instance, g.owner,
 							case when trim(concat(g1.name, '\', g2.name, '\', g3.name, '\', g4.name), '\') = '' then ''
 								else concat(trim(concat(g1.name, '\', g2.name, '\', g3.name, '\', g4.name), '\'), '\') end as path,
@@ -809,7 +809,7 @@ namespace WBZ
 							i.archival, i.comment
 						from wbz.icons i
 						where {filter}",
-                    Config.SubModules.LOGS => $@"
+                    Config.Modules.LOGS => $@"
 						select l.id, l.""user"", l.module, l.instance, l.type as group, l.content, l.datetime
 						from wbz.logs l
 						left join wbz.users u on l.""user"" = u.id
@@ -1048,7 +1048,7 @@ namespace WBZ
 							}
 							break;
 						/// ATTACHMENTS
-						case Config.SubModules.ATTACHMENTS:
+						case Config.Modules.ATTACHMENTS:
 							query = @"";
 							break;
 						/// ATTRIBUTES_CLASSES
@@ -1384,7 +1384,7 @@ namespace WBZ
                             SetLog(Global.User.ID, module, family.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} rodzinę: {family.Lastname}.", sqlConn, sqlTran);
 							break;
 						/// GROUPS
-						case Config.SubModules.GROUPS:
+						case Config.Modules.GROUPS:
 							var group = instance as M_Group;
 							query = @"insert into wbz.groups (id, module, name, instance, owner, archival, comment, icon)
 								values (@id, @module, @name, @instance, @owner, @archival, @comment, nullif(@icon, 0))
@@ -1435,7 +1435,7 @@ namespace WBZ
                             SetLog(Global.User.ID, module, icon.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} ikonę: {icon.Name}.", sqlConn, sqlTran);
 							break;
 						/// LOGS
-						case Config.SubModules.LOGS:
+						case Config.Modules.LOGS:
 							var log = instance as M_Log;
 							query = @"insert into wbz.logs (""user"", module, instance, type, content)
 								values (@user, @module, @instance, @type, @content)
@@ -1584,7 +1584,7 @@ namespace WBZ
                         SetLog(Global.User.ID, module, id, $"Usunięto towar: {name}", sqlConn, sqlTran);
                         break;
                     /// ATTACHMENTS
-                    case Config.SubModules.ATTACHMENTS:
+                    case Config.Modules.ATTACHMENTS:
                         query = @"delete from wbz.attachments where id=@id";
                         SetLog(Global.User.ID, module, id, $"Usunięto załącznik: {name}", sqlConn, sqlTran);
                         break;
@@ -1636,7 +1636,7 @@ namespace WBZ
                         SetLog(Global.User.ID, module, id, $"Usunięto rodzinę: {name}", sqlConn, sqlTran);
                         break;
                     /// GROUPS
-                    case Config.SubModules.GROUPS:
+                    case Config.Modules.GROUPS:
                         query = @"delete from wbz.groups where id=@id;
 								delete from wbz.groups where owner=@id";
                         SetLog(Global.User.ID, module, id, $"Usunięto grupę: {name}", sqlConn, sqlTran);
@@ -1647,7 +1647,7 @@ namespace WBZ
                         SetLog(Global.User.ID, module, id, $"Usunięto ikonę: {name}", sqlConn, sqlTran);
                         break;
                     /// LOGS
-                    case Config.SubModules.LOGS:
+                    case Config.Modules.LOGS:
                         query = @"delete from wbz.logs where id=@id";
                         break;
                     /// STORES
@@ -1953,7 +1953,7 @@ namespace WBZ
             }
 			catch (Exception ex)
 			{
-                Error("Błąd pobierania listy atrybutów", ex, Config.SubModules.ATTRIBUTES);
+                Error("Błąd pobierania listy atrybutów", ex, Config.Modules.ATTRIBUTES);
 			}
 
 			return result;
@@ -2138,7 +2138,7 @@ namespace WBZ
             }
 			catch (Exception ex)
 			{
-                Error("Błąd zapisywania logu", ex, Config.SubModules.LOGS, 0, true, false);
+                Error("Błąd zapisywania logu", ex, Config.Modules.LOGS, 0, true, false);
 				return false;
 			}
 

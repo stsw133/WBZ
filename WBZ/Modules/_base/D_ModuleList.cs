@@ -3,14 +3,16 @@ using StswExpress.Translate;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using WBZ.Globals;
+using WBZ.Models;
 
 namespace WBZ.Modules._base
 {
 	abstract class D_ModuleList<MODULE_MODEL> : D where MODULE_MODEL : class, new()
 	{
 		/// Module
-		public string Module => Fn.AddCharBeforeUpperLetters(GetType().Name[2..^4], '_').ToLower();
-		public string Title => TM.Tr(Module.Capitalize() + Mode.ToString().Capitalize());
+		public MV Module => Config.ListModules.Find(x => x.Name.ToString() == GetType().Name[2..^4]);
+		public string Title => TM.Tr(Module.Name + Mode.ToString().Capitalize());
 
 		/// Mode
 		public Commands.Type Mode { get; set; }

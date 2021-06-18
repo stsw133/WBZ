@@ -8,7 +8,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using WBZ.Globals;
 using WBZ.Models;
-using WBZ.Modules._shared;
+using WBZ.Modules._submodules;
 
 namespace WBZ.Controls
 {
@@ -58,7 +58,7 @@ namespace WBZ.Controls
                 return;
 
             int id = (int)(SelectedItem as TreeViewItem).Tag;
-            new GroupsNew(SQL.GetInstance<M_Group>(Config.SubModules.GROUPS, id), Commands.Type.PREVIEW) { Owner = Window.GetWindow(this) }.ShowDialog();
+            new GroupsNew(SQL.GetInstance<M_Group>(Config.Modules.GROUPS, id), Commands.Type.PREVIEW) { Owner = Window.GetWindow(this) }.ShowDialog();
             btnGroupsRefresh_Click(null, null);
         }
 
@@ -107,7 +107,7 @@ namespace WBZ.Controls
                 return;
 
             int id = (int)(SelectedItem as TreeViewItem).Tag;
-            new GroupsNew(SQL.GetInstance<M_Group>(Config.SubModules.GROUPS, id), Commands.Type.EDIT) { Owner = Window.GetWindow(this) }.ShowDialog();
+            new GroupsNew(SQL.GetInstance<M_Group>(Config.Modules.GROUPS, id), Commands.Type.EDIT) { Owner = Window.GetWindow(this) }.ShowDialog();
             btnGroupsRefresh_Click(null, null);
         }
 
@@ -122,7 +122,7 @@ namespace WBZ.Controls
             if (MessageBox.Show("Czy na pewno usunąć zaznaczoną grupę?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
                 var group = SelectedItem as TreeViewItem;
-                SQL.DeleteInstance(Config.SubModules.GROUPS, (int)group.Tag, ((group.Header as StackPanel).Children[1] as TextBlock).Text);
+                SQL.DeleteInstance(Config.Modules.GROUPS, (int)group.Tag, ((group.Header as StackPanel).Children[1] as TextBlock).Text);
                 btnGroupsRefresh_Click(null, null);
             }
         }
@@ -181,7 +181,7 @@ namespace WBZ.Controls
                 {
                     Module = (string)d.Module;
                     // TODO - filtr do parametryzacji
-                    InstancesList = SQL.ListInstances<M_Group>(Config.SubModules.GROUPS, $"g.module='{Module}' and g.instance is null", null, Properties.Settings.Default.sorting_GroupsList);
+                    InstancesList = SQL.ListInstances<M_Group>(Config.Modules.GROUPS, $"g.module='{Module}' and g.instance is null", null, Properties.Settings.Default.sorting_GroupsList);
                 }
 
                 /// Clear groups

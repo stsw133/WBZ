@@ -22,7 +22,7 @@ namespace WBZ.Modules.AttributesClasses
                 D.InstanceData = instance;
             D.Mode = mode;
 
-            D.InstanceData.Values = SQL.GetInstancePositions(D.Module, D.InstanceData.ID);
+            D.InstanceData.Values = SQL.GetInstancePositions(D.Module.Value.ToString(), D.InstanceData.ID);
             if (D.Mode == Commands.Type.DUPLICATE)
                 foreach (DataRow row in D.InstanceData.Values.Rows)
                     row.SetAdded();

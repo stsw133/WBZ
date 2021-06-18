@@ -76,6 +76,11 @@ namespace WBZ.Models
 		public object Value { get; set; } = null;
 
 		/// <summary>
+		/// Module
+		/// </summary>
+		public object Name { get; set; } = null;
+
+		/// <summary>
 		/// Tag
 		/// </summary>
 		public object Tag { get; set; } = null;

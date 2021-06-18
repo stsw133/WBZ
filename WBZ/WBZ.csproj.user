@@ -129,10 +129,10 @@
     <Page Update="Modules\Families\V_FamiliesNew.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Modules\_shared\V_GroupsList.xaml">
+    <Page Update="Modules\_submodules\V_GroupsList.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Modules\_shared\V_GroupsNew.xaml">
+    <Page Update="Modules\_submodules\V_GroupsNew.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Modules\Icons\V_IconsList.xaml">

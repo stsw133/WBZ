@@ -5,7 +5,7 @@ using System.Windows.Input;
 using WBZ.Globals;
 using MODULE_MODEL = WBZ.Models.M_Group;
 
-namespace WBZ.Modules._shared
+namespace WBZ.Modules._submodules
 {
     /// <summary>
     /// Logika interakcji dla klasy GroupsList.xaml
@@ -34,7 +34,7 @@ namespace WBZ.Modules._shared
                 if (D.Mode == Commands.Type.SELECT)
                 {
 					if (groupsView.SelectedItem is TreeViewItem itm)
-						Selected = SQL.GetInstance<MODULE_MODEL>(Config.SubModules.GROUPS, (int)itm.Tag);
+						Selected = SQL.GetInstance<MODULE_MODEL>(Config.Modules.GROUPS, (int)itm.Tag);
 
                     if (Selected != null)
                         DialogResult = true;

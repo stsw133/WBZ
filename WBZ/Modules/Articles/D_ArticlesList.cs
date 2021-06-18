@@ -14,5 +14,5 @@ namespace WBZ.Modules.Articles
 			get => storesList;
 			set => SetField(ref storesList, value, () => StoresList);
 		}
-    }
+	}
 }

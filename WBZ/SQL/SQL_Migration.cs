@@ -236,6 +236,31 @@ alter table wbz.attachments add column if not exists format character varying(10
 alter table wbz.attachments add column if not exists size integer;
 alter table wbz.attachments alter column name type varchar(255);
 
+CREATE VIEW art AS SELECT * FROM wbz.articles;
+CREATE VIEW arm AS SELECT * FROM wbz.articles_measures;
+CREATE VIEW att AS SELECT * FROM wbz.attachments;
+CREATE VIEW atr AS SELECT * FROM wbz.attributes;
+CREATE VIEW atc AS SELECT * FROM wbz.attributes_classes;
+CREATE VIEW atv AS SELECT * FROM wbz.attributes_values;
+CREATE VIEW cfg AS SELECT * FROM wbz.config;
+CREATE VIEW con AS SELECT * FROM wbz.contacts;
+CREATE VIEW cnt AS SELECT * FROM wbz.contractors;
+CREATE VIEW dis AS SELECT * FROM wbz.distributions;
+CREATE VIEW dip AS SELECT * FROM wbz.distributions_positions;
+CREATE VIEW doc AS SELECT * FROM wbz.documents;
+CREATE VIEW dop AS SELECT * FROM wbz.documents_positions;
+CREATE VIEW emp AS SELECT * FROM wbz.employees;
+CREATE VIEW fam AS SELECT * FROM wbz.families;
+CREATE VIEW gro AS SELECT * FROM wbz.groups;
+CREATE VIEW ico AS SELECT * FROM wbz.icons;
+CREATE VIEW log AS SELECT * FROM wbz.logs;
+CREATE VIEW ntf AS SELECT * FROM wbz.notifications;
+CREATE VIEW sto AS SELECT * FROM wbz.stores;
+CREATE VIEW sta AS SELECT * FROM wbz.stores_articles;
+CREATE VIEW use AS SELECT * FROM wbz.users;
+CREATE VIEW usp AS SELECT * FROM wbz.users_permissions;
+CREATE VIEW veh AS SELECT * FROM wbz.vehicles;
+
 								update wbz.config set value='1.2' where property='VERSION'", sqlConn, sqlTran);
 							sqlCmd.ExecuteNonQuery();
 						}

@@ -53,10 +53,10 @@ namespace WBZ.Modules
 			if (!Global.User.Perms.Contains($"{Config.Modules.STORES}_{Global.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modStores);
 			///STATS
-			if (!Global.User.Perms.Contains($"{Config.Modules.STATS}_{Global.PermType.PREVIEW}"))
+			if (!Global.User.Perms.Contains($"stats_{Global.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modStats);
 			///LOGS
-			if (!Global.User.Perms.Contains($"{Config.SubModules.LOGS}_{Global.PermType.PREVIEW}"))
+			if (!Global.User.Perms.Contains($"{Config.Modules.LOGS}_{Global.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modLogs);
 			///ICONS
 			if (!Global.User.Perms.Contains($"{Config.Modules.ICONS}_{Global.PermType.PREVIEW}"))
@@ -80,7 +80,7 @@ namespace WBZ.Modules
 			if (!Global.User.Perms.Contains($"{Config.Modules.ATTRIBUTES_CLASSES}_{Global.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modAttributesClasses);
 			///ATTACHMENTS
-			if (!Global.User.Perms.Contains($"{Config.SubModules.ATTACHMENTS}_{Global.PermType.PREVIEW}"))
+			if (!Global.User.Perms.Contains($"{Config.Modules.ATTACHMENTS}_{Global.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modAttachments);
 			///ARTICLES
 			if (!Global.User.Perms.Contains($"{Config.Modules.ARTICLES}_{Global.PermType.PREVIEW}"))

@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using WBZ.Globals;
 using WBZ.Models;
-using WBZ.Modules._shared;
+using WBZ.Modules._submodules;
 
 namespace WBZ.Modules._tabs
 {
@@ -39,7 +39,7 @@ namespace WBZ.Modules._tabs
 					ID = (int)d.InstanceData.ID;
 				}
 				if (ID != 0 && D.InstanceGroups == null)
-					D.InstanceGroups = SQL.ListInstances<M_Group>(Config.SubModules.GROUPS, $"g.module='{Module}' and g.instance={ID}");
+					D.InstanceGroups = SQL.ListInstances<M_Group>(Config.Modules.GROUPS, $"g.module='{Module}' and g.instance={ID}");
 			}
 			catch { }
 		}
@@ -55,10 +55,10 @@ namespace WBZ.Modules._tabs
             {
 				var group = window.Selected;
 				group.Owner = group.ID;
-				group.ID = SQL.NewInstanceID(Config.SubModules.GROUPS);
+				group.ID = SQL.NewInstanceID(Config.Modules.GROUPS);
 				group.Instance = ID;
-                SQL.SetInstance(Config.SubModules.GROUPS, group, Commands.Type.NEW);
-                D.InstanceGroups = SQL.ListInstances<M_Group>(Config.SubModules.GROUPS, $"g.module='{Module}' and g.instance={ID}");
+                SQL.SetInstance(Config.Modules.GROUPS, group, Commands.Type.NEW);
+                D.InstanceGroups = SQL.ListInstances<M_Group>(Config.Modules.GROUPS, $"g.module='{Module}' and g.instance={ID}");
 			}
 		}
 
@@ -71,8 +71,8 @@ namespace WBZ.Modules._tabs
 			if (selectedInstances.Count() > 0)
 			{
 				foreach (var instance in selectedInstances)
-                    SQL.DeleteInstance(Config.SubModules.GROUPS, instance.ID, instance.Name);
-                D.InstanceGroups = SQL.ListInstances<M_Group>(Config.SubModules.GROUPS, $"g.module='{Module}' and g.instance={ID}");
+                    SQL.DeleteInstance(Config.Modules.GROUPS, instance.ID, instance.Name);
+                D.InstanceGroups = SQL.ListInstances<M_Group>(Config.Modules.GROUPS, $"g.module='{Module}' and g.instance={ID}");
 			}
 		}
 

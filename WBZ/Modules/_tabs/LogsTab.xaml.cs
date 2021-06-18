@@ -37,7 +37,7 @@ namespace WBZ.Modules._tabs
                     ID = (int)d.InstanceData.ID;
                 }
                 if (ID != 0 && D.InstanceLogs == null)
-                    D.InstanceLogs = SQL.ListInstances<M_Log>(Config.SubModules.LOGS, $"l.module='{Module}' and l.instance={ID}");
+                    D.InstanceLogs = SQL.ListInstances<M_Log>(Config.Modules.LOGS, $"l.module='{Module}' and l.instance={ID}");
             }
             catch { }
         }

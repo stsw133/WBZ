@@ -39,7 +39,7 @@ namespace WBZ.Modules.Families
         }
         private void btnRodo_Click(object sender, RoutedEventArgs e)
         {
-            Prints.Print_RODO(D.InstanceData, SQL.ListContacts(D.Module, D.InstanceData.ID, "default = true").ToList<M_Contact>()?[0]);
+            Prints.Print_RODO(D.InstanceData, SQL.ListContacts(D.Module.Value.ToString(), D.InstanceData.ID, "default = true").ToList<M_Contact>()?[0]);
         }
 
         /// <summary>

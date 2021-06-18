@@ -42,7 +42,7 @@ namespace WBZ.Modules._base
                     dg.SelectionMode = DataGridSelectionMode.Single;
 
             if (dgLists.Count > 1)
-                D.TotalItems = SQL.CountInstances(D.Module, D.FilterSqlString, D.FilterSqlParams);
+                D.TotalItems = SQL.CountInstances(D.Module.Value.ToString(), D.FilterSqlString, D.FilterSqlParams);
             else
                 cmdRefresh_Executed(null, null);
         }
@@ -53,8 +53,8 @@ namespace WBZ.Modules._base
         internal virtual void UpdateFilters()
         {
             Fn.GetColumnFilters(dgLists[D.SelectedTab], out var a, out var b); D.FilterSqlString = a; D.FilterSqlParams = b;
-            D.FilterSqlString += !(D.Filters as M).Archival ? $" and {Config.GetModuleAlias(D.Module)}.archival=false" : string.Empty;
-            D.FilterSqlString += (D.Filters as M).Group > 0 ? $" and exists (select from wbz.groups g where g.instance={Config.GetModuleAlias(D.Module)}.id and g.owner={(D.Filters as M).Group})" : string.Empty;
+            D.FilterSqlString += !(D.Filters as M).Archival ? $" and {Config.GetModuleAlias(D.Module.Value.ToString())}.archival=false" : string.Empty;
+            D.FilterSqlString += (D.Filters as M).Group > 0 ? $" and exists (select from wbz.groups g where g.instance={Config.GetModuleAlias(D.Module.Value.ToString())}.id and g.owner={(D.Filters as M).Group})" : string.Empty;
             if (D.FilterSqlString.StartsWith(" and "))
                 D.FilterSqlString = D.FilterSqlString[5..];
         }
@@ -122,7 +122,7 @@ namespace WBZ.Modules._base
             {
                 foreach (object instance in selectedInstances)
                 {
-                    SQL.DeleteInstance(D.Module, (instance as M).ID, (instance as M).Name);
+                    SQL.DeleteInstance(D.Module.Value.ToString(), (instance as M).ID, (instance as M).Name);
                     dgLists[D.SelectedTab].Items.Remove(instance);
                 }
             }
@@ -146,8 +146,8 @@ namespace WBZ.Modules._base
             Cursor = Cursors.Wait;
             UpdateFilters();
             await Task.Run(() => {
-                D.TotalItems = SQL.CountInstances(D.Module, D.FilterSqlString);
-                D.InstancesList = SQL.ListInstances<MODULE_MODEL>(D.Module, D.FilterSqlString, D.FilterSqlParams, D.Sorting, 0);
+                D.TotalItems = SQL.CountInstances(D.Module.Value.ToString(), D.FilterSqlString);
+                D.InstancesList = SQL.ListInstances<MODULE_MODEL>(D.Module.Value.ToString(), D.FilterSqlString, D.FilterSqlParams, D.Sorting, 0);
             });
             Cursor = Cursors.Arrow;
         }
@@ -184,7 +184,7 @@ namespace WBZ.Modules._base
             if (e.VerticalChange > 0 && e.VerticalOffset + e.ViewportHeight == e.ExtentHeight && D.InstancesList.Count < D.TotalItems)
             {
                 Cursor = Cursors.Wait;
-                foreach (var i in SQL.ListInstances<MODULE_MODEL>(D.Module, D.FilterSqlString, D.FilterSqlParams, D.Sorting, (D.InstancesList as ObservableCollection<M>)?.Count ?? 0))
+                foreach (var i in SQL.ListInstances<MODULE_MODEL>(D.Module.Value.ToString(), D.FilterSqlString, D.FilterSqlParams, D.Sorting, (D.InstancesList as ObservableCollection<M>)?.Count ?? 0))
                     D.InstancesList.Add(i);
                 (e.OriginalSource as ScrollViewer).ScrollToVerticalOffset(e.VerticalOffset);
                 Cursor = Cursors.Arrow;
@@ -199,19 +199,19 @@ namespace WBZ.Modules._base
             var sort = CollectionViewSource.GetDefaultView((sender as DataGrid).ItemsSource).SortDescriptions;
             if (sort.Any(x => x.PropertyName == e.Column.SortMemberPath))
             {
-                D.Sorting[D.Sorting.IndexOf($"{Config.GetModuleAlias(D.Module)}.{e.Column.SortMemberPath.ToLower()}") + 1] = e.Column.SortDirection == ListSortDirection.Descending ? "desc" : "asc";
+                D.Sorting[D.Sorting.IndexOf($"{Config.GetModuleAlias(D.Module.Value.ToString())}.{e.Column.SortMemberPath.ToLower()}") + 1] = e.Column.SortDirection == ListSortDirection.Descending ? "desc" : "asc";
                 return;
             }
 
             var limit = Convert.ToInt32(D.Sorting[4]);
             D.Sorting = new StringCollection
             {
-                $"{Config.GetModuleAlias(D.Module)}.{e.Column.SortMemberPath.ToLower()}",
+                $"{Config.GetModuleAlias(D.Module.Value.ToString())}.{e.Column.SortMemberPath.ToLower()}",
                 e.Column.SortDirection == ListSortDirection.Descending ? "desc" : "asc"
             };
             if (sort.Count > 0)
             {
-                D.Sorting.Add($"{Config.GetModuleAlias(D.Module)}.{sort[0].PropertyName.ToLower()}");
+                D.Sorting.Add($"{Config.GetModuleAlias(D.Module.Value.ToString())}.{sort[0].PropertyName.ToLower()}");
                 D.Sorting.Add(sort[0].Direction == ListSortDirection.Descending ? "desc" : "asc");
             }
             else

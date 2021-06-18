@@ -1,5 +1,6 @@
 ﻿using StswExpress;
 using StswExpress.Translate;
+using WBZ.Globals;
 using WBZ.Models;
 
 namespace WBZ.Modules._base
@@ -7,8 +8,8 @@ namespace WBZ.Modules._base
     abstract class D_ModuleNew<MODULE_MODEL> : D where MODULE_MODEL : class, new()
     {
 		/// Module
-		public string Module => Fn.AddCharBeforeUpperLetters(GetType().Name[2..^3], '_').ToLower();
-		public string Title => TM.Tr(Module.Capitalize() + Mode.ToString().Capitalize()) + (InstanceData != null ? $": {(InstanceData as M).Name}" : string.Empty);
+		public MV Module => Config.ListModules.Find(x => x.Name.ToString() == GetType().Name[2..^3]);
+		public string Title => TM.Tr(Module.Name + Mode.ToString().Capitalize()) + (InstanceData != null ? $": {(InstanceData as M).Name}" : string.Empty);
 
 		/// Mode
 		public Commands.Type Mode { get; set; }

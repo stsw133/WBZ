@@ -61,8 +61,8 @@ namespace WBZ.Modules.Attachments
 		{
 			await Task.Run(() => {
 				UpdateFilters();
-				D.TotalItems = SQL.CountInstances(D.Module, D.FilterSqlString);
-				D.InstancesList = SQL.ListInstances<MODULE_MODEL>(D.Module, D.FilterSqlString, D.FilterSqlParams, D.Sorting, D.InstancesList?.Count ?? 0);
+				D.TotalItems = SQL.CountInstances(D.Module.Value.ToString(), D.FilterSqlString);
+				D.InstancesList = SQL.ListInstances<MODULE_MODEL>(D.Module.Value.ToString(), D.FilterSqlString, D.FilterSqlParams, D.Sorting, D.InstancesList?.Count ?? 0);
 
 				foreach (var img in D.InstancesList)
 					img.File = SQL.GetAttachmentFile(img.ID);
@@ -84,7 +84,7 @@ namespace WBZ.Modules.Attachments
 		/// </summary>
 		private void lbImages_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			var lbImages = (sender as ListBox);
+			var lbImages = sender as ListBox;
 
 			if (lbImages.SelectedIndex < 0)
 				return;
@@ -106,7 +106,7 @@ namespace WBZ.Modules.Attachments
 		{
 			if (e.HorizontalChange > 0 && e.HorizontalOffset + e.ViewportWidth == e.ExtentWidth && D.InstancesList.Count < D.TotalItems)
 			{
-				foreach (var i in SQL.ListInstances<MODULE_MODEL>(D.Module, D.FilterSqlString, D.FilterSqlParams, D.Sorting, D.InstancesList?.Count ?? 0)) D.InstancesList.Add(i);
+				foreach (var i in SQL.ListInstances<MODULE_MODEL>(D.Module.Value.ToString(), D.FilterSqlString, D.FilterSqlParams, D.Sorting, D.InstancesList?.Count ?? 0)) D.InstancesList.Add(i);
 				foreach (var img in D.InstancesList)
 					img.File = SQL.GetAttachmentFile(img.ID);
 				(e.OriginalSource as ScrollViewer).ScrollToVerticalOffset(e.HorizontalOffset);

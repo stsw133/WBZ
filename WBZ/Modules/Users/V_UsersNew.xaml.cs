@@ -26,7 +26,7 @@ namespace WBZ.Modules.Users
 			D.InstanceData.Perms = SQL.GetUserPerms(D.InstanceData.ID);
 			// TODO - do sprawdzenia czy można usunąć
 			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE))
-				D.InstanceData.ID = SQL.NewInstanceID(D.Module);
+				D.InstanceData.ID = SQL.NewInstanceID(D.Module.Value.ToString());
 		}
 
 		/// <summary>

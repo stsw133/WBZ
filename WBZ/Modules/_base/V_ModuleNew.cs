@@ -31,7 +31,7 @@ namespace WBZ.Modules._base
 		{
 			int newID = (D.InstanceData as M).ID;
 			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE))
-				newID = SQL.NewInstanceID(D.Module);
+				newID = SQL.NewInstanceID(D.Module.Value.ToString());
 			
 			/*
 			if ((Commands.Type)D.Mode == Commands.Type.DUPLICATE)
@@ -77,7 +77,7 @@ namespace WBZ.Modules._base
 			if (!CheckDataValidation())
 				return;
 
-			if (saved = SQL.SetInstance(D.Module, D.InstanceData, D.Mode))
+			if (saved = SQL.SetInstance(D.Module.Value.ToString(), D.InstanceData, D.Mode))
 			{
 				if (Owner != null)
 					DialogResult = true;
@@ -126,7 +126,7 @@ namespace WBZ.Modules._base
 		internal void Window_Closed(object sender, EventArgs e)
 		{
 			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE) && !saved)
-				SQL.ClearObject(D.Module, (D.InstanceData as M).ID);
+				SQL.ClearObject(D.Module.Value.ToString(), (D.InstanceData as M).ID);
 
 			Properties.Settings.Default.Save();
 			if (W.Owner != null)
