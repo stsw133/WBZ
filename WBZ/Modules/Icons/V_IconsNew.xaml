@@ -7,7 +7,7 @@
        xmlns:b="clr-namespace:WBZ.Modules.Icons"
        xmlns:g="clr-namespace:WBZ.Globals"
        xmlns:p="clr-namespace:WBZ.Properties"
-       xmlns:t="clr-namespace:WBZ.Modules._tabs"
+       xmlns:s="clr-namespace:WBZ.Modules._shared"
        mc:Ignorable="d" Height="600" Width="900" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
        Title="{Binding Title}" Icon="/Resources/icon32_icons.ico"
        Loaded="Window_Loaded" Closed="Window_Closed"
@@ -127,21 +127,21 @@
                 <TabItem.Header>
                     <se:Header Text="{Tr Additional}" Icon="/Resources/icon32_tools.ico"/>
                 </TabItem.Header>
-                <t:AdditionalsTab HasIcon="False"/>
+                <s:AdditionalsTab HasIcon="False"/>
             </TabItem>
             <!-- tabGroups -->
             <TabItem>
                 <TabItem.Header>
 					<se:Header Text="{Tr Groups}" Icon="/Resources/icon32_groups.ico"/>
                 </TabItem.Header>
-                <t:GroupsTab/>
+                <s:GroupsTab/>
             </TabItem>
             <!-- tabLogs -->
             <TabItem>
                 <TabItem.Header>
 					<se:Header Text="{Tr History}" Icon="/Resources/icon32_history.ico"/>
                 </TabItem.Header>
-                <t:LogsTab/>
+                <s:LogsTab/>
             </TabItem>
         </TabControl>
     </DockPanel>

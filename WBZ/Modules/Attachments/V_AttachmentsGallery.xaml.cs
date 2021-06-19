@@ -29,11 +29,13 @@ namespace WBZ.Modules.Attachments
 		/// </summary>
 		private void UpdateFilters()
 		{
+			/*
 			D.FilterSqlString = $"LOWER(COALESCE(a.module,'')) like '%{D.Filters.Module.ToLower()}%' and "
 						+ $"LOWER(COALESCE(a.name,'')) like '%{D.Filters.Name.ToLower()}%' and "
 						+ $"(LOWER(a.name) like '%.png' or LOWER(a.name) like '%.jpg') and ";
 
 			D.FilterSqlString = D.FilterSqlString.TrimEnd(" and ".ToCharArray());
+			*/
 		}
 
 		/// <summary>
@@ -50,7 +52,7 @@ namespace WBZ.Modules.Attachments
 		/// </summary>
 		private void btnFiltersClear_Click(object sender, RoutedEventArgs e)
 		{
-			D.Filters = new MODULE_MODEL();
+			D.Filter = new Models.M_Filter();
 			btnRefresh_Click(null, null);
 		}
 
@@ -61,11 +63,11 @@ namespace WBZ.Modules.Attachments
 		{
 			await Task.Run(() => {
 				UpdateFilters();
-				D.TotalItems = SQL.CountInstances(D.Module.Value.ToString(), D.FilterSqlString);
-				D.InstancesList = SQL.ListInstances<MODULE_MODEL>(D.Module.Value.ToString(), D.FilterSqlString, D.FilterSqlParams, D.Sorting, D.InstancesList?.Count ?? 0);
+				D.TotalItems = SQL.CountInstances(D.Module, D.Filter);
+				D.InstancesLists[D.SelectedTab] = SQL.ListInstances<MODULE_MODEL>(D.Module, D.Filter, D.InstancesLists[D.SelectedTab].Count);
 
-				foreach (var img in D.InstancesList)
-					img.File = SQL.GetAttachmentFile(img.ID);
+				foreach (var img in D.InstancesLists[D.SelectedTab])
+					img.Content = SQL.GetAttachmentFile(img.ID);
 			});
 		}
 
@@ -90,10 +92,10 @@ namespace WBZ.Modules.Attachments
 				return;
 
 			var selection = lbImages.SelectedItem as MODULE_MODEL;
-			if (selection.File == null)
-				selection.File = SQL.GetAttachmentFile(selection.ID);
+			if (selection.Content == null)
+				selection.Content = SQL.GetAttachmentFile(selection.ID);
 
-			using (var stream = new MemoryStream(selection.File))
+			using (var stream = new MemoryStream(selection.Content))
 			{
 				imgContent.Source = BitmapFrame.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
 			}
@@ -104,11 +106,12 @@ namespace WBZ.Modules.Attachments
 		/// </summary>
 		private void lbImages_ScrollChanged(object sender, ScrollChangedEventArgs e)
 		{
-			if (e.HorizontalChange > 0 && e.HorizontalOffset + e.ViewportWidth == e.ExtentWidth && D.InstancesList.Count < D.TotalItems)
+			if (e.HorizontalChange > 0 && e.HorizontalOffset + e.ViewportWidth == e.ExtentWidth && D.InstancesLists[D.SelectedTab].Count < D.TotalItems)
 			{
-				foreach (var i in SQL.ListInstances<MODULE_MODEL>(D.Module.Value.ToString(), D.FilterSqlString, D.FilterSqlParams, D.Sorting, D.InstancesList?.Count ?? 0)) D.InstancesList.Add(i);
-				foreach (var img in D.InstancesList)
-					img.File = SQL.GetAttachmentFile(img.ID);
+				foreach (var i in SQL.ListInstances<MODULE_MODEL>(D.Module, D.Filter, D.InstancesLists[D.SelectedTab].Count))
+					D.InstancesLists[D.SelectedTab].Add(i);
+				foreach (var img in D.InstancesLists[D.SelectedTab])
+					img.Content = SQL.GetAttachmentFile(img.ID);
 				(e.OriginalSource as ScrollViewer).ScrollToVerticalOffset(e.HorizontalOffset);
 			}
 		}
@@ -120,9 +123,9 @@ namespace WBZ.Modules.Attachments
 		{
 			try
 			{
-				if (D.InstancesList != null)
-					foreach (var attachment in D.InstancesList)
-						if (attachment.File != null)
+				if (D.InstancesLists[D.SelectedTab] != null)
+					foreach (var attachment in D.InstancesLists[D.SelectedTab])
+						if (attachment.Content != null)
 							File.Delete(Path.Combine(Path.GetTempPath(), attachment.Name));
 			}
 			catch { }

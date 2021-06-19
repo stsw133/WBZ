@@ -1,4 +1,4 @@
-﻿<DataGrid x:Class="WBZ.Modules.Employees.EmployeesListGrid"
+﻿<DataGrid x:Class="WBZ.Modules.EmployeesListGrid"
           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -19,7 +19,7 @@
         <DataGridTextColumn Binding="{Binding ID}" Header="ID"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_ID, Converter={se:conv_Bool}}"/>
         <!-- Icon -->
-        <se:DataGridImageColumn Image="{Binding cIcon.Value}" Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"
+        <se:DataGridImageColumn Image="{Binding IconContent}" Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"
                                 Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Icon, Converter={se:conv_Bool}}"/>
         <!-- Fullname -->
         <DataGridTextColumn Binding="{Binding Fullname}" Width="*"

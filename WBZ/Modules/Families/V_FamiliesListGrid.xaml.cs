@@ -1,7 +1,7 @@
 ﻿using StswExpress;
 using System.Windows.Controls;
 
-namespace WBZ.Modules.Families
+namespace WBZ.Modules
 {
     /// <summary>
     /// Interaction logic for FamiliesListGrid.xaml

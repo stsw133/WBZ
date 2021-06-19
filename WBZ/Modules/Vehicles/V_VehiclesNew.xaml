@@ -6,7 +6,7 @@
        xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
        xmlns:b="clr-namespace:WBZ.Modules.Vehicles"
        xmlns:p="clr-namespace:WBZ.Properties"
-       xmlns:t="clr-namespace:WBZ.Modules._tabs"
+       xmlns:s="clr-namespace:WBZ.Modules._shared"
        mc:Ignorable="d" Height="600" Width="900" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
        Title="{Binding Title}" Icon="/Resources/icon32_transport.ico"
        Loaded="Window_Loaded" Closed="Window_Closed"
@@ -139,35 +139,35 @@
                 <TabItem.Header>
                     <se:Header Text="{Tr Additional}" Icon="/Resources/icon32_tools.ico"/>
                 </TabItem.Header>
-                <t:AdditionalsTab/>
+                <s:AdditionalsTab/>
             </TabItem>
             <!-- tabGroups -->
             <TabItem>
                 <TabItem.Header>
                     <se:Header Text="{Tr Groups}" Icon="/Resources/icon32_groups.ico"/>
                 </TabItem.Header>
-                <t:GroupsTab/>
+                <s:GroupsTab/>
             </TabItem>
             <!-- tabAttributes -->
             <TabItem>
                 <TabItem.Header>
                     <se:Header Text="{Tr Attributes}" Icon="/Resources/icon32_attributes.ico"/>
                 </TabItem.Header>
-                <t:AttributesTab/>
+                <s:AttributesTab/>
             </TabItem>
             <!-- tabAttachments -->
             <TabItem>
                 <TabItem.Header>
                     <se:Header Text="{Tr Attachments}" Icon="/Resources/icon32_photos.ico"/>
                 </TabItem.Header>
-                <t:AttachmentsTab/>
+                <s:AttachmentsTab/>
             </TabItem>
             <!-- tabLogs -->
             <TabItem>
                 <TabItem.Header>
                     <se:Header Text="{Tr History}" Icon="/Resources/icon32_history.ico"/>
                 </TabItem.Header>
-                <t:LogsTab/>
+                <s:LogsTab/>
             </TabItem>
         </TabControl>
     </DockPanel>

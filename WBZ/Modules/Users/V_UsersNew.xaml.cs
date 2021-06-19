@@ -1,6 +1,10 @@
 ﻿using StswExpress;
+using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using WBZ.Globals;
 using WBZ.Modules._base;
 using MODULE_MODEL = WBZ.Models.M_User;
 
@@ -24,23 +28,33 @@ namespace WBZ.Modules.Users
 			D.Mode = mode;
 
 			D.InstanceData.Perms = SQL.GetUserPerms(D.InstanceData.ID);
-			// TODO - do sprawdzenia czy można usunąć
-			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE))
-				D.InstanceData.ID = SQL.NewInstanceID(D.Module.Value.ToString());
 		}
 
 		/// <summary>
 		/// Loaded
 		/// </summary>
-		private void Window_Loaded(object sender, RoutedEventArgs e)
+		internal new void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			// TODO - do sprawdzenia czy można usunąć
-			/*
-			var coll = dpPerms.Children.Cast<UniformGrid>().OrderBy(x => (x.Children[0] as StswExpress.Controls.Header)?.Text).ToList();
+			var modulesGrids = dpPerms.Children.Cast<UniformGrid>().OrderBy(x => (x.Children[0] as Header)?.Text).ToList();
 			dpPerms.Children.RemoveRange(0, dpPerms.Children.Count);
-			foreach (var item in coll)
-				dpPerms.Children.Add(item);
-			*/
+			for (int i = 0; i < modulesGrids.Count; i++)
+			{
+				foreach (var perm in Enum.GetValues(typeof(Config.PermType)).Cast <Config.PermType>())
+				{
+					if (i < 2) break;
+
+					var check = new ExtCheckBox()
+					{
+						HorizontalAlignment = HorizontalAlignment.Center,
+						IsChecked = D.InstanceData.Perms.Contains($"{modulesGrids[i].Tag}_{perm}"),
+						Tag = $"{modulesGrids[i].Tag}_{perm}"
+					};
+					check.Checked += chckPerms_Checked;
+					check.Unchecked += chckPerms_Unchecked;
+					modulesGrids[i].Children.Add(check);
+				}
+				dpPerms.Children.Add(modulesGrids[i]);
+			}
 		}
 
 		/// <summary>
@@ -59,14 +73,15 @@ namespace WBZ.Modules.Users
 		private void chckPerms_Unchecked(object sender, RoutedEventArgs e)
 		{
 			var perm = (sender as CheckBox).Tag.ToString();
-			if (D.InstanceData.Perms.Contains(perm))
+			if (!D.InstanceData.Perms.Contains(perm))
 				D.InstanceData.Perms.Remove(perm);
 		}
 
 		/// <summary>
 		/// PasswordChanged
 		/// </summary>
-		private void tbNewpass_PasswordChanged(object sender, RoutedEventArgs e) => D.InstanceData.Newpass = (sender as PasswordBox).Password;
+		private void tbNewpass_PasswordChanged(object sender, RoutedEventArgs e) =>
+			D.InstanceData.Newpass = (sender as PasswordBox).Password;
 
 		/// <summary>
 		/// Validation

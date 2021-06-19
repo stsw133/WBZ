@@ -38,17 +38,17 @@ namespace WBZ.Modules.Stores
 				if (tab?.Name == "tabSources_Articles")
 				{
 					if (D.InstanceData.ID != 0 && D.InstanceSources_Articles == null)
-						D.InstanceSources_Articles = SQL.ListInstances<M_Article>(Config.Modules.ARTICLES, $"sa.store={D.InstanceData.ID}");
+						D.InstanceSources_Articles = SQL.ListInstances<M_Article>(Config.GetModule(nameof(Modules.Articles)), $"sa.store={D.InstanceData.ID}");
 				}
 				else if (tab?.Name == "tabSources_Documents")
 				{
 					if (D.InstanceData.ID != 0 && D.InstanceSources_Documents == null)
-						D.InstanceSources_Documents = SQL.ListInstances<M_Document>(Config.Modules.DOCUMENTS, $"d.store={D.InstanceData.ID}");
+						D.InstanceSources_Documents = SQL.ListInstances<M_Document>(Config.GetModule(nameof(Modules.Documents)), $"d.store={D.InstanceData.ID}");
 				}
 			});
 		}
-		private void dgList_Articles_MouseDoubleClick(object sender, MouseButtonEventArgs e) => dgSourceList_MouseDoubleClick<M_Article>(sender, e, Config.Modules.ARTICLES);
-		private void dgList_Documents_MouseDoubleClick(object sender, MouseButtonEventArgs e) => dgSourceList_MouseDoubleClick<M_Document>(sender, e, Config.Modules.DOCUMENTS);
+		private void dgList_Articles_MouseDoubleClick(object sender, MouseButtonEventArgs e) => dgSourceList_MouseDoubleClick<M_Article>(sender, e, Config.GetModule(nameof(Modules.Articles)));
+		private void dgList_Documents_MouseDoubleClick(object sender, MouseButtonEventArgs e) => dgSourceList_MouseDoubleClick<M_Document>(sender, e, Config.GetModule(nameof(Modules.Documents)));
 
 		/// <summary>
 		/// Validation

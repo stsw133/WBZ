@@ -44,49 +44,49 @@ namespace WBZ.Modules
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			///VEHICLES
-			if (!Global.User.Perms.Contains($"{Config.Modules.VEHICLES}_{Global.PermType.PREVIEW}"))
+			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Modules.Vehicles)).Name}_{Config.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modVehicles);
 			///USERS
-			if (!Global.User.Perms.Contains($"{Config.Modules.USERS}_{Global.PermType.PREVIEW}"))
+			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Modules.Users)).Name}_{Config.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modUsers);
 			///STORES
-			if (!Global.User.Perms.Contains($"{Config.Modules.STORES}_{Global.PermType.PREVIEW}"))
+			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Modules.Stores)).Name}_{Config.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modStores);
 			///STATS
-			if (!Global.User.Perms.Contains($"stats_{Global.PermType.PREVIEW}"))
+			//if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Modules.Stats)).Name}_{Config.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modStats);
 			///LOGS
-			if (!Global.User.Perms.Contains($"{Config.Modules.LOGS}_{Global.PermType.PREVIEW}"))
+			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Modules.Logs)).Name}_{Config.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modLogs);
 			///ICONS
-			if (!Global.User.Perms.Contains($"{Config.Modules.ICONS}_{Global.PermType.PREVIEW}"))
+			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Modules.Icons)).Name}_{Config.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modIcons);
 			///FAMILIES
-			if (!Global.User.Perms.Contains($"{Config.Modules.FAMILIES}_{Global.PermType.PREVIEW}"))
+			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Modules.Families)).Name}_{Config.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modFamilies);
 			///EMPLOYEES
-			if (!Global.User.Perms.Contains($"{Config.Modules.EMPLOYEES}_{Global.PermType.PREVIEW}"))
+			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Modules.Employees)).Name}_{Config.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modEmployees);
 			///DOCUMENTS
-			if (!Global.User.Perms.Contains($"{Config.Modules.DOCUMENTS}_{Global.PermType.PREVIEW}"))
+			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Modules.Documents)).Name}_{Config.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modDocuments);
 			///DISTRIBUTIONS
-			if (!Global.User.Perms.Contains($"{Config.Modules.DISTRIBUTIONS}_{Global.PermType.PREVIEW}"))
+			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Modules.Distributions)).Name}_{Config.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modDistributions);
 			///CONTRACTORS
-			if (!Global.User.Perms.Contains($"{Config.Modules.CONTRACTORS}_{Global.PermType.PREVIEW}"))
+			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Modules.Contractors)).Name}_{Config.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modContractors);
 			///ATTRIBUTES_CLASSES
-			if (!Global.User.Perms.Contains($"{Config.Modules.ATTRIBUTES_CLASSES}_{Global.PermType.PREVIEW}"))
+			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Modules.AttributesClasses)).Name}_{Config.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modAttributesClasses);
 			///ATTACHMENTS
-			if (!Global.User.Perms.Contains($"{Config.Modules.ATTACHMENTS}_{Global.PermType.PREVIEW}"))
+			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Modules.Attachments)).Name}_{Config.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modAttachments);
 			///ARTICLES
-			if (!Global.User.Perms.Contains($"{Config.Modules.ARTICLES}_{Global.PermType.PREVIEW}"))
+			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Modules.Articles)).Name}_{Config.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modArticles);
 			///ADMIN
-			if (!Global.User.Perms.Contains($"admin"))
+			if (!Config.User.Perms.Contains($"Admin"))
 				gridModules.Children.Remove(modAdmin);
 
 			var coll = gridModules.Children.Cast<Border>().OrderBy(x => (x.Child as IconButton).Text).ToList();
@@ -105,8 +105,8 @@ namespace WBZ.Modules
 		/// </summary>
 		internal void menuRefresh_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
-            Global.User = SQL.GetInstance<M_User>(Config.Modules.USERS, Global.User.ID);
-			Global.User.Perms = SQL.GetUserPerms(Global.User.ID);
+            Config.User = SQL.GetInstance<M_User>(Config.GetModule(nameof(Modules.Users)), Config.User.ID);
+			Config.User.Perms = SQL.GetUserPerms(Config.User.ID);
 
 			new Main().Show();
 
@@ -117,7 +117,7 @@ namespace WBZ.Modules
 		{
 			if (new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.QUESTION, "Na pewno wylogować?") { Owner = this }.ShowDialog() == true)
 			{
-				Global.User = new M_User();
+				Config.User = new M_User();
 
 				foreach (Window x in App.Current.Windows)
 				{
@@ -125,8 +125,7 @@ namespace WBZ.Modules
 						x.Close();
 				}
 
-				var window = new Login.Login();
-				window.Show();
+				new Login.Login().Show();
 
 				D.WantToLogout = true;
 				Close();

@@ -1,8 +1,8 @@
-﻿using System.Windows;
+﻿using StswExpress;
+using System.Windows;
 using System.Windows.Controls;
 using WBZ.Models;
 using WBZ.Globals;
-using StswExpress;
 
 namespace WBZ.Modules.Distributions
 {
@@ -18,8 +18,8 @@ namespace WBZ.Modules.Distributions
 			InitializeComponent();
 			DataContext = D;
 
-			D.FamilyInfo = SQL.GetInstance<M_Family>("family", family.Family);
-			D.FamilyContactsInfo = SQL.ListContacts("families", family.Family, @"""default""=true");
+			D.FamilyInfo = SQL.GetInstance<M_Family>(Config.GetModule(nameof(Modules.Families)), family.Family);
+			D.FamilyContactsInfo = SQL.ListContacts(Config.GetModule(nameof(Modules.Families)), family.Family, @"""default""=true");
 
 			if (family.Status == 0) rbStatus0.IsChecked = true;
 			if (family.Status == 1) rbStatus1.IsChecked = true;

@@ -94,7 +94,7 @@ namespace WBZ.Modules.Icons
                     D.InstanceData.Width = 0;
                     D.InstanceData.Size = 0;
                     D.NotifyPropertyChanged("InstanceData");
-                    SQL.Error("Błąd podczas pobierania obrazu", ex, Config.Modules.ICONS, D.InstanceData.ID, true, false);
+                    SQL.Error("Błąd podczas pobierania obrazu", ex, Config.GetModule(nameof(Modules.Icons)), D.InstanceData.ID, true, false);
                 }
             });
         }

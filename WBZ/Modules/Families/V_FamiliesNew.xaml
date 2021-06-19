@@ -5,9 +5,9 @@
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
        xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
        xmlns:b="clr-namespace:WBZ.Modules.Families"
-       xmlns:bdis="clr-namespace:WBZ.Modules.Distributions"
+       xmlns:m="clr-namespace:WBZ.Modules"
        xmlns:p="clr-namespace:WBZ.Properties"
-       xmlns:t="clr-namespace:WBZ.Modules._tabs"
+       xmlns:s="clr-namespace:WBZ.Modules._shared"
        mc:Ignorable="d" Height="600" Width="900" ResizeMode="CanResize"
        Title="{Binding Title}" Icon="/Resources/icon32_families.ico" 
        Loaded="Window_Loaded" Closed="Window_Closed"
@@ -116,7 +116,7 @@
                 <TabItem.Header>
                     <se:Header Text="Dodatkowe" Icon="/Resources/icon32_tools.ico"/>
                 </TabItem.Header>
-                <t:AdditionalsTab/>
+                <s:AdditionalsTab/>
             </TabItem>
             <!-- tabSources -->
             <TabItem>
@@ -129,7 +129,7 @@
                         <TabItem.Header>
                             <se:Header Text="Dystrybucje" Icon="/Resources/icon32_food.ico"/>
                         </TabItem.Header>
-                        <bdis:DistributionsListGrid x:Name="dgList_Distributions" ItemsSource="{Binding InstanceSources_Distributions}" IsReadOnly="True" MouseDoubleClick="dgList_Distributions_MouseDoubleClick"/>
+                        <m:DistributionsListGrid x:Name="dgList_Distributions" ItemsSource="{Binding InstanceSources_Distributions}" IsReadOnly="True" MouseDoubleClick="dgList_Distributions_MouseDoubleClick"/>
                     </TabItem>
                 </TabControl>
             </TabItem>
@@ -138,35 +138,35 @@
                 <TabItem.Header>
                     <se:Header Text="Kontakty" Icon="/Resources/icon32_contacts.ico"/>
                 </TabItem.Header>
-                <t:ContactsTab/>
+                <s:ContactsTab/>
             </TabItem>
             <!-- tabGroups -->
             <TabItem>
                 <TabItem.Header>
                     <se:Header Text="Grupy" Icon="/Resources/icon32_groups.ico"/>
                 </TabItem.Header>
-                <t:GroupsTab/>
+                <s:GroupsTab/>
             </TabItem>
             <!-- tabAttributes -->
             <TabItem>
                 <TabItem.Header>
                     <se:Header Text="Atrybuty" Icon="/Resources/icon32_attributes.ico"/>
                 </TabItem.Header>
-                <t:AttributesTab/>
+                <s:AttributesTab/>
             </TabItem>
             <!-- tabAttachments -->
             <TabItem>
                 <TabItem.Header>
                     <se:Header Text="Załączniki" Icon="/Resources/icon32_photos.ico"/>
                 </TabItem.Header>
-                <t:AttachmentsTab/>
+                <s:AttachmentsTab/>
             </TabItem>
             <!-- tabLogs -->
             <TabItem>
                 <TabItem.Header>
                     <se:Header Text="Historia" Icon="/Resources/icon32_history.ico"/>
                 </TabItem.Header>
-                <t:LogsTab/>
+                <s:LogsTab/>
             </TabItem>
         </TabControl>
     </DockPanel>

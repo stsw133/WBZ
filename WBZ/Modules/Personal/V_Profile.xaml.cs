@@ -31,7 +31,7 @@ namespace WBZ.Modules.Personal
                 }
                 else
                 {
-                    if (SQL.Login(Global.User.Username, Global.sha256(tbOldPassword.Password)))
+                    if (SQL.Login(Config.User.Username, Global.sha256(tbOldPassword.Password)))
                         D.User.Newpass = tbNewPassword.Password;
                     else
                     {
@@ -41,7 +41,7 @@ namespace WBZ.Modules.Personal
                 }
             }
 
-            if (SQL.SetInstance(Config.Modules.USERS, D.User, StswExpress.Commands.Type.EDIT))
+            if (SQL.SetInstance(Config.GetModule(nameof(Modules.Users)), D.User, StswExpress.Commands.Type.EDIT))
                 Close();
 		}
 	}

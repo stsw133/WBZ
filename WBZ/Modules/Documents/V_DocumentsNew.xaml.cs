@@ -30,7 +30,7 @@ namespace WBZ.Modules.Documents
 			if (mode == Commands.Type.EDIT && D.InstanceData.Status != (short)MODULE_MODEL.DocumentStatus.Buffer)
 				D.Mode = Commands.Type.PREVIEW;
 
-			D.InstanceData.Positions = SQL.GetInstancePositions(D.Module.Value.ToString(), D.InstanceData.ID);
+			D.InstanceData.Positions = SQL.GetInstancePositions(D.Module, D.InstanceData.ID);
 			if (D.Mode.In(Commands.Type.DUPLICATE))
 				foreach (DataRow row in D.InstanceData.Positions.Rows)
 					row.SetAdded();
@@ -106,7 +106,7 @@ namespace WBZ.Modules.Documents
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano nazwy (numeru) dokumentu!") { Owner = this }.ShowDialog();
 				return false;
 			}
-			if (D.InstanceData.cStore == null)
+			if (D.InstanceData.Store == 0)
 			{
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie wybrano magazynu!") { Owner = this }.ShowDialog();
 				return false;

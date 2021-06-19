@@ -12,7 +12,7 @@ namespace WBZ.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -1045,210 +1045,165 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>e.lastname</string>
-  <string>asc</string>
-  <string>e.forename</string>
-  <string>asc</string>
-  <string>50</string>
-</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection sorting_EmployeesList {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>emp.lastname asc</string>\r\n  <string>emp.forename asc</string>\r\n</ArrayOfS" +
+            "tring>")]
+        public global::System.Collections.Specialized.StringCollection sorting_Employees {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_EmployeesList"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_Employees"]));
             }
             set {
-                this["sorting_EmployeesList"] = value;
+                this["sorting_Employees"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>u.lastname</string>
-  <string>asc</string>
-  <string>u.forename</string>
-  <string>asc</string>
-  <string>50</string>
-</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection sorting_UsersList {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>use.lastname asc</string>\r\n  <string>use.forename asc</string>\r\n</ArrayOfS" +
+            "tring>")]
+        public global::System.Collections.Specialized.StringCollection sorting_Users {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_UsersList"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_Users"]));
             }
             set {
-                this["sorting_UsersList"] = value;
+                this["sorting_Users"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>a.codename</string>
-  <string>asc</string>
-  <string>a.name</string>
-  <string>asc</string>
-  <string>50</string>
-</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection sorting_ArticlesList {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>art.codename asc</string>\r\n  <string>art.name asc</string>\r\n</ArrayOfStrin" +
+            "g>")]
+        public global::System.Collections.Specialized.StringCollection sorting_Articles {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_ArticlesList"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_Articles"]));
             }
             set {
-                this["sorting_ArticlesList"] = value;
+                this["sorting_Articles"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>s.codename</string>
-  <string>asc</string>
-  <string>s.name</string>
-  <string>asc</string>
-  <string>50</string>
-</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection sorting_StoresList {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>sto.codename asc</string>\r\n  <string>sto.name asc</string>\r\n</ArrayOfStrin" +
+            "g>")]
+        public global::System.Collections.Specialized.StringCollection sorting_Stores {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_StoresList"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_Stores"]));
             }
             set {
-                this["sorting_StoresList"] = value;
+                this["sorting_Stores"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>f.lastname</string>
-  <string>asc</string>
-  <string>f.city</string>
-  <string>asc</string>
-  <string>50</string>
-</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection sorting_FamiliesList {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>fam.lastname asc</string>\r\n  <string>fam.city asc</string>\r\n</ArrayOfStrin" +
+            "g>")]
+        public global::System.Collections.Specialized.StringCollection sorting_Families {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_FamiliesList"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_Families"]));
             }
             set {
-                this["sorting_FamiliesList"] = value;
+                this["sorting_Families"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>d.dateissue</string>
-  <string>desc</string>
-  <string>d.name</string>
-  <string>asc</string>
-  <string>50</string>
-</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection sorting_DocumentsList {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>doc.dateissue asc</string>\r\n  <string>doc.name asc</string>\r\n</ArrayOfStri" +
+            "ng>")]
+        public global::System.Collections.Specialized.StringCollection sorting_Documents {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_DocumentsList"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_Documents"]));
             }
             set {
-                this["sorting_DocumentsList"] = value;
+                this["sorting_Documents"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>d.datereal</string>
-  <string>desc</string>
-  <string>d.name</string>
-  <string>asc</string>
-  <string>50</string>
-</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection sorting_DistributionsList {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>dis.datereal asc</string>\r\n  <string>dis.name asc</string>\r\n</ArrayOfStrin" +
+            "g>")]
+        public global::System.Collections.Specialized.StringCollection sorting_Distributions {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_DistributionsList"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_Distributions"]));
             }
             set {
-                this["sorting_DistributionsList"] = value;
+                this["sorting_Distributions"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>l.datetime</string>
-  <string>desc</string>
-  <string>l.id</string>
-  <string>desc</string>
-  <string>50</string>
-</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection sorting_LogsList {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>log.datetime desc</string>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection sorting_Logs {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_LogsList"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_Logs"]));
             }
             set {
-                this["sorting_LogsList"] = value;
+                this["sorting_Logs"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>ac.module</string>
-  <string>asc</string>
-  <string>ac.name</string>
-  <string>asc</string>
-  <string>50</string>
-</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection sorting_AttributesClassesList {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>atc.module asc</string>\r\n  <string>atc.name asc</string>\r\n</ArrayOfString>" +
+            "")]
+        public global::System.Collections.Specialized.StringCollection sorting_AttributesClasses {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_AttributesClassesList"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_AttributesClasses"]));
             }
             set {
-                this["sorting_AttributesClassesList"] = value;
+                this["sorting_AttributesClasses"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>g.module</string>
-  <string>asc</string>
-  <string>g.name</string>
-  <string>asc</string>
-  <string>50</string>
-</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection sorting_GroupsList {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>gro.module asc</string>\r\n  <string>gro.name asc</string>\r\n</ArrayOfString>" +
+            "")]
+        public global::System.Collections.Specialized.StringCollection sorting_Groups {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_GroupsList"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_Groups"]));
             }
             set {
-                this["sorting_GroupsList"] = value;
+                this["sorting_Groups"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>a.module</string>
-  <string>asc</string>
-  <string>a.name</string>
-  <string>asc</string>
-  <string>20</string>
-</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection sorting_AttachmentsGallery {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>att.module asc</string>\r\n  <string>att.name asc</string>\r\n</ArrayOfString>" +
+            "")]
+        public global::System.Collections.Specialized.StringCollection sorting_Gallery {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_AttachmentsGallery"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_Gallery"]));
             }
             set {
-                this["sorting_AttachmentsGallery"] = value;
+                this["sorting_Gallery"] = value;
             }
         }
         
@@ -1410,20 +1365,16 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>a.module</string>
-  <string>asc</string>
-  <string>a.name</string>
-  <string>asc</string>
-  <string>50</string>
-</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection sorting_AttachmentsList {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>att.module asc</string>\r\n  <string>att.name asc</string>\r\n</ArrayOfString>" +
+            "")]
+        public global::System.Collections.Specialized.StringCollection sorting_Attachments {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_AttachmentsList"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_Attachments"]));
             }
             set {
-                this["sorting_AttachmentsList"] = value;
+                this["sorting_Attachments"] = value;
             }
         }
         
@@ -1741,20 +1692,16 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>c.codename</string>
-  <string>asc</string>
-  <string>c.name</string>
-  <string>asc</string>
-  <string>50</string>
-</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection sorting_ContractorsList {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>cnt.codename asc</string>\r\n  <string>cnt.name asc</string>\r\n</ArrayOfStrin" +
+            "g>")]
+        public global::System.Collections.Specialized.StringCollection sorting_Contractors {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_ContractorsList"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_Contractors"]));
             }
             set {
-                this["sorting_ContractorsList"] = value;
+                this["sorting_Contractors"] = value;
             }
         }
         
@@ -1772,20 +1719,16 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>v.register</string>
-  <string>asc</string>
-  <string>v.brand</string>
-  <string>asc</string>
-  <string>50</string>
-</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection sorting_VehiclesList {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>veh.register asc</string>\r\n  <string>veh.brand asc</string>\r\n</ArrayOfStri" +
+            "ng>")]
+        public global::System.Collections.Specialized.StringCollection sorting_Vehicles {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_VehiclesList"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_Vehicles"]));
             }
             set {
-                this["sorting_VehiclesList"] = value;
+                this["sorting_Vehicles"] = value;
             }
         }
         
@@ -1971,20 +1914,16 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>i.module</string>
-  <string>asc</string>
-  <string>i.name</string>
-  <string>asc</string>
-  <string>50</string>
-</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection sorting_IconsList {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>ico.module asc</string>\r\n  <string>ico.name asc</string>\r\n</ArrayOfString>" +
+            "")]
+        public global::System.Collections.Specialized.StringCollection sorting_Icons {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_IconsList"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["sorting_Icons"]));
             }
             set {
-                this["sorting_IconsList"] = value;
+                this["sorting_Icons"] = value;
             }
         }
         
@@ -2093,6 +2032,186 @@ namespace WBZ.Properties {
             }
             set {
                 this["columns_IconsList_Size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int limit_Users {
+            get {
+                return ((int)(this["limit_Users"]));
+            }
+            set {
+                this["limit_Users"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int limit_Vehicles {
+            get {
+                return ((int)(this["limit_Vehicles"]));
+            }
+            set {
+                this["limit_Vehicles"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int limit_Stores {
+            get {
+                return ((int)(this["limit_Stores"]));
+            }
+            set {
+                this["limit_Stores"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int limit_Logs {
+            get {
+                return ((int)(this["limit_Logs"]));
+            }
+            set {
+                this["limit_Logs"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int limit_Icons {
+            get {
+                return ((int)(this["limit_Icons"]));
+            }
+            set {
+                this["limit_Icons"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int limit_Groups {
+            get {
+                return ((int)(this["limit_Groups"]));
+            }
+            set {
+                this["limit_Groups"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int limit_Gallery {
+            get {
+                return ((int)(this["limit_Gallery"]));
+            }
+            set {
+                this["limit_Gallery"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int limit_Families {
+            get {
+                return ((int)(this["limit_Families"]));
+            }
+            set {
+                this["limit_Families"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int limit_Employees {
+            get {
+                return ((int)(this["limit_Employees"]));
+            }
+            set {
+                this["limit_Employees"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int limit_Documents {
+            get {
+                return ((int)(this["limit_Documents"]));
+            }
+            set {
+                this["limit_Documents"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int limit_Distributions {
+            get {
+                return ((int)(this["limit_Distributions"]));
+            }
+            set {
+                this["limit_Distributions"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int limit_Contractors {
+            get {
+                return ((int)(this["limit_Contractors"]));
+            }
+            set {
+                this["limit_Contractors"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int limit_AttributesClasses {
+            get {
+                return ((int)(this["limit_AttributesClasses"]));
+            }
+            set {
+                this["limit_AttributesClasses"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int limit_Attachments {
+            get {
+                return ((int)(this["limit_Attachments"]));
+            }
+            set {
+                this["limit_Attachments"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int limit_Articles {
+            get {
+                return ((int)(this["limit_Articles"]));
+            }
+            set {
+                this["limit_Articles"] = value;
             }
         }
     }

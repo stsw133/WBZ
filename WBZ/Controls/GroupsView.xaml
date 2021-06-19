@@ -18,7 +18,8 @@
             <se:ExtMenuItem Header="{Tr Edit}" IconUri="/Resources/icon32_edit.ico" Click="btnGroupsEdit_Click"/>
             <se:ExtMenuItem Header="{Tr Delete}" IconUri="/Resources/icon32_delete.ico" Click="btnGroupsDelete_Click"/>
             <Separator/>
-            <MenuItem Header="{Tr ExpandGroups}" IsCheckable="True" IsChecked="{Binding config_ExpandGroups, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Click="btnGroupsExpandAll_Click"/>
+            <MenuItem Header="{Tr ExpandGroups}" IsCheckable="True" IsChecked="{Binding config_ExpandGroups, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+                      Click="btnGroupsExpandAll_Click"/>
             <se:ExtMenuItem Header="{Tr Refresh}" IconUri="/Resources/icon32_refresh.ico" Click="btnGroupsRefresh_Click"/>
         </ContextMenu>
     </TreeView.ContextMenu>

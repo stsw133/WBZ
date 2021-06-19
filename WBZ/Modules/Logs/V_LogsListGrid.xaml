@@ -1,4 +1,4 @@
-﻿<DataGrid x:Class="WBZ.Modules.Logs.LogsListGrid"
+﻿<DataGrid x:Class="WBZ.Modules.LogsListGrid"
           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -58,7 +58,7 @@
     <DataGrid.ContextMenu>
         <ContextMenu>
             <!-- Columns -->
-			<se:ExtMenuItem Header="{Tr ColumnVisibility}" IconUri="/Resources/icon32_show.ico">
+			<se:ExtMenuItem Header="{Tr ColumnsVisibility}" IconUri="/Resources/icon32_show.ico">
 				<MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_ID}"/>
 				<MenuItem IsCheckable="True" Header="Użytkownik" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_User}"/>
 				<MenuItem IsCheckable="True" Header="Nazwa modułu" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Module}"/>

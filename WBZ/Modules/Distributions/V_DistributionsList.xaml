@@ -7,6 +7,7 @@
         xmlns:b="clr-namespace:WBZ.Modules.Distributions"
         xmlns:c="clr-namespace:WBZ.Controls"
         xmlns:g="clr-namespace:WBZ.Globals"
+        xmlns:m="clr-namespace:WBZ.Modules"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d" Height="650" Width="975" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
         Title="{Binding Title}" Icon="/Resources/icon32_food.ico"
@@ -88,15 +89,15 @@
         <c:StatusPanel DockPanel.Dock="Bottom" Background="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}}"
                        HasFilters="{Binding AreFiltersVisible, Mode=OneTime}" HasGroups="{Binding AreGroupsVisible, Mode=OneTime}"/>
         <!-- groupsView -->
-        <c:GroupsView EditingMode="{Binding Perms, Source={x:Static g:Global.User}, Converter={se:conv_Contains}, ConverterParameter=distributions_groups}"
+        <c:GroupsView EditingMode="{Binding Perms, Source={x:Static g:Config.User}, Converter={se:conv_Contains}, ConverterParameter=distributions_groups}"
                       Visibility="{Binding AreGroupsVisible, Converter={se:conv_Bool}}"/>
         <!-- otherFilters -->
         <DockPanel DockPanel.Dock="Bottom" Visibility="{Binding AreFiltersVisible, Converter={se:conv_Bool}}">
             <CheckBox Margin="5,0,5,5" HorizontalAlignment="Right" VerticalContentAlignment="Center"
-                      Content="Pokaż archiwalne" IsChecked="{Binding Filters.Archival}"/>
+                      Content="Pokaż archiwalne" IsChecked="{Binding Filters.ShowArchival}"/>
         </DockPanel>
         <!-- dataGrid -->
-        <b:DistributionsListGrid x:Name="dgList" ItemsSource="{Binding InstancesList}" IsReadOnly="True"
+        <m:DistributionsListGrid x:Name="dgList" ItemsSource="{Binding InstancesList}" IsReadOnly="True"
                                  MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged"/>
     </DockPanel>
 </b:List>

@@ -1,44 +1,38 @@
-﻿using WBZ.Globals;
-
-namespace WBZ.Models
+﻿namespace WBZ.Models
 {
-	public class M_Icon : M
+	/// <summary>
+	/// Model for Icons
+	/// </summary>
+	public class M_Icon : M, IMM
 	{
-		/// <summary>
-		/// Module
-		/// </summary>
-		public string Module { get; set; } = string.Empty;
-		public string TranslatedModule => Config.GetModuleTranslation(Module);
-
-		/// <summary>
-		/// Name
-		/// </summary>
-		public string Name { get; set; } = string.Empty;
+		/// IMM
+		public MV Module { get; set; }
+		public int InstanceID { get; set; }
 
 		/// <summary>
 		/// Path
 		/// </summary>
-		public string Path { get; set; } = string.Empty;
+		public string Path { get; set; }
 
 		/// <summary>
 		/// Format
 		/// </summary>
-		public string Format { get; set; } = string.Empty;
+		public string Format { get; set; }
 
 		/// <summary>
 		/// Dimensions
 		/// </summary>
-		public int Height { get; set; } = 0;
-		public int Width { get; set; } = 0;
+		public int Height { get; set; }
+		public int Width { get; set; }
 
 		/// <summary>
 		/// Size
 		/// </summary>
-		public double Size { get; set; } = 0;
+		public double Size { get; set; }
 
 		/// <summary>
 		/// File
 		/// </summary>
-		public byte[] File { get; set; } = null;
-	}
+		public byte[] File { get; set; }
+    }
 }

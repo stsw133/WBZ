@@ -1,6 +1,7 @@
 ﻿using StswExpress;
 using StswExpress.Translate;
 using System.Windows;
+using WBZ.Globals;
 using WBZ.Modules._base;
 
 namespace WBZ.Modules
@@ -41,7 +42,7 @@ namespace WBZ.Modules
 		/// </summary>
 		private void btnEmailTest_Click(object sender, RoutedEventArgs e)
 		{
-			if (Mail.SendMail(Mail.Email, new string[] { Globals.Global.User.Email }, string.Empty, string.Empty))
+			if (Mail.SendMail(Mail.Email, new string[] { Config.User.Email }, string.Empty, string.Empty))
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.INFO, "Test poczty e-mail powiódł się.") { Owner = this }.ShowDialog();
 			else
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Test poczty e-mail nie powiódł się!") { Owner = this }.ShowDialog();

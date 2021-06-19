@@ -1,58 +1,38 @@
-﻿using WBZ.Globals;
-
-namespace WBZ.Models
+﻿namespace WBZ.Models
 {
-	public class M_Attachment
+	/// <summary>
+	/// Model for Attachments
+	/// </summary>
+	public class M_Attachment : M, IMM
 	{
-		/// <summary>
-		/// ID
-		/// </summary>
-		public int ID { get; set; } = 0;
+		/// IMM
+		public MV Module { get; set; }
+		public int InstanceID { get; set; }
 
 		/// <summary>
 		/// User
 		/// </summary>
-		public MV cUser { get; set; } = new MV();
-		public int User
-		{
-			get => (int)cUser.Value;
-			set => cUser = SQL.ListValues(Config.Modules.USERS, "lastname || ' ' || forename", $"id={value}", false)?[0];
-		}
-
-		/// <summary>
-		/// Module
-		/// </summary>
-		public string Module { get; set; } = string.Empty;
-		public string TranslatedModule => Config.GetModuleTranslation(Module);
-
-		/// <summary>
-		/// Instance
-		/// </summary>
-		public int Instance { get; set; } = 0;
-
-		/// <summary>
-		/// Name
-		/// </summary>
-		public string Name { get; set; } = string.Empty;
+		public int User { get; set; }
+		public string UserName { get; set; }
 
 		/// <summary>
 		/// Path
 		/// </summary>
-		public string Path { get; set; } = string.Empty;
+		public string Path { get; set; }
 
 		/// <summary>
 		/// Format
 		/// </summary>
-		public string Format { get; set; } = string.Empty;
+		public string Format { get; set; }
 
 		/// <summary>
 		/// Size
 		/// </summary>
-		public double Size { get; set; } = 0;
+		public double Size { get; set; }
 
 		/// <summary>
-		/// File
+		/// Content
 		/// </summary>
-		public byte[] File { get; set; } = null;
-	}
+		public byte[] Content { get; set; }
+    }
 }

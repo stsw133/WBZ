@@ -1,6 +1,6 @@
 ﻿using StswExpress;
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Windows;
 using WBZ.Models;
 using WBZ.Modules._base;
@@ -20,7 +20,7 @@ namespace WBZ.Controls
 			DataContext = D;
 
 			D.AttributeInfo = attribute;
-			D.AttributeValues = SQL.ListValues("attributes_values", "value", $"class={attribute.Class.ID} and archival=false", true);
+			D.AttributeValues = SQL.ComboSource(new MV() { Tag = "atv" }, "value", $"class={attribute.Class.ID} and archival=false", true);
 			D.EditMode = editMode;
 		}
 
@@ -76,8 +76,8 @@ namespace WBZ.Controls
 		}
 
 		/// Attribute values
-		private ObservableCollection<MV> attributeValues;
-		public ObservableCollection<MV> AttributeValues
+		private List<MV> attributeValues;
+		public List<MV> AttributeValues
 		{
 			get => attributeValues;
 			set => SetField(ref attributeValues, value, () => AttributeValues);

@@ -1,7 +1,7 @@
 ﻿using StswExpress;
 using System.Windows.Controls;
 
-namespace WBZ.Modules.Employees
+namespace WBZ.Modules
 {
     /// <summary>
     /// Interaction logic for EmployeesListGrid.xaml

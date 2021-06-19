@@ -39,7 +39,7 @@ namespace WBZ.Modules.Families
         }
         private void btnRodo_Click(object sender, RoutedEventArgs e)
         {
-            Prints.Print_RODO(D.InstanceData, SQL.ListContacts(D.Module.Value.ToString(), D.InstanceData.ID, "default = true").ToList<M_Contact>()?[0]);
+            Prints.Print_RODO(D.InstanceData, SQL.ListContacts(D.Module, D.InstanceData.ID, "default = true").ToList<M_Contact>()?[0]);
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace WBZ.Modules.Families
             if (tab?.Name == "tabSources_Distributions")
             {
 				if (D.InstanceData.ID != 0 && D.InstanceSources_Distributions == null)
-                    D.InstanceSources_Distributions = SQL.ListInstances<M_Distribution>(Config.Modules.DISTRIBUTIONS, $"dp.family={D.InstanceData.ID}");
+                    D.InstanceSources_Distributions = SQL.ListInstances<M_Distribution>(Config.GetModule(nameof(Modules.Distributions)), $"dp.family={D.InstanceData.ID}");
             }
         }
 
@@ -60,7 +60,7 @@ namespace WBZ.Modules.Families
 		/// </summary>
         private void dgList_Distributions_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            dgSourceList_MouseDoubleClick<M_Distribution>(sender, e, Config.Modules.DISTRIBUTIONS);
+            dgSourceList_MouseDoubleClick<M_Distribution>(sender, e, Config.GetModule(nameof(Modules.Distributions)));
         }
 
         /// <summary>

@@ -28,7 +28,7 @@ namespace WBZ.Modules.Articles
 				D.InstanceData = instance;
 			D.Mode = mode;
 
-			D.InstanceData.Measures = SQL.GetInstancePositions(D.Module.Value.ToString(), D.InstanceData.ID);
+			D.InstanceData.Measures = SQL.GetInstancePositions(D.Module, D.InstanceData.ID);
 			if (D.Mode == Commands.Type.DUPLICATE)
 				foreach (DataRow row in D.InstanceData.Measures.Rows)
 					row.SetAdded();
@@ -64,22 +64,22 @@ namespace WBZ.Modules.Articles
 			if (tab?.Name?.EndsWith("_Stores") == true)
 			{
 				if (D.InstanceData.ID != 0 && D.InstanceSources_Stores == null)
-                    D.InstanceSources_Stores = SQL.ListInstances<M_Store>(Config.Modules.STORES, $"sa.article={D.InstanceData.ID}");
+                    D.InstanceSources_Stores = SQL.ListInstances<M_Store>(Config.GetModule(nameof(Modules.Stores)), $"sa.article={D.InstanceData.ID}");
 			}
 			else if (tab?.Name?.EndsWith("_Documents") == true)
 			{
 				if (D.InstanceData.ID != 0 && D.InstanceSources_Documents == null)
-                    D.InstanceSources_Documents = SQL.ListInstances<M_Document>(Config.Modules.DOCUMENTS, $"dp.article={D.InstanceData.ID}");
+                    D.InstanceSources_Documents = SQL.ListInstances<M_Document>(Config.GetModule(nameof(Modules.Documents)), $"dp.article={D.InstanceData.ID}");
 			}
 			else if (tab?.Name?.EndsWith("_Distributions") == true)
 			{
 				if (D.InstanceData.ID != 0 && D.InstanceSources_Distributions == null)
-                    D.InstanceSources_Distributions = SQL.ListInstances<M_Distribution>(Config.Modules.DISTRIBUTIONS, $"dp.article={D.InstanceData.ID}");
+                    D.InstanceSources_Distributions = SQL.ListInstances<M_Distribution>(Config.GetModule(nameof(Modules.Distributions)), $"dp.article={D.InstanceData.ID}");
 			}
 		}
-		private void dgList_Stores_MouseDoubleClick(object sender, MouseButtonEventArgs e) => dgSourceList_MouseDoubleClick<M_Store>(sender, e, Config.Modules.STORES);
-		private void dgList_Documents_MouseDoubleClick(object sender, MouseButtonEventArgs e) => dgSourceList_MouseDoubleClick<M_Document>(sender, e, Config.Modules.DOCUMENTS);
-		private void dgList_Distributions_MouseDoubleClick(object sender, MouseButtonEventArgs e) => dgSourceList_MouseDoubleClick<M_Distribution>(sender, e, Config.Modules.DISTRIBUTIONS);
+		private void dgList_Stores_MouseDoubleClick(object sender, MouseButtonEventArgs e) => dgSourceList_MouseDoubleClick<M_Store>(sender, e, Config.GetModule(nameof(Modules.Stores)));
+		private void dgList_Documents_MouseDoubleClick(object sender, MouseButtonEventArgs e) => dgSourceList_MouseDoubleClick<M_Document>(sender, e, Config.GetModule(nameof(Modules.Documents)));
+		private void dgList_Distributions_MouseDoubleClick(object sender, MouseButtonEventArgs e) => dgSourceList_MouseDoubleClick<M_Distribution>(sender, e, Config.GetModule(nameof(Modules.Distributions)));
 
 		/// <summary>
 		/// Validation

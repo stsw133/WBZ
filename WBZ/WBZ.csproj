@@ -331,7 +331,7 @@
     <Page Update="Modules\Icons\V_IconsNew.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
-    <Page Update="Modules\Login\V_LoginChangePassword.xaml">
+    <Page Update="Login\V_LoginChangePassword.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
     <Page Update="Modules\Vehicles\V_VehiclesList.xaml">

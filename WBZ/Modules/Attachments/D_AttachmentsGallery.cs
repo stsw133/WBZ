@@ -9,7 +9,7 @@ namespace WBZ.Modules.Attachments
 		/// Sorting
         public StringCollection Sorting
 		{
-			get => Properties.Settings.Default.sorting_AttachmentsGallery;
+			get => Properties.Settings.Default.sorting_Gallery;
 			set => throw new System.NotImplementedException();
 		}
     }

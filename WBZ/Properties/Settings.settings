@@ -257,114 +257,80 @@
     <Setting Name="columns_EmployeesList_Address" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="sorting_EmployeesList" Type="System.Collections.Specialized.StringCollection" Scope="User">
+    <Setting Name="sorting_Employees" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;e.lastname&lt;/string&gt;
-  &lt;string&gt;asc&lt;/string&gt;
-  &lt;string&gt;e.forename&lt;/string&gt;
-  &lt;string&gt;asc&lt;/string&gt;
-  &lt;string&gt;50&lt;/string&gt;
+  &lt;string&gt;emp.lastname asc&lt;/string&gt;
+  &lt;string&gt;emp.forename asc&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
-    <Setting Name="sorting_UsersList" Type="System.Collections.Specialized.StringCollection" Scope="User">
+    <Setting Name="sorting_Users" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;u.lastname&lt;/string&gt;
-  &lt;string&gt;asc&lt;/string&gt;
-  &lt;string&gt;u.forename&lt;/string&gt;
-  &lt;string&gt;asc&lt;/string&gt;
-  &lt;string&gt;50&lt;/string&gt;
+  &lt;string&gt;use.lastname asc&lt;/string&gt;
+  &lt;string&gt;use.forename asc&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
-    <Setting Name="sorting_ArticlesList" Type="System.Collections.Specialized.StringCollection" Scope="User">
+    <Setting Name="sorting_Articles" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;a.codename&lt;/string&gt;
-  &lt;string&gt;asc&lt;/string&gt;
-  &lt;string&gt;a.name&lt;/string&gt;
-  &lt;string&gt;asc&lt;/string&gt;
-  &lt;string&gt;50&lt;/string&gt;
+  &lt;string&gt;art.codename asc&lt;/string&gt;
+  &lt;string&gt;art.name asc&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
-    <Setting Name="sorting_StoresList" Type="System.Collections.Specialized.StringCollection" Scope="User">
+    <Setting Name="sorting_Stores" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;s.codename&lt;/string&gt;
-  &lt;string&gt;asc&lt;/string&gt;
-  &lt;string&gt;s.name&lt;/string&gt;
-  &lt;string&gt;asc&lt;/string&gt;
-  &lt;string&gt;50&lt;/string&gt;
+  &lt;string&gt;sto.codename asc&lt;/string&gt;
+  &lt;string&gt;sto.name asc&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
-    <Setting Name="sorting_FamiliesList" Type="System.Collections.Specialized.StringCollection" Scope="User">
+    <Setting Name="sorting_Families" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;f.lastname&lt;/string&gt;
-  &lt;string&gt;asc&lt;/string&gt;
-  &lt;string&gt;f.city&lt;/string&gt;
-  &lt;string&gt;asc&lt;/string&gt;
-  &lt;string&gt;50&lt;/string&gt;
+  &lt;string&gt;fam.lastname asc&lt;/string&gt;
+  &lt;string&gt;fam.city asc&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
-    <Setting Name="sorting_DocumentsList" Type="System.Collections.Specialized.StringCollection" Scope="User">
+    <Setting Name="sorting_Documents" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;d.dateissue&lt;/string&gt;
-  &lt;string&gt;desc&lt;/string&gt;
-  &lt;string&gt;d.name&lt;/string&gt;
-  &lt;string&gt;asc&lt;/string&gt;
-  &lt;string&gt;50&lt;/string&gt;
+  &lt;string&gt;doc.dateissue asc&lt;/string&gt;
+  &lt;string&gt;doc.name asc&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
-    <Setting Name="sorting_DistributionsList" Type="System.Collections.Specialized.StringCollection" Scope="User">
+    <Setting Name="sorting_Distributions" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;d.datereal&lt;/string&gt;
-  &lt;string&gt;desc&lt;/string&gt;
-  &lt;string&gt;d.name&lt;/string&gt;
-  &lt;string&gt;asc&lt;/string&gt;
-  &lt;string&gt;50&lt;/string&gt;
+  &lt;string&gt;dis.datereal asc&lt;/string&gt;
+  &lt;string&gt;dis.name asc&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
-    <Setting Name="sorting_LogsList" Type="System.Collections.Specialized.StringCollection" Scope="User">
+    <Setting Name="sorting_Logs" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;l.datetime&lt;/string&gt;
-  &lt;string&gt;desc&lt;/string&gt;
-  &lt;string&gt;l.id&lt;/string&gt;
-  &lt;string&gt;desc&lt;/string&gt;
-  &lt;string&gt;50&lt;/string&gt;
+  &lt;string&gt;log.datetime desc&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
-    <Setting Name="sorting_AttributesClassesList" Type="System.Collections.Specialized.StringCollection" Scope="User">
+    <Setting Name="sorting_AttributesClasses" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;ac.module&lt;/string&gt;
-  &lt;string&gt;asc&lt;/string&gt;
-  &lt;string&gt;ac.name&lt;/string&gt;
-  &lt;string&gt;asc&lt;/string&gt;
-  &lt;string&gt;50&lt;/string&gt;
+  &lt;string&gt;atc.module asc&lt;/string&gt;
+  &lt;string&gt;atc.name asc&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
-    <Setting Name="sorting_GroupsList" Type="System.Collections.Specialized.StringCollection" Scope="User">
+    <Setting Name="sorting_Groups" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;g.module&lt;/string&gt;
-  &lt;string&gt;asc&lt;/string&gt;
-  &lt;string&gt;g.name&lt;/string&gt;
-  &lt;string&gt;asc&lt;/string&gt;
-  &lt;string&gt;50&lt;/string&gt;
+  &lt;string&gt;gro.module asc&lt;/string&gt;
+  &lt;string&gt;gro.name asc&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
-    <Setting Name="sorting_AttachmentsGallery" Type="System.Collections.Specialized.StringCollection" Scope="User">
+    <Setting Name="sorting_Gallery" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;a.module&lt;/string&gt;
-  &lt;string&gt;asc&lt;/string&gt;
-  &lt;string&gt;a.name&lt;/string&gt;
-  &lt;string&gt;asc&lt;/string&gt;
-  &lt;string&gt;20&lt;/string&gt;
+  &lt;string&gt;att.module asc&lt;/string&gt;
+  &lt;string&gt;att.name asc&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="columns_EmployeesList_Icon" Type="System.Boolean" Scope="User">
@@ -406,14 +372,11 @@
     <Setting Name="columns_AttributesClassesList_Required" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="sorting_AttachmentsList" Type="System.Collections.Specialized.StringCollection" Scope="User">
+    <Setting Name="sorting_Attachments" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;a.module&lt;/string&gt;
-  &lt;string&gt;asc&lt;/string&gt;
-  &lt;string&gt;a.name&lt;/string&gt;
-  &lt;string&gt;asc&lt;/string&gt;
-  &lt;string&gt;50&lt;/string&gt;
+  &lt;string&gt;att.module asc&lt;/string&gt;
+  &lt;string&gt;att.name asc&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="columns_AttachmentsList_ID" Type="System.Boolean" Scope="User">
@@ -494,27 +457,21 @@
     <Setting Name="columns_ContractorsList_Address" Type="System.String" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="sorting_ContractorsList" Type="System.Collections.Specialized.StringCollection" Scope="User">
+    <Setting Name="sorting_Contractors" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;c.codename&lt;/string&gt;
-  &lt;string&gt;asc&lt;/string&gt;
-  &lt;string&gt;c.name&lt;/string&gt;
-  &lt;string&gt;asc&lt;/string&gt;
-  &lt;string&gt;50&lt;/string&gt;
+  &lt;string&gt;cnt.codename asc&lt;/string&gt;
+  &lt;string&gt;cnt.name asc&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="columns_ContractorsList_Icon" Type="System.String" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="sorting_VehiclesList" Type="System.Collections.Specialized.StringCollection" Scope="User">
+    <Setting Name="sorting_Vehicles" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;v.register&lt;/string&gt;
-  &lt;string&gt;asc&lt;/string&gt;
-  &lt;string&gt;v.brand&lt;/string&gt;
-  &lt;string&gt;asc&lt;/string&gt;
-  &lt;string&gt;50&lt;/string&gt;
+  &lt;string&gt;veh.register asc&lt;/string&gt;
+  &lt;string&gt;veh.brand asc&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="config_Vehicles_PanelColor" Type="System.String" Scope="User">
@@ -562,14 +519,11 @@
     <Setting Name="config_Icons_PanelColor" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FFEEEE55</Value>
     </Setting>
-    <Setting Name="sorting_IconsList" Type="System.Collections.Specialized.StringCollection" Scope="User">
+    <Setting Name="sorting_Icons" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;i.module&lt;/string&gt;
-  &lt;string&gt;asc&lt;/string&gt;
-  &lt;string&gt;i.name&lt;/string&gt;
-  &lt;string&gt;asc&lt;/string&gt;
-  &lt;string&gt;50&lt;/string&gt;
+  &lt;string&gt;ico.module asc&lt;/string&gt;
+  &lt;string&gt;ico.name asc&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="columns_IconsList_ID" Type="System.Boolean" Scope="User">
@@ -598,6 +552,51 @@
     </Setting>
     <Setting Name="columns_IconsList_Size" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="limit_Users" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="limit_Vehicles" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="limit_Stores" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="limit_Logs" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="limit_Icons" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="limit_Groups" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="limit_Gallery" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="limit_Families" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="limit_Employees" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="limit_Documents" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="limit_Distributions" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="limit_Contractors" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="limit_AttributesClasses" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="limit_Attachments" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="limit_Articles" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">50</Value>
     </Setting>
   </Settings>
 </SettingsFile>

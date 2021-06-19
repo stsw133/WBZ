@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="WBZ.Modules._shared.ContactsTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
+             xmlns:g="clr-namespace:WBZ.Globals"
+             mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="750"
+             Loaded="UserControl_Loaded">
+    <DataGrid ItemsSource="{Binding InstanceContacts}" IsReadOnly="{Binding EditingMode, Converter={se:conv_Bool}, ConverterParameter=!}"
+              Margin="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1" AutoGenerateColumns="False">
+        <DataGrid.Resources>
+            <g:BindingProxy x:Key="proxy" Data="{Binding}"/>
+        </DataGrid.Resources>
+        <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding id}" Header="ID" IsReadOnly="True" Visibility="Collapsed"/>
+            <DataGridTextColumn Binding="{Binding forename}" Header="Imię" Width="1*"/>
+            <DataGridTextColumn Binding="{Binding lastname}" Header="Nazwisko" Width="1*"/>
+            <DataGridTextColumn Binding="{Binding email}" Header="E-mail" Width="3*"/>
+            <DataGridTextColumn Binding="{Binding phone}" Header="Nr telefonu" Width="1*"/>
+            <DataGridCheckBoxColumn Binding="{Binding default}" Header="Domyślny"/>
+            <DataGridCheckBoxColumn Binding="{Binding archival}" Header="Archiwalny"/>
+        </DataGrid.Columns>
+        <DataGrid.RowStyle>
+            <Style TargetType="DataGridRow">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Row.RowState}" Value="Added">
+                        <Setter Property="Background" Value="LightGreen"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Row.RowState}" Value="Modified">
+                        <Setter Property="Background" Value="LightYellow"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Row.RowState}" Value="Deleted">
+                        <Setter Property="Background" Value="LightPink"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </DataGrid.RowStyle>
+    </DataGrid>
+</UserControl>

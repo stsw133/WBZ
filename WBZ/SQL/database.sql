@@ -28,7 +28,6 @@ CREATE TABLE wbz.config
     property character varying(50) PRIMARY KEY,
     value character varying(100)
 );
-CREATE VIEW cfg AS SELECT * FROM wbz.config;
 
 -- Table: wbz.users
 CREATE TABLE wbz.users
@@ -43,7 +42,6 @@ CREATE TABLE wbz.users
     blocked boolean NOT NULL DEFAULT false,
     archival boolean NOT NULL DEFAULT false
 );
-CREATE VIEW use AS SELECT * FROM wbz.users;
 
 -- Table: wbz.users_permissions
 CREATE TABLE wbz.users_permissions
@@ -56,7 +54,6 @@ CREATE TABLE wbz.users_permissions
         ON DELETE CASCADE
         NOT VALID
 );
-CREATE VIEW usp AS SELECT * FROM wbz.users_permissions;
 
 -- Table: wbz.logs
 CREATE TABLE wbz.logs
@@ -73,7 +70,6 @@ CREATE TABLE wbz.logs
         ON UPDATE CASCADE
         ON DELETE NO ACTION
 );
-CREATE VIEW log AS SELECT * FROM wbz.logs;
 
 -- Table: wbz.attachments
 CREATE TABLE wbz.attachments
@@ -93,7 +89,6 @@ CREATE TABLE wbz.attachments
         ON UPDATE CASCADE
         ON DELETE NO ACTION
 );
-CREATE VIEW att AS SELECT * FROM wbz.attachments;
 
 -- Table: wbz.icons
 CREATE TABLE wbz.icons
@@ -110,7 +105,6 @@ CREATE TABLE wbz.icons
     archival boolean NOT NULL DEFAULT false,
     comment text
 );
-CREATE VIEW ico AS SELECT * FROM wbz.icons;
 
 -- Table: wbz.groups
 CREATE TABLE wbz.groups
@@ -128,7 +122,6 @@ CREATE TABLE wbz.groups
         ON UPDATE CASCADE
         ON DELETE NO ACTION
 );
-CREATE VIEW gro AS SELECT * FROM wbz.groups;
 
 -- Table: wbz.attributes_classes
 CREATE TABLE wbz.attributes_classes
@@ -148,7 +141,6 @@ CREATE TABLE wbz.attributes_classes
         ON UPDATE CASCADE
         ON DELETE NO ACTION
 );
-CREATE VIEW atc AS SELECT * FROM wbz.attributes_classes;
 
 -- Table: wbz.attributes
 CREATE TABLE wbz.attributes
@@ -163,7 +155,6 @@ CREATE TABLE wbz.attributes
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
-CREATE VIEW atr AS SELECT * FROM wbz.attributes;
 
 -- Table: wbz.attributes
 CREATE TABLE wbz.attributes_values
@@ -177,7 +168,6 @@ CREATE TABLE wbz.attributes_values
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
-CREATE VIEW atv AS SELECT * FROM wbz.attributes_values;
 
 -- Table: wbz.contacts
 CREATE TABLE wbz.contacts
@@ -192,7 +182,6 @@ CREATE TABLE wbz.contacts
     "default" boolean NOT NULL DEFAULT false,
     archival boolean NOT NULL DEFAULT false
 );
-CREATE VIEW con AS SELECT * FROM wbz.contacts;
 
 -- Table: wbz.notifications
 CREATE TABLE wbz.notifications
@@ -208,7 +197,6 @@ CREATE TABLE wbz.notifications
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
-CREATE VIEW ntf AS SELECT * FROM wbz.notifications;
 
 -- Table: wbz.articles
 CREATE TABLE wbz.articles
@@ -226,7 +214,6 @@ CREATE TABLE wbz.articles
         ON UPDATE CASCADE
         ON DELETE NO ACTION
 );
-CREATE VIEW art AS SELECT * FROM wbz.articles;
 
 -- Table: wbz.articles_measures
 CREATE TABLE wbz.articles_measures
@@ -241,7 +228,6 @@ CREATE TABLE wbz.articles_measures
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
-CREATE VIEW arm AS SELECT * FROM wbz.articles_measures;
 
 -- Table: wbz.stores
 CREATE TABLE wbz.stores
@@ -260,7 +246,6 @@ CREATE TABLE wbz.stores
         ON UPDATE CASCADE
         ON DELETE NO ACTION
 );
-CREATE VIEW sto AS SELECT * FROM wbz.stores;
 
 -- Table: wbz.stores_articles
 CREATE TABLE wbz.stores_articles
@@ -279,7 +264,6 @@ CREATE TABLE wbz.stores_articles
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
-CREATE VIEW sta AS SELECT * FROM wbz.stores_articles;
 
 -- Table: wbz.contractors
 CREATE TABLE wbz.contractors
@@ -301,7 +285,6 @@ CREATE TABLE wbz.contractors
         ON UPDATE CASCADE
         ON DELETE NO ACTION
 );
-CREATE VIEW cnt AS SELECT * FROM wbz.contractors;
 
 -- Table: wbz.families
 CREATE TABLE wbz.families
@@ -325,7 +308,6 @@ CREATE TABLE wbz.families
         ON UPDATE CASCADE
         ON DELETE NO ACTION
 );
-CREATE VIEW fam AS SELECT * FROM wbz.families;
 
 -- Table: wbz.documents
 CREATE TABLE wbz.documents
@@ -353,7 +335,6 @@ CREATE TABLE wbz.documents
         ON UPDATE CASCADE
         ON DELETE NO ACTION
 );
-CREATE VIEW doc AS SELECT * FROM wbz.documents;
 
 -- Table: wbz.documents_positions
 CREATE TABLE wbz.documents_positions
@@ -374,7 +355,6 @@ CREATE TABLE wbz.documents_positions
         ON UPDATE CASCADE
         ON DELETE NO ACTION
 );
-CREATE VIEW dop AS SELECT * FROM wbz.documents_positions;
 
 -- Table: wbz.distributions
 CREATE TABLE wbz.distributions
@@ -391,7 +371,6 @@ CREATE TABLE wbz.distributions
         ON UPDATE CASCADE
         ON DELETE NO ACTION
 );
-CREATE VIEW dis AS SELECT * FROM wbz.distributions;
 
 -- Table: wbz.distributions_positions
 CREATE TABLE wbz.distributions_positions
@@ -422,7 +401,6 @@ CREATE TABLE wbz.distributions_positions
         ON UPDATE CASCADE
         ON DELETE NO ACTION
 );
-CREATE VIEW dip AS SELECT * FROM wbz.distributions_positions;
 
 -- Table: wbz.employees
 CREATE TABLE wbz.employees
@@ -445,7 +423,6 @@ CREATE TABLE wbz.employees
         ON UPDATE CASCADE
         ON DELETE NO ACTION
 );
-CREATE VIEW emp AS SELECT * FROM wbz.employees;
 
 -- Table: wbz.vehicles
 CREATE TABLE wbz.vehicles
@@ -474,7 +451,6 @@ CREATE TABLE wbz.vehicles
         ON UPDATE CASCADE
         ON DELETE NO ACTION
 );
-CREATE VIEW veh AS SELECT * FROM wbz.vehicles;
 
 -- FUNCTION: wbz.artdefmeaval(integer, double precision)
 CREATE OR REPLACE FUNCTION wbz.artdefmeaval(

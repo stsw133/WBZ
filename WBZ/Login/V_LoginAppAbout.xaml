@@ -1,0 +1,45 @@
+﻿<Window x:Class="WBZ.Login.LoginAppAbout"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
+        mc:Ignorable="d" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize"  WindowStartupLocation="CenterOwner"
+        Title="{Tr AboutApp}" Icon="/Resources/icon64.ico">
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
+    </WindowChrome.WindowChrome>
+    <DockPanel>
+        <!-- titleBar -->
+        <se:TitleBar DockPanel.Dock="Top"/>
+        <!-- main -->
+        <DockPanel Margin="0,0,0,5">
+            <DockPanel DockPanel.Dock="Top" Margin="5,5,5,0">
+                <Image Margin="10" Stretch="None" Source="/Resources/icon64.ico"/>
+                <StackPanel VerticalAlignment="Center">
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label Content="WBZ"
+                               FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.5}"
+                               FontWeight="Heavy"/>
+                        <Label Content="{Binding Version}"
+                               FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.5}"
+                               FontWeight="Heavy"/>
+                    </StackPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="{Binding AboutApp}" Padding="5" TextAlignment="Center" TextWrapping="Wrap"
+                               Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=25}"/>
+                </StackPanel>
+            </DockPanel>
+            <Border DockPanel.Dock="Top" Margin="5" BorderBrush="Gray" BorderThickness="2"/>
+            <DockPanel DockPanel.Dock="Top">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock DockPanel.Dock="Top" Text="{Binding AboutCreators}" Padding="5" TextAlignment="Center" TextWrapping="Wrap"
+                               Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=25}"/>
+                    <StackPanel DockPanel.Dock="Top">
+                        <Label Content="Karol Staszewski" Padding="5,5,5,0" HorizontalAlignment="Center" FontWeight="Medium"/>
+                        <Label Content="stsw.karolstaszewski@gmail.com" Padding="5,0,5,5" HorizontalAlignment="Center" Foreground="#239"/>
+                    </StackPanel>
+                </StackPanel>
+            </DockPanel>
+        </DockPanel>
+    </DockPanel>
+</Window>
