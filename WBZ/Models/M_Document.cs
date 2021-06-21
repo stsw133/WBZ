@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Data;
-using WBZ.Globals;
 
 namespace WBZ.Models
 {
+	/// <summary>
+	/// Model for Documents
+	/// </summary>
 	public class M_Document : M
 	{
 		public enum DocumentStatus
@@ -19,30 +21,20 @@ namespace WBZ.Models
 		public string Type { get; set; } = "FS";
 
 		/// <summary>
-		/// Name
-		/// </summary>
-		public string Name { get; set; } = string.Empty;
-
-		/// <summary>
 		/// Store
 		/// </summary>
-		public MV cStore { get; set; } = new MV();
-		public int Store
-		{
-			get => (int)cStore.Value;
-			set => cStore = SQL.ListValues(Config.Modules.STORES, "codename", $"id={value}", false)?[0];
-		}
+		public int Store { get; set; }
+		public string StoreName { get; set; }
 
 		/// <summary>
 		/// Contractor
 		/// </summary>
-		public int Contractor { get; set; } = 0;
-		public string ContractorName { get; set; } = string.Empty;
+		public int Contractor { get; set; }
+		public string ContractorName { get; set; }
 
 		/// <summary>
 		/// DateIssue
 		/// </summary>
-		public DateTime fDateIssue { get; set; } = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
 		public DateTime DateIssue { get; set; } = DateTime.Now;
 
 		/// <summary>
@@ -58,49 +50,57 @@ namespace WBZ.Models
 		/// <summary>
 		/// PositionsCount
 		/// </summary>
-		public int PositionsCount { get; set; } = 0;
+		public int PositionsCount { get; set; }
 
 		/// <summary>
 		/// Weight
 		/// </summary>
-		public decimal Weight { get; set; } = 0;
+		public decimal Weight { get; set; }
 
 		/// <summary>
-		/// Cost
+		/// Net
 		/// </summary>
-		public decimal Cost { get; set; } = 0;
+		public decimal Net { get; set; }
+
+		/// <summary>
+		/// Tax
+		/// </summary>
+		public decimal Tax { get; set; }
 	}
 
+	/// <summary>
+	/// Model for DocumentsPositions
+	/// </summary>
 	public class M_DocumentPosition
 	{
 		/// <summary>
 		/// ID
 		/// </summary>
-		public int ID { get; set; } = 0;
+		public int ID { get; set; }
 		
 		/// <summary>
 		/// Position
 		/// </summary>
-		public short Position { get; set; } = 0;
+		public short Position { get; set; }
 
 		/// <summary>
 		/// Article
 		/// </summary>
-		public int Article { get; set; } = 0;
+		public int Article { get; set; }
 
 		/// <summary>
 		/// Amount
 		/// </summary>
-		public decimal Amount { get; set; } = 0;
+		public decimal Amount { get; set; }
 
 		/// <summary>
-		/// Cost
+		/// Net
 		/// </summary>
-		public decimal Cost { get; set; } = 0;
+		public decimal Net { get; set; }
 
 		/// <summary>
 		/// Tax
 		/// </summary>
-		public decimal Tax { get; set; } = 0;
+		public decimal Tax { get; set; }
 	}
 }

@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using WBZ.Globals;
-using WBZ.Modules.Login;
+using WBZ.Login;
 
 namespace WBZ
 {
@@ -54,7 +54,7 @@ namespace WBZ
 			if (DB.LoadAllDatabases().Count == 0)
 				new LoginDatabases().Show();
 			else
-				new Login().Show();
+				new Login.Login().Show();
 		}
 	}
 }

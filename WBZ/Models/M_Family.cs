@@ -2,39 +2,44 @@
 
 namespace WBZ.Models
 {
-	public class M_Family : MA
+	/// <summary>
+	/// Model for Families
+	/// </summary>
+	public class M_Family : M, IMA
 	{
+		/// IMA
+		public string Address { get; set; }
+		public string City { get; set; }
+		public string Country { get; set; }
+		public string Postcode { get; set; }
+
 		/// <summary>
 		/// Declarant
 		/// </summary>
-		public string Declarant { get; set; } = string.Empty;
+		public string Declarant { get; set; }
 
 		/// <summary>
 		/// Lastname
 		/// </summary>
-		public string Lastname { get; set; } = string.Empty;
+		public string Lastname { get; set; }
 
 		/// <summary>
 		/// Members
 		/// </summary>
-		public short Members { get; set; } = 0;
+		public short? Members { get; set; }
 
 		/// <summary>
 		/// Status
 		/// </summary>
-		public bool Status { get; set; } = false;
+		public bool Status { get; set; }
 
-		/// <summary>
 		/// C_*
-		/// </summary>
-		public bool C_SMS { get; set; } = false;
-		public bool C_Call { get; set; } = false;
-		public bool C_Email { get; set; } = false;
+		public bool C_SMS { get; set; }
+		public bool C_Call { get; set; }
+		public bool C_Email { get; set; }
 
-		/// <summary>
 		/// Donation
-		/// </summary>
-		public DateTime? DonationLast { get; set; } = null;
-		public decimal DonationWeight { get; set; } = 0;
-	}
+		public DateTime? DonationLast { get; set; }
+		public decimal DonationWeight { get; set; }
+    }
 }

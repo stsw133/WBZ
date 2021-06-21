@@ -1,8 +1,6 @@
 ﻿using StswExpress;
 using StswExpress.Translate;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using WBZ.Globals;
 using WBZ.Models;
 
@@ -31,62 +29,31 @@ namespace WBZ.Modules._base
 		public int SelectedTab
         {
 			get => selectedTab;
-			set
-			{
-				SetField(ref selectedTab, value, () => SelectedTab);
-				InstancesList = instancesLists[value];
-			}
+			set => SetField(ref selectedTab, value, () => SelectedTab);
 		}
 
 		/// Instances lists
-		private ObservableCollection<ObservableCollection<MODULE_MODEL>> instancesLists;
-		public ObservableCollection<ObservableCollection<MODULE_MODEL>> InstancesLists
+		private List<List<MODULE_MODEL>> instancesLists = new List<List<MODULE_MODEL>>();
+		public List<List<MODULE_MODEL>> InstancesLists
 		{
 			get => instancesLists;
 			set => SetField(ref instancesLists, value, () => InstancesLists);
 		}
 
-		/// Instances list
-		private ObservableCollection<MODULE_MODEL> instancesList = new ObservableCollection<MODULE_MODEL>();
-		public ObservableCollection<MODULE_MODEL> InstancesList
-		{
-			get => instancesList;
-			set => SetField(ref instancesList, value, () => InstancesList);
-		}
-
-		/// Sorting
-		public StringCollection Sorting
-		{
-			get => (StringCollection)Properties.Settings.Default[$"sorting_{GetType().Name[2..^4]}List"];
-			set => Properties.Settings.Default[$"sorting_{GetType().Name[2..^4]}List"] = value;
-		}
-
-		/// SQL filter
-		public string FilterSqlString { get; set; }
-		public List<(string name, object val)> FilterSqlParams { get; set; }
-
-		/// Filters instance
-		private MODULE_MODEL filters = new MODULE_MODEL();
-		public MODULE_MODEL Filters
-		{
-			get => filters;
-			set => SetField(ref filters, value, () => Filters);
-		}
-
-		/// Filters list
-		private ObservableCollection<string> filtersList = new ObservableCollection<string>();
-		public ObservableCollection<string> FiltersList
+		/// FiltersList
+		private List<M_Filter> filtersList = new List<M_Filter>();
+		public List<M_Filter> FiltersList
 		{
 			get => filtersList;
 			set => SetField(ref filtersList, value, () => FiltersList);
 		}
 
-		/// Selected filter
-		private string selectedFilter;
-		public string SelectedFilter
+		/// Filter
+		private M_Filter filter = new M_Filter();
+		public M_Filter Filter
 		{
-			get => selectedFilter;
-			set => SetField(ref selectedFilter, value, () => SelectedFilter);
+			get => filter;
+			set => SetField(ref filter, value, () => Filter);
 		}
 
 		/// Are filters visible
@@ -103,6 +70,14 @@ namespace WBZ.Modules._base
 		{
 			get => areGroupsVisible;
 			set => SetField(ref areGroupsVisible, value, () => AreGroupsVisible);
+		}
+
+		/// Count items
+		private int countItems;
+		public int CountItems
+		{
+			get => countItems;
+			set => SetField(ref countItems, value, () => CountItems);
 		}
 
 		/// Total items

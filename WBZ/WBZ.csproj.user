@@ -33,22 +33,22 @@
     <Page Update="Controls\StatusPanel.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Modules\_tabs\AdditionalsTab.xaml">
+    <Page Update="Modules\_shared\AdditionalsTab.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Modules\_tabs\AttachmentsTab.xaml">
+    <Page Update="Modules\_shared\AttachmentsTab.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Modules\_tabs\AttributesTab.xaml">
+    <Page Update="Modules\_shared\AttributesTab.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Modules\_tabs\ContactsTab.xaml">
+    <Page Update="Modules\_shared\ContactsTab.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Modules\_tabs\GroupsTab.xaml">
+    <Page Update="Modules\_shared\GroupsTab.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Modules\_tabs\LogsTab.xaml">
+    <Page Update="Modules\_shared\LogsTab.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Modules\Admin\ConsoleSQL.xaml">
@@ -129,10 +129,10 @@
     <Page Update="Modules\Families\V_FamiliesNew.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Modules\_submodules\V_GroupsList.xaml">
+    <Page Update="Modules\_submodules\Groups\V_GroupsList.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Modules\_submodules\V_GroupsNew.xaml">
+    <Page Update="Modules\_submodules\Groups\V_GroupsNew.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Modules\Icons\V_IconsList.xaml">
@@ -144,22 +144,22 @@
     <Page Update="Modules\Icons\V_IconsNew.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Modules\Login\V_Login.xaml">
+    <Page Update="Login\V_Login.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Modules\Login\V_LoginAppAbout.xaml">
+    <Page Update="Login\V_LoginAppAbout.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Modules\Login\V_LoginChangePassword.xaml">
+    <Page Update="Login\V_LoginChangePassword.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Modules\Login\V_LoginDatabases.xaml">
+    <Page Update="Login\V_LoginDatabases.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Modules\Login\V_LoginRegister.xaml">
+    <Page Update="Login\V_LoginRegister.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Modules\Login\V_Versions.xaml">
+    <Page Update="Login\V_Versions.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Modules\Personal\V_Profile.xaml">

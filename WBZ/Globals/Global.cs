@@ -1,31 +1,11 @@
 ﻿using System.Security.Cryptography;
 ﻿using System.Text;
 using System.Windows;
-using WBZ.Models;
 
 namespace WBZ.Globals
 {
-    public static class Global
+    public static class Global  //TODO - docelowo klasa do usunięcia
     {
-        /// Newest version to download
-        public static string VersionNewest { get; set; } = null;
-
-        /// Logged user
-        public static M_User User { get; set; } = new M_User();
-		
-		/// <summary>
-		/// UserPermType
-		/// </summary>
-		public static class PermType
-        {
-            public const string PREVIEW = "preview";
-            public const string SAVE = "save";
-            public const string DELETE = "delete";
-            public const string GROUPS = "groups";
-            public const string FILTERS = "filters";
-			public const string STATS = "stats";  // do dodania w wersji 1.3.0
-		}
-
 		#region Crypto
 		internal static string sha256(string pass)
         {

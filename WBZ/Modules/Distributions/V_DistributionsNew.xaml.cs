@@ -126,8 +126,8 @@ namespace WBZ.Modules.Distributions
 							counter += f.Positions.Rows.Count;
 
 						row["position"] = counter + 1;
-						row["store"] = (window2.DataContext as D_ArticlesList).Filters.MainStore.ID;
-						row["storename"] = (window2.DataContext as D_ArticlesList).Filters.MainStore.Name;
+						row["store"] = window2.cbStoresList.SelectedValue;
+						row["storename"] = window2.cbStoresList.Text;
 						row["article"] = window2.Selected.ID;
 						row["articlename"] = window2.Selected.Name;
 						row["amount"] = DBNull.Value;

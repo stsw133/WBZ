@@ -1,13 +1,18 @@
 ﻿using StswExpress;
 using StswExpress.Translate;
 using System.Collections.Generic;
-using System.Linq;
 using WBZ.Models;
 
 namespace WBZ.Globals
 {
 	public static class Config
 	{
+		/// Newest version to download
+		public static string VersionNewest { get; set; } = null;
+
+		/// Logged user
+		public static M_User User { get; set; } = new M_User();
+
 		/// Config
 		public static string Version => SQL.GetPropertyValue("VERSION", Fn.AppVersion());
 		public static string Attachment_Size_Max => SQL.GetPropertyValue("ATTACHMENT_SIZE_MAX", (1024*1024*10).ToString());
@@ -18,39 +23,7 @@ namespace WBZ.Globals
 		public static string Icon_Dimensions_Max => SQL.GetPropertyValue("ICON_DIMENSIONS_MAX", 32.ToString());
 		public static string Icon_Size_Max => SQL.GetPropertyValue("ICON_SIZE_MAX", (1024 * 10).ToString());
 		public static string Logs_Enabled => SQL.GetPropertyValue("LOGS_ENABLED", 0.ToString());
-
-        /// <summary>
-        /// Modules
-        /// </summary>
-        public static class Modules
-        {
-            public const string ARTICLES = "articles";
-            public const string ATTRIBUTES_CLASSES = "attributes_classes";
-            public const string CONTRACTORS = "contractors";
-            public const string DISTRIBUTIONS = "distributions";
-            public const string DOCUMENTS = "documents";
-            public const string EMPLOYEES = "employees";
-            public const string FAMILIES = "families";
-			public const string GALLERY = "gallery";  // do dodania w wersji 1.3.0
-			public const string ICONS = "icons";
-            public const string ORDERS = "orders";  // do dodania w wersji 1.3.0
-            public const string SHIPMENTS = "shipments";  // do dodania w wersji 1.3.0
-            public const string STORES = "stores";
-            public const string USERS = "users";
-            public const string VEHICLES = "vehicles";
-
-			public const string ATTACHMENTS = "attachments";
-			public const string ATTRIBUTES = "attributes";
-			public const string COMMUNITY = "community";  // do dodania w wersji 1.3.0
-			public const string CONTACTS = "contacts";
-			public const string FILTERS = "filters";
-			public const string GROUPS = "groups";
-			public const string LOGS = "logs";
-			public const string TRANSLATIONS = "translations";  // do dodania w wersji 1.4.0
-		}
-		public static string GetModuleAlias(string module) => string.Join(string.Empty, module.Split('_').Where(x => !string.IsNullOrEmpty(x)).Select(y => y[0]));
-        public static string GetModuleTranslation(string module) => TM.Tr(string.Join("", module.Split('_').Select(x => x.Substring(0, 1).ToUpper() + x[1..]).ToArray()));
-
+		
         /// <summary>
         /// List of modules
         /// </summary>
@@ -59,107 +32,114 @@ namespace WBZ.Globals
             new MV()
 			{
 				Name = string.Empty,
-				Tag = string.Empty,
+				Alias = string.Empty,
 				Value = string.Empty,
 				Display = string.Empty
 			},
             new MV()
 			{
-				Name = nameof(WBZ.Modules.Articles),
-				Tag = "art",
-				Value = Modules.ARTICLES,
-				Display = GetModuleTranslation(Modules.ARTICLES)
+				Name = nameof(Modules.Articles),
+				Alias = "art",
+				Value = Fn.AddCharBeforeUpperLetters(nameof(Modules.Articles), '_').ToLower(),
+				Display = TM.Tr(nameof(Modules.Articles))
 			},
             new MV()
 			{
-				Name = nameof(WBZ.Modules.AttributesClasses),
-				Tag = "atc",
-				Value = Modules.ATTRIBUTES_CLASSES,
-				Display = GetModuleTranslation(Modules.ATTRIBUTES_CLASSES)
-			},
-            new MV()
-			{
-				Name = nameof(WBZ.Modules.Contractors),
-				Tag = "cnt",
-				Value = Modules.CONTRACTORS,
-				Display = GetModuleTranslation(Modules.CONTRACTORS)
-			},
-            new MV()
-			{
-				Name = nameof(WBZ.Modules.Distributions),
-				Tag = "dis",
-				Value = Modules.DISTRIBUTIONS,
-				Display = GetModuleTranslation(Modules.DISTRIBUTIONS)
-			},
-            new MV()
-			{
-				Name = nameof(WBZ.Modules.Documents),
-				Tag = "doc",
-				Value = Modules.DOCUMENTS,
-				Display = GetModuleTranslation(Modules.DOCUMENTS)
-			},
-            new MV()
-			{
-				Name = nameof(WBZ.Modules.Employees),
-				Tag = "emp",
-				Value = Modules.EMPLOYEES,
-				Display = GetModuleTranslation(Modules.EMPLOYEES)
-			},
-            new MV()
-			{
-				Name = nameof(WBZ.Modules.Families),
-				Tag = "fam",
-				Value = Modules.FAMILIES,
-				Display = GetModuleTranslation(Modules.FAMILIES)
+				Name = nameof(Modules.AttributesClasses),
+				Alias = "atc",
+				Value = Fn.AddCharBeforeUpperLetters(nameof(Modules.AttributesClasses), '_').ToLower(),
+				Display = TM.Tr(nameof(Modules.AttributesClasses))
 			},/*
             new MV()
 			{
-				Module = nameof(WBZ.Modules.Gallery),
-				Tag = "gal",
-				Value = Modules.GALLERY,
-				Display = GetModuleTranslation(Modules.GALLERY)
+				Name = nameof(Modules.Complaints),
+				Alias = "cpl",
+				Value = Fn.AddCharBeforeUpperLetters(nameof(Modules.Complaints), '_').ToLower(),
+				Display = GetModuleTranslation(nameof(Modules.Complaints))
 			},*/
             new MV()
 			{
-				Name = nameof(WBZ.Modules.Icons),
-				Tag = "ico",
-				Value = Modules.ICONS,
-				Display = GetModuleTranslation(Modules.ICONS)
+				Name = nameof(Modules.Contractors),
+				Alias = "cnt",
+				Value = Fn.AddCharBeforeUpperLetters(nameof(Modules.Contractors), '_').ToLower(),
+				Display = TM.Tr(nameof(Modules.Contractors))
+			},
+            new MV()
+			{
+				Name = nameof(Modules.Distributions),
+				Alias = "dis",
+				Value = Fn.AddCharBeforeUpperLetters(nameof(Modules.Distributions), '_').ToLower(),
+				Display = TM.Tr(nameof(Modules.Distributions))
+			},
+            new MV()
+			{
+				Name = nameof(Modules.Documents),
+				Alias = "doc",
+				Value = Fn.AddCharBeforeUpperLetters(nameof(Modules.Documents), '_').ToLower(),
+				Display = TM.Tr(nameof(Modules.Documents))
+			},
+            new MV()
+			{
+				Name = nameof(Modules.Employees),
+				Alias = "emp",
+				Value = Fn.AddCharBeforeUpperLetters(nameof(Modules.Employees), '_').ToLower(),
+				Display = TM.Tr(nameof(Modules.Employees))
+			},
+            new MV()
+			{
+				Name = nameof(Modules.Families),
+				Alias = "fam",
+				Value = Fn.AddCharBeforeUpperLetters(nameof(Modules.Families), '_').ToLower(),
+				Display = TM.Tr(nameof(Modules.Families))
 			},/*
             new MV()
 			{
-				Module = nameof(WBZ.Modules.Orders),
-				Tag = "ord",
-				Value = Modules.ORDERS,
-				Display = GetModuleTranslation(Modules.ORDERS)
+				Module = nameof(Modules.Gallery),
+				Alias = "gal",
+				Value = Fn.AddCharBeforeUpperLetters(nameof(Modules.Gallery), '_').ToLower(),
+				Display = GetModuleTranslation(nameof(Modules.Gallery))
+			},*/
+            new MV()
+			{
+				Name = nameof(Modules.Icons),
+				Alias = "ico",
+				Value = Fn.AddCharBeforeUpperLetters(nameof(Modules.Icons), '_').ToLower(),
+				Display = TM.Tr(nameof(Modules.Icons))
+			},/*
+            new MV()
+			{
+				Module = nameof(Modules.Orders),
+				Alias = "ord",
+				Value = Fn.AddCharBeforeUpperLetters(nameof(Modules.Orders), '_').ToLower(),
+				Display = GetModuleTranslation(nameof(Modules.Orders))
 			},*/ /*
             new MV()
 			{
-				Module = nameof(WBZ.Modules.Shipments),
-				Tag = "shi",
-				Value = Modules.SHIPMENTS,
-				Display = GetModuleTranslation(Modules.SHIPMENTS)
+				Module = nameof(Modules.Shipments),
+				Alias = "shi",
+				Value = Fn.AddCharBeforeUpperLetters(nameof(Modules.Shipments), '_').ToLower(),
+				Display = GetModuleTranslation(nameof(Modules.Shipments))
 			},*/
             new MV()
 			{
-				Name = nameof(WBZ.Modules.Stores),
-				Tag = "sto",
-				Value = Modules.STORES,
-				Display = GetModuleTranslation(Modules.STORES)
+				Name = nameof(Modules.Stores),
+				Alias = "sto",
+				Value = Fn.AddCharBeforeUpperLetters(nameof(Modules.Stores), '_').ToLower(),
+				Display = TM.Tr(nameof(Modules.Stores))
 			},
             new MV()
 			{
-				Name = nameof(WBZ.Modules.Users),
-				Tag = "use",
-				Value = Modules.USERS,
-				Display = GetModuleTranslation(Modules.USERS)
+				Name = nameof(Modules.Users),
+				Alias = "use",
+				Value = Fn.AddCharBeforeUpperLetters(nameof(Modules.Users), '_').ToLower(),
+				Display = TM.Tr(nameof(Modules.Users))
 			},
             new MV()
 			{
-				Name = nameof(WBZ.Modules.Vehicles),
-				Tag = "veh",
-				Value = Modules.VEHICLES,
-				Display = GetModuleTranslation(Modules.VEHICLES)
+				Name = nameof(Modules.Vehicles),
+				Alias = "veh",
+				Value = Fn.AddCharBeforeUpperLetters(nameof(Modules.Vehicles), '_').ToLower(),
+				Display = TM.Tr(nameof(Modules.Vehicles))
 			}
         };
 		/// <summary>
@@ -170,59 +150,68 @@ namespace WBZ.Globals
             new MV()
 			{
 				Name = "Attachments",
-				Tag = "att",
-				Value = Modules.ATTACHMENTS,
-				Display = GetModuleTranslation(Modules.ATTACHMENTS)
+				Alias = "att",
+				Value = Fn.AddCharBeforeUpperLetters("Attachments", '_').ToLower(),
+				Display = TM.Tr("Attachments")
 			},
             new MV()
 			{
 				Name = "Attributes",
-				Tag = "atr",
-				Value = Modules.ATTRIBUTES,
-				Display = GetModuleTranslation(Modules.ATTRIBUTES)
+				Alias = "atr",
+				Value = Fn.AddCharBeforeUpperLetters("Attributes", '_').ToLower(),
+				Display = TM.Tr("Attributes")
 			},
 			new MV()
 			{
 				Name = "Community",
-				Tag = "com",
-				Value = Modules.COMMUNITY,
-				Display = GetModuleTranslation(Modules.COMMUNITY)
+				Alias = "com",
+				Value = Fn.AddCharBeforeUpperLetters("Community", '_').ToLower(),
+				Display = TM.Tr("Community")
 			},
 			new MV()
 			{
 				Name = "Contacts",
-				Tag = "con",
-				Value = Modules.CONTACTS,
-				Display = GetModuleTranslation(Modules.CONTACTS)
+				Alias = "con",
+				Value = Fn.AddCharBeforeUpperLetters("Contacts", '_').ToLower(),
+				Display = TM.Tr("Contacts")
 			},
             new MV()
 			{
 				Name = "Filters",
-				Tag = "fil",
-				Value = Modules.FILTERS,
-				Display = GetModuleTranslation(Modules.FILTERS)
+				Alias = "fil",
+				Value = Fn.AddCharBeforeUpperLetters("Filters", '_').ToLower(),
+				Display = TM.Tr("Filters")
 			},
             new MV()
 			{
 				Name = "Groups",
-				Tag = "gro",
-				Value = Modules.GROUPS,
-				Display = GetModuleTranslation(Modules.GROUPS)
+				Alias = "gro",
+				Value = Fn.AddCharBeforeUpperLetters("Groups", '_').ToLower(),
+				Display = TM.Tr("Groups")
 			},
             new MV()
 			{
 				Name = "Logs",
-				Tag = "log",
-				Value = Modules.LOGS,
-				Display = GetModuleTranslation(Modules.LOGS)
+				Alias = "log",
+				Value = Fn.AddCharBeforeUpperLetters("Logs", '_').ToLower(),
+				Display = TM.Tr("Logs")
 			},
             new MV()
 			{
 				Name = "Translations",
-				Tag = "trs",
-				Value = Modules.TRANSLATIONS,
-				Display = GetModuleTranslation(Modules.TRANSLATIONS)
+				Alias = "tns",
+				Value = Fn.AddCharBeforeUpperLetters("Translations", '_').ToLower(),
+				Display = TM.Tr("Translations")
 			}
         };
-    }
+		public static MV GetModule(string moduleName) => ListModules.Find(x => x.Name == moduleName) ?? ListSubModules.Find(x => x.Name == moduleName);
+
+		/// <summary>
+		/// UserPermType
+		/// </summary>
+		public enum PermType
+		{
+			PREVIEW, SAVE, DELETE, GROUPS, FILTERS, STATS  //TODO - STATS do dodania w wersji 1.3.0
+		}
+	}
 }

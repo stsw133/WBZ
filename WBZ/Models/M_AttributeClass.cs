@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-using WBZ.Globals;
 
 namespace WBZ.Models
 {
+	/// <summary>
+	/// Static model for AttributesClasses sources
+	/// </summary>
 	public static class MS_AttributesClasses
 	{
 		public static List<MV> Types { get; } = new List<MV>()
@@ -16,41 +18,45 @@ namespace WBZ.Models
 		};
 	}
 
-	public class M_AttributeClass : M
+	/// <summary>
+	/// Model for AttributesClasses
+	/// </summary>
+	public class M_AttributeClass : M, IMM
 	{
-		/// <summary>
-		/// Module
-		/// </summary>
-		public string Module { get; set; } = string.Empty;
-		public string TranslatedModule => Config.GetModuleTranslation(Module);
+		/// IMM
+		public MV Module { get; set; }
+		public int InstanceID { get; set; }
 
 		/// <summary>
 		/// Type
 		/// </summary>
-		public string Type { get; set; } = string.Empty;
+		public string Type { get; set; } = MS_AttributesClasses.Types[0].Value.ToString();
 
 		/// <summary>
 		/// DefValue
 		/// </summary>
-		public string DefValue { get; set; } = string.Empty;
+		public string DefValue { get; set; }
 
 		/// <summary>
 		/// Required
 		/// </summary>
-		public bool Required { get; set; } = false;
+		public bool Required { get; set; }
 
 		/// <summary>
 		/// Values
 		/// </summary>
 		public DataTable Values { get; set; } = new DataTable();
-	}
+    }
 
+	/// <summary>
+	/// Model for Attributes
+	/// </summary>
 	public class M_Attribute
 	{
 		/// <summary>
 		/// ID
 		/// </summary>
-		public long ID { get; set; } = 0;
+		public long ID { get; set; }
 
 		/// <summary>
 		/// Class
@@ -58,18 +64,18 @@ namespace WBZ.Models
 		public M_AttributeClass Class { get; set; } = new M_AttributeClass();
 
 		/// <summary>
-		/// Instance
+		/// InstanceID
 		/// </summary>
-		public int Instance { get; set; } = 0;
+		public int InstanceID { get; set; }
 
 		/// <summary>
 		/// Value
 		/// </summary>
-		public string Value { get; set; } = string.Empty;
+		public string Value { get; set; }
 
 		/// <summary>
 		/// Archival
 		/// </summary>
-		public bool Archival { get; set; } = false;
+		public bool Archival { get; set; }
 	}
 }

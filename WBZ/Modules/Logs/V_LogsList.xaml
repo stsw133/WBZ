@@ -6,6 +6,7 @@
         xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
         xmlns:b="clr-namespace:WBZ.Modules.Logs"
         xmlns:c="clr-namespace:WBZ.Controls"
+        xmlns:m="clr-namespace:WBZ.Modules"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d" Height="650" Width="975" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
         Title="{Binding Title}" Icon="/Resources/icon32_logs.ico"
@@ -68,7 +69,7 @@
                 <TabItem.Header>
                     <se:Header Text="{Tr Logs}" Icon="/Resources/icon32_shield_blue.ico"/>
                 </TabItem.Header>
-				<b:LogsListGrid x:Name="dgList_Logs" ItemsSource="{Binding InstancesList, Mode=OneWay}" BorderBrush="Gray" BorderThickness="0,0,0,1"
+				<m:LogsListGrid x:Name="dgList_Logs" ItemsSource="{Binding InstancesList, Mode=OneWay}" BorderBrush="Gray" BorderThickness="0,0,0,1"
                                 MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged" Sorting="dgList_Sorting"/>
             </TabItem>
             <!-- errors -->
@@ -76,7 +77,7 @@
                 <TabItem.Header>
                     <se:Header Text="{Tr Errors}" Icon="/Resources/icon32_shield_red.ico"/>
                 </TabItem.Header>
-				<b:LogsListGrid x:Name="dgList_Errors" ItemsSource="{Binding InstancesList, Mode=OneWay}" BorderBrush="Gray" BorderThickness="0,0,0,1"
+				<m:LogsListGrid x:Name="dgList_Errors" ItemsSource="{Binding InstancesList, Mode=OneWay}" BorderBrush="Gray" BorderThickness="0,0,0,1"
                                 MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged" Sorting="dgList_Sorting"/>
             </TabItem>
         </TabControl>

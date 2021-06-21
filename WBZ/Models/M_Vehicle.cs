@@ -1,5 +1,8 @@
 ﻿namespace WBZ.Models
 {
+	/// <summary>
+	/// Model for Vehicles
+	/// </summary>
 	public class M_Vehicle : M
 	{
 		/// <summary>
@@ -10,56 +13,38 @@
 		/// <summary>
 		/// Register
 		/// </summary>
-		public string Register { get; set; } = string.Empty;
+		public string Register { get; set; }
 
 		/// <summary>
 		/// Brand
 		/// </summary>
-		public string Brand { get; set; } = string.Empty;
+		public string Brand { get; set; }
 
 		/// <summary>
 		/// Model
 		/// </summary>
-		public string Model { get; set; } = string.Empty;
+		public string Model { get; set; }
 
 		/// <summary>
 		/// Capacity
 		/// </summary>
-		public decimal? Capacity { get; set; } = null;
+		public decimal? Capacity { get; set; }
 
 		/// <summary>
 		/// Forwarder
 		/// </summary>
-		private readonly MV Forwarder = new MV();
-		public int ForwarderID
-		{
-			get => (int)(Forwarder.Value ?? 0);
-			set => Forwarder.Value = value;
-		}
-		public string ForwarderName
-		{
-			get => (string)Forwarder.Display;
-			set => Forwarder.Display = value;
-		}
+		public int Forwarder { get; set; }
+		public string ForwarderName { get; set; }
 
 		/// <summary>
 		/// Driver
 		/// </summary>
-		private readonly MV Driver = new MV();
-		public int DriverID
-		{
-			get => (int)(Driver.Value ?? 0);
-			set => Driver.Value = value;
-		}
-		public string DriverName
-		{
-			get => (string)Driver.Display;
-			set => Driver.Display = value;
-		}
+		public int Driver { get; set; }
+		public string DriverName { get; set; }
 
 		/// <summary>
 		/// ProdYear
 		/// </summary>
-		public int? ProdYear { get; set; } = null;
+		public int? ProdYear { get; set; }
 	}
 }

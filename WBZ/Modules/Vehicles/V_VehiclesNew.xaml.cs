@@ -33,7 +33,7 @@ namespace WBZ.Modules.Vehicles
 			var window = new ContractorsList(Commands.Type.SELECT);
 			if (window.ShowDialog() == true && window.Selected != null)
 			{
-				D.InstanceData.ForwarderID = window.Selected.ID;
+				D.InstanceData.Forwarder = window.Selected.ID;
 				D.InstanceData.ForwarderName = window.Selected.Name;
 				D.InstanceData = D.InstanceData;
 			}
@@ -43,7 +43,7 @@ namespace WBZ.Modules.Vehicles
 			var window = new EmployeesList(Commands.Type.SELECT);
 			if (window.ShowDialog() == true && window.Selected != null)
 			{
-				D.InstanceData.DriverID = window.Selected.ID;
+				D.InstanceData.Driver = window.Selected.ID;
 				D.InstanceData.DriverName = window.Selected.Name;
 				D.InstanceData = D.InstanceData;
 			}

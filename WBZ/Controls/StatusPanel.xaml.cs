@@ -16,33 +16,33 @@ namespace WBZ.Controls
         /// <summary>
         /// HasFilters
         /// </summary>
-        public bool HasFilters
-        {
-            get => (bool)GetValue(pHasFilters);
-            set => SetValue(pHasFilters, value);
-        }
-        public static readonly DependencyProperty pHasFilters
+        public static readonly DependencyProperty HasFiltersProperty
             = DependencyProperty.Register(
                   nameof(HasFilters),
                   typeof(bool),
                   typeof(StatusPanel),
                   new PropertyMetadata(false)
               );
+        public bool HasFilters
+        {
+            get => (bool)GetValue(HasFiltersProperty);
+            set => SetValue(HasFiltersProperty, value);
+        }
 
         /// <summary>
         /// HasGroups
         /// </summary>
-        public bool HasGroups
-        {
-            get => (bool)GetValue(pHasGroups);
-            set => SetValue(pHasGroups, value);
-        }
-        public static readonly DependencyProperty pHasGroups
+        public static readonly DependencyProperty HasGroupsProperty
             = DependencyProperty.Register(
                   nameof(HasGroups),
                   typeof(bool),
                   typeof(StatusPanel),
                   new PropertyMetadata(false)
               );
+        public bool HasGroups
+        {
+            get => (bool)GetValue(HasGroupsProperty);
+            set => SetValue(HasGroupsProperty, value);
+        }
     }
 }

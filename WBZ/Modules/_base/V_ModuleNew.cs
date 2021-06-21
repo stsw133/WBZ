@@ -1,9 +1,10 @@
-﻿using System;
+﻿using StswExpress;
+using System;
 using System.Data;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using StswExpress;
+using WBZ.Globals;
 using WBZ.Models;
 
 namespace WBZ.Modules._base
@@ -31,8 +32,7 @@ namespace WBZ.Modules._base
 		{
 			int newID = (D.InstanceData as M).ID;
 			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE))
-				newID = SQL.NewInstanceID(D.Module.Value.ToString());
-			
+				newID = SQL.NewInstanceID(D.Module);
 			/*
 			if ((Commands.Type)D.Mode == Commands.Type.DUPLICATE)
             {
@@ -77,7 +77,7 @@ namespace WBZ.Modules._base
 			if (!CheckDataValidation())
 				return;
 
-			if (saved = SQL.SetInstance(D.Module.Value.ToString(), D.InstanceData, D.Mode))
+			if (saved = SQL.SetInstance(D.Module, D.InstanceData, D.Mode))
 			{
 				if (Owner != null)
 					DialogResult = true;
@@ -103,20 +103,15 @@ namespace WBZ.Modules._base
 		/// <summary>
 		/// Open module
 		/// </summary>
-		internal void dgSourceList_MouseDoubleClick<T>(object sender, MouseButtonEventArgs e, string module)
+		internal void dgSourceList_MouseDoubleClick<T>(object sender, MouseButtonEventArgs e, MV module)
 		{
 			if (e.LeftButton == MouseButtonState.Pressed)
 			{
-				var perm = Globals.Global.User.Perms.Contains($"{module}_{Globals.Global.PermType.SAVE}") ? Commands.Type.EDIT : Commands.Type.PREVIEW;
+				var perm = Config.User.Perms.Contains($"{module.Name}_{Config.PermType.SAVE}") ? Commands.Type.EDIT : Commands.Type.PREVIEW;
 
 				var selectedInstances = (sender as System.Windows.Controls.DataGrid).SelectedItems.Cast<T>();
 				foreach (T instance in selectedInstances)
-				{
-					var winNames = module.Split('_');
-					for (int i = 0; i < winNames.Length; i++)
-						winNames[i] = winNames[i].First().ToString().ToUpper() + string.Join(string.Empty, winNames[i].Skip(1));
-					(Activator.CreateInstance(Type.GetType($"WBZ.Modules.{string.Join(string.Empty, winNames)}.{string.Join(string.Empty, winNames)}New"), instance, perm) as Window).Show();
-				}
+					(Activator.CreateInstance(Type.GetType($"WBZ.Modules.{module.Name}.{module.Name}New"), instance, perm) as Window).Show();
 			}
 		}
 
@@ -126,7 +121,7 @@ namespace WBZ.Modules._base
 		internal void Window_Closed(object sender, EventArgs e)
 		{
 			if (D.Mode.In(Commands.Type.NEW, Commands.Type.DUPLICATE) && !saved)
-				SQL.ClearObject(D.Module.Value.ToString(), (D.InstanceData as M).ID);
+				SQL.ClearObject(D.Module, (D.InstanceData as M).ID);
 
 			Properties.Settings.Default.Save();
 			if (W.Owner != null)

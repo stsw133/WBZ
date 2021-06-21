@@ -1,8 +1,7 @@
 ﻿using StswExpress;
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,7 +18,7 @@ namespace WBZ.Modules._base
         private Window W;
         private D_ModuleList<MODULE_MODEL> D;
         private string Namespace;
-        private ObservableCollection<DataGrid> dgLists = new ObservableCollection<DataGrid>();
+        private List<DataGrid> dgLists = new List<DataGrid>();
 
         /// <summary>
         /// Init
@@ -36,15 +35,20 @@ namespace WBZ.Modules._base
         /// </summary>
         internal virtual void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            dgLists = new ObservableCollection<DataGrid>(Extensions.FindVisualChildren<DataGrid>(W));
+            /// for every datagrid set items source
+            dgLists = new List<DataGrid>(Extensions.FindVisualChildren<DataGrid>(W));
+            for (int i = 0; i < dgLists.Count; i++)
+                D.InstancesLists.Add(new List<MODULE_MODEL>());
+
+            /// for select mode
             if (D.Mode == Commands.Type.SELECT)
+            {
                 foreach (var dg in dgLists)
                     dg.SelectionMode = DataGridSelectionMode.Single;
+            }
 
-            if (dgLists.Count > 1)
-                D.TotalItems = SQL.CountInstances(D.Module.Value.ToString(), D.FilterSqlString, D.FilterSqlParams);
-            else
-                cmdRefresh_Executed(null, null);
+            /// refresh
+            cmdRefresh_Executed(null, null);
         }
 
         /// <summary>
@@ -52,38 +56,57 @@ namespace WBZ.Modules._base
 		/// </summary>
         internal virtual void UpdateFilters()
         {
-            Fn.GetColumnFilters(dgLists[D.SelectedTab], out var a, out var b); D.FilterSqlString = a; D.FilterSqlParams = b;
-            D.FilterSqlString += !(D.Filters as M).Archival ? $" and {Config.GetModuleAlias(D.Module.Value.ToString())}.archival=false" : string.Empty;
-            D.FilterSqlString += (D.Filters as M).Group > 0 ? $" and exists (select from wbz.groups g where g.instance={Config.GetModuleAlias(D.Module.Value.ToString())}.id and g.owner={(D.Filters as M).Group})" : string.Empty;
-            if (D.FilterSqlString.StartsWith(" and "))
-                D.FilterSqlString = D.FilterSqlString[5..];
+            /// add module reference to filter
+            D.Filter.Module = D.Module;
+
+            /// get column filters
+            Fn.GetColumnFilters(dgLists[D.SelectedTab], out var a, out var b);
+            D.Filter.AutoFilterString = a;
+            D.Filter.AutoFilterParams = new List<MV>();
+            foreach (var param in b)
+                D.Filter.AutoFilterParams.Add(new MV()
+                {
+                    Name = param.name,
+                    Value = param.val
+                });
+
+            /// wbz filters
+            if (!D.Filter.ShowArchival) D.Filter.AutoFilterString += $" and {D.Module.Alias}.archival=false";
+            if (D.Filter.ShowGroup > 0) D.Filter.AutoFilterString += $" and exists (select from wbz.groups g where g.instance={D.Module.Alias}.id and g.owner={D.Filter.ShowGroup})";
+
+            /// remove "and"
+            if (D.Filter.AutoFilterString.StartsWith(" and "))
+                D.Filter.AutoFilterString = D.Filter.AutoFilterString[5..];
         }
 
         /// <summary>
 		/// Select instance
 		/// </summary>
-		internal void cmdSelect_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = D?.Mode == Commands.Type.SELECT;
         internal virtual void cmdSelect_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Selected = dgLists[D.SelectedTab].SelectedItems.Cast<MODULE_MODEL>().FirstOrDefault();
             W.DialogResult = true;
         }
+        internal void cmdSelect_CanExecute(object sender, CanExecuteRoutedEventArgs e) =>
+            e.CanExecute = D?.Mode == Commands.Type.SELECT;
 
         /// <summary>
         /// Preview instances
         /// </summary>
-        internal void cmdPreview_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = Global.User.Perms.Contains($"{D?.Module}_{Global.PermType.PREVIEW}");
         internal virtual void cmdPreview_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var selectedInstances = dgLists[D.SelectedTab].SelectedItems.Cast<MODULE_MODEL>();
             foreach (MODULE_MODEL instance in selectedInstances)
-                (Activator.CreateInstance(Type.GetType(Namespace + "New"), instance, Commands.Type.PREVIEW) as Window).Show();
+                (Activator.CreateInstance(Type.GetType(Namespace + "New"), SQL.GetInstance<MODULE_MODEL>(D.Module, (instance as M).ID), Commands.Type.PREVIEW) as Window).Show();
         }
+        internal void cmdPreview_CanExecute(object sender, CanExecuteRoutedEventArgs e) =>
+            e.CanExecute = Config.User.Perms.Contains($"{D?.Module?.Name}_{Config.PermType.PREVIEW}");
 
         /// <summary>
 		/// New instance
 		/// </summary>
-		internal void cmdNew_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = Global.User.Perms.Contains($"{D?.Module}_{Global.PermType.SAVE}");
+		internal void cmdNew_CanExecute(object sender, CanExecuteRoutedEventArgs e) =>
+            e.CanExecute = Config.User.Perms.Contains($"{D?.Module?.Name}_{Config.PermType.SAVE}");
         internal virtual void cmdNew_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             (Activator.CreateInstance(Type.GetType(Namespace + "New"), null, Commands.Type.NEW) as Window).Show();
@@ -92,29 +115,30 @@ namespace WBZ.Modules._base
         /// <summary>
         /// Duplicate instances
         /// </summary>
-        internal void cmdDuplicate_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = Global.User.Perms.Contains($"{D?.Module}_{Global.PermType.SAVE}");
         internal virtual void cmdDuplicate_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var selectedInstances = dgLists[D.SelectedTab].SelectedItems.Cast<MODULE_MODEL>();
             foreach (MODULE_MODEL instance in selectedInstances)
-                (Activator.CreateInstance(Type.GetType(Namespace + "New"), instance, Commands.Type.DUPLICATE) as Window).Show();
+                (Activator.CreateInstance(Type.GetType(Namespace + "New"), SQL.GetInstance<MODULE_MODEL>(D.Module, (instance as M).ID), Commands.Type.DUPLICATE) as Window).Show();
         }
+        internal void cmdDuplicate_CanExecute(object sender, CanExecuteRoutedEventArgs e) =>
+            e.CanExecute = Config.User.Perms.Contains($"{D?.Module?.Name}_{Config.PermType.SAVE}");
 
         /// <summary>
         /// Edit instances
         /// </summary>
-        internal void cmdEdit_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = Global.User.Perms.Contains($"{D?.Module}_{Global.PermType.SAVE}");
         internal virtual void cmdEdit_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var selectedInstances = dgLists[D.SelectedTab].SelectedItems.Cast<MODULE_MODEL>();
             foreach (MODULE_MODEL instance in selectedInstances)
-                (Activator.CreateInstance(Type.GetType(Namespace + "New"), instance, Commands.Type.EDIT) as Window).Show();
+                (Activator.CreateInstance(Type.GetType(Namespace + "New"), SQL.GetInstance<MODULE_MODEL>(D.Module, (instance as M).ID), Commands.Type.EDIT) as Window).Show();
         }
+        internal void cmdEdit_CanExecute(object sender, CanExecuteRoutedEventArgs e) =>
+            e.CanExecute = Config.User.Perms.Contains($"{D?.Module?.Name}_{Config.PermType.SAVE}");
 
         /// <summary>
         /// Delete instances
         /// </summary>
-        internal void cmdDelete_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = Global.User.Perms.Contains($"{D?.Module}_{Global.PermType.DELETE}");
         internal virtual void cmdDelete_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var selectedInstances = dgLists[D.SelectedTab].SelectedItems.Cast<MODULE_MODEL>();
@@ -122,18 +146,20 @@ namespace WBZ.Modules._base
             {
                 foreach (object instance in selectedInstances)
                 {
-                    SQL.DeleteInstance(D.Module.Value.ToString(), (instance as M).ID, (instance as M).Name);
+                    SQL.DeleteInstance(D.Module, (instance as M).ID, (instance as M).Name);
                     dgLists[D.SelectedTab].Items.Remove(instance);
                 }
             }
         }
+        internal void cmdDelete_CanExecute(object sender, CanExecuteRoutedEventArgs e) =>
+            e.CanExecute = Config.User.Perms.Contains($"{D?.Module?.Name}_{Config.PermType.DELETE}");
 
         /// <summary>
 		/// Clear filters
 		/// </summary>
 		internal virtual void cmdClear_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            D.Filters = new MODULE_MODEL();
+            D.Filter = new M_Filter();
             Fn.ClearColumnFilters(dgLists[D.SelectedTab]);
             cmdRefresh_Executed(null, null);
         }
@@ -145,9 +171,12 @@ namespace WBZ.Modules._base
         {
             Cursor = Cursors.Wait;
             UpdateFilters();
-            await Task.Run(() => {
-                D.TotalItems = SQL.CountInstances(D.Module.Value.ToString(), D.FilterSqlString);
-                D.InstancesList = SQL.ListInstances<MODULE_MODEL>(D.Module.Value.ToString(), D.FilterSqlString, D.FilterSqlParams, D.Sorting, 0);
+            await Task.Run(() =>
+            {
+                D.TotalItems = SQL.CountInstances(D.Module, D.Filter);
+                D.InstancesLists[D.SelectedTab] = SQL.ListInstances<MODULE_MODEL>(D.Module, D.Filter, 0);
+                D.NotifyPropertyChanged(nameof(D.InstancesLists));
+                D.CountItems = D.InstancesLists[D.SelectedTab].Count;
             });
             Cursor = Cursors.Arrow;
         }
@@ -165,27 +194,31 @@ namespace WBZ.Modules._base
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                if (D.Mode != Commands.Type.SELECT)
+                if (D.Mode == Commands.Type.LIST)
                 {
-                    if (Global.User.Perms.Contains($"{D.Module}_{Global.PermType.SAVE}"))
+                    if (Config.User.Perms.Contains($"{D.Module.Name}_{Config.PermType.SAVE}"))
                         cmdEdit_Executed(null, null);
                     else
                         cmdPreview_Executed(null, null);
                 }
-                else cmdSelect_Executed(null, null);
+                else if (D.Mode == Commands.Type.SELECT)
+                    cmdSelect_Executed(null, null);
             }
         }
 
         /// <summary>
         /// Load more
         /// </summary>
-        internal void dgList_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        internal async void dgList_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            if (e.VerticalChange > 0 && e.VerticalOffset + e.ViewportHeight == e.ExtentHeight && D.InstancesList.Count < D.TotalItems)
+            if (e.VerticalChange > 0 && e.VerticalOffset + e.ViewportHeight == e.ExtentHeight && D.InstancesLists[D.SelectedTab].Count < D.TotalItems)
             {
                 Cursor = Cursors.Wait;
-                foreach (var i in SQL.ListInstances<MODULE_MODEL>(D.Module.Value.ToString(), D.FilterSqlString, D.FilterSqlParams, D.Sorting, (D.InstancesList as ObservableCollection<M>)?.Count ?? 0))
-                    D.InstancesList.Add(i);
+                await Task.Run(() =>
+                {
+                    foreach (var i in SQL.ListInstances<MODULE_MODEL>(D.Module, D.Filter, D.InstancesLists[D.SelectedTab].Count))
+                        D.InstancesLists[D.SelectedTab].Add(i);
+                });
                 (e.OriginalSource as ScrollViewer).ScrollToVerticalOffset(e.VerticalOffset);
                 Cursor = Cursors.Arrow;
             }
@@ -196,30 +229,14 @@ namespace WBZ.Modules._base
 		/// </summary>
 		internal void dgList_Sorting(object sender, DataGridSortingEventArgs e)
         {
-            var sort = CollectionViewSource.GetDefaultView((sender as DataGrid).ItemsSource).SortDescriptions;
-            if (sort.Any(x => x.PropertyName == e.Column.SortMemberPath))
-            {
-                D.Sorting[D.Sorting.IndexOf($"{Config.GetModuleAlias(D.Module.Value.ToString())}.{e.Column.SortMemberPath.ToLower()}") + 1] = e.Column.SortDirection == ListSortDirection.Descending ? "desc" : "asc";
-                return;
-            }
+            var currentSort = CollectionViewSource.GetDefaultView((sender as DataGrid).ItemsSource).SortDescriptions;
+            var newSort = $"{D.Module.Alias}.{e.Column.SortMemberPath.ToLower()} {e.Column.SortDirection?.ToString()?.ToLower()?[..^6] ?? "asc"}";
 
-            var limit = Convert.ToInt32(D.Sorting[4]);
-            D.Sorting = new StringCollection
-            {
-                $"{Config.GetModuleAlias(D.Module.Value.ToString())}.{e.Column.SortMemberPath.ToLower()}",
-                e.Column.SortDirection == ListSortDirection.Descending ? "desc" : "asc"
-            };
-            if (sort.Count > 0)
-            {
-                D.Sorting.Add($"{Config.GetModuleAlias(D.Module.Value.ToString())}.{sort[0].PropertyName.ToLower()}");
-                D.Sorting.Add(sort[0].Direction == ListSortDirection.Descending ? "desc" : "asc");
-            }
-            else
-            {
-                D.Sorting.Add(D.Sorting[0]);
-                D.Sorting.Add(D.Sorting[1]);
-            }
-            D.Sorting.Add(limit.ToString());
+            var sorting = new StringCollection();
+            foreach (var sort in currentSort)
+                sorting.Add($"{D.Module.Alias}.{sort.PropertyName.ToLower()} {sort.Direction.ToString().ToLower()[..^6]}");
+            sorting.Insert(0, newSort);
+            D.Filter.Sorting = sorting;
         }
 
 		/// <summary>

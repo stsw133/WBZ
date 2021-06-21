@@ -1,7 +1,7 @@
 ﻿using StswExpress;
 using System.Windows.Controls;
 
-namespace WBZ.Modules.Documents
+namespace WBZ.Modules
 {
     /// <summary>
     /// Interaction logic for DocumentsListGrid.xaml

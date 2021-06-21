@@ -39,11 +39,11 @@
                 </ToggleButton>
                 <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
                     <Label Content="{Tr LimitPerPage, Suffix=':'}" Margin="5,0,0,0" VerticalAlignment="Center"/>
-                    <se:NumericUpDown Margin="2" BoxAlignment="Center" Value="{Binding Sorting[4], Mode=TwoWay}" Min="0"
+                    <se:NumericUpDown Margin="2" BoxAlignment="Center" Value="{Binding Filter.Limit, Mode=TwoWay}" Min="0"
                                       Width="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=5}"/>
                 </StackPanel>
                 <se:ExtLabel Content="{Tr Displayed, Suffix=':'}"/>
-                <se:ExtLabel Content="{Binding InstancesList.Count}" FontWeight="Medium"/>
+                <se:ExtLabel Content="{Binding CountItems}" FontWeight="Medium"/>
                 <se:ExtLabel Content=" / " Padding="0"/>
                 <se:ExtLabel Content="{Binding TotalItems}" FontWeight="Medium"/>
             </DockPanel>

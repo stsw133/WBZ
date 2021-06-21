@@ -1,5 +1,5 @@
 ﻿using StswExpress;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,7 +24,6 @@ namespace WBZ.Modules.Logs
 			Init();
 
 			D.Mode = mode;
-			D.InstancesLists.Add(new ObservableCollection<MODULE_MODEL>());
 
 			if (Config.Logs_Enabled == "1")
 				chckEnabled.IsChecked = true;
@@ -48,9 +47,9 @@ namespace WBZ.Modules.Logs
 		internal override void UpdateFilters()
 		{
 			base.UpdateFilters();
-			D.FilterSqlString += $" and l.type={D.SelectedTab + 1}";
-			if (D.FilterSqlString.StartsWith(" and "))
-				D.FilterSqlString = D.FilterSqlString[5..];
+			D.Filter.AutoFilterString += $" and l.type={D.SelectedTab + 1}";
+			if (D.Filter.AutoFilterString.StartsWith(" and "))
+				D.Filter.AutoFilterString = D.Filter.AutoFilterString[5..];
 		}
 
 		/// <summary>
@@ -111,8 +110,7 @@ namespace WBZ.Modules.Logs
 		/// </summary>
         private void tcList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-			if (D.InstancesList == null)
-				cmdRefresh_Executed(null, null);
+			cmdRefresh_Executed(null, null);
 		}
 	}
 

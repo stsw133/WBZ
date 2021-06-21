@@ -2,32 +2,31 @@
 
 namespace WBZ.Models
 {
+	/// <summary>
+	/// Model for Articles
+	/// </summary>
 	public class M_Article : M
 	{
 		/// <summary>
 		/// Codename
 		/// </summary>
-		public string Codename { get; set; } = string.Empty;
-
-		/// <summary>
-		/// Name
-		/// </summary>
-		public override string Name { get; set; } = string.Empty;
+		public string Codename { get; set; }
 
 		/// <summary>
 		/// EAN
 		/// </summary>
-		public string EAN { get; set; } = string.Empty;
+		public string EAN { get; set; }
 
 		/// <summary>
 		/// Price
 		/// </summary>
-		public decimal Price { get; set; } = 0;
+		public decimal Price { get; set; }
 
 		/// <summary>
 		/// MainStore
 		/// </summary>
-		public M_Store MainStore { get; set; } = new M_Store();
+		public int MainStore { get; set; }
+		public string MainStoreName { get; set; }
 
 		/// <summary>
 		/// Measures
@@ -37,40 +36,43 @@ namespace WBZ.Models
 		/// <summary>
 		/// Measure
 		/// </summary>
-		public string Measure { get; set; } = string.Empty;
+		public string Measure { get; set; }
 
 		/// <summary>
 		/// AmountRaw
 		/// </summary>
-		public decimal AmountRaw { get; set; } = 0;
+		public decimal AmountRaw { get; set; }
 
 		/// <summary>
 		/// Amount
 		/// </summary>
-		public decimal Amount { get; set; } = 0;
+		public decimal Amount { get; set; }
 
 		/// <summary>
 		/// ReservedRaw
 		/// </summary>
-		public decimal ReservedRaw { get; set; } = 0;
+		public decimal ReservedRaw { get; set; }
 
 		/// <summary>
 		/// Reserved
 		/// </summary>
-		public decimal Reserved { get; set; } = 0;
-	}
+		public decimal Reserved { get; set; }
+    }
 
+	/// <summary>
+	/// Model for ArticlesMeasures
+	/// </summary>
 	public class M_ArticleMeasure
 	{
 		/// <summary>
 		/// ID
 		/// </summary>
-		public int ID { get; set; } = 0;
+		public int ID { get; set; }
 
 		/// <summary>
 		/// Name
 		/// </summary>
-		public string Name { get; set; } = string.Empty;
+		public string Name { get; set; }
 
 		/// <summary>
 		/// Converter
@@ -80,21 +82,21 @@ namespace WBZ.Models
 		/// <summary>
 		/// Default
 		/// </summary>
-		public bool Default { get; set; } = false;
+		public bool Default { get; set; }
 
 		/// <summary>
 		/// Price
 		/// </summary>
-		public decimal Price { get; set; } = 0;
+		public decimal Price { get; set; }
 
 		/// <summary>
 		/// Amount
 		/// </summary>
-		public decimal Amount { get; set; } = 0;
+		public decimal Amount { get; set; }
 
 		/// <summary>
 		/// Reserved
 		/// </summary>
-		public decimal Reserved { get; set; } = 0;
+		public decimal Reserved { get; set; }
 	}
 }

@@ -1,34 +1,23 @@
-﻿using WBZ.Globals;
-
-namespace WBZ.Models
+﻿namespace WBZ.Models
 {
-	public class M_Group : M
+	/// <summary>
+	/// Model for Groups
+	/// </summary>
+	public class M_Group : M, IMM
 	{
-		/// <summary>
-		/// Module
-		/// </summary>
-		public string Module { get; set; } = string.Empty;
-		public string TranslatedModule => Config.GetModuleTranslation(Module);
-
-		/// <summary>
-		/// Name
-		/// </summary>
-		public string Name { get; set; } = string.Empty;
-
-		/// <summary>
-		/// Instance
-		/// </summary>
-		public int Instance { get; set; } = 0;
+		/// IMM
+		public MV Module { get; set; }
+		public int InstanceID { get; set; }
 
 		/// <summary>
 		/// Owner
 		/// </summary>
-		public int Owner { get; set; } = 0;
+		public int Owner { get; set; }
 
 		/// <summary>
 		/// Path
 		/// </summary>
-		public string Path { get; set; } = string.Empty;
+		public string Path { get; set; }
 		public string Fullpath => Path + Name;
-	}
+    }
 }

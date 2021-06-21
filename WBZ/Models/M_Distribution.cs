@@ -5,6 +5,9 @@ using WBZ.Globals;
 
 namespace WBZ.Models
 {
+	/// <summary>
+	/// Model for Distributions
+	/// </summary>
 	public class M_Distribution : M
 	{
 		public enum DistributionStatus
@@ -15,14 +18,8 @@ namespace WBZ.Models
 		}
 
 		/// <summary>
-		/// Name
-		/// </summary>
-		public string Name { get; set; } = string.Empty;
-
-		/// <summary>
 		/// DateReal
 		/// </summary>
-		public DateTime fDateReal { get; set; } = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
 		public DateTime DateReal { get; set; } = DateTime.Now;
 
 		/// <summary>
@@ -38,24 +35,27 @@ namespace WBZ.Models
 		/// <summary>
 		/// FamiliesCount
 		/// </summary>
-		public int FamiliesCount { get; set; } = 0;
+		public int FamiliesCount { get; set; }
 
 		/// <summary>
 		/// MembersCount
 		/// </summary>
-		public int MembersCount { get; set; } = 0;
+		public int MembersCount { get; set; }
 
 		/// <summary>
 		/// PositionsCount
 		/// </summary>
-		public int PositionsCount { get; set; } = 0;
+		public int PositionsCount { get; set; }
 
 		/// <summary>
 		/// Weight
 		/// </summary>
-		public decimal Weight { get; set; } = 0;
+		public decimal Weight { get; set; }
 	}
 
+	/// <summary>
+	/// Model for DistributionsFamilies
+	/// </summary>
 	public class M_DistributionFamily
 	{
 		public enum DistributionFamilyStatus
@@ -68,17 +68,13 @@ namespace WBZ.Models
 		/// <summary>
 		/// Family
 		/// </summary>
-		public int Family { get; set; } = 0;
-
-		/// <summary>
-		/// FamilyName
-		/// </summary>
-		public string FamilyName { get; set; } = string.Empty;
+		public int Family { get; set; }
+		public string FamilyName { get; set; }
 
 		/// <summary>
 		/// Members
 		/// </summary>
-		public short Members { get; set; } = 0;
+		public short? Members { get; set; }
 
 		/// <summary>
 		/// Status
@@ -91,6 +87,9 @@ namespace WBZ.Models
 		public DataTable Positions { get; set; } = SQL.GetDistributionPositionsFormatting();
 	}
 
+	/// <summary>
+	/// Model for DistributionsPositions
+	/// </summary>
 	public class M_DistributionPosition
 	{
 		/// <summary>
@@ -118,7 +117,7 @@ namespace WBZ.Models
 		/// Article
 		/// </summary>
 		public int Article { get; set; }
-		public string ArticleName { get; set; } = string.Empty;
+		public string ArticleName { get; set; }
 
 		/// <summary>
 		/// Amount
@@ -127,10 +126,12 @@ namespace WBZ.Models
 
 		public M_DistributionPosition()
 		{
-			var stores = SQL.ListInstances<M_Store>(Config.Modules.STORES, "true", null, null, 1);
-
-			Store = stores.Count == 1 ? stores[0].ID : 0;
-			StoreName = stores.Count == 1 ? stores[0].Name : string.Empty;
+			var stores = SQL.ComboSource(Config.GetModule(nameof(Modules.Stores)), "codename", "true", false);
+			if (stores.Count > 0 && Store == 0)
+			{
+				Store = (int)stores[0].Value;
+				StoreName = (string)stores[0].Display;
+			}
 		}
 	}
 }

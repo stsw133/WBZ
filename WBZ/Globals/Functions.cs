@@ -1,5 +1,4 @@
 ﻿using StswExpress;
-using System.Linq;
 using System.Windows;
 using WBZ.Models;
 using WBZ.Modules.Articles;
@@ -38,71 +37,70 @@ namespace WBZ.Globals
 		/// <summary>
 		/// Open instance window
 		/// </summary>
-		internal static void OpenInstanceWindow(Window owner, dynamic obj, Commands.Type mode)
+		internal static void OpenInstanceWindow<T>(Window owner, T instance, Commands.Type mode)
 		{
-			if (obj.Instance == 0)
-				return;
-			if (SQL.CountInstances(obj.Module, $"{string.Join(string.Empty, (obj.Module.Split('_') as string[]).AsQueryable().Cast<string>().Select(str => str.Substring(0, 1)))}.id={obj.Instance}") == 0)
+			var mm = instance as IMM;
+
+			if (mm.InstanceID == 0)
 				return;
 
-			if (!(mode == Commands.Type.EDIT && Global.User.Perms.Contains($"{obj.Module}_{Global.PermType.SAVE}")))
+			if (SQL.CountInstances(mm.Module, $"{mm.Module.Tag}.id={mm.InstanceID}") == 0)
+				return;
+
+			if (!(mode == Commands.Type.EDIT && Config.User.Perms.Contains($"{mm.Module.Name}_{Config.PermType.SAVE}")))
 				mode = Commands.Type.PREVIEW;
-			if (!Global.User.Perms.Contains($"{obj.Module}_{Global.PermType.PREVIEW}") && !Global.User.Perms.Contains($"{obj.Module}_{Global.PermType.SAVE}"))
+			if (!Config.User.Perms.Contains($"{mm.Module.Name}_{Config.PermType.PREVIEW}") && !Config.User.Perms.Contains($"{mm.Module.Name}_{Config.PermType.SAVE}"))
 				return;
 
 			Window window;
-			/*
-			var moduleNames = (obj.Module as string).Split('_');
-			for (int i = 0; i < moduleNames.Length; i++)
-				moduleNames[i] = char.ToUpper(moduleNames[i][0]) + moduleNames[i][1..];
-			var moduleName = string.Join(string.Empty, moduleNames);
-			OpenWindow(owner, $"WBZ.Modules.{moduleName}.{moduleName}New", false, SQL.GetInstance<MODULE_MODEL>(obj.Module, obj.Instance), mode);
-			*/
-			switch (obj.Module)
+			
+			//OpenWindow(owner, $"WBZ.Modules.{module.Name}.{module.Name}New", false, SQL.GetInstance<new A>(module, mm.InstanceID), mode);
+			
+			switch (mm.Module.Name)
 			{
 				/// ARTICLES
-				case Config.Modules.ARTICLES:
-					window = new ArticlesNew(SQL.GetInstance<M_Article>(obj.Module, obj.Instance), mode);
+				case nameof(Modules.Articles):
+					window = new ArticlesNew(SQL.GetInstance<M_Article>(mm.Module, mm.InstanceID), mode);
 					break;
 				/// ATTRIBUTES_CLASSES
-				case Config.Modules.ATTRIBUTES_CLASSES:
-					window = new AttributesClassesNew(SQL.GetInstance<M_AttributeClass>(obj.Module, obj.Instance), mode);
+				case nameof(Modules.AttributesClasses):
+					window = new AttributesClassesNew(SQL.GetInstance<M_AttributeClass>(mm.Module, mm.InstanceID), mode);
 					break;
 				/// CONTRACTORS
-				case Config.Modules.CONTRACTORS:
-					window = new ContractorsNew(SQL.GetInstance<M_Contractor>(obj.Module, obj.Instance), mode);
+				case nameof(Modules.Contractors):
+					window = new ContractorsNew(SQL.GetInstance<M_Contractor>(mm.Module, mm.InstanceID), mode);
 					break;
 				/// DISTRIBUTIONS
-				case Config.Modules.DISTRIBUTIONS:
-					window = new DistributionsNew(SQL.GetInstance<M_Distribution>(obj.Module, obj.Instance), mode);
+				case nameof(Modules.Distributions):
+					window = new DistributionsNew(SQL.GetInstance<M_Distribution>(mm.Module, mm.InstanceID), mode);
 					break;
 				/// DOCUMENTS
-				case Config.Modules.DOCUMENTS:
-					window = new DocumentsNew(SQL.GetInstance<M_Document>(obj.Module, obj.Instance), mode);
+				case nameof(Modules.Documents):
+					window = new DocumentsNew(SQL.GetInstance<M_Document>(mm.Module, mm.InstanceID), mode);
 					break;
 				/// EMPLOYEES
-				case Config.Modules.EMPLOYEES:
-					window = new EmployeesNew(SQL.GetInstance<M_Employee>(obj.Module, obj.Instance), mode);
-					break;
-				/// ICONS
-				case Config.Modules.ICONS:
-					window = new IconsNew(SQL.GetInstance<M_Icon>(obj.Module, obj.Instance), mode);
+				case nameof(Modules.Employees):
+					window = new EmployeesNew(SQL.GetInstance<M_Employee>(mm.Module, mm.InstanceID), mode);
 					break;
 				/// FAMILIES
-				case Config.Modules.FAMILIES:
-					window = new FamiliesNew(SQL.GetInstance<M_Family>(obj.Module, obj.Instance), mode);
+				case nameof(Modules.Families):
+					window = new FamiliesNew(SQL.GetInstance<M_Family>(mm.Module, mm.InstanceID), mode);
+					break;
+				/// ICONS
+				case nameof(Modules.Icons):
+					window = new IconsNew(SQL.GetInstance<M_Icon>(mm.Module, mm.InstanceID), mode);
 					break;
 				/// STORES
-				case Config.Modules.STORES:
-					window = new StoresNew(SQL.GetInstance<M_Store>(obj.Module, obj.Instance), mode);
+				case nameof(Modules.Stores):
+					window = new StoresNew(SQL.GetInstance<M_Store>(mm.Module, mm.InstanceID), mode);
 					break;
 				/// USERS
-				case Config.Modules.USERS:
-					window = new UsersNew(SQL.GetInstance<M_User>(obj.Module, obj.Instance), mode);
+				case nameof(Modules.Users):
+					window = new UsersNew(SQL.GetInstance<M_User>(mm.Module, mm.InstanceID), mode);
 					break;
 				/// VEHICLES
-				case Config.Modules.VEHICLES:
-					window = new VehiclesNew(SQL.GetInstance<M_Vehicle>(obj.Module, obj.Instance), mode);
+				case nameof(Modules.Vehicles):
+					window = new VehiclesNew(SQL.GetInstance<M_Vehicle>(mm.Module, mm.InstanceID), mode);
 					break;
 				default:
 					return;

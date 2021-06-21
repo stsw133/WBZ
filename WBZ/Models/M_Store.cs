@@ -1,25 +1,29 @@
 ﻿namespace WBZ.Models
 {
-	public class M_Store : MA
+	/// <summary>
+	/// Model for Stores
+	/// </summary>
+	public class M_Store : M, IMA
 	{
+		/// IMA
+		public string Address { get; set; }
+		public string City { get; set; }
+		public string Country { get; set; }
+		public string Postcode { get; set; }
+
 		/// <summary>
 		/// Codename
 		/// </summary>
-		public string Codename { get; set; } = string.Empty;
-
-		/// <summary>
-		/// Name
-		/// </summary>
-		public override string Name { get; set; } = string.Empty;
+		public string Codename { get; set; }
 
 		/// <summary>
 		/// Amount
 		/// </summary>
-		public decimal Amount { get; set; } = 0;
+		public decimal Amount { get; set; }
 
 		/// <summary>
 		/// Reserved
 		/// </summary>
-		public decimal Reserved { get; set; } = 0;
-	}
+		public decimal Reserved { get; set; }
+    }
 }

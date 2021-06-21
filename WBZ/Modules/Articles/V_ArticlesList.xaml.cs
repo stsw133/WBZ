@@ -30,7 +30,7 @@ namespace WBZ.Modules.Articles
 		internal override void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			base.Window_Loaded(sender, e);
-			D.StoresList = SQL.ListValues(Config.Modules.STORES, "codename", "archival=false", D.Mode != Commands.Type.SELECT);
+			D.StoresList = SQL.ComboSource(Config.GetModule(nameof(Modules.Stores)), "codename", "archival=false", D.Mode != Commands.Type.SELECT);
 		}
 
 		/// <summary>
@@ -39,8 +39,9 @@ namespace WBZ.Modules.Articles
 		internal override void UpdateFilters()
 		{
 			base.UpdateFilters();
-			D.FilterSqlString += D.Filters.MainStore.ID > 0 ? $"sa.store={D.Filters.MainStore.ID} and " : string.Empty;
-			D.FilterSqlString = D.FilterSqlString.TrimEnd(" and ".ToCharArray());
+			D.Filter.AutoFilterString += (int)cbStoresList.SelectedValue > 0 ? $" and sa.store={cbStoresList.SelectedValue}" : string.Empty;
+			if (D.Filter.AutoFilterString.StartsWith(" and "))
+				D.Filter.AutoFilterString = D.Filter.AutoFilterString[5..];
 		}
 
 		/// <summary>
@@ -49,10 +50,10 @@ namespace WBZ.Modules.Articles
 		private void cbStore_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			var cbStore = sender as ComboBox;
-			if (cbStore.SelectedValue != null && (int)cbStore.SelectedValue > 0)
-				D.Filters.MainStore = SQL.GetInstance<M_Store>(Config.Modules.STORES, (int)cbStore.SelectedValue);
+			if ((int)cbStore?.SelectedValue > 0)
+				cbStoresList.SelectedValue = SQL.GetInstance<M_Store>(Config.GetModule(nameof(Modules.Stores)), (int)cbStore.SelectedValue);
 			else
-				D.Filters.MainStore = new M_Store();
+				cbStoresList.SelectedValue = 0;
 			cmdRefresh_Executed(null, null);
 		}
 	}

@@ -1,6 +1,6 @@
 ﻿using StswExpress;
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,7 +8,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using WBZ.Globals;
 using WBZ.Models;
+using WBZ.Modules._base;
 using WBZ.Modules._submodules;
+using WBZ.Modules._submodules.Groups;
 
 namespace WBZ.Controls
 {
@@ -17,8 +19,9 @@ namespace WBZ.Controls
     /// </summary>
     public partial class GroupsView : TreeView
     {
-        public ObservableCollection<M_Group> InstancesList = new ObservableCollection<M_Group>();
-        string Module;
+        internal List<M_Group> InstancesList = new List<M_Group>();
+        private MV GroupModule = Config.GetModule(nameof(Modules._submodules.Groups));
+        private MV WindowModule;
 
         public GroupsView()
         {
@@ -28,18 +31,18 @@ namespace WBZ.Controls
         /// <summary>
         /// EditingMode
         /// </summary>
-        public bool EditingMode
-        {
-            get => (bool)GetValue(pEditingMode);
-            set => SetValue(pEditingMode, value);
-        }
-        public static readonly DependencyProperty pEditingMode
+        public static readonly DependencyProperty EditingModeProperty
             = DependencyProperty.Register(
                   nameof(EditingMode),
                   typeof(bool),
                   typeof(GroupsView),
-                  new PropertyMetadata(false)
+                  new PropertyMetadata(default(bool))
               );
+        public bool EditingMode
+        {
+            get => (bool)GetValue(EditingModeProperty);
+            set => SetValue(EditingModeProperty, value);
+        }
 
         /// <summary>
         /// Loaded
@@ -58,7 +61,7 @@ namespace WBZ.Controls
                 return;
 
             int id = (int)(SelectedItem as TreeViewItem).Tag;
-            new GroupsNew(SQL.GetInstance<M_Group>(Config.Modules.GROUPS, id), Commands.Type.PREVIEW) { Owner = Window.GetWindow(this) }.ShowDialog();
+            new GroupsNew(SQL.GetInstance<M_Group>(GroupModule, id), Commands.Type.PREVIEW) { Owner = Window.GetWindow(this) }.ShowDialog();
             btnGroupsRefresh_Click(null, null);
         }
 
@@ -78,7 +81,7 @@ namespace WBZ.Controls
             var instance = new M_Group();
             if (SelectedItem == null || (int)(SelectedItem as Control).Tag == 0)
             {
-                instance.Module = Module;
+                instance.Module = WindowModule;
                 instance.Owner = 0;
             }
             else
@@ -90,7 +93,7 @@ namespace WBZ.Controls
                 if (path.Split('\\').Length > 5)
                     return;
 
-                instance.Module = Module;
+                instance.Module = WindowModule;
                 instance.Owner = (int)(SelectedItem as TreeViewItem).Tag;
                 instance.Path = path;
             }
@@ -107,7 +110,7 @@ namespace WBZ.Controls
                 return;
 
             int id = (int)(SelectedItem as TreeViewItem).Tag;
-            new GroupsNew(SQL.GetInstance<M_Group>(Config.Modules.GROUPS, id), Commands.Type.EDIT) { Owner = Window.GetWindow(this) }.ShowDialog();
+            new GroupsNew(SQL.GetInstance<M_Group>(GroupModule, id), Commands.Type.EDIT) { Owner = Window.GetWindow(this) }.ShowDialog();
             btnGroupsRefresh_Click(null, null);
         }
 
@@ -122,7 +125,7 @@ namespace WBZ.Controls
             if (MessageBox.Show("Czy na pewno usunąć zaznaczoną grupę?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
                 var group = SelectedItem as TreeViewItem;
-                SQL.DeleteInstance(Config.Modules.GROUPS, (int)group.Tag, ((group.Header as StackPanel).Children[1] as TextBlock).Text);
+                SQL.DeleteInstance(GroupModule, (int)group.Tag, ((group.Header as StackPanel).Children[1] as TextBlock).Text);
                 btnGroupsRefresh_Click(null, null);
             }
         }
@@ -175,13 +178,12 @@ namespace WBZ.Controls
             try
             {
                 Window win = Window.GetWindow(this);
-
-                dynamic d = win?.DataContext;
+                var d = win?.DataContext as D_ModuleList<M_Group>;
                 if (d != null)
                 {
-                    Module = (string)d.Module;
+                    WindowModule = d.Module;
                     // TODO - filtr do parametryzacji
-                    InstancesList = SQL.ListInstances<M_Group>(Config.Modules.GROUPS, $"g.module='{Module}' and g.instance is null", null, Properties.Settings.Default.sorting_GroupsList);
+                    InstancesList = SQL.ListInstances<M_Group>(GroupModule, $"{GroupModule.Alias}.module='{WindowModule.Alias}' and {GroupModule.Alias}.instance is null");
                 }
 
                 /// Clear groups
@@ -195,10 +197,10 @@ namespace WBZ.Controls
                     };
                     var image = new Image()
                     {
-                        Source = Fn.LoadImage(group.cIcon.Display as byte[]),
+                        Source = Fn.LoadImage(group.IconContent),
                         Margin = new Thickness(0, 0, 5, 0),
-                        Width = Settings.Default.iSize * 1.5,
-                        Height = Settings.Default.iSize * 1.5
+                        Width = StswExpress.Settings.Default.iSize * 1.5,
+                        Height = StswExpress.Settings.Default.iSize * 1.5
                     };
                     image.Visibility = image.Source != null ? Visibility.Visible : Visibility.Collapsed;
                     var tb = new TextBlock()
@@ -265,7 +267,7 @@ namespace WBZ.Controls
 
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                if (Global.User.Perms.Contains($"{Module}_{Global.PermType.SAVE}"))
+                if (Config.User.Perms.Contains($"{WindowModule.Name}_{Config.PermType.SAVE}"))
                     btnGroupsEdit_Click(null, null);
                 else
                     btnGroupsPreview_Click(null, null);
@@ -301,15 +303,11 @@ namespace WBZ.Controls
             try
             {
                 Window win = Window.GetWindow(this);
-
-                dynamic d = win?.DataContext;
+                var d = win?.DataContext as D_GroupsList;
                 if (d != null)
                 {
-                    if (e.NewValue != null)
-                        d.Filters.Group = (int)(e.NewValue as TreeViewItem).Tag;
-                    else
-                        d.Filters.Group = 0;
-                    (win as dynamic).cmdRefresh_Executed(null, null);
+                    d.Filter.ShowGroup = e.NewValue != null ? (int)(e.NewValue as TreeViewItem).Tag : 0;
+                    Commands.Refresh.Execute(null, win);
                 }
             }
             catch { }
