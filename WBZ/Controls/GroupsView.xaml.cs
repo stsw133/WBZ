@@ -28,21 +28,10 @@ namespace WBZ.Controls
             InitializeComponent();
         }
 
-        /// <summary>
-        /// EditingMode
-        /// </summary>
-        public static readonly DependencyProperty EditingModeProperty
-            = DependencyProperty.Register(
-                  nameof(EditingMode),
-                  typeof(bool),
-                  typeof(GroupsView),
-                  new PropertyMetadata(default(bool))
-              );
-        public bool EditingMode
-        {
-            get => (bool)GetValue(EditingModeProperty);
-            set => SetValue(EditingModeProperty, value);
-        }
+		/// <summary>
+		/// EditingMode
+		/// </summary>
+		public bool EditingMode => Config.User.Perms.Contains($"{WindowModule.Name}_{Config.PermType.GROUPS}");
 
         /// <summary>
         /// Loaded
@@ -87,7 +76,7 @@ namespace WBZ.Controls
             else
             {
                 var path = (((SelectedItem as TreeViewItem).Header as StackPanel).Children[1] as TextBlock).Text + "\\";
-                for (var i = GetParentItem((SelectedItem as TreeViewItem)); i != null; i = GetParentItem(i))
+                for (var i = GetParentItem(SelectedItem as TreeViewItem); i != null; i = GetParentItem(i))
                     path = ((i.Header as StackPanel).Children[1] as TextBlock).Text + "\\" + path;
 
                 if (path.Split('\\').Length > 5)
@@ -199,8 +188,8 @@ namespace WBZ.Controls
                     {
                         Source = Fn.LoadImage(group.IconContent),
                         Margin = new Thickness(0, 0, 5, 0),
-                        Width = StswExpress.Settings.Default.iSize * 1.5,
-                        Height = StswExpress.Settings.Default.iSize * 1.5
+                        Width = Settings.Default.iSize * 1.5,
+                        Height = Settings.Default.iSize * 1.5
                     };
                     image.Visibility = image.Source != null ? Visibility.Visible : Visibility.Collapsed;
                     var tb = new TextBlock()

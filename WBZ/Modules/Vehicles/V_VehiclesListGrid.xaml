@@ -16,58 +16,53 @@
     </DataGrid.Resources>
     <DataGrid.Columns>
         <!-- ID -->
-        <DataGridTextColumn Binding="{Binding ID}" Header="ID"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_ID, Converter={se:conv_Bool}}"/>
+		<DataGridTextColumn Binding="{Binding ID}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_ID, Converter={se:conv_Bool}}">
+			<DataGridTextColumn.Header>
+				<se:ColumnFilter FilterType="Number" Header="ID" NameSQL="veh.id"/>
+			</DataGridTextColumn.Header>
+		</DataGridTextColumn>
         <!-- Icon -->
-        <se:DataGridImageColumn Image="{Binding IconContent}" Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"
-                                Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Icon, Converter={se:conv_Bool}}"/>
+        <se:DataGridImageColumn Image="{Binding IconContent}" Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Icon, Converter={se:conv_Bool}}"/>
         <!-- Register -->
-        <DataGridTextColumn Binding="{Binding Register}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Register, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Register}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Register, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="Text" Header="Nr rej." NameSQL="v.register"/>
+				<se:ColumnFilter FilterType="Text" Header="Nr rej." NameSQL="veh.register"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Brand -->
-        <DataGridTextColumn Binding="{Binding Brand}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Brand, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Brand}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Brand, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="Text" Header="Marka" NameSQL="v.brand"/>
+				<se:ColumnFilter FilterType="Text" Header="Marka" NameSQL="veh.brand"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Model -->
-        <DataGridTextColumn Binding="{Binding Model}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Model, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Model}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Model, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="Text" Header="Model" NameSQL="v.model"/>
+				<se:ColumnFilter FilterType="Text" Header="Model" NameSQL="veh.model"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Capacity -->
-        <DataGridTextColumn Binding="{Binding Capacity}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Capacity, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Capacity}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Capacity, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="Number" Header="Pojemność" NameSQL="v.capacity"/>
+				<se:ColumnFilter FilterType="Number" Header="Pojemność" NameSQL="veh.capacity"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Forwarder -->
-        <DataGridTextColumn Binding="{Binding ForwarderName}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Forwarder, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding ForwarderName}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Forwarder, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="Text" Header="Spedytor" NameSQL="c.name"/>
+				<se:ColumnFilter FilterType="Text" Header="Spedytor" NameSQL="cnt.name"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Driver -->
-        <DataGridTextColumn Binding="{Binding DriverName}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Driver, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding DriverName}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Driver, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="Text" Header="Kierowca" NameSQL="e.lastname || ' ' || e.forename"/>
+				<se:ColumnFilter FilterType="Text" Header="Kierowca" NameSQL="emp.lastname || ' ' || emp.forename"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- ProdYear -->
-        <DataGridTextColumn Binding="{Binding ProdYear}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_ProdYear, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding ProdYear}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_ProdYear, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="Number" Header="Rok produkcji" NameSQL="v.prodyear"/>
+				<se:ColumnFilter FilterType="Number" Header="Rok produkcji" NameSQL="veh.prodyear"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
     </DataGrid.Columns>

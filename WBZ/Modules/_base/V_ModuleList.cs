@@ -144,10 +144,10 @@ namespace WBZ.Modules._base
             var selectedInstances = dgLists[D.SelectedTab].SelectedItems.Cast<MODULE_MODEL>();
             if (selectedInstances.Count() > 0 && MessageBox.Show("Czy na pewno usunąć zaznaczone rekordy?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                foreach (object instance in selectedInstances)
+                foreach (MODULE_MODEL instance in selectedInstances)
                 {
                     SQL.DeleteInstance(D.Module, (instance as M).ID, (instance as M).Name);
-                    dgLists[D.SelectedTab].Items.Remove(instance);
+                    D.InstancesLists[D.SelectedTab].Remove(instance);
                 }
             }
         }

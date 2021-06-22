@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using StswExpress;
 using System;
+using System.IO;
 using System.Windows;
 
 namespace WBZ
@@ -21,7 +22,15 @@ namespace WBZ
 				{
 					using (var sqlTran = sqlConn.BeginTransaction())
 					{
-						///1.0.0 => 1.0.1
+						/// first time
+						if (SQL.GetPropertyValue("VERSION") == null)
+						{
+							var sqlCmd = new NpgsqlCommand(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SQL/database.sql")), sqlConn, sqlTran);
+							sqlCmd.ExecuteNonQuery();
+							sqlCmd = new NpgsqlCommand($"insert into wbz.config (property, value) values ('VERSION', '{Fn.AppVersion()}')", sqlConn, sqlTran);
+							sqlCmd.ExecuteNonQuery();
+						}
+						/// 1.0.0 => 1.0.1
 						if (SQL.GetPropertyValue("VERSION") == "1.0.0")
 						{
 							var sqlCmd = new NpgsqlCommand(@"
@@ -68,14 +77,14 @@ $BODY$;
 								update wbz.config set value='1.0.1' where property='VERSION'", sqlConn, sqlTran);
 							sqlCmd.ExecuteNonQuery();
 						}
-						///1.0.1 => 1.0.2
+						/// 1.0.1 => 1.0.2
 						if (SQL.GetPropertyValue("VERSION") == "1.0.1")
 						{
 							var sqlCmd = new NpgsqlCommand(@"
 								update wbz.config set value='1.0.2' where property='VERSION'", sqlConn, sqlTran);
 							sqlCmd.ExecuteNonQuery();
 						}
-						///1.0.2 => 1.1.0
+						/// 1.0.2 => 1.1.0
 						if (SQL.GetPropertyValue("VERSION") == "1.0.2")
 						{
 							var sqlCmd = new NpgsqlCommand(@"
@@ -158,7 +167,7 @@ CREATE TABLE wbz.attributes_values
 								update wbz.config set value='1.1.0' where property='VERSION'", sqlConn, sqlTran);
 							sqlCmd.ExecuteNonQuery();
 						}
-						///1.1.0 => 1.2
+						/// 1.1.0 => 1.2
 						if (SQL.GetPropertyValue("VERSION") == "1.1.0")
 						{
 							var sqlCmd = new NpgsqlCommand(@"

@@ -1,12 +1,12 @@
 -- Database: wbz
-CREATE DATABASE WBZ
-    WITH 
-    OWNER = WBZ
-    ENCODING = 'UTF8'
-    LC_COLLATE = 'Polish_Poland.1250'
-    LC_CTYPE = 'Polish_Poland.1250'
-    TABLESPACE = pg_default
-    CONNECTION LIMIT = -1;
+--CREATE DATABASE WBZ
+--    WITH 
+--    OWNER = WBZ
+--    ENCODING = 'UTF8'
+--    LC_COLLATE = 'Polish_Poland.1250'
+--    LC_CTYPE = 'Polish_Poland.1250'
+--    TABLESPACE = pg_default
+--    CONNECTION LIMIT = -1;
 
 -- Role: wbz_user
 CREATE ROLE userWBZ WITH
@@ -16,10 +16,10 @@ CREATE ROLE userWBZ WITH
   CREATEDB
   CREATEROLE
   REPLICATION;
-
+ 
 -- SCHEMA: wbz
 CREATE SCHEMA wbz AUTHORIZATION userWBZ;
-GRANT ALL ON SCHEMA wbz TO postgres;
+--GRANT ALL ON SCHEMA wbz TO postgres;
 GRANT ALL ON SCHEMA wbz TO userWBZ;
 
 -- Table: wbz.config

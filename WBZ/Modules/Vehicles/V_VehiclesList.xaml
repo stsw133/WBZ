@@ -31,7 +31,8 @@
         <!-- titleBar -->
         <se:TitleBar DockPanel.Dock="Top" SubIcon="{Binding ModeIcon}"/>
         <!-- buttonsPanel -->
-		<Border DockPanel.Dock="Right" BorderBrush="Gray" BorderThickness="1,0,0,0" Background="{Binding panelColor_Vehicles, Source={x:Static p:Settings.Default}}">
+		<ScrollViewer DockPanel.Dock="Right" VerticalScrollBarVisibility="Auto"
+					  BorderBrush="Gray" BorderThickness="1,0,0,0" Background="{Binding panelColor_Vehicles, Source={x:Static p:Settings.Default}}">
             <DockPanel>
                 <DockPanel.Resources>
                     <Style TargetType="{x:Type se:IconButton}">
@@ -58,18 +59,17 @@
                     <se:IconButton Text="{Tr CloseWindow}" Margin="5" Icon="/Resources/icon32_close.ico" Command="se:Commands.Close"/>
                 </StackPanel>
             </DockPanel>
-            <Border.ContextMenu>
+			<ScrollViewer.ContextMenu>
                 <ContextMenu>
 					<se:ColorSetter Color="{Binding panelColor_Vehicles, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                 </ContextMenu>
-            </Border.ContextMenu>
-        </Border>
+            </ScrollViewer.ContextMenu>
+        </ScrollViewer>
         <!-- statusPanel -->
 		<c:StatusPanel DockPanel.Dock="Bottom" Background="{Binding panelColor_Vehicles, Source={x:Static p:Settings.Default}}"
                        HasFilters="{Binding AreFiltersVisible, Mode=OneTime}" HasGroups="{Binding AreGroupsVisible, Mode=OneTime}"/>
         <!-- groupsView -->
-        <c:GroupsView EditingMode="{Binding Perms, Source={x:Static g:Config.User}, Converter={se:conv_Contains}, ConverterParameter=vehicles_groups}"
-                      Visibility="{Binding AreGroupsVisible, Converter={se:conv_Bool}}"/>
+        <c:GroupsView Visibility="{Binding AreGroupsVisible, Converter={se:conv_Bool}}"/>
         <!-- otherFilters -->
         <DockPanel DockPanel.Dock="Bottom" Visibility="{Binding AreFiltersVisible, Converter={se:conv_Bool}}">
             <se:ExtCheckBox Content="{Tr ShowArchival}" IsChecked="{Binding Filters.ShowArchival}" Margin="5" HorizontalAlignment="Right"/>

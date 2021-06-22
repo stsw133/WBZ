@@ -64,8 +64,7 @@
 		<c:StatusPanel DockPanel.Dock="Bottom" Background="{Binding panelColor_Attachments, Source={x:Static p:Settings.Default}}"
                        HasFilters="{Binding AreFiltersVisible, Mode=OneTime}" HasGroups="{Binding AreGroupsVisible, Mode=OneTime}"/>
         <!-- groupsView -->
-        <c:GroupsView EditingMode="{Binding Perms, Source={x:Static g:Config.User}, Converter={se:conv_Contains}, ConverterParameter=attachments_groups}"
-                      Visibility="{Binding AreGroupsVisible, Converter={se:conv_Bool}}"/>
+        <c:GroupsView Visibility="{Binding AreGroupsVisible, Converter={se:conv_Bool}}"/>
         <!-- dataGrid -->
 		<m:AttachmentsListGrid x:Name="dgList" ItemsSource="{Binding InstancesList}" BorderBrush="Gray" BorderThickness="0,0,0,1"
                                MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged" Sorting="dgList_Sorting"/>

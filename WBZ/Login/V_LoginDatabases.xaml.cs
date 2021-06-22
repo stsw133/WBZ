@@ -66,6 +66,8 @@ namespace WBZ.Login
 			lblStatus.Content = string.Empty;
 
 			gridDatabaseInfo.IsEnabled = true;
+			D.CanUpdateDatabase = false;
+			D.CanCreateAdmin = false;
 		}
 
 		/// <summary>
@@ -84,31 +86,34 @@ namespace WBZ.Login
 		/// </summary>
 		private void btnTest_Click(object sender, RoutedEventArgs e)
 		{
-			SQL.connWBZ = StswExpress.SQL.MakeConnString(tbServer.Text, Convert.ToInt32(tbPort.Text), tbDatabase.Text, tbUsername.Text, pbPassword.Password);
-			string dbv = SQL.GetPropertyValue("VERSION");
-
-			if (dbv == Fn.AppVersion())
+			try
 			{
-				lblStatus.Content = "Wersja bazy aktualna!";
-				lblStatus.Foreground = Brushes.Green;
+				SQL.connWBZ = StswExpress.SQL.MakeConnString(tbServer.Text, Convert.ToInt32(tbPort.Text), tbDatabase.Text, tbUsername.Text, pbPassword.Password);
+				string dbv = SQL.GetPropertyValue("VERSION");
 
-				D.CanUpdateDatabase = false;
-				D.CanCreateAdmin = SQL.CountInstances(Config.GetModule(nameof(Modules.Users)), @"u.blocked=false and u.archival=false and exists(select from wbz.users_permissions where ""user""=u.id and perm='admin')") == 0;
+				if (dbv == Fn.AppVersion())
+				{
+					lblStatus.Content = "Wersja bazy aktualna!";
+					lblStatus.Foreground = Brushes.Green;
+
+					D.CanUpdateDatabase = false;
+					D.CanCreateAdmin = SQL.CountInstances(Config.GetModule(nameof(Modules.Users)), @"use.blocked=false and use.archival=false and exists(select from wbz.users_permissions where ""user""=use.id and perm='Admin')") == 0;
+				}
+				else
+				{
+					lblStatus.Content = "Wersja bazy nieaktualna!";
+					lblStatus.Foreground = Brushes.Orange;
+
+					D.CanUpdateDatabase = true;
+					D.CanCreateAdmin = false;
+				}
 			}
-			else if (dbv == null)
+			catch
 			{
 				lblStatus.Content = "Połączenie z bazą nie powiodło się!";
 				lblStatus.Foreground = Brushes.Red;
 
 				D.CanUpdateDatabase = false;
-				D.CanCreateAdmin = false;
-			}
-			else
-			{
-				lblStatus.Content = "Wersja bazy nieaktualna!";
-				lblStatus.Foreground = Brushes.Orange;
-
-				D.CanUpdateDatabase = true;
 				D.CanCreateAdmin = false;
 			}
 		}
@@ -118,14 +123,18 @@ namespace WBZ.Login
 		/// </summary>
 		private void btnUpdateDatabase_Click(object sender, RoutedEventArgs e)
 		{
+			string dbv = SQL.GetPropertyValue("VERSION");
 			var conf = new Confirmation { Owner = this };
-			if (conf.ShowDialog() == true)
+			if (string.IsNullOrEmpty(dbv) || conf.ShowDialog() == true)
 			{
-				var users = SQL.ListInstances<Models.M_User>(Config.GetModule(nameof(Modules.Users)), $"(lower(username)='{conf.GetLogin.ToLower()}' or lower(email)='{conf.GetLogin.ToLower()}') and password='{Global.sha256(conf.GetPassword)}'");
-				if (users.Count == 0 || !SQL.GetUserPerms(users[0].ID).Contains("admin"))
+				if (!string.IsNullOrEmpty(dbv))
 				{
-					new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Brak uprawnień administracyjnych lub błędne dane użytkownika!") { Owner = this }.ShowDialog();
-					return;
+					var users = SQL.ListInstances<Models.M_User>(Config.GetModule(nameof(Modules.Users)), $"(lower(username)='{conf.GetLogin.ToLower()}' or lower(email)='{conf.GetLogin.ToLower()}') and password='{Global.sha256(conf.GetPassword)}'");
+					if (users.Count == 0 || !SQL.GetUserPerms(users[0].ID).Contains("Admin"))
+					{
+						new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Brak uprawnień administracyjnych lub błędne dane użytkownika!") { Owner = this }.ShowDialog();
+						return;
+					}
 				}
 
 				if (SQL_Migration.DoWork())

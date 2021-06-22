@@ -122,10 +122,10 @@ namespace WBZ
 					if (admin)
 					{
 						sqlCmd = new NpgsqlCommand(@"insert into wbz.users_permissions (""user"", perm)
-							values (@id, 'admin'),
-								(@id, 'users_preview'),
-								(@id, 'users_save'),
-								(@id, 'users_delete')", sqlConn, sqlTran);
+							values (@id, 'Admin'),
+								(@id, 'Users_PREVIEW'),
+								(@id, 'Users_SAVE'),
+								(@id, 'Users_DELETE')", sqlConn, sqlTran);
 						sqlCmd.Parameters.AddWithValue("id", id);
 						sqlCmd.ExecuteNonQuery();
 					}
@@ -1634,7 +1634,7 @@ namespace WBZ
 
 			using var sqlConn = ConnOpenedWBZ;
 			using var sqlTran = sqlConn.BeginTransaction();
-			switch (module.Value)
+			switch (module.Name)
 			{
 				/// ARTICLES
 				case nameof(Modules.Articles):
@@ -1773,16 +1773,23 @@ namespace WBZ
 
 			string result = null;
 
-			using (var sqlConn = ConnOpenedWBZ)
-			using (var sqlCmd = new NpgsqlCommand(@"select coalesce((select value from wbz.config where property=@property),'')", sqlConn))
+			try
 			{
-				sqlCmd.Parameters.AddWithValue("property", property);
-				result = sqlCmd.ExecuteScalar().ToString();
-			}
+				using (var sqlConn = ConnOpenedWBZ)
+				using (var sqlCmd = new NpgsqlCommand(@"select coalesce((select value from wbz.config where property=@property), '')", sqlConn))
+				{
+					sqlCmd.Parameters.AddWithValue("property", property);
+					result = sqlCmd.ExecuteScalar().ToString();
+				}
 
-			if (result == string.Empty && def != null)
+				if (result == string.Empty && def != null)
+				{
+					SetPropertyValue(property, def);
+					result = def;
+				}
+			}
+			catch
 			{
-				SetPropertyValue(property, def);
 				result = def;
 			}
 

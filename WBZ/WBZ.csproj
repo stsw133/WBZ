@@ -30,6 +30,7 @@
     <None Remove="Resources\StswExpress.dll" />
     <None Remove="Resources\Translations.json" />
     <None Remove="Resources\_null.ico" />
+    <None Remove="SQL\database.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -316,6 +317,9 @@
     <Resource Include="Properties\Resources.resx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Content Include="SQL\database.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

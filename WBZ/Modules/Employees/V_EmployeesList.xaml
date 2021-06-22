@@ -68,8 +68,7 @@
 		<c:StatusPanel DockPanel.Dock="Bottom" Background="{Binding panelColor_Employees, Source={x:Static p:Settings.Default}}"
                        HasFilters="{Binding AreFiltersVisible, Mode=OneTime}" HasGroups="{Binding AreGroupsVisible, Mode=OneTime}"/>
         <!-- groupsView -->
-        <c:GroupsView EditingMode="{Binding Perms, Source={x:Static g:Config.User}, Converter={se:conv_Contains}, ConverterParameter=employees_groups}"
-                      Visibility="{Binding AreGroupsVisible, Converter={se:conv_Bool}}"/>
+        <c:GroupsView Visibility="{Binding AreGroupsVisible, Converter={se:conv_Bool}}"/>
         <!-- otherFilters -->
         <DockPanel DockPanel.Dock="Bottom" Visibility="{Binding AreFiltersVisible, Converter={se:conv_Bool}}">
             <se:ExtCheckBox Content="{Tr ShowArchival}" IsChecked="{Binding Filters.ShowArchival}" Margin="5" HorizontalAlignment="Right"/>

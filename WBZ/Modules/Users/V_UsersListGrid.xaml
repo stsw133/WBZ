@@ -16,25 +16,25 @@
     </DataGrid.Resources>
     <DataGrid.Columns>
         <!-- ID -->
-        <DataGridTextColumn Binding="{Binding ID}" Header="ID"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_ID, Converter={se:conv_Bool}}"/>
+		<DataGridTextColumn Binding="{Binding ID}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_ID, Converter={se:conv_Bool}}">
+			<DataGridTextColumn.Header>
+				<se:ColumnFilter FilterType="Number" Header="ID" NameSQL="use.id"/>
+			</DataGridTextColumn.Header>
+		</DataGridTextColumn>
         <!-- Fullname -->
-        <DataGridTextColumn Binding="{Binding Fullname}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Fullname, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Fullname}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Fullname, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <se:ColumnFilter FilterType="Text" Header="Nazwisko" NameSQL="use.lastname || ' ' || use.forename"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Email -->
-        <DataGridTextColumn Binding="{Binding Email}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Email, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Email}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Email, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
 				<se:ColumnFilter FilterType="Text" Header="E-mail" NameSQL="use.email"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Phone -->
-        <DataGridTextColumn Binding="{Binding Phone}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Phone, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Phone}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_UsersList_Phone, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
                 <se:ColumnFilter FilterType="Text" Header="Telefon" NameSQL="use.phone"/>
             </DataGridTextColumn.Header>
