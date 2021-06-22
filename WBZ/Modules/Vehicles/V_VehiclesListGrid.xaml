@@ -50,13 +50,13 @@
         <!-- Forwarder -->
         <DataGridTextColumn Binding="{Binding ForwarderName}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Forwarder, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="Text" Header="Spedytor" NameSQL="cnt.name"/>
+				<se:ColumnFilter FilterType="Text" Header="Spedytor" NameSQL="c.name"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Driver -->
         <DataGridTextColumn Binding="{Binding DriverName}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_VehiclesList_Driver, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="Text" Header="Kierowca" NameSQL="emp.lastname || ' ' || emp.forename"/>
+				<se:ColumnFilter FilterType="Text" Header="Kierowca" NameSQL="e.lastname || ' ' || e.forename"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- ProdYear -->

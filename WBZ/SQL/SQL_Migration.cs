@@ -9,9 +9,9 @@ namespace WBZ
 	internal static class SQL_Migration
 	{
 		/// <summary>
-		/// Funkcja migrująca bazę do aktualnej wersji z wersji wcześniejszych
+		/// Updates schema to make it compatible with the newest app version
 		/// </summary>
-		/// <returns>True - jeśli udało się przeprowadzić migrację</returns>
+		/// <returns>True - if schema has been updated</returns>
 		internal static bool DoWork()
 		{
 			bool result = false;
@@ -25,15 +25,15 @@ namespace WBZ
 						/// first time
 						if (SQL.GetPropertyValue("VERSION") == null)
 						{
-							var sqlCmd = new NpgsqlCommand(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SQL/database.sql")), sqlConn, sqlTran);
+							using var sqlCmd = new NpgsqlCommand(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SQL/database.sql")), sqlConn, sqlTran);
 							sqlCmd.ExecuteNonQuery();
-							sqlCmd = new NpgsqlCommand($"insert into wbz.config (property, value) values ('VERSION', '{Fn.AppVersion()}')", sqlConn, sqlTran);
-							sqlCmd.ExecuteNonQuery();
+							using var sqlCmd2 = new NpgsqlCommand($"insert into wbz.config (property, value) values ('VERSION', '{Fn.AppVersion()}')", sqlConn, sqlTran);
+							sqlCmd2.ExecuteNonQuery();
 						}
 						/// 1.0.0 => 1.0.1
 						if (SQL.GetPropertyValue("VERSION") == "1.0.0")
 						{
-							var sqlCmd = new NpgsqlCommand(@"
+							using var sqlCmd = new NpgsqlCommand(@"
 CREATE OR REPLACE FUNCTION wbz.artdefmeaval(
 	_article integer,
 	_amount double precision)
@@ -80,14 +80,14 @@ $BODY$;
 						/// 1.0.1 => 1.0.2
 						if (SQL.GetPropertyValue("VERSION") == "1.0.1")
 						{
-							var sqlCmd = new NpgsqlCommand(@"
+							using var sqlCmd = new NpgsqlCommand(@"
 								update wbz.config set value='1.0.2' where property='VERSION'", sqlConn, sqlTran);
 							sqlCmd.ExecuteNonQuery();
 						}
 						/// 1.0.2 => 1.1.0
 						if (SQL.GetPropertyValue("VERSION") == "1.0.2")
 						{
-							var sqlCmd = new NpgsqlCommand(@"
+							using var sqlCmd = new NpgsqlCommand(@"
 delete from wbz.users_permissions where perm='admin_config_preview';
 delete from wbz.users_permissions where perm='admin_config_save';
 delete from wbz.users_permissions where perm='admin_config_delete';
@@ -170,7 +170,7 @@ CREATE TABLE wbz.attributes_values
 						/// 1.1.0 => 1.2
 						if (SQL.GetPropertyValue("VERSION") == "1.1.0")
 						{
-							var sqlCmd = new NpgsqlCommand(@"
+							using var sqlCmd = new NpgsqlCommand(@"
 update wbz.users_permissions set perm='contractors_preview' where perm='companies_preview';
 update wbz.users_permissions set perm='contractors_save' where perm='companies_save';
 update wbz.users_permissions set perm='contractors_delete' where perm='companies_delete';
@@ -253,9 +253,8 @@ alter table wbz.attachments alter column name type varchar(255);
 					}
 				}
 
-				result = true;
-
 				Fn.AppDatabase.Version = SQL.GetPropertyValue("VERSION");
+				result = true;
 			}
 			catch (Exception ex)
 			{

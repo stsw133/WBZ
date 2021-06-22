@@ -20,12 +20,12 @@ namespace WBZ.Controls
     public partial class GroupsView : TreeView
     {
         internal List<M_Group> InstancesList = new List<M_Group>();
-        private MV GroupModule = Config.GetModule(nameof(Modules._submodules.Groups));
-        private MV WindowModule;
+        private MV WindowModule, GroupModule = Config.GetModule(nameof(Modules._submodules.Groups));
 
         public GroupsView()
         {
             InitializeComponent();
+            DataContext = this;
         }
 
 		/// <summary>
@@ -38,6 +38,11 @@ namespace WBZ.Controls
         /// </summary>
         private void TreeView_Loaded(object sender, RoutedEventArgs e)
         {
+            var win = Window.GetWindow(this);
+            dynamic d = win?.DataContext;
+            if (d != null)
+                WindowModule = d.Module;
+
             btnGroupsRefresh_Click(null, null);
         }
 
@@ -166,16 +171,8 @@ namespace WBZ.Controls
 
             try
             {
-                Window win = Window.GetWindow(this);
-                var d = win?.DataContext as D_ModuleList<M_Group>;
-                if (d != null)
-                {
-                    WindowModule = d.Module;
-                    // TODO - filtr do parametryzacji
-                    InstancesList = SQL.ListInstances<M_Group>(GroupModule, $"{GroupModule.Alias}.module='{WindowModule.Alias}' and {GroupModule.Alias}.instance is null");
-                }
-
-                /// Clear groups
+                // TODO - filtr do parametryzacji
+                InstancesList = SQL.ListInstances<M_Group>(GroupModule, $"{GroupModule.Alias}.module='{WindowModule.Alias}' and {GroupModule.Alias}.instance is null");
                 Items.Clear();
 
                 TreeViewItem GetTreeViewHeader(M_Group group)

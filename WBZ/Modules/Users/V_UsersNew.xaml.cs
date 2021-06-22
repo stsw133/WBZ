@@ -73,7 +73,7 @@ namespace WBZ.Modules.Users
 		private void chckPerms_Unchecked(object sender, RoutedEventArgs e)
 		{
 			var perm = (sender as CheckBox).Tag.ToString();
-			if (!D.InstanceData.Perms.Contains(perm))
+			if (D.InstanceData.Perms.Contains(perm))
 				D.InstanceData.Perms.Remove(perm);
 		}
 

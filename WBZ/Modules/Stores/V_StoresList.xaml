@@ -6,7 +6,6 @@
         xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
         xmlns:b="clr-namespace:WBZ.Modules.Stores"
         xmlns:c="clr-namespace:WBZ.Controls"
-        xmlns:g="clr-namespace:WBZ.Globals"
         xmlns:m="clr-namespace:WBZ.Modules"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d" Height="650" Width="975" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
@@ -31,50 +30,54 @@
         <!-- titleBar -->
         <se:TitleBar DockPanel.Dock="Top" SubIcon="{Binding ModeIcon}"/>
         <!-- buttonsPanel -->
-		<Border DockPanel.Dock="Right" BorderBrush="Gray" BorderThickness="1,0,0,0" Background="{Binding panelColor_Stores, Source={x:Static p:Settings.Default}}">
-            <DockPanel>
-                <DockPanel.Resources>
-                    <Style TargetType="{x:Type se:IconButton}">
-                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
-                        <Setter Property="IsTextVisible" Value="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"/>
-                    </Style>
-                </DockPanel.Resources>
-                <StackPanel DockPanel.Dock="Top" Visibility="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=SELECT}">
-                    <se:IconButton Text="{Tr Select}" Margin="5" Icon="/Resources/icon32_select.ico" Command="se:Commands.Select"/>
-                    <Separator/>
-                </StackPanel>
-                <StackPanel DockPanel.Dock="Top">
-                    <se:IconButton Text="{Tr Preview}" Margin="5" Icon="/Resources/icon32_search.ico" Command="se:Commands.Preview"/>
-					<se:IconButton Text="{Tr New}" Margin="5,0,5,5" Icon="/Resources/icon32_add.ico" Command="se:Commands.New"/>
-					<se:IconButton Text="{Tr Duplicate}" Margin="5,0,5,5" Icon="/Resources/icon32_duplicate.ico" Command="se:Commands.Duplicate"/>
-					<se:IconButton Text="{Tr Edit}" Margin="5,0,5,5" Icon="/Resources/icon32_edit.ico" Command="se:Commands.Edit"/>
-					<se:IconButton Text="{Tr Delete}" Margin="5,0,5,5" Icon="/Resources/icon32_delete.ico" Command="se:Commands.Delete"/>
-                    <Separator/>
-                </StackPanel>
-                <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
-                    <Separator/>
-                    <se:IconButton Text="{Tr Refresh}" Margin="5" Icon="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
-                    <Separator/>
-                    <se:IconButton Text="{Tr CloseWindow}" Margin="5" Icon="/Resources/icon32_close.ico" Command="se:Commands.Close"/>
-                </StackPanel>
-            </DockPanel>
-            <Border.ContextMenu>
-                <ContextMenu>
-					<se:ColorSetter Color="{Binding panelColor_Stores, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
-                </ContextMenu>
-            </Border.ContextMenu>
-        </Border>
+        <ScrollViewer DockPanel.Dock="Right" VerticalScrollBarVisibility="Auto">
+            <Border BorderBrush="Gray" BorderThickness="1,0,0,0" Background="{Binding panelColor_Stores, Source={x:Static p:Settings.Default}}">
+                <DockPanel>
+                    <DockPanel.Resources>
+                        <Style TargetType="{x:Type se:IconButton}">
+                            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                            <Setter Property="IsTextVisible" Value="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"/>
+                        </Style>
+                    </DockPanel.Resources>
+                    <StackPanel DockPanel.Dock="Top" Visibility="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=SELECT}">
+                        <se:IconButton Text="{Tr Select}" Margin="5" Icon="/Resources/icon32_select.ico" Command="se:Commands.Select"/>
+                        <Separator/>
+                    </StackPanel>
+                    <StackPanel DockPanel.Dock="Top">
+                        <se:IconButton Text="{Tr Preview}" Margin="5" Icon="/Resources/icon32_search.ico" Command="se:Commands.Preview"/>
+                        <se:IconButton Text="{Tr New}" Margin="5,0,5,5" Icon="/Resources/icon32_add.ico" Command="se:Commands.New"/>
+                        <se:IconButton Text="{Tr Duplicate}" Margin="5,0,5,5" Icon="/Resources/icon32_duplicate.ico" Command="se:Commands.Duplicate"/>
+                        <se:IconButton Text="{Tr Edit}" Margin="5,0,5,5" Icon="/Resources/icon32_edit.ico" Command="se:Commands.Edit"/>
+                        <se:IconButton Text="{Tr Delete}" Margin="5,0,5,5" Icon="/Resources/icon32_delete.ico" Command="se:Commands.Delete"/>
+                        <Separator/>
+                    </StackPanel>
+                    <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
+                        <Separator/>
+                        <se:IconButton Text="{Tr Refresh}" Margin="5" Icon="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
+                        <Separator/>
+                        <se:IconButton Text="{Tr CloseWindow}" Margin="5" Icon="/Resources/icon32_close.ico" Command="se:Commands.Close"/>
+                    </StackPanel>
+                </DockPanel>
+                <Border.ContextMenu>
+                    <ContextMenu>
+                        <se:ColorSetter Color="{Binding panelColor_Stores, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+                    </ContextMenu>
+                </Border.ContextMenu>
+            </Border>
+        </ScrollViewer>
         <!-- statusPanel -->
 		<c:StatusPanel DockPanel.Dock="Bottom" Background="{Binding panelColor_Stores, Source={x:Static p:Settings.Default}}"
                        HasFilters="{Binding AreFiltersVisible, Mode=OneTime}" HasGroups="{Binding AreGroupsVisible, Mode=OneTime}"/>
         <!-- groupsView -->
         <c:GroupsView Visibility="{Binding AreGroupsVisible, Converter={se:conv_Bool}}"/>
         <!-- otherFilters -->
-        <DockPanel DockPanel.Dock="Bottom" Visibility="{Binding AreFiltersVisible, Converter={se:conv_Bool}}">
-            <se:ExtCheckBox Content="{Tr ShowArchival}" IsChecked="{Binding Filters.ShowArchival}" Margin="5" HorizontalAlignment="Right"/>
-        </DockPanel>
+        <Border DockPanel.Dock="Bottom" BorderBrush="Gray" BorderThickness="0,1,0,0" Visibility="{Binding AreFiltersVisible, Converter={se:conv_Bool}}">
+            <DockPanel>
+                <se:ExtCheckBox Content="{Tr ShowArchival}" IsChecked="{Binding Filter.ShowArchival}" Margin="5" HorizontalAlignment="Right"/>
+            </DockPanel>
+        </Border>
         <!-- dataGrid -->
-        <m:StoresListGrid ItemsSource="{Binding InstancesList}" BorderBrush="Gray" BorderThickness="0,0,0,1"
+        <m:StoresListGrid ItemsSource="{Binding InstancesList}" BorderThickness="0"
                           MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged" Sorting="dgList_Sorting"/>
     </DockPanel>
 </b:List>

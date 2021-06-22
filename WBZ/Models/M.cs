@@ -1,6 +1,4 @@
-﻿using WBZ.Globals;
-
-namespace WBZ.Models
+﻿namespace WBZ.Models
 {
     /// <summary>
     /// Main (base) model interface

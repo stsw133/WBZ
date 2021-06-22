@@ -46,8 +46,8 @@ namespace WBZ
 			Mail.Password = WBZ.Properties.Settings.Default.config_Email_Password;
 
 			TM.Instance.CurrentLanguage = WBZ.Properties.Settings.Default.Language;
-			if (File.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Resources\Translations.json")))
-				TMLanguagesLoader.Instance.AddFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Resources\Translations.json"));
+			if (File.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Other\Translations.json")))
+				TMLanguagesLoader.Instance.AddFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Other\Translations.json"));
 
 			Config.ListModules.Sort((x, y) => (x.Display as string).CompareTo(y.Display as string));
 

@@ -16,56 +16,51 @@
     </DataGrid.Resources>
     <DataGrid.Columns>
         <!-- ID -->
-        <DataGridTextColumn Binding="{Binding ID}" Header="ID"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_StoresList_ID, Converter={se:conv_Bool}}"/>
-        <!-- Icon -->
-        <se:DataGridImageColumn Image="{Binding IconContent}" Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"
-                                Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_StoresList_Icon, Converter={se:conv_Bool}}"/>
-        <!-- Codename -->
-        <DataGridTextColumn Binding="{Binding Codename}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_StoresList_Codename, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding ID}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_StoresList_ID, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="Text" Header="Kod" NameSQL="s.codename"/>
+                <se:ColumnFilter FilterType="Number" Header="ID" NameSQL="sto.id"/>
+            </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+        <!-- Icon -->
+        <se:DataGridImageColumn Image="{Binding IconContent}" Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_StoresList_Icon, Converter={se:conv_Bool}}"/>
+        <!-- Codename -->
+        <DataGridTextColumn Binding="{Binding Codename}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_StoresList_Codename, Converter={se:conv_Bool}}">
+            <DataGridTextColumn.Header>
+				<se:ColumnFilter FilterType="Text" Header="Kod" NameSQL="sto.codename"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Name -->
-        <DataGridTextColumn Binding="{Binding Name}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_StoresList_Name, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Name}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_StoresList_Name, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="Text" Header="Nazwa" NameSQL="s.name"/>
+                <se:ColumnFilter FilterType="Text" Header="Nazwa" NameSQL="sto.name"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Postcode -->
-        <DataGridTextColumn Binding="{Binding Postcode}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_StoresList_Postcode, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Postcode}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_StoresList_Postcode, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="Text" Header="Kod pocztowy" NameSQL="s.postcode"/>
+                <se:ColumnFilter FilterType="Text" Header="Kod pocztowy" NameSQL="sto.postcode"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- City -->
-        <DataGridTextColumn Binding="{Binding City}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_StoresList_City, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding City}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_StoresList_City, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="Text" Header="Miasto" NameSQL="s.city"/>
+                <se:ColumnFilter FilterType="Text" Header="Miasto" NameSQL="sto.city"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Address -->
-        <DataGridTextColumn Binding="{Binding Address}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_StoresList_Address, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Address}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_StoresList_Address, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="Text" Header="Adres" NameSQL="s.address"/>
+                <se:ColumnFilter FilterType="Text" Header="Adres" NameSQL="sto.address"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Amount -->
-        <DataGridTextColumn Binding="{Binding Amount}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_StoresList_Amount, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Amount}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_StoresList_Amount, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
 				<se:ColumnFilter FilterType="Number" Header="Posiadany towar (kg)" NameSQL="sum(sa.amount)"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Reserved -->
-        <DataGridTextColumn Binding="{Binding Reserved}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_StoresList_Reserved, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Reserved}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_StoresList_Reserved, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
 				<se:ColumnFilter FilterType="Number" Header="Zarezerwowany towar (kg)" NameSQL="sum(sa.reserved)"/>
             </DataGridTextColumn.Header>

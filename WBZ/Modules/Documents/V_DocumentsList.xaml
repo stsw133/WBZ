@@ -71,7 +71,7 @@
         <c:GroupsView Visibility="{Binding AreGroupsVisible, Converter={se:conv_Bool}}"/>
         <!-- otherFilters -->
         <DockPanel DockPanel.Dock="Bottom" Visibility="{Binding AreFiltersVisible, Converter={se:conv_Bool}}">
-			<se:ExtCheckBox Content="{Tr ShowArchival}" IsChecked="{Binding Filters.ShowArchival}" Margin="5" HorizontalAlignment="Right"/>
+			<se:ExtCheckBox Content="{Tr ShowArchival}" IsChecked="{Binding Filter.ShowArchival}" Margin="5" HorizontalAlignment="Right"/>
 		</DockPanel>
         <!-- dataGrid -->
 		<m:DocumentsListGrid ItemsSource="{Binding InstancesList}" BorderBrush="Gray" BorderThickness="0,0,0,1"

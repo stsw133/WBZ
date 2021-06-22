@@ -295,7 +295,7 @@
     <Content Include="Resources\StswExpress.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Translations.json">
+    <Content Include="Other\Translations.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\_null.ico">
@@ -317,7 +317,7 @@
     <Resource Include="Properties\Resources.resx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Content Include="SQL\database.sql">
+    <Content Include="SQL\Database.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

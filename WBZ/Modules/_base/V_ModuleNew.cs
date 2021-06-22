@@ -71,7 +71,6 @@ namespace WBZ.Modules._base
 		/// Save
 		/// </summary>
 		private bool saved = false;
-		internal void cmdSave_CanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = D?.Mode != Commands.Type.PREVIEW;
 		internal void cmdSave_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			if (!CheckDataValidation())
@@ -84,6 +83,8 @@ namespace WBZ.Modules._base
                 else Close();
 			}
 		}
+		internal void cmdSave_CanExecute(object sender, CanExecuteRoutedEventArgs e) =>
+			e.CanExecute = D?.Mode != Commands.Type.PREVIEW;
 
 		/// <summary>
 		/// Refresh

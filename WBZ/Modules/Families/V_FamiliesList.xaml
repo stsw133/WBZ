@@ -93,7 +93,7 @@
         <!-- otherFilters -->
         <DockPanel DockPanel.Dock="Bottom" Visibility="{Binding AreFiltersVisible, Converter={se:conv_Bool}}">
             <CheckBox Margin="5,0,5,5" HorizontalAlignment="Right" VerticalContentAlignment="Center"
-                      Content="Pokaż archiwalne" IsChecked="{Binding Filters.ShowArchival}"/>
+                      Content="Pokaż archiwalne" IsChecked="{Binding Filter.ShowArchival}"/>
         </DockPanel>
         <!-- dataGrid -->
         <m:FamiliesListGrid x:Name="dgList" ItemsSource="{Binding InstancesList}" IsReadOnly="True"

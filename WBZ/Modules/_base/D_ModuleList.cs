@@ -9,7 +9,7 @@ namespace WBZ.Modules._base
 	abstract class D_ModuleList<MODULE_MODEL> : D where MODULE_MODEL : class, new()
 	{
 		/// Module
-		public MV Module => Config.ListModules.Find(x => x.Name.ToString() == GetType().Name[2..^4]);
+		public MV Module => Config.GetModule(GetType().Name[2..^4]);
 		public string Title => TM.Tr(Module.Name + Mode.ToString().Capitalize());
 
 		/// Mode

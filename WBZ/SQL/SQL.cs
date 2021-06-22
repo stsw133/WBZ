@@ -48,7 +48,9 @@ namespace WBZ
                 if (user.Rows.Count > 0)
                 {
                     Config.User = user.ToList<M_User>()[0];
-                    if (Config.User.Blocked)
+                    if (Config.User.Archival)
+                        MessageBox.Show("Użytkownik o podanym loginie jest zarchiwizowany.");
+					else if (Config.User.Blocked)
                         MessageBox.Show("Użytkownik o podanym loginie jest zablokowany.");
                     else
                     {
@@ -582,13 +584,10 @@ namespace WBZ
 		/// <param name="filter">Filtr SQL</param>
 		internal static List<MV> ComboSource(MV module, string column, string filter, bool allowEmpty)
 		{
-			if (string.IsNullOrWhiteSpace(filter))
-				filter = "true";
-
 			using var sqlConn = ConnOpenedWBZ;
 			var query = $@"select id as value, {column} as display
 				from wbz.{module.Tag}
-				where {filter}
+				where {filter ?? "true"}
 				order by 2 asc";
 			using var sqlDA = new NpgsqlDataAdapter(query, sqlConn);
 			if (allowEmpty)
@@ -622,275 +621,285 @@ namespace WBZ
 				(mode == SelectMode.COUNT ? "count (*) "
 				: mode == SelectMode.SIMPLE ?
 				$@"
-						{a}.id, {a}.codename, {a}.name, {a}.ean, coalesce(nullif(wbz.ArtDefMeaNam({a}.id),''), 'kg') as measure,
-						coalesce(sum(sa.amount), 0) as amountraw, coalesce(sum(sa.amount) / wbz.ArtDefMeaCon({a}.id), 0) as amount,
-						coalesce(sum(sa.reserved), 0) as reservedraw, coalesce(sum(sa.reserved) / wbz.ArtDefMeaCon({a}.id), 0) as reserved,
-						{a}.archival, {a}.comment, {a}.icon
-					" :
+					{a}.id, {a}.codename, {a}.name, {a}.ean, coalesce(nullif(wbz.ArtDefMeaNam({a}.id),''), 'kg') as measure,
+					coalesce(sum(sa.amount), 0) as amountraw, coalesce(sum(sa.amount) / wbz.ArtDefMeaCon({a}.id), 0) as amount,
+					coalesce(sum(sa.reserved), 0) as reservedraw, coalesce(sum(sa.reserved) / wbz.ArtDefMeaCon({a}.id), 0) as reserved,
+					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+				" :
 				$@"
-						{a}.id, {a}.codename, {a}.name, {a}.ean, coalesce(nullif(wbz.ArtDefMeaNam({a}.id),''), 'kg') as measure,
-						coalesce(sum(sa.amount), 0) as amountraw, coalesce(sum(sa.amount) / wbz.ArtDefMeaCon({a}.id), 0) as amount,
-						coalesce(sum(sa.reserved), 0) as reservedraw, coalesce(sum(sa.reserved) / wbz.ArtDefMeaCon({a}.id), 0) as reserved,
-						{a}.archival, {a}.comment, {a}.icon
-					") +
+					{a}.id, {a}.codename, {a}.name, {a}.ean, coalesce(nullif(wbz.ArtDefMeaNam({a}.id),''), 'kg') as measure,
+					coalesce(sum(sa.amount), 0) as amountraw, coalesce(sum(sa.amount) / wbz.ArtDefMeaCon({a}.id), 0) as amount,
+					coalesce(sum(sa.reserved), 0) as reservedraw, coalesce(sum(sa.reserved) / wbz.ArtDefMeaCon({a}.id), 0) as reserved,
+					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+				") +
 				$@"
-						from wbz.articles {a}
-						left join wbz.stores_articles sa on {a}.id=sa.article
-						where {filter.Content ?? "1=1"} and {filter.AutoFilterString ?? "1=1"}
-						group by {a}.id
-					",
+					from wbz.articles {a}
+					left join wbz.icons i on {a}.icon=i.id
+					left join wbz.stores_articles sa on {a}.id=sa.article
+					where {filter.Content ?? "true"} and {filter.AutoFilterString ?? "true"}
+					group by {a}.id
+				",
 				/// ATTACHMENTS
 				nameof(Modules.Attachments) =>
 				(mode == SelectMode.COUNT ? "count (*) "
 				: mode == SelectMode.SIMPLE ?
 				$@"
-						{a}.id, {a}.""user"", {a}.module, {a}.instance, {a}.name,
-						{a}.""format"", {a}.""path"", {a}.size, null as file
-					" :
+					{a}.id, {a}.""user"", {a}.module, {a}.instance, {a}.name,
+					{a}.""format"", {a}.""path"", {a}.size, null as file
+				" :
 				$@"
-						{a}.id, {a}.""user"", {a}.module, {a}.instance, {a}.name,
-						{a}.""format"", {a}.""path"", {a}.size, null as file
-					") +
+					{a}.id, {a}.""user"", {a}.module, {a}.instance, {a}.name,
+					{a}.""format"", {a}.""path"", {a}.size, null as file
+				") +
 				$@"
-						from wbz.attachments {a}
-						left join wbz.users u on {a}.""user"" = u.id	
-						where {filter.Content ?? "1=1"} and {filter.AutoFilterString ?? "1=1"}
-					",
+					from wbz.attachments {a}
+					left join wbz.users u on {a}.""user"" = u.id	
+					where {filter.Content ?? "true"} and {filter.AutoFilterString ?? "true"}
+				",
 				/// ATTRIBUTES_CLASSES
 				nameof(Modules.AttributesClasses) =>
 				(mode == SelectMode.COUNT ? "count (*) "
 				: mode == SelectMode.SIMPLE ?
 				$@"
-						{a}.id, {a}.module, {a}.name, {a}.type, {a}.""values"",
-						{a}.archival, {a}.comment, {a}.icon
-					" :
+					{a}.id, {a}.module, {a}.name, {a}.type, {a}.""values"",
+					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+				" :
 				$@"
-						{a}.id, {a}.module, {a}.name, {a}.type, {a}.""values"",
-						{a}.archival, {a}.comment, {a}.icon
-					") +
+					{a}.id, {a}.module, {a}.name, {a}.type, {a}.""values"",
+					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+				") +
 				$@"
-						from wbz.attributes_classes {a}
-						where {filter.Content ?? "1=1"} and {filter.AutoFilterString ?? "1=1"}
-					",
+					from wbz.attributes_classes {a}
+					left join wbz.icons i on {a}.icon=i.id
+					where {filter.Content ?? "true"} and {filter.AutoFilterString ?? "true"}
+				",
 				/// CONTRACTORS
 				nameof(Modules.Contractors) =>
 				(mode == SelectMode.COUNT ? "count (*) "
 				: mode == SelectMode.SIMPLE ?
 				$@"
-						{a}.id, {a}.codename, {a}.name, {a}.branch, {a}.nip, {a}.regon, {a}.postcode, {a}.city, {a}.address,
-						{a}.archival, {a}.comment, {a}.icon
-					" :
+					{a}.id, {a}.codename, {a}.name, {a}.branch, {a}.nip, {a}.regon, {a}.postcode, {a}.city, {a}.address,
+					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+				" :
 				$@"
-						{a}.id, {a}.codename, {a}.name, {a}.branch, {a}.nip, {a}.regon, {a}.postcode, {a}.city, {a}.address,
-						{a}.archival, {a}.comment, {a}.icon
-					") +
+					{a}.id, {a}.codename, {a}.name, {a}.branch, {a}.nip, {a}.regon, {a}.postcode, {a}.city, {a}.address,
+					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+				") +
 				$@"
-						from wbz.contractors {a}
-						where {filter.Content} and {filter.AutoFilterString}
-					",
+					from wbz.contractors {a}
+					left join wbz.icons i on {a}.icon=i.id
+					where {filter.Content ?? "true"} and {filter.AutoFilterString ?? "true"}
+				",
 				/// DISTRIBUTIONS
 				nameof(Modules.Distributions) =>
 				(mode == SelectMode.COUNT ? "count (*) "
 				: mode == SelectMode.SIMPLE ?
 				$@"
-						{a}.id, {a}.name, {a}.datereal, {a}.status,
-						count(distinct dp.family) as familiescount, sum(members) as memberscount,
-						count(dp.*) as positionscount, sum(dp.amount) as weight,
-						{a}.archival, {a}.comment, {a}.icon
-					" :
+					{a}.id, {a}.name, {a}.datereal, {a}.status,
+					count(distinct dp.family) as familiescount, sum(members) as memberscount,
+					count(dp.*) as positionscount, sum(dp.amount) as weight,
+					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+				" :
 				$@"
-						{a}.id, {a}.name, {a}.datereal, {a}.status,
-						count(distinct dp.family) as familiescount, sum(members) as memberscount,
-						count(dp.*) as positionscount, sum(dp.amount) as weight,
-						{a}.archival, {a}.comment, {a}.icon
-					") +
+					{a}.id, {a}.name, {a}.datereal, {a}.status,
+					count(distinct dp.family) as familiescount, sum(members) as memberscount,
+					count(dp.*) as positionscount, sum(dp.amount) as weight,
+					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+				") +
 				$@"
-						from wbz.distributions {a}
-						left join wbz.distributions_positions dp on dp.distribution={a}.id
-						where {filter.Content ?? "1=1"} and {filter.AutoFilterString ?? "1=1"}
-						group by {a}.id
-					",
+					from wbz.distributions {a}
+					left join wbz.distributions_positions dp on {a}.id=dp.distribution
+					left join wbz.icons i on {a}.icon=i.id
+					where {filter.Content ?? "true"} and {filter.AutoFilterString ?? "true"}
+					group by {a}.id
+				",
 				/// DOCUMENTS
 				nameof(Modules.Documents) =>
 				(mode == SelectMode.COUNT ? "count (*) "
 				: mode == SelectMode.SIMPLE ?
 				$@"
-						{a}.id, {a}.name, {a}.store, s.name as storename, {a}.contractor, c.name as contractorname,
-						{a}.type, {a}.dateissue, {a}.status, count(dp.*) as positionscount, sum(dp.amount) as weight, sum(dp.cost) as cost,
-						{a}.archival, {a}.comment, {a}.icon
-					" :
+					{a}.id, {a}.name, {a}.store, s.name as storename, {a}.contractor, c.name as contractorname,
+					{a}.type, {a}.dateissue, {a}.status, count(dp.*) as positionscount, sum(dp.amount) as weight, sum(dp.cost) as cost,
+					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+				" :
 				$@"
-						{a}.id, {a}.name, {a}.store, s.name as storename, {a}.contractor, c.name as contractorname,
-						{a}.type, {a}.dateissue, {a}.status, count(dp.*) as positionscount, sum(dp.amount) as weight, sum(dp.cost) as cost,
-						{a}.archival, {a}.comment, {a}.icon
-					") +
+					{a}.id, {a}.name, {a}.store, s.name as storename, {a}.contractor, c.name as contractorname,
+					{a}.type, {a}.dateissue, {a}.status, count(dp.*) as positionscount, sum(dp.amount) as weight, sum(dp.cost) as cost,
+					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+				") +
 				$@"
-						from wbz.documents {a}
-						left join wbz.documents_positions dp on dp.document={a}.id
-						left join wbz.contractors c on c.id={a}.contractor
-						left join wbz.stores s on s.id={a}.store
-						where {filter.Content ?? "1=1"} and {filter.AutoFilterString ?? "1=1"}
-						group by {a}.id, c.id, s.id
-					",
+					from wbz.documents {a}
+					left join wbz.documents_positions dp on {a}.id=dp.document
+					left join wbz.contractors c on {a}.contractor=c.id
+					left join wbz.icons i on {a}.icon=i.id
+					left join wbz.stores s on {a}.store=s.id
+					where {filter.Content ?? "true"} and {filter.AutoFilterString ?? "true"}
+					group by {a}.id, c.id, s.id
+				",
 				/// EMPLOYEES
 				nameof(Modules.Employees) =>
 				(mode == SelectMode.COUNT ? "count (*) "
 				: mode == SelectMode.SIMPLE ?
 				$@"
-						{a}.id, {a}.""user"", u.lastname || ' ' || u.forename as username,
-						{a}.forename, {a}.lastname, {a}.department, {a}.position,
-						{a}.email, {a}.phone, {a}.postcode, {a}.city, {a}.address,
-						{a}.archival, {a}.comment, {a}.icon
-					" :
+					{a}.id, {a}.""user"", u.lastname || ' ' || u.forename as username,
+					{a}.forename, {a}.lastname, {a}.department, {a}.position,
+					{a}.email, {a}.phone, {a}.postcode, {a}.city, {a}.address,
+					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+				" :
 				$@"
-						{a}.id, {a}.""user"", u.lastname || ' ' || u.forename as username,
-						{a}.forename, {a}.lastname, {a}.department, {a}.position,
-						{a}.email, {a}.phone, {a}.postcode, {a}.city, {a}.address,
-						{a}.archival, {a}.comment, {a}.icon
-					") +
+					{a}.id, {a}.""user"", u.lastname || ' ' || u.forename as username,
+					{a}.forename, {a}.lastname, {a}.department, {a}.position,
+					{a}.email, {a}.phone, {a}.postcode, {a}.city, {a}.address,
+					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+				") +
 				$@"
-						from wbz.employees {a}
-						left join wbz.users u on u.id=e.""user""
-						where {filter.Content ?? "1=1"} and {filter.AutoFilterString ?? "1=1"}
-					",
+					from wbz.employees {a}
+					left join wbz.icons i on {a}.icon=i.id
+					left join wbz.users u on {a}.""user""=u.id
+					where {filter.Content ?? "true"} and {filter.AutoFilterString ?? "true"}
+				",
 				/// FAMILIES
 				nameof(Modules.Families) =>
 				(mode == SelectMode.COUNT ? "count (*) "
 				: mode == SelectMode.SIMPLE ?
 				$@"
-						{a}.id, {a}.declarant, {a}.lastname, {a}.members, {a}.postcode, {a}.city, {a}.address,
-						{a}.status, {a}.c_sms, {a}.c_call, {a}.c_email, max(d.datereal) as donationlast, sum(dp.amount) as donationweight,
-						{a}.archival, {a}.comment, {a}.icon
-					" :
+					{a}.id, {a}.declarant, {a}.lastname, {a}.members, {a}.postcode, {a}.city, {a}.address,
+					{a}.status, {a}.c_sms, {a}.c_call, {a}.c_email, max(d.datereal) as donationlast, sum(dp.amount) as donationweight,
+					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+				" :
 				$@"
-						{a}.id, {a}.declarant, {a}.lastname, {a}.members, {a}.postcode, {a}.city, {a}.address,
-						{a}.status, {a}.c_sms, {a}.c_call, {a}.c_email, max(d.datereal) as donationlast, sum(dp.amount) as donationweight,
-						{a}.archival, {a}.comment, {a}.icon
-					") +
+					{a}.id, {a}.declarant, {a}.lastname, {a}.members, {a}.postcode, {a}.city, {a}.address,
+					{a}.status, {a}.c_sms, {a}.c_call, {a}.c_email, max(d.datereal) as donationlast, sum(dp.amount) as donationweight,
+					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+				") +
 				$@"
-						from wbz.families {a}
-						left join wbz.distributions_positions dp on {a}.id=dp.family
-						left join wbz.distributions d on dp.distribution=d.id
-						where {filter.Content ?? "1=1"} and {filter.AutoFilterString ?? "1=1"}
-						group by {a}.id
-					",
+					from wbz.families {a}
+					left join wbz.icons i on {a}.icon=i.id
+					left join wbz.distributions_positions dp on {a}.id=dp.family
+					left join wbz.distributions d on dp.distribution=d.id
+					where {filter.Content ?? "true"} and {filter.AutoFilterString ?? "true"}
+					group by {a}.id
+				",
 				/// GROUPS
 				nameof(Modules._submodules.Groups) =>
 				(mode == SelectMode.COUNT ? "count (*) "
 				: mode == SelectMode.SIMPLE ?
 				$@"
-						{a}.id, {a}.module, {a}.name, {a}.instance, {a}.owner,
-						case when trim(concat({a}1.name, '\', {a}2.name, '\', {a}3.name, '\', {a}4.name), '\') = '' then ''
-							else concat(trim(concat({a}1.name, '\', {a}2.name, '\', {a}3.name, '\', {a}4.name), '\'), '\') end as path,
-						{a}.archival, {a}.comment, {a}.icon
-					" :
+					{a}.id, {a}.module, {a}.name, {a}.instance, {a}.owner,
+					case when trim(concat(g1.name, '\', g2.name, '\', g3.name, '\', g4.name), '\') = '' then ''
+						else concat(trim(concat(g1.name, '\', g2.name, '\', g3.name, '\', g4.name), '\'), '\') end as path,
+					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+				" :
 				$@"
-						{a}.id, {a}.module, {a}.name, {a}.instance, {a}.owner,
-						case when trim(concat({a}1.name, '\', {a}2.name, '\', {a}3.name, '\', {a}4.name), '\') = '' then ''
-							else concat(trim(concat({a}1.name, '\', {a}2.name, '\', {a}3.name, '\', {a}4.name), '\'), '\') end as path,
-						{a}.archival, {a}.comment, {a}.icon
-					") +
+					{a}.id, {a}.module, {a}.name, {a}.instance, {a}.owner,
+					case when trim(concat(g1.name, '\', g2.name, '\', g3.name, '\', g4.name), '\') = '' then ''
+						else concat(trim(concat(g1.name, '\', g2.name, '\', g3.name, '\', g4.name), '\'), '\') end as path,
+					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+				") +
 				$@"
-						from wbz.groups {a}
-						left join wbz.groups {a}4 on {a}4.id={a}.owner
-						left join wbz.groups {a}3 on {a}3.id={a}4.owner
-						left join wbz.groups {a}2 on {a}2.id={a}3.owner
-						left join wbz.groups {a}1 on {a}1.id={a}2.owner
-						where {filter.Content ?? "1=1"} and {filter.AutoFilterString ?? "1=1"}
-					",
+					from wbz.groups {a}
+					left join wbz.icons i on {a}.icon=i.id
+					left join wbz.groups g4 on g4.id={a}.owner
+					left join wbz.groups g3 on g3.id=g4.owner
+					left join wbz.groups g2 on g2.id=g3.owner
+					left join wbz.groups g1 on g1.id=g2.owner
+					where {filter.Content ?? "true"} and {filter.AutoFilterString ?? "true"}
+				",
 				/// ICONS
 				nameof(Modules.Icons) =>
 				(mode == SelectMode.COUNT ? "count (*) "
 				: mode == SelectMode.SIMPLE ?
 				$@"
-						{a}.id, {a}.module, {a}.name, {a}.""format"", {a}.""path"",
-						{a}.file, {a}.height, {a}.width, {a}.size,
-						{a}.archival, {a}.comment
-					" :
+					{a}.id, {a}.module, {a}.name, {a}.""format"", {a}.""path"",
+					{a}.file, {a}.height, {a}.width, {a}.size,
+					{a}.archival, {a}.comment
+				" :
 				$@"
-						{a}.id, {a}.module, {a}.name, {a}.""format"", {a}.""path"",
-						{a}.file, {a}.height, {a}.width, {a}.size,
-						{a}.archival, {a}.comment
-					") +
+					{a}.id, {a}.module, {a}.name, {a}.""format"", {a}.""path"",
+					{a}.file, {a}.height, {a}.width, {a}.size,
+					{a}.archival, {a}.comment
+				") +
 				$@"
-						from wbz.icons {a}
-						where {filter.Content ?? "1=1"} and {filter.AutoFilterString ?? "1=1"}
-					",
+					from wbz.icons {a}
+					where {filter.Content ?? "true"} and {filter.AutoFilterString ?? "true"}
+				",
 				/// LOGS
 				nameof(Modules.Logs) =>
 				(mode == SelectMode.COUNT ? "count (*) "
 				: mode == SelectMode.SIMPLE ?
 				$@"
-						{a}.id, {a}.""user"", {a}.module, {a}.instance, {a}.type as group, {a}.content, {a}.datetime
-					" :
+					{a}.id, {a}.""user"", {a}.module, {a}.instance, {a}.type as group, {a}.content, {a}.datetime
+				" :
 				$@"
-						{a}.id, {a}.""user"", {a}.module, {a}.instance, {a}.type as group, {a}.content, {a}.datetime
-					") +
+					{a}.id, {a}.""user"", {a}.module, {a}.instance, {a}.type as group, {a}.content, {a}.datetime
+				") +
 				$@"
-						from wbz.logs {a}
-						left join wbz.users u on {a}.""user"" = u.id
-						where {filter.Content ?? "1=1"} and {filter.AutoFilterString ?? "1=1"}
-					",
+					from wbz.logs {a}
+					left join wbz.users u on {a}.""user"" = u.id
+					where {filter.Content ?? "true"} and {filter.AutoFilterString ?? "true"}
+				",
 				/// STORES
 				nameof(Modules.Stores) =>
 				(mode == SelectMode.COUNT ? "count (*) "
 				: mode == SelectMode.SIMPLE ?
 				$@"
-						{a}.id, {a}.codename, {a}.name, {a}.postcode, {a}.city, {a}.address,
-						coalesce(sum(sa.amount),0) as amount, coalesce(sum(sa.reserved),0) as reserved,
-						{a}.archival, {a}.comment, {a}.icon
-					" :
+					{a}.id, {a}.codename, {a}.name, {a}.postcode, {a}.city, {a}.address,
+					coalesce(sum(sa.amount),0) as amount, coalesce(sum(sa.reserved),0) as reserved,
+					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+				" :
 				$@"
-						{a}.id, {a}.codename, {a}.name, {a}.postcode, {a}.city, {a}.address,
-						coalesce(sum(sa.amount),0) as amount, coalesce(sum(sa.reserved),0) as reserved,
-						{a}.archival, {a}.comment, {a}.icon
-					") +
+					{a}.id, {a}.codename, {a}.name, {a}.postcode, {a}.city, {a}.address,
+					coalesce(sum(sa.amount),0) as amount, coalesce(sum(sa.reserved),0) as reserved,
+					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+				") +
 				$@"
-						from wbz.stores {a}
-						left join wbz.stores_articles sa on {a}.id = sa.store
-						where {filter.Content ?? "1=1"} and {filter.AutoFilterString ?? "1=1"}
-						group by {a}.id
-					",
+					from wbz.stores {a}
+					left join wbz.icons i on {a}.icon=i.id
+					left join wbz.stores_articles sa on {a}.id = sa.store
+					where {filter.Content ?? "true"} and {filter.AutoFilterString ?? "true"}
+					group by {a}.id
+				",
 				/// USERS
 				nameof(Modules.Users) =>
 				(mode == SelectMode.COUNT ? "count (*) "
 				: mode == SelectMode.SIMPLE ?
 				$@"
-						{a}.id, {a}.username, '' as newpass, {a}.forename, {a}.lastname,
-						{a}.email, {a}.phone, {a}.blocked, {a}.archival
-					" :
+					{a}.id, {a}.username, '' as newpass, {a}.forename, {a}.lastname,
+					{a}.email, {a}.phone, {a}.blocked, {a}.archival
+				" :
 				$@"
-						{a}.id, {a}.username, '' as newpass, {a}.forename, {a}.lastname,
-						{a}.email, {a}.phone, {a}.blocked, {a}.archival
-					") +
+					{a}.id, {a}.username, '' as newpass, {a}.forename, {a}.lastname,
+					{a}.email, {a}.phone, {a}.blocked, {a}.archival
+				") +
 				$@"
-						from wbz.users {a}
-						where {filter.Content ?? "1=1"} and {filter.AutoFilterString ?? "1=1"}
-					",
+					from wbz.users {a}
+					where {filter.Content ?? "true"} and {filter.AutoFilterString ?? "true"}
+				",
 				/// VEHICLES
 				nameof(Modules.Vehicles) =>
 				(mode == SelectMode.COUNT ? "count (*) "
 				: mode == SelectMode.SIMPLE ?
 				$@"
-						{a}.id, {a}.register, {a}.brand, {a}.model, {a}.capacity,
-						c.id as forwarderid, c.codename as forwardername,
-						e.id as driverid, e.lastname || ' ' || e.forename as drivername,
-						{a}.prodyear,
-						{a}.archival, {a}.comment, {a}.icon
-					" :
+					{a}.id, {a}.register, {a}.brand, {a}.model, {a}.capacity,
+					c.id as forwarderid, c.codename as forwardername,
+					e.id as driverid, e.lastname || ' ' || e.forename as drivername,
+					{a}.prodyear,
+					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+				" :
 				$@"
-						{a}.id, {a}.register, {a}.brand, {a}.model, {a}.capacity,
-						c.id as forwarderid, c.codename as forwardername,
-						e.id as driverid, e.lastname || ' ' || e.forename as drivername,
-						{a}.prodyear,
-						{a}.archival, {a}.comment, {a}.icon
-					") +
+					{a}.id, {a}.register, {a}.brand, {a}.model, {a}.capacity,
+					c.id as forwarderid, c.codename as forwardername,
+					e.id as driverid, e.lastname || ' ' || e.forename as drivername,
+					{a}.prodyear,
+					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+				") +
 				$@"
-						from wbz.vehicles {a}
-						left join wbz.contractors c on c.id={a}.forwarder
-						left join wbz.employees e on e.id={a}.driver
-						where {filter.Content ?? "1=1"} and {filter.AutoFilterString ?? "1=1"}
-					",
+					from wbz.vehicles {a}
+					left join wbz.contractors c on {a}.forwarder=c.id
+					left join wbz.employees e on {a}.driver=e.id
+					left join wbz.icons i on {a}.icon=i.id
+					where {filter.Content ?? "true"} and {filter.AutoFilterString ?? "true"}
+				",
 				_ => throw new NotImplementedException(),
 			};
 
@@ -975,7 +984,7 @@ namespace WBZ
 			{
 				nameof(Modules.Articles) => @"
 					select am.id, am.name, am.converter, am.""default"",
-						sa.amount / coalesce(nullif(am.converter,0),1) as amount, sa.reserved / coalesce(nullif(am.converter,0),1) as reserved
+						sa.amount / coalesce(nullif(am.converter, 0), 1) as amount, sa.reserved / coalesce(nullif(am.converter, 0), 1) as reserved
 					from wbz.articles a
 					inner join wbz.articles_measures am on a.id = am.article
 					left join wbz.stores_articles sa on a.id = sa.article
@@ -1827,7 +1836,6 @@ namespace WBZ
 			using var sqlTran = sqlConn.BeginTransaction();
 			ClearObject(module, instanceID, sqlConn, sqlTran);
 			sqlTran.Commit();
-
 			return true;
 		}
 
@@ -1878,8 +1886,8 @@ namespace WBZ
 		{
 			using var sqlConn = ConnOpenedWBZ;
 			var sqlCmd = new NpgsqlCommand(@"select file
-					from wbz.attachments
-					where id=@id", sqlConn);
+				from wbz.attachments
+				where id=@id", sqlConn);
 			sqlCmd.Parameters.AddWithValue("id", id);
 			return (byte[])sqlCmd.ExecuteScalar();
 		}

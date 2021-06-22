@@ -105,12 +105,12 @@ namespace WBZ.Modules._base
         /// <summary>
 		/// New instance
 		/// </summary>
-		internal void cmdNew_CanExecute(object sender, CanExecuteRoutedEventArgs e) =>
-            e.CanExecute = Config.User.Perms.Contains($"{D?.Module?.Name}_{Config.PermType.SAVE}");
         internal virtual void cmdNew_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             (Activator.CreateInstance(Type.GetType(Namespace + "New"), null, Commands.Type.NEW) as Window).Show();
         }
+        internal void cmdNew_CanExecute(object sender, CanExecuteRoutedEventArgs e) =>
+            e.CanExecute = Config.User.Perms.Contains($"{D?.Module?.Name}_{Config.PermType.SAVE}");
 
         /// <summary>
         /// Duplicate instances
