@@ -100,18 +100,18 @@ namespace WBZ.Login
 			var db = Fn.AppDatabase = cbDatabase.SelectedItem as DB;
 
 			Cursor = Cursors.Wait;
-			await Task.Run(() =>
+			try
 			{
-				try
+				await Task.Run(() =>
 				{
 					SQL.connWBZ = StswExpress.SQL.MakeConnString(db.Server, db.Port, db.Database, db.Username, db.Password);
 					Fn.AppDatabase.Version = SQL.GetPropertyValue("VERSION");
-				}
-				catch (Exception ex)
-				{
-					new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Błąd zmiany bazy: " + ex.Message) { Owner = this }.ShowDialog();
-				}
-			});
+				});
+			}
+			catch (Exception ex)
+			{
+				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Błąd zmiany bazy: " + ex.Message) { Owner = this }.ShowDialog();
+			}
 			Cursor = Cursors.Arrow;
 		}
 

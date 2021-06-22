@@ -31,7 +31,7 @@
         <!-- titleBar -->
         <se:TitleBar DockPanel.Dock="Top" SubIcon="{Binding ModeIcon}"/>
         <!-- buttonsPanel -->
-		<Border DockPanel.Dock="Right" BorderBrush="Gray" BorderThickness="1,0,0,0" Background="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}}">
+		<Border DockPanel.Dock="Right" BorderBrush="Gray" BorderThickness="1,0,0,0" Background="{Binding panelColor_Documents, Source={x:Static p:Settings.Default}}">
             <DockPanel>
 				<DockPanel.Resources>
 					<Style TargetType="{x:Type se:IconButton}">
@@ -60,12 +60,12 @@
             </DockPanel>
             <Border.ContextMenu>
                 <ContextMenu>
-                    <se:ColorSetter Color="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+					<se:ColorSetter Color="{Binding panelColor_Documents, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                 </ContextMenu>
             </Border.ContextMenu>
         </Border>
         <!-- statusPanel -->
-        <c:StatusPanel DockPanel.Dock="Bottom" Background="{Binding config_Documents_PanelColor, Source={x:Static p:Settings.Default}}"
+		<c:StatusPanel DockPanel.Dock="Bottom" Background="{Binding panelColor_Documents, Source={x:Static p:Settings.Default}}"
                        HasFilters="{Binding AreFiltersVisible, Mode=OneTime}" HasGroups="{Binding AreGroupsVisible, Mode=OneTime}"/>
         <!-- groupsView -->
         <c:GroupsView EditingMode="{Binding Perms, Source={x:Static g:Config.User}, Converter={se:conv_Contains}, ConverterParameter=documents_groups}"

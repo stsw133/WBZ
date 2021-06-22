@@ -11,7 +11,7 @@ namespace WBZ.Modules
         public DistributionsListGrid()
         {
             InitializeComponent();
-			ExtDataGrid.Load(this, Properties.Settings.Default.config_Distributions_PanelColor);
+			ExtDataGrid.Load(this, Properties.Settings.Default.panelColor_Distributions);
 		}
     }
 }

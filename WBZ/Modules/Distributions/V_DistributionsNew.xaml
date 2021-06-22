@@ -24,8 +24,8 @@
         <se:TitleBar DockPanel.Dock="Top" SubIcon="{Binding ModeIcon}"/>
         <!-- buttonsPanel -->
         <Border DockPanel.Dock="Right"
-                Background="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}}"
-                BorderBrush="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.5}"
+                Background="{Binding panelColor_Distributions, Source={x:Static p:Settings.Default}}"
+                BorderBrush="{Binding panelColor_Distributions, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.5}"
                 BorderThickness="1,0,0,0">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Top">
@@ -65,7 +65,7 @@
             </DockPanel>
             <Border.ContextMenu>
                 <ContextMenu>
-                    <se:ColorSetter Color="{Binding config_Distributions_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+					<se:ColorSetter Color="{Binding panelColor_Distributions, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                 </ContextMenu>
             </Border.ContextMenu>
         </Border>

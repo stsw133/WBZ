@@ -11,7 +11,7 @@ namespace WBZ.Modules
         public ContractorsListGrid()
         {
             InitializeComponent();
-			ExtDataGrid.Load(this, Properties.Settings.Default.config_Contractors_PanelColor);
+			ExtDataGrid.Load(this, Properties.Settings.Default.panelColor_Contractors);
 		}
     }
 }

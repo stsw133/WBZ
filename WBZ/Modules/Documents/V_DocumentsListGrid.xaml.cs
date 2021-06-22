@@ -11,7 +11,7 @@ namespace WBZ.Modules
         public DocumentsListGrid()
         {
             InitializeComponent();
-			ExtDataGrid.Load(this, Properties.Settings.Default.config_Documents_PanelColor);
+			ExtDataGrid.Load(this, Properties.Settings.Default.panelColor_Documents);
 		}
     }
 }

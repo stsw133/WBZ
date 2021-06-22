@@ -19,45 +19,36 @@
         <!-- titleBar -->
         <se:TitleBar DockPanel.Dock="Top"/>
         <!-- buttonsPanel -->
-        <Border DockPanel.Dock="Right"
-                Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}}"
-                BorderBrush="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.5}"
-                BorderThickness="1,0,0,0">
+		<Border DockPanel.Dock="Right" BorderBrush="Gray" BorderThickness="1,0,0,0" Background="{Binding panelColor_Admin, Source={x:Static p:Settings.Default}}">
             <DockPanel>
+				<DockPanel.Resources>
+					<Style TargetType="{x:Type se:IconButton}">
+						<Setter Property="HorizontalContentAlignment" Value="Left"/>
+						<Setter Property="IsTextVisible" Value="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"/>
+					</Style>
+				</DockPanel.Resources>
                 <StackPanel DockPanel.Dock="Top">
-                    <se:IconButton Text="{Tr Download}" Margin="5"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                    Icon="/Resources/icon32_download.ico"
-                                    Click="btnDownload_Click"/>
+                    <se:IconButton Text="{Tr Download}" Margin="5" Icon="/Resources/icon32_download.ico" Click="btnDownload_Click"/>
                     <Separator/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                     <Separator/>
-                    <se:IconButton Text="{Tr Refresh}" Margin="5"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                    Icon="/Resources/icon32_refresh.ico"
-                                    Command="se:Commands.Refresh"/>
+                    <se:IconButton Text="{Tr Refresh}" Margin="5" Icon="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
                     <Separator/>
-                    <se:IconButton Text="{Tr CloseWindow}" Margin="5"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
-                                    Icon="/Resources/icon32_close.ico"
-                                    Command="se:Commands.Close"/>
+                    <se:IconButton Text="{Tr CloseWindow}" Margin="5" Icon="/Resources/icon32_close.ico" Command="se:Commands.Close"/>
                 </StackPanel>
             </DockPanel>
             <Border.ContextMenu>
                 <ContextMenu>
-                    <se:ColorSetter Color="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+                    <se:ColorSetter Color="{Binding panelColor_Admin, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                 </ContextMenu>
             </Border.ContextMenu>
         </Border>
         <!-- statusPanel -->
-        <!-- <c:StatusPanel DockPanel.Dock="Bottom" Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}}"
+		<!-- <c:StatusPanel DockPanel.Dock="Bottom" Background="{Binding panelColor_Admin, Source={x:Static p:Settings.Default}}"
                        HasFilters="False" HasGroups="False"/>
         -->
-        <Border DockPanel.Dock="Bottom"
-                Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}}"
-                BorderBrush="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}, Converter={se:conv_Color}, ConverterParameter=-0.5}"
-                BorderThickness="0,1,0,0">
+        <Border DockPanel.Dock="Bottom" BorderBrush="Gray" BorderThickness="0,1,0,0" Background="{Binding panelColor_Admin, Source={x:Static p:Settings.Default}}">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
                     <Label Content="{Tr Displayed, Suffix=':'}" Margin="5,0"/>

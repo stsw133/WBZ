@@ -11,7 +11,7 @@ namespace WBZ.Modules
         public StoresListGrid()
         {
             InitializeComponent();
-			ExtDataGrid.Load(this, Properties.Settings.Default.config_Stores_PanelColor);
+			ExtDataGrid.Load(this, Properties.Settings.Default.panelColor_Stores);
         }
     }
 }

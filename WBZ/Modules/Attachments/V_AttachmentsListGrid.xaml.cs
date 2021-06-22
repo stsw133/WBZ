@@ -11,7 +11,7 @@ namespace WBZ.Modules
         public AttachmentsListGrid()
         {
             InitializeComponent();
-			ExtDataGrid.Load(this, Properties.Settings.Default.config_Attachments_PanelColor);
+			ExtDataGrid.Load(this, Properties.Settings.Default.panelColor_Attachments);
 		}
     }
 }

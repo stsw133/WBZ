@@ -12,7 +12,7 @@ namespace WBZ.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -98,24 +98,24 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("#FF444444")]
-        public string config_Admin_PanelColor {
+        public string panelColor_Admin {
             get {
-                return ((string)(this["config_Admin_PanelColor"]));
+                return ((string)(this["panelColor_Admin"]));
             }
             set {
-                this["config_Admin_PanelColor"] = value;
+                this["panelColor_Admin"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("#FF33AAEE")]
-        public string config_Documents_PanelColor {
+        public string panelColor_Documents {
             get {
-                return ((string)(this["config_Documents_PanelColor"]));
+                return ((string)(this["panelColor_Documents"]));
             }
             set {
-                this["config_Documents_PanelColor"] = value;
+                this["panelColor_Documents"] = value;
             }
         }
         
@@ -314,12 +314,12 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("#FF55DD55")]
-        public string config_Articles_PanelColor {
+        public string panelColor_Articles {
             get {
-                return ((string)(this["config_Articles_PanelColor"]));
+                return ((string)(this["panelColor_Articles"]));
             }
             set {
-                this["config_Articles_PanelColor"] = value;
+                this["panelColor_Articles"] = value;
             }
         }
         
@@ -410,36 +410,36 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("#FFEEEE55")]
-        public string config_Contractors_PanelColor {
+        public string panelColor_Contractors {
             get {
-                return ((string)(this["config_Contractors_PanelColor"]));
+                return ((string)(this["panelColor_Contractors"]));
             }
             set {
-                this["config_Contractors_PanelColor"] = value;
+                this["panelColor_Contractors"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("#FFEEAA33")]
-        public string config_Families_PanelColor {
+        public string panelColor_Families {
             get {
-                return ((string)(this["config_Families_PanelColor"]));
+                return ((string)(this["panelColor_Families"]));
             }
             set {
-                this["config_Families_PanelColor"] = value;
+                this["panelColor_Families"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("#FFBB88DD")]
-        public string config_Stats_PanelColor {
+        public string panelColor_Stats {
             get {
-                return ((string)(this["config_Stats_PanelColor"]));
+                return ((string)(this["panelColor_Stats"]));
             }
             set {
-                this["config_Stats_PanelColor"] = value;
+                this["panelColor_Stats"] = value;
             }
         }
         
@@ -698,12 +698,12 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("#FFEE5555")]
-        public string config_Distributions_PanelColor {
+        public string panelColor_Distributions {
             get {
-                return ((string)(this["config_Distributions_PanelColor"]));
+                return ((string)(this["panelColor_Distributions"]));
             }
             set {
-                this["config_Distributions_PanelColor"] = value;
+                this["panelColor_Distributions"] = value;
             }
         }
         
@@ -920,18 +920,6 @@ namespace WBZ.Properties {
             }
             set {
                 this["columns_LogsList_DateTime"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FFFF69B4")]
-        public string config_Attmisc_PanelColor {
-            get {
-                return ((string)(this["config_Attmisc_PanelColor"]));
-            }
-            set {
-                this["config_Attmisc_PanelColor"] = value;
             }
         }
         
@@ -1453,96 +1441,96 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("#FF44CCCC")]
-        public string config_Stores_PanelColor {
+        public string panelColor_Stores {
             get {
-                return ((string)(this["config_Stores_PanelColor"]));
+                return ((string)(this["panelColor_Stores"]));
             }
             set {
-                this["config_Stores_PanelColor"] = value;
+                this["panelColor_Stores"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("#FF99AABB")]
-        public string config_Users_PanelColor {
+        public string panelColor_Users {
             get {
-                return ((string)(this["config_Users_PanelColor"]));
+                return ((string)(this["panelColor_Users"]));
             }
             set {
-                this["config_Users_PanelColor"] = value;
+                this["panelColor_Users"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("#FFBB9966")]
-        public string config_Employees_PanelColor {
+        public string panelColor_Employees {
             get {
-                return ((string)(this["config_Employees_PanelColor"]));
+                return ((string)(this["panelColor_Employees"]));
             }
             set {
-                this["config_Employees_PanelColor"] = value;
+                this["panelColor_Employees"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("#FFEEAA33")]
-        public string config_AttributesClasses_PanelColor {
+        public string panelColor_AttributesClasses {
             get {
-                return ((string)(this["config_AttributesClasses_PanelColor"]));
+                return ((string)(this["panelColor_AttributesClasses"]));
             }
             set {
-                this["config_AttributesClasses_PanelColor"] = value;
+                this["panelColor_AttributesClasses"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("#FFEEEE55")]
-        public string config_Attachments_PanelColor {
+        public string panelColor_Attachments {
             get {
-                return ((string)(this["config_Attachments_PanelColor"]));
+                return ((string)(this["panelColor_Attachments"]));
             }
             set {
-                this["config_Attachments_PanelColor"] = value;
+                this["panelColor_Attachments"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("#FF44CCCC")]
-        public string config_Logs_PanelColor {
+        public string panelColor_Logs {
             get {
-                return ((string)(this["config_Logs_PanelColor"]));
+                return ((string)(this["panelColor_Logs"]));
             }
             set {
-                this["config_Logs_PanelColor"] = value;
+                this["panelColor_Logs"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("#FF33AAEE")]
-        public string config_Groups_PanelColor {
+        public string panelColor_Groups {
             get {
-                return ((string)(this["config_Groups_PanelColor"]));
+                return ((string)(this["panelColor_Groups"]));
             }
             set {
-                this["config_Groups_PanelColor"] = value;
+                this["panelColor_Groups"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("#FFFF69B4")]
-        public string config_Community_PanelColor {
+        public string panelColor_Community {
             get {
-                return ((string)(this["config_Community_PanelColor"]));
+                return ((string)(this["panelColor_Community"]));
             }
             set {
-                this["config_Community_PanelColor"] = value;
+                this["panelColor_Community"] = value;
             }
         }
         
@@ -1735,12 +1723,12 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("#FF55DD55")]
-        public string config_Vehicles_PanelColor {
+        public string panelColor_Vehicles {
             get {
-                return ((string)(this["config_Vehicles_PanelColor"]));
+                return ((string)(this["panelColor_Vehicles"]));
             }
             set {
-                this["config_Vehicles_PanelColor"] = value;
+                this["panelColor_Vehicles"] = value;
             }
         }
         
@@ -1891,24 +1879,24 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("#FF999999")]
-        public string config_Main_PanelColor {
+        public string panelColor_Main {
             get {
-                return ((string)(this["config_Main_PanelColor"]));
+                return ((string)(this["panelColor_Main"]));
             }
             set {
-                this["config_Main_PanelColor"] = value;
+                this["panelColor_Main"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("#FFEEEE55")]
-        public string config_Icons_PanelColor {
+        public string panelColor_Icons {
             get {
-                return ((string)(this["config_Icons_PanelColor"]));
+                return ((string)(this["panelColor_Icons"]));
             }
             set {
-                this["config_Icons_PanelColor"] = value;
+                this["panelColor_Icons"] = value;
             }
         }
         

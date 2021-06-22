@@ -11,7 +11,7 @@ namespace WBZ.Modules
         public FamiliesListGrid()
         {
             InitializeComponent();
-			ExtDataGrid.Load(this, Properties.Settings.Default.config_Families_PanelColor);
+			ExtDataGrid.Load(this, Properties.Settings.Default.panelColor_Families);
 		}
     }
 }

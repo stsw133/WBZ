@@ -14,7 +14,7 @@
         <!-- titleBar -->
         <se:TitleBar DockPanel.Dock="Top"/>
         <!-- buttonsPanel -->
-        <Border DockPanel.Dock="Bottom" Background="{Binding config_Admin_PanelColor, Source={x:Static p:Settings.Default}}" BorderBrush="Gray" BorderThickness="0,1,0,0">
+		<Border DockPanel.Dock="Bottom" Background="{Binding panelColor_Admin, Source={x:Static p:Settings.Default}}" BorderBrush="Gray" BorderThickness="0,1,0,0">
 			<se:IconButton Text="Zapisz i zamknij" Margin="5" HorizontalAlignment="Center" Icon="/Resources/icon32_save.ico" Click="btnSave_Click"/>
         </Border>
         <!-- tabs -->

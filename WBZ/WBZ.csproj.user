@@ -33,24 +33,6 @@
     <Page Update="Controls\StatusPanel.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Modules\_shared\AdditionalsTab.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Modules\_shared\AttachmentsTab.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Modules\_shared\AttributesTab.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Modules\_shared\ContactsTab.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Modules\_shared\GroupsTab.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Modules\_shared\LogsTab.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="Modules\Admin\ConsoleSQL.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -129,12 +111,6 @@
     <Page Update="Modules\Families\V_FamiliesNew.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Modules\_submodules\Groups\V_GroupsList.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Modules\_submodules\Groups\V_GroupsNew.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="Modules\Icons\V_IconsList.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -142,24 +118,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Modules\Icons\V_IconsNew.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Login\V_Login.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Login\V_LoginAppAbout.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Login\V_LoginChangePassword.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Login\V_LoginDatabases.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Login\V_LoginRegister.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Login\V_Versions.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Modules\Personal\V_Profile.xaml">

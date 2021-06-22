@@ -11,7 +11,7 @@ namespace WBZ.Modules
         public EmployeesListGrid()
         {
             InitializeComponent();
-			ExtDataGrid.Load(this, Properties.Settings.Default.config_Employees_PanelColor);
+			ExtDataGrid.Load(this, Properties.Settings.Default.panelColor_Employees);
 		}
     }
 }

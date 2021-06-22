@@ -11,7 +11,7 @@ namespace WBZ.Modules
         public ArticlesListGrid()
         {
             InitializeComponent();
-			ExtDataGrid.Load(this, Properties.Settings.Default.config_Articles_PanelColor);
+			ExtDataGrid.Load(this, Properties.Settings.Default.panelColor_Articles);
 		}
     }
 }

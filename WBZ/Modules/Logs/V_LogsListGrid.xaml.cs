@@ -11,7 +11,7 @@ namespace WBZ.Modules
         public LogsListGrid()
         {
             InitializeComponent();
-			ExtDataGrid.Load(this, Properties.Settings.Default.config_Logs_PanelColor);
+			ExtDataGrid.Load(this, Properties.Settings.Default.panelColor_Logs);
 		}
     }
 }

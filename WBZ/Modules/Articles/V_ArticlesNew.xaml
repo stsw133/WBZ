@@ -24,7 +24,7 @@
         <!-- titleBar -->
         <se:TitleBar DockPanel.Dock="Top" SubIcon="{Binding ModeIcon}"/>
         <!-- buttonsPanel -->
-		<Border DockPanel.Dock="Right" BorderBrush="Gray" BorderThickness="1,0,0,0" Background="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}}">
+		<Border DockPanel.Dock="Right" BorderBrush="Gray" BorderThickness="1,0,0,0" Background="{Binding panelColor_Articles, Source={x:Static p:Settings.Default}}">
             <DockPanel>
 				<DockPanel.Resources>
 					<Style TargetType="{x:Type se:IconButton}">
@@ -45,7 +45,7 @@
             </DockPanel>
             <Border.ContextMenu>
                 <ContextMenu>
-                    <se:ColorSetter Color="{Binding config_Articles_PanelColor, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+					<se:ColorSetter Color="{Binding panelColor_Articles, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
                 </ContextMenu>
             </Border.ContextMenu>
         </Border>

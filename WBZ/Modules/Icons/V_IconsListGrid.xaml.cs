@@ -11,7 +11,7 @@ namespace WBZ.Modules
         public IconsListGrid()
         {
             InitializeComponent();
-			ExtDataGrid.Load(this, Properties.Settings.Default.config_Icons_PanelColor);
+			ExtDataGrid.Load(this, Properties.Settings.Default.panelColor_Icons);
 		}
     }
 }

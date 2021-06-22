@@ -20,10 +20,10 @@
     <Setting Name="config_TitleBarStyle" Type="System.Byte" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="config_Admin_PanelColor" Type="System.String" Scope="User">
+    <Setting Name="panelColor_Admin" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FF444444</Value>
     </Setting>
-    <Setting Name="config_Documents_PanelColor" Type="System.String" Scope="User">
+    <Setting Name="panelColor_Documents" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FF33AAEE</Value>
     </Setting>
     <Setting Name="columns_DocumentsList_ID" Type="System.Boolean" Scope="User">
@@ -74,7 +74,7 @@
     <Setting Name="columns_StoresList_Reserved" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="config_Articles_PanelColor" Type="System.String" Scope="User">
+    <Setting Name="panelColor_Articles" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FF55DD55</Value>
     </Setting>
     <Setting Name="columns_ArticlesList_ID" Type="System.Boolean" Scope="User">
@@ -98,13 +98,13 @@
     <Setting Name="columns_ArticlesList_Reserved" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="config_Contractors_PanelColor" Type="System.String" Scope="User">
+    <Setting Name="panelColor_Contractors" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FFEEEE55</Value>
     </Setting>
-    <Setting Name="config_Families_PanelColor" Type="System.String" Scope="User">
+    <Setting Name="panelColor_Families" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FFEEAA33</Value>
     </Setting>
-    <Setting Name="config_Stats_PanelColor" Type="System.String" Scope="User">
+    <Setting Name="panelColor_Stats" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FFBB88DD</Value>
     </Setting>
     <Setting Name="columns_FamiliesList_ID" Type="System.Boolean" Scope="User">
@@ -170,7 +170,7 @@
     <Setting Name="conn_password" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="config_Distributions_PanelColor" Type="System.String" Scope="User">
+    <Setting Name="panelColor_Distributions" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FFEE5555</Value>
     </Setting>
     <Setting Name="columns_DistributionsList_ID" Type="System.Boolean" Scope="User">
@@ -226,9 +226,6 @@
     </Setting>
     <Setting Name="columns_LogsList_DateTime" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="config_Attmisc_PanelColor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#FFFF69B4</Value>
     </Setting>
     <Setting Name="columns_EmployeesList_ID" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -397,28 +394,28 @@
     <Setting Name="Language" Type="System.String" Scope="User">
       <Value Profile="(Default)">pl</Value>
     </Setting>
-    <Setting Name="config_Stores_PanelColor" Type="System.String" Scope="User">
+    <Setting Name="panelColor_Stores" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FF44CCCC</Value>
     </Setting>
-    <Setting Name="config_Users_PanelColor" Type="System.String" Scope="User">
+    <Setting Name="panelColor_Users" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FF99AABB</Value>
     </Setting>
-    <Setting Name="config_Employees_PanelColor" Type="System.String" Scope="User">
+    <Setting Name="panelColor_Employees" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FFBB9966</Value>
     </Setting>
-    <Setting Name="config_AttributesClasses_PanelColor" Type="System.String" Scope="User">
+    <Setting Name="panelColor_AttributesClasses" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FFEEAA33</Value>
     </Setting>
-    <Setting Name="config_Attachments_PanelColor" Type="System.String" Scope="User">
+    <Setting Name="panelColor_Attachments" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FFEEEE55</Value>
     </Setting>
-    <Setting Name="config_Logs_PanelColor" Type="System.String" Scope="User">
+    <Setting Name="panelColor_Logs" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FF44CCCC</Value>
     </Setting>
-    <Setting Name="config_Groups_PanelColor" Type="System.String" Scope="User">
+    <Setting Name="panelColor_Groups" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FF33AAEE</Value>
     </Setting>
-    <Setting Name="config_Community_PanelColor" Type="System.String" Scope="User">
+    <Setting Name="panelColor_Community" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FFFF69B4</Value>
     </Setting>
     <Setting Name="config_ExpandGroups" Type="System.Boolean" Scope="User">
@@ -474,7 +471,7 @@
   &lt;string&gt;veh.brand asc&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
-    <Setting Name="config_Vehicles_PanelColor" Type="System.String" Scope="User">
+    <Setting Name="panelColor_Vehicles" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FF55DD55</Value>
     </Setting>
     <Setting Name="columns_VehiclesList_ID" Type="System.Boolean" Scope="User">
@@ -513,10 +510,10 @@
     <Setting Name="config_ShowHeaderWithText" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="config_Main_PanelColor" Type="System.String" Scope="User">
+    <Setting Name="panelColor_Main" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FF999999</Value>
     </Setting>
-    <Setting Name="config_Icons_PanelColor" Type="System.String" Scope="User">
+    <Setting Name="panelColor_Icons" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FFEEEE55</Value>
     </Setting>
     <Setting Name="sorting_Icons" Type="System.Collections.Specialized.StringCollection" Scope="User">

@@ -11,7 +11,7 @@ namespace WBZ.Modules
         public AttributesClassesListGrid()
         {
             InitializeComponent();
-			ExtDataGrid.Load(this, Properties.Settings.Default.config_AttributesClasses_PanelColor);
+			ExtDataGrid.Load(this, Properties.Settings.Default.panelColor_AttributesClasses);
 		}
     }
 }
