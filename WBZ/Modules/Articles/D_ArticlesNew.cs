@@ -14,6 +14,7 @@ namespace WBZ.Modules.Articles
 			get => instanceSources_Stores;
 			set => SetField(ref instanceSources_Stores, value, () => InstanceSources_Stores);
 		}
+
 		/// Instance source - documents
 		private List<M_Document> instanceSources_Documents;
 		public List<M_Document> InstanceSources_Documents
@@ -21,6 +22,7 @@ namespace WBZ.Modules.Articles
 			get => instanceSources_Documents;
 			set => SetField(ref instanceSources_Documents, value, () => InstanceSources_Documents);
 		}
+
 		/// Instance source - distributions
 		private List<M_Distribution> instanceSources_Distributions;
 		public List<M_Distribution> InstanceSources_Distributions

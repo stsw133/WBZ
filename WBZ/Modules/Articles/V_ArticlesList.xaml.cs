@@ -30,7 +30,7 @@ namespace WBZ.Modules.Articles
 		internal override void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			base.Window_Loaded(sender, e);
-			D.StoresList = SQL.ComboSource(Config.GetModule(nameof(Modules.Stores)), "codename", "archival=false", D.Mode != Commands.Type.SELECT);
+			D.StoresList = SQL.ComboSource(Config.GetModule(nameof(Stores)), "codename", "archival=false", D.Mode != Commands.Type.SELECT);
 		}
 
 		/// <summary>
@@ -51,7 +51,7 @@ namespace WBZ.Modules.Articles
 		{
 			var cbStore = sender as ComboBox;
 			if ((int)cbStore?.SelectedValue > 0)
-				cbStoresList.SelectedValue = SQL.GetInstance<M_Store>(Config.GetModule(nameof(Modules.Stores)), (int)cbStore.SelectedValue);
+				cbStoresList.SelectedValue = SQL.GetInstance<M_Store>(Config.GetModule(nameof(Stores)), (int)cbStore.SelectedValue);
 			else
 				cbStoresList.SelectedValue = 0;
 			cmdRefresh_Executed(null, null);

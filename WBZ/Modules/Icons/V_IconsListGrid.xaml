@@ -16,59 +16,54 @@
 	</DataGrid.Resources>
     <DataGrid.Columns>
         <!-- ID -->
-        <DataGridTextColumn Binding="{Binding ID}" Header="ID"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_ID, Converter={se:conv_Bool}}"/>
+		<DataGridTextColumn Binding="{Binding ID}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_ID, Converter={se:conv_Bool}}">
+			<DataGridTextColumn.Header>
+				<se:ColumnFilter FilterType="Number" Header="ID" NameSQL="ico.id"/>
+			</DataGridTextColumn.Header>
+		</DataGridTextColumn>
         <!-- File -->
-		<se:DataGridImageColumn Image="{Binding File}" Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"
-                                Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_File, Converter={se:conv_Bool}}"/>
+		<se:DataGridImageColumn Image="{Binding IconContent}" Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_File, Converter={se:conv_Bool}}"/>
 		<!-- Module -->
-        <DataGridTextColumn Binding="{Binding TranslatedModule}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Module, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding TranslatedModule}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Module, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="List" Header="Moduł" NameSQL="i.module"
+				<se:ColumnFilter FilterType="List" Header="Moduł" NameSQL="ico.module"
                                  ItemsSource="{x:Static g:Config.ListModules}" DisplayMemberPath="Display" SelectedValuePath="Value"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Name -->
-        <DataGridTextColumn Binding="{Binding Name}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Name, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Name}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Name, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="Text" Header="Nazwa" NameSQL="i.name"/>
+				<se:ColumnFilter FilterType="Text" Header="Nazwa" NameSQL="ico.name"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Format -->
-        <DataGridTextColumn Binding="{Binding Format}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Format, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Format}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Format, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="Text" Header="Format" NameSQL="i.format"/>
+				<se:ColumnFilter FilterType="Text" Header="Format" NameSQL="ico.format"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Path -->
-        <DataGridTextColumn Binding="{Binding Path}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Path, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Path}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Path, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="Text" Header="Ścieżka" NameSQL="i.path"/>
+				<se:ColumnFilter FilterType="Text" Header="Ścieżka" NameSQL="ico.path"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Height -->
-        <DataGridTextColumn Binding="{Binding Height}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Height, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Height}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Height, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="Number" Header="Wysokość" NameSQL="i.height"/>
+				<se:ColumnFilter FilterType="Number" Header="Wysokość" NameSQL="ico.height"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Width -->
-        <DataGridTextColumn Binding="{Binding Width}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Width, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Width}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Width, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="Number" Header="Szerokość" NameSQL="i.width"/>
+				<se:ColumnFilter FilterType="Number" Header="Szerokość" NameSQL="ico.width"/>
 			</DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Size -->
-        <DataGridTextColumn Binding="{Binding Size}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Size, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Size}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Size, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="Number" Header="Rozmiar" NameSQL="i.size"/>
+				<se:ColumnFilter FilterType="Number" Header="Rozmiar" NameSQL="ico.size"/>
 			</DataGridTextColumn.Header>
         </DataGridTextColumn>
     </DataGrid.Columns>

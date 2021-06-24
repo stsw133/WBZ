@@ -16,65 +16,59 @@
     </DataGrid.Resources>
     <DataGrid.Columns>
         <!-- ID -->
-        <DataGridTextColumn Binding="{Binding ID}" Header="ID"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_ID, Converter={se:conv_Bool}}"/>
+		<DataGridTextColumn Binding="{Binding ID}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_ID, Converter={se:conv_Bool}}">
+			<DataGridTextColumn.Header>
+				<se:ColumnFilter FilterType="Number" Header="ID" NameSQL="cnt.id"/>
+			</DataGridTextColumn.Header>
+		</DataGridTextColumn>
         <!-- Icon -->
-        <se:DataGridImageColumn Image="{Binding IconContent}" Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"
-                                Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_Icon, Converter={se:conv_Bool}}"/>
+        <se:DataGridImageColumn Image="{Binding IconContent}" Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_Icon, Converter={se:conv_Bool}}"/>
         <!-- Codename -->
-        <DataGridTextColumn Binding="{Binding Codename}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_Codename, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Codename}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_Codename, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter FilterType="Text" Header="Kod" NameSQL="c.codename"/>
+				<se:ColumnFilter FilterType="Text" Header="Kod" NameSQL="cnt.codename"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Name -->
-        <DataGridTextColumn Binding="{Binding Name}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_Name, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Name}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_Name, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter FilterType="Text" Header="Nazwa" NameSQL="c.name"/>
+				<se:ColumnFilter FilterType="Text" Header="Nazwa" NameSQL="cnt.name"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Branch -->
-        <DataGridTextColumn Binding="{Binding Branch}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_Branch, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Branch}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_Branch, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter FilterType="Text" Header="Oddział" NameSQL="c.branch"/>
+				<se:ColumnFilter FilterType="Text" Header="Oddział" NameSQL="cnt.branch"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- NIP -->
-        <DataGridTextColumn Binding="{Binding NIP}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_NIP, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding NIP}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_NIP, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter FilterType="Text" Header="NIP" NameSQL="c.nip"/>
+				<se:ColumnFilter FilterType="Text" Header="NIP" NameSQL="cnt.nip"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- REGON -->
-        <DataGridTextColumn Binding="{Binding REGON}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_REGON, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding REGON}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_REGON, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter FilterType="Text" Header="REGON" NameSQL="c.regon"/>
+				<se:ColumnFilter FilterType="Text" Header="REGON" NameSQL="cnt.regon"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Postcode -->
-        <DataGridTextColumn Binding="{Binding Postcode}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_Postcode, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Postcode}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_Postcode, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter FilterType="Text" Header="Kod pocztowy" NameSQL="c.postcode"/>
+				<se:ColumnFilter FilterType="Text" Header="Kod pocztowy" NameSQL="cnt.postcode"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- City -->
-        <DataGridTextColumn Binding="{Binding City}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_City, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding City}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_City, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter FilterType="Text" Header="Miasto" NameSQL="c.city"/>
+				<se:ColumnFilter FilterType="Text" Header="Miasto" NameSQL="cnt.city"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Address -->
-        <DataGridTextColumn Binding="{Binding Address}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_Address, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Address}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ContractorsList_Address, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter FilterType="Text" Header="Adres" NameSQL="c.address"/>
+				<se:ColumnFilter FilterType="Text" Header="Adres" NameSQL="cnt.address"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
     </DataGrid.Columns>

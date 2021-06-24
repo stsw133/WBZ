@@ -371,6 +371,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controls\Styles\" />
     <Folder Include="Modules\Equipment\" />
     <Folder Include="Modules\Orders\" />
     <Folder Include="Modules\Shipments\" />

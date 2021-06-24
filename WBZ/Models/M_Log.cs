@@ -15,7 +15,7 @@ namespace WBZ.Models
 
 		/// IMM
 		public MV Module { get; set; }
-		public int InstanceID { get; set; }
+		public int Instance { get; set; }
 
 		/// <summary>
 		/// User

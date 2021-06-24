@@ -1,7 +1,6 @@
 ﻿using StswExpress;
 using System;
 using System.Data;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 using WBZ.Globals;
@@ -42,17 +41,14 @@ namespace WBZ.Modules.Articles
 			int index = e.Row.GetIndex();
 			dgMeasures_Convert(index);
 		}
-		private async void dgMeasures_Convert(int index)
+		private void dgMeasures_Convert(int index)
 		{
-			await Task.Delay(10);
-			await Task.Run(() => {
-				if (D.InstanceData.ID != 0 && index < D.InstanceData.Measures.Rows.Count)
-				{
-					double conv = Convert.IsDBNull(D.InstanceData.Measures.Rows[index]["converter"]) ? 1 : (double)D.InstanceData.Measures.Rows[index]["converter"];
-					D.InstanceData.Measures.Rows[index]["amount"] = Convert.ToDouble(D.InstanceData.AmountRaw) / conv;
-					D.InstanceData.Measures.Rows[index]["reserved"] = Convert.ToDouble(D.InstanceData.ReservedRaw) / conv;
-				}
-			});
+			if (D.InstanceData.ID != 0 && index < D.InstanceData.Measures.Rows.Count)
+			{
+				double conv = Convert.IsDBNull(D.InstanceData.Measures.Rows[index]["converter"]) ? 1 : (double)D.InstanceData.Measures.Rows[index]["converter"];
+				D.InstanceData.Measures.Rows[index]["amount"] = Convert.ToDouble(D.InstanceData.AmountRaw) / conv;
+				D.InstanceData.Measures.Rows[index]["reserved"] = Convert.ToDouble(D.InstanceData.ReservedRaw) / conv;
+			}
 		}
 
 		/// <summary>
@@ -64,22 +60,22 @@ namespace WBZ.Modules.Articles
 			if (tab?.Name?.EndsWith("_Stores") == true)
 			{
 				if (D.InstanceData.ID != 0 && D.InstanceSources_Stores == null)
-                    D.InstanceSources_Stores = SQL.ListInstances<M_Store>(Config.GetModule(nameof(Modules.Stores)), $"sa.article={D.InstanceData.ID}");
+                    D.InstanceSources_Stores = SQL.ListInstances<M_Store>(Config.GetModule(nameof(Stores)), $"sa.article={D.InstanceData.ID}");
 			}
 			else if (tab?.Name?.EndsWith("_Documents") == true)
 			{
 				if (D.InstanceData.ID != 0 && D.InstanceSources_Documents == null)
-                    D.InstanceSources_Documents = SQL.ListInstances<M_Document>(Config.GetModule(nameof(Modules.Documents)), $"dp.article={D.InstanceData.ID}");
+                    D.InstanceSources_Documents = SQL.ListInstances<M_Document>(Config.GetModule(nameof(Documents)), $"dp.article={D.InstanceData.ID}");
 			}
 			else if (tab?.Name?.EndsWith("_Distributions") == true)
 			{
 				if (D.InstanceData.ID != 0 && D.InstanceSources_Distributions == null)
-                    D.InstanceSources_Distributions = SQL.ListInstances<M_Distribution>(Config.GetModule(nameof(Modules.Distributions)), $"dp.article={D.InstanceData.ID}");
+                    D.InstanceSources_Distributions = SQL.ListInstances<M_Distribution>(Config.GetModule(nameof(Distributions)), $"dp.article={D.InstanceData.ID}");
 			}
 		}
-		private void dgList_Stores_MouseDoubleClick(object sender, MouseButtonEventArgs e) => dgSourceList_MouseDoubleClick<M_Store>(sender, e, Config.GetModule(nameof(Modules.Stores)));
-		private void dgList_Documents_MouseDoubleClick(object sender, MouseButtonEventArgs e) => dgSourceList_MouseDoubleClick<M_Document>(sender, e, Config.GetModule(nameof(Modules.Documents)));
-		private void dgList_Distributions_MouseDoubleClick(object sender, MouseButtonEventArgs e) => dgSourceList_MouseDoubleClick<M_Distribution>(sender, e, Config.GetModule(nameof(Modules.Distributions)));
+		private void dgList_Stores_MouseDoubleClick(object sender, MouseButtonEventArgs e) => dgSourceList_MouseDoubleClick<M_Store>(sender, e, Config.GetModule(nameof(Stores)));
+		private void dgList_Documents_MouseDoubleClick(object sender, MouseButtonEventArgs e) => dgSourceList_MouseDoubleClick<M_Document>(sender, e, Config.GetModule(nameof(Documents)));
+		private void dgList_Distributions_MouseDoubleClick(object sender, MouseButtonEventArgs e) => dgSourceList_MouseDoubleClick<M_Distribution>(sender, e, Config.GetModule(nameof(Distributions)));
 
 		/// <summary>
 		/// Validation

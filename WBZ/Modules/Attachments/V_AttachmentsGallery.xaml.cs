@@ -52,7 +52,7 @@ namespace WBZ.Modules.Attachments
 		/// </summary>
 		private void btnFiltersClear_Click(object sender, RoutedEventArgs e)
 		{
-			D.Filter = new Models.M_Filter();
+			D.Filter = new Models.M_Filter(D.Module);
 			btnRefresh_Click(null, null);
 		}
 

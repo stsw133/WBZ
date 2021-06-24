@@ -25,32 +25,34 @@
         <!-- titleBar -->
         <se:TitleBar DockPanel.Dock="Top" SubIcon="{Binding ModeIcon}"/>
         <!-- buttonsPanel -->
-		<Border DockPanel.Dock="Right" BorderBrush="Gray" BorderThickness="1,0,0,0" Background="{Binding panelColor_AttributesClasses, Source={x:Static p:Settings.Default}}">
-            <DockPanel>
-                <DockPanel.Resources>
-                    <Style TargetType="{x:Type se:IconButton}">
-                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
-                        <Setter Property="IsTextVisible" Value="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"/>
-                    </Style>
-                </DockPanel.Resources>
-                <StackPanel DockPanel.Dock="Top">
-                    <se:IconButton Text="{Tr Save}" Margin="5" Icon="/Resources/icon32_save.ico" Command="se:Commands.Save"/>
-                    <Separator/>
-                </StackPanel>
-                <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
-                    <Separator/>
-                    <se:IconButton Text="{Tr Refresh}" Margin="5" Icon="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
-                    <Separator/>
-                    <se:IconButton Text="{Tr CloseWindow}" Margin="5" Icon="/Resources/icon32_close.ico" Command="se:Commands.Close"/>
-                </StackPanel>
-            </DockPanel>
-            <Border.ContextMenu>
-                <ContextMenu>
-					<se:ColorSetter Color="{Binding panelColor_AttributesClasses, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
-                </ContextMenu>
-            </Border.ContextMenu>
-        </Border>
-        <!-- tabs -->
+		<ScrollViewer DockPanel.Dock="Right" VerticalScrollBarVisibility="Auto">
+			<Border BorderBrush="Gray" BorderThickness="1,0,0,0" Background="{Binding panelColor_AttributesClasses, Source={x:Static p:Settings.Default}}">
+				<DockPanel>
+					<DockPanel.Resources>
+						<Style TargetType="{x:Type se:IconButton}">
+							<Setter Property="HorizontalContentAlignment" Value="Left"/>
+							<Setter Property="IsTextVisible" Value="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"/>
+						</Style>
+					</DockPanel.Resources>
+					<StackPanel DockPanel.Dock="Top">
+						<se:IconButton Text="{Tr Save}" Margin="5" Icon="/Resources/icon32_save.ico" Command="se:Commands.Save"/>
+						<Separator/>
+					</StackPanel>
+					<StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
+						<Separator/>
+						<se:IconButton Text="{Tr Refresh}" Margin="5" Icon="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
+						<Separator/>
+						<se:IconButton Text="{Tr CloseWindow}" Margin="5" Icon="/Resources/icon32_close.ico" Command="se:Commands.Close"/>
+					</StackPanel>
+				</DockPanel>
+				<Border.ContextMenu>
+					<ContextMenu>
+						<se:ColorSetter Color="{Binding panelColor_AttributesClasses, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+					</ContextMenu>
+				</Border.ContextMenu>
+			</Border>
+		</ScrollViewer>
+		<!-- tabs -->
         <TabControl DockPanel.Dock="Top">
             <!-- tabMain -->
             <TabItem>
@@ -111,9 +113,9 @@
                             <!-- Required -->
                             <se:ExtCheckBox DockPanel.Dock="Top" Content="Wymagana" Margin="20" HorizontalAlignment="Center" IsChecked="{Binding InstanceData.Required}"/>
                             <Label DockPanel.Dock="Top" Content="Lista możliwych wartości:" Margin="5,5,5,0" HorizontalAlignment="Center"/>
-                            <DataGrid x:Name="dgValues" DockPanel.Dock="Top" Padding="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"
-                                      AutoGenerateColumns="False" RowHeaderWidth="0" ItemsSource="{Binding InstanceData.Values.DefaultView}" IsReadOnly="{Binding EditMode, Converter={se:conv_Bool}, ConverterParameter=!}"
-                                      IsEnabled="{Binding InstanceData.Type, Converter={se:conv_Compare}, ConverterParameter=list}">
+                            <se:ExtDataGrid Padding="5" ItemsSource="{Binding InstanceData.Values.DefaultView}"
+											IsEnabled="{Binding InstanceData.Type, Converter={se:conv_Compare}, ConverterParameter=list}"
+											IsReadOnly="{Binding EditMode, Converter={se:conv_Bool}, ConverterParameter=!}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Binding="{Binding id}" Header="ID" IsReadOnly="True" Visibility="Collapsed"/>
                                     <DataGridTextColumn Binding="{Binding value}" Header="Wartość" Width="*"/>
@@ -137,7 +139,7 @@
                                         </Style.Triggers>
                                     </Style>
                                 </DataGrid.RowStyle>
-                            </DataGrid>
+                            </se:ExtDataGrid>
                         </DockPanel>
                     </Grid>
                 </ScrollViewer>

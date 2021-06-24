@@ -24,32 +24,34 @@
         <!-- titleBar -->
         <se:TitleBar DockPanel.Dock="Top" SubIcon="{Binding ModeIcon}"/>
         <!-- buttonsPanel -->
-		<Border DockPanel.Dock="Right" BorderBrush="Gray" BorderThickness="1,0,0,0" Background="{Binding panelColor_Contractors, Source={x:Static p:Settings.Default}}">
-            <DockPanel>
-                <DockPanel.Resources>
-                    <Style TargetType="{x:Type se:IconButton}">
-                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
-                        <Setter Property="IsTextVisible" Value="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"/>
-                    </Style>
-                </DockPanel.Resources>
-                <StackPanel DockPanel.Dock="Top">
-                    <se:IconButton Text="{Tr Save}" Margin="5" Icon="/Resources/icon32_save.ico" Command="se:Commands.Save"/>
-                    <Separator/>
-                </StackPanel>
-                <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
-                    <Separator/>
-                    <se:IconButton Text="{Tr Refresh}" Margin="5" Icon="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
-                    <Separator/>
-                    <se:IconButton Text="{Tr CloseWindow}" Margin="5" Icon="/Resources/icon32_close.ico" Command="se:Commands.Close"/>
-                </StackPanel>
-            </DockPanel>
-            <Border.ContextMenu>
-                <ContextMenu>
-					<se:ColorSetter Color="{Binding panelColor_Contractors, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
-                </ContextMenu>
-            </Border.ContextMenu>
-        </Border>
-        <!-- tabs -->
+		<ScrollViewer DockPanel.Dock="Right" VerticalScrollBarVisibility="Auto">
+			<Border BorderBrush="Gray" BorderThickness="1,0,0,0" Background="{Binding panelColor_Contractors, Source={x:Static p:Settings.Default}}">
+				<DockPanel>
+					<DockPanel.Resources>
+						<Style TargetType="{x:Type se:IconButton}">
+							<Setter Property="HorizontalContentAlignment" Value="Left"/>
+							<Setter Property="IsTextVisible" Value="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"/>
+						</Style>
+					</DockPanel.Resources>
+					<StackPanel DockPanel.Dock="Top">
+						<se:IconButton Text="{Tr Save}" Margin="5" Icon="/Resources/icon32_save.ico" Command="se:Commands.Save"/>
+						<Separator/>
+					</StackPanel>
+					<StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
+						<Separator/>
+						<se:IconButton Text="{Tr Refresh}" Margin="5" Icon="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
+						<Separator/>
+						<se:IconButton Text="{Tr CloseWindow}" Margin="5" Icon="/Resources/icon32_close.ico" Command="se:Commands.Close"/>
+					</StackPanel>
+				</DockPanel>
+				<Border.ContextMenu>
+					<ContextMenu>
+						<se:ColorSetter Color="{Binding panelColor_Contractors, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+					</ContextMenu>
+				</Border.ContextMenu>
+			</Border>
+		</ScrollViewer>
+		<!-- tabs -->
         <TabControl DockPanel.Dock="Top">
             <!-- tabMain -->
             <TabItem>
@@ -57,7 +59,7 @@
                     <se:Header Text="{Tr General}" Icon="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
                 </TabItem.Header>
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <Grid Margin="10" IsEnabled="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=!PREVIEW}">
+					<Grid Margin="10" VerticalAlignment="Top" IsEnabled="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=!PREVIEW}">
                         <Grid.Resources>
                             <Style TargetType="{x:Type se:IconButton}">
                                 <Setter Property="CornerRadius" Value="0"/>
@@ -125,8 +127,8 @@
                             </DockPanel>
                             <!-- Address -->
                             <DockPanel DockPanel.Dock="Top">
-                                <Label Content="Adres:" FontWeight="Normal"/>
-                                <TextBox Text="{Binding InstanceData.Address}"/>
+                                <se:ExtLabel Content="Adres:" FontWeight="Normal"/>
+                                <se:ExtTextBox Text="{Binding InstanceData.Address}"/>
                             </DockPanel>
                         </DockPanel>
                     </Grid>

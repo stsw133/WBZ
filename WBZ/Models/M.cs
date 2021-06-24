@@ -76,7 +76,7 @@
         /// <summary>
         /// Instance
         /// </summary>
-        public int InstanceID { get; set; }
+        public int Instance { get; set; }
     }
 
     /// <summary>

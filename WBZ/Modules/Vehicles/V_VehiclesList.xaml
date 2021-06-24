@@ -77,7 +77,7 @@
             </DockPanel>
         </Border>
         <!-- dataGrid -->
-        <m:VehiclesListGrid ItemsSource="{Binding InstancesList}" BorderThickness="0"
+		<m:VehiclesListGrid ItemsSource="{Binding InstancesLists[0]}" BorderThickness="0"
                             MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged" Sorting="dgList_Sorting"/>
     </DockPanel>
 </b:List>

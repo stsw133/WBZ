@@ -56,9 +56,6 @@ namespace WBZ.Modules._base
 		/// </summary>
         internal virtual void UpdateFilters()
         {
-            /// add module reference to filter
-            D.Filter.Module = D.Module;
-
             /// get column filters
             Fn.GetColumnFilters(dgLists[D.SelectedTab], out var a, out var b);
             D.Filter.AutoFilterString = a;
@@ -159,7 +156,7 @@ namespace WBZ.Modules._base
 		/// </summary>
 		internal virtual void cmdClear_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            D.Filter = new M_Filter();
+            D.Filter = new M_Filter(D.Module);
             Fn.ClearColumnFilters(dgLists[D.SelectedTab]);
             cmdRefresh_Executed(null, null);
         }

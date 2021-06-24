@@ -17,39 +17,37 @@
     </DataGrid.Resources>
     <DataGrid.Columns>
         <!-- ID -->
-        <DataGridTextColumn Binding="{Binding ID}" Header="ID"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_ID, Converter={se:conv_Bool}}"/>
+		<DataGridTextColumn Binding="{Binding ID}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_ID, Converter={se:conv_Bool}}">
+			<DataGridTextColumn.Header>
+				<se:ColumnFilter FilterType="Number" Header="ID" NameSQL="atc.id"/>
+			</DataGridTextColumn.Header>
+		</DataGridTextColumn>
         <!-- Icon -->
-        <se:DataGridImageColumn Image="{Binding IconContent}" Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"
-                                Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Icon, Converter={se:conv_Bool}}"/>
+        <se:DataGridImageColumn Image="{Binding IconContent}" Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Icon, Converter={se:conv_Bool}}"/>
         <!-- Module -->
-        <DataGridTextColumn Binding="{Binding TranslatedModule}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Module, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding TranslatedModule}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Module, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="List" Header="Moduł" NameSQL="ac.module"
+				<se:ColumnFilter FilterType="List" Header="Moduł" NameSQL="atc.module"
                                  ItemsSource="{x:Static g:Config.ListModules}" DisplayMemberPath="Display" SelectedValuePath="Value"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Name -->
-        <DataGridTextColumn Binding="{Binding Name}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Name, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Name}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Name, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="Text" Header="Nazwa" NameSQL="ac.name"/>
+				<se:ColumnFilter FilterType="Text" Header="Nazwa" NameSQL="atc.name"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Type -->
-        <DataGridTextColumn Binding="{Binding Type}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Type, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Type}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Type, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="List" Header="Typ" NameSQL="ac.type"
+				<se:ColumnFilter FilterType="List" Header="Typ" NameSQL="atc.type"
                                  ItemsSource="{Binding Source={x:Static m:MS_AttributesClasses.Types}}" DisplayMemberPath="Display" SelectedValuePath="Value"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Required -->
-        <DataGridCheckBoxColumn Binding="{Binding Required}" Width="*"
-                                Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Required, Converter={se:conv_Bool}}">
+        <DataGridCheckBoxColumn Binding="{Binding Required}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Required, Converter={se:conv_Bool}}">
             <DataGridCheckBoxColumn.Header>
-				<se:ColumnFilter FilterType="Check" Header="Wymagany" NameSQL="ac.required"/>
+				<se:ColumnFilter FilterType="Check" Header="Wymagany" NameSQL="atc.required"/>
             </DataGridCheckBoxColumn.Header>
         </DataGridCheckBoxColumn>
     </DataGrid.Columns>

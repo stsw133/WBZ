@@ -549,7 +549,7 @@ namespace WBZ
 				var error = new M_Log()
 				{
 					ID = NewInstanceID(logsModule),
-					InstanceID = instanceID,
+					Instance = instanceID,
 					Module = module,
 					Type = (short)M_Log.LogType.Error,
 					User = Config.User.ID
@@ -637,7 +637,7 @@ namespace WBZ
 					left join wbz.icons i on {a}.icon=i.id
 					left join wbz.stores_articles sa on {a}.id=sa.article
 					where {filter.Content ?? "true"} and {filter.AutoFilterString ?? "true"}
-					group by {a}.id
+					group by {a}.id, i.id
 				",
 				/// ATTACHMENTS
 				nameof(Modules.Attachments) =>
@@ -857,7 +857,7 @@ namespace WBZ
 					left join wbz.icons i on {a}.icon=i.id
 					left join wbz.stores_articles sa on {a}.id = sa.store
 					where {filter.Content ?? "true"} and {filter.AutoFilterString ?? "true"}
-					group by {a}.id
+					group by {a}.id, i.id
 				",
 				/// USERS
 				nameof(Modules.Users) =>
@@ -932,7 +932,7 @@ namespace WBZ
 
 			return Convert.ToInt32(sqlCmd.ExecuteScalar());
 		}
-		internal static int CountInstances(MV module, string filter) => CountInstances(module, new M_Filter() { AutoFilterString = filter });
+		internal static int CountInstances(MV module, string filter) => CountInstances(module, new M_Filter(module) { AutoFilterString = filter });
 
 		/// <summary>
 		/// Pobiera listę instancji
@@ -951,7 +951,7 @@ namespace WBZ
 
 			return new List<T>(dt.ToList<T>());
 		}
-		internal static List<T> ListInstances<T>(MV module, string filter, int displayed = 0) where T : class, new() => ListInstances<T>(module, new M_Filter() { AutoFilterString = filter }, displayed);
+		internal static List<T> ListInstances<T>(MV module, string filter, int displayed = 0) where T : class, new() => ListInstances<T>(module, new M_Filter(module) { AutoFilterString = filter }, displayed);
 
 		/// <summary>
 		/// Pobiera dane o instancji
@@ -961,7 +961,7 @@ namespace WBZ
 		internal static T GetInstance<T>(MV module, int instanceID) where T : class, new()
 		{
 			using var sqlConn = ConnOpenedWBZ;
-			using var sqlDA = new NpgsqlDataAdapter(ListCommand(module, SelectMode.EXTENDED, new M_Filter() { AutoFilterString = $"{module.Alias}.id={instanceID}" }, 0));
+			using var sqlDA = new NpgsqlDataAdapter(ListCommand(module, SelectMode.EXTENDED, new M_Filter(module) { AutoFilterString = $"{module.Alias}.id={instanceID}" }, 0));
 			sqlDA.SelectCommand.Connection = sqlConn;
 
 			var dt = new DataTable();
@@ -1470,7 +1470,7 @@ namespace WBZ
 							sqlCmd.Parameters.AddWithValue("id", group.ID);
 							sqlCmd.Parameters.AddWithValue("module", group.Module);
 							sqlCmd.Parameters.AddWithValue("name", group.Name);
-							sqlCmd.Parameters.AddWithValue("instance", group.InstanceID > 0 ? (object)group.InstanceID : DBNull.Value);
+							sqlCmd.Parameters.AddWithValue("instance", group.Instance > 0 ? (object)group.Instance : DBNull.Value);
 							sqlCmd.Parameters.AddWithValue("owner", group.Owner);
 							sqlCmd.Parameters.AddWithValue("archival", group.Archival);
 							sqlCmd.Parameters.AddWithValue("comment", group.Comment);
@@ -1520,7 +1520,7 @@ namespace WBZ
 						{
 							sqlCmd.Parameters.AddWithValue("user", log.User);
 							sqlCmd.Parameters.AddWithValue("module", log.Module);
-							sqlCmd.Parameters.AddWithValue("instance", log.InstanceID);
+							sqlCmd.Parameters.AddWithValue("instance", log.Instance);
 							sqlCmd.Parameters.AddWithValue("type", log.Type);
 							sqlCmd.Parameters.AddWithValue("content", log.Content);
 							sqlCmd.ExecuteNonQuery();

@@ -8,8 +8,14 @@ namespace WBZ.Modules._base
 {
 	abstract class D_ModuleList<MODULE_MODEL> : D where MODULE_MODEL : class, new()
 	{
+		public D_ModuleList()
+		{
+			Module = Config.GetModule(GetType().Name[2..^4]);
+			Filter = new M_Filter(Module);
+		}
+
 		/// Module
-		public MV Module => Config.GetModule(GetType().Name[2..^4]);
+		public MV Module;
 		public string Title => TM.Tr(Module.Name + Mode.ToString().Capitalize());
 
 		/// Mode
@@ -18,16 +24,16 @@ namespace WBZ.Modules._base
 		{
 			get
 			{
-				if		(Mode == Commands.Type.LIST)	return "/Resources/icon32_list.ico";
-				else if	(Mode == Commands.Type.SELECT)	return "/Resources/icon32_select.ico";
-				else									return null;
+				if (Mode == Commands.Type.LIST) return "/Resources/icon32_list.ico";
+				else if (Mode == Commands.Type.SELECT) return "/Resources/icon32_select.ico";
+				else return null;
 			}
 		}
 
 		/// Selected tab
 		private int selectedTab = 0;
 		public int SelectedTab
-        {
+		{
 			get => selectedTab;
 			set => SetField(ref selectedTab, value, () => SelectedTab);
 		}
@@ -49,7 +55,7 @@ namespace WBZ.Modules._base
 		}
 
 		/// Filter
-		private M_Filter filter = new M_Filter();
+		private M_Filter filter;
 		public M_Filter Filter
 		{
 			get => filter;
