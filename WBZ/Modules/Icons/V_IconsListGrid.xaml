@@ -26,7 +26,7 @@
 		<!-- Module -->
         <DataGridTextColumn Binding="{Binding TranslatedModule}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_IconsList_Module, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="List" Header="Moduł" NameSQL="ico.module"
+				<se:ColumnFilter FilterType="List" Header="Moduł" NameSQL="ico.module_alias"
                                  ItemsSource="{x:Static g:Config.ListModules}" DisplayMemberPath="Display" SelectedValuePath="Value"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>

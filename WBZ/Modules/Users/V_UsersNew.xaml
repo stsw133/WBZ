@@ -89,10 +89,10 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <DockPanel Grid.Column="0" Grid.ColumnSpan="3">
-                            <!-- Username -->
+                            <!-- Codename -->
                             <DockPanel DockPanel.Dock="Top">
-                                <se:ExtLabel Content="Nazwa użytk.:" FontWeight="Bold"/>
-                                <se:ExtTextBox Text="{Binding InstanceData.Username}"/>
+                                <se:ExtLabel Content="Kod:" FontWeight="Bold"/>
+                                <se:ExtTextBox Text="{Binding InstanceData.Codename}"/>
                             </DockPanel>
                             <!-- Newpass -->
                             <DockPanel DockPanel.Dock="Top">
@@ -119,15 +119,15 @@
                                 <se:ExtLabel Content="Nazwisko:" FontWeight="Normal"/>
                                 <se:ExtTextBox Text="{Binding InstanceData.Lastname}"/>
                             </DockPanel>
-                            <!-- Blocked -->
+                            <!-- IsBlocked -->
                             <DockPanel DockPanel.Dock="Top">
                                 <se:ExtLabel Content="Zablokowany:" FontWeight="Normal"/>
-                                <se:ExtCheckBox Margin="5" IsChecked="{Binding InstanceData.Blocked}"/>
+                                <se:ExtCheckBox Margin="5" IsChecked="{Binding InstanceData.IsBlocked}"/>
                             </DockPanel>
-                            <!-- Archival -->
+                            <!-- IsArchival -->
                             <DockPanel DockPanel.Dock="Top">
                                 <se:ExtLabel Content="Archiwalny:" FontWeight="Normal"/>
-                                <se:ExtCheckBox Margin="5" IsChecked="{Binding InstanceData.Archival}"/>
+                                <se:ExtCheckBox Margin="5" IsChecked="{Binding InstanceData.IsArchival}"/>
                             </DockPanel>
                         </DockPanel>
                     </Grid>
@@ -143,7 +143,8 @@
                         <!-- admin -->
                         <UniformGrid Tag="Admin" DockPanel.Dock="Top">
                             <se:ExtCheckBox Margin="0,5,0,15" Content="{Tr AdminPermissions}" HorizontalAlignment="Left"
-                                            IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=Admin}" Tag="Admin"/>
+                                            IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=Admin}" Tag="Admin"
+                                            Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
                         </UniformGrid>
                         <!-- headers -->
                         <UniformGrid DockPanel.Dock="Top" Rows="1" Height="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=1.5}">

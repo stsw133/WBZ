@@ -17,9 +17,9 @@
 		public string Codename { get; set; }
 
 		/// <summary>
-		/// Amount
+		/// Quantity
 		/// </summary>
-		public decimal Amount { get; set; }
+		public decimal Quantity { get; set; }
 
 		/// <summary>
 		/// Reserved

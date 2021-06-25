@@ -13,51 +13,47 @@
     </DataGrid.Resources>
     <DataGrid.Columns>
         <!-- ID -->
-        <DataGridTextColumn Binding="{Binding ID}" Header="ID"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_ID, Converter={se:conv_Bool}}"/>
-        <!-- Icon -->
-        <se:DataGridImageColumn Image="{Binding IconContent}" Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"
-                                Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Icon, Converter={se:conv_Bool}}"/>
-        <!-- Declarant -->
-        <DataGridTextColumn Binding="{Binding Declarant}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Declarant, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding ID}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_ID, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="Zgłaszający"/>
+                <se:ColumnFilter FilterType="Number" Header="ID" NameSQL="fam.id"/>
+            </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+        <!-- Icon -->
+        <se:DataGridImageColumn Image="{Binding IconContent}" Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Icon, Converter={se:conv_Bool}}"/>
+        <!-- Declarant -->
+        <DataGridTextColumn Binding="{Binding Declarant}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Declarant, Converter={se:conv_Bool}}">
+            <DataGridTextColumn.Header>
+                <se:ColumnFilter FilterType="Text" Header="Zgłaszający" NameSQL="fam.declarant"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Lastname -->
-        <DataGridTextColumn Binding="{Binding Lastname}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Lastname, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Lastname}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Lastname, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="Rodzina"/>
+                <se:ColumnFilter FilterType="Text" Header="Rodzina" NameSQL="fam.lastname"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Members -->
-        <DataGridTextColumn Binding="{Binding Members}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Members, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Members}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Members, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="Ilość osób"/>
+                <se:ColumnFilter FilterType="Number" Header="Ilość osób" NameSQL="fam.members"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Postcode -->
-        <DataGridTextColumn Binding="{Binding Postcode}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Postcode, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Postcode}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Postcode, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="Kod pocztowy"/>
+                <se:ColumnFilter FilterType="Text" Header="Kod pocztowy" NameSQL="fam.postcode"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- City -->
-        <DataGridTextColumn Binding="{Binding City}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_City, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding City}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_City, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="Miejscowość"/>
+                <se:ColumnFilter FilterType="Text" Header="Miejscowość" NameSQL="fam.city"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Address -->
-        <DataGridTextColumn Binding="{Binding Address}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Address, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Address}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Address, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter Header="Adres"/>
+                <se:ColumnFilter FilterType="Text" Header="Adres" NameSQL="fam.address"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- DonationWeight -->
@@ -93,91 +89,28 @@
     <DataGrid.ContextMenu>
         <ContextMenu>
             <!-- Columns -->
-            <MenuItem Header="Widoczność kolumn">
-                <MenuItem.Icon>
-                    <Image Source="/Resources/icon32_show.ico"/>
-                </MenuItem.Icon>
-                <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_ID, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Ikona" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Icon, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Zgłaszający" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Declarant, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Rodzina" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Lastname, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Ilość osób" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Members, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Kod pocztowy" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Postcode, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Miejscowość" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_City, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Adres" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Address, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Przekazano (kg)" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_DonationWeight, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Status" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Status, Mode=TwoWay}"/>
-                <MenuItem IsCheckable="True" Header="Ostatnia darowizna" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_DonationLast, Mode=TwoWay}"/>
-            </MenuItem>
-            <!-- Sorting -->
-            <MenuItem Header="Sortowanie danych">
-                <MenuItem.Icon>
-                    <Image Source="/Resources/icon32_descending.ico"/>
-                </MenuItem.Icon>
-                <MenuItem>
-                    <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Sortowanie 1:"/>
-                            <ToggleButton IsChecked="{Binding sorting_FamiliesList[1], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                          Height="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.2}"
-                                          Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.2}">
-                                <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.1}"
-                                       Source="/Resources/icon32_descending.ico"/>
-                            </ToggleButton>
-                            <ComboBox SelectedValue="{Binding sorting_FamiliesList[0], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                      SelectedValuePath="Tag" VerticalContentAlignment="Center">
-                                <ComboBoxItem Content="Zgłaszający" Tag="f.declarant"/>
-                                <ComboBoxItem Content="Rodzina" Tag="f.lastname"/>
-                                <ComboBoxItem Content="Liczba osób" Tag="f.members"/>
-                                <ComboBoxItem Content="Kod pocztowy" Tag="f.postcode"/>
-                                <ComboBoxItem Content="Miasto" Tag="f.city"/>
-                                <ComboBoxItem Content="Adres" Tag="f.address"/>
-                            </ComboBox>
-                        </StackPanel>
-                    </MenuItem.Header>
-                </MenuItem>
-                <MenuItem>
-                    <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Sortowanie 2:"/>
-                            <ToggleButton IsChecked="{Binding sorting_FamiliesList[3], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                          Height="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.2}"
-                                          Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2.2}">
-                                <Image Margin="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.1}"
-                                       Source="/Resources/icon32_descending.ico"/>
-                            </ToggleButton>
-                            <ComboBox SelectedValue="{Binding sorting_FamiliesList[2], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                      SelectedValuePath="Tag" VerticalContentAlignment="Center">
-                                <ComboBoxItem Content="Zgłaszający" Tag="f.declarant"/>
-                                <ComboBoxItem Content="Rodzina" Tag="f.lastname"/>
-                                <ComboBoxItem Content="Liczba osób" Tag="f.members"/>
-                                <ComboBoxItem Content="Kod pocztowy" Tag="f.postcode"/>
-                                <ComboBoxItem Content="Miasto" Tag="f.city"/>
-                                <ComboBoxItem Content="Adres" Tag="f.address"/>
-                            </ComboBox>
-                        </StackPanel>
-                    </MenuItem.Header>
-                </MenuItem>
-                <MenuItem>
-                    <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Limit wczytywania:"/>
-                            <TextBox Text="{Binding sorting_FamiliesList[4], Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                                     Width="{Binding FontSize, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=5}"
-                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                    </MenuItem.Header>
-                </MenuItem>
-            </MenuItem>
+            <se:ExtMenuItem Header="{Tr ColumnsVisibility}" IconUri="/Resources/icon32_show.ico">
+                <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_ID}"/>
+                <MenuItem IsCheckable="True" Header="Ikona" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Icon}"/>
+                <MenuItem IsCheckable="True" Header="Zgłaszający" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Declarant}"/>
+                <MenuItem IsCheckable="True" Header="Rodzina" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Lastname}"/>
+                <MenuItem IsCheckable="True" Header="Ilość osób" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Members}"/>
+                <MenuItem IsCheckable="True" Header="Kod pocztowy" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Postcode}"/>
+                <MenuItem IsCheckable="True" Header="Miejscowość" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_City}"/>
+                <MenuItem IsCheckable="True" Header="Adres" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Address}"/>
+                <MenuItem IsCheckable="True" Header="Przekazano (kg)" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_DonationWeight}"/>
+                <MenuItem IsCheckable="True" Header="Status" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_Status}"/>
+                <MenuItem IsCheckable="True" Header="Ostatnia darowizna" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_FamiliesList_DonationLast}"/>
+            </se:ExtMenuItem>
             <!-- Actions -->
             <Separator/>
-            <se:ExtMenuItem Header="Podgląd" IconUri="/Resources/icon32_search.ico" Command="se:Commands.Preview"/>
-            <se:ExtMenuItem Header="Dodaj" IconUri="/Resources/icon32_add.ico" Command="se:Commands.New"/>
-            <se:ExtMenuItem Header="Duplikuj" IconUri="/Resources/icon32_duplicate.ico" Command="se:Commands.Duplicate"/>
-            <se:ExtMenuItem Header="Edytuj" IconUri="/Resources/icon32_edit.ico" Command="se:Commands.Edit"/>
-            <se:ExtMenuItem Header="Usuń" IconUri="/Resources/icon32_delete.ico" Command="se:Commands.Delete"/>
+            <se:ExtMenuItem Header="{Tr Preview}" IconUri="/Resources/icon32_search.ico" Command="se:Commands.Preview"/>
+            <se:ExtMenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico" Command="se:Commands.New"/>
+            <se:ExtMenuItem Header="{Tr Duplicate}" IconUri="/Resources/icon32_duplicate.ico" Command="se:Commands.Duplicate"/>
+            <se:ExtMenuItem Header="{Tr Edit}" IconUri="/Resources/icon32_edit.ico" Command="se:Commands.Edit"/>
+            <se:ExtMenuItem Header="{Tr Delete}" IconUri="/Resources/icon32_delete.ico" Command="se:Commands.Delete"/>
             <Separator/>
-            <se:ExtMenuItem Header="Odśwież" IconUri="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
+            <se:ExtMenuItem Header="{Tr Refresh}" IconUri="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
         </ContextMenu>
     </DataGrid.ContextMenu>
     <DataGrid.RowStyle>

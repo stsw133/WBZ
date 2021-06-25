@@ -71,8 +71,8 @@ namespace WBZ.Modules._base
                 });
 
             /// wbz filters
-            if (!D.Filter.ShowArchival) D.Filter.AutoFilterString += $" and {D.Module.Alias}.archival=false";
-            if (D.Filter.ShowGroup > 0) D.Filter.AutoFilterString += $" and exists (select from wbz.groups g where g.instance={D.Module.Alias}.id and g.owner={D.Filter.ShowGroup})";
+            if (!D.Filter.ShowArchival) D.Filter.AutoFilterString += $" and {D.Module.Alias}.is_archival=false";
+            if (D.Filter.ShowGroup > 0) D.Filter.AutoFilterString += $" and exists (select from wbz.groups g where g.module_alias={D.Module.Alias}.id and g.owner_id={D.Filter.ShowGroup})";
 
             /// remove "and"
             if (D.Filter.AutoFilterString.StartsWith(" and "))

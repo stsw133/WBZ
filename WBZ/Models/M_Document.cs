@@ -37,13 +37,13 @@ namespace WBZ.Models
 		/// <summary>
 		/// Store
 		/// </summary>
-		public int Store { get; set; }
+		public int StoreID { get; set; }
 		public string StoreName { get; set; }
 
 		/// <summary>
 		/// Contractor
 		/// </summary>
-		public int Contractor { get; set; }
+		public int ContractorID { get; set; }
 		public string ContractorName { get; set; }
 
 		/// <summary>
@@ -93,19 +93,20 @@ namespace WBZ.Models
 		public int ID { get; set; }
 		
 		/// <summary>
-		/// Position
+		/// Pos
 		/// </summary>
-		public short Position { get; set; }
+		public short Pos { get; set; }
 
 		/// <summary>
 		/// Article
 		/// </summary>
-		public int Article { get; set; }
+		public int ArticleID { get; set; }
+		public int ArticleName { get; set; }
 
 		/// <summary>
-		/// Amount
+		/// Quantity
 		/// </summary>
-		public decimal Amount { get; set; }
+		public decimal Quantity { get; set; }
 
 		/// <summary>
 		/// Net

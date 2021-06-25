@@ -211,6 +211,30 @@
 		"en": "Distributions",
 		"pl": "Dystrybucje"
 	},
+	"DistributionsDuplicate": {
+		"en": "Duplicate distribution",
+		"pl": "Duplikat dystrybucji"
+	},
+	"DistributionsEdit": {
+		"en": "Edit distribution",
+		"pl": "Edycja dystrybucji"
+	},
+	"DistributionsList": {
+		"en": "List of distributions",
+		"pl": "Lista dystrybucji"
+	},
+	"DistributionsNew": {
+		"en": "New distribution",
+		"pl": "Nowa dystrybucja"
+	},
+	"DistributionsPreview": {
+		"en": "Preview distribution",
+		"pl": "Podgląd dystrybucji"
+	},
+	"DistributionsSelect": {
+		"en": "Select distribution",
+		"pl": "Wybór dystrybucji"
+	},
 	"Documents": {
 		"en": "Documents",
 		"pl": "Dokumenty"
@@ -290,6 +314,30 @@
 	"Families": {
 		"en": "Families",
 		"pl": "Rodziny"
+	},
+	"FamiliesDuplicate": {
+		"en": "Duplicate family",
+		"pl": "Duplikat rodziny"
+	},
+	"FamiliesEdit": {
+		"en": "Edit family",
+		"pl": "Edycja rodziny"
+	},
+	"FamiliesList": {
+		"en": "List of families",
+		"pl": "Lista rodzin"
+	},
+	"FamiliesNew": {
+		"en": "New family",
+		"pl": "Nowa rodzina"
+	},
+	"FamiliesPreview": {
+		"en": "Preview family",
+		"pl": "Podgląd rodziny"
+	},
+	"FamiliesSelect": {
+		"en": "Select family",
+		"pl": "Wybór rodziny"
 	},
 	"Filter": {
 		"en": "Filter",

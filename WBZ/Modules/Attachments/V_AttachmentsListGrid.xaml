@@ -22,14 +22,14 @@
         <DataGridTextColumn Binding="{Binding cUser.Value}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_User, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="Text" Header="Użytkownik" NameSQL="v.user"/>
+				<se:ColumnFilter FilterType="Text" Header="Użytkownik" NameSQL="concat(use.lastname, ' ', use.forename)"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Module -->
         <DataGridTextColumn Binding="{Binding TranslatedModule}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Module, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="List" Header="Moduł" NameSQL="a.module"
+				<se:ColumnFilter FilterType="List" Header="Moduł" NameSQL="att.module"
                                  ItemsSource="{x:Static g:Config.ListModules}" DisplayMemberPath="Display" SelectedValuePath="Value"/>
 			</DataGridTextColumn.Header>
         </DataGridTextColumn>
@@ -37,14 +37,14 @@
 		<DataGridTextColumn Binding="{Binding Instance}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Instance, Converter={se:conv_Bool}}">
 			<DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="Number" Header="ID instancji" NameSQL="a.instance"/>
+                <se:ColumnFilter FilterType="Number" Header="ID instancji" NameSQL="att.instance_id"/>
 			</DataGridTextColumn.Header>
 		</DataGridTextColumn>
         <!-- Name -->
         <DataGridTextColumn Binding="{Binding Name}" Width="*"
                             Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Name, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="Text" Header="Nazwa" NameSQL="a.name"/>
+                <se:ColumnFilter FilterType="Text" Header="Nazwa" NameSQL="att.name"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
     </DataGrid.Columns>
@@ -54,7 +54,7 @@
 			<se:ExtMenuItem Header="{Tr ColumnsVisibility}" IconUri="/Resources/icon32_show.ico">
 				<MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_ID}"/>
 				<MenuItem IsCheckable="True" Header="Użytkownik" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_User}"/>
-				<MenuItem IsCheckable="True" Header="Nazwa modułu" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Module}"/>
+				<MenuItem IsCheckable="True" Header="Moduł" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Module}"/>
 				<MenuItem IsCheckable="True" Header="ID instancji" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Instance}"/>
 				<MenuItem IsCheckable="True" Header="Nazwa" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttachmentsList_Name}"/>
 			</se:ExtMenuItem>

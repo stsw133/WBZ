@@ -38,9 +38,9 @@ namespace WBZ.Models
 		public string DefValue { get; set; }
 
 		/// <summary>
-		/// Required
+		/// IsRequired
 		/// </summary>
-		public bool Required { get; set; }
+		public bool IsRequired { get; set; }
 
 		/// <summary>
 		/// Values
@@ -64,7 +64,7 @@ namespace WBZ.Models
 		public M_AttributeClass Class { get; set; } = new M_AttributeClass();
 
 		/// <summary>
-		/// InstanceID
+		/// Instance
 		/// </summary>
 		public int InstanceID { get; set; }
 
@@ -74,8 +74,8 @@ namespace WBZ.Models
 		public string Value { get; set; }
 
 		/// <summary>
-		/// Archival
+		/// IsArchival
 		/// </summary>
-		public bool Archival { get; set; }
+		public bool IsArchival { get; set; }
 	}
 }

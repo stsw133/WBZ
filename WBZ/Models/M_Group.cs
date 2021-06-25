@@ -1,4 +1,6 @@
-﻿namespace WBZ.Models
+﻿using System.Collections.Generic;
+
+namespace WBZ.Models
 {
 	/// <summary>
 	/// Model for Groups
@@ -13,6 +15,11 @@
 		/// Owner
 		/// </summary>
 		public int OwnerID { get; set; }
+
+		/// <summary>
+		/// SubGroups
+		/// </summary>
+		public List<M_Group> SubGroups { get; set; }
 
 		/// <summary>
 		/// Path

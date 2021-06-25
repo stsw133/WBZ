@@ -18,8 +18,8 @@ namespace WBZ.Modules.Distributions
 			InitializeComponent();
 			DataContext = D;
 
-			D.FamilyInfo = SQL.GetInstance<M_Family>(Config.GetModule(nameof(Modules.Families)), family.Family);
-			D.FamilyContactsInfo = SQL.ListContacts(Config.GetModule(nameof(Modules.Families)), family.Family, @"""default""=true");
+			D.FamilyInfo = SQL.GetInstance<M_Family>(Config.GetModule(nameof(Modules.Families)), family.FamilyID);
+			D.FamilyContactsInfo = SQL.ListContacts(Config.GetModule(nameof(Modules.Families)), family.FamilyID, @"""default""=true");
 
 			if (family.Status == 0) rbStatus0.IsChecked = true;
 			if (family.Status == 1) rbStatus1.IsChecked = true;

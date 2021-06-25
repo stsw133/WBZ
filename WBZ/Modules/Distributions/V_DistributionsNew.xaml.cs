@@ -95,12 +95,12 @@ namespace WBZ.Modules.Distributions
 			var window = new FamiliesList(Commands.Type.SELECT);
 			if (window.ShowDialog() == true)
 			{
-				family = D.InstanceData.Families.FirstOrDefault(x => x.Family == window.Selected.ID);
+				family = D.InstanceData.Families.FirstOrDefault(x => x.FamilyID == window.Selected.ID);
 				if (family == null)
 				{
 					family = new M_DistributionFamily()
 					{
-						Family = window.Selected.ID,
+						FamilyID = window.Selected.ID,
 						FamilyName = window.Selected.Lastname,
 						Members = window.Selected.Members
 					};

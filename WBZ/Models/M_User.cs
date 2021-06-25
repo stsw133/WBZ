@@ -16,9 +16,9 @@ namespace WBZ.Models
 		public string Phone { get; set; }
 
 		/// <summary>
-		/// Username
+		/// Codename
 		/// </summary>
-		public string Username { get; set; }
+		public string Codename { get; set; }
 
 		/// <summary>
 		/// Newpass
@@ -26,9 +26,9 @@ namespace WBZ.Models
 		public string Newpass { get; set; }
 
 		/// <summary>
-		/// Blocked
+		/// IsBlocked
 		/// </summary>
-		public bool Blocked { get; set; }
+		public bool IsBlocked { get; set; }
 
 		/// <summary>
 		/// Perms

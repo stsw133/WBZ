@@ -22,38 +22,20 @@ namespace WBZ.Models
         /// </summary>
         public string Content { get; set; }
 
-        /// <summary>
-        /// ShowArchival
-        /// </summary>
+        /// Show...
         public bool ShowArchival { get; set; }
-        
-        /// <summary>
-        /// ShowGroup
-        /// </summary>
         public int ShowGroup { get; set; }
 
-        /// <summary>
-        /// ColumnFilterString
-        /// </summary>
+        /// ColumnFilter...
         public string AutoFilterString { get; set; }
-
-        /// <summary>
-        /// ColumnFilterParams
-        /// </summary>
         public List<MV> AutoFilterParams { get; set; } = new List<MV>();
 
-        /// <summary>
-        /// Sorting
-        /// </summary>
+        /// Sorting & limit
         public StringCollection Sorting
         {
             get => Module == null ? new StringCollection() { "2 asc" } : (StringCollection)Properties.Settings.Default[$"sorting_{Module.Name}"];
             set => Properties.Settings.Default[$"sorting_{Module.Name}"] = value;
         }
-
-        /// <summary>
-        /// Limit
-        /// </summary>
         public int Limit
         {
             get => Module == null ? 50 : (int)Properties.Settings.Default[$"limit_{Module.Name}"];

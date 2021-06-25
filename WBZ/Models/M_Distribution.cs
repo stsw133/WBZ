@@ -68,7 +68,7 @@ namespace WBZ.Models
 		/// <summary>
 		/// Family
 		/// </summary>
-		public int Family { get; set; }
+		public int FamilyID { get; set; }
 		public string FamilyName { get; set; }
 
 		/// <summary>
@@ -100,36 +100,36 @@ namespace WBZ.Models
 		/// <summary>
 		/// Distribution
 		/// </summary>
-		public int Distribution { get; set; }
+		public int DistributionID { get; set; }
 		
 		/// <summary>
-		/// Position
+		/// Pos
 		/// </summary>
-		public short Position { get; set; }
+		public short Pos { get; set; }
 
 		/// <summary>
 		/// Store
 		/// </summary>
-		public int Store { get; set; }
+		public int StoreID { get; set; }
 		public string StoreName { get; set; }
 
 		/// <summary>
 		/// Article
 		/// </summary>
-		public int Article { get; set; }
+		public int ArticleID { get; set; }
 		public string ArticleName { get; set; }
 
 		/// <summary>
-		/// Amount
+		/// Quantity
 		/// </summary>
-		public decimal Amount { get; set; }
+		public decimal Quantity { get; set; }
 
 		public M_DistributionPosition()
 		{
 			var stores = SQL.ComboSource(Config.GetModule(nameof(Modules.Stores)), "codename", "true", false);
-			if (stores.Count > 0 && Store == 0)
+			if (stores.Count > 0 && StoreID == 0)
 			{
-				Store = (int)stores[0].Value;
+				StoreID = (int)stores[0].Value;
 				StoreName = (string)stores[0].Display;
 			}
 		}

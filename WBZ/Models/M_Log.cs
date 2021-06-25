@@ -41,8 +41,8 @@ namespace WBZ.Models
 		public string Content { get; set; }
 
 		/// <summary>
-		/// CreatedDate
+		/// DateCreated
 		/// </summary>
-		public DateTime CreatedDate { get; set; } = DateTime.Now;
+		public DateTime DateCreated { get; set; } = DateTime.Now;
     }
 }

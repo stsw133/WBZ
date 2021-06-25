@@ -48,9 +48,9 @@
 			</DataGridTextColumn.Header>
 		</DataGridTextColumn>
         <!-- Amount -->
-		<DataGridTextColumn Binding="{Binding Amount}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Amount, Converter={se:conv_Bool}}">
+		<DataGridTextColumn Binding="{Binding Quantity}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Quantity, Converter={se:conv_Bool}}">
 			<DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="Number" Header="Ilość" NameSQL="sum(sa.amount) / wbz.ArtDefMeaCon(art.id)"/>
+				<se:ColumnFilter FilterType="Number" Header="Ilość" NameSQL="sum(sa.quantity) / wbz.ArtDefMeaCon(art.id)"/>
 			</DataGridTextColumn.Header>
 		</DataGridTextColumn>
         <!-- Reserved -->
@@ -70,7 +70,7 @@
 				<MenuItem IsCheckable="True" Header="Nazwa" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Name}"/>
 				<MenuItem IsCheckable="True" Header="EAN" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_EAN}"/>
 				<MenuItem IsCheckable="True" Header="Jm" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Measure}"/>
-				<MenuItem IsCheckable="True" Header="Ilość" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Amount}"/>
+				<MenuItem IsCheckable="True" Header="Ilość" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Quantity}"/>
 				<MenuItem IsCheckable="True" Header="Zarezerwowano" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_ArticlesList_Reserved}"/>
 			</se:ExtMenuItem>
 			<!-- Actions -->

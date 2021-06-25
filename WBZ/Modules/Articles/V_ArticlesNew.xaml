@@ -108,7 +108,7 @@
 							<!-- AmountRaw -->
 							<DockPanel DockPanel.Dock="Top">
 								<se:ExtLabel Content="Ilość (kg):" FontWeight="Normal"/>
-								<se:ExtTextBox Text="{Binding InstanceData.AmountRaw}" IsReadOnly="True" Background="#EEE"/>
+								<se:ExtTextBox Text="{Binding InstanceData.QuantityRaw}" IsReadOnly="True" Background="#EEE"/>
 							</DockPanel>
 							<!-- ReservedRaw -->
 							<DockPanel DockPanel.Dock="Top">
@@ -124,8 +124,8 @@
 									<DataGridTextColumn Binding="{Binding id}" Header="ID" IsReadOnly="True" Visibility="Collapsed"/>
 									<DataGridTextColumn Binding="{Binding name}" Header="Jm" Width="*"/>
 									<DataGridTextColumn Binding="{Binding converter}" Header="Przelicznik (na kg)"/>
-									<DataGridCheckBoxColumn Binding="{Binding default}" Header="Domyślna"/>
-									<DataGridTextColumn Binding="{Binding amount}" Header="Dostępna ilość" IsReadOnly="True"/>
+									<DataGridCheckBoxColumn Binding="{Binding is_default}" Header="Domyślna"/>
+									<DataGridTextColumn Binding="{Binding quantity}" Header="Dostępna ilość" IsReadOnly="True"/>
 									<DataGridTextColumn Binding="{Binding reserved}" Header="Zarezerwowano" IsReadOnly="True"/>
 								</DataGrid.Columns>
 								<DataGrid.RowStyle>

@@ -30,7 +30,7 @@ namespace WBZ.Modules.Articles
 		internal override void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			base.Window_Loaded(sender, e);
-			D.StoresList = SQL.ComboSource(Config.GetModule(nameof(Stores)), "codename", "archival=false", D.Mode != Commands.Type.SELECT);
+			D.StoresList = SQL.ComboSource(Config.GetModule(nameof(Stores)), "codename", "is_archival=false", D.Mode != Commands.Type.SELECT);
 		}
 
 		/// <summary>
@@ -39,7 +39,7 @@ namespace WBZ.Modules.Articles
 		internal override void UpdateFilters()
 		{
 			base.UpdateFilters();
-			D.Filter.AutoFilterString += (int)cbStoresList.SelectedValue > 0 ? $" and sa.store={cbStoresList.SelectedValue}" : string.Empty;
+			D.Filter.AutoFilterString += (int?)cbStoresList?.SelectedValue > 0 ? $" and sa.store={cbStoresList?.SelectedValue}" : string.Empty;
 			if (D.Filter.AutoFilterString.StartsWith(" and "))
 				D.Filter.AutoFilterString = D.Filter.AutoFilterString[5..];
 		}

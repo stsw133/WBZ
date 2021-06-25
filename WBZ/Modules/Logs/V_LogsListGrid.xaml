@@ -16,42 +16,40 @@
 	</DataGrid.Resources>
     <DataGrid.Columns>
         <!-- ID -->
-        <DataGridTextColumn Binding="{Binding ID}" Header="ID"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_ID, Converter={se:conv_Bool}}"/>
-        <!-- User -->
-        <DataGridTextColumn Binding="{Binding cUser.Value}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_User, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding ID}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_ID, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter FilterType="Text" Header="Użytkownik" NameSQL="l.user"/>
+                <se:ColumnFilter FilterType="Number" Header="ID" NameSQL="log.id"/>
+            </DataGridTextColumn.Header>
+        </DataGridTextColumn>
+        <!-- User -->
+        <DataGridTextColumn Binding="{Binding cUser.Value}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_User, Converter={se:conv_Bool}}">
+            <DataGridTextColumn.Header>
+                <se:ColumnFilter FilterType="Text" Header="Użytkownik" NameSQL="concat(u.lastname, ' ', u.forename)"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Module -->
-        <DataGridTextColumn Binding="{Binding TranslatedModule}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Module, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding TranslatedModule}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Module, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="List" Header="Moduł" NameSQL="l.module"
+                <se:ColumnFilter FilterType="List" Header="Moduł" NameSQL="log.module_alias"
                                  ItemsSource="{x:Static g:Config.ListModules}" DisplayMemberPath="Display" SelectedValuePath="Value"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Instance -->
-		<DataGridTextColumn Binding="{Binding Instance}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Obj, Converter={se:conv_Bool}}">
+		<DataGridTextColumn Binding="{Binding Instance}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Instance, Converter={se:conv_Bool}}">
 			<DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="Number" Header="ID instancji" NameSQL="l.instance"/>
+                <se:ColumnFilter FilterType="Number" Header="ID instancji" NameSQL="log.instance_id"/>
 			</DataGridTextColumn.Header>
 		</DataGridTextColumn>
         <!-- Content -->
-        <DataGridTextColumn Binding="{Binding Content}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Content, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Content}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Content, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="Text" Header="Treść" NameSQL="l.content"/>
+                <se:ColumnFilter FilterType="Text" Header="Treść" NameSQL="log.content"/>
 			</DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- DateTime -->
-        <DataGridTextColumn Binding="{Binding DateTime, StringFormat={}{0:yyyy-MM-dd}}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_DateTime, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding DateTime, StringFormat={}{0:yyyy-MM-dd}}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_DateCreated, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="Date" Header="Data i czas" NameSQL="cast(l.datetime as date)"/>
+                <se:ColumnFilter FilterType="Date" Header="Data utworzenia" NameSQL="cast(log.datecreated as date)"/>
 			</DataGridTextColumn.Header>
         </DataGridTextColumn>
     </DataGrid.Columns>
@@ -61,10 +59,10 @@
 			<se:ExtMenuItem Header="{Tr ColumnsVisibility}" IconUri="/Resources/icon32_show.ico">
 				<MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_ID}"/>
 				<MenuItem IsCheckable="True" Header="Użytkownik" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_User}"/>
-				<MenuItem IsCheckable="True" Header="Nazwa modułu" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Module}"/>
-				<MenuItem IsCheckable="True" Header="ID obiektu" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Obj}"/>
+				<MenuItem IsCheckable="True" Header="Moduł" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Module}"/>
+				<MenuItem IsCheckable="True" Header="ID instancji" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Instance}"/>
 				<MenuItem IsCheckable="True" Header="Treść" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Content}"/>
-				<MenuItem IsCheckable="True" Header="Data i czas" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_DateTime}"/>
+				<MenuItem IsCheckable="True" Header="Data utworzenia" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_DateCreated}"/>
 				<Separator/>
 			</se:ExtMenuItem>
 			<!-- Actions -->

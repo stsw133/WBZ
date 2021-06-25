@@ -171,51 +171,49 @@ CREATE TABLE wbz.attributes_values
 						if (SQL.GetPropertyValue("VERSION") == "1.1.0")
 						{
 							using var sqlCmd = new NpgsqlCommand(@"
-update wbz.users_permissions set perm='contractors_preview' where perm='companies_preview';
-update wbz.users_permissions set perm='contractors_save' where perm='companies_save';
-update wbz.users_permissions set perm='contractors_delete' where perm='companies_delete';
-
 alter table wbz.companies rename to contractors;
 alter table wbz.documents rename column company to contractor;
 
 CREATE TABLE wbz.vehicles
 (
-    id serial NOT NULL,
-    register character varying(20) NOT NULL,
-	brand character varying(40),
-	model character varying(60),
-	capacity decimal(18, 3),
-	forwarder integer,
-	driver integer,
-	prodyear integer,
-	archival boolean NOT NULL DEFAULT false,
-	comment text,
-	icon bytea,
-	CONSTRAINT vehicles_pkey PRIMARY KEY(id),
-	CONSTRAINT vehicles_register_key UNIQUE (register),
-	CONSTRAINT vehicles_headers_forwarder_fkey FOREIGN KEY(forwarder)
-		REFERENCES wbz.contractors(id) MATCH SIMPLE
-		ON UPDATE CASCADE
-		ON DELETE NO ACTION,
-	CONSTRAINT vehicles_headers_driver_fkey FOREIGN KEY(driver)
-		REFERENCES wbz.employees(id) MATCH SIMPLE
-		ON UPDATE CASCADE
-		ON DELETE NO ACTION
+    id serial PRIMARY KEY,
+    register character varying(20) NOT NULL UNIQUE,
+    brand character varying(40),
+    model character varying(60),
+    capacity decimal(18,3),
+    forwarder_id integer,
+    driver_id integer,
+    prodyear integer,
+    is_archival boolean NOT NULL DEFAULT false,
+    comment text,
+    icon_id integer,
+    CONSTRAINT groups_icon_fkey FOREIGN KEY (icon_id)
+        REFERENCES wbz.icons (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE NO ACTION,
+    CONSTRAINT vehicles_headers_forwarder_fkey FOREIGN KEY (forwarder_id)
+        REFERENCES wbz.contractors (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE NO ACTION,
+    CONSTRAINT vehicles_headers_driver_fkey FOREIGN KEY (driver_id)
+        REFERENCES wbz.employees (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE NO ACTION
 );
 
 CREATE TABLE wbz.icons
 (
     id bigserial PRIMARY KEY,
-    module character varying(50) NOT NULL,
+    module_alias character varying(3) NOT NULL,
     name character varying(255) NOT NULL,
-    ""format"" character varying(10) NOT NULL,
-	""path"" character varying(2000) NOT NULL,
-	height integer NOT NULL,
-	width integer NOT NULL,
-	size integer NOT NULL,
-	file bytea NOT NULL,
-	archival boolean NOT NULL DEFAULT false,
-	comment text
+    format character varying(10) NOT NULL,
+    path character varying(2000) NOT NULL,
+    height integer NOT NULL,
+    width integer NOT NULL,
+    size integer NOT NULL,
+    content bytea NOT NULL,
+    is_archival boolean NOT NULL DEFAULT false,
+    comment text
 );
 
 alter table wbz.articles drop column if exists icon;
@@ -229,21 +227,95 @@ alter table wbz.groups drop column if exists icon;
 alter table wbz.stores drop column if exists icon;
 alter table wbz.vehicles drop column if exists icon;
 
-alter table wbz.articles add column if not exists icon integer;
-alter table wbz.attributes_classes add column if not exists icon integer;
-alter table wbz.contractors add column if not exists icon integer;
-alter table wbz.distributions add column if not exists icon integer;
-alter table wbz.documents add column if not exists icon integer;
-alter table wbz.employees add column if not exists icon integer;
-alter table wbz.families add column if not exists icon integer;
-alter table wbz.groups add column if not exists icon integer;
-alter table wbz.stores add column if not exists icon integer;
-alter table wbz.vehicles add column if not exists icon integer;
+alter table wbz.articles add column if not exists icon_id integer;
+alter table wbz.attributes_classes add column if not exists icon_id integer;
+alter table wbz.contractors add column if not exists icon_id integer;
+alter table wbz.distributions add column if not exists icon_id integer;
+alter table wbz.documents add column if not exists icon_id integer;
+alter table wbz.employees add column if not exists icon_id integer;
+alter table wbz.families add column if not exists icon_id integer;
+alter table wbz.groups add column if not exists icon_id integer;
+alter table wbz.stores add column if not exists icon_id integer;
+alter table wbz.vehicles add column if not exists icon_id integer;
 
+alter table wbz.articles alter column price type numeric(12,2);
+alter table wbz.articles rename column archival to is_archival;
+alter table wbz.articles_measures rename column article to article_id;
+alter table wbz.articles_measures rename column ""default"" to is_default;
+alter table wbz.attachments rename column ""user"" to user_id;
+alter table wbz.attachments rename column module to module_alias;
+alter table wbz.attachments alter column module_alias type varchar(3);
+alter table wbz.attachments rename column instance to instance_id;
+alter table wbz.attachments rename column file to content;
 alter table wbz.attachments add column if not exists path character varying(2000);
 alter table wbz.attachments add column if not exists format character varying(10);
 alter table wbz.attachments add column if not exists size integer;
 alter table wbz.attachments alter column name type varchar(255);
+alter table wbz.attributes rename column instance to instance_id;
+alter table wbz.attributes rename column class to class_id;
+alter table wbz.attributes alter column value type varchar(255);
+alter table wbz.attributes rename column archival to is_archival;
+alter table wbz.attributes_classes rename column module to module_alias;
+alter table wbz.attributes_classes alter column module_alias type varchar(3);
+alter table wbz.attributes_classes rename column archival to is_archival;
+alter table wbz.attributes_classes rename column required to is_required;
+alter table wbz.attributes_values rename column class to class_id;
+alter table wbz.attributes_values alter column value type varchar(255);
+alter table wbz.attributes_values rename column archival to is_archival;
+alter table wbz.contacts rename column module to module_alias;
+alter table wbz.contacts alter column module_alias type varchar(3);
+alter table wbz.contacts rename column instance to instance_id;
+alter table wbz.contacts alter column email type varchar(100);
+alter table wbz.contacts alter column phone type varchar(30);
+alter table wbz.contacts rename column archival to is_archival;
+alter table wbz.contacts rename column ""default"" to is_default;
+alter table wbz.contractors rename column archival to is_archival;
+alter table wbz.distributions rename column archival to is_archival;
+alter table wbz.distributions_positions rename column ""position"" to pos;
+alter table wbz.distributions_positions rename column distribution to distribution_id;
+alter table wbz.distributions_positions rename column article to article_id;
+alter table wbz.distributions_positions rename column store to store_id;
+alter table wbz.distributions_positions rename column family to family_id;
+alter table wbz.distributions_positions rename column amount to quantity;
+alter table wbz.documents alter column type type varchar(3);
+alter table wbz.documents rename column contractor to contractor_id;
+alter table wbz.documents rename column store to store_id;
+alter table wbz.documents rename column archival to is_archival;
+alter table wbz.documents_positions rename column document to document_id;
+alter table wbz.documents_positions rename column ""position"" to pos;
+alter table wbz.documents_positions rename column article to article_id;
+alter table wbz.documents_positions rename column cost to net;
+alter table wbz.documents_positions rename column amount to quantity;
+alter table wbz.documents_positions alter column net type numeric(15,2);
+alter table wbz.documents_positions alter column tax type numeric(15,2);
+alter table wbz.employees alter column forename type varchar(30);
+alter table wbz.employees alter column email type varchar(100);
+alter table wbz.employees alter column phone type varchar(30);
+alter table wbz.employees rename column archival to archival_id;
+alter table wbz.families rename column archival to is_archival;
+alter table wbz.groups rename column module to module_alias;
+alter table wbz.groups alter column module_alias type varchar(3);
+alter table wbz.groups rename column instance to instance_id;
+alter table wbz.groups rename column owner to owner_id;
+alter table wbz.groups rename column archival to is_archival;
+alter table wbz.logs rename column ""user"" to user_id;
+alter table wbz.logs rename column module to module_alias;
+alter table wbz.logs alter column module_alias type varchar(3);
+alter table wbz.logs rename column instance to instance_id;
+alter table wbz.logs rename column datetime to datecreated;
+alter table wbz.notifications rename column ""user"" to user_id;
+alter table wbz.notifications rename column ""read"" to is_read;
+alter table wbz.notifications rename column datetime to datecreated;
+alter table wbz.stores rename column archival to is_archival;
+alter table wbz.stores_articles rename column store to store_id;
+alter table wbz.stores_articles rename column article to article_id;
+alter table wbz.stores_articles rename column amount to quantity;
+alter table wbz.users rename column username to codename;
+alter table wbz.users alter column email type varchar(100);
+alter table wbz.users alter column phone type varchar(30);
+alter table wbz.users rename column archival to is_archival;
+alter table wbz.users rename column blocked to is_blocked;
+alter table wbz.users_permissions rename column ""user"" to user_id;
 
 								update wbz.config set value='1.2' where property='VERSION'", sqlConn, sqlTran);
 							sqlCmd.ExecuteNonQuery();

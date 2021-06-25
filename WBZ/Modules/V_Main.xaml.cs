@@ -105,7 +105,7 @@ namespace WBZ.Modules
 		/// </summary>
 		internal void menuRefresh_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
-            Config.User = SQL.GetInstance<M_User>(Config.GetModule(nameof(Modules.Users)), Config.User.ID);
+            Config.User = SQL.GetInstance<M_User>(Config.GetModule(nameof(Users)), Config.User.ID);
 			Config.User.Perms = SQL.GetUserPerms(Config.User.ID);
 
 			new Main().Show();

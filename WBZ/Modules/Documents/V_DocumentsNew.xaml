@@ -99,22 +99,15 @@
 							<DockPanel DockPanel.Dock="Top">
 								<se:ExtLabel Content="Firma:" FontWeight="Bold"/>
 								<se:IconButton Icon="/Resources/icon32_contractors.ico" Click="btnSelectContractor_Click"/>
-								<se:ExtTextBox Text="{Binding InstanceData.ContractorName}" Tag="{Binding InstanceData.Contractor}" IsReadOnly="True"/>
+								<se:ExtTextBox Text="{Binding InstanceData.ContractorName}" Tag="{Binding InstanceData.ContractorID}" IsReadOnly="True"/>
 							</DockPanel>
 							<!-- Store -->
-							<DockPanel DockPanel.Dock="Top">
-								<se:ExtLabel Content="Magazyn:" FontWeight="Bold"/>
-								<se:IconButton Icon="/Resources/icon32_stores.ico" Click="btnSelectStore_Click"/>
-								<se:ExtTextBox Text="{Binding InstanceData.StoreName}" Tag="{Binding InstanceData.Store}" IsReadOnly="True"/>
-							</DockPanel>
-							<!-- Type -->
-							<DockPanel DockPanel.Dock="Top">
-								<se:ExtLabel Content="Typ:" FontWeight="Bold"/>
-								<ComboBox SelectedValue="{Binding InstanceData.Type}" SelectedValuePath="Tag" Margin="5" VerticalContentAlignment="Center">
-									<ComboBoxItem Content="Faktura" Tag="FS"/>
-								</ComboBox>
-							</DockPanel>
-							<!-- Name -->
+                            <DockPanel DockPanel.Dock="Top">
+                                <se:ExtLabel Content="Magazyn:" FontWeight="Bold"/>
+                                <se:IconButton Icon="/Resources/icon32_stores.ico" Click="btnSelectStore_Click"/>
+                                <se:ExtTextBox Text="{Binding InstanceData.StoreName}" Tag="{Binding InstanceData.StoreID}" IsReadOnly="True"/>
+                            </DockPanel>
+                            <!-- Name -->
 							<DockPanel DockPanel.Dock="Top">
 								<se:ExtLabel Content="Nazwa:" FontWeight="Bold"/>
 								<se:ExtTextBox Text="{Binding InstanceData.Name}"/>

@@ -58,7 +58,7 @@ namespace WBZ.Modules.Documents
 			var window = new ContractorsList(Commands.Type.SELECT);
 			if (window.ShowDialog() == true && window.Selected != null)
 			{
-				D.InstanceData.Contractor = window.Selected.ID;
+				D.InstanceData.ContractorID = window.Selected.ID;
 				D.InstanceData = D.InstanceData;
 			}
 		}
@@ -67,7 +67,7 @@ namespace WBZ.Modules.Documents
 			var window = new StoresList(Commands.Type.SELECT);
 			if (window.ShowDialog() == true && window.Selected != null)
 			{
-				D.InstanceData.Store = window.Selected.ID;
+				D.InstanceData.StoreID = window.Selected.ID;
 				D.InstanceData = D.InstanceData;
 			}
 		}
@@ -106,12 +106,12 @@ namespace WBZ.Modules.Documents
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano nazwy (numeru) dokumentu!") { Owner = this }.ShowDialog();
 				return false;
 			}
-			if (D.InstanceData.Store == 0)
+			if (D.InstanceData.StoreID == 0)
 			{
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie wybrano magazynu!") { Owner = this }.ShowDialog();
 				return false;
 			}
-			if (D.InstanceData.Contractor == 0)
+			if (D.InstanceData.ContractorID == 0)
 			{
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie wybrano kontrahenta!") { Owner = this }.ShowDialog();
 				return false;

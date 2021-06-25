@@ -86,34 +86,31 @@ namespace WBZ.Login
 		/// </summary>
 		private void btnTest_Click(object sender, RoutedEventArgs e)
 		{
-			try
-			{
-				SQL.connWBZ = StswExpress.SQL.MakeConnString(tbServer.Text, Convert.ToInt32(tbPort.Text), tbDatabase.Text, tbUsername.Text, pbPassword.Password);
-				string dbv = SQL.GetPropertyValue("VERSION");
+			SQL.connWBZ = StswExpress.SQL.MakeConnString(tbServer.Text, Convert.ToInt32(tbPort.Text), tbDatabase.Text, tbUsername.Text, pbPassword.Password);
+			string dbv = SQL.GetPropertyValue("VERSION");
 
-				if (dbv == Fn.AppVersion())
-				{
-					lblStatus.Content = "Wersja bazy aktualna!";
-					lblStatus.Foreground = Brushes.Green;
-
-					D.CanUpdateDatabase = false;
-					D.CanCreateAdmin = SQL.CountInstances(Config.GetModule(nameof(Modules.Users)), @"use.blocked=false and use.archival=false and exists(select from wbz.users_permissions where ""user""=use.id and perm='Admin')") == 0;
-				}
-				else
-				{
-					lblStatus.Content = "Wersja bazy nieaktualna!";
-					lblStatus.Foreground = Brushes.Orange;
-
-					D.CanUpdateDatabase = true;
-					D.CanCreateAdmin = false;
-				}
-			}
-			catch
+			if (dbv == null)
 			{
 				lblStatus.Content = "Połączenie z bazą nie powiodło się!";
 				lblStatus.Foreground = Brushes.Red;
 
 				D.CanUpdateDatabase = false;
+				D.CanCreateAdmin = false;
+			}
+			else if (dbv == Fn.AppVersion())
+			{
+				lblStatus.Content = "Wersja bazy aktualna!";
+				lblStatus.Foreground = Brushes.Green;
+
+				D.CanUpdateDatabase = false;
+				D.CanCreateAdmin = SQL.CountInstances(Config.GetModule(nameof(Modules.Users)), @"use.blocked=false and use.archival=false and exists(select from wbz.users_permissions where ""user""=use.id and perm='Admin')") == 0;
+			}
+			else
+			{
+				lblStatus.Content = "Wersja bazy nieaktualna!";
+				lblStatus.Foreground = Brushes.Orange;
+
+				D.CanUpdateDatabase = true;
 				D.CanCreateAdmin = false;
 			}
 		}

@@ -14,7 +14,7 @@ namespace WBZ
 {
 	internal static class SQL
 	{
-		internal static string connWBZ = null; ///przypisywanie połączenia w oknie logowania
+		internal static string connWBZ = null; /// przypisywanie połączenia w oknie logowania
 		internal static NpgsqlConnection ConnOpenedWBZ => (NpgsqlConnection)StswExpress.SQL.OpenConnection(new NpgsqlConnection(connWBZ));
 
 		#region Login
@@ -34,10 +34,9 @@ namespace WBZ
                 var user = new DataTable();
                 var perms = new DataTable();
 
-                var sqlCmd = new NpgsqlCommand(@"select id, username, email, phone, forename, lastname, blocked, archival
+                var sqlCmd = new NpgsqlCommand(@"select *
 					from wbz.users
-					where (lower(username)=lower(@login) or lower(email)=lower(@login))
-						and password=@password", sqlConn);
+					where codename=@login and password=@password", sqlConn);
                 sqlCmd.Parameters.AddWithValue("login", login);
                 sqlCmd.Parameters.AddWithValue("password", password);
                 using (var sqlDA = new NpgsqlDataAdapter(sqlCmd))
@@ -48,9 +47,9 @@ namespace WBZ
                 if (user.Rows.Count > 0)
                 {
                     Config.User = user.ToList<M_User>()[0];
-                    if (Config.User.Archival)
+                    if (Config.User.IsArchival)
                         MessageBox.Show("Użytkownik o podanym loginie jest zarchiwizowany.");
-					else if (Config.User.Blocked)
+					else if (Config.User.IsBlocked)
                         MessageBox.Show("Użytkownik o podanym loginie jest zablokowany.");
                     else
                     {
@@ -68,43 +67,45 @@ namespace WBZ
 
 			return result;
 		}
+
 		/// <summary>
 		/// Pobiera uprawnienia użytkownika
 		/// </summary>
-		/// <param name="id">ID użytkownika</param>
-		internal static List<string> GetUserPerms(int id)
+		/// <param name="userID">ID użytkownika</param>
+		internal static List<string> GetUserPerms(int userID)
 		{
 			var result = new List<string>();
+			var dt = new DataTable();
 
 			try
 			{
                 using var sqlConn = ConnOpenedWBZ;
                 var query = @"select up.perm
 					from wbz.users_permissions up
-					where ""user""=@id";
+					where user_id=@user_id";
                 using var sqlDA = new NpgsqlDataAdapter(query, sqlConn);
-				sqlDA.SelectCommand.Parameters.AddWithValue("id", id);
-                var dt = new DataTable();
+				sqlDA.SelectCommand.Parameters.AddWithValue("user_id", userID);
                 sqlDA.Fill(dt);
                 foreach (DataRow row in dt.Rows)
                     result.Add(row["perm"].ToString());
             }
 			catch (Exception ex)
 			{
-				Error("Błąd pobierania uprawnień użytkownika", ex, Config.ListModules[0], id);
+				Error("Błąd pobierania uprawnień użytkownika", ex, Config.ListModules[0], userID);
 			}
 
 			return result;
 		}
+
 		/// <summary>
 		/// Tworzy konto użytkownika/administratora w bazie o podanych parametrach
 		/// </summary>
 		/// <param name="email">Adres e-mail</param>
-		/// <param name="username">Nazwa użytkownika</param>
+		/// <param name="codename">Nazwa użytkownika</param>
 		/// <param name="password">Hasło do konta</param>
 		/// <param name="admin">Czy nadać uprawnienia administracyjne</param>
 		/// <returns></returns>
-		internal static bool Register(string email, string username, string password, bool admin = true)
+		internal static bool Register(string email, string codename, string password, bool admin = true)
 		{
 			bool result = false;
 
@@ -113,22 +114,22 @@ namespace WBZ
 				using (var sqlConn = ConnOpenedWBZ)
 				using (var sqlTran = sqlConn.BeginTransaction())
 				{
-					var sqlCmd = new NpgsqlCommand(@"insert into wbz.users (email, username, password)
-						values (@email, @username, @password) returning id", sqlConn, sqlTran);
+					var sqlCmd = new NpgsqlCommand(@"insert into wbz.users (email, codename, password)
+						values (@email, @codename, @password) returning id", sqlConn, sqlTran);
 					sqlCmd.Parameters.AddWithValue("email", email);
-					sqlCmd.Parameters.AddWithValue("username", username);
+					sqlCmd.Parameters.AddWithValue("codename", codename);
 					sqlCmd.Parameters.AddWithValue("password", Global.sha256(password));
 					int id = (int)sqlCmd.ExecuteScalar();
 
-					///permissions
+					/// permissions
 					if (admin)
 					{
 						sqlCmd = new NpgsqlCommand(@"insert into wbz.users_permissions (""user"", perm)
-							values (@id, 'Admin'),
-								(@id, 'Users_PREVIEW'),
-								(@id, 'Users_SAVE'),
-								(@id, 'Users_DELETE')", sqlConn, sqlTran);
-						sqlCmd.Parameters.AddWithValue("id", id);
+							values (@user_id, 'Admin'),
+								(@user_id, 'Users_PREVIEW'),
+								(@user_id, 'Users_SAVE'),
+								(@user_id, 'Users_DELETE')", sqlConn, sqlTran);
+						sqlCmd.Parameters.AddWithValue("user_id", id);
 						sqlCmd.ExecuteNonQuery();
 					}
 
@@ -144,6 +145,7 @@ namespace WBZ
 
 			return result;
 		}
+
 		/// <summary>
 		/// Generuje nowe hasło dla konta powiązanego z podanym e-mailem i wysyła na pocztę
 		/// </summary>
@@ -151,8 +153,9 @@ namespace WBZ
 		/// <returns></returns>
 		internal static DataRow GenerateNewPasswordForAccount(string email)
 		{
-			var dt = new DataTable();
 			DataRow result = null;
+			var dt = new DataTable();
+
 			Random rnd = new Random();
 			string newpass = rnd.NextDouble().ToString().Substring(2, 6);
 
@@ -167,8 +170,8 @@ namespace WBZ
                 sqlCmd.Parameters.AddWithValue("email", email);
                 sqlCmd.ExecuteNonQuery();
 
-                sqlCmd = new NpgsqlCommand(@"select u.username, u.password
-					from wbz.users u
+                sqlCmd = new NpgsqlCommand(@"select codename, password
+					from wbz.users
 					where email=@email", sqlConn, sqlTran);
                 sqlCmd.Parameters.AddWithValue("email", email);
                 using (var sqlDA = new NpgsqlDataAdapter(sqlCmd))
@@ -192,22 +195,22 @@ namespace WBZ
 		/// <summary>
 		/// Pobiera przelicznik głównej jednostki miary towaru
 		/// </summary>
-		/// <param name="article">ID towaru</param>
+		/// <param name="articleID">ID towaru</param>
 		/// <returns></returns>
-		internal static double GetArtDefMeaCon(int article)
+		internal static double GetArtDefMeaCon(int articleID)
 		{
 			double result = 0;
 
 			try
 			{
                 using var sqlConn = ConnOpenedWBZ;
-                var sqlCmd = new NpgsqlCommand(@"select wbz.artdefmeacon(@article)", sqlConn);
-                sqlCmd.Parameters.AddWithValue("article", article);
+                var sqlCmd = new NpgsqlCommand(@"select wbz.artdefmeacon(@article_id)", sqlConn);
+                sqlCmd.Parameters.AddWithValue("article_id", articleID);
                 result = Convert.ToDouble(sqlCmd.ExecuteScalar());
             }
 			catch (Exception ex)
 			{
-				Error("Błąd pobierania przelicznika głównej jednostki miary towaru", ex, Config.GetModule(nameof(Modules.Articles)), article);
+				Error("Błąd pobierania przelicznika głównej jednostki miary towaru", ex, Config.GetModule(nameof(Modules.Articles)), articleID);
 			}
 
 			return result;
@@ -216,50 +219,50 @@ namespace WBZ
 		/// <summary>
 		/// Ustawia stany towaru
 		/// </summary>
-		/// <param name="store">ID magazynu</param>
-		/// <param name="article">ID towaru</param>
-		/// <param name="amount">Ilość towaru (kg)</param>
+		/// <param name="storeID">ID magazynu</param>
+		/// <param name="articleID">ID towaru</param>
+		/// <param name="quantity">Ilość towaru (kg)</param>
 		/// <param name="measure">Jednostka miary</param>
 		/// <param name="reserved">Czy rezerwacja</param>
 		/// <param name="sqlConn">Połączenie SQL</param>
 		/// <param name="sqlTran">Transakcja SQL</param>
 		/// <returns></returns>
-		internal static bool ChangeArticleAmount(int store, int article, double amount, string measure, bool reserved, NpgsqlConnection sqlConn, NpgsqlTransaction sqlTran)
+		internal static bool ChangeArticleQuantity(int storeID, int articleID, double quantity, string measure, bool reserved, NpgsqlConnection sqlConn, NpgsqlTransaction sqlTran)
 		{
 			bool result = false;
 
 			try
 			{
 				var sqlCmd = new NpgsqlCommand(@"select case
-					when exists(select from wbz.stores_articles where store=@store and article=@article) then true
+					when exists(select from wbz.stores_articles where store_id=@store_id and article_id=@article_id) then true
 					else false end", sqlConn, sqlTran);
-				sqlCmd.Parameters.AddWithValue("store", store);
-				sqlCmd.Parameters.AddWithValue("article", article);
+				sqlCmd.Parameters.AddWithValue("store_id", storeID);
+				sqlCmd.Parameters.AddWithValue("article_id", articleID);
 				bool exists = Convert.ToBoolean(sqlCmd.ExecuteScalar());
 
 				if (!reserved)
 				{
 					if (exists)
 						sqlCmd = new NpgsqlCommand(@"update wbz.stores_articles
-							set amount=amount+(@amount * coalesce(nullif((select converter from wbz.articles_measures where article=@article and name=@measure limit 1),0),1))
+							set quantity=quantity+(@quantity * coalesce(nullif((select converter from wbz.articles_measures where article=@article and name=@measure limit 1),0),1))
 							where store=@store and article=@article", sqlConn, sqlTran);
 					else
-						sqlCmd = new NpgsqlCommand(@"insert into wbz.stores_articles (store, article, amount, reserved)
-							values (@store, @article, (@amount * coalesce(nullif((select converter from wbz.articles_measures where article=@article and name=@measure limit 1),0),1)), 0)", sqlConn, sqlTran);
+						sqlCmd = new NpgsqlCommand(@"insert into wbz.stores_articles (store, article, quantity, reserved)
+							values (@store, @article, (@quantity * coalesce(nullif((select converter from wbz.articles_measures where article=@article and name=@measure limit 1),0),1)), 0)", sqlConn, sqlTran);
 				}
 				else
 				{
 					if (exists)
 						sqlCmd = new NpgsqlCommand(@"update wbz.stores_articles
-							set reserved=reserved+(@amount * coalesce(nullif((select converter from wbz.articles_measures where article=@article and name=@measure limit 1),0),1))
+							set reserved=reserved+(@quantity * coalesce(nullif((select converter from wbz.articles_measures where article=@article and name=@measure limit 1),0),1))
 							where store=@store and article=@article", sqlConn, sqlTran);
 					else
-						sqlCmd = new NpgsqlCommand(@"insert into wbz.stores_articles (store, article, amount, reserved)
-							values (@store, @article, 0, (@amount * coalesce(nullif((select converter from wbz.articles_measures where article=@article and name=@measure limit 1),0),1)))", sqlConn, sqlTran);
+						sqlCmd = new NpgsqlCommand(@"insert into wbz.stores_articles (store, article, quantity, reserved)
+							values (@store, @article, 0, (@quantity * coalesce(nullif((select converter from wbz.articles_measures where article=@article and name=@measure limit 1),0),1)))", sqlConn, sqlTran);
 				}
-				sqlCmd.Parameters.AddWithValue("store", store);
-				sqlCmd.Parameters.AddWithValue("article", article);
-				sqlCmd.Parameters.AddWithValue("amount", amount);
+				sqlCmd.Parameters.AddWithValue("store", storeID);
+				sqlCmd.Parameters.AddWithValue("article", articleID);
+				sqlCmd.Parameters.AddWithValue("quantity", quantity);
 				sqlCmd.Parameters.AddWithValue("measure", measure);
 				sqlCmd.ExecuteNonQuery();
 
@@ -267,7 +270,7 @@ namespace WBZ
 			}
 			catch (Exception ex)
 			{
-				Error("Błąd zmiany ilości towaru na stanie", ex, Config.GetModule(nameof(Modules.Articles)), article);
+				Error("Błąd zmiany ilości towaru na stanie", ex, Config.GetModule(nameof(Modules.Articles)), articleID);
 			}
 
 			return result;
@@ -283,8 +286,8 @@ namespace WBZ
 			try
 			{
                 using var sqlConn = ConnOpenedWBZ;
-                var sqlCmd = new NpgsqlCommand(@"select 0 as id, 0 as position, 0 as store, '' as storename,
-					0 as article, '' as articlename, 0.0 as amount, '' as measure", sqlConn);
+                var sqlCmd = new NpgsqlCommand(@"select 0 as id, 0 as pos, 0 as store_id, '' as store_name,
+					0 as article_id, '' as article_name, 0.0 as quantity, '' as measure", sqlConn);
                 using var sqlDA = new NpgsqlDataAdapter(sqlCmd);
                 sqlDA.Fill(result);
                 result.Rows.Clear();
@@ -318,10 +321,10 @@ namespace WBZ
 					///edit
 					else
 					{
-						sqlCmd = new NpgsqlCommand(@"select id, position, family, (select lastname from wbz.families where id=dp.family) as familyname, members,
-								store, (select name from wbz.stores where id=dp.store) as storename,
-								article, (select name from wbz.articles where id=dp.article) as articlename,
-								amount / wbz.ArtDefMeaCon(dp.article) as amount, coalesce(nullif(wbz.ArtDefMeaNam(dp.article),''), 'kg') as measure, status
+						sqlCmd = new NpgsqlCommand(@"select id, pos, family_id, (select lastname from wbz.families where id=dp.family_id) as family_name, members,
+								store_id, (select name from wbz.stores where id=dp.store_id) as store_name,
+								article_id, (select name from wbz.articles where id=dp.article_id) as article_name,
+								quantity / wbz.ArtDefMeaCon(dp.article_id) as quantity, coalesce(nullif(wbz.ArtDefMeaNam(dp.article_id),''), 'kg') as measure, status
 							from wbz.distributions_positions dp
 							where distribution=@id", sqlConn);
 						sqlCmd.Parameters.AddWithValue("id", id);
@@ -333,29 +336,29 @@ namespace WBZ
 				///przypisywanie towarów do rodzin
 				foreach (DataRow row in dt.Rows)
 				{
-					var family = result.FirstOrDefault(x => x.Family == (int)row["family"]);
+					var family = result.FirstOrDefault(x => x.FamilyID == (int)row["family"]);
 					if (family == null)
 					{
 						family = new M_DistributionFamily()
 						{
-							Family = (int)row["family"],
-							FamilyName = (string)row["familyname"],
+							FamilyID = (int)row["family_id"],
+							FamilyName = (string)row["family_name"],
 							Members = Convert.ToInt16(row["members"]),
 							Status = Convert.ToInt16(row["status"])
 						};
 						result.Add(family);
-						family = result.FirstOrDefault(x => x.Family == (int)row["family"]);
+						family = result.FirstOrDefault(x => x.FamilyID == (int)row["family_id"]);
 					}
 
 					var position = family.Positions.NewRow();
 
 					position["id"] = row["id"];
-					position["position"] = row["position"];
-					position["store"] = row["store"];
-					position["storename"] = row["storename"];
-					position["article"] = row["article"];
-					position["articlename"] = row["articlename"];
-					position["amount"] = row["amount"];
+					position["pos"] = row["pos"];
+					position["store_id"] = row["store_id"];
+					position["store_name"] = row["store_name"];
+					position["article_id"] = row["article_id"];
+					position["article_name"] = row["article_name"];
+					position["quantity"] = row["quantity"];
 					position["measure"] = row["measure"];
 
 					family.Positions.Rows.Add(position);
@@ -397,18 +400,18 @@ namespace WBZ
 					from
 					(
 						select extract(year from dateissue) as year,
-							(SELECT sum(amount) WHERE extract(month from dateissue) =  1) as m_01,
-							(SELECT sum(amount) WHERE extract(month from dateissue) =  2) as m_02,
-							(SELECT sum(amount) WHERE extract(month from dateissue) =  3) as m_03,
-							(SELECT sum(amount) WHERE extract(month from dateissue) =  4) as m_04,
-							(SELECT sum(amount) WHERE extract(month from dateissue) =  5) as m_05,
-							(SELECT sum(amount) WHERE extract(month from dateissue) =  6) as m_06,
-							(SELECT sum(amount) WHERE extract(month from dateissue) =  7) as m_07,
-							(SELECT sum(amount) WHERE extract(month from dateissue) =  8) as m_08,
-							(SELECT sum(amount) WHERE extract(month from dateissue) =  9) as m_09,
-							(SELECT sum(amount) WHERE extract(month from dateissue) = 10) as m_10,
-							(SELECT sum(amount) WHERE extract(month from dateissue) = 11) as m_11,
-							(SELECT sum(amount) WHERE extract(month from dateissue) = 12) as m_12
+							(SELECT sum(quantity) WHERE extract(month from dateissue) =  1) as m_01,
+							(SELECT sum(quantity) WHERE extract(month from dateissue) =  2) as m_02,
+							(SELECT sum(quantity) WHERE extract(month from dateissue) =  3) as m_03,
+							(SELECT sum(quantity) WHERE extract(month from dateissue) =  4) as m_04,
+							(SELECT sum(quantity) WHERE extract(month from dateissue) =  5) as m_05,
+							(SELECT sum(quantity) WHERE extract(month from dateissue) =  6) as m_06,
+							(SELECT sum(quantity) WHERE extract(month from dateissue) =  7) as m_07,
+							(SELECT sum(quantity) WHERE extract(month from dateissue) =  8) as m_08,
+							(SELECT sum(quantity) WHERE extract(month from dateissue) =  9) as m_09,
+							(SELECT sum(quantity) WHERE extract(month from dateissue) = 10) as m_10,
+							(SELECT sum(quantity) WHERE extract(month from dateissue) = 11) as m_11,
+							(SELECT sum(quantity) WHERE extract(month from dateissue) = 12) as m_12
 						from wbz.documents i
 						inner join wbz.documents_positions
 							on document = i.id
@@ -437,7 +440,7 @@ namespace WBZ
 			try
 			{
                 using var sqlConn = ConnOpenedWBZ;
-                var sqlCmd = new NpgsqlCommand(@"select coalesce(sum(amount),0)
+                var sqlCmd = new NpgsqlCommand(@"select coalesce(sum(quantity),0)
 					from wbz.documents i
 					inner join wbz.documents_positions
 						on document=i.id
@@ -492,7 +495,7 @@ namespace WBZ
 			{
                 using var sqlConn = ConnOpenedWBZ;
                 var sqlCmd = new NpgsqlCommand(@"SELECT 
-					SUM((SELECT SUM(ip.amount) FROM wbz.documents_positions ip WHERE i.id = ip.document)) as amount,
+					SUM((SELECT SUM(ip.quantity) FROM wbz.documents_positions ip WHERE i.id = ip.document)) as quantity,
 					SUM((SELECT SUM(ip.cost) FROM wbz.documents_positions ip WHERE i.id = ip.document)) as cost
 					FROM wbz.documents i join wbz.contractors c ON (i.contractor = c.id)
 					WHERE i.archival = false and i.dateissue = '" + date.ToString("yyyy.MM.dd") + @"' and c.name = @contractor and c.archival = false", sqlConn);
@@ -586,7 +589,7 @@ namespace WBZ
 		{
 			using var sqlConn = ConnOpenedWBZ;
 			var query = $@"select id as value, {column} as display
-				from wbz.{module.Tag}
+				from wbz.{module.Value}
 				where {filter ?? "true"}
 				order by 2 asc";
 			using var sqlDA = new NpgsqlDataAdapter(query, sqlConn);
@@ -601,7 +604,7 @@ namespace WBZ
 		/// <summary>
 		/// Select query mode
 		/// </summary>
-		internal enum SelectMode { SIMPLE, EXTENDED, COUNT }
+		internal enum SelectMode { SIMPLE, EXTENDED, COUNT, COMBO }
 
 		/// <summary>
 		/// Pobiera listę instancji
@@ -622,20 +625,20 @@ namespace WBZ
 				: mode == SelectMode.SIMPLE ?
 				$@"
 					{a}.id, {a}.codename, {a}.name, {a}.ean, coalesce(nullif(wbz.ArtDefMeaNam({a}.id),''), 'kg') as measure,
-					coalesce(sum(sa.amount), 0) as amountraw, coalesce(sum(sa.amount) / wbz.ArtDefMeaCon({a}.id), 0) as amount,
+					coalesce(sum(sa.quantity), 0) as quantityraw, coalesce(sum(sa.quantity) / wbz.ArtDefMeaCon({a}.id), 0) as quantity,
 					coalesce(sum(sa.reserved), 0) as reservedraw, coalesce(sum(sa.reserved) / wbz.ArtDefMeaCon({a}.id), 0) as reserved,
-					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
+					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				" :
 				$@"
 					{a}.id, {a}.codename, {a}.name, {a}.ean, coalesce(nullif(wbz.ArtDefMeaNam({a}.id),''), 'kg') as measure,
-					coalesce(sum(sa.amount), 0) as amountraw, coalesce(sum(sa.amount) / wbz.ArtDefMeaCon({a}.id), 0) as amount,
+					coalesce(sum(sa.quantity), 0) as quantityraw, coalesce(sum(sa.quantity) / wbz.ArtDefMeaCon({a}.id), 0) as quantity,
 					coalesce(sum(sa.reserved), 0) as reservedraw, coalesce(sum(sa.reserved) / wbz.ArtDefMeaCon({a}.id), 0) as reserved,
-					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
+					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				") +
 				$@"
 					from wbz.articles {a}
-					left join wbz.icons i on {a}.icon=i.id
-					left join wbz.stores_articles sa on {a}.id=sa.article
+					left join wbz.icons i on {a}.icon_id=i.id
+					left join wbz.stores_articles sa on {a}.id=sa.article_id
 					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 					group by {a}.id, i.id
 				",
@@ -644,16 +647,16 @@ namespace WBZ
 				(mode == SelectMode.COUNT ? "count (*) "
 				: mode == SelectMode.SIMPLE ?
 				$@"
-					{a}.id, {a}.""user"", {a}.module, {a}.instance as instanceid, {a}.name,
-					{a}.""format"", {a}.""path"", {a}.size, null as content
+					{a}.id, {a}.user_id, {a}.module_alias, {a}.instance_id, {a}.name,
+					{a}.format, {a}.path, {a}.size, null as content
 				" :
 				$@"
-					{a}.id, {a}.""user"", {a}.module, {a}.instance as instanceid, {a}.name,
-					{a}.""format"", {a}.""path"", {a}.size, null as content
+					{a}.id, {a}.user_id, {a}.module_alias, {a}.instance_id, {a}.name,
+					{a}.format, {a}.path, {a}.size, null as content
 				") +
 				$@"
 					from wbz.attachments {a}
-					left join wbz.users u on {a}.""user"" = u.id	
+					left join wbz.users u on {a}.user_id = u.id	
 					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 				",
 				/// ATTRIBUTES_CLASSES
@@ -661,12 +664,12 @@ namespace WBZ
 				(mode == SelectMode.COUNT ? "count (*) "
 				: mode == SelectMode.SIMPLE ?
 				$@"
-					{a}.id, {a}.module, {a}.name, {a}.type, {a}.""values"",
-					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
+					{a}.id, {a}.module_alias, {a}.name, {a}.type, {a}.values,
+					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				" :
 				$@"
-					{a}.id, {a}.module, {a}.name, {a}.type, {a}.""values"",
-					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
+					{a}.id, {a}.module_alias, {a}.name, {a}.type, {a}.""values"",
+					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				") +
 				$@"
 					from wbz.attributes_classes {a}
@@ -679,15 +682,15 @@ namespace WBZ
 				: mode == SelectMode.SIMPLE ?
 				$@"
 					{a}.id, {a}.codename, {a}.name, {a}.branch, {a}.nip, {a}.regon, {a}.postcode, {a}.city, {a}.address,
-					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
+					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				" :
 				$@"
 					{a}.id, {a}.codename, {a}.name, {a}.branch, {a}.nip, {a}.regon, {a}.postcode, {a}.city, {a}.address,
-					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
+					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				") +
 				$@"
 					from wbz.contractors {a}
-					left join wbz.icons i on {a}.icon=i.id
+					left join wbz.icons i on {a}.icon_id=i.id
 					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 				",
 				/// DISTRIBUTIONS
@@ -696,20 +699,20 @@ namespace WBZ
 				: mode == SelectMode.SIMPLE ?
 				$@"
 					{a}.id, {a}.name, {a}.datereal, {a}.status,
-					count(distinct dp.family) as familiescount, sum(members) as memberscount,
-					count(dp.*) as positionscount, sum(dp.amount) as weight,
-					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
+					count(distinct dp.family_id) as familiescount, sum(members) as memberscount,
+					count(dp.*) as positionscount, sum(dp.quantity) as weight,
+					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				" :
 				$@"
 					{a}.id, {a}.name, {a}.datereal, {a}.status,
-					count(distinct dp.family) as familiescount, sum(members) as memberscount,
-					count(dp.*) as positionscount, sum(dp.amount) as weight,
-					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
+					count(distinct dp.family_id) as familiescount, sum(members) as memberscount,
+					count(dp.*) as positionscount, sum(dp.quantity) as weight,
+					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				") +
 				$@"
 					from wbz.distributions {a}
-					left join wbz.distributions_positions dp on {a}.id=dp.distribution
-					left join wbz.icons i on {a}.icon=i.id
+					left join wbz.distributions_positions dp on {a}.id=dp.distribution_id
+					left join wbz.icons i on {a}.icon_id=i.id
 					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 					group by {a}.id
 				",
@@ -718,21 +721,21 @@ namespace WBZ
 				(mode == SelectMode.COUNT ? "count (*) "
 				: mode == SelectMode.SIMPLE ?
 				$@"
-					{a}.id, {a}.name, {a}.store as storeid, s.name as storename, {a}.contractor as contractorid, c.name as contractorname,
-					{a}.type, {a}.dateissue, {a}.status, count(dp.*) as positionscount, sum(dp.amount) as weight, sum(dp.net) as net,
-					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
+					{a}.id, {a}.name, {a}.store_id, s.name as store_name, {a}.contractor_id, c.name as contractor_name,
+					{a}.type, {a}.dateissue, {a}.status, count(dp.*) as positionscount, sum(dp.quantity) as weight, sum(dp.net) as net,
+					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				" :
 				$@"
-					{a}.id, {a}.name, {a}.store as storeid, s.name as storename, {a}.contractor as contractorid, c.name as contractorname,
-					{a}.type, {a}.dateissue, {a}.status, count(dp.*) as positionscount, sum(dp.amount) as weight, sum(dp.net) as net,
-					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
+					{a}.id, {a}.name, {a}.store_id, s.name as store_name, {a}.contractor_id, c.name as contractor_name,
+					{a}.type, {a}.dateissue, {a}.status, count(dp.*) as positionscount, sum(dp.quantity) as weight, sum(dp.net) as net,
+					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				") +
 				$@"
 					from wbz.documents {a}
-					left join wbz.documents_positions dp on {a}.id=dp.document
-					left join wbz.contractors c on {a}.contractor=c.id
-					left join wbz.icons i on {a}.icon=i.id
-					left join wbz.stores s on {a}.store=s.id
+					left join wbz.documents_positions dp on {a}.id=dp.document_id
+					left join wbz.contractors c on {a}.contractor_id=c.id
+					left join wbz.icons i on {a}.icon_id=i.id
+					left join wbz.stores s on {a}.store_id=s.id
 					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 					group by {a}.id, c.id, s.id
 				",
@@ -741,21 +744,21 @@ namespace WBZ
 				(mode == SelectMode.COUNT ? "count (*) "
 				: mode == SelectMode.SIMPLE ?
 				$@"
-					{a}.id, {a}.""user"" as userid, u.lastname || ' ' || u.forename as username,
+					{a}.id, {a}.user_id, u.lastname || ' ' || u.forename as username,
 					{a}.forename, {a}.lastname, {a}.department, {a}.position,
 					{a}.email, {a}.phone, {a}.postcode, {a}.city, {a}.address,
-					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
+					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				" :
 				$@"
-					{a}.id, {a}.""user"" as userid, u.lastname || ' ' || u.forename as username,
+					{a}.id, {a}.user_id, u.lastname || ' ' || u.forename as username,
 					{a}.forename, {a}.lastname, {a}.department, {a}.position,
 					{a}.email, {a}.phone, {a}.postcode, {a}.city, {a}.address,
-					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
+					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				") +
 				$@"
 					from wbz.employees {a}
-					left join wbz.icons i on {a}.icon=i.id
-					left join wbz.users u on {a}.""user""=u.id
+					left join wbz.icons i on {a}.icon_id=i.id
+					left join wbz.users u on {a}.user_id=u.id
 					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 				",
 				/// FAMILIES
@@ -764,19 +767,19 @@ namespace WBZ
 				: mode == SelectMode.SIMPLE ?
 				$@"
 					{a}.id, {a}.declarant, {a}.lastname, {a}.members, {a}.postcode, {a}.city, {a}.address,
-					{a}.status, {a}.c_sms, {a}.c_call, {a}.c_email, max(d.datereal) as donationlast, sum(dp.amount) as donationweight,
-					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
+					{a}.status, {a}.c_sms, {a}.c_call, {a}.c_email, max(d.datereal) as donationlast, sum(dp.quantity) as donationweight,
+					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				" :
 				$@"
 					{a}.id, {a}.declarant, {a}.lastname, {a}.members, {a}.postcode, {a}.city, {a}.address,
-					{a}.status, {a}.c_sms, {a}.c_call, {a}.c_email, max(d.datereal) as donationlast, sum(dp.amount) as donationweight,
-					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
+					{a}.status, {a}.c_sms, {a}.c_call, {a}.c_email, max(d.datereal) as donationlast, sum(dp.quantity) as donationweight,
+					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				") +
 				$@"
 					from wbz.families {a}
-					left join wbz.icons i on {a}.icon=i.id
-					left join wbz.distributions_positions dp on {a}.id=dp.family
-					left join wbz.distributions d on dp.distribution=d.id
+					left join wbz.icons i on {a}.icon_id=i.id
+					left join wbz.distributions_positions dp on {a}.id=dp.family_id
+					left join wbz.distributions d on dp.distribution_id=d.id
 					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 					group by {a}.id
 				",
@@ -785,24 +788,24 @@ namespace WBZ
 				(mode == SelectMode.COUNT ? "count (*) "
 				: mode == SelectMode.SIMPLE ?
 				$@"
-					{a}.id, {a}.module, {a}.name, {a}.instance as instanceid, {a}.owner as ownerid,
+					{a}.id, {a}.module_alias, {a}.name, {a}.instance_id, {a}.owner_id,
 					case when trim(concat(g1.name, '\', g2.name, '\', g3.name, '\', g4.name), '\') = '' then ''
 						else concat(trim(concat(g1.name, '\', g2.name, '\', g3.name, '\', g4.name), '\'), '\') end as path,
-					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
+					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				" :
 				$@"
-					{a}.id, {a}.module, {a}.name, {a}.instance as instanceid, {a}.owner as ownerid,
+					{a}.id, {a}.module_alias, {a}.name, {a}.instance_id, {a}.owner_id,
 					case when trim(concat(g1.name, '\', g2.name, '\', g3.name, '\', g4.name), '\') = '' then ''
 						else concat(trim(concat(g1.name, '\', g2.name, '\', g3.name, '\', g4.name), '\'), '\') end as path,
-					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
+					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				") +
 				$@"
 					from wbz.groups {a}
-					left join wbz.icons i on {a}.icon=i.id
-					left join wbz.groups g4 on g4.id={a}.owner
-					left join wbz.groups g3 on g3.id=g4.owner
-					left join wbz.groups g2 on g2.id=g3.owner
-					left join wbz.groups g1 on g1.id=g2.owner
+					left join wbz.icons i on {a}.icon_id=i.id
+					left join wbz.groups g4 on g4.id={a}.owner_id
+					left join wbz.groups g3 on g3.id=g4.owner_id
+					left join wbz.groups g2 on g2.id=g3.owner_id
+					left join wbz.groups g1 on g1.id=g2.owner_id
 					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 				",
 				/// ICONS
@@ -810,14 +813,14 @@ namespace WBZ
 				(mode == SelectMode.COUNT ? "count (*) "
 				: mode == SelectMode.SIMPLE ?
 				$@"
-					{a}.id, {a}.module, {a}.name, {a}.""format"", {a}.""path"",
+					{a}.id, {a}.module_alias, {a}.name, {a}.format, {a}.path,
 					{a}.content, {a}.height, {a}.width, {a}.size,
-					{a}.archival, {a}.comment
+					{a}.is_archival, {a}.comment
 				" :
 				$@"
-					{a}.id, {a}.module, {a}.name, {a}.""format"", {a}.""path"",
+					{a}.id, {a}.module_alias, {a}.name, {a}.format, {a}.path,
 					{a}.content, {a}.height, {a}.width, {a}.size,
-					{a}.archival, {a}.comment
+					{a}.is_archival, {a}.comment
 				") +
 				$@"
 					from wbz.icons {a}
@@ -828,14 +831,14 @@ namespace WBZ
 				(mode == SelectMode.COUNT ? "count (*) "
 				: mode == SelectMode.SIMPLE ?
 				$@"
-					{a}.id, {a}.""user"", {a}.module, {a}.instance as instanceid, {a}.type, {a}.content, {a}.createddate
+					{a}.id, {a}.user_id, {a}.module_alias, {a}.instance_id, {a}.type, {a}.content, {a}.datecreated
 				" :
 				$@"
-					{a}.id, {a}.""user"", {a}.module, {a}.instance as instanceid, {a}.type, {a}.content, {a}.createddate
+					{a}.id, {a}.user_id, {a}.module_alias, {a}.instance_id, {a}.type, {a}.content, {a}.datecreated
 				") +
 				$@"
 					from wbz.logs {a}
-					left join wbz.users u on {a}.""user"" = u.id
+					left join wbz.users u on {a}.user_id = u.id
 					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 				",
 				/// STORES
@@ -844,18 +847,18 @@ namespace WBZ
 				: mode == SelectMode.SIMPLE ?
 				$@"
 					{a}.id, {a}.codename, {a}.name, {a}.postcode, {a}.city, {a}.address,
-					coalesce(sum(sa.amount),0) as amount, coalesce(sum(sa.reserved),0) as reserved,
-					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
+					coalesce(sum(sa.quantity),0) as quantity, coalesce(sum(sa.reserved),0) as reserved,
+					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				" :
 				$@"
 					{a}.id, {a}.codename, {a}.name, {a}.postcode, {a}.city, {a}.address,
-					coalesce(sum(sa.amount),0) as amount, coalesce(sum(sa.reserved),0) as reserved,
-					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
+					coalesce(sum(sa.quantity),0) as quantity, coalesce(sum(sa.reserved),0) as reserved,
+					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				") +
 				$@"
 					from wbz.stores {a}
-					left join wbz.icons i on {a}.icon=i.id
-					left join wbz.stores_articles sa on {a}.id = sa.store
+					left join wbz.icons i on {a}.icon_id=i.id
+					left join wbz.stores_articles sa on {a}.id = sa.store_id
 					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 					group by {a}.id, i.id
 				",
@@ -864,12 +867,12 @@ namespace WBZ
 				(mode == SelectMode.COUNT ? "count (*) "
 				: mode == SelectMode.SIMPLE ?
 				$@"
-					{a}.id, {a}.username, '' as newpass, {a}.forename, {a}.lastname,
-					{a}.email, {a}.phone, {a}.blocked, {a}.archival
+					{a}.id, {a}.codename, '' as newpass, {a}.forename, {a}.lastname,
+					{a}.email, {a}.phone, {a}.is_archival, {a}.is_blocked
 				" :
 				$@"
-					{a}.id, {a}.username, '' as newpass, {a}.forename, {a}.lastname,
-					{a}.email, {a}.phone, {a}.blocked, {a}.archival
+					{a}.id, {a}.codename, '' as newpass, {a}.forename, {a}.lastname,
+					{a}.email, {a}.phone, {a}.is_archival, {a}.is_blocked
 				") +
 				$@"
 					from wbz.users {a}
@@ -881,23 +884,23 @@ namespace WBZ
 				: mode == SelectMode.SIMPLE ?
 				$@"
 					{a}.id, {a}.register, {a}.brand, {a}.model, {a}.capacity,
-					c.id as forwarderid, c.codename as forwardername,
-					e.id as driverid, e.lastname || ' ' || e.forename as drivername,
+					{a}.forwarder_id, c.codename as forwarder_name,
+					{a}.driver_id, e.lastname || ' ' || e.forename as driver_name,
 					{a}.prodyear,
-					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
+					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				" :
 				$@"
 					{a}.id, {a}.register, {a}.brand, {a}.model, {a}.capacity,
 					c.id as forwarderid, c.codename as forwardername,
 					e.id as driverid, e.lastname || ' ' || e.forename as drivername,
 					{a}.prodyear,
-					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
+					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				") +
 				$@"
 					from wbz.vehicles {a}
-					left join wbz.contractors c on {a}.forwarder=c.id
-					left join wbz.employees e on {a}.driver=e.id
-					left join wbz.icons i on {a}.icon=i.id
+					left join wbz.contractors c on {a}.forwarder_id=c.id
+					left join wbz.employees e on {a}.driver_id=e.id
+					left join wbz.icons i on {a}.icon_id=i.id
 					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 				",
 				_ => throw new NotImplementedException(),
@@ -949,7 +952,7 @@ namespace WBZ
 			var dt = new DataTable();
 			sqlDA.Fill(dt);
 
-			return new List<T>(dt.ToList<T>());
+			return new List<T>(dt.ToList<T>("_"));
 		}
 		internal static List<T> ListInstances<T>(MV module, string filter, int displayed = 0) where T : class, new() => ListInstances<T>(module, new M_Filter(module) { AutoFilterString = filter }, displayed);
 
@@ -967,7 +970,7 @@ namespace WBZ
 			var dt = new DataTable();
 			sqlDA.Fill(dt);
 
-			return new List<T>(dt.ToList<T>())?[0];
+			return new List<T>(dt.ToList<T>("_"))?[0];
 		}
 
 		/// <summary>
@@ -983,26 +986,26 @@ namespace WBZ
 			string query = module.Value switch
 			{
 				nameof(Modules.Articles) => @"
-					select am.id, am.name, am.converter, am.""default"",
-						sa.amount / coalesce(nullif(am.converter, 0), 1) as amount, sa.reserved / coalesce(nullif(am.converter, 0), 1) as reserved
+					select am.id, am.name, am.converter, am.is_default,
+						sa.quantity / coalesce(nullif(am.converter, 0), 1) as quantity, sa.reserved / coalesce(nullif(am.converter, 0), 1) as reserved
 					from wbz.articles a
-					inner join wbz.articles_measures am on a.id = am.article
-					left join wbz.stores_articles sa on a.id = sa.article
+					inner join wbz.articles_measures am on a.id = am.article_id
+					left join wbz.stores_articles sa on a.id = sa.article_id
 					where a.id=@id",
 				nameof(Modules.AttributesClasses) => @"
-					select id, value, archival
+					select id, value, is_archival
 					from wbz.attributes_values av
 					where class=@id",
 				nameof(Modules.Distributions) => @"
-					select id, position, family, (select lastname from wbz.families where id=dp.family) as familyname, members,
-						store, (select name from wbz.stores where id=dp.store) as storename,
-						article, (select name from wbz.articles where id=dp.article) as articlename,
-						amount / wbz.ArtDefMeaCon(dp.article) as amount, coalesce(nullif(wbz.ArtDefMeaNam(dp.article),''), 'kg') as measure, status
+					select id, pos, family_id, (select lastname from wbz.families where id=dp.family_id) as family_name, members,
+						store_id, (select name from wbz.stores where id=dp.store_id) as store_name,
+						article_id, (select name from wbz.articles where id=dp.article_id) as article_name,
+						quantity / wbz.ArtDefMeaCon(dp.article_id) as quantity, coalesce(nullif(wbz.ArtDefMeaNam(dp.article_id),''), 'kg') as measure, status
 					from wbz.distributions_positions dp
 					where distribution=@id",
 				nameof(Modules.Documents) => @"
-					select id, position, article, (select name from wbz.articles where id=dp.article) as articlename,
-						amount / wbz.ArtDefMeaCon(dp.article) as amount, coalesce(nullif(wbz.ArtDefMeaNam(dp.article),''), 'kg') as measure, net
+					select id, pos, article_id, (select name from wbz.articles where id=dp.article_id) as article_name,
+						quantity / wbz.ArtDefMeaCon(dp.article_id) as quantity, coalesce(nullif(wbz.ArtDefMeaNam(dp.article_id),''), 'kg') as measure, net
 					from wbz.documents_positions dp
 					where document=@id",
 				_ => throw new NotImplementedException(),
@@ -1017,7 +1020,7 @@ namespace WBZ
 			if (module.Name == nameof(Modules.Articles))
 			{
 				result.Columns["converter"].DefaultValue = 1.0;
-				result.Columns["default"].DefaultValue = false;
+				result.Columns["is_default"].DefaultValue = false;
 			}
 			else if (module.Name == nameof(Modules.Distributions))
 			{
@@ -1059,20 +1062,20 @@ namespace WBZ
 					/// ARTICLES
 					case nameof(Modules.Articles):
 						var article = instance as M_Article;
-						query = @"insert into wbz.articles (id, codename, name, ean, archival, comment, icon)
-								values (@id, @codename, @name, @ean, @archival, @comment, nullif(@icon, 0))
+						query = @"insert into wbz.articles (id, codename, name, ean, is_archival, comment, icon_id)
+								values (@id, @codename, @name, @ean, @is_archival, @comment, nullif(@icon_id, 0))
 								on conflict(id) do
 								update set codename=@codename, name=@name, ean=@ean,
-									archival=@archival, comment=@comment, icon=nullif(@icon, 0)";
+									is_archival=@is_archival, comment=@comment, icon_id=nullif(@icon_id, 0)";
 						using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 						{
 							sqlCmd.Parameters.AddWithValue("id", article.ID);
 							sqlCmd.Parameters.AddWithValue("codename", article.Codename);
 							sqlCmd.Parameters.AddWithValue("name", article.Name);
 							sqlCmd.Parameters.AddWithValue("ean", article.EAN);
-							sqlCmd.Parameters.AddWithValue("archival", article.Archival);
+							sqlCmd.Parameters.AddWithValue("is_archival", article.IsArchival);
 							sqlCmd.Parameters.AddWithValue("comment", article.Comment);
-							sqlCmd.Parameters.AddWithValue("icon", article.IconID);
+							sqlCmd.Parameters.AddWithValue("icon_id", article.IconID);
 							sqlCmd.ExecuteNonQuery();
 						}
 						SetLog(Config.User.ID, module, article.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} towar: {article.Name}.", sqlConn, sqlTran);
@@ -1083,13 +1086,13 @@ namespace WBZ
 							///add
 							if (measure.RowState == DataRowState.Added)
 							{
-								using (sqlCmd = new NpgsqlCommand(@"insert into wbz.articles_measures (article, name, converter, ""default"")
-										values (@article, @name, @converter, @default)", sqlConn, sqlTran))
+								using (sqlCmd = new NpgsqlCommand(@"insert into wbz.articles_measures (article_id, name, converter, is_default)
+										values (@article_id, @name, @converter, @is_default)", sqlConn, sqlTran))
 								{
-									sqlCmd.Parameters.AddWithValue("article", article.ID);
+									sqlCmd.Parameters.AddWithValue("article_id", article.ID);
 									sqlCmd.Parameters.AddWithValue("name", measure["name"]);
 									sqlCmd.Parameters.AddWithValue("converter", measure["converter"]);
-									sqlCmd.Parameters.AddWithValue("default", measure["default"]);
+									sqlCmd.Parameters.AddWithValue("is_default", measure["is_default"]);
 									sqlCmd.ExecuteNonQuery();
 								}
 								SetLog(Config.User.ID, module, article.ID, $"Dodano jednostkę miary {measure["name"]}.", sqlConn, sqlTran);
@@ -1098,13 +1101,13 @@ namespace WBZ
 							else if (measure.RowState == DataRowState.Modified)
 							{
 								using (sqlCmd = new NpgsqlCommand(@"update wbz.articles_measures
-										set name=@name, converter=@converter, ""default""=@default
+										set name=@name, converter=@converter, is_default=@is_default
 										where id=@id", sqlConn, sqlTran))
 								{
 									sqlCmd.Parameters.AddWithValue("id", measure["id", DataRowVersion.Original]);
 									sqlCmd.Parameters.AddWithValue("name", measure["name"]);
 									sqlCmd.Parameters.AddWithValue("converter", measure["converter"]);
-									sqlCmd.Parameters.AddWithValue("default", measure["default"]);
+									sqlCmd.Parameters.AddWithValue("is_default", measure["is_default"]);
 									sqlCmd.ExecuteNonQuery();
 								}
 								SetLog(Config.User.ID, module, article.ID, $"Edytowano jednostkę miary {measure["name", DataRowVersion.Original]}.", sqlConn, sqlTran);
@@ -1129,21 +1132,21 @@ namespace WBZ
 					/// ATTRIBUTES_CLASSES
 					case nameof(Modules.AttributesClasses):
 						var attributeClass = instance as M_AttributeClass;
-						query = @"insert into wbz.attributes_classes (id, module, name, type, required, archival, comment, icon)
-								values (@id, @module, @name, @type, @required, @archival, @comment, nullif(@icon, 0))
+						query = @"insert into wbz.attributes_classes (id, module_alias, name, type, is_required, is_archival, comment, icon_id)
+								values (@id, @module_alias, @name, @type, @is_required, @is_archival, @comment, nullif(@icon_id, 0))
 								on conflict(id) do
-								update set module=@module, name=@name, type=@type, required=@required,
-									archival=@archival, comment=@comment, icon=nullif(@icon, 0)";
+								update set module_alias=@module_alias, name=@name, type=@type, is_required=@is_required,
+									is_archival=@is_archival, comment=@comment, icon_id=nullif(@icon_id, 0)";
 						using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 						{
 							sqlCmd.Parameters.AddWithValue("id", attributeClass.ID);
-							sqlCmd.Parameters.AddWithValue("module", attributeClass.Module);
+							sqlCmd.Parameters.AddWithValue("module_alias", attributeClass.Module.Alias);
 							sqlCmd.Parameters.AddWithValue("name", attributeClass.Name);
 							sqlCmd.Parameters.AddWithValue("type", attributeClass.Type);
-							sqlCmd.Parameters.AddWithValue("required", attributeClass.Required);
-							sqlCmd.Parameters.AddWithValue("archival", attributeClass.Archival);
+							sqlCmd.Parameters.AddWithValue("is_required", attributeClass.IsRequired);
+							sqlCmd.Parameters.AddWithValue("is_archival", attributeClass.IsArchival);
 							sqlCmd.Parameters.AddWithValue("comment", attributeClass.Comment);
-							sqlCmd.Parameters.AddWithValue("icon", attributeClass.IconID);
+							sqlCmd.Parameters.AddWithValue("icon_id", attributeClass.IconID);
 							sqlCmd.ExecuteNonQuery();
 						}
 						SetLog(Config.User.ID, module, attributeClass.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} klasę atrybutu: {attributeClass.Name}.", sqlConn, sqlTran);
@@ -1154,12 +1157,12 @@ namespace WBZ
 							///add
 							if (value.RowState == DataRowState.Added)
 							{
-								using (sqlCmd = new NpgsqlCommand(@"insert into wbz.attributes_values (class, value, archival)
-										values (@class, @value, @archival)", sqlConn, sqlTran))
+								using (sqlCmd = new NpgsqlCommand(@"insert into wbz.attributes_values (class_id, value, is_archival)
+										values (@class_id, @value, @is_archival)", sqlConn, sqlTran))
 								{
-									sqlCmd.Parameters.AddWithValue("class", attributeClass.ID);
+									sqlCmd.Parameters.AddWithValue("class_id", attributeClass.ID);
 									sqlCmd.Parameters.AddWithValue("value", value["name"]);
-									sqlCmd.Parameters.AddWithValue("archival", value["archival"]);
+									sqlCmd.Parameters.AddWithValue("is_archival", value["is_archival"]);
 									sqlCmd.ExecuteNonQuery();
 								}
 								SetLog(Config.User.ID, module, attributeClass.ID, $"Dodano wartość {value["name"]}.", sqlConn, sqlTran);
@@ -1168,12 +1171,12 @@ namespace WBZ
 							else if (value.RowState == DataRowState.Modified)
 							{
 								using (sqlCmd = new NpgsqlCommand(@"update wbz.attributes_values
-										set value=@value, archival=@archival
+										set value=@value, is_archival=@is_archival
 										where id=@id", sqlConn, sqlTran))
 								{
 									sqlCmd.Parameters.AddWithValue("id", value["id", DataRowVersion.Original]);
 									sqlCmd.Parameters.AddWithValue("value", value["name"]);
-									sqlCmd.Parameters.AddWithValue("archival", value["archival"]);
+									sqlCmd.Parameters.AddWithValue("is_archival", value["is_archival"]);
 									sqlCmd.ExecuteNonQuery();
 								}
 								SetLog(Config.User.ID, module, attributeClass.ID, $"Edytowano wartość {value["name", DataRowVersion.Original]}.", sqlConn, sqlTran);
@@ -1194,12 +1197,12 @@ namespace WBZ
 					/// CONTRACTORS
 					case nameof(Modules.Contractors):
 						var contractor = instance as M_Contractor;
-						query = @"insert into wbz.contractors (id, codename, name, branch, nip, regon, postcode, city, address, archival, comment, icon)
-								values (@id, @codename, @name, @branch, @nip, @regon, @postcode, @city, @address, @archival, @comment, nullif(@icon, 0))
+						query = @"insert into wbz.contractors (id, codename, name, branch, nip, regon, postcode, city, address, is_archival, comment, icon_id)
+								values (@id, @codename, @name, @branch, @nip, @regon, @postcode, @city, @address, @is_archival, @comment, nullif(@icon_id, 0))
 								on conflict(id) do
 								update set codename=@codename, name=@name, branch=@branch, nip=@nip, regon=@regon,
 									postcode=@postcode, city=@city, address=@address,
-									archival=@archival, comment=@comment, icon=nullif(@icon, 0)";
+									is_archival=@is_archival, comment=@comment, icon_id=nullif(@icon_id, 0)";
 						using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 						{
 							sqlCmd.Parameters.AddWithValue("id", contractor.ID);
@@ -1211,9 +1214,9 @@ namespace WBZ
 							sqlCmd.Parameters.AddWithValue("postcode", contractor.Postcode);
 							sqlCmd.Parameters.AddWithValue("city", contractor.City);
 							sqlCmd.Parameters.AddWithValue("address", contractor.Address);
-							sqlCmd.Parameters.AddWithValue("archival", contractor.Archival);
+							sqlCmd.Parameters.AddWithValue("is_archival", contractor.IsArchival);
 							sqlCmd.Parameters.AddWithValue("comment", contractor.Comment);
-							sqlCmd.Parameters.AddWithValue("icon", contractor.IconID);
+							sqlCmd.Parameters.AddWithValue("icon_id", contractor.IconID);
 							sqlCmd.ExecuteNonQuery();
 						}
 						SetLog(Config.User.ID, module, contractor.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} kontrahenta: {contractor.Name}.", sqlConn, sqlTran);
@@ -1226,19 +1229,19 @@ namespace WBZ
 							sqlCmd.Parameters.AddWithValue("id", distribution.ID);
 							oldstatus = Convert.ToInt32(sqlCmd.ExecuteScalar());
 						}
-						query = @"insert into wbz.distributions (id, name, datereal, status, archival, comment, icon)
-								values (@id, @name, @datereal, @status, @archival, @comment, nullif(@icon, 0))
+						query = @"insert into wbz.distributions (id, name, datereal, status, is_archival, comment, icon_id)
+								values (@id, @name, @datereal, @status, @is_archival, @comment, nullif(@icon_id, 0))
 								on conflict(id) do
-								update set name=@name, datereal=@datereal, status=@status, archival=@archival, comment=@comment, icon=nullif(@icon, 0)";
+								update set name=@name, datereal=@datereal, status=@status, is_archival=@is_archival, comment=@comment, icon_id=nullif(@icon_id, 0)";
 						using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 						{
 							sqlCmd.Parameters.AddWithValue("id", distribution.ID);
 							sqlCmd.Parameters.AddWithValue("name", distribution.Name);
 							sqlCmd.Parameters.AddWithValue("datereal", distribution.DateReal);
 							sqlCmd.Parameters.AddWithValue("status", distribution.Status);
-							sqlCmd.Parameters.AddWithValue("archival", distribution.Archival);
+							sqlCmd.Parameters.AddWithValue("is_archival", distribution.IsArchival);
 							sqlCmd.Parameters.AddWithValue("comment", distribution.Comment);
-							sqlCmd.Parameters.AddWithValue("icon", distribution.IconID);
+							sqlCmd.Parameters.AddWithValue("icon_id", distribution.IconID);
 							sqlCmd.ExecuteNonQuery();
 						}
 						SetLog(Config.User.ID, module, distribution.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} dystrybucję: {distribution.Name}.", sqlConn, sqlTran);
@@ -1250,16 +1253,16 @@ namespace WBZ
 								///add
 								if (position.RowState == DataRowState.Added)
 								{
-									sqlCmd = new NpgsqlCommand(@"insert into wbz.distributions_positions (distribution, position, family, members, store, article, amount, status)
-											values (@distribution, @position, @family, @members, @store, @article, (@amount * wbz.ArtDefMeaCon(@article)), @status)", sqlConn, sqlTran);
+									sqlCmd = new NpgsqlCommand(@"insert into wbz.distributions_positions (distribution_id, pos, family_id, members, store_id, article_id, quantity, status)
+											values (@distribution_id, @pos, @family_id, @members, @store_id, @article_id, (@quantity * wbz.ArtDefMeaCon(@article_id)), @status)", sqlConn, sqlTran);
 									sqlCmd.Parameters.Clear();
-									sqlCmd.Parameters.AddWithValue("distribution", distribution.ID);
-									sqlCmd.Parameters.AddWithValue("position", position["position"]);
-									sqlCmd.Parameters.AddWithValue("family", posfam.Family);
+									sqlCmd.Parameters.AddWithValue("distribution_id", distribution.ID);
+									sqlCmd.Parameters.AddWithValue("pos", position["pos"]);
+									sqlCmd.Parameters.AddWithValue("family_id", posfam.FamilyID);
 									sqlCmd.Parameters.AddWithValue("members", posfam.Members);
-									sqlCmd.Parameters.AddWithValue("store", position["store"]);
-									sqlCmd.Parameters.AddWithValue("article", position["article"]);
-									sqlCmd.Parameters.AddWithValue("amount", position["amount"]);
+									sqlCmd.Parameters.AddWithValue("store_id", position["store_id"]);
+									sqlCmd.Parameters.AddWithValue("article_id", position["article_id"]);
+									sqlCmd.Parameters.AddWithValue("quantity", position["quantity"]);
 									sqlCmd.Parameters.AddWithValue("measure", position["measure"]);
 									sqlCmd.Parameters.AddWithValue("status", posfam.Status);
 									sqlCmd.ExecuteNonQuery();
@@ -1269,16 +1272,16 @@ namespace WBZ
 								else if (position.RowState == DataRowState.Modified)
 								{
 									sqlCmd = new NpgsqlCommand(@"update wbz.distributions_positions
-											set position=@position, family=@family, members=@members, store=@store, article=@article, amount=(@amount * wbz.ArtDefMeaCon(@article)), status=@status
+											set pos=@pos, family_id=@family_id, members=@members, store_id=@store_id, article_id=@article_id, quantity=(@quantity * wbz.ArtDefMeaCon(@article)), status=@status
 											where id=@id", sqlConn, sqlTran);
 									sqlCmd.Parameters.Clear();
 									sqlCmd.Parameters.AddWithValue("id", position["id", DataRowVersion.Original]);
-									sqlCmd.Parameters.AddWithValue("position", position["position"]);
-									sqlCmd.Parameters.AddWithValue("family", posfam.Family);
+									sqlCmd.Parameters.AddWithValue("pos", position["pos"]);
+									sqlCmd.Parameters.AddWithValue("family_id", posfam.FamilyID);
 									sqlCmd.Parameters.AddWithValue("members", posfam.Members);
-									sqlCmd.Parameters.AddWithValue("store", position["store"]);
-									sqlCmd.Parameters.AddWithValue("article", position["article"]);
-									sqlCmd.Parameters.AddWithValue("amount", position["amount"]);
+									sqlCmd.Parameters.AddWithValue("store_id", position["store"]);
+									sqlCmd.Parameters.AddWithValue("article_id", position["article"]);
+									sqlCmd.Parameters.AddWithValue("quantity", position["quantity"]);
 									sqlCmd.Parameters.AddWithValue("measure", position["measure"]);
 									sqlCmd.Parameters.AddWithValue("status", posfam.Status);
 									sqlCmd.ExecuteNonQuery();
@@ -1295,13 +1298,13 @@ namespace WBZ
 									SetLog(Config.User.ID, module, distribution.ID, $"Usunięto pozycję {position["position", DataRowVersion.Original]}.", sqlConn, sqlTran);
 								}
 
-								///update articles amounts
+								///update articles quantity
 								if (oldstatus != distribution.Status)
 								{
 									if (oldstatus <= 0 && distribution.Status > 0)
-										ChangeArticleAmount((int)position["store"], (int)position["article"], -Convert.ToDouble(position["amount"]), (string)position["measure"], false, sqlConn, sqlTran);
+										ChangeArticleQuantity((int)position["store_id"], (int)position["article_id"], -Convert.ToDouble(position["quantity"]), (string)position["measure"], false, sqlConn, sqlTran);
 									else if (oldstatus > 0 && distribution.Status < 0)
-										ChangeArticleAmount((int)position["store"], (int)position["article"], Convert.ToDouble(position["amount"]), (string)position["measure"], false, sqlConn, sqlTran);
+										ChangeArticleQuantity((int)position["store_id"], (int)position["article_id"], Convert.ToDouble(position["quantity"]), (string)position["measure"], false, sqlConn, sqlTran);
 								}
 							}
 						break;
@@ -1313,23 +1316,23 @@ namespace WBZ
 							sqlCmd.Parameters.AddWithValue("id", document.ID);
 							oldstatus = Convert.ToInt32(sqlCmd.ExecuteScalar());
 						}
-						query = @"insert into wbz.documents (id, name, type, store, contractor, dateissue, status, archival, comment, icon)
-								values (@id, @name, @type, @store, @contractor, @dateissue, @status, @archival, @comment, nullif(@icon, 0))
+						query = @"insert into wbz.documents (id, name, type, store_id, contractor_id, dateissue, status, is_archival, comment, icon_id)
+								values (@id, @name, @type, @store_id, @contractor_id, @dateissue, @status, @is_archival, @comment, nullif(@icon_id, 0))
 								on conflict(id) do
-								update set name=@name, type=@type, store=@store, contractor=@contractor, dateissue=@dateissue, status=@status,
-									archival=@archival, comment=@comment, icon=nullif(@icon, 0)";
+								update set name=@name, type=@type, store_id=@store_id, contractor_id=@contractor_id, dateissue=@dateissue, status=@status,
+									is_archival=@is_archival, comment=@comment, icon_id=nullif(@icon_id, 0)";
 						using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 						{
 							sqlCmd.Parameters.AddWithValue("id", document.ID);
 							sqlCmd.Parameters.AddWithValue("name", document.Name);
 							sqlCmd.Parameters.AddWithValue("type", document.Type);
-							sqlCmd.Parameters.AddWithValue("store", document.Store);
-							sqlCmd.Parameters.AddWithValue("contractor", document.Contractor);
+							sqlCmd.Parameters.AddWithValue("store_id", document.StoreID);
+							sqlCmd.Parameters.AddWithValue("contractor_id", document.ContractorID);
 							sqlCmd.Parameters.AddWithValue("dateissue", document.DateIssue);
 							sqlCmd.Parameters.AddWithValue("status", document.Status);
-							sqlCmd.Parameters.AddWithValue("archival", document.Archival);
+							sqlCmd.Parameters.AddWithValue("is_archival", document.IsArchival);
 							sqlCmd.Parameters.AddWithValue("comment", document.Comment);
-							sqlCmd.Parameters.AddWithValue("icon", document.IconID);
+							sqlCmd.Parameters.AddWithValue("icon_id", document.IconID);
 							sqlCmd.ExecuteNonQuery();
 						}
 						SetLog(Config.User.ID, module, document.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} dokument: {document.Name}.", sqlConn, sqlTran);
@@ -1340,34 +1343,34 @@ namespace WBZ
 							///add
 							if (position.RowState == DataRowState.Added)
 							{
-								using (sqlCmd = new NpgsqlCommand(@"insert into wbz.documents_positions (document, position, article, amount, net)
-										values (@document, @position, @article, (@amount * wbz.ArtDefMeaCon(@article)),
+								using (sqlCmd = new NpgsqlCommand(@"insert into wbz.documents_positions (document_id, pos, article_id, quantity, net)
+										values (@document_id, @pos, @article_id, (@quantity * wbz.ArtDefMeaCon(@article_id)),
 											@net)", sqlConn, sqlTran))
 								{
 									sqlCmd.Parameters.Clear();
-									sqlCmd.Parameters.AddWithValue("document", document.ID);
-									sqlCmd.Parameters.AddWithValue("position", position["position"]);
-									sqlCmd.Parameters.AddWithValue("article", position["article"]);
-									sqlCmd.Parameters.AddWithValue("amount", position["amount"]);
+									sqlCmd.Parameters.AddWithValue("document_id", document.ID);
+									sqlCmd.Parameters.AddWithValue("pos", position["pos"]);
+									sqlCmd.Parameters.AddWithValue("article_id", position["article_id"]);
+									sqlCmd.Parameters.AddWithValue("quantity", position["quantity"]);
 									sqlCmd.Parameters.AddWithValue("measure", position["measure"]);
 									sqlCmd.Parameters.AddWithValue("net", position["net"]);
 									sqlCmd.ExecuteNonQuery();
 								}
-								SetLog(Config.User.ID, module, document.ID, $"Dodano pozycję {position["position"]}.", sqlConn, sqlTran);
+								SetLog(Config.User.ID, module, document.ID, $"Dodano pozycję {position["pos"]}.", sqlConn, sqlTran);
 							}
 							///edit
 							else if (position.RowState == DataRowState.Modified)
 							{
 								using (sqlCmd = new NpgsqlCommand(@"update wbz.documents_positions
-										set position=@position, article=@article, amount=(@amount * wbz.ArtDefMeaCon(@article)),
+										set pos=@pos, article_id=@article_id, quantity=(@quantity * wbz.ArtDefMeaCon(@article_id)),
 											net=@net
 										where id=@id", sqlConn, sqlTran))
 								{
 									sqlCmd.Parameters.Clear();
 									sqlCmd.Parameters.AddWithValue("id", position["id", DataRowVersion.Original]);
-									sqlCmd.Parameters.AddWithValue("position", position["position"]);
-									sqlCmd.Parameters.AddWithValue("article", position["article"]);
-									sqlCmd.Parameters.AddWithValue("amount", position["amount"]);
+									sqlCmd.Parameters.AddWithValue("pos", position["pos"]);
+									sqlCmd.Parameters.AddWithValue("article_id", position["article_id"]);
+									sqlCmd.Parameters.AddWithValue("quantity", position["quantity"]);
 									sqlCmd.Parameters.AddWithValue("measure", position["measure"]);
 									sqlCmd.Parameters.AddWithValue("net", position["net"]);
 									sqlCmd.ExecuteNonQuery();
@@ -1384,16 +1387,16 @@ namespace WBZ
 									sqlCmd.Parameters.AddWithValue("id", position["id", DataRowVersion.Original]);
 									sqlCmd.ExecuteNonQuery();
 								}
-								SetLog(Config.User.ID, module, document.ID, $"Usunięto pozycję {position["position", DataRowVersion.Original]}.", sqlConn, sqlTran);
+								SetLog(Config.User.ID, module, document.ID, $"Usunięto pozycję {position["pos", DataRowVersion.Original]}.", sqlConn, sqlTran);
 							}
 
-							///update articles amounts
+							///update articles quantity
 							if (oldstatus != document.Status)
 							{
 								if (oldstatus <= 0 && document.Status > 0)
-									ChangeArticleAmount(document.Store, (int)position["article"], Convert.ToDouble(position["amount"]), (string)position["measure"], false, sqlConn, sqlTran);
+									ChangeArticleQuantity(document.StoreID, (int)position["article_id"], Convert.ToDouble(position["quantity"]), (string)position["measure"], false, sqlConn, sqlTran);
 								else if (oldstatus > 0 && document.Status < 0)
-									ChangeArticleAmount(document.Store, (int)position["article"], -Convert.ToDouble(position["amount"]), (string)position["measure"], false, sqlConn, sqlTran);
+									ChangeArticleQuantity(document.StoreID, (int)position["article_id"], -Convert.ToDouble(position["quantity"]), (string)position["measure"], false, sqlConn, sqlTran);
 							}
 						}
 						break;
@@ -1401,13 +1404,13 @@ namespace WBZ
 					case nameof(Modules.Employees):
 						var employee = instance as M_Employee;
 						query = @"insert into wbz.employees (id, forename, lastname, department, position,
-									email, phone, city, address, postcode, archival, comment, icon)
+									email, phone, city, address, postcode, is_archival, comment, icon_id)
 								values (@id, @forename, @lastname, @department, @position,
-									@email, @phone, @city, @address, @postcode, @archival, @comment, nullif(@icon, 0))
+									@email, @phone, @city, @address, @postcode, @is_archival, @comment, nullif(@icon_id, 0))
 								on conflict(id) do
 								update set forename=@forename, lastname=@lastname, department=@department, position=@position,
 									email=@email, phone=@phone, city=@city, address=@address, postcode=@postcode,
-									archival=@archival, comment=@comment, icon=nullif(@icon, 0)";
+									is_archival=@is_archival, comment=@comment, icon_id=nullif(@icon_id, 0)";
 						using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 						{
 							sqlCmd.Parameters.AddWithValue("id", employee.ID);
@@ -1420,9 +1423,9 @@ namespace WBZ
 							sqlCmd.Parameters.AddWithValue("city", employee.City);
 							sqlCmd.Parameters.AddWithValue("address", employee.Address);
 							sqlCmd.Parameters.AddWithValue("postcode", employee.Postcode);
-							sqlCmd.Parameters.AddWithValue("archival", employee.Archival);
+							sqlCmd.Parameters.AddWithValue("is_archival", employee.IsArchival);
 							sqlCmd.Parameters.AddWithValue("comment", employee.Comment);
-							sqlCmd.Parameters.AddWithValue("icon", employee.IconID);
+							sqlCmd.Parameters.AddWithValue("icon_id", employee.IconID);
 							sqlCmd.ExecuteNonQuery();
 						}
 						SetLog(Config.User.ID, module, employee.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} pracownika: {employee.Name}.", sqlConn, sqlTran);
@@ -1431,13 +1434,13 @@ namespace WBZ
 					case nameof(Modules.Families):
 						var family = instance as M_Family;
 						query = @"insert into wbz.families (id, declarant, lastname, members, postcode, city, address,
-									status, c_sms, c_call, c_email, archival, comment, icon)
+									status, c_sms, c_call, c_email, is_archival, comment, icon_id)
 								values (@id, @declarant, @lastname, @members, @postcode, @city, @address,
-									@status, @c_sms, @c_call, @c_email, @archival, @comment, nullif(@icon, 0))
+									@status, @c_sms, @c_call, @c_email, @is_archival, @comment, nullif(@icon_id, 0))
 								on conflict(id) do
 								update set declarant=@declarant, lastname=@lastname, members=@members, postcode=@postcode, city=@city, address=@address,
 									status=@status, c_sms=@c_sms, c_call=@c_call, c_email=@c_email,
-									archival=@archival, comment=@comment, icon=nullif(@icon, 0)";
+									is_archival=@is_archival, comment=@comment, icon_id=nullif(@icon_id, 0)";
 						using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 						{
 							sqlCmd.Parameters.AddWithValue("id", family.ID);
@@ -1451,9 +1454,9 @@ namespace WBZ
 							sqlCmd.Parameters.AddWithValue("c_sms", family.C_SMS);
 							sqlCmd.Parameters.AddWithValue("c_call", family.C_Call);
 							sqlCmd.Parameters.AddWithValue("c_email", family.C_Email);
-							sqlCmd.Parameters.AddWithValue("archival", family.Archival);
+							sqlCmd.Parameters.AddWithValue("is_archival", family.IsArchival);
 							sqlCmd.Parameters.AddWithValue("comment", family.Comment);
-							sqlCmd.Parameters.AddWithValue("icon", family.IconID);
+							sqlCmd.Parameters.AddWithValue("icon_id", family.IconID);
 							sqlCmd.ExecuteNonQuery();
 						}
 						SetLog(Config.User.ID, module, family.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} rodzinę: {family.Lastname}.", sqlConn, sqlTran);
@@ -1461,20 +1464,20 @@ namespace WBZ
 					/// GROUPS
 					case nameof(Modules._submodules.Groups):
 						var group = instance as M_Group;
-						query = @"insert into wbz.groups (id, module, name, instance, owner, archival, comment, icon)
-								values (@id, @module, @name, @instance, @owner, @archival, @comment, nullif(@icon, 0))
+						query = @"insert into wbz.groups (id, module_alias, name, instance_id, owner_id, is_archival, comment, icon_id)
+								values (@id, @module_alias, @name, @instance_id, @owner_id, @is_archival, @comment, nullif(@icon_id, 0))
 								on conflict(id) do
-								update set module=@module, name=@name, instance=@instance, owner=@owner, archival=@archival, comment=@comment, icon=nullif(@icon, 0)";
+								update set module_alias=@module_alias, name=@name, instance_id=@instance_id, owner_id=@owner_id, is_archival=@is_archival, comment=@comment, icon_id=nullif(@icon_id, 0)";
 						using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 						{
 							sqlCmd.Parameters.AddWithValue("id", group.ID);
-							sqlCmd.Parameters.AddWithValue("module", group.Module);
+							sqlCmd.Parameters.AddWithValue("module_alias", group.Module.Alias);
 							sqlCmd.Parameters.AddWithValue("name", group.Name);
-							sqlCmd.Parameters.AddWithValue("instance", group.InstanceID > 0 ? (object)group.InstanceID : DBNull.Value);
-							sqlCmd.Parameters.AddWithValue("owner", group.OwnerID);
-							sqlCmd.Parameters.AddWithValue("archival", group.Archival);
+							sqlCmd.Parameters.AddWithValue("instance_id", group.InstanceID > 0 ? (object)group.InstanceID : DBNull.Value);
+							sqlCmd.Parameters.AddWithValue("owner_id", group.OwnerID);
+							sqlCmd.Parameters.AddWithValue("is_archival", group.IsArchival);
 							sqlCmd.Parameters.AddWithValue("comment", group.Comment);
-							sqlCmd.Parameters.AddWithValue("icon", group.IconID);
+							sqlCmd.Parameters.AddWithValue("icon_id", group.IconID);
 							sqlCmd.ExecuteNonQuery();
 						}
 						SetLog(Config.User.ID, module, group.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} grupę: {group.Name}.", sqlConn, sqlTran);
@@ -1482,28 +1485,28 @@ namespace WBZ
 					/// ICONS
 					case nameof(Modules.Icons):
 						var icon = instance as M_Icon;
-						query = @"insert into wbz.icons (id, module, name, ""format"", ""path"",
-									file, height, width, size,
-									archival, comment)
-								values (@id, @module, @name, @format, @path,
-									@file, @height, @width, @size,
-									@archival, @comment)
+						query = @"insert into wbz.icons (id, module_alias, name, format, path,
+									content, height, width, size,
+									is_archival, comment)
+								values (@id, @module_alias, @name, @format, @path,
+									@content, @height, @width, @size,
+									@is_archival, @comment)
 								on conflict(id) do
-								update set module=@module, name=@name, ""format""=@format, ""path""=@path,
-									file=@file, height=@height, width=@width, size=@size,
-									archival=@archival, comment=@comment";
+								update set module_alias=@module_alias, name=@name, format=@format, path=@path,
+									content=@content, height=@height, width=@width, size=@size,
+									is_archival=@is_archival, comment=@comment";
 						using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 						{
 							sqlCmd.Parameters.AddWithValue("id", icon.ID);
-							sqlCmd.Parameters.AddWithValue("module", icon.Module);
+							sqlCmd.Parameters.AddWithValue("module_alias", icon.Module.Alias);
 							sqlCmd.Parameters.AddWithValue("name", icon.Name);
 							sqlCmd.Parameters.AddWithValue("format", icon.Format);
 							sqlCmd.Parameters.AddWithValue("path", icon.Path);
-							sqlCmd.Parameters.AddWithValue("file", icon.Content);
+							sqlCmd.Parameters.AddWithValue("content", icon.Content);
 							sqlCmd.Parameters.AddWithValue("height", icon.Height);
 							sqlCmd.Parameters.AddWithValue("width", icon.Width);
 							sqlCmd.Parameters.AddWithValue("size", icon.Size);
-							sqlCmd.Parameters.AddWithValue("archival", icon.Archival);
+							sqlCmd.Parameters.AddWithValue("is_archival", icon.IsArchival);
 							sqlCmd.Parameters.AddWithValue("comment", icon.Comment);
 							sqlCmd.ExecuteNonQuery();
 						}
@@ -1512,15 +1515,15 @@ namespace WBZ
 					/// LOGS
 					case nameof(Modules.Logs):
 						var log = instance as M_Log;
-						query = @"insert into wbz.logs (""user"", module, instance, type, content)
-								values (@user, @module, @instance, @type, @content)
+						query = @"insert into wbz.logs (user_id, module_alias, instance_id, type, content)
+								values (@user_id, @module_alias, @instance_id, @type, @content)
 								on conflict(id) do
-								update set ""user""=@user, module=@module, instance=@instance, type=@type, content=@content";
+								update set user_id=@user_id, module_alias=@module_alias, instance_id=@instance_id, type=@type, content=@content";
 						using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 						{
-							sqlCmd.Parameters.AddWithValue("user", log.UserID);
-							sqlCmd.Parameters.AddWithValue("module", log.Module);
-							sqlCmd.Parameters.AddWithValue("instance", log.InstanceID);
+							sqlCmd.Parameters.AddWithValue("user_id", log.UserID);
+							sqlCmd.Parameters.AddWithValue("module_alias", log.Module);
+							sqlCmd.Parameters.AddWithValue("instance_id", log.InstanceID);
 							sqlCmd.Parameters.AddWithValue("type", log.Type);
 							sqlCmd.Parameters.AddWithValue("content", log.Content);
 							sqlCmd.ExecuteNonQuery();
@@ -1529,11 +1532,11 @@ namespace WBZ
 					/// STORES
 					case nameof(Modules.Stores):
 						var store = instance as M_Store;
-						query = @"insert into wbz.stores (id, codename, name, city, address, postcode, archival, comment, icon)
-								values (@id, @codename, @name, @city, @address, @postcode, @archival, @comment, nullif(@icon, 0))
+						query = @"insert into wbz.stores (id, codename, name, city, address, postcode, is_archival, comment, icon_id)
+								values (@id, @codename, @name, @city, @address, @postcode, @is_archival, @comment, nullif(@icon_id, 0))
 								on conflict(id) do
 								update set codename=@codename, name=@name, city=@city, address=@address, postcode=@postcode,
-									archival=@archival, comment=@comment, icon=nullif(@icon, 0)";
+									is_archival=@is_archival, comment=@comment, icon_id=nullif(@icon_id, 0)";
 						using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 						{
 							sqlCmd.Parameters.AddWithValue("id", store.ID);
@@ -1542,9 +1545,9 @@ namespace WBZ
 							sqlCmd.Parameters.AddWithValue("city", store.City);
 							sqlCmd.Parameters.AddWithValue("address", store.Address);
 							sqlCmd.Parameters.AddWithValue("postcode", store.Postcode);
-							sqlCmd.Parameters.AddWithValue("archival", store.Archival);
+							sqlCmd.Parameters.AddWithValue("is_archival", store.IsArchival);
 							sqlCmd.Parameters.AddWithValue("comment", store.Comment);
-							sqlCmd.Parameters.AddWithValue("icon", store.IconID);
+							sqlCmd.Parameters.AddWithValue("icon_id", store.IconID);
 							sqlCmd.ExecuteNonQuery();
 						}
 						SetLog(Config.User.ID, module, store.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} magazyn: {store.Name}.", sqlConn, sqlTran);
@@ -1552,38 +1555,38 @@ namespace WBZ
 					/// USERS
 					case nameof(Modules.Users):
 						var user = instance as M_User;
-						query = @"insert into wbz.users (id, username, password, forename, lastname, email, phone, blocked, archival)
-								values (@id, @username, @password, @forename, @lastname, @email, @phone, @blocked, @archival)
+						query = @"insert into wbz.users (id, username, password, forename, lastname, email, phone, is_archival, is_blocked)
+								values (@id, @username, @password, @forename, @lastname, @email, @phone, @is_archival, @is_blocked)
 								on conflict(id) do
 								update set username=@username, " + (!string.IsNullOrEmpty(user.Newpass) ? "password = @password," : "") + @"
-									forename = @forename, lastname = @lastname, email = @email, phone = @phone, blocked = @blocked, archival = @archival";
+									forename=@forename, lastname=@lastname, email=@email, phone=@phone, is_archival=@is_archival, is_blocked=@is_blocked";
 						using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 						{
 							sqlCmd.Parameters.AddWithValue("id", user.ID);
-							sqlCmd.Parameters.AddWithValue("username", user.Username);
+							sqlCmd.Parameters.AddWithValue("username", user.Codename);
 							sqlCmd.Parameters.AddWithValue("password", Global.sha256(user.Newpass));
 							sqlCmd.Parameters.AddWithValue("forename", user.Forename);
 							sqlCmd.Parameters.AddWithValue("lastname", user.Lastname);
 							sqlCmd.Parameters.AddWithValue("email", user.Email);
 							sqlCmd.Parameters.AddWithValue("phone", user.Phone);
-							sqlCmd.Parameters.AddWithValue("blocked", user.Blocked);
-							sqlCmd.Parameters.AddWithValue("archival", user.Archival);
+							sqlCmd.Parameters.AddWithValue("is_archival", user.IsArchival);
+							sqlCmd.Parameters.AddWithValue("is_blocked", user.IsBlocked);
 							sqlCmd.ExecuteNonQuery();
 						}
 						SetLog(Config.User.ID, module, user.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} użytkownika: {user.Name}.", sqlConn, sqlTran);
 
 						/// permissions
-						using (sqlCmd = new NpgsqlCommand(@"delete from wbz.users_permissions where ""user""=@user", sqlConn, sqlTran))
+						using (sqlCmd = new NpgsqlCommand(@"delete from wbz.users_permissions where user_id=@user_id", sqlConn, sqlTran))
 						{
-							sqlCmd.Parameters.AddWithValue("user", user.ID);
+							sqlCmd.Parameters.AddWithValue("user_id", user.ID);
 							sqlCmd.ExecuteNonQuery();
 						}
 						foreach (string perm in user.Perms)
 						{
-							using (sqlCmd = new NpgsqlCommand(@"insert into wbz.users_permissions (""user"", perm)
-									values (@user, @perm)", sqlConn, sqlTran))
+							using (sqlCmd = new NpgsqlCommand(@"insert into wbz.users_permissions (user_id, perm)
+									values (@user_id, @perm)", sqlConn, sqlTran))
 							{
-								sqlCmd.Parameters.AddWithValue("user", user.ID);
+								sqlCmd.Parameters.AddWithValue("user_id", user.ID);
 								sqlCmd.Parameters.AddWithValue("perm", perm);
 								sqlCmd.ExecuteNonQuery();
 							}
@@ -1593,15 +1596,15 @@ namespace WBZ
 					case nameof(Modules.Vehicles):
 						var vehicle = instance as M_Vehicle;
 						query = @"insert into wbz.vehicles (id, register, brand, model, capacity,
-									forwarder, driver, prodyear,
-									archival, comment, icon)
+									forwarder_id, driver_id, prodyear,
+									is_archival, comment, icon_id)
 								values (@id, @register, @brand, @model, @capacity,
-									nullif(@forwarder, 0), nullif(@driver, 0), @prodyear,
-									@archival, @comment, nullif(@icon, 0))
+									nullif(@forwarder_id, 0), nullif(@driver_id, 0), @prodyear,
+									@is_archival, @comment, nullif(@icon_id, 0))
 								on conflict(id) do
 								update set register=@register, brand=@brand, model=@model, capacity=@capacity,
-									forwarder=nullif(@forwarder, 0), driver=nullif(@driver, 0), prodyear=@prodyear,
-									archival=@archival, comment=@comment, icon=nullif(@icon, 0)";
+									forwarder_id=nullif(@forwarder_id, 0), driver_id=nullif(@driver_id, 0), prodyear=@prodyear,
+									is_archival=@is_archival, comment=@comment, icon_id=nullif(@icon_id, 0)";
 						using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 						{
 							sqlCmd.Parameters.AddWithValue("id", vehicle.ID);
@@ -1609,12 +1612,12 @@ namespace WBZ
 							sqlCmd.Parameters.AddWithValue("brand", (object)vehicle.Brand ?? DBNull.Value);
 							sqlCmd.Parameters.AddWithValue("model", (object)vehicle.Model ?? DBNull.Value);
 							sqlCmd.Parameters.AddWithValue("capacity", (object)vehicle.Capacity ?? DBNull.Value);
-							sqlCmd.Parameters.AddWithValue("forwarder", (object)vehicle.ForwarderID ?? DBNull.Value);
-							sqlCmd.Parameters.AddWithValue("driver", (object)vehicle.DriverID ?? DBNull.Value);
+							sqlCmd.Parameters.AddWithValue("forwarder_id", (object)vehicle.ForwarderID ?? DBNull.Value);
+							sqlCmd.Parameters.AddWithValue("driver_id", (object)vehicle.DriverID ?? DBNull.Value);
 							sqlCmd.Parameters.AddWithValue("prodyear", (object)vehicle.ProdYear ?? DBNull.Value);
-							sqlCmd.Parameters.AddWithValue("archival", (object)vehicle.Archival ?? DBNull.Value);
+							sqlCmd.Parameters.AddWithValue("is_archival", (object)vehicle.IsArchival ?? DBNull.Value);
 							sqlCmd.Parameters.AddWithValue("comment", (object)vehicle.Comment ?? DBNull.Value);
-							sqlCmd.Parameters.AddWithValue("icon", (object)vehicle.IconID ?? DBNull.Value);
+							sqlCmd.Parameters.AddWithValue("icon_id", (object)vehicle.IconID ?? DBNull.Value);
 							sqlCmd.ExecuteNonQuery();
 						}
 						SetLog(Config.User.ID, module, vehicle.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} pojazd: {vehicle.Name}.", sqlConn, sqlTran);
@@ -1647,8 +1650,8 @@ namespace WBZ
 			{
 				/// ARTICLES
 				case nameof(Modules.Articles):
-					query = @"delete from wbz.stores_articles where article=@id;
-								delete from wbz.articles where id=@id";
+					query = @"delete from wbz.stores_articles where article_id=@id;
+						delete from wbz.articles where id=@id";
 					SetLog(Config.User.ID, module, instanceID, $"Usunięto towar: {name}", sqlConn, sqlTran);
 					break;
 				/// ATTACHMENTS
@@ -1658,8 +1661,8 @@ namespace WBZ
 					break;
 				/// ATTRIBUTES_CLASSES
 				case nameof(Modules.AttributesClasses):
-					query = @"delete from wbz.attributes where class=@id;
-								delete from wbz.attributes_classes where id=@id";
+					query = @"delete from wbz.attributes where class_id=@id;
+						delete from wbz.attributes_classes where id=@id";
 					SetLog(Config.User.ID, module, instanceID, $"Usunięto klasę atrybutu: {name}", sqlConn, sqlTran);
 					break;
 				/// CONTRACTORS
@@ -1675,7 +1678,7 @@ namespace WBZ
 						sqlCmd_Dis.Parameters.AddWithValue("id", instanceID);
 						oldstatus = Convert.ToInt32(sqlCmd_Dis.ExecuteScalar());
 					}
-					query = @"delete from wbz.distributions_positions where distribution=@id;
+					query = @"delete from wbz.distributions_positions where distribution_id=@id;
 						delete from wbz.distributions where id=@id";
 					SetLog(Config.User.ID, module, instanceID, $"Usunięto dystrybucję: {name}", sqlConn, sqlTran);
 					break;
@@ -1687,7 +1690,7 @@ namespace WBZ
 						sqlCmd_Doc.Parameters.AddWithValue("id", instanceID);
 						oldstatus = Convert.ToInt32(sqlCmd_Doc.ExecuteScalar());
 					}
-					query = @"delete from wbz.documents_positions WHERE document=@id;
+					query = @"delete from wbz.documents_positions WHERE document_id=@id;
 						delete from wbz.documents WHERE id=@id";
 					SetLog(Config.User.ID, module, instanceID, $"Usunięto dokument: {name}", sqlConn, sqlTran);
 					break;
@@ -1704,7 +1707,7 @@ namespace WBZ
 				/// GROUPS
 				case nameof(Modules._submodules.Groups):
 					query = @"delete from wbz.groups where id=@id;
-						delete from wbz.groups where owner=@id";
+						delete from wbz.groups where owner_id=@id";
 					SetLog(Config.User.ID, module, instanceID, $"Usunięto grupę: {name}", sqlConn, sqlTran);
 					break;
 				/// ICONS
@@ -1718,7 +1721,7 @@ namespace WBZ
 					break;
 				/// STORES
 				case nameof(Modules.Stores):
-					query = @"delete from wbz.stores_articles where store=@id;
+					query = @"delete from wbz.stores_articles where store_id=@id;
 						delete from wbz.stores where id=@id";
 					SetLog(Config.User.ID, module, instanceID, $"Usunięto magazyn: {name}", sqlConn, sqlTran);
 					break;
@@ -1742,7 +1745,7 @@ namespace WBZ
 			}
 			ClearObject(module, instanceID, sqlConn, sqlTran);
 
-			/// update articles amounts
+			/// update articles quantity
 			if (oldstatus > 0)
 			{
 				/// DISTRIBUTIONS
@@ -1751,7 +1754,7 @@ namespace WBZ
 					var families = GetDistributionPositions(instanceID);
 					foreach (var family in families)
 						foreach (DataRow pos in family.Positions.Rows)
-							ChangeArticleAmount((int)pos["store"], (int)pos["article"], (double)pos["amount"], (string)pos["measure"], false, sqlConn, sqlTran);
+							ChangeArticleQuantity((int)pos["store_id"], (int)pos["article_id"], (double)pos["quantity"], (string)pos["measure"], false, sqlConn, sqlTran);
 				}
 				/// DOCUMENTS
 				else if (module.Name == nameof(Modules.Documents))
@@ -1759,7 +1762,7 @@ namespace WBZ
 					var document = GetInstance<M_Document>(Config.GetModule(nameof(Modules.Documents)), instanceID);
 					var positions = GetInstancePositions(Config.GetModule(nameof(Modules.Documents)), instanceID);
 					foreach (DataRow pos in positions.Rows)
-						ChangeArticleAmount(document.Store, (int)pos["article"], -(double)pos["amount"], (string)pos["measure"], false, sqlConn, sqlTran);
+						ChangeArticleQuantity(document.StoreID, (int)pos["article_id"], -(double)pos["quantity"], (string)pos["measure"], false, sqlConn, sqlTran);
 				}
 			}
 
@@ -1847,31 +1850,31 @@ namespace WBZ
 		internal static bool ClearObject(MV module, int instanceID, NpgsqlConnection sqlConn, NpgsqlTransaction sqlTran)
 		{
 			using (var sqlCmd = new NpgsqlCommand(@"delete from wbz.attachments
-				where module=@module and instance=@instance", sqlConn, sqlTran))
+				where module_alias=@module_alias and instance_id=@instance_id", sqlConn, sqlTran))
 			{
-				sqlCmd.Parameters.AddWithValue("module", module.Name);
-				sqlCmd.Parameters.AddWithValue("instance", instanceID);
+				sqlCmd.Parameters.AddWithValue("module_alias", module.Alias);
+				sqlCmd.Parameters.AddWithValue("instance_id", instanceID);
 				sqlCmd.ExecuteNonQuery();
 			}
 			using (var sqlCmd = new NpgsqlCommand(@"delete from wbz.attributes
-				where class in (select id from wbz.attributes_classes where module=@module) and instance=@instance", sqlConn, sqlTran))
+				where class_id in (select id from wbz.attributes_classes where module_alias=@module_alias) and instance_id=@instance_id", sqlConn, sqlTran))
 			{
-				sqlCmd.Parameters.AddWithValue("module", module.Name);
-				sqlCmd.Parameters.AddWithValue("instance", instanceID);
+				sqlCmd.Parameters.AddWithValue("module_alias", module.Alias);
+				sqlCmd.Parameters.AddWithValue("instance_id", instanceID);
 				sqlCmd.ExecuteNonQuery();
 			}
 			using (var sqlCmd = new NpgsqlCommand(@"delete from wbz.contacts
-				where module=@module and instance=@instance", sqlConn, sqlTran))
+				where module_alias=@module_alias and instance_id=@instance_id", sqlConn, sqlTran))
 			{
-				sqlCmd.Parameters.AddWithValue("module", module.Name);
-				sqlCmd.Parameters.AddWithValue("instance", instanceID);
+				sqlCmd.Parameters.AddWithValue("module_alias", module.Alias);
+				sqlCmd.Parameters.AddWithValue("instance_id", instanceID);
 				sqlCmd.ExecuteNonQuery();
 			}
 			using (var sqlCmd = new NpgsqlCommand(@"delete from wbz.groups
-				where module=@module and instance=@instance", sqlConn, sqlTran))
+				where module_alias=@module_alias and instance_id=@instance_id", sqlConn, sqlTran))
 			{
-				sqlCmd.Parameters.AddWithValue("module", module.Name);
-				sqlCmd.Parameters.AddWithValue("instance", instanceID);
+				sqlCmd.Parameters.AddWithValue("module_alias", module.Alias);
+				sqlCmd.Parameters.AddWithValue("instance_id", instanceID);
 				sqlCmd.ExecuteNonQuery();
 			}
 
@@ -1885,7 +1888,7 @@ namespace WBZ
 		internal static byte[] GetAttachmentFile(int id)
 		{
 			using var sqlConn = ConnOpenedWBZ;
-			var sqlCmd = new NpgsqlCommand(@"select file
+			var sqlCmd = new NpgsqlCommand(@"select content
 				from wbz.attachments
 				where id=@id", sqlConn);
 			sqlCmd.Parameters.AddWithValue("id", id);
@@ -1899,25 +1902,25 @@ namespace WBZ
 		/// <param name="instanceID">ID instancji</param>
 		/// <param name="name">Nazwa załącznika</param>
 		/// <param name="path">Ścieżka do pliku</param>
-		/// <param name="file">Plik</param>
+		/// <param name="content">Plik</param>
 		/// <param name="comment">Komentarz</param>
-		internal static int SetAttachment(MV module, int instanceID, string name, string path, byte[] file, string comment)
+		internal static int SetAttachment(MV module, int instanceID, string name, string path, byte[] content, string comment)
 		{
             using var sqlConn = ConnOpenedWBZ;
 			using var sqlTran = sqlConn.BeginTransaction();
-			var query = @"insert into wbz.attachments (""user"", module, instance,
-					name, ""format"", ""path"", file, comment)
-				values (@user, @module, @instance,
-					@name, @format, @path, @file, @comment) returning id";
+			var query = @"insert into wbz.attachments (user_id, module_alias, instance_id,
+					name, format, path, content, comment)
+				values (@user_id, @module_alias, @instance_id,
+					@name, @format, @path, @content, @comment) returning id";
 			var sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran);
-			sqlCmd.Parameters.AddWithValue("user", Config.User.ID);
-			sqlCmd.Parameters.AddWithValue("module", module.Name);
-			sqlCmd.Parameters.AddWithValue("instance", instanceID);
+			sqlCmd.Parameters.AddWithValue("user_id", Config.User.ID);
+			sqlCmd.Parameters.AddWithValue("module_alias", module.Alias);
+			sqlCmd.Parameters.AddWithValue("instance_id", instanceID);
 			sqlCmd.Parameters.AddWithValue("name", name);
 			sqlCmd.Parameters.AddWithValue("format", path.Split('.').Last());
 			sqlCmd.Parameters.AddWithValue("path", path);
-			sqlCmd.Parameters.AddWithValue("size", file.Length);
-			sqlCmd.Parameters.AddWithValue("file", file);
+			sqlCmd.Parameters.AddWithValue("size", content.Length);
+			sqlCmd.Parameters.AddWithValue("content", content);
 			sqlCmd.Parameters.AddWithValue("comment", comment);
             int result = Convert.ToInt32(sqlCmd.ExecuteScalar());
 
@@ -1939,16 +1942,16 @@ namespace WBZ
 			var result = new List<M_Attribute>();
 
 			using var sqlConn = ConnOpenedWBZ;
-			var query = @"select a.id as id, ac.module, @instance as instance,
-					ac.id as class, ac.name, ac.type, ac.required, ac.icon, a.value as value
+			var query = @"select a.id, ac.module_alias, @instance_id as instance_id,
+					ac.id as class_id, ac.name, ac.type, ac.is_required, ac.icon_id, a.value as value
 				from wbz.attributes_classes ac
 				left join wbz.attributes a
-					on ac.id=a.class and a.instance=@instance
-				where ac.module=@module and @filter
+					on ac.id=a.class_id and a.instance_id=@instance_id
+				where ac.module_alias=@module_alias and @filter
 				order by ac.name";
 			var sqlCmd = new NpgsqlCommand(query, sqlConn);
-			sqlCmd.Parameters.AddWithValue("module", module.Name);
-			sqlCmd.Parameters.AddWithValue("instance", instanceID);
+			sqlCmd.Parameters.AddWithValue("module_alias", module.Alias);
+			sqlCmd.Parameters.AddWithValue("instance_id", instanceID);
 			sqlCmd.CommandText = sqlCmd.CommandText.Replace("@filter", filter ?? true.ToString());
 			using var sqlDA = new NpgsqlDataAdapter(sqlCmd);
 			var dt = new DataTable();
@@ -1961,15 +1964,15 @@ namespace WBZ
 					ID = !Convert.IsDBNull(row["id"]) ? (long)row["id"] : 0,
 					Class = new M_AttributeClass()
 					{
-						ID = !Convert.IsDBNull(row["class"]) ? (int)row["class"] : 0,
-						Module = Config.ListModules.Find(x => x.Alias == (!Convert.IsDBNull(row["module"]) ? (string)row["module"] : string.Empty)),
+						ID = !Convert.IsDBNull(row["class_id"]) ? (int)row["class_id"] : 0,
+						Module = Config.ListModules.Find(x => x.Alias == (!Convert.IsDBNull(row["module_alias"]) ? (string)row["module_alias"] : string.Empty)),
 						Name = !Convert.IsDBNull(row["name"]) ? (string)row["name"] : string.Empty,
 						Type = !Convert.IsDBNull(row["type"]) ? (string)row["type"] : string.Empty,
-						Required = !Convert.IsDBNull(row["required"]) && (bool)row["required"],
-						IconID = !Convert.IsDBNull(row["icon"]) ? (int)row["icon"] : 0,
-						Values = GetInstancePositions(Config.GetModule(nameof(Modules.AttributesClasses)), !Convert.IsDBNull(row["class"]) ? (int)row["class"] : 0)
+						IsRequired = !Convert.IsDBNull(row["is_required"]) && (bool)row["is_required"],
+						IconID = !Convert.IsDBNull(row["icon_id"]) ? (int)row["icon_id"] : 0,
+						Values = GetInstancePositions(Config.GetModule(nameof(Modules.AttributesClasses)), !Convert.IsDBNull(row["class_id"]) ? (int)row["class_id"] : 0)
 					},
-					InstanceID = !Convert.IsDBNull(row["instance"]) ? (int)row["instance"] : 0,
+					InstanceID = !Convert.IsDBNull(row["instance_id"]) ? (int)row["instance_id"] : 0,
 					Value = !Convert.IsDBNull(row["value"]) ? (string)row["value"] : string.Empty
 				};
 				result.Add(c);
@@ -1990,10 +1993,10 @@ namespace WBZ
 			///add
 			if (attribute.ID == 0)
 			{
-				var sqlCmd = new NpgsqlCommand(@"insert into wbz.attributes (instance, class, value)
-					values (@instance, @class, @value)", sqlConn, sqlTran);
-				sqlCmd.Parameters.AddWithValue("instance", attribute.InstanceID);
-				sqlCmd.Parameters.AddWithValue("class", attribute.Class.ID);
+				var sqlCmd = new NpgsqlCommand(@"insert into wbz.attributes (instance_id, class_id, value)
+					values (@instance_id, @class_id, @value)", sqlConn, sqlTran);
+				sqlCmd.Parameters.AddWithValue("instance_id", attribute.InstanceID);
+				sqlCmd.Parameters.AddWithValue("class_id", attribute.Class.ID);
 				sqlCmd.Parameters.AddWithValue("value", attribute.Value);
 				sqlCmd.ExecuteNonQuery();
 				SetLog(Config.User.ID, module, attribute.InstanceID, $"Dodano atrybut {attribute.Class.Name}.", sqlConn, sqlTran);
@@ -2002,11 +2005,11 @@ namespace WBZ
 			else if (!string.IsNullOrEmpty(attribute.Value))
 			{
 				var sqlCmd = new NpgsqlCommand(@"update wbz.attributes
-					set instance=@instance, class=@class, value=@value
+					set instance_id=@instance_id, class_id=@class_id, value=@value
 					where id=@id", sqlConn, sqlTran);
 				sqlCmd.Parameters.AddWithValue("id", attribute.ID);
-				sqlCmd.Parameters.AddWithValue("instance", attribute.InstanceID);
-				sqlCmd.Parameters.AddWithValue("class", attribute.Class.ID);
+				sqlCmd.Parameters.AddWithValue("instance_id", attribute.InstanceID);
+				sqlCmd.Parameters.AddWithValue("class_id", attribute.Class.ID);
 				sqlCmd.Parameters.AddWithValue("value", attribute.Value);
 				sqlCmd.ExecuteNonQuery();
 				SetLog(Config.User.ID, module, attribute.InstanceID, $"Edytowano atrybut {attribute.Class.Name}.", sqlConn, sqlTran);
@@ -2030,24 +2033,24 @@ namespace WBZ
 		/// Pobiera kontakty dla podanego modułu i obiektu
 		/// </summary>
 		/// <param name="module">Moduł</param>
-		/// <param name="instance">ID instancji</param>
+		/// <param name="instanceID">ID instancji</param>
 		/// <param name="filter">Filtr SQL</param>
-		internal static DataTable ListContacts(MV module, int instance, string filter = null)
+		internal static DataTable ListContacts(MV module, int instanceID, string filter = null)
 		{
 			var result = new DataTable();
 
 			using var sqlConn = ConnOpenedWBZ;
-			var query = @"select c.id, c.module, c.instance, c.email, c.phone, c.forename, c.lastname, c.""default"", c.archival
+			var query = @"select c.id, c.module_alias, c.instance_id, c.email, c.phone, c.forename, c.lastname, c.is_default, c.is_archival
 					from wbz.contacts c
-					where c.module=@module and c.instance=@instance and @filter";
+					where c.module_alias=@module_alias and c.instance_id=@instance_id and @filter";
 			var sqlCmd = new NpgsqlCommand(query, sqlConn);
-			sqlCmd.Parameters.AddWithValue("module", module.Name);
-			sqlCmd.Parameters.AddWithValue("instance", instance);
+			sqlCmd.Parameters.AddWithValue("module_alias", module.Alias);
+			sqlCmd.Parameters.AddWithValue("instance_id", instanceID);
 			sqlCmd.CommandText = sqlCmd.CommandText.Replace("@filter", filter ?? true.ToString());
 			using var sqlDA = new NpgsqlDataAdapter(sqlCmd);
 			sqlDA.Fill(result);
-			result.Columns["default"].DefaultValue = false;
-			result.Columns["archival"].DefaultValue = false;
+			result.Columns["is_default"].DefaultValue = false;
+			result.Columns["is_archival"].DefaultValue = false;
 
 			return result;
 		}
@@ -2056,9 +2059,9 @@ namespace WBZ
 		/// Ustawia dane o kontaktach
 		/// </summary>
 		/// <param name="module">Moduł</param>
-		/// <param name="instance">ID instancji</param>
+		/// <param name="instanceID">ID instancji</param>
 		/// <param name="contacts">Tabela kontaktów</param>
-		internal static bool UpdateContacts(MV module, int instance, DataTable contacts)
+		internal static bool UpdateContacts(MV module, int instanceID, DataTable contacts)
 		{
 			using var sqlConn = ConnOpenedWBZ;
 			using var sqlTran = sqlConn.BeginTransaction();
@@ -2070,34 +2073,34 @@ namespace WBZ
 				///add
 				if (contact.RowState == DataRowState.Added)
 				{
-					sqlCmd = new NpgsqlCommand(@"insert into wbz.contacts (module, instance, email, phone, forename, lastname, ""default"", archival)
-							values (@module, @instance, @email, @phone, @forename, @lastname, @default, @archival)", sqlConn, sqlTran);
-					sqlCmd.Parameters.AddWithValue("module", module.Name);
-					sqlCmd.Parameters.AddWithValue("instance", instance);
+					sqlCmd = new NpgsqlCommand(@"insert into wbz.contacts (module_alias, instance_id, email, phone, forename, lastname, is_default, is_archival)
+							values (@module_alias, @instance_id, @email, @phone, @forename, @lastname, @is_default, @is_archival)", sqlConn, sqlTran);
+					sqlCmd.Parameters.AddWithValue("module_alias", module.Alias);
+					sqlCmd.Parameters.AddWithValue("instance_id", instanceID);
 					sqlCmd.Parameters.AddWithValue("email", contact["email"]);
 					sqlCmd.Parameters.AddWithValue("phone", contact["phone"]);
 					sqlCmd.Parameters.AddWithValue("forename", contact["forename"]);
 					sqlCmd.Parameters.AddWithValue("lastname", contact["lastname"]);
-					sqlCmd.Parameters.AddWithValue("default", contact["default"]);
-					sqlCmd.Parameters.AddWithValue("archival", contact["archival"]);
+					sqlCmd.Parameters.AddWithValue("is_default", contact["is_default"]);
+					sqlCmd.Parameters.AddWithValue("is_archival", contact["is_archival"]);
 					sqlCmd.ExecuteNonQuery();
-					SetLog(Config.User.ID, module, instance, $"Dodano kontakt {contact["forename"]} {contact["lastname"]}.", sqlConn, sqlTran);
+					SetLog(Config.User.ID, module, instanceID, $"Dodano kontakt {contact["forename"]} {contact["lastname"]}.", sqlConn, sqlTran);
 				}
 				///edit
 				else if (contact.RowState == DataRowState.Modified)
 				{
 					sqlCmd = new NpgsqlCommand(@"update wbz.contacts
-							set email=@email, phone=@phone, forename=@forename, lastname=@lastname, ""default""=@default, archival=@archival
+							set email=@email, phone=@phone, forename=@forename, lastname=@lastname, is_default=@default, is_archival=@is_archival
 							where id=@id", sqlConn, sqlTran);
 					sqlCmd.Parameters.AddWithValue("id", contact["id", DataRowVersion.Original]);
 					sqlCmd.Parameters.AddWithValue("email", contact["email"]);
 					sqlCmd.Parameters.AddWithValue("phone", contact["phone"]);
 					sqlCmd.Parameters.AddWithValue("forename", contact["forename"]);
 					sqlCmd.Parameters.AddWithValue("lastname", contact["lastname"]);
-					sqlCmd.Parameters.AddWithValue("default", contact["default"]);
-					sqlCmd.Parameters.AddWithValue("archival", contact["archival"]);
+					sqlCmd.Parameters.AddWithValue("is_default", contact["is_default"]);
+					sqlCmd.Parameters.AddWithValue("is_archival", contact["is_archival"]);
 					sqlCmd.ExecuteNonQuery();
-					SetLog(Config.User.ID, module, instance, $"Edytowano kontakt {contact["forename", DataRowVersion.Original]} {contact["lastname", DataRowVersion.Original]}.", sqlConn, sqlTran);
+					SetLog(Config.User.ID, module, instanceID, $"Edytowano kontakt {contact["forename", DataRowVersion.Original]} {contact["lastname", DataRowVersion.Original]}.", sqlConn, sqlTran);
 				}
 				///delete
 				else if (contact.RowState == DataRowState.Deleted)
@@ -2106,7 +2109,7 @@ namespace WBZ
 							where id=@id", sqlConn, sqlTran);
 					sqlCmd.Parameters.AddWithValue("id", contact["id", DataRowVersion.Original]);
 					sqlCmd.ExecuteNonQuery();
-					SetLog(Config.User.ID, module, instance, $"Usunięto kontakt {contact["forename", DataRowVersion.Original]} {contact["lastname", DataRowVersion.Original]}.", sqlConn, sqlTran);
+					SetLog(Config.User.ID, module, instanceID, $"Usunięto kontakt {contact["forename", DataRowVersion.Original]} {contact["lastname", DataRowVersion.Original]}.", sqlConn, sqlTran);
 				}
 			}
 
@@ -2118,20 +2121,20 @@ namespace WBZ
 		/// <summary>
 		/// Zapisuje log o podanych parametrach
 		/// </summary>
-		/// <param name="user">ID użytkownika</param>
+		/// <param name="userID">ID użytkownika</param>
 		/// <param name="module">Moduł</param>
 		/// <param name="instanceID">ID instancji</param>
 		/// <param name="content">Treść logu</param>
-		internal static bool SetLog(int user, MV module, int instanceID, string content, NpgsqlConnection sqlConn, NpgsqlTransaction sqlTran)
+		internal static bool SetLog(int userID, MV module, int instanceID, string content, NpgsqlConnection sqlConn, NpgsqlTransaction sqlTran)
 		{
 			if (Config.Logs_Enabled != "1")
 				return true;
 
-			using var sqlCmd = new NpgsqlCommand(@"insert into wbz.logs (""user"", module, instance, type, content)
-				values (@user, @module, @instance, 1, @content)", sqlConn, sqlTran);
-			sqlCmd.Parameters.AddWithValue("user", user);
-			sqlCmd.Parameters.AddWithValue("module", module.Name);
-			sqlCmd.Parameters.AddWithValue("instance", instanceID);
+			using var sqlCmd = new NpgsqlCommand(@"insert into wbz.logs (user_id, module_alias, instance_id, type, content)
+				values (@user_id, @module_alias, @instance_id, 1, @content)", sqlConn, sqlTran);
+			sqlCmd.Parameters.AddWithValue("user_id", userID);
+			sqlCmd.Parameters.AddWithValue("module_alias", module.Alias);
+			sqlCmd.Parameters.AddWithValue("instance_id", instanceID);
 			sqlCmd.Parameters.AddWithValue("content", content);
 			sqlCmd.ExecuteNonQuery();
 

@@ -12,7 +12,7 @@ namespace WBZ.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -140,18 +140,6 @@ namespace WBZ.Properties {
             }
             set {
                 this["columns_DocumentsList_Store"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool columns_DocumentsList_Type {
-            get {
-                return ((bool)(this["columns_DocumentsList_Type"]));
-            }
-            set {
-                this["columns_DocumentsList_Type"] = value;
             }
         }
         
@@ -290,12 +278,12 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool columns_StoresList_Amount {
+        public bool columns_StoresList_Quantity {
             get {
-                return ((bool)(this["columns_StoresList_Amount"]));
+                return ((bool)(this["columns_StoresList_Quantity"]));
             }
             set {
-                this["columns_StoresList_Amount"] = value;
+                this["columns_StoresList_Quantity"] = value;
             }
         }
         
@@ -386,12 +374,12 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool columns_ArticlesList_Amount {
+        public bool columns_ArticlesList_Quantity {
             get {
-                return ((bool)(this["columns_ArticlesList_Amount"]));
+                return ((bool)(this["columns_ArticlesList_Quantity"]));
             }
             set {
-                this["columns_ArticlesList_Amount"] = value;
+                this["columns_ArticlesList_Quantity"] = value;
             }
         }
         
@@ -890,12 +878,12 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool columns_LogsList_Obj {
+        public bool columns_LogsList_Instance {
             get {
-                return ((bool)(this["columns_LogsList_Obj"]));
+                return ((bool)(this["columns_LogsList_Instance"]));
             }
             set {
-                this["columns_LogsList_Obj"] = value;
+                this["columns_LogsList_Instance"] = value;
             }
         }
         
@@ -914,12 +902,12 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool columns_LogsList_DateTime {
+        public bool columns_LogsList_DateCreated {
             get {
-                return ((bool)(this["columns_LogsList_DateTime"]));
+                return ((bool)(this["columns_LogsList_DateCreated"]));
             }
             set {
-                this["columns_LogsList_DateTime"] = value;
+                this["columns_LogsList_DateCreated"] = value;
             }
         }
         
@@ -1342,12 +1330,12 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool columns_AttributesClassesList_Required {
+        public bool columns_AttributesClassesList_IsRequired {
             get {
-                return ((bool)(this["columns_AttributesClassesList_Required"]));
+                return ((bool)(this["columns_AttributesClassesList_IsRequired"]));
             }
             set {
-                this["columns_AttributesClassesList_Required"] = value;
+                this["columns_AttributesClassesList_IsRequired"] = value;
             }
         }
         
@@ -1918,12 +1906,12 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool columns_IconsList_File {
+        public bool columns_IconsList_Content {
             get {
-                return ((bool)(this["columns_IconsList_File"]));
+                return ((bool)(this["columns_IconsList_Content"]));
             }
             set {
-                this["columns_IconsList_File"] = value;
+                this["columns_IconsList_Content"] = value;
             }
         }
         

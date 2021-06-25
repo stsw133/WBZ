@@ -16,9 +16,9 @@
         public virtual string Name { get; set; }
 
         /// <summary>
-        /// Archival
+        /// IsArchival
         /// </summary>
-        public bool Archival { get; set; }
+        public bool IsArchival { get; set; }
 
         /// <summary>
         /// Comment

@@ -32,9 +32,6 @@
     <Setting Name="columns_DocumentsList_Store" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="columns_DocumentsList_Type" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
     <Setting Name="columns_DocumentsList_Name" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
@@ -68,7 +65,7 @@
     <Setting Name="columns_StoresList_Address" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="columns_StoresList_Amount" Type="System.Boolean" Scope="User">
+    <Setting Name="columns_StoresList_Quantity" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="columns_StoresList_Reserved" Type="System.Boolean" Scope="User">
@@ -92,7 +89,7 @@
     <Setting Name="columns_ArticlesList_Measure" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="columns_ArticlesList_Amount" Type="System.Boolean" Scope="User">
+    <Setting Name="columns_ArticlesList_Quantity" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="columns_ArticlesList_Reserved" Type="System.Boolean" Scope="User">
@@ -218,13 +215,13 @@
     <Setting Name="columns_LogsList_Module" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="columns_LogsList_Obj" Type="System.Boolean" Scope="User">
+    <Setting Name="columns_LogsList_Instance" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="columns_LogsList_Content" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="columns_LogsList_DateTime" Type="System.Boolean" Scope="User">
+    <Setting Name="columns_LogsList_DateCreated" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="columns_EmployeesList_ID" Type="System.Boolean" Scope="User">
@@ -366,7 +363,7 @@
     <Setting Name="columns_AttributesClassesList_Values" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="columns_AttributesClassesList_Required" Type="System.Boolean" Scope="User">
+    <Setting Name="columns_AttributesClassesList_IsRequired" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="sorting_Attachments" Type="System.Collections.Specialized.StringCollection" Scope="User">
@@ -523,7 +520,7 @@
     <Setting Name="columns_IconsList_ID" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="columns_IconsList_File" Type="System.Boolean" Scope="User">
+    <Setting Name="columns_IconsList_Content" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="columns_IconsList_Module" Type="System.Boolean" Scope="User">

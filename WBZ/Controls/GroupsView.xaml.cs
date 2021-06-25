@@ -8,7 +8,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using WBZ.Globals;
 using WBZ.Models;
-using WBZ.Modules._base;
 using WBZ.Modules._submodules;
 using WBZ.Modules._submodules.Groups;
 
@@ -25,7 +24,6 @@ namespace WBZ.Controls
         public GroupsView()
         {
             InitializeComponent();
-            DataContext = this;
         }
 
 		/// <summary>
@@ -172,7 +170,7 @@ namespace WBZ.Controls
             try
             {
                 // TODO - filtr do parametryzacji
-                InstancesList = SQL.ListInstances<M_Group>(GroupModule, $"{GroupModule.Alias}.module='{WindowModule.Alias}' and {GroupModule.Alias}.instance is null");
+                InstancesList = SQL.ListInstances<M_Group>(GroupModule, $"{GroupModule.Alias}.module_alias='{WindowModule.Alias}' and {GroupModule.Alias}.instance_id is null");
                 Items.Clear();
 
                 TreeViewItem GetTreeViewHeader(M_Group group)
@@ -193,7 +191,7 @@ namespace WBZ.Controls
                     {
                         Text = group.Name
                     };
-                    if (group.Archival)
+                    if (group.IsArchival)
                         tb.Foreground = (Brush)new BrushConverter().ConvertFrom("#777");
                     stack.Children.Add(image);
                     stack.Children.Add(tb);

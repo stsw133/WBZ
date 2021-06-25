@@ -47,7 +47,7 @@
         <!-- Required -->
         <DataGridCheckBoxColumn Binding="{Binding Required}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Required, Converter={se:conv_Bool}}">
             <DataGridCheckBoxColumn.Header>
-				<se:ColumnFilter FilterType="Check" Header="Wymagany" NameSQL="atc.required"/>
+				<se:ColumnFilter FilterType="Check" Header="Wymagany" NameSQL="atc.is_required"/>
             </DataGridCheckBoxColumn.Header>
         </DataGridCheckBoxColumn>
     </DataGrid.Columns>
@@ -61,7 +61,7 @@
                 <MenuItem IsCheckable="True" Header="Nazwa" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Name}"/>
                 <MenuItem IsCheckable="True" Header="Typ" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Type}"/>
                 <MenuItem IsCheckable="True" Header="Wartości" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Values}"/>
-                <MenuItem IsCheckable="True" Header="Wymagany" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_Required}"/>
+                <MenuItem IsCheckable="True" Header="Wymagany" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_AttributesClassesList_IsRequired}"/>
             </se:ExtMenuItem>
             <!-- Actions -->
             <Separator/>

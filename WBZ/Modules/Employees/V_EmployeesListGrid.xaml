@@ -26,7 +26,7 @@
         <!-- Fullname -->
         <DataGridTextColumn Binding="{Binding Fullname}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Fullname, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="Text" Header="Nazwisko" NameSQL="emp.lastname || ' ' || emp.forename"/>
+				<se:ColumnFilter FilterType="Text" Header="Nazwisko" NameSQL="concat(emp.lastname, ' ', emp.forename)"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Department -->

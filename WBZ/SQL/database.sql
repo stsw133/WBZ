@@ -33,22 +33,22 @@ CREATE TABLE wbz.config
 CREATE TABLE wbz.users
 (
     id serial PRIMARY KEY,
-    username character varying(20) NOT NULL UNIQUE,
+    codename character varying(20) NOT NULL UNIQUE,
     password text NOT NULL,
-    email character varying(60) NOT NULL UNIQUE,
-    phone character varying(16),
+    email character varying(100) NOT NULL UNIQUE,
+    phone character varying(30),
     forename character varying(30),
     lastname character varying(30),
-    blocked boolean NOT NULL DEFAULT false,
-    archival boolean NOT NULL DEFAULT false
+    is_archival boolean NOT NULL DEFAULT false,
+    is_blocked boolean NOT NULL DEFAULT false
 );
 
 -- Table: wbz.users_permissions
 CREATE TABLE wbz.users_permissions
 (
-    "user" integer NOT NULL,
+    user_id integer NOT NULL,
     perm character varying(50) NOT NULL,
-    CONSTRAINT users_permissions_user_fkey FOREIGN KEY ("user")
+    CONSTRAINT users_permissions_user_fkey FOREIGN KEY (user_id)
         REFERENCES wbz.users (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
@@ -59,13 +59,13 @@ CREATE TABLE wbz.users_permissions
 CREATE TABLE wbz.logs
 (
     id bigserial PRIMARY KEY,
-    "user" integer NOT NULL,
-    module character varying(50) NOT NULL,
-    instance integer NOT NULL,
+    user_id integer NOT NULL,
+    module_alias character varying(3) NOT NULL,
+    instance_id integer NOT NULL,
     type smallint NOT NULL DEFAULT 1,
     content text NOT NULL,
-    datetime timestamp(6) with time zone NOT NULL DEFAULT now(),
-    CONSTRAINT logs_perms_user_fkey FOREIGN KEY ("user")
+    datecreated timestamp(6) with time zone NOT NULL DEFAULT now(),
+    CONSTRAINT logs_perms_user_fkey FOREIGN KEY (user_id)
         REFERENCES wbz.users (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE NO ACTION
@@ -75,16 +75,16 @@ CREATE TABLE wbz.logs
 CREATE TABLE wbz.attachments
 (
     id bigserial PRIMARY KEY,
-    "user" integer NOT NULL,
-    module character varying(50) NOT NULL,
-    instance integer NOT NULL,
+    user_id integer NOT NULL,
+    module_alias character varying(3) NOT NULL,
+    instance_id integer NOT NULL,
     name character varying(255) NOT NULL,
-    "format" character varying(10) NOT NULL,
-    "path" character varying(2000) NOT NULL,
+    format character varying(10) NOT NULL,
+    path character varying(2000) NOT NULL,
     size integer NOT NULL,
-    file bytea NOT NULL,
+    content bytea NOT NULL,
     comment text,
-    CONSTRAINT attachments_perms_user_fkey FOREIGN KEY ("user")
+    CONSTRAINT attachments_perms_user_fkey FOREIGN KEY (user_id)
         REFERENCES wbz.users (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE NO ACTION
@@ -94,15 +94,15 @@ CREATE TABLE wbz.attachments
 CREATE TABLE wbz.icons
 (
     id bigserial PRIMARY KEY,
-    module character varying(50) NOT NULL,
+    module_alias character varying(3) NOT NULL,
     name character varying(255) NOT NULL,
-    "format" character varying(10) NOT NULL,
-    "path" character varying(2000) NOT NULL,
+    format character varying(10) NOT NULL,
+    path character varying(2000) NOT NULL,
     height integer NOT NULL,
     width integer NOT NULL,
     size integer NOT NULL,
-    file bytea NOT NULL,
-    archival boolean NOT NULL DEFAULT false,
+    content bytea NOT NULL,
+    is_archival boolean NOT NULL DEFAULT false,
     comment text
 );
 
@@ -110,14 +110,14 @@ CREATE TABLE wbz.icons
 CREATE TABLE wbz.groups
 (
     id serial PRIMARY KEY,
-    module character varying(50) NOT NULL,
+    module_alias character varying(3) NOT NULL,
     name character varying(50) NOT NULL,
-    instance integer,
-    owner integer,
-    archival boolean NOT NULL DEFAULT false,
+    instance_id integer,
+    owner_id integer,
+    is_archival boolean NOT NULL DEFAULT false,
     comment text,
-    icon integer,
-    CONSTRAINT groups_icon_fkey FOREIGN KEY (icon)
+    icon_id integer,
+    CONSTRAINT groups_icon_fkey FOREIGN KEY (icon_id)
         REFERENCES wbz.icons (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE NO ACTION
@@ -127,16 +127,16 @@ CREATE TABLE wbz.groups
 CREATE TABLE wbz.attributes_classes
 (
     id serial PRIMARY KEY,
-    module character varying(50) NOT NULL,
+    module_alias character varying(3) NOT NULL,
     name character varying(50) NOT NULL,
     type character varying(20) NOT NULL,
-    "values" character varying(100),
+    values character varying(100),
     defvalue character varying(50),
-    required boolean NOT NULL DEFAULT false,
-    archival boolean NOT NULL DEFAULT false,
+    is_archival boolean NOT NULL DEFAULT false,
+    is_required boolean NOT NULL DEFAULT false,
     comment text,
-    icon integer,
-    CONSTRAINT groups_icon_fkey FOREIGN KEY (icon)
+    icon_id integer,
+    CONSTRAINT groups_icon_fkey FOREIGN KEY (icon_id)
         REFERENCES wbz.icons (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE NO ACTION
@@ -146,11 +146,11 @@ CREATE TABLE wbz.attributes_classes
 CREATE TABLE wbz.attributes
 (
     id bigserial PRIMARY KEY,
-    instance integer NOT NULL,
-    class integer NOT NULL,
-    value character varying(50) NOT NULL,
-    archival boolean NOT NULL DEFAULT false,
-    CONSTRAINT attributes_class_fkey FOREIGN KEY (class)
+    instance_id integer NOT NULL,
+    class_id integer NOT NULL,
+    value character varying(255) NOT NULL,
+    is_archival boolean NOT NULL DEFAULT false,
+    CONSTRAINT attributes_class_fkey FOREIGN KEY (class_id)
         REFERENCES wbz.attributes_classes (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
@@ -160,10 +160,10 @@ CREATE TABLE wbz.attributes
 CREATE TABLE wbz.attributes_values
 (
     id bigserial PRIMARY KEY,
-    class integer NOT NULL,
-    value character varying(50) NOT NULL,
-    archival boolean NOT NULL DEFAULT false,
-    CONSTRAINT attributes_values_class_fkey FOREIGN KEY (class)
+    class_id integer NOT NULL,
+    value character varying(255) NOT NULL,
+    is_archival boolean NOT NULL DEFAULT false,
+    CONSTRAINT attributes_values_class_fkey FOREIGN KEY (class_id)
         REFERENCES wbz.attributes_classes (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
@@ -173,26 +173,26 @@ CREATE TABLE wbz.attributes_values
 CREATE TABLE wbz.contacts
 (
     id serial PRIMARY KEY,
-    module character varying(50) NOT NULL,
-    instance integer NOT NULL,
-    email character varying(60),
-    phone character varying(12),
+    module_alias character varying(3) NOT NULL,
+    instance_id integer NOT NULL,
+    email character varying(100),
+    phone character varying(30),
     forename character varying(30),
     lastname character varying(30),
-    "default" boolean NOT NULL DEFAULT false,
-    archival boolean NOT NULL DEFAULT false
+    is_archival boolean NOT NULL DEFAULT false,
+    is_default boolean NOT NULL DEFAULT false
 );
 
 -- Table: wbz.notifications
 CREATE TABLE wbz.notifications
 (
     id serial PRIMARY KEY,
-    "user" integer NOT NULL,
+    user_id integer NOT NULL,
     content character varying(100) NOT NULL,
-    read boolean NOT NULL DEFAULT false,
-    datetime timestamp(6) with time zone NOT NULL DEFAULT now(),
+    is_read boolean NOT NULL DEFAULT false,
+    datecreated timestamp(6) with time zone NOT NULL DEFAULT now(),
     action character varying(20),
-    CONSTRAINT notifications_user_fkey FOREIGN KEY ("user")
+    CONSTRAINT notifications_user_fkey FOREIGN KEY (user_id)
         REFERENCES wbz.users (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
@@ -205,11 +205,11 @@ CREATE TABLE wbz.articles
     codename character varying(20) UNIQUE,
     name character varying(100) NOT NULL,
     ean character varying(20),
-    price numeric(16,2),
-    archival boolean NOT NULL DEFAULT false,
+    price numeric(12,2),
+    is_archival boolean NOT NULL DEFAULT false,
     comment text,
-    icon integer,
-    CONSTRAINT groups_icon_fkey FOREIGN KEY (icon)
+    icon_id integer,
+    CONSTRAINT groups_icon_fkey FOREIGN KEY (icon_id)
         REFERENCES wbz.icons (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE NO ACTION
@@ -219,11 +219,11 @@ CREATE TABLE wbz.articles
 CREATE TABLE wbz.articles_measures
 (
     id serial PRIMARY KEY,
-    article integer NOT NULL,
+    article_id integer NOT NULL,
     name character varying(10) NOT NULL,
     converter double precision NOT NULL DEFAULT 1,
-    "default" boolean NOT NULL DEFAULT false,
-    CONSTRAINT articles_measures_article_fkey FOREIGN KEY (article)
+    is_default boolean NOT NULL DEFAULT false,
+    CONSTRAINT articles_measures_article_fkey FOREIGN KEY (article_id)
         REFERENCES wbz.articles (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
@@ -238,10 +238,10 @@ CREATE TABLE wbz.stores
     city character varying(40) NOT NULL,
     address character varying(60) NOT NULL,
     postcode character varying(6) NOT NULL,
-    archival boolean NOT NULL DEFAULT false,
+    is_archival boolean NOT NULL DEFAULT false,
     comment text,
-    icon integer,
-    CONSTRAINT groups_icon_fkey FOREIGN KEY (icon)
+    icon_id integer,
+    CONSTRAINT groups_icon_fkey FOREIGN KEY (icon_id)
         REFERENCES wbz.icons (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE NO ACTION
@@ -251,15 +251,15 @@ CREATE TABLE wbz.stores
 CREATE TABLE wbz.stores_articles
 (
     id serial PRIMARY KEY,
-    store integer NOT NULL,
-    article integer NOT NULL,
-    amount numeric(15,3) NOT NULL DEFAULT 0,
+    store_id integer NOT NULL,
+    article_id integer NOT NULL,
+    quantity numeric(15,3) NOT NULL DEFAULT 0,
     reserved numeric(15,3) NOT NULL DEFAULT 0,
-    CONSTRAINT stores_articles_store_fkey FOREIGN KEY (store)
+    CONSTRAINT stores_articles_store_fkey FOREIGN KEY (store_id)
         REFERENCES wbz.stores (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE,
-    CONSTRAINT stores_articles_article_fkey FOREIGN KEY (article)
+    CONSTRAINT stores_articles_article_fkey FOREIGN KEY (article_id)
         REFERENCES wbz.articles (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
@@ -277,10 +277,10 @@ CREATE TABLE wbz.contractors
     city character varying(40) NOT NULL,
     address character varying(60) NOT NULL,
     postcode character varying(6) NOT NULL,
-    archival boolean NOT NULL DEFAULT false,
+    is_archival boolean NOT NULL DEFAULT false,
     comment text,
-    icon integer,
-    CONSTRAINT groups_icon_fkey FOREIGN KEY (icon)
+    icon_id integer,
+    CONSTRAINT groups_icon_fkey FOREIGN KEY (icon_id)
         REFERENCES wbz.icons (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE NO ACTION
@@ -300,10 +300,10 @@ CREATE TABLE wbz.families
     c_sms boolean NOT NULL DEFAULT false,
     c_call boolean NOT NULL DEFAULT false,
     c_email boolean NOT NULL DEFAULT false,
-    archival boolean NOT NULL DEFAULT false,
+    is_archival boolean NOT NULL DEFAULT false,
     comment text,
-    icon integer,
-    CONSTRAINT groups_icon_fkey FOREIGN KEY (icon)
+    icon_id integer,
+    CONSTRAINT groups_icon_fkey FOREIGN KEY (icon_id)
         REFERENCES wbz.icons (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE NO ACTION
@@ -313,24 +313,24 @@ CREATE TABLE wbz.families
 CREATE TABLE wbz.documents
 (
     id serial PRIMARY KEY,
-    type character varying(50) NOT NULL,
+    type character varying(3) NOT NULL,
     name character varying(50) NOT NULL,
-    store integer NOT NULL,
-    contractor integer NOT NULL,
+    store_id integer NOT NULL,
+    contractor_id integer NOT NULL,
     dateissue date NOT NULL DEFAULT now(),
     status smallint NOT NULL DEFAULT 0,
-    archival boolean NOT NULL DEFAULT false,
+    is_archival boolean NOT NULL DEFAULT false,
     comment text,
-    icon integer,
-    CONSTRAINT groups_icon_fkey FOREIGN KEY (icon)
+    icon_id integer,
+    CONSTRAINT groups_icon_fkey FOREIGN KEY (icon_id)
         REFERENCES wbz.icons (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE NO ACTION,
-    CONSTRAINT documents_headers_store_fkey FOREIGN KEY (store)
+    CONSTRAINT documents_headers_store_fkey FOREIGN KEY (store_id)
         REFERENCES wbz.stores (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE NO ACTION,
-    CONSTRAINT documents_headers_contractor_fkey FOREIGN KEY (contractor)
+    CONSTRAINT documents_headers_contractor_fkey FOREIGN KEY (contractor_id)
         REFERENCES wbz.contractors (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE NO ACTION
@@ -340,17 +340,17 @@ CREATE TABLE wbz.documents
 CREATE TABLE wbz.documents_positions
 (
     id bigserial PRIMARY KEY,
-    document integer NOT NULL,
-    "position" smallint NOT NULL,
-    article integer NOT NULL,
-    amount numeric(15,3) NOT NULL DEFAULT 0,
-    cost numeric(16,2) NOT NULL DEFAULT 0,
-    tax numeric(16,2) NOT NULL DEFAULT 0,
-    CONSTRAINT documents_positions_document_fkey FOREIGN KEY (document)
+    document_id integer NOT NULL,
+    pos smallint NOT NULL,
+    article_id integer NOT NULL,
+    quantity numeric(15,3) NOT NULL DEFAULT 0,
+    net numeric(15,2) NOT NULL DEFAULT 0,
+    tax numeric(15,2) NOT NULL DEFAULT 0,
+    CONSTRAINT documents_positions_document_fkey FOREIGN KEY (document_id)
         REFERENCES wbz.documents (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE,
-    CONSTRAINT documents_positions_article_fkey FOREIGN KEY (article)
+    CONSTRAINT documents_positions_article_fkey FOREIGN KEY (article_id)
         REFERENCES wbz.articles (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE NO ACTION
@@ -363,10 +363,10 @@ CREATE TABLE wbz.distributions
     name character varying(50),
     datereal date,
     status smallint NOT NULL DEFAULT 0,
-    archival boolean NOT NULL,
+    is_archival boolean NOT NULL,
     comment text,
-    icon integer,
-    CONSTRAINT groups_icon_fkey FOREIGN KEY (icon)
+    icon_id integer,
+    CONSTRAINT groups_icon_fkey FOREIGN KEY (icon_id)
         REFERENCES wbz.icons (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE NO ACTION
@@ -376,27 +376,27 @@ CREATE TABLE wbz.distributions
 CREATE TABLE wbz.distributions_positions
 (
     id bigserial PRIMARY KEY,
-    distribution integer NOT NULL,
-    "position" smallint,
-    family integer NOT NULL,
+    distribution_id integer NOT NULL,
+    pos smallint,
+    family_id integer NOT NULL,
     members smallint NOT NULL,
-    store integer NOT NULL,
-    article integer NOT NULL,
-    amount numeric(15,3) NOT NULL DEFAULT 0,
+    store_id integer NOT NULL,
+    article_id integer NOT NULL,
+    quantity numeric(15,3) NOT NULL DEFAULT 0,
     status smallint NOT NULL,
-    CONSTRAINT distributions_positions_distribution_fkey FOREIGN KEY (distribution)
+    CONSTRAINT distributions_positions_distribution_fkey FOREIGN KEY (distribution_id)
         REFERENCES wbz.distributions (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE,
-    CONSTRAINT distributions_positions_family_fkey FOREIGN KEY (family)
+    CONSTRAINT distributions_positions_family_fkey FOREIGN KEY (family_id)
         REFERENCES wbz.families (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE NO ACTION,
-    CONSTRAINT distributions_positions_store_fkey FOREIGN KEY (store)
+    CONSTRAINT distributions_positions_store_fkey FOREIGN KEY (store_id)
         REFERENCES wbz.stores (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE NO ACTION,
-    CONSTRAINT distributions_positions_article_fkey FOREIGN KEY (article)
+    CONSTRAINT distributions_positions_article_fkey FOREIGN KEY (article_id)
         REFERENCES wbz.articles (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE NO ACTION
@@ -406,19 +406,19 @@ CREATE TABLE wbz.distributions_positions
 CREATE TABLE wbz.employees
 (
     id serial PRIMARY KEY,
-    email character varying(60),
-    phone character varying(16),
-    forename character varying(50) NOT NULL,
+    email character varying(100),
+    phone character varying(30),
+    forename character varying(30) NOT NULL,
     lastname character varying(30) NOT NULL,
     city character varying(40),
     address character varying(60),
     postcode character varying(6),
     department character varying(40),
     position character varying(40),
-    archival boolean NOT NULL DEFAULT false,
+    is_archival boolean NOT NULL DEFAULT false,
     comment text,
-    icon integer,
-    CONSTRAINT groups_icon_fkey FOREIGN KEY (icon)
+    icon_id integer,
+    CONSTRAINT groups_icon_fkey FOREIGN KEY (icon_id)
         REFERENCES wbz.icons (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE NO ACTION
@@ -432,21 +432,21 @@ CREATE TABLE wbz.vehicles
     brand character varying(40),
     model character varying(60),
     capacity decimal(18,3),
-    forwarder integer,
-    driver integer,
+    forwarder_id integer,
+    driver_id integer,
     prodyear integer,
-    archival boolean NOT NULL DEFAULT false,
+    is_archival boolean NOT NULL DEFAULT false,
     comment text,
-    icon integer,
-    CONSTRAINT groups_icon_fkey FOREIGN KEY (icon)
+    icon_id integer,
+    CONSTRAINT groups_icon_fkey FOREIGN KEY (icon_id)
         REFERENCES wbz.icons (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE NO ACTION,
-    CONSTRAINT vehicles_headers_forwarder_fkey FOREIGN KEY (forwarder)
+    CONSTRAINT vehicles_headers_forwarder_fkey FOREIGN KEY (forwarder_id)
         REFERENCES wbz.contractors (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE NO ACTION,
-    CONSTRAINT vehicles_headers_driver_fkey FOREIGN KEY (driver)
+    CONSTRAINT vehicles_headers_driver_fkey FOREIGN KEY (driver_id)
         REFERENCES wbz.employees (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE NO ACTION

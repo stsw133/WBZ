@@ -80,9 +80,9 @@ namespace WBZ.Models
 		public double Converter { get; set; } = 1;
 
 		/// <summary>
-		/// Default
+		/// IsDefault
 		/// </summary>
-		public bool Default { get; set; }
+		public bool IsDefault { get; set; }
 
 		/// <summary>
 		/// Price
