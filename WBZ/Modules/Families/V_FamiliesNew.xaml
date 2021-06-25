@@ -31,7 +31,7 @@
             <DockPanel>
                 <StackPanel DockPanel.Dock="Top">
                     <se:IconButton Text="{Tr Save}" Margin="5"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    IsTextVisible="{Binding config_ShowButtonsWithNames, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_save.ico"
                                     Command="se:Commands.Save"/>
                     <Separator/>
@@ -39,7 +39,7 @@
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                     <Separator Height="5" Margin="0,0,0,5"/>
                     <se:IconButton Text="{Tr Print}" Margin="5"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    IsTextVisible="{Binding config_ShowButtonsWithNames, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_printer.ico"
                                     Click="btnPrint_Click">
                         <se:IconButton.ContextMenu>
@@ -50,12 +50,12 @@
                     </se:IconButton>
                     <Separator/>
                     <se:IconButton Text="{Tr Refresh}" Margin="5"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    IsTextVisible="{Binding config_ShowButtonsWithNames, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_refresh.ico"
                                     Command="se:Commands.Refresh"/>
                     <Separator/>
                     <se:IconButton Text="{Tr CloseWindow}" Margin="5"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    IsTextVisible="{Binding config_ShowButtonsWithNames, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_close.ico"
                                     Command="se:Commands.Close"/>
                 </StackPanel>

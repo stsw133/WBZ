@@ -16,61 +16,53 @@
     </DataGrid.Resources>
     <DataGrid.Columns>
         <!-- ID -->
-        <DataGridTextColumn Binding="{Binding ID}" Header="ID"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_ID, Converter={se:conv_Bool}}"/>
+		<DataGridTextColumn Binding="{Binding ID}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_ID, Converter={se:conv_Bool}}">
+			<DataGridTextColumn.Header>
+				<se:ColumnFilter FilterType="Number" Header="ID" NameSQL="doc.id"/>
+			</DataGridTextColumn.Header>
+		</DataGridTextColumn>
         <!-- Icon -->
-        <se:DataGridImageColumn Image="{Binding IconContent}" Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"
-                                Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Icon, Converter={se:conv_Bool}}"/>
-		<!-- Type -->
-        <DataGridTextColumn Binding="{Binding Type}" Header="Typ" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Type, Converter={se:conv_Bool}}"/>
-        <!-- Name -->
-        <DataGridTextColumn Binding="{Binding Name}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Name, Converter={se:conv_Bool}}">
+		<se:DataGridImageColumn Image="{Binding IconContent}" Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Icon, Converter={se:conv_Bool}}"/>
+		<!-- Name -->
+        <DataGridTextColumn Binding="{Binding Name}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Name, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter FilterType="Text" Header="Nazwa" NameSQL="d.name"/>
+                <se:ColumnFilter FilterType="Text" Header="Nazwa" NameSQL="doc.name"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Store -->
-        <DataGridTextColumn Binding="{Binding cStore.Value}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Store, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding StoreName}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Store, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
 				<se:ColumnFilter FilterType="Text" Header="Magazyn" NameSQL="s.codename"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- ContractorName -->
-        <DataGridTextColumn Binding="{Binding ContractorName}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_ContractorName, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding ContractorName}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_ContractorName, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
 				<se:ColumnFilter FilterType="Text" Header="Kontrahent" NameSQL="c.codename"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- PositionsCount -->
-        <DataGridTextColumn Binding="{Binding PositionsCount}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_PositionsCount, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding PositionsCount}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_PositionsCount, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter FilterType="Number" Header="Pozycje" NameSQL="d.positionscount"/>
+				<se:ColumnFilter FilterType="Number" Header="Pozycje" NameSQL="doc.positionscount"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- Weight -->
-        <DataGridTextColumn Binding="{Binding Weight}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Weight, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding Weight}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Weight, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="Number" Header="Waga (kg)" NameSQL="d.weight"/>
+				<se:ColumnFilter FilterType="Number" Header="Waga (kg)" NameSQL="doc.weight"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
-        <!-- Cost -->
-        <DataGridTextColumn Binding="{Binding Cost}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Cost, Converter={se:conv_Bool}}">
+        <!-- Net -->
+        <DataGridTextColumn Binding="{Binding Net}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_Cost, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-				<se:ColumnFilter FilterType="Number" Header="Kwota netto" NameSQL="d.cost"/>
+				<se:ColumnFilter FilterType="Number" Header="Kwota netto" NameSQL="doc.net"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
         <!-- DateIssue -->
-        <DataGridTextColumn Binding="{Binding DateIssue, StringFormat={}{0:yyyy-MM-dd}}" Width="*"
-                            Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_DateIssue, Converter={se:conv_Bool}}">
+        <DataGridTextColumn Binding="{Binding DateIssue, StringFormat={}{0:yyyy-MM-dd}}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_DocumentsList_DateIssue, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
-                <se:ColumnFilter FilterType="Date" Header="Data wystawienia" NameSQL="cast(d.dateissue as date)"/>
+				<se:ColumnFilter FilterType="Date" Header="Data wystawienia" NameSQL="cast(doc.dateissue as date)"/>
             </DataGridTextColumn.Header>
         </DataGridTextColumn>
     </DataGrid.Columns>
@@ -102,19 +94,25 @@
     </DataGrid.ContextMenu>
     <DataGrid.RowStyle>
         <Style TargetType="DataGridRow">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding Status}" Value="0">
-                    <Setter Property="Foreground" Value="Green"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Status}" Value="-1">
-                    <Setter Property="Foreground" Value="DarkGoldenrod"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Archival}" Value="True">
+			<Style.Triggers>
+				<DataTrigger Binding="{Binding Archival}" Value="True">
                     <Setter Property="Foreground" Value="Gray"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Comment, Converter={se:conv_Compare}, ConverterParameter=''}" Value="False">
                     <Setter Property="ToolTip" Value="{Binding Comment}"/>
                 </DataTrigger>
+				<DataTrigger Binding="{Binding Status}" Value="-1">
+					<Setter Property="Foreground" Value="Gray"/>
+				</DataTrigger>
+				<DataTrigger Binding="{Binding Status}" Value="0">
+					<Setter Property="Foreground" Value="Green"/>
+				</DataTrigger>
+				<DataTrigger Binding="{Binding Status}" Value="2">
+					<Setter Property="Foreground" Value="Blue"/>
+				</DataTrigger>
+				<DataTrigger Binding="{Binding Status}" Value="3">
+					<Setter Property="Foreground" Value="SaddleBrown"/>
+				</DataTrigger>
             </Style.Triggers>
         </Style>
     </DataGrid.RowStyle>

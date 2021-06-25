@@ -27,7 +27,7 @@ namespace WBZ.Modules.Documents
 				D.InstanceData = instance;
 			D.Mode = mode;
 
-			if (mode == Commands.Type.EDIT && D.InstanceData.Status != (short)MODULE_MODEL.DocumentStatus.Buffer)
+			if (mode == Commands.Type.EDIT && D.InstanceData.Status != 0)
 				D.Mode = Commands.Type.PREVIEW;
 
 			D.InstanceData.Positions = SQL.GetInstancePositions(D.Module, D.InstanceData.ID);

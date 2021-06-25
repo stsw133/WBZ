@@ -36,7 +36,7 @@
                     <DockPanel.Resources>
                         <Style TargetType="{x:Type se:IconButton}">
                             <Setter Property="HorizontalContentAlignment" Value="Left"/>
-                            <Setter Property="IsTextVisible" Value="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"/>
+                            <Setter Property="IsTextVisible" Value="{Binding config_ShowButtonsWithNames, Source={x:Static p:Settings.Default}}"/>
                         </Style>
                     </DockPanel.Resources>
                     <StackPanel DockPanel.Dock="Top" Visibility="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=SELECT}">

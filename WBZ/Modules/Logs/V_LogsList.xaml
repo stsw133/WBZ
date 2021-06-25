@@ -32,7 +32,7 @@
 				<DockPanel.Resources>
 					<Style TargetType="{x:Type se:IconButton}">
 						<Setter Property="HorizontalContentAlignment" Value="Left"/>
-						<Setter Property="IsTextVisible" Value="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"/>
+						<Setter Property="IsTextVisible" Value="{Binding config_ShowButtonsWithNames, Source={x:Static p:Settings.Default}}"/>
 					</Style>
 				</DockPanel.Resources>
                 <StackPanel DockPanel.Dock="Top">
@@ -40,9 +40,9 @@
                     <se:IconButton Margin="5" Text="Edycja&#10;obiektu" Icon="/Resources/icon32_edit.ico" Command="se:Commands.Edit"/>
                     <Separator/>
                     <se:ExtCheckBox x:Name="chckEnabled" Margin="5" Content="Logi włączone"
-									Visibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}, Converter={se:conv_Bool}}"
+									Visibility="{Binding config_ShowButtonsWithNames, Source={x:Static p:Settings.Default}, Converter={se:conv_Bool}}"
 									Checked="chckEnabled_Checked" Unchecked="chckEnabled_Checked"/>
-                    <Separator Visibility="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}, Converter={se:conv_Bool}}"/>
+                    <Separator Visibility="{Binding config_ShowButtonsWithNames, Source={x:Static p:Settings.Default}, Converter={se:conv_Bool}}"/>
                     <se:IconButton Margin="5" Text="{Tr Delete}" Icon="/Resources/icon32_delete.ico" Command="se:Commands.Delete"/>
                     <Separator/>
                 </StackPanel>

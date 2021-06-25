@@ -7,12 +7,12 @@
 	{
 		/// IMM
 		public MV Module { get; set; }
-		public int Instance { get; set; }
+		public int InstanceID { get; set; }
 
 		/// <summary>
 		/// User
 		/// </summary>
-		public int User { get; set; }
+		public int UserID { get; set; }
 		public string UserName { get; set; }
 
 		/// <summary>

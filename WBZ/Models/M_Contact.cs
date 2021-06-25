@@ -7,7 +7,7 @@
     {
         /// IMM
         public MV Module { get; set; }
-        public int Instance { get; set; }
+        public int InstanceID { get; set; }
 
         /// IMP
         public override string Name => Fullname;

@@ -415,6 +415,10 @@
 		"en": "List",
 		"pl": "Lista"
 	},
+	"LoadFirstDataOnLists": {
+		"en": "Load first data on lists",
+		"pl": "Wczytuj pierwsze dane na listach"
+	},
 	"Login": {
 		"en": "Logging",
 		"pl": "Logowanie"

@@ -25,12 +25,12 @@ namespace WBZ.Models
 	{
 		/// IMM
 		public MV Module { get; set; }
-		public int Instance { get; set; }
+		public int InstanceID { get; set; }
 
 		/// <summary>
 		/// Type
 		/// </summary>
-		public string Type { get; set; } = MS_AttributesClasses.Types[0].Value.ToString();
+		public string Type { get; set; } = (string)MS_AttributesClasses.Types[0].Value;
 
 		/// <summary>
 		/// DefValue

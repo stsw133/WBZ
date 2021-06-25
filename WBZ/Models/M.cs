@@ -28,12 +28,12 @@
         /// <summary>
         /// Group
         /// </summary>
-        public int Group { get; set; }
+        public int GroupID { get; set; }
 
         /// <summary>
         /// Icon
         /// </summary>
-        public int Icon { get; set; }
+        public int IconID { get; set; }
         public byte[] IconContent { get; set; }
     }
 
@@ -76,7 +76,7 @@
         /// <summary>
         /// Instance
         /// </summary>
-        public int Instance { get; set; }
+        public int InstanceID { get; set; }
     }
 
     /// <summary>

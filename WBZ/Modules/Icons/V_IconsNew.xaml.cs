@@ -70,26 +70,26 @@ namespace WBZ.Modules.Icons
                     {
                         using (var client = new WebClient())
                         {
-                            D.InstanceData.File = client.DownloadData(D.InstanceData.Path);
+                            D.InstanceData.Content = client.DownloadData(D.InstanceData.Path);
                         }
                     }
                     else
-                        D.InstanceData.File = File.ReadAllBytes(D.InstanceData.Path);
+                        D.InstanceData.Content = File.ReadAllBytes(D.InstanceData.Path);
 
                     D.InstanceData.Format = D.InstanceData.Path.Split('.').Last();
                     if (string.IsNullOrEmpty(D.InstanceData.Name))
                         D.InstanceData.Name = Path.GetFileName(D.InstanceData.Path).TrimEnd(D.InstanceData.Format.ToCharArray());
 
-                    var image = Fn.LoadImage(D.InstanceData.File);
+                    var image = Fn.LoadImage(D.InstanceData.Content);
                     
                     D.InstanceData.Height = image.PixelHeight;
                     D.InstanceData.Width = image.PixelWidth;
-                    D.InstanceData.Size = D.InstanceData.File.Length;
+                    D.InstanceData.Size = D.InstanceData.Content.Length;
                     D.NotifyPropertyChanged("InstanceData");
                 }
                 catch (Exception ex)
                 {
-                    D.InstanceData.File = null;
+                    D.InstanceData.Content = null;
                     D.InstanceData.Height = 0;
                     D.InstanceData.Width = 0;
                     D.InstanceData.Size = 0;
@@ -132,7 +132,7 @@ namespace WBZ.Modules.Icons
                 new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Obraz przekracza dopuszczalny rozmiar: " + Config.Icon_Size_Max) { Owner = this }.ShowDialog();
                 return false;
             }
-            if (D.InstanceData.File == null)
+            if (D.InstanceData.Content == null)
             {
                 new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie wybrano pliku z obrazem!") { Owner = this }.ShowDialog();
                 return false;

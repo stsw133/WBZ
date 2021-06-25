@@ -76,7 +76,7 @@ namespace WBZ.Controls
             if (SelectedItem == null || (int)(SelectedItem as Control).Tag == 0)
             {
                 instance.Module = WindowModule;
-                instance.Owner = 0;
+                instance.OwnerID = 0;
             }
             else
             {
@@ -88,7 +88,7 @@ namespace WBZ.Controls
                     return;
 
                 instance.Module = WindowModule;
-                instance.Owner = (int)(SelectedItem as TreeViewItem).Tag;
+                instance.OwnerID = (int)(SelectedItem as TreeViewItem).Tag;
                 instance.Path = path;
             }
             new GroupsNew(instance, Commands.Type.NEW) { Owner = Window.GetWindow(this) }.ShowDialog();
@@ -210,27 +210,27 @@ namespace WBZ.Controls
 
                 /// Add groups to TreeView
                 Items.Add(GetTreeViewHeader(new M_Group() { Name = ". . ." }));
-                foreach (var group1 in InstancesList.Where(x => x.Owner == 0))
+                foreach (var group1 in InstancesList.Where(x => x.OwnerID == 0))
                 {
                     var tvi1 = GetTreeViewHeader(group1);
                     Items.Add(tvi1);
 
-                    foreach (var group2 in InstancesList.Where(x => x.Owner == group1.ID))
+                    foreach (var group2 in InstancesList.Where(x => x.OwnerID == group1.ID))
                     {
                         var tvi2 = GetTreeViewHeader(group2);
                         tvi1.Items.Add(tvi2);
 
-                        foreach (var group3 in InstancesList.Where(x => x.Owner == group2.ID))
+                        foreach (var group3 in InstancesList.Where(x => x.OwnerID == group2.ID))
                         {
                             var tvi3 = GetTreeViewHeader(group3);
                             tvi2.Items.Add(tvi3);
 
-                            foreach (var group4 in InstancesList.Where(x => x.Owner == group3.ID))
+                            foreach (var group4 in InstancesList.Where(x => x.OwnerID == group3.ID))
                             {
                                 var tvi4 = GetTreeViewHeader(group4);
                                 tvi3.Items.Add(tvi4);
 
-                                foreach (var group5 in InstancesList.Where(x => x.Owner == group4.ID))
+                                foreach (var group5 in InstancesList.Where(x => x.OwnerID == group4.ID))
                                 {
                                     var tvi5 = GetTreeViewHeader(group5);
                                     tvi4.Items.Add(tvi5);

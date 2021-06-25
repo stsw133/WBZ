@@ -1549,12 +1549,12 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool config_ShowButtonTexts {
+        public bool config_LoadFirstDataOnLists {
             get {
-                return ((bool)(this["config_ShowButtonTexts"]));
+                return ((bool)(this["config_LoadFirstDataOnLists"]));
             }
             set {
-                this["config_ShowButtonTexts"] = value;
+                this["config_LoadFirstDataOnLists"] = value;
             }
         }
         
@@ -1843,12 +1843,12 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool config_ShowButtonWithText {
+        public bool config_ShowButtonsWithNames {
             get {
-                return ((bool)(this["config_ShowButtonWithText"]));
+                return ((bool)(this["config_ShowButtonsWithNames"]));
             }
             set {
-                this["config_ShowButtonWithText"] = value;
+                this["config_ShowButtonsWithNames"] = value;
             }
         }
         
@@ -1861,18 +1861,6 @@ namespace WBZ.Properties {
             }
             set {
                 this["ThemeColor"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool config_ShowHeaderWithText {
-            get {
-                return ((bool)(this["config_ShowHeaderWithText"]));
-            }
-            set {
-                this["config_ShowHeaderWithText"] = value;
             }
         }
         

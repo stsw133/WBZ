@@ -48,8 +48,11 @@ namespace WBZ.Modules._base
             }
 
             /// refresh
-            cmdRefresh_Executed(null, null);
-        }
+			if (Properties.Settings.Default.config_LoadFirstDataOnLists)
+				cmdRefresh_Executed(null, null);
+			else
+				D.TotalItems = SQL.CountInstances(D.Module, D.Filter);
+		}
 
         /// <summary>
 		/// Update filters

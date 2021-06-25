@@ -38,30 +38,30 @@
             <DockPanel>
                 <StackPanel DockPanel.Dock="Top" Visibility="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=SELECT}">
                     <se:IconButton Text="{Tr Select}" Margin="5"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    IsTextVisible="{Binding config_ShowButtonsWithNames, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_select.ico"
                                     Command="se:Commands.Select"/>
                     <Separator/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Top">
                     <se:IconButton Text="{Tr Preview}" Margin="5"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    IsTextVisible="{Binding config_ShowButtonsWithNames, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_search.ico"
                                     Command="se:Commands.Preview"/>
                     <se:IconButton Text="{Tr New}" Margin="5"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    IsTextVisible="{Binding config_ShowButtonsWithNames, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_add.ico"
                                     Command="se:Commands.New"/>
                     <se:IconButton Text="{Tr Duplicate}" Margin="5"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    IsTextVisible="{Binding config_ShowButtonsWithNames, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_duplicate.ico"
                                     Command="se:Commands.Duplicate"/>
                     <se:IconButton Text="{Tr Edit}" Margin="5"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    IsTextVisible="{Binding config_ShowButtonsWithNames, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_edit.ico"
                                     Command="se:Commands.Edit"/>
                     <se:IconButton Text="{Tr Delete}" Margin="5"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    IsTextVisible="{Binding config_ShowButtonsWithNames, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_delete.ico"
                                     Command="se:Commands.Delete"/>
                     <Separator/>
@@ -69,12 +69,12 @@
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                     <Separator/>
                     <se:IconButton Text="{Tr Refresh}" Margin="5"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    IsTextVisible="{Binding config_ShowButtonsWithNames, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_refresh.ico"
                                     Command="se:Commands.Refresh"/>
                     <Separator/>
                     <se:IconButton Text="{Tr CloseWindow}" Margin="5"
-                                    IsTextVisible="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"
+                                    IsTextVisible="{Binding config_ShowButtonsWithNames, Source={x:Static p:Settings.Default}}"
                                     Icon="/Resources/icon32_close.ico"
                                     Command="se:Commands.Close"/>
                 </StackPanel>

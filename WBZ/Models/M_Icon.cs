@@ -7,7 +7,7 @@
 	{
 		/// IMM
 		public MV Module { get; set; }
-		public int Instance { get; set; }
+		public int InstanceID { get; set; }
 
 		/// <summary>
 		/// Path
@@ -31,8 +31,8 @@
 		public double Size { get; set; }
 
 		/// <summary>
-		/// File
+		/// Content
 		/// </summary>
-		public byte[] File { get; set; }
+		public byte[] Content { get; set; }
     }
 }

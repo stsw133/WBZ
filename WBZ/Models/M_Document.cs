@@ -1,24 +1,38 @@
-﻿using System;
+﻿using StswExpress.Translate;
+using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace WBZ.Models
 {
 	/// <summary>
+	/// Static model for Documents sources
+	/// </summary>
+	public static class MS_Documents
+	{
+		public static List<MV> Statuses { get; } = new List<MV>()
+		{
+			new MV() { Value = 0, Display = TM.Tr("ToBuffer") },
+			new MV() { Value = 1, Display = TM.Tr("Approved") },
+			new MV() { Value = 2, Display = TM.Tr("InProgress") },
+			new MV() { Value = 3, Display = TM.Tr("Closed") }
+		};
+
+		public static List<MV> Types { get; } = new List<MV>()
+		{
+			new MV() { Value = "fs", Display = "Faktura sprzedaży" }
+		};
+	}
+
+	/// <summary>
 	/// Model for Documents
 	/// </summary>
 	public class M_Document : M
 	{
-		public enum DocumentStatus
-		{
-			Withdrawn = -1,
-			Buffer = 0,
-			Approved = 1
-		}
-
 		/// <summary>
 		/// Type
 		/// </summary>
-		public string Type { get; set; } = "FS";
+		public string Type { get; set; } = (string)MS_Documents.Types[0].Value;
 
 		/// <summary>
 		/// Store
@@ -40,7 +54,7 @@ namespace WBZ.Models
 		/// <summary>
 		/// Status
 		/// </summary>
-		public short Status { get; set; } = (short)DocumentStatus.Buffer;
+		public short Status { get; set; } = (short)MS_Documents.Types[0].Value;
 
 		/// <summary>
 		/// Positions

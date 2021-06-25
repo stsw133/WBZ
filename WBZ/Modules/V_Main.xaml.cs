@@ -44,46 +44,46 @@ namespace WBZ.Modules
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			///VEHICLES
-			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Modules.Vehicles)).Name}_{Config.PermType.PREVIEW}"))
+			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Vehicles)).Name}_{Config.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modVehicles);
 			///USERS
-			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Modules.Users)).Name}_{Config.PermType.PREVIEW}"))
+			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Users)).Name}_{Config.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modUsers);
 			///STORES
-			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Modules.Stores)).Name}_{Config.PermType.PREVIEW}"))
+			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Stores)).Name}_{Config.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modStores);
 			///STATS
-			//if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Modules.Stats)).Name}_{Config.PermType.PREVIEW}"))
+			//if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Stats)).Name}_{Config.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modStats);
 			///LOGS
-			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Modules.Logs)).Name}_{Config.PermType.PREVIEW}"))
+			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Logs)).Name}_{Config.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modLogs);
 			///ICONS
-			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Modules.Icons)).Name}_{Config.PermType.PREVIEW}"))
+			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Icons)).Name}_{Config.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modIcons);
 			///FAMILIES
-			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Modules.Families)).Name}_{Config.PermType.PREVIEW}"))
+			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Families)).Name}_{Config.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modFamilies);
 			///EMPLOYEES
-			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Modules.Employees)).Name}_{Config.PermType.PREVIEW}"))
+			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Employees)).Name}_{Config.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modEmployees);
 			///DOCUMENTS
-			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Modules.Documents)).Name}_{Config.PermType.PREVIEW}"))
+			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Documents)).Name}_{Config.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modDocuments);
 			///DISTRIBUTIONS
-			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Modules.Distributions)).Name}_{Config.PermType.PREVIEW}"))
+			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Distributions)).Name}_{Config.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modDistributions);
 			///CONTRACTORS
-			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Modules.Contractors)).Name}_{Config.PermType.PREVIEW}"))
+			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Contractors)).Name}_{Config.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modContractors);
 			///ATTRIBUTES_CLASSES
-			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Modules.AttributesClasses)).Name}_{Config.PermType.PREVIEW}"))
+			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(AttributesClasses)).Name}_{Config.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modAttributesClasses);
 			///ATTACHMENTS
-			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Modules.Attachments)).Name}_{Config.PermType.PREVIEW}"))
+			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Attachments)).Name}_{Config.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modAttachments);
 			///ARTICLES
-			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Modules.Articles)).Name}_{Config.PermType.PREVIEW}"))
+			if (!Config.User.Perms.Contains($"{Config.GetModule(nameof(Articles)).Name}_{Config.PermType.PREVIEW}"))
 				gridModules.Children.Remove(modArticles);
 			///ADMIN
 			if (!Config.User.Perms.Contains($"Admin"))

@@ -54,9 +54,9 @@ namespace WBZ.Modules._shared
 			if (window.ShowDialog() == true)
             {
 				var group = window.Selected;
-				group.Owner = group.ID;
+				group.OwnerID = group.ID;
 				group.ID = SQL.NewInstanceID(Config.GetModule(nameof(Modules._submodules.Groups)));
-				group.Instance = ID;
+				group.InstanceID = ID;
                 SQL.SetInstance(Config.GetModule(nameof(Modules._submodules.Groups)), group, Commands.Type.NEW);
                 D.InstanceGroups = SQL.ListInstances<M_Group>(Config.GetModule(nameof(Modules._submodules.Groups)), $"g.module='{Module}' and g.instance={ID}");
 			}

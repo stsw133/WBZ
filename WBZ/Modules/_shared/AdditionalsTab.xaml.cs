@@ -82,8 +82,8 @@ namespace WBZ.Modules._shared
                     {
                         if (window.Selected.Module.Alias.In(string.Empty, d.Module.Alias))
                         {
-                            d.InstanceData.Icon = window.Selected.ID;
-                            d.InstanceData.IconContent = window.Selected.File;
+                            d.InstanceData.IconID = window.Selected.ID;
+                            d.InstanceData.IconContent = window.Selected.Content;
                             d.InstanceData = d.InstanceData;
                         }
                     }

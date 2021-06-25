@@ -7,12 +7,12 @@
 	{
 		/// IMM
 		public MV Module { get; set; }
-		public int Instance { get; set; }
+		public int InstanceID { get; set; }
 
 		/// <summary>
 		/// Owner
 		/// </summary>
-		public int Owner { get; set; }
+		public int OwnerID { get; set; }
 
 		/// <summary>
 		/// Path

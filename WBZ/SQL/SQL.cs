@@ -549,10 +549,10 @@ namespace WBZ
 				var error = new M_Log()
 				{
 					ID = NewInstanceID(logsModule),
-					Instance = instanceID,
+					InstanceID = instanceID,
 					Module = module,
-					Type = (short)M_Log.LogType.Error,
-					User = Config.User.ID
+					Type = 2,
+					UserID = Config.User.ID
 				};
 
 				var d = Application.Current.Dispatcher;
@@ -624,19 +624,19 @@ namespace WBZ
 					{a}.id, {a}.codename, {a}.name, {a}.ean, coalesce(nullif(wbz.ArtDefMeaNam({a}.id),''), 'kg') as measure,
 					coalesce(sum(sa.amount), 0) as amountraw, coalesce(sum(sa.amount) / wbz.ArtDefMeaCon({a}.id), 0) as amount,
 					coalesce(sum(sa.reserved), 0) as reservedraw, coalesce(sum(sa.reserved) / wbz.ArtDefMeaCon({a}.id), 0) as reserved,
-					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
 				" :
 				$@"
 					{a}.id, {a}.codename, {a}.name, {a}.ean, coalesce(nullif(wbz.ArtDefMeaNam({a}.id),''), 'kg') as measure,
 					coalesce(sum(sa.amount), 0) as amountraw, coalesce(sum(sa.amount) / wbz.ArtDefMeaCon({a}.id), 0) as amount,
 					coalesce(sum(sa.reserved), 0) as reservedraw, coalesce(sum(sa.reserved) / wbz.ArtDefMeaCon({a}.id), 0) as reserved,
-					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
 				") +
 				$@"
 					from wbz.articles {a}
 					left join wbz.icons i on {a}.icon=i.id
 					left join wbz.stores_articles sa on {a}.id=sa.article
-					where {filter.Content ?? "true"} and {filter.AutoFilterString ?? "true"}
+					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 					group by {a}.id, i.id
 				",
 				/// ATTACHMENTS
@@ -644,17 +644,17 @@ namespace WBZ
 				(mode == SelectMode.COUNT ? "count (*) "
 				: mode == SelectMode.SIMPLE ?
 				$@"
-					{a}.id, {a}.""user"", {a}.module, {a}.instance, {a}.name,
-					{a}.""format"", {a}.""path"", {a}.size, null as file
+					{a}.id, {a}.""user"", {a}.module, {a}.instance as instanceid, {a}.name,
+					{a}.""format"", {a}.""path"", {a}.size, null as content
 				" :
 				$@"
-					{a}.id, {a}.""user"", {a}.module, {a}.instance, {a}.name,
-					{a}.""format"", {a}.""path"", {a}.size, null as file
+					{a}.id, {a}.""user"", {a}.module, {a}.instance as instanceid, {a}.name,
+					{a}.""format"", {a}.""path"", {a}.size, null as content
 				") +
 				$@"
 					from wbz.attachments {a}
 					left join wbz.users u on {a}.""user"" = u.id	
-					where {filter.Content ?? "true"} and {filter.AutoFilterString ?? "true"}
+					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 				",
 				/// ATTRIBUTES_CLASSES
 				nameof(Modules.AttributesClasses) =>
@@ -662,16 +662,16 @@ namespace WBZ
 				: mode == SelectMode.SIMPLE ?
 				$@"
 					{a}.id, {a}.module, {a}.name, {a}.type, {a}.""values"",
-					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
 				" :
 				$@"
 					{a}.id, {a}.module, {a}.name, {a}.type, {a}.""values"",
-					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
 				") +
 				$@"
 					from wbz.attributes_classes {a}
 					left join wbz.icons i on {a}.icon=i.id
-					where {filter.Content ?? "true"} and {filter.AutoFilterString ?? "true"}
+					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 				",
 				/// CONTRACTORS
 				nameof(Modules.Contractors) =>
@@ -679,16 +679,16 @@ namespace WBZ
 				: mode == SelectMode.SIMPLE ?
 				$@"
 					{a}.id, {a}.codename, {a}.name, {a}.branch, {a}.nip, {a}.regon, {a}.postcode, {a}.city, {a}.address,
-					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
 				" :
 				$@"
 					{a}.id, {a}.codename, {a}.name, {a}.branch, {a}.nip, {a}.regon, {a}.postcode, {a}.city, {a}.address,
-					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
 				") +
 				$@"
 					from wbz.contractors {a}
 					left join wbz.icons i on {a}.icon=i.id
-					where {filter.Content ?? "true"} and {filter.AutoFilterString ?? "true"}
+					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 				",
 				/// DISTRIBUTIONS
 				nameof(Modules.Distributions) =>
@@ -698,19 +698,19 @@ namespace WBZ
 					{a}.id, {a}.name, {a}.datereal, {a}.status,
 					count(distinct dp.family) as familiescount, sum(members) as memberscount,
 					count(dp.*) as positionscount, sum(dp.amount) as weight,
-					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
 				" :
 				$@"
 					{a}.id, {a}.name, {a}.datereal, {a}.status,
 					count(distinct dp.family) as familiescount, sum(members) as memberscount,
 					count(dp.*) as positionscount, sum(dp.amount) as weight,
-					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
 				") +
 				$@"
 					from wbz.distributions {a}
 					left join wbz.distributions_positions dp on {a}.id=dp.distribution
 					left join wbz.icons i on {a}.icon=i.id
-					where {filter.Content ?? "true"} and {filter.AutoFilterString ?? "true"}
+					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 					group by {a}.id
 				",
 				/// DOCUMENTS
@@ -718,14 +718,14 @@ namespace WBZ
 				(mode == SelectMode.COUNT ? "count (*) "
 				: mode == SelectMode.SIMPLE ?
 				$@"
-					{a}.id, {a}.name, {a}.store, s.name as storename, {a}.contractor, c.name as contractorname,
-					{a}.type, {a}.dateissue, {a}.status, count(dp.*) as positionscount, sum(dp.amount) as weight, sum(dp.cost) as cost,
-					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+					{a}.id, {a}.name, {a}.store as storeid, s.name as storename, {a}.contractor as contractorid, c.name as contractorname,
+					{a}.type, {a}.dateissue, {a}.status, count(dp.*) as positionscount, sum(dp.amount) as weight, sum(dp.net) as net,
+					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
 				" :
 				$@"
-					{a}.id, {a}.name, {a}.store, s.name as storename, {a}.contractor, c.name as contractorname,
-					{a}.type, {a}.dateissue, {a}.status, count(dp.*) as positionscount, sum(dp.amount) as weight, sum(dp.cost) as cost,
-					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+					{a}.id, {a}.name, {a}.store as storeid, s.name as storename, {a}.contractor as contractorid, c.name as contractorname,
+					{a}.type, {a}.dateissue, {a}.status, count(dp.*) as positionscount, sum(dp.amount) as weight, sum(dp.net) as net,
+					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
 				") +
 				$@"
 					from wbz.documents {a}
@@ -733,7 +733,7 @@ namespace WBZ
 					left join wbz.contractors c on {a}.contractor=c.id
 					left join wbz.icons i on {a}.icon=i.id
 					left join wbz.stores s on {a}.store=s.id
-					where {filter.Content ?? "true"} and {filter.AutoFilterString ?? "true"}
+					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 					group by {a}.id, c.id, s.id
 				",
 				/// EMPLOYEES
@@ -741,22 +741,22 @@ namespace WBZ
 				(mode == SelectMode.COUNT ? "count (*) "
 				: mode == SelectMode.SIMPLE ?
 				$@"
-					{a}.id, {a}.""user"", u.lastname || ' ' || u.forename as username,
+					{a}.id, {a}.""user"" as userid, u.lastname || ' ' || u.forename as username,
 					{a}.forename, {a}.lastname, {a}.department, {a}.position,
 					{a}.email, {a}.phone, {a}.postcode, {a}.city, {a}.address,
-					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
 				" :
 				$@"
-					{a}.id, {a}.""user"", u.lastname || ' ' || u.forename as username,
+					{a}.id, {a}.""user"" as userid, u.lastname || ' ' || u.forename as username,
 					{a}.forename, {a}.lastname, {a}.department, {a}.position,
 					{a}.email, {a}.phone, {a}.postcode, {a}.city, {a}.address,
-					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
 				") +
 				$@"
 					from wbz.employees {a}
 					left join wbz.icons i on {a}.icon=i.id
 					left join wbz.users u on {a}.""user""=u.id
-					where {filter.Content ?? "true"} and {filter.AutoFilterString ?? "true"}
+					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 				",
 				/// FAMILIES
 				nameof(Modules.Families) =>
@@ -765,19 +765,19 @@ namespace WBZ
 				$@"
 					{a}.id, {a}.declarant, {a}.lastname, {a}.members, {a}.postcode, {a}.city, {a}.address,
 					{a}.status, {a}.c_sms, {a}.c_call, {a}.c_email, max(d.datereal) as donationlast, sum(dp.amount) as donationweight,
-					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
 				" :
 				$@"
 					{a}.id, {a}.declarant, {a}.lastname, {a}.members, {a}.postcode, {a}.city, {a}.address,
 					{a}.status, {a}.c_sms, {a}.c_call, {a}.c_email, max(d.datereal) as donationlast, sum(dp.amount) as donationweight,
-					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
 				") +
 				$@"
 					from wbz.families {a}
 					left join wbz.icons i on {a}.icon=i.id
 					left join wbz.distributions_positions dp on {a}.id=dp.family
 					left join wbz.distributions d on dp.distribution=d.id
-					where {filter.Content ?? "true"} and {filter.AutoFilterString ?? "true"}
+					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 					group by {a}.id
 				",
 				/// GROUPS
@@ -785,16 +785,16 @@ namespace WBZ
 				(mode == SelectMode.COUNT ? "count (*) "
 				: mode == SelectMode.SIMPLE ?
 				$@"
-					{a}.id, {a}.module, {a}.name, {a}.instance, {a}.owner,
+					{a}.id, {a}.module, {a}.name, {a}.instance as instanceid, {a}.owner as ownerid,
 					case when trim(concat(g1.name, '\', g2.name, '\', g3.name, '\', g4.name), '\') = '' then ''
 						else concat(trim(concat(g1.name, '\', g2.name, '\', g3.name, '\', g4.name), '\'), '\') end as path,
-					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
 				" :
 				$@"
-					{a}.id, {a}.module, {a}.name, {a}.instance, {a}.owner,
+					{a}.id, {a}.module, {a}.name, {a}.instance as instanceid, {a}.owner as ownerid,
 					case when trim(concat(g1.name, '\', g2.name, '\', g3.name, '\', g4.name), '\') = '' then ''
 						else concat(trim(concat(g1.name, '\', g2.name, '\', g3.name, '\', g4.name), '\'), '\') end as path,
-					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
 				") +
 				$@"
 					from wbz.groups {a}
@@ -803,7 +803,7 @@ namespace WBZ
 					left join wbz.groups g3 on g3.id=g4.owner
 					left join wbz.groups g2 on g2.id=g3.owner
 					left join wbz.groups g1 on g1.id=g2.owner
-					where {filter.Content ?? "true"} and {filter.AutoFilterString ?? "true"}
+					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 				",
 				/// ICONS
 				nameof(Modules.Icons) =>
@@ -811,32 +811,32 @@ namespace WBZ
 				: mode == SelectMode.SIMPLE ?
 				$@"
 					{a}.id, {a}.module, {a}.name, {a}.""format"", {a}.""path"",
-					{a}.file, {a}.height, {a}.width, {a}.size,
+					{a}.content, {a}.height, {a}.width, {a}.size,
 					{a}.archival, {a}.comment
 				" :
 				$@"
 					{a}.id, {a}.module, {a}.name, {a}.""format"", {a}.""path"",
-					{a}.file, {a}.height, {a}.width, {a}.size,
+					{a}.content, {a}.height, {a}.width, {a}.size,
 					{a}.archival, {a}.comment
 				") +
 				$@"
 					from wbz.icons {a}
-					where {filter.Content ?? "true"} and {filter.AutoFilterString ?? "true"}
+					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 				",
 				/// LOGS
 				nameof(Modules.Logs) =>
 				(mode == SelectMode.COUNT ? "count (*) "
 				: mode == SelectMode.SIMPLE ?
 				$@"
-					{a}.id, {a}.""user"", {a}.module, {a}.instance, {a}.type as group, {a}.content, {a}.datetime
+					{a}.id, {a}.""user"", {a}.module, {a}.instance as instanceid, {a}.type, {a}.content, {a}.createddate
 				" :
 				$@"
-					{a}.id, {a}.""user"", {a}.module, {a}.instance, {a}.type as group, {a}.content, {a}.datetime
+					{a}.id, {a}.""user"", {a}.module, {a}.instance as instanceid, {a}.type, {a}.content, {a}.createddate
 				") +
 				$@"
 					from wbz.logs {a}
 					left join wbz.users u on {a}.""user"" = u.id
-					where {filter.Content ?? "true"} and {filter.AutoFilterString ?? "true"}
+					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 				",
 				/// STORES
 				nameof(Modules.Stores) =>
@@ -845,18 +845,18 @@ namespace WBZ
 				$@"
 					{a}.id, {a}.codename, {a}.name, {a}.postcode, {a}.city, {a}.address,
 					coalesce(sum(sa.amount),0) as amount, coalesce(sum(sa.reserved),0) as reserved,
-					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
 				" :
 				$@"
 					{a}.id, {a}.codename, {a}.name, {a}.postcode, {a}.city, {a}.address,
 					coalesce(sum(sa.amount),0) as amount, coalesce(sum(sa.reserved),0) as reserved,
-					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
 				") +
 				$@"
 					from wbz.stores {a}
 					left join wbz.icons i on {a}.icon=i.id
 					left join wbz.stores_articles sa on {a}.id = sa.store
-					where {filter.Content ?? "true"} and {filter.AutoFilterString ?? "true"}
+					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 					group by {a}.id, i.id
 				",
 				/// USERS
@@ -873,7 +873,7 @@ namespace WBZ
 				") +
 				$@"
 					from wbz.users {a}
-					where {filter.Content ?? "true"} and {filter.AutoFilterString ?? "true"}
+					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 				",
 				/// VEHICLES
 				nameof(Modules.Vehicles) =>
@@ -884,21 +884,21 @@ namespace WBZ
 					c.id as forwarderid, c.codename as forwardername,
 					e.id as driverid, e.lastname || ' ' || e.forename as drivername,
 					{a}.prodyear,
-					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
 				" :
 				$@"
 					{a}.id, {a}.register, {a}.brand, {a}.model, {a}.capacity,
 					c.id as forwarderid, c.codename as forwardername,
 					e.id as driverid, e.lastname || ' ' || e.forename as drivername,
 					{a}.prodyear,
-					{a}.archival, {a}.comment, {a}.icon, i.file as iconcontent
+					{a}.archival, {a}.comment, {a}.icon as iconid, i.content as iconcontent
 				") +
 				$@"
 					from wbz.vehicles {a}
 					left join wbz.contractors c on {a}.forwarder=c.id
 					left join wbz.employees e on {a}.driver=e.id
 					left join wbz.icons i on {a}.icon=i.id
-					where {filter.Content ?? "true"} and {filter.AutoFilterString ?? "true"}
+					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 				",
 				_ => throw new NotImplementedException(),
 			};
@@ -1002,7 +1002,7 @@ namespace WBZ
 					where distribution=@id",
 				nameof(Modules.Documents) => @"
 					select id, position, article, (select name from wbz.articles where id=dp.article) as articlename,
-						amount / wbz.ArtDefMeaCon(dp.article) as amount, coalesce(nullif(wbz.ArtDefMeaNam(dp.article),''), 'kg') as measure, cost
+						amount / wbz.ArtDefMeaCon(dp.article) as amount, coalesce(nullif(wbz.ArtDefMeaNam(dp.article),''), 'kg') as measure, net
 					from wbz.documents_positions dp
 					where document=@id",
 				_ => throw new NotImplementedException(),
@@ -1072,7 +1072,7 @@ namespace WBZ
 							sqlCmd.Parameters.AddWithValue("ean", article.EAN);
 							sqlCmd.Parameters.AddWithValue("archival", article.Archival);
 							sqlCmd.Parameters.AddWithValue("comment", article.Comment);
-							sqlCmd.Parameters.AddWithValue("icon", article.Icon);
+							sqlCmd.Parameters.AddWithValue("icon", article.IconID);
 							sqlCmd.ExecuteNonQuery();
 						}
 						SetLog(Config.User.ID, module, article.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} towar: {article.Name}.", sqlConn, sqlTran);
@@ -1143,7 +1143,7 @@ namespace WBZ
 							sqlCmd.Parameters.AddWithValue("required", attributeClass.Required);
 							sqlCmd.Parameters.AddWithValue("archival", attributeClass.Archival);
 							sqlCmd.Parameters.AddWithValue("comment", attributeClass.Comment);
-							sqlCmd.Parameters.AddWithValue("icon", attributeClass.Icon);
+							sqlCmd.Parameters.AddWithValue("icon", attributeClass.IconID);
 							sqlCmd.ExecuteNonQuery();
 						}
 						SetLog(Config.User.ID, module, attributeClass.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} klasę atrybutu: {attributeClass.Name}.", sqlConn, sqlTran);
@@ -1213,7 +1213,7 @@ namespace WBZ
 							sqlCmd.Parameters.AddWithValue("address", contractor.Address);
 							sqlCmd.Parameters.AddWithValue("archival", contractor.Archival);
 							sqlCmd.Parameters.AddWithValue("comment", contractor.Comment);
-							sqlCmd.Parameters.AddWithValue("icon", contractor.Icon);
+							sqlCmd.Parameters.AddWithValue("icon", contractor.IconID);
 							sqlCmd.ExecuteNonQuery();
 						}
 						SetLog(Config.User.ID, module, contractor.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} kontrahenta: {contractor.Name}.", sqlConn, sqlTran);
@@ -1238,7 +1238,7 @@ namespace WBZ
 							sqlCmd.Parameters.AddWithValue("status", distribution.Status);
 							sqlCmd.Parameters.AddWithValue("archival", distribution.Archival);
 							sqlCmd.Parameters.AddWithValue("comment", distribution.Comment);
-							sqlCmd.Parameters.AddWithValue("icon", distribution.Icon);
+							sqlCmd.Parameters.AddWithValue("icon", distribution.IconID);
 							sqlCmd.ExecuteNonQuery();
 						}
 						SetLog(Config.User.ID, module, distribution.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} dystrybucję: {distribution.Name}.", sqlConn, sqlTran);
@@ -1329,7 +1329,7 @@ namespace WBZ
 							sqlCmd.Parameters.AddWithValue("status", document.Status);
 							sqlCmd.Parameters.AddWithValue("archival", document.Archival);
 							sqlCmd.Parameters.AddWithValue("comment", document.Comment);
-							sqlCmd.Parameters.AddWithValue("icon", document.Icon);
+							sqlCmd.Parameters.AddWithValue("icon", document.IconID);
 							sqlCmd.ExecuteNonQuery();
 						}
 						SetLog(Config.User.ID, module, document.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} dokument: {document.Name}.", sqlConn, sqlTran);
@@ -1340,9 +1340,9 @@ namespace WBZ
 							///add
 							if (position.RowState == DataRowState.Added)
 							{
-								using (sqlCmd = new NpgsqlCommand(@"insert into wbz.documents_positions (document, position, article, amount, cost)
+								using (sqlCmd = new NpgsqlCommand(@"insert into wbz.documents_positions (document, position, article, amount, net)
 										values (@document, @position, @article, (@amount * wbz.ArtDefMeaCon(@article)),
-											@cost)", sqlConn, sqlTran))
+											@net)", sqlConn, sqlTran))
 								{
 									sqlCmd.Parameters.Clear();
 									sqlCmd.Parameters.AddWithValue("document", document.ID);
@@ -1350,7 +1350,7 @@ namespace WBZ
 									sqlCmd.Parameters.AddWithValue("article", position["article"]);
 									sqlCmd.Parameters.AddWithValue("amount", position["amount"]);
 									sqlCmd.Parameters.AddWithValue("measure", position["measure"]);
-									sqlCmd.Parameters.AddWithValue("cost", position["cost"]);
+									sqlCmd.Parameters.AddWithValue("net", position["net"]);
 									sqlCmd.ExecuteNonQuery();
 								}
 								SetLog(Config.User.ID, module, document.ID, $"Dodano pozycję {position["position"]}.", sqlConn, sqlTran);
@@ -1360,7 +1360,7 @@ namespace WBZ
 							{
 								using (sqlCmd = new NpgsqlCommand(@"update wbz.documents_positions
 										set position=@position, article=@article, amount=(@amount * wbz.ArtDefMeaCon(@article)),
-											cost=@cost
+											net=@net
 										where id=@id", sqlConn, sqlTran))
 								{
 									sqlCmd.Parameters.Clear();
@@ -1369,7 +1369,7 @@ namespace WBZ
 									sqlCmd.Parameters.AddWithValue("article", position["article"]);
 									sqlCmd.Parameters.AddWithValue("amount", position["amount"]);
 									sqlCmd.Parameters.AddWithValue("measure", position["measure"]);
-									sqlCmd.Parameters.AddWithValue("cost", position["cost"]);
+									sqlCmd.Parameters.AddWithValue("net", position["net"]);
 									sqlCmd.ExecuteNonQuery();
 								}
 								SetLog(Config.User.ID, module, document.ID, $"Edytowano pozycję {position["position", DataRowVersion.Original]}.", sqlConn, sqlTran);
@@ -1422,7 +1422,7 @@ namespace WBZ
 							sqlCmd.Parameters.AddWithValue("postcode", employee.Postcode);
 							sqlCmd.Parameters.AddWithValue("archival", employee.Archival);
 							sqlCmd.Parameters.AddWithValue("comment", employee.Comment);
-							sqlCmd.Parameters.AddWithValue("icon", employee.Icon);
+							sqlCmd.Parameters.AddWithValue("icon", employee.IconID);
 							sqlCmd.ExecuteNonQuery();
 						}
 						SetLog(Config.User.ID, module, employee.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} pracownika: {employee.Name}.", sqlConn, sqlTran);
@@ -1453,7 +1453,7 @@ namespace WBZ
 							sqlCmd.Parameters.AddWithValue("c_email", family.C_Email);
 							sqlCmd.Parameters.AddWithValue("archival", family.Archival);
 							sqlCmd.Parameters.AddWithValue("comment", family.Comment);
-							sqlCmd.Parameters.AddWithValue("icon", family.Icon);
+							sqlCmd.Parameters.AddWithValue("icon", family.IconID);
 							sqlCmd.ExecuteNonQuery();
 						}
 						SetLog(Config.User.ID, module, family.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} rodzinę: {family.Lastname}.", sqlConn, sqlTran);
@@ -1470,11 +1470,11 @@ namespace WBZ
 							sqlCmd.Parameters.AddWithValue("id", group.ID);
 							sqlCmd.Parameters.AddWithValue("module", group.Module);
 							sqlCmd.Parameters.AddWithValue("name", group.Name);
-							sqlCmd.Parameters.AddWithValue("instance", group.Instance > 0 ? (object)group.Instance : DBNull.Value);
-							sqlCmd.Parameters.AddWithValue("owner", group.Owner);
+							sqlCmd.Parameters.AddWithValue("instance", group.InstanceID > 0 ? (object)group.InstanceID : DBNull.Value);
+							sqlCmd.Parameters.AddWithValue("owner", group.OwnerID);
 							sqlCmd.Parameters.AddWithValue("archival", group.Archival);
 							sqlCmd.Parameters.AddWithValue("comment", group.Comment);
-							sqlCmd.Parameters.AddWithValue("icon", group.Icon);
+							sqlCmd.Parameters.AddWithValue("icon", group.IconID);
 							sqlCmd.ExecuteNonQuery();
 						}
 						SetLog(Config.User.ID, module, group.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} grupę: {group.Name}.", sqlConn, sqlTran);
@@ -1499,7 +1499,7 @@ namespace WBZ
 							sqlCmd.Parameters.AddWithValue("name", icon.Name);
 							sqlCmd.Parameters.AddWithValue("format", icon.Format);
 							sqlCmd.Parameters.AddWithValue("path", icon.Path);
-							sqlCmd.Parameters.AddWithValue("file", icon.File);
+							sqlCmd.Parameters.AddWithValue("file", icon.Content);
 							sqlCmd.Parameters.AddWithValue("height", icon.Height);
 							sqlCmd.Parameters.AddWithValue("width", icon.Width);
 							sqlCmd.Parameters.AddWithValue("size", icon.Size);
@@ -1518,9 +1518,9 @@ namespace WBZ
 								update set ""user""=@user, module=@module, instance=@instance, type=@type, content=@content";
 						using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 						{
-							sqlCmd.Parameters.AddWithValue("user", log.User);
+							sqlCmd.Parameters.AddWithValue("user", log.UserID);
 							sqlCmd.Parameters.AddWithValue("module", log.Module);
-							sqlCmd.Parameters.AddWithValue("instance", log.Instance);
+							sqlCmd.Parameters.AddWithValue("instance", log.InstanceID);
 							sqlCmd.Parameters.AddWithValue("type", log.Type);
 							sqlCmd.Parameters.AddWithValue("content", log.Content);
 							sqlCmd.ExecuteNonQuery();
@@ -1544,7 +1544,7 @@ namespace WBZ
 							sqlCmd.Parameters.AddWithValue("postcode", store.Postcode);
 							sqlCmd.Parameters.AddWithValue("archival", store.Archival);
 							sqlCmd.Parameters.AddWithValue("comment", store.Comment);
-							sqlCmd.Parameters.AddWithValue("icon", store.Icon);
+							sqlCmd.Parameters.AddWithValue("icon", store.IconID);
 							sqlCmd.ExecuteNonQuery();
 						}
 						SetLog(Config.User.ID, module, store.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} magazyn: {store.Name}.", sqlConn, sqlTran);
@@ -1609,12 +1609,12 @@ namespace WBZ
 							sqlCmd.Parameters.AddWithValue("brand", (object)vehicle.Brand ?? DBNull.Value);
 							sqlCmd.Parameters.AddWithValue("model", (object)vehicle.Model ?? DBNull.Value);
 							sqlCmd.Parameters.AddWithValue("capacity", (object)vehicle.Capacity ?? DBNull.Value);
-							sqlCmd.Parameters.AddWithValue("forwarder", (object)vehicle.Forwarder ?? DBNull.Value);
-							sqlCmd.Parameters.AddWithValue("driver", (object)vehicle.Driver ?? DBNull.Value);
+							sqlCmd.Parameters.AddWithValue("forwarder", (object)vehicle.ForwarderID ?? DBNull.Value);
+							sqlCmd.Parameters.AddWithValue("driver", (object)vehicle.DriverID ?? DBNull.Value);
 							sqlCmd.Parameters.AddWithValue("prodyear", (object)vehicle.ProdYear ?? DBNull.Value);
 							sqlCmd.Parameters.AddWithValue("archival", (object)vehicle.Archival ?? DBNull.Value);
 							sqlCmd.Parameters.AddWithValue("comment", (object)vehicle.Comment ?? DBNull.Value);
-							sqlCmd.Parameters.AddWithValue("icon", (object)vehicle.Icon ?? DBNull.Value);
+							sqlCmd.Parameters.AddWithValue("icon", (object)vehicle.IconID ?? DBNull.Value);
 							sqlCmd.ExecuteNonQuery();
 						}
 						SetLog(Config.User.ID, module, vehicle.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} pojazd: {vehicle.Name}.", sqlConn, sqlTran);
@@ -1966,7 +1966,7 @@ namespace WBZ
 						Name = !Convert.IsDBNull(row["name"]) ? (string)row["name"] : string.Empty,
 						Type = !Convert.IsDBNull(row["type"]) ? (string)row["type"] : string.Empty,
 						Required = !Convert.IsDBNull(row["required"]) && (bool)row["required"],
-						Icon = !Convert.IsDBNull(row["icon"]) ? (int)row["icon"] : 0,
+						IconID = !Convert.IsDBNull(row["icon"]) ? (int)row["icon"] : 0,
 						Values = GetInstancePositions(Config.GetModule(nameof(Modules.AttributesClasses)), !Convert.IsDBNull(row["class"]) ? (int)row["class"] : 0)
 					},
 					InstanceID = !Convert.IsDBNull(row["instance"]) ? (int)row["instance"] : 0,

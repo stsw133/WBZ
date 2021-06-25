@@ -58,7 +58,8 @@
                                 <se:Header Text="{Tr Others}" Icon="/Resources/icon32_tools.ico"/>
                             </GroupBox.Header>
                             <StackPanel Margin="5">
-                                <se:ExtCheckBox Content="{Tr ShowButtonsWithNames}" Margin="5" IsChecked="{Binding config_ShowButtonWithText, Source={x:Static p:Settings.Default}}"/>
+                                <se:ExtCheckBox Content="{Tr ShowButtonsWithNames}" Margin="5" IsChecked="{Binding config_ShowButtonsWithNames, Source={x:Static p:Settings.Default}}"/>
+								<se:ExtCheckBox Content="{Tr LoadFirstDataOnLists}" Margin="5" IsChecked="{Binding config_LoadFirstDataOnLists, Source={x:Static p:Settings.Default}}"/>
                             </StackPanel>
                         </GroupBox>
                     </DockPanel>

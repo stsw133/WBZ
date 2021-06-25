@@ -421,7 +421,7 @@
     <Setting Name="config_ExpandGroups" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="config_ShowButtonTexts" Type="System.Boolean" Scope="User">
+    <Setting Name="config_LoadFirstDataOnLists" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="columns_DocumentsList_ContractorName" Type="System.String" Scope="User">
@@ -501,14 +501,11 @@
     <Setting Name="columns_VehiclesList_Icon" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="config_ShowButtonWithText" Type="System.Boolean" Scope="User">
+    <Setting Name="config_ShowButtonsWithNames" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="ThemeColor" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FF3C4B5A</Value>
-    </Setting>
-    <Setting Name="config_ShowHeaderWithText" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="panelColor_Main" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FF999999</Value>

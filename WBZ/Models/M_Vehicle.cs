@@ -33,13 +33,13 @@
 		/// <summary>
 		/// Forwarder
 		/// </summary>
-		public int Forwarder { get; set; }
+		public int ForwarderID { get; set; }
 		public string ForwarderName { get; set; }
 
 		/// <summary>
 		/// Driver
 		/// </summary>
-		public int Driver { get; set; }
+		public int DriverID { get; set; }
 		public string DriverName { get; set; }
 
 		/// <summary>
