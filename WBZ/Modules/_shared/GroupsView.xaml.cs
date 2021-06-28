@@ -11,7 +11,7 @@ using WBZ.Models;
 using WBZ.Modules._submodules;
 using WBZ.Modules._submodules.Groups;
 
-namespace WBZ.Controls
+namespace WBZ.Modules._shared
 {
     /// <summary>
     /// Interaction logic for GroupsView.xaml
@@ -183,8 +183,8 @@ namespace WBZ.Controls
                     {
                         Source = Fn.LoadImage(group.IconContent),
                         Margin = new Thickness(0, 0, 5, 0),
-                        Width = Settings.Default.iSize * 1.5,
-                        Height = Settings.Default.iSize * 1.5
+                        Width = StswExpress.Settings.Default.iSize * 1.5,
+                        Height = StswExpress.Settings.Default.iSize * 1.5
                     };
                     image.Visibility = image.Source != null ? Visibility.Visible : Visibility.Collapsed;
                     var tb = new TextBlock()

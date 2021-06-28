@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using WBZ.Globals;
+using WBZ.Models;
 using WBZ.Modules._submodules.Groups;
 using MODULE_MODEL = WBZ.Models.M_Group;
 
@@ -13,9 +14,9 @@ namespace WBZ.Modules._submodules
     /// </summary>
     public partial class GroupsList : Window
     {
-        D_GroupsList D = new D_GroupsList();
+		readonly D_GroupsList D = new D_GroupsList();
 
-        public GroupsList(string module, Commands.Type mode)
+        public GroupsList(MV module, Commands.Type mode)
         {
             InitializeComponent();
             DataContext = D;
@@ -35,7 +36,7 @@ namespace WBZ.Modules._submodules
                 if (D.Mode == Commands.Type.SELECT)
                 {
 					if (groupsView.SelectedItem is TreeViewItem itm)
-						Selected = SQL.GetInstance<MODULE_MODEL>(Config.GetModule(nameof(Modules._submodules.Groups)), (int)itm.Tag);
+						Selected = SQL.GetInstance<MODULE_MODEL>(Config.GetModule(nameof(Groups)), (int)itm.Tag);
 
                     if (Selected != null)
                         DialogResult = true;

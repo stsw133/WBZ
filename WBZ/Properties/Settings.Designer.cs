@@ -12,7 +12,7 @@ namespace WBZ.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -38,48 +38,48 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Login_Username {
+        public string login_Username {
             get {
-                return ((string)(this["Login_Username"]));
+                return ((string)(this["login_Username"]));
             }
             set {
-                this["Login_Username"] = value;
+                this["login_Username"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Login_Password {
+        public string login_Password {
             get {
-                return ((string)(this["Login_Password"]));
+                return ((string)(this["login_Password"]));
             }
             set {
-                this["Login_Password"] = value;
+                this["login_Password"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Login_Database {
+        public string login_Database {
             get {
-                return ((string)(this["Login_Database"]));
+                return ((string)(this["login_Database"]));
             }
             set {
-                this["Login_Database"] = value;
+                this["login_Database"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool Login_RememberMe {
+        public bool login_RememberMe {
             get {
-                return ((bool)(this["Login_RememberMe"]));
+                return ((bool)(this["login_RememberMe"]));
             }
             set {
-                this["Login_RememberMe"] = value;
+                this["login_RememberMe"] = value;
             }
         }
         
@@ -620,66 +620,6 @@ namespace WBZ.Properties {
             }
             set {
                 this["config_Email_Password"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("wbztest.ddns.net")]
-        public string conn_server {
-            get {
-                return ((string)(this["conn_server"]));
-            }
-            set {
-                this["conn_server"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("5432")]
-        public int conn_port {
-            get {
-                return ((int)(this["conn_port"]));
-            }
-            set {
-                this["conn_port"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("wbz")]
-        public string conn_database {
-            get {
-                return ((string)(this["conn_database"]));
-            }
-            set {
-                this["conn_database"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string conn_userID {
-            get {
-                return ((string)(this["conn_userID"]));
-            }
-            set {
-                this["conn_userID"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string conn_password {
-            get {
-                return ((string)(this["conn_password"]));
-            }
-            set {
-                this["conn_password"] = value;
             }
         }
         
@@ -1837,18 +1777,6 @@ namespace WBZ.Properties {
             }
             set {
                 this["config_ShowButtonsWithNames"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FF3C4B5A")]
-        public string ThemeColor {
-            get {
-                return ((string)(this["ThemeColor"]));
-            }
-            set {
-                this["ThemeColor"] = value;
             }
         }
         

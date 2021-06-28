@@ -173,6 +173,7 @@ CREATE TABLE wbz.attributes_values
 							using var sqlCmd = new NpgsqlCommand(@"
 alter table wbz.companies rename to contractors;
 alter table wbz.documents rename column company to contractor;
+alter table wbz.stores_articles rename to stores_resources;
 
 CREATE TABLE wbz.vehicles
 (
@@ -307,9 +308,9 @@ alter table wbz.notifications rename column ""user"" to user_id;
 alter table wbz.notifications rename column ""read"" to is_read;
 alter table wbz.notifications rename column datetime to datecreated;
 alter table wbz.stores rename column archival to is_archival;
-alter table wbz.stores_articles rename column store to store_id;
-alter table wbz.stores_articles rename column article to article_id;
-alter table wbz.stores_articles rename column amount to quantity;
+alter table wbz.stores_resources rename column store to store_id;
+alter table wbz.stores_resources rename column article to article_id;
+alter table wbz.stores_resources rename column amount to quantity;
 alter table wbz.users rename column username to codename;
 alter table wbz.users alter column email type varchar(100);
 alter table wbz.users alter column phone type varchar(30);

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows;
 using WBZ.Modules._base;
 
-namespace WBZ.Controls
+namespace WBZ.Modules._shared
 {
     /// <summary>
     /// Interaction logic for AttachmentsAdd.xaml

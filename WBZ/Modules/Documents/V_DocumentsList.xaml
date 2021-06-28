@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
         xmlns:b="clr-namespace:WBZ.Modules.Documents"
-        xmlns:c="clr-namespace:WBZ.Controls"
         xmlns:m="clr-namespace:WBZ.Modules"
         xmlns:p="clr-namespace:WBZ.Properties"
+		xmlns:s="clr-namespace:WBZ.Modules._shared"
         mc:Ignorable="d" Height="650" Width="975" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
         Title="{Binding Title}" Icon="/Resources/icon32_documents.ico"
         Loaded="Window_Loaded" Closed="Window_Closed"
@@ -66,10 +66,10 @@
 			</Border>
 		</ScrollViewer>
 		<!-- statusPanel -->
-		<c:StatusPanel DockPanel.Dock="Bottom" Background="{Binding panelColor_Documents, Source={x:Static p:Settings.Default}}"
+		<s:StatusPanel DockPanel.Dock="Bottom" Background="{Binding panelColor_Documents, Source={x:Static p:Settings.Default}}"
                        HasFilters="{Binding AreFiltersVisible, Mode=OneTime}" HasGroups="{Binding AreGroupsVisible, Mode=OneTime}"/>
         <!-- groupsView -->
-        <c:GroupsView Visibility="{Binding AreGroupsVisible, Converter={se:conv_Bool}}"/>
+        <s:GroupsView Visibility="{Binding AreGroupsVisible, Converter={se:conv_Bool}}"/>
         <!-- otherFilters -->
 		<Border DockPanel.Dock="Bottom" BorderBrush="Gray" BorderThickness="0,1,0,0" Visibility="{Binding AreFiltersVisible, Converter={se:conv_Bool}}">
 			<DockPanel>

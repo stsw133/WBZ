@@ -371,10 +371,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controls\Styles\" />
     <Folder Include="Modules\Equipment\" />
     <Folder Include="Modules\Orders\" />
     <Folder Include="Modules\Shipments\" />
+    <Folder Include="Modules\_submodules\Attachments\" />
+    <Folder Include="Modules\_submodules\Logs\" />
+    <Folder Include="Styles\" />
   </ItemGroup>
 
 </Project>

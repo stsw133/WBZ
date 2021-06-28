@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
         xmlns:b="clr-namespace:WBZ.Modules.Attachments"
-        xmlns:c="clr-namespace:WBZ.Controls"
         xmlns:g="clr-namespace:WBZ.Globals"
         xmlns:m="clr-namespace:WBZ.Modules"
         xmlns:p="clr-namespace:WBZ.Properties"
+		xmlns:s="clr-namespace:WBZ.Modules._shared"
         mc:Ignorable="d" Height="650" Width="975" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
         Title="{Binding Title}" Icon="/Resources/icon32_photos.ico"
         Loaded="Window_Loaded" Closed="Window_Closed"
@@ -61,10 +61,10 @@
             </Border.ContextMenu>
         </Border>
         <!-- statusPanel -->
-		<c:StatusPanel DockPanel.Dock="Bottom" Background="{Binding panelColor_Attachments, Source={x:Static p:Settings.Default}}"
+		<s:StatusPanel DockPanel.Dock="Bottom" Background="{Binding panelColor_Attachments, Source={x:Static p:Settings.Default}}"
                        HasFilters="{Binding AreFiltersVisible, Mode=OneTime}" HasGroups="{Binding AreGroupsVisible, Mode=OneTime}"/>
         <!-- groupsView -->
-        <c:GroupsView Visibility="{Binding AreGroupsVisible, Converter={se:conv_Bool}}"/>
+        <s:GroupsView Visibility="{Binding AreGroupsVisible, Converter={se:conv_Bool}}"/>
         <!-- dataGrid -->
 		<m:AttachmentsListGrid x:Name="dgList" ItemsSource="{Binding InstancesList}" BorderBrush="Gray" BorderThickness="0,0,0,1"
                                MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged" Sorting="dgList_Sorting"/>

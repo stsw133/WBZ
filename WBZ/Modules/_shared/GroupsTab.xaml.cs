@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using WBZ.Globals;
 using WBZ.Models;
+using WBZ.Modules._base;
 using WBZ.Modules._submodules;
 
 namespace WBZ.Modules._shared
@@ -14,9 +15,10 @@ namespace WBZ.Modules._shared
 	/// </summary>
 	public partial class GroupsTab : UserControl
 	{
-		D_GroupsTab D = new D_GroupsTab();
-		private string Module;
-		private int ID;
+		readonly D_GroupsTab D = new D_GroupsTab();
+
+		private MV Module;
+		private int InstanceID;
 
 		public GroupsTab()
 		{
@@ -31,15 +33,16 @@ namespace WBZ.Modules._shared
         {
 			try
 			{
-				Window win = Window.GetWindow(this);
-				dynamic d = win?.DataContext;
+				var win = Window.GetWindow(this);
+				var d = win?.DataContext as D_ModuleNew<dynamic>;
+
 				if (d != null)
 				{
-					Module = (string)d.Module;
-					ID = (int)d.InstanceData.ID;
+					Module = d.Module;
+					InstanceID = (d.InstanceData as M).ID;
 				}
-				if (ID != 0 && D.InstanceGroups == null)
-					D.InstanceGroups = SQL.ListInstances<M_Group>(Config.GetModule(nameof(Modules._submodules.Groups)), $"g.module='{Module}' and g.instance={ID}");
+				if (InstanceID != 0 && D.InstanceGroups == null)
+					D.InstanceGroups = SQL.ListInstances<M_Group>(D.ModuleGroups, $"{D.ModuleGroups.Alias}.module_alias='{Module}' and {D.ModuleGroups.Alias}.instance_id={InstanceID}");
 			}
 			catch { }
 		}
@@ -55,10 +58,10 @@ namespace WBZ.Modules._shared
             {
 				var group = window.Selected;
 				group.OwnerID = group.ID;
-				group.ID = SQL.NewInstanceID(Config.GetModule(nameof(Modules._submodules.Groups)));
-				group.InstanceID = ID;
-                SQL.SetInstance(Config.GetModule(nameof(Modules._submodules.Groups)), group, Commands.Type.NEW);
-                D.InstanceGroups = SQL.ListInstances<M_Group>(Config.GetModule(nameof(Modules._submodules.Groups)), $"g.module='{Module}' and g.instance={ID}");
+				group.ID = SQL.NewInstanceID(Config.GetModule(nameof(_submodules.Groups)));
+				group.InstanceID = InstanceID;
+                SQL.SetInstance(Config.GetModule(nameof(_submodules.Groups)), group, Commands.Type.NEW);
+                D.InstanceGroups = SQL.ListInstances<M_Group>(D.ModuleGroups, $"{D.ModuleGroups.Alias}.module_alias='{Module.Alias}' and {D.ModuleGroups.Alias}.instance_id={InstanceID}");
 			}
 		}
 
@@ -67,12 +70,12 @@ namespace WBZ.Modules._shared
 		/// </summary>
 		private void btnGroupRemove_Click(object sender, RoutedEventArgs e)
 		{
-			var selectedInstances = dgList.SelectedItems.Cast<M_Group>();
+			var selectedInstances = dgListGroups.SelectedItems.Cast<M_Group>();
 			if (selectedInstances.Count() > 0)
 			{
 				foreach (var instance in selectedInstances)
-                    SQL.DeleteInstance(Config.GetModule(nameof(Modules._submodules.Groups)), instance.ID, instance.Name);
-                D.InstanceGroups = SQL.ListInstances<M_Group>(Config.GetModule(nameof(Modules._submodules.Groups)), $"g.module='{Module}' and g.instance={ID}");
+                    SQL.DeleteInstance(Config.GetModule(nameof(_submodules.Groups)), instance.ID, instance.Name);
+                D.InstanceGroups = SQL.ListInstances<M_Group>(Config.GetModule(nameof(_submodules.Groups)), $"{D.ModuleGroups.Alias}.module_alias='{Module.Alias}' and {D.ModuleGroups.Alias}.instance_id={InstanceID}");
 			}
 		}
 
@@ -81,7 +84,7 @@ namespace WBZ.Modules._shared
 		/// </summary>
 		private void btnGroupSelectAsMain_Click(object sender, RoutedEventArgs e)
 		{
-
+			//TODO - grupy domyślne
 		}
 	}
 
@@ -90,6 +93,9 @@ namespace WBZ.Modules._shared
 	/// </summary>
 	class D_GroupsTab : D
 	{
+		/// Module
+		public MV ModuleGroups = Config.GetModule(nameof(_submodules.Groups));
+
 		/// Groups
 		private List<M_Group> instanceGroups;
 		public List<M_Group> InstanceGroups

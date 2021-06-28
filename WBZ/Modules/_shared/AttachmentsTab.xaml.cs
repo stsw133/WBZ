@@ -1,14 +1,13 @@
 ﻿using StswExpress;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
-using WBZ.Models;
 using WBZ.Globals;
-using WBZ.Controls;
+using WBZ.Models;
 using WBZ.Modules._base;
-using System.Collections.Generic;
 
 namespace WBZ.Modules._shared
 {
@@ -17,14 +16,15 @@ namespace WBZ.Modules._shared
     /// </summary>
     public partial class AttachmentsTab : UserControl
     {
-        D_AttachmentsTab D = new D_AttachmentsTab();
+		readonly D_AttachmentsTab D = new D_AttachmentsTab();
+
         private MV Module;
-        private int ID;
+        private int InstanceID;
 
         public AttachmentsTab()
         {
             InitializeComponent();
-            lbAttachments.DataContext = D;
+            DataContext = D;
         }
 
         /// <summary>
@@ -34,16 +34,17 @@ namespace WBZ.Modules._shared
         {
             try
             {
-                Window win = Window.GetWindow(this);
-                dynamic d = win?.DataContext;
-                if (d != null)
+                var win = Window.GetWindow(this);
+				var d = win?.DataContext as D_ModuleNew<dynamic>;
+
+				if (d != null)
                 {
-                    Module = (MV)d.Module;
-                    ID = (int)d.InstanceData.ID;
-                }
-                if (ID != 0 && D.InstanceAttachments == null)
+					Module = d.Module;
+					InstanceID = (d.InstanceData as M).ID;
+				}
+                if (InstanceID != 0 && D.InstanceAttachments == null)
                 {
-                    D.InstanceAttachments = SQL.ListInstances<M_Attachment>(Config.GetModule(nameof(Modules.Attachments)), $"a.module='{Module}' and a.instance={ID}");
+                    D.InstanceAttachments = SQL.ListInstances<M_Attachment>(D.ModuleAttachments, $"{D.ModuleAttachments.Alias}.module_alias='{Module.Alias}' and {D.ModuleAttachments.Alias}.instance_id={InstanceID}");
                     win.Closed += UserControl_Closed;
                 }
             }
@@ -61,10 +62,11 @@ namespace WBZ.Modules._shared
             {
                 string filePath;
                 byte[] file;
+
                 if (string.IsNullOrEmpty(window.GetDrive))
                 {
                     filePath = window.GetLink;
-                    using (WebClient client = new WebClient())
+                    using (var client = new WebClient())
                     {
                         file = client.DownloadData(filePath);
                     }
@@ -81,8 +83,8 @@ namespace WBZ.Modules._shared
                     return;
                 }
 
-                SQL.SetAttachment(Module, ID, window.GetName, filePath, file, filePath);
-                D.InstanceAttachments = SQL.ListInstances<M_Attachment>(Config.GetModule(nameof(Modules.Attachments)), $"a.module='{Module}' and a.instance={ID}");
+                SQL.SetAttachment(Module, InstanceID, window.GetName, filePath, file, filePath);
+                D.InstanceAttachments = SQL.ListInstances<M_Attachment>(Config.GetModule(nameof(Attachments)), $"{D.ModuleAttachments.Alias}.module_alias='{Module.Alias}' and {D.ModuleAttachments.Alias}.instance_id={InstanceID}");
             }
         }
 
@@ -113,8 +115,8 @@ namespace WBZ.Modules._shared
                 return;
             var item = lbAttachments.SelectedItem as M_Attachment;
 
-            SQL.DeleteInstance(Config.GetModule(nameof(Modules.Attachments)), item.ID, item.Name);
-            D.InstanceAttachments = SQL.ListInstances<M_Attachment>(Config.GetModule(nameof(Modules.Attachments)), $"a.module='{Module}' and a.instance={ID}");
+            SQL.DeleteInstance(Config.GetModule(nameof(Attachments)), item.ID, item.Name);
+            D.InstanceAttachments = SQL.ListInstances<M_Attachment>(Config.GetModule(nameof(Attachments)), $"{D.ModuleAttachments.Alias}.module_alias='{Module.Alias}' and {D.ModuleAttachments.Alias}.instance_id={InstanceID}");
         }
 
         /// <summary>
@@ -127,8 +129,8 @@ namespace WBZ.Modules._shared
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
                 byte[] file = File.ReadAllBytes(files[0]);
 
-                SQL.SetAttachment(Module, ID, Path.GetFileName(files[0]), files[0], file, files[0]);
-                D.InstanceAttachments = SQL.ListInstances<M_Attachment>(Config.GetModule(nameof(Modules.Attachments)), $"a.module='{Module}' and a.instance={ID}");
+                SQL.SetAttachment(Module, InstanceID, Path.GetFileName(files[0]), files[0], file, files[0]);
+                D.InstanceAttachments = SQL.ListInstances<M_Attachment>(Config.GetModule(nameof(Attachments)), $"{D.ModuleAttachments.Alias}.module_alias='{Module.Alias}' and {D.ModuleAttachments.Alias}.instance_id={InstanceID}");
             }
         }
 
@@ -139,7 +141,7 @@ namespace WBZ.Modules._shared
         {
             if (lbAttachments.SelectedIndex < 0)
                 return;
-
+			
             var selection = (sender as ListBox).SelectedItem as M_Attachment;
             if (selection.Content == null)
                 selection.Content = SQL.GetAttachmentFile(selection.ID);
@@ -170,8 +172,11 @@ namespace WBZ.Modules._shared
     /// </summary>
     class D_AttachmentsTab : D
     {
-        /// Attachments
-        private List<M_Attachment> instanceAttachments;
+		/// Module
+		public MV ModuleAttachments = Config.GetModule(nameof(Attachments));
+
+		/// Attachments
+		private List<M_Attachment> instanceAttachments;
         public List<M_Attachment> InstanceAttachments
         {
             get => instanceAttachments;

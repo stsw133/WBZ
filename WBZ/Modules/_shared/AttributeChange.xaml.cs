@@ -5,7 +5,7 @@ using System.Windows;
 using WBZ.Models;
 using WBZ.Modules._base;
 
-namespace WBZ.Controls
+namespace WBZ.Modules._shared
 {
 	/// <summary>
 	/// Interaction logic for AttributeChange.xaml

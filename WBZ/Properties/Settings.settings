@@ -5,16 +5,16 @@
     <Setting Name="apiUrl" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Login_Username" Type="System.String" Scope="User">
+    <Setting Name="login_Username" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Login_Password" Type="System.String" Scope="User">
+    <Setting Name="login_Password" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Login_Database" Type="System.String" Scope="User">
+    <Setting Name="login_Database" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Login_RememberMe" Type="System.Boolean" Scope="User">
+    <Setting Name="login_RememberMe" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="config_TitleBarStyle" Type="System.Byte" Scope="User">
@@ -150,21 +150,6 @@
       <Value Profile="(Default)">WBZ, Twoja paczka jest do odebrania. </Value>
     </Setting>
     <Setting Name="config_Email_Password" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="conn_server" Type="System.String" Scope="User">
-      <Value Profile="(Default)">wbztest.ddns.net</Value>
-    </Setting>
-    <Setting Name="conn_port" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">5432</Value>
-    </Setting>
-    <Setting Name="conn_database" Type="System.String" Scope="User">
-      <Value Profile="(Default)">wbz</Value>
-    </Setting>
-    <Setting Name="conn_userID" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="conn_password" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="panelColor_Distributions" Type="System.String" Scope="User">
@@ -500,9 +485,6 @@
     </Setting>
     <Setting Name="config_ShowButtonsWithNames" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="ThemeColor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">#FF3C4B5A</Value>
     </Setting>
     <Setting Name="panelColor_Main" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FF999999</Value>

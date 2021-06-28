@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using WBZ.Controls;
 using WBZ.Models;
+using WBZ.Modules._base;
 
 namespace WBZ.Modules._shared
 {
@@ -13,9 +13,10 @@ namespace WBZ.Modules._shared
     /// </summary>
     public partial class AttributesTab : UserControl
     {
-        D_AttributesTab D = new D_AttributesTab();
+		readonly D_AttributesTab D = new D_AttributesTab();
+
         private MV Module;
-        private int ID;
+        private int InstanceID;
         private bool EditingMode;
 
         public AttributesTab()
@@ -31,15 +32,16 @@ namespace WBZ.Modules._shared
         {
             try
             {
-                Window win = Window.GetWindow(this);
-                dynamic d = win?.DataContext;
-                if (d != null)
+                var win = Window.GetWindow(this);
+				var d = win?.DataContext as D_ModuleNew<dynamic>;
+
+				if (d != null)
                 {
-                    Module = (MV)d.Module;
-                    ID = (int)d.InstanceData.ID;
-                }
-                if (ID != 0 && D.InstanceAttributes == null)
-                    D.InstanceAttributes = SQL.ListAttributes(Module, ID);
+                    Module = d.Module;
+					InstanceID = (d.InstanceData as M).ID;
+				}
+                if (InstanceID != 0 && D.InstanceAttributes == null)
+                    D.InstanceAttributes = SQL.ListAttributes(Module, InstanceID);
             }
             catch { }
         }
@@ -49,10 +51,10 @@ namespace WBZ.Modules._shared
         /// </summary>
         private void btnAttributeChange_Click(object sender, RoutedEventArgs e)
         {
-            var dataGrid = Content as DataGrid;
-            Window win = Window.GetWindow(this);
-
+            var win = Window.GetWindow(this);
             dynamic d = win?.DataContext;
+            var dataGrid = Content as DataGrid;
+
             if (d != null)
                 EditingMode = (bool)(d.Mode != Commands.Type.PREVIEW);
 
@@ -65,7 +67,7 @@ namespace WBZ.Modules._shared
                     SQL.UpdateAttribute(Module, D.InstanceAttributes[index]);
             }
 
-            D.InstanceAttributes = SQL.ListAttributes(Module, ID);
+            D.InstanceAttributes = SQL.ListAttributes(Module, InstanceID);
         }
 	}
 
@@ -74,8 +76,11 @@ namespace WBZ.Modules._shared
 	/// </summary>
 	class D_AttributesTab : D
     {
-        /// Attributes
-        private List<M_Attribute> instanceAttributes;
+		/// Module
+		
+
+		/// Attributes
+		private List<M_Attribute> instanceAttributes;
         public List<M_Attribute> InstanceAttributes
         {
             get => instanceAttributes;

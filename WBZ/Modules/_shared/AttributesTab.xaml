@@ -5,10 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
              xmlns:g="clr-namespace:WBZ.Globals"
-             mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="750"
+             mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800"
              Loaded="UserControl_Loaded">
-    <DataGrid ItemsSource="{Binding InstanceAttributes}" IsReadOnly="True"
-              Margin="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1" AutoGenerateColumns="False">
+	<se:ExtDataGrid ItemsSource="{Binding InstanceAttributes}" Margin="5" IsReadOnly="True">
         <DataGrid.Resources>
             <g:BindingProxy x:Key="proxy" Data="{Binding}"/>
         </DataGrid.Resources>
@@ -25,8 +24,8 @@
                     <DataTemplate>
                         <DockPanel>
                             <Button DockPanel.Dock="Right" Content=" • • • "
-                                    FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.5}"
-                                    Visibility="{Binding EditingMode, Converter={se:conv_Bool}}"
+                                    FontSize="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=0.5}"
+                                    Visibility="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=!PREVIEW}"
                                     Click="btnAttributeChange_Click"/>
                             <TextBlock Text="{Binding Value}"/>
                         </DockPanel>
@@ -47,5 +46,5 @@
                 </Style.Triggers>
             </Style>
         </DataGrid.RowStyle>
-    </DataGrid>
+    </se:ExtDataGrid>
 </UserControl>

@@ -44,8 +44,8 @@ namespace WBZ.Login
 
 			D.Databases = new ObservableCollection<DB>(DB.LoadAllDatabases());
 
-			if (!string.IsNullOrEmpty(Props.Default.Login_Password))
-                tbPassword.Password = Props.Default.Login_Password;
+			if (!string.IsNullOrEmpty(Props.Default.login_Password))
+                tbPassword.Password = Props.Default.login_Password;
 		}
 
 		/// <summary>
@@ -138,15 +138,15 @@ namespace WBZ.Login
 				Close();
 			}
 
-			if (Props.Default.Login_RememberMe)
+			if (Props.Default.login_RememberMe)
 			{
-				Props.Default.Login_Password = tbPassword.Password;
+				Props.Default.login_Password = tbPassword.Password;
 			}
 			else
 			{
-				Props.Default.Login_Username = string.Empty;
-				Props.Default.Login_Password = string.Empty;
-				Props.Default.Login_RememberMe = false;
+				Props.Default.login_Username = string.Empty;
+				Props.Default.login_Password = string.Empty;
+				Props.Default.login_RememberMe = false;
 			}
 			Props.Default.Save();
 		}

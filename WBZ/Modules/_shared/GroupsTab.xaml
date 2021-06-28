@@ -5,40 +5,39 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
              xmlns:g="clr-namespace:WBZ.Globals"
-             mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="750"
+             mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800"
              Loaded="UserControl_Loaded">
-    <DataGrid x:Name="dgList" ItemsSource="{Binding InstanceGroups}" IsReadOnly="True"
-              Margin="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1" AutoGenerateColumns="False">
+	<se:ExtDataGrid x:Name="dgListGroups" ItemsSource="{Binding InstanceGroups}" Margin="5" IsReadOnly="True">
         <DataGrid.Resources>
             <g:BindingProxy x:Key="proxy" Data="{Binding}"/>
         </DataGrid.Resources>
         <DataGrid.Columns>
             <!-- ID -->
-            <DataGridTextColumn Binding="{Binding ID}" Header="ID" IsReadOnly="True" Visibility="Collapsed"/>
+            <DataGridTextColumn Binding="{Binding ID}" Header="ID" Visibility="Collapsed"/>
             <!-- Icon -->
             <se:DataGridImageColumn Image="{Binding IconContent}" Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"/>
             <!-- Path -->
             <DataGridTextColumn Binding="{Binding Path}" Header="Grupa" Width="*"/>
         </DataGrid.Columns>
         <DataGrid.ContextMenu>
-            <ContextMenu>
-                <se:ExtMenuItem Header="Dodaj" IconUri="/Resources/icon32_add.ico" IsEnabled="{Binding EditingMode}" Click="btnGroupAdd_Click"/>
-                <se:ExtMenuItem Header="Usuń" IconUri="/Resources/icon32_delete.ico" IsEnabled="{Binding EditingMode}" Click="btnGroupRemove_Click"/>
+			<ContextMenu IsEnabled="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=!PREVIEW}">
+                <se:ExtMenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico" Click="btnGroupAdd_Click"/>
+                <se:ExtMenuItem Header="{Tr Delete}" IconUri="/Resources/icon32_delete.ico" Click="btnGroupRemove_Click"/>
                 <Separator Visibility="Collapsed"/>
-                <se:ExtMenuItem Header="Ustaw jako główną" IconUri="/Resources/icon32_select.ico" IsEnabled="{Binding EditingMode}" Click="btnGroupSelectAsMain_Click" Visibility="Collapsed"/>
+                <se:ExtMenuItem Header="Ustaw jako główną" IconUri="/Resources/icon32_select.ico" Click="btnGroupSelectAsMain_Click" Visibility="Collapsed"/>
             </ContextMenu>
         </DataGrid.ContextMenu>
         <DataGrid.RowStyle>
             <Style TargetType="DataGridRow">
                 <Style.Triggers>
-                    <DataTrigger Binding="{Binding Main}" Value="True">
-                        <Setter Property="Foreground" Value="Green"/>
-                    </DataTrigger>
-                    <DataTrigger Binding="{Binding Archival}" Value="True">
-                        <Setter Property="Foreground" Value="Gray"/>
-                    </DataTrigger>
-                </Style.Triggers>
+					<DataTrigger Binding="{Binding Archival}" Value="True">
+						<Setter Property="Foreground" Value="Gray"/>
+					</DataTrigger>
+					<DataTrigger Binding="{Binding Main}" Value="True">
+						<Setter Property="Foreground" Value="Green"/>
+					</DataTrigger>
+				</Style.Triggers>
             </Style>
         </DataGrid.RowStyle>
-    </DataGrid>
+    </se:ExtDataGrid>
 </UserControl>

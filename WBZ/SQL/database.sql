@@ -247,19 +247,19 @@ CREATE TABLE wbz.stores
         ON DELETE NO ACTION
 );
 
--- Table: wbz.stores_articles
-CREATE TABLE wbz.stores_articles
+-- Table: wbz.stores_resources
+CREATE TABLE wbz.stores_resources
 (
     id serial PRIMARY KEY,
     store_id integer NOT NULL,
     article_id integer NOT NULL,
     quantity numeric(15,3) NOT NULL DEFAULT 0,
     reserved numeric(15,3) NOT NULL DEFAULT 0,
-    CONSTRAINT stores_articles_store_fkey FOREIGN KEY (store_id)
+    CONSTRAINT stores_resources_store_fkey FOREIGN KEY (store_id)
         REFERENCES wbz.stores (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE,
-    CONSTRAINT stores_articles_article_fkey FOREIGN KEY (article_id)
+    CONSTRAINT stores_resources_article_fkey FOREIGN KEY (article_id)
         REFERENCES wbz.articles (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE

@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace WBZ.Controls
+namespace WBZ.Login
 {
 	/// <summary>
 	/// Interaction logic for Confirmation.xaml
@@ -12,8 +12,8 @@ namespace WBZ.Controls
 			InitializeComponent();
 		}
 
-		public string GetLogin => tbLogin.Text;
-		public string GetPassword => pbPassword.Password;
+		public string GetLogin => TxtBox_Login.Text;
+		public string GetPassword => PwdBox_Password.Password;
 
 		/// <summary>
 		/// Accept
@@ -21,6 +21,14 @@ namespace WBZ.Controls
 		private void btnAccept_Click(object sender, RoutedEventArgs e)
 		{
 			DialogResult = true;
+		}
+		
+		/// <summary>
+		/// Cancel
+		/// </summary>
+		private void btnCancel_Click(object sender, RoutedEventArgs e)
+		{
+			DialogResult = false;
 		}
 	}
 }

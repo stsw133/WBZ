@@ -211,7 +211,7 @@ namespace WBZ.Globals
 		/// </summary>
 		public enum PermType
 		{
-			PREVIEW, SAVE, DELETE, GROUPS, FILTERS, STATS  //TODO - STATS do dodania w wersji 1.3.0
+			PREVIEW, SAVE, DELETE, GROUPS, FILTERS, STATS  //TODO - FILTERS i STATS do dodania w wersji 1.3.0
 		}
 	}
 }

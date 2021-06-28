@@ -38,8 +38,6 @@ namespace WBZ
 			ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(int.MaxValue));
 
 			Settings.Default.HashKey = "ejdndbfewbasjhdggjhbasbvdgewvbjdbsavdqgwjbdjsvdyugwqyubashjdbjfgdtyuqw";
-			Settings.Default.ThemeColor = WBZ.Properties.Settings.Default.ThemeColor;
-
 			Mail.Host = WBZ.Properties.Settings.Default.config_Email_Host;
 			Mail.Port = WBZ.Properties.Settings.Default.config_Email_Port;
 			Mail.Email = WBZ.Properties.Settings.Default.config_Email_Email;

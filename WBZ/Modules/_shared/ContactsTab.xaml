@@ -5,10 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
              xmlns:g="clr-namespace:WBZ.Globals"
-             mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="750"
+             mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800"
              Loaded="UserControl_Loaded">
-    <DataGrid ItemsSource="{Binding InstanceContacts}" IsReadOnly="{Binding EditingMode, Converter={se:conv_Bool}, ConverterParameter=!}"
-              Margin="5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1" AutoGenerateColumns="False">
+	<se:ExtDataGrid ItemsSource="{Binding InstanceContacts}" Margin="5" IsReadOnly="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=PREVIEW}">
         <DataGrid.Resources>
             <g:BindingProxy x:Key="proxy" Data="{Binding}"/>
         </DataGrid.Resources>
@@ -18,8 +17,8 @@
             <DataGridTextColumn Binding="{Binding lastname}" Header="Nazwisko" Width="1*"/>
             <DataGridTextColumn Binding="{Binding email}" Header="E-mail" Width="3*"/>
             <DataGridTextColumn Binding="{Binding phone}" Header="Nr telefonu" Width="1*"/>
-            <DataGridCheckBoxColumn Binding="{Binding default}" Header="Domyślny"/>
-            <DataGridCheckBoxColumn Binding="{Binding archival}" Header="Archiwalny"/>
+            <DataGridCheckBoxColumn Binding="{Binding is_default}" Header="Domyślny"/>
+            <DataGridCheckBoxColumn Binding="{Binding is_archival}" Header="Archiwalny"/>
         </DataGrid.Columns>
         <DataGrid.RowStyle>
             <Style TargetType="DataGridRow">
@@ -36,5 +35,5 @@
                 </Style.Triggers>
             </Style>
         </DataGrid.RowStyle>
-    </DataGrid>
+    </se:ExtDataGrid>
 </UserControl>

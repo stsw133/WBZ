@@ -15,22 +15,22 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Controls\Windows\AttachmentsAdd.xaml">
+    <Page Update="Modules\_shared\AttachmentsAdd.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Controls\Windows\AttributeChange.xaml">
+    <Page Update="Modules\_shared\AttributeChange.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Controls\Windows\Confirmation.xaml">
+    <Page Update="Login\Confirmation.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Modules\_base\MsgWin.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Controls\GroupsView.xaml">
+    <Page Update="Modules\_shared\GroupsView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Controls\StatusPanel.xaml">
+    <Page Update="Modules\_shared\StatusPanel.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Modules\Admin\ConsoleSQL.xaml">

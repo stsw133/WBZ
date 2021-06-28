@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
-        xmlns:c="clr-namespace:WBZ.Controls"
+        xmlns:s="clr-namespace:WBZ.Modules._shared"
         mc:Ignorable="d" Height="650" Width="975" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
         Title="{Binding Title}" Icon="/Resources/icon32_groups.ico"
 		FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}">
@@ -15,6 +15,6 @@
         <!-- titleBar -->
 		<se:TitleBar DockPanel.Dock="Top" SubIcon="{Binding ModeIcon}"/>
         <!-- buttonsPanel -->
-        <c:GroupsView x:Name="groupsView" Margin="5" MouseDoubleClick="groupsView_MouseDoubleClick"/>
+        <s:GroupsView x:Name="groupsView" Margin="5" MouseDoubleClick="groupsView_MouseDoubleClick"/>
     </DockPanel>
 </Window>

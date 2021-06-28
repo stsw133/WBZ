@@ -147,6 +147,10 @@
 		"en": "Configure filters",
 		"pl": "Konfiguruj filtry"
 	},
+	"Confirmation": {
+		"en": "Confirmation",
+		"pl": "Potwierdzenie"
+	},
 	"Console": {
 		"en": "Console",
 		"pl": "Konsola"
@@ -463,13 +467,17 @@
 		"en": "List",
 		"pl": "Lista"
 	},
-	"LoadFirstDataOnLists": {
-		"en": "Load first data on lists",
-		"pl": "Wczytuj pierwsze dane na listach"
+	"LoadStartDataOnLists": {
+		"en": "Load start data on lists",
+		"pl": "Wczytuj startowe dane na listach"
 	},
-	"Login": {
+	"Logging": {
 		"en": "Logging",
 		"pl": "Logowanie"
+	},
+	"Login": {
+		"en": "Login",
+		"pl": "Login"
 	},
 	"LogIn": {
 		"en": "Log in",

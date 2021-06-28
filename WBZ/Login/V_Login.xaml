@@ -6,7 +6,7 @@
         xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
 		mc:Ignorable="d" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen"
-        x:Name="winLogin" Title="{Tr Login}" Icon="/Resources/icon32_login.ico"
+        x:Name="winLogin" Title="{Tr Logging}" Icon="/Resources/icon32_login.ico"
         Loaded="Window_Loaded">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
@@ -41,13 +41,13 @@
 								   Click="btnDatabases_Click"/>
 					<ComboBox VerticalContentAlignment="Center" BorderThickness="0,1,1,1" ToolTip="Identyfikator bazy danych"
 							  ItemsSource="{Binding Databases}" DisplayMemberPath="Name" SelectedValuePath="Name"
-							  SelectedValue="{Binding Login_Database, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+							  SelectedValue="{Binding login_Database, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
 							  SelectionChanged="cbDatabase_SelectionChanged"/>
 				</DockPanel>
 				<!-- login -->
 				<DockPanel Margin="5">
 					<se:ExtLabel Content="Login:"/>
-					<se:ExtTextBox x:Name="tbLogin" Text="{Binding Login_Username, Source={x:Static p:Settings.Default}, Mode=TwoWay}" ToolTip="Nazwa użytkownika lub e-mail"/>
+					<se:ExtTextBox x:Name="tbLogin" Text="{Binding login_Username, Source={x:Static p:Settings.Default}, Mode=TwoWay}" ToolTip="Nazwa użytkownika lub e-mail"/>
 				</DockPanel>
 				<!-- password -->
 				<DockPanel Margin="5">
@@ -57,7 +57,7 @@
 				<!-- remember -->
 				<DockPanel Margin="5">
 					<se:ExtLabel/>
-					<se:ExtCheckBox Content="Zapamiętaj dane logowania" IsChecked="{Binding Login_RememberMe, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+					<se:ExtCheckBox Content="Zapamiętaj dane logowania" IsChecked="{Binding login_RememberMe, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
 				</DockPanel>
 			</UniformGrid>
 			<!-- buttons -->
