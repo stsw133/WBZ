@@ -59,7 +59,7 @@
                             </GroupBox.Header>
                             <StackPanel Margin="5">
                                 <se:ExtCheckBox Content="{Tr ShowButtonsWithNames}" Margin="5" IsChecked="{Binding config_ShowButtonsWithNames, Source={x:Static p:Settings.Default}}"/>
-								<se:ExtCheckBox Content="{Tr LoadFirstDataOnLists}" Margin="5" IsChecked="{Binding config_LoadFirstDataOnLists, Source={x:Static p:Settings.Default}}"/>
+								<se:ExtCheckBox Content="{Tr LoadStartDataOnLists}" Margin="5" IsChecked="{Binding config_LoadStartDataOnLists, Source={x:Static p:Settings.Default}}"/>
                             </StackPanel>
                         </GroupBox>
                     </DockPanel>

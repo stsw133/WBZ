@@ -1477,12 +1477,12 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool config_LoadFirstDataOnLists {
+        public bool config_LoadStartDataOnLists {
             get {
-                return ((bool)(this["config_LoadFirstDataOnLists"]));
+                return ((bool)(this["config_LoadStartDataOnLists"]));
             }
             set {
-                this["config_LoadFirstDataOnLists"] = value;
+                this["config_LoadStartDataOnLists"] = value;
             }
         }
         

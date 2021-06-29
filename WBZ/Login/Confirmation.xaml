@@ -14,8 +14,8 @@
         <se:TitleBar DockPanel.Dock="Top"/>
 		<!-- buttons -->
 		<UniformGrid DockPanel.Dock="Bottom" Rows="1" HorizontalAlignment="Center">
-			<se:IconButton Text="{Tr Accept}" Margin="5" Icon="/Resources/icon32_accept.ico" Click="btnAccept_Click" IsDefault="True"/>
-			<se:IconButton Text="{Tr Cancel}" Margin="5" Icon="/Resources/icon32_cancel.ico" Click="btnCancel_Click"/>
+			<se:IconButton Text="{Tr Accept}" Margin="5" Icon="/Resources/32/icon32_accept.ico" Click="BtnAccept_Click" IsDefault="True"/>
+			<se:IconButton Text="{Tr Cancel}" Margin="5" Icon="/Resources/32/icon32_cancel.ico" Click="BtnCancel_Click"/>
 		</UniformGrid>
 		<!-- main -->
 		<Grid Margin="5">
@@ -28,9 +28,9 @@
 				<RowDefinition/>
 			</Grid.RowDefinitions>
 			<se:ExtLabel Content="{Tr Login, Suffix=':'}" Grid.Row="0" Grid.Column="0" Margin="5" HorizontalContentAlignment="Right"/>
-			<se:ExtTextBox x:Name="TxtBox_Login" Grid.Row="0" Grid.Column="1" Margin="5"/>
+			<se:ExtTextBox x:Name="TxtBoxLogin" Grid.Row="0" Grid.Column="1" Margin="5"/>
 			<se:ExtLabel Content="{Tr Password, Suffix=':'}" Grid.Row="1" Grid.Column="0" Margin="5" HorizontalContentAlignment="Right"/>
-			<PasswordBox x:Name="PwdBox_Password" Grid.Row="1" Grid.Column="1" Margin="5" VerticalContentAlignment="Center"/>
+			<PasswordBox x:Name="PwdBoxPassword" Grid.Row="1" Grid.Column="1" Margin="5" VerticalContentAlignment="Center"/>
 		</Grid>
 	</DockPanel>
 </Window>

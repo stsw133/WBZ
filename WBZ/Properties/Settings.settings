@@ -403,7 +403,7 @@
     <Setting Name="config_ExpandGroups" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="config_LoadFirstDataOnLists" Type="System.Boolean" Scope="User">
+    <Setting Name="config_LoadStartDataOnLists" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="columns_DocumentsList_ContractorName" Type="System.String" Scope="User">
