@@ -31,7 +31,7 @@
             <Label Grid.Row="1" Grid.Column="1" Content="/" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <DatePicker Grid.Row="1" Grid.Column="2" x:Name="dpTo" Margin="5,5,20,5" VerticalContentAlignment="Center"/>
             <se:IconButton Grid.Row="3" Grid.ColumnSpan="3" Margin="5" IsEnabled="True" IsTextVisible="True" HorizontalAlignment="Center"
-                            Text="Akceptuj" Icon="/Resources/icon32_accept.ico" PreviewMouseLeftButtonUp="btnAccept_Click"/>
+                            Text="Akceptuj" Icon="/Resources/32/icon32_accept.ico" PreviewMouseLeftButtonUp="btnAccept_Click"/>
         </Grid>
     </DockPanel>
 </Window>

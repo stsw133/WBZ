@@ -17,10 +17,11 @@
 			<se:IconButton Text="{Tr Accept}" Margin="5" Icon="/Resources/32/icon32_accept.ico" Click="BtnAccept_Click" IsDefault="True"/>
 			<se:IconButton Text="{Tr Cancel}" Margin="5" Icon="/Resources/32/icon32_cancel.ico" Click="BtnCancel_Click"/>
 		</UniformGrid>
+		<Separator DockPanel.Dock="Bottom" Margin="10,5"/>
 		<!-- main -->
 		<Grid Margin="5">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="auto"/>
+				<ColumnDefinition/>
 				<ColumnDefinition Width="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=20}"/>
 			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>

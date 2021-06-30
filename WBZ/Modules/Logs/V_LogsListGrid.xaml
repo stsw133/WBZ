@@ -56,7 +56,7 @@
     <DataGrid.ContextMenu>
         <ContextMenu>
             <!-- Columns -->
-			<se:ExtMenuItem Header="{Tr ColumnsVisibility}" IconUri="/Resources/icon32_show.ico">
+			<se:ExtMenuItem Header="{Tr ColumnsVisibility}" IconUri="/Resources/32/icon32_show.ico">
 				<MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_ID}"/>
 				<MenuItem IsCheckable="True" Header="Użytkownik" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_User}"/>
 				<MenuItem IsCheckable="True" Header="Moduł" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_LogsList_Module}"/>
@@ -67,13 +67,13 @@
 			</se:ExtMenuItem>
 			<!-- Actions -->
 			<Separator/>
-			<se:ExtMenuItem Header="{Tr Preview}" IconUri="/Resources/icon32_search.ico" Command="se:Commands.Preview"/>
-			<se:ExtMenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico" Command="se:Commands.New"/>
-			<se:ExtMenuItem Header="{Tr Duplicate}" IconUri="/Resources/icon32_duplicate.ico" Command="se:Commands.Duplicate"/>
-			<se:ExtMenuItem Header="{Tr Edit}" IconUri="/Resources/icon32_edit.ico" Command="se:Commands.Edit"/>
-			<se:ExtMenuItem Header="{Tr Delete}" IconUri="/Resources/icon32_delete.ico" Command="se:Commands.Delete"/>
+			<se:ExtMenuItem Header="{Tr Preview}" IconUri="/Resources/32/icon32_search.ico" Command="se:Commands.Preview"/>
+			<se:ExtMenuItem Header="{Tr New}" IconUri="/Resources/32/icon32_add.ico" Command="se:Commands.New"/>
+			<se:ExtMenuItem Header="{Tr Duplicate}" IconUri="/Resources/32/icon32_duplicate.ico" Command="se:Commands.Duplicate"/>
+			<se:ExtMenuItem Header="{Tr Edit}" IconUri="/Resources/32/icon32_edit.ico" Command="se:Commands.Edit"/>
+			<se:ExtMenuItem Header="{Tr Delete}" IconUri="/Resources/32/icon32_delete.ico" Command="se:Commands.Delete"/>
 			<Separator/>
-			<se:ExtMenuItem Header="{Tr Refresh}" IconUri="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
+			<se:ExtMenuItem Header="{Tr Refresh}" IconUri="/Resources/32/icon32_refresh.ico" Command="se:Commands.Refresh"/>
 		</ContextMenu>
     </DataGrid.ContextMenu>
     <DataGrid.RowStyle>

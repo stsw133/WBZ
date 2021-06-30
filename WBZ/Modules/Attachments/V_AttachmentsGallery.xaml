@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
         mc:Ignorable="d" Height="700" Width="1050" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" WindowState="Maximized"
-        Title="Galeria załączników" Icon="/Resources/icon32_gallery.ico"
+        Title="Galeria załączników" Icon="/Resources/32/icon32_gallery.ico"
         Closed="Window_Closed">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
@@ -20,7 +20,7 @@
                     <!-- tabMain -->
                     <TabItem>
                         <TabItem.Header>
-                            <se:Header Text="Ogólne" Icon="/Resources/icon32_filter.ico"/>
+                            <se:Header Text="Ogólne" Icon="/Resources/32/icon32_filter.ico"/>
                         </TabItem.Header>
                         <ScrollViewer>
                             <DockPanel Margin="5">
@@ -47,9 +47,9 @@
             </Expander>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
                 <se:IconButton Margin="0,4,4,4" IsTextVisible="{Binding IsChecked, ElementName=btnToggle}" Visibility="{Binding IsExpanded, ElementName=filtersExpander, Converter={se:conv_Bool}}"
-                                Text="Akceptuj" Icon="/Resources/icon32_accept.ico" Click="btnRefresh_Click"/>
+                                Text="Akceptuj" Icon="/Resources/32/icon32_accept.ico" Click="btnRefresh_Click"/>
                 <se:IconButton Margin="0,4,4,4" IsTextVisible="{Binding IsChecked, ElementName=btnToggle}" Visibility="{Binding IsExpanded, ElementName=filtersExpander, Converter={se:conv_Bool}}"
-                                Text="Czyść" Icon="/Resources/icon32_clear.ico" Click="btnFiltersClear_Click"/>
+                                Text="Czyść" Icon="/Resources/32/icon32_clear.ico" Click="btnFiltersClear_Click"/>
             </StackPanel>
         </Grid>
         <!-- selectionPanel -->

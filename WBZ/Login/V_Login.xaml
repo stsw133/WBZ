@@ -6,7 +6,7 @@
         xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
 		mc:Ignorable="d" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen"
-        x:Name="winLogin" Title="{Tr Logging}" Icon="/Resources/icon32_login.ico"
+        Title="{Tr Logging}" Icon="/Resources/32/icon32_login.ico"
         Loaded="Window_Loaded">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
@@ -17,47 +17,36 @@
         <!-- main -->
         <DockPanel DockPanel.Dock="Top">
 			<!-- logo -->
-            <Border DockPanel.Dock="Top" Background="White" BorderBrush="Gray" BorderThickness="1">
+            <Border DockPanel.Dock="Top" BorderBrush="Gray" BorderThickness="1">
                 <Image Source="/Resources/logo.png"
                        Margin="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=1.5}"
                        Width="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=30}"/>
             </Border>
 			<!-- login data -->
 			<UniformGrid DockPanel.Dock="Top" Margin="5" Columns="1">
-				<UniformGrid.Resources>
-					<Style TargetType="{x:Type se:ExtLabel}">
-						<Setter Property="Margin" Value="0,0,5,0"/>
-						<Setter Property="HorizontalContentAlignment" Value="Right"/>
-						<Setter Property="Width" Value="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=10}"/>
-					</Style>
-				</UniformGrid.Resources>
 				<!-- database -->
 				<DockPanel Margin="5">
-					<se:ExtLabel Content="{Tr Database, Suffix=':'}"/>
-					<se:IconButton CornerRadius="0" IsTextVisible="False" ToolTip="Zmień połączenie z główną bazą"
-								   Icon="/Resources/icon32_database.ico"
-								   IconMargin="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=0.1}"
-								   IconSize="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=1.5}"
-								   Click="btnDatabases_Click"/>
-					<ComboBox VerticalContentAlignment="Center" BorderThickness="0,1,1,1" ToolTip="Identyfikator bazy danych"
-							  ItemsSource="{Binding Databases}" DisplayMemberPath="Name" SelectedValuePath="Name"
-							  SelectedValue="{Binding login_Database, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-							  SelectionChanged="cbDatabase_SelectionChanged"/>
+					<se:ExtLabel Content="{Tr Database, Suffix=':'}" Style="{StaticResource PaneledLabel}"/>
+					<se:IconButton ToolTip="Zmień połączenie z główną bazą" Icon="/Resources/32/icon32_database.ico" Style="{StaticResource PaneledButton}"
+								   Click="BtnDatabases_Click"/>
+					<se:ExtComboBox BorderThickness="0,1,1,1" ItemsSource="{Binding Databases}" DisplayMemberPath="Name" SelectedValuePath="Name"
+									SelectedValue="{Binding login_Database, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+									SelectionChanged="CmbBoxDatabase_SelectionChanged"/>
 				</DockPanel>
 				<!-- login -->
 				<DockPanel Margin="5">
-					<se:ExtLabel Content="Login:"/>
-					<se:ExtTextBox x:Name="tbLogin" Text="{Binding login_Username, Source={x:Static p:Settings.Default}, Mode=TwoWay}" ToolTip="Nazwa użytkownika lub e-mail"/>
+					<se:ExtLabel Content="{Tr Login, Suffix=':'}" Style="{StaticResource PaneledLabel}"/>
+					<se:ExtTextBox Text="{Binding login_Username, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
 				</DockPanel>
 				<!-- password -->
 				<DockPanel Margin="5">
-					<se:ExtLabel Content="{Tr Password, Suffix=':'}"/>
-					<PasswordBox x:Name="tbPassword" VerticalContentAlignment="Center"/>
+					<se:ExtLabel Content="{Tr Password, Suffix=':'}" Style="{StaticResource PaneledLabel}"/>
+					<PasswordBox x:Name="PwdBoxPassword" VerticalContentAlignment="Center"/>
 				</DockPanel>
 				<!-- remember -->
 				<DockPanel Margin="5">
-					<se:ExtLabel/>
-					<se:ExtCheckBox Content="Zapamiętaj dane logowania" IsChecked="{Binding login_RememberMe, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+					<se:ExtLabel Style="{StaticResource PaneledLabel}"/>
+					<se:ExtCheckBox Content="{Tr RememberLoginData}" IsChecked="{Binding login_RememberMe, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
 				</DockPanel>
 			</UniformGrid>
 			<!-- buttons -->
@@ -65,29 +54,28 @@
             <UniformGrid DockPanel.Dock="Bottom" Margin="5" Rows="1">
 				<!-- version -->
                 <DockPanel>
-                    <Image x:Name="imgVersion" Margin="5" Height="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=2}"
-						   Source="/Resources/icon32_shield_white.ico"/>
+                    <Image Margin="5" Height="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=2}"
+						   ToolTip="{Binding StatusName}" Source="{Binding StatusIcon}"/>
                     <StackPanel VerticalAlignment="Center" Margin="5">
                         <Label Content="{Tr Version, Suffix=':'}" Padding="1"/>
-                        <Label x:Name="txtVersion" Padding="1" FontWeight="Medium"/>
+						<Label Content="{Binding AppVersion}" Padding="1" FontWeight="Medium"/>
                     </StackPanel>
                 </DockPanel>
 				<!-- login -->
-                <se:IconButton Content="{Tr LogIn}" Margin="5"
-							   IsEnabled="{Binding Version, Source={x:Static se:Fn.AppDatabase}, Converter={se:conv_Compare}, ConverterParameter=!{}}"
-							   Click="btnLogin_Click" IsDefault="True"/>
+                <se:IconButton x:Name="BtnLogin" Content="{Tr LogIn}" Margin="5"
+							   Click="BtnLogin_Click" IsDefault="True"/>
 				<!-- others -->
-				<se:IconButton IsTextVisible="False" Icon="/Resources/icon32_tools.ico" ToolTip="{Tr Others}" Margin="5" HorizontalAlignment="Right"
-							   Click="btnContextMenu_Click">
+				<se:IconButton IsTextVisible="False" ToolTip="{Tr Others}" Icon="/Resources/32/icon32_tools.ico" Margin="5" HorizontalAlignment="Right"
+							   Click="BtnContextMenu_Click">
 					<se:IconButton.ContextMenu>
 						<ContextMenu>
-							<se:ExtMenuItem Header="{Tr GenerateNewPassword}" IconUri="/Resources/icon32_random.ico" Click="btnGenerateNewpass_Click"/>
-							<se:ExtMenuItem Header="{Tr UserManual}" IconUri="/Resources/icon32_books.ico" Command="se:Commands.Help"/>
+							<se:ExtMenuItem Header="{Tr GenerateNewPassword}" IconUri="/Resources/32/icon32_random.ico" Click="BtnGenerateNewpass_Click"/>
+							<se:ExtMenuItem Header="{Tr UserManual}" IconUri="/Resources/32/icon32_books.ico" Command="se:Commands.Help"/>
                             <Separator/>
-							<se:ExtMenuItem Header="{Tr Settings}" IconUri="/Resources/icon32_settings.ico" Command="se:Commands.Settings"/>
+							<se:ExtMenuItem Header="{Tr Settings}" IconUri="/Resources/32/icon32_settings.ico" Command="se:Commands.Settings"/>
 							<Separator/>
-							<se:ExtMenuItem Header="{Tr Versions}" IconUri="/Resources/icon32_versions.ico" Click="btnVersions_Click"/>
-                            <se:ExtMenuItem Header="{Tr AboutApp}" IconUri="/Resources/icon64.ico" Click="btnAboutApp_Click"/>
+							<se:ExtMenuItem Header="{Tr Versions}" IconUri="/Resources/32/icon32_versions.ico" Click="BtnVersions_Click"/>
+                            <se:ExtMenuItem Header="{Tr AboutApp}" IconUri="/Resources/icon.ico" Click="BtnAboutApp_Click"/>
                         </ContextMenu>
                     </se:IconButton.ContextMenu>
                 </se:IconButton>

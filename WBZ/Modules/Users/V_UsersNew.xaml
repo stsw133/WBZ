@@ -8,7 +8,7 @@
        xmlns:p="clr-namespace:WBZ.Properties"
        xmlns:s="clr-namespace:WBZ.Modules._shared"
        mc:Ignorable="d" Height="600" Width="900" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
-       Title="{Binding Title}" Icon="/Resources/icon32_user.ico"
+       Title="{Binding Title}" Icon="/Resources/32/icon32_user.ico"
        Loaded="Window_Loaded" Closed="Window_Closed"
        FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}">
     <WindowChrome.WindowChrome>
@@ -33,14 +33,14 @@
                         </Style>
                     </DockPanel.Resources>
                     <StackPanel DockPanel.Dock="Top">
-                        <se:IconButton Text="{Tr Save}" Margin="5" Icon="/Resources/icon32_save.ico" Command="se:Commands.Save"/>
+                        <se:IconButton Text="{Tr Save}" Margin="5" Icon="/Resources/32/icon32_save.ico" Command="se:Commands.Save"/>
                         <Separator/>
                     </StackPanel>
                     <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                         <Separator/>
-                        <se:IconButton Text="{Tr Refresh}" Margin="5" Icon="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
+                        <se:IconButton Text="{Tr Refresh}" Margin="5" Icon="/Resources/32/icon32_refresh.ico" Command="se:Commands.Refresh"/>
                         <Separator/>
-                        <se:IconButton Text="{Tr CloseWindow}" Margin="5" Icon="/Resources/icon32_close.ico" Command="se:Commands.Close"/>
+                        <se:IconButton Text="{Tr CloseWindow}" Margin="5" Icon="/Resources/32/icon32_close.ico" Command="se:Commands.Close"/>
                     </StackPanel>
                 </DockPanel>
                 <Border.ContextMenu>
@@ -89,10 +89,10 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <DockPanel Grid.Column="0" Grid.ColumnSpan="3">
-                            <!-- Codename -->
+                            <!-- Login -->
                             <DockPanel DockPanel.Dock="Top">
-                                <se:ExtLabel Content="Kod:" FontWeight="Bold"/>
-                                <se:ExtTextBox Text="{Binding InstanceData.Codename}"/>
+								<se:ExtLabel Content="Login:" FontWeight="Bold"/>
+								<se:ExtTextBox Text="{Binding InstanceData.Login}"/>
                             </DockPanel>
                             <!-- Newpass -->
                             <DockPanel DockPanel.Dock="Top">
@@ -136,7 +136,7 @@
             <!-- tabPerms -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="{Tr Permissions}" Icon="/Resources/icon32_accept.ico"/>
+                    <se:Header Text="{Tr Permissions}" Icon="/Resources/32/icon32_accept.ico"/>
                 </TabItem.Header>
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <DockPanel x:Name="dpPerms" Margin="10" VerticalAlignment="Top" IsEnabled="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=!PREVIEW}">
@@ -149,68 +149,68 @@
                         <!-- headers -->
                         <UniformGrid DockPanel.Dock="Top" Rows="1" Height="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=1.5}">
                             <TextBlock/>
-                            <Image Tag="PREVIEW" ToolTip="{Tr Preview}" Source="/Resources/icon32_search.ico"/>
-                            <Image Tag="SAVE" ToolTip="{Tr Save}" Source="/Resources/icon32_save.ico"/>
-                            <Image Tag="DELETE" ToolTip="{Tr Delete}" Source="/Resources/icon32_delete.ico"/>
-                            <Image Tag="FILTERS" ToolTip="{Tr Filters}" Source="/Resources/icon32_filter.ico"/>
-                            <Image Tag="GROUPS" ToolTip="{Tr Groups}" Source="/Resources/icon32_groups.ico"/>
-                            <Image Tag="STATS" ToolTip="{Tr Stats}" Source="/Resources/icon32_stats.ico"/>
+                            <Image Tag="PREVIEW" ToolTip="{Tr Preview}" Source="/Resources/32/icon32_search.ico"/>
+                            <Image Tag="SAVE" ToolTip="{Tr Save}" Source="/Resources/32/icon32_save.ico"/>
+                            <Image Tag="DELETE" ToolTip="{Tr Delete}" Source="/Resources/32/icon32_delete.ico"/>
+                            <Image Tag="FILTERS" ToolTip="{Tr Filters}" Source="/Resources/32/icon32_filter.ico"/>
+                            <Image Tag="GROUPS" ToolTip="{Tr Groups}" Source="/Resources/32/icon32_groups.ico"/>
+                            <Image Tag="STATS" ToolTip="{Tr Stats}" Source="/Resources/32/icon32_stats.ico"/>
                         </UniformGrid>
                         <!-- articles -->
                         <UniformGrid Tag="Articles" DockPanel.Dock="Top" Rows="1">
-                            <se:Header Text="{Tr Articles, Suffix=':'}" Icon="/Resources/icon32_articles.ico"/>
+                            <se:Header Text="{Tr Articles, Suffix=':'}" Icon="/Resources/32/icon32_articles.ico"/>
                         </UniformGrid>
                         <!-- attachments -->
                         <UniformGrid Tag="Attachments" DockPanel.Dock="Top" Rows="1">
-                            <se:Header Text="{Tr Attachments, Suffix=':'}" Icon="/Resources/icon32_photos.ico"/>
+                            <se:Header Text="{Tr Attachments, Suffix=':'}" Icon="/Resources/32/icon32_photos.ico"/>
                         </UniformGrid>
                         <!-- attributes_classes -->
                         <UniformGrid Tag="AttributesClasses" DockPanel.Dock="Top" Rows="1">
-                            <se:Header Text="{Tr AttributesClasses, Suffix=':'}" Icon="/Resources/icon32_attributes.ico"/>
+                            <se:Header Text="{Tr AttributesClasses, Suffix=':'}" Icon="/Resources/32/icon32_attributes.ico"/>
                         </UniformGrid>
                         <!-- community
                         <UniformGrid Tag="Community" DockPanel.Dock="Top" Rows="1">
-                            <se:Header Text="{Tr Community, Suffix=':'}" Icon="/Resources/icon32_community.ico"/>
+                            <se:Header Text="{Tr Community, Suffix=':'}" Icon="/Resources/32/icon32_community.ico"/>
                         </UniformGrid>-->
                         <!-- contractors -->
                         <UniformGrid Tag="Contractors" DockPanel.Dock="Top" Rows="1">
-                            <se:Header Text="{Tr AttributesClasses, Suffix=':'}" Icon="/Resources/icon32_contractors.ico"/>
+                            <se:Header Text="{Tr AttributesClasses, Suffix=':'}" Icon="/Resources/32/icon32_contractors.ico"/>
                         </UniformGrid>
                         <!-- distributions -->
                         <UniformGrid Tag="Distributions" DockPanel.Dock="Top" Rows="1">
-                            <se:Header Text="{Tr Distributions, Suffix=':'}" Icon="/Resources/icon32_food.ico"/>
+                            <se:Header Text="{Tr Distributions, Suffix=':'}" Icon="/Resources/32/icon32_food.ico"/>
                         </UniformGrid>
                         <!-- documents -->
                         <UniformGrid Tag="Documents" DockPanel.Dock="Top" Rows="1">
-                            <se:Header Text="{Tr Documents, Suffix=':'}" Icon="/Resources/icon32_documents.ico"/>
+                            <se:Header Text="{Tr Documents, Suffix=':'}" Icon="/Resources/32/icon32_documents.ico"/>
                         </UniformGrid>
                         <!-- employees -->
                         <UniformGrid Tag="Employees" DockPanel.Dock="Top" Rows="1">
-                            <se:Header Text="{Tr Employees, Suffix=':'}" Icon="/Resources/icon32_briefcase.ico"/>
+                            <se:Header Text="{Tr Employees, Suffix=':'}" Icon="/Resources/32/icon32_briefcase.ico"/>
                         </UniformGrid>
                         <!-- families -->
                         <UniformGrid Tag="Families" DockPanel.Dock="Top" Rows="1">
-                            <se:Header Text="{Tr Families, Suffix=':'}" Icon="/Resources/icon32_families.ico"/>
+                            <se:Header Text="{Tr Families, Suffix=':'}" Icon="/Resources/32/icon32_families.ico"/>
                         </UniformGrid>
                         <!-- icons -->
                         <UniformGrid Tag="Icons" DockPanel.Dock="Top" Rows="1">
-                            <se:Header Text="{Tr Icons, Suffix=':'}" Icon="/Resources/icon32_icons.ico"/>
+                            <se:Header Text="{Tr Icons, Suffix=':'}" Icon="/Resources/32/icon32_icons.ico"/>
                         </UniformGrid>
                         <!-- logs -->
                         <UniformGrid Tag="Logs" DockPanel.Dock="Top" Rows="1">
-                            <se:Header Text="{Tr Logs, Suffix=':'}" Icon="/Resources/icon32_logs.ico"/>
+                            <se:Header Text="{Tr Logs, Suffix=':'}" Icon="/Resources/32/icon32_logs.ico"/>
                         </UniformGrid>
                         <!-- stores -->
                         <UniformGrid Tag="Stores" DockPanel.Dock="Top" Rows="1">
-                            <se:Header Text="{Tr Stores, Suffix=':'}" Icon="/Resources/icon32_stores.ico"/>
+                            <se:Header Text="{Tr Stores, Suffix=':'}" Icon="/Resources/32/icon32_stores.ico"/>
                         </UniformGrid>
                         <!-- users -->
                         <UniformGrid Tag="Users" DockPanel.Dock="Top" Rows="1">
-                            <se:Header Text="{Tr Users, Suffix=':'}" Icon="/Resources/icon32_users.ico"/>
+                            <se:Header Text="{Tr Users, Suffix=':'}" Icon="/Resources/32/icon32_users.ico"/>
                        </UniformGrid>
                         <!-- vehicles -->
                         <UniformGrid Tag="Vehicles" DockPanel.Dock="Top" Rows="1">
-                            <se:Header Text="{Tr Vehicles, Suffix=':'}" Icon="/Resources/icon32_transport.ico"/>
+                            <se:Header Text="{Tr Vehicles, Suffix=':'}" Icon="/Resources/32/icon32_transport.ico"/>
                         </UniformGrid>
                     </DockPanel>
                 </ScrollViewer>
@@ -218,7 +218,7 @@
             <!-- tabLogs -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="{Tr History}" Icon="/Resources/icon32_history.ico"/>
+                    <se:Header Text="{Tr History}" Icon="/Resources/32/icon32_history.ico"/>
                 </TabItem.Header>
                 <s:LogsTab/>
             </TabItem>

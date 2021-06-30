@@ -18,7 +18,7 @@ namespace WBZ.Models
 		/// <summary>
 		/// Codename
 		/// </summary>
-		public string Codename { get; set; }
+		public string Login { get; set; }
 
 		/// <summary>
 		/// Newpass

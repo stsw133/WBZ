@@ -24,8 +24,8 @@ namespace WBZ.Modules._base
 		{
 			get
 			{
-				if		(Mode == Commands.Type.LIST)	return "/Resources/icon32_list.ico";
-				else if	(Mode == Commands.Type.SELECT)	return "/Resources/icon32_select.ico";
+				if		(Mode == Commands.Type.LIST)	return "/Resources/32/icon32_list.ico";
+				else if	(Mode == Commands.Type.SELECT)	return "/Resources/32/icon32_select.ico";
 				else									return null;
 			}
 		}

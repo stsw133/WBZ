@@ -121,6 +121,12 @@
   <data name="CreateSchema" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\SQL\database.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
   </data>
+  <data name="icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="icon16_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\16\icon16_add.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="icon32_accept" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\32\icon32_accept.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -373,11 +379,11 @@
   <data name="icon32_web" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\32\icon32_web.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="icon64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon64.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="icon64_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\64\icon64_add.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\logo.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="pl_manual" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pl_manual.pdf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

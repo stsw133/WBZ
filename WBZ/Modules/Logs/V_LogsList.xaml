@@ -9,7 +9,7 @@
         xmlns:p="clr-namespace:WBZ.Properties"
 		xmlns:s="clr-namespace:WBZ.Modules._shared"
         mc:Ignorable="d" Height="650" Width="975" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
-        Title="{Binding Title}" Icon="/Resources/icon32_logs.ico"
+        Title="{Binding Title}" Icon="/Resources/32/icon32_logs.ico"
         Loaded="Window_Loaded" Closed="Window_Closed"
         FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}">
     <WindowChrome.WindowChrome>
@@ -36,21 +36,21 @@
 					</Style>
 				</DockPanel.Resources>
                 <StackPanel DockPanel.Dock="Top">
-                    <se:IconButton Margin="5" Text="Podgląd&#10;obiektu" Icon="/Resources/icon32_search.ico" Command="se:Commands.Preview"/>
-                    <se:IconButton Margin="5" Text="Edycja&#10;obiektu" Icon="/Resources/icon32_edit.ico" Command="se:Commands.Edit"/>
+                    <se:IconButton Margin="5" Text="Podgląd&#10;obiektu" Icon="/Resources/32/icon32_search.ico" Command="se:Commands.Preview"/>
+                    <se:IconButton Margin="5" Text="Edycja&#10;obiektu" Icon="/Resources/32/icon32_edit.ico" Command="se:Commands.Edit"/>
                     <Separator/>
                     <se:ExtCheckBox x:Name="chckEnabled" Margin="5" Content="Logi włączone"
 									Visibility="{Binding config_ShowButtonsWithNames, Source={x:Static p:Settings.Default}, Converter={se:conv_Bool}}"
 									Checked="chckEnabled_Checked" Unchecked="chckEnabled_Checked"/>
                     <Separator Visibility="{Binding config_ShowButtonsWithNames, Source={x:Static p:Settings.Default}, Converter={se:conv_Bool}}"/>
-                    <se:IconButton Margin="5" Text="{Tr Delete}" Icon="/Resources/icon32_delete.ico" Command="se:Commands.Delete"/>
+                    <se:IconButton Margin="5" Text="{Tr Delete}" Icon="/Resources/32/icon32_delete.ico" Command="se:Commands.Delete"/>
                     <Separator/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                     <Separator/>
-                    <se:IconButton Text="{Tr Refresh}" Margin="5" Icon="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
+                    <se:IconButton Text="{Tr Refresh}" Margin="5" Icon="/Resources/32/icon32_refresh.ico" Command="se:Commands.Refresh"/>
                     <Separator/>
-                    <se:IconButton Text="{Tr CloseWindow}" Margin="5" Icon="/Resources/icon32_close.ico" Command="se:Commands.Close"/>
+                    <se:IconButton Text="{Tr CloseWindow}" Margin="5" Icon="/Resources/32/icon32_close.ico" Command="se:Commands.Close"/>
                 </StackPanel>
             </DockPanel>
             <Border.ContextMenu>
@@ -67,7 +67,7 @@
             <!-- logs -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="{Tr Logs}" Icon="/Resources/icon32_shield_blue.ico"/>
+                    <se:Header Text="{Tr Logs}" Icon="/Resources/32/icon32_shield_blue.ico"/>
                 </TabItem.Header>
 				<m:LogsListGrid x:Name="dgList_Logs" ItemsSource="{Binding InstancesList, Mode=OneWay}" BorderBrush="Gray" BorderThickness="0,0,0,1"
                                 MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged" Sorting="dgList_Sorting"/>
@@ -75,7 +75,7 @@
             <!-- errors -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="{Tr Errors}" Icon="/Resources/icon32_shield_red.ico"/>
+                    <se:Header Text="{Tr Errors}" Icon="/Resources/32/icon32_shield_red.ico"/>
                 </TabItem.Header>
 				<m:LogsListGrid x:Name="dgList_Errors" ItemsSource="{Binding InstancesList, Mode=OneWay}" BorderBrush="Gray" BorderThickness="0,0,0,1"
                                 MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged" Sorting="dgList_Sorting"/>

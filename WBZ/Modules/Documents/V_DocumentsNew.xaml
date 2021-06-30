@@ -8,7 +8,7 @@
        xmlns:p="clr-namespace:WBZ.Properties"
        xmlns:s="clr-namespace:WBZ.Modules._shared"
        mc:Ignorable="d" Height="600" Width="900" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
-       Title="{Binding Title}" Icon="/Resources/icon32_documents.ico"
+       Title="{Binding Title}" Icon="/Resources/32/icon32_documents.ico"
        Loaded="Window_Loaded" Closed="Window_Closed"
        FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}">
     <WindowChrome.WindowChrome>
@@ -33,7 +33,7 @@
 						</Style>
 					</DockPanel.Resources>
 					<StackPanel DockPanel.Dock="Top">
-						<se:IconButton Text="{Tr Save}" Margin="5" Icon="/Resources/icon32_save.ico" Command="se:Commands.Save"/>
+						<se:IconButton Text="{Tr Save}" Margin="5" Icon="/Resources/32/icon32_save.ico" Command="se:Commands.Save"/>
 						<Separator/>
 						<se:ExtCheckBox Content="{Tr ToBuffer}" Margin="5" IsEnabled="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=!PREVIEW}"
 										IsChecked="{Binding InstanceData.Status, Converter={se:conv_Compare}, ConverterParameter=!0}"/>
@@ -41,12 +41,12 @@
 					</StackPanel>
 					<StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
 						<Separator Visibility="Collapsed"/>
-						<se:IconButton Text="{Tr FromFile}" Margin="5" Icon="/Resources/icon32_camfile.ico" Click="btnGetFromFile_Click" Visibility="Collapsed"/>
-						<se:IconButton Text="{Tr FromScanner}" Margin="5" Icon="/Resources/icon32_scanner.ico" Click="btnGetByScaner_Click" Visibility="Collapsed"/>
+						<se:IconButton Text="{Tr FromFile}" Margin="5" Icon="/Resources/32/icon32_camfile.ico" Click="btnGetFromFile_Click" Visibility="Collapsed"/>
+						<se:IconButton Text="{Tr FromScanner}" Margin="5" Icon="/Resources/32/icon32_scanner.ico" Click="btnGetByScaner_Click" Visibility="Collapsed"/>
 						<Separator/>
-						<se:IconButton Text="{Tr Refresh}" Margin="5" Icon="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
+						<se:IconButton Text="{Tr Refresh}" Margin="5" Icon="/Resources/32/icon32_refresh.ico" Command="se:Commands.Refresh"/>
 						<Separator/>
-						<se:IconButton Text="{Tr CloseWindow}" Margin="5" Icon="/Resources/icon32_close.ico" Command="se:Commands.Close"/>
+						<se:IconButton Text="{Tr CloseWindow}" Margin="5" Icon="/Resources/32/icon32_close.ico" Command="se:Commands.Close"/>
 					</StackPanel>
 				</DockPanel>
 				<Border.ContextMenu>
@@ -98,13 +98,13 @@
 							<!-- Contractor-->
 							<DockPanel DockPanel.Dock="Top">
 								<se:ExtLabel Content="Firma:" FontWeight="Bold"/>
-								<se:IconButton Icon="/Resources/icon32_contractors.ico" Click="btnSelectContractor_Click"/>
+								<se:IconButton Icon="/Resources/32/icon32_contractors.ico" Click="btnSelectContractor_Click"/>
 								<se:ExtTextBox Text="{Binding InstanceData.ContractorName}" Tag="{Binding InstanceData.ContractorID}" IsReadOnly="True"/>
 							</DockPanel>
 							<!-- Store -->
                             <DockPanel DockPanel.Dock="Top">
                                 <se:ExtLabel Content="Magazyn:" FontWeight="Bold"/>
-                                <se:IconButton Icon="/Resources/icon32_stores.ico" Click="btnSelectStore_Click"/>
+                                <se:IconButton Icon="/Resources/32/icon32_stores.ico" Click="btnSelectStore_Click"/>
                                 <se:ExtTextBox Text="{Binding InstanceData.StoreName}" Tag="{Binding InstanceData.StoreID}" IsReadOnly="True"/>
                             </DockPanel>
                             <!-- Name -->
@@ -119,7 +119,7 @@
 							</DockPanel>
 							<!-- Positions -->
 							<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-								<se:IconButton Icon="/Resources/icon32_add.ico" ToolTip="Dodaj pozycję" Click="btnPositionsAdd_Click"/>
+								<se:IconButton Icon="/Resources/32/icon32_add.ico" ToolTip="Dodaj pozycję" Click="btnPositionsAdd_Click"/>
 								<Label Content="Pozycje:"/>
 							</StackPanel>
 							<se:ExtDataGrid x:Name="dgPositions" DockPanel.Dock="Top" ItemsSource="{Binding InstanceData.Positions.DefaultView}" CanUserAddRows="False">
@@ -154,35 +154,35 @@
             <!-- tabAdditional -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="{Tr Additional}" Icon="/Resources/icon32_tools.ico"/>
+                    <se:Header Text="{Tr Additional}" Icon="/Resources/32/icon32_tools.ico"/>
                 </TabItem.Header>
                 <s:AdditionalsTab/>
             </TabItem>
             <!-- tabGroups -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="{Tr Groups}" Icon="/Resources/icon32_groups.ico"/>
+                    <se:Header Text="{Tr Groups}" Icon="/Resources/32/icon32_groups.ico"/>
                 </TabItem.Header>
                 <s:GroupsTab/>
             </TabItem>
             <!-- tabAttributes -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="{Tr Attributes}" Icon="/Resources/icon32_attributes.ico"/>
+                    <se:Header Text="{Tr Attributes}" Icon="/Resources/32/icon32_attributes.ico"/>
                 </TabItem.Header>
                 <s:AttributesTab/>
             </TabItem>
             <!-- tabAttachments -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="{Tr Attachments}" Icon="/Resources/icon32_photos.ico"/>
+                    <se:Header Text="{Tr Attachments}" Icon="/Resources/32/icon32_photos.ico"/>
                 </TabItem.Header>
                 <s:AttachmentsTab/>
             </TabItem>
             <!-- tabLogs -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="{Tr History}" Icon="/Resources/icon32_history.ico"/>
+                    <se:Header Text="{Tr History}" Icon="/Resources/32/icon32_history.ico"/>
                 </TabItem.Header>
                 <s:LogsTab/>
             </TabItem>

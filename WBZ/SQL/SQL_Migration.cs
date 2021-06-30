@@ -311,7 +311,7 @@ alter table wbz.stores rename column archival to is_archival;
 alter table wbz.stores_resources rename column store to store_id;
 alter table wbz.stores_resources rename column article to article_id;
 alter table wbz.stores_resources rename column amount to quantity;
-alter table wbz.users rename column username to codename;
+alter table wbz.users rename column username to login;
 alter table wbz.users alter column email type varchar(100);
 alter table wbz.users alter column phone type varchar(30);
 alter table wbz.users rename column archival to is_archival;

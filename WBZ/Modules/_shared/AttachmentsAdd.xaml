@@ -5,20 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
         mc:Ignorable="d" SizeToContent="Height" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner"
-        Title="{Tr AttachmentsNew}" Icon="/Resources/icon32_photos.ico"
+        Title="{Tr AttachmentsNew}" Icon="/Resources/32/icon32_photos.ico"
         Loaded="Window_Loaded">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
     <DockPanel>
         <!-- titleBar -->
-        <se:TitleBar DockPanel.Dock="Top" SubIcon="/Resources/icon32_add.ico"/>
+        <se:TitleBar DockPanel.Dock="Top" SubIcon="/Resources/32/icon32_add.ico"/>
         <!-- main -->
         <DockPanel DockPanel.Dock="Top">
             <se:IconButton Margin="5,5,0,5"
                            ToolTip="{Tr FromBrowser}" IsTextVisible="False"
                            IsEnabled="{Binding EditMode}"
-                           Icon="/Resources/icon32_web.ico"
+                           Icon="/Resources/32/icon32_web.ico"
                            Click="btnLink_Click"/>
             <TextBox x:Name="tbLink" Margin="5" VerticalContentAlignment="Center"
                      Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=30}"/>
@@ -27,7 +27,7 @@
             <se:IconButton Margin="5,5,0,5"
                             ToolTip="{Tr FromDrive}" IsTextVisible="False"
                             IsEnabled="{Binding EditMode}"
-                            Icon="/Resources/icon32_folder.ico"
+                            Icon="/Resources/32/icon32_folder.ico"
                             Click="btnDrive_Click"/>
             <TextBox x:Name="tbDrive" Margin="5" VerticalContentAlignment="Center"
                      Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=30}"/>
@@ -38,7 +38,7 @@
         </DockPanel>
         <se:IconButton Margin="5" HorizontalAlignment="Center"
                         Text="{Tr Accept}"
-                        Icon="/Resources/icon32_accept.ico"
+                        Icon="/Resources/32/icon32_accept.ico"
                         IsDefault="True"
                         Click="btnAccept_Click"/>
     </DockPanel>

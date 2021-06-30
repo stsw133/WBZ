@@ -21,7 +21,7 @@
     <Page Update="Modules\_shared\AttributeChange.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Login\Confirmation.xaml">
+    <Page Update="Login\V_Confirmation.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Modules\_base\MsgWin.xaml">
@@ -157,6 +157,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Modules\V_Settings.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\ResourceDictionary.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

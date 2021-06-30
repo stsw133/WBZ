@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
         mc:Ignorable="d" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize"  WindowStartupLocation="CenterOwner"
-        Title="{Tr AboutApp}" Icon="/Resources/icon64.ico">
+        Title="{Tr AboutApp}" Icon="/Resources/icon.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -13,28 +13,26 @@
         <!-- titleBar -->
         <se:TitleBar DockPanel.Dock="Top"/>
         <!-- main -->
-        <DockPanel Margin="0,0,0,5">
-            <DockPanel DockPanel.Dock="Top" Margin="5,5,5,0">
-                <Image Margin="10" Stretch="None" Source="/Resources/icon64.ico"/>
+        <DockPanel>
+            <DockPanel DockPanel.Dock="Top" Margin="5">
+                <Image Margin="10" Stretch="None" Source="/Resources/icon.ico"/>
                 <StackPanel VerticalAlignment="Center">
                     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Label Content="WBZ"
-                               FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.5}"
-                               FontWeight="Heavy"/>
-                        <Label Content="{Binding Version}"
-                               FontSize="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.5}"
-                               FontWeight="Heavy"/>
+						<Label Content="WBZ" FontWeight="Heavy"
+                               FontSize="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=1.5}"/>
+						<Label Content="{Binding Version}" FontWeight="Heavy"
+                               FontSize="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=1.5}"/>
                     </StackPanel>
-                    <TextBlock DockPanel.Dock="Top" Text="{Binding AboutApp}" Padding="5" TextAlignment="Center" TextWrapping="Wrap"
-                               Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=25}"/>
+                    <TextBlock Text="{Binding AboutApp}" Padding="5" TextAlignment="Center" TextWrapping="Wrap"
+                               Width="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=25}"/>
                 </StackPanel>
             </DockPanel>
-            <Border DockPanel.Dock="Top" Margin="5" BorderBrush="Gray" BorderThickness="2"/>
+            <Separator DockPanel.Dock="Top" Margin="5"/>
             <DockPanel DockPanel.Dock="Top">
                 <StackPanel VerticalAlignment="Center">
-                    <TextBlock DockPanel.Dock="Top" Text="{Binding AboutCreators}" Padding="5" TextAlignment="Center" TextWrapping="Wrap"
-                               Width="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=25}"/>
-                    <StackPanel DockPanel.Dock="Top">
+                    <TextBlock Text="{Binding AboutCreators}" Padding="5" TextAlignment="Center" TextWrapping="Wrap"
+                               Width="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=25}"/>
+                    <StackPanel Margin="5">
                         <Label Content="Karol Staszewski" Padding="5,5,5,0" HorizontalAlignment="Center" FontWeight="Medium"/>
                         <Label Content="stsw.karolstaszewski@gmail.com" Padding="5,0,5,5" HorizontalAlignment="Center" Foreground="#239"/>
                     </StackPanel>

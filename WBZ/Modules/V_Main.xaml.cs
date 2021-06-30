@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using WBZ.Models;
 using WBZ.Globals;
+using WBZ.Modules._base;
 using WBZ.Modules.Admin;
 using WBZ.Modules.Articles;
 using WBZ.Modules.Attachments;
@@ -15,13 +16,12 @@ using WBZ.Modules.Distributions;
 using WBZ.Modules.Documents;
 using WBZ.Modules.Employees;
 using WBZ.Modules.Families;
+using WBZ.Modules.Icons;
 using WBZ.Modules.Logs;
 using WBZ.Modules.Personal;
 using WBZ.Modules.Stores;
 using WBZ.Modules.Users;
 using WBZ.Modules.Vehicles;
-using WBZ.Modules.Icons;
-using WBZ.Modules._base;
 
 namespace WBZ.Modules
 {

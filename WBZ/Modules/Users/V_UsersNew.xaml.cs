@@ -88,7 +88,7 @@ namespace WBZ.Modules.Users
 		/// </summary>
 		internal override bool CheckDataValidation()
 		{
-			if (string.IsNullOrEmpty(D.InstanceData.Codename))
+			if (string.IsNullOrEmpty(D.InstanceData.Login))
 			{
 				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano nazwy użytkownika!") { Owner = this }.ShowDialog();
 				return false;

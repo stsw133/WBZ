@@ -6,7 +6,7 @@
         xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d" Height="500" Width="750" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
-        Title="{Tr Versions}" Icon="/Resources/icon32_versions.ico"
+        Title="{Tr Versions}" Icon="/Resources/32/icon32_versions.ico"
         Loaded="Window_Loaded">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
@@ -28,14 +28,14 @@
 					</Style>
 				</DockPanel.Resources>
                 <StackPanel DockPanel.Dock="Top">
-                    <se:IconButton Text="{Tr Download}" Margin="5" Icon="/Resources/icon32_download.ico" Click="btnDownload_Click"/>
+                    <se:IconButton Text="{Tr Download}" Margin="5" Icon="/Resources/32/icon32_download.ico" Click="btnDownload_Click"/>
                     <Separator/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                     <Separator/>
-                    <se:IconButton Text="{Tr Refresh}" Margin="5" Icon="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
+                    <se:IconButton Text="{Tr Refresh}" Margin="5" Icon="/Resources/32/icon32_refresh.ico" Command="se:Commands.Refresh"/>
                     <Separator/>
-                    <se:IconButton Text="{Tr CloseWindow}" Margin="5" Icon="/Resources/icon32_close.ico" Command="se:Commands.Close"/>
+                    <se:IconButton Text="{Tr CloseWindow}" Margin="5" Icon="/Resources/32/icon32_close.ico" Command="se:Commands.Close"/>
                 </StackPanel>
             </DockPanel>
             <Border.ContextMenu>

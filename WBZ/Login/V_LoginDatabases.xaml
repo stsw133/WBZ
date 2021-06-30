@@ -5,43 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
         mc:Ignorable="d" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner"
-        Title="{Tr DatabasesList}" Icon="/Resources/icon32_database.ico">
+        Title="{Tr DatabasesList}" Icon="/Resources/32/icon32_database.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
     <DockPanel>
         <!-- titleBar -->
-        <se:TitleBar DockPanel.Dock="Top" SubIcon="/Resources/icon32_settings.ico"/>
-        <!-- buttonsPanel -->
-        <Border DockPanel.Dock="Bottom" Background="#EEE" BorderBrush="Gray" BorderThickness="0,1,0,0">
-			<se:IconButton Text="{Tr Save}" Icon="\Resources\icon32_accept.ico" Margin="5" HorizontalAlignment="Center" Click="btnSave_Click"/>
-        </Border>
-        <!-- listBox -->
+        <se:TitleBar DockPanel.Dock="Top" SubIcon="/Resources/32/icon32_settings.ico"/>
+        <!-- buttons -->
+		<UniformGrid DockPanel.Dock="Bottom" Rows="1" HorizontalAlignment="Center">
+			<se:IconButton Text="{Tr Accept}" Margin="5" Icon="\Resources\32\icon32_accept.ico" Click="BtnSave_Click"/>
+			<se:IconButton Text="{Tr Cancel}" Margin="5" Icon="\Resources\32\icon32_cancel.ico" Click="BtnSave_Click"/>
+		</UniformGrid>
+		<Separator DockPanel.Dock="Bottom" Margin="10,5"/>
+		<!-- listBox -->
         <DockPanel DockPanel.Dock="Left">
 			<StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-				<Button Margin="5,5,0,5" ToolTip="Dodaj nowe połączenie z bazą danych" Click="btnAddDatabase_Click">
-                    <Grid>
-						<Image Height="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=2}" Margin="2"
-                               Source="/Resources/icon32_database.ico"/>
-						<Image Height="{Binding iSize, Source={x:Static se:Settings.Default}}" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                               Source="/Resources/icon32_add.ico"/>
-                    </Grid>
-                </Button>
-				<Button Margin="5,5,0,5" ToolTip="Usuń zaznaczone połączenie z bazą danych" Click="btnRemoveDatabase_Click">
-                    <Grid>
-						<Image Height="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=2}" Margin="2"
-                               Source="/Resources/icon32_database.ico"/>
-						<Image Height="{Binding iSize, Source={x:Static se:Settings.Default}}" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                               Source="/Resources/icon32_remove.ico"/>
-                    </Grid>
-                </Button>
-            </StackPanel>
-			<ListBox x:Name="lbDatabases" Margin="5,0,5,5" Width="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=15}"
+				<se:IconButton CornerRadius="0" Margin="5,5,0,5" IsTextVisible="False" ToolTip="Dodaj nowe połączenie z bazą danych"
+							   Icon="/Resources/32/icon32_database.ico" SubIcon="/Resources/16/icon16_add.ico"
+							   Click="BtnAddDatabase_Click"/>
+				<se:IconButton CornerRadius="0" Margin="5,5,0,5" IsTextVisible="False" ToolTip="Usuń zaznaczone połączenie z bazą danych"
+							   Icon="/Resources/32/icon32_database.ico" SubIcon="/Resources/32/icon32_remove.ico"
+							   Click="BtnRemoveDatabase_Click"/>
+			</StackPanel>
+			<ListBox x:Name="LstBoxDatabases" Margin="5,0,5,5" Width="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=15}"
 					 ItemsSource="{Binding Databases}" SelectedValuePath="Name" DisplayMemberPath="Name"
-					 SelectionChanged="lbDatabases_SelectionChanged"/>
+					 SelectionChanged="LstBoxDatabases_SelectionChanged"/>
         </DockPanel>
         <!-- main -->
-		<UniformGrid x:Name="gridDatabaseInfo" DataContext="{Binding ElementName=lbDatabases, Path=SelectedItem}" Margin="5" VerticalAlignment="Center" IsEnabled="False"
+		<UniformGrid x:Name="GrdDatabaseInfo" DataContext="{Binding SelectedItem, ElementName=LstBoxDatabases}" Margin="5" VerticalAlignment="Center" IsEnabled="False"
 					 Width="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=30}" Columns="1">
 			<UniformGrid.Resources>
 				<Style TargetType="{x:Type se:ExtLabel}">
@@ -61,32 +53,32 @@
 			<!-- Server -->
 			<DockPanel>
 				<se:ExtLabel Content="Serwer:"/>
-				<se:ExtTextBox x:Name="tbServer" Text="{Binding Server}"/>
+				<se:ExtTextBox x:Name="TxtBoxServer" Text="{Binding Server}"/>
 			</DockPanel>
 			<!-- Port -->
 			<DockPanel>
 				<se:ExtLabel Content="Port:"/>
-				<se:ExtTextBox x:Name="tbPort" Text="{Binding Port}"/>
+				<se:ExtTextBox x:Name="TxtBoxPort" Text="{Binding Port}"/>
 			</DockPanel>
 			<!-- Database -->
 			<DockPanel>
 				<se:ExtLabel Content="Baza:"/>
-				<se:ExtTextBox x:Name="tbDatabase" Text="{Binding Database, Mode=TwoWay}"/>
+				<se:ExtTextBox x:Name="TxtBoxDatabase" Text="{Binding Database}"/>
 			</DockPanel>
 			<!-- Username -->
 			<DockPanel>
 				<se:ExtLabel Content="Użytkownik:"/>
-				<se:ExtTextBox x:Name="tbUsername" Text="{Binding Username, Mode=TwoWay}"/>
+				<se:ExtTextBox x:Name="TxtBoxUsername" Text="{Binding Username}"/>
 			</DockPanel>
 			<!-- Password -->
 			<DockPanel>
 				<se:ExtLabel Content="Hasło:"/>
-				<PasswordBox x:Name="pbPassword" Margin="5" VerticalContentAlignment="Center" PasswordChanged="pbPassword_PasswordChanged"/>
+				<PasswordBox x:Name="PwdBoxPassword" Margin="5" VerticalContentAlignment="Center" PasswordChanged="PwdBoxPassword_PasswordChanged"/>
 			</DockPanel>
 			<!-- Status -->
 			<DockPanel>
 				<se:ExtLabel Content="Status:"/>
-				<Label x:Name="lblStatus" Margin="5" VerticalContentAlignment="Center"/>
+				<Label x:Name="LblStatus" Margin="5" VerticalContentAlignment="Center"/>
 			</DockPanel>
 			<!-- buttons -->
 			<UniformGrid HorizontalAlignment="Center" Rows="1">
@@ -95,13 +87,14 @@
 						<Setter Property="Margin" Value="2.5,0"/>
 					</Style>
 				</UniformGrid.Resources>
-				<se:IconButton IsTextVisible="False" ToolTip="{Tr Test}" Icon="/Resources/icon32_test.ico" Click="btnTest_Click"/>
-				<se:IconButton IsTextVisible="False" ToolTip="{Tr UpdateDatabase}" Icon="/Resources/icon32_database.ico"
+				<se:IconButton IsTextVisible="False" ToolTip="{Tr Test}" Icon="/Resources/32/icon32_test.ico"
+							   Click="BtnTest_Click" IsDefault="True"/>
+				<se:IconButton IsTextVisible="False" ToolTip="{Tr UpdateDatabase}" Icon="/Resources/32/icon32_database.ico"
 							   IsEnabled="{Binding DataContext.CanUpdateDatabase, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
-							   Click="btnUpdateDatabase_Click"/>
-				<se:IconButton IsTextVisible="False" ToolTip="{Tr CreateAdmin}" Icon="/Resources/icon32_admin.ico"
+							   Click="BtnUpdateDatabase_Click"/>
+				<se:IconButton IsTextVisible="False" ToolTip="{Tr CreateAdmin}" Icon="/Resources/32/icon32_admin.ico"
 							   IsEnabled="{Binding DataContext.CanCreateAdmin, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
-							   Click="btnCreateAdmin_Click"/>
+							   Click="BtnCreateAdmin_Click"/>
 			</UniformGrid>
 		</UniformGrid>
     </DockPanel>

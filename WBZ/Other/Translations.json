@@ -587,6 +587,10 @@
 		"en": "Register",
 		"pl": "Rejestracja"
 	},
+	"RememberLoginData": {
+		"en": "Remember login data",
+		"pl": "Pamiętaj dane logowania"
+	},
 	"Repass": {
 		"en": "Repeat pass.",
 		"pl": "Powt. hasło"

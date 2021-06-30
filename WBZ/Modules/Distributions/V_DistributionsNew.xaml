@@ -8,7 +8,7 @@
        xmlns:p="clr-namespace:WBZ.Properties"
        xmlns:s="clr-namespace:WBZ.Modules._shared"
        mc:Ignorable="d" Height="600" Width="900" ResizeMode="CanResize"
-       Title="{Binding Title}" Icon="/Resources/icon32_food.ico"
+       Title="{Binding Title}" Icon="/Resources/32/icon32_food.ico"
        Loaded="Window_Loaded" Closed="Window_Closed"
        FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}">
     <WindowChrome.WindowChrome>
@@ -31,7 +31,7 @@
                 <StackPanel DockPanel.Dock="Top">
                     <se:IconButton Text="{Tr Save}" Margin="5"
                                     IsTextVisible="{Binding config_ShowButtonsWithNames, Source={x:Static p:Settings.Default}}"
-                                    Icon="/Resources/icon32_save.ico"
+                                    Icon="/Resources/32/icon32_save.ico"
                                     Command="se:Commands.Save"/>
                     <Separator/>
                     <CheckBox Content="{Tr ToBuffer}" Margin="5"
@@ -43,7 +43,7 @@
                     <Separator/>
                     <se:IconButton Text="{Tr Print}" Margin="5"
                                     IsTextVisible="{Binding config_ShowButtonsWithNames, Source={x:Static p:Settings.Default}}"
-                                    Icon="/Resources/icon32_printer.ico"
+                                    Icon="/Resources/32/icon32_printer.ico"
                                     Click="btnPrint_Click">
                         <se:IconButton.ContextMenu>
                             <ContextMenu>
@@ -54,12 +54,12 @@
                     <Separator/>
                     <se:IconButton Text="{Tr Refresh}" Margin="5"
                                     IsTextVisible="{Binding config_ShowButtonsWithNames, Source={x:Static p:Settings.Default}}"
-                                    Icon="/Resources/icon32_refresh.ico"
+                                    Icon="/Resources/32/icon32_refresh.ico"
                                     Command="se:Commands.Refresh"/>
                     <Separator/>
                     <se:IconButton Text="{Tr CloseWindow}" Margin="5"
                                     IsTextVisible="{Binding config_ShowButtonsWithNames, Source={x:Static p:Settings.Default}}"
-                                    Icon="/Resources/icon32_close.ico"
+                                    Icon="/Resources/32/icon32_close.ico"
                                     Command="se:Commands.Close"/>
                 </StackPanel>
             </DockPanel>
@@ -90,7 +90,7 @@
                             <Button ToolTip="Dodaj pozycję" HorizontalAlignment="Left"
                                     Height="{Binding FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=2}"
                                     Click="btnPositionsAdd_Click">
-                                <Image Margin="2" Source="/Resources/icon32_add.ico"/>
+                                <Image Margin="2" Source="/Resources/32/icon32_add.ico"/>
                             </Button>
                             <Label Content="Pozycje:"/>
                         </StackPanel>
@@ -197,35 +197,35 @@
             <!-- tabAdditional -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="Dodatkowe" Icon="/Resources/icon32_tools.ico"/>
+                    <se:Header Text="Dodatkowe" Icon="/Resources/32/icon32_tools.ico"/>
                 </TabItem.Header>
                 <s:AdditionalsTab/>
             </TabItem>
             <!-- tabGroups -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="Grupy" Icon="/Resources/icon32_groups.ico"/>
+                    <se:Header Text="Grupy" Icon="/Resources/32/icon32_groups.ico"/>
                 </TabItem.Header>
                 <s:GroupsTab/>
             </TabItem>
             <!-- tabAttributes -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="Atrybuty" Icon="/Resources/icon32_attributes.ico"/>
+                    <se:Header Text="Atrybuty" Icon="/Resources/32/icon32_attributes.ico"/>
                 </TabItem.Header>
                 <s:AttributesTab/>
             </TabItem>
             <!-- tabAttachments -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="Załączniki" Icon="/Resources/icon32_photos.ico"/>
+                    <se:Header Text="Załączniki" Icon="/Resources/32/icon32_photos.ico"/>
                 </TabItem.Header>
                 <s:AttachmentsTab/>
             </TabItem>
             <!-- tabLogs -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="Historia" Icon="/Resources/icon32_history.ico"/>
+                    <se:Header Text="Historia" Icon="/Resources/32/icon32_history.ico"/>
                 </TabItem.Header>
                 <s:LogsTab/>
             </TabItem>

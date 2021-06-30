@@ -12,12 +12,12 @@
                 <Button DockPanel.Dock="Right" Margin="2" VerticalAlignment="Center" ToolTip="{Tr ClearFilters}" Command="se:Commands.Clear">
                     <Image Margin="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.15}"
                            Height="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.5}"
-                           Source="/Resources/icon32_clear.ico"/>
+                           Source="/Resources/32/icon32_clear.ico"/>
                 </Button>
                 <Button DockPanel.Dock="Right" Margin="2,2,0,2" VerticalAlignment="Center" ToolTip="{Tr ConfigureFilters}">
                     <Image Margin="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.15}"
                            Height="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.5}"
-                           Source="/Resources/icon32_settings.ico"/>
+                           Source="/Resources/32/icon32_settings.ico"/>
                 </Button>
                 <Label Content="{Tr Filter, Suffix=':'}" VerticalAlignment="Center"/>
                 <ComboBox Margin="5,0" VerticalAlignment="Center" FontWeight="Medium"
@@ -29,13 +29,13 @@
                               Visibility="{Binding HasGroups, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Converter={se:conv_Bool}}">
                     <Image Margin="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.15}"
                            Height="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.5}"
-                           Source="/Resources/icon32_groups.ico"/>
+                           Source="/Resources/32/icon32_groups.ico"/>
                 </ToggleButton>
                 <ToggleButton Margin="2,2,0,2" ToolTip="{Tr ShowFilters}" IsChecked="{Binding AreFiltersVisible}"
                               Visibility="{Binding HasFilters, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Converter={se:conv_Bool}}">
                     <Image Margin="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=0.15}"
                            Height="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=OneWay, Converter={se:conv_Size}, ConverterParameter=1.5}"
-                           Source="/Resources/icon32_filter.ico"/>
+                           Source="/Resources/32/icon32_filter.ico"/>
                 </ToggleButton>
                 <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
                     <Label Content="{Tr LimitPerPage, Suffix=':'}" Margin="5,0,0,0" VerticalAlignment="Center"/>

@@ -22,10 +22,10 @@ namespace WBZ.Modules._base
 		{
 			get
 			{
-				if		(Mode == Commands.Type.NEW)			return "/Resources/icon32_add.ico";
-				else if (Mode == Commands.Type.DUPLICATE)	return "/Resources/icon32_duplicate.ico";
-				else if (Mode == Commands.Type.EDIT)		return "/Resources/icon32_edit.ico";
-				else if (Mode == Commands.Type.PREVIEW)		return "/Resources/icon32_search.ico";
+				if		(Mode == Commands.Type.NEW)			return "/Resources/32/icon32_add.ico";
+				else if (Mode == Commands.Type.DUPLICATE)	return "/Resources/32/icon32_duplicate.ico";
+				else if (Mode == Commands.Type.EDIT)		return "/Resources/32/icon32_edit.ico";
+				else if (Mode == Commands.Type.PREVIEW)		return "/Resources/32/icon32_search.ico";
 				else										return null;
 			}
 		}

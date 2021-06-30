@@ -12,9 +12,9 @@
                  Drop="lbAttachments_Drop" SelectionChanged="lbAttachments_SelectionChanged">
             <ListBox.ContextMenu>
 				<ContextMenu IsEnabled="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=!PREVIEW}">
-                    <se:ExtMenuItem Header="{Tr New}" IconUri="/Resources/icon32_add.ico" Click="btnAttachmentAdd_Click"/>
-                    <se:ExtMenuItem Header="{Tr Edit}" IconUri="/Resources/icon32_edit.ico" Click="btnAttachmentEdit_Click"/>
-                    <se:ExtMenuItem Header="{Tr Delete}" IconUri="/Resources/icon32_delete.ico" Click="btnAttachmentRemove_Click"/>
+                    <se:ExtMenuItem Header="{Tr New}" IconUri="/Resources/32/icon32_add.ico" Click="btnAttachmentAdd_Click"/>
+                    <se:ExtMenuItem Header="{Tr Edit}" IconUri="/Resources/32/icon32_edit.ico" Click="btnAttachmentEdit_Click"/>
+                    <se:ExtMenuItem Header="{Tr Delete}" IconUri="/Resources/32/icon32_delete.ico" Click="btnAttachmentRemove_Click"/>
                 </ContextMenu>
             </ListBox.ContextMenu>
         </ListBox>

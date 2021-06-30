@@ -7,7 +7,7 @@
         xmlns:g="clr-namespace:WBZ.Globals"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d" Height="600" Width="900" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
-        Title="{Tr Stats}" Icon="/Resources/icon32_stats.ico">
+        Title="{Tr Stats}" Icon="/Resources/32/icon32_stats.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -28,14 +28,14 @@
 					</Style>
 				</DockPanel.Resources>
 				<StackPanel DockPanel.Dock="Top">
-                    <se:IconButton Text="{Tr GenerateReport}" Margin="5" Icon="/Resources/icon32_list.ico" Click="btnReportGenerate_Click"/>
+                    <se:IconButton Text="{Tr GenerateReport}" Margin="5" Icon="/Resources/32/icon32_list.ico" Click="btnReportGenerate_Click"/>
                     <Separator/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
                     <Separator/>
-                    <se:IconButton Text="{Tr Refresh}" Margin="5" Icon="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
+                    <se:IconButton Text="{Tr Refresh}" Margin="5" Icon="/Resources/32/icon32_refresh.ico" Command="se:Commands.Refresh"/>
                     <Separator/>
-                    <se:IconButton Text="{Tr CloseWindow}" Margin="5" Icon="/Resources/icon32_close.ico" Command="se:Commands.Close"/>
+                    <se:IconButton Text="{Tr CloseWindow}" Margin="5" Icon="/Resources/32/icon32_close.ico" Command="se:Commands.Close"/>
                 </StackPanel>
             </DockPanel>
             <Border.ContextMenu>
@@ -53,7 +53,7 @@
                         <Border Background="White" BorderBrush="Gray" BorderThickness="1">
                             <ScrollViewer Padding="10">
                                 <DockPanel>
-									<se:Header DockPanel.Dock="Top" Margin="3" Text="Towary" Icon="/Resources/icon32_articles.ico"
+									<se:Header DockPanel.Dock="Top" Margin="3" Text="Towary" Icon="/Resources/32/icon32_articles.ico"
 											   IconSize="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=2}"/>
 									<Label DockPanel.Dock="Top" Content="Towary otrzymane wg lat i miesięcy (kg):" VerticalAlignment="Center" FontWeight="Normal"/>
                                     <DataGrid DockPanel.Dock="Top" Margin="5,0,5,5" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray" BorderThickness="1"

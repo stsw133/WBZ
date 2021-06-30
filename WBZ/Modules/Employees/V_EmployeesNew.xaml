@@ -8,7 +8,7 @@
        xmlns:p="clr-namespace:WBZ.Properties"
        xmlns:s="clr-namespace:WBZ.Modules._shared"
        mc:Ignorable="d" Height="600" Width="900" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
-       Title="{Binding Title}" Icon="/Resources/icon32_briefcase.ico"
+       Title="{Binding Title}" Icon="/Resources/32/icon32_briefcase.ico"
        Loaded="Window_Loaded" Closed="Window_Closed"
        FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}">
     <WindowChrome.WindowChrome>
@@ -33,14 +33,14 @@
 						</Style>
 					</DockPanel.Resources>
 					<StackPanel DockPanel.Dock="Top">
-						<se:IconButton Text="{Tr Save}" Margin="5" Icon="/Resources/icon32_save.ico" Command="se:Commands.Save"/>
+						<se:IconButton Text="{Tr Save}" Margin="5" Icon="/Resources/32/icon32_save.ico" Command="se:Commands.Save"/>
 						<Separator/>
 					</StackPanel>
 					<StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
 						<Separator/>
-						<se:IconButton Text="{Tr Refresh}" Margin="5" Icon="/Resources/icon32_refresh.ico" Command="se:Commands.Refresh"/>
+						<se:IconButton Text="{Tr Refresh}" Margin="5" Icon="/Resources/32/icon32_refresh.ico" Command="se:Commands.Refresh"/>
 						<Separator/>
-						<se:IconButton Text="{Tr CloseWindow}" Margin="5" Icon="/Resources/icon32_close.ico" Command="se:Commands.Close"/>
+						<se:IconButton Text="{Tr CloseWindow}" Margin="5" Icon="/Resources/32/icon32_close.ico" Command="se:Commands.Close"/>
 					</StackPanel>
 				</DockPanel>
 				<Border.ContextMenu>
@@ -141,35 +141,35 @@
             <!-- tabAdditional -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="{Tr Additional}" Icon="/Resources/icon32_tools.ico"/>
+                    <se:Header Text="{Tr Additional}" Icon="/Resources/32/icon32_tools.ico"/>
                 </TabItem.Header>
                 <s:AdditionalsTab/>
             </TabItem>
             <!-- tabGroups -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="{Tr Groups}" Icon="/Resources/icon32_groups.ico"/>
+                    <se:Header Text="{Tr Groups}" Icon="/Resources/32/icon32_groups.ico"/>
                 </TabItem.Header>
                 <s:GroupsTab/>
             </TabItem>
             <!-- tabAttributes -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="{Tr Attributes}" Icon="/Resources/icon32_attributes.ico"/>
+                    <se:Header Text="{Tr Attributes}" Icon="/Resources/32/icon32_attributes.ico"/>
                 </TabItem.Header>
                 <s:AttributesTab/>
             </TabItem>
             <!-- tabAttachments -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="{Tr Attachments}" Icon="/Resources/icon32_photos.ico"/>
+                    <se:Header Text="{Tr Attachments}" Icon="/Resources/32/icon32_photos.ico"/>
                 </TabItem.Header>
                 <s:AttachmentsTab/>
             </TabItem>
             <!-- tabLogs -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="{Tr History}" Icon="/Resources/icon32_history.ico"/>
+                    <se:Header Text="{Tr History}" Icon="/Resources/32/icon32_history.ico"/>
                 </TabItem.Header>
                 <s:LogsTab/>
             </TabItem>

@@ -36,7 +36,7 @@ namespace WBZ
 
                 var sqlCmd = new NpgsqlCommand(@"select *
 					from wbz.users
-					where codename=@login and password=@password", sqlConn);
+					where login=@login and password=@password", sqlConn);
                 sqlCmd.Parameters.AddWithValue("login", login);
                 sqlCmd.Parameters.AddWithValue("password", password);
                 using (var sqlDA = new NpgsqlDataAdapter(sqlCmd))
@@ -101,11 +101,11 @@ namespace WBZ
 		/// Tworzy konto użytkownika/administratora w bazie o podanych parametrach
 		/// </summary>
 		/// <param name="email">Adres e-mail</param>
-		/// <param name="codename">Nazwa użytkownika</param>
+		/// <param name="login">Nazwa użytkownika</param>
 		/// <param name="password">Hasło do konta</param>
 		/// <param name="admin">Czy nadać uprawnienia administracyjne</param>
 		/// <returns></returns>
-		internal static bool Register(string email, string codename, string password, bool admin = true)
+		internal static bool Register(string email, string login, string password, bool admin = true)
 		{
 			bool result = false;
 
@@ -114,10 +114,10 @@ namespace WBZ
 				using (var sqlConn = ConnOpenedWBZ)
 				using (var sqlTran = sqlConn.BeginTransaction())
 				{
-					var sqlCmd = new NpgsqlCommand(@"insert into wbz.users (email, codename, password)
-						values (@email, @codename, @password) returning id", sqlConn, sqlTran);
+					var sqlCmd = new NpgsqlCommand(@"insert into wbz.users (email, login, password)
+						values (@email, @login, @password) returning id", sqlConn, sqlTran);
 					sqlCmd.Parameters.AddWithValue("email", email);
-					sqlCmd.Parameters.AddWithValue("codename", codename);
+					sqlCmd.Parameters.AddWithValue("login", login);
 					sqlCmd.Parameters.AddWithValue("password", Global.sha256(password));
 					int id = (int)sqlCmd.ExecuteScalar();
 
@@ -170,7 +170,7 @@ namespace WBZ
                 sqlCmd.Parameters.AddWithValue("email", email);
                 sqlCmd.ExecuteNonQuery();
 
-                sqlCmd = new NpgsqlCommand(@"select codename, password
+                sqlCmd = new NpgsqlCommand(@"select login, password
 					from wbz.users
 					where email=@email", sqlConn, sqlTran);
                 sqlCmd.Parameters.AddWithValue("email", email);
@@ -540,43 +540,43 @@ namespace WBZ
 
 			return result;
 		}
-		#endregion
+        #endregion
 
-		#region basic
-		[STAThread]
-		internal static void Error(string msg, Exception ex, MV module, int instanceID = 0, bool showWin = true, bool save = true)
+        #region basic
+        [STAThread]
+        internal static void Error(string msg, Exception ex, MV module, int instanceID = 0, bool showWin = true, bool saveToSQL = true)
         {
-			try
-			{
-				var logsModule = Config.GetModule(nameof(Modules.Logs));
-				var error = new M_Log()
-				{
-					ID = NewInstanceID(logsModule),
-					InstanceID = instanceID,
-					Module = module,
-					Type = 2,
-					UserID = Config.User.ID
-				};
+            try
+            {
+                var moduleLogs = Config.GetModule(nameof(Modules.Logs));
+                var error = new M_Log()
+                {
+                    ID = NewInstanceID(moduleLogs),
+                    InstanceID = instanceID,
+                    Module = module,
+                    Type = 2,
+                    UserID = Config.User.ID
+                };
 
-				var d = Application.Current.Dispatcher;
-				d.BeginInvoke((Action)OpenErrorWindow);
+                var d = Application.Current.Dispatcher;
+                d.BeginInvoke((Action)OpenErrorWindow);
 
-				void OpenErrorWindow()
-				{
+                void OpenErrorWindow()
+                {
 #if DEBUG
-					error.Content = ex.ToString();
+                    error.Content = ex.ToString();
 #else
 					error.Content = ex.Message;
 #endif
-					if (showWin)
-						new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"{msg}:{Environment.NewLine}{error.Content}").ShowDialog();
-					if (save)
-                        SetInstance(logsModule, error, Commands.Type.NEW);
-				}
-			}
-			catch { }
-		}
-		#endregion
+                    if (showWin)
+                        new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"{msg}:{Environment.NewLine}{error.Content}").ShowDialog();
+                    if (saveToSQL)
+                        SetInstance(moduleLogs, error, Commands.Type.NEW);
+                }
+            }
+            catch { }
+        }
+        #endregion
 
 		#region modules
 		/// <summary>
@@ -867,11 +867,11 @@ namespace WBZ
 				(mode == SelectMode.COUNT ? "count (*) "
 				: mode == SelectMode.SIMPLE ?
 				$@"
-					{a}.id, {a}.codename, '' as newpass, {a}.forename, {a}.lastname,
+					{a}.id, {a}.login, '' as newpass, {a}.forename, {a}.lastname,
 					{a}.email, {a}.phone, {a}.is_archival, {a}.is_blocked
 				" :
 				$@"
-					{a}.id, {a}.codename, '' as newpass, {a}.forename, {a}.lastname,
+					{a}.id, {a}.login, '' as newpass, {a}.forename, {a}.lastname,
 					{a}.email, {a}.phone, {a}.is_archival, {a}.is_blocked
 				") +
 				$@"
@@ -1555,15 +1555,15 @@ namespace WBZ
 					/// USERS
 					case nameof(Modules.Users):
 						var user = instance as M_User;
-						query = @"insert into wbz.users (id, username, password, forename, lastname, email, phone, is_archival, is_blocked)
+						query = @"insert into wbz.users (id, login, password, forename, lastname, email, phone, is_archival, is_blocked)
 								values (@id, @username, @password, @forename, @lastname, @email, @phone, @is_archival, @is_blocked)
 								on conflict(id) do
-								update set username=@username, " + (!string.IsNullOrEmpty(user.Newpass) ? "password = @password," : "") + @"
+								update set login=@login, " + (!string.IsNullOrEmpty(user.Newpass) ? "password = @password," : "") + @"
 									forename=@forename, lastname=@lastname, email=@email, phone=@phone, is_archival=@is_archival, is_blocked=@is_blocked";
 						using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
 						{
 							sqlCmd.Parameters.AddWithValue("id", user.ID);
-							sqlCmd.Parameters.AddWithValue("username", user.Codename);
+							sqlCmd.Parameters.AddWithValue("login", user.Login);
 							sqlCmd.Parameters.AddWithValue("password", Global.sha256(user.Newpass));
 							sqlCmd.Parameters.AddWithValue("forename", user.Forename);
 							sqlCmd.Parameters.AddWithValue("lastname", user.Lastname);

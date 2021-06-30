@@ -6,7 +6,7 @@
         xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
         xmlns:p="clr-namespace:WBZ.Properties"
         mc:Ignorable="d" Height="450" Width="675" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
-        Title="Konsola SQL" Icon="/Resources/icon32_code.ico">
+        Title="Konsola SQL" Icon="/Resources/32/icon32_code.ico">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
@@ -15,7 +15,7 @@
         <se:TitleBar DockPanel.Dock="Top"/>
         <!-- main -->
         <se:IconButton DockPanel.Dock="Bottom" Margin="5,0,5,5" HorizontalAlignment="Center"
-                       IsTextVisible="False" Icon="/Resources/icon32_accept.ico" IsDefault="True"
+                       IsTextVisible="False" Icon="/Resources/32/icon32_accept.ico" IsDefault="True"
                        Click="btnStart_Click"/>
         <Grid>
             <Grid.RowDefinitions>

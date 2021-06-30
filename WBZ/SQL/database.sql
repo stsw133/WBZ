@@ -33,7 +33,7 @@ CREATE TABLE wbz.config
 CREATE TABLE wbz.users
 (
     id serial PRIMARY KEY,
-    codename character varying(20) NOT NULL UNIQUE,
+    login character varying(20) NOT NULL UNIQUE,
     password text NOT NULL,
     email character varying(100) NOT NULL UNIQUE,
     phone character varying(30),

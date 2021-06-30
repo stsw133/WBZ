@@ -16,7 +16,7 @@
 					<Image.Source>
 						<Binding Path="InstanceData.IconContent">
 							<Binding.TargetNullValue>
-								<ImageSource>pack://application:,,,/Resources/icon32_photos.ico</ImageSource>
+								<ImageSource>pack://application:,,,/Resources/32/icon32_photos.ico</ImageSource>
 							</Binding.TargetNullValue>
 						</Binding>
 					</Image.Source>
