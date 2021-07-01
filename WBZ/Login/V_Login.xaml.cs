@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
 using System.Net.Http;
 using WBZ.Globals;
 using WBZ.Modules._base;
@@ -58,18 +57,18 @@ namespace WBZ.Login
                 /// check app version
                 if (Fn.AppVersion() == Config.VersionNewest)
                 {
-                    D.StatusIcon = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resources/32/icon32_shield_green.ico"));
+                    D.StatusIcon = Fn.LoadImage(Properties.Resources.icon32_shield_green);
                     D.StatusName = "Posiadasz aktualną wersję programu.";
                 }
                 else
                 {
-                    D.StatusIcon = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resources/32/icon32_shield_orange.ico"));
+                    D.StatusIcon = Fn.LoadImage(Properties.Resources.icon32_shield_orange);
                     D.StatusName = "Posiadasz nieaktualną wersję programu. Najnowsza wersja: " + Config.VersionNewest;
                 }
             }
             catch
             {
-                D.StatusIcon = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resources/32/icon32_shield_white.ico"));
+                D.StatusIcon = Fn.LoadImage(Properties.Resources.icon32_shield_white);
                 D.StatusName = null;
             }
         }
@@ -79,7 +78,7 @@ namespace WBZ.Login
         /// </summary>
         private void BtnDatabases_Click(object sender, RoutedEventArgs e)
         {
-            if (new LoginDatabases() { Owner = this }.ShowDialog() == true)
+            if (new Databases() { Owner = this }.ShowDialog() == true)
                 Window_Loaded(null, null);
         }
 
@@ -88,15 +87,15 @@ namespace WBZ.Login
         /// </summary>
         private async void CmbBoxDatabase_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var cbDatabase = sender as ComboBox;
-            if (cbDatabase.SelectedIndex < 0)
-                return;
-
-            var db = cbDatabase.SelectedItem as DB;
-
             Cursor = Cursors.Wait;
             try
             {
+                var cbDatabase = sender as ComboBox;
+                if (cbDatabase.SelectedIndex < 0)
+                    return;
+
+                var db = cbDatabase.SelectedItem as DB;
+
                 await Task.Run(() =>
                 {
                     SQL.connWBZ = StswExpress.SQL.MakeConnString(db.Server, db.Port, db.Database, db.Username, db.Password);
@@ -107,7 +106,7 @@ namespace WBZ.Login
             }
             catch (Exception ex)
             {
-                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"Błąd zmiany bazy:{Environment.NewLine}{ex.Message}") { Owner = this }.ShowDialog();
+                SQL.Error("Błąd zmiany bazy", ex, Config.ListModules[0]);
             }
             Cursor = Cursors.Arrow;
         }
@@ -117,35 +116,42 @@ namespace WBZ.Login
         /// </summary>
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
-            if (Fn.AppDatabase.Version == null)
+            try
             {
-                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"Nie udało się połączyć z wybraną bazą danych!") { Owner = this }.ShowDialog();
-                return;
-            }
-            else if (Fn.AppDatabase.Version != Fn.AppVersion())
-            {
-                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, $"Wersja aplikacji {Fn.AppVersion()} nie zgadza się z wersją bazy danych {Fn.AppDatabase.Version}!" +
-                    Environment.NewLine + "Zaktualizuj bazę z menu dodatkowych opcji lub skontaktuj się z administratorem.") { Owner = this }.ShowDialog();
-                return;
-            }
+                if (Fn.AppDatabase.Version == null)
+                {
+                    new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.ERROR, $"Nie udało się połączyć z wybraną bazą danych!") { Owner = this }.ShowDialog();
+                    return;
+                }
+                else if (Fn.AppDatabase.Version != Fn.AppVersion())
+                {
+                    new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, $"Wersja aplikacji {Fn.AppVersion()} nie zgadza się z wersją bazy danych {Fn.AppDatabase.Version}!" +
+                        Environment.NewLine + "Zaktualizuj bazę z menu dodatkowych opcji lub skontaktuj się z administratorem.") { Owner = this }.ShowDialog();
+                    return;
+                }
 
-            if (SQL.Login(Props.Default.login_Username, Global.sha256(PwdBoxPassword.Password)))
-            {
-                new Modules.Main().Show();
-                Close();
-            }
+                if (SQL.Login(Props.Default.login_Username, Global.sha256(PwdBoxPassword.Password)))
+                {
+                    new Modules.Main().Show();
+                    Close();
+                }
 
-            if (Props.Default.login_RememberMe)
-            {
-                Props.Default.login_Password = PwdBoxPassword.Password;
+                if (Props.Default.login_RememberMe)
+                {
+                    Props.Default.login_Password = PwdBoxPassword.Password;
+                }
+                else
+                {
+                    Props.Default.login_Username = string.Empty;
+                    Props.Default.login_Password = string.Empty;
+                    Props.Default.login_RememberMe = false;
+                }
+                Props.Default.Save();
             }
-            else
+            catch (Exception ex)
             {
-                Props.Default.login_Username = string.Empty;
-                Props.Default.login_Password = string.Empty;
-                Props.Default.login_RememberMe = false;
+                SQL.Error("Błąd logowania do systemu", ex, Config.ListModules[0]);
             }
-            Props.Default.Save();
         }
 
         /// <summary>
@@ -158,23 +164,31 @@ namespace WBZ.Login
         /// </summary>
         private void BtnGenerateNewpass_Click(object sender, RoutedEventArgs e)
         {
-            var window = new MsgWin(MsgWin.Type.InputBox, "Generowanie nowego hasła", "Podaj e-mail konta, którego hasło chcesz odzyskać:") { Owner = this };
-            if (window.ShowDialog() == true)
+            try
             {
-                var rnd = new Random().Next(100_000, 1_000_000);
-                if (Mail.SendMail(Props.Default.config_Email_Email, new string[] { window.Value },
-                        "WBZ - generowanie nowego hasła", $"Kod do zmiany hasła: {rnd}"))
-                    if (new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.INFO, "Wiadomość z kodem do zmiany hasła wysłano na podany e-mail.") { Owner = this }.ShowDialog() == true)
+                var window = new MsgWin(MsgWin.Types.InputBox, "Generowanie nowego hasła", "Podaj e-mail konta, którego hasło chcesz zmienić:") { Owner = this };
+                if (window.ShowDialog() == true)
+                {
+                    var rnd = new Random().Next(100_000, 1_000_000);
+                    if (Mail.SendMail(Props.Default.config_Email_Email, new string[] { window.Value }, "WBZ - generowanie nowego hasła", $"Kod do zmiany hasła: {rnd}"))
                     {
-                        var cwin = new MsgWin(MsgWin.Type.InputBox, "Kod zmiany hasła", "Podaj kod otrzymany w wiadomości e-mail:") { Owner = this };
-                        if (cwin.ShowDialog() == true)
+                        if (new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.INFO, "Wiadomość z kodem do zmiany hasła wysłano na podany e-mail.") { Owner = this }.ShowDialog() == true)
                         {
-                            if (cwin.Value == rnd.ToString())
-                                new LoginChangePassword(window.Value) { Owner = this }.ShowDialog();
-                            else
-                                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.INFO, "Niepoprawny kod! Spróbuj wygenerować kod na nowo.") { Owner = this }.ShowDialog();
+                            var cwin = new MsgWin(MsgWin.Types.InputBox, "Kod zmiany hasła", "Podaj kod otrzymany w wiadomości e-mail:") { Owner = this };
+                            if (cwin.ShowDialog() == true)
+                            {
+                                if (cwin.Value == rnd.ToString())
+                                    new PasswordChange(window.Value) { Owner = this }.ShowDialog();
+                                else
+                                    new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.INFO, "Niepoprawny kod! Spróbuj wygenerować kod ponownie.") { Owner = this }.ShowDialog();
+                            }
                         }
                     }
+                }
+            }
+            catch (Exception ex)
+            {
+                SQL.Error("Błąd generowania nowego hasła", ex, Config.ListModules[0]);
             }
         }
 
@@ -186,6 +200,6 @@ namespace WBZ.Login
         /// <summary>
         /// AboutApp
         /// </summary>
-        private void BtnAboutApp_Click(object sender, RoutedEventArgs e) => new LoginAppAbout() { Owner = this }.ShowDialog();
+        private void BtnAboutApp_Click(object sender, RoutedEventArgs e) => new AppAbout() { Owner = this }.ShowDialog();
     }
 }

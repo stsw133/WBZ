@@ -119,22 +119,22 @@ namespace WBZ.Modules.Icons
         {
             if (D.InstanceData.Width > Convert.ToInt32(Config.Icon_Dimensions_Max))
             {
-                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Obraz przekracza dopuszczalną szerokość: " + Config.Icon_Dimensions_Max) { Owner = this }.ShowDialog();
+                new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Obraz przekracza dopuszczalną szerokość: " + Config.Icon_Dimensions_Max) { Owner = this }.ShowDialog();
                 return false;
             }
             if (D.InstanceData.Height > Convert.ToInt32(Config.Icon_Dimensions_Max))
             {
-                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Obraz przekracza dopuszczalną wysokość: " + Config.Icon_Dimensions_Max) { Owner = this }.ShowDialog();
+                new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Obraz przekracza dopuszczalną wysokość: " + Config.Icon_Dimensions_Max) { Owner = this }.ShowDialog();
                 return false;
             }
             if (D.InstanceData.Size > Convert.ToInt32(Config.Icon_Size_Max))
             {
-                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Obraz przekracza dopuszczalny rozmiar: " + Config.Icon_Size_Max) { Owner = this }.ShowDialog();
+                new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Obraz przekracza dopuszczalny rozmiar: " + Config.Icon_Size_Max) { Owner = this }.ShowDialog();
                 return false;
             }
             if (D.InstanceData.Content == null)
             {
-                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie wybrano pliku z obrazem!") { Owner = this }.ShowDialog();
+                new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Nie wybrano pliku z obrazem!") { Owner = this }.ShowDialog();
                 return false;
             }
 

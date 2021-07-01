@@ -72,7 +72,7 @@ namespace WBZ.Modules._shared
         {
             if (needName && string.IsNullOrWhiteSpace(GetName))
             {
-                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Należy uzupełnić nazwę załącznika!") { Owner = this }.ShowDialog();
+                new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Należy uzupełnić nazwę załącznika!") { Owner = this }.ShowDialog();
                 return;
             }
             DialogResult = true;

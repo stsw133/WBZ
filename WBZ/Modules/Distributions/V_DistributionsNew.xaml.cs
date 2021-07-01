@@ -172,7 +172,7 @@ namespace WBZ.Modules.Distributions
 		{
 			if (D.InstanceData.Families.Count == 0)
 			{
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Brak pozycji na dystrybucji!") { Owner = this }.ShowDialog();
+				new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Brak pozycji na dystrybucji!") { Owner = this }.ShowDialog();
 				return false;
 			}
 

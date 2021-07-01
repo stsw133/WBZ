@@ -38,7 +38,7 @@ namespace WBZ.Modules.Admin
 			}
 			catch (Exception ex)
 			{
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Błąd zapytania SQL: " + ex.Message) { Owner = this }.ShowDialog();
+				new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.ERROR, "Błąd zapytania SQL: " + ex.Message) { Owner = this }.ShowDialog();
 			}
 
 			dgConsole.ItemsSource = dt.DefaultView;

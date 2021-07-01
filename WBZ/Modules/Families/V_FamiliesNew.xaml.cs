@@ -70,32 +70,32 @@ namespace WBZ.Modules.Families
         {
             if (string.IsNullOrEmpty(D.InstanceData.Declarant))
             {
-                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano osoby zgłaszającej!") { Owner = this }.ShowDialog();
+                new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Nie podano osoby zgłaszającej!") { Owner = this }.ShowDialog();
                 return false;
             }
             if (string.IsNullOrEmpty(D.InstanceData.Lastname))
             {
-                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano nazwiska rodziny!") { Owner = this }.ShowDialog();
+                new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Nie podano nazwiska rodziny!") { Owner = this }.ShowDialog();
                 return false;
             }
             if (D.InstanceData.Members == 0)
             {
-                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano liczby osób w rodzinie!") { Owner = this }.ShowDialog();
+                new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Nie podano liczby osób w rodzinie!") { Owner = this }.ShowDialog();
                 return false;
             }
             if (string.IsNullOrEmpty(D.InstanceData.City))
             {
-                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano miasta!") { Owner = this }.ShowDialog();
+                new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Nie podano miasta!") { Owner = this }.ShowDialog();
                 return false;
             }
             if (string.IsNullOrEmpty(D.InstanceData.Address))
             {
-                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano adresu!") { Owner = this }.ShowDialog();
+                new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Nie podano adresu!") { Owner = this }.ShowDialog();
                 return false;
             }
             if (string.IsNullOrEmpty(D.InstanceData.Postcode))
             {
-                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano kodu pocztowego!") { Owner = this }.ShowDialog();
+                new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Nie podano kodu pocztowego!") { Owner = this }.ShowDialog();
                 return false;
             }
 

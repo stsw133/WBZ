@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 
 namespace WBZ.Login
 {
-    class D_LoginDatabases : D
+    class D_Databases : D
     {
         /// Databases
         private ObservableCollection<DB> databases = new ObservableCollection<DB>(DB.LoadAllDatabases());

@@ -98,27 +98,27 @@ namespace WBZ.Modules.Documents
 		{
 			if (string.IsNullOrEmpty(D.InstanceData.Type))
 			{
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie wybrano typu dokumentu!") { Owner = this }.ShowDialog();
+				new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Nie wybrano typu dokumentu!") { Owner = this }.ShowDialog();
 				return false;
 			}
 			if (string.IsNullOrEmpty(D.InstanceData.Name))
 			{
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano nazwy (numeru) dokumentu!") { Owner = this }.ShowDialog();
+				new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Nie podano nazwy (numeru) dokumentu!") { Owner = this }.ShowDialog();
 				return false;
 			}
 			if (D.InstanceData.StoreID == 0)
 			{
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie wybrano magazynu!") { Owner = this }.ShowDialog();
+				new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Nie wybrano magazynu!") { Owner = this }.ShowDialog();
 				return false;
 			}
 			if (D.InstanceData.ContractorID == 0)
 			{
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie wybrano kontrahenta!") { Owner = this }.ShowDialog();
+				new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Nie wybrano kontrahenta!") { Owner = this }.ShowDialog();
 				return false;
 			}
 			if (D.InstanceData.Positions.Rows.Count == 0)
 			{
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Brak pozycji na dokumencie!") { Owner = this }.ShowDialog();
+				new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Brak pozycji na dokumencie!") { Owner = this }.ShowDialog();
 				return false;
 			}
 

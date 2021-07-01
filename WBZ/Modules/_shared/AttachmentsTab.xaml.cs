@@ -79,7 +79,7 @@ namespace WBZ.Modules._shared
 
                 if (file.Length > Convert.ToInt32(Config.Attachment_Size_Max))
                 {
-                    new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Załącznik przekracza dopuszczalny rozmiar: " + Config.Attachment_Size_Max) { Owner = Window.GetWindow(this) }.ShowDialog();
+                    new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Załącznik przekracza dopuszczalny rozmiar: " + Config.Attachment_Size_Max) { Owner = Window.GetWindow(this) }.ShowDialog();
                     return;
                 }
 
@@ -97,7 +97,7 @@ namespace WBZ.Modules._shared
                 return;
             var item = lbAttachments.SelectedItem as M_Attachment;
 
-            var window = new MsgWin(MsgWin.Type.InputBox, "Edycja załącznika", "Nowa nazwa załącznika:", item.Name);
+            var window = new MsgWin(MsgWin.Types.InputBox, "Edycja załącznika", "Nowa nazwa załącznika:", item.Name);
             window.Owner = Window.GetWindow(this);
             if (window.ShowDialog() == true)
             {

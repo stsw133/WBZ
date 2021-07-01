@@ -58,7 +58,7 @@ namespace WBZ
             Config.ListModules.Sort((x, y) => (x.Display as string).CompareTo(y.Display as string));
 
             if (DB.LoadAllDatabases().Count == 0)
-                new LoginDatabases().Show();
+                new Databases().Show();
             else
                 new Login.Login().Show();
         }

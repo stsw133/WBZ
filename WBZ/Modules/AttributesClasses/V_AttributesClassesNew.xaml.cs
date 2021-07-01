@@ -35,17 +35,17 @@ namespace WBZ.Modules.AttributesClasses
 		{
 			if (string.IsNullOrEmpty(D.InstanceData.Module.Alias))
 			{
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie wybrano modułu!") { Owner = this }.ShowDialog();
+				new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Nie wybrano modułu!") { Owner = this }.ShowDialog();
 				return false;
 			}
 			if (string.IsNullOrEmpty(D.InstanceData.Name))
 			{
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano nazwy!") { Owner = this }.ShowDialog();
+				new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Nie podano nazwy!") { Owner = this }.ShowDialog();
 				return false;
 			}
 			if (string.IsNullOrEmpty(D.InstanceData.Type))
 			{
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie wybrano typu!") { Owner = this }.ShowDialog();
+				new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Nie wybrano typu!") { Owner = this }.ShowDialog();
 				return false;
 			}
 

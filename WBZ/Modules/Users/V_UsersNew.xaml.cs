@@ -90,12 +90,12 @@ namespace WBZ.Modules.Users
 		{
 			if (string.IsNullOrEmpty(D.InstanceData.Login))
 			{
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano nazwy użytkownika!") { Owner = this }.ShowDialog();
+				new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Nie podano nazwy użytkownika!") { Owner = this }.ShowDialog();
 				return false;
 			}
 			if (string.IsNullOrEmpty(D.InstanceData.Email))
 			{
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano adresu e-mail!") { Owner = this }.ShowDialog();
+				new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Nie podano adresu e-mail!") { Owner = this }.ShowDialog();
 				return false;
 			}
 

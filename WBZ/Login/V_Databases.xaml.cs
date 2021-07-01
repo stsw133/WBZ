@@ -10,13 +10,13 @@ using WBZ.Modules._base;
 namespace WBZ.Login
 {
     /// <summary>
-    /// Interaction logic for LoginConnection.xaml
+    /// Interaction logic for Databases.xaml
     /// </summary>
-    public partial class LoginDatabases : Window
+    public partial class Databases : Window
     {
-        readonly D_LoginDatabases D = new D_LoginDatabases();
+        readonly D_Databases D = new D_Databases();
 
-        public LoginDatabases()
+        public Databases()
         {
             InitializeComponent();
             DataContext = D;
@@ -117,7 +117,7 @@ namespace WBZ.Login
             }
             catch (Exception ex)
             {
-                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"Błąd testowania połączenia:{Environment.NewLine}{ex.Message}") { Owner = this }.ShowDialog();
+                new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.ERROR, $"Błąd testowania połączenia:{Environment.NewLine}{ex.Message}") { Owner = this }.ShowDialog();
             }
         }
 
@@ -137,20 +137,20 @@ namespace WBZ.Login
                         var users = SQL.ListInstances<Models.M_User>(Config.GetModule(nameof(Modules.Users)), $"login='{conf.GetLogin.ToLower()}' and password='{Global.sha256(conf.GetPassword)}'");
                         if (users.Count == 0 || !SQL.GetUserPerms(users[0].ID).Contains("Admin"))
                         {
-                            new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Brak uprawnień administracyjnych lub błędne dane użytkownika!") { Owner = this }.ShowDialog();
+                            new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.ERROR, "Brak uprawnień administracyjnych lub błędne dane użytkownika!") { Owner = this }.ShowDialog();
                             return;
                         }
                     }
 
                     if (SQL_Migration.DoWork())
-                        new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.INFO, "Migracja przeprowadzona pomyślnie.") { Owner = this }.ShowDialog();
+                        new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.INFO, "Migracja przeprowadzona pomyślnie.") { Owner = this }.ShowDialog();
                     else
-                        new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Nie udało się przeprowadzić migracji!") { Owner = this }.ShowDialog();
+                        new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.ERROR, "Nie udało się przeprowadzić migracji!") { Owner = this }.ShowDialog();
                 }
             }
             catch (Exception ex)
             {
-                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"Błąd przeprowadzania migracji:{Environment.NewLine}{ex.Message}") { Owner = this }.ShowDialog();
+                new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.ERROR, $"Błąd przeprowadzania migracji:{Environment.NewLine}{ex.Message}") { Owner = this }.ShowDialog();
             }
         }
 
@@ -159,7 +159,7 @@ namespace WBZ.Login
         /// </summary>
         private void BtnCreateAdmin_Click(object sender, RoutedEventArgs e)
         {
-            if (new LoginRegister() { Owner = this }.ShowDialog() == true)
+            if (new Register() { Owner = this }.ShowDialog() == true)
                 D.CanCreateAdmin = false;
         }
 
@@ -182,7 +182,7 @@ namespace WBZ.Login
             }
             catch (Exception ex)
             {
-                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"Błąd zapisywania zmian:{Environment.NewLine}{ex.Message}") { Owner = this }.ShowDialog();
+                new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.ERROR, $"Błąd zapisywania zmian:{Environment.NewLine}{ex.Message}") { Owner = this }.ShowDialog();
             }
         }
     }

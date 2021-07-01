@@ -56,7 +56,7 @@ namespace WBZ.Modules.Vehicles
 		{
 			if (string.IsNullOrEmpty(D.InstanceData.Register))
 			{
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano numeru rejestracyjnego!") { Owner = this }.ShowDialog();
+				new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Nie podano numeru rejestracyjnego!") { Owner = this }.ShowDialog();
 				return false;
 			}
 

@@ -38,13 +38,13 @@ namespace WBZ.Globals
                         if (response.Contains("ERROR"))
                         {
                             result = false;
-                            new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"Nie udało się wysłać SMS na numer {number}").ShowDialog();
+                            new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.ERROR, $"Nie udało się wysłać SMS na numer {number}").ShowDialog();
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, ex.Message).ShowDialog();
+                    new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.ERROR, ex.Message).ShowDialog();
                     result = false;
                 }
             }

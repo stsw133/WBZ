@@ -1,8 +1,6 @@
 ﻿using StswExpress;
-using System;
 using System.Collections.ObjectModel;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 
 namespace WBZ.Login
 {
@@ -20,7 +18,7 @@ namespace WBZ.Login
         }
 
         /// Status
-        private ImageSource statusIcon = new BitmapImage(new Uri("pack://siteoforigin:,,,/Resources/32/icon32_shield_white.ico"));
+        private ImageSource statusIcon = Fn.LoadImage(Properties.Resources.icon32_shield_white);
         public ImageSource StatusIcon
         {
             get => statusIcon;

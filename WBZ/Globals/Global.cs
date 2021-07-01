@@ -6,13 +6,13 @@ namespace WBZ.Globals
 {
     public static class Global  //TODO - docelowo klasa do usunięcia
     {
-		#region Crypto
-		internal static string sha256(string pass)
+        #region Crypto
+        internal static string sha256(string pass)
         {
             var crypt = new SHA256Managed();
             var hash256 = new StringBuilder();
-            byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(pass));
-            foreach (byte x in crypto)
+            var crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(pass));
+            foreach (var x in crypto)
                 hash256.Append(x.ToString("x2"));
 
             return hash256.ToString();

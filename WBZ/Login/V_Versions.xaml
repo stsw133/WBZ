@@ -58,8 +58,7 @@
         </Border>
         <!-- listBox -->
         <Label DockPanel.Dock="Top" Content="{Tr VersionsList, Suffix=':'}"/>
-        <ListBox x:Name="lbList" DockPanel.Dock="Top" Margin="5"
-                 ItemsSource="{Binding InstancesList.versions}"
-                 MouseDoubleClick="lbList_MouseDoubleClick"/>
+        <ListBox x:Name="LstBoxList" DockPanel.Dock="Top" Margin="5" ItemsSource="{Binding InstancesList.Versions}"
+                 MouseDoubleClick="LstBoxList_MouseDoubleClick"/>
     </DockPanel>
 </Window>

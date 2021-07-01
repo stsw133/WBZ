@@ -43,9 +43,9 @@ namespace WBZ.Modules
 		private void btnEmailTest_Click(object sender, RoutedEventArgs e)
 		{
 			if (Mail.SendMail(Mail.Email, new string[] { Config.User.Email }, string.Empty, string.Empty))
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.INFO, "Test poczty e-mail powiódł się.") { Owner = this }.ShowDialog();
+				new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.INFO, "Test poczty e-mail powiódł się.") { Owner = this }.ShowDialog();
 			else
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, "Test poczty e-mail nie powiódł się!") { Owner = this }.ShowDialog();
+				new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.ERROR, "Test poczty e-mail nie powiódł się!") { Owner = this }.ShowDialog();
 		}
 
 		/// <summary>

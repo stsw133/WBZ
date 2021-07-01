@@ -12,279 +12,204 @@ using WBZ.Modules._base;
 
 namespace WBZ
 {
-	internal static class SQL
-	{
-		internal static string connWBZ = null; /// przypisywanie połączenia w oknie logowania
+    internal static class SQL
+    {
+        internal static string connWBZ = null; /// przypisywanie połączenia w oknie logowania
 		internal static NpgsqlConnection ConnOpenedWBZ => (NpgsqlConnection)StswExpress.SQL.OpenConnection(new NpgsqlConnection(connWBZ));
 
-		#region Login
-		/// <summary>
-		/// Loguje użytkownika do systemu
-		/// </summary>
-		/// <param name="login">Nazwa użytkownika lub adres e-mail</param>
-		/// <param name="password">Hasło do konta</param>
-		/// <returns></returns>
-		internal static bool Login(string login, string password)
-		{
-			bool result = false;
-			
-			try
-			{
-                using var sqlConn = ConnOpenedWBZ;
-                var user = new DataTable();
-                var perms = new DataTable();
+        #region Login
+        /// <summary>
+        /// Loguje użytkownika do systemu
+        /// </summary>
+        /// <param name="login">Nazwa użytkownika lub adres e-mail</param>
+        /// <param name="password">Hasło do konta</param>
+        /// <returns></returns>
+        internal static bool Login(string login, string password)
+        {
+            bool result = false;
+            var dt = new DataTable();
 
-                var sqlCmd = new NpgsqlCommand(@"select *
-					from wbz.users
-					where login=@login and password=@password", sqlConn);
-                sqlCmd.Parameters.AddWithValue("login", login);
-                sqlCmd.Parameters.AddWithValue("password", password);
-                using (var sqlDA = new NpgsqlDataAdapter(sqlCmd))
-                {
-                    sqlDA.Fill(user);
-                }
+            using var sqlConn = ConnOpenedWBZ;
+            var sqlCmd = new NpgsqlCommand(@"select * from wbz.users where login=@login and password=@password", sqlConn);
+            sqlCmd.Parameters.AddWithValue("login", login);
+            sqlCmd.Parameters.AddWithValue("password", password);
+            using (var sqlDA = new NpgsqlDataAdapter(sqlCmd))
+            sqlDA.Fill(dt);
 
-                if (user.Rows.Count > 0)
-                {
-                    Config.User = user.ToList<M_User>()[0];
-                    if (Config.User.IsArchival)
-                        MessageBox.Show("Użytkownik o podanym loginie jest zarchiwizowany.");
-					else if (Config.User.IsBlocked)
-                        MessageBox.Show("Użytkownik o podanym loginie jest zablokowany.");
-                    else
-                    {
-						Config.User.Perms = GetUserPerms(Config.User.ID);
-                        result = true;
-                    }
-                }
+            if (dt.Rows.Count > 0)
+            {
+                Config.User = dt.ToList<M_User>()[0];
+                if (Config.User.IsArchival)
+                    new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Użytkownik o podanym loginie jest zarchiwizowany.").ShowDialog();
+                else if (Config.User.IsBlocked)
+                    new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Użytkownik o podanym loginie jest zablokowany.").ShowDialog();
                 else
-                    MessageBox.Show("Brak użytkownika w bazie lub złe dane logowania.");
+                {
+                    Config.User.Perms = GetUserPerms(Config.User.ID);
+                    result = true;
+                }
             }
-			catch (Exception ex)
-			{
-				Error("Błąd logowania do systemu", ex, Config.ListModules[0]);
-			}
+            else new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Brak użytkownika w bazie lub złe dane logowania.").ShowDialog();
 
-			return result;
-		}
+            return result;
+        }
 
-		/// <summary>
-		/// Pobiera uprawnienia użytkownika
-		/// </summary>
-		/// <param name="userID">ID użytkownika</param>
-		internal static List<string> GetUserPerms(int userID)
-		{
-			var result = new List<string>();
-			var dt = new DataTable();
+        /// <summary>
+        /// Pobiera uprawnienia użytkownika
+        /// </summary>
+        /// <param name="userID">ID użytkownika</param>
+        internal static List<string> GetUserPerms(int userID)
+        {
+            var result = new List<string>();
+            var dt = new DataTable();
 
-			try
-			{
+            try
+            {
                 using var sqlConn = ConnOpenedWBZ;
-                var query = @"select up.perm
-					from wbz.users_permissions up
-					where user_id=@user_id";
+                var query = @"select perm from wbz.users_permissions where user_id=@user_id";
                 using var sqlDA = new NpgsqlDataAdapter(query, sqlConn);
-				sqlDA.SelectCommand.Parameters.AddWithValue("user_id", userID);
+                sqlDA.SelectCommand.Parameters.AddWithValue("user_id", userID);
                 sqlDA.Fill(dt);
                 foreach (DataRow row in dt.Rows)
                     result.Add(row["perm"].ToString());
             }
-			catch (Exception ex)
-			{
-				Error("Błąd pobierania uprawnień użytkownika", ex, Config.ListModules[0], userID);
-			}
+            catch (Exception ex)
+            {
+                Error("Błąd pobierania uprawnień użytkownika", ex, Config.ListModules[0], userID);
+            }
 
-			return result;
-		}
+            return result;
+        }
 
-		/// <summary>
-		/// Tworzy konto użytkownika/administratora w bazie o podanych parametrach
-		/// </summary>
-		/// <param name="email">Adres e-mail</param>
-		/// <param name="login">Nazwa użytkownika</param>
-		/// <param name="password">Hasło do konta</param>
-		/// <param name="admin">Czy nadać uprawnienia administracyjne</param>
-		/// <returns></returns>
-		internal static bool Register(string email, string login, string password, bool admin = true)
-		{
-			bool result = false;
-
-			try
-			{
-				using (var sqlConn = ConnOpenedWBZ)
-				using (var sqlTran = sqlConn.BeginTransaction())
-				{
-					var sqlCmd = new NpgsqlCommand(@"insert into wbz.users (email, login, password)
-						values (@email, @login, @password) returning id", sqlConn, sqlTran);
-					sqlCmd.Parameters.AddWithValue("email", email);
-					sqlCmd.Parameters.AddWithValue("login", login);
-					sqlCmd.Parameters.AddWithValue("password", Global.sha256(password));
-					int id = (int)sqlCmd.ExecuteScalar();
-
-					/// permissions
-					if (admin)
-					{
-						sqlCmd = new NpgsqlCommand(@"insert into wbz.users_permissions (""user"", perm)
-							values (@user_id, 'Admin'),
-								(@user_id, 'Users_PREVIEW'),
-								(@user_id, 'Users_SAVE'),
-								(@user_id, 'Users_DELETE')", sqlConn, sqlTran);
-						sqlCmd.Parameters.AddWithValue("user_id", id);
-						sqlCmd.ExecuteNonQuery();
-					}
-
-					sqlTran.Commit();
-				}
-
-				result = true;
-			}
-			catch (Exception ex)
-			{
-				Error("Błąd rejestracji użytkownika", ex, Config.ListModules[0]);
-			}
-
-			return result;
-		}
-
-		/// <summary>
-		/// Generuje nowe hasło dla konta powiązanego z podanym e-mailem i wysyła na pocztę
-		/// </summary>
-		/// <param name="email">Adres e-mail powiązanego konta</param>
-		/// <returns></returns>
-		internal static DataRow GenerateNewPasswordForAccount(string email)
-		{
-			DataRow result = null;
-			var dt = new DataTable();
-
-			Random rnd = new Random();
-			string newpass = rnd.NextDouble().ToString().Substring(2, 6);
-
-			try
-			{
-                using var sqlConn = ConnOpenedWBZ;
-                using var sqlTran = sqlConn.BeginTransaction();
-                var sqlCmd = new NpgsqlCommand(@"update wbz.users
-					set password=@newpass
-					where email=@email", sqlConn, sqlTran);
-                sqlCmd.Parameters.AddWithValue("newpass", Global.sha256(newpass));
+        /// <summary>
+        /// Tworzy konto użytkownika/administratora w bazie o podanych parametrach
+        /// </summary>
+        /// <param name="email">Adres e-mail</param>
+        /// <param name="login">Nazwa użytkownika</param>
+        /// <param name="password">Hasło do konta</param>
+        /// <param name="admin">Czy nadać uprawnienia administracyjne</param>
+        /// <returns></returns>
+        internal static bool Register(string email, string login, string password, bool admin = true)
+        {
+            using (var sqlConn = ConnOpenedWBZ)
+            using (var sqlTran = sqlConn.BeginTransaction())
+            {
+                var sqlCmd = new NpgsqlCommand(@"insert into wbz.users (email, login, password)
+				    values (@email, @login, @password) returning id", sqlConn, sqlTran);
                 sqlCmd.Parameters.AddWithValue("email", email);
-                sqlCmd.ExecuteNonQuery();
+                sqlCmd.Parameters.AddWithValue("login", login);
+                sqlCmd.Parameters.AddWithValue("password", Global.sha256(password));
+                var id = Convert.ToInt32(sqlCmd.ExecuteScalar());
 
-                sqlCmd = new NpgsqlCommand(@"select login, password
-					from wbz.users
-					where email=@email", sqlConn, sqlTran);
-                sqlCmd.Parameters.AddWithValue("email", email);
-                using (var sqlDA = new NpgsqlDataAdapter(sqlCmd))
+                /// permissions
+                if (admin)
                 {
-                    sqlDA.Fill(dt);
-                    result = dt.Rows[0];
-                    dt.Rows[0][1] = newpass;
+                    sqlCmd = new NpgsqlCommand(@"insert into wbz.users_permissions (user_id, perm)
+					    values (@user_id, 'Admin'), (@user_id, 'Users_PREVIEW'), (@user_id, 'Users_SAVE'), (@user_id, 'Users_DELETE')", sqlConn, sqlTran);
+                    sqlCmd.Parameters.AddWithValue("user_id", id);
+                    sqlCmd.ExecuteNonQuery();
                 }
 
                 sqlTran.Commit();
             }
-			catch (Exception ex)
-			{
-				Error("Błąd generowania nowego hasła użytkownika", ex, Config.ListModules[0]);
-			}
 
-			return result;
-		}
-		#endregion
+            return true;
+        }
+        #endregion
 
-		/// <summary>
-		/// Pobiera przelicznik głównej jednostki miary towaru
-		/// </summary>
-		/// <param name="articleID">ID towaru</param>
-		/// <returns></returns>
-		internal static double GetArtDefMeaCon(int articleID)
-		{
-			double result = 0;
+        /// <summary>
+        /// Pobiera przelicznik głównej jednostki miary towaru
+        /// </summary>
+        /// <param name="articleID">ID towaru</param>
+        /// <returns></returns>
+        internal static double GetArtDefMeaCon(int articleID)
+        {
+            double result = 0;
 
-			try
-			{
+            try
+            {
                 using var sqlConn = ConnOpenedWBZ;
                 var sqlCmd = new NpgsqlCommand(@"select wbz.artdefmeacon(@article_id)", sqlConn);
                 sqlCmd.Parameters.AddWithValue("article_id", articleID);
                 result = Convert.ToDouble(sqlCmd.ExecuteScalar());
             }
-			catch (Exception ex)
-			{
-				Error("Błąd pobierania przelicznika głównej jednostki miary towaru", ex, Config.GetModule(nameof(Modules.Articles)), articleID);
-			}
+            catch (Exception ex)
+            {
+                Error("Błąd pobierania przelicznika głównej jednostki miary towaru", ex, Config.GetModule(nameof(Modules.Articles)), articleID);
+            }
 
-			return result;
-		}
+            return result;
+        }
 
-		/// <summary>
-		/// Ustawia stany towaru
-		/// </summary>
-		/// <param name="storeID">ID magazynu</param>
-		/// <param name="articleID">ID towaru</param>
-		/// <param name="quantity">Ilość towaru (kg)</param>
-		/// <param name="measure">Jednostka miary</param>
-		/// <param name="reserved">Czy rezerwacja</param>
-		/// <param name="sqlConn">Połączenie SQL</param>
-		/// <param name="sqlTran">Transakcja SQL</param>
-		/// <returns></returns>
-		internal static bool ChangeArticleQuantity(int storeID, int articleID, double quantity, string measure, bool reserved, NpgsqlConnection sqlConn, NpgsqlTransaction sqlTran)
-		{
-			bool result = false;
+        /// <summary>
+        /// Ustawia stany towaru
+        /// </summary>
+        /// <param name="storeID">ID magazynu</param>
+        /// <param name="articleID">ID towaru</param>
+        /// <param name="quantity">Ilość towaru (kg)</param>
+        /// <param name="measure">Jednostka miary</param>
+        /// <param name="reserved">Czy rezerwacja</param>
+        /// <param name="sqlConn">Połączenie SQL</param>
+        /// <param name="sqlTran">Transakcja SQL</param>
+        /// <returns></returns>
+        internal static bool ChangeArticleQuantity(int storeID, int articleID, double quantity, string measure, bool reserved, NpgsqlConnection sqlConn, NpgsqlTransaction sqlTran)
+        {
+            bool result = false;
 
-			try
-			{
-				var sqlCmd = new NpgsqlCommand(@"select case
+            try
+            {
+                var sqlCmd = new NpgsqlCommand(@"select case
 					when exists(select from wbz.stores_articles where store_id=@store_id and article_id=@article_id) then true
 					else false end", sqlConn, sqlTran);
-				sqlCmd.Parameters.AddWithValue("store_id", storeID);
-				sqlCmd.Parameters.AddWithValue("article_id", articleID);
-				bool exists = Convert.ToBoolean(sqlCmd.ExecuteScalar());
+                sqlCmd.Parameters.AddWithValue("store_id", storeID);
+                sqlCmd.Parameters.AddWithValue("article_id", articleID);
+                bool exists = Convert.ToBoolean(sqlCmd.ExecuteScalar());
 
-				if (!reserved)
-				{
-					if (exists)
-						sqlCmd = new NpgsqlCommand(@"update wbz.stores_articles
+                if (!reserved)
+                {
+                    if (exists)
+                        sqlCmd = new NpgsqlCommand(@"update wbz.stores_articles
 							set quantity=quantity+(@quantity * coalesce(nullif((select converter from wbz.articles_measures where article=@article and name=@measure limit 1),0),1))
 							where store=@store and article=@article", sqlConn, sqlTran);
-					else
-						sqlCmd = new NpgsqlCommand(@"insert into wbz.stores_articles (store, article, quantity, reserved)
+                    else
+                        sqlCmd = new NpgsqlCommand(@"insert into wbz.stores_articles (store, article, quantity, reserved)
 							values (@store, @article, (@quantity * coalesce(nullif((select converter from wbz.articles_measures where article=@article and name=@measure limit 1),0),1)), 0)", sqlConn, sqlTran);
-				}
-				else
-				{
-					if (exists)
-						sqlCmd = new NpgsqlCommand(@"update wbz.stores_articles
+                }
+                else
+                {
+                    if (exists)
+                        sqlCmd = new NpgsqlCommand(@"update wbz.stores_articles
 							set reserved=reserved+(@quantity * coalesce(nullif((select converter from wbz.articles_measures where article=@article and name=@measure limit 1),0),1))
 							where store=@store and article=@article", sqlConn, sqlTran);
-					else
-						sqlCmd = new NpgsqlCommand(@"insert into wbz.stores_articles (store, article, quantity, reserved)
+                    else
+                        sqlCmd = new NpgsqlCommand(@"insert into wbz.stores_articles (store, article, quantity, reserved)
 							values (@store, @article, 0, (@quantity * coalesce(nullif((select converter from wbz.articles_measures where article=@article and name=@measure limit 1),0),1)))", sqlConn, sqlTran);
-				}
-				sqlCmd.Parameters.AddWithValue("store", storeID);
-				sqlCmd.Parameters.AddWithValue("article", articleID);
-				sqlCmd.Parameters.AddWithValue("quantity", quantity);
-				sqlCmd.Parameters.AddWithValue("measure", measure);
-				sqlCmd.ExecuteNonQuery();
+                }
+                sqlCmd.Parameters.AddWithValue("store", storeID);
+                sqlCmd.Parameters.AddWithValue("article", articleID);
+                sqlCmd.Parameters.AddWithValue("quantity", quantity);
+                sqlCmd.Parameters.AddWithValue("measure", measure);
+                sqlCmd.ExecuteNonQuery();
 
-				result = true;
-			}
-			catch (Exception ex)
-			{
-				Error("Błąd zmiany ilości towaru na stanie", ex, Config.GetModule(nameof(Modules.Articles)), articleID);
-			}
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                Error("Błąd zmiany ilości towaru na stanie", ex, Config.GetModule(nameof(Modules.Articles)), articleID);
+            }
 
-			return result;
-		}
+            return result;
+        }
 
-		/// <summary>
-		/// Pobiera sformatowaną tabelę dla pozycji dystrybucji
-		/// </summary>
-		internal static DataTable GetDistributionPositionsFormatting()
-		{
-			var result = new DataTable();
+        /// <summary>
+        /// Pobiera sformatowaną tabelę dla pozycji dystrybucji
+        /// </summary>
+        internal static DataTable GetDistributionPositionsFormatting()
+        {
+            var result = new DataTable();
 
-			try
-			{
+            try
+            {
                 using var sqlConn = ConnOpenedWBZ;
                 var sqlCmd = new NpgsqlCommand(@"select 0 as id, 0 as pos, 0 as store_id, '' as store_name,
 					0 as article_id, '' as article_name, 0.0 as quantity, '' as measure", sqlConn);
@@ -292,97 +217,97 @@ namespace WBZ
                 sqlDA.Fill(result);
                 result.Rows.Clear();
             }
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.ToString());
-			}
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
 
-			return result;
-		}
+            return result;
+        }
 
-		/// <summary>
-		/// Pobiera dane o pozycjach dystrybucji
-		/// </summary>
-		/// <param name="id">ID instancji</param>
-		internal static List<M_DistributionFamily> GetDistributionPositions(int id)
-		{
-			var result = new List<M_DistributionFamily>();
-			var dt = new DataTable();
+        /// <summary>
+        /// Pobiera dane o pozycjach dystrybucji
+        /// </summary>
+        /// <param name="id">ID instancji</param>
+        internal static List<M_DistributionFamily> GetDistributionPositions(int id)
+        {
+            var result = new List<M_DistributionFamily>();
+            var dt = new DataTable();
 
-			try
-			{
-				using (var sqlConn = ConnOpenedWBZ)
-				{
-					NpgsqlCommand sqlCmd;
+            try
+            {
+                using (var sqlConn = ConnOpenedWBZ)
+                {
+                    NpgsqlCommand sqlCmd;
 
-					///add
-					if (id == 0)
-						dt = GetDistributionPositionsFormatting();
-					///edit
-					else
-					{
-						sqlCmd = new NpgsqlCommand(@"select id, pos, family_id, (select lastname from wbz.families where id=dp.family_id) as family_name, members,
+                    ///add
+                    if (id == 0)
+                        dt = GetDistributionPositionsFormatting();
+                    ///edit
+                    else
+                    {
+                        sqlCmd = new NpgsqlCommand(@"select id, pos, family_id, (select lastname from wbz.families where id=dp.family_id) as family_name, members,
 								store_id, (select name from wbz.stores where id=dp.store_id) as store_name,
 								article_id, (select name from wbz.articles where id=dp.article_id) as article_name,
 								quantity / wbz.ArtDefMeaCon(dp.article_id) as quantity, coalesce(nullif(wbz.ArtDefMeaNam(dp.article_id),''), 'kg') as measure, status
 							from wbz.distributions_positions dp
 							where distribution=@id", sqlConn);
-						sqlCmd.Parameters.AddWithValue("id", id);
+                        sqlCmd.Parameters.AddWithValue("id", id);
                         using var sqlDA = new NpgsqlDataAdapter(sqlCmd);
                         sqlDA.Fill(dt);
                     }
-				}
+                }
 
-				///przypisywanie towarów do rodzin
-				foreach (DataRow row in dt.Rows)
-				{
-					var family = result.FirstOrDefault(x => x.FamilyID == (int)row["family"]);
-					if (family == null)
-					{
-						family = new M_DistributionFamily()
-						{
-							FamilyID = (int)row["family_id"],
-							FamilyName = (string)row["family_name"],
-							Members = Convert.ToInt16(row["members"]),
-							Status = Convert.ToInt16(row["status"])
-						};
-						result.Add(family);
-						family = result.FirstOrDefault(x => x.FamilyID == (int)row["family_id"]);
-					}
+                ///przypisywanie towarów do rodzin
+                foreach (DataRow row in dt.Rows)
+                {
+                    var family = result.FirstOrDefault(x => x.FamilyID == (int)row["family"]);
+                    if (family == null)
+                    {
+                        family = new M_DistributionFamily()
+                        {
+                            FamilyID = (int)row["family_id"],
+                            FamilyName = (string)row["family_name"],
+                            Members = Convert.ToInt16(row["members"]),
+                            Status = Convert.ToInt16(row["status"])
+                        };
+                        result.Add(family);
+                        family = result.FirstOrDefault(x => x.FamilyID == (int)row["family_id"]);
+                    }
 
-					var position = family.Positions.NewRow();
+                    var position = family.Positions.NewRow();
 
-					position["id"] = row["id"];
-					position["pos"] = row["pos"];
-					position["store_id"] = row["store_id"];
-					position["store_name"] = row["store_name"];
-					position["article_id"] = row["article_id"];
-					position["article_name"] = row["article_name"];
-					position["quantity"] = row["quantity"];
-					position["measure"] = row["measure"];
+                    position["id"] = row["id"];
+                    position["pos"] = row["pos"];
+                    position["store_id"] = row["store_id"];
+                    position["store_name"] = row["store_name"];
+                    position["article_id"] = row["article_id"];
+                    position["article_name"] = row["article_name"];
+                    position["quantity"] = row["quantity"];
+                    position["measure"] = row["measure"];
 
-					family.Positions.Rows.Add(position);
-					family.Positions.Rows[^1].AcceptChanges();
-				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.ToString());
-			}
+                    family.Positions.Rows.Add(position);
+                    family.Positions.Rows[^1].AcceptChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
 
-			return result;
-		}
+            return result;
+        }
 
-		#region module "Stats"
-		/// <summary>
-		/// Pobiera ilości towarów wg lat i miesięcy
-		/// </summary>
-		internal static DataTable GetStatsArticles()
-		{
-			var result = new DataTable();
+        #region module "Stats"
+        /// <summary>
+        /// Pobiera ilości towarów wg lat i miesięcy
+        /// </summary>
+        internal static DataTable GetStatsArticles()
+        {
+            var result = new DataTable();
 
-			try
-			{
+            try
+            {
                 using var sqlConn = ConnOpenedWBZ;
                 var sqlCmd = new NpgsqlCommand(@"select year,
 						sum(m_01) as month_01,
@@ -422,23 +347,24 @@ namespace WBZ
                 using var sqlDA = new NpgsqlDataAdapter(sqlCmd);
                 sqlDA.Fill(result);
             }
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.ToString());
-			}
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
 
-			return result;
-		}
-		/// <summary>
-		/// Pobiera sumę ilości towarów
-		/// </summary>
-		/// <returns></returns>
-		internal static double GetStatsArticlesTotal()
-		{
-			var result = 0.0;
+            return result;
+        }
 
-			try
-			{
+        /// <summary>
+        /// Pobiera sumę ilości towarów
+        /// </summary>
+        /// <returns></returns>
+        internal static double GetStatsArticlesTotal()
+        {
+            var result = 0.0;
+
+            try
+            {
                 using var sqlConn = ConnOpenedWBZ;
                 var sqlCmd = new NpgsqlCommand(@"select coalesce(sum(quantity),0)
 					from wbz.documents i
@@ -447,24 +373,25 @@ namespace WBZ
 					where status=1", sqlConn);
                 result = Convert.ToDouble(sqlCmd.ExecuteScalar());
             }
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.ToString());
-			}
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
 
-			return result;
-		}
-		/// <summary>
-		/// ???
-		/// </summary>
-		/// <param name="from">???</param>
-		/// <param name="to">???</param>
-		internal static DataTable GetDonationSumContractor(DateTime from, DateTime to)
-		{
-			var result = new DataTable();
+            return result;
+        }
 
-			try
-			{
+        /// <summary>
+        /// ???
+        /// </summary>
+        /// <param name="from">???</param>
+        /// <param name="to">???</param>
+        internal static DataTable GetDonationSumContractor(DateTime from, DateTime to)
+        {
+            var result = new DataTable();
+
+            try
+            {
                 using var sqlConn = ConnOpenedWBZ;
                 var sqlCmd = new NpgsqlCommand(@"SELECT DISTINCT (SELECT c.name FROM wbz.contractors c WHERE c.id = i.contractor)
 					FROM wbz.documents i 
@@ -474,25 +401,26 @@ namespace WBZ
                 using var sqlDA = new NpgsqlDataAdapter(sqlCmd);
                 sqlDA.Fill(result);
             }
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.ToString());
-			}
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
 
-			return result;
-		}
-		/// <summary>
-		/// ???
-		/// </summary>
-		/// <param name="date">???</param>
-		/// <param name="contractor">???</param>
-		internal static DataRow GetDonationSumContractorValue(DateTime date, string contractor)
-		{
-			var dt = new DataTable();
-			DataRow result = null;
+            return result;
+        }
 
-			try
-			{
+        /// <summary>
+        /// ???
+        /// </summary>
+        /// <param name="date">???</param>
+        /// <param name="contractor">???</param>
+        internal static DataRow GetDonationSumContractorValue(DateTime date, string contractor)
+        {
+            var dt = new DataTable();
+            DataRow result = null;
+
+            try
+            {
                 using var sqlConn = ConnOpenedWBZ;
                 var sqlCmd = new NpgsqlCommand(@"SELECT 
 					SUM((SELECT SUM(ip.quantity) FROM wbz.documents_positions ip WHERE i.id = ip.document)) as quantity,
@@ -505,24 +433,25 @@ namespace WBZ
                 sqlDA.Fill(dt);
                 result = dt.Rows[0];
             }
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.ToString());
-			}
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
 
-			return result;
-		}
-		/// <summary>
-		/// ???
-		/// </summary>
-		/// <param name="from">???</param>
-		/// <param name="to">???</param>
-		internal static DataTable GetDonationSumDate(DateTime from, DateTime to)
-		{
-			var result = new DataTable();
+            return result;
+        }
 
-			try
-			{
+        /// <summary>
+        /// ???
+        /// </summary>
+        /// <param name="from">???</param>
+        /// <param name="to">???</param>
+        internal static DataTable GetDonationSumDate(DateTime from, DateTime to)
+        {
+            var result = new DataTable();
+
+            try
+            {
                 using var sqlConn = ConnOpenedWBZ;
                 var sqlCmd = new NpgsqlCommand(@"SELECT DISTINCT to_char(i.dateissue,'dd.MM.yyyy') as day, i.dateissue
 					FROM wbz.documents i
@@ -533,13 +462,13 @@ namespace WBZ
                 using var sqlDA = new NpgsqlDataAdapter(sqlCmd);
                 sqlDA.Fill(result);
             }
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.ToString());
-			}
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
 
-			return result;
-		}
+            return result;
+        }
         #endregion
 
         #region basic
@@ -569,7 +498,7 @@ namespace WBZ
 					error.Content = ex.Message;
 #endif
                     if (showWin)
-                        new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"{msg}:{Environment.NewLine}{error.Content}").ShowDialog();
+                        new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.ERROR, $"{msg}:{Environment.NewLine}{error.Content}").ShowDialog();
                     if (saveToSQL)
                         SetInstance(moduleLogs, error, Commands.Type.NEW);
                 }
@@ -578,159 +507,159 @@ namespace WBZ
         }
         #endregion
 
-		#region modules
-		/// <summary>
-		/// Pobiera listę ID i wartości (zazwyczaj ID i Name)
-		/// </summary>
-		/// <param name="module">Moduł</param>
-		/// <param name="column">Kolumna z której będą pobierane wartości</param>
-		/// <param name="filter">Filtr SQL</param>
-		internal static List<MV> ComboSource(MV module, string column, string filter, bool allowEmpty)
-		{
-			using var sqlConn = ConnOpenedWBZ;
-			var query = $@"select id as value, {column} as display
+        #region modules
+        /// <summary>
+        /// Pobiera listę ID i wartości (zazwyczaj ID i Name)
+        /// </summary>
+        /// <param name="module">Moduł</param>
+        /// <param name="column">Kolumna z której będą pobierane wartości</param>
+        /// <param name="filter">Filtr SQL</param>
+        internal static List<MV> ComboSource(MV module, string column, string filter, bool allowEmpty)
+        {
+            using var sqlConn = ConnOpenedWBZ;
+            var query = $@"select id as value, {column} as display
 				from wbz.{module.Value}
 				where {filter ?? "true"}
 				order by 2 asc";
-			using var sqlDA = new NpgsqlDataAdapter(query, sqlConn);
-			if (allowEmpty)
-				sqlDA.SelectCommand.CommandText = "select 0 as value, '' as display union " + sqlDA.SelectCommand.CommandText;
+            using var sqlDA = new NpgsqlDataAdapter(query, sqlConn);
+            if (allowEmpty)
+                sqlDA.SelectCommand.CommandText = "select 0 as value, '' as display union " + sqlDA.SelectCommand.CommandText;
 
-			var dt = new DataTable();
-			sqlDA.Fill(dt);
-			return new List<MV>(dt.ToList<MV>());
-		}
+            var dt = new DataTable();
+            sqlDA.Fill(dt);
+            return new List<MV>(dt.ToList<MV>());
+        }
 
-		/// <summary>
-		/// Select query mode
-		/// </summary>
-		internal enum SelectMode { SIMPLE, EXTENDED, COUNT, COMBO }
+        /// <summary>
+        /// Select query mode
+        /// </summary>
+        internal enum SelectMode { SIMPLE, EXTENDED, COUNT, COMBO }
 
-		/// <summary>
-		/// Pobiera listę instancji
-		/// </summary>
-		/// <param name="module">Moduł</param>
-		/// <param name="mode">Tryb zapytania select</param>
-		/// <param name="filter">Filtr SQL</param>
-		/// <param name="displayed">Liczba obecnie wyświetlonych rekordów</param>
-		private static NpgsqlCommand ListCommand(MV module, SelectMode mode, M_Filter filter, int displayed)
-		{
-			var a = module.Alias;
-			string query = "select ";
-			query += module.Name switch
-			{
-				/// ARTICLES
-				nameof(Modules.Articles) =>
-				(mode == SelectMode.COUNT ? "count (*) "
-				: mode == SelectMode.SIMPLE ?
-				$@"
+        /// <summary>
+        /// Pobiera listę instancji
+        /// </summary>
+        /// <param name="module">Moduł</param>
+        /// <param name="mode">Tryb zapytania select</param>
+        /// <param name="filter">Filtr SQL</param>
+        /// <param name="displayed">Liczba obecnie wyświetlonych rekordów</param>
+        private static NpgsqlCommand ListCommand(MV module, SelectMode mode, M_Filter filter, int displayed)
+        {
+            var a = module.Alias;
+            var query = "select ";
+            query += module.Name switch
+            {
+                /// ARTICLES
+                nameof(Modules.Articles) =>
+                (mode == SelectMode.COUNT ? "count (*) "
+                : mode == SelectMode.SIMPLE ?
+                $@"
 					{a}.id, {a}.codename, {a}.name, {a}.ean, coalesce(nullif(wbz.ArtDefMeaNam({a}.id),''), 'kg') as measure,
 					coalesce(sum(sa.quantity), 0) as quantityraw, coalesce(sum(sa.quantity) / wbz.ArtDefMeaCon({a}.id), 0) as quantity,
 					coalesce(sum(sa.reserved), 0) as reservedraw, coalesce(sum(sa.reserved) / wbz.ArtDefMeaCon({a}.id), 0) as reserved,
 					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				" :
-				$@"
+                $@"
 					{a}.id, {a}.codename, {a}.name, {a}.ean, coalesce(nullif(wbz.ArtDefMeaNam({a}.id),''), 'kg') as measure,
 					coalesce(sum(sa.quantity), 0) as quantityraw, coalesce(sum(sa.quantity) / wbz.ArtDefMeaCon({a}.id), 0) as quantity,
 					coalesce(sum(sa.reserved), 0) as reservedraw, coalesce(sum(sa.reserved) / wbz.ArtDefMeaCon({a}.id), 0) as reserved,
 					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				") +
-				$@"
+                $@"
 					from wbz.articles {a}
 					left join wbz.icons i on {a}.icon_id=i.id
 					left join wbz.stores_articles sa on {a}.id=sa.article_id
 					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 					group by {a}.id, i.id
 				",
-				/// ATTACHMENTS
-				nameof(Modules.Attachments) =>
-				(mode == SelectMode.COUNT ? "count (*) "
-				: mode == SelectMode.SIMPLE ?
-				$@"
+                /// ATTACHMENTS
+                nameof(Modules.Attachments) =>
+                (mode == SelectMode.COUNT ? "count (*) "
+                : mode == SelectMode.SIMPLE ?
+                $@"
 					{a}.id, {a}.user_id, {a}.module_alias, {a}.instance_id, {a}.name,
 					{a}.format, {a}.path, {a}.size, null as content
 				" :
-				$@"
+                $@"
 					{a}.id, {a}.user_id, {a}.module_alias, {a}.instance_id, {a}.name,
 					{a}.format, {a}.path, {a}.size, null as content
 				") +
-				$@"
+                $@"
 					from wbz.attachments {a}
 					left join wbz.users u on {a}.user_id = u.id	
 					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 				",
-				/// ATTRIBUTES_CLASSES
-				nameof(Modules.AttributesClasses) =>
-				(mode == SelectMode.COUNT ? "count (*) "
-				: mode == SelectMode.SIMPLE ?
-				$@"
+                /// ATTRIBUTES_CLASSES
+                nameof(Modules.AttributesClasses) =>
+                (mode == SelectMode.COUNT ? "count (*) "
+                : mode == SelectMode.SIMPLE ?
+                $@"
 					{a}.id, {a}.module_alias, {a}.name, {a}.type, {a}.values,
 					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				" :
-				$@"
+                $@"
 					{a}.id, {a}.module_alias, {a}.name, {a}.type, {a}.""values"",
 					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				") +
-				$@"
+                $@"
 					from wbz.attributes_classes {a}
 					left join wbz.icons i on {a}.icon=i.id
 					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 				",
-				/// CONTRACTORS
-				nameof(Modules.Contractors) =>
-				(mode == SelectMode.COUNT ? "count (*) "
-				: mode == SelectMode.SIMPLE ?
-				$@"
+                /// CONTRACTORS
+                nameof(Modules.Contractors) =>
+                (mode == SelectMode.COUNT ? "count (*) "
+                : mode == SelectMode.SIMPLE ?
+                $@"
 					{a}.id, {a}.codename, {a}.name, {a}.branch, {a}.nip, {a}.regon, {a}.postcode, {a}.city, {a}.address,
 					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				" :
-				$@"
+                $@"
 					{a}.id, {a}.codename, {a}.name, {a}.branch, {a}.nip, {a}.regon, {a}.postcode, {a}.city, {a}.address,
 					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				") +
-				$@"
+                $@"
 					from wbz.contractors {a}
 					left join wbz.icons i on {a}.icon_id=i.id
 					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 				",
-				/// DISTRIBUTIONS
-				nameof(Modules.Distributions) =>
-				(mode == SelectMode.COUNT ? "count (*) "
-				: mode == SelectMode.SIMPLE ?
-				$@"
+                /// DISTRIBUTIONS
+                nameof(Modules.Distributions) =>
+                (mode == SelectMode.COUNT ? "count (*) "
+                : mode == SelectMode.SIMPLE ?
+                $@"
 					{a}.id, {a}.name, {a}.datereal, {a}.status,
 					count(distinct dp.family_id) as familiescount, sum(members) as memberscount,
 					count(dp.*) as positionscount, sum(dp.quantity) as weight,
 					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				" :
-				$@"
+                $@"
 					{a}.id, {a}.name, {a}.datereal, {a}.status,
 					count(distinct dp.family_id) as familiescount, sum(members) as memberscount,
 					count(dp.*) as positionscount, sum(dp.quantity) as weight,
 					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				") +
-				$@"
+                $@"
 					from wbz.distributions {a}
 					left join wbz.distributions_positions dp on {a}.id=dp.distribution_id
 					left join wbz.icons i on {a}.icon_id=i.id
 					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 					group by {a}.id
 				",
-				/// DOCUMENTS
-				nameof(Modules.Documents) =>
-				(mode == SelectMode.COUNT ? "count (*) "
-				: mode == SelectMode.SIMPLE ?
-				$@"
+                /// DOCUMENTS
+                nameof(Modules.Documents) =>
+                (mode == SelectMode.COUNT ? "count (*) "
+                : mode == SelectMode.SIMPLE ?
+                $@"
 					{a}.id, {a}.name, {a}.store_id, s.name as store_name, {a}.contractor_id, c.name as contractor_name,
 					{a}.type, {a}.dateissue, {a}.status, count(dp.*) as positionscount, sum(dp.quantity) as weight, sum(dp.net) as net,
 					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				" :
-				$@"
+                $@"
 					{a}.id, {a}.name, {a}.store_id, s.name as store_name, {a}.contractor_id, c.name as contractor_name,
 					{a}.type, {a}.dateissue, {a}.status, count(dp.*) as positionscount, sum(dp.quantity) as weight, sum(dp.net) as net,
 					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				") +
-				$@"
+                $@"
 					from wbz.documents {a}
 					left join wbz.documents_positions dp on {a}.id=dp.document_id
 					left join wbz.contractors c on {a}.contractor_id=c.id
@@ -739,43 +668,43 @@ namespace WBZ
 					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 					group by {a}.id, c.id, s.id
 				",
-				/// EMPLOYEES
-				nameof(Modules.Employees) =>
-				(mode == SelectMode.COUNT ? "count (*) "
-				: mode == SelectMode.SIMPLE ?
-				$@"
+                /// EMPLOYEES
+                nameof(Modules.Employees) =>
+                (mode == SelectMode.COUNT ? "count (*) "
+                : mode == SelectMode.SIMPLE ?
+                $@"
 					{a}.id, {a}.user_id, u.lastname || ' ' || u.forename as username,
 					{a}.forename, {a}.lastname, {a}.department, {a}.position,
 					{a}.email, {a}.phone, {a}.postcode, {a}.city, {a}.address,
 					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				" :
-				$@"
+                $@"
 					{a}.id, {a}.user_id, u.lastname || ' ' || u.forename as username,
 					{a}.forename, {a}.lastname, {a}.department, {a}.position,
 					{a}.email, {a}.phone, {a}.postcode, {a}.city, {a}.address,
 					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				") +
-				$@"
+                $@"
 					from wbz.employees {a}
 					left join wbz.icons i on {a}.icon_id=i.id
 					left join wbz.users u on {a}.user_id=u.id
 					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
 				",
-				/// FAMILIES
-				nameof(Modules.Families) =>
-				(mode == SelectMode.COUNT ? "count (*) "
-				: mode == SelectMode.SIMPLE ?
-				$@"
+                /// FAMILIES
+                nameof(Modules.Families) =>
+                (mode == SelectMode.COUNT ? "count (*) "
+                : mode == SelectMode.SIMPLE ?
+                $@"
 					{a}.id, {a}.declarant, {a}.lastname, {a}.members, {a}.postcode, {a}.city, {a}.address,
 					{a}.status, {a}.c_sms, {a}.c_call, {a}.c_email, max(d.datereal) as donationlast, sum(dp.quantity) as donationweight,
 					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				" :
-				$@"
+                $@"
 					{a}.id, {a}.declarant, {a}.lastname, {a}.members, {a}.postcode, {a}.city, {a}.address,
 					{a}.status, {a}.c_sms, {a}.c_call, {a}.c_email, max(d.datereal) as donationlast, sum(dp.quantity) as donationweight,
 					{a}.is_archival, {a}.comment, {a}.icon_id, i.content as icon_content
 				") +
-				$@"
+                $@"
 					from wbz.families {a}
 					left join wbz.icons i on {a}.icon_id=i.id
 					left join wbz.distributions_positions dp on {a}.id=dp.family_id

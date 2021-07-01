@@ -39,7 +39,7 @@ namespace WBZ.Modules._shared
 			||  (D.AttributeInfo.Class.Type.In("string", "list")))
 				DialogResult = true;
 			else
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.ERROR, $"Wartość niezgodna z typem ({D.AttributeInfo.Class.Type}) danych klasy atrybutu!") { Owner = this }.ShowDialog();
+				new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.ERROR, $"Wartość niezgodna z typem ({D.AttributeInfo.Class.Type}) danych klasy atrybutu!") { Owner = this }.ShowDialog();
 		}
 
 		/// <summary>

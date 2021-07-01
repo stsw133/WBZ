@@ -29,12 +29,12 @@ namespace WBZ.Modules.Employees
         {
             if (string.IsNullOrEmpty(D.InstanceData.Forename))
             {
-                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano imienia!") { Owner = this }.ShowDialog();
+                new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Nie podano imienia!") { Owner = this }.ShowDialog();
                 return false;
             }
             if (string.IsNullOrEmpty(D.InstanceData.Lastname))
             {
-                new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano nazwiska!") { Owner = this }.ShowDialog();
+                new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Nie podano nazwiska!") { Owner = this }.ShowDialog();
                 return false;
             }
 

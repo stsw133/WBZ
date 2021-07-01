@@ -84,7 +84,7 @@ namespace WBZ.Modules.Articles
 		{
 			if (string.IsNullOrEmpty(D.InstanceData.Name))
 			{
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano nazwy!") { Owner = this }.ShowDialog();
+				new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Nie podano nazwy!") { Owner = this }.ShowDialog();
 				return false;
 			}
 

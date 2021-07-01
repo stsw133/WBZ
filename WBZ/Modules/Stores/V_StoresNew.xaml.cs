@@ -57,22 +57,22 @@ namespace WBZ.Modules.Stores
 		{
 			if (string.IsNullOrEmpty(D.InstanceData.Name))
 			{
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano nazwy!") { Owner = this }.ShowDialog();
+				new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Nie podano nazwy!") { Owner = this }.ShowDialog();
 				return false;
 			}
 			if (string.IsNullOrEmpty(D.InstanceData.City))
 			{
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano miasta!") { Owner = this }.ShowDialog();
+				new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Nie podano miasta!") { Owner = this }.ShowDialog();
 				return false;
 			}
 			if (string.IsNullOrEmpty(D.InstanceData.Address))
 			{
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano adresu!") { Owner = this }.ShowDialog();
+				new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Nie podano adresu!") { Owner = this }.ShowDialog();
 				return false;
 			}
 			if (string.IsNullOrEmpty(D.InstanceData.Postcode))
 			{
-				new MsgWin(MsgWin.Type.MsgOnly, MsgWin.MsgTitle.BLOCKADE, "Nie podano kodu pocztowego!") { Owner = this }.ShowDialog();
+				new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Nie podano kodu pocztowego!") { Owner = this }.ShowDialog();
 				return false;
 			}
 
