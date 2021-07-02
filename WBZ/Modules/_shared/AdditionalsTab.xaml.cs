@@ -22,32 +22,32 @@ namespace WBZ.Modules._shared
         /// HasIcon
         /// </summary>
         public static readonly DependencyProperty HasIconProperty
-			= DependencyProperty.Register(
+            = DependencyProperty.Register(
                   nameof(HasIcon),
                   typeof(bool),
                   typeof(GroupsView),
                   new PropertyMetadata(true)
               );
-		public bool HasIcon
-		{
-			get => (bool)GetValue(HasIconProperty);
-			set => SetValue(HasIconProperty, value);
-		}
+        public bool HasIcon
+        {
+            get => (bool)GetValue(HasIconProperty);
+            set => SetValue(HasIconProperty, value);
+        }
 
-		/// <summary>
-		/// ManageIcon - drop image
-		/// </summary>
-		private void btnManageIcon_Drop(object sender, DragEventArgs e)
+        /// <summary>
+        /// ManageIcon - drop image
+        /// </summary>
+        private void btnManageIcon_Drop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
-                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                byte[] file = File.ReadAllBytes(files[0]);
+                var files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                var file = File.ReadAllBytes(files[0]);
 
                 var win = Window.GetWindow(this);
-				var d = win?.DataContext as D_ModuleNew<dynamic>;
+                var d = win?.DataContext as D_ModuleNew<dynamic>;
 
-				if (d != null)
+                if (d != null)
                 {
                     d.InstanceData.IconContent = file;
                     d.InstanceData = d.InstanceData;
@@ -55,10 +55,10 @@ namespace WBZ.Modules._shared
             }
         }
 
-		/// <summary>
-		/// ManageIcon - open context menu
-		/// </summary>
-		private void btnManageIcon_Click(object sender, MouseButtonEventArgs e) => Fn.OpenContextMenu(sender);
+        /// <summary>
+        /// ManageIcon - open context menu
+        /// </summary>
+        private void btnManageIcon_Click(object sender, MouseButtonEventArgs e) => Fn.OpenContextMenu(sender);
 
         /// <summary>
 		/// ManageIcon - Select
@@ -66,13 +66,13 @@ namespace WBZ.Modules._shared
 		private void btnSelect_Click(object sender, RoutedEventArgs e)
         {
             var win = Window.GetWindow(this);
-			var d = win?.DataContext as D_ModuleNew<dynamic>;
+            var d = win?.DataContext as D_ModuleNew<dynamic>;
 
-			if (d != null)
+            if (d != null)
             {
                 var window = new IconsList(Commands.Type.SELECT);
-				//TODO - ogarnąć coś z filtrem w kolumnie modułu w oknie listy ikon
-				//(window.DataContext as D_IconsList).Filter.Module = d.Module;
+                //TODO - ogarnąć coś z filtrem w kolumnie modułu w oknie listy ikon
+                //(window.DataContext as D_IconsList).Filter.Module = d.Module;
                 if (window.ShowDialog() == true)
                     if (window.Selected != null)
                     {
@@ -92,9 +92,9 @@ namespace WBZ.Modules._shared
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             var win = Window.GetWindow(this);
-			var d = win?.DataContext as D_ModuleNew<dynamic>;
+            var d = win?.DataContext as D_ModuleNew<dynamic>;
 
-			if (d != null)
+            if (d != null)
             {
                 d.InstanceData.IconContent = null;
                 d.InstanceData.IconID = 0;

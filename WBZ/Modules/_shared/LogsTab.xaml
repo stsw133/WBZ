@@ -9,7 +9,7 @@
              Loaded="UserControl_Loaded">
 	<se:ExtDataGrid ItemsSource="{Binding InstanceLogs}" Margin="5" IsReadOnly="True">
         <DataGrid.Resources>
-            <g:BindingProxy x:Key="proxy" Data="{Binding}"/>
+            <se:BindingProxy x:Key="proxy" Data="{Binding}"/>
         </DataGrid.Resources>
         <DataGrid.Columns>
             <DataGridTextColumn Binding="{Binding UserName}" Header="Użytkownik"/>

@@ -9,7 +9,7 @@
           mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800"
           BorderThickness="0" IsReadOnly="True">
 	<DataGrid.Resources>
-        <g:BindingProxy x:Key="proxy" Data="{Binding}"/>
+        <se:BindingProxy x:Key="proxy" Data="{Binding}"/>
 		<Style TargetType="{x:Type se:ColumnFilter}">
 			<Setter Property="IsFilterVisible" Value="{Binding Data.AreFiltersVisible, Source={StaticResource proxy}}"/>
 		</Style>
@@ -86,14 +86,14 @@
     </DataGrid.ContextMenu>
     <DataGrid.RowStyle>
         <Style TargetType="DataGridRow">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding Archival}" Value="True">
-                    <Setter Property="Foreground" Value="Gray"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Comment, Converter={se:conv_Compare}, ConverterParameter=''}" Value="False">
+			<Style.Triggers>
+				<DataTrigger Binding="{Binding Comment, Converter={se:conv_Compare}, ConverterParameter=''}" Value="False">
                     <Setter Property="ToolTip" Value="{Binding Comment}"/>
                 </DataTrigger>
-            </Style.Triggers>
+				<DataTrigger Binding="{Binding IsArchival}" Value="True">
+					<Setter Property="Foreground" Value="Gray"/>
+				</DataTrigger>
+			</Style.Triggers>
         </Style>
     </DataGrid.RowStyle>
 </DataGrid>

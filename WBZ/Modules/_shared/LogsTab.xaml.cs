@@ -13,9 +13,9 @@ namespace WBZ.Modules._shared
     /// </summary>
     public partial class LogsTab : UserControl
     {
-		readonly D_LogsTab D = new D_LogsTab();
+        readonly D_LogsTab D = new D_LogsTab();
 
-		private MV Module;
+        private MV Module;
         private int InstanceID;
 
         public LogsTab()
@@ -37,25 +37,25 @@ namespace WBZ.Modules._shared
                 if (d != null)
                 {
                     Module = d.Module;
-					InstanceID = (d.InstanceData as M).ID;
+                    InstanceID = (d.InstanceData as M).ID;
                 }
                 if (InstanceID != 0 && D.InstanceLogs == null)
                     D.InstanceLogs = SQL.ListInstances<M_Log>(D.ModuleLogs, $"{D.ModuleLogs.Alias}.module_alias='{Module.Alias}' and {D.ModuleLogs.Alias}.instance_id={InstanceID}");
             }
             catch { }
         }
-	}
+    }
 
-	/// <summary>
-	/// DataContext
-	/// </summary>
-	class D_LogsTab : D
+    /// <summary>
+    /// DataContext
+    /// </summary>
+    internal class D_LogsTab : D
     {
-		/// Module
-		public MV ModuleLogs = Config.GetModule(nameof(Logs));
+        /// Module
+        public MV ModuleLogs = Config.GetModule(nameof(Logs));
 
-		/// Logs
-		private List<M_Log> instanceLogs;
+        /// Logs
+        private List<M_Log> instanceLogs;
         public List<M_Log> InstanceLogs
         {
             get => instanceLogs;

@@ -15,9 +15,9 @@
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
     <Window.CommandBindings>
-		<CommandBinding Command="se:Commands.Close" Executed="cmdClose_Executed"/>
-		<CommandBinding Command="se:Commands.Refresh" Executed="cmdRefresh_Executed"/>
-        <CommandBinding Command="se:Commands.Save" Executed="cmdSave_Executed" CanExecute="cmdSave_CanExecute"/>
+		<CommandBinding Command="se:Commands.Close" Executed="CmdClose_Executed"/>
+		<CommandBinding Command="se:Commands.Refresh" Executed="CmdRefresh_Executed"/>
+        <CommandBinding Command="se:Commands.Save" Executed="CmdSave_Executed" CanExecute="CmdSave_CanExecute"/>
     </Window.CommandBindings>
     <DockPanel>
         <!-- titleBar -->
@@ -58,31 +58,21 @@
                     <se:Header Text="{Tr General}" Icon="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
                 </TabItem.Header>
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <Grid Margin="10" VerticalAlignment="Top" IsEnabled="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=!PREVIEW}">
+                    <Grid Margin="5" VerticalAlignment="Top" IsEnabled="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=!PREVIEW}">
                         <Grid.Resources>
-                            <Style TargetType="{x:Type se:IconButton}">
-                                <Setter Property="CornerRadius" Value="0"/>
-                                <Setter Property="IconMargin" Value="0"/>
-                                <Setter Property="IconSize" Value="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=1.5}"/>
-                                <Setter Property="IsTextVisible" Value="False"/>
-                                <Setter Property="Margin" Value="5,5,0,5"/>
-                                <Setter Property="Padding" Value="0"/>
-                                <Setter Property="Width" Value="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"/>
-                            </Style>
-                            <Style TargetType="{x:Type se:ExtLabel}">
-                                <Setter Property="HorizontalContentAlignment" Value="Right"/>
-                                <Setter Property="Margin" Value="5"/>
-                                <Setter Property="Width" Value="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=10}"/>
-                            </Style>
-                            <Style TargetType="{x:Type se:NumericUpDown}">
-                                <Setter Property="HorizontalAlignment" Value="Left"/>
-                                <Setter Property="Margin" Value="5"/>
-                                <Setter Property="Width" Value="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=10}"/>
-                            </Style>
-                            <Style TargetType="{x:Type se:ExtTextBox}">
-                                <Setter Property="Margin" Value="5"/>
-                            </Style>
-                        </Grid.Resources>
+							<Style TargetType="{x:Type se:IconButton}">
+								<Setter Property="CornerRadius" Value="0"/>
+								<Setter Property="IconMargin" Value="0"/>
+								<Setter Property="IconSize" Value="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=1.5}"/>
+								<Setter Property="IsTextVisible" Value="False"/>
+								<Setter Property="Padding" Value="0"/>
+								<Setter Property="Width" Value="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"/>
+							</Style>
+							<Style TargetType="{x:Type se:NumericUpDown}">
+								<Setter Property="HorizontalAlignment" Value="Left"/>
+								<Setter Property="Width" Value="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=10}"/>
+							</Style>
+						</Grid.Resources>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition Width="auto"/>
@@ -90,40 +80,40 @@
                         </Grid.ColumnDefinitions>
                         <DockPanel Grid.Column="0" Grid.ColumnSpan="3">
                             <!-- Register -->
-                            <DockPanel DockPanel.Dock="Top">
-                                <se:ExtLabel Content="Nr rej.:" FontWeight="Bold"/>
+                            <DockPanel DockPanel.Dock="Top" Margin="5">
+                                <se:ExtLabel Content="Nr rej.:" FontWeight="Bold" Style="{StaticResource PaneledLabel}"/>
                                 <se:ExtTextBox Text="{Binding InstanceData.Register}"/>
                             </DockPanel>
                             <!-- Brand -->
-                            <DockPanel DockPanel.Dock="Top">
-                                <se:ExtLabel Content="Marka:" FontWeight="Normal"/>
+                            <DockPanel DockPanel.Dock="Top" Margin="5">
+								<se:ExtLabel Content="Marka:" FontWeight="Normal" Style="{StaticResource PaneledLabel}"/>
                                 <se:ExtTextBox Text="{Binding InstanceData.Brand}"/>
                             </DockPanel>
                             <!-- Model -->
-                            <DockPanel DockPanel.Dock="Top">
-                                <se:ExtLabel Content="Model:" FontWeight="Normal"/>
+                            <DockPanel DockPanel.Dock="Top" Margin="5">
+								<se:ExtLabel Content="Model:" FontWeight="Normal" Style="{StaticResource PaneledLabel}"/>
                                 <se:ExtTextBox Text="{Binding InstanceData.Model}"/>
                             </DockPanel>
                             <!-- Capacity -->
-                            <DockPanel DockPanel.Dock="Top">
-                                <se:ExtLabel Content="Pojemność (t):" FontWeight="Normal"/>
+                            <DockPanel DockPanel.Dock="Top" Margin="5">
+								<se:ExtLabel Content="Pojemność (t):" FontWeight="Normal" Style="{StaticResource PaneledLabel}"/>
                                 <se:NumericUpDown Value="{Binding InstanceData.Capacity}" Min="0"/>
                             </DockPanel>
                             <!-- Forwarder -->
-                            <DockPanel DockPanel.Dock="Top">
-                                <se:ExtLabel Content="Spedytor:" FontWeight="Normal"/>
+                            <DockPanel DockPanel.Dock="Top" Margin="5">
+								<se:ExtLabel Content="Spedytor:" FontWeight="Normal" Style="{StaticResource PaneledLabel}"/>
                                 <se:IconButton HorizontalContentAlignment="Center" Icon="/Resources/32/icon32_contractors.ico" Click="btnSelectForwarder_Click"/>
-                                <se:ExtTextBox Text="{Binding InstanceData.ForwarderName}" Tag="{Binding InstanceData.ForwarderID}" IsReadOnly="True"/>
+                                <se:ExtTextBox Text="{Binding InstanceData.ForwarderName}" Tag="{Binding InstanceData.ForwarderID}" IsReadOnly="True" Background="#EEE"/>
                             </DockPanel>
                             <!-- Driver -->
-                            <DockPanel DockPanel.Dock="Top">
-                                <se:ExtLabel Content="Kierowca:" FontWeight="Normal"/>
+                            <DockPanel DockPanel.Dock="Top" Margin="5">
+								<se:ExtLabel Content="Kierowca:" FontWeight="Normal" Style="{StaticResource PaneledLabel}"/>
                                 <se:IconButton HorizontalContentAlignment="Center" Icon="/Resources/32/icon32_briefcase.ico" Click="btnSelectDriver_Click"/>
-                                <se:ExtTextBox Text="{Binding InstanceData.DriverName}" Tag="{Binding InstanceData.DriverID}" IsReadOnly="True"/>
+                                <se:ExtTextBox Text="{Binding InstanceData.DriverName}" Tag="{Binding InstanceData.DriverID}" IsReadOnly="True" Background="#EEE"/>
                             </DockPanel>
                             <!-- ProdYear -->
-                            <DockPanel DockPanel.Dock="Top">
-                                <se:ExtLabel Content="Rok produkcji:" FontWeight="Normal"/>
+                            <DockPanel DockPanel.Dock="Top" Margin="5">
+								<se:ExtLabel Content="Rok produkcji:" FontWeight="Normal" Style="{StaticResource PaneledLabel}"/>
                                 <se:NumericUpDown Value="{Binding InstanceData.ProdYear}" Min="0"/>
                             </DockPanel>
                         </DockPanel>

@@ -7,9 +7,9 @@
              xmlns:g="clr-namespace:WBZ.Globals"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800"
              Loaded="UserControl_Loaded">
-	<se:ExtDataGrid x:Name="dgListGroups" ItemsSource="{Binding InstanceGroups}" Margin="5" IsReadOnly="True">
+	<se:ExtDataGrid x:Name="DtgListGroups" ItemsSource="{Binding InstanceGroups}" Margin="5" IsReadOnly="True" AutoGenerateColumns="False">
         <DataGrid.Resources>
-            <g:BindingProxy x:Key="proxy" Data="{Binding}"/>
+            <se:BindingProxy x:Key="proxy" Data="{Binding}"/>
         </DataGrid.Resources>
         <DataGrid.Columns>
             <!-- ID -->
@@ -21,8 +21,8 @@
         </DataGrid.Columns>
         <DataGrid.ContextMenu>
 			<ContextMenu IsEnabled="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=!PREVIEW}">
-                <se:ExtMenuItem Header="{Tr New}" IconUri="/Resources/32/icon32_add.ico" Click="btnGroupAdd_Click"/>
-                <se:ExtMenuItem Header="{Tr Delete}" IconUri="/Resources/32/icon32_delete.ico" Click="btnGroupRemove_Click"/>
+                <se:ExtMenuItem Header="{Tr New}" IconUri="/Resources/32/icon32_add.ico" Click="BtnGroupAdd_Click"/>
+                <se:ExtMenuItem Header="{Tr Delete}" IconUri="/Resources/32/icon32_delete.ico" Click="BtnGroupRemove_Click"/>
                 <Separator Visibility="Collapsed"/>
                 <se:ExtMenuItem Header="Ustaw jako główną" IconUri="/Resources/32/icon32_select.ico" Click="btnGroupSelectAsMain_Click" Visibility="Collapsed"/>
             </ContextMenu>
@@ -30,10 +30,10 @@
         <DataGrid.RowStyle>
             <Style TargetType="DataGridRow">
                 <Style.Triggers>
-					<DataTrigger Binding="{Binding Archival}" Value="True">
+					<DataTrigger Binding="{Binding IsArchival}" Value="True">
 						<Setter Property="Foreground" Value="Gray"/>
 					</DataTrigger>
-					<DataTrigger Binding="{Binding Main}" Value="True">
+					<DataTrigger Binding="{Binding IsMain}" Value="True">
 						<Setter Property="Foreground" Value="Green"/>
 					</DataTrigger>
 				</Style.Triggers>

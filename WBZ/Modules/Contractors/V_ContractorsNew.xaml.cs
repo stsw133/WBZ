@@ -38,7 +38,7 @@ namespace WBZ.Modules.Contractors
                     D.InstanceSources_Documents = SQL.ListInstances<M_Document>(Config.GetModule(nameof(Documents)), $"d.contractor={D.InstanceData.ID}");
             }
         }
-		private void dgList_Documents_MouseDoubleClick(object sender, MouseButtonEventArgs e) => dgSourceList_MouseDoubleClick<M_Document>(sender, e, Config.GetModule(nameof(Modules.Documents)));
+		private void dgList_Documents_MouseDoubleClick(object sender, MouseButtonEventArgs e) => DtgSourceList_MouseDoubleClick<M_Document>(sender, e, Config.GetModule(nameof(Modules.Documents)));
 
 		/// <summary>
 		/// Validation

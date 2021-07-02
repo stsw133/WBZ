@@ -13,14 +13,14 @@
           SelectedItemChanged="TreeView_SelectedItemChanged">
     <TreeView.ContextMenu>
         <ContextMenu>
-            <se:ExtMenuItem Header="{Tr Preview}" IconUri="/Resources/32/icon32_search.ico" Click="btnGroupsPreview_Click"/>
-            <se:ExtMenuItem Header="{Tr New}" IconUri="/Resources/32/icon32_add.ico" IsEnabled="{Binding EditingMode}" Click="btnGroupsNew_Click"/>
-            <se:ExtMenuItem Header="{Tr Edit}" IconUri="/Resources/32/icon32_edit.ico" IsEnabled="{Binding EditingMode}" Click="btnGroupsEdit_Click"/>
-            <se:ExtMenuItem Header="{Tr Delete}" IconUri="/Resources/32/icon32_delete.ico" IsEnabled="{Binding EditingMode}" Click="btnGroupsDelete_Click"/>
+            <se:ExtMenuItem Header="{Tr Preview}" IconUri="/Resources/32/icon32_search.ico" Click="BtnGroupsPreview_Click"/>
+            <se:ExtMenuItem Header="{Tr New}" IconUri="/Resources/32/icon32_add.ico" IsEnabled="{Binding EditingMode}" Click="BtnGroupsNew_Click"/>
+            <se:ExtMenuItem Header="{Tr Edit}" IconUri="/Resources/32/icon32_edit.ico" IsEnabled="{Binding EditingMode}" Click="BtnGroupsEdit_Click"/>
+            <se:ExtMenuItem Header="{Tr Delete}" IconUri="/Resources/32/icon32_delete.ico" IsEnabled="{Binding EditingMode}" Click="BtnGroupsDelete_Click"/>
             <Separator/>
-            <MenuItem Header="{Tr ExpandGroups}" IsCheckable="True" IsChecked="{Binding config_ExpandGroups, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
-                      Click="btnGroupsExpandAll_Click"/>
-            <se:ExtMenuItem Header="{Tr Refresh}" IconUri="/Resources/32/icon32_refresh.ico" Click="btnGroupsRefresh_Click"/>
+            <se:ExtMenuItem Header="{Tr ExpandGroups}" IsCheckable="True" IsChecked="{Binding config_ExpandGroups, Source={x:Static p:Settings.Default}, Mode=TwoWay}"
+							Click="BtnGroupsExpandAll_Click"/>
+            <se:ExtMenuItem Header="{Tr Refresh}" IconUri="/Resources/32/icon32_refresh.ico" Click="BtnGroupsRefresh_Click"/>
         </ContextMenu>
     </TreeView.ContextMenu>
 </TreeView>

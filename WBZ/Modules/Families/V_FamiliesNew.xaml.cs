@@ -60,7 +60,7 @@ namespace WBZ.Modules.Families
 		/// </summary>
         private void dgList_Distributions_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            dgSourceList_MouseDoubleClick<M_Distribution>(sender, e, Config.GetModule(nameof(Modules.Distributions)));
+            DtgSourceList_MouseDoubleClick<M_Distribution>(sender, e, Config.GetModule(nameof(Modules.Distributions)));
         }
 
         /// <summary>

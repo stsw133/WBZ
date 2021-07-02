@@ -15,6 +15,6 @@
         <!-- titleBar -->
 		<se:TitleBar DockPanel.Dock="Top" SubIcon="{Binding ModeIcon}"/>
         <!-- buttonsPanel -->
-        <s:GroupsView x:Name="groupsView" Margin="5" MouseDoubleClick="groupsView_MouseDoubleClick"/>
+        <s:GroupsView x:Name="GroupsView" Margin="5" MouseDoubleClick="GroupsView_MouseDoubleClick"/>
     </DockPanel>
 </Window>

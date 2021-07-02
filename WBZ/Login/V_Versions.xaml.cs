@@ -26,12 +26,12 @@ namespace WBZ.Login
         /// <summary>
         /// Loaded
         /// </summary>
-        private void Window_Loaded(object sender, RoutedEventArgs e) => cmdRefresh_Executed(null, null);
+        private void Window_Loaded(object sender, RoutedEventArgs e) => CmdRefresh_Executed(null, null);
 
         /// <summary>
         /// Download
         /// </summary>
-        private async void btnDownload_Click(object sender, RoutedEventArgs e)
+        private async void BtnDownload_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -75,7 +75,7 @@ namespace WBZ.Login
         /// <summary>
         /// Refresh
         /// </summary>
-        private async void cmdRefresh_Executed(object sender, ExecutedRoutedEventArgs e)
+        private async void CmdRefresh_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             try
             {
@@ -97,7 +97,7 @@ namespace WBZ.Login
         /// <summary>
         /// Close
         /// </summary>
-        private void cmdClose_Executed(object sender, ExecutedRoutedEventArgs e) => Close();
+        private void CmdClose_Executed(object sender, ExecutedRoutedEventArgs e) => Close();
 
         /// <summary>
         /// VersionList - MouseDoubleClick
@@ -105,7 +105,7 @@ namespace WBZ.Login
         private void LstBoxList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
-                btnDownload_Click(null, null);
+                BtnDownload_Click(null, null);
         }
     }
 }

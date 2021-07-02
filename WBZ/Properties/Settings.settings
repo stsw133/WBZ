@@ -134,23 +134,11 @@
     <Setting Name="columns_FamiliesList_DonationLast" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="config_Email_Host" Type="System.String" Scope="User">
-      <Value Profile="(Default)">smtp.gmail.com</Value>
-    </Setting>
-    <Setting Name="config_Email_Port" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">587</Value>
-    </Setting>
-    <Setting Name="config_Email_Email" Type="System.String" Scope="User">
-      <Value Profile="(Default)">wbz.email.testowy@gmail.com</Value>
-    </Setting>
     <Setting Name="config_GSM_com" Type="System.String" Scope="User">
       <Value Profile="(Default)">COM5</Value>
     </Setting>
     <Setting Name="config_GSM_message" Type="System.String" Scope="User">
       <Value Profile="(Default)">WBZ, Twoja paczka jest do odebrania. </Value>
-    </Setting>
-    <Setting Name="config_Email_Password" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="panelColor_Distributions" Type="System.String" Scope="User">
       <Value Profile="(Default)">#FFEE5555</Value>
@@ -182,7 +170,7 @@
     <Setting Name="columns_UsersList_ID" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="columns_UsersList_Fullname" Type="System.Boolean" Scope="User">
+    <Setting Name="columns_UsersList_Name" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="columns_UsersList_Email" Type="System.Boolean" Scope="User">
@@ -212,7 +200,7 @@
     <Setting Name="columns_EmployeesList_ID" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="columns_EmployeesList_Fullname" Type="System.Boolean" Scope="User">
+    <Setting Name="columns_EmployeesList_Name" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="columns_EmployeesList_Department" Type="System.Boolean" Scope="User">

@@ -1,5 +1,6 @@
 ﻿using StswExpress;
 using System.Windows;
+using System.Windows.Media;
 
 namespace WBZ.Modules._base
 {
@@ -40,12 +41,12 @@ namespace WBZ.Modules._base
         /// <summary>
         /// OK
         /// </summary>
-        private void btnOk_Click(object sender, RoutedEventArgs e) => DialogResult = true;
+        private void BtnOk_Click(object sender, RoutedEventArgs e) => DialogResult = true;
 
         /// <summary>
         /// Cancel
         /// </summary>
-        private void btnCancel_Click(object sender, RoutedEventArgs e) => DialogResult = false;
+        private void BtnCancel_Click(object sender, RoutedEventArgs e) => DialogResult = false;
     }
 
     /// <summary>
@@ -86,14 +87,14 @@ namespace WBZ.Modules._base
         }
 
         /// Icon
-        public string Icon => Title switch
+        public ImageSource Icon => Title switch
         {
-            MsgWin.Titles.BLOCKADE => "/Resources/32/icon32_shield_orange.ico",
-            MsgWin.Titles.ERROR => "/Resources/32/icon32_shield_red.ico",
-            MsgWin.Titles.INFO => "/Resources/32/icon32_shield_green.ico",
-            MsgWin.Titles.QUESTION => "/Resources/32/icon32_shield_blue.ico",
-            MsgWin.Titles.WARNING => "/Resources/32/icon32_shield_yellow.ico",
-            _ => null,
+            MsgWin.Titles.BLOCKADE => Fn.LoadImage(Properties.Resources.icon32_shield_orange),
+            MsgWin.Titles.ERROR => Fn.LoadImage(Properties.Resources.icon32_shield_red),
+            MsgWin.Titles.INFO => Fn.LoadImage(Properties.Resources.icon32_shield_green),
+            MsgWin.Titles.QUESTION => Fn.LoadImage(Properties.Resources.icon32_shield_blue),
+            MsgWin.Titles.WARNING => Fn.LoadImage(Properties.Resources.icon32_shield_yellow),
+            _ => null
         };
     }
 }

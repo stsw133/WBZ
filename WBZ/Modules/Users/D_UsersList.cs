@@ -3,7 +3,7 @@ using MODULE_MODEL = WBZ.Models.M_User;
 
 namespace WBZ.Modules.Users
 {
-    class D_UsersList : D_ModuleList<MODULE_MODEL>
-	{
-	}
+    internal class D_UsersList : D_ModuleList<MODULE_MODEL>
+    {
+    }
 }

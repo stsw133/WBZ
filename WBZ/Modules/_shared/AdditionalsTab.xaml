@@ -6,25 +6,28 @@
              xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
              xmlns:g="clr-namespace:WBZ.Globals"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800">
-	<DockPanel Margin="5" IsEnabled="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=!PREVIEW}">
+	<DockPanel Margin="5">
         <DockPanel DockPanel.Dock="Top">
 			<DockPanel DockPanel.Dock="Right" Visibility="{Binding HasIcon, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Converter={se:conv_Bool}}">
 				<Label DockPanel.Dock="Top" Content="Ikona:"/>
 				<se:ExtImage DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" Stretch="UniformToFill"
 							 Height="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}" Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}"
+							 IsEnabled="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=!PREVIEW}"
 							 PreviewMouseLeftButtonUp="btnManageIcon_Click">
 					<Image.Source>
 						<Binding Path="InstanceData.IconContent">
 							<Binding.TargetNullValue>
-								<ImageSource>pack://application:,,,/Resources/32/icon32_photos.ico</ImageSource>
+								<ImageSource>pack://siteoforigin:,,,/Resources/32/icon32_photos.ico</ImageSource>
 							</Binding.TargetNullValue>
 						</Binding>
 					</Image.Source>
 				</se:ExtImage>
 			</DockPanel>
-			<se:ExtCheckBox DockPanel.Dock="Top" Content="{Tr Archival}" Margin="20" IsChecked="{Binding InstanceData.IsArchival}"/>
-            <Label DockPanel.Dock="Top" Content="Komentarz:" Margin="5,0"/>
+			<se:ExtCheckBox DockPanel.Dock="Top" Content="{Tr Archival}" Margin="20" IsChecked="{Binding InstanceData.IsArchival}"
+							IsEnabled="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=!PREVIEW}"/>
+            <Label DockPanel.Dock="Top" Content="{Tr Comment, Suffix=':'}" Margin="5,0"/>
         </DockPanel>
-		<TextBox Text="{Binding InstanceData.Comment}" Margin="5" AcceptsReturn="True" TextWrapping="Wrap"/>
+		<TextBox Text="{Binding InstanceData.Comment}" Margin="5,0,5,5" AcceptsReturn="True" TextWrapping="Wrap"
+				 IsReadOnly="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=PREVIEW}"/>
     </DockPanel>
 </UserControl>

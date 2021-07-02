@@ -12,7 +12,7 @@ namespace WBZ.Modules._shared
     /// </summary>
     public partial class ContactsTab : UserControl
     {
-        D_ContactsTab D = new D_ContactsTab();
+        readonly D_ContactsTab D = new D_ContactsTab();
         private MV Module;
         private int ID;
         private bool EditingMode;
@@ -30,7 +30,7 @@ namespace WBZ.Modules._shared
         {
             try
             {
-                Window win = Window.GetWindow(this);
+                var win = Window.GetWindow(this);
                 dynamic d = win?.DataContext;
                 if (d != null)
                 {
@@ -63,7 +63,7 @@ namespace WBZ.Modules._shared
     /// <summary>
     /// DataContext
     /// </summary>
-    class D_ContactsTab : D
+    internal class D_ContactsTab : D
     {
         /// Contacts
         private DataTable instanceContacts;

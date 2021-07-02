@@ -46,10 +46,6 @@ namespace WBZ
                 Props.Default.UpgradeRequired = false;
                 Props.Default.Save();
             }
-            Mail.Host = Props.Default.config_Email_Host;
-            Mail.Port = Props.Default.config_Email_Port;
-            Mail.Email = Props.Default.config_Email_Email;
-            Mail.Password = Props.Default.config_Email_Password;
 
             TM.Instance.CurrentLanguage = Props.Default.Language;
             if (File.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Other\Translations.json")))

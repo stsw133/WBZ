@@ -23,6 +23,10 @@
 		"en": "Admin",
 		"pl": "Admin"
 	},
+	"Archival": {
+		"en": "Archival",
+		"pl": "Archiwalne"
+	},
 	"Articles": {
 		"en": "Articles",
 		"pl": "Towary"
@@ -134,6 +138,10 @@
 	"ColumnsVisibility": {
 		"en": "Columns' visbility",
 		"pl": "Widoczność kolumn"
+	},
+	"Comment": {
+		"en": "Comment",
+		"pl": "Komentarz"
 	},
 	"Communication": {
 		"en": "Communication",

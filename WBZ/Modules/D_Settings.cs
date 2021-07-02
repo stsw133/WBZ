@@ -2,7 +2,7 @@
 
 namespace WBZ.Modules
 {
-    class D_Settings : D
+    internal class D_Settings : D
     {
     }
 }

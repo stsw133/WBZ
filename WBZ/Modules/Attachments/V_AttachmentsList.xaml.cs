@@ -12,46 +12,46 @@ namespace WBZ.Modules.Attachments
     /// </summary>
     public partial class AttachmentsList : List
     {
-		readonly D_AttachmentsList D = new D_AttachmentsList();
+        readonly D_AttachmentsList D = new D_AttachmentsList();
 
         public AttachmentsList(Commands.Type mode)
         {
             InitializeComponent();
             DataContext = D;
-			Init();
+            Init();
 
-			D.Mode = mode;
+            D.Mode = mode;
         }
 
-		/// <summary>
-		/// Preview
-		/// </summary>
-		internal override void cmdPreview_Executed(object sender, ExecutedRoutedEventArgs e)
-		{
-			var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
-			foreach (MODULE_MODEL instance in selectedInstances)
-				Functions.OpenInstanceWindow(this, instance, Commands.Type.PREVIEW);
-		}
+        /// <summary>
+        /// Preview
+        /// </summary>
+        internal override void CmdPreview_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            var selectedInstances = DtgList.SelectedItems.Cast<MODULE_MODEL>();
+            foreach (MODULE_MODEL instance in selectedInstances)
+                Functions.OpenInstanceWindow(this, instance, Commands.Type.PREVIEW);
+        }
 
-		/// <summary>
-		/// Edit
-		/// </summary>
-		internal override void cmdEdit_Executed(object sender, ExecutedRoutedEventArgs e)
-		{
-			var selectedInstances = dgList.SelectedItems.Cast<MODULE_MODEL>();
-			foreach (MODULE_MODEL instance in selectedInstances)
-				Functions.OpenInstanceWindow(this, instance, Commands.Type.EDIT);
-		}
+        /// <summary>
+        /// Edit
+        /// </summary>
+        internal override void CmdEdit_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            var selectedInstances = DtgList.SelectedItems.Cast<MODULE_MODEL>();
+            foreach (MODULE_MODEL instance in selectedInstances)
+                Functions.OpenInstanceWindow(this, instance, Commands.Type.EDIT);
+        }
 
-		/// <summary>
-		/// Select
-		/// </summary>
-		internal override void dgList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-		{
-			if (e.LeftButton == MouseButtonState.Pressed)
-				cmdEdit_Executed(null, null);
-		}
-	}
+        /// <summary>
+        /// Select
+        /// </summary>
+        internal override void DtgList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                CmdEdit_Executed(null, null);
+        }
+    }
 
-	public class List : ModuleList<MODULE_MODEL> { }
+    public class List : ModuleList<MODULE_MODEL> { }
 }

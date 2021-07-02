@@ -11,7 +11,7 @@ namespace WBZ.Modules
         public VehiclesListGrid()
         {
             InitializeComponent();
-			ExtDataGrid.Load(this, Properties.Settings.Default.panelColor_Vehicles);
-		}
+            ExtDataGrid.Load(this, Properties.Settings.Default.panelColor_Vehicles);
+        }
     }
 }

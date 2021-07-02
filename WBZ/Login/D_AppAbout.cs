@@ -2,7 +2,7 @@
 
 namespace WBZ.Login
 {
-    class D_AppAbout : D
+    internal class D_AppAbout : D
     {
         /// System version
         public string Version { get; } = Fn.AppVersion();

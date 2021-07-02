@@ -553,42 +553,6 @@ namespace WBZ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("smtp.gmail.com")]
-        public string config_Email_Host {
-            get {
-                return ((string)(this["config_Email_Host"]));
-            }
-            set {
-                this["config_Email_Host"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("587")]
-        public int config_Email_Port {
-            get {
-                return ((int)(this["config_Email_Port"]));
-            }
-            set {
-                this["config_Email_Port"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("wbz.email.testowy@gmail.com")]
-        public string config_Email_Email {
-            get {
-                return ((string)(this["config_Email_Email"]));
-            }
-            set {
-                this["config_Email_Email"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("COM5")]
         public string config_GSM_com {
             get {
@@ -608,18 +572,6 @@ namespace WBZ.Properties {
             }
             set {
                 this["config_GSM_message"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string config_Email_Password {
-            get {
-                return ((string)(this["config_Email_Password"]));
-            }
-            set {
-                this["config_Email_Password"] = value;
             }
         }
         
@@ -746,12 +698,12 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool columns_UsersList_Fullname {
+        public bool columns_UsersList_Name {
             get {
-                return ((bool)(this["columns_UsersList_Fullname"]));
+                return ((bool)(this["columns_UsersList_Name"]));
             }
             set {
-                this["columns_UsersList_Fullname"] = value;
+                this["columns_UsersList_Name"] = value;
             }
         }
         
@@ -866,12 +818,12 @@ namespace WBZ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool columns_EmployeesList_Fullname {
+        public bool columns_EmployeesList_Name {
             get {
-                return ((bool)(this["columns_EmployeesList_Fullname"]));
+                return ((bool)(this["columns_EmployeesList_Name"]));
             }
             set {
-                this["columns_EmployeesList_Fullname"] = value;
+                this["columns_EmployeesList_Name"] = value;
             }
         }
         

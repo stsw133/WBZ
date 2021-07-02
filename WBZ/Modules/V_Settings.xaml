@@ -15,8 +15,8 @@
         <se:TitleBar DockPanel.Dock="Top"/>
         <!-- buttons -->
         <UniformGrid DockPanel.Dock="Bottom" Columns="2" HorizontalAlignment="Center">
-            <se:IconButton Text="{Tr Accept}" Margin="5" Icon="/Resources/32/icon32_accept.ico" Click="btnAccept_Click" IsDefault="True"/>
-            <se:IconButton Text="{Tr Cancel}" Margin="5" Icon="/Resources/32/icon32_cancel.ico" Click="btnCancel_Click"/>
+            <se:IconButton Text="{Tr Accept}" Margin="5" Icon="/Resources/32/icon32_accept.ico" Click="BtnAccept_Click" IsDefault="True"/>
+            <se:IconButton Text="{Tr Cancel}" Margin="5" Icon="/Resources/32/icon32_cancel.ico" Click="BtnCancel_Click"/>
         </UniformGrid>
         <Separator DockPanel.Dock="Bottom"/>
         <!-- tabs -->
@@ -131,15 +131,16 @@
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <se:ExtLabel Grid.Row="0" Grid.Column="0" Content="{Tr Host, Suffix=':'}" Margin="5" HorizontalContentAlignment="Right"/>
-                                <se:ExtTextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding config_Email_Host, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Margin="5"/>
+                                <se:ExtTextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding mail_Host, Source={x:Static se:Settings.Default}, Mode=TwoWay}" Margin="5"/>
                                 <se:ExtLabel Grid.Row="1" Grid.Column="0" Content="{Tr Port, Suffix=':'}" Margin="5" HorizontalContentAlignment="Right"/>
-                                <se:ExtTextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding config_Email_Port, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Margin="5"/>
+                                <se:ExtTextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding mail_Port, Source={x:Static se:Settings.Default}, Mode=TwoWay}" Margin="5"/>
                                 <se:ExtLabel Grid.Row="2" Grid.Column="0" Content="{Tr Address, Suffix=':'}" Margin="5" HorizontalContentAlignment="Right"/>
-                                <se:ExtTextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding config_Email_Email, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Margin="5"/>
+                                <se:ExtTextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding mail_Username, Source={x:Static se:Settings.Default}, Mode=TwoWay}" Margin="5"/>
                                 <se:ExtLabel Grid.Row="3" Grid.Column="0" Content="{Tr Password, Suffix=':'}" Margin="5" HorizontalContentAlignment="Right"/>
-                                <PasswordBox x:Name="pbEmailPassword" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" Loaded="pbEmailPassword_Loaded" PasswordChanged="pbEmailPassword_PasswordChanged"/>
+                                <PasswordBox x:Name="PwdBoxEmailPassword" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="5"
+											 Loaded="PwdBoxEmailPassword_Loaded" PasswordChanged="PwdBoxEmailPassword_PasswordChanged"/>
                                 <se:IconButton Grid.Row="4" Grid.Column="1" Margin="5" Text="{Tr Test}" Icon="/Resources/32/icon32_test.ico"
-                                               Click="btnEmailTest_Click"/>
+                                               Click="BtnEmailTest_Click"/>
                             </Grid>
                         </GroupBox>
                         <!-- GSM -->

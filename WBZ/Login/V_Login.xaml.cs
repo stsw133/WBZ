@@ -170,7 +170,7 @@ namespace WBZ.Login
                 if (window.ShowDialog() == true)
                 {
                     var rnd = new Random().Next(100_000, 1_000_000);
-                    if (Mail.SendMail(Props.Default.config_Email_Email, new string[] { window.Value }, "WBZ - generowanie nowego hasła", $"Kod do zmiany hasła: {rnd}"))
+                    if (Mail.SendMail(Settings.Default.mail_Username, new string[] { window.Value }, "WBZ - generowanie nowego hasła", $"Kod do zmiany hasła: {rnd}"))
                     {
                         if (new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.INFO, "Wiadomość z kodem do zmiany hasła wysłano na podany e-mail.") { Owner = this }.ShowDialog() == true)
                         {

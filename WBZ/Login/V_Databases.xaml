@@ -33,7 +33,7 @@
 					 SelectionChanged="LstBoxDatabases_SelectionChanged"/>
         </DockPanel>
         <!-- main -->
-		<UniformGrid x:Name="GrdDatabaseInfo" DataContext="{Binding SelectedItem, ElementName=LstBoxDatabases}" Margin="5" VerticalAlignment="Center" IsEnabled="False"
+		<UniformGrid x:Name="UniGriDatabaseInfo" DataContext="{Binding SelectedItem, ElementName=LstBoxDatabases}" Margin="5" VerticalAlignment="Center" IsEnabled="False"
 					 Width="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=30}" Columns="1">
 			<UniformGrid.Resources>
 				<Style TargetType="{x:Type se:ExtLabel}">

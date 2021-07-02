@@ -3,7 +3,7 @@ using MODULE_MODEL = WBZ.Models.M_Group;
 
 namespace WBZ.Modules._submodules.Groups
 {
-    class D_GroupsList : D_ModuleList<MODULE_MODEL>
+    internal class D_GroupsList : D_ModuleList<MODULE_MODEL>
     {
-	}
+    }
 }

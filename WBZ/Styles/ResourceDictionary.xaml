@@ -17,4 +17,8 @@
 		<Setter Property="Margin" Value="5,0"/>
 		<Setter Property="Width" Value="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=10}"/>
 	</Style>
+	<Style x:Key="PaneledNumericUpDown" TargetType="{x:Type se:NumericUpDown}">
+		<Setter Property="HorizontalAlignment" Value="Left"/>
+		<Setter Property="Width" Value="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=10}"/>
+	</Style>
 </ResourceDictionary>

@@ -3,7 +3,7 @@ using MODULE_MODEL = WBZ.Models.M_Vehicle;
 
 namespace WBZ.Modules.Vehicles
 {
-    class D_VehiclesNew : D_ModuleNew<MODULE_MODEL>
-	{
-	}
+    internal class D_VehiclesNew : D_ModuleNew<MODULE_MODEL>
+    {
+    }
 }

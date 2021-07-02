@@ -10,7 +10,7 @@ namespace WBZ.Modules._submodules
     /// </summary>
     public partial class GroupsNew : New
     {
-        D_GroupsNew D = new D_GroupsNew();
+        readonly D_GroupsNew D = new D_GroupsNew();
 
         public GroupsNew(MODULE_MODEL instance, Commands.Type mode)
         {

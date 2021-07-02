@@ -8,6 +8,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using WBZ.Globals;
 using WBZ.Models;
+using WBZ.Modules._base;
 using WBZ.Modules._submodules;
 using WBZ.Modules._submodules.Groups;
 
@@ -19,17 +20,17 @@ namespace WBZ.Modules._shared
     public partial class GroupsView : TreeView
     {
         internal List<M_Group> InstancesList = new List<M_Group>();
-        private MV WindowModule, GroupModule = Config.GetModule(nameof(Modules._submodules.Groups));
+        private MV WindowModule, GroupModule = Config.GetModule(nameof(_submodules.Groups));
 
         public GroupsView()
         {
             InitializeComponent();
         }
 
-		/// <summary>
-		/// EditingMode
-		/// </summary>
-		public bool EditingMode => Config.User.Perms.Contains($"{WindowModule.Name}_{Config.PermType.GROUPS}");
+        /// <summary>
+        /// EditingMode
+        /// </summary>
+        public bool EditingMode => Config.User.Perms.Contains($"{WindowModule.Name}_{Config.PermType.GROUPS}");
 
         /// <summary>
         /// Loaded
@@ -41,26 +42,26 @@ namespace WBZ.Modules._shared
             if (d != null)
                 WindowModule = d.Module;
 
-            btnGroupsRefresh_Click(null, null);
+            BtnGroupsRefresh_Click(null, null);
         }
 
         /// <summary>
 		/// Preview
 		/// </summary>
-		private void btnGroupsPreview_Click(object sender, RoutedEventArgs e)
+		private void BtnGroupsPreview_Click(object sender, RoutedEventArgs e)
         {
             if (SelectedItem == null || (int)(SelectedItem as Control).Tag == 0)
                 return;
 
-            int id = (int)(SelectedItem as TreeViewItem).Tag;
+            var id = (int)(SelectedItem as TreeViewItem).Tag;
             new GroupsNew(SQL.GetInstance<M_Group>(GroupModule, id), Commands.Type.PREVIEW) { Owner = Window.GetWindow(this) }.ShowDialog();
-            btnGroupsRefresh_Click(null, null);
+            BtnGroupsRefresh_Click(null, null);
         }
 
         /// <summary>
 		/// New
 		/// </summary>
-		private void btnGroupsNew_Click(object sender, RoutedEventArgs e)
+		private void BtnGroupsNew_Click(object sender, RoutedEventArgs e)
         {
             TreeViewItem GetParentItem(TreeViewItem item)
             {
@@ -90,26 +91,26 @@ namespace WBZ.Modules._shared
                 instance.Path = path;
             }
             new GroupsNew(instance, Commands.Type.NEW) { Owner = Window.GetWindow(this) }.ShowDialog();
-            btnGroupsRefresh_Click(null, null);
+            BtnGroupsRefresh_Click(null, null);
         }
 
         /// <summary>
 		/// Edit
 		/// </summary>
-		private void btnGroupsEdit_Click(object sender, RoutedEventArgs e)
+		private void BtnGroupsEdit_Click(object sender, RoutedEventArgs e)
         {
             if (SelectedItem == null || (int)(SelectedItem as Control).Tag == 0)
                 return;
 
-            int id = (int)(SelectedItem as TreeViewItem).Tag;
+            var id = (int)(SelectedItem as TreeViewItem).Tag;
             new GroupsNew(SQL.GetInstance<M_Group>(GroupModule, id), Commands.Type.EDIT) { Owner = Window.GetWindow(this) }.ShowDialog();
-            btnGroupsRefresh_Click(null, null);
+            BtnGroupsRefresh_Click(null, null);
         }
 
         /// <summary>
         /// Delete
         /// </summary>
-        private void btnGroupsDelete_Click(object sender, RoutedEventArgs e)
+        private void BtnGroupsDelete_Click(object sender, RoutedEventArgs e)
         {
             if (SelectedItem == null || (int)(SelectedItem as Control).Tag == 0)
                 return;
@@ -118,14 +119,14 @@ namespace WBZ.Modules._shared
             {
                 var group = SelectedItem as TreeViewItem;
                 SQL.DeleteInstance(GroupModule, (int)group.Tag, ((group.Header as StackPanel).Children[1] as TextBlock).Text);
-                btnGroupsRefresh_Click(null, null);
+                BtnGroupsRefresh_Click(null, null);
             }
         }
 
         /// <summary>
         /// Expand all
         /// </summary>
-        private void btnGroupsExpandAll_Click(object sender, RoutedEventArgs e)
+        private void BtnGroupsExpandAll_Click(object sender, RoutedEventArgs e)
         {
             foreach (TreeViewItem tvi1 in Items)
             {
@@ -152,7 +153,7 @@ namespace WBZ.Modules._shared
         /// <summary>
 		/// Refresh
 		/// </summary>
-		private void btnGroupsRefresh_Click(object sender, RoutedEventArgs e)
+		private void BtnGroupsRefresh_Click(object sender, RoutedEventArgs e)
         {
             ItemCollection recurseItemCollection(ItemCollection items, int id)
             {
@@ -170,7 +171,7 @@ namespace WBZ.Modules._shared
             try
             {
                 // TODO - filtr do parametryzacji
-                InstancesList = SQL.ListInstances<M_Group>(GroupModule, $"{GroupModule.Alias}.module_alias='{WindowModule.Alias}' and {GroupModule.Alias}.instance_id is null");
+                InstancesList = SQL.ListInstances<M_Group>(GroupModule, $"{GroupModule.Alias}.module_alias='{WindowModule.Alias}' and {GroupModule.Alias}.instance_id=0");
                 Items.Clear();
 
                 TreeViewItem GetTreeViewHeader(M_Group group)
@@ -207,7 +208,7 @@ namespace WBZ.Modules._shared
                 }
 
                 /// Add groups to TreeView
-                Items.Add(GetTreeViewHeader(new M_Group() { Name = ". . ." }));
+                Items.Add(GetTreeViewHeader(new M_Group() { Name = " • • • " }));
                 foreach (var group1 in InstancesList.Where(x => x.OwnerID == 0))
                 {
                     var tvi1 = GetTreeViewHeader(group1);
@@ -252,9 +253,9 @@ namespace WBZ.Modules._shared
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 if (Config.User.Perms.Contains($"{WindowModule.Name}_{Config.PermType.SAVE}"))
-                    btnGroupsEdit_Click(null, null);
+                    BtnGroupsEdit_Click(null, null);
                 else
-                    btnGroupsPreview_Click(null, null);
+                    BtnGroupsPreview_Click(null, null);
             }
         }
 
@@ -265,12 +266,11 @@ namespace WBZ.Modules._shared
         {
             while (source != null && !(source is TreeViewItem))
                 source = VisualTreeHelper.GetParent(source);
-
             return source as TreeViewItem;
         }
         private void TreeView_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            TreeViewItem treeViewItem = VisualUpwardSearch(e.OriginalSource as DependencyObject);
+            var treeViewItem = VisualUpwardSearch(e.OriginalSource as DependencyObject);
 
             if (treeViewItem != null)
                 treeViewItem.Focus();
@@ -286,8 +286,8 @@ namespace WBZ.Modules._shared
         {
             try
             {
-                Window win = Window.GetWindow(this);
-                var d = win?.DataContext as D_GroupsList;
+                var win = Window.GetWindow(this);
+                dynamic d = win?.DataContext;
                 if (d != null)
                 {
                     d.Filter.ShowGroup = e.NewValue != null ? (int)(e.NewValue as TreeViewItem).Tag : 0;

@@ -13,7 +13,7 @@ namespace WBZ.Modules._shared
     /// </summary>
     public partial class AttributesTab : UserControl
     {
-		readonly D_AttributesTab D = new D_AttributesTab();
+        readonly D_AttributesTab D = new D_AttributesTab();
 
         private MV Module;
         private int InstanceID;
@@ -33,13 +33,13 @@ namespace WBZ.Modules._shared
             try
             {
                 var win = Window.GetWindow(this);
-				var d = win?.DataContext as D_ModuleNew<dynamic>;
+                var d = win?.DataContext as D_ModuleNew<dynamic>;
 
-				if (d != null)
+                if (d != null)
                 {
                     Module = d.Module;
-					InstanceID = (d.InstanceData as M).ID;
-				}
+                    InstanceID = (d.InstanceData as M).ID;
+                }
                 if (InstanceID != 0 && D.InstanceAttributes == null)
                     D.InstanceAttributes = SQL.ListAttributes(Module, InstanceID);
             }
@@ -49,7 +49,7 @@ namespace WBZ.Modules._shared
         /// <summary>
         /// Change
         /// </summary>
-        private void btnAttributeChange_Click(object sender, RoutedEventArgs e)
+        private void BtnAttributeChange_Click(object sender, RoutedEventArgs e)
         {
             var win = Window.GetWindow(this);
             dynamic d = win?.DataContext;
@@ -69,18 +69,18 @@ namespace WBZ.Modules._shared
 
             D.InstanceAttributes = SQL.ListAttributes(Module, InstanceID);
         }
-	}
+    }
 
-	/// <summary>
-	/// DataContext
-	/// </summary>
-	class D_AttributesTab : D
+    /// <summary>
+    /// DataContext
+    /// </summary>
+    internal class D_AttributesTab : D
     {
-		/// Module
-		
+        /// Module
 
-		/// Attributes
-		private List<M_Attribute> instanceAttributes;
+
+        /// Attributes
+        private List<M_Attribute> instanceAttributes;
         public List<M_Attribute> InstanceAttributes
         {
             get => instanceAttributes;

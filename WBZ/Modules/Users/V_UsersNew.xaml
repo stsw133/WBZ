@@ -15,9 +15,9 @@
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
     <Window.CommandBindings>
-		<CommandBinding Command="se:Commands.Close" Executed="cmdClose_Executed"/>
-		<CommandBinding Command="se:Commands.Refresh" Executed="cmdRefresh_Executed"/>
-        <CommandBinding Command="se:Commands.Save" Executed="cmdSave_Executed" CanExecute="cmdSave_CanExecute"/>
+		<CommandBinding Command="se:Commands.Close" Executed="CmdClose_Executed"/>
+		<CommandBinding Command="se:Commands.Refresh" Executed="CmdRefresh_Executed"/>
+        <CommandBinding Command="se:Commands.Save" Executed="CmdSave_Executed" CanExecute="CmdSave_CanExecute"/>
     </Window.CommandBindings>
     <DockPanel>
         <!-- titleBar -->
@@ -58,76 +58,52 @@
                     <se:Header Text="{Tr General}" Icon="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
                 </TabItem.Header>
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <Grid Margin="10" VerticalAlignment="Top" IsEnabled="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=!PREVIEW}">
-                        <Grid.Resources>
-                            <Style TargetType="{x:Type se:IconButton}">
-                                <Setter Property="CornerRadius" Value="0"/>
-                                <Setter Property="IconMargin" Value="0"/>
-                                <Setter Property="IconSize" Value="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=1.5}"/>
-                                <Setter Property="IsTextVisible" Value="False"/>
-                                <Setter Property="Margin" Value="5,5,0,5"/>
-                                <Setter Property="Padding" Value="0"/>
-                                <Setter Property="Width" Value="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"/>
-                            </Style>
-                            <Style TargetType="{x:Type se:ExtLabel}">
-                                <Setter Property="HorizontalContentAlignment" Value="Right"/>
-                                <Setter Property="Margin" Value="5"/>
-                                <Setter Property="Width" Value="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=10}"/>
-                            </Style>
-                            <Style TargetType="{x:Type se:NumericUpDown}">
-                                <Setter Property="HorizontalAlignment" Value="Left"/>
-                                <Setter Property="Margin" Value="5"/>
-                                <Setter Property="Width" Value="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=10}"/>
-                            </Style>
-                            <Style TargetType="{x:Type se:ExtTextBox}">
-                                <Setter Property="Margin" Value="5"/>
-                            </Style>
-                        </Grid.Resources>
-                        <Grid.ColumnDefinitions>
+					<Grid Margin="5" VerticalAlignment="Top">
+						<Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition Width="auto"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <DockPanel Grid.Column="0" Grid.ColumnSpan="3">
                             <!-- Login -->
-                            <DockPanel DockPanel.Dock="Top">
-								<se:ExtLabel Content="Login:" FontWeight="Bold"/>
-								<se:ExtTextBox Text="{Binding InstanceData.Login}"/>
+                            <DockPanel DockPanel.Dock="Top" Margin="5">
+								<se:ExtLabel Content="{Tr Login, Suffix=':'}" FontWeight="Bold" Style="{StaticResource PaneledLabel}"/>
+								<se:ExtTextBox Text="{Binding InstanceData.Login}" IsReadOnly="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=PREVIEW}"/>
                             </DockPanel>
                             <!-- Newpass -->
-                            <DockPanel DockPanel.Dock="Top">
-                                <se:ExtLabel Content="Nowe hasło:" FontWeight="Normal"/>
-                                <PasswordBox Margin="5" PasswordChanged="tbNewpass_PasswordChanged"/>
+                            <DockPanel DockPanel.Dock="Top" Margin="5">
+                                <se:ExtLabel Content="{Tr NewPassword, Suffix=':'}" FontWeight="Normal" Style="{StaticResource PaneledLabel}"/>
+								<PasswordBox PasswordChanged="PwdBoxNewpass_PasswordChanged" IsEnabled="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=!PREVIEW}"/>
                             </DockPanel>
                             <!-- Email -->
-                            <DockPanel DockPanel.Dock="Top">
-                                <se:ExtLabel Content="E-mail:" FontWeight="Bold"/>
-                                <se:ExtTextBox Text="{Binding InstanceData.Email}"/>
+                            <DockPanel DockPanel.Dock="Top" Margin="5">
+                                <se:ExtLabel Content="{Tr Email, Suffix=':'}" FontWeight="Bold" Style="{StaticResource PaneledLabel}"/>
+								<se:ExtTextBox Text="{Binding InstanceData.Email}" IsReadOnly="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=PREVIEW}"/>
                             </DockPanel>
                             <!-- Phone -->
-                            <DockPanel DockPanel.Dock="Top">
-                                <se:ExtLabel Content="Nr telefonu:" FontWeight="Normal"/>
-                                <se:ExtTextBox Text="{Binding InstanceData.Phone}"/>
+                            <DockPanel DockPanel.Dock="Top" Margin="5">
+                                <se:ExtLabel Content="Nr telefonu:" FontWeight="Normal" Style="{StaticResource PaneledLabel}"/>
+								<se:ExtTextBox Text="{Binding InstanceData.Phone}" IsReadOnly="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=PREVIEW}"/>
                             </DockPanel>
                             <!-- Forename -->
-                            <DockPanel DockPanel.Dock="Top">
-                                <se:ExtLabel Content="Imię:" FontWeight="Normal"/>
-                                <se:ExtTextBox Text="{Binding InstanceData.Forename}"/>
+                            <DockPanel DockPanel.Dock="Top" Margin="5">
+                                <se:ExtLabel Content="Imię:" FontWeight="Normal" Style="{StaticResource PaneledLabel}"/>
+								<se:ExtTextBox Text="{Binding InstanceData.Forename}" IsReadOnly="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=PREVIEW}"/>
                             </DockPanel>
                             <!-- Lastname -->
-                            <DockPanel DockPanel.Dock="Top">
-                                <se:ExtLabel Content="Nazwisko:" FontWeight="Normal"/>
-                                <se:ExtTextBox Text="{Binding InstanceData.Lastname}"/>
+                            <DockPanel DockPanel.Dock="Top" Margin="5">
+                                <se:ExtLabel Content="Nazwisko:" FontWeight="Normal" Style="{StaticResource PaneledLabel}"/>
+								<se:ExtTextBox Text="{Binding InstanceData.Lastname}" IsReadOnly="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=PREVIEW}"/>
                             </DockPanel>
                             <!-- IsBlocked -->
-                            <DockPanel DockPanel.Dock="Top">
-                                <se:ExtLabel Content="Zablokowany:" FontWeight="Normal"/>
-                                <se:ExtCheckBox Margin="5" IsChecked="{Binding InstanceData.IsBlocked}"/>
+                            <DockPanel DockPanel.Dock="Top" Margin="5">
+                                <se:ExtLabel Content="Zablokowany:" FontWeight="Normal" Style="{StaticResource PaneledLabel}"/>
+								<se:ExtCheckBox IsChecked="{Binding InstanceData.IsBlocked}" IsEnabled="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=!PREVIEW}"/>
                             </DockPanel>
                             <!-- IsArchival -->
-                            <DockPanel DockPanel.Dock="Top">
-                                <se:ExtLabel Content="Archiwalny:" FontWeight="Normal"/>
-                                <se:ExtCheckBox Margin="5" IsChecked="{Binding InstanceData.IsArchival}"/>
+                            <DockPanel DockPanel.Dock="Top" Margin="5">
+                                <se:ExtLabel Content="Archiwalny:" FontWeight="Normal" Style="{StaticResource PaneledLabel}"/>
+								<se:ExtCheckBox IsChecked="{Binding InstanceData.IsArchival}" IsEnabled="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=!PREVIEW}"/>
                             </DockPanel>
                         </DockPanel>
                     </Grid>
@@ -139,12 +115,12 @@
                     <se:Header Text="{Tr Permissions}" Icon="/Resources/32/icon32_accept.ico"/>
                 </TabItem.Header>
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <DockPanel x:Name="dpPerms" Margin="10" VerticalAlignment="Top" IsEnabled="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=!PREVIEW}">
+                    <DockPanel x:Name="DckPanPerms" Margin="5" VerticalAlignment="Top" IsEnabled="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=!PREVIEW}">
                         <!-- admin -->
                         <UniformGrid Tag="Admin" DockPanel.Dock="Top">
                             <se:ExtCheckBox Margin="0,5,0,15" Content="{Tr AdminPermissions}" HorizontalAlignment="Left"
                                             IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=Admin}" Tag="Admin"
-                                            Checked="chckPerms_Checked" Unchecked="chckPerms_Unchecked"/>
+                                            Checked="ChkPerms_Checked" Unchecked="ChkPerms_Unchecked"/>
                         </UniformGrid>
                         <!-- headers -->
                         <UniformGrid DockPanel.Dock="Top" Rows="1" Height="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=1.5}">
@@ -214,6 +190,13 @@
                         </UniformGrid>
                     </DockPanel>
                 </ScrollViewer>
+            </TabItem>
+            <!-- tabGroups -->
+            <TabItem>
+                <TabItem.Header>
+                    <se:Header Text="{Tr Groups}" Icon="/Resources/32/icon32_groups.ico"/>
+                </TabItem.Header>
+                <s:GroupsTab/>
             </TabItem>
             <!-- tabLogs -->
             <TabItem>

@@ -12,8 +12,8 @@
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
     <Window.CommandBindings>
-		<CommandBinding Command="se:Commands.Close" Executed="cmdClose_Executed"/>
-		<CommandBinding Command="se:Commands.Refresh" Executed="cmdRefresh_Executed"/>
+		<CommandBinding Command="se:Commands.Close" Executed="CmdClose_Executed"/>
+		<CommandBinding Command="se:Commands.Refresh" Executed="CmdRefresh_Executed"/>
     </Window.CommandBindings>
     <DockPanel>
         <!-- titleBar -->
@@ -28,7 +28,7 @@
 					</Style>
 				</DockPanel.Resources>
                 <StackPanel DockPanel.Dock="Top">
-                    <se:IconButton Text="{Tr Download}" Margin="5" Icon="/Resources/32/icon32_download.ico" Click="btnDownload_Click"/>
+                    <se:IconButton Text="{Tr Download}" Margin="5" Icon="/Resources/32/icon32_download.ico" Click="BtnDownload_Click"/>
                     <Separator/>
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">

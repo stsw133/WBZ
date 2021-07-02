@@ -16,9 +16,9 @@
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
     <Window.CommandBindings>
-		<CommandBinding Command="se:Commands.Close" Executed="cmdClose_Executed"/>
-		<CommandBinding Command="se:Commands.Refresh" Executed="cmdRefresh_Executed"/>
-        <CommandBinding Command="se:Commands.Save" Executed="cmdSave_Executed" CanExecute="cmdSave_CanExecute"/>
+		<CommandBinding Command="se:Commands.Close" Executed="CmdClose_Executed"/>
+		<CommandBinding Command="se:Commands.Refresh" Executed="CmdRefresh_Executed"/>
+        <CommandBinding Command="se:Commands.Save" Executed="CmdSave_Executed" CanExecute="CmdSave_CanExecute"/>
     </Window.CommandBindings>
     <DockPanel>
         <!-- titleBar -->
@@ -59,29 +59,19 @@
 					<se:Header Text="{Tr General}" Icon="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
                 </TabItem.Header>
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-					<Grid Margin="10" IsEnabled="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=!PREVIEW}">
+					<Grid Margin="5">
 						<Grid.Resources>
 							<Style TargetType="{x:Type se:IconButton}">
 								<Setter Property="CornerRadius" Value="0"/>
 								<Setter Property="IconMargin" Value="0"/>
 								<Setter Property="IconSize" Value="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=1.5}"/>
 								<Setter Property="IsTextVisible" Value="False"/>
-								<Setter Property="Margin" Value="5,5,0,5"/>
 								<Setter Property="Padding" Value="0"/>
 								<Setter Property="Width" Value="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"/>
 							</Style>
-							<Style TargetType="{x:Type se:ExtLabel}">
-								<Setter Property="HorizontalContentAlignment" Value="Right"/>
-								<Setter Property="Margin" Value="5"/>
-								<Setter Property="Width" Value="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=10}"/>
-							</Style>
 							<Style TargetType="{x:Type se:NumericUpDown}">
 								<Setter Property="HorizontalAlignment" Value="Left"/>
-								<Setter Property="Margin" Value="5"/>
 								<Setter Property="Width" Value="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=10}"/>
-							</Style>
-							<Style TargetType="{x:Type se:ExtTextBox}">
-								<Setter Property="Margin" Value="5"/>
 							</Style>
 						</Grid.Resources>
 						<Grid.ColumnDefinitions>
@@ -91,35 +81,35 @@
 						</Grid.ColumnDefinitions>
 						<DockPanel Grid.Column="0" Grid.ColumnSpan="3">
 							<!-- Codename -->
-							<DockPanel DockPanel.Dock="Top">
-								<se:ExtLabel Content="Kod:" FontWeight="Bold"/>
-								<se:ExtTextBox Text="{Binding InstanceData.Codename}"/>
+							<DockPanel DockPanel.Dock="Top" Margin="5">
+								<se:ExtLabel Content="{Tr Codename, Suffix=':'}" FontWeight="Bold" Style="{StaticResource PaneledLabel}"/>
+								<se:ExtTextBox Text="{Binding InstanceData.Codename}" IsReadOnly="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=PREVIEW}"/>
 							</DockPanel>
 							<!-- Name -->
-							<DockPanel DockPanel.Dock="Top">
-								<se:ExtLabel Content="Nazwa:" FontWeight="Bold"/>
-								<se:ExtTextBox Text="{Binding InstanceData.Name}"/>
+							<DockPanel DockPanel.Dock="Top" Margin="5">
+								<se:ExtLabel Content="{Tr Name, Suffix=':'}" FontWeight="Bold" Style="{StaticResource PaneledLabel}"/>
+								<se:ExtTextBox Text="{Binding InstanceData.Name}" IsReadOnly="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=PREVIEW}"/>
 							</DockPanel>
 							<!-- EAN -->
-							<DockPanel DockPanel.Dock="Top">
-								<se:ExtLabel Content="EAN:" FontWeight="Normal"/>
-								<se:ExtTextBox Text="{Binding InstanceData.EAN}"/>
+							<DockPanel DockPanel.Dock="Top" Margin="5">
+								<se:ExtLabel Content="{Tr EAN, Suffix=':'}" FontWeight="Normal" Style="{StaticResource PaneledLabel}"/>
+								<se:ExtTextBox Text="{Binding InstanceData.EAN}" IsReadOnly="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=PREVIEW}"/>
 							</DockPanel>
 							<!-- AmountRaw -->
-							<DockPanel DockPanel.Dock="Top">
-								<se:ExtLabel Content="Ilość (kg):" FontWeight="Normal"/>
+							<DockPanel DockPanel.Dock="Top" Margin="5">
+								<se:ExtLabel Content="Ilość (kg):" FontWeight="Normal" Style="{StaticResource PaneledLabel}"/>
 								<se:ExtTextBox Text="{Binding InstanceData.QuantityRaw}" IsReadOnly="True" Background="#EEE"/>
 							</DockPanel>
 							<!-- ReservedRaw -->
-							<DockPanel DockPanel.Dock="Top">
-								<se:ExtLabel Content="Zarezerwowano (kg):" FontWeight="Normal"/>
+							<DockPanel DockPanel.Dock="Top" Margin="5">
+								<se:ExtLabel Content="Zarezerwowano (kg):" FontWeight="Normal" Style="{StaticResource PaneledLabel}"/>
 								<se:ExtTextBox Text="{Binding InstanceData.ReservedRaw}" IsReadOnly="True" Background="#EEE"/>
 							</DockPanel>
 							<!-- Measures -->
 							<Label DockPanel.Dock="Top" Content="Dodatkowe wagi i zasoby:" Margin="5,5,5,0" HorizontalAlignment="Center"/>
 							<se:ExtDataGrid ItemsSource="{Binding InstanceData.Measures.DefaultView}"
-											IsReadOnly="{Binding EditMode, Converter={se:conv_Bool}, ConverterParameter=!}"
-											CellEditEnding="dgMeasures_CellEditEnding">
+											IsReadOnly="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=PREVIEW}"
+											CellEditEnding="DtgMeasures_CellEditEnding">
 								<DataGrid.Columns>
 									<DataGridTextColumn Binding="{Binding id}" Header="ID" IsReadOnly="True" Visibility="Collapsed"/>
 									<DataGridTextColumn Binding="{Binding name}" Header="Jm" Width="*"/>
@@ -160,29 +150,29 @@
                 <TabItem.Header>
                     <se:Header Text="{Tr Sources}" Icon="/Resources/32/icon32_source.ico"/>
                 </TabItem.Header>
-                <TabControl SelectionChanged="tcSources_SelectionChanged">
-                    <!-- tabStores -->
-                    <TabItem x:Name="tabSources_Stores">
-                        <TabItem.Header>
-                            <se:Header Text="{Tr Stores}" Icon="/Resources/32/icon32_stores.ico"/>
-                        </TabItem.Header>
-                        <m:StoresListGrid ItemsSource="{Binding InstanceSources_Stores}" MouseDoubleClick="dgList_Stores_MouseDoubleClick"/>
-                    </TabItem>
-                    <!-- tabDocuments -->
-                    <TabItem x:Name="tabSources_Documents">
-                        <TabItem.Header>
-                            <se:Header Text="{Tr Documents}" Icon="/Resources/32/icon32_documents.ico"/>
-                        </TabItem.Header>
-                        <m:DocumentsListGrid ItemsSource="{Binding InstanceSources_Documents}" MouseDoubleClick="dgList_Documents_MouseDoubleClick"/>
-                    </TabItem>
-                    <!-- tabDistributions -->
-                    <TabItem x:Name="tabSources_Distributions">
-                        <TabItem.Header>
-                            <se:Header Text="{Tr Distributions}" Icon="/Resources/32/icon32_food.ico"/>
-                        </TabItem.Header>
-                        <m:DistributionsListGrid ItemsSource="{Binding InstanceSources_Distributions}" MouseDoubleClick="dgList_Distributions_MouseDoubleClick"/>
-                    </TabItem>
-                </TabControl>
+				<TabControl SelectionChanged="TabConSources_SelectionChanged">
+					<!-- tabDistributions -->
+					<TabItem x:Name="tabSources_Distributions">
+						<TabItem.Header>
+							<se:Header Text="{Tr Distributions}" Icon="/Resources/32/icon32_food.ico"/>
+						</TabItem.Header>
+						<m:DistributionsListGrid ItemsSource="{Binding InstanceSources_Distributions}" MouseDoubleClick="dgList_Distributions_MouseDoubleClick"/>
+					</TabItem>
+					<!-- tabDocuments -->
+					<TabItem x:Name="tabSources_Documents">
+						<TabItem.Header>
+							<se:Header Text="{Tr Documents}" Icon="/Resources/32/icon32_documents.ico"/>
+						</TabItem.Header>
+						<m:DocumentsListGrid ItemsSource="{Binding InstanceSources_Documents}" MouseDoubleClick="dgList_Documents_MouseDoubleClick"/>
+					</TabItem>
+					<!-- tabStores -->
+					<TabItem x:Name="tabSources_Stores">
+						<TabItem.Header>
+							<se:Header Text="{Tr Stores}" Icon="/Resources/32/icon32_stores.ico"/>
+						</TabItem.Header>
+						<m:StoresListGrid ItemsSource="{Binding InstanceSources_Stores}" MouseDoubleClick="dgList_Stores_MouseDoubleClick"/>
+					</TabItem>
+				</TabControl>
             </TabItem>
             <!-- tabGroups -->
             <TabItem>

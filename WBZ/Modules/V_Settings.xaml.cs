@@ -6,73 +6,68 @@ using WBZ.Modules._base;
 
 namespace WBZ.Modules
 {
-	/// <summary>
-	/// Interaction logic for Settings.xaml
-	/// </summary>
-	public partial class Settings : Window
-	{
-		D_Settings D = new D_Settings();
+    /// <summary>
+    /// Interaction logic for Settings.xaml
+    /// </summary>
+    public partial class Settings : Window
+    {
+        readonly D_Settings D = new D_Settings();
 
-		public Settings()
-		{
-			InitializeComponent();
-			DataContext = D;
-		}
-
-		/// <summary>
-		/// EmailPassword - Loaded
-		/// </summary>
-		private void pbEmailPassword_Loaded(object sender, RoutedEventArgs e)
-		{
-			if (Properties.Settings.Default.config_Email_Password.Length > 0)
-				pbEmailPassword.Password = Security.Decrypt(Properties.Settings.Default.config_Email_Password);
-		}
-
-		/// <summary>
-		/// EmailPassword - PasswordChanged
-		/// </summary>
-		private void pbEmailPassword_PasswordChanged(object sender, RoutedEventArgs e)
-		{
-			if (pbEmailPassword.Password.Length > 0)
-				Properties.Settings.Default.config_Email_Password = Security.Encrypt(pbEmailPassword.Password);
-		}
-
-		/// <summary>
-		/// EmailTest
-		/// </summary>
-		private void btnEmailTest_Click(object sender, RoutedEventArgs e)
-		{
-			if (Mail.SendMail(Mail.Email, new string[] { Config.User.Email }, string.Empty, string.Empty))
-				new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.INFO, "Test poczty e-mail powiódł się.") { Owner = this }.ShowDialog();
-			else
-				new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.ERROR, "Test poczty e-mail nie powiódł się!") { Owner = this }.ShowDialog();
-		}
-
-		/// <summary>
-		/// Accept
-		/// </summary>
-        private void btnAccept_Click(object sender, RoutedEventArgs e)
+        public Settings()
         {
-			TM.Instance.CurrentLanguage = Properties.Settings.Default.Language;
+            InitializeComponent();
+            DataContext = D;
+        }
 
-			Mail.Host = Properties.Settings.Default.config_Email_Host;
-			Mail.Port = Properties.Settings.Default.config_Email_Port;
-			Mail.Email = Properties.Settings.Default.config_Email_Email;
-			Mail.Password = Properties.Settings.Default.config_Email_Password;
+        /// <summary>
+        /// EmailPassword - Loaded
+        /// </summary>
+        private void PwdBoxEmailPassword_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (StswExpress.Settings.Default.mail_Password.Length > 0)
+                PwdBoxEmailPassword.Password = Security.Decrypt(StswExpress.Settings.Default.mail_Password);
+        }
 
-			Properties.Settings.Default.Save();
-			StswExpress.Settings.Default.Save();
+        /// <summary>
+        /// EmailPassword - PasswordChanged
+        /// </summary>
+        private void PwdBoxEmailPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (PwdBoxEmailPassword.Password.Length > 0)
+                StswExpress.Settings.Default.mail_Password = Security.Encrypt(PwdBoxEmailPassword.Password);
+        }
 
-			Close();
-		}
+        /// <summary>
+        /// EmailTest
+        /// </summary>
+        private void BtnEmailTest_Click(object sender, RoutedEventArgs e)
+        {
+            if (Mail.SendMail(StswExpress.Settings.Default.mail_Username, Config.User.Email, string.Empty, string.Empty))
+                new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.INFO, "Test poczty e-mail powiódł się.") { Owner = this }.ShowDialog();
+            else
+                new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.ERROR, "Test poczty e-mail nie powiódł się!") { Owner = this }.ShowDialog();
+        }
 
-		/// <summary>
-		/// Cancel
-		/// </summary>
-		private void btnCancel_Click(object sender, RoutedEventArgs e)
-		{
-			Properties.Settings.Default.Reload();
-			Close();
-		}
-	}
+        /// <summary>
+        /// Accept
+        /// </summary>
+        private void BtnAccept_Click(object sender, RoutedEventArgs e)
+        {
+            TM.Instance.CurrentLanguage = Properties.Settings.Default.Language;
+
+            Properties.Settings.Default.Save();
+            StswExpress.Settings.Default.Save();
+
+            Close();
+        }
+
+        /// <summary>
+        /// Cancel
+        /// </summary>
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.Reload();
+            Close();
+        }
+    }
 }

@@ -3,15 +3,15 @@ using System.Windows.Controls;
 
 namespace WBZ.Modules._shared
 {
-	/// <summary>
-	/// Interaction logic for StatusPanel.xaml
-	/// </summary>
-	public partial class StatusPanel : UserControl
-	{
-		public StatusPanel()
-		{
-			InitializeComponent();
-		}
+    /// <summary>
+    /// Interaction logic for StatusPanel.xaml
+    /// </summary>
+    public partial class StatusPanel : UserControl
+    {
+        public StatusPanel()
+        {
+            InitializeComponent();
+        }
 
         /// <summary>
         /// HasFilters

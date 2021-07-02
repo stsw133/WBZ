@@ -184,10 +184,10 @@ namespace WBZ.Globals
             },
             new MV()
             {
-                Name = "Groups",
+                Name = nameof(Modules._submodules.Groups),
                 Alias = "gro",
-                Value = Fn.AddCharBeforeUpperLetters("Groups", '_').ToLower(),
-                Display = TM.Tr("Groups")
+                Value = Fn.AddCharBeforeUpperLetters(nameof(Modules._submodules.Groups), '_').ToLower(),
+                Display = TM.Tr(nameof(Modules._submodules.Groups))
             },
             new MV()
             {

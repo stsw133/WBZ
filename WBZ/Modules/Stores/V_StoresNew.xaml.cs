@@ -47,8 +47,8 @@ namespace WBZ.Modules.Stores
 				}
 			});
 		}
-		private void dgList_Articles_MouseDoubleClick(object sender, MouseButtonEventArgs e) => dgSourceList_MouseDoubleClick<M_Article>(sender, e, Config.GetModule(nameof(Articles)));
-		private void dgList_Documents_MouseDoubleClick(object sender, MouseButtonEventArgs e) => dgSourceList_MouseDoubleClick<M_Document>(sender, e, Config.GetModule(nameof(Documents)));
+		private void dgList_Articles_MouseDoubleClick(object sender, MouseButtonEventArgs e) => DtgSourceList_MouseDoubleClick<M_Article>(sender, e, Config.GetModule(nameof(Articles)));
+		private void dgList_Documents_MouseDoubleClick(object sender, MouseButtonEventArgs e) => DtgSourceList_MouseDoubleClick<M_Document>(sender, e, Config.GetModule(nameof(Documents)));
 
 		/// <summary>
 		/// Validation

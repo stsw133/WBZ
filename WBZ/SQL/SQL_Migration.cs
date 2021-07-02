@@ -6,34 +6,34 @@ using System.Windows;
 
 namespace WBZ
 {
-	internal static class SQL_Migration
-	{
-		/// <summary>
-		/// Updates schema to make it compatible with the newest app version
-		/// </summary>
-		/// <returns>True - if schema has been updated</returns>
-		internal static bool DoWork()
-		{
-			bool result = false;
+    internal static class SQL_Migration
+    {
+        /// <summary>
+        /// Updates schema to make it compatible with the newest app version
+        /// </summary>
+        /// <returns>True - if schema has been updated</returns>
+        internal static bool DoWork()
+        {
+            bool result = false;
 
-			try
-			{
-				using (var sqlConn = SQL.ConnOpenedWBZ)
-				{
-					using (var sqlTran = sqlConn.BeginTransaction())
-					{
-						/// first time
-						if (SQL.GetPropertyValue("VERSION") == null)
-						{
-							using var sqlCmd = new NpgsqlCommand(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SQL/database.sql")), sqlConn, sqlTran);
-							sqlCmd.ExecuteNonQuery();
-							using var sqlCmd2 = new NpgsqlCommand($"insert into wbz.config (property, value) values ('VERSION', '{Fn.AppVersion()}')", sqlConn, sqlTran);
-							sqlCmd2.ExecuteNonQuery();
-						}
-						/// 1.0.0 => 1.0.1
-						if (SQL.GetPropertyValue("VERSION") == "1.0.0")
-						{
-							using var sqlCmd = new NpgsqlCommand(@"
+            try
+            {
+                using (var sqlConn = SQL.ConnOpenedWBZ)
+                {
+                    using (var sqlTran = sqlConn.BeginTransaction())
+                    {
+                        /// first time
+                        if (SQL.GetPropertyValue("VERSION") == null)
+                        {
+                            using var sqlCmd = new NpgsqlCommand(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SQL/Database.sql")), sqlConn, sqlTran);
+                            sqlCmd.ExecuteNonQuery();
+                            using var sqlCmd2 = new NpgsqlCommand($"insert into wbz.config (property, value) values ('VERSION', '{Fn.AppVersion()}')", sqlConn, sqlTran);
+                            sqlCmd2.ExecuteNonQuery();
+                        }
+                        /// 1.0.0 => 1.0.1
+                        if (SQL.GetPropertyValue("VERSION") == "1.0.0")
+                        {
+                            using var sqlCmd = new NpgsqlCommand(@"
 CREATE OR REPLACE FUNCTION wbz.artdefmeaval(
 	_article integer,
 	_amount double precision)
@@ -75,19 +75,19 @@ END
 $BODY$;
 
 								update wbz.config set value='1.0.1' where property='VERSION'", sqlConn, sqlTran);
-							sqlCmd.ExecuteNonQuery();
-						}
-						/// 1.0.1 => 1.0.2
-						if (SQL.GetPropertyValue("VERSION") == "1.0.1")
-						{
-							using var sqlCmd = new NpgsqlCommand(@"
+                            sqlCmd.ExecuteNonQuery();
+                        }
+                        /// 1.0.1 => 1.0.2
+                        if (SQL.GetPropertyValue("VERSION") == "1.0.1")
+                        {
+                            using var sqlCmd = new NpgsqlCommand(@"
 								update wbz.config set value='1.0.2' where property='VERSION'", sqlConn, sqlTran);
-							sqlCmd.ExecuteNonQuery();
-						}
-						/// 1.0.2 => 1.1.0
-						if (SQL.GetPropertyValue("VERSION") == "1.0.2")
-						{
-							using var sqlCmd = new NpgsqlCommand(@"
+                            sqlCmd.ExecuteNonQuery();
+                        }
+                        /// 1.0.2 => 1.1.0
+                        if (SQL.GetPropertyValue("VERSION") == "1.0.2")
+                        {
+                            using var sqlCmd = new NpgsqlCommand(@"
 delete from wbz.users_permissions where perm='admin_config_preview';
 delete from wbz.users_permissions where perm='admin_config_save';
 delete from wbz.users_permissions where perm='admin_config_delete';
@@ -165,12 +165,12 @@ CREATE TABLE wbz.attributes_values
 ) TABLESPACE pg_default;
 
 								update wbz.config set value='1.1.0' where property='VERSION'", sqlConn, sqlTran);
-							sqlCmd.ExecuteNonQuery();
-						}
-						/// 1.1.0 => 1.2
-						if (SQL.GetPropertyValue("VERSION") == "1.1.0")
-						{
-							using var sqlCmd = new NpgsqlCommand(@"
+                            sqlCmd.ExecuteNonQuery();
+                        }
+                        /// 1.1.0 => 1.2
+                        if (SQL.GetPropertyValue("VERSION") == "1.1.0")
+                        {
+                            using var sqlCmd = new NpgsqlCommand(@"
 alter table wbz.companies rename to contractors;
 alter table wbz.documents rename column company to contractor;
 alter table wbz.stores_articles rename to stores_resources;
@@ -319,22 +319,22 @@ alter table wbz.users rename column blocked to is_blocked;
 alter table wbz.users_permissions rename column ""user"" to user_id;
 
 								update wbz.config set value='1.2' where property='VERSION'", sqlConn, sqlTran);
-							sqlCmd.ExecuteNonQuery();
-						}
+                            sqlCmd.ExecuteNonQuery();
+                        }
 
-						sqlTran.Commit();
-					}
-				}
+                        sqlTran.Commit();
+                    }
+                }
 
-				Fn.AppDatabase.Version = SQL.GetPropertyValue("VERSION");
-				result = true;
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message);
-			}
+                Fn.AppDatabase.Version = SQL.GetPropertyValue("VERSION");
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
-			return result;
-		}
-	}
+            return result;
+        }
+    }
 }

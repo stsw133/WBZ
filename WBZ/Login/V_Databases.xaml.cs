@@ -57,14 +57,14 @@ namespace WBZ.Login
         {
             if (LstBoxDatabases.SelectedIndex < 0)
             {
-                GrdDatabaseInfo.IsEnabled = false;
+                UniGriDatabaseInfo.IsEnabled = false;
                 return;
             }
 
             PwdBoxPassword.Password = (LstBoxDatabases.SelectedItem as DB).Password;
             LblStatus.Content = string.Empty;
 
-            GrdDatabaseInfo.IsEnabled = true;
+            UniGriDatabaseInfo.IsEnabled = true;
             D.CanUpdateDatabase = false;
             D.CanCreateAdmin = false;
         }

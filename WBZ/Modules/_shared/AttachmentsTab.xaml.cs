@@ -16,7 +16,7 @@ namespace WBZ.Modules._shared
     /// </summary>
     public partial class AttachmentsTab : UserControl
     {
-		readonly D_AttachmentsTab D = new D_AttachmentsTab();
+        readonly D_AttachmentsTab D = new D_AttachmentsTab();
 
         private MV Module;
         private int InstanceID;
@@ -35,13 +35,13 @@ namespace WBZ.Modules._shared
             try
             {
                 var win = Window.GetWindow(this);
-				var d = win?.DataContext as D_ModuleNew<dynamic>;
+                var d = win?.DataContext as D_ModuleNew<dynamic>;
 
-				if (d != null)
+                if (d != null)
                 {
-					Module = d.Module;
-					InstanceID = (d.InstanceData as M).ID;
-				}
+                    Module = d.Module;
+                    InstanceID = (d.InstanceData as M).ID;
+                }
                 if (InstanceID != 0 && D.InstanceAttachments == null)
                 {
                     D.InstanceAttachments = SQL.ListInstances<M_Attachment>(D.ModuleAttachments, $"{D.ModuleAttachments.Alias}.module_alias='{Module.Alias}' and {D.ModuleAttachments.Alias}.instance_id={InstanceID}");
@@ -54,7 +54,7 @@ namespace WBZ.Modules._shared
         /// <summary>
         /// Add
         /// </summary>
-        private void btnAttachmentAdd_Click(object sender, RoutedEventArgs e)
+        private void BtnAttachmentAdd_Click(object sender, RoutedEventArgs e)
         {
             var window = new AttachmentsAdd(true);
             window.Owner = Window.GetWindow(this);
@@ -91,29 +91,29 @@ namespace WBZ.Modules._shared
         /// <summary>
         /// Edit
         /// </summary>
-        private void btnAttachmentEdit_Click(object sender, RoutedEventArgs e)
+        private void BtnAttachmentEdit_Click(object sender, RoutedEventArgs e)
         {
-            if (lbAttachments.SelectedIndex < 0)
+            if (LstBoxAttachments.SelectedIndex < 0)
                 return;
-            var item = lbAttachments.SelectedItem as M_Attachment;
+            var item = LstBoxAttachments.SelectedItem as M_Attachment;
 
             var window = new MsgWin(MsgWin.Types.InputBox, "Edycja załącznika", "Nowa nazwa załącznika:", item.Name);
             window.Owner = Window.GetWindow(this);
             if (window.ShowDialog() == true)
             {
                 item.Name = window.Value;
-                lbAttachments.ItemsSource = D.InstanceAttachments;
+                LstBoxAttachments.ItemsSource = D.InstanceAttachments;
             }
         }
 
         /// <summary>
         /// Remove
         /// </summary>
-        private void btnAttachmentRemove_Click(object sender, RoutedEventArgs e)
+        private void BtnAttachmentRemove_Click(object sender, RoutedEventArgs e)
         {
-            if (lbAttachments.SelectedIndex < 0)
+            if (LstBoxAttachments.SelectedIndex < 0)
                 return;
-            var item = lbAttachments.SelectedItem as M_Attachment;
+            var item = LstBoxAttachments.SelectedItem as M_Attachment;
 
             SQL.DeleteInstance(Config.GetModule(nameof(Attachments)), item.ID, item.Name);
             D.InstanceAttachments = SQL.ListInstances<M_Attachment>(Config.GetModule(nameof(Attachments)), $"{D.ModuleAttachments.Alias}.module_alias='{Module.Alias}' and {D.ModuleAttachments.Alias}.instance_id={InstanceID}");
@@ -122,12 +122,12 @@ namespace WBZ.Modules._shared
         /// <summary>
         /// Drop
         /// </summary>
-        private void lbAttachments_Drop(object sender, DragEventArgs e)
+        private void LstBoxAttachments_Drop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
-                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                byte[] file = File.ReadAllBytes(files[0]);
+                var files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                var file = File.ReadAllBytes(files[0]);
 
                 SQL.SetAttachment(Module, InstanceID, Path.GetFileName(files[0]), files[0], file, files[0]);
                 D.InstanceAttachments = SQL.ListInstances<M_Attachment>(Config.GetModule(nameof(Attachments)), $"{D.ModuleAttachments.Alias}.module_alias='{Module.Alias}' and {D.ModuleAttachments.Alias}.instance_id={InstanceID}");
@@ -137,18 +137,17 @@ namespace WBZ.Modules._shared
         /// <summary>
         /// SelectionChanged
         /// </summary>
-        private void lbAttachments_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void LstBoxAttachments_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (lbAttachments.SelectedIndex < 0)
+            if (LstBoxAttachments.SelectedIndex < 0)
                 return;
-			
+
             var selection = (sender as ListBox).SelectedItem as M_Attachment;
             if (selection.Content == null)
                 selection.Content = SQL.GetAttachmentFile(selection.ID);
 
             File.WriteAllBytes(Path.Combine(Path.GetTempPath(), selection.Name), selection.Content);
-
-            wbFile.Source = new Uri(@"file:///" + Path.Combine(Path.GetTempPath(), selection.Name));
+            WebBwsFile.Source = new Uri(@"file:///" + Path.Combine(Path.GetTempPath(), selection.Name));
         }
 
         /// <summary>
@@ -172,11 +171,11 @@ namespace WBZ.Modules._shared
     /// </summary>
     class D_AttachmentsTab : D
     {
-		/// Module
-		public MV ModuleAttachments = Config.GetModule(nameof(Attachments));
+        /// Module
+        public MV ModuleAttachments = Config.GetModule(nameof(Attachments));
 
-		/// Attachments
-		private List<M_Attachment> instanceAttachments;
+        /// Attachments
+        private List<M_Attachment> instanceAttachments;
         public List<M_Attachment> InstanceAttachments
         {
             get => instanceAttachments;

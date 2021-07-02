@@ -19,12 +19,12 @@ namespace WBZ.Modules._shared
 
             this.needName = needName;
             if (!needName)
-                dpName.Visibility = Visibility.Collapsed;
+                DckPanName.Visibility = Visibility.Collapsed;
         }
 
-        public string GetLink=> tbLink.Text;
-        public string GetDrive => tbDrive.Text;
-        public string GetName => tbName.Text;
+        public string GetLink => TxtBoxLink.Text;
+        public string GetDrive => TxtBoxDrive.Text;
+        public string GetName => TxtBoxName.Text;
 
         /// <summary>
         /// Loaded
@@ -33,20 +33,20 @@ namespace WBZ.Modules._shared
         {
             var clipboardText = Clipboard.GetText();
             if (clipboardText.StartsWith("http"))
-                tbLink.Text = clipboardText;
+                TxtBoxLink.Text = clipboardText;
             else if (clipboardText.StartsWith("C:"))
-                tbDrive.Text = clipboardText;
+                TxtBoxDrive.Text = clipboardText;
 
-            if (!string.IsNullOrEmpty(tbLink.Text))
-                tbName.Text = tbLink.Text.Split('\\').Last().Split('.').First();
-            else if (!string.IsNullOrEmpty(tbDrive.Text))
-                tbName.Text = tbDrive.Text.Split('/').Last().Split('.').First();
+            if (!string.IsNullOrEmpty(TxtBoxLink.Text))
+                TxtBoxName.Text = TxtBoxLink.Text.Split('\\').Last().Split('.').First();
+            else if (!string.IsNullOrEmpty(TxtBoxDrive.Text))
+                TxtBoxName.Text = TxtBoxDrive.Text.Split('/').Last().Split('.').First();
         }
 
         /// <summary>
         /// Open internet browser
         /// </summary>
-        private void btnLink_Click(object sender, RoutedEventArgs e)
+        private void BtnLink_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -58,17 +58,17 @@ namespace WBZ.Modules._shared
         /// <summary>
         /// Open file dialog
         /// </summary>
-        private void btnDrive_Click(object sender, RoutedEventArgs e)
+        private void BtnDrive_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog() { Filter = "Wszystkie pliki|*.*" };
             if (dialog.ShowDialog() == true)
-                tbDrive.Text = dialog.FileName;
+                TxtBoxDrive.Text = dialog.FileName;
         }
 
         /// <summary>
         /// Accept
         /// </summary>
-        private void btnAccept_Click(object sender, RoutedEventArgs e)
+        private void BtnAccept_Click(object sender, RoutedEventArgs e)
         {
             if (needName && string.IsNullOrWhiteSpace(GetName))
             {

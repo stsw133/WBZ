@@ -23,8 +23,8 @@
 		</DataGridTextColumn>
         <!-- Icon -->
         <se:DataGridImageColumn Image="{Binding IconContent}" Width="{Binding Source={x:Static g:Config.Icon_Dimensions_Max}}" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Icon, Converter={se:conv_Bool}}"/>
-        <!-- Fullname -->
-        <DataGridTextColumn Binding="{Binding Fullname}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Fullname, Converter={se:conv_Bool}}">
+        <!-- Name -->
+        <DataGridTextColumn Binding="{Binding Name}" Width="*" Visibility="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Fullname, Converter={se:conv_Bool}}">
             <DataGridTextColumn.Header>
 				<se:ColumnFilter FilterType="Text" Header="Nazwisko" NameSQL="concat(emp.lastname, ' ', emp.forename)"/>
             </DataGridTextColumn.Header>
@@ -78,7 +78,7 @@
             <se:ExtMenuItem Header="{Tr ColumnsVisibility}" IconUri="/Resources/32/icon32_show.ico">
                 <MenuItem IsCheckable="True" Header="ID" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_ID}"/>
                 <MenuItem IsCheckable="True" Header="Ikona" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Icon}"/>
-                <MenuItem IsCheckable="True" Header="Nazwisko" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Fullname}"/>
+                <MenuItem IsCheckable="True" Header="Nazwisko" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Name}"/>
                 <MenuItem IsCheckable="True" Header="Dział" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Department}"/>
                 <MenuItem IsCheckable="True" Header="Stanowisko" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Position}"/>
                 <MenuItem IsCheckable="True" Header="E-mail" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=columns_EmployeesList_Email}"/>

@@ -11,7 +11,7 @@ namespace WBZ.Modules
         public UsersListGrid()
         {
             InitializeComponent();
-			ExtDataGrid.Load(this, Properties.Settings.Default.panelColor_Users);
-		}
+            ExtDataGrid.Load(this, Properties.Settings.Default.panelColor_Users);
+        }
     }
 }

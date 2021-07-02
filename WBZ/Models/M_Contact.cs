@@ -10,10 +10,9 @@
         public int InstanceID { get; set; }
 
         /// IMP
-        public override string Name => Fullname;
+        public override string Name => $"{Lastname} {Forename}";
         public string Forename { get; set; }
         public string Lastname { get; set; }
-        public string Fullname => $"{Lastname} {Forename}";
         public string Email { get; set; }
         public string Phone { get; set; }
 

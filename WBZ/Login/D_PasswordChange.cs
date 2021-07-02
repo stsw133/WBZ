@@ -2,7 +2,7 @@
 
 namespace WBZ.Login
 {
-    class D_PasswordChange : D
+    internal class D_PasswordChange : D
     {
         /// E-mail
         private string email;

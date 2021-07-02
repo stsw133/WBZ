@@ -15,9 +15,9 @@
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
     <Window.CommandBindings>
-		<CommandBinding Command="se:Commands.Close" Executed="cmdClose_Executed"/>
-		<CommandBinding Command="se:Commands.Refresh" Executed="cmdRefresh_Executed"/>
-        <CommandBinding Command="se:Commands.Save" Executed="cmdSave_Executed" CanExecute="cmdSave_CanExecute"/>
+		<CommandBinding Command="se:Commands.Close" Executed="CmdClose_Executed"/>
+		<CommandBinding Command="se:Commands.Refresh" Executed="CmdRefresh_Executed"/>
+        <CommandBinding Command="se:Commands.Save" Executed="CmdSave_Executed" CanExecute="CmdSave_CanExecute"/>
     </Window.CommandBindings>
     <DockPanel>
         <!-- titleBar -->
@@ -57,23 +57,16 @@
                 </TabItem.Header>
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
 					<DockPanel Margin="10" IsEnabled="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=!PREVIEW}">
-                        <DockPanel DockPanel.Dock="Top">
-                            <se:ExtLabel Content="Moduł:" FontWeight="Normal"
-										 Margin="5" HorizontalContentAlignment="Right"
-										 Width="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=10}"/>
-							<se:ExtTextBox Text="{Binding InstanceData.TranslatedModule}"
-										   Margin="5" IsReadOnly="True" Background="#EEE"/>
+                        <DockPanel DockPanel.Dock="Top" Margin="5">
+							<se:ExtLabel Content="Moduł:" FontWeight="Normal" Style="{StaticResource PaneledLabel}"/>
+							<se:ExtTextBox Text="{Binding InstanceData.Module.Display}" IsReadOnly="True" Background="#EEE"/>
                         </DockPanel>
-                        <DockPanel DockPanel.Dock="Top">
-							<se:ExtLabel Content="Nazwa:" FontWeight="Medium"
-										 Margin="5" HorizontalContentAlignment="Right"
-										 Width="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=10}"/>
-                            <se:ExtTextBox Text="{Binding InstanceData.Path}"
-										   Margin="5,5,0,5" IsReadOnly="True" Background="#EEE"/>
-                            <se:ExtTextBox Text="{Binding InstanceData.Name}"
-										   Margin="0,5,5,5"/>
-                        </DockPanel>
-                        <s:AdditionalsTab/>
+						<DockPanel DockPanel.Dock="Top" Margin="5">
+							<se:ExtLabel Content="Nazwa:" FontWeight="Bold" Style="{StaticResource PaneledLabel}"/>
+							<se:ExtTextBox Text="{Binding InstanceData.Path}" IsReadOnly="True" Background="#EEE"/>
+							<se:ExtTextBox Text="{Binding InstanceData.Name}"/>
+						</DockPanel>
+						<s:AdditionalsTab/>
                     </DockPanel>
                 </ScrollViewer>
             </TabItem>

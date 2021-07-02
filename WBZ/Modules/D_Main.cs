@@ -3,16 +3,12 @@ using StswExpress;
 
 namespace WBZ.Modules
 {
-    class D_Main : D
+    internal class D_Main : D
     {
-		/// <summary>
-		/// Title
-		/// </summary>
-		public string Title => Fn.AppDatabase.Name + TM.Tr("MainWindow");
+        /// Title
+        public string Title => Fn.AppDatabase.Name + TM.Tr("MainWindow");
 
-		/// <summary>
-		/// WantToLogout
-		/// </summary>
-		public bool WantToLogout { get; set; }
-	}
+        /// WantToLogout
+        public bool WantToLogout { get; set; }
+    }
 }

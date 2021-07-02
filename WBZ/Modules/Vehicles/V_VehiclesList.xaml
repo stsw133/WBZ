@@ -16,15 +16,15 @@
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0"/>
     </WindowChrome.WindowChrome>
     <Window.CommandBindings>
-        <CommandBinding Command="se:Commands.Clear" Executed="cmdClear_Executed"/>
-        <CommandBinding Command="se:Commands.Close" Executed="cmdClose_Executed"/>
-        <CommandBinding Command="se:Commands.Delete" Executed="cmdDelete_Executed" CanExecute="cmdDelete_CanExecute"/>
-        <CommandBinding Command="se:Commands.Duplicate" Executed="cmdDuplicate_Executed" CanExecute="cmdDuplicate_CanExecute"/>
-		<CommandBinding Command="se:Commands.Edit" Executed="cmdEdit_Executed" CanExecute="cmdEdit_CanExecute"/>
-		<CommandBinding Command="se:Commands.New" Executed="cmdNew_Executed" CanExecute="cmdNew_CanExecute"/>
-        <CommandBinding Command="se:Commands.Preview" Executed="cmdPreview_Executed" CanExecute="cmdPreview_CanExecute"/>
-        <CommandBinding Command="se:Commands.Refresh" Executed="cmdRefresh_Executed"/>
-        <CommandBinding Command="se:Commands.Select" Executed="cmdSelect_Executed" CanExecute="cmdSelect_CanExecute"/>
+        <CommandBinding Command="se:Commands.Clear" Executed="CmdClear_Executed"/>
+        <CommandBinding Command="se:Commands.Close" Executed="CmdClose_Executed"/>
+        <CommandBinding Command="se:Commands.Delete" Executed="CmdDelete_Executed" CanExecute="CmdDelete_CanExecute"/>
+        <CommandBinding Command="se:Commands.Duplicate" Executed="CmdDuplicate_Executed" CanExecute="CmdDuplicate_CanExecute"/>
+		<CommandBinding Command="se:Commands.Edit" Executed="CmdEdit_Executed" CanExecute="CmdEdit_CanExecute"/>
+		<CommandBinding Command="se:Commands.New" Executed="CmdNew_Executed" CanExecute="CmdNew_CanExecute"/>
+        <CommandBinding Command="se:Commands.Preview" Executed="CmdPreview_Executed" CanExecute="CmdPreview_CanExecute"/>
+        <CommandBinding Command="se:Commands.Refresh" Executed="CmdRefresh_Executed"/>
+        <CommandBinding Command="se:Commands.Select" Executed="CmdSelect_Executed" CanExecute="CmdSelect_CanExecute"/>
     </Window.CommandBindings>
     <DockPanel>
         <!-- titleBar -->
@@ -78,6 +78,6 @@
         </Border>
         <!-- dataGrid -->
 		<m:VehiclesListGrid ItemsSource="{Binding InstancesLists[0]}" BorderThickness="0"
-                            MouseDoubleClick="dgList_MouseDoubleClick" ScrollViewer.ScrollChanged="dgList_ScrollChanged" Sorting="dgList_Sorting"/>
+                            MouseDoubleClick="DtgList_MouseDoubleClick" ScrollViewer.ScrollChanged="DtgList_ScrollChanged" Sorting="DtgList_Sorting"/>
     </DockPanel>
 </b:List>

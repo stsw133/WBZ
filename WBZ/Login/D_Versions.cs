@@ -2,7 +2,7 @@
 
 namespace WBZ.Login
 {
-    class D_Versions : D
+    internal class D_Versions : D
     {
         /// InstancesList
         private dynamic instancesList;

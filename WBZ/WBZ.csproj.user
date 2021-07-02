@@ -164,8 +164,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Update="Properties\Resources.resx">
+    <EmbeddedResource Update="Properties\Resources.resx">
       <SubType>Designer</SubType>
-    </Resource>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

@@ -14,19 +14,17 @@
         <!-- titleBar -->
         <se:TitleBar DockPanel.Dock="Top"/>
         <!-- main -->
-        <se:IconButton DockPanel.Dock="Bottom" Margin="5,0,5,5" HorizontalAlignment="Center"
-                       IsTextVisible="False" Icon="/Resources/32/icon32_accept.ico" IsDefault="True"
-                       Click="btnStart_Click"/>
+        <se:IconButton DockPanel.Dock="Bottom" Margin="5,0,5,5" HorizontalAlignment="Center" IsTextVisible="False" Icon="/Resources/32/icon32_accept.ico" Click="BtnStart_Click" IsDefault="True"/>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBox x:Name="tbConsole" Grid.Row="0" Margin="5,5,5,0" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True"/>
+            <TextBox x:Name="TxtBoxConsole" Grid.Row="0" Margin="5,5,5,0" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True"/>
             <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" ResizeDirection="Rows" Height="5"
                           Background="{Binding panelColor_Admin, Source={x:Static p:Settings.Default}}"/>
-            <se:ExtDataGrid x:Name="dgConsole" Grid.Row="2" Margin="5,0,5,5" AutoGenerateColumns="True" IsReadOnly="True"/>
+            <se:ExtDataGrid x:Name="DtgConsole" Grid.Row="2" Margin="5,0,5,5" AutoGenerateColumns="True" IsReadOnly="True"/>
         </Grid>
     </DockPanel>
 </Window>

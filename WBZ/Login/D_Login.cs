@@ -4,7 +4,7 @@ using System.Windows.Media;
 
 namespace WBZ.Login
 {
-    class D_Login : D
+    internal class D_Login : D
     {
         /// AppVersion
         public string AppVersion { get; } = Fn.AppVersion();

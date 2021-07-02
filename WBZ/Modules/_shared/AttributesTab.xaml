@@ -9,7 +9,7 @@
              Loaded="UserControl_Loaded">
 	<se:ExtDataGrid ItemsSource="{Binding InstanceAttributes}" Margin="5" IsReadOnly="True">
         <DataGrid.Resources>
-            <g:BindingProxy x:Key="proxy" Data="{Binding}"/>
+            <se:BindingProxy x:Key="proxy" Data="{Binding}"/>
         </DataGrid.Resources>
         <DataGrid.Columns>
             <!-- ID -->
@@ -26,7 +26,7 @@
                             <Button DockPanel.Dock="Right" Content=" • • • "
                                     FontSize="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=0.5}"
                                     Visibility="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=!PREVIEW}"
-                                    Click="btnAttributeChange_Click"/>
+                                    Click="BtnAttributeChange_Click"/>
                             <TextBlock Text="{Binding Value}"/>
                         </DockPanel>
                     </DataTemplate>
@@ -38,7 +38,7 @@
                 <Style.Triggers>
                     <MultiDataTrigger>
                         <MultiDataTrigger.Conditions>
-                            <Condition Binding="{Binding Required}" Value="True"/>
+                            <Condition Binding="{Binding IsRequired}" Value="True"/>
                             <Condition Binding="{Binding Value}" Value=""/>
                         </MultiDataTrigger.Conditions>
                         <Setter Property="Foreground" Value="Red"/>
