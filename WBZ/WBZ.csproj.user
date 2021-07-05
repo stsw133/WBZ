@@ -15,6 +15,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Modules\_shared\DescriptionsTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Modules\_shared\AttachmentsAdd.xaml">
       <SubType>Designer</SubType>
     </Page>

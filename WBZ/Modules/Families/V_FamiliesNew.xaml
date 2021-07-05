@@ -118,7 +118,14 @@
                 </TabItem.Header>
 				<s:AdditionalsTab Module="{Binding Module}" InstanceID="{Binding InstanceData.ID}"/>
             </TabItem>
-            <!-- tabSources -->
+			<!-- tabDescriptions -->
+			<TabItem>
+				<TabItem.Header>
+					<se:Header Text="{Tr Descriptions}" Icon="/Resources/32/icon32_descriptions.ico"/>
+				</TabItem.Header>
+				<s:AdditionalsTab Module="{Binding Module}" InstanceID="{Binding InstanceData.ID}"/>
+			</TabItem>
+			<!-- tabSources -->
             <TabItem>
                 <TabItem.Header>
                     <se:Header Text="Źródła" Icon="/Resources/32/icon32_source.ico"/>

@@ -133,6 +133,13 @@
                 </TabItem.Header>
 				<s:AdditionalsTab Module="{Binding Module}" InstanceID="{Binding InstanceData.ID}"/>
             </TabItem>
+            <!-- tabDescriptions -->
+            <TabItem>
+                <TabItem.Header>
+                    <se:Header Text="{Tr Descriptions}" Icon="/Resources/32/icon32_descriptions.ico"/>
+                </TabItem.Header>
+				<s:AdditionalsTab Module="{Binding Module}" InstanceID="{Binding InstanceData.ID}"/>
+            </TabItem>
             <!-- tabGroups -->
             <TabItem>
                 <TabItem.Header>

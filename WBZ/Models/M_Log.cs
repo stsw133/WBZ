@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using WBZ.Globals;
 
 namespace WBZ.Models
 {

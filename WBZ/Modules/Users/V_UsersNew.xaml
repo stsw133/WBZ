@@ -96,20 +96,22 @@
 								<se:ExtTextBox Text="{Binding InstanceData.Lastname}" IsReadOnly="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=PREVIEW}"/>
                             </DockPanel>
                             <!-- IsBlocked -->
-                            <DockPanel DockPanel.Dock="Top" Margin="5">
-                                <se:ExtLabel Content="Zablokowany:" FontWeight="Normal" Style="{StaticResource PaneledLabel}"/>
+							<DockPanel DockPanel.Dock="Top" Margin="5">
+								<se:ExtLabel Content="Zablokowany:" FontWeight="Normal" Style="{StaticResource PaneledLabel}"/>
 								<se:ExtCheckBox IsChecked="{Binding InstanceData.IsBlocked}" IsEnabled="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=!PREVIEW}"/>
-                            </DockPanel>
-                            <!-- IsArchival -->
-                            <DockPanel DockPanel.Dock="Top" Margin="5">
-                                <se:ExtLabel Content="Archiwalny:" FontWeight="Normal" Style="{StaticResource PaneledLabel}"/>
-								<se:ExtCheckBox IsChecked="{Binding InstanceData.IsArchival}" IsEnabled="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=!PREVIEW}"/>
-                            </DockPanel>
-                        </DockPanel>
+							</DockPanel>
+						</DockPanel>
                     </Grid>
                 </ScrollViewer>
             </TabItem>
-            <!-- tabPerms -->
+			<!-- tabAdditional -->
+			<TabItem>
+				<TabItem.Header>
+					<se:Header Text="{Tr Additional}" Icon="/Resources/32/icon32_tools.ico"/>
+				</TabItem.Header>
+				<s:AdditionalsTab Module="{Binding Module}" InstanceID="{Binding InstanceData.ID}"/>
+			</TabItem>
+			<!-- tabPerms -->
             <TabItem>
                 <TabItem.Header>
                     <se:Header Text="{Tr Permissions}" Icon="/Resources/32/icon32_accept.ico"/>

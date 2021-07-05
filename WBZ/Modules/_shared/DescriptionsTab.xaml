@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="WBZ.Modules._shared.DescriptionsTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:se="clr-namespace:StswExpress;assembly=StswExpress"
+             mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800">
+	<DockPanel Margin="5">
+		<se:ExtLabel DockPanel.Dock="Top" Content="{Tr Comment, Suffix=':'}" Margin="5,5,5,0"/>
+		<TextBox Text="{Binding InstanceData.Comment}" Margin="5" AcceptsReturn="True" TextWrapping="Wrap"
+				 IsReadOnly="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=PREVIEW}"/>
+    </DockPanel>
+</UserControl>

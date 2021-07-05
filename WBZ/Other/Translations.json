@@ -23,6 +23,10 @@
 		"en": "Admin",
 		"pl": "Admin"
 	},
+	"AdminPermissions": {
+		"en": "Admin permissions",
+		"pl": "Uprawnienia administracyjne"
+	},
 	"Archival": {
 		"en": "Archival",
 		"pl": "Archiwalne"
@@ -214,6 +218,10 @@
 	"Delete": {
 		"en": "Delete",
 		"pl": "Usuń"
+	},
+	"Descriptions": {
+		"en": "Descriptions",
+		"pl": "Opisy"
 	},
 	"Displayed": {
 		"en": "Displayed",
