@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using WBZ.Models;
 using WBZ.Modules._base;
 using WBZ.Modules.Icons;
 
@@ -19,13 +20,45 @@ namespace WBZ.Modules._shared
         }
 
         /// <summary>
+        /// Module
+        /// </summary>
+        public static readonly DependencyProperty ModuleProperty
+            = DependencyProperty.Register(
+                  nameof(Module),
+                  typeof(MV),
+                  typeof(AdditionalsTab),
+                  new PropertyMetadata(default(MV))
+              );
+        public MV Module
+        {
+            get => (MV)GetValue(ModuleProperty);
+            set => SetValue(ModuleProperty, value);
+        }
+
+        /// <summary>
+        /// InstanceID
+        /// </summary>
+        public static readonly DependencyProperty InstanceIDProperty
+            = DependencyProperty.Register(
+                  nameof(InstanceID),
+                  typeof(int),
+                  typeof(AdditionalsTab),
+                  new PropertyMetadata(default(int))
+              );
+        public int InstanceID
+        {
+            get => (int)GetValue(InstanceIDProperty);
+            set => SetValue(InstanceIDProperty, value);
+        }
+
+        /// <summary>
         /// HasIcon
         /// </summary>
         public static readonly DependencyProperty HasIconProperty
             = DependencyProperty.Register(
                   nameof(HasIcon),
                   typeof(bool),
-                  typeof(GroupsView),
+                  typeof(AdditionalsTab),
                   new PropertyMetadata(true)
               );
         public bool HasIcon
@@ -45,7 +78,7 @@ namespace WBZ.Modules._shared
                 var file = File.ReadAllBytes(files[0]);
 
                 var win = Window.GetWindow(this);
-                var d = win?.DataContext as D_ModuleNew<dynamic>;
+                var d = win?.DataContext as dynamic;
 
                 if (d != null)
                 {
@@ -66,7 +99,7 @@ namespace WBZ.Modules._shared
 		private void btnSelect_Click(object sender, RoutedEventArgs e)
         {
             var win = Window.GetWindow(this);
-            var d = win?.DataContext as D_ModuleNew<dynamic>;
+            var d = win?.DataContext as dynamic;
 
             if (d != null)
             {
@@ -74,14 +107,11 @@ namespace WBZ.Modules._shared
                 //TODO - ogarnąć coś z filtrem w kolumnie modułu w oknie listy ikon
                 //(window.DataContext as D_IconsList).Filter.Module = d.Module;
                 if (window.ShowDialog() == true)
-                    if (window.Selected != null)
+                    if (window.Selected != null && window.Selected.Module.Alias.In(string.Empty, (string)d.Module.Alias))
                     {
-                        if (window.Selected.Module.Alias.In(string.Empty, d.Module.Alias))
-                        {
-                            d.InstanceData.IconID = window.Selected.ID;
-                            d.InstanceData.IconContent = window.Selected.Content;
-                            d.InstanceData = d.InstanceData;
-                        }
+                        d.InstanceData.IconID = window.Selected.ID;
+                        d.InstanceData.IconContent = window.Selected.Content;
+                        d.InstanceData = d.InstanceData;
                     }
             }
         }
@@ -92,7 +122,7 @@ namespace WBZ.Modules._shared
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             var win = Window.GetWindow(this);
-            var d = win?.DataContext as D_ModuleNew<dynamic>;
+            var d = win?.DataContext as dynamic;
 
             if (d != null)
             {

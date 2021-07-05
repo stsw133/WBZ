@@ -39,9 +39,9 @@ namespace WBZ
             if (dt.Rows.Count > 0)
             {
                 Config.User = dt.ToList<M_User>()[0];
-                if (Config.User.IsArchival)
+                /*if (Config.User.IsArchival)
                     new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Użytkownik o podanym loginie jest zarchiwizowany.").ShowDialog();
-                else if (Config.User.IsBlocked)
+                else*/ if (Config.User.IsBlocked)
                     new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Użytkownik o podanym loginie jest zablokowany.").ShowDialog();
                 else
                 {
@@ -568,7 +568,9 @@ namespace WBZ
 					from wbz.articles {a}
 					left join wbz.icons i on {a}.icon_id=i.id
 					left join wbz.stores_articles sa on {a}.id=sa.article_id
+                    --{(filter.ShowGroup > 0 ? $"inner join wbz.groups g on g.module_alias='{a}' and g.owner_id={filter.ShowGroup} and g.instance_id={a}.id" : string.Empty)}
 					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
+                        --and {(filter.ShowArchival || mode == SelectMode.EXTENDED ? "true" : $"{a}.is_archival=false")}
 					group by {a}.id, i.id
 				",
                 /// ATTACHMENTS
@@ -605,7 +607,9 @@ namespace WBZ
                 $@"
 					from wbz.attributes_classes {a}
 					left join wbz.icons i on {a}.icon=i.id
+					--{(filter.ShowGroup > 0 ? $"inner join wbz.groups g on g.module_alias='{a}' and g.owner_id={filter.ShowGroup} and g.instance_id={a}.id" : string.Empty)}
 					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
+                        --and {(filter.ShowArchival || mode == SelectMode.EXTENDED ? "true" : $"{a}.is_archival=false")}
 				",
                 /// CONTRACTORS
                 nameof(Modules.Contractors) =>
@@ -623,7 +627,9 @@ namespace WBZ
                 $@"
 					from wbz.contractors {a}
 					left join wbz.icons i on {a}.icon_id=i.id
+					--{(filter.ShowGroup > 0 ? $"inner join wbz.groups g on g.module_alias='{a}' and g.owner_id={filter.ShowGroup} and g.instance_id={a}.id" : string.Empty)}
 					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
+                        --and {(filter.ShowArchival || mode == SelectMode.EXTENDED ? "true" : $"{a}.is_archival=false")}
 				",
                 /// DISTRIBUTIONS
                 nameof(Modules.Distributions) =>
@@ -646,7 +652,9 @@ namespace WBZ
 					from wbz.distributions {a}
 					left join wbz.distributions_positions dp on {a}.id=dp.distribution_id
 					left join wbz.icons i on {a}.icon_id=i.id
+					--{(filter.ShowGroup > 0 ? $"inner join wbz.groups g on g.module_alias='{a}' and g.owner_id={filter.ShowGroup} and g.instance_id={a}.id" : string.Empty)}
 					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
+                        --and {(filter.ShowArchival || mode == SelectMode.EXTENDED ? "true" : $"{a}.is_archival=false")}
 					group by {a}.id
 				",
                 /// DOCUMENTS
@@ -670,7 +678,9 @@ namespace WBZ
 					left join wbz.contractors c on {a}.contractor_id=c.id
 					left join wbz.icons i on {a}.icon_id=i.id
 					left join wbz.stores s on {a}.store_id=s.id
+					--{(filter.ShowGroup > 0 ? $"inner join wbz.groups g on g.module_alias='{a}' and g.owner_id={filter.ShowGroup} and g.instance_id={a}.id" : string.Empty)}
 					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
+                        --and {(filter.ShowArchival || mode == SelectMode.EXTENDED ? "true" : $"{a}.is_archival=false")}
 					group by {a}.id, c.id, s.id
 				",
                 /// EMPLOYEES
@@ -694,7 +704,9 @@ namespace WBZ
 					from wbz.employees {a}
 					left join wbz.icons i on {a}.icon_id=i.id
 					left join wbz.users u on {a}.user_id=u.id
+					--{(filter.ShowGroup > 0 ? $"inner join wbz.groups g on g.module_alias='{a}' and g.owner_id={filter.ShowGroup} and g.instance_id={a}.id" : string.Empty)}
 					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
+                        --and {(filter.ShowArchival || mode == SelectMode.EXTENDED ? "true" : $"{a}.is_archival=false")}
 				",
                 /// FAMILIES
                 nameof(Modules.Families) =>
@@ -716,7 +728,9 @@ namespace WBZ
 					left join wbz.icons i on {a}.icon_id=i.id
 					left join wbz.distributions_positions dp on {a}.id=dp.family_id
 					left join wbz.distributions d on dp.distribution_id=d.id
+					--{(filter.ShowGroup > 0 ? $"inner join wbz.groups g on g.module_alias='{a}' and g.owner_id={filter.ShowGroup} and g.instance_id={a}.id" : string.Empty)}
 					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
+                        --and {(filter.ShowArchival || mode == SelectMode.EXTENDED ? "true" : $"{a}.is_archival=false")}
 					group by {a}.id
 				",
                 /// GROUPS
@@ -744,6 +758,7 @@ namespace WBZ
         			left join wbz.groups g2 on g2.id=g3.owner_id
         			left join wbz.groups g1 on g1.id=g2.owner_id
         			where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
+                        --and {(filter.ShowArchival || mode == SelectMode.EXTENDED ? "true" : $"{a}.is_archival=false")}
         		",
                 /// ICONS
                 nameof(Modules.Icons) =>
@@ -762,7 +777,9 @@ namespace WBZ
         		") +
                 $@"
         			from wbz.icons {a}
-        			where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
+        			--{(filter.ShowGroup > 0 ? $"inner join wbz.groups g on g.module_alias='{a}' and g.owner_id={filter.ShowGroup} and g.instance_id={a}.id" : string.Empty)}
+					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
+                        --and {(filter.ShowArchival || mode == SelectMode.EXTENDED ? "true" : $"{a}.is_archival=false")}
         		",
                 /// LOGS
                 nameof(Modules.Logs) =>
@@ -770,10 +787,12 @@ namespace WBZ
                 : mode == SelectMode.COMBO ? $"{a}.id as value, {a}.datecreated as display"
                 : mode == SelectMode.SIMPLE ?
                 $@"
-        			{a}.id, {a}.user_id, {a}.module_alias, {a}.instance_id, {a}.type, {a}.content, {a}.datecreated
+        			{a}.id, {a}.user_id, concat(u.lastname, ' ', u.forename) as user_name, {a}.module_alias, {a}.instance_id,
+                    {a}.type, {a}.content, {a}.datecreated
         		" :
                 $@"
-        			{a}.id, {a}.user_id, {a}.module_alias, {a}.instance_id, {a}.type, {a}.content, {a}.datecreated
+        			{a}.id, {a}.user_id, concat(u.lastname, ' ', u.forename) as user_name, {a}.module_alias, {a}.instance_id,
+                    {a}.type, {a}.content, {a}.datecreated
         		") +
                 $@"
         			from wbz.logs {a}
@@ -799,7 +818,9 @@ namespace WBZ
         			from wbz.stores {a}
         			left join wbz.icons i on {a}.icon_id=i.id
         			left join wbz.stores_articles sa on {a}.id = sa.store_id
-        			where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
+        			--{(filter.ShowGroup > 0 ? $"inner join wbz.groups g on g.module_alias='{a}' and g.owner_id={filter.ShowGroup} and g.instance_id={a}.id" : string.Empty)}
+					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
+                        --and {(filter.ShowArchival || mode == SelectMode.EXTENDED ? "true" : $"{a}.is_archival=false")}
         			group by {a}.id, i.id
         		",
                 /// USERS
@@ -817,7 +838,9 @@ namespace WBZ
         		") +
                 $@"
         			from wbz.users {a}
-        			where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
+        			--{(filter.ShowGroup > 0 ? $"inner join wbz.groups g on g.module_alias='{a}' and g.owner_id={filter.ShowGroup} and g.instance_id={a}.id" : string.Empty)}
+					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
+                        --and {(filter.ShowArchival || mode == SelectMode.EXTENDED ? "true" : $"{a}.is_archival=false")}
         		",
                 /// VEHICLES
                 nameof(Modules.Vehicles) =>
@@ -843,7 +866,9 @@ namespace WBZ
         			left join wbz.contractors c on {a}.forwarder_id=c.id
         			left join wbz.employees e on {a}.driver_id=e.id
         			left join wbz.icons i on {a}.icon_id=i.id
-        			where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
+        			--{(filter.ShowGroup > 0 ? $"inner join wbz.groups g on g.module_alias='{a}' and g.owner_id={filter.ShowGroup} and g.instance_id={a}.id" : string.Empty)}
+					where {filter.AutoFilterString ?? "true"} and {filter.Content ?? "true"}
+                        --and {(filter.ShowArchival || mode == SelectMode.EXTENDED ? "true" : $"{a}.is_archival=false")}
         		",
                 _ => throw new NotImplementedException(),
             };

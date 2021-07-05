@@ -54,7 +54,7 @@ namespace WBZ.Modules._shared
                 return;
 
             var id = (int)(SelectedItem as TreeViewItem).Tag;
-            new GroupsNew(SQL.GetInstance<M_Group>(GroupModule, id), Commands.Type.PREVIEW) { Owner = Window.GetWindow(this) }.ShowDialog();
+            new GroupsNew(SQL.GetInstance<M_Group>(GroupModule, id), Commands.Type.PREVIEW, WindowModule) { Owner = Window.GetWindow(this) }.ShowDialog();
             BtnGroupsRefresh_Click(null, null);
         }
 
@@ -90,7 +90,7 @@ namespace WBZ.Modules._shared
                 instance.OwnerID = (int)(SelectedItem as TreeViewItem).Tag;
                 instance.Path = path;
             }
-            new GroupsNew(instance, Commands.Type.NEW) { Owner = Window.GetWindow(this) }.ShowDialog();
+            new GroupsNew(instance, Commands.Type.NEW, WindowModule) { Owner = Window.GetWindow(this) }.ShowDialog();
             BtnGroupsRefresh_Click(null, null);
         }
 
@@ -103,7 +103,7 @@ namespace WBZ.Modules._shared
                 return;
 
             var id = (int)(SelectedItem as TreeViewItem).Tag;
-            new GroupsNew(SQL.GetInstance<M_Group>(GroupModule, id), Commands.Type.EDIT) { Owner = Window.GetWindow(this) }.ShowDialog();
+            new GroupsNew(SQL.GetInstance<M_Group>(GroupModule, id), Commands.Type.EDIT, WindowModule) { Owner = Window.GetWindow(this) }.ShowDialog();
             BtnGroupsRefresh_Click(null, null);
         }
 

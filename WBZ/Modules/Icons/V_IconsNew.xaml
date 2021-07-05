@@ -127,21 +127,21 @@
                 <TabItem.Header>
                     <se:Header Text="{Tr Additional}" Icon="/Resources/32/icon32_tools.ico"/>
                 </TabItem.Header>
-                <s:AdditionalsTab HasIcon="False"/>
+				<s:AdditionalsTab Module="{Binding Module}" InstanceID="{Binding InstanceData.ID}" HasIcon="False"/>
             </TabItem>
             <!-- tabGroups -->
             <TabItem>
                 <TabItem.Header>
 					<se:Header Text="{Tr Groups}" Icon="/Resources/32/icon32_groups.ico"/>
                 </TabItem.Header>
-                <s:GroupsTab/>
+				<s:GroupsTab Module="{Binding Module}" InstanceID="{Binding InstanceData.ID}"/>
             </TabItem>
             <!-- tabLogs -->
             <TabItem>
                 <TabItem.Header>
-					<se:Header Text="{Tr History}" Icon="/Resources/32/icon32_history.ico"/>
+					<se:Header Text="{Tr Logs}" Icon="/Resources/32/icon32_logs.ico"/>
                 </TabItem.Header>
-                <s:LogsTab/>
+				<s:LogsTab Module="{Binding Module}" InstanceID="{Binding InstanceData.ID}"/>
             </TabItem>
         </TabControl>
     </DockPanel>

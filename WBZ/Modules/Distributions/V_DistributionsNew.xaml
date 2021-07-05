@@ -197,37 +197,37 @@
             <!-- tabAdditional -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="Dodatkowe" Icon="/Resources/32/icon32_tools.ico"/>
+                    <se:Header Text="{Tr Additional}" Icon="/Resources/32/icon32_tools.ico"/>
                 </TabItem.Header>
-                <s:AdditionalsTab/>
+				<s:AdditionalsTab Module="{Binding Module}" InstanceID="{Binding InstanceData.ID}"/>
             </TabItem>
             <!-- tabGroups -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="Grupy" Icon="/Resources/32/icon32_groups.ico"/>
+                    <se:Header Text="{Tr Groups}" Icon="/Resources/32/icon32_groups.ico"/>
                 </TabItem.Header>
-                <s:GroupsTab/>
+				<s:GroupsTab Module="{Binding Module}" InstanceID="{Binding InstanceData.ID}"/>
             </TabItem>
             <!-- tabAttributes -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="Atrybuty" Icon="/Resources/32/icon32_attributes.ico"/>
+                    <se:Header Text="{Tr Attributes}" Icon="/Resources/32/icon32_attributes.ico"/>
                 </TabItem.Header>
-                <s:AttributesTab/>
+				<s:AttributesTab Module="{Binding Module}" InstanceID="{Binding InstanceData.ID}"/>
             </TabItem>
             <!-- tabAttachments -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="Załączniki" Icon="/Resources/32/icon32_photos.ico"/>
+                    <se:Header Text="{Tr Attachments}" Icon="/Resources/32/icon32_photos.ico"/>
                 </TabItem.Header>
-                <s:AttachmentsTab/>
+				<s:AttachmentsTab Module="{Binding Module}" InstanceID="{Binding InstanceData.ID}"/>
             </TabItem>
             <!-- tabLogs -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="Historia" Icon="/Resources/32/icon32_history.ico"/>
+                    <se:Header Text="{Tr Logs}" Icon="/Resources/32/icon32_logs.ico"/>
                 </TabItem.Header>
-                <s:LogsTab/>
+				<s:LogsTab Module="{Binding Module}" InstanceID="{Binding InstanceData.ID}"/>
             </TabItem>
         </TabControl>
     </DockPanel>

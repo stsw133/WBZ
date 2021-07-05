@@ -13,14 +13,43 @@ namespace WBZ.Modules._shared
     public partial class ContactsTab : UserControl
     {
         readonly D_ContactsTab D = new D_ContactsTab();
-        private MV Module;
-        private int ID;
-        private bool EditingMode;
 
         public ContactsTab()
         {
             InitializeComponent();
-            DataContext = D;
+            //DataContext = D;
+        }
+
+        /// <summary>
+        /// Module
+        /// </summary>
+        public static readonly DependencyProperty ModuleProperty
+            = DependencyProperty.Register(
+                  nameof(Module),
+                  typeof(MV),
+                  typeof(ContactsTab),
+                  new PropertyMetadata(default(MV))
+              );
+        public MV Module
+        {
+            get => (MV)GetValue(ModuleProperty);
+            set => SetValue(ModuleProperty, value);
+        }
+
+        /// <summary>
+        /// InstanceID
+        /// </summary>
+        public static readonly DependencyProperty InstanceIDProperty
+            = DependencyProperty.Register(
+                  nameof(InstanceID),
+                  typeof(int),
+                  typeof(ContactsTab),
+                  new PropertyMetadata(default(int))
+              );
+        public int InstanceID
+        {
+            get => (int)GetValue(InstanceIDProperty);
+            set => SetValue(InstanceIDProperty, value);
         }
 
         /// <summary>
@@ -30,21 +59,17 @@ namespace WBZ.Modules._shared
         {
             try
             {
-                var win = Window.GetWindow(this);
-                dynamic d = win?.DataContext;
-                if (d != null)
-                {
-                    Module = (MV)d.Module;
-                    ID = (int)d.InstanceData.ID;
-                    EditingMode = (bool)(d.Mode != Commands.Type.PREVIEW);
-                }
-                if (ID != 0 && D.InstanceContacts == null)
-                {
-                    D.InstanceContacts = SQL.ListContacts(Module, ID);
-                    win.Closed += UserControl_Closed;
-                }
+                if (InstanceID > 0 && D.InstanceContacts == null)
+                    //D.InstanceContacts = SQL.ListInstances<M_Log>(D.Module, $"{D.Module.Alias}.module_alias='{Module.Alias}' and {D.Module.Alias}.instance_id={InstanceID}");
+                    D.InstanceContacts = SQL.ListContacts(Module, InstanceID);
+                DataContext = D;
+                Loaded -= UserControl_Loaded;
+                Window.GetWindow(this).Closed += UserControl_Closed;
             }
-            catch { }
+            catch (Exception ex)
+            {
+                SQL.Error("Błąd inicjalizacji zakładki kontaktów", ex, Module, InstanceID);
+            }
         }
 
         /// <summary>
@@ -54,9 +79,12 @@ namespace WBZ.Modules._shared
         {
             try
             {
-                SQL.UpdateContacts(Module, ID, D.InstanceContacts);
+                SQL.UpdateContacts(Module, InstanceID, D.InstanceContacts);
             }
-            catch { }
+            catch (Exception ex)
+            {
+                SQL.Error("Błąd aktualizacji kontaktów", ex, Module, InstanceID);
+            }
         }
     }
 
@@ -65,6 +93,9 @@ namespace WBZ.Modules._shared
     /// </summary>
     internal class D_ContactsTab : D
     {
+        /// Module
+        //public MV Module = Config.GetModule(nameof(Contacts));
+
         /// Contacts
         private DataTable instanceContacts;
         public DataTable InstanceContacts

@@ -16,7 +16,12 @@ namespace WBZ.Modules._base
         }
 
         /// Module
-        public MV Module;
+        private MV module;
+        public MV Module
+        {
+            get => module;
+            set => SetField(ref module, value, () => Module);
+        }
         public string Title => TM.Tr(Module.Name + Mode.ToString().Capitalize());
 
         /// Mode

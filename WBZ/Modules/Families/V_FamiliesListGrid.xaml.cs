@@ -1,5 +1,4 @@
-﻿using StswExpress;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace WBZ.Modules
 {
@@ -11,7 +10,6 @@ namespace WBZ.Modules
         public FamiliesListGrid()
         {
             InitializeComponent();
-			ExtDataGrid.Load(this, Properties.Settings.Default.panelColor_Families);
-		}
+        }
     }
 }

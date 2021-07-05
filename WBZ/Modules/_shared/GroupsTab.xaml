@@ -7,7 +7,7 @@
              xmlns:g="clr-namespace:WBZ.Globals"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800"
              Loaded="UserControl_Loaded">
-	<se:ExtDataGrid x:Name="DtgListGroups" ItemsSource="{Binding InstanceGroups}" Margin="5" IsReadOnly="True" AutoGenerateColumns="False">
+	<se:ExtDataGrid x:Name="DtgListGroups" ItemsSource="{Binding InstanceGroups}" Margin="5" IsReadOnly="True">
         <DataGrid.Resources>
             <se:BindingProxy x:Key="proxy" Data="{Binding}"/>
         </DataGrid.Resources>

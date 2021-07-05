@@ -53,10 +53,10 @@
     /// </summary>
     public class MV
     {
-        public string Name { get; set; } = string.Empty;
-        public string Alias { get; set; } = string.Empty;
-        public object Value { get; set; } = null;
-        public object Display { get; set; } = null;
-        public object Tag { get; set; } = null;
+        public string Name { get; set; }
+        public string Alias { get; set; }
+        public object Value { get; set; }
+        public object Display { get; set; }
+        public object Tag { get; set; }
     }
 }

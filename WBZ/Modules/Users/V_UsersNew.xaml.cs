@@ -35,6 +35,9 @@ namespace WBZ.Modules.Users
         /// </summary>
         internal new void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            ChkAdmin.Tag = nameof(Admin);
+            ChkAdmin.IsChecked = D.InstanceData.Perms.Contains(nameof(Admin));
+
             var modulesGrids = DckPanPerms.Children.Cast<UniformGrid>().OrderBy(x => (x.Children[0] as Header)?.Text).ToList();
             DckPanPerms.Children.RemoveRange(0, DckPanPerms.Children.Count);
             for (int i = 0; i < modulesGrids.Count; i++)

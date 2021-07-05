@@ -118,8 +118,7 @@
                     <DockPanel x:Name="DckPanPerms" Margin="5" VerticalAlignment="Top" IsEnabled="{Binding Mode, Converter={se:conv_Compare}, ConverterParameter=!PREVIEW}">
                         <!-- admin -->
                         <UniformGrid Tag="Admin" DockPanel.Dock="Top">
-                            <se:ExtCheckBox Margin="0,5,0,15" Content="{Tr AdminPermissions}" HorizontalAlignment="Left"
-                                            IsChecked="{Binding InstanceData.Perms, Mode=OneTime, Converter={se:conv_Contains}, ConverterParameter=Admin}" Tag="Admin"
+                            <se:ExtCheckBox x:Name="ChkAdmin" Margin="0,5,0,15" Content="{Tr AdminPermissions}" HorizontalAlignment="Left"
                                             Checked="ChkPerms_Checked" Unchecked="ChkPerms_Unchecked"/>
                         </UniformGrid>
                         <!-- headers -->
@@ -196,14 +195,14 @@
                 <TabItem.Header>
                     <se:Header Text="{Tr Groups}" Icon="/Resources/32/icon32_groups.ico"/>
                 </TabItem.Header>
-                <s:GroupsTab/>
+				<s:GroupsTab Module="{Binding Module}" InstanceID="{Binding InstanceData.ID}"/>
             </TabItem>
             <!-- tabLogs -->
             <TabItem>
                 <TabItem.Header>
-                    <se:Header Text="{Tr History}" Icon="/Resources/32/icon32_history.ico"/>
+                    <se:Header Text="{Tr Logs}" Icon="/Resources/32/icon32_logs.ico"/>
                 </TabItem.Header>
-                <s:LogsTab/>
+				<s:LogsTab Module="{Binding Module}" InstanceID="{Binding InstanceData.ID}"/>
             </TabItem>
         </TabControl>
     </DockPanel>

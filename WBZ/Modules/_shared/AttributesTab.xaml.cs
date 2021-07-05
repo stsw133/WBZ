@@ -1,10 +1,11 @@
 ﻿using StswExpress;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using WBZ.Globals;
 using WBZ.Models;
-using WBZ.Modules._base;
 
 namespace WBZ.Modules._shared
 {
@@ -15,14 +16,42 @@ namespace WBZ.Modules._shared
     {
         readonly D_AttributesTab D = new D_AttributesTab();
 
-        private MV Module;
-        private int InstanceID;
-        private bool EditingMode;
-
         public AttributesTab()
         {
             InitializeComponent();
-            DataContext = D;
+            //DataContext = D;
+        }
+
+        /// <summary>
+        /// Module
+        /// </summary>
+        public static readonly DependencyProperty ModuleProperty
+            = DependencyProperty.Register(
+                  nameof(Module),
+                  typeof(MV),
+                  typeof(AttributesTab),
+                  new PropertyMetadata(default(MV))
+              );
+        public MV Module
+        {
+            get => (MV)GetValue(ModuleProperty);
+            set => SetValue(ModuleProperty, value);
+        }
+
+        /// <summary>
+        /// InstanceID
+        /// </summary>
+        public static readonly DependencyProperty InstanceIDProperty
+            = DependencyProperty.Register(
+                  nameof(InstanceID),
+                  typeof(int),
+                  typeof(AttributesTab),
+                  new PropertyMetadata(default(int))
+              );
+        public int InstanceID
+        {
+            get => (int)GetValue(InstanceIDProperty);
+            set => SetValue(InstanceIDProperty, value);
         }
 
         /// <summary>
@@ -32,18 +61,16 @@ namespace WBZ.Modules._shared
         {
             try
             {
-                var win = Window.GetWindow(this);
-                var d = win?.DataContext as D_ModuleNew<dynamic>;
-
-                if (d != null)
-                {
-                    Module = d.Module;
-                    InstanceID = (d.InstanceData as M).ID;
-                }
-                if (InstanceID != 0 && D.InstanceAttributes == null)
+                if (InstanceID > 0 && D.InstanceAttributes == null)
+                    //D.InstanceAttributes = SQL.ListInstances<M_Log>(D.Module, $"{D.Module.Alias}.module_alias='{Module.Alias}' and {D.Module.Alias}.instance_id={InstanceID}");
                     D.InstanceAttributes = SQL.ListAttributes(Module, InstanceID);
+                DataContext = D;
+                Loaded -= UserControl_Loaded;
             }
-            catch { }
+            catch (Exception ex)
+            {
+                SQL.Error("Błąd inicjalizacji zakładki atrybutów", ex, Module, InstanceID);
+            }
         }
 
         /// <summary>
@@ -55,13 +82,13 @@ namespace WBZ.Modules._shared
             dynamic d = win?.DataContext;
             var dataGrid = Content as DataGrid;
 
-            if (d != null)
-                EditingMode = (bool)(d.Mode != Commands.Type.PREVIEW);
+            //if (d != null)
+            //    EditingMode = (bool)(d.Mode != Commands.Type.PREVIEW);
 
             var indexes = dataGrid.SelectedItems.Cast<M_Attribute>().Select(x => D.InstanceAttributes.IndexOf(x));
             foreach (int index in indexes)
             {
-                var window = new AttributeChange(D.InstanceAttributes[index], EditingMode);
+                var window = new AttributeChange(D.InstanceAttributes[index], /*EditingMode*/ true);
                 window.Owner = win;
                 if (window.ShowDialog() == true)
                     SQL.UpdateAttribute(Module, D.InstanceAttributes[index]);
@@ -77,7 +104,7 @@ namespace WBZ.Modules._shared
     internal class D_AttributesTab : D
     {
         /// Module
-
+        //public MV Module = Config.GetModule(nameof(Attributes));
 
         /// Attributes
         private List<M_Attribute> instanceAttributes;

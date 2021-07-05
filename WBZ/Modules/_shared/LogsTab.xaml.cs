@@ -1,10 +1,10 @@
 ﻿using StswExpress;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using WBZ.Models;
 using WBZ.Globals;
-using WBZ.Modules._base;
 
 namespace WBZ.Modules._shared
 {
@@ -15,13 +15,42 @@ namespace WBZ.Modules._shared
     {
         readonly D_LogsTab D = new D_LogsTab();
 
-        private MV Module;
-        private int InstanceID;
-
         public LogsTab()
         {
             InitializeComponent();
-            DataContext = D;
+            //DataContext = D;
+        }
+
+        /// <summary>
+        /// Module
+        /// </summary>
+        public static readonly DependencyProperty ModuleProperty
+            = DependencyProperty.Register(
+                  nameof(Module),
+                  typeof(MV),
+                  typeof(LogsTab),
+                  new PropertyMetadata(default(MV))
+              );
+        public MV Module
+        {
+            get => (MV)GetValue(ModuleProperty);
+            set => SetValue(ModuleProperty, value);
+        }
+
+        /// <summary>
+        /// InstanceID
+        /// </summary>
+        public static readonly DependencyProperty InstanceIDProperty
+            = DependencyProperty.Register(
+                  nameof(InstanceID),
+                  typeof(int),
+                  typeof(LogsTab),
+                  new PropertyMetadata(default(int))
+              );
+        public int InstanceID
+        {
+            get => (int)GetValue(InstanceIDProperty);
+            set => SetValue(InstanceIDProperty, value);
         }
 
         /// <summary>
@@ -31,18 +60,15 @@ namespace WBZ.Modules._shared
         {
             try
             {
-                var win = Window.GetWindow(this);
-                var d = win?.DataContext as D_ModuleNew<dynamic>;
-
-                if (d != null)
-                {
-                    Module = d.Module;
-                    InstanceID = (d.InstanceData as M).ID;
-                }
-                if (InstanceID != 0 && D.InstanceLogs == null)
-                    D.InstanceLogs = SQL.ListInstances<M_Log>(D.ModuleLogs, $"{D.ModuleLogs.Alias}.module_alias='{Module.Alias}' and {D.ModuleLogs.Alias}.instance_id={InstanceID}");
+                if (InstanceID > 0 && D.InstanceLogs == null)
+                    D.InstanceLogs = SQL.ListInstances<M_Log>(D.Module, $"{D.Module.Alias}.module_alias='{Module.Alias}' and {D.Module.Alias}.instance_id={InstanceID}");
+                DataContext = D;
+                Loaded -= UserControl_Loaded;
             }
-            catch { }
+            catch (Exception ex)
+            {
+                SQL.Error("Błąd inicjalizacji zakładki logów", ex, Module, InstanceID);
+            }
         }
     }
 
@@ -52,7 +78,7 @@ namespace WBZ.Modules._shared
     internal class D_LogsTab : D
     {
         /// Module
-        public MV ModuleLogs = Config.GetModule(nameof(Logs));
+        public MV Module = Config.GetModule(nameof(Logs));
 
         /// Logs
         private List<M_Log> instanceLogs;
