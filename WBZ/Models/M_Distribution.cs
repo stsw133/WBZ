@@ -1,137 +1,108 @@
-﻿using System;
+﻿using StswExpress.Translate;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using WBZ.Globals;
 
 namespace WBZ.Models
 {
-	/// <summary>
-	/// Model for Distributions
-	/// </summary>
-	public class M_Distribution : M
-	{
-		public enum DistributionStatus
-		{
-			Withdrawn = -1,
-			Buffer = 0,
-			Approved = 1
-		}
+    /// <summary>
+    /// Static model for Distributions sources
+    /// </summary>
+    public static class MS_Distributions
+    {
+        public static List<MV> Statuses { get; } = new List<MV>()
+        {
+            new MV() { Value = 0, Display = TM.Tr("ToBuffer") },
+            new MV() { Value = 1, Display = TM.Tr("Approved") },
+            new MV() { Value = 2, Display = TM.Tr("InProgress") },
+            new MV() { Value = 3, Display = TM.Tr("Closed") }
+        };
+    }
 
-		/// <summary>
-		/// DateReal
-		/// </summary>
-		public DateTime DateReal { get; set; } = DateTime.Now;
+    /// <summary>
+    /// Model for Distributions
+    /// </summary>
+    public class M_Distribution : M
+    {
+        /// Name
+        public override string Name { get; set; }
 
-		/// <summary>
-		/// Status
-		/// </summary>
-		public short Status { get; set; } = (short)DistributionStatus.Buffer;
+        /// DateReal
+        public DateTime DateReal { get; set; } = DateTime.Now;
 
-		/// <summary>
-		/// Families
-		/// </summary>
-		public List<M_DistributionFamily> Families { get; set; } = new List<M_DistributionFamily>();
+        /// Status
+        public int Status { get; set; } = (int)MS_Distributions.Statuses[0].Value;
 
-		/// <summary>
-		/// FamiliesCount
-		/// </summary>
-		public int FamiliesCount { get; set; }
+        /// Families
+        public List<M_DistributionFamily> Families { get; set; } = new List<M_DistributionFamily>();
+        public int FamiliesCount { get; set; }
 
-		/// <summary>
-		/// MembersCount
-		/// </summary>
-		public int MembersCount { get; set; }
+        /// MembersCount
+        public int MembersCount { get; set; }
 
-		/// <summary>
-		/// PositionsCount
-		/// </summary>
-		public int PositionsCount { get; set; }
+        /// PositionsCount
+        public int PositionsCount { get; set; }
 
-		/// <summary>
-		/// Weight
-		/// </summary>
-		public decimal Weight { get; set; }
-	}
+        /// Weight
+        public decimal Weight { get; set; }
+    }
 
-	/// <summary>
-	/// Model for DistributionsFamilies
-	/// </summary>
-	public class M_DistributionFamily
-	{
-		public enum DistributionFamilyStatus
-		{
-			None = 0,
-			Informed = 1,
-			Taken = 2
-		}
+    /// <summary>
+    /// Model for DistributionsFamilies
+    /// </summary>
+    public class M_DistributionFamily
+    {
+        public enum DistributionFamilyStatus
+        {
+            None = 0,
+            Informed = 1,
+            Taken = 2
+        }
 
-		/// <summary>
-		/// Family
-		/// </summary>
-		public int FamilyID { get; set; }
-		public string FamilyName { get; set; }
+        /// Family
+        public int FamilyID { get; set; }
+        public string FamilyName { get; set; }
 
-		/// <summary>
-		/// Members
-		/// </summary>
-		public short? Members { get; set; }
+        /// Members
+        public short? Members { get; set; }
 
-		/// <summary>
-		/// Status
-		/// </summary>
-		public short Status { get; set; } = (short)DistributionFamilyStatus.None;
+        /// Status
+        public int Status { get; set; } = (int)DistributionFamilyStatus.None;
 
-		/// <summary>
-		/// Positions
-		/// </summary>
-		public DataTable Positions { get; set; } = SQL.GetDistributionPositionsFormatting();
-	}
+        /// Positions
+        public DataTable Positions { get; set; } = SQL.GetDistributionPositionsFormatting();
+    }
 
-	/// <summary>
-	/// Model for DistributionsPositions
-	/// </summary>
-	public class M_DistributionPosition
-	{
-		/// <summary>
-		/// ID
-		/// </summary>
-		public int ID { get; set; }
+    /// <summary>
+    /// Model for DistributionsPositions
+    /// </summary>
+    public class M_DistributionPosition
+    {
+        /// ID
+        public int ID { get; set; }
+        public int DistributionID { get; set; }
+        public short Pos { get; set; }
 
-		/// <summary>
-		/// Distribution
-		/// </summary>
-		public int DistributionID { get; set; }
-		
-		/// <summary>
-		/// Pos
-		/// </summary>
-		public short Pos { get; set; }
+        /// Store
+        public int StoreID { get; set; }
+        public string StoreName { get; set; }
 
-		/// <summary>
-		/// Store
-		/// </summary>
-		public int StoreID { get; set; }
-		public string StoreName { get; set; }
+        /// Article
+        public int ArticleID { get; set; }
+        public string ArticleName { get; set; }
 
-		/// <summary>
-		/// Article
-		/// </summary>
-		public int ArticleID { get; set; }
-		public string ArticleName { get; set; }
+        /// Quantity
+        public decimal Quantity { get; set; }
 
-		/// <summary>
-		/// Quantity
-		/// </summary>
-		public decimal Quantity { get; set; }
-
-		public M_DistributionPosition()
-		{
-			var stores = SQL.ComboSource(Config.GetModule(nameof(Modules.Stores)), "codename", "true", false);
-			if (stores.Count > 0 && StoreID == 0)
-			{
-				StoreID = (int)stores[0].Value;
-				StoreName = (string)stores[0].Display;
-			}
-		}
-	}
+        public M_DistributionPosition()
+        {
+            var stores = SQL.ComboSource(Config.GetModule(nameof(Modules.Stores)), "codename", "true", false);
+            if (stores.Count > 0 && StoreID == 0)
+            {
+                StoreID = (int)stores[0].Value;
+                StoreName = (string)stores[0].Display;
+            }
+        }
+    }
 }

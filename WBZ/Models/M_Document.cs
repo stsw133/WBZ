@@ -5,117 +5,85 @@ using System.Data;
 
 namespace WBZ.Models
 {
-	/// <summary>
-	/// Static model for Documents sources
-	/// </summary>
-	public static class MS_Documents
-	{
-		public static List<MV> Statuses { get; } = new List<MV>()
-		{
-			new MV() { Value = 0, Display = TM.Tr("ToBuffer") },
-			new MV() { Value = 1, Display = TM.Tr("Approved") },
-			new MV() { Value = 2, Display = TM.Tr("InProgress") },
-			new MV() { Value = 3, Display = TM.Tr("Closed") }
-		};
+    /// <summary>
+    /// Static model for Documents sources
+    /// </summary>
+    public static class MS_Documents
+    {
+        public static List<MV> Statuses { get; } = new List<MV>()
+        {
+            new MV() { Value = 0, Display = TM.Tr("ToBuffer") },
+            new MV() { Value = 1, Display = TM.Tr("Approved") },
+            new MV() { Value = 2, Display = TM.Tr("InProgress") },
+            new MV() { Value = 3, Display = TM.Tr("Closed") }
+        };
 
-		public static List<MV> Types { get; } = new List<MV>()
-		{
-			new MV() { Value = "fs", Display = "Faktura sprzedaży" }
-		};
-	}
+        public static List<MV> Types { get; } = new List<MV>()
+        {
+            new MV() { Value = "fs", Display = "Faktura sprzedaży" }
+        };
+    }
 
-	/// <summary>
-	/// Model for Documents
-	/// </summary>
-	public class M_Document : M
-	{
-		/// <summary>
-		/// Type
-		/// </summary>
-		public string Type { get; set; } = (string)MS_Documents.Types[0].Value;
+    /// <summary>
+    /// Model for Documents
+    /// </summary>
+    public class M_Document : M
+    {
+        /// Name
+        public override string Name { get; set; }
 
-		/// <summary>
-		/// Store
-		/// </summary>
-		public int StoreID { get; set; }
-		public string StoreName { get; set; }
+        /// Type
+        public string Type { get; set; } = (string)MS_Documents.Types[0].Value;
 
-		/// <summary>
-		/// Contractor
-		/// </summary>
-		public int ContractorID { get; set; }
-		public string ContractorName { get; set; }
+        /// Store
+        public int StoreID { get; set; }
+        public string StoreName { get; set; }
 
-		/// <summary>
-		/// DateIssue
-		/// </summary>
-		public DateTime DateIssue { get; set; } = DateTime.Now;
+        /// Contractor
+        public int ContractorID { get; set; }
+        public string ContractorName { get; set; }
 
-		/// <summary>
-		/// Status
-		/// </summary>
-		public short Status { get; set; } = (short)MS_Documents.Types[0].Value;
+        /// DateIssue
+        public DateTime DateIssue { get; set; } = DateTime.Now;
 
-		/// <summary>
-		/// Positions
-		/// </summary>
-		public DataTable Positions { get; set; } = new DataTable();
-		
-		/// <summary>
-		/// PositionsCount
-		/// </summary>
-		public int PositionsCount { get; set; }
+        /// Status
+        public int Status { get; set; } = (int)MS_Documents.Statuses[0].Value;
 
-		/// <summary>
-		/// Weight
-		/// </summary>
-		public decimal Weight { get; set; }
+        /// Positions
+        public DataTable Positions { get; set; } = new DataTable();
+        public int PositionsCount { get; set; }
 
-		/// <summary>
-		/// Net
-		/// </summary>
-		public decimal Net { get; set; }
+        /// Weight
+        public decimal Weight { get; set; }
 
-		/// <summary>
-		/// Tax
-		/// </summary>
-		public decimal Tax { get; set; }
-	}
+        /// Net
+        public decimal Net { get; set; }
 
-	/// <summary>
-	/// Model for DocumentsPositions
-	/// </summary>
-	public class M_DocumentPosition
-	{
-		/// <summary>
-		/// ID
-		/// </summary>
-		public int ID { get; set; }
-		
-		/// <summary>
-		/// Pos
-		/// </summary>
-		public short Pos { get; set; }
+        /// Tax
+        public decimal Tax { get; set; }
+    }
 
-		/// <summary>
-		/// Article
-		/// </summary>
-		public int ArticleID { get; set; }
-		public int ArticleName { get; set; }
+    /// <summary>
+    /// Model for DocumentsPositions
+    /// </summary>
+    public class M_DocumentPosition
+    {
+        /// ID
+        public int ID { get; set; }
+        public int DocumentID { get; set; }
+        public short Pos { get; set; }
 
-		/// <summary>
-		/// Quantity
-		/// </summary>
-		public decimal Quantity { get; set; }
+        /// Article
+        public int ArticleID { get; set; }
+        public int ArticleName { get; set; }
 
-		/// <summary>
-		/// Net
-		/// </summary>
-		public decimal Net { get; set; }
+        /// Quantity
+        public decimal Quantity { get; set; }
 
-		/// <summary>
-		/// Tax
-		/// </summary>
-		public decimal Tax { get; set; }
-	}
+        /// Net
+        public decimal Net { get; set; }
+
+        /// Tax
+        public decimal Tax { get; set; }
+    }
 }

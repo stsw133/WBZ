@@ -1,34 +1,29 @@
 ﻿namespace WBZ.Models
 {
-	/// <summary>
-	/// Model for Contractors
-	/// </summary>
-	public class M_Contractor : M, IMA
-	{
-		/// IMA
-		public string Address { get; set; }
-		public string City { get; set; }
-		public string Country { get; set; }
-		public string Postcode { get; set; }
+    /// <summary>
+    /// Model for Contractors
+    /// </summary>
+    public class M_Contractor : M, IMA
+    {
+        /// IMA
+        public string Address { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
+        public string Postcode { get; set; }
 
-		/// <summary>
-		/// Codename
-		/// </summary>
-		public string Codename { get; set; }
+        /// Codename
+        public string Codename { get; set; }
 
-		/// <summary>
-		/// Branch
-		/// </summary>
-		public string Branch { get; set; }
+        /// Name
+        public override string Name { get; set; }
 
-		/// <summary>
-		/// NIP
-		/// </summary>
-		public string NIP { get; set; }
+        /// Branch
+        public string Branch { get; set; }
 
-		/// <summary>
-		/// REGON
-		/// </summary>
-		public string REGON { get; set; }
+        /// NIP
+        public string NIP { get; set; }
+
+        /// REGON
+        public string REGON { get; set; }
     }
 }

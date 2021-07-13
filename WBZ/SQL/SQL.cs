@@ -1420,17 +1420,17 @@ namespace WBZ
                         var family = instance as M_Family;
                         query = @"insert into wbz.families (id, declarant, lastname, members, postcode, city, address,
 									status, c_sms, c_call, c_email, is_archival, comment, icon_id)
-								values (@id, @declarant, @lastname, @members, @postcode, @city, @address,
+								values (@id, @declarant, @name, @members, @postcode, @city, @address,
 									@status, @c_sms, @c_call, @c_email, @is_archival, @comment, nullif(@icon_id, 0))
 								on conflict(id) do
-								update set declarant=@declarant, lastname=@lastname, members=@members, postcode=@postcode, city=@city, address=@address,
+								update set declarant=@declarant, lastname=@name, members=@members, postcode=@postcode, city=@city, address=@address,
 									status=@status, c_sms=@c_sms, c_call=@c_call, c_email=@c_email,
 									is_archival=@is_archival, comment=@comment, icon_id=nullif(@icon_id, 0)";
                         using (sqlCmd = new NpgsqlCommand(query, sqlConn, sqlTran))
                         {
                             sqlCmd.Parameters.AddWithValue("id", family.ID);
                             sqlCmd.Parameters.AddWithValue("declarant", family.Declarant);
-                            sqlCmd.Parameters.AddWithValue("lastname", family.Lastname);
+                            sqlCmd.Parameters.AddWithValue("name", family.Name);
                             sqlCmd.Parameters.AddWithValue("members", family.Members);
                             sqlCmd.Parameters.AddWithValue("postcode", family.Postcode);
                             sqlCmd.Parameters.AddWithValue("city", family.City);
@@ -1444,7 +1444,7 @@ namespace WBZ
                             sqlCmd.Parameters.AddWithValue("icon_id", family.IconID);
                             sqlCmd.ExecuteNonQuery();
                         }
-                        SetLog(Config.User.ID, module, family.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} rodzinę: {family.Lastname}.", sqlConn, sqlTran);
+                        SetLog(Config.User.ID, module, family.ID, $"{(mode == Commands.Type.EDIT ? "Edytowano" : "Utworzono")} rodzinę: {family.Name}.", sqlConn, sqlTran);
                         break;
                     /// GROUPS
                     case nameof(Modules._submodules.Groups):

@@ -124,8 +124,14 @@
   <data name="icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="icon16_accept" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\16\icon16_accept.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="icon16_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\16\icon16_add.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="icon16_clear" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\16\icon16_clear.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="icon32_accept" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\32\icon32_accept.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -144,6 +150,12 @@
   </data>
   <data name="icon32_attributes" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\32\icon32_attributes.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="icon32_automatic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\32\icon32_automatic.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="icon32_block" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\32\icon32_block.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="icon32_books" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\32\icon32_books.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -237,6 +249,9 @@
   </data>
   <data name="icon32_groups" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\32\icon32_groups.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="icon32_help" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\32\icon32_help.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="icon32_history" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\32\icon32_history.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -379,8 +394,14 @@
   <data name="icon32_web" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\32\icon32_web.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="icon64_accept" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\64\icon64_accept.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="icon64_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\64\icon64_add.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="icon64_clear" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\64\icon64_clear.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\logo.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

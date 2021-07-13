@@ -15,7 +15,7 @@ namespace WBZ.Modules.Families
     /// </summary>
     public partial class FamiliesNew : New
     {
-        D_FamiliesNew D = new D_FamiliesNew();
+        readonly D_FamiliesNew D = new D_FamiliesNew();
 
         public FamiliesNew(MODULE_MODEL instance, Commands.Type mode)
         {
@@ -73,7 +73,7 @@ namespace WBZ.Modules.Families
                 new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Nie podano osoby zgłaszającej!") { Owner = this }.ShowDialog();
                 return false;
             }
-            if (string.IsNullOrEmpty(D.InstanceData.Lastname))
+            if (string.IsNullOrEmpty(D.InstanceData.Name))
             {
                 new MsgWin(MsgWin.Types.MsgOnly, MsgWin.Titles.BLOCKADE, "Nie podano nazwiska rodziny!") { Owner = this }.ShowDialog();
                 return false;

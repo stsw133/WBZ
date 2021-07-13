@@ -17,9 +17,10 @@ namespace WBZ.Models
         public MV Module { get; set; }
         public int InstanceID { get; set; }
 
-        /// <summary>
+        /// Name
+        public override string Name { get; set; }
+
         /// Content
-        /// </summary>
         public string Content { get; set; }
 
         /// Show...

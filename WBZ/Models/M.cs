@@ -40,7 +40,6 @@
     /// </summary>
     public interface IMP
     {
-        public string Name { get; }
         public string Forename { get; set; }
         public string Lastname { get; set; }
 

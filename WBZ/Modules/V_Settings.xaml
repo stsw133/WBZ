@@ -29,11 +29,8 @@
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <DockPanel>
                         <!-- region -->
-                        <GroupBox DockPanel.Dock="Top" Margin="5,5,5,0" VerticalAlignment="Top">
-                            <GroupBox.Header>
-                                <se:Header Text="{Tr Region}" Icon="/Resources/32/icon32_language.ico"/>
-                            </GroupBox.Header>
-                            <DockPanel Margin="5">
+						<se:ExtGroupBox DockPanel.Dock="Top" Text="{Tr Region}" Icon="/Resources/32/icon32_language.ico" Margin="5,5,5,0" VerticalAlignment="Top">
+							<DockPanel>
                                 <se:ExtLabel Content="{Tr Language, Suffix=':'}" Margin="5"/>
                                 <ComboBox Margin="5" VerticalContentAlignment="Center" SelectedValuePath="Tag"
                                           SelectedValue="{Binding Language, Source={x:Static p:Settings.Default}}">
@@ -41,27 +38,21 @@
                                     <ComboBoxItem Tag="pl" Content="Polski"/>
                                 </ComboBox>
                             </DockPanel>
-                        </GroupBox>
+                        </se:ExtGroupBox>
                         <!-- network -->
-                        <GroupBox DockPanel.Dock="Top" Margin="5,5,5,0" VerticalAlignment="Top">
-                            <GroupBox.Header>
-                                <se:Header Text="{Tr Network}" Icon="/Resources/32/icon32_web.ico"/>
-                            </GroupBox.Header>
-                            <DockPanel Margin="5">
+						<se:ExtGroupBox DockPanel.Dock="Top" Text="{Tr Network}" Icon="/Resources/32/icon32_web.ico" Margin="5,5,5,0" VerticalAlignment="Top">
+							<DockPanel>
                                 <se:ExtLabel Content="API URL:" Margin="5"/>
                                 <se:ExtTextBox Text="{Binding apiUrl, Source={x:Static p:Settings.Default}}" Margin="5"/>
                             </DockPanel>
-                        </GroupBox>
+                        </se:ExtGroupBox>
                         <!-- other -->
-                        <GroupBox DockPanel.Dock="Top" Margin="5,5,5,0" VerticalAlignment="Top">
-                            <GroupBox.Header>
-                                <se:Header Text="{Tr Others}" Icon="/Resources/32/icon32_tools.ico"/>
-                            </GroupBox.Header>
-                            <StackPanel Margin="5">
+						<se:ExtGroupBox DockPanel.Dock="Top" Text="{Tr Others}" Icon="/Resources/32/icon32_tools.ico" Margin="5,5,5,0" VerticalAlignment="Top">
+							<StackPanel>
                                 <se:ExtCheckBox Content="{Tr ShowButtonsWithNames}" Margin="5" IsChecked="{Binding config_ShowButtonsWithNames, Source={x:Static p:Settings.Default}}"/>
 								<se:ExtCheckBox Content="{Tr LoadStartDataOnLists}" Margin="5" IsChecked="{Binding config_LoadStartDataOnLists, Source={x:Static p:Settings.Default}}"/>
                             </StackPanel>
-                        </GroupBox>
+                        </se:ExtGroupBox>
                     </DockPanel>
                 </ScrollViewer>
             </TabItem>
@@ -73,16 +64,16 @@
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <DockPanel>
                         <se:ExtCheckBox DockPanel.Dock="Top" Content="Tryb ciemny" Margin="10,10,10,5" Visibility="Collapsed"/>
-                        <GroupBox DockPanel.Dock="Top" Header="{Tr TitleBar}" Margin="5,5,5,0" VerticalAlignment="Top">
-                            <DockPanel Margin="5">
+                        <se:ExtGroupBox DockPanel.Dock="Top" Header="{Tr TitleBar}" Margin="5,5,5,0" VerticalAlignment="Top">
+                            <DockPanel>
                                 <RadioButton DockPanel.Dock="Top" Content="Domyślny" Margin="5" VerticalContentAlignment="Center" GroupName="TitleBarStyle" Visibility="Collapsed"/>
                                 <RadioButton DockPanel.Dock="Top" Content="Alternatywny" Margin="5" VerticalContentAlignment="Center" GroupName="TitleBarStyle" Visibility="Collapsed"/>
                                 <se:ExtLabel Content="{Tr Color, Suffix=':'}"/>
                                 <se:ColorSetter Color="{Binding ThemeColor, Source={x:Static se:Settings.Default}, Mode=TwoWay}"/>
                             </DockPanel>
-                        </GroupBox>
-                        <GroupBox DockPanel.Dock="Top" Header="{Tr Interface}" Margin="5,5,5,0" VerticalAlignment="Top">
-                            <DockPanel Margin="5">
+                        </se:ExtGroupBox>
+                        <se:ExtGroupBox DockPanel.Dock="Top" Header="{Tr Interface}" Margin="5,5,5,0" VerticalAlignment="Top">
+                            <DockPanel>
                                 <DockPanel DockPanel.Dock="Top">
                                     <se:ExtLabel Content="{Tr Font, Suffix=':'}" Margin="5"/>
                                     <ComboBox Margin="5" VerticalContentAlignment="Center" SelectedValuePath="Tag"
@@ -101,7 +92,7 @@
                                 </DockPanel>
                                 <Slider DockPanel.Dock="Top" Value="{Binding iSize, Source={x:Static se:Settings.Default}, Mode=TwoWay}" IsSnapToTickEnabled="True" Minimum="8" Maximum="16" TickFrequency="0.5" TickPlacement="BottomRight"/>
                             </DockPanel>
-                        </GroupBox>
+                        </se:ExtGroupBox>
                     </DockPanel>
                 </ScrollViewer>
             </TabItem>
@@ -113,13 +104,10 @@
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <DockPanel>
                         <!-- email -->
-                        <GroupBox DockPanel.Dock="Top" Margin="5,5,5,0" VerticalAlignment="Top">
-                            <GroupBox.Header>
-                                <se:Header Text="{Tr Email}" Icon="/Resources/32/icon32_mail.ico"/>
-                            </GroupBox.Header>
-                            <Grid>
+						<se:ExtGroupBox DockPanel.Dock="Top" Text="{Tr Email}" Icon="/Resources/32/icon32_mail.ico" Margin="5,5,5,0" VerticalAlignment="Top">
+							<Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
@@ -139,38 +127,30 @@
                                 <se:ExtLabel Grid.Row="3" Grid.Column="0" Content="{Tr Password, Suffix=':'}" Margin="5" HorizontalContentAlignment="Right"/>
                                 <PasswordBox x:Name="PwdBoxEmailPassword" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="5"
 											 Loaded="PwdBoxEmailPassword_Loaded" PasswordChanged="PwdBoxEmailPassword_PasswordChanged"/>
-                                <se:IconButton Grid.Row="4" Grid.Column="1" Margin="5" Text="{Tr Test}" Icon="/Resources/32/icon32_test.ico"
+								<se:IconButton Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Margin="5" HorizontalAlignment="Center"
+											   Text="{Tr Test}" Icon="/Resources/32/icon32_test.ico"
                                                Click="BtnEmailTest_Click"/>
                             </Grid>
-                        </GroupBox>
+                        </se:ExtGroupBox>
                         <!-- GSM -->
-                        <GroupBox DockPanel.Dock="Top" Margin="5,5,5,0" VerticalAlignment="Top">
-                            <GroupBox.Header>
-                                <se:Header Text="GSM" Icon="/Resources/32/icon32_phone.ico"/>
-                            </GroupBox.Header>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="1*"/>
-                                    <ColumnDefinition Width="2*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <se:ExtLabel Grid.Row="0" Grid.Column="0" Content="{Tr Port, Suffix=':'}" Margin="5" HorizontalContentAlignment="Right"/>
-                                <se:ExtTextBox Grid.Row="0" Grid.Column="1" Text="{Binding config_GSM_com, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Margin="5"/>
-                                <GroupBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Header="{Tr MessageContent, Suffix=':'}" Margin="5">
-                                    <TextBox Text="{Binding config_GSM_message, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Margin="5" MinHeight="150" TextWrapping="Wrap" MaxLength="240"/>
-                                </GroupBox>
-                            </Grid>
-                        </GroupBox>
+						<se:ExtGroupBox DockPanel.Dock="Top" Text="GSM" Icon="/Resources/32/icon32_phone.ico" Margin="5,5,5,0" VerticalAlignment="Top">
+							<DockPanel>
+								<DockPanel DockPanel.Dock="Top">
+									<se:ExtLabel Grid.Row="0" Grid.Column="0" Content="{Tr Port, Suffix=':'}" Margin="5" HorizontalContentAlignment="Right"/>
+									<se:ExtTextBox Grid.Row="0" Grid.Column="1" Text="{Binding config_GSM_com, Source={x:Static p:Settings.Default}, Mode=TwoWay}" Margin="5"/>
+								</DockPanel>
+								<TextBlock DockPanel.Dock="Top" Margin="5,5,5,0" Text="{Tr MessageContent, Suffix=':'}"/>
+								<TextBox DockPanel.Dock="Top" Margin="5" Height="150" MaxLength="240" TextWrapping="Wrap"
+										 Text="{Binding config_GSM_message, Source={x:Static p:Settings.Default}, Mode=TwoWay}"/>
+							</DockPanel>
+                        </se:ExtGroupBox>
                     </DockPanel>
                 </ScrollViewer>
             </TabItem>
             <!-- shortcuts -->
-            <TabItem Header="Skróty klawiszowe" Visibility="Collapsed"/>
+            <TabItem Header="{Tr KeyboardShortcuts}" Visibility="Collapsed"/>
             <!-- offline mode -->
-            <TabItem Header="Tryb offline" Visibility="Collapsed"/>
+            <TabItem Header="{Tr OfflineMode}" Visibility="Collapsed"/>
         </TabControl>
     </DockPanel>
 </Window>

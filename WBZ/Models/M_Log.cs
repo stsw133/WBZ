@@ -24,25 +24,20 @@ namespace WBZ.Models
         public MV Module { get; set; }
         public int InstanceID { get; set; }
 
-        /// <summary>
+        /// Name
+        public override string Name { get; set; }
+
         /// User
-        /// </summary>
         public int UserID { get; set; }
         public string UserName { get; set; }
 
-        /// <summary>
         /// Type
-        /// </summary>
         public short Type { get; set; } = Convert.ToInt16(MS_Logs.Types[0].Value);
 
-        /// <summary>
         /// Content
-        /// </summary>
         public string Content { get; set; }
 
-        /// <summary>
         /// DateCreated
-        /// </summary>
         public DateTime DateCreated { get; set; } = DateTime.Now;
     }
 }

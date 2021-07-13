@@ -8,30 +8,24 @@ namespace WBZ.Models
     public class M_User : M, IMP
     {
         /// IMP
-        public override string Name => $"{Lastname} {Forename}";
         public string Forename { get; set; }
         public string Lastname { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
 
-        /// <summary>
+        /// Name
+        public override string Name => $"{Lastname} {Forename}";
+
         /// Login
-        /// </summary>
         public string Login { get; set; }
 
-        /// <summary>
         /// Newpass
-        /// </summary>
         public string Newpass { get; set; }
 
-        /// <summary>
         /// IsBlocked
-        /// </summary>
         public bool IsBlocked { get; set; }
 
-        /// <summary>
         /// Perms
-        /// </summary>
         public List<string> Perms { get; set; } = new List<string>();
     }
 }

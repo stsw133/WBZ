@@ -21,12 +21,16 @@
 		<!-- listBox -->
         <DockPanel DockPanel.Dock="Left">
 			<StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-				<se:IconButton CornerRadius="0" Margin="5,5,0,5" IsTextVisible="False" ToolTip="Dodaj nowe połączenie z bazą danych"
-							   Icon="/Resources/32/icon32_database.ico" SubIcon="/Resources/16/icon16_add.ico"
-							   Click="BtnAddDatabase_Click"/>
-				<se:IconButton CornerRadius="0" Margin="5,5,0,5" IsTextVisible="False" ToolTip="Usuń zaznaczone połączenie z bazą danych"
-							   Icon="/Resources/32/icon32_database.ico" SubIcon="/Resources/32/icon32_remove.ico"
-							   Click="BtnRemoveDatabase_Click"/>
+				<StackPanel.Resources>
+					<Style TargetType="{x:Type se:IconButton}">
+						<Setter Property="CornerRadius" Value="0"/>
+						<Setter Property="Icon" Value="/Resources/32/icon32_database.ico"/>
+						<Setter Property="IsTextVisible" Value="False"/>
+						<Setter Property="Margin" Value="5,5,0,5"/>
+					</Style>
+				</StackPanel.Resources>
+				<se:IconButton SubIcon="/Resources/16/icon16_add.ico" ToolTip="Dodaj nowe połączenie z bazą danych" Click="BtnAddDatabase_Click"/>
+				<se:IconButton SubIcon="/Resources/32/icon32_remove.ico" ToolTip="Usuń wybrane połączenie z bazą danych" Click="BtnRemoveDatabase_Click"/>
 			</StackPanel>
 			<ListBox x:Name="LstBoxDatabases" Margin="5,0,5,5" Width="{Binding iSize, Source={x:Static se:Settings.Default}, Converter={se:conv_Size}, ConverterParameter=15}"
 					 ItemsSource="{Binding Databases}" SelectedValuePath="Name" DisplayMemberPath="Name"
@@ -47,37 +51,37 @@
 			</UniformGrid.Resources>
 			<!-- Name -->
 			<DockPanel>
-				<se:ExtLabel Content="Nazwa:"/>
-				<se:ExtTextBox x:Name="tbName" Text="{Binding Name}"/>
+				<se:ExtLabel Content="{Tr Name, Suffix=':'}"/>
+				<se:ExtTextBox x:Name="TxtName" Text="{Binding Name}"/>
 			</DockPanel>
 			<!-- Server -->
 			<DockPanel>
-				<se:ExtLabel Content="Serwer:"/>
+				<se:ExtLabel Content="{Tr Server, Suffix=':'}"/>
 				<se:ExtTextBox x:Name="TxtBoxServer" Text="{Binding Server}"/>
 			</DockPanel>
 			<!-- Port -->
 			<DockPanel>
-				<se:ExtLabel Content="Port:"/>
+				<se:ExtLabel Content="{Tr Port, Suffix=':'}"/>
 				<se:ExtTextBox x:Name="TxtBoxPort" Text="{Binding Port}"/>
 			</DockPanel>
 			<!-- Database -->
 			<DockPanel>
-				<se:ExtLabel Content="Baza:"/>
+				<se:ExtLabel Content="{Tr Database, Suffix=':'}"/>
 				<se:ExtTextBox x:Name="TxtBoxDatabase" Text="{Binding Database}"/>
 			</DockPanel>
 			<!-- Username -->
 			<DockPanel>
-				<se:ExtLabel Content="Użytkownik:"/>
+				<se:ExtLabel Content="{Tr User, Suffix=':'}"/>
 				<se:ExtTextBox x:Name="TxtBoxUsername" Text="{Binding Username}"/>
 			</DockPanel>
 			<!-- Password -->
 			<DockPanel>
-				<se:ExtLabel Content="Hasło:"/>
+				<se:ExtLabel Content="{Tr Password, Suffix=':'}"/>
 				<PasswordBox x:Name="PwdBoxPassword" Margin="5" VerticalContentAlignment="Center" PasswordChanged="PwdBoxPassword_PasswordChanged"/>
 			</DockPanel>
 			<!-- Status -->
 			<DockPanel>
-				<se:ExtLabel Content="Status:"/>
+				<se:ExtLabel Content="{Tr Status, Suffix=':'}"/>
 				<Label x:Name="LblStatus" Margin="5" VerticalContentAlignment="Center"/>
 			</DockPanel>
 			<!-- buttons -->

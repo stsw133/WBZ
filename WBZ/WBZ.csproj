@@ -12,8 +12,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\16\icon16_accept.ico" />
     <None Remove="Resources\16\icon16_add.ico" />
+    <None Remove="Resources\16\icon16_clear.ico" />
+    <None Remove="Resources\16\icon16_database.ico" />
+    <None Remove="Resources\16\icon16_locked.ico" />
+    <None Remove="Resources\16\icon16_remove.ico" />
+    <None Remove="Resources\16\icon16_trash.ico" />
+    <None Remove="Resources\16\icon16_unlocked.ico" />
+    <None Remove="Resources\32\icon32_automatic.ico" />
+    <None Remove="Resources\32\icon32_block.ico" />
+    <None Remove="Resources\32\icon32_help.ico" />
+    <None Remove="Resources\64\icon64_accept.ico" />
     <None Remove="Resources\64\icon64_add.ico" />
+    <None Remove="Resources\64\icon64_clear.ico" />
+    <None Remove="Resources\64\icon64_database.ico" />
+    <None Remove="Resources\64\icon64_locked.ico" />
+    <None Remove="Resources\64\icon64_remove.ico" />
+    <None Remove="Resources\64\icon64_trash.ico" />
+    <None Remove="Resources\64\icon64_unlocked.ico" />
     <None Remove="Resources\icon.ico" />
     <None Remove="Resources\icon32_copy.ico" />
     <None Remove="Resources\icon32_cut.ico" />
@@ -32,7 +49,28 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Resources\16\icon16_accept.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\16\icon16_add.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\16\icon16_clear.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\16\icon16_database.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\16\icon16_locked.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\16\icon16_remove.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\16\icon16_trash.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\16\icon16_unlocked.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\32\icon32_accept.ico">
@@ -51,6 +89,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\32\icon32_attributes.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\32\icon32_automatic.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\32\icon32_block.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\32\icon32_books.ico">
@@ -144,6 +188,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\32\icon32_groups.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\32\icon32_help.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\32\icon32_history.ico">
@@ -287,7 +334,28 @@
     <Content Include="Resources\32\icon32_web.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\64\icon64_accept.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\64\icon64_add.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\64\icon64_clear.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\64\icon64_database.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\64\icon64_locked.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\64\icon64_remove.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\64\icon64_trash.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\64\icon64_unlocked.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\icon.ico">
@@ -330,6 +398,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Properties\Settings.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>

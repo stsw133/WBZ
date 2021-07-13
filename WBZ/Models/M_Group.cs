@@ -11,19 +11,16 @@ namespace WBZ.Models
         public MV Module { get; set; }
         public int InstanceID { get; set; }
 
-        /// <summary>
+        /// Name
+        public override string Name { get; set; }
+
         /// Owner
-        /// </summary>
         public int OwnerID { get; set; }
 
-        /// <summary>
         /// SubGroups
-        /// </summary>
         public List<M_Group> SubGroups { get; set; }
 
-        /// <summary>
         /// Path
-        /// </summary>
         public string Path { get; set; }
         public string Fullpath => Path + Name;
     }

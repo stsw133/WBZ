@@ -30,7 +30,7 @@ z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danyc
 
                 Document document = new Document();
                 document.Info.Title = "Kwestionariusz dodania rodziny";
-                document.Info.Subject = $"Dodawanie rodziny: {family.Lastname}";
+                document.Info.Subject = $"Dodawanie rodziny: {family.Name}";
                 document.Info.Author = $"{Fn.AppDatabase.Name}";
 
                 ///Title
@@ -54,7 +54,7 @@ z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danyc
                 pSubject.AddLineBreak();
                 pSubject.AddText("Dodawanie rodziny");
                 pSubject.AddLineBreak();
-                pSubject.AddText($"Rodzina: {family.Lastname}");
+                pSubject.AddText($"Rodzina: {family.Name}");
                 pSubject.AddLineBreak();
                 pSubject.AddDateField("dd.MM.yyyy");
                 pSubject.Format.Alignment = ParagraphAlignment.Left;
@@ -76,7 +76,7 @@ z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danyc
                 pContent.AddTab();
                 pContent.AddTab();
                 pContent.AddTab();
-                pContent.AddText($"Rodzina: {family.Lastname}");
+                pContent.AddText($"Rodzina: {family.Name}");
                 pContent.AddLineBreak();
                 pContent.AddTab();
                 pContent.AddTab();
@@ -499,7 +499,7 @@ z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danyc
                 row1.Cells[0].AddParagraph(index.ToString());
                 row1.Cells[1].AddParagraph($"{family.FamilyName}");
                 row1.Cells[2].AddParagraph($"{amount}");
-                if (family.Status == (short)M_DistributionFamily.DistributionFamilyStatus.Taken)
+                if (family.Status == (int)M_DistributionFamily.DistributionFamilyStatus.Taken)
                     row1.Cells[4].AddParagraph("Odebrano");
             }
 

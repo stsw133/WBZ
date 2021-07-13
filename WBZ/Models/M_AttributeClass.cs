@@ -27,24 +27,19 @@ namespace WBZ.Models
         public MV Module { get; set; }
         public int InstanceID { get; set; }
 
-        /// <summary>
+        /// Name
+        public override string Name { get; set; }
+
         /// Type
-        /// </summary>
         public string Type { get; set; } = (string)MS_AttributesClasses.Types[0].Value;
 
-        /// <summary>
         /// DefValue
-        /// </summary>
         public string DefValue { get; set; }
 
-        /// <summary>
         /// IsRequired
-        /// </summary>
         public bool IsRequired { get; set; }
 
-        /// <summary>
         /// Values
-        /// </summary>
         public DataTable Values { get; set; } = new DataTable();
     }
 
@@ -53,29 +48,19 @@ namespace WBZ.Models
     /// </summary>
     public class M_Attribute
     {
-        /// <summary>
         /// ID
-        /// </summary>
         public long ID { get; set; }
 
-        /// <summary>
         /// Class
-        /// </summary>
         public M_AttributeClass Class { get; set; } = new M_AttributeClass();
 
-        /// <summary>
         /// Instance
-        /// </summary>
         public int InstanceID { get; set; }
 
-        /// <summary>
         /// Value
-        /// </summary>
         public string Value { get; set; }
 
-        /// <summary>
         /// IsArchival
-        /// </summary>
         public bool IsArchival { get; set; }
     }
 }

@@ -106,9 +106,29 @@ namespace WBZ.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] icon16_accept {
+            get {
+                object obj = ResourceManager.GetObject("icon16_accept", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] icon16_add {
             get {
                 object obj = ResourceManager.GetObject("icon16_add", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] icon16_clear {
+            get {
+                object obj = ResourceManager.GetObject("icon16_clear", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -169,6 +189,26 @@ namespace WBZ.Properties {
         internal static byte[] icon32_attributes {
             get {
                 object obj = ResourceManager.GetObject("icon32_attributes", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] icon32_automatic {
+            get {
+                object obj = ResourceManager.GetObject("icon32_automatic", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] icon32_block {
+            get {
+                object obj = ResourceManager.GetObject("icon32_block", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -479,6 +519,16 @@ namespace WBZ.Properties {
         internal static byte[] icon32_groups {
             get {
                 object obj = ResourceManager.GetObject("icon32_groups", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] icon32_help {
+            get {
+                object obj = ResourceManager.GetObject("icon32_help", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -956,9 +1006,29 @@ namespace WBZ.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] icon64_accept {
+            get {
+                object obj = ResourceManager.GetObject("icon64_accept", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] icon64_add {
             get {
                 object obj = ResourceManager.GetObject("icon64_add", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] icon64_clear {
+            get {
+                object obj = ResourceManager.GetObject("icon64_clear", resourceCulture);
                 return ((byte[])(obj));
             }
         }

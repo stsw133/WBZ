@@ -12,20 +12,18 @@
         public string Postcode { get; set; }
 
         /// IMP
-        public override string Name => $"{Lastname} {Forename}";
         public string Forename { get; set; }
         public string Lastname { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
 
-        /// <summary>
+        /// Name
+        public override string Name => $"{Lastname} {Forename}";
+
         /// Department
-        /// </summary>
         public string Department { get; set; }
 
-        /// <summary>
         /// Position
-        /// </summary>
         public string Position { get; set; }
     }
 }
