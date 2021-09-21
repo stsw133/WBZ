@@ -1,6 +1,7 @@
 ﻿using StswExpress;
 using StswExpress.Translate;
 using System.Windows;
+using System.Windows.Controls;
 using WBZ.Globals;
 using WBZ.Modules._base;
 
@@ -25,7 +26,7 @@ namespace WBZ.Modules
         private void PwdBoxEmailPassword_Loaded(object sender, RoutedEventArgs e)
         {
             if (StswExpress.Settings.Default.mail_Password.Length > 0)
-                PwdBoxEmailPassword.Password = Security.Decrypt(StswExpress.Settings.Default.mail_Password);
+                (sender as PasswordBox).Password = Security.Decrypt(StswExpress.Settings.Default.mail_Password);
         }
 
         /// <summary>
@@ -33,8 +34,8 @@ namespace WBZ.Modules
         /// </summary>
         private void PwdBoxEmailPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            if (PwdBoxEmailPassword.Password.Length > 0)
-                StswExpress.Settings.Default.mail_Password = Security.Encrypt(PwdBoxEmailPassword.Password);
+            if ((sender as PasswordBox).Password.Length > 0)
+                StswExpress.Settings.Default.mail_Password = Security.Encrypt((sender as PasswordBox).Password);
         }
 
         /// <summary>
