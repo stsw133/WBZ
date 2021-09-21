@@ -44,7 +44,6 @@
     <None Remove="Resources\pl_manual.pdf" />
     <None Remove="Resources\StswExpress.dll" />
     <None Remove="Resources\Translations.json" />
-    <None Remove="Resources\_null.ico" />
     <None Remove="SQL\database.sql" />
   </ItemGroup>
 
@@ -368,9 +367,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Other\Translations.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\_null.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
